@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 95659 (5627 per locale)
+/// Strings: 95727 (5631 per locale)
 ///
-/// Built on 2026-09-27 at 08:45 UTC
+/// Built on 2026-09-27 at 09:48 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8022,6 +8022,11 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   String get nav_browse => 'Browse';
+  String get novel_detail_library_remove => 'Remove from bookshelf';
+  String get novel_detail_library_remove_confirm =>
+      'Remove this novel from the bookshelf? Cached chapters and reading progress will be deleted.';
+  String get novel_detail_download => 'Download';
+  String get novel_detail_library_added => 'Added to bookshelf';
 }
 
 // Path: <root>
@@ -21494,6 +21499,15 @@ class _StringsAr extends _StringsEn {
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
   String get nav_browse => 'تصفح';
+  @override
+  String get novel_detail_library_remove => 'إزالة من رف الكتب';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'إزالة هذه الرواية من رف الكتب؟ سيتم حذف الفصول المخزنة وتقدم القراءة.';
+  @override
+  String get novel_detail_download => 'تنزيل';
+  @override
+  String get novel_detail_library_added => 'تمت الإضافة إلى رف الكتب';
 }
 
 // Path: <root>
@@ -35206,6 +35220,15 @@ class _StringsDe extends _StringsEn {
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
   String get nav_browse => 'Durchsuchen';
+  @override
+  String get novel_detail_library_remove => 'Aus dem Bücherregal entfernen';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'Diesen Roman aus dem Bücherregal entfernen? Zwischengespeicherte Kapitel und Lesefortschritt werden gelöscht.';
+  @override
+  String get novel_detail_download => 'Herunterladen';
+  @override
+  String get novel_detail_library_added => 'Zum Bücherregal hinzugefügt';
 }
 
 // Path: <root>
@@ -48969,6 +48992,15 @@ class _StringsEs extends _StringsEn {
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
   String get nav_browse => 'Explorar';
+  @override
+  String get novel_detail_library_remove => 'Quitar de la estantería';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      '¿Quitar esta novela de la estantería? Se eliminarán los capítulos en caché y el progreso de lectura.';
+  @override
+  String get novel_detail_download => 'Descargar';
+  @override
+  String get novel_detail_library_added => 'Añadido a la estantería';
 }
 
 // Path: <root>
@@ -62771,6 +62803,15 @@ class _StringsFr extends _StringsEn {
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
   String get nav_browse => 'Parcourir';
+  @override
+  String get novel_detail_library_remove => 'Retirer de la bibliothèque';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'Retirer ce roman de la bibliothèque ? Les chapitres en cache et la progression de lecture seront supprimés.';
+  @override
+  String get novel_detail_download => 'Télécharger';
+  @override
+  String get novel_detail_library_added => 'Ajouté à la bibliothèque';
 }
 
 // Path: <root>
@@ -76363,6 +76404,15 @@ class _StringsId extends _StringsEn {
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
   String get nav_browse => 'Jelajah';
+  @override
+  String get novel_detail_library_remove => 'Hapus dari rak buku';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'Hapus novel ini dari rak buku? Bab yang tersimpan dan progres membaca akan dihapus.';
+  @override
+  String get novel_detail_download => 'Unduh';
+  @override
+  String get novel_detail_library_added => 'Ditambahkan ke rak buku';
 }
 
 // Path: <root>
@@ -90056,6 +90106,15 @@ class _StringsIt extends _StringsEn {
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
   String get nav_browse => 'Sfoglia';
+  @override
+  String get novel_detail_library_remove => 'Rimuovi dalla libreria';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'Rimuovere questo romanzo dalla libreria? I capitoli in cache e i progressi di lettura verranno eliminati.';
+  @override
+  String get novel_detail_download => 'Scarica';
+  @override
+  String get novel_detail_library_added => 'Aggiunto alla libreria';
 }
 
 // Path: <root>
@@ -103104,6 +103163,15 @@ class _StringsJa extends _StringsEn {
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
   String get nav_browse => 'ブラウズ';
+  @override
+  String get novel_detail_library_remove => '本棚から削除';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'この小説を本棚から削除しますか？キャッシュ済みの章と読書進捗も削除されます。';
+  @override
+  String get novel_detail_download => 'ダウンロード';
+  @override
+  String get novel_detail_library_added => '本棚に追加しました';
 }
 
 // Path: <root>
@@ -116169,6 +116237,15 @@ class _StringsKo extends _StringsEn {
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
   String get nav_browse => '탐색';
+  @override
+  String get novel_detail_library_remove => '책장에서 제거';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      '이 소설을 책장에서 제거할까요? 캐시된 챕터와 읽기 진행 상황이 삭제됩니다.';
+  @override
+  String get novel_detail_download => '다운로드';
+  @override
+  String get novel_detail_library_added => '책장에 추가했어요';
 }
 
 // Path: <root>
@@ -129816,6 +129893,15 @@ class _StringsNl extends _StringsEn {
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
   String get nav_browse => 'Bladeren';
+  @override
+  String get novel_detail_library_remove => 'Uit boekenkast verwijderen';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'Deze roman uit de boekenkast verwijderen? Gecachte hoofdstukken en leesvoortgang worden verwijderd.';
+  @override
+  String get novel_detail_download => 'Downloaden';
+  @override
+  String get novel_detail_library_added => 'Aan boekenkast toegevoegd';
 }
 
 // Path: <root>
@@ -143516,6 +143602,15 @@ class _StringsPtBr extends _StringsEn {
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
   String get nav_browse => 'Navegar';
+  @override
+  String get novel_detail_library_remove => 'Remover da estante';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'Remover este romance da estante? Os capítulos em cache e o progresso de leitura serão apagados.';
+  @override
+  String get novel_detail_download => 'Baixar';
+  @override
+  String get novel_detail_library_added => 'Adicionado à estante';
 }
 
 // Path: <root>
@@ -157191,6 +157286,15 @@ class _StringsRu extends _StringsEn {
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
   String get nav_browse => 'Обзор';
+  @override
+  String get novel_detail_library_remove => 'Убрать с полки';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'Убрать этот роман с полки? Кэшированные главы и прогресс чтения будут удалены.';
+  @override
+  String get novel_detail_download => 'Скачать';
+  @override
+  String get novel_detail_library_added => 'Добавлено на полку';
 }
 
 // Path: <root>
@@ -170663,6 +170767,15 @@ class _StringsTh extends _StringsEn {
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
   String get nav_browse => 'เรียกดู';
+  @override
+  String get novel_detail_library_remove => 'นำออกจากชั้นหนังสือ';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'นำนิยายเรื่องนี้ออกจากชั้นหนังสือ? ตอนที่แคชไว้และความคืบหน้าการอ่านจะถูกลบ';
+  @override
+  String get novel_detail_download => 'ดาวน์โหลด';
+  @override
+  String get novel_detail_library_added => 'เพิ่มลงชั้นหนังสือแล้ว';
 }
 
 // Path: <root>
@@ -184249,6 +184362,15 @@ class _StringsTr extends _StringsEn {
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
   String get nav_browse => 'Göz at';
+  @override
+  String get novel_detail_library_remove => 'Kitaplıktan kaldır';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'Bu roman kitaplıktan kaldırılsın mı? Önbelleğe alınan bölümler ve okuma ilerlemesi silinecek.';
+  @override
+  String get novel_detail_download => 'İndir';
+  @override
+  String get novel_detail_library_added => 'Kitaplığa eklendi';
 }
 
 // Path: <root>
@@ -197806,6 +197928,15 @@ class _StringsVi extends _StringsEn {
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
   String get nav_browse => 'Duyệt';
+  @override
+  String get novel_detail_library_remove => 'Xóa khỏi kệ sách';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'Xóa tiểu thuyết này khỏi kệ sách? Các chương đã lưu đệm và tiến độ đọc sẽ bị xóa.';
+  @override
+  String get novel_detail_download => 'Tải xuống';
+  @override
+  String get novel_detail_library_added => 'Đã thêm vào kệ sách';
 }
 
 // Path: <root>
@@ -210206,6 +210337,15 @@ class _StringsZhCn extends _StringsEn {
       '播放互联服务端上的视频时，导入或重定时的字幕会上传并设为该集默认字幕，所有设备都会看到。关闭后字幕只在本机生效。';
   @override
   String get nav_browse => '浏览';
+  @override
+  String get novel_detail_library_remove => '移出书架';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      '把这部小说移出书架？已缓存的章节和阅读进度会一并删除。';
+  @override
+  String get novel_detail_download => '下载';
+  @override
+  String get novel_detail_library_added => '已加入书架';
 }
 
 // Path: <root>
@@ -222935,6 +223075,15 @@ class _StringsZhHk extends _StringsEn {
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
   String get nav_browse => '瀏覽';
+  @override
+  String get novel_detail_library_remove => '移出書架';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      '把這部小說移出書架？已快取的章節和閱讀進度會一併刪除。';
+  @override
+  String get novel_detail_download => '下載';
+  @override
+  String get novel_detail_library_added => '已加入書架';
 }
 
 /// Flat map(s) containing all translations.
@@ -234544,6 +234693,14 @@ extension on _StringsEn {
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       case 'nav_browse':
         return 'Browse';
+      case 'novel_detail_library_remove':
+        return 'Remove from bookshelf';
+      case 'novel_detail_library_remove_confirm':
+        return 'Remove this novel from the bookshelf? Cached chapters and reading progress will be deleted.';
+      case 'novel_detail_download':
+        return 'Download';
+      case 'novel_detail_library_added':
+        return 'Added to bookshelf';
       default:
         return null;
     }
@@ -246148,6 +246305,14 @@ extension on _StringsAr {
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       case 'nav_browse':
         return 'تصفح';
+      case 'novel_detail_library_remove':
+        return 'إزالة من رف الكتب';
+      case 'novel_detail_library_remove_confirm':
+        return 'إزالة هذه الرواية من رف الكتب؟ سيتم حذف الفصول المخزنة وتقدم القراءة.';
+      case 'novel_detail_download':
+        return 'تنزيل';
+      case 'novel_detail_library_added':
+        return 'تمت الإضافة إلى رف الكتب';
       default:
         return null;
     }
@@ -257801,6 +257966,14 @@ extension on _StringsDe {
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       case 'nav_browse':
         return 'Durchsuchen';
+      case 'novel_detail_library_remove':
+        return 'Aus dem Bücherregal entfernen';
+      case 'novel_detail_library_remove_confirm':
+        return 'Diesen Roman aus dem Bücherregal entfernen? Zwischengespeicherte Kapitel und Lesefortschritt werden gelöscht.';
+      case 'novel_detail_download':
+        return 'Herunterladen';
+      case 'novel_detail_library_added':
+        return 'Zum Bücherregal hinzugefügt';
       default:
         return null;
     }
@@ -269444,6 +269617,14 @@ extension on _StringsEs {
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       case 'nav_browse':
         return 'Explorar';
+      case 'novel_detail_library_remove':
+        return 'Quitar de la estantería';
+      case 'novel_detail_library_remove_confirm':
+        return '¿Quitar esta novela de la estantería? Se eliminarán los capítulos en caché y el progreso de lectura.';
+      case 'novel_detail_download':
+        return 'Descargar';
+      case 'novel_detail_library_added':
+        return 'Añadido a la estantería';
       default:
         return null;
     }
@@ -281095,6 +281276,14 @@ extension on _StringsFr {
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       case 'nav_browse':
         return 'Parcourir';
+      case 'novel_detail_library_remove':
+        return 'Retirer de la bibliothèque';
+      case 'novel_detail_library_remove_confirm':
+        return 'Retirer ce roman de la bibliothèque ? Les chapitres en cache et la progression de lecture seront supprimés.';
+      case 'novel_detail_download':
+        return 'Télécharger';
+      case 'novel_detail_library_added':
+        return 'Ajouté à la bibliothèque';
       default:
         return null;
     }
@@ -292716,6 +292905,14 @@ extension on _StringsId {
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       case 'nav_browse':
         return 'Jelajah';
+      case 'novel_detail_library_remove':
+        return 'Hapus dari rak buku';
+      case 'novel_detail_library_remove_confirm':
+        return 'Hapus novel ini dari rak buku? Bab yang tersimpan dan progres membaca akan dihapus.';
+      case 'novel_detail_download':
+        return 'Unduh';
+      case 'novel_detail_library_added':
+        return 'Ditambahkan ke rak buku';
       default:
         return null;
     }
@@ -304360,6 +304557,14 @@ extension on _StringsIt {
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       case 'nav_browse':
         return 'Sfoglia';
+      case 'novel_detail_library_remove':
+        return 'Rimuovi dalla libreria';
+      case 'novel_detail_library_remove_confirm':
+        return 'Rimuovere questo romanzo dalla libreria? I capitoli in cache e i progressi di lettura verranno eliminati.';
+      case 'novel_detail_download':
+        return 'Scarica';
+      case 'novel_detail_library_added':
+        return 'Aggiunto alla libreria';
       default:
         return null;
     }
@@ -315925,6 +316130,14 @@ extension on _StringsJa {
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       case 'nav_browse':
         return 'ブラウズ';
+      case 'novel_detail_library_remove':
+        return '本棚から削除';
+      case 'novel_detail_library_remove_confirm':
+        return 'この小説を本棚から削除しますか？キャッシュ済みの章と読書進捗も削除されます。';
+      case 'novel_detail_download':
+        return 'ダウンロード';
+      case 'novel_detail_library_added':
+        return '本棚に追加しました';
       default:
         return null;
     }
@@ -327498,6 +327711,14 @@ extension on _StringsKo {
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       case 'nav_browse':
         return '탐색';
+      case 'novel_detail_library_remove':
+        return '책장에서 제거';
+      case 'novel_detail_library_remove_confirm':
+        return '이 소설을 책장에서 제거할까요? 캐시된 챕터와 읽기 진행 상황이 삭제됩니다.';
+      case 'novel_detail_download':
+        return '다운로드';
+      case 'novel_detail_library_added':
+        return '책장에 추가했어요';
       default:
         return null;
     }
@@ -339137,6 +339358,14 @@ extension on _StringsNl {
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       case 'nav_browse':
         return 'Bladeren';
+      case 'novel_detail_library_remove':
+        return 'Uit boekenkast verwijderen';
+      case 'novel_detail_library_remove_confirm':
+        return 'Deze roman uit de boekenkast verwijderen? Gecachte hoofdstukken en leesvoortgang worden verwijderd.';
+      case 'novel_detail_download':
+        return 'Downloaden';
+      case 'novel_detail_library_added':
+        return 'Aan boekenkast toegevoegd';
       default:
         return null;
     }
@@ -350771,6 +351000,14 @@ extension on _StringsPtBr {
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       case 'nav_browse':
         return 'Navegar';
+      case 'novel_detail_library_remove':
+        return 'Remover da estante';
+      case 'novel_detail_library_remove_confirm':
+        return 'Remover este romance da estante? Os capítulos em cache e o progresso de leitura serão apagados.';
+      case 'novel_detail_download':
+        return 'Baixar';
+      case 'novel_detail_library_added':
+        return 'Adicionado à estante';
       default:
         return null;
     }
@@ -362411,6 +362648,14 @@ extension on _StringsRu {
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       case 'nav_browse':
         return 'Обзор';
+      case 'novel_detail_library_remove':
+        return 'Убрать с полки';
+      case 'novel_detail_library_remove_confirm':
+        return 'Убрать этот роман с полки? Кэшированные главы и прогресс чтения будут удалены.';
+      case 'novel_detail_download':
+        return 'Скачать';
+      case 'novel_detail_library_added':
+        return 'Добавлено на полку';
       default:
         return null;
     }
@@ -374020,6 +374265,14 @@ extension on _StringsTh {
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       case 'nav_browse':
         return 'เรียกดู';
+      case 'novel_detail_library_remove':
+        return 'นำออกจากชั้นหนังสือ';
+      case 'novel_detail_library_remove_confirm':
+        return 'นำนิยายเรื่องนี้ออกจากชั้นหนังสือ? ตอนที่แคชไว้และความคืบหน้าการอ่านจะถูกลบ';
+      case 'novel_detail_download':
+        return 'ดาวน์โหลด';
+      case 'novel_detail_library_added':
+        return 'เพิ่มลงชั้นหนังสือแล้ว';
       default:
         return null;
     }
@@ -385645,6 +385898,14 @@ extension on _StringsTr {
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       case 'nav_browse':
         return 'Göz at';
+      case 'novel_detail_library_remove':
+        return 'Kitaplıktan kaldır';
+      case 'novel_detail_library_remove_confirm':
+        return 'Bu roman kitaplıktan kaldırılsın mı? Önbelleğe alınan bölümler ve okuma ilerlemesi silinecek.';
+      case 'novel_detail_download':
+        return 'İndir';
+      case 'novel_detail_library_added':
+        return 'Kitaplığa eklendi';
       default:
         return null;
     }
@@ -397264,6 +397525,14 @@ extension on _StringsVi {
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       case 'nav_browse':
         return 'Duyệt';
+      case 'novel_detail_library_remove':
+        return 'Xóa khỏi kệ sách';
+      case 'novel_detail_library_remove_confirm':
+        return 'Xóa tiểu thuyết này khỏi kệ sách? Các chương đã lưu đệm và tiến độ đọc sẽ bị xóa.';
+      case 'novel_detail_download':
+        return 'Tải xuống';
+      case 'novel_detail_library_added':
+        return 'Đã thêm vào kệ sách';
       default:
         return null;
     }
@@ -408770,6 +409039,14 @@ extension on _StringsZhCn {
         return '播放互联服务端上的视频时，导入或重定时的字幕会上传并设为该集默认字幕，所有设备都会看到。关闭后字幕只在本机生效。';
       case 'nav_browse':
         return '浏览';
+      case 'novel_detail_library_remove':
+        return '移出书架';
+      case 'novel_detail_library_remove_confirm':
+        return '把这部小说移出书架？已缓存的章节和阅读进度会一并删除。';
+      case 'novel_detail_download':
+        return '下载';
+      case 'novel_detail_library_added':
+        return '已加入书架';
       default:
         return null;
     }
@@ -420314,6 +420591,14 @@ extension on _StringsZhHk {
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       case 'nav_browse':
         return '瀏覽';
+      case 'novel_detail_library_remove':
+        return '移出書架';
+      case 'novel_detail_library_remove_confirm':
+        return '把這部小說移出書架？已快取的章節和閱讀進度會一併刪除。';
+      case 'novel_detail_download':
+        return '下載';
+      case 'novel_detail_library_added':
+        return '已加入書架';
       default:
         return null;
     }
