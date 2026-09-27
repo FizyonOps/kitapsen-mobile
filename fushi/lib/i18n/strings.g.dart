@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 95625 (5625 per locale)
+/// Strings: 95659 (5627 per locale)
 ///
-/// Built on 2026-09-27 at 05:52 UTC
+/// Built on 2026-09-27 at 06:14 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8018,6 +8018,10 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
       'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
   String get video_subtitle_host_upload_unsupported =>
       'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+  String get video_setting_subtitle_auto_upload_to_host =>
+      'Auto-upload imported subtitles to host';
+  String get video_setting_subtitle_auto_upload_to_host_hint =>
+      'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
 }
 
 // Path: <root>
@@ -21484,6 +21488,12 @@ class _StringsAr extends _StringsEn {
   @override
   String get video_subtitle_host_upload_unsupported =>
       'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host =>
+      'Auto-upload imported subtitles to host';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host_hint =>
+      'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
 }
 
 // Path: <root>
@@ -35190,6 +35200,12 @@ class _StringsDe extends _StringsEn {
   @override
   String get video_subtitle_host_upload_unsupported =>
       'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host =>
+      'Auto-upload imported subtitles to host';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host_hint =>
+      'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
 }
 
 // Path: <root>
@@ -48947,6 +48963,12 @@ class _StringsEs extends _StringsEn {
   @override
   String get video_subtitle_host_upload_unsupported =>
       'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host =>
+      'Auto-upload imported subtitles to host';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host_hint =>
+      'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
 }
 
 // Path: <root>
@@ -62743,6 +62765,12 @@ class _StringsFr extends _StringsEn {
   @override
   String get video_subtitle_host_upload_unsupported =>
       'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host =>
+      'Auto-upload imported subtitles to host';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host_hint =>
+      'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
 }
 
 // Path: <root>
@@ -76329,6 +76357,12 @@ class _StringsId extends _StringsEn {
   @override
   String get video_subtitle_host_upload_unsupported =>
       'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host =>
+      'Auto-upload imported subtitles to host';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host_hint =>
+      'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
 }
 
 // Path: <root>
@@ -90016,6 +90050,12 @@ class _StringsIt extends _StringsEn {
   @override
   String get video_subtitle_host_upload_unsupported =>
       'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host =>
+      'Auto-upload imported subtitles to host';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host_hint =>
+      'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
 }
 
 // Path: <root>
@@ -103058,6 +103098,12 @@ class _StringsJa extends _StringsEn {
   @override
   String get video_subtitle_host_upload_unsupported =>
       'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host =>
+      'Auto-upload imported subtitles to host';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host_hint =>
+      'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
 }
 
 // Path: <root>
@@ -116117,6 +116163,12 @@ class _StringsKo extends _StringsEn {
   @override
   String get video_subtitle_host_upload_unsupported =>
       'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host =>
+      'Auto-upload imported subtitles to host';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host_hint =>
+      'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
 }
 
 // Path: <root>
@@ -129758,6 +129810,12 @@ class _StringsNl extends _StringsEn {
   @override
   String get video_subtitle_host_upload_unsupported =>
       'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host =>
+      'Auto-upload imported subtitles to host';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host_hint =>
+      'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
 }
 
 // Path: <root>
@@ -143452,6 +143510,12 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get video_subtitle_host_upload_unsupported =>
       'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host =>
+      'Auto-upload imported subtitles to host';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host_hint =>
+      'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
 }
 
 // Path: <root>
@@ -157121,6 +157185,12 @@ class _StringsRu extends _StringsEn {
   @override
   String get video_subtitle_host_upload_unsupported =>
       'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host =>
+      'Auto-upload imported subtitles to host';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host_hint =>
+      'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
 }
 
 // Path: <root>
@@ -170587,6 +170657,12 @@ class _StringsTh extends _StringsEn {
   @override
   String get video_subtitle_host_upload_unsupported =>
       'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host =>
+      'Auto-upload imported subtitles to host';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host_hint =>
+      'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
 }
 
 // Path: <root>
@@ -184167,6 +184243,12 @@ class _StringsTr extends _StringsEn {
   @override
   String get video_subtitle_host_upload_unsupported =>
       'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host =>
+      'Auto-upload imported subtitles to host';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host_hint =>
+      'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
 }
 
 // Path: <root>
@@ -197718,6 +197800,12 @@ class _StringsVi extends _StringsEn {
   @override
   String get video_subtitle_host_upload_unsupported =>
       'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host =>
+      'Auto-upload imported subtitles to host';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host_hint =>
+      'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
 }
 
 // Path: <root>
@@ -210113,6 +210201,11 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get video_subtitle_host_upload_unsupported =>
       '服务端 Fushi 版本过旧，不接收字幕，仅保存在本机';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host => '导入的字幕自动上传到服务端';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host_hint =>
+      '播放互联服务端上的视频时，导入或重定时的字幕会上传并设为该集默认字幕，所有设备都会看到。关闭后字幕只在本机生效。';
 }
 
 // Path: <root>
@@ -222836,6 +222929,12 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get video_subtitle_host_upload_unsupported =>
       'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host =>
+      'Auto-upload imported subtitles to host';
+  @override
+  String get video_setting_subtitle_auto_upload_to_host_hint =>
+      'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
 }
 
 /// Flat map(s) containing all translations.
@@ -234441,6 +234540,10 @@ extension on _StringsEn {
         return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       case 'video_subtitle_host_upload_unsupported':
         return 'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+      case 'video_setting_subtitle_auto_upload_to_host':
+        return 'Auto-upload imported subtitles to host';
+      case 'video_setting_subtitle_auto_upload_to_host_hint':
+        return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       default:
         return null;
     }
@@ -246041,6 +246144,10 @@ extension on _StringsAr {
         return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       case 'video_subtitle_host_upload_unsupported':
         return 'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+      case 'video_setting_subtitle_auto_upload_to_host':
+        return 'Auto-upload imported subtitles to host';
+      case 'video_setting_subtitle_auto_upload_to_host_hint':
+        return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       default:
         return null;
     }
@@ -257690,6 +257797,10 @@ extension on _StringsDe {
         return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       case 'video_subtitle_host_upload_unsupported':
         return 'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+      case 'video_setting_subtitle_auto_upload_to_host':
+        return 'Auto-upload imported subtitles to host';
+      case 'video_setting_subtitle_auto_upload_to_host_hint':
+        return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       default:
         return null;
     }
@@ -269329,6 +269440,10 @@ extension on _StringsEs {
         return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       case 'video_subtitle_host_upload_unsupported':
         return 'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+      case 'video_setting_subtitle_auto_upload_to_host':
+        return 'Auto-upload imported subtitles to host';
+      case 'video_setting_subtitle_auto_upload_to_host_hint':
+        return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       default:
         return null;
     }
@@ -280976,6 +281091,10 @@ extension on _StringsFr {
         return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       case 'video_subtitle_host_upload_unsupported':
         return 'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+      case 'video_setting_subtitle_auto_upload_to_host':
+        return 'Auto-upload imported subtitles to host';
+      case 'video_setting_subtitle_auto_upload_to_host_hint':
+        return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       default:
         return null;
     }
@@ -292593,6 +292712,10 @@ extension on _StringsId {
         return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       case 'video_subtitle_host_upload_unsupported':
         return 'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+      case 'video_setting_subtitle_auto_upload_to_host':
+        return 'Auto-upload imported subtitles to host';
+      case 'video_setting_subtitle_auto_upload_to_host_hint':
+        return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       default:
         return null;
     }
@@ -304233,6 +304356,10 @@ extension on _StringsIt {
         return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       case 'video_subtitle_host_upload_unsupported':
         return 'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+      case 'video_setting_subtitle_auto_upload_to_host':
+        return 'Auto-upload imported subtitles to host';
+      case 'video_setting_subtitle_auto_upload_to_host_hint':
+        return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       default:
         return null;
     }
@@ -315794,6 +315921,10 @@ extension on _StringsJa {
         return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       case 'video_subtitle_host_upload_unsupported':
         return 'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+      case 'video_setting_subtitle_auto_upload_to_host':
+        return 'Auto-upload imported subtitles to host';
+      case 'video_setting_subtitle_auto_upload_to_host_hint':
+        return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       default:
         return null;
     }
@@ -327363,6 +327494,10 @@ extension on _StringsKo {
         return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       case 'video_subtitle_host_upload_unsupported':
         return 'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+      case 'video_setting_subtitle_auto_upload_to_host':
+        return 'Auto-upload imported subtitles to host';
+      case 'video_setting_subtitle_auto_upload_to_host_hint':
+        return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       default:
         return null;
     }
@@ -338998,6 +339133,10 @@ extension on _StringsNl {
         return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       case 'video_subtitle_host_upload_unsupported':
         return 'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+      case 'video_setting_subtitle_auto_upload_to_host':
+        return 'Auto-upload imported subtitles to host';
+      case 'video_setting_subtitle_auto_upload_to_host_hint':
+        return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       default:
         return null;
     }
@@ -350628,6 +350767,10 @@ extension on _StringsPtBr {
         return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       case 'video_subtitle_host_upload_unsupported':
         return 'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+      case 'video_setting_subtitle_auto_upload_to_host':
+        return 'Auto-upload imported subtitles to host';
+      case 'video_setting_subtitle_auto_upload_to_host_hint':
+        return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       default:
         return null;
     }
@@ -362264,6 +362407,10 @@ extension on _StringsRu {
         return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       case 'video_subtitle_host_upload_unsupported':
         return 'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+      case 'video_setting_subtitle_auto_upload_to_host':
+        return 'Auto-upload imported subtitles to host';
+      case 'video_setting_subtitle_auto_upload_to_host_hint':
+        return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       default:
         return null;
     }
@@ -373869,6 +374016,10 @@ extension on _StringsTh {
         return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       case 'video_subtitle_host_upload_unsupported':
         return 'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+      case 'video_setting_subtitle_auto_upload_to_host':
+        return 'Auto-upload imported subtitles to host';
+      case 'video_setting_subtitle_auto_upload_to_host_hint':
+        return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       default:
         return null;
     }
@@ -385490,6 +385641,10 @@ extension on _StringsTr {
         return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       case 'video_subtitle_host_upload_unsupported':
         return 'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+      case 'video_setting_subtitle_auto_upload_to_host':
+        return 'Auto-upload imported subtitles to host';
+      case 'video_setting_subtitle_auto_upload_to_host_hint':
+        return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       default:
         return null;
     }
@@ -397105,6 +397260,10 @@ extension on _StringsVi {
         return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       case 'video_subtitle_host_upload_unsupported':
         return 'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+      case 'video_setting_subtitle_auto_upload_to_host':
+        return 'Auto-upload imported subtitles to host';
+      case 'video_setting_subtitle_auto_upload_to_host_hint':
+        return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       default:
         return null;
     }
@@ -408607,6 +408766,10 @@ extension on _StringsZhCn {
         return '字幕上传服务端失败，仅保存在本机';
       case 'video_subtitle_host_upload_unsupported':
         return '服务端 Fushi 版本过旧，不接收字幕，仅保存在本机';
+      case 'video_setting_subtitle_auto_upload_to_host':
+        return '导入的字幕自动上传到服务端';
+      case 'video_setting_subtitle_auto_upload_to_host_hint':
+        return '播放互联服务端上的视频时，导入或重定时的字幕会上传并设为该集默认字幕，所有设备都会看到。关闭后字幕只在本机生效。';
       default:
         return null;
     }
@@ -420147,6 +420310,10 @@ extension on _StringsZhHk {
         return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       case 'video_subtitle_host_upload_unsupported':
         return 'The host\'s Fushi is too old to receive subtitles; it\'s only saved on this device';
+      case 'video_setting_subtitle_auto_upload_to_host':
+        return 'Auto-upload imported subtitles to host';
+      case 'video_setting_subtitle_auto_upload_to_host_hint':
+        return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
       default:
         return null;
     }
