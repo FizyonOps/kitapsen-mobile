@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 95982 (5646 per locale)
+/// Strings: 95999 (5647 per locale)
 ///
-/// Built on 2026-09-27 at 10:55 UTC
+/// Built on 2026-09-27 at 11:09 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8049,6 +8049,8 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get ai_video_download_bitrate_any => 'Any';
   String get ai_video_download_bitrate_high => 'Highest bitrate';
   String get ai_video_download_bitrate_low => 'Smallest size';
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -21567,6 +21569,9 @@ class _StringsAr extends _StringsEn {
   String get ai_video_download_bitrate_high => 'Highest bitrate';
   @override
   String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -35325,6 +35330,9 @@ class _StringsDe extends _StringsEn {
   String get ai_video_download_bitrate_high => 'Highest bitrate';
   @override
   String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -49134,6 +49142,9 @@ class _StringsEs extends _StringsEn {
   String get ai_video_download_bitrate_high => 'Highest bitrate';
   @override
   String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -62982,6 +62993,9 @@ class _StringsFr extends _StringsEn {
   String get ai_video_download_bitrate_high => 'Highest bitrate';
   @override
   String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -76620,6 +76634,9 @@ class _StringsId extends _StringsEn {
   String get ai_video_download_bitrate_high => 'Highest bitrate';
   @override
   String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -90359,6 +90376,9 @@ class _StringsIt extends _StringsEn {
   String get ai_video_download_bitrate_high => 'Highest bitrate';
   @override
   String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -103453,6 +103473,9 @@ class _StringsJa extends _StringsEn {
   String get ai_video_download_bitrate_high => 'Highest bitrate';
   @override
   String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -116564,6 +116587,9 @@ class _StringsKo extends _StringsEn {
   String get ai_video_download_bitrate_high => 'Highest bitrate';
   @override
   String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -130257,6 +130283,9 @@ class _StringsNl extends _StringsEn {
   String get ai_video_download_bitrate_high => 'Highest bitrate';
   @override
   String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -144003,6 +144032,9 @@ class _StringsPtBr extends _StringsEn {
   String get ai_video_download_bitrate_high => 'Highest bitrate';
   @override
   String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -157724,6 +157756,9 @@ class _StringsRu extends _StringsEn {
   String get ai_video_download_bitrate_high => 'Highest bitrate';
   @override
   String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -171242,6 +171277,9 @@ class _StringsTh extends _StringsEn {
   String get ai_video_download_bitrate_high => 'Highest bitrate';
   @override
   String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -184874,6 +184912,9 @@ class _StringsTr extends _StringsEn {
   String get ai_video_download_bitrate_high => 'Highest bitrate';
   @override
   String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -198477,6 +198518,9 @@ class _StringsVi extends _StringsEn {
   String get ai_video_download_bitrate_high => 'Highest bitrate';
   @override
   String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -210920,6 +210964,8 @@ class _StringsZhCn extends _StringsEn {
   String get ai_video_download_bitrate_high => '高码率优先';
   @override
   String get ai_video_download_bitrate_low => '小体积优先';
+  @override
+  String get ai_feature_assigned_unavailable => '所选提供商不可用（未配置完整或已停用）';
 }
 
 // Path: <root>
@@ -223694,6 +223740,9 @@ class _StringsZhHk extends _StringsEn {
   String get ai_video_download_bitrate_high => 'Highest bitrate';
   @override
   String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 /// Flat map(s) containing all translations.
@@ -235341,6 +235390,8 @@ extension on _StringsEn {
         return 'Highest bitrate';
       case 'ai_video_download_bitrate_low':
         return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -246983,6 +247034,8 @@ extension on _StringsAr {
         return 'Highest bitrate';
       case 'ai_video_download_bitrate_low':
         return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -258674,6 +258727,8 @@ extension on _StringsDe {
         return 'Highest bitrate';
       case 'ai_video_download_bitrate_low':
         return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -270355,6 +270410,8 @@ extension on _StringsEs {
         return 'Highest bitrate';
       case 'ai_video_download_bitrate_low':
         return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -282044,6 +282101,8 @@ extension on _StringsFr {
         return 'Highest bitrate';
       case 'ai_video_download_bitrate_low':
         return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -293703,6 +293762,8 @@ extension on _StringsId {
         return 'Highest bitrate';
       case 'ai_video_download_bitrate_low':
         return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -305385,6 +305446,8 @@ extension on _StringsIt {
         return 'Highest bitrate';
       case 'ai_video_download_bitrate_low':
         return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -316988,6 +317051,8 @@ extension on _StringsJa {
         return 'Highest bitrate';
       case 'ai_video_download_bitrate_low':
         return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -328599,6 +328664,8 @@ extension on _StringsKo {
         return 'Highest bitrate';
       case 'ai_video_download_bitrate_low':
         return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -340276,6 +340343,8 @@ extension on _StringsNl {
         return 'Highest bitrate';
       case 'ai_video_download_bitrate_low':
         return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -351948,6 +352017,8 @@ extension on _StringsPtBr {
         return 'Highest bitrate';
       case 'ai_video_download_bitrate_low':
         return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -363626,6 +363697,8 @@ extension on _StringsRu {
         return 'Highest bitrate';
       case 'ai_video_download_bitrate_low':
         return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -375273,6 +375346,8 @@ extension on _StringsTh {
         return 'Highest bitrate';
       case 'ai_video_download_bitrate_low':
         return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -386936,6 +387011,8 @@ extension on _StringsTr {
         return 'Highest bitrate';
       case 'ai_video_download_bitrate_low':
         return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -398593,6 +398670,8 @@ extension on _StringsVi {
         return 'Highest bitrate';
       case 'ai_video_download_bitrate_low':
         return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -410137,6 +410216,8 @@ extension on _StringsZhCn {
         return '高码率优先';
       case 'ai_video_download_bitrate_low':
         return '小体积优先';
+      case 'ai_feature_assigned_unavailable':
+        return '所选提供商不可用（未配置完整或已停用）';
       default:
         return null;
     }
@@ -421719,6 +421800,8 @@ extension on _StringsZhHk {
         return 'Highest bitrate';
       case 'ai_video_download_bitrate_low':
         return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
