@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 97155 (5715 per locale)
+/// Strings: 97172 (5716 per locale)
 ///
-/// Built on 2026-09-27 at 17:56 UTC
+/// Built on 2026-09-27 at 18:25 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8141,6 +8141,7 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get plex_token_label => 'X-Plex-Token';
   String get plex_manual_connect => 'Connect';
   String get plex_sign_in_failed => 'Plex sign-in failed';
+  String get remote_video_stream_play => 'Play (stream)';
   String get nav_browse => 'Browse';
   String get novel_detail_library_remove => 'Remove from bookshelf';
   String get novel_detail_library_remove_confirm =>
@@ -21832,6 +21833,8 @@ class _StringsAr extends _StringsEn {
   String get plex_manual_connect => 'Connect';
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
   @override
   String get nav_browse => 'تصفح';
   @override
@@ -35780,6 +35783,8 @@ class _StringsDe extends _StringsEn {
   String get plex_manual_connect => 'Connect';
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
   @override
   String get nav_browse => 'Durchsuchen';
   @override
@@ -49779,6 +49784,8 @@ class _StringsEs extends _StringsEn {
   String get plex_manual_connect => 'Connect';
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
   @override
   String get nav_browse => 'Explorar';
   @override
@@ -63818,6 +63825,8 @@ class _StringsFr extends _StringsEn {
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
+  String get remote_video_stream_play => 'Play (stream)';
+  @override
   String get nav_browse => 'Parcourir';
   @override
   String get novel_detail_library_remove => 'Retirer de la bibliothèque';
@@ -77645,6 +77654,8 @@ class _StringsId extends _StringsEn {
   String get plex_manual_connect => 'Connect';
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
   @override
   String get nav_browse => 'Jelajah';
   @override
@@ -91575,6 +91586,8 @@ class _StringsIt extends _StringsEn {
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
+  String get remote_video_stream_play => 'Play (stream)';
+  @override
   String get nav_browse => 'Sfoglia';
   @override
   String get novel_detail_library_remove => 'Rimuovi dalla libreria';
@@ -104857,6 +104870,8 @@ class _StringsJa extends _StringsEn {
   String get plex_manual_connect => 'Connect';
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
   @override
   String get nav_browse => 'ブラウズ';
   @override
@@ -118156,6 +118171,8 @@ class _StringsKo extends _StringsEn {
   String get plex_manual_connect => 'Connect';
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
   @override
   String get nav_browse => '탐색';
   @override
@@ -132038,6 +132055,8 @@ class _StringsNl extends _StringsEn {
   String get plex_manual_connect => 'Connect';
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
   @override
   String get nav_browse => 'Bladeren';
   @override
@@ -145976,6 +145995,8 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
+  String get remote_video_stream_play => 'Play (stream)';
+  @override
   String get nav_browse => 'Navegar';
   @override
   String get novel_detail_library_remove => 'Remover da estante';
@@ -159887,6 +159908,8 @@ class _StringsRu extends _StringsEn {
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
+  String get remote_video_stream_play => 'Play (stream)';
+  @override
   String get nav_browse => 'Обзор';
   @override
   String get novel_detail_library_remove => 'Убрать с полки';
@@ -173593,6 +173616,8 @@ class _StringsTh extends _StringsEn {
   String get plex_manual_connect => 'Connect';
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
   @override
   String get nav_browse => 'เรียกดู';
   @override
@@ -187416,6 +187441,8 @@ class _StringsTr extends _StringsEn {
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
+  String get remote_video_stream_play => 'Play (stream)';
+  @override
   String get nav_browse => 'Göz at';
   @override
   String get novel_detail_library_remove => 'Kitaplıktan kaldır';
@@ -201209,6 +201236,8 @@ class _StringsVi extends _StringsEn {
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
+  String get remote_video_stream_play => 'Play (stream)';
+  @override
   String get nav_browse => 'Duyệt';
   @override
   String get novel_detail_library_remove => 'Xóa khỏi kệ sách';
@@ -213827,6 +213856,8 @@ class _StringsZhCn extends _StringsEn {
   String get plex_manual_connect => '连接';
   @override
   String get plex_sign_in_failed => 'Plex 登录失败';
+  @override
+  String get remote_video_stream_play => '播放（流播）';
   @override
   String get nav_browse => '浏览';
   @override
@@ -226786,6 +226817,8 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
+  String get remote_video_stream_play => '播放（串流）';
+  @override
   String get nav_browse => '瀏覽';
   @override
   String get novel_detail_library_remove => '移出書架';
@@ -238593,6 +238626,8 @@ extension on _StringsEn {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       case 'nav_browse':
         return 'Browse';
       case 'novel_detail_library_remove':
@@ -250395,6 +250430,8 @@ extension on _StringsAr {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       case 'nav_browse':
         return 'تصفح';
       case 'novel_detail_library_remove':
@@ -262245,6 +262282,8 @@ extension on _StringsDe {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       case 'nav_browse':
         return 'Durchsuchen';
       case 'novel_detail_library_remove':
@@ -274086,6 +274125,8 @@ extension on _StringsEs {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       case 'nav_browse':
         return 'Explorar';
       case 'novel_detail_library_remove':
@@ -285935,6 +285976,8 @@ extension on _StringsFr {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       case 'nav_browse':
         return 'Parcourir';
       case 'novel_detail_library_remove':
@@ -297754,6 +297797,8 @@ extension on _StringsId {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       case 'nav_browse':
         return 'Jelajah';
       case 'novel_detail_library_remove':
@@ -309596,6 +309641,8 @@ extension on _StringsIt {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       case 'nav_browse':
         return 'Sfoglia';
       case 'novel_detail_library_remove':
@@ -321358,6 +321405,8 @@ extension on _StringsJa {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       case 'nav_browse':
         return 'ブラウズ';
       case 'novel_detail_library_remove':
@@ -333127,6 +333176,8 @@ extension on _StringsKo {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       case 'nav_browse':
         return '탐색';
       case 'novel_detail_library_remove':
@@ -344963,6 +345014,8 @@ extension on _StringsNl {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       case 'nav_browse':
         return 'Bladeren';
       case 'novel_detail_library_remove':
@@ -356795,6 +356848,8 @@ extension on _StringsPtBr {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       case 'nav_browse':
         return 'Navegar';
       case 'novel_detail_library_remove':
@@ -368633,6 +368688,8 @@ extension on _StringsRu {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       case 'nav_browse':
         return 'Обзор';
       case 'novel_detail_library_remove':
@@ -380439,6 +380496,8 @@ extension on _StringsTh {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       case 'nav_browse':
         return 'เรียกดู';
       case 'novel_detail_library_remove':
@@ -392261,6 +392320,8 @@ extension on _StringsTr {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       case 'nav_browse':
         return 'Göz at';
       case 'novel_detail_library_remove':
@@ -404077,6 +404138,8 @@ extension on _StringsVi {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       case 'nav_browse':
         return 'Duyệt';
       case 'novel_detail_library_remove':
@@ -415777,6 +415840,8 @@ extension on _StringsZhCn {
         return '连接';
       case 'plex_sign_in_failed':
         return 'Plex 登录失败';
+      case 'remote_video_stream_play':
+        return '播放（流播）';
       case 'nav_browse':
         return '浏览';
       case 'novel_detail_library_remove':
@@ -427517,6 +427582,8 @@ extension on _StringsZhHk {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'remote_video_stream_play':
+        return '播放（串流）';
       case 'nav_browse':
         return '瀏覽';
       case 'novel_detail_library_remove':
