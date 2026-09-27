@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 95880 (5640 per locale)
+/// Strings: 96662 (5686 per locale)
 ///
-/// Built on 2026-09-27 at 11:21 UTC
+/// Built on 2026-09-27 at 13:24 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -6875,7 +6875,7 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get ai_provider_incomplete => 'Not configured';
   String get ai_features_section => 'Feature providers';
   String get ai_features_section_summary =>
-      'Choose which provider each feature uses';
+      'Pick a default provider, then override it only for the features that need a different one or no AI';
   String get ai_feature_unset => 'Not set';
   String get ai_feature_galgame_text_process => 'Game text processing';
   String get ai_feature_galgame_text_process_summary =>
@@ -7392,7 +7392,7 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get ai_video_download_section => 'AI video download';
   String get ai_video_download_quality => 'Default quality';
   String get ai_video_download_quality_hint =>
-      'Used when the AI download assistant picks a release; "Ask each time" asks on every request.';
+      'Used when the AI download assistant picks a release; "Best available" takes the highest resolution found, "Ask each time" asks on every request.';
   String get ai_video_download_quality_unset => 'Not set (ask on first use)';
   String get ai_video_download_quality_ask => 'Ask each time';
   String get ai_video_download_quality_any => 'Any';
@@ -8039,6 +8039,91 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get video_online_download_started =>
       'Download started — see Browse › Downloads';
   String get video_online_downloaded => 'Downloaded';
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
+  String get ai_feature_default_provider => 'Default provider';
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  String get ai_feature_disabled => 'Don\'t use AI';
+  String get ai_video_download_quality_best => 'Best available';
+  String get ai_video_download_source => 'Preferred source';
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  String get ai_video_download_source_any => 'Any';
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  String get ai_video_download_bitrate => 'Bitrate';
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  String get ai_video_download_bitrate_any => 'Any';
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
+  String get ai_video_acquire_action_change_work => 'Pick another work';
+  String get ai_video_acquire_action_scope_all => 'Whole series';
+  String get ai_video_acquire_action_scope_movies => 'All movies';
+  String get ai_video_acquire_action_scope_series => 'All TV series';
+  String get ai_video_acquire_action_scope_work => 'Only this work';
+  String get ai_video_acquire_restart => 'Download another';
+  String ai_video_acquire_franchise_searching({required Object title}) =>
+      'Looking for every work in the series of “${title}”…';
+  String ai_video_acquire_franchise_found({
+    required Object name,
+    required Object series,
+    required Object movies,
+  }) =>
+      'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+  String ai_video_acquire_franchise_not_found({required Object title}) =>
+      'No other works found in the series of “${title}”, continuing with this one.';
+  String ai_video_acquire_franchise_ready({
+    required Object ready,
+    required Object total,
+  }) =>
+      '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+  String ai_video_acquire_franchise_submitted({
+    required Object downloads,
+    required Object subscriptions,
+    required Object failed,
+  }) =>
+      'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+  String ai_video_acquire_option_submit_all({required Object count}) =>
+      'Submit selected (${count})';
+  String get ai_video_acquire_option_latest => 'Only the latest episode';
+  String get ai_video_acquire_franchise_entry_pending => 'Searching…';
+  String get ai_video_acquire_franchise_entry_none => 'No release found';
+  String ai_video_acquire_franchise_entry_download({required Object version}) =>
+      'Download · ${version}';
+  String ai_video_acquire_franchise_entry_subscribe({
+    required Object version,
+  }) => 'Subscribe · ${version}';
+  String get ai_video_acquire_franchise_entry_owned =>
+      'Already in library or subscribed';
+  String ai_video_acquire_summary_position({
+    required Object index,
+    required Object total,
+  }) => 'Version ${index} of ${total}';
+  String ai_video_acquire_summary_size({required Object size}) =>
+      'about ${size} per episode';
+  String get ai_video_acquire_failure_no_candidates =>
+      'No releases found for this work.';
+  String get ai_video_acquire_failure_no_plannable_version =>
+      'Releases were found, but none covers what you asked for.';
+  String get ai_video_acquire_failure_no_sources =>
+      'There is no managed video source to download into.';
+  String get ai_video_acquire_failure_nothing_selected =>
+      'Nothing selected to submit.';
+  String get ai_video_download_skip_extras => 'Skip extras';
+  String get ai_video_download_skip_extras_hint =>
+      'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
 }
 
 // Path: <root>
@@ -21541,6 +21626,137 @@ class _StringsAr extends _StringsEn {
       'Download started — see Browse › Downloads';
   @override
   String get video_online_downloaded => 'Downloaded';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
+  @override
+  String get ai_video_acquire_action_change_work => 'Pick another work';
+  @override
+  String get ai_video_acquire_action_scope_all => 'Whole series';
+  @override
+  String get ai_video_acquire_action_scope_movies => 'All movies';
+  @override
+  String get ai_video_acquire_action_scope_series => 'All TV series';
+  @override
+  String get ai_video_acquire_action_scope_work => 'Only this work';
+  @override
+  String get ai_video_acquire_restart => 'Download another';
+  @override
+  String ai_video_acquire_franchise_searching({required Object title}) =>
+      'Looking for every work in the series of “${title}”…';
+  @override
+  String ai_video_acquire_franchise_found({
+    required Object name,
+    required Object series,
+    required Object movies,
+  }) =>
+      'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+  @override
+  String ai_video_acquire_franchise_not_found({required Object title}) =>
+      'No other works found in the series of “${title}”, continuing with this one.';
+  @override
+  String ai_video_acquire_franchise_ready({
+    required Object ready,
+    required Object total,
+  }) =>
+      '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+  @override
+  String ai_video_acquire_franchise_submitted({
+    required Object downloads,
+    required Object subscriptions,
+    required Object failed,
+  }) =>
+      'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+  @override
+  String ai_video_acquire_option_submit_all({required Object count}) =>
+      'Submit selected (${count})';
+  @override
+  String get ai_video_acquire_option_latest => 'Only the latest episode';
+  @override
+  String get ai_video_acquire_franchise_entry_pending => 'Searching…';
+  @override
+  String get ai_video_acquire_franchise_entry_none => 'No release found';
+  @override
+  String ai_video_acquire_franchise_entry_download({required Object version}) =>
+      'Download · ${version}';
+  @override
+  String ai_video_acquire_franchise_entry_subscribe({
+    required Object version,
+  }) => 'Subscribe · ${version}';
+  @override
+  String get ai_video_acquire_franchise_entry_owned =>
+      'Already in library or subscribed';
+  @override
+  String ai_video_acquire_summary_position({
+    required Object index,
+    required Object total,
+  }) => 'Version ${index} of ${total}';
+  @override
+  String ai_video_acquire_summary_size({required Object size}) =>
+      'about ${size} per episode';
+  @override
+  String get ai_video_acquire_failure_no_candidates =>
+      'No releases found for this work.';
+  @override
+  String get ai_video_acquire_failure_no_plannable_version =>
+      'Releases were found, but none covers what you asked for.';
+  @override
+  String get ai_video_acquire_failure_no_sources =>
+      'There is no managed video source to download into.';
+  @override
+  String get ai_video_acquire_failure_nothing_selected =>
+      'Nothing selected to submit.';
+  @override
+  String get ai_video_download_skip_extras => 'Skip extras';
+  @override
+  String get ai_video_download_skip_extras_hint =>
+      'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
 }
 
 // Path: <root>
@@ -35283,6 +35499,137 @@ class _StringsDe extends _StringsEn {
       'Download started — see Browse › Downloads';
   @override
   String get video_online_downloaded => 'Downloaded';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
+  @override
+  String get ai_video_acquire_action_change_work => 'Pick another work';
+  @override
+  String get ai_video_acquire_action_scope_all => 'Whole series';
+  @override
+  String get ai_video_acquire_action_scope_movies => 'All movies';
+  @override
+  String get ai_video_acquire_action_scope_series => 'All TV series';
+  @override
+  String get ai_video_acquire_action_scope_work => 'Only this work';
+  @override
+  String get ai_video_acquire_restart => 'Download another';
+  @override
+  String ai_video_acquire_franchise_searching({required Object title}) =>
+      'Looking for every work in the series of “${title}”…';
+  @override
+  String ai_video_acquire_franchise_found({
+    required Object name,
+    required Object series,
+    required Object movies,
+  }) =>
+      'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+  @override
+  String ai_video_acquire_franchise_not_found({required Object title}) =>
+      'No other works found in the series of “${title}”, continuing with this one.';
+  @override
+  String ai_video_acquire_franchise_ready({
+    required Object ready,
+    required Object total,
+  }) =>
+      '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+  @override
+  String ai_video_acquire_franchise_submitted({
+    required Object downloads,
+    required Object subscriptions,
+    required Object failed,
+  }) =>
+      'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+  @override
+  String ai_video_acquire_option_submit_all({required Object count}) =>
+      'Submit selected (${count})';
+  @override
+  String get ai_video_acquire_option_latest => 'Only the latest episode';
+  @override
+  String get ai_video_acquire_franchise_entry_pending => 'Searching…';
+  @override
+  String get ai_video_acquire_franchise_entry_none => 'No release found';
+  @override
+  String ai_video_acquire_franchise_entry_download({required Object version}) =>
+      'Download · ${version}';
+  @override
+  String ai_video_acquire_franchise_entry_subscribe({
+    required Object version,
+  }) => 'Subscribe · ${version}';
+  @override
+  String get ai_video_acquire_franchise_entry_owned =>
+      'Already in library or subscribed';
+  @override
+  String ai_video_acquire_summary_position({
+    required Object index,
+    required Object total,
+  }) => 'Version ${index} of ${total}';
+  @override
+  String ai_video_acquire_summary_size({required Object size}) =>
+      'about ${size} per episode';
+  @override
+  String get ai_video_acquire_failure_no_candidates =>
+      'No releases found for this work.';
+  @override
+  String get ai_video_acquire_failure_no_plannable_version =>
+      'Releases were found, but none covers what you asked for.';
+  @override
+  String get ai_video_acquire_failure_no_sources =>
+      'There is no managed video source to download into.';
+  @override
+  String get ai_video_acquire_failure_nothing_selected =>
+      'Nothing selected to submit.';
+  @override
+  String get ai_video_download_skip_extras => 'Skip extras';
+  @override
+  String get ai_video_download_skip_extras_hint =>
+      'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
 }
 
 // Path: <root>
@@ -49076,6 +49423,137 @@ class _StringsEs extends _StringsEn {
       'Download started — see Browse › Downloads';
   @override
   String get video_online_downloaded => 'Downloaded';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
+  @override
+  String get ai_video_acquire_action_change_work => 'Pick another work';
+  @override
+  String get ai_video_acquire_action_scope_all => 'Whole series';
+  @override
+  String get ai_video_acquire_action_scope_movies => 'All movies';
+  @override
+  String get ai_video_acquire_action_scope_series => 'All TV series';
+  @override
+  String get ai_video_acquire_action_scope_work => 'Only this work';
+  @override
+  String get ai_video_acquire_restart => 'Download another';
+  @override
+  String ai_video_acquire_franchise_searching({required Object title}) =>
+      'Looking for every work in the series of “${title}”…';
+  @override
+  String ai_video_acquire_franchise_found({
+    required Object name,
+    required Object series,
+    required Object movies,
+  }) =>
+      'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+  @override
+  String ai_video_acquire_franchise_not_found({required Object title}) =>
+      'No other works found in the series of “${title}”, continuing with this one.';
+  @override
+  String ai_video_acquire_franchise_ready({
+    required Object ready,
+    required Object total,
+  }) =>
+      '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+  @override
+  String ai_video_acquire_franchise_submitted({
+    required Object downloads,
+    required Object subscriptions,
+    required Object failed,
+  }) =>
+      'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+  @override
+  String ai_video_acquire_option_submit_all({required Object count}) =>
+      'Submit selected (${count})';
+  @override
+  String get ai_video_acquire_option_latest => 'Only the latest episode';
+  @override
+  String get ai_video_acquire_franchise_entry_pending => 'Searching…';
+  @override
+  String get ai_video_acquire_franchise_entry_none => 'No release found';
+  @override
+  String ai_video_acquire_franchise_entry_download({required Object version}) =>
+      'Download · ${version}';
+  @override
+  String ai_video_acquire_franchise_entry_subscribe({
+    required Object version,
+  }) => 'Subscribe · ${version}';
+  @override
+  String get ai_video_acquire_franchise_entry_owned =>
+      'Already in library or subscribed';
+  @override
+  String ai_video_acquire_summary_position({
+    required Object index,
+    required Object total,
+  }) => 'Version ${index} of ${total}';
+  @override
+  String ai_video_acquire_summary_size({required Object size}) =>
+      'about ${size} per episode';
+  @override
+  String get ai_video_acquire_failure_no_candidates =>
+      'No releases found for this work.';
+  @override
+  String get ai_video_acquire_failure_no_plannable_version =>
+      'Releases were found, but none covers what you asked for.';
+  @override
+  String get ai_video_acquire_failure_no_sources =>
+      'There is no managed video source to download into.';
+  @override
+  String get ai_video_acquire_failure_nothing_selected =>
+      'Nothing selected to submit.';
+  @override
+  String get ai_video_download_skip_extras => 'Skip extras';
+  @override
+  String get ai_video_download_skip_extras_hint =>
+      'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
 }
 
 // Path: <root>
@@ -62908,6 +63386,137 @@ class _StringsFr extends _StringsEn {
       'Download started — see Browse › Downloads';
   @override
   String get video_online_downloaded => 'Downloaded';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
+  @override
+  String get ai_video_acquire_action_change_work => 'Pick another work';
+  @override
+  String get ai_video_acquire_action_scope_all => 'Whole series';
+  @override
+  String get ai_video_acquire_action_scope_movies => 'All movies';
+  @override
+  String get ai_video_acquire_action_scope_series => 'All TV series';
+  @override
+  String get ai_video_acquire_action_scope_work => 'Only this work';
+  @override
+  String get ai_video_acquire_restart => 'Download another';
+  @override
+  String ai_video_acquire_franchise_searching({required Object title}) =>
+      'Looking for every work in the series of “${title}”…';
+  @override
+  String ai_video_acquire_franchise_found({
+    required Object name,
+    required Object series,
+    required Object movies,
+  }) =>
+      'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+  @override
+  String ai_video_acquire_franchise_not_found({required Object title}) =>
+      'No other works found in the series of “${title}”, continuing with this one.';
+  @override
+  String ai_video_acquire_franchise_ready({
+    required Object ready,
+    required Object total,
+  }) =>
+      '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+  @override
+  String ai_video_acquire_franchise_submitted({
+    required Object downloads,
+    required Object subscriptions,
+    required Object failed,
+  }) =>
+      'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+  @override
+  String ai_video_acquire_option_submit_all({required Object count}) =>
+      'Submit selected (${count})';
+  @override
+  String get ai_video_acquire_option_latest => 'Only the latest episode';
+  @override
+  String get ai_video_acquire_franchise_entry_pending => 'Searching…';
+  @override
+  String get ai_video_acquire_franchise_entry_none => 'No release found';
+  @override
+  String ai_video_acquire_franchise_entry_download({required Object version}) =>
+      'Download · ${version}';
+  @override
+  String ai_video_acquire_franchise_entry_subscribe({
+    required Object version,
+  }) => 'Subscribe · ${version}';
+  @override
+  String get ai_video_acquire_franchise_entry_owned =>
+      'Already in library or subscribed';
+  @override
+  String ai_video_acquire_summary_position({
+    required Object index,
+    required Object total,
+  }) => 'Version ${index} of ${total}';
+  @override
+  String ai_video_acquire_summary_size({required Object size}) =>
+      'about ${size} per episode';
+  @override
+  String get ai_video_acquire_failure_no_candidates =>
+      'No releases found for this work.';
+  @override
+  String get ai_video_acquire_failure_no_plannable_version =>
+      'Releases were found, but none covers what you asked for.';
+  @override
+  String get ai_video_acquire_failure_no_sources =>
+      'There is no managed video source to download into.';
+  @override
+  String get ai_video_acquire_failure_nothing_selected =>
+      'Nothing selected to submit.';
+  @override
+  String get ai_video_download_skip_extras => 'Skip extras';
+  @override
+  String get ai_video_download_skip_extras_hint =>
+      'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
 }
 
 // Path: <root>
@@ -76530,6 +77139,137 @@ class _StringsId extends _StringsEn {
       'Download started — see Browse › Downloads';
   @override
   String get video_online_downloaded => 'Downloaded';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
+  @override
+  String get ai_video_acquire_action_change_work => 'Pick another work';
+  @override
+  String get ai_video_acquire_action_scope_all => 'Whole series';
+  @override
+  String get ai_video_acquire_action_scope_movies => 'All movies';
+  @override
+  String get ai_video_acquire_action_scope_series => 'All TV series';
+  @override
+  String get ai_video_acquire_action_scope_work => 'Only this work';
+  @override
+  String get ai_video_acquire_restart => 'Download another';
+  @override
+  String ai_video_acquire_franchise_searching({required Object title}) =>
+      'Looking for every work in the series of “${title}”…';
+  @override
+  String ai_video_acquire_franchise_found({
+    required Object name,
+    required Object series,
+    required Object movies,
+  }) =>
+      'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+  @override
+  String ai_video_acquire_franchise_not_found({required Object title}) =>
+      'No other works found in the series of “${title}”, continuing with this one.';
+  @override
+  String ai_video_acquire_franchise_ready({
+    required Object ready,
+    required Object total,
+  }) =>
+      '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+  @override
+  String ai_video_acquire_franchise_submitted({
+    required Object downloads,
+    required Object subscriptions,
+    required Object failed,
+  }) =>
+      'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+  @override
+  String ai_video_acquire_option_submit_all({required Object count}) =>
+      'Submit selected (${count})';
+  @override
+  String get ai_video_acquire_option_latest => 'Only the latest episode';
+  @override
+  String get ai_video_acquire_franchise_entry_pending => 'Searching…';
+  @override
+  String get ai_video_acquire_franchise_entry_none => 'No release found';
+  @override
+  String ai_video_acquire_franchise_entry_download({required Object version}) =>
+      'Download · ${version}';
+  @override
+  String ai_video_acquire_franchise_entry_subscribe({
+    required Object version,
+  }) => 'Subscribe · ${version}';
+  @override
+  String get ai_video_acquire_franchise_entry_owned =>
+      'Already in library or subscribed';
+  @override
+  String ai_video_acquire_summary_position({
+    required Object index,
+    required Object total,
+  }) => 'Version ${index} of ${total}';
+  @override
+  String ai_video_acquire_summary_size({required Object size}) =>
+      'about ${size} per episode';
+  @override
+  String get ai_video_acquire_failure_no_candidates =>
+      'No releases found for this work.';
+  @override
+  String get ai_video_acquire_failure_no_plannable_version =>
+      'Releases were found, but none covers what you asked for.';
+  @override
+  String get ai_video_acquire_failure_no_sources =>
+      'There is no managed video source to download into.';
+  @override
+  String get ai_video_acquire_failure_nothing_selected =>
+      'Nothing selected to submit.';
+  @override
+  String get ai_video_download_skip_extras => 'Skip extras';
+  @override
+  String get ai_video_download_skip_extras_hint =>
+      'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
 }
 
 // Path: <root>
@@ -90253,6 +90993,137 @@ class _StringsIt extends _StringsEn {
       'Download started — see Browse › Downloads';
   @override
   String get video_online_downloaded => 'Downloaded';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
+  @override
+  String get ai_video_acquire_action_change_work => 'Pick another work';
+  @override
+  String get ai_video_acquire_action_scope_all => 'Whole series';
+  @override
+  String get ai_video_acquire_action_scope_movies => 'All movies';
+  @override
+  String get ai_video_acquire_action_scope_series => 'All TV series';
+  @override
+  String get ai_video_acquire_action_scope_work => 'Only this work';
+  @override
+  String get ai_video_acquire_restart => 'Download another';
+  @override
+  String ai_video_acquire_franchise_searching({required Object title}) =>
+      'Looking for every work in the series of “${title}”…';
+  @override
+  String ai_video_acquire_franchise_found({
+    required Object name,
+    required Object series,
+    required Object movies,
+  }) =>
+      'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+  @override
+  String ai_video_acquire_franchise_not_found({required Object title}) =>
+      'No other works found in the series of “${title}”, continuing with this one.';
+  @override
+  String ai_video_acquire_franchise_ready({
+    required Object ready,
+    required Object total,
+  }) =>
+      '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+  @override
+  String ai_video_acquire_franchise_submitted({
+    required Object downloads,
+    required Object subscriptions,
+    required Object failed,
+  }) =>
+      'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+  @override
+  String ai_video_acquire_option_submit_all({required Object count}) =>
+      'Submit selected (${count})';
+  @override
+  String get ai_video_acquire_option_latest => 'Only the latest episode';
+  @override
+  String get ai_video_acquire_franchise_entry_pending => 'Searching…';
+  @override
+  String get ai_video_acquire_franchise_entry_none => 'No release found';
+  @override
+  String ai_video_acquire_franchise_entry_download({required Object version}) =>
+      'Download · ${version}';
+  @override
+  String ai_video_acquire_franchise_entry_subscribe({
+    required Object version,
+  }) => 'Subscribe · ${version}';
+  @override
+  String get ai_video_acquire_franchise_entry_owned =>
+      'Already in library or subscribed';
+  @override
+  String ai_video_acquire_summary_position({
+    required Object index,
+    required Object total,
+  }) => 'Version ${index} of ${total}';
+  @override
+  String ai_video_acquire_summary_size({required Object size}) =>
+      'about ${size} per episode';
+  @override
+  String get ai_video_acquire_failure_no_candidates =>
+      'No releases found for this work.';
+  @override
+  String get ai_video_acquire_failure_no_plannable_version =>
+      'Releases were found, but none covers what you asked for.';
+  @override
+  String get ai_video_acquire_failure_no_sources =>
+      'There is no managed video source to download into.';
+  @override
+  String get ai_video_acquire_failure_nothing_selected =>
+      'Nothing selected to submit.';
+  @override
+  String get ai_video_download_skip_extras => 'Skip extras';
+  @override
+  String get ai_video_download_skip_extras_hint =>
+      'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
 }
 
 // Path: <root>
@@ -103331,6 +104202,137 @@ class _StringsJa extends _StringsEn {
       'Download started — see Browse › Downloads';
   @override
   String get video_online_downloaded => 'Downloaded';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
+  @override
+  String get ai_video_acquire_action_change_work => 'Pick another work';
+  @override
+  String get ai_video_acquire_action_scope_all => 'Whole series';
+  @override
+  String get ai_video_acquire_action_scope_movies => 'All movies';
+  @override
+  String get ai_video_acquire_action_scope_series => 'All TV series';
+  @override
+  String get ai_video_acquire_action_scope_work => 'Only this work';
+  @override
+  String get ai_video_acquire_restart => 'Download another';
+  @override
+  String ai_video_acquire_franchise_searching({required Object title}) =>
+      'Looking for every work in the series of “${title}”…';
+  @override
+  String ai_video_acquire_franchise_found({
+    required Object name,
+    required Object series,
+    required Object movies,
+  }) =>
+      'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+  @override
+  String ai_video_acquire_franchise_not_found({required Object title}) =>
+      'No other works found in the series of “${title}”, continuing with this one.';
+  @override
+  String ai_video_acquire_franchise_ready({
+    required Object ready,
+    required Object total,
+  }) =>
+      '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+  @override
+  String ai_video_acquire_franchise_submitted({
+    required Object downloads,
+    required Object subscriptions,
+    required Object failed,
+  }) =>
+      'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+  @override
+  String ai_video_acquire_option_submit_all({required Object count}) =>
+      'Submit selected (${count})';
+  @override
+  String get ai_video_acquire_option_latest => 'Only the latest episode';
+  @override
+  String get ai_video_acquire_franchise_entry_pending => 'Searching…';
+  @override
+  String get ai_video_acquire_franchise_entry_none => 'No release found';
+  @override
+  String ai_video_acquire_franchise_entry_download({required Object version}) =>
+      'Download · ${version}';
+  @override
+  String ai_video_acquire_franchise_entry_subscribe({
+    required Object version,
+  }) => 'Subscribe · ${version}';
+  @override
+  String get ai_video_acquire_franchise_entry_owned =>
+      'Already in library or subscribed';
+  @override
+  String ai_video_acquire_summary_position({
+    required Object index,
+    required Object total,
+  }) => 'Version ${index} of ${total}';
+  @override
+  String ai_video_acquire_summary_size({required Object size}) =>
+      'about ${size} per episode';
+  @override
+  String get ai_video_acquire_failure_no_candidates =>
+      'No releases found for this work.';
+  @override
+  String get ai_video_acquire_failure_no_plannable_version =>
+      'Releases were found, but none covers what you asked for.';
+  @override
+  String get ai_video_acquire_failure_no_sources =>
+      'There is no managed video source to download into.';
+  @override
+  String get ai_video_acquire_failure_nothing_selected =>
+      'Nothing selected to submit.';
+  @override
+  String get ai_video_download_skip_extras => 'Skip extras';
+  @override
+  String get ai_video_download_skip_extras_hint =>
+      'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
 }
 
 // Path: <root>
@@ -116426,6 +117428,137 @@ class _StringsKo extends _StringsEn {
       'Download started — see Browse › Downloads';
   @override
   String get video_online_downloaded => 'Downloaded';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
+  @override
+  String get ai_video_acquire_action_change_work => 'Pick another work';
+  @override
+  String get ai_video_acquire_action_scope_all => 'Whole series';
+  @override
+  String get ai_video_acquire_action_scope_movies => 'All movies';
+  @override
+  String get ai_video_acquire_action_scope_series => 'All TV series';
+  @override
+  String get ai_video_acquire_action_scope_work => 'Only this work';
+  @override
+  String get ai_video_acquire_restart => 'Download another';
+  @override
+  String ai_video_acquire_franchise_searching({required Object title}) =>
+      'Looking for every work in the series of “${title}”…';
+  @override
+  String ai_video_acquire_franchise_found({
+    required Object name,
+    required Object series,
+    required Object movies,
+  }) =>
+      'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+  @override
+  String ai_video_acquire_franchise_not_found({required Object title}) =>
+      'No other works found in the series of “${title}”, continuing with this one.';
+  @override
+  String ai_video_acquire_franchise_ready({
+    required Object ready,
+    required Object total,
+  }) =>
+      '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+  @override
+  String ai_video_acquire_franchise_submitted({
+    required Object downloads,
+    required Object subscriptions,
+    required Object failed,
+  }) =>
+      'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+  @override
+  String ai_video_acquire_option_submit_all({required Object count}) =>
+      'Submit selected (${count})';
+  @override
+  String get ai_video_acquire_option_latest => 'Only the latest episode';
+  @override
+  String get ai_video_acquire_franchise_entry_pending => 'Searching…';
+  @override
+  String get ai_video_acquire_franchise_entry_none => 'No release found';
+  @override
+  String ai_video_acquire_franchise_entry_download({required Object version}) =>
+      'Download · ${version}';
+  @override
+  String ai_video_acquire_franchise_entry_subscribe({
+    required Object version,
+  }) => 'Subscribe · ${version}';
+  @override
+  String get ai_video_acquire_franchise_entry_owned =>
+      'Already in library or subscribed';
+  @override
+  String ai_video_acquire_summary_position({
+    required Object index,
+    required Object total,
+  }) => 'Version ${index} of ${total}';
+  @override
+  String ai_video_acquire_summary_size({required Object size}) =>
+      'about ${size} per episode';
+  @override
+  String get ai_video_acquire_failure_no_candidates =>
+      'No releases found for this work.';
+  @override
+  String get ai_video_acquire_failure_no_plannable_version =>
+      'Releases were found, but none covers what you asked for.';
+  @override
+  String get ai_video_acquire_failure_no_sources =>
+      'There is no managed video source to download into.';
+  @override
+  String get ai_video_acquire_failure_nothing_selected =>
+      'Nothing selected to submit.';
+  @override
+  String get ai_video_download_skip_extras => 'Skip extras';
+  @override
+  String get ai_video_download_skip_extras_hint =>
+      'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
 }
 
 // Path: <root>
@@ -130103,6 +131236,137 @@ class _StringsNl extends _StringsEn {
       'Download started — see Browse › Downloads';
   @override
   String get video_online_downloaded => 'Downloaded';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
+  @override
+  String get ai_video_acquire_action_change_work => 'Pick another work';
+  @override
+  String get ai_video_acquire_action_scope_all => 'Whole series';
+  @override
+  String get ai_video_acquire_action_scope_movies => 'All movies';
+  @override
+  String get ai_video_acquire_action_scope_series => 'All TV series';
+  @override
+  String get ai_video_acquire_action_scope_work => 'Only this work';
+  @override
+  String get ai_video_acquire_restart => 'Download another';
+  @override
+  String ai_video_acquire_franchise_searching({required Object title}) =>
+      'Looking for every work in the series of “${title}”…';
+  @override
+  String ai_video_acquire_franchise_found({
+    required Object name,
+    required Object series,
+    required Object movies,
+  }) =>
+      'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+  @override
+  String ai_video_acquire_franchise_not_found({required Object title}) =>
+      'No other works found in the series of “${title}”, continuing with this one.';
+  @override
+  String ai_video_acquire_franchise_ready({
+    required Object ready,
+    required Object total,
+  }) =>
+      '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+  @override
+  String ai_video_acquire_franchise_submitted({
+    required Object downloads,
+    required Object subscriptions,
+    required Object failed,
+  }) =>
+      'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+  @override
+  String ai_video_acquire_option_submit_all({required Object count}) =>
+      'Submit selected (${count})';
+  @override
+  String get ai_video_acquire_option_latest => 'Only the latest episode';
+  @override
+  String get ai_video_acquire_franchise_entry_pending => 'Searching…';
+  @override
+  String get ai_video_acquire_franchise_entry_none => 'No release found';
+  @override
+  String ai_video_acquire_franchise_entry_download({required Object version}) =>
+      'Download · ${version}';
+  @override
+  String ai_video_acquire_franchise_entry_subscribe({
+    required Object version,
+  }) => 'Subscribe · ${version}';
+  @override
+  String get ai_video_acquire_franchise_entry_owned =>
+      'Already in library or subscribed';
+  @override
+  String ai_video_acquire_summary_position({
+    required Object index,
+    required Object total,
+  }) => 'Version ${index} of ${total}';
+  @override
+  String ai_video_acquire_summary_size({required Object size}) =>
+      'about ${size} per episode';
+  @override
+  String get ai_video_acquire_failure_no_candidates =>
+      'No releases found for this work.';
+  @override
+  String get ai_video_acquire_failure_no_plannable_version =>
+      'Releases were found, but none covers what you asked for.';
+  @override
+  String get ai_video_acquire_failure_no_sources =>
+      'There is no managed video source to download into.';
+  @override
+  String get ai_video_acquire_failure_nothing_selected =>
+      'Nothing selected to submit.';
+  @override
+  String get ai_video_download_skip_extras => 'Skip extras';
+  @override
+  String get ai_video_download_skip_extras_hint =>
+      'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
 }
 
 // Path: <root>
@@ -143833,6 +145097,137 @@ class _StringsPtBr extends _StringsEn {
       'Download started — see Browse › Downloads';
   @override
   String get video_online_downloaded => 'Downloaded';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
+  @override
+  String get ai_video_acquire_action_change_work => 'Pick another work';
+  @override
+  String get ai_video_acquire_action_scope_all => 'Whole series';
+  @override
+  String get ai_video_acquire_action_scope_movies => 'All movies';
+  @override
+  String get ai_video_acquire_action_scope_series => 'All TV series';
+  @override
+  String get ai_video_acquire_action_scope_work => 'Only this work';
+  @override
+  String get ai_video_acquire_restart => 'Download another';
+  @override
+  String ai_video_acquire_franchise_searching({required Object title}) =>
+      'Looking for every work in the series of “${title}”…';
+  @override
+  String ai_video_acquire_franchise_found({
+    required Object name,
+    required Object series,
+    required Object movies,
+  }) =>
+      'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+  @override
+  String ai_video_acquire_franchise_not_found({required Object title}) =>
+      'No other works found in the series of “${title}”, continuing with this one.';
+  @override
+  String ai_video_acquire_franchise_ready({
+    required Object ready,
+    required Object total,
+  }) =>
+      '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+  @override
+  String ai_video_acquire_franchise_submitted({
+    required Object downloads,
+    required Object subscriptions,
+    required Object failed,
+  }) =>
+      'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+  @override
+  String ai_video_acquire_option_submit_all({required Object count}) =>
+      'Submit selected (${count})';
+  @override
+  String get ai_video_acquire_option_latest => 'Only the latest episode';
+  @override
+  String get ai_video_acquire_franchise_entry_pending => 'Searching…';
+  @override
+  String get ai_video_acquire_franchise_entry_none => 'No release found';
+  @override
+  String ai_video_acquire_franchise_entry_download({required Object version}) =>
+      'Download · ${version}';
+  @override
+  String ai_video_acquire_franchise_entry_subscribe({
+    required Object version,
+  }) => 'Subscribe · ${version}';
+  @override
+  String get ai_video_acquire_franchise_entry_owned =>
+      'Already in library or subscribed';
+  @override
+  String ai_video_acquire_summary_position({
+    required Object index,
+    required Object total,
+  }) => 'Version ${index} of ${total}';
+  @override
+  String ai_video_acquire_summary_size({required Object size}) =>
+      'about ${size} per episode';
+  @override
+  String get ai_video_acquire_failure_no_candidates =>
+      'No releases found for this work.';
+  @override
+  String get ai_video_acquire_failure_no_plannable_version =>
+      'Releases were found, but none covers what you asked for.';
+  @override
+  String get ai_video_acquire_failure_no_sources =>
+      'There is no managed video source to download into.';
+  @override
+  String get ai_video_acquire_failure_nothing_selected =>
+      'Nothing selected to submit.';
+  @override
+  String get ai_video_download_skip_extras => 'Skip extras';
+  @override
+  String get ai_video_download_skip_extras_hint =>
+      'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
 }
 
 // Path: <root>
@@ -157538,6 +158933,137 @@ class _StringsRu extends _StringsEn {
       'Download started — see Browse › Downloads';
   @override
   String get video_online_downloaded => 'Downloaded';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
+  @override
+  String get ai_video_acquire_action_change_work => 'Pick another work';
+  @override
+  String get ai_video_acquire_action_scope_all => 'Whole series';
+  @override
+  String get ai_video_acquire_action_scope_movies => 'All movies';
+  @override
+  String get ai_video_acquire_action_scope_series => 'All TV series';
+  @override
+  String get ai_video_acquire_action_scope_work => 'Only this work';
+  @override
+  String get ai_video_acquire_restart => 'Download another';
+  @override
+  String ai_video_acquire_franchise_searching({required Object title}) =>
+      'Looking for every work in the series of “${title}”…';
+  @override
+  String ai_video_acquire_franchise_found({
+    required Object name,
+    required Object series,
+    required Object movies,
+  }) =>
+      'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+  @override
+  String ai_video_acquire_franchise_not_found({required Object title}) =>
+      'No other works found in the series of “${title}”, continuing with this one.';
+  @override
+  String ai_video_acquire_franchise_ready({
+    required Object ready,
+    required Object total,
+  }) =>
+      '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+  @override
+  String ai_video_acquire_franchise_submitted({
+    required Object downloads,
+    required Object subscriptions,
+    required Object failed,
+  }) =>
+      'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+  @override
+  String ai_video_acquire_option_submit_all({required Object count}) =>
+      'Submit selected (${count})';
+  @override
+  String get ai_video_acquire_option_latest => 'Only the latest episode';
+  @override
+  String get ai_video_acquire_franchise_entry_pending => 'Searching…';
+  @override
+  String get ai_video_acquire_franchise_entry_none => 'No release found';
+  @override
+  String ai_video_acquire_franchise_entry_download({required Object version}) =>
+      'Download · ${version}';
+  @override
+  String ai_video_acquire_franchise_entry_subscribe({
+    required Object version,
+  }) => 'Subscribe · ${version}';
+  @override
+  String get ai_video_acquire_franchise_entry_owned =>
+      'Already in library or subscribed';
+  @override
+  String ai_video_acquire_summary_position({
+    required Object index,
+    required Object total,
+  }) => 'Version ${index} of ${total}';
+  @override
+  String ai_video_acquire_summary_size({required Object size}) =>
+      'about ${size} per episode';
+  @override
+  String get ai_video_acquire_failure_no_candidates =>
+      'No releases found for this work.';
+  @override
+  String get ai_video_acquire_failure_no_plannable_version =>
+      'Releases were found, but none covers what you asked for.';
+  @override
+  String get ai_video_acquire_failure_no_sources =>
+      'There is no managed video source to download into.';
+  @override
+  String get ai_video_acquire_failure_nothing_selected =>
+      'Nothing selected to submit.';
+  @override
+  String get ai_video_download_skip_extras => 'Skip extras';
+  @override
+  String get ai_video_download_skip_extras_hint =>
+      'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
 }
 
 // Path: <root>
@@ -171040,6 +172566,137 @@ class _StringsTh extends _StringsEn {
       'Download started — see Browse › Downloads';
   @override
   String get video_online_downloaded => 'Downloaded';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
+  @override
+  String get ai_video_acquire_action_change_work => 'Pick another work';
+  @override
+  String get ai_video_acquire_action_scope_all => 'Whole series';
+  @override
+  String get ai_video_acquire_action_scope_movies => 'All movies';
+  @override
+  String get ai_video_acquire_action_scope_series => 'All TV series';
+  @override
+  String get ai_video_acquire_action_scope_work => 'Only this work';
+  @override
+  String get ai_video_acquire_restart => 'Download another';
+  @override
+  String ai_video_acquire_franchise_searching({required Object title}) =>
+      'Looking for every work in the series of “${title}”…';
+  @override
+  String ai_video_acquire_franchise_found({
+    required Object name,
+    required Object series,
+    required Object movies,
+  }) =>
+      'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+  @override
+  String ai_video_acquire_franchise_not_found({required Object title}) =>
+      'No other works found in the series of “${title}”, continuing with this one.';
+  @override
+  String ai_video_acquire_franchise_ready({
+    required Object ready,
+    required Object total,
+  }) =>
+      '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+  @override
+  String ai_video_acquire_franchise_submitted({
+    required Object downloads,
+    required Object subscriptions,
+    required Object failed,
+  }) =>
+      'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+  @override
+  String ai_video_acquire_option_submit_all({required Object count}) =>
+      'Submit selected (${count})';
+  @override
+  String get ai_video_acquire_option_latest => 'Only the latest episode';
+  @override
+  String get ai_video_acquire_franchise_entry_pending => 'Searching…';
+  @override
+  String get ai_video_acquire_franchise_entry_none => 'No release found';
+  @override
+  String ai_video_acquire_franchise_entry_download({required Object version}) =>
+      'Download · ${version}';
+  @override
+  String ai_video_acquire_franchise_entry_subscribe({
+    required Object version,
+  }) => 'Subscribe · ${version}';
+  @override
+  String get ai_video_acquire_franchise_entry_owned =>
+      'Already in library or subscribed';
+  @override
+  String ai_video_acquire_summary_position({
+    required Object index,
+    required Object total,
+  }) => 'Version ${index} of ${total}';
+  @override
+  String ai_video_acquire_summary_size({required Object size}) =>
+      'about ${size} per episode';
+  @override
+  String get ai_video_acquire_failure_no_candidates =>
+      'No releases found for this work.';
+  @override
+  String get ai_video_acquire_failure_no_plannable_version =>
+      'Releases were found, but none covers what you asked for.';
+  @override
+  String get ai_video_acquire_failure_no_sources =>
+      'There is no managed video source to download into.';
+  @override
+  String get ai_video_acquire_failure_nothing_selected =>
+      'Nothing selected to submit.';
+  @override
+  String get ai_video_download_skip_extras => 'Skip extras';
+  @override
+  String get ai_video_download_skip_extras_hint =>
+      'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
 }
 
 // Path: <root>
@@ -184656,6 +186313,137 @@ class _StringsTr extends _StringsEn {
       'Download started — see Browse › Downloads';
   @override
   String get video_online_downloaded => 'Downloaded';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
+  @override
+  String get ai_video_acquire_action_change_work => 'Pick another work';
+  @override
+  String get ai_video_acquire_action_scope_all => 'Whole series';
+  @override
+  String get ai_video_acquire_action_scope_movies => 'All movies';
+  @override
+  String get ai_video_acquire_action_scope_series => 'All TV series';
+  @override
+  String get ai_video_acquire_action_scope_work => 'Only this work';
+  @override
+  String get ai_video_acquire_restart => 'Download another';
+  @override
+  String ai_video_acquire_franchise_searching({required Object title}) =>
+      'Looking for every work in the series of “${title}”…';
+  @override
+  String ai_video_acquire_franchise_found({
+    required Object name,
+    required Object series,
+    required Object movies,
+  }) =>
+      'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+  @override
+  String ai_video_acquire_franchise_not_found({required Object title}) =>
+      'No other works found in the series of “${title}”, continuing with this one.';
+  @override
+  String ai_video_acquire_franchise_ready({
+    required Object ready,
+    required Object total,
+  }) =>
+      '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+  @override
+  String ai_video_acquire_franchise_submitted({
+    required Object downloads,
+    required Object subscriptions,
+    required Object failed,
+  }) =>
+      'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+  @override
+  String ai_video_acquire_option_submit_all({required Object count}) =>
+      'Submit selected (${count})';
+  @override
+  String get ai_video_acquire_option_latest => 'Only the latest episode';
+  @override
+  String get ai_video_acquire_franchise_entry_pending => 'Searching…';
+  @override
+  String get ai_video_acquire_franchise_entry_none => 'No release found';
+  @override
+  String ai_video_acquire_franchise_entry_download({required Object version}) =>
+      'Download · ${version}';
+  @override
+  String ai_video_acquire_franchise_entry_subscribe({
+    required Object version,
+  }) => 'Subscribe · ${version}';
+  @override
+  String get ai_video_acquire_franchise_entry_owned =>
+      'Already in library or subscribed';
+  @override
+  String ai_video_acquire_summary_position({
+    required Object index,
+    required Object total,
+  }) => 'Version ${index} of ${total}';
+  @override
+  String ai_video_acquire_summary_size({required Object size}) =>
+      'about ${size} per episode';
+  @override
+  String get ai_video_acquire_failure_no_candidates =>
+      'No releases found for this work.';
+  @override
+  String get ai_video_acquire_failure_no_plannable_version =>
+      'Releases were found, but none covers what you asked for.';
+  @override
+  String get ai_video_acquire_failure_no_sources =>
+      'There is no managed video source to download into.';
+  @override
+  String get ai_video_acquire_failure_nothing_selected =>
+      'Nothing selected to submit.';
+  @override
+  String get ai_video_download_skip_extras => 'Skip extras';
+  @override
+  String get ai_video_download_skip_extras_hint =>
+      'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
 }
 
 // Path: <root>
@@ -198243,6 +200031,137 @@ class _StringsVi extends _StringsEn {
       'Download started — see Browse › Downloads';
   @override
   String get video_online_downloaded => 'Downloaded';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
+  @override
+  String get ai_video_acquire_action_change_work => 'Pick another work';
+  @override
+  String get ai_video_acquire_action_scope_all => 'Whole series';
+  @override
+  String get ai_video_acquire_action_scope_movies => 'All movies';
+  @override
+  String get ai_video_acquire_action_scope_series => 'All TV series';
+  @override
+  String get ai_video_acquire_action_scope_work => 'Only this work';
+  @override
+  String get ai_video_acquire_restart => 'Download another';
+  @override
+  String ai_video_acquire_franchise_searching({required Object title}) =>
+      'Looking for every work in the series of “${title}”…';
+  @override
+  String ai_video_acquire_franchise_found({
+    required Object name,
+    required Object series,
+    required Object movies,
+  }) =>
+      'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+  @override
+  String ai_video_acquire_franchise_not_found({required Object title}) =>
+      'No other works found in the series of “${title}”, continuing with this one.';
+  @override
+  String ai_video_acquire_franchise_ready({
+    required Object ready,
+    required Object total,
+  }) =>
+      '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+  @override
+  String ai_video_acquire_franchise_submitted({
+    required Object downloads,
+    required Object subscriptions,
+    required Object failed,
+  }) =>
+      'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+  @override
+  String ai_video_acquire_option_submit_all({required Object count}) =>
+      'Submit selected (${count})';
+  @override
+  String get ai_video_acquire_option_latest => 'Only the latest episode';
+  @override
+  String get ai_video_acquire_franchise_entry_pending => 'Searching…';
+  @override
+  String get ai_video_acquire_franchise_entry_none => 'No release found';
+  @override
+  String ai_video_acquire_franchise_entry_download({required Object version}) =>
+      'Download · ${version}';
+  @override
+  String ai_video_acquire_franchise_entry_subscribe({
+    required Object version,
+  }) => 'Subscribe · ${version}';
+  @override
+  String get ai_video_acquire_franchise_entry_owned =>
+      'Already in library or subscribed';
+  @override
+  String ai_video_acquire_summary_position({
+    required Object index,
+    required Object total,
+  }) => 'Version ${index} of ${total}';
+  @override
+  String ai_video_acquire_summary_size({required Object size}) =>
+      'about ${size} per episode';
+  @override
+  String get ai_video_acquire_failure_no_candidates =>
+      'No releases found for this work.';
+  @override
+  String get ai_video_acquire_failure_no_plannable_version =>
+      'Releases were found, but none covers what you asked for.';
+  @override
+  String get ai_video_acquire_failure_no_sources =>
+      'There is no managed video source to download into.';
+  @override
+  String get ai_video_acquire_failure_nothing_selected =>
+      'Nothing selected to submit.';
+  @override
+  String get ai_video_download_skip_extras => 'Skip extras';
+  @override
+  String get ai_video_download_skip_extras_hint =>
+      'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
 }
 
 // Path: <root>
@@ -208927,7 +210846,7 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get ai_features_section => '功能提供商';
   @override
-  String get ai_features_section_summary => '为每个功能指定使用哪一家提供商';
+  String get ai_features_section_summary => '先选一家默认提供商；个别功能想换一家或不用 AI，再单独指定';
   @override
   String get ai_feature_unset => '未指定';
   @override
@@ -209708,7 +211627,8 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get ai_video_download_quality => '默认画质';
   @override
-  String get ai_video_download_quality_hint => 'AI 下载助手选版本时使用；「每次询问」= 每次都问。';
+  String get ai_video_download_quality_hint =>
+      'AI 下载助手选版本时使用；「最高可用」= 结果里分辨率最高的那一档，「每次询问」= 每次都问。';
   @override
   String get ai_video_download_quality_unset => '未设置（首次使用时询问）';
   @override
@@ -210671,6 +212591,124 @@ class _StringsZhCn extends _StringsEn {
   String get video_online_download_started => '已开始下载，进度见「浏览 › 下载」';
   @override
   String get video_online_downloaded => '已下载';
+  @override
+  String get delete_statistics_book_desc =>
+      '该书的阅读时长、阅读字数与查词/制卡计数将从统计中移除，并同步到其他设备';
+  @override
+  String get delete_statistics_manga_desc =>
+      '该漫画的阅读时长、字数、页数与查词/制卡计数将从统计中移除，并同步到其他设备';
+  @override
+  String get delete_statistics_game_desc => '该游戏的游玩时长与文本字数将从本机统计中移除';
+  @override
+  String get ai_feature_default_provider => '默认提供商';
+  @override
+  String get ai_feature_default_provider_summary => '下面的功能没单独指定时都用这一家，配一次就够';
+  @override
+  String ai_feature_follow_default({required Object name}) => '跟随默认（${name}）';
+  @override
+  String get ai_feature_disabled => '不使用 AI';
+  @override
+  String get ai_video_download_quality_best => '最高可用';
+  @override
+  String get ai_video_download_source => '片源偏好';
+  @override
+  String get ai_video_download_source_hint =>
+      '优先挑这种片源的版本，没有时照常用其它版本。蓝光含 BDRip / Remux。';
+  @override
+  String get ai_video_download_source_any => '不限';
+  @override
+  String get ai_video_download_source_best =>
+      '最佳（Remux > 蓝光 > WEB-DL > WEBRip > TV > DVD）';
+  @override
+  String get ai_video_download_source_bluray => '蓝光（BD）';
+  @override
+  String get ai_video_download_source_web => '网络源（WEB-DL / WEBRip）';
+  @override
+  String get ai_video_download_bitrate => '码率偏好';
+  @override
+  String get ai_video_download_bitrate_hint => '按每集文件体积估算码率，在已符合画质与片源的版本之间排序。';
+  @override
+  String get ai_video_download_bitrate_any => '不限';
+  @override
+  String get ai_video_download_bitrate_high => '高码率优先';
+  @override
+  String get ai_video_download_bitrate_low => '小体积优先';
+  @override
+  String get ai_feature_assigned_unavailable => '所选提供商不可用（未配置完整或已停用）';
+  @override
+  String get ai_video_acquire_action_change_work => '换一部';
+  @override
+  String get ai_video_acquire_action_scope_all => '下载整个系列';
+  @override
+  String get ai_video_acquire_action_scope_movies => '全部剧场版';
+  @override
+  String get ai_video_acquire_action_scope_series => '全部剧集';
+  @override
+  String get ai_video_acquire_action_scope_work => '只下这一部';
+  @override
+  String get ai_video_acquire_restart => '再下一部';
+  @override
+  String ai_video_acquire_franchise_searching({required Object title}) =>
+      '正在找「${title}」这个系列的全部作品…';
+  @override
+  String ai_video_acquire_franchise_found({
+    required Object name,
+    required Object series,
+    required Object movies,
+  }) => '找到「${name}」：${series} 部剧集、${movies} 部剧场版，正在逐部找资源…';
+  @override
+  String ai_video_acquire_franchise_not_found({required Object title}) =>
+      '没找到「${title}」同系列的其它作品，先按这一部继续。';
+  @override
+  String ai_video_acquire_franchise_ready({
+    required Object total,
+    required Object ready,
+  }) => '${total} 部里有 ${ready} 部找到了资源。取消勾选不要的再提交；还在播的剧集会自动订阅。';
+  @override
+  String ai_video_acquire_franchise_submitted({
+    required Object downloads,
+    required Object subscriptions,
+    required Object failed,
+  }) => '已入队 ${downloads} 条下载，新建 ${subscriptions} 个订阅；失败 ${failed} 部。';
+  @override
+  String ai_video_acquire_option_submit_all({required Object count}) =>
+      '提交勾选的（${count} 部）';
+  @override
+  String get ai_video_acquire_option_latest => '只下最新一集';
+  @override
+  String get ai_video_acquire_franchise_entry_pending => '正在找资源…';
+  @override
+  String get ai_video_acquire_franchise_entry_none => '没找到资源';
+  @override
+  String ai_video_acquire_franchise_entry_download({required Object version}) =>
+      '下载 · ${version}';
+  @override
+  String ai_video_acquire_franchise_entry_subscribe({
+    required Object version,
+  }) => '订阅 · ${version}';
+  @override
+  String get ai_video_acquire_franchise_entry_owned => '已在库或已订阅';
+  @override
+  String ai_video_acquire_summary_position({
+    required Object index,
+    required Object total,
+  }) => '第 ${index} / ${total} 个版本';
+  @override
+  String ai_video_acquire_summary_size({required Object size}) => '每集约 ${size}';
+  @override
+  String get ai_video_acquire_failure_no_candidates => '这部作品没搜到任何资源。';
+  @override
+  String get ai_video_acquire_failure_no_plannable_version =>
+      '搜到了资源，但没有一个满足要的集数或画质。';
+  @override
+  String get ai_video_acquire_failure_no_sources => '没有可以下载到的受管视频来源。';
+  @override
+  String get ai_video_acquire_failure_nothing_selected => '没有勾选任何可提交的作品。';
+  @override
+  String get ai_video_download_skip_extras => '跳过特典';
+  @override
+  String get ai_video_download_skip_extras_hint =>
+      'PV、CM、NCOP/NCED、菜单等。对所有下载到视频来源的任务生效：种子里的特典文件不下载，只有特典的发布也不会被选中。';
 }
 
 // Path: <root>
@@ -223430,6 +225468,136 @@ class _StringsZhHk extends _StringsEn {
       'Download started — see Browse › Downloads';
   @override
   String get video_online_downloaded => 'Downloaded';
+  @override
+  String get delete_statistics_book_desc =>
+      '該書的閱讀時長、閱讀字數與查詞/製卡計數將從統計中移除，並同步到其他裝置';
+  @override
+  String get delete_statistics_manga_desc =>
+      '該漫畫的閱讀時長、字數、頁數與查詞/製卡計數將從統計中移除，並同步到其他裝置';
+  @override
+  String get delete_statistics_game_desc => '該遊戲的遊玩時長與文字字數將從本機統計中移除';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
+  @override
+  String get ai_video_acquire_action_change_work => 'Pick another work';
+  @override
+  String get ai_video_acquire_action_scope_all => 'Whole series';
+  @override
+  String get ai_video_acquire_action_scope_movies => 'All movies';
+  @override
+  String get ai_video_acquire_action_scope_series => 'All TV series';
+  @override
+  String get ai_video_acquire_action_scope_work => 'Only this work';
+  @override
+  String get ai_video_acquire_restart => 'Download another';
+  @override
+  String ai_video_acquire_franchise_searching({required Object title}) =>
+      'Looking for every work in the series of “${title}”…';
+  @override
+  String ai_video_acquire_franchise_found({
+    required Object name,
+    required Object series,
+    required Object movies,
+  }) =>
+      'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+  @override
+  String ai_video_acquire_franchise_not_found({required Object title}) =>
+      'No other works found in the series of “${title}”, continuing with this one.';
+  @override
+  String ai_video_acquire_franchise_ready({
+    required Object ready,
+    required Object total,
+  }) =>
+      '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+  @override
+  String ai_video_acquire_franchise_submitted({
+    required Object downloads,
+    required Object subscriptions,
+    required Object failed,
+  }) =>
+      'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+  @override
+  String ai_video_acquire_option_submit_all({required Object count}) =>
+      'Submit selected (${count})';
+  @override
+  String get ai_video_acquire_option_latest => 'Only the latest episode';
+  @override
+  String get ai_video_acquire_franchise_entry_pending => 'Searching…';
+  @override
+  String get ai_video_acquire_franchise_entry_none => 'No release found';
+  @override
+  String ai_video_acquire_franchise_entry_download({required Object version}) =>
+      'Download · ${version}';
+  @override
+  String ai_video_acquire_franchise_entry_subscribe({
+    required Object version,
+  }) => 'Subscribe · ${version}';
+  @override
+  String get ai_video_acquire_franchise_entry_owned =>
+      'Already in library or subscribed';
+  @override
+  String ai_video_acquire_summary_position({
+    required Object index,
+    required Object total,
+  }) => 'Version ${index} of ${total}';
+  @override
+  String ai_video_acquire_summary_size({required Object size}) =>
+      'about ${size} per episode';
+  @override
+  String get ai_video_acquire_failure_no_candidates =>
+      'No releases found for this work.';
+  @override
+  String get ai_video_acquire_failure_no_plannable_version =>
+      'Releases were found, but none covers what you asked for.';
+  @override
+  String get ai_video_acquire_failure_no_sources =>
+      'There is no managed video source to download into.';
+  @override
+  String get ai_video_acquire_failure_nothing_selected =>
+      'Nothing selected to submit.';
+  @override
+  String get ai_video_download_skip_extras => 'Skip extras';
+  @override
+  String get ai_video_download_skip_extras_hint =>
+      'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
 }
 
 /// Flat map(s) containing all translations.
@@ -233479,7 +235647,7 @@ extension on _StringsEn {
       case 'ai_features_section':
         return 'Feature providers';
       case 'ai_features_section_summary':
-        return 'Choose which provider each feature uses';
+        return 'Pick a default provider, then override it only for the features that need a different one or no AI';
       case 'ai_feature_unset':
         return 'Not set';
       case 'ai_feature_galgame_text_process':
@@ -234200,7 +236368,7 @@ extension on _StringsEn {
       case 'ai_video_download_quality':
         return 'Default quality';
       case 'ai_video_download_quality_hint':
-        return 'Used when the AI download assistant picks a release; "Ask each time" asks on every request.';
+        return 'Used when the AI download assistant picks a release; "Best available" takes the highest resolution found, "Ask each time" asks on every request.';
       case 'ai_video_download_quality_unset':
         return 'Not set (ask on first use)';
       case 'ai_video_download_quality_ask':
@@ -235066,6 +237234,112 @@ extension on _StringsEn {
         return 'Download started — see Browse › Downloads';
       case 'video_online_downloaded':
         return 'Downloaded';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
+      case 'ai_video_acquire_action_change_work':
+        return 'Pick another work';
+      case 'ai_video_acquire_action_scope_all':
+        return 'Whole series';
+      case 'ai_video_acquire_action_scope_movies':
+        return 'All movies';
+      case 'ai_video_acquire_action_scope_series':
+        return 'All TV series';
+      case 'ai_video_acquire_action_scope_work':
+        return 'Only this work';
+      case 'ai_video_acquire_restart':
+        return 'Download another';
+      case 'ai_video_acquire_franchise_searching':
+        return ({required Object title}) =>
+            'Looking for every work in the series of “${title}”…';
+      case 'ai_video_acquire_franchise_found':
+        return ({
+          required Object name,
+          required Object series,
+          required Object movies,
+        }) =>
+            'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+      case 'ai_video_acquire_franchise_not_found':
+        return ({required Object title}) =>
+            'No other works found in the series of “${title}”, continuing with this one.';
+      case 'ai_video_acquire_franchise_ready':
+        return ({required Object ready, required Object total}) =>
+            '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+      case 'ai_video_acquire_franchise_submitted':
+        return ({
+          required Object downloads,
+          required Object subscriptions,
+          required Object failed,
+        }) =>
+            'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+      case 'ai_video_acquire_option_submit_all':
+        return ({required Object count}) => 'Submit selected (${count})';
+      case 'ai_video_acquire_option_latest':
+        return 'Only the latest episode';
+      case 'ai_video_acquire_franchise_entry_pending':
+        return 'Searching…';
+      case 'ai_video_acquire_franchise_entry_none':
+        return 'No release found';
+      case 'ai_video_acquire_franchise_entry_download':
+        return ({required Object version}) => 'Download · ${version}';
+      case 'ai_video_acquire_franchise_entry_subscribe':
+        return ({required Object version}) => 'Subscribe · ${version}';
+      case 'ai_video_acquire_franchise_entry_owned':
+        return 'Already in library or subscribed';
+      case 'ai_video_acquire_summary_position':
+        return ({required Object index, required Object total}) =>
+            'Version ${index} of ${total}';
+      case 'ai_video_acquire_summary_size':
+        return ({required Object size}) => 'about ${size} per episode';
+      case 'ai_video_acquire_failure_no_candidates':
+        return 'No releases found for this work.';
+      case 'ai_video_acquire_failure_no_plannable_version':
+        return 'Releases were found, but none covers what you asked for.';
+      case 'ai_video_acquire_failure_no_sources':
+        return 'There is no managed video source to download into.';
+      case 'ai_video_acquire_failure_nothing_selected':
+        return 'Nothing selected to submit.';
+      case 'ai_video_download_skip_extras':
+        return 'Skip extras';
+      case 'ai_video_download_skip_extras_hint':
+        return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       default:
         return null;
     }
@@ -246697,6 +248971,112 @@ extension on _StringsAr {
         return 'Download started — see Browse › Downloads';
       case 'video_online_downloaded':
         return 'Downloaded';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
+      case 'ai_video_acquire_action_change_work':
+        return 'Pick another work';
+      case 'ai_video_acquire_action_scope_all':
+        return 'Whole series';
+      case 'ai_video_acquire_action_scope_movies':
+        return 'All movies';
+      case 'ai_video_acquire_action_scope_series':
+        return 'All TV series';
+      case 'ai_video_acquire_action_scope_work':
+        return 'Only this work';
+      case 'ai_video_acquire_restart':
+        return 'Download another';
+      case 'ai_video_acquire_franchise_searching':
+        return ({required Object title}) =>
+            'Looking for every work in the series of “${title}”…';
+      case 'ai_video_acquire_franchise_found':
+        return ({
+          required Object name,
+          required Object series,
+          required Object movies,
+        }) =>
+            'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+      case 'ai_video_acquire_franchise_not_found':
+        return ({required Object title}) =>
+            'No other works found in the series of “${title}”, continuing with this one.';
+      case 'ai_video_acquire_franchise_ready':
+        return ({required Object ready, required Object total}) =>
+            '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+      case 'ai_video_acquire_franchise_submitted':
+        return ({
+          required Object downloads,
+          required Object subscriptions,
+          required Object failed,
+        }) =>
+            'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+      case 'ai_video_acquire_option_submit_all':
+        return ({required Object count}) => 'Submit selected (${count})';
+      case 'ai_video_acquire_option_latest':
+        return 'Only the latest episode';
+      case 'ai_video_acquire_franchise_entry_pending':
+        return 'Searching…';
+      case 'ai_video_acquire_franchise_entry_none':
+        return 'No release found';
+      case 'ai_video_acquire_franchise_entry_download':
+        return ({required Object version}) => 'Download · ${version}';
+      case 'ai_video_acquire_franchise_entry_subscribe':
+        return ({required Object version}) => 'Subscribe · ${version}';
+      case 'ai_video_acquire_franchise_entry_owned':
+        return 'Already in library or subscribed';
+      case 'ai_video_acquire_summary_position':
+        return ({required Object index, required Object total}) =>
+            'Version ${index} of ${total}';
+      case 'ai_video_acquire_summary_size':
+        return ({required Object size}) => 'about ${size} per episode';
+      case 'ai_video_acquire_failure_no_candidates':
+        return 'No releases found for this work.';
+      case 'ai_video_acquire_failure_no_plannable_version':
+        return 'Releases were found, but none covers what you asked for.';
+      case 'ai_video_acquire_failure_no_sources':
+        return 'There is no managed video source to download into.';
+      case 'ai_video_acquire_failure_nothing_selected':
+        return 'Nothing selected to submit.';
+      case 'ai_video_download_skip_extras':
+        return 'Skip extras';
+      case 'ai_video_download_skip_extras_hint':
+        return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       default:
         return null;
     }
@@ -258377,6 +260757,112 @@ extension on _StringsDe {
         return 'Download started — see Browse › Downloads';
       case 'video_online_downloaded':
         return 'Downloaded';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
+      case 'ai_video_acquire_action_change_work':
+        return 'Pick another work';
+      case 'ai_video_acquire_action_scope_all':
+        return 'Whole series';
+      case 'ai_video_acquire_action_scope_movies':
+        return 'All movies';
+      case 'ai_video_acquire_action_scope_series':
+        return 'All TV series';
+      case 'ai_video_acquire_action_scope_work':
+        return 'Only this work';
+      case 'ai_video_acquire_restart':
+        return 'Download another';
+      case 'ai_video_acquire_franchise_searching':
+        return ({required Object title}) =>
+            'Looking for every work in the series of “${title}”…';
+      case 'ai_video_acquire_franchise_found':
+        return ({
+          required Object name,
+          required Object series,
+          required Object movies,
+        }) =>
+            'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+      case 'ai_video_acquire_franchise_not_found':
+        return ({required Object title}) =>
+            'No other works found in the series of “${title}”, continuing with this one.';
+      case 'ai_video_acquire_franchise_ready':
+        return ({required Object ready, required Object total}) =>
+            '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+      case 'ai_video_acquire_franchise_submitted':
+        return ({
+          required Object downloads,
+          required Object subscriptions,
+          required Object failed,
+        }) =>
+            'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+      case 'ai_video_acquire_option_submit_all':
+        return ({required Object count}) => 'Submit selected (${count})';
+      case 'ai_video_acquire_option_latest':
+        return 'Only the latest episode';
+      case 'ai_video_acquire_franchise_entry_pending':
+        return 'Searching…';
+      case 'ai_video_acquire_franchise_entry_none':
+        return 'No release found';
+      case 'ai_video_acquire_franchise_entry_download':
+        return ({required Object version}) => 'Download · ${version}';
+      case 'ai_video_acquire_franchise_entry_subscribe':
+        return ({required Object version}) => 'Subscribe · ${version}';
+      case 'ai_video_acquire_franchise_entry_owned':
+        return 'Already in library or subscribed';
+      case 'ai_video_acquire_summary_position':
+        return ({required Object index, required Object total}) =>
+            'Version ${index} of ${total}';
+      case 'ai_video_acquire_summary_size':
+        return ({required Object size}) => 'about ${size} per episode';
+      case 'ai_video_acquire_failure_no_candidates':
+        return 'No releases found for this work.';
+      case 'ai_video_acquire_failure_no_plannable_version':
+        return 'Releases were found, but none covers what you asked for.';
+      case 'ai_video_acquire_failure_no_sources':
+        return 'There is no managed video source to download into.';
+      case 'ai_video_acquire_failure_nothing_selected':
+        return 'Nothing selected to submit.';
+      case 'ai_video_download_skip_extras':
+        return 'Skip extras';
+      case 'ai_video_download_skip_extras_hint':
+        return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       default:
         return null;
     }
@@ -270047,6 +272533,112 @@ extension on _StringsEs {
         return 'Download started — see Browse › Downloads';
       case 'video_online_downloaded':
         return 'Downloaded';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
+      case 'ai_video_acquire_action_change_work':
+        return 'Pick another work';
+      case 'ai_video_acquire_action_scope_all':
+        return 'Whole series';
+      case 'ai_video_acquire_action_scope_movies':
+        return 'All movies';
+      case 'ai_video_acquire_action_scope_series':
+        return 'All TV series';
+      case 'ai_video_acquire_action_scope_work':
+        return 'Only this work';
+      case 'ai_video_acquire_restart':
+        return 'Download another';
+      case 'ai_video_acquire_franchise_searching':
+        return ({required Object title}) =>
+            'Looking for every work in the series of “${title}”…';
+      case 'ai_video_acquire_franchise_found':
+        return ({
+          required Object name,
+          required Object series,
+          required Object movies,
+        }) =>
+            'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+      case 'ai_video_acquire_franchise_not_found':
+        return ({required Object title}) =>
+            'No other works found in the series of “${title}”, continuing with this one.';
+      case 'ai_video_acquire_franchise_ready':
+        return ({required Object ready, required Object total}) =>
+            '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+      case 'ai_video_acquire_franchise_submitted':
+        return ({
+          required Object downloads,
+          required Object subscriptions,
+          required Object failed,
+        }) =>
+            'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+      case 'ai_video_acquire_option_submit_all':
+        return ({required Object count}) => 'Submit selected (${count})';
+      case 'ai_video_acquire_option_latest':
+        return 'Only the latest episode';
+      case 'ai_video_acquire_franchise_entry_pending':
+        return 'Searching…';
+      case 'ai_video_acquire_franchise_entry_none':
+        return 'No release found';
+      case 'ai_video_acquire_franchise_entry_download':
+        return ({required Object version}) => 'Download · ${version}';
+      case 'ai_video_acquire_franchise_entry_subscribe':
+        return ({required Object version}) => 'Subscribe · ${version}';
+      case 'ai_video_acquire_franchise_entry_owned':
+        return 'Already in library or subscribed';
+      case 'ai_video_acquire_summary_position':
+        return ({required Object index, required Object total}) =>
+            'Version ${index} of ${total}';
+      case 'ai_video_acquire_summary_size':
+        return ({required Object size}) => 'about ${size} per episode';
+      case 'ai_video_acquire_failure_no_candidates':
+        return 'No releases found for this work.';
+      case 'ai_video_acquire_failure_no_plannable_version':
+        return 'Releases were found, but none covers what you asked for.';
+      case 'ai_video_acquire_failure_no_sources':
+        return 'There is no managed video source to download into.';
+      case 'ai_video_acquire_failure_nothing_selected':
+        return 'Nothing selected to submit.';
+      case 'ai_video_download_skip_extras':
+        return 'Skip extras';
+      case 'ai_video_download_skip_extras_hint':
+        return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       default:
         return null;
     }
@@ -281725,6 +284317,112 @@ extension on _StringsFr {
         return 'Download started — see Browse › Downloads';
       case 'video_online_downloaded':
         return 'Downloaded';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
+      case 'ai_video_acquire_action_change_work':
+        return 'Pick another work';
+      case 'ai_video_acquire_action_scope_all':
+        return 'Whole series';
+      case 'ai_video_acquire_action_scope_movies':
+        return 'All movies';
+      case 'ai_video_acquire_action_scope_series':
+        return 'All TV series';
+      case 'ai_video_acquire_action_scope_work':
+        return 'Only this work';
+      case 'ai_video_acquire_restart':
+        return 'Download another';
+      case 'ai_video_acquire_franchise_searching':
+        return ({required Object title}) =>
+            'Looking for every work in the series of “${title}”…';
+      case 'ai_video_acquire_franchise_found':
+        return ({
+          required Object name,
+          required Object series,
+          required Object movies,
+        }) =>
+            'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+      case 'ai_video_acquire_franchise_not_found':
+        return ({required Object title}) =>
+            'No other works found in the series of “${title}”, continuing with this one.';
+      case 'ai_video_acquire_franchise_ready':
+        return ({required Object ready, required Object total}) =>
+            '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+      case 'ai_video_acquire_franchise_submitted':
+        return ({
+          required Object downloads,
+          required Object subscriptions,
+          required Object failed,
+        }) =>
+            'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+      case 'ai_video_acquire_option_submit_all':
+        return ({required Object count}) => 'Submit selected (${count})';
+      case 'ai_video_acquire_option_latest':
+        return 'Only the latest episode';
+      case 'ai_video_acquire_franchise_entry_pending':
+        return 'Searching…';
+      case 'ai_video_acquire_franchise_entry_none':
+        return 'No release found';
+      case 'ai_video_acquire_franchise_entry_download':
+        return ({required Object version}) => 'Download · ${version}';
+      case 'ai_video_acquire_franchise_entry_subscribe':
+        return ({required Object version}) => 'Subscribe · ${version}';
+      case 'ai_video_acquire_franchise_entry_owned':
+        return 'Already in library or subscribed';
+      case 'ai_video_acquire_summary_position':
+        return ({required Object index, required Object total}) =>
+            'Version ${index} of ${total}';
+      case 'ai_video_acquire_summary_size':
+        return ({required Object size}) => 'about ${size} per episode';
+      case 'ai_video_acquire_failure_no_candidates':
+        return 'No releases found for this work.';
+      case 'ai_video_acquire_failure_no_plannable_version':
+        return 'Releases were found, but none covers what you asked for.';
+      case 'ai_video_acquire_failure_no_sources':
+        return 'There is no managed video source to download into.';
+      case 'ai_video_acquire_failure_nothing_selected':
+        return 'Nothing selected to submit.';
+      case 'ai_video_download_skip_extras':
+        return 'Skip extras';
+      case 'ai_video_download_skip_extras_hint':
+        return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       default:
         return null;
     }
@@ -293373,6 +296071,112 @@ extension on _StringsId {
         return 'Download started — see Browse › Downloads';
       case 'video_online_downloaded':
         return 'Downloaded';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
+      case 'ai_video_acquire_action_change_work':
+        return 'Pick another work';
+      case 'ai_video_acquire_action_scope_all':
+        return 'Whole series';
+      case 'ai_video_acquire_action_scope_movies':
+        return 'All movies';
+      case 'ai_video_acquire_action_scope_series':
+        return 'All TV series';
+      case 'ai_video_acquire_action_scope_work':
+        return 'Only this work';
+      case 'ai_video_acquire_restart':
+        return 'Download another';
+      case 'ai_video_acquire_franchise_searching':
+        return ({required Object title}) =>
+            'Looking for every work in the series of “${title}”…';
+      case 'ai_video_acquire_franchise_found':
+        return ({
+          required Object name,
+          required Object series,
+          required Object movies,
+        }) =>
+            'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+      case 'ai_video_acquire_franchise_not_found':
+        return ({required Object title}) =>
+            'No other works found in the series of “${title}”, continuing with this one.';
+      case 'ai_video_acquire_franchise_ready':
+        return ({required Object ready, required Object total}) =>
+            '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+      case 'ai_video_acquire_franchise_submitted':
+        return ({
+          required Object downloads,
+          required Object subscriptions,
+          required Object failed,
+        }) =>
+            'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+      case 'ai_video_acquire_option_submit_all':
+        return ({required Object count}) => 'Submit selected (${count})';
+      case 'ai_video_acquire_option_latest':
+        return 'Only the latest episode';
+      case 'ai_video_acquire_franchise_entry_pending':
+        return 'Searching…';
+      case 'ai_video_acquire_franchise_entry_none':
+        return 'No release found';
+      case 'ai_video_acquire_franchise_entry_download':
+        return ({required Object version}) => 'Download · ${version}';
+      case 'ai_video_acquire_franchise_entry_subscribe':
+        return ({required Object version}) => 'Subscribe · ${version}';
+      case 'ai_video_acquire_franchise_entry_owned':
+        return 'Already in library or subscribed';
+      case 'ai_video_acquire_summary_position':
+        return ({required Object index, required Object total}) =>
+            'Version ${index} of ${total}';
+      case 'ai_video_acquire_summary_size':
+        return ({required Object size}) => 'about ${size} per episode';
+      case 'ai_video_acquire_failure_no_candidates':
+        return 'No releases found for this work.';
+      case 'ai_video_acquire_failure_no_plannable_version':
+        return 'Releases were found, but none covers what you asked for.';
+      case 'ai_video_acquire_failure_no_sources':
+        return 'There is no managed video source to download into.';
+      case 'ai_video_acquire_failure_nothing_selected':
+        return 'Nothing selected to submit.';
+      case 'ai_video_download_skip_extras':
+        return 'Skip extras';
+      case 'ai_video_download_skip_extras_hint':
+        return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       default:
         return null;
     }
@@ -305044,6 +307848,112 @@ extension on _StringsIt {
         return 'Download started — see Browse › Downloads';
       case 'video_online_downloaded':
         return 'Downloaded';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
+      case 'ai_video_acquire_action_change_work':
+        return 'Pick another work';
+      case 'ai_video_acquire_action_scope_all':
+        return 'Whole series';
+      case 'ai_video_acquire_action_scope_movies':
+        return 'All movies';
+      case 'ai_video_acquire_action_scope_series':
+        return 'All TV series';
+      case 'ai_video_acquire_action_scope_work':
+        return 'Only this work';
+      case 'ai_video_acquire_restart':
+        return 'Download another';
+      case 'ai_video_acquire_franchise_searching':
+        return ({required Object title}) =>
+            'Looking for every work in the series of “${title}”…';
+      case 'ai_video_acquire_franchise_found':
+        return ({
+          required Object name,
+          required Object series,
+          required Object movies,
+        }) =>
+            'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+      case 'ai_video_acquire_franchise_not_found':
+        return ({required Object title}) =>
+            'No other works found in the series of “${title}”, continuing with this one.';
+      case 'ai_video_acquire_franchise_ready':
+        return ({required Object ready, required Object total}) =>
+            '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+      case 'ai_video_acquire_franchise_submitted':
+        return ({
+          required Object downloads,
+          required Object subscriptions,
+          required Object failed,
+        }) =>
+            'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+      case 'ai_video_acquire_option_submit_all':
+        return ({required Object count}) => 'Submit selected (${count})';
+      case 'ai_video_acquire_option_latest':
+        return 'Only the latest episode';
+      case 'ai_video_acquire_franchise_entry_pending':
+        return 'Searching…';
+      case 'ai_video_acquire_franchise_entry_none':
+        return 'No release found';
+      case 'ai_video_acquire_franchise_entry_download':
+        return ({required Object version}) => 'Download · ${version}';
+      case 'ai_video_acquire_franchise_entry_subscribe':
+        return ({required Object version}) => 'Subscribe · ${version}';
+      case 'ai_video_acquire_franchise_entry_owned':
+        return 'Already in library or subscribed';
+      case 'ai_video_acquire_summary_position':
+        return ({required Object index, required Object total}) =>
+            'Version ${index} of ${total}';
+      case 'ai_video_acquire_summary_size':
+        return ({required Object size}) => 'about ${size} per episode';
+      case 'ai_video_acquire_failure_no_candidates':
+        return 'No releases found for this work.';
+      case 'ai_video_acquire_failure_no_plannable_version':
+        return 'Releases were found, but none covers what you asked for.';
+      case 'ai_video_acquire_failure_no_sources':
+        return 'There is no managed video source to download into.';
+      case 'ai_video_acquire_failure_nothing_selected':
+        return 'Nothing selected to submit.';
+      case 'ai_video_download_skip_extras':
+        return 'Skip extras';
+      case 'ai_video_download_skip_extras_hint':
+        return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       default:
         return null;
     }
@@ -316636,6 +319546,112 @@ extension on _StringsJa {
         return 'Download started — see Browse › Downloads';
       case 'video_online_downloaded':
         return 'Downloaded';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
+      case 'ai_video_acquire_action_change_work':
+        return 'Pick another work';
+      case 'ai_video_acquire_action_scope_all':
+        return 'Whole series';
+      case 'ai_video_acquire_action_scope_movies':
+        return 'All movies';
+      case 'ai_video_acquire_action_scope_series':
+        return 'All TV series';
+      case 'ai_video_acquire_action_scope_work':
+        return 'Only this work';
+      case 'ai_video_acquire_restart':
+        return 'Download another';
+      case 'ai_video_acquire_franchise_searching':
+        return ({required Object title}) =>
+            'Looking for every work in the series of “${title}”…';
+      case 'ai_video_acquire_franchise_found':
+        return ({
+          required Object name,
+          required Object series,
+          required Object movies,
+        }) =>
+            'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+      case 'ai_video_acquire_franchise_not_found':
+        return ({required Object title}) =>
+            'No other works found in the series of “${title}”, continuing with this one.';
+      case 'ai_video_acquire_franchise_ready':
+        return ({required Object ready, required Object total}) =>
+            '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+      case 'ai_video_acquire_franchise_submitted':
+        return ({
+          required Object downloads,
+          required Object subscriptions,
+          required Object failed,
+        }) =>
+            'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+      case 'ai_video_acquire_option_submit_all':
+        return ({required Object count}) => 'Submit selected (${count})';
+      case 'ai_video_acquire_option_latest':
+        return 'Only the latest episode';
+      case 'ai_video_acquire_franchise_entry_pending':
+        return 'Searching…';
+      case 'ai_video_acquire_franchise_entry_none':
+        return 'No release found';
+      case 'ai_video_acquire_franchise_entry_download':
+        return ({required Object version}) => 'Download · ${version}';
+      case 'ai_video_acquire_franchise_entry_subscribe':
+        return ({required Object version}) => 'Subscribe · ${version}';
+      case 'ai_video_acquire_franchise_entry_owned':
+        return 'Already in library or subscribed';
+      case 'ai_video_acquire_summary_position':
+        return ({required Object index, required Object total}) =>
+            'Version ${index} of ${total}';
+      case 'ai_video_acquire_summary_size':
+        return ({required Object size}) => 'about ${size} per episode';
+      case 'ai_video_acquire_failure_no_candidates':
+        return 'No releases found for this work.';
+      case 'ai_video_acquire_failure_no_plannable_version':
+        return 'Releases were found, but none covers what you asked for.';
+      case 'ai_video_acquire_failure_no_sources':
+        return 'There is no managed video source to download into.';
+      case 'ai_video_acquire_failure_nothing_selected':
+        return 'Nothing selected to submit.';
+      case 'ai_video_download_skip_extras':
+        return 'Skip extras';
+      case 'ai_video_download_skip_extras_hint':
+        return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       default:
         return null;
     }
@@ -328236,6 +331252,112 @@ extension on _StringsKo {
         return 'Download started — see Browse › Downloads';
       case 'video_online_downloaded':
         return 'Downloaded';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
+      case 'ai_video_acquire_action_change_work':
+        return 'Pick another work';
+      case 'ai_video_acquire_action_scope_all':
+        return 'Whole series';
+      case 'ai_video_acquire_action_scope_movies':
+        return 'All movies';
+      case 'ai_video_acquire_action_scope_series':
+        return 'All TV series';
+      case 'ai_video_acquire_action_scope_work':
+        return 'Only this work';
+      case 'ai_video_acquire_restart':
+        return 'Download another';
+      case 'ai_video_acquire_franchise_searching':
+        return ({required Object title}) =>
+            'Looking for every work in the series of “${title}”…';
+      case 'ai_video_acquire_franchise_found':
+        return ({
+          required Object name,
+          required Object series,
+          required Object movies,
+        }) =>
+            'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+      case 'ai_video_acquire_franchise_not_found':
+        return ({required Object title}) =>
+            'No other works found in the series of “${title}”, continuing with this one.';
+      case 'ai_video_acquire_franchise_ready':
+        return ({required Object ready, required Object total}) =>
+            '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+      case 'ai_video_acquire_franchise_submitted':
+        return ({
+          required Object downloads,
+          required Object subscriptions,
+          required Object failed,
+        }) =>
+            'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+      case 'ai_video_acquire_option_submit_all':
+        return ({required Object count}) => 'Submit selected (${count})';
+      case 'ai_video_acquire_option_latest':
+        return 'Only the latest episode';
+      case 'ai_video_acquire_franchise_entry_pending':
+        return 'Searching…';
+      case 'ai_video_acquire_franchise_entry_none':
+        return 'No release found';
+      case 'ai_video_acquire_franchise_entry_download':
+        return ({required Object version}) => 'Download · ${version}';
+      case 'ai_video_acquire_franchise_entry_subscribe':
+        return ({required Object version}) => 'Subscribe · ${version}';
+      case 'ai_video_acquire_franchise_entry_owned':
+        return 'Already in library or subscribed';
+      case 'ai_video_acquire_summary_position':
+        return ({required Object index, required Object total}) =>
+            'Version ${index} of ${total}';
+      case 'ai_video_acquire_summary_size':
+        return ({required Object size}) => 'about ${size} per episode';
+      case 'ai_video_acquire_failure_no_candidates':
+        return 'No releases found for this work.';
+      case 'ai_video_acquire_failure_no_plannable_version':
+        return 'Releases were found, but none covers what you asked for.';
+      case 'ai_video_acquire_failure_no_sources':
+        return 'There is no managed video source to download into.';
+      case 'ai_video_acquire_failure_nothing_selected':
+        return 'Nothing selected to submit.';
+      case 'ai_video_download_skip_extras':
+        return 'Skip extras';
+      case 'ai_video_download_skip_extras_hint':
+        return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       default:
         return null;
     }
@@ -339902,6 +343024,112 @@ extension on _StringsNl {
         return 'Download started — see Browse › Downloads';
       case 'video_online_downloaded':
         return 'Downloaded';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
+      case 'ai_video_acquire_action_change_work':
+        return 'Pick another work';
+      case 'ai_video_acquire_action_scope_all':
+        return 'Whole series';
+      case 'ai_video_acquire_action_scope_movies':
+        return 'All movies';
+      case 'ai_video_acquire_action_scope_series':
+        return 'All TV series';
+      case 'ai_video_acquire_action_scope_work':
+        return 'Only this work';
+      case 'ai_video_acquire_restart':
+        return 'Download another';
+      case 'ai_video_acquire_franchise_searching':
+        return ({required Object title}) =>
+            'Looking for every work in the series of “${title}”…';
+      case 'ai_video_acquire_franchise_found':
+        return ({
+          required Object name,
+          required Object series,
+          required Object movies,
+        }) =>
+            'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+      case 'ai_video_acquire_franchise_not_found':
+        return ({required Object title}) =>
+            'No other works found in the series of “${title}”, continuing with this one.';
+      case 'ai_video_acquire_franchise_ready':
+        return ({required Object ready, required Object total}) =>
+            '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+      case 'ai_video_acquire_franchise_submitted':
+        return ({
+          required Object downloads,
+          required Object subscriptions,
+          required Object failed,
+        }) =>
+            'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+      case 'ai_video_acquire_option_submit_all':
+        return ({required Object count}) => 'Submit selected (${count})';
+      case 'ai_video_acquire_option_latest':
+        return 'Only the latest episode';
+      case 'ai_video_acquire_franchise_entry_pending':
+        return 'Searching…';
+      case 'ai_video_acquire_franchise_entry_none':
+        return 'No release found';
+      case 'ai_video_acquire_franchise_entry_download':
+        return ({required Object version}) => 'Download · ${version}';
+      case 'ai_video_acquire_franchise_entry_subscribe':
+        return ({required Object version}) => 'Subscribe · ${version}';
+      case 'ai_video_acquire_franchise_entry_owned':
+        return 'Already in library or subscribed';
+      case 'ai_video_acquire_summary_position':
+        return ({required Object index, required Object total}) =>
+            'Version ${index} of ${total}';
+      case 'ai_video_acquire_summary_size':
+        return ({required Object size}) => 'about ${size} per episode';
+      case 'ai_video_acquire_failure_no_candidates':
+        return 'No releases found for this work.';
+      case 'ai_video_acquire_failure_no_plannable_version':
+        return 'Releases were found, but none covers what you asked for.';
+      case 'ai_video_acquire_failure_no_sources':
+        return 'There is no managed video source to download into.';
+      case 'ai_video_acquire_failure_nothing_selected':
+        return 'Nothing selected to submit.';
+      case 'ai_video_download_skip_extras':
+        return 'Skip extras';
+      case 'ai_video_download_skip_extras_hint':
+        return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       default:
         return null;
     }
@@ -351563,6 +354791,112 @@ extension on _StringsPtBr {
         return 'Download started — see Browse › Downloads';
       case 'video_online_downloaded':
         return 'Downloaded';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
+      case 'ai_video_acquire_action_change_work':
+        return 'Pick another work';
+      case 'ai_video_acquire_action_scope_all':
+        return 'Whole series';
+      case 'ai_video_acquire_action_scope_movies':
+        return 'All movies';
+      case 'ai_video_acquire_action_scope_series':
+        return 'All TV series';
+      case 'ai_video_acquire_action_scope_work':
+        return 'Only this work';
+      case 'ai_video_acquire_restart':
+        return 'Download another';
+      case 'ai_video_acquire_franchise_searching':
+        return ({required Object title}) =>
+            'Looking for every work in the series of “${title}”…';
+      case 'ai_video_acquire_franchise_found':
+        return ({
+          required Object name,
+          required Object series,
+          required Object movies,
+        }) =>
+            'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+      case 'ai_video_acquire_franchise_not_found':
+        return ({required Object title}) =>
+            'No other works found in the series of “${title}”, continuing with this one.';
+      case 'ai_video_acquire_franchise_ready':
+        return ({required Object ready, required Object total}) =>
+            '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+      case 'ai_video_acquire_franchise_submitted':
+        return ({
+          required Object downloads,
+          required Object subscriptions,
+          required Object failed,
+        }) =>
+            'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+      case 'ai_video_acquire_option_submit_all':
+        return ({required Object count}) => 'Submit selected (${count})';
+      case 'ai_video_acquire_option_latest':
+        return 'Only the latest episode';
+      case 'ai_video_acquire_franchise_entry_pending':
+        return 'Searching…';
+      case 'ai_video_acquire_franchise_entry_none':
+        return 'No release found';
+      case 'ai_video_acquire_franchise_entry_download':
+        return ({required Object version}) => 'Download · ${version}';
+      case 'ai_video_acquire_franchise_entry_subscribe':
+        return ({required Object version}) => 'Subscribe · ${version}';
+      case 'ai_video_acquire_franchise_entry_owned':
+        return 'Already in library or subscribed';
+      case 'ai_video_acquire_summary_position':
+        return ({required Object index, required Object total}) =>
+            'Version ${index} of ${total}';
+      case 'ai_video_acquire_summary_size':
+        return ({required Object size}) => 'about ${size} per episode';
+      case 'ai_video_acquire_failure_no_candidates':
+        return 'No releases found for this work.';
+      case 'ai_video_acquire_failure_no_plannable_version':
+        return 'Releases were found, but none covers what you asked for.';
+      case 'ai_video_acquire_failure_no_sources':
+        return 'There is no managed video source to download into.';
+      case 'ai_video_acquire_failure_nothing_selected':
+        return 'Nothing selected to submit.';
+      case 'ai_video_download_skip_extras':
+        return 'Skip extras';
+      case 'ai_video_download_skip_extras_hint':
+        return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       default:
         return null;
     }
@@ -363230,6 +366564,112 @@ extension on _StringsRu {
         return 'Download started — see Browse › Downloads';
       case 'video_online_downloaded':
         return 'Downloaded';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
+      case 'ai_video_acquire_action_change_work':
+        return 'Pick another work';
+      case 'ai_video_acquire_action_scope_all':
+        return 'Whole series';
+      case 'ai_video_acquire_action_scope_movies':
+        return 'All movies';
+      case 'ai_video_acquire_action_scope_series':
+        return 'All TV series';
+      case 'ai_video_acquire_action_scope_work':
+        return 'Only this work';
+      case 'ai_video_acquire_restart':
+        return 'Download another';
+      case 'ai_video_acquire_franchise_searching':
+        return ({required Object title}) =>
+            'Looking for every work in the series of “${title}”…';
+      case 'ai_video_acquire_franchise_found':
+        return ({
+          required Object name,
+          required Object series,
+          required Object movies,
+        }) =>
+            'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+      case 'ai_video_acquire_franchise_not_found':
+        return ({required Object title}) =>
+            'No other works found in the series of “${title}”, continuing with this one.';
+      case 'ai_video_acquire_franchise_ready':
+        return ({required Object ready, required Object total}) =>
+            '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+      case 'ai_video_acquire_franchise_submitted':
+        return ({
+          required Object downloads,
+          required Object subscriptions,
+          required Object failed,
+        }) =>
+            'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+      case 'ai_video_acquire_option_submit_all':
+        return ({required Object count}) => 'Submit selected (${count})';
+      case 'ai_video_acquire_option_latest':
+        return 'Only the latest episode';
+      case 'ai_video_acquire_franchise_entry_pending':
+        return 'Searching…';
+      case 'ai_video_acquire_franchise_entry_none':
+        return 'No release found';
+      case 'ai_video_acquire_franchise_entry_download':
+        return ({required Object version}) => 'Download · ${version}';
+      case 'ai_video_acquire_franchise_entry_subscribe':
+        return ({required Object version}) => 'Subscribe · ${version}';
+      case 'ai_video_acquire_franchise_entry_owned':
+        return 'Already in library or subscribed';
+      case 'ai_video_acquire_summary_position':
+        return ({required Object index, required Object total}) =>
+            'Version ${index} of ${total}';
+      case 'ai_video_acquire_summary_size':
+        return ({required Object size}) => 'about ${size} per episode';
+      case 'ai_video_acquire_failure_no_candidates':
+        return 'No releases found for this work.';
+      case 'ai_video_acquire_failure_no_plannable_version':
+        return 'Releases were found, but none covers what you asked for.';
+      case 'ai_video_acquire_failure_no_sources':
+        return 'There is no managed video source to download into.';
+      case 'ai_video_acquire_failure_nothing_selected':
+        return 'Nothing selected to submit.';
+      case 'ai_video_download_skip_extras':
+        return 'Skip extras';
+      case 'ai_video_download_skip_extras_hint':
+        return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       default:
         return null;
     }
@@ -374866,6 +378306,112 @@ extension on _StringsTh {
         return 'Download started — see Browse › Downloads';
       case 'video_online_downloaded':
         return 'Downloaded';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
+      case 'ai_video_acquire_action_change_work':
+        return 'Pick another work';
+      case 'ai_video_acquire_action_scope_all':
+        return 'Whole series';
+      case 'ai_video_acquire_action_scope_movies':
+        return 'All movies';
+      case 'ai_video_acquire_action_scope_series':
+        return 'All TV series';
+      case 'ai_video_acquire_action_scope_work':
+        return 'Only this work';
+      case 'ai_video_acquire_restart':
+        return 'Download another';
+      case 'ai_video_acquire_franchise_searching':
+        return ({required Object title}) =>
+            'Looking for every work in the series of “${title}”…';
+      case 'ai_video_acquire_franchise_found':
+        return ({
+          required Object name,
+          required Object series,
+          required Object movies,
+        }) =>
+            'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+      case 'ai_video_acquire_franchise_not_found':
+        return ({required Object title}) =>
+            'No other works found in the series of “${title}”, continuing with this one.';
+      case 'ai_video_acquire_franchise_ready':
+        return ({required Object ready, required Object total}) =>
+            '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+      case 'ai_video_acquire_franchise_submitted':
+        return ({
+          required Object downloads,
+          required Object subscriptions,
+          required Object failed,
+        }) =>
+            'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+      case 'ai_video_acquire_option_submit_all':
+        return ({required Object count}) => 'Submit selected (${count})';
+      case 'ai_video_acquire_option_latest':
+        return 'Only the latest episode';
+      case 'ai_video_acquire_franchise_entry_pending':
+        return 'Searching…';
+      case 'ai_video_acquire_franchise_entry_none':
+        return 'No release found';
+      case 'ai_video_acquire_franchise_entry_download':
+        return ({required Object version}) => 'Download · ${version}';
+      case 'ai_video_acquire_franchise_entry_subscribe':
+        return ({required Object version}) => 'Subscribe · ${version}';
+      case 'ai_video_acquire_franchise_entry_owned':
+        return 'Already in library or subscribed';
+      case 'ai_video_acquire_summary_position':
+        return ({required Object index, required Object total}) =>
+            'Version ${index} of ${total}';
+      case 'ai_video_acquire_summary_size':
+        return ({required Object size}) => 'about ${size} per episode';
+      case 'ai_video_acquire_failure_no_candidates':
+        return 'No releases found for this work.';
+      case 'ai_video_acquire_failure_no_plannable_version':
+        return 'Releases were found, but none covers what you asked for.';
+      case 'ai_video_acquire_failure_no_sources':
+        return 'There is no managed video source to download into.';
+      case 'ai_video_acquire_failure_nothing_selected':
+        return 'Nothing selected to submit.';
+      case 'ai_video_download_skip_extras':
+        return 'Skip extras';
+      case 'ai_video_download_skip_extras_hint':
+        return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       default:
         return null;
     }
@@ -386518,6 +390064,112 @@ extension on _StringsTr {
         return 'Download started — see Browse › Downloads';
       case 'video_online_downloaded':
         return 'Downloaded';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
+      case 'ai_video_acquire_action_change_work':
+        return 'Pick another work';
+      case 'ai_video_acquire_action_scope_all':
+        return 'Whole series';
+      case 'ai_video_acquire_action_scope_movies':
+        return 'All movies';
+      case 'ai_video_acquire_action_scope_series':
+        return 'All TV series';
+      case 'ai_video_acquire_action_scope_work':
+        return 'Only this work';
+      case 'ai_video_acquire_restart':
+        return 'Download another';
+      case 'ai_video_acquire_franchise_searching':
+        return ({required Object title}) =>
+            'Looking for every work in the series of “${title}”…';
+      case 'ai_video_acquire_franchise_found':
+        return ({
+          required Object name,
+          required Object series,
+          required Object movies,
+        }) =>
+            'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+      case 'ai_video_acquire_franchise_not_found':
+        return ({required Object title}) =>
+            'No other works found in the series of “${title}”, continuing with this one.';
+      case 'ai_video_acquire_franchise_ready':
+        return ({required Object ready, required Object total}) =>
+            '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+      case 'ai_video_acquire_franchise_submitted':
+        return ({
+          required Object downloads,
+          required Object subscriptions,
+          required Object failed,
+        }) =>
+            'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+      case 'ai_video_acquire_option_submit_all':
+        return ({required Object count}) => 'Submit selected (${count})';
+      case 'ai_video_acquire_option_latest':
+        return 'Only the latest episode';
+      case 'ai_video_acquire_franchise_entry_pending':
+        return 'Searching…';
+      case 'ai_video_acquire_franchise_entry_none':
+        return 'No release found';
+      case 'ai_video_acquire_franchise_entry_download':
+        return ({required Object version}) => 'Download · ${version}';
+      case 'ai_video_acquire_franchise_entry_subscribe':
+        return ({required Object version}) => 'Subscribe · ${version}';
+      case 'ai_video_acquire_franchise_entry_owned':
+        return 'Already in library or subscribed';
+      case 'ai_video_acquire_summary_position':
+        return ({required Object index, required Object total}) =>
+            'Version ${index} of ${total}';
+      case 'ai_video_acquire_summary_size':
+        return ({required Object size}) => 'about ${size} per episode';
+      case 'ai_video_acquire_failure_no_candidates':
+        return 'No releases found for this work.';
+      case 'ai_video_acquire_failure_no_plannable_version':
+        return 'Releases were found, but none covers what you asked for.';
+      case 'ai_video_acquire_failure_no_sources':
+        return 'There is no managed video source to download into.';
+      case 'ai_video_acquire_failure_nothing_selected':
+        return 'Nothing selected to submit.';
+      case 'ai_video_download_skip_extras':
+        return 'Skip extras';
+      case 'ai_video_download_skip_extras_hint':
+        return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       default:
         return null;
     }
@@ -398164,6 +401816,112 @@ extension on _StringsVi {
         return 'Download started — see Browse › Downloads';
       case 'video_online_downloaded':
         return 'Downloaded';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
+      case 'ai_video_acquire_action_change_work':
+        return 'Pick another work';
+      case 'ai_video_acquire_action_scope_all':
+        return 'Whole series';
+      case 'ai_video_acquire_action_scope_movies':
+        return 'All movies';
+      case 'ai_video_acquire_action_scope_series':
+        return 'All TV series';
+      case 'ai_video_acquire_action_scope_work':
+        return 'Only this work';
+      case 'ai_video_acquire_restart':
+        return 'Download another';
+      case 'ai_video_acquire_franchise_searching':
+        return ({required Object title}) =>
+            'Looking for every work in the series of “${title}”…';
+      case 'ai_video_acquire_franchise_found':
+        return ({
+          required Object name,
+          required Object series,
+          required Object movies,
+        }) =>
+            'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+      case 'ai_video_acquire_franchise_not_found':
+        return ({required Object title}) =>
+            'No other works found in the series of “${title}”, continuing with this one.';
+      case 'ai_video_acquire_franchise_ready':
+        return ({required Object ready, required Object total}) =>
+            '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+      case 'ai_video_acquire_franchise_submitted':
+        return ({
+          required Object downloads,
+          required Object subscriptions,
+          required Object failed,
+        }) =>
+            'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+      case 'ai_video_acquire_option_submit_all':
+        return ({required Object count}) => 'Submit selected (${count})';
+      case 'ai_video_acquire_option_latest':
+        return 'Only the latest episode';
+      case 'ai_video_acquire_franchise_entry_pending':
+        return 'Searching…';
+      case 'ai_video_acquire_franchise_entry_none':
+        return 'No release found';
+      case 'ai_video_acquire_franchise_entry_download':
+        return ({required Object version}) => 'Download · ${version}';
+      case 'ai_video_acquire_franchise_entry_subscribe':
+        return ({required Object version}) => 'Subscribe · ${version}';
+      case 'ai_video_acquire_franchise_entry_owned':
+        return 'Already in library or subscribed';
+      case 'ai_video_acquire_summary_position':
+        return ({required Object index, required Object total}) =>
+            'Version ${index} of ${total}';
+      case 'ai_video_acquire_summary_size':
+        return ({required Object size}) => 'about ${size} per episode';
+      case 'ai_video_acquire_failure_no_candidates':
+        return 'No releases found for this work.';
+      case 'ai_video_acquire_failure_no_plannable_version':
+        return 'Releases were found, but none covers what you asked for.';
+      case 'ai_video_acquire_failure_no_sources':
+        return 'There is no managed video source to download into.';
+      case 'ai_video_acquire_failure_nothing_selected':
+        return 'Nothing selected to submit.';
+      case 'ai_video_download_skip_extras':
+        return 'Skip extras';
+      case 'ai_video_download_skip_extras_hint':
+        return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       default:
         return null;
     }
@@ -408127,7 +411885,7 @@ extension on _StringsZhCn {
       case 'ai_features_section':
         return '功能提供商';
       case 'ai_features_section_summary':
-        return '为每个功能指定使用哪一家提供商';
+        return '先选一家默认提供商；个别功能想换一家或不用 AI，再单独指定';
       case 'ai_feature_unset':
         return '未指定';
       case 'ai_feature_galgame_text_process':
@@ -408843,7 +412601,7 @@ extension on _StringsZhCn {
       case 'ai_video_download_quality':
         return '默认画质';
       case 'ai_video_download_quality_hint':
-        return 'AI 下载助手选版本时使用；「每次询问」= 每次都问。';
+        return 'AI 下载助手选版本时使用；「最高可用」= 结果里分辨率最高的那一档，「每次询问」= 每次都问。';
       case 'ai_video_download_quality_unset':
         return '未设置（首次使用时询问）';
       case 'ai_video_download_quality_ask':
@@ -409696,6 +413454,108 @@ extension on _StringsZhCn {
         return '已开始下载，进度见「浏览 › 下载」';
       case 'video_online_downloaded':
         return '已下载';
+      case 'delete_statistics_book_desc':
+        return '该书的阅读时长、阅读字数与查词/制卡计数将从统计中移除，并同步到其他设备';
+      case 'delete_statistics_manga_desc':
+        return '该漫画的阅读时长、字数、页数与查词/制卡计数将从统计中移除，并同步到其他设备';
+      case 'delete_statistics_game_desc':
+        return '该游戏的游玩时长与文本字数将从本机统计中移除';
+      case 'ai_feature_default_provider':
+        return '默认提供商';
+      case 'ai_feature_default_provider_summary':
+        return '下面的功能没单独指定时都用这一家，配一次就够';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => '跟随默认（${name}）';
+      case 'ai_feature_disabled':
+        return '不使用 AI';
+      case 'ai_video_download_quality_best':
+        return '最高可用';
+      case 'ai_video_download_source':
+        return '片源偏好';
+      case 'ai_video_download_source_hint':
+        return '优先挑这种片源的版本，没有时照常用其它版本。蓝光含 BDRip / Remux。';
+      case 'ai_video_download_source_any':
+        return '不限';
+      case 'ai_video_download_source_best':
+        return '最佳（Remux > 蓝光 > WEB-DL > WEBRip > TV > DVD）';
+      case 'ai_video_download_source_bluray':
+        return '蓝光（BD）';
+      case 'ai_video_download_source_web':
+        return '网络源（WEB-DL / WEBRip）';
+      case 'ai_video_download_bitrate':
+        return '码率偏好';
+      case 'ai_video_download_bitrate_hint':
+        return '按每集文件体积估算码率，在已符合画质与片源的版本之间排序。';
+      case 'ai_video_download_bitrate_any':
+        return '不限';
+      case 'ai_video_download_bitrate_high':
+        return '高码率优先';
+      case 'ai_video_download_bitrate_low':
+        return '小体积优先';
+      case 'ai_feature_assigned_unavailable':
+        return '所选提供商不可用（未配置完整或已停用）';
+      case 'ai_video_acquire_action_change_work':
+        return '换一部';
+      case 'ai_video_acquire_action_scope_all':
+        return '下载整个系列';
+      case 'ai_video_acquire_action_scope_movies':
+        return '全部剧场版';
+      case 'ai_video_acquire_action_scope_series':
+        return '全部剧集';
+      case 'ai_video_acquire_action_scope_work':
+        return '只下这一部';
+      case 'ai_video_acquire_restart':
+        return '再下一部';
+      case 'ai_video_acquire_franchise_searching':
+        return ({required Object title}) => '正在找「${title}」这个系列的全部作品…';
+      case 'ai_video_acquire_franchise_found':
+        return ({
+          required Object name,
+          required Object series,
+          required Object movies,
+        }) => '找到「${name}」：${series} 部剧集、${movies} 部剧场版，正在逐部找资源…';
+      case 'ai_video_acquire_franchise_not_found':
+        return ({required Object title}) => '没找到「${title}」同系列的其它作品，先按这一部继续。';
+      case 'ai_video_acquire_franchise_ready':
+        return ({required Object total, required Object ready}) =>
+            '${total} 部里有 ${ready} 部找到了资源。取消勾选不要的再提交；还在播的剧集会自动订阅。';
+      case 'ai_video_acquire_franchise_submitted':
+        return ({
+          required Object downloads,
+          required Object subscriptions,
+          required Object failed,
+        }) => '已入队 ${downloads} 条下载，新建 ${subscriptions} 个订阅；失败 ${failed} 部。';
+      case 'ai_video_acquire_option_submit_all':
+        return ({required Object count}) => '提交勾选的（${count} 部）';
+      case 'ai_video_acquire_option_latest':
+        return '只下最新一集';
+      case 'ai_video_acquire_franchise_entry_pending':
+        return '正在找资源…';
+      case 'ai_video_acquire_franchise_entry_none':
+        return '没找到资源';
+      case 'ai_video_acquire_franchise_entry_download':
+        return ({required Object version}) => '下载 · ${version}';
+      case 'ai_video_acquire_franchise_entry_subscribe':
+        return ({required Object version}) => '订阅 · ${version}';
+      case 'ai_video_acquire_franchise_entry_owned':
+        return '已在库或已订阅';
+      case 'ai_video_acquire_summary_position':
+        return ({required Object index, required Object total}) =>
+            '第 ${index} / ${total} 个版本';
+      case 'ai_video_acquire_summary_size':
+        return ({required Object size}) => '每集约 ${size}';
+      case 'ai_video_acquire_failure_no_candidates':
+        return '这部作品没搜到任何资源。';
+      case 'ai_video_acquire_failure_no_plannable_version':
+        return '搜到了资源，但没有一个满足要的集数或画质。';
+      case 'ai_video_acquire_failure_no_sources':
+        return '没有可以下载到的受管视频来源。';
+      case 'ai_video_acquire_failure_nothing_selected':
+        return '没有勾选任何可提交的作品。';
+      case 'ai_video_download_skip_extras':
+        return '跳过特典';
+      case 'ai_video_download_skip_extras_hint':
+        return 'PV、CM、NCOP/NCED、菜单等。对所有下载到视频来源的任务生效：种子里的特典文件不下载，只有特典的发布也不会被选中。';
       default:
         return null;
     }
@@ -421267,6 +425127,112 @@ extension on _StringsZhHk {
         return 'Download started — see Browse › Downloads';
       case 'video_online_downloaded':
         return 'Downloaded';
+      case 'delete_statistics_book_desc':
+        return '該書的閱讀時長、閱讀字數與查詞/製卡計數將從統計中移除，並同步到其他裝置';
+      case 'delete_statistics_manga_desc':
+        return '該漫畫的閱讀時長、字數、頁數與查詞/製卡計數將從統計中移除，並同步到其他裝置';
+      case 'delete_statistics_game_desc':
+        return '該遊戲的遊玩時長與文字字數將從本機統計中移除';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
+      case 'ai_video_acquire_action_change_work':
+        return 'Pick another work';
+      case 'ai_video_acquire_action_scope_all':
+        return 'Whole series';
+      case 'ai_video_acquire_action_scope_movies':
+        return 'All movies';
+      case 'ai_video_acquire_action_scope_series':
+        return 'All TV series';
+      case 'ai_video_acquire_action_scope_work':
+        return 'Only this work';
+      case 'ai_video_acquire_restart':
+        return 'Download another';
+      case 'ai_video_acquire_franchise_searching':
+        return ({required Object title}) =>
+            'Looking for every work in the series of “${title}”…';
+      case 'ai_video_acquire_franchise_found':
+        return ({
+          required Object name,
+          required Object series,
+          required Object movies,
+        }) =>
+            'Found “${name}”: ${series} TV series and ${movies} movies. Searching releases one by one…';
+      case 'ai_video_acquire_franchise_not_found':
+        return ({required Object title}) =>
+            'No other works found in the series of “${title}”, continuing with this one.';
+      case 'ai_video_acquire_franchise_ready':
+        return ({required Object ready, required Object total}) =>
+            '${ready} of ${total} works have releases. Untick what you don\'t want, then submit. Series still airing will be subscribed.';
+      case 'ai_video_acquire_franchise_submitted':
+        return ({
+          required Object downloads,
+          required Object subscriptions,
+          required Object failed,
+        }) =>
+            'Queued ${downloads} downloads and added ${subscriptions} subscriptions. Failed: ${failed}.';
+      case 'ai_video_acquire_option_submit_all':
+        return ({required Object count}) => 'Submit selected (${count})';
+      case 'ai_video_acquire_option_latest':
+        return 'Only the latest episode';
+      case 'ai_video_acquire_franchise_entry_pending':
+        return 'Searching…';
+      case 'ai_video_acquire_franchise_entry_none':
+        return 'No release found';
+      case 'ai_video_acquire_franchise_entry_download':
+        return ({required Object version}) => 'Download · ${version}';
+      case 'ai_video_acquire_franchise_entry_subscribe':
+        return ({required Object version}) => 'Subscribe · ${version}';
+      case 'ai_video_acquire_franchise_entry_owned':
+        return 'Already in library or subscribed';
+      case 'ai_video_acquire_summary_position':
+        return ({required Object index, required Object total}) =>
+            'Version ${index} of ${total}';
+      case 'ai_video_acquire_summary_size':
+        return ({required Object size}) => 'about ${size} per episode';
+      case 'ai_video_acquire_failure_no_candidates':
+        return 'No releases found for this work.';
+      case 'ai_video_acquire_failure_no_plannable_version':
+        return 'Releases were found, but none covers what you asked for.';
+      case 'ai_video_acquire_failure_no_sources':
+        return 'There is no managed video source to download into.';
+      case 'ai_video_acquire_failure_nothing_selected':
+        return 'Nothing selected to submit.';
+      case 'ai_video_download_skip_extras':
+        return 'Skip extras';
+      case 'ai_video_download_skip_extras_hint':
+        return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       default:
         return null;
     }
