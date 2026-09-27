@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 95710 (5630 per locale)
+/// Strings: 95999 (5647 per locale)
 ///
-/// Built on 2026-09-27 at 08:36 UTC
+/// Built on 2026-09-27 at 11:09 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -6875,7 +6875,7 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get ai_provider_incomplete => 'Not configured';
   String get ai_features_section => 'Feature providers';
   String get ai_features_section_summary =>
-      'Choose which provider each feature uses';
+      'Pick a default provider, then override it only for the features that need a different one or no AI';
   String get ai_feature_unset => 'Not set';
   String get ai_feature_galgame_text_process => 'Game text processing';
   String get ai_feature_galgame_text_process_summary =>
@@ -7393,7 +7393,7 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get ai_video_download_section => 'AI video download';
   String get ai_video_download_quality => 'Default quality';
   String get ai_video_download_quality_hint =>
-      'Used when the AI download assistant picks a release; "Ask each time" asks on every request.';
+      'Used when the AI download assistant picks a release; "Best available" takes the highest resolution found, "Ask each time" asks on every request.';
   String get ai_video_download_quality_unset => 'Not set (ask on first use)';
   String get ai_video_download_quality_ask => 'Ask each time';
   String get ai_video_download_quality_any => 'Any';
@@ -8028,6 +8028,29 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
       'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
   String get delete_statistics_game_desc =>
       'Play time and text characters for this game are removed from statistics on this device';
+  String get ai_feature_default_provider => 'Default provider';
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  String get ai_feature_disabled => 'Don\'t use AI';
+  String get ai_video_download_quality_best => 'Best available';
+  String get ai_video_download_source => 'Preferred source';
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  String get ai_video_download_source_any => 'Any';
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  String get ai_video_download_bitrate => 'Bitrate';
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  String get ai_video_download_bitrate_any => 'Any';
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -21509,6 +21532,46 @@ class _StringsAr extends _StringsEn {
   @override
   String get delete_statistics_game_desc =>
       'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -35230,6 +35293,46 @@ class _StringsDe extends _StringsEn {
   @override
   String get delete_statistics_game_desc =>
       'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -49002,6 +49105,46 @@ class _StringsEs extends _StringsEn {
   @override
   String get delete_statistics_game_desc =>
       'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -62813,6 +62956,46 @@ class _StringsFr extends _StringsEn {
   @override
   String get delete_statistics_game_desc =>
       'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -76414,6 +76597,46 @@ class _StringsId extends _StringsEn {
   @override
   String get delete_statistics_game_desc =>
       'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -90116,6 +90339,46 @@ class _StringsIt extends _StringsEn {
   @override
   String get delete_statistics_game_desc =>
       'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -103173,6 +103436,46 @@ class _StringsJa extends _StringsEn {
   @override
   String get delete_statistics_game_desc =>
       'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -116247,6 +116550,46 @@ class _StringsKo extends _StringsEn {
   @override
   String get delete_statistics_game_desc =>
       'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -129903,6 +130246,46 @@ class _StringsNl extends _StringsEn {
   @override
   String get delete_statistics_game_desc =>
       'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -143612,6 +143995,46 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get delete_statistics_game_desc =>
       'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -157296,6 +157719,46 @@ class _StringsRu extends _StringsEn {
   @override
   String get delete_statistics_game_desc =>
       'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -170777,6 +171240,46 @@ class _StringsTh extends _StringsEn {
   @override
   String get delete_statistics_game_desc =>
       'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -184372,6 +184875,46 @@ class _StringsTr extends _StringsEn {
   @override
   String get delete_statistics_game_desc =>
       'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -197938,6 +198481,46 @@ class _StringsVi extends _StringsEn {
   @override
   String get delete_statistics_game_desc =>
       'Play time and text characters for this game are removed from statistics on this device';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 // Path: <root>
@@ -208622,7 +209205,7 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get ai_features_section => '功能提供商';
   @override
-  String get ai_features_section_summary => '为每个功能指定使用哪一家提供商';
+  String get ai_features_section_summary => '先选一家默认提供商；个别功能想换一家或不用 AI，再单独指定';
   @override
   String get ai_feature_unset => '未指定';
   @override
@@ -209405,7 +209988,8 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get ai_video_download_quality => '默认画质';
   @override
-  String get ai_video_download_quality_hint => 'AI 下载助手选版本时使用；「每次询问」= 每次都问。';
+  String get ai_video_download_quality_hint =>
+      'AI 下载助手选版本时使用；「最高可用」= 结果里分辨率最高的那一档，「每次询问」= 每次都问。';
   @override
   String get ai_video_download_quality_unset => '未设置（首次使用时询问）';
   @override
@@ -210346,6 +210930,42 @@ class _StringsZhCn extends _StringsEn {
       '该漫画的阅读时长、字数、页数与查词/制卡计数将从统计中移除，并同步到其他设备';
   @override
   String get delete_statistics_game_desc => '该游戏的游玩时长与文本字数将从本机统计中移除';
+  @override
+  String get ai_feature_default_provider => '默认提供商';
+  @override
+  String get ai_feature_default_provider_summary => '下面的功能没单独指定时都用这一家，配一次就够';
+  @override
+  String ai_feature_follow_default({required Object name}) => '跟随默认（${name}）';
+  @override
+  String get ai_feature_disabled => '不使用 AI';
+  @override
+  String get ai_video_download_quality_best => '最高可用';
+  @override
+  String get ai_video_download_source => '片源偏好';
+  @override
+  String get ai_video_download_source_hint =>
+      '优先挑这种片源的版本，没有时照常用其它版本。蓝光含 BDRip / Remux。';
+  @override
+  String get ai_video_download_source_any => '不限';
+  @override
+  String get ai_video_download_source_best =>
+      '最佳（Remux > 蓝光 > WEB-DL > WEBRip > TV > DVD）';
+  @override
+  String get ai_video_download_source_bluray => '蓝光（BD）';
+  @override
+  String get ai_video_download_source_web => '网络源（WEB-DL / WEBRip）';
+  @override
+  String get ai_video_download_bitrate => '码率偏好';
+  @override
+  String get ai_video_download_bitrate_hint => '按每集文件体积估算码率，在已符合画质与片源的版本之间排序。';
+  @override
+  String get ai_video_download_bitrate_any => '不限';
+  @override
+  String get ai_video_download_bitrate_high => '高码率优先';
+  @override
+  String get ai_video_download_bitrate_low => '小体积优先';
+  @override
+  String get ai_feature_assigned_unavailable => '所选提供商不可用（未配置完整或已停用）';
 }
 
 // Path: <root>
@@ -223083,6 +223703,46 @@ class _StringsZhHk extends _StringsEn {
       '該漫畫的閱讀時長、字數、頁數與查詞/製卡計數將從統計中移除，並同步到其他裝置';
   @override
   String get delete_statistics_game_desc => '該遊戲的遊玩時長與文字字數將從本機統計中移除';
+  @override
+  String get ai_feature_default_provider => 'Default provider';
+  @override
+  String get ai_feature_default_provider_summary =>
+      'Every feature below uses this provider unless you pick another one for it';
+  @override
+  String ai_feature_follow_default({required Object name}) =>
+      'Use default (${name})';
+  @override
+  String get ai_feature_disabled => 'Don\'t use AI';
+  @override
+  String get ai_video_download_quality_best => 'Best available';
+  @override
+  String get ai_video_download_source => 'Preferred source';
+  @override
+  String get ai_video_download_source_hint =>
+      'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+  @override
+  String get ai_video_download_source_any => 'Any';
+  @override
+  String get ai_video_download_source_best =>
+      'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+  @override
+  String get ai_video_download_source_bluray => 'Blu-ray (BD)';
+  @override
+  String get ai_video_download_source_web => 'Web (WEB-DL / WEBRip)';
+  @override
+  String get ai_video_download_bitrate => 'Bitrate';
+  @override
+  String get ai_video_download_bitrate_hint =>
+      'Estimated from the size per episode; ranks versions that already match the quality and source.';
+  @override
+  String get ai_video_download_bitrate_any => 'Any';
+  @override
+  String get ai_video_download_bitrate_high => 'Highest bitrate';
+  @override
+  String get ai_video_download_bitrate_low => 'Smallest size';
+  @override
+  String get ai_feature_assigned_unavailable =>
+      'Selected provider unavailable (incomplete or disabled)';
 }
 
 /// Flat map(s) containing all translations.
@@ -233132,7 +233792,7 @@ extension on _StringsEn {
       case 'ai_features_section':
         return 'Feature providers';
       case 'ai_features_section_summary':
-        return 'Choose which provider each feature uses';
+        return 'Pick a default provider, then override it only for the features that need a different one or no AI';
       case 'ai_feature_unset':
         return 'Not set';
       case 'ai_feature_galgame_text_process':
@@ -233855,7 +234515,7 @@ extension on _StringsEn {
       case 'ai_video_download_quality':
         return 'Default quality';
       case 'ai_video_download_quality_hint':
-        return 'Used when the AI download assistant picks a release; "Ask each time" asks on every request.';
+        return 'Used when the AI download assistant picks a release; "Best available" takes the highest resolution found, "Ask each time" asks on every request.';
       case 'ai_video_download_quality_unset':
         return 'Not set (ask on first use)';
       case 'ai_video_download_quality_ask':
@@ -234698,6 +235358,40 @@ extension on _StringsEn {
         return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
       case 'delete_statistics_game_desc':
         return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -246308,6 +247002,40 @@ extension on _StringsAr {
         return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
       case 'delete_statistics_game_desc':
         return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -257967,6 +258695,40 @@ extension on _StringsDe {
         return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
       case 'delete_statistics_game_desc':
         return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -269616,6 +270378,40 @@ extension on _StringsEs {
         return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
       case 'delete_statistics_game_desc':
         return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -281273,6 +282069,40 @@ extension on _StringsFr {
         return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
       case 'delete_statistics_game_desc':
         return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -292900,6 +293730,40 @@ extension on _StringsId {
         return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
       case 'delete_statistics_game_desc':
         return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -304550,6 +305414,40 @@ extension on _StringsIt {
         return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
       case 'delete_statistics_game_desc':
         return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -316121,6 +317019,40 @@ extension on _StringsJa {
         return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
       case 'delete_statistics_game_desc':
         return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -327700,6 +328632,40 @@ extension on _StringsKo {
         return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
       case 'delete_statistics_game_desc':
         return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -339345,6 +340311,40 @@ extension on _StringsNl {
         return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
       case 'delete_statistics_game_desc':
         return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -350985,6 +351985,40 @@ extension on _StringsPtBr {
         return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
       case 'delete_statistics_game_desc':
         return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -362631,6 +363665,40 @@ extension on _StringsRu {
         return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
       case 'delete_statistics_game_desc':
         return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -374246,6 +375314,40 @@ extension on _StringsTh {
         return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
       case 'delete_statistics_game_desc':
         return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -385877,6 +386979,40 @@ extension on _StringsTr {
         return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
       case 'delete_statistics_game_desc':
         return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -397502,6 +398638,40 @@ extension on _StringsVi {
         return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
       case 'delete_statistics_game_desc':
         return 'Play time and text characters for this game are removed from statistics on this device';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
@@ -407465,7 +408635,7 @@ extension on _StringsZhCn {
       case 'ai_features_section':
         return '功能提供商';
       case 'ai_features_section_summary':
-        return '为每个功能指定使用哪一家提供商';
+        return '先选一家默认提供商；个别功能想换一家或不用 AI，再单独指定';
       case 'ai_feature_unset':
         return '未指定';
       case 'ai_feature_galgame_text_process':
@@ -408183,7 +409353,7 @@ extension on _StringsZhCn {
       case 'ai_video_download_quality':
         return '默认画质';
       case 'ai_video_download_quality_hint':
-        return 'AI 下载助手选版本时使用；「每次询问」= 每次都问。';
+        return 'AI 下载助手选版本时使用；「最高可用」= 结果里分辨率最高的那一档，「每次询问」= 每次都问。';
       case 'ai_video_download_quality_unset':
         return '未设置（首次使用时询问）';
       case 'ai_video_download_quality_ask':
@@ -409014,6 +410184,40 @@ extension on _StringsZhCn {
         return '该漫画的阅读时长、字数、页数与查词/制卡计数将从统计中移除，并同步到其他设备';
       case 'delete_statistics_game_desc':
         return '该游戏的游玩时长与文本字数将从本机统计中移除';
+      case 'ai_feature_default_provider':
+        return '默认提供商';
+      case 'ai_feature_default_provider_summary':
+        return '下面的功能没单独指定时都用这一家，配一次就够';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => '跟随默认（${name}）';
+      case 'ai_feature_disabled':
+        return '不使用 AI';
+      case 'ai_video_download_quality_best':
+        return '最高可用';
+      case 'ai_video_download_source':
+        return '片源偏好';
+      case 'ai_video_download_source_hint':
+        return '优先挑这种片源的版本，没有时照常用其它版本。蓝光含 BDRip / Remux。';
+      case 'ai_video_download_source_any':
+        return '不限';
+      case 'ai_video_download_source_best':
+        return '最佳（Remux > 蓝光 > WEB-DL > WEBRip > TV > DVD）';
+      case 'ai_video_download_source_bluray':
+        return '蓝光（BD）';
+      case 'ai_video_download_source_web':
+        return '网络源（WEB-DL / WEBRip）';
+      case 'ai_video_download_bitrate':
+        return '码率偏好';
+      case 'ai_video_download_bitrate_hint':
+        return '按每集文件体积估算码率，在已符合画质与片源的版本之间排序。';
+      case 'ai_video_download_bitrate_any':
+        return '不限';
+      case 'ai_video_download_bitrate_high':
+        return '高码率优先';
+      case 'ai_video_download_bitrate_low':
+        return '小体积优先';
+      case 'ai_feature_assigned_unavailable':
+        return '所选提供商不可用（未配置完整或已停用）';
       default:
         return null;
     }
@@ -420564,6 +421768,40 @@ extension on _StringsZhHk {
         return '該漫畫的閱讀時長、字數、頁數與查詞/製卡計數將從統計中移除，並同步到其他裝置';
       case 'delete_statistics_game_desc':
         return '該遊戲的遊玩時長與文字字數將從本機統計中移除';
+      case 'ai_feature_default_provider':
+        return 'Default provider';
+      case 'ai_feature_default_provider_summary':
+        return 'Every feature below uses this provider unless you pick another one for it';
+      case 'ai_feature_follow_default':
+        return ({required Object name}) => 'Use default (${name})';
+      case 'ai_feature_disabled':
+        return 'Don\'t use AI';
+      case 'ai_video_download_quality_best':
+        return 'Best available';
+      case 'ai_video_download_source':
+        return 'Preferred source';
+      case 'ai_video_download_source_hint':
+        return 'Versions from this source are tried first; others are still used when it is missing. Blu-ray includes BDRip and Remux.';
+      case 'ai_video_download_source_any':
+        return 'Any';
+      case 'ai_video_download_source_best':
+        return 'Best (Remux > Blu-ray > WEB-DL > WEBRip > TV > DVD)';
+      case 'ai_video_download_source_bluray':
+        return 'Blu-ray (BD)';
+      case 'ai_video_download_source_web':
+        return 'Web (WEB-DL / WEBRip)';
+      case 'ai_video_download_bitrate':
+        return 'Bitrate';
+      case 'ai_video_download_bitrate_hint':
+        return 'Estimated from the size per episode; ranks versions that already match the quality and source.';
+      case 'ai_video_download_bitrate_any':
+        return 'Any';
+      case 'ai_video_download_bitrate_high':
+        return 'Highest bitrate';
+      case 'ai_video_download_bitrate_low':
+        return 'Smallest size';
+      case 'ai_feature_assigned_unavailable':
+        return 'Selected provider unavailable (incomplete or disabled)';
       default:
         return null;
     }
