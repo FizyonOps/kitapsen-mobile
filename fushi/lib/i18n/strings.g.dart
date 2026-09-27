@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 96713 (5689 per locale)
+/// Strings: 96883 (5699 per locale)
 ///
-/// Built on 2026-09-27 at 14:13 UTC
+/// Built on 2026-09-27 at 14:49 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8127,6 +8127,20 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get ai_web_knowledge_custom_endpoint_invalid =>
       'Enter an https:// address ending in api.php';
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  String get video_iptv_import_action => 'Import IPTV list';
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  String get video_iptv_url_field => 'Channel list URL';
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
 }
 
 // Path: <root>
@@ -21766,6 +21780,30 @@ class _StringsAr extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
 }
 
 // Path: <root>
@@ -35645,6 +35683,30 @@ class _StringsDe extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
 }
 
 // Path: <root>
@@ -49575,6 +49637,30 @@ class _StringsEs extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
 }
 
 // Path: <root>
@@ -63544,6 +63630,30 @@ class _StringsFr extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
 }
 
 // Path: <root>
@@ -77303,6 +77413,30 @@ class _StringsId extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
 }
 
 // Path: <root>
@@ -91163,6 +91297,30 @@ class _StringsIt extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
 }
 
 // Path: <root>
@@ -104378,6 +104536,30 @@ class _StringsJa extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
 }
 
 // Path: <root>
@@ -117610,6 +117792,30 @@ class _StringsKo extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
 }
 
 // Path: <root>
@@ -131424,6 +131630,30 @@ class _StringsNl extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
 }
 
 // Path: <root>
@@ -145291,6 +145521,30 @@ class _StringsPtBr extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
 }
 
 // Path: <root>
@@ -159133,6 +159387,30 @@ class _StringsRu extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
 }
 
 // Path: <root>
@@ -172772,6 +173050,30 @@ class _StringsTh extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
 }
 
 // Path: <root>
@@ -186525,6 +186827,30 @@ class _StringsTr extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
 }
 
 // Path: <root>
@@ -200249,6 +200575,30 @@ class _StringsVi extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
 }
 
 // Path: <root>
@@ -212803,6 +213153,29 @@ class _StringsZhCn extends _StringsEn {
       '请填写以 https:// 开头、以 api.php 结尾的地址';
   @override
   String get ai_web_knowledge_custom_remove => '删除站点';
+  @override
+  String get video_strm_target_local =>
+      '该 .strm 文件指向本机文件路径，暂不支持。请直接把视频文件放进来源库。';
+  @override
+  String get video_strm_target_unsupported =>
+      '该 .strm 文件里没有可播放的流地址（http、https、rtsp 等）。';
+  @override
+  String get video_strm_file_unreadable => '无法读取 .strm 文件。';
+  @override
+  String get video_iptv_import_action => '导入 IPTV 频道列表';
+  @override
+  String get video_iptv_import_title => '导入 M3U / IPTV 频道列表';
+  @override
+  String get video_iptv_url_field => '频道列表地址';
+  @override
+  String get video_iptv_pick_file => '选择本地 .m3u / .m3u8 文件';
+  @override
+  String get video_iptv_import_hint =>
+      '每个频道作为一条流入库，并按 group-title 分组成合集；HLS 流播放列表会作为单个视频导入。';
+  @override
+  String get video_iptv_list_empty => '列表里没有找到频道。';
+  @override
+  String video_iptv_imported({required Object count}) => '已导入 ${count} 个频道';
 }
 
 // Path: <root>
@@ -225698,6 +226071,30 @@ class _StringsZhHk extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
 }
 
 /// Flat map(s) containing all translations.
@@ -237445,6 +237842,26 @@ extension on _StringsEn {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
       default:
         return null;
     }
@@ -249187,6 +249604,26 @@ extension on _StringsAr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
       default:
         return null;
     }
@@ -260978,6 +261415,26 @@ extension on _StringsDe {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
       default:
         return null;
     }
@@ -272759,6 +273216,26 @@ extension on _StringsEs {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
       default:
         return null;
     }
@@ -284548,6 +285025,26 @@ extension on _StringsFr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
       default:
         return null;
     }
@@ -296307,6 +296804,26 @@ extension on _StringsId {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
       default:
         return null;
     }
@@ -308089,6 +308606,26 @@ extension on _StringsIt {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
       default:
         return null;
     }
@@ -319792,6 +320329,26 @@ extension on _StringsJa {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
       default:
         return null;
     }
@@ -331503,6 +332060,26 @@ extension on _StringsKo {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
       default:
         return null;
     }
@@ -343280,6 +343857,26 @@ extension on _StringsNl {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
       default:
         return null;
     }
@@ -355052,6 +355649,26 @@ extension on _StringsPtBr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
       default:
         return null;
     }
@@ -366830,6 +367447,26 @@ extension on _StringsRu {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
       default:
         return null;
     }
@@ -378577,6 +379214,26 @@ extension on _StringsTh {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
       default:
         return null;
     }
@@ -390340,6 +390997,26 @@ extension on _StringsTr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
       default:
         return null;
     }
@@ -402097,6 +402774,26 @@ extension on _StringsVi {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
       default:
         return null;
     }
@@ -413738,6 +414435,26 @@ extension on _StringsZhCn {
         return '请填写以 https:// 开头、以 api.php 结尾的地址';
       case 'ai_web_knowledge_custom_remove':
         return '删除站点';
+      case 'video_strm_target_local':
+        return '该 .strm 文件指向本机文件路径，暂不支持。请直接把视频文件放进来源库。';
+      case 'video_strm_target_unsupported':
+        return '该 .strm 文件里没有可播放的流地址（http、https、rtsp 等）。';
+      case 'video_strm_file_unreadable':
+        return '无法读取 .strm 文件。';
+      case 'video_iptv_import_action':
+        return '导入 IPTV 频道列表';
+      case 'video_iptv_import_title':
+        return '导入 M3U / IPTV 频道列表';
+      case 'video_iptv_url_field':
+        return '频道列表地址';
+      case 'video_iptv_pick_file':
+        return '选择本地 .m3u / .m3u8 文件';
+      case 'video_iptv_import_hint':
+        return '每个频道作为一条流入库，并按 group-title 分组成合集；HLS 流播放列表会作为单个视频导入。';
+      case 'video_iptv_list_empty':
+        return '列表里没有找到频道。';
+      case 'video_iptv_imported':
+        return ({required Object count}) => '已导入 ${count} 个频道';
       default:
         return null;
     }
@@ -425420,6 +426137,26 @@ extension on _StringsZhHk {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
       default:
         return null;
     }
