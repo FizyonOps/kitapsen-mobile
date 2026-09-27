@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 96730 (5690 per locale)
+/// Strings: 96934 (5702 per locale)
 ///
-/// Built on 2026-09-27 at 16:51 UTC
+/// Built on 2026-09-27 at 17:30 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8127,6 +8127,23 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get ai_web_knowledge_custom_endpoint_invalid =>
       'Enter an https:// address ending in api.php';
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  String get plex_account_sign_in => 'Sign in with Plex';
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  String get plex_manual_title => 'Connect manually';
+  String get plex_token_label => 'X-Plex-Token';
+  String get plex_manual_connect => 'Connect';
+  String get plex_sign_in_failed => 'Plex sign-in failed';
   String get remote_video_stream_play => 'Play (stream)';
 }
 
@@ -21767,6 +21784,35 @@ class _StringsAr extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
   String get remote_video_stream_play => 'Play (stream)';
 }
@@ -35648,6 +35694,35 @@ class _StringsDe extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
   String get remote_video_stream_play => 'Play (stream)';
 }
@@ -49580,6 +49655,35 @@ class _StringsEs extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
   String get remote_video_stream_play => 'Play (stream)';
 }
@@ -63552,6 +63656,35 @@ class _StringsFr extends _StringsEn {
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
   String get remote_video_stream_play => 'Play (stream)';
 }
 
@@ -77312,6 +77445,35 @@ class _StringsId extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
   String get remote_video_stream_play => 'Play (stream)';
 }
@@ -91175,6 +91337,35 @@ class _StringsIt extends _StringsEn {
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
   String get remote_video_stream_play => 'Play (stream)';
 }
 
@@ -104391,6 +104582,35 @@ class _StringsJa extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
   String get remote_video_stream_play => 'Play (stream)';
 }
@@ -117625,6 +117845,35 @@ class _StringsKo extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
   String get remote_video_stream_play => 'Play (stream)';
 }
@@ -131441,6 +131690,35 @@ class _StringsNl extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
   String get remote_video_stream_play => 'Play (stream)';
 }
@@ -145311,6 +145589,35 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
   String get remote_video_stream_play => 'Play (stream)';
 }
 
@@ -159155,6 +159462,35 @@ class _StringsRu extends _StringsEn {
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
   String get remote_video_stream_play => 'Play (stream)';
 }
 
@@ -172795,6 +173131,35 @@ class _StringsTh extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
   String get remote_video_stream_play => 'Play (stream)';
 }
@@ -186551,6 +186916,35 @@ class _StringsTr extends _StringsEn {
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
   String get remote_video_stream_play => 'Play (stream)';
 }
 
@@ -200277,6 +200671,35 @@ class _StringsVi extends _StringsEn {
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
   String get remote_video_stream_play => 'Play (stream)';
 }
 
@@ -212832,6 +213255,31 @@ class _StringsZhCn extends _StringsEn {
       '请填写以 https:// 开头、以 api.php 结尾的地址';
   @override
   String get ai_web_knowledge_custom_remove => '删除站点';
+  @override
+  String get video_item_rescrape_not_planned => '这个视频不在任何本地视频来源的刮削计划里';
+  @override
+  String get plex_settings_hint =>
+      '用 Plex 账号登录，或填写服务器地址与 X-Plex-Token 直连。播放直接串流原文件（direct play），不使用 Plex 转码。';
+  @override
+  String get plex_account_sign_in => '使用 Plex 账号登录';
+  @override
+  String get plex_pin_waiting => '等待在浏览器中授权 Fushi…';
+  @override
+  String get plex_pin_link_hint => '如果浏览器没有自动打开，请复制这个链接：';
+  @override
+  String get plex_pin_expired => '登录请求已过期，请重试。';
+  @override
+  String get plex_servers_none_reachable => '这个账号下没有找到可连接的 Plex 服务器。';
+  @override
+  String plex_servers_added({required Object n}) => '已添加 ${n} 台 Plex 服务器';
+  @override
+  String get plex_manual_title => '手动连接';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => '连接';
+  @override
+  String get plex_sign_in_failed => 'Plex 登录失败';
   @override
   String get remote_video_stream_play => '播放（流播）';
 }
@@ -225730,6 +226178,34 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
+  String get video_item_rescrape_not_planned => '這個影片不在任何本機影片來源的刮削計劃裡';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
   String get remote_video_stream_play => '播放（串流）';
 }
 
@@ -237478,6 +237954,30 @@ extension on _StringsEn {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       default:
@@ -249222,6 +249722,30 @@ extension on _StringsAr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       default:
@@ -261015,6 +261539,30 @@ extension on _StringsDe {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       default:
@@ -272798,6 +273346,30 @@ extension on _StringsEs {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       default:
@@ -284589,6 +285161,30 @@ extension on _StringsFr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       default:
@@ -296350,6 +296946,30 @@ extension on _StringsId {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       default:
@@ -308134,6 +308754,30 @@ extension on _StringsIt {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       default:
@@ -319839,6 +320483,30 @@ extension on _StringsJa {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       default:
@@ -331552,6 +332220,30 @@ extension on _StringsKo {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       default:
@@ -343331,6 +344023,30 @@ extension on _StringsNl {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       default:
@@ -355105,6 +355821,30 @@ extension on _StringsPtBr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       default:
@@ -366885,6 +367625,30 @@ extension on _StringsRu {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       default:
@@ -378634,6 +379398,30 @@ extension on _StringsTh {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       default:
@@ -390399,6 +391187,30 @@ extension on _StringsTr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       default:
@@ -402158,6 +402970,30 @@ extension on _StringsVi {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       default:
@@ -413801,6 +414637,30 @@ extension on _StringsZhCn {
         return '请填写以 https:// 开头、以 api.php 结尾的地址';
       case 'ai_web_knowledge_custom_remove':
         return '删除站点';
+      case 'video_item_rescrape_not_planned':
+        return '这个视频不在任何本地视频来源的刮削计划里';
+      case 'plex_settings_hint':
+        return '用 Plex 账号登录，或填写服务器地址与 X-Plex-Token 直连。播放直接串流原文件（direct play），不使用 Plex 转码。';
+      case 'plex_account_sign_in':
+        return '使用 Plex 账号登录';
+      case 'plex_pin_waiting':
+        return '等待在浏览器中授权 Fushi…';
+      case 'plex_pin_link_hint':
+        return '如果浏览器没有自动打开，请复制这个链接：';
+      case 'plex_pin_expired':
+        return '登录请求已过期，请重试。';
+      case 'plex_servers_none_reachable':
+        return '这个账号下没有找到可连接的 Plex 服务器。';
+      case 'plex_servers_added':
+        return ({required Object n}) => '已添加 ${n} 台 Plex 服务器';
+      case 'plex_manual_title':
+        return '手动连接';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return '连接';
+      case 'plex_sign_in_failed':
+        return 'Plex 登录失败';
       case 'remote_video_stream_play':
         return '播放（流播）';
       default:
@@ -425485,6 +426345,30 @@ extension on _StringsZhHk {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return '這個影片不在任何本機影片來源的刮削計劃裡';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'remote_video_stream_play':
         return '播放（串流）';
       default:
