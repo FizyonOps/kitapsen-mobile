@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 97019 (5707 per locale)
+/// Strings: 97087 (5711 per locale)
 ///
-/// Built on 2026-09-27 at 17:48 UTC
+/// Built on 2026-09-27 at 18:03 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8151,6 +8151,12 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get sync_server_public_urls => 'Public / reverse proxy addresses';
   String get sync_server_public_urls_hint =>
       'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+  String get sync_p2p_enable => 'Allow remote connections over a P2P tunnel';
+  String get sync_p2p_enable_hint =>
+      'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+  String get sync_p2p_relay_urls => 'Self-hosted relays (optional)';
+  String get sync_p2p_relay_urls_hint =>
+      'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
 }
 
 // Path: <root>
@@ -21832,6 +21838,16 @@ class _StringsAr extends _StringsEn {
   @override
   String get sync_server_public_urls_hint =>
       'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+  @override
+  String get sync_p2p_enable => 'Allow remote connections over a P2P tunnel';
+  @override
+  String get sync_p2p_enable_hint =>
+      'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+  @override
+  String get sync_p2p_relay_urls => 'Self-hosted relays (optional)';
+  @override
+  String get sync_p2p_relay_urls_hint =>
+      'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
 }
 
 // Path: <root>
@@ -35753,6 +35769,16 @@ class _StringsDe extends _StringsEn {
   @override
   String get sync_server_public_urls_hint =>
       'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+  @override
+  String get sync_p2p_enable => 'Allow remote connections over a P2P tunnel';
+  @override
+  String get sync_p2p_enable_hint =>
+      'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+  @override
+  String get sync_p2p_relay_urls => 'Self-hosted relays (optional)';
+  @override
+  String get sync_p2p_relay_urls_hint =>
+      'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
 }
 
 // Path: <root>
@@ -49725,6 +49751,16 @@ class _StringsEs extends _StringsEn {
   @override
   String get sync_server_public_urls_hint =>
       'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+  @override
+  String get sync_p2p_enable => 'Allow remote connections over a P2P tunnel';
+  @override
+  String get sync_p2p_enable_hint =>
+      'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+  @override
+  String get sync_p2p_relay_urls => 'Self-hosted relays (optional)';
+  @override
+  String get sync_p2p_relay_urls_hint =>
+      'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
 }
 
 // Path: <root>
@@ -63736,6 +63772,16 @@ class _StringsFr extends _StringsEn {
   @override
   String get sync_server_public_urls_hint =>
       'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+  @override
+  String get sync_p2p_enable => 'Allow remote connections over a P2P tunnel';
+  @override
+  String get sync_p2p_enable_hint =>
+      'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+  @override
+  String get sync_p2p_relay_urls => 'Self-hosted relays (optional)';
+  @override
+  String get sync_p2p_relay_urls_hint =>
+      'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
 }
 
 // Path: <root>
@@ -77537,6 +77583,16 @@ class _StringsId extends _StringsEn {
   @override
   String get sync_server_public_urls_hint =>
       'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+  @override
+  String get sync_p2p_enable => 'Allow remote connections over a P2P tunnel';
+  @override
+  String get sync_p2p_enable_hint =>
+      'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+  @override
+  String get sync_p2p_relay_urls => 'Self-hosted relays (optional)';
+  @override
+  String get sync_p2p_relay_urls_hint =>
+      'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
 }
 
 // Path: <root>
@@ -91439,6 +91495,16 @@ class _StringsIt extends _StringsEn {
   @override
   String get sync_server_public_urls_hint =>
       'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+  @override
+  String get sync_p2p_enable => 'Allow remote connections over a P2P tunnel';
+  @override
+  String get sync_p2p_enable_hint =>
+      'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+  @override
+  String get sync_p2p_relay_urls => 'Self-hosted relays (optional)';
+  @override
+  String get sync_p2p_relay_urls_hint =>
+      'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
 }
 
 // Path: <root>
@@ -104696,6 +104762,16 @@ class _StringsJa extends _StringsEn {
   @override
   String get sync_server_public_urls_hint =>
       'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+  @override
+  String get sync_p2p_enable => 'Allow remote connections over a P2P tunnel';
+  @override
+  String get sync_p2p_enable_hint =>
+      'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+  @override
+  String get sync_p2p_relay_urls => 'Self-hosted relays (optional)';
+  @override
+  String get sync_p2p_relay_urls_hint =>
+      'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
 }
 
 // Path: <root>
@@ -117970,6 +118046,16 @@ class _StringsKo extends _StringsEn {
   @override
   String get sync_server_public_urls_hint =>
       'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+  @override
+  String get sync_p2p_enable => 'Allow remote connections over a P2P tunnel';
+  @override
+  String get sync_p2p_enable_hint =>
+      'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+  @override
+  String get sync_p2p_relay_urls => 'Self-hosted relays (optional)';
+  @override
+  String get sync_p2p_relay_urls_hint =>
+      'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
 }
 
 // Path: <root>
@@ -131826,6 +131912,16 @@ class _StringsNl extends _StringsEn {
   @override
   String get sync_server_public_urls_hint =>
       'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+  @override
+  String get sync_p2p_enable => 'Allow remote connections over a P2P tunnel';
+  @override
+  String get sync_p2p_enable_hint =>
+      'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+  @override
+  String get sync_p2p_relay_urls => 'Self-hosted relays (optional)';
+  @override
+  String get sync_p2p_relay_urls_hint =>
+      'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
 }
 
 // Path: <root>
@@ -145735,6 +145831,16 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get sync_server_public_urls_hint =>
       'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+  @override
+  String get sync_p2p_enable => 'Allow remote connections over a P2P tunnel';
+  @override
+  String get sync_p2p_enable_hint =>
+      'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+  @override
+  String get sync_p2p_relay_urls => 'Self-hosted relays (optional)';
+  @override
+  String get sync_p2p_relay_urls_hint =>
+      'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
 }
 
 // Path: <root>
@@ -159619,6 +159725,16 @@ class _StringsRu extends _StringsEn {
   @override
   String get sync_server_public_urls_hint =>
       'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+  @override
+  String get sync_p2p_enable => 'Allow remote connections over a P2P tunnel';
+  @override
+  String get sync_p2p_enable_hint =>
+      'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+  @override
+  String get sync_p2p_relay_urls => 'Self-hosted relays (optional)';
+  @override
+  String get sync_p2p_relay_urls_hint =>
+      'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
 }
 
 // Path: <root>
@@ -173300,6 +173416,16 @@ class _StringsTh extends _StringsEn {
   @override
   String get sync_server_public_urls_hint =>
       'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+  @override
+  String get sync_p2p_enable => 'Allow remote connections over a P2P tunnel';
+  @override
+  String get sync_p2p_enable_hint =>
+      'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+  @override
+  String get sync_p2p_relay_urls => 'Self-hosted relays (optional)';
+  @override
+  String get sync_p2p_relay_urls_hint =>
+      'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
 }
 
 // Path: <root>
@@ -187095,6 +187221,16 @@ class _StringsTr extends _StringsEn {
   @override
   String get sync_server_public_urls_hint =>
       'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+  @override
+  String get sync_p2p_enable => 'Allow remote connections over a P2P tunnel';
+  @override
+  String get sync_p2p_enable_hint =>
+      'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+  @override
+  String get sync_p2p_relay_urls => 'Self-hosted relays (optional)';
+  @override
+  String get sync_p2p_relay_urls_hint =>
+      'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
 }
 
 // Path: <root>
@@ -200861,6 +200997,16 @@ class _StringsVi extends _StringsEn {
   @override
   String get sync_server_public_urls_hint =>
       'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+  @override
+  String get sync_p2p_enable => 'Allow remote connections over a P2P tunnel';
+  @override
+  String get sync_p2p_enable_hint =>
+      'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+  @override
+  String get sync_p2p_relay_urls => 'Self-hosted relays (optional)';
+  @override
+  String get sync_p2p_relay_urls_hint =>
+      'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
 }
 
 // Path: <root>
@@ -213453,6 +213599,15 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get sync_server_public_urls_hint =>
       '每行一个，例如 https://home.example.com。已配对设备会自动学到。';
+  @override
+  String get sync_p2p_enable => '允许经 P2P 隧道远程连接';
+  @override
+  String get sync_p2p_enable_hint =>
+      '用于双方都没有公网 IP 的情况。会用到 iroh 的中继与发现服务器（它们能看到本机 IP）；连接走中继时看视频可能较慢。';
+  @override
+  String get sync_p2p_relay_urls => '自建中继（可选）';
+  @override
+  String get sync_p2p_relay_urls_hint => '每行一个 iroh-relay 地址；留空则用 iroh 公共中继。';
 }
 
 // Path: <root>
@@ -226390,6 +226545,16 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get sync_server_public_urls_hint =>
       'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+  @override
+  String get sync_p2p_enable => 'Allow remote connections over a P2P tunnel';
+  @override
+  String get sync_p2p_enable_hint =>
+      'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+  @override
+  String get sync_p2p_relay_urls => 'Self-hosted relays (optional)';
+  @override
+  String get sync_p2p_relay_urls_hint =>
+      'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
 }
 
 /// Flat map(s) containing all translations.
@@ -238173,6 +238338,14 @@ extension on _StringsEn {
         return 'Public / reverse proxy addresses';
       case 'sync_server_public_urls_hint':
         return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+      case 'sync_p2p_enable':
+        return 'Allow remote connections over a P2P tunnel';
+      case 'sync_p2p_enable_hint':
+        return 'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+      case 'sync_p2p_relay_urls':
+        return 'Self-hosted relays (optional)';
+      case 'sync_p2p_relay_urls_hint':
+        return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
       default:
         return null;
     }
@@ -249951,6 +250124,14 @@ extension on _StringsAr {
         return 'Public / reverse proxy addresses';
       case 'sync_server_public_urls_hint':
         return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+      case 'sync_p2p_enable':
+        return 'Allow remote connections over a P2P tunnel';
+      case 'sync_p2p_enable_hint':
+        return 'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+      case 'sync_p2p_relay_urls':
+        return 'Self-hosted relays (optional)';
+      case 'sync_p2p_relay_urls_hint':
+        return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
       default:
         return null;
     }
@@ -261778,6 +261959,14 @@ extension on _StringsDe {
         return 'Public / reverse proxy addresses';
       case 'sync_server_public_urls_hint':
         return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+      case 'sync_p2p_enable':
+        return 'Allow remote connections over a P2P tunnel';
+      case 'sync_p2p_enable_hint':
+        return 'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+      case 'sync_p2p_relay_urls':
+        return 'Self-hosted relays (optional)';
+      case 'sync_p2p_relay_urls_hint':
+        return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
       default:
         return null;
     }
@@ -273595,6 +273784,14 @@ extension on _StringsEs {
         return 'Public / reverse proxy addresses';
       case 'sync_server_public_urls_hint':
         return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+      case 'sync_p2p_enable':
+        return 'Allow remote connections over a P2P tunnel';
+      case 'sync_p2p_enable_hint':
+        return 'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+      case 'sync_p2p_relay_urls':
+        return 'Self-hosted relays (optional)';
+      case 'sync_p2p_relay_urls_hint':
+        return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
       default:
         return null;
     }
@@ -285420,6 +285617,14 @@ extension on _StringsFr {
         return 'Public / reverse proxy addresses';
       case 'sync_server_public_urls_hint':
         return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+      case 'sync_p2p_enable':
+        return 'Allow remote connections over a P2P tunnel';
+      case 'sync_p2p_enable_hint':
+        return 'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+      case 'sync_p2p_relay_urls':
+        return 'Self-hosted relays (optional)';
+      case 'sync_p2p_relay_urls_hint':
+        return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
       default:
         return null;
     }
@@ -297215,6 +297420,14 @@ extension on _StringsId {
         return 'Public / reverse proxy addresses';
       case 'sync_server_public_urls_hint':
         return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+      case 'sync_p2p_enable':
+        return 'Allow remote connections over a P2P tunnel';
+      case 'sync_p2p_enable_hint':
+        return 'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+      case 'sync_p2p_relay_urls':
+        return 'Self-hosted relays (optional)';
+      case 'sync_p2p_relay_urls_hint':
+        return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
       default:
         return null;
     }
@@ -309033,6 +309246,14 @@ extension on _StringsIt {
         return 'Public / reverse proxy addresses';
       case 'sync_server_public_urls_hint':
         return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+      case 'sync_p2p_enable':
+        return 'Allow remote connections over a P2P tunnel';
+      case 'sync_p2p_enable_hint':
+        return 'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+      case 'sync_p2p_relay_urls':
+        return 'Self-hosted relays (optional)';
+      case 'sync_p2p_relay_urls_hint':
+        return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
       default:
         return null;
     }
@@ -320772,6 +320993,14 @@ extension on _StringsJa {
         return 'Public / reverse proxy addresses';
       case 'sync_server_public_urls_hint':
         return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+      case 'sync_p2p_enable':
+        return 'Allow remote connections over a P2P tunnel';
+      case 'sync_p2p_enable_hint':
+        return 'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+      case 'sync_p2p_relay_urls':
+        return 'Self-hosted relays (optional)';
+      case 'sync_p2p_relay_urls_hint':
+        return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
       default:
         return null;
     }
@@ -332519,6 +332748,14 @@ extension on _StringsKo {
         return 'Public / reverse proxy addresses';
       case 'sync_server_public_urls_hint':
         return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+      case 'sync_p2p_enable':
+        return 'Allow remote connections over a P2P tunnel';
+      case 'sync_p2p_enable_hint':
+        return 'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+      case 'sync_p2p_relay_urls':
+        return 'Self-hosted relays (optional)';
+      case 'sync_p2p_relay_urls_hint':
+        return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
       default:
         return null;
     }
@@ -344332,6 +344569,14 @@ extension on _StringsNl {
         return 'Public / reverse proxy addresses';
       case 'sync_server_public_urls_hint':
         return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+      case 'sync_p2p_enable':
+        return 'Allow remote connections over a P2P tunnel';
+      case 'sync_p2p_enable_hint':
+        return 'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+      case 'sync_p2p_relay_urls':
+        return 'Self-hosted relays (optional)';
+      case 'sync_p2p_relay_urls_hint':
+        return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
       default:
         return null;
     }
@@ -356140,6 +356385,14 @@ extension on _StringsPtBr {
         return 'Public / reverse proxy addresses';
       case 'sync_server_public_urls_hint':
         return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+      case 'sync_p2p_enable':
+        return 'Allow remote connections over a P2P tunnel';
+      case 'sync_p2p_enable_hint':
+        return 'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+      case 'sync_p2p_relay_urls':
+        return 'Self-hosted relays (optional)';
+      case 'sync_p2p_relay_urls_hint':
+        return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
       default:
         return null;
     }
@@ -367954,6 +368207,14 @@ extension on _StringsRu {
         return 'Public / reverse proxy addresses';
       case 'sync_server_public_urls_hint':
         return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+      case 'sync_p2p_enable':
+        return 'Allow remote connections over a P2P tunnel';
+      case 'sync_p2p_enable_hint':
+        return 'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+      case 'sync_p2p_relay_urls':
+        return 'Self-hosted relays (optional)';
+      case 'sync_p2p_relay_urls_hint':
+        return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
       default:
         return null;
     }
@@ -379737,6 +379998,14 @@ extension on _StringsTh {
         return 'Public / reverse proxy addresses';
       case 'sync_server_public_urls_hint':
         return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+      case 'sync_p2p_enable':
+        return 'Allow remote connections over a P2P tunnel';
+      case 'sync_p2p_enable_hint':
+        return 'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+      case 'sync_p2p_relay_urls':
+        return 'Self-hosted relays (optional)';
+      case 'sync_p2p_relay_urls_hint':
+        return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
       default:
         return null;
     }
@@ -391536,6 +391805,14 @@ extension on _StringsTr {
         return 'Public / reverse proxy addresses';
       case 'sync_server_public_urls_hint':
         return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+      case 'sync_p2p_enable':
+        return 'Allow remote connections over a P2P tunnel';
+      case 'sync_p2p_enable_hint':
+        return 'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+      case 'sync_p2p_relay_urls':
+        return 'Self-hosted relays (optional)';
+      case 'sync_p2p_relay_urls_hint':
+        return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
       default:
         return null;
     }
@@ -403329,6 +403606,14 @@ extension on _StringsVi {
         return 'Public / reverse proxy addresses';
       case 'sync_server_public_urls_hint':
         return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+      case 'sync_p2p_enable':
+        return 'Allow remote connections over a P2P tunnel';
+      case 'sync_p2p_enable_hint':
+        return 'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+      case 'sync_p2p_relay_urls':
+        return 'Self-hosted relays (optional)';
+      case 'sync_p2p_relay_urls_hint':
+        return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
       default:
         return null;
     }
@@ -415006,6 +415291,14 @@ extension on _StringsZhCn {
         return '公网 / 反代地址';
       case 'sync_server_public_urls_hint':
         return '每行一个，例如 https://home.example.com。已配对设备会自动学到。';
+      case 'sync_p2p_enable':
+        return '允许经 P2P 隧道远程连接';
+      case 'sync_p2p_enable_hint':
+        return '用于双方都没有公网 IP 的情况。会用到 iroh 的中继与发现服务器（它们能看到本机 IP）；连接走中继时看视频可能较慢。';
+      case 'sync_p2p_relay_urls':
+        return '自建中继（可选）';
+      case 'sync_p2p_relay_urls_hint':
+        return '每行一个 iroh-relay 地址；留空则用 iroh 公共中继。';
       default:
         return null;
     }
@@ -426724,6 +427017,14 @@ extension on _StringsZhHk {
         return 'Public / reverse proxy addresses';
       case 'sync_server_public_urls_hint':
         return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
+      case 'sync_p2p_enable':
+        return 'Allow remote connections over a P2P tunnel';
+      case 'sync_p2p_enable_hint':
+        return 'For when neither side has a public IP. Uses iroh\'s relay and discovery servers, which can see this device\'s IP address. Video may be slow when the connection goes through a relay.';
+      case 'sync_p2p_relay_urls':
+        return 'Self-hosted relays (optional)';
+      case 'sync_p2p_relay_urls_hint':
+        return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
       default:
         return null;
     }
