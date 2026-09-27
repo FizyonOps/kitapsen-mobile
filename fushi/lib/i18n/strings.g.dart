@@ -3,7 +3,7 @@
 /// Locales: 17
 /// Strings: 95659 (5627 per locale)
 ///
-/// Built on 2026-09-27 at 06:14 UTC
+/// Built on 2026-09-27 at 08:45 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -3475,7 +3475,7 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get module_disabled_hint =>
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   String get module_downloads_hidden_hint =>
-      'The Downloads tab is hidden in Settings → Appearance → Feature modules; turn it back on to manage subscriptions.';
+      'The Browse tab is hidden in Settings → Appearance → Feature modules; turn it back on to manage subscriptions.';
   String get module_extension_label => 'Browser extension';
   String get move_down => 'Move down';
   String get move_up => 'Move up';
@@ -7169,7 +7169,6 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get video_online_episodes_empty => 'No episodes found.';
   String get video_online_stream_none =>
       'This episode returned no playable stream.';
-  String get media_import_segment_local => 'Local';
   String get media_import_segment_stores => 'Stores';
   String get media_import_segment_extensions => 'Extensions';
   String get media_import_segment_sources => 'Sources';
@@ -8022,6 +8021,7 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
       'Auto-upload imported subtitles to host';
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  String get nav_browse => 'Browse';
 }
 
 // Path: <root>
@@ -13695,7 +13695,7 @@ class _StringsAr extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      'تبويب التحميلات مخفي في الإعدادات → المظهر → وحدات الميزات؛ أعد تشغيله لإدارة الاشتراكات.';
+      'تبويب التصفح مخفي في الإعدادات → المظهر → وحدات الميزات؛ أعد تشغيله لإدارة الاشتراكات.';
   @override
   String get module_extension_label => 'إضافة المتصفح';
   @override
@@ -20074,8 +20074,6 @@ class _StringsAr extends _StringsEn {
   String get video_online_stream_none =>
       'This episode returned no playable stream.';
   @override
-  String get media_import_segment_local => 'Local';
-  @override
   String get media_import_segment_stores => 'Stores';
   @override
   String get media_import_segment_extensions => 'Extensions';
@@ -21494,6 +21492,8 @@ class _StringsAr extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get nav_browse => 'تصفح';
 }
 
 // Path: <root>
@@ -27293,7 +27293,7 @@ class _StringsDe extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      'Der Tab „Downloads“ ist unter Einstellungen → Erscheinungsbild → Funktionsmodule ausgeblendet; schalte ihn wieder ein, um Abos zu verwalten.';
+      'Der Tab „Durchsuchen“ ist unter Einstellungen → Erscheinungsbild → Funktionsmodule ausgeblendet; schalte ihn wieder ein, um Abos zu verwalten.';
   @override
   String get module_extension_label => 'Browser-Erweiterung';
   @override
@@ -33782,8 +33782,6 @@ class _StringsDe extends _StringsEn {
   String get video_online_stream_none =>
       'This episode returned no playable stream.';
   @override
-  String get media_import_segment_local => 'Local';
-  @override
   String get media_import_segment_stores => 'Stores';
   @override
   String get media_import_segment_extensions => 'Extensions';
@@ -35206,6 +35204,8 @@ class _StringsDe extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get nav_browse => 'Durchsuchen';
 }
 
 // Path: <root>
@@ -41025,7 +41025,7 @@ class _StringsEs extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      'La pestaña Descargas está oculta en Configuración → Apariencia → Módulos de funciones; vuelve a activarla para gestionar las suscripciones.';
+      'La pestaña Explorar está oculta en Configuración → Apariencia → Módulos de funciones; vuelve a activarla para gestionar las suscripciones.';
   @override
   String get module_extension_label => 'Extensión del navegador';
   @override
@@ -47544,8 +47544,6 @@ class _StringsEs extends _StringsEn {
   String get video_online_stream_none =>
       'This episode returned no playable stream.';
   @override
-  String get media_import_segment_local => 'Local';
-  @override
   String get media_import_segment_stores => 'Stores';
   @override
   String get media_import_segment_extensions => 'Extensions';
@@ -48969,6 +48967,8 @@ class _StringsEs extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get nav_browse => 'Explorar';
 }
 
 // Path: <root>
@@ -54801,7 +54801,7 @@ class _StringsFr extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      'L\'onglet Téléchargements est masqué dans Paramètres → Apparence → Modules de fonctionnalités ; réactivez-le pour gérer les abonnements.';
+      'L\'onglet Parcourir est masqué dans Paramètres → Apparence → Modules de fonctionnalités ; réactivez-le pour gérer les abonnements.';
   @override
   String get module_extension_label => 'Extension navigateur';
   @override
@@ -61344,8 +61344,6 @@ class _StringsFr extends _StringsEn {
   String get video_online_stream_none =>
       'This episode returned no playable stream.';
   @override
-  String get media_import_segment_local => 'Local';
-  @override
   String get media_import_segment_stores => 'Stores';
   @override
   String get media_import_segment_extensions => 'Extensions';
@@ -62771,6 +62769,8 @@ class _StringsFr extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get nav_browse => 'Parcourir';
 }
 
 // Path: <root>
@@ -68507,7 +68507,7 @@ class _StringsId extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      'Tab Unduhan disembunyikan di Pengaturan → Tampilan → Modul fitur; nyalakan lagi untuk mengelola langganan.';
+      'Tab Jelajah disembunyikan di Pengaturan → Tampilan → Modul fitur; nyalakan lagi untuk mengelola langganan.';
   @override
   String get module_extension_label => 'Ekstensi browser';
   @override
@@ -74942,8 +74942,6 @@ class _StringsId extends _StringsEn {
   String get video_online_stream_none =>
       'This episode returned no playable stream.';
   @override
-  String get media_import_segment_local => 'Local';
-  @override
   String get media_import_segment_stores => 'Stores';
   @override
   String get media_import_segment_extensions => 'Extensions';
@@ -76363,6 +76361,8 @@ class _StringsId extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get nav_browse => 'Jelajah';
 }
 
 // Path: <root>
@@ -82146,7 +82146,7 @@ class _StringsIt extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      'La scheda Download è nascosta in Impostazioni → Aspetto → Moduli funzionalità; riattivala per gestire le sottoscrizioni.';
+      'La scheda Sfoglia è nascosta in Impostazioni → Aspetto → Moduli funzionalità; riattivala per gestire le sottoscrizioni.';
   @override
   String get module_extension_label => 'Estensione browser';
   @override
@@ -88631,8 +88631,6 @@ class _StringsIt extends _StringsEn {
   String get video_online_stream_none =>
       'This episode returned no playable stream.';
   @override
-  String get media_import_segment_local => 'Local';
-  @override
   String get media_import_segment_stores => 'Stores';
   @override
   String get media_import_segment_extensions => 'Extensions';
@@ -90056,6 +90054,8 @@ class _StringsIt extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get nav_browse => 'Sfoglia';
 }
 
 // Path: <root>
@@ -95520,7 +95520,7 @@ class _StringsJa extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      '「ダウンロード」タブは 設定 → 外観 → 機能モジュール で非表示になっています。購読を管理するには再度オンにしてください。';
+      '「ブラウズ」タブは 設定 → 外観 → 機能モジュール で非表示になっています。購読を管理するには再度オンにしてください。';
   @override
   String get module_extension_label => 'ブラウザ拡張機能';
   @override
@@ -101694,8 +101694,6 @@ class _StringsJa extends _StringsEn {
   String get video_online_stream_none =>
       'This episode returned no playable stream.';
   @override
-  String get media_import_segment_local => 'Local';
-  @override
   String get media_import_segment_stores => 'Stores';
   @override
   String get media_import_segment_extensions => 'Extensions';
@@ -103104,6 +103102,8 @@ class _StringsJa extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get nav_browse => 'ブラウズ';
 }
 
 // Path: <root>
@@ -108571,7 +108571,7 @@ class _StringsKo extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      '‘다운로드’ 탭이 설정 → 외관 → 기능 모듈에서 숨겨져 있어요. 구독을 관리하려면 다시 켜세요.';
+      '‘탐색’ 탭이 설정 → 외관 → 기능 모듈에서 숨겨져 있어요. 구독을 관리하려면 다시 켜세요.';
   @override
   String get module_extension_label => '브라우저 확장';
   @override
@@ -114752,8 +114752,6 @@ class _StringsKo extends _StringsEn {
   String get video_online_stream_none =>
       'This episode returned no playable stream.';
   @override
-  String get media_import_segment_local => 'Local';
-  @override
   String get media_import_segment_stores => 'Stores';
   @override
   String get media_import_segment_extensions => 'Extensions';
@@ -116169,6 +116167,8 @@ class _StringsKo extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get nav_browse => '탐색';
 }
 
 // Path: <root>
@@ -121924,7 +121924,7 @@ class _StringsNl extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      'Het tabblad Downloads is verborgen via Instellingen → Uiterlijk → Functiemodules; zet het weer aan om abonnementen te beheren.';
+      'Het tabblad Bladeren is verborgen via Instellingen → Uiterlijk → Functiemodules; zet het weer aan om abonnementen te beheren.';
   @override
   String get module_extension_label => 'Browserextensie';
   @override
@@ -128393,8 +128393,6 @@ class _StringsNl extends _StringsEn {
   String get video_online_stream_none =>
       'This episode returned no playable stream.';
   @override
-  String get media_import_segment_local => 'Local';
-  @override
   String get media_import_segment_stores => 'Stores';
   @override
   String get media_import_segment_extensions => 'Extensions';
@@ -129816,6 +129814,8 @@ class _StringsNl extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get nav_browse => 'Bladeren';
 }
 
 // Path: <root>
@@ -135603,7 +135603,7 @@ class _StringsPtBr extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      'A aba Downloads está oculta em Configurações → Aparência → Módulos de funcionalidades; reative-a para gerenciar as assinaturas.';
+      'A aba Navegar está oculta em Configurações → Aparência → Módulos de funcionalidades; reative-a para gerenciar as assinaturas.';
   @override
   String get module_extension_label => 'Extensão do navegador';
   @override
@@ -142093,8 +142093,6 @@ class _StringsPtBr extends _StringsEn {
   String get video_online_stream_none =>
       'This episode returned no playable stream.';
   @override
-  String get media_import_segment_local => 'Local';
-  @override
   String get media_import_segment_stores => 'Stores';
   @override
   String get media_import_segment_extensions => 'Extensions';
@@ -143516,6 +143514,8 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get nav_browse => 'Navegar';
 }
 
 // Path: <root>
@@ -149277,7 +149277,7 @@ class _StringsRu extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      'Вкладка «Загрузки» скрыта в разделе Настройки → Внешний вид → Функциональные модули; включите её снова, чтобы управлять подписками.';
+      'Вкладка «Обзор» скрыта в разделе Настройки → Внешний вид → Функциональные модули; включите её снова, чтобы управлять подписками.';
   @override
   String get module_extension_label => 'Расширение для браузера';
   @override
@@ -155769,8 +155769,6 @@ class _StringsRu extends _StringsEn {
   String get video_online_stream_none =>
       'This episode returned no playable stream.';
   @override
-  String get media_import_segment_local => 'Local';
-  @override
   String get media_import_segment_stores => 'Stores';
   @override
   String get media_import_segment_extensions => 'Extensions';
@@ -157191,6 +157189,8 @@ class _StringsRu extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get nav_browse => 'Обзор';
 }
 
 // Path: <root>
@@ -162858,7 +162858,7 @@ class _StringsTh extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      'แท็บดาวน์โหลดถูกซ่อนไว้ใน การตั้งค่า → รูปลักษณ์ → โมดูลฟีเจอร์ ต้องเปิดกลับมาจึงจะจัดการรายการติดตามได้';
+      'แท็บเรียกดูถูกซ่อนไว้ใน การตั้งค่า → รูปลักษณ์ → โมดูลฟีเจอร์ ต้องเปิดกลับมาจึงจะจัดการรายการติดตามได้';
   @override
   String get module_extension_label => 'ส่วนขยายเบราว์เซอร์';
   @override
@@ -169243,8 +169243,6 @@ class _StringsTh extends _StringsEn {
   String get video_online_stream_none =>
       'This episode returned no playable stream.';
   @override
-  String get media_import_segment_local => 'Local';
-  @override
   String get media_import_segment_stores => 'Stores';
   @override
   String get media_import_segment_extensions => 'Extensions';
@@ -170663,6 +170661,8 @@ class _StringsTh extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get nav_browse => 'เรียกดู';
 }
 
 // Path: <root>
@@ -176400,7 +176400,7 @@ class _StringsTr extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      'İndirmeler sekmesi Ayarlar → Görünüm → Özellik modülleri altında gizli; abonelikleri yönetmek için yeniden açın.';
+      'Göz at sekmesi Ayarlar → Görünüm → Özellik modülleri altında gizli; abonelikleri yönetmek için yeniden açın.';
   @override
   String get module_extension_label => 'Tarayıcı eklentisi';
   @override
@@ -182830,8 +182830,6 @@ class _StringsTr extends _StringsEn {
   String get video_online_stream_none =>
       'This episode returned no playable stream.';
   @override
-  String get media_import_segment_local => 'Local';
-  @override
   String get media_import_segment_stores => 'Stores';
   @override
   String get media_import_segment_extensions => 'Extensions';
@@ -184249,6 +184247,8 @@ class _StringsTr extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get nav_browse => 'Göz at';
 }
 
 // Path: <root>
@@ -189974,7 +189974,7 @@ class _StringsVi extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      'Tab Tải xuống đang bị ẩn trong Cài đặt → Giao diện → Mô-đun tính năng; bật lại để quản lý đăng ký.';
+      'Tab Duyệt đang bị ẩn trong Cài đặt → Giao diện → Mô-đun tính năng; bật lại để quản lý đăng ký.';
   @override
   String get module_extension_label => 'Tiện ích mở rộng trình duyệt';
   @override
@@ -196387,8 +196387,6 @@ class _StringsVi extends _StringsEn {
   String get video_online_stream_none =>
       'This episode returned no playable stream.';
   @override
-  String get media_import_segment_local => 'Local';
-  @override
   String get media_import_segment_stores => 'Stores';
   @override
   String get media_import_segment_extensions => 'Extensions';
@@ -197806,6 +197804,8 @@ class _StringsVi extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get nav_browse => 'Duyệt';
 }
 
 // Path: <root>
@@ -203056,7 +203056,7 @@ class _StringsZhCn extends _StringsEn {
   String get module_disabled_hint => '该功能模块已在「设置 → 外观 → 功能模块」中关闭。';
   @override
   String get module_downloads_hidden_hint =>
-      '「下载」页已在 设置 → 外观 → 功能模块 中隐藏；重新打开它才能管理订阅。';
+      '「浏览」页已在 设置 → 外观 → 功能模块 中隐藏；重新打开它才能管理订阅。';
   @override
   String get module_extension_label => '浏览器扩展';
   @override
@@ -208915,8 +208915,6 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get video_online_stream_none => '该集没有可播放的流。';
   @override
-  String get media_import_segment_local => '本地';
-  @override
   String get media_import_segment_stores => '仓库';
   @override
   String get media_import_segment_extensions => '扩展';
@@ -210206,6 +210204,8 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       '播放互联服务端上的视频时，导入或重定时的字幕会上传并设为该集默认字幕，所有设备都会看到。关闭后字幕只在本机生效。';
+  @override
+  String get nav_browse => '浏览';
 }
 
 // Path: <root>
@@ -215496,7 +215496,7 @@ class _StringsZhHk extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      '「下載」頁已在 設定 → 外觀 → 功能模塊 中隱藏；重新開啟才能管理訂閱。';
+      '「瀏覽」頁已在 設定 → 外觀 → 功能模塊 中隱藏；重新開啟才能管理訂閱。';
   @override
   String get module_extension_label => '瀏覽器擴展';
   @override
@@ -221526,8 +221526,6 @@ class _StringsZhHk extends _StringsEn {
   String get video_online_stream_none =>
       'This episode returned no playable stream.';
   @override
-  String get media_import_segment_local => 'Local';
-  @override
   String get media_import_segment_stores => 'Stores';
   @override
   String get media_import_segment_extensions => 'Extensions';
@@ -222935,6 +222933,8 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get nav_browse => '瀏覽';
 }
 
 /// Flat map(s) containing all translations.
@@ -227855,7 +227855,7 @@ extension on _StringsEn {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return 'The Downloads tab is hidden in Settings → Appearance → Feature modules; turn it back on to manage subscriptions.';
+        return 'The Browse tab is hidden in Settings → Appearance → Feature modules; turn it back on to manage subscriptions.';
       case 'module_extension_label':
         return 'Browser extension';
       case 'move_down':
@@ -233373,8 +233373,6 @@ extension on _StringsEn {
         return 'No episodes found.';
       case 'video_online_stream_none':
         return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
       case 'media_import_segment_stores':
         return 'Stores';
       case 'media_import_segment_extensions':
@@ -234544,6 +234542,8 @@ extension on _StringsEn {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'nav_browse':
+        return 'Browse';
       default:
         return null;
     }
@@ -239461,7 +239461,7 @@ extension on _StringsAr {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return 'تبويب التحميلات مخفي في الإعدادات → المظهر → وحدات الميزات؛ أعد تشغيله لإدارة الاشتراكات.';
+        return 'تبويب التصفح مخفي في الإعدادات → المظهر → وحدات الميزات؛ أعد تشغيله لإدارة الاشتراكات.';
       case 'module_extension_label':
         return 'إضافة المتصفح';
       case 'move_down':
@@ -244977,8 +244977,6 @@ extension on _StringsAr {
         return 'No episodes found.';
       case 'video_online_stream_none':
         return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
       case 'media_import_segment_stores':
         return 'Stores';
       case 'media_import_segment_extensions':
@@ -246148,6 +246146,8 @@ extension on _StringsAr {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'nav_browse':
+        return 'تصفح';
       default:
         return null;
     }
@@ -251095,7 +251095,7 @@ extension on _StringsDe {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return 'Der Tab „Downloads“ ist unter Einstellungen → Erscheinungsbild → Funktionsmodule ausgeblendet; schalte ihn wieder ein, um Abos zu verwalten.';
+        return 'Der Tab „Durchsuchen“ ist unter Einstellungen → Erscheinungsbild → Funktionsmodule ausgeblendet; schalte ihn wieder ein, um Abos zu verwalten.';
       case 'module_extension_label':
         return 'Browser-Erweiterung';
       case 'move_down':
@@ -256630,8 +256630,6 @@ extension on _StringsDe {
         return 'No episodes found.';
       case 'video_online_stream_none':
         return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
       case 'media_import_segment_stores':
         return 'Stores';
       case 'media_import_segment_extensions':
@@ -257801,6 +257799,8 @@ extension on _StringsDe {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'nav_browse':
+        return 'Durchsuchen';
       default:
         return null;
     }
@@ -262740,7 +262740,7 @@ extension on _StringsEs {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return 'La pestaña Descargas está oculta en Configuración → Apariencia → Módulos de funciones; vuelve a activarla para gestionar las suscripciones.';
+        return 'La pestaña Explorar está oculta en Configuración → Apariencia → Módulos de funciones; vuelve a activarla para gestionar las suscripciones.';
       case 'module_extension_label':
         return 'Extensión del navegador';
       case 'move_down':
@@ -268273,8 +268273,6 @@ extension on _StringsEs {
         return 'No episodes found.';
       case 'video_online_stream_none':
         return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
       case 'media_import_segment_stores':
         return 'Stores';
       case 'media_import_segment_extensions':
@@ -269444,6 +269442,8 @@ extension on _StringsEs {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'nav_browse':
+        return 'Explorar';
       default:
         return null;
     }
@@ -274388,7 +274388,7 @@ extension on _StringsFr {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return 'L\'onglet Téléchargements est masqué dans Paramètres → Apparence → Modules de fonctionnalités ; réactivez-le pour gérer les abonnements.';
+        return 'L\'onglet Parcourir est masqué dans Paramètres → Apparence → Modules de fonctionnalités ; réactivez-le pour gérer les abonnements.';
       case 'module_extension_label':
         return 'Extension navigateur';
       case 'move_down':
@@ -279924,8 +279924,6 @@ extension on _StringsFr {
         return 'No episodes found.';
       case 'video_online_stream_none':
         return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
       case 'media_import_segment_stores':
         return 'Stores';
       case 'media_import_segment_extensions':
@@ -281095,6 +281093,8 @@ extension on _StringsFr {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'nav_browse':
+        return 'Parcourir';
       default:
         return null;
     }
@@ -286024,7 +286024,7 @@ extension on _StringsId {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return 'Tab Unduhan disembunyikan di Pengaturan → Tampilan → Modul fitur; nyalakan lagi untuk mengelola langganan.';
+        return 'Tab Jelajah disembunyikan di Pengaturan → Tampilan → Modul fitur; nyalakan lagi untuk mengelola langganan.';
       case 'module_extension_label':
         return 'Ekstensi browser';
       case 'move_down':
@@ -291545,8 +291545,6 @@ extension on _StringsId {
         return 'No episodes found.';
       case 'video_online_stream_none':
         return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
       case 'media_import_segment_stores':
         return 'Stores';
       case 'media_import_segment_extensions':
@@ -292716,6 +292714,8 @@ extension on _StringsId {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'nav_browse':
+        return 'Jelajah';
       default:
         return null;
     }
@@ -297654,7 +297654,7 @@ extension on _StringsIt {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return 'La scheda Download è nascosta in Impostazioni → Aspetto → Moduli funzionalità; riattivala per gestire le sottoscrizioni.';
+        return 'La scheda Sfoglia è nascosta in Impostazioni → Aspetto → Moduli funzionalità; riattivala per gestire le sottoscrizioni.';
       case 'module_extension_label':
         return 'Estensione browser';
       case 'move_down':
@@ -303189,8 +303189,6 @@ extension on _StringsIt {
         return 'No episodes found.';
       case 'video_online_stream_none':
         return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
       case 'media_import_segment_stores':
         return 'Stores';
       case 'media_import_segment_extensions':
@@ -304360,6 +304358,8 @@ extension on _StringsIt {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'nav_browse':
+        return 'Sfoglia';
       default:
         return null;
     }
@@ -309262,7 +309262,7 @@ extension on _StringsJa {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return '「ダウンロード」タブは 設定 → 外観 → 機能モジュール で非表示になっています。購読を管理するには再度オンにしてください。';
+        return '「ブラウズ」タブは 設定 → 外観 → 機能モジュール で非表示になっています。購読を管理するには再度オンにしてください。';
       case 'module_extension_label':
         return 'ブラウザ拡張機能';
       case 'move_down':
@@ -314757,8 +314757,6 @@ extension on _StringsJa {
         return 'No episodes found.';
       case 'video_online_stream_none':
         return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
       case 'media_import_segment_stores':
         return 'Stores';
       case 'media_import_segment_extensions':
@@ -315925,6 +315923,8 @@ extension on _StringsJa {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'nav_browse':
+        return 'ブラウズ';
       default:
         return null;
     }
@@ -320828,7 +320828,7 @@ extension on _StringsKo {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return '‘다운로드’ 탭이 설정 → 외관 → 기능 모듈에서 숨겨져 있어요. 구독을 관리하려면 다시 켜세요.';
+        return '‘탐색’ 탭이 설정 → 외관 → 기능 모듈에서 숨겨져 있어요. 구독을 관리하려면 다시 켜세요.';
       case 'module_extension_label':
         return '브라우저 확장';
       case 'move_down':
@@ -326327,8 +326327,6 @@ extension on _StringsKo {
         return 'No episodes found.';
       case 'video_online_stream_none':
         return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
       case 'media_import_segment_stores':
         return 'Stores';
       case 'media_import_segment_extensions':
@@ -327498,6 +327496,8 @@ extension on _StringsKo {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'nav_browse':
+        return '탐색';
       default:
         return null;
     }
@@ -332436,7 +332436,7 @@ extension on _StringsNl {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return 'Het tabblad Downloads is verborgen via Instellingen → Uiterlijk → Functiemodules; zet het weer aan om abonnementen te beheren.';
+        return 'Het tabblad Bladeren is verborgen via Instellingen → Uiterlijk → Functiemodules; zet het weer aan om abonnementen te beheren.';
       case 'module_extension_label':
         return 'Browserextensie';
       case 'move_down':
@@ -337966,8 +337966,6 @@ extension on _StringsNl {
         return 'No episodes found.';
       case 'video_online_stream_none':
         return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
       case 'media_import_segment_stores':
         return 'Stores';
       case 'media_import_segment_extensions':
@@ -339137,6 +339135,8 @@ extension on _StringsNl {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'nav_browse':
+        return 'Bladeren';
       default:
         return null;
     }
@@ -344074,7 +344074,7 @@ extension on _StringsPtBr {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return 'A aba Downloads está oculta em Configurações → Aparência → Módulos de funcionalidades; reative-a para gerenciar as assinaturas.';
+        return 'A aba Navegar está oculta em Configurações → Aparência → Módulos de funcionalidades; reative-a para gerenciar as assinaturas.';
       case 'module_extension_label':
         return 'Extensão do navegador';
       case 'move_down':
@@ -349600,8 +349600,6 @@ extension on _StringsPtBr {
         return 'No episodes found.';
       case 'video_online_stream_none':
         return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
       case 'media_import_segment_stores':
         return 'Stores';
       case 'media_import_segment_extensions':
@@ -350771,6 +350769,8 @@ extension on _StringsPtBr {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'nav_browse':
+        return 'Navegar';
       default:
         return null;
     }
@@ -355715,7 +355715,7 @@ extension on _StringsRu {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return 'Вкладка «Загрузки» скрыта в разделе Настройки → Внешний вид → Функциональные модули; включите её снова, чтобы управлять подписками.';
+        return 'Вкладка «Обзор» скрыта в разделе Настройки → Внешний вид → Функциональные модули; включите её снова, чтобы управлять подписками.';
       case 'module_extension_label':
         return 'Расширение для браузера';
       case 'move_down':
@@ -361240,8 +361240,6 @@ extension on _StringsRu {
         return 'No episodes found.';
       case 'video_online_stream_none':
         return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
       case 'media_import_segment_stores':
         return 'Stores';
       case 'media_import_segment_extensions':
@@ -362411,6 +362409,8 @@ extension on _StringsRu {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'nav_browse':
+        return 'Обзор';
       default:
         return null;
     }
@@ -367332,7 +367332,7 @@ extension on _StringsTh {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return 'แท็บดาวน์โหลดถูกซ่อนไว้ใน การตั้งค่า → รูปลักษณ์ → โมดูลฟีเจอร์ ต้องเปิดกลับมาจึงจะจัดการรายการติดตามได้';
+        return 'แท็บเรียกดูถูกซ่อนไว้ใน การตั้งค่า → รูปลักษณ์ → โมดูลฟีเจอร์ ต้องเปิดกลับมาจึงจะจัดการรายการติดตามได้';
       case 'module_extension_label':
         return 'ส่วนขยายเบราว์เซอร์';
       case 'move_down':
@@ -372849,8 +372849,6 @@ extension on _StringsTh {
         return 'No episodes found.';
       case 'video_online_stream_none':
         return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
       case 'media_import_segment_stores':
         return 'Stores';
       case 'media_import_segment_extensions':
@@ -374020,6 +374018,8 @@ extension on _StringsTh {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'nav_browse':
+        return 'เรียกดู';
       default:
         return null;
     }
@@ -378952,7 +378952,7 @@ extension on _StringsTr {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return 'İndirmeler sekmesi Ayarlar → Görünüm → Özellik modülleri altında gizli; abonelikleri yönetmek için yeniden açın.';
+        return 'Göz at sekmesi Ayarlar → Görünüm → Özellik modülleri altında gizli; abonelikleri yönetmek için yeniden açın.';
       case 'module_extension_label':
         return 'Tarayıcı eklentisi';
       case 'move_down':
@@ -384474,8 +384474,6 @@ extension on _StringsTr {
         return 'No episodes found.';
       case 'video_online_stream_none':
         return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
       case 'media_import_segment_stores':
         return 'Stores';
       case 'media_import_segment_extensions':
@@ -385645,6 +385643,8 @@ extension on _StringsTr {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'nav_browse':
+        return 'Göz at';
       default:
         return null;
     }
@@ -390572,7 +390572,7 @@ extension on _StringsVi {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return 'Tab Tải xuống đang bị ẩn trong Cài đặt → Giao diện → Mô-đun tính năng; bật lại để quản lý đăng ký.';
+        return 'Tab Duyệt đang bị ẩn trong Cài đặt → Giao diện → Mô-đun tính năng; bật lại để quản lý đăng ký.';
       case 'module_extension_label':
         return 'Tiện ích mở rộng trình duyệt';
       case 'move_down':
@@ -396093,8 +396093,6 @@ extension on _StringsVi {
         return 'No episodes found.';
       case 'video_online_stream_none':
         return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
       case 'media_import_segment_stores':
         return 'Stores';
       case 'media_import_segment_extensions':
@@ -397264,6 +397262,8 @@ extension on _StringsVi {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'nav_browse':
+        return 'Duyệt';
       default:
         return null;
     }
@@ -402149,7 +402149,7 @@ extension on _StringsZhCn {
       case 'module_disabled_hint':
         return '该功能模块已在「设置 → 外观 → 功能模块」中关闭。';
       case 'module_downloads_hidden_hint':
-        return '「下载」页已在 设置 → 外观 → 功能模块 中隐藏；重新打开它才能管理订阅。';
+        return '「浏览」页已在 设置 → 外观 → 功能模块 中隐藏；重新打开它才能管理订阅。';
       case 'module_extension_label':
         return '浏览器扩展';
       case 'move_down':
@@ -407615,8 +407615,6 @@ extension on _StringsZhCn {
         return '没有找到剧集。';
       case 'video_online_stream_none':
         return '该集没有可播放的流。';
-      case 'media_import_segment_local':
-        return '本地';
       case 'media_import_segment_stores':
         return '仓库';
       case 'media_import_segment_extensions':
@@ -408770,6 +408768,8 @@ extension on _StringsZhCn {
         return '导入的字幕自动上传到服务端';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return '播放互联服务端上的视频时，导入或重定时的字幕会上传并设为该集默认字幕，所有设备都会看到。关闭后字幕只在本机生效。';
+      case 'nav_browse':
+        return '浏览';
       default:
         return null;
     }
@@ -413661,7 +413661,7 @@ extension on _StringsZhHk {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return '「下載」頁已在 設定 → 外觀 → 功能模塊 中隱藏；重新開啟才能管理訂閱。';
+        return '「瀏覽」頁已在 設定 → 外觀 → 功能模塊 中隱藏；重新開啟才能管理訂閱。';
       case 'module_extension_label':
         return '瀏覽器擴展';
       case 'move_down':
@@ -419145,8 +419145,6 @@ extension on _StringsZhHk {
         return 'No episodes found.';
       case 'video_online_stream_none':
         return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
       case 'media_import_segment_stores':
         return 'Stores';
       case 'media_import_segment_extensions':
@@ -420314,6 +420312,8 @@ extension on _StringsZhHk {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'nav_browse':
+        return '瀏覽';
       default:
         return null;
     }
