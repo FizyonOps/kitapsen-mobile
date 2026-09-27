@@ -3,7 +3,7 @@
 /// Locales: 17
 /// Strings: 97002 (5706 per locale)
 ///
-/// Built on 2026-09-27 at 17:33 UTC
+/// Built on 2026-09-27 at 17:58 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8156,7 +8156,7 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get anki_pending_mine_landing_title =>
       'Deliver cards from other devices';
   String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
 }
 
 // Path: <root>
@@ -21842,7 +21842,7 @@ class _StringsAr extends _StringsEn {
       'Deliver cards from other devices';
   @override
   String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
 }
 
 // Path: <root>
@@ -35768,7 +35768,7 @@ class _StringsDe extends _StringsEn {
       'Deliver cards from other devices';
   @override
   String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
 }
 
 // Path: <root>
@@ -49745,7 +49745,7 @@ class _StringsEs extends _StringsEn {
       'Deliver cards from other devices';
   @override
   String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
 }
 
 // Path: <root>
@@ -63761,7 +63761,7 @@ class _StringsFr extends _StringsEn {
       'Deliver cards from other devices';
   @override
   String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
 }
 
 // Path: <root>
@@ -77567,7 +77567,7 @@ class _StringsId extends _StringsEn {
       'Deliver cards from other devices';
   @override
   String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
 }
 
 // Path: <root>
@@ -91474,7 +91474,7 @@ class _StringsIt extends _StringsEn {
       'Deliver cards from other devices';
   @override
   String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
 }
 
 // Path: <root>
@@ -104736,7 +104736,7 @@ class _StringsJa extends _StringsEn {
       'Deliver cards from other devices';
   @override
   String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
 }
 
 // Path: <root>
@@ -118015,7 +118015,7 @@ class _StringsKo extends _StringsEn {
       'Deliver cards from other devices';
   @override
   String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
 }
 
 // Path: <root>
@@ -131876,7 +131876,7 @@ class _StringsNl extends _StringsEn {
       'Deliver cards from other devices';
   @override
   String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
 }
 
 // Path: <root>
@@ -145790,7 +145790,7 @@ class _StringsPtBr extends _StringsEn {
       'Deliver cards from other devices';
   @override
   String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
 }
 
 // Path: <root>
@@ -159679,7 +159679,7 @@ class _StringsRu extends _StringsEn {
       'Deliver cards from other devices';
   @override
   String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
 }
 
 // Path: <root>
@@ -173365,7 +173365,7 @@ class _StringsTh extends _StringsEn {
       'Deliver cards from other devices';
   @override
   String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
 }
 
 // Path: <root>
@@ -187165,7 +187165,7 @@ class _StringsTr extends _StringsEn {
       'Deliver cards from other devices';
   @override
   String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
 }
 
 // Path: <root>
@@ -200936,7 +200936,7 @@ class _StringsVi extends _StringsEn {
       'Deliver cards from other devices';
   @override
   String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
 }
 
 // Path: <root>
@@ -213531,7 +213531,7 @@ class _StringsZhCn extends _StringsEn {
   String get anki_pending_mine_landing_title => '本机负责落地其他设备的卡片';
   @override
   String get anki_pending_mine_landing_hint =>
-      '没装 Anki 的设备存下的卡片，经你配置的同步（云盘或互联）送到这台设备，由这里的 Anki 加卡。同一时间只有一台设备负责。';
+      '没装 Anki 的设备存下的卡片，经你配置的同步（云盘，或本机作为互联客户端时的互联）送到这台设备，由这里的 Anki 加卡。同一时间只有一台设备负责。互联主机暂时不能担任。';
 }
 
 // Path: <root>
@@ -226473,7 +226473,7 @@ class _StringsZhHk extends _StringsEn {
       'Deliver cards from other devices';
   @override
   String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
 }
 
 /// Flat map(s) containing all translations.
@@ -238258,7 +238258,7 @@ extension on _StringsEn {
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       default:
         return null;
     }
@@ -250038,7 +250038,7 @@ extension on _StringsAr {
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       default:
         return null;
     }
@@ -261867,7 +261867,7 @@ extension on _StringsDe {
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       default:
         return null;
     }
@@ -273686,7 +273686,7 @@ extension on _StringsEs {
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       default:
         return null;
     }
@@ -285513,7 +285513,7 @@ extension on _StringsFr {
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       default:
         return null;
     }
@@ -297310,7 +297310,7 @@ extension on _StringsId {
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       default:
         return null;
     }
@@ -309130,7 +309130,7 @@ extension on _StringsIt {
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       default:
         return null;
     }
@@ -320871,7 +320871,7 @@ extension on _StringsJa {
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       default:
         return null;
     }
@@ -332620,7 +332620,7 @@ extension on _StringsKo {
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       default:
         return null;
     }
@@ -344435,7 +344435,7 @@ extension on _StringsNl {
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       default:
         return null;
     }
@@ -356245,7 +356245,7 @@ extension on _StringsPtBr {
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       default:
         return null;
     }
@@ -368061,7 +368061,7 @@ extension on _StringsRu {
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       default:
         return null;
     }
@@ -379846,7 +379846,7 @@ extension on _StringsTh {
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       default:
         return null;
     }
@@ -391647,7 +391647,7 @@ extension on _StringsTr {
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       default:
         return null;
     }
@@ -403442,7 +403442,7 @@ extension on _StringsVi {
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       default:
         return null;
     }
@@ -415121,7 +415121,7 @@ extension on _StringsZhCn {
       case 'anki_pending_mine_landing_title':
         return '本机负责落地其他设备的卡片';
       case 'anki_pending_mine_landing_hint':
-        return '没装 Anki 的设备存下的卡片，经你配置的同步（云盘或互联）送到这台设备，由这里的 Anki 加卡。同一时间只有一台设备负责。';
+        return '没装 Anki 的设备存下的卡片，经你配置的同步（云盘，或本机作为互联客户端时的互联）送到这台设备，由这里的 Anki 加卡。同一时间只有一台设备负责。互联主机暂时不能担任。';
       default:
         return null;
     }
@@ -426841,7 +426841,7 @@ extension on _StringsZhHk {
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       default:
         return null;
     }
