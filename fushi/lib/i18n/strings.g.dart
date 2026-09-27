@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 96900 (5700 per locale)
+/// Strings: 96917 (5701 per locale)
 ///
-/// Built on 2026-09-27 at 14:46 UTC
+/// Built on 2026-09-27 at 17:08 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8127,6 +8127,8 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get ai_web_knowledge_custom_endpoint_invalid =>
       'Enter an https:// address ending in api.php';
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
   String get plex_settings_hint =>
       'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
   String get plex_account_sign_in => 'Sign in with Plex';
@@ -21781,6 +21783,9 @@ class _StringsAr extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
   @override
   String get plex_settings_hint =>
       'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
@@ -35686,6 +35691,9 @@ class _StringsDe extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
   @override
   String get plex_settings_hint =>
       'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
@@ -49642,6 +49650,9 @@ class _StringsEs extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
   @override
   String get plex_settings_hint =>
       'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
@@ -63638,6 +63649,9 @@ class _StringsFr extends _StringsEn {
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
   String get plex_settings_hint =>
       'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
   @override
@@ -77422,6 +77436,9 @@ class _StringsId extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
   @override
   String get plex_settings_hint =>
       'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
@@ -91309,6 +91326,9 @@ class _StringsIt extends _StringsEn {
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
   String get plex_settings_hint =>
       'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
   @override
@@ -104549,6 +104569,9 @@ class _StringsJa extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
   @override
   String get plex_settings_hint =>
       'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
@@ -117807,6 +117830,9 @@ class _StringsKo extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
   @override
   String get plex_settings_hint =>
       'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
@@ -131647,6 +131673,9 @@ class _StringsNl extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
   @override
   String get plex_settings_hint =>
       'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
@@ -145541,6 +145570,9 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
   String get plex_settings_hint =>
       'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
   @override
@@ -159409,6 +159441,9 @@ class _StringsRu extends _StringsEn {
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
   String get plex_settings_hint =>
       'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
   @override
@@ -173073,6 +173108,9 @@ class _StringsTh extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
   @override
   String get plex_settings_hint =>
       'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
@@ -186853,6 +186891,9 @@ class _StringsTr extends _StringsEn {
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
   String get plex_settings_hint =>
       'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
   @override
@@ -200603,6 +200644,9 @@ class _StringsVi extends _StringsEn {
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
   String get plex_settings_hint =>
       'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
   @override
@@ -213182,6 +213226,8 @@ class _StringsZhCn extends _StringsEn {
       '请填写以 https:// 开头、以 api.php 结尾的地址';
   @override
   String get ai_web_knowledge_custom_remove => '删除站点';
+  @override
+  String get video_item_rescrape_not_planned => '这个视频不在任何本地视频来源的刮削计划里';
   @override
   String get plex_settings_hint =>
       '用 Plex 账号登录，或填写服务器地址与 X-Plex-Token 直连。播放直接串流原文件（direct play），不使用 Plex 转码。';
@@ -226101,6 +226147,8 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
+  String get video_item_rescrape_not_planned => '這個影片不在任何本機影片來源的刮削計劃裡';
+  @override
   String get plex_settings_hint =>
       'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
   @override
@@ -237873,6 +237921,8 @@ extension on _StringsEn {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       case 'plex_settings_hint':
         return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
       case 'plex_account_sign_in':
@@ -249637,6 +249687,8 @@ extension on _StringsAr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       case 'plex_settings_hint':
         return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
       case 'plex_account_sign_in':
@@ -261450,6 +261502,8 @@ extension on _StringsDe {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       case 'plex_settings_hint':
         return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
       case 'plex_account_sign_in':
@@ -273253,6 +273307,8 @@ extension on _StringsEs {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       case 'plex_settings_hint':
         return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
       case 'plex_account_sign_in':
@@ -285064,6 +285120,8 @@ extension on _StringsFr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       case 'plex_settings_hint':
         return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
       case 'plex_account_sign_in':
@@ -296845,6 +296903,8 @@ extension on _StringsId {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       case 'plex_settings_hint':
         return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
       case 'plex_account_sign_in':
@@ -308649,6 +308709,8 @@ extension on _StringsIt {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       case 'plex_settings_hint':
         return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
       case 'plex_account_sign_in':
@@ -320374,6 +320436,8 @@ extension on _StringsJa {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       case 'plex_settings_hint':
         return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
       case 'plex_account_sign_in':
@@ -332107,6 +332171,8 @@ extension on _StringsKo {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       case 'plex_settings_hint':
         return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
       case 'plex_account_sign_in':
@@ -343906,6 +343972,8 @@ extension on _StringsNl {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       case 'plex_settings_hint':
         return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
       case 'plex_account_sign_in':
@@ -355700,6 +355768,8 @@ extension on _StringsPtBr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       case 'plex_settings_hint':
         return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
       case 'plex_account_sign_in':
@@ -367500,6 +367570,8 @@ extension on _StringsRu {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       case 'plex_settings_hint':
         return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
       case 'plex_account_sign_in':
@@ -379269,6 +379341,8 @@ extension on _StringsTh {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       case 'plex_settings_hint':
         return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
       case 'plex_account_sign_in':
@@ -391054,6 +391128,8 @@ extension on _StringsTr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       case 'plex_settings_hint':
         return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
       case 'plex_account_sign_in':
@@ -402833,6 +402909,8 @@ extension on _StringsVi {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       case 'plex_settings_hint':
         return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
       case 'plex_account_sign_in':
@@ -414496,6 +414574,8 @@ extension on _StringsZhCn {
         return '请填写以 https:// 开头、以 api.php 结尾的地址';
       case 'ai_web_knowledge_custom_remove':
         return '删除站点';
+      case 'video_item_rescrape_not_planned':
+        return '这个视频不在任何本地视频来源的刮削计划里';
       case 'plex_settings_hint':
         return '用 Plex 账号登录，或填写服务器地址与 X-Plex-Token 直连。播放直接串流原文件（direct play），不使用 Plex 转码。';
       case 'plex_account_sign_in':
@@ -426200,6 +426280,8 @@ extension on _StringsZhHk {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return '這個影片不在任何本機影片來源的刮削計劃裡';
       case 'plex_settings_hint':
         return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
       case 'plex_account_sign_in':
