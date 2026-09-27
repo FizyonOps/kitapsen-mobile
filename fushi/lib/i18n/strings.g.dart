@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 96713 (5689 per locale)
+/// Strings: 96968 (5704 per locale)
 ///
-/// Built on 2026-09-27 at 14:13 UTC
+/// Built on 2026-09-27 at 17:02 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8127,6 +8127,32 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get ai_web_knowledge_custom_endpoint_invalid =>
       'Enter an https:// address ending in api.php';
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  String get anki_pending_mine_queued =>
+      'Saved to pending cards. It will be sent to Anki later.';
+  String get anki_batch_mining_title => 'Batch mining';
+  String get anki_batch_mining_hint =>
+      'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+  String get anki_pending_mines_title => 'Pending cards';
+  String get anki_pending_mines_hint =>
+      'Cards saved while Anki was unreachable or while batch mining was on';
+  String get anki_pending_mines_empty => 'No pending cards';
+  String get anki_pending_mines_send_all => 'Send all';
+  String get anki_pending_mines_delete => 'Delete';
+  String get anki_pending_mines_delete_confirm =>
+      'Delete this pending card? It has not been sent to Anki yet.';
+  String get anki_pending_mines_status_pending => 'Waiting to send';
+  String get anki_pending_mines_status_sending => 'Sending';
+  String get anki_pending_mines_unreachable =>
+      'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+  String get anki_pending_mines_ankimobile_hint =>
+      'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+  String anki_pending_mines_status_failed({required Object error}) =>
+      'Failed: ${error}';
+  String anki_pending_mines_flush_result({
+    required Object delivered,
+    required Object failed,
+    required Object remaining,
+  }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
 }
 
 // Path: <root>
@@ -21766,6 +21792,47 @@ class _StringsAr extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get anki_pending_mine_queued =>
+      'Saved to pending cards. It will be sent to Anki later.';
+  @override
+  String get anki_batch_mining_title => 'Batch mining';
+  @override
+  String get anki_batch_mining_hint =>
+      'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+  @override
+  String get anki_pending_mines_title => 'Pending cards';
+  @override
+  String get anki_pending_mines_hint =>
+      'Cards saved while Anki was unreachable or while batch mining was on';
+  @override
+  String get anki_pending_mines_empty => 'No pending cards';
+  @override
+  String get anki_pending_mines_send_all => 'Send all';
+  @override
+  String get anki_pending_mines_delete => 'Delete';
+  @override
+  String get anki_pending_mines_delete_confirm =>
+      'Delete this pending card? It has not been sent to Anki yet.';
+  @override
+  String get anki_pending_mines_status_pending => 'Waiting to send';
+  @override
+  String get anki_pending_mines_status_sending => 'Sending';
+  @override
+  String get anki_pending_mines_unreachable =>
+      'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+  @override
+  String get anki_pending_mines_ankimobile_hint =>
+      'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+  @override
+  String anki_pending_mines_status_failed({required Object error}) =>
+      'Failed: ${error}';
+  @override
+  String anki_pending_mines_flush_result({
+    required Object delivered,
+    required Object failed,
+    required Object remaining,
+  }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
 }
 
 // Path: <root>
@@ -35645,6 +35712,47 @@ class _StringsDe extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get anki_pending_mine_queued =>
+      'Saved to pending cards. It will be sent to Anki later.';
+  @override
+  String get anki_batch_mining_title => 'Batch mining';
+  @override
+  String get anki_batch_mining_hint =>
+      'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+  @override
+  String get anki_pending_mines_title => 'Pending cards';
+  @override
+  String get anki_pending_mines_hint =>
+      'Cards saved while Anki was unreachable or while batch mining was on';
+  @override
+  String get anki_pending_mines_empty => 'No pending cards';
+  @override
+  String get anki_pending_mines_send_all => 'Send all';
+  @override
+  String get anki_pending_mines_delete => 'Delete';
+  @override
+  String get anki_pending_mines_delete_confirm =>
+      'Delete this pending card? It has not been sent to Anki yet.';
+  @override
+  String get anki_pending_mines_status_pending => 'Waiting to send';
+  @override
+  String get anki_pending_mines_status_sending => 'Sending';
+  @override
+  String get anki_pending_mines_unreachable =>
+      'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+  @override
+  String get anki_pending_mines_ankimobile_hint =>
+      'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+  @override
+  String anki_pending_mines_status_failed({required Object error}) =>
+      'Failed: ${error}';
+  @override
+  String anki_pending_mines_flush_result({
+    required Object delivered,
+    required Object failed,
+    required Object remaining,
+  }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
 }
 
 // Path: <root>
@@ -49575,6 +49683,47 @@ class _StringsEs extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get anki_pending_mine_queued =>
+      'Saved to pending cards. It will be sent to Anki later.';
+  @override
+  String get anki_batch_mining_title => 'Batch mining';
+  @override
+  String get anki_batch_mining_hint =>
+      'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+  @override
+  String get anki_pending_mines_title => 'Pending cards';
+  @override
+  String get anki_pending_mines_hint =>
+      'Cards saved while Anki was unreachable or while batch mining was on';
+  @override
+  String get anki_pending_mines_empty => 'No pending cards';
+  @override
+  String get anki_pending_mines_send_all => 'Send all';
+  @override
+  String get anki_pending_mines_delete => 'Delete';
+  @override
+  String get anki_pending_mines_delete_confirm =>
+      'Delete this pending card? It has not been sent to Anki yet.';
+  @override
+  String get anki_pending_mines_status_pending => 'Waiting to send';
+  @override
+  String get anki_pending_mines_status_sending => 'Sending';
+  @override
+  String get anki_pending_mines_unreachable =>
+      'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+  @override
+  String get anki_pending_mines_ankimobile_hint =>
+      'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+  @override
+  String anki_pending_mines_status_failed({required Object error}) =>
+      'Failed: ${error}';
+  @override
+  String anki_pending_mines_flush_result({
+    required Object delivered,
+    required Object failed,
+    required Object remaining,
+  }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
 }
 
 // Path: <root>
@@ -63544,6 +63693,47 @@ class _StringsFr extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get anki_pending_mine_queued =>
+      'Saved to pending cards. It will be sent to Anki later.';
+  @override
+  String get anki_batch_mining_title => 'Batch mining';
+  @override
+  String get anki_batch_mining_hint =>
+      'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+  @override
+  String get anki_pending_mines_title => 'Pending cards';
+  @override
+  String get anki_pending_mines_hint =>
+      'Cards saved while Anki was unreachable or while batch mining was on';
+  @override
+  String get anki_pending_mines_empty => 'No pending cards';
+  @override
+  String get anki_pending_mines_send_all => 'Send all';
+  @override
+  String get anki_pending_mines_delete => 'Delete';
+  @override
+  String get anki_pending_mines_delete_confirm =>
+      'Delete this pending card? It has not been sent to Anki yet.';
+  @override
+  String get anki_pending_mines_status_pending => 'Waiting to send';
+  @override
+  String get anki_pending_mines_status_sending => 'Sending';
+  @override
+  String get anki_pending_mines_unreachable =>
+      'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+  @override
+  String get anki_pending_mines_ankimobile_hint =>
+      'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+  @override
+  String anki_pending_mines_status_failed({required Object error}) =>
+      'Failed: ${error}';
+  @override
+  String anki_pending_mines_flush_result({
+    required Object delivered,
+    required Object failed,
+    required Object remaining,
+  }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
 }
 
 // Path: <root>
@@ -77303,6 +77493,47 @@ class _StringsId extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get anki_pending_mine_queued =>
+      'Saved to pending cards. It will be sent to Anki later.';
+  @override
+  String get anki_batch_mining_title => 'Batch mining';
+  @override
+  String get anki_batch_mining_hint =>
+      'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+  @override
+  String get anki_pending_mines_title => 'Pending cards';
+  @override
+  String get anki_pending_mines_hint =>
+      'Cards saved while Anki was unreachable or while batch mining was on';
+  @override
+  String get anki_pending_mines_empty => 'No pending cards';
+  @override
+  String get anki_pending_mines_send_all => 'Send all';
+  @override
+  String get anki_pending_mines_delete => 'Delete';
+  @override
+  String get anki_pending_mines_delete_confirm =>
+      'Delete this pending card? It has not been sent to Anki yet.';
+  @override
+  String get anki_pending_mines_status_pending => 'Waiting to send';
+  @override
+  String get anki_pending_mines_status_sending => 'Sending';
+  @override
+  String get anki_pending_mines_unreachable =>
+      'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+  @override
+  String get anki_pending_mines_ankimobile_hint =>
+      'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+  @override
+  String anki_pending_mines_status_failed({required Object error}) =>
+      'Failed: ${error}';
+  @override
+  String anki_pending_mines_flush_result({
+    required Object delivered,
+    required Object failed,
+    required Object remaining,
+  }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
 }
 
 // Path: <root>
@@ -91163,6 +91394,47 @@ class _StringsIt extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get anki_pending_mine_queued =>
+      'Saved to pending cards. It will be sent to Anki later.';
+  @override
+  String get anki_batch_mining_title => 'Batch mining';
+  @override
+  String get anki_batch_mining_hint =>
+      'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+  @override
+  String get anki_pending_mines_title => 'Pending cards';
+  @override
+  String get anki_pending_mines_hint =>
+      'Cards saved while Anki was unreachable or while batch mining was on';
+  @override
+  String get anki_pending_mines_empty => 'No pending cards';
+  @override
+  String get anki_pending_mines_send_all => 'Send all';
+  @override
+  String get anki_pending_mines_delete => 'Delete';
+  @override
+  String get anki_pending_mines_delete_confirm =>
+      'Delete this pending card? It has not been sent to Anki yet.';
+  @override
+  String get anki_pending_mines_status_pending => 'Waiting to send';
+  @override
+  String get anki_pending_mines_status_sending => 'Sending';
+  @override
+  String get anki_pending_mines_unreachable =>
+      'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+  @override
+  String get anki_pending_mines_ankimobile_hint =>
+      'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+  @override
+  String anki_pending_mines_status_failed({required Object error}) =>
+      'Failed: ${error}';
+  @override
+  String anki_pending_mines_flush_result({
+    required Object delivered,
+    required Object failed,
+    required Object remaining,
+  }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
 }
 
 // Path: <root>
@@ -104378,6 +104650,47 @@ class _StringsJa extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get anki_pending_mine_queued =>
+      'Saved to pending cards. It will be sent to Anki later.';
+  @override
+  String get anki_batch_mining_title => 'Batch mining';
+  @override
+  String get anki_batch_mining_hint =>
+      'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+  @override
+  String get anki_pending_mines_title => 'Pending cards';
+  @override
+  String get anki_pending_mines_hint =>
+      'Cards saved while Anki was unreachable or while batch mining was on';
+  @override
+  String get anki_pending_mines_empty => 'No pending cards';
+  @override
+  String get anki_pending_mines_send_all => 'Send all';
+  @override
+  String get anki_pending_mines_delete => 'Delete';
+  @override
+  String get anki_pending_mines_delete_confirm =>
+      'Delete this pending card? It has not been sent to Anki yet.';
+  @override
+  String get anki_pending_mines_status_pending => 'Waiting to send';
+  @override
+  String get anki_pending_mines_status_sending => 'Sending';
+  @override
+  String get anki_pending_mines_unreachable =>
+      'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+  @override
+  String get anki_pending_mines_ankimobile_hint =>
+      'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+  @override
+  String anki_pending_mines_status_failed({required Object error}) =>
+      'Failed: ${error}';
+  @override
+  String anki_pending_mines_flush_result({
+    required Object delivered,
+    required Object failed,
+    required Object remaining,
+  }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
 }
 
 // Path: <root>
@@ -117610,6 +117923,47 @@ class _StringsKo extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get anki_pending_mine_queued =>
+      'Saved to pending cards. It will be sent to Anki later.';
+  @override
+  String get anki_batch_mining_title => 'Batch mining';
+  @override
+  String get anki_batch_mining_hint =>
+      'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+  @override
+  String get anki_pending_mines_title => 'Pending cards';
+  @override
+  String get anki_pending_mines_hint =>
+      'Cards saved while Anki was unreachable or while batch mining was on';
+  @override
+  String get anki_pending_mines_empty => 'No pending cards';
+  @override
+  String get anki_pending_mines_send_all => 'Send all';
+  @override
+  String get anki_pending_mines_delete => 'Delete';
+  @override
+  String get anki_pending_mines_delete_confirm =>
+      'Delete this pending card? It has not been sent to Anki yet.';
+  @override
+  String get anki_pending_mines_status_pending => 'Waiting to send';
+  @override
+  String get anki_pending_mines_status_sending => 'Sending';
+  @override
+  String get anki_pending_mines_unreachable =>
+      'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+  @override
+  String get anki_pending_mines_ankimobile_hint =>
+      'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+  @override
+  String anki_pending_mines_status_failed({required Object error}) =>
+      'Failed: ${error}';
+  @override
+  String anki_pending_mines_flush_result({
+    required Object delivered,
+    required Object failed,
+    required Object remaining,
+  }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
 }
 
 // Path: <root>
@@ -131424,6 +131778,47 @@ class _StringsNl extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get anki_pending_mine_queued =>
+      'Saved to pending cards. It will be sent to Anki later.';
+  @override
+  String get anki_batch_mining_title => 'Batch mining';
+  @override
+  String get anki_batch_mining_hint =>
+      'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+  @override
+  String get anki_pending_mines_title => 'Pending cards';
+  @override
+  String get anki_pending_mines_hint =>
+      'Cards saved while Anki was unreachable or while batch mining was on';
+  @override
+  String get anki_pending_mines_empty => 'No pending cards';
+  @override
+  String get anki_pending_mines_send_all => 'Send all';
+  @override
+  String get anki_pending_mines_delete => 'Delete';
+  @override
+  String get anki_pending_mines_delete_confirm =>
+      'Delete this pending card? It has not been sent to Anki yet.';
+  @override
+  String get anki_pending_mines_status_pending => 'Waiting to send';
+  @override
+  String get anki_pending_mines_status_sending => 'Sending';
+  @override
+  String get anki_pending_mines_unreachable =>
+      'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+  @override
+  String get anki_pending_mines_ankimobile_hint =>
+      'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+  @override
+  String anki_pending_mines_status_failed({required Object error}) =>
+      'Failed: ${error}';
+  @override
+  String anki_pending_mines_flush_result({
+    required Object delivered,
+    required Object failed,
+    required Object remaining,
+  }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
 }
 
 // Path: <root>
@@ -145291,6 +145686,47 @@ class _StringsPtBr extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get anki_pending_mine_queued =>
+      'Saved to pending cards. It will be sent to Anki later.';
+  @override
+  String get anki_batch_mining_title => 'Batch mining';
+  @override
+  String get anki_batch_mining_hint =>
+      'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+  @override
+  String get anki_pending_mines_title => 'Pending cards';
+  @override
+  String get anki_pending_mines_hint =>
+      'Cards saved while Anki was unreachable or while batch mining was on';
+  @override
+  String get anki_pending_mines_empty => 'No pending cards';
+  @override
+  String get anki_pending_mines_send_all => 'Send all';
+  @override
+  String get anki_pending_mines_delete => 'Delete';
+  @override
+  String get anki_pending_mines_delete_confirm =>
+      'Delete this pending card? It has not been sent to Anki yet.';
+  @override
+  String get anki_pending_mines_status_pending => 'Waiting to send';
+  @override
+  String get anki_pending_mines_status_sending => 'Sending';
+  @override
+  String get anki_pending_mines_unreachable =>
+      'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+  @override
+  String get anki_pending_mines_ankimobile_hint =>
+      'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+  @override
+  String anki_pending_mines_status_failed({required Object error}) =>
+      'Failed: ${error}';
+  @override
+  String anki_pending_mines_flush_result({
+    required Object delivered,
+    required Object failed,
+    required Object remaining,
+  }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
 }
 
 // Path: <root>
@@ -159133,6 +159569,47 @@ class _StringsRu extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get anki_pending_mine_queued =>
+      'Saved to pending cards. It will be sent to Anki later.';
+  @override
+  String get anki_batch_mining_title => 'Batch mining';
+  @override
+  String get anki_batch_mining_hint =>
+      'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+  @override
+  String get anki_pending_mines_title => 'Pending cards';
+  @override
+  String get anki_pending_mines_hint =>
+      'Cards saved while Anki was unreachable or while batch mining was on';
+  @override
+  String get anki_pending_mines_empty => 'No pending cards';
+  @override
+  String get anki_pending_mines_send_all => 'Send all';
+  @override
+  String get anki_pending_mines_delete => 'Delete';
+  @override
+  String get anki_pending_mines_delete_confirm =>
+      'Delete this pending card? It has not been sent to Anki yet.';
+  @override
+  String get anki_pending_mines_status_pending => 'Waiting to send';
+  @override
+  String get anki_pending_mines_status_sending => 'Sending';
+  @override
+  String get anki_pending_mines_unreachable =>
+      'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+  @override
+  String get anki_pending_mines_ankimobile_hint =>
+      'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+  @override
+  String anki_pending_mines_status_failed({required Object error}) =>
+      'Failed: ${error}';
+  @override
+  String anki_pending_mines_flush_result({
+    required Object delivered,
+    required Object failed,
+    required Object remaining,
+  }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
 }
 
 // Path: <root>
@@ -172772,6 +173249,47 @@ class _StringsTh extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get anki_pending_mine_queued =>
+      'Saved to pending cards. It will be sent to Anki later.';
+  @override
+  String get anki_batch_mining_title => 'Batch mining';
+  @override
+  String get anki_batch_mining_hint =>
+      'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+  @override
+  String get anki_pending_mines_title => 'Pending cards';
+  @override
+  String get anki_pending_mines_hint =>
+      'Cards saved while Anki was unreachable or while batch mining was on';
+  @override
+  String get anki_pending_mines_empty => 'No pending cards';
+  @override
+  String get anki_pending_mines_send_all => 'Send all';
+  @override
+  String get anki_pending_mines_delete => 'Delete';
+  @override
+  String get anki_pending_mines_delete_confirm =>
+      'Delete this pending card? It has not been sent to Anki yet.';
+  @override
+  String get anki_pending_mines_status_pending => 'Waiting to send';
+  @override
+  String get anki_pending_mines_status_sending => 'Sending';
+  @override
+  String get anki_pending_mines_unreachable =>
+      'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+  @override
+  String get anki_pending_mines_ankimobile_hint =>
+      'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+  @override
+  String anki_pending_mines_status_failed({required Object error}) =>
+      'Failed: ${error}';
+  @override
+  String anki_pending_mines_flush_result({
+    required Object delivered,
+    required Object failed,
+    required Object remaining,
+  }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
 }
 
 // Path: <root>
@@ -186525,6 +187043,47 @@ class _StringsTr extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get anki_pending_mine_queued =>
+      'Saved to pending cards. It will be sent to Anki later.';
+  @override
+  String get anki_batch_mining_title => 'Batch mining';
+  @override
+  String get anki_batch_mining_hint =>
+      'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+  @override
+  String get anki_pending_mines_title => 'Pending cards';
+  @override
+  String get anki_pending_mines_hint =>
+      'Cards saved while Anki was unreachable or while batch mining was on';
+  @override
+  String get anki_pending_mines_empty => 'No pending cards';
+  @override
+  String get anki_pending_mines_send_all => 'Send all';
+  @override
+  String get anki_pending_mines_delete => 'Delete';
+  @override
+  String get anki_pending_mines_delete_confirm =>
+      'Delete this pending card? It has not been sent to Anki yet.';
+  @override
+  String get anki_pending_mines_status_pending => 'Waiting to send';
+  @override
+  String get anki_pending_mines_status_sending => 'Sending';
+  @override
+  String get anki_pending_mines_unreachable =>
+      'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+  @override
+  String get anki_pending_mines_ankimobile_hint =>
+      'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+  @override
+  String anki_pending_mines_status_failed({required Object error}) =>
+      'Failed: ${error}';
+  @override
+  String anki_pending_mines_flush_result({
+    required Object delivered,
+    required Object failed,
+    required Object remaining,
+  }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
 }
 
 // Path: <root>
@@ -200249,6 +200808,47 @@ class _StringsVi extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get anki_pending_mine_queued =>
+      'Saved to pending cards. It will be sent to Anki later.';
+  @override
+  String get anki_batch_mining_title => 'Batch mining';
+  @override
+  String get anki_batch_mining_hint =>
+      'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+  @override
+  String get anki_pending_mines_title => 'Pending cards';
+  @override
+  String get anki_pending_mines_hint =>
+      'Cards saved while Anki was unreachable or while batch mining was on';
+  @override
+  String get anki_pending_mines_empty => 'No pending cards';
+  @override
+  String get anki_pending_mines_send_all => 'Send all';
+  @override
+  String get anki_pending_mines_delete => 'Delete';
+  @override
+  String get anki_pending_mines_delete_confirm =>
+      'Delete this pending card? It has not been sent to Anki yet.';
+  @override
+  String get anki_pending_mines_status_pending => 'Waiting to send';
+  @override
+  String get anki_pending_mines_status_sending => 'Sending';
+  @override
+  String get anki_pending_mines_unreachable =>
+      'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+  @override
+  String get anki_pending_mines_ankimobile_hint =>
+      'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+  @override
+  String anki_pending_mines_status_failed({required Object error}) =>
+      'Failed: ${error}';
+  @override
+  String anki_pending_mines_flush_result({
+    required Object delivered,
+    required Object failed,
+    required Object remaining,
+  }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
 }
 
 // Path: <root>
@@ -212803,6 +213403,42 @@ class _StringsZhCn extends _StringsEn {
       '请填写以 https:// 开头、以 api.php 结尾的地址';
   @override
   String get ai_web_knowledge_custom_remove => '删除站点';
+  @override
+  String get anki_pending_mine_queued => '已存入待发卡片，稍后发送到 Anki';
+  @override
+  String get anki_batch_mining_title => '批量制卡';
+  @override
+  String get anki_batch_mining_hint => '制卡先存在本机，之后一次性发送到 Anki，而不是每张单独发送';
+  @override
+  String get anki_pending_mines_title => '待发卡片';
+  @override
+  String get anki_pending_mines_hint => '连不上 Anki 或开着批量制卡时存下的卡片';
+  @override
+  String get anki_pending_mines_empty => '没有待发卡片';
+  @override
+  String get anki_pending_mines_send_all => '全部发送';
+  @override
+  String get anki_pending_mines_delete => '删除';
+  @override
+  String get anki_pending_mines_delete_confirm => '删除这张待发卡片？它还没有发送到 Anki。';
+  @override
+  String get anki_pending_mines_status_pending => '等待发送';
+  @override
+  String get anki_pending_mines_status_sending => '发送中';
+  @override
+  String get anki_pending_mines_unreachable => '现在连不上 Anki，剩下的卡片继续留在队列里';
+  @override
+  String get anki_pending_mines_ankimobile_hint =>
+      '每张卡会短暂打开 AnkiMobile，回到 Fushi 后自动发送下一张，全部发完后让 AnkiMobile 同步一次';
+  @override
+  String anki_pending_mines_status_failed({required Object error}) =>
+      '失败：${error}';
+  @override
+  String anki_pending_mines_flush_result({
+    required Object delivered,
+    required Object failed,
+    required Object remaining,
+  }) => '已发送 ${delivered} 张，失败 ${failed} 张，剩余 ${remaining} 张';
 }
 
 // Path: <root>
@@ -225698,6 +226334,47 @@ class _StringsZhHk extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get anki_pending_mine_queued =>
+      'Saved to pending cards. It will be sent to Anki later.';
+  @override
+  String get anki_batch_mining_title => 'Batch mining';
+  @override
+  String get anki_batch_mining_hint =>
+      'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+  @override
+  String get anki_pending_mines_title => 'Pending cards';
+  @override
+  String get anki_pending_mines_hint =>
+      'Cards saved while Anki was unreachable or while batch mining was on';
+  @override
+  String get anki_pending_mines_empty => 'No pending cards';
+  @override
+  String get anki_pending_mines_send_all => 'Send all';
+  @override
+  String get anki_pending_mines_delete => 'Delete';
+  @override
+  String get anki_pending_mines_delete_confirm =>
+      'Delete this pending card? It has not been sent to Anki yet.';
+  @override
+  String get anki_pending_mines_status_pending => 'Waiting to send';
+  @override
+  String get anki_pending_mines_status_sending => 'Sending';
+  @override
+  String get anki_pending_mines_unreachable =>
+      'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+  @override
+  String get anki_pending_mines_ankimobile_hint =>
+      'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+  @override
+  String anki_pending_mines_status_failed({required Object error}) =>
+      'Failed: ${error}';
+  @override
+  String anki_pending_mines_flush_result({
+    required Object delivered,
+    required Object failed,
+    required Object remaining,
+  }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
 }
 
 /// Flat map(s) containing all translations.
@@ -237445,6 +238122,40 @@ extension on _StringsEn {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'anki_pending_mine_queued':
+        return 'Saved to pending cards. It will be sent to Anki later.';
+      case 'anki_batch_mining_title':
+        return 'Batch mining';
+      case 'anki_batch_mining_hint':
+        return 'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+      case 'anki_pending_mines_title':
+        return 'Pending cards';
+      case 'anki_pending_mines_hint':
+        return 'Cards saved while Anki was unreachable or while batch mining was on';
+      case 'anki_pending_mines_empty':
+        return 'No pending cards';
+      case 'anki_pending_mines_send_all':
+        return 'Send all';
+      case 'anki_pending_mines_delete':
+        return 'Delete';
+      case 'anki_pending_mines_delete_confirm':
+        return 'Delete this pending card? It has not been sent to Anki yet.';
+      case 'anki_pending_mines_status_pending':
+        return 'Waiting to send';
+      case 'anki_pending_mines_status_sending':
+        return 'Sending';
+      case 'anki_pending_mines_unreachable':
+        return 'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+      case 'anki_pending_mines_ankimobile_hint':
+        return 'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+      case 'anki_pending_mines_status_failed':
+        return ({required Object error}) => 'Failed: ${error}';
+      case 'anki_pending_mines_flush_result':
+        return ({
+          required Object delivered,
+          required Object failed,
+          required Object remaining,
+        }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       default:
         return null;
     }
@@ -249187,6 +249898,40 @@ extension on _StringsAr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'anki_pending_mine_queued':
+        return 'Saved to pending cards. It will be sent to Anki later.';
+      case 'anki_batch_mining_title':
+        return 'Batch mining';
+      case 'anki_batch_mining_hint':
+        return 'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+      case 'anki_pending_mines_title':
+        return 'Pending cards';
+      case 'anki_pending_mines_hint':
+        return 'Cards saved while Anki was unreachable or while batch mining was on';
+      case 'anki_pending_mines_empty':
+        return 'No pending cards';
+      case 'anki_pending_mines_send_all':
+        return 'Send all';
+      case 'anki_pending_mines_delete':
+        return 'Delete';
+      case 'anki_pending_mines_delete_confirm':
+        return 'Delete this pending card? It has not been sent to Anki yet.';
+      case 'anki_pending_mines_status_pending':
+        return 'Waiting to send';
+      case 'anki_pending_mines_status_sending':
+        return 'Sending';
+      case 'anki_pending_mines_unreachable':
+        return 'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+      case 'anki_pending_mines_ankimobile_hint':
+        return 'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+      case 'anki_pending_mines_status_failed':
+        return ({required Object error}) => 'Failed: ${error}';
+      case 'anki_pending_mines_flush_result':
+        return ({
+          required Object delivered,
+          required Object failed,
+          required Object remaining,
+        }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       default:
         return null;
     }
@@ -260978,6 +261723,40 @@ extension on _StringsDe {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'anki_pending_mine_queued':
+        return 'Saved to pending cards. It will be sent to Anki later.';
+      case 'anki_batch_mining_title':
+        return 'Batch mining';
+      case 'anki_batch_mining_hint':
+        return 'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+      case 'anki_pending_mines_title':
+        return 'Pending cards';
+      case 'anki_pending_mines_hint':
+        return 'Cards saved while Anki was unreachable or while batch mining was on';
+      case 'anki_pending_mines_empty':
+        return 'No pending cards';
+      case 'anki_pending_mines_send_all':
+        return 'Send all';
+      case 'anki_pending_mines_delete':
+        return 'Delete';
+      case 'anki_pending_mines_delete_confirm':
+        return 'Delete this pending card? It has not been sent to Anki yet.';
+      case 'anki_pending_mines_status_pending':
+        return 'Waiting to send';
+      case 'anki_pending_mines_status_sending':
+        return 'Sending';
+      case 'anki_pending_mines_unreachable':
+        return 'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+      case 'anki_pending_mines_ankimobile_hint':
+        return 'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+      case 'anki_pending_mines_status_failed':
+        return ({required Object error}) => 'Failed: ${error}';
+      case 'anki_pending_mines_flush_result':
+        return ({
+          required Object delivered,
+          required Object failed,
+          required Object remaining,
+        }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       default:
         return null;
     }
@@ -272759,6 +273538,40 @@ extension on _StringsEs {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'anki_pending_mine_queued':
+        return 'Saved to pending cards. It will be sent to Anki later.';
+      case 'anki_batch_mining_title':
+        return 'Batch mining';
+      case 'anki_batch_mining_hint':
+        return 'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+      case 'anki_pending_mines_title':
+        return 'Pending cards';
+      case 'anki_pending_mines_hint':
+        return 'Cards saved while Anki was unreachable or while batch mining was on';
+      case 'anki_pending_mines_empty':
+        return 'No pending cards';
+      case 'anki_pending_mines_send_all':
+        return 'Send all';
+      case 'anki_pending_mines_delete':
+        return 'Delete';
+      case 'anki_pending_mines_delete_confirm':
+        return 'Delete this pending card? It has not been sent to Anki yet.';
+      case 'anki_pending_mines_status_pending':
+        return 'Waiting to send';
+      case 'anki_pending_mines_status_sending':
+        return 'Sending';
+      case 'anki_pending_mines_unreachable':
+        return 'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+      case 'anki_pending_mines_ankimobile_hint':
+        return 'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+      case 'anki_pending_mines_status_failed':
+        return ({required Object error}) => 'Failed: ${error}';
+      case 'anki_pending_mines_flush_result':
+        return ({
+          required Object delivered,
+          required Object failed,
+          required Object remaining,
+        }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       default:
         return null;
     }
@@ -284548,6 +285361,40 @@ extension on _StringsFr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'anki_pending_mine_queued':
+        return 'Saved to pending cards. It will be sent to Anki later.';
+      case 'anki_batch_mining_title':
+        return 'Batch mining';
+      case 'anki_batch_mining_hint':
+        return 'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+      case 'anki_pending_mines_title':
+        return 'Pending cards';
+      case 'anki_pending_mines_hint':
+        return 'Cards saved while Anki was unreachable or while batch mining was on';
+      case 'anki_pending_mines_empty':
+        return 'No pending cards';
+      case 'anki_pending_mines_send_all':
+        return 'Send all';
+      case 'anki_pending_mines_delete':
+        return 'Delete';
+      case 'anki_pending_mines_delete_confirm':
+        return 'Delete this pending card? It has not been sent to Anki yet.';
+      case 'anki_pending_mines_status_pending':
+        return 'Waiting to send';
+      case 'anki_pending_mines_status_sending':
+        return 'Sending';
+      case 'anki_pending_mines_unreachable':
+        return 'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+      case 'anki_pending_mines_ankimobile_hint':
+        return 'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+      case 'anki_pending_mines_status_failed':
+        return ({required Object error}) => 'Failed: ${error}';
+      case 'anki_pending_mines_flush_result':
+        return ({
+          required Object delivered,
+          required Object failed,
+          required Object remaining,
+        }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       default:
         return null;
     }
@@ -296307,6 +297154,40 @@ extension on _StringsId {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'anki_pending_mine_queued':
+        return 'Saved to pending cards. It will be sent to Anki later.';
+      case 'anki_batch_mining_title':
+        return 'Batch mining';
+      case 'anki_batch_mining_hint':
+        return 'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+      case 'anki_pending_mines_title':
+        return 'Pending cards';
+      case 'anki_pending_mines_hint':
+        return 'Cards saved while Anki was unreachable or while batch mining was on';
+      case 'anki_pending_mines_empty':
+        return 'No pending cards';
+      case 'anki_pending_mines_send_all':
+        return 'Send all';
+      case 'anki_pending_mines_delete':
+        return 'Delete';
+      case 'anki_pending_mines_delete_confirm':
+        return 'Delete this pending card? It has not been sent to Anki yet.';
+      case 'anki_pending_mines_status_pending':
+        return 'Waiting to send';
+      case 'anki_pending_mines_status_sending':
+        return 'Sending';
+      case 'anki_pending_mines_unreachable':
+        return 'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+      case 'anki_pending_mines_ankimobile_hint':
+        return 'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+      case 'anki_pending_mines_status_failed':
+        return ({required Object error}) => 'Failed: ${error}';
+      case 'anki_pending_mines_flush_result':
+        return ({
+          required Object delivered,
+          required Object failed,
+          required Object remaining,
+        }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       default:
         return null;
     }
@@ -308089,6 +308970,40 @@ extension on _StringsIt {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'anki_pending_mine_queued':
+        return 'Saved to pending cards. It will be sent to Anki later.';
+      case 'anki_batch_mining_title':
+        return 'Batch mining';
+      case 'anki_batch_mining_hint':
+        return 'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+      case 'anki_pending_mines_title':
+        return 'Pending cards';
+      case 'anki_pending_mines_hint':
+        return 'Cards saved while Anki was unreachable or while batch mining was on';
+      case 'anki_pending_mines_empty':
+        return 'No pending cards';
+      case 'anki_pending_mines_send_all':
+        return 'Send all';
+      case 'anki_pending_mines_delete':
+        return 'Delete';
+      case 'anki_pending_mines_delete_confirm':
+        return 'Delete this pending card? It has not been sent to Anki yet.';
+      case 'anki_pending_mines_status_pending':
+        return 'Waiting to send';
+      case 'anki_pending_mines_status_sending':
+        return 'Sending';
+      case 'anki_pending_mines_unreachable':
+        return 'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+      case 'anki_pending_mines_ankimobile_hint':
+        return 'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+      case 'anki_pending_mines_status_failed':
+        return ({required Object error}) => 'Failed: ${error}';
+      case 'anki_pending_mines_flush_result':
+        return ({
+          required Object delivered,
+          required Object failed,
+          required Object remaining,
+        }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       default:
         return null;
     }
@@ -319792,6 +320707,40 @@ extension on _StringsJa {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'anki_pending_mine_queued':
+        return 'Saved to pending cards. It will be sent to Anki later.';
+      case 'anki_batch_mining_title':
+        return 'Batch mining';
+      case 'anki_batch_mining_hint':
+        return 'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+      case 'anki_pending_mines_title':
+        return 'Pending cards';
+      case 'anki_pending_mines_hint':
+        return 'Cards saved while Anki was unreachable or while batch mining was on';
+      case 'anki_pending_mines_empty':
+        return 'No pending cards';
+      case 'anki_pending_mines_send_all':
+        return 'Send all';
+      case 'anki_pending_mines_delete':
+        return 'Delete';
+      case 'anki_pending_mines_delete_confirm':
+        return 'Delete this pending card? It has not been sent to Anki yet.';
+      case 'anki_pending_mines_status_pending':
+        return 'Waiting to send';
+      case 'anki_pending_mines_status_sending':
+        return 'Sending';
+      case 'anki_pending_mines_unreachable':
+        return 'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+      case 'anki_pending_mines_ankimobile_hint':
+        return 'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+      case 'anki_pending_mines_status_failed':
+        return ({required Object error}) => 'Failed: ${error}';
+      case 'anki_pending_mines_flush_result':
+        return ({
+          required Object delivered,
+          required Object failed,
+          required Object remaining,
+        }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       default:
         return null;
     }
@@ -331503,6 +332452,40 @@ extension on _StringsKo {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'anki_pending_mine_queued':
+        return 'Saved to pending cards. It will be sent to Anki later.';
+      case 'anki_batch_mining_title':
+        return 'Batch mining';
+      case 'anki_batch_mining_hint':
+        return 'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+      case 'anki_pending_mines_title':
+        return 'Pending cards';
+      case 'anki_pending_mines_hint':
+        return 'Cards saved while Anki was unreachable or while batch mining was on';
+      case 'anki_pending_mines_empty':
+        return 'No pending cards';
+      case 'anki_pending_mines_send_all':
+        return 'Send all';
+      case 'anki_pending_mines_delete':
+        return 'Delete';
+      case 'anki_pending_mines_delete_confirm':
+        return 'Delete this pending card? It has not been sent to Anki yet.';
+      case 'anki_pending_mines_status_pending':
+        return 'Waiting to send';
+      case 'anki_pending_mines_status_sending':
+        return 'Sending';
+      case 'anki_pending_mines_unreachable':
+        return 'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+      case 'anki_pending_mines_ankimobile_hint':
+        return 'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+      case 'anki_pending_mines_status_failed':
+        return ({required Object error}) => 'Failed: ${error}';
+      case 'anki_pending_mines_flush_result':
+        return ({
+          required Object delivered,
+          required Object failed,
+          required Object remaining,
+        }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       default:
         return null;
     }
@@ -343280,6 +344263,40 @@ extension on _StringsNl {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'anki_pending_mine_queued':
+        return 'Saved to pending cards. It will be sent to Anki later.';
+      case 'anki_batch_mining_title':
+        return 'Batch mining';
+      case 'anki_batch_mining_hint':
+        return 'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+      case 'anki_pending_mines_title':
+        return 'Pending cards';
+      case 'anki_pending_mines_hint':
+        return 'Cards saved while Anki was unreachable or while batch mining was on';
+      case 'anki_pending_mines_empty':
+        return 'No pending cards';
+      case 'anki_pending_mines_send_all':
+        return 'Send all';
+      case 'anki_pending_mines_delete':
+        return 'Delete';
+      case 'anki_pending_mines_delete_confirm':
+        return 'Delete this pending card? It has not been sent to Anki yet.';
+      case 'anki_pending_mines_status_pending':
+        return 'Waiting to send';
+      case 'anki_pending_mines_status_sending':
+        return 'Sending';
+      case 'anki_pending_mines_unreachable':
+        return 'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+      case 'anki_pending_mines_ankimobile_hint':
+        return 'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+      case 'anki_pending_mines_status_failed':
+        return ({required Object error}) => 'Failed: ${error}';
+      case 'anki_pending_mines_flush_result':
+        return ({
+          required Object delivered,
+          required Object failed,
+          required Object remaining,
+        }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       default:
         return null;
     }
@@ -355052,6 +356069,40 @@ extension on _StringsPtBr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'anki_pending_mine_queued':
+        return 'Saved to pending cards. It will be sent to Anki later.';
+      case 'anki_batch_mining_title':
+        return 'Batch mining';
+      case 'anki_batch_mining_hint':
+        return 'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+      case 'anki_pending_mines_title':
+        return 'Pending cards';
+      case 'anki_pending_mines_hint':
+        return 'Cards saved while Anki was unreachable or while batch mining was on';
+      case 'anki_pending_mines_empty':
+        return 'No pending cards';
+      case 'anki_pending_mines_send_all':
+        return 'Send all';
+      case 'anki_pending_mines_delete':
+        return 'Delete';
+      case 'anki_pending_mines_delete_confirm':
+        return 'Delete this pending card? It has not been sent to Anki yet.';
+      case 'anki_pending_mines_status_pending':
+        return 'Waiting to send';
+      case 'anki_pending_mines_status_sending':
+        return 'Sending';
+      case 'anki_pending_mines_unreachable':
+        return 'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+      case 'anki_pending_mines_ankimobile_hint':
+        return 'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+      case 'anki_pending_mines_status_failed':
+        return ({required Object error}) => 'Failed: ${error}';
+      case 'anki_pending_mines_flush_result':
+        return ({
+          required Object delivered,
+          required Object failed,
+          required Object remaining,
+        }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       default:
         return null;
     }
@@ -366830,6 +367881,40 @@ extension on _StringsRu {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'anki_pending_mine_queued':
+        return 'Saved to pending cards. It will be sent to Anki later.';
+      case 'anki_batch_mining_title':
+        return 'Batch mining';
+      case 'anki_batch_mining_hint':
+        return 'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+      case 'anki_pending_mines_title':
+        return 'Pending cards';
+      case 'anki_pending_mines_hint':
+        return 'Cards saved while Anki was unreachable or while batch mining was on';
+      case 'anki_pending_mines_empty':
+        return 'No pending cards';
+      case 'anki_pending_mines_send_all':
+        return 'Send all';
+      case 'anki_pending_mines_delete':
+        return 'Delete';
+      case 'anki_pending_mines_delete_confirm':
+        return 'Delete this pending card? It has not been sent to Anki yet.';
+      case 'anki_pending_mines_status_pending':
+        return 'Waiting to send';
+      case 'anki_pending_mines_status_sending':
+        return 'Sending';
+      case 'anki_pending_mines_unreachable':
+        return 'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+      case 'anki_pending_mines_ankimobile_hint':
+        return 'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+      case 'anki_pending_mines_status_failed':
+        return ({required Object error}) => 'Failed: ${error}';
+      case 'anki_pending_mines_flush_result':
+        return ({
+          required Object delivered,
+          required Object failed,
+          required Object remaining,
+        }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       default:
         return null;
     }
@@ -378577,6 +379662,40 @@ extension on _StringsTh {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'anki_pending_mine_queued':
+        return 'Saved to pending cards. It will be sent to Anki later.';
+      case 'anki_batch_mining_title':
+        return 'Batch mining';
+      case 'anki_batch_mining_hint':
+        return 'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+      case 'anki_pending_mines_title':
+        return 'Pending cards';
+      case 'anki_pending_mines_hint':
+        return 'Cards saved while Anki was unreachable or while batch mining was on';
+      case 'anki_pending_mines_empty':
+        return 'No pending cards';
+      case 'anki_pending_mines_send_all':
+        return 'Send all';
+      case 'anki_pending_mines_delete':
+        return 'Delete';
+      case 'anki_pending_mines_delete_confirm':
+        return 'Delete this pending card? It has not been sent to Anki yet.';
+      case 'anki_pending_mines_status_pending':
+        return 'Waiting to send';
+      case 'anki_pending_mines_status_sending':
+        return 'Sending';
+      case 'anki_pending_mines_unreachable':
+        return 'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+      case 'anki_pending_mines_ankimobile_hint':
+        return 'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+      case 'anki_pending_mines_status_failed':
+        return ({required Object error}) => 'Failed: ${error}';
+      case 'anki_pending_mines_flush_result':
+        return ({
+          required Object delivered,
+          required Object failed,
+          required Object remaining,
+        }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       default:
         return null;
     }
@@ -390340,6 +391459,40 @@ extension on _StringsTr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'anki_pending_mine_queued':
+        return 'Saved to pending cards. It will be sent to Anki later.';
+      case 'anki_batch_mining_title':
+        return 'Batch mining';
+      case 'anki_batch_mining_hint':
+        return 'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+      case 'anki_pending_mines_title':
+        return 'Pending cards';
+      case 'anki_pending_mines_hint':
+        return 'Cards saved while Anki was unreachable or while batch mining was on';
+      case 'anki_pending_mines_empty':
+        return 'No pending cards';
+      case 'anki_pending_mines_send_all':
+        return 'Send all';
+      case 'anki_pending_mines_delete':
+        return 'Delete';
+      case 'anki_pending_mines_delete_confirm':
+        return 'Delete this pending card? It has not been sent to Anki yet.';
+      case 'anki_pending_mines_status_pending':
+        return 'Waiting to send';
+      case 'anki_pending_mines_status_sending':
+        return 'Sending';
+      case 'anki_pending_mines_unreachable':
+        return 'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+      case 'anki_pending_mines_ankimobile_hint':
+        return 'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+      case 'anki_pending_mines_status_failed':
+        return ({required Object error}) => 'Failed: ${error}';
+      case 'anki_pending_mines_flush_result':
+        return ({
+          required Object delivered,
+          required Object failed,
+          required Object remaining,
+        }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       default:
         return null;
     }
@@ -402097,6 +403250,40 @@ extension on _StringsVi {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'anki_pending_mine_queued':
+        return 'Saved to pending cards. It will be sent to Anki later.';
+      case 'anki_batch_mining_title':
+        return 'Batch mining';
+      case 'anki_batch_mining_hint':
+        return 'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+      case 'anki_pending_mines_title':
+        return 'Pending cards';
+      case 'anki_pending_mines_hint':
+        return 'Cards saved while Anki was unreachable or while batch mining was on';
+      case 'anki_pending_mines_empty':
+        return 'No pending cards';
+      case 'anki_pending_mines_send_all':
+        return 'Send all';
+      case 'anki_pending_mines_delete':
+        return 'Delete';
+      case 'anki_pending_mines_delete_confirm':
+        return 'Delete this pending card? It has not been sent to Anki yet.';
+      case 'anki_pending_mines_status_pending':
+        return 'Waiting to send';
+      case 'anki_pending_mines_status_sending':
+        return 'Sending';
+      case 'anki_pending_mines_unreachable':
+        return 'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+      case 'anki_pending_mines_ankimobile_hint':
+        return 'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+      case 'anki_pending_mines_status_failed':
+        return ({required Object error}) => 'Failed: ${error}';
+      case 'anki_pending_mines_flush_result':
+        return ({
+          required Object delivered,
+          required Object failed,
+          required Object remaining,
+        }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       default:
         return null;
     }
@@ -413738,6 +414925,40 @@ extension on _StringsZhCn {
         return '请填写以 https:// 开头、以 api.php 结尾的地址';
       case 'ai_web_knowledge_custom_remove':
         return '删除站点';
+      case 'anki_pending_mine_queued':
+        return '已存入待发卡片，稍后发送到 Anki';
+      case 'anki_batch_mining_title':
+        return '批量制卡';
+      case 'anki_batch_mining_hint':
+        return '制卡先存在本机，之后一次性发送到 Anki，而不是每张单独发送';
+      case 'anki_pending_mines_title':
+        return '待发卡片';
+      case 'anki_pending_mines_hint':
+        return '连不上 Anki 或开着批量制卡时存下的卡片';
+      case 'anki_pending_mines_empty':
+        return '没有待发卡片';
+      case 'anki_pending_mines_send_all':
+        return '全部发送';
+      case 'anki_pending_mines_delete':
+        return '删除';
+      case 'anki_pending_mines_delete_confirm':
+        return '删除这张待发卡片？它还没有发送到 Anki。';
+      case 'anki_pending_mines_status_pending':
+        return '等待发送';
+      case 'anki_pending_mines_status_sending':
+        return '发送中';
+      case 'anki_pending_mines_unreachable':
+        return '现在连不上 Anki，剩下的卡片继续留在队列里';
+      case 'anki_pending_mines_ankimobile_hint':
+        return '每张卡会短暂打开 AnkiMobile，回到 Fushi 后自动发送下一张，全部发完后让 AnkiMobile 同步一次';
+      case 'anki_pending_mines_status_failed':
+        return ({required Object error}) => '失败：${error}';
+      case 'anki_pending_mines_flush_result':
+        return ({
+          required Object delivered,
+          required Object failed,
+          required Object remaining,
+        }) => '已发送 ${delivered} 张，失败 ${failed} 张，剩余 ${remaining} 张';
       default:
         return null;
     }
@@ -425420,6 +426641,40 @@ extension on _StringsZhHk {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'anki_pending_mine_queued':
+        return 'Saved to pending cards. It will be sent to Anki later.';
+      case 'anki_batch_mining_title':
+        return 'Batch mining';
+      case 'anki_batch_mining_hint':
+        return 'Save cards on this device first and send them to Anki together later, instead of one at a time.';
+      case 'anki_pending_mines_title':
+        return 'Pending cards';
+      case 'anki_pending_mines_hint':
+        return 'Cards saved while Anki was unreachable or while batch mining was on';
+      case 'anki_pending_mines_empty':
+        return 'No pending cards';
+      case 'anki_pending_mines_send_all':
+        return 'Send all';
+      case 'anki_pending_mines_delete':
+        return 'Delete';
+      case 'anki_pending_mines_delete_confirm':
+        return 'Delete this pending card? It has not been sent to Anki yet.';
+      case 'anki_pending_mines_status_pending':
+        return 'Waiting to send';
+      case 'anki_pending_mines_status_sending':
+        return 'Sending';
+      case 'anki_pending_mines_unreachable':
+        return 'Anki can\'t be reached right now. The remaining cards stay in the queue.';
+      case 'anki_pending_mines_ankimobile_hint':
+        return 'Each card opens AnkiMobile briefly. Fushi sends the next one when you come back, then asks AnkiMobile to sync.';
+      case 'anki_pending_mines_status_failed':
+        return ({required Object error}) => 'Failed: ${error}';
+      case 'anki_pending_mines_flush_result':
+        return ({
+          required Object delivered,
+          required Object failed,
+          required Object remaining,
+        }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       default:
         return null;
     }
