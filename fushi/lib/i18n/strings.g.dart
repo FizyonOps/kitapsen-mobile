@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 96883 (5699 per locale)
+/// Strings: 96900 (5700 per locale)
 ///
-/// Built on 2026-09-27 at 14:49 UTC
+/// Built on 2026-09-27 at 16:37 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8141,6 +8141,8 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get video_iptv_list_empty => 'No channels found in this list.';
   String video_iptv_imported({required Object count}) =>
       'Imported ${count} channels';
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -21804,6 +21806,9 @@ class _StringsAr extends _StringsEn {
   @override
   String video_iptv_imported({required Object count}) =>
       'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -35707,6 +35712,9 @@ class _StringsDe extends _StringsEn {
   @override
   String video_iptv_imported({required Object count}) =>
       'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -49661,6 +49669,9 @@ class _StringsEs extends _StringsEn {
   @override
   String video_iptv_imported({required Object count}) =>
       'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -63654,6 +63665,9 @@ class _StringsFr extends _StringsEn {
   @override
   String video_iptv_imported({required Object count}) =>
       'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -77437,6 +77451,9 @@ class _StringsId extends _StringsEn {
   @override
   String video_iptv_imported({required Object count}) =>
       'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -91321,6 +91338,9 @@ class _StringsIt extends _StringsEn {
   @override
   String video_iptv_imported({required Object count}) =>
       'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -104560,6 +104580,9 @@ class _StringsJa extends _StringsEn {
   @override
   String video_iptv_imported({required Object count}) =>
       'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -117816,6 +117839,9 @@ class _StringsKo extends _StringsEn {
   @override
   String video_iptv_imported({required Object count}) =>
       'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -131654,6 +131680,9 @@ class _StringsNl extends _StringsEn {
   @override
   String video_iptv_imported({required Object count}) =>
       'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -145545,6 +145574,9 @@ class _StringsPtBr extends _StringsEn {
   @override
   String video_iptv_imported({required Object count}) =>
       'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -159411,6 +159443,9 @@ class _StringsRu extends _StringsEn {
   @override
   String video_iptv_imported({required Object count}) =>
       'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -173074,6 +173109,9 @@ class _StringsTh extends _StringsEn {
   @override
   String video_iptv_imported({required Object count}) =>
       'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -186851,6 +186889,9 @@ class _StringsTr extends _StringsEn {
   @override
   String video_iptv_imported({required Object count}) =>
       'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -200599,6 +200640,9 @@ class _StringsVi extends _StringsEn {
   @override
   String video_iptv_imported({required Object count}) =>
       'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -213176,6 +213220,9 @@ class _StringsZhCn extends _StringsEn {
   String get video_iptv_list_empty => '列表里没有找到频道。';
   @override
   String video_iptv_imported({required Object count}) => '已导入 ${count} 个频道';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'iOS 与 macOS 暂不支持这种流协议（rtsps / rtmps / rtmpe）。';
 }
 
 // Path: <root>
@@ -226095,6 +226142,9 @@ class _StringsZhHk extends _StringsEn {
   @override
   String video_iptv_imported({required Object count}) =>
       'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 /// Flat map(s) containing all translations.
@@ -237862,6 +237912,8 @@ extension on _StringsEn {
         return 'No channels found in this list.';
       case 'video_iptv_imported':
         return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -249624,6 +249676,8 @@ extension on _StringsAr {
         return 'No channels found in this list.';
       case 'video_iptv_imported':
         return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -261435,6 +261489,8 @@ extension on _StringsDe {
         return 'No channels found in this list.';
       case 'video_iptv_imported':
         return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -273236,6 +273292,8 @@ extension on _StringsEs {
         return 'No channels found in this list.';
       case 'video_iptv_imported':
         return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -285045,6 +285103,8 @@ extension on _StringsFr {
         return 'No channels found in this list.';
       case 'video_iptv_imported':
         return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -296824,6 +296884,8 @@ extension on _StringsId {
         return 'No channels found in this list.';
       case 'video_iptv_imported':
         return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -308626,6 +308688,8 @@ extension on _StringsIt {
         return 'No channels found in this list.';
       case 'video_iptv_imported':
         return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -320349,6 +320413,8 @@ extension on _StringsJa {
         return 'No channels found in this list.';
       case 'video_iptv_imported':
         return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -332080,6 +332146,8 @@ extension on _StringsKo {
         return 'No channels found in this list.';
       case 'video_iptv_imported':
         return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -343877,6 +343945,8 @@ extension on _StringsNl {
         return 'No channels found in this list.';
       case 'video_iptv_imported':
         return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -355669,6 +355739,8 @@ extension on _StringsPtBr {
         return 'No channels found in this list.';
       case 'video_iptv_imported':
         return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -367467,6 +367539,8 @@ extension on _StringsRu {
         return 'No channels found in this list.';
       case 'video_iptv_imported':
         return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -379234,6 +379308,8 @@ extension on _StringsTh {
         return 'No channels found in this list.';
       case 'video_iptv_imported':
         return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -391017,6 +391093,8 @@ extension on _StringsTr {
         return 'No channels found in this list.';
       case 'video_iptv_imported':
         return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -402794,6 +402872,8 @@ extension on _StringsVi {
         return 'No channels found in this list.';
       case 'video_iptv_imported':
         return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -414455,6 +414535,8 @@ extension on _StringsZhCn {
         return '列表里没有找到频道。';
       case 'video_iptv_imported':
         return ({required Object count}) => '已导入 ${count} 个频道';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'iOS 与 macOS 暂不支持这种流协议（rtsps / rtmps / rtmpe）。';
       default:
         return null;
     }
@@ -426157,6 +426239,8 @@ extension on _StringsZhHk {
         return 'No channels found in this list.';
       case 'video_iptv_imported':
         return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
