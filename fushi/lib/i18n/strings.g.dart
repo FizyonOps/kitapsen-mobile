@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 96968 (5704 per locale)
+/// Strings: 97002 (5706 per locale)
 ///
-/// Built on 2026-09-27 at 17:02 UTC
+/// Built on 2026-09-27 at 17:33 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8153,6 +8153,10 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
     required Object failed,
     required Object remaining,
   }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+  String get anki_pending_mine_landing_title =>
+      'Deliver cards from other devices';
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
 }
 
 // Path: <root>
@@ -21833,6 +21837,12 @@ class _StringsAr extends _StringsEn {
     required Object failed,
     required Object remaining,
   }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+  @override
+  String get anki_pending_mine_landing_title =>
+      'Deliver cards from other devices';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
 }
 
 // Path: <root>
@@ -35753,6 +35763,12 @@ class _StringsDe extends _StringsEn {
     required Object failed,
     required Object remaining,
   }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+  @override
+  String get anki_pending_mine_landing_title =>
+      'Deliver cards from other devices';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
 }
 
 // Path: <root>
@@ -49724,6 +49740,12 @@ class _StringsEs extends _StringsEn {
     required Object failed,
     required Object remaining,
   }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+  @override
+  String get anki_pending_mine_landing_title =>
+      'Deliver cards from other devices';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
 }
 
 // Path: <root>
@@ -63734,6 +63756,12 @@ class _StringsFr extends _StringsEn {
     required Object failed,
     required Object remaining,
   }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+  @override
+  String get anki_pending_mine_landing_title =>
+      'Deliver cards from other devices';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
 }
 
 // Path: <root>
@@ -77534,6 +77562,12 @@ class _StringsId extends _StringsEn {
     required Object failed,
     required Object remaining,
   }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+  @override
+  String get anki_pending_mine_landing_title =>
+      'Deliver cards from other devices';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
 }
 
 // Path: <root>
@@ -91435,6 +91469,12 @@ class _StringsIt extends _StringsEn {
     required Object failed,
     required Object remaining,
   }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+  @override
+  String get anki_pending_mine_landing_title =>
+      'Deliver cards from other devices';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
 }
 
 // Path: <root>
@@ -104691,6 +104731,12 @@ class _StringsJa extends _StringsEn {
     required Object failed,
     required Object remaining,
   }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+  @override
+  String get anki_pending_mine_landing_title =>
+      'Deliver cards from other devices';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
 }
 
 // Path: <root>
@@ -117964,6 +118010,12 @@ class _StringsKo extends _StringsEn {
     required Object failed,
     required Object remaining,
   }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+  @override
+  String get anki_pending_mine_landing_title =>
+      'Deliver cards from other devices';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
 }
 
 // Path: <root>
@@ -131819,6 +131871,12 @@ class _StringsNl extends _StringsEn {
     required Object failed,
     required Object remaining,
   }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+  @override
+  String get anki_pending_mine_landing_title =>
+      'Deliver cards from other devices';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
 }
 
 // Path: <root>
@@ -145727,6 +145785,12 @@ class _StringsPtBr extends _StringsEn {
     required Object failed,
     required Object remaining,
   }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+  @override
+  String get anki_pending_mine_landing_title =>
+      'Deliver cards from other devices';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
 }
 
 // Path: <root>
@@ -159610,6 +159674,12 @@ class _StringsRu extends _StringsEn {
     required Object failed,
     required Object remaining,
   }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+  @override
+  String get anki_pending_mine_landing_title =>
+      'Deliver cards from other devices';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
 }
 
 // Path: <root>
@@ -173290,6 +173360,12 @@ class _StringsTh extends _StringsEn {
     required Object failed,
     required Object remaining,
   }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+  @override
+  String get anki_pending_mine_landing_title =>
+      'Deliver cards from other devices';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
 }
 
 // Path: <root>
@@ -187084,6 +187160,12 @@ class _StringsTr extends _StringsEn {
     required Object failed,
     required Object remaining,
   }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+  @override
+  String get anki_pending_mine_landing_title =>
+      'Deliver cards from other devices';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
 }
 
 // Path: <root>
@@ -200849,6 +200931,12 @@ class _StringsVi extends _StringsEn {
     required Object failed,
     required Object remaining,
   }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+  @override
+  String get anki_pending_mine_landing_title =>
+      'Deliver cards from other devices';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
 }
 
 // Path: <root>
@@ -213439,6 +213527,11 @@ class _StringsZhCn extends _StringsEn {
     required Object failed,
     required Object remaining,
   }) => '已发送 ${delivered} 张，失败 ${failed} 张，剩余 ${remaining} 张';
+  @override
+  String get anki_pending_mine_landing_title => '本机负责落地其他设备的卡片';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      '没装 Anki 的设备存下的卡片，经你配置的同步（云盘或互联）送到这台设备，由这里的 Anki 加卡。同一时间只有一台设备负责。';
 }
 
 // Path: <root>
@@ -226375,6 +226468,12 @@ class _StringsZhHk extends _StringsEn {
     required Object failed,
     required Object remaining,
   }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+  @override
+  String get anki_pending_mine_landing_title =>
+      'Deliver cards from other devices';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
 }
 
 /// Flat map(s) containing all translations.
@@ -238156,6 +238255,10 @@ extension on _StringsEn {
           required Object failed,
           required Object remaining,
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+      case 'anki_pending_mine_landing_title':
+        return 'Deliver cards from other devices';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
       default:
         return null;
     }
@@ -249932,6 +250035,10 @@ extension on _StringsAr {
           required Object failed,
           required Object remaining,
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+      case 'anki_pending_mine_landing_title':
+        return 'Deliver cards from other devices';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
       default:
         return null;
     }
@@ -261757,6 +261864,10 @@ extension on _StringsDe {
           required Object failed,
           required Object remaining,
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+      case 'anki_pending_mine_landing_title':
+        return 'Deliver cards from other devices';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
       default:
         return null;
     }
@@ -273572,6 +273683,10 @@ extension on _StringsEs {
           required Object failed,
           required Object remaining,
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+      case 'anki_pending_mine_landing_title':
+        return 'Deliver cards from other devices';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
       default:
         return null;
     }
@@ -285395,6 +285510,10 @@ extension on _StringsFr {
           required Object failed,
           required Object remaining,
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+      case 'anki_pending_mine_landing_title':
+        return 'Deliver cards from other devices';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
       default:
         return null;
     }
@@ -297188,6 +297307,10 @@ extension on _StringsId {
           required Object failed,
           required Object remaining,
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+      case 'anki_pending_mine_landing_title':
+        return 'Deliver cards from other devices';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
       default:
         return null;
     }
@@ -309004,6 +309127,10 @@ extension on _StringsIt {
           required Object failed,
           required Object remaining,
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+      case 'anki_pending_mine_landing_title':
+        return 'Deliver cards from other devices';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
       default:
         return null;
     }
@@ -320741,6 +320868,10 @@ extension on _StringsJa {
           required Object failed,
           required Object remaining,
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+      case 'anki_pending_mine_landing_title':
+        return 'Deliver cards from other devices';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
       default:
         return null;
     }
@@ -332486,6 +332617,10 @@ extension on _StringsKo {
           required Object failed,
           required Object remaining,
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+      case 'anki_pending_mine_landing_title':
+        return 'Deliver cards from other devices';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
       default:
         return null;
     }
@@ -344297,6 +344432,10 @@ extension on _StringsNl {
           required Object failed,
           required Object remaining,
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+      case 'anki_pending_mine_landing_title':
+        return 'Deliver cards from other devices';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
       default:
         return null;
     }
@@ -356103,6 +356242,10 @@ extension on _StringsPtBr {
           required Object failed,
           required Object remaining,
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+      case 'anki_pending_mine_landing_title':
+        return 'Deliver cards from other devices';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
       default:
         return null;
     }
@@ -367915,6 +368058,10 @@ extension on _StringsRu {
           required Object failed,
           required Object remaining,
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+      case 'anki_pending_mine_landing_title':
+        return 'Deliver cards from other devices';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
       default:
         return null;
     }
@@ -379696,6 +379843,10 @@ extension on _StringsTh {
           required Object failed,
           required Object remaining,
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+      case 'anki_pending_mine_landing_title':
+        return 'Deliver cards from other devices';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
       default:
         return null;
     }
@@ -391493,6 +391644,10 @@ extension on _StringsTr {
           required Object failed,
           required Object remaining,
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+      case 'anki_pending_mine_landing_title':
+        return 'Deliver cards from other devices';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
       default:
         return null;
     }
@@ -403284,6 +403439,10 @@ extension on _StringsVi {
           required Object failed,
           required Object remaining,
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+      case 'anki_pending_mine_landing_title':
+        return 'Deliver cards from other devices';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
       default:
         return null;
     }
@@ -414959,6 +415118,10 @@ extension on _StringsZhCn {
           required Object failed,
           required Object remaining,
         }) => '已发送 ${delivered} 张，失败 ${failed} 张，剩余 ${remaining} 张';
+      case 'anki_pending_mine_landing_title':
+        return '本机负责落地其他设备的卡片';
+      case 'anki_pending_mine_landing_hint':
+        return '没装 Anki 的设备存下的卡片，经你配置的同步（云盘或互联）送到这台设备，由这里的 Anki 加卡。同一时间只有一台设备负责。';
       default:
         return null;
     }
@@ -426675,6 +426838,10 @@ extension on _StringsZhHk {
           required Object failed,
           required Object remaining,
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
+      case 'anki_pending_mine_landing_title':
+        return 'Deliver cards from other devices';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage or interconnect) and are added to Anki on this device. Only one device does this at a time.';
       default:
         return null;
     }
