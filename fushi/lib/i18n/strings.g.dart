@@ -3,7 +3,7 @@
 /// Locales: 17
 /// Strings: 96628 (5684 per locale)
 ///
-/// Built on 2026-09-27 at 15:02 UTC
+/// Built on 2026-09-27 at 15:32 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8122,7 +8122,7 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get mining_clip_format_mp4_h264 =>
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   String get mining_clip_format_hint =>
-      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+      'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
 }
 
 // Path: <root>
@@ -21752,7 +21752,7 @@ class _StringsAr extends _StringsEn {
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
-      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+      'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
 }
 
 // Path: <root>
@@ -35622,7 +35622,7 @@ class _StringsDe extends _StringsEn {
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
-      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+      'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
 }
 
 // Path: <root>
@@ -49543,7 +49543,7 @@ class _StringsEs extends _StringsEn {
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
-      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+      'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
 }
 
 // Path: <root>
@@ -63503,7 +63503,7 @@ class _StringsFr extends _StringsEn {
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
-      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+      'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
 }
 
 // Path: <root>
@@ -77253,7 +77253,7 @@ class _StringsId extends _StringsEn {
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
-      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+      'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
 }
 
 // Path: <root>
@@ -91104,7 +91104,7 @@ class _StringsIt extends _StringsEn {
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
-      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+      'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
 }
 
 // Path: <root>
@@ -104310,7 +104310,7 @@ class _StringsJa extends _StringsEn {
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
-      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+      'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
 }
 
 // Path: <root>
@@ -117533,7 +117533,7 @@ class _StringsKo extends _StringsEn {
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
-      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+      'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
 }
 
 // Path: <root>
@@ -131338,7 +131338,7 @@ class _StringsNl extends _StringsEn {
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
-      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+      'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
 }
 
 // Path: <root>
@@ -145196,7 +145196,7 @@ class _StringsPtBr extends _StringsEn {
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
-      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+      'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
 }
 
 // Path: <root>
@@ -159029,7 +159029,7 @@ class _StringsRu extends _StringsEn {
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
-      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+      'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
 }
 
 // Path: <root>
@@ -172659,7 +172659,7 @@ class _StringsTh extends _StringsEn {
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
-      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+      'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
 }
 
 // Path: <root>
@@ -186403,7 +186403,7 @@ class _StringsTr extends _StringsEn {
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
-      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+      'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
 }
 
 // Path: <root>
@@ -200118,7 +200118,7 @@ class _StringsVi extends _StringsEn {
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
-      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+      'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
 }
 
 // Path: <root>
@@ -212661,7 +212661,8 @@ class _StringsZhCn extends _StringsEn {
   String get mining_clip_format_mp4_h264 =>
       'MP4 · H.264（Anki 自带播放器；AnkiMobile 用这个）';
   @override
-  String get mining_clip_format_hint => '所选格式在本机编不出来时，自动退回 WebM VP9，再退回 MP4。';
+  String get mining_clip_format_hint =>
+      'WebM 在卡片内播放，但 iPhone 上的 AnkiMobile 放不了——在 iPhone 复习请选 MP4。WebM 在本机编不出来时自动退回 MP4。';
 }
 
 // Path: <root>
@@ -225547,7 +225548,7 @@ class _StringsZhHk extends _StringsEn {
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
-      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+      'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
 }
 
 /// Flat map(s) containing all translations.
@@ -237284,7 +237285,7 @@ extension on _StringsEn {
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
-        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+        return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
       default:
         return null;
     }
@@ -249016,7 +249017,7 @@ extension on _StringsAr {
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
-        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+        return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
       default:
         return null;
     }
@@ -260797,7 +260798,7 @@ extension on _StringsDe {
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
-        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+        return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
       default:
         return null;
     }
@@ -272568,7 +272569,7 @@ extension on _StringsEs {
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
-        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+        return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
       default:
         return null;
     }
@@ -284347,7 +284348,7 @@ extension on _StringsFr {
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
-        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+        return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
       default:
         return null;
     }
@@ -296096,7 +296097,7 @@ extension on _StringsId {
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
-        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+        return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
       default:
         return null;
     }
@@ -307868,7 +307869,7 @@ extension on _StringsIt {
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
-        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+        return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
       default:
         return null;
     }
@@ -319561,7 +319562,7 @@ extension on _StringsJa {
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
-        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+        return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
       default:
         return null;
     }
@@ -331262,7 +331263,7 @@ extension on _StringsKo {
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
-        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+        return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
       default:
         return null;
     }
@@ -343029,7 +343030,7 @@ extension on _StringsNl {
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
-        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+        return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
       default:
         return null;
     }
@@ -354791,7 +354792,7 @@ extension on _StringsPtBr {
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
-        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+        return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
       default:
         return null;
     }
@@ -366559,7 +366560,7 @@ extension on _StringsRu {
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
-        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+        return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
       default:
         return null;
     }
@@ -378296,7 +378297,7 @@ extension on _StringsTh {
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
-        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+        return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
       default:
         return null;
     }
@@ -390049,7 +390050,7 @@ extension on _StringsTr {
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
-        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+        return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
       default:
         return null;
     }
@@ -401796,7 +401797,7 @@ extension on _StringsVi {
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
-        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+        return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
       default:
         return null;
     }
@@ -413427,7 +413428,7 @@ extension on _StringsZhCn {
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264（Anki 自带播放器；AnkiMobile 用这个）';
       case 'mining_clip_format_hint':
-        return '所选格式在本机编不出来时，自动退回 WebM VP9，再退回 MP4。';
+        return 'WebM 在卡片内播放，但 iPhone 上的 AnkiMobile 放不了——在 iPhone 复习请选 MP4。WebM 在本机编不出来时自动退回 MP4。';
       default:
         return null;
     }
@@ -425099,7 +425100,7 @@ extension on _StringsZhHk {
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
-        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
+        return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
       default:
         return null;
     }
