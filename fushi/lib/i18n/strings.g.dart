@@ -3,7 +3,7 @@
 /// Locales: 17
 /// Strings: 96526 (5678 per locale)
 ///
-/// Built on 2026-09-27 at 13:35 UTC
+/// Built on 2026-09-27 at 13:56 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8058,7 +8058,7 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get ai_video_acquire_action_scope_work => 'Only this work';
   String get ai_video_acquire_restart => 'Download another';
   String ai_video_acquire_franchise_searching({required Object title}) =>
-      'Looking for every work in the series of “${title}”…';
+      'Looking for every work in the series of “${title}” (checking each work, this can take a minute)…';
   String ai_video_acquire_franchise_found({
     required Object name,
     required Object series,
@@ -212344,7 +212344,7 @@ class _StringsZhCn extends _StringsEn {
   String get ai_video_acquire_restart => '再下一部';
   @override
   String ai_video_acquire_franchise_searching({required Object title}) =>
-      '正在找「${title}」这个系列的全部作品…';
+      '正在找「${title}」这个系列的全部作品（要逐部查资料，可能需要一分钟）…';
   @override
   String ai_video_acquire_franchise_found({
     required Object name,
@@ -236948,7 +236948,7 @@ extension on _StringsEn {
         return 'Download another';
       case 'ai_video_acquire_franchise_searching':
         return ({required Object title}) =>
-            'Looking for every work in the series of “${title}”…';
+            'Looking for every work in the series of “${title}” (checking each work, this can take a minute)…';
       case 'ai_video_acquire_franchise_found':
         return ({
           required Object name,
@@ -412913,7 +412913,8 @@ extension on _StringsZhCn {
       case 'ai_video_acquire_restart':
         return '再下一部';
       case 'ai_video_acquire_franchise_searching':
-        return ({required Object title}) => '正在找「${title}」这个系列的全部作品…';
+        return ({required Object title}) =>
+            '正在找「${title}」这个系列的全部作品（要逐部查资料，可能需要一分钟）…';
       case 'ai_video_acquire_franchise_found':
         return ({
           required Object name,
