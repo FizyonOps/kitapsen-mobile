@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 95608 (5624 per locale)
+/// Strings: 95557 (5621 per locale)
 ///
-/// Built on 2026-09-27 at 02:58 UTC
+/// Built on 2026-09-27 at 02:56 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -6843,7 +6843,7 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get audiobook_follow_audio => 'Follow audio';
   String get reader_floating_ball => 'Floating ball';
   String get reader_floating_ball_hint =>
-      'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+      'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
   String get reader_control_item_play_pause => 'Play / Pause';
   String get reader_control_item_seek_back => 'Rewind 10 seconds';
   String get reader_control_item_seek_forward => 'Forward 10 seconds';
@@ -8010,12 +8010,6 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
       '${count} downloads in progress';
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
-  String get video_subtitle_remote_audio_fetching =>
-      'Fetching the audio track from the host…';
-  String get video_subtitle_host_upload_done =>
-      'Subtitle uploaded to the host as this episode\'s default';
-  String get video_subtitle_host_upload_failed =>
-      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -19520,7 +19514,7 @@ class _StringsAr extends _StringsEn {
   String get reader_floating_ball => 'Floating ball';
   @override
   String get reader_floating_ball_hint =>
-      'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+      'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
   @override
   String get reader_control_item_play_pause => 'Play / Pause';
   @override
@@ -21470,15 +21464,6 @@ class _StringsAr extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
-  @override
-  String get video_subtitle_remote_audio_fetching =>
-      'Fetching the audio track from the host…';
-  @override
-  String get video_subtitle_host_upload_done =>
-      'Subtitle uploaded to the host as this episode\'s default';
-  @override
-  String get video_subtitle_host_upload_failed =>
-      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -33217,7 +33202,7 @@ class _StringsDe extends _StringsEn {
   String get reader_floating_ball => 'Floating ball';
   @override
   String get reader_floating_ball_hint =>
-      'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+      'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
   @override
   String get reader_control_item_play_pause => 'Play / Pause';
   @override
@@ -35173,15 +35158,6 @@ class _StringsDe extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
-  @override
-  String get video_subtitle_remote_audio_fetching =>
-      'Fetching the audio track from the host…';
-  @override
-  String get video_subtitle_host_upload_done =>
-      'Subtitle uploaded to the host as this episode\'s default';
-  @override
-  String get video_subtitle_host_upload_failed =>
-      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -46971,7 +46947,7 @@ class _StringsEs extends _StringsEn {
   String get reader_floating_ball => 'Floating ball';
   @override
   String get reader_floating_ball_hint =>
-      'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+      'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
   @override
   String get reader_control_item_play_pause => 'Play / Pause';
   @override
@@ -48927,15 +48903,6 @@ class _StringsEs extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
-  @override
-  String get video_subtitle_remote_audio_fetching =>
-      'Fetching the audio track from the host…';
-  @override
-  String get video_subtitle_host_upload_done =>
-      'Subtitle uploaded to the host as this episode\'s default';
-  @override
-  String get video_subtitle_host_upload_failed =>
-      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -60758,7 +60725,7 @@ class _StringsFr extends _StringsEn {
   String get reader_floating_ball => 'Floating ball';
   @override
   String get reader_floating_ball_hint =>
-      'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+      'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
   @override
   String get reader_control_item_play_pause => 'Play / Pause';
   @override
@@ -62720,15 +62687,6 @@ class _StringsFr extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
-  @override
-  String get video_subtitle_remote_audio_fetching =>
-      'Fetching the audio track from the host…';
-  @override
-  String get video_subtitle_host_upload_done =>
-      'Subtitle uploaded to the host as this episode\'s default';
-  @override
-  String get video_subtitle_host_upload_failed =>
-      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -74352,7 +74310,7 @@ class _StringsId extends _StringsEn {
   String get reader_floating_ball => 'Floating ball';
   @override
   String get reader_floating_ball_hint =>
-      'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+      'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
   @override
   String get reader_control_item_play_pause => 'Play / Pause';
   @override
@@ -76303,15 +76261,6 @@ class _StringsId extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
-  @override
-  String get video_subtitle_remote_audio_fetching =>
-      'Fetching the audio track from the host…';
-  @override
-  String get video_subtitle_host_upload_done =>
-      'Subtitle uploaded to the host as this episode\'s default';
-  @override
-  String get video_subtitle_host_upload_failed =>
-      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -88031,7 +87980,7 @@ class _StringsIt extends _StringsEn {
   String get reader_floating_ball => 'Floating ball';
   @override
   String get reader_floating_ball_hint =>
-      'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+      'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
   @override
   String get reader_control_item_play_pause => 'Play / Pause';
   @override
@@ -89987,15 +89936,6 @@ class _StringsIt extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
-  @override
-  String get video_subtitle_remote_audio_fetching =>
-      'Fetching the audio track from the host…';
-  @override
-  String get video_subtitle_host_upload_done =>
-      'Subtitle uploaded to the host as this episode\'s default';
-  @override
-  String get video_subtitle_host_upload_failed =>
-      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -101088,7 +101028,7 @@ class _StringsJa extends _StringsEn {
   String get reader_floating_ball => 'Floating ball';
   @override
   String get reader_floating_ball_hint =>
-      'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+      'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
   @override
   String get reader_control_item_play_pause => 'Play / Pause';
   @override
@@ -103026,15 +102966,6 @@ class _StringsJa extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
-  @override
-  String get video_subtitle_remote_audio_fetching =>
-      'Fetching the audio track from the host…';
-  @override
-  String get video_subtitle_host_upload_done =>
-      'Subtitle uploaded to the host as this episode\'s default';
-  @override
-  String get video_subtitle_host_upload_failed =>
-      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -114137,7 +114068,7 @@ class _StringsKo extends _StringsEn {
   String get reader_floating_ball => 'Floating ball';
   @override
   String get reader_floating_ball_hint =>
-      'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+      'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
   @override
   String get reader_control_item_play_pause => 'Play / Pause';
   @override
@@ -116082,15 +116013,6 @@ class _StringsKo extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
-  @override
-  String get video_subtitle_remote_audio_fetching =>
-      'Fetching the audio track from the host…';
-  @override
-  String get video_subtitle_host_upload_done =>
-      'Subtitle uploaded to the host as this episode\'s default';
-  @override
-  String get video_subtitle_host_upload_failed =>
-      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -127764,7 +127686,7 @@ class _StringsNl extends _StringsEn {
   String get reader_floating_ball => 'Floating ball';
   @override
   String get reader_floating_ball_hint =>
-      'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+      'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
   @override
   String get reader_control_item_play_pause => 'Play / Pause';
   @override
@@ -129720,15 +129642,6 @@ class _StringsNl extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
-  @override
-  String get video_subtitle_remote_audio_fetching =>
-      'Fetching the audio track from the host…';
-  @override
-  String get video_subtitle_host_upload_done =>
-      'Subtitle uploaded to the host as this episode\'s default';
-  @override
-  String get video_subtitle_host_upload_failed =>
-      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -141455,7 +141368,7 @@ class _StringsPtBr extends _StringsEn {
   String get reader_floating_ball => 'Floating ball';
   @override
   String get reader_floating_ball_hint =>
-      'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+      'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
   @override
   String get reader_control_item_play_pause => 'Play / Pause';
   @override
@@ -143411,15 +143324,6 @@ class _StringsPtBr extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
-  @override
-  String get video_subtitle_remote_audio_fetching =>
-      'Fetching the audio track from the host…';
-  @override
-  String get video_subtitle_host_upload_done =>
-      'Subtitle uploaded to the host as this episode\'s default';
-  @override
-  String get video_subtitle_host_upload_failed =>
-      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -155124,7 +155028,7 @@ class _StringsRu extends _StringsEn {
   String get reader_floating_ball => 'Floating ball';
   @override
   String get reader_floating_ball_hint =>
-      'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+      'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
   @override
   String get reader_control_item_play_pause => 'Play / Pause';
   @override
@@ -157077,15 +156981,6 @@ class _StringsRu extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
-  @override
-  String get video_subtitle_remote_audio_fetching =>
-      'Fetching the audio track from the host…';
-  @override
-  String get video_subtitle_host_upload_done =>
-      'Subtitle uploaded to the host as this episode\'s default';
-  @override
-  String get video_subtitle_host_upload_failed =>
-      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -168590,7 +168485,7 @@ class _StringsTh extends _StringsEn {
   String get reader_floating_ball => 'Floating ball';
   @override
   String get reader_floating_ball_hint =>
-      'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+      'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
   @override
   String get reader_control_item_play_pause => 'Play / Pause';
   @override
@@ -170540,15 +170435,6 @@ class _StringsTh extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
-  @override
-  String get video_subtitle_remote_audio_fetching =>
-      'Fetching the audio track from the host…';
-  @override
-  String get video_subtitle_host_upload_done =>
-      'Subtitle uploaded to the host as this episode\'s default';
-  @override
-  String get video_subtitle_host_upload_failed =>
-      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -182168,7 +182054,7 @@ class _StringsTr extends _StringsEn {
   String get reader_floating_ball => 'Floating ball';
   @override
   String get reader_floating_ball_hint =>
-      'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+      'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
   @override
   String get reader_control_item_play_pause => 'Play / Pause';
   @override
@@ -184117,15 +184003,6 @@ class _StringsTr extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
-  @override
-  String get video_subtitle_remote_audio_fetching =>
-      'Fetching the audio track from the host…';
-  @override
-  String get video_subtitle_host_upload_done =>
-      'Subtitle uploaded to the host as this episode\'s default';
-  @override
-  String get video_subtitle_host_upload_failed =>
-      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -195713,7 +195590,7 @@ class _StringsVi extends _StringsEn {
   String get reader_floating_ball => 'Floating ball';
   @override
   String get reader_floating_ball_hint =>
-      'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+      'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
   @override
   String get reader_control_item_play_pause => 'Play / Pause';
   @override
@@ -197665,15 +197542,6 @@ class _StringsVi extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
-  @override
-  String get video_subtitle_remote_audio_fetching =>
-      'Fetching the audio track from the host…';
-  @override
-  String get video_subtitle_host_upload_done =>
-      'Subtitle uploaded to the host as this episode\'s default';
-  @override
-  String get video_subtitle_host_upload_failed =>
-      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -208301,7 +208169,7 @@ class _StringsZhCn extends _StringsEn {
   String get reader_floating_ball => '悬浮球';
   @override
   String get reader_floating_ball_hint =>
-      '半透明小球停靠在页面边缘。点击后按钮环绕小球展开，再点收起；可拖动上下移动或换边。放哪些按钮在上方的按钮布局编辑器里拖选。';
+      '半透明小球停靠在页面边缘。点击后按钮在小球上方竖排一列展开（小球在最下方），再点小球收起；可拖动上下移动或换边。放哪些按钮在上方的按钮布局编辑器里拖选。';
   @override
   String get reader_control_item_play_pause => '播放 / 暂停';
   @override
@@ -210059,12 +209927,6 @@ class _StringsZhCn extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       '正在下载更新 ${version}';
-  @override
-  String get video_subtitle_remote_audio_fetching => '正在从服务端获取音轨…';
-  @override
-  String get video_subtitle_host_upload_done => '字幕已上传到服务端，设为这一集的默认字幕';
-  @override
-  String get video_subtitle_host_upload_failed => '字幕上传服务端失败，仅保存在本机';
 }
 
 // Path: <root>
@@ -220841,7 +220703,7 @@ class _StringsZhHk extends _StringsEn {
   String get reader_floating_ball => 'Floating ball';
   @override
   String get reader_floating_ball_hint =>
-      'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+      'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
   @override
   String get reader_control_item_play_pause => 'Play / Pause';
   @override
@@ -222776,15 +222638,6 @@ class _StringsZhHk extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       '正在下載更新 ${version}';
-  @override
-  String get video_subtitle_remote_audio_fetching =>
-      'Fetching the audio track from the host…';
-  @override
-  String get video_subtitle_host_upload_done =>
-      'Subtitle uploaded to the host as this episode\'s default';
-  @override
-  String get video_subtitle_host_upload_failed =>
-      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 /// Flat map(s) containing all translations.
@@ -232778,7 +232631,7 @@ extension on _StringsEn {
       case 'reader_floating_ball':
         return 'Floating ball';
       case 'reader_floating_ball_hint':
-        return 'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+        return 'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
       case 'reader_control_item_play_pause':
         return 'Play / Pause';
       case 'reader_control_item_seek_back':
@@ -234382,12 +234235,6 @@ extension on _StringsEn {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
-      case 'video_subtitle_remote_audio_fetching':
-        return 'Fetching the audio track from the host…';
-      case 'video_subtitle_host_upload_done':
-        return 'Subtitle uploaded to the host as this episode\'s default';
-      case 'video_subtitle_host_upload_failed':
-        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -244376,7 +244223,7 @@ extension on _StringsAr {
       case 'reader_floating_ball':
         return 'Floating ball';
       case 'reader_floating_ball_hint':
-        return 'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+        return 'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
       case 'reader_control_item_play_pause':
         return 'Play / Pause';
       case 'reader_control_item_seek_back':
@@ -245980,12 +245827,6 @@ extension on _StringsAr {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
-      case 'video_subtitle_remote_audio_fetching':
-        return 'Fetching the audio track from the host…';
-      case 'video_subtitle_host_upload_done':
-        return 'Subtitle uploaded to the host as this episode\'s default';
-      case 'video_subtitle_host_upload_failed':
-        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -256023,7 +255864,7 @@ extension on _StringsDe {
       case 'reader_floating_ball':
         return 'Floating ball';
       case 'reader_floating_ball_hint':
-        return 'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+        return 'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
       case 'reader_control_item_play_pause':
         return 'Play / Pause';
       case 'reader_control_item_seek_back':
@@ -257627,12 +257468,6 @@ extension on _StringsDe {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
-      case 'video_subtitle_remote_audio_fetching':
-        return 'Fetching the audio track from the host…';
-      case 'video_subtitle_host_upload_done':
-        return 'Subtitle uploaded to the host as this episode\'s default';
-      case 'video_subtitle_host_upload_failed':
-        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -267660,7 +267495,7 @@ extension on _StringsEs {
       case 'reader_floating_ball':
         return 'Floating ball';
       case 'reader_floating_ball_hint':
-        return 'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+        return 'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
       case 'reader_control_item_play_pause':
         return 'Play / Pause';
       case 'reader_control_item_seek_back':
@@ -269264,12 +269099,6 @@ extension on _StringsEs {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
-      case 'video_subtitle_remote_audio_fetching':
-        return 'Fetching the audio track from the host…';
-      case 'video_subtitle_host_upload_done':
-        return 'Subtitle uploaded to the host as this episode\'s default';
-      case 'video_subtitle_host_upload_failed':
-        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -279305,7 +279134,7 @@ extension on _StringsFr {
       case 'reader_floating_ball':
         return 'Floating ball';
       case 'reader_floating_ball_hint':
-        return 'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+        return 'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
       case 'reader_control_item_play_pause':
         return 'Play / Pause';
       case 'reader_control_item_seek_back':
@@ -280909,12 +280738,6 @@ extension on _StringsFr {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
-      case 'video_subtitle_remote_audio_fetching':
-        return 'Fetching the audio track from the host…';
-      case 'video_subtitle_host_upload_done':
-        return 'Subtitle uploaded to the host as this episode\'s default';
-      case 'video_subtitle_host_upload_failed':
-        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -290920,7 +290743,7 @@ extension on _StringsId {
       case 'reader_floating_ball':
         return 'Floating ball';
       case 'reader_floating_ball_hint':
-        return 'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+        return 'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
       case 'reader_control_item_play_pause':
         return 'Play / Pause';
       case 'reader_control_item_seek_back':
@@ -292524,12 +292347,6 @@ extension on _StringsId {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
-      case 'video_subtitle_remote_audio_fetching':
-        return 'Fetching the audio track from the host…';
-      case 'video_subtitle_host_upload_done':
-        return 'Subtitle uploaded to the host as this episode\'s default';
-      case 'video_subtitle_host_upload_failed':
-        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -302558,7 +302375,7 @@ extension on _StringsIt {
       case 'reader_floating_ball':
         return 'Floating ball';
       case 'reader_floating_ball_hint':
-        return 'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+        return 'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
       case 'reader_control_item_play_pause':
         return 'Play / Pause';
       case 'reader_control_item_seek_back':
@@ -304162,12 +303979,6 @@ extension on _StringsIt {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
-      case 'video_subtitle_remote_audio_fetching':
-        return 'Fetching the audio track from the host…';
-      case 'video_subtitle_host_upload_done':
-        return 'Subtitle uploaded to the host as this episode\'s default';
-      case 'video_subtitle_host_upload_failed':
-        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -314120,7 +313931,7 @@ extension on _StringsJa {
       case 'reader_floating_ball':
         return 'Floating ball';
       case 'reader_floating_ball_hint':
-        return 'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+        return 'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
       case 'reader_control_item_play_pause':
         return 'Play / Pause';
       case 'reader_control_item_seek_back':
@@ -315721,12 +315532,6 @@ extension on _StringsJa {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
-      case 'video_subtitle_remote_audio_fetching':
-        return 'Fetching the audio track from the host…';
-      case 'video_subtitle_host_upload_done':
-        return 'Subtitle uploaded to the host as this episode\'s default';
-      case 'video_subtitle_host_upload_failed':
-        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -325684,7 +325489,7 @@ extension on _StringsKo {
       case 'reader_floating_ball':
         return 'Floating ball';
       case 'reader_floating_ball_hint':
-        return 'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+        return 'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
       case 'reader_control_item_play_pause':
         return 'Play / Pause';
       case 'reader_control_item_seek_back':
@@ -327288,12 +327093,6 @@ extension on _StringsKo {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
-      case 'video_subtitle_remote_audio_fetching':
-        return 'Fetching the audio track from the host…';
-      case 'video_subtitle_host_upload_done':
-        return 'Subtitle uploaded to the host as this episode\'s default';
-      case 'video_subtitle_host_upload_failed':
-        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -337317,7 +337116,7 @@ extension on _StringsNl {
       case 'reader_floating_ball':
         return 'Floating ball';
       case 'reader_floating_ball_hint':
-        return 'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+        return 'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
       case 'reader_control_item_play_pause':
         return 'Play / Pause';
       case 'reader_control_item_seek_back':
@@ -338921,12 +338720,6 @@ extension on _StringsNl {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
-      case 'video_subtitle_remote_audio_fetching':
-        return 'Fetching the audio track from the host…';
-      case 'video_subtitle_host_upload_done':
-        return 'Subtitle uploaded to the host as this episode\'s default';
-      case 'video_subtitle_host_upload_failed':
-        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -348945,7 +348738,7 @@ extension on _StringsPtBr {
       case 'reader_floating_ball':
         return 'Floating ball';
       case 'reader_floating_ball_hint':
-        return 'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+        return 'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
       case 'reader_control_item_play_pause':
         return 'Play / Pause';
       case 'reader_control_item_seek_back':
@@ -350549,12 +350342,6 @@ extension on _StringsPtBr {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
-      case 'video_subtitle_remote_audio_fetching':
-        return 'Fetching the audio track from the host…';
-      case 'video_subtitle_host_upload_done':
-        return 'Subtitle uploaded to the host as this episode\'s default';
-      case 'video_subtitle_host_upload_failed':
-        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -360579,7 +360366,7 @@ extension on _StringsRu {
       case 'reader_floating_ball':
         return 'Floating ball';
       case 'reader_floating_ball_hint':
-        return 'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+        return 'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
       case 'reader_control_item_play_pause':
         return 'Play / Pause';
       case 'reader_control_item_seek_back':
@@ -362183,12 +361970,6 @@ extension on _StringsRu {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
-      case 'video_subtitle_remote_audio_fetching':
-        return 'Fetching the audio track from the host…';
-      case 'video_subtitle_host_upload_done':
-        return 'Subtitle uploaded to the host as this episode\'s default';
-      case 'video_subtitle_host_upload_failed':
-        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -372182,7 +371963,7 @@ extension on _StringsTh {
       case 'reader_floating_ball':
         return 'Floating ball';
       case 'reader_floating_ball_hint':
-        return 'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+        return 'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
       case 'reader_control_item_play_pause':
         return 'Play / Pause';
       case 'reader_control_item_seek_back':
@@ -373786,12 +373567,6 @@ extension on _StringsTh {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
-      case 'video_subtitle_remote_audio_fetching':
-        return 'Fetching the audio track from the host…';
-      case 'video_subtitle_host_upload_done':
-        return 'Subtitle uploaded to the host as this episode\'s default';
-      case 'video_subtitle_host_upload_failed':
-        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -383801,7 +383576,7 @@ extension on _StringsTr {
       case 'reader_floating_ball':
         return 'Floating ball';
       case 'reader_floating_ball_hint':
-        return 'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+        return 'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
       case 'reader_control_item_play_pause':
         return 'Play / Pause';
       case 'reader_control_item_seek_back':
@@ -385405,12 +385180,6 @@ extension on _StringsTr {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
-      case 'video_subtitle_remote_audio_fetching':
-        return 'Fetching the audio track from the host…';
-      case 'video_subtitle_host_upload_done':
-        return 'Subtitle uploaded to the host as this episode\'s default';
-      case 'video_subtitle_host_upload_failed':
-        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -395414,7 +395183,7 @@ extension on _StringsVi {
       case 'reader_floating_ball':
         return 'Floating ball';
       case 'reader_floating_ball_hint':
-        return 'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+        return 'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
       case 'reader_control_item_play_pause':
         return 'Play / Pause';
       case 'reader_control_item_seek_back':
@@ -397018,12 +396787,6 @@ extension on _StringsVi {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
-      case 'video_subtitle_remote_audio_fetching':
-        return 'Fetching the audio track from the host…';
-      case 'video_subtitle_host_upload_done':
-        return 'Subtitle uploaded to the host as this episode\'s default';
-      case 'video_subtitle_host_upload_failed':
-        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -406931,7 +406694,7 @@ extension on _StringsZhCn {
       case 'reader_floating_ball':
         return '悬浮球';
       case 'reader_floating_ball_hint':
-        return '半透明小球停靠在页面边缘。点击后按钮环绕小球展开，再点收起；可拖动上下移动或换边。放哪些按钮在上方的按钮布局编辑器里拖选。';
+        return '半透明小球停靠在页面边缘。点击后按钮在小球上方竖排一列展开（小球在最下方），再点小球收起；可拖动上下移动或换边。放哪些按钮在上方的按钮布局编辑器里拖选。';
       case 'reader_control_item_play_pause':
         return '播放 / 暂停';
       case 'reader_control_item_seek_back':
@@ -408518,12 +408281,6 @@ extension on _StringsZhCn {
         return ({required Object count}) => '${count} 项下载进行中';
       case 'update_download_notification_title':
         return ({required Object version}) => '正在下载更新 ${version}';
-      case 'video_subtitle_remote_audio_fetching':
-        return '正在从服务端获取音轨…';
-      case 'video_subtitle_host_upload_done':
-        return '字幕已上传到服务端，设为这一集的默认字幕';
-      case 'video_subtitle_host_upload_failed':
-        return '字幕上传服务端失败，仅保存在本机';
       default:
         return null;
     }
@@ -418454,7 +418211,7 @@ extension on _StringsZhHk {
       case 'reader_floating_ball':
         return 'Floating ball';
       case 'reader_floating_ball_hint':
-        return 'A translucent ball docked at the edge of the page. Tap it to fan its buttons out around it, tap again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
+        return 'A translucent ball docked at the edge of the page. Tap it to stack its buttons in a column above it, tap the ball again to collapse; drag to move it or switch sides. Choose its buttons in the button layout editor above.';
       case 'reader_control_item_play_pause':
         return 'Play / Pause';
       case 'reader_control_item_seek_back':
@@ -420056,12 +419813,6 @@ extension on _StringsZhHk {
         return ({required Object count}) => '${count} 項下載進行中';
       case 'update_download_notification_title':
         return ({required Object version}) => '正在下載更新 ${version}';
-      case 'video_subtitle_remote_audio_fetching':
-        return 'Fetching the audio track from the host…';
-      case 'video_subtitle_host_upload_done':
-        return 'Subtitle uploaded to the host as this episode\'s default';
-      case 'video_subtitle_host_upload_failed':
-        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
