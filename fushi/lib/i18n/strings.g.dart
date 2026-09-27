@@ -3,7 +3,7 @@
 /// Locales: 17
 /// Strings: 95625 (5625 per locale)
 ///
-/// Built on 2026-09-27 at 03:49 UTC
+/// Built on 2026-09-27 at 05:52 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -7654,7 +7654,7 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get game_stream_more => 'More';
   String get game_stream_settings_adaptive => 'Adaptive bitrate';
   String get game_stream_settings_adaptive_hint =>
-      'Lower the bitrate when the network is congested';
+      'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
   String get game_stream_settings_apply_failed =>
       'Could not apply stream settings';
   String get game_stream_settings_audio => 'Play game audio';
@@ -20895,7 +20895,7 @@ class _StringsAr extends _StringsEn {
   String get game_stream_settings_adaptive => 'Adaptive bitrate';
   @override
   String get game_stream_settings_adaptive_hint =>
-      'Lower the bitrate when the network is congested';
+      'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
   @override
   String get game_stream_settings_apply_failed =>
       'Could not apply stream settings';
@@ -34601,7 +34601,7 @@ class _StringsDe extends _StringsEn {
   String get game_stream_settings_adaptive => 'Adaptive bitrate';
   @override
   String get game_stream_settings_adaptive_hint =>
-      'Lower the bitrate when the network is congested';
+      'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
   @override
   String get game_stream_settings_apply_failed =>
       'Could not apply stream settings';
@@ -48357,7 +48357,7 @@ class _StringsEs extends _StringsEn {
   String get game_stream_settings_adaptive => 'Adaptive bitrate';
   @override
   String get game_stream_settings_adaptive_hint =>
-      'Lower the bitrate when the network is congested';
+      'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
   @override
   String get game_stream_settings_apply_failed =>
       'Could not apply stream settings';
@@ -62154,7 +62154,7 @@ class _StringsFr extends _StringsEn {
   String get game_stream_settings_adaptive => 'Adaptive bitrate';
   @override
   String get game_stream_settings_adaptive_hint =>
-      'Lower the bitrate when the network is congested';
+      'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
   @override
   String get game_stream_settings_apply_failed =>
       'Could not apply stream settings';
@@ -75740,7 +75740,7 @@ class _StringsId extends _StringsEn {
   String get game_stream_settings_adaptive => 'Adaptive bitrate';
   @override
   String get game_stream_settings_adaptive_hint =>
-      'Lower the bitrate when the network is congested';
+      'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
   @override
   String get game_stream_settings_apply_failed =>
       'Could not apply stream settings';
@@ -89427,7 +89427,7 @@ class _StringsIt extends _StringsEn {
   String get game_stream_settings_adaptive => 'Adaptive bitrate';
   @override
   String get game_stream_settings_adaptive_hint =>
-      'Lower the bitrate when the network is congested';
+      'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
   @override
   String get game_stream_settings_apply_failed =>
       'Could not apply stream settings';
@@ -102477,7 +102477,7 @@ class _StringsJa extends _StringsEn {
   String get game_stream_settings_adaptive => 'Adaptive bitrate';
   @override
   String get game_stream_settings_adaptive_hint =>
-      'Lower the bitrate when the network is congested';
+      'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
   @override
   String get game_stream_settings_apply_failed =>
       'Could not apply stream settings';
@@ -115529,7 +115529,7 @@ class _StringsKo extends _StringsEn {
   String get game_stream_settings_adaptive => 'Adaptive bitrate';
   @override
   String get game_stream_settings_adaptive_hint =>
-      'Lower the bitrate when the network is congested';
+      'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
   @override
   String get game_stream_settings_apply_failed =>
       'Could not apply stream settings';
@@ -129169,7 +129169,7 @@ class _StringsNl extends _StringsEn {
   String get game_stream_settings_adaptive => 'Adaptive bitrate';
   @override
   String get game_stream_settings_adaptive_hint =>
-      'Lower the bitrate when the network is congested';
+      'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
   @override
   String get game_stream_settings_apply_failed =>
       'Could not apply stream settings';
@@ -142863,7 +142863,7 @@ class _StringsPtBr extends _StringsEn {
   String get game_stream_settings_adaptive => 'Adaptive bitrate';
   @override
   String get game_stream_settings_adaptive_hint =>
-      'Lower the bitrate when the network is congested';
+      'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
   @override
   String get game_stream_settings_apply_failed =>
       'Could not apply stream settings';
@@ -156532,7 +156532,7 @@ class _StringsRu extends _StringsEn {
   String get game_stream_settings_adaptive => 'Adaptive bitrate';
   @override
   String get game_stream_settings_adaptive_hint =>
-      'Lower the bitrate when the network is congested';
+      'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
   @override
   String get game_stream_settings_apply_failed =>
       'Could not apply stream settings';
@@ -169998,7 +169998,7 @@ class _StringsTh extends _StringsEn {
   String get game_stream_settings_adaptive => 'Adaptive bitrate';
   @override
   String get game_stream_settings_adaptive_hint =>
-      'Lower the bitrate when the network is congested';
+      'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
   @override
   String get game_stream_settings_apply_failed =>
       'Could not apply stream settings';
@@ -183578,7 +183578,7 @@ class _StringsTr extends _StringsEn {
   String get game_stream_settings_adaptive => 'Adaptive bitrate';
   @override
   String get game_stream_settings_adaptive_hint =>
-      'Lower the bitrate when the network is congested';
+      'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
   @override
   String get game_stream_settings_apply_failed =>
       'Could not apply stream settings';
@@ -197129,7 +197129,7 @@ class _StringsVi extends _StringsEn {
   String get game_stream_settings_adaptive => 'Adaptive bitrate';
   @override
   String get game_stream_settings_adaptive_hint =>
-      'Lower the bitrate when the network is congested';
+      'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
   @override
   String get game_stream_settings_apply_failed =>
       'Could not apply stream settings';
@@ -209573,7 +209573,8 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get game_stream_settings_adaptive => '自适应码率';
   @override
-  String get game_stream_settings_adaptive_hint => '网络拥塞时自动降低码率';
+  String get game_stream_settings_adaptive_hint =>
+      '从一半码率起步再逐步提升；关闭则直接以设定码率起步。两种方式在网络拥塞时都会降低码率';
   @override
   String get game_stream_settings_apply_failed => '未能应用串流设置';
   @override
@@ -222255,7 +222256,7 @@ class _StringsZhHk extends _StringsEn {
   String get game_stream_settings_adaptive => 'Adaptive bitrate';
   @override
   String get game_stream_settings_adaptive_hint =>
-      'Lower the bitrate when the network is congested';
+      'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
   @override
   String get game_stream_settings_apply_failed =>
       'Could not apply stream settings';
@@ -233973,7 +233974,7 @@ extension on _StringsEn {
       case 'game_stream_settings_adaptive':
         return 'Adaptive bitrate';
       case 'game_stream_settings_adaptive_hint':
-        return 'Lower the bitrate when the network is congested';
+        return 'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
       case 'game_stream_settings_apply_failed':
         return 'Could not apply stream settings';
       case 'game_stream_settings_audio':
@@ -245573,7 +245574,7 @@ extension on _StringsAr {
       case 'game_stream_settings_adaptive':
         return 'Adaptive bitrate';
       case 'game_stream_settings_adaptive_hint':
-        return 'Lower the bitrate when the network is congested';
+        return 'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
       case 'game_stream_settings_apply_failed':
         return 'Could not apply stream settings';
       case 'game_stream_settings_audio':
@@ -257222,7 +257223,7 @@ extension on _StringsDe {
       case 'game_stream_settings_adaptive':
         return 'Adaptive bitrate';
       case 'game_stream_settings_adaptive_hint':
-        return 'Lower the bitrate when the network is congested';
+        return 'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
       case 'game_stream_settings_apply_failed':
         return 'Could not apply stream settings';
       case 'game_stream_settings_audio':
@@ -268861,7 +268862,7 @@ extension on _StringsEs {
       case 'game_stream_settings_adaptive':
         return 'Adaptive bitrate';
       case 'game_stream_settings_adaptive_hint':
-        return 'Lower the bitrate when the network is congested';
+        return 'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
       case 'game_stream_settings_apply_failed':
         return 'Could not apply stream settings';
       case 'game_stream_settings_audio':
@@ -280508,7 +280509,7 @@ extension on _StringsFr {
       case 'game_stream_settings_adaptive':
         return 'Adaptive bitrate';
       case 'game_stream_settings_adaptive_hint':
-        return 'Lower the bitrate when the network is congested';
+        return 'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
       case 'game_stream_settings_apply_failed':
         return 'Could not apply stream settings';
       case 'game_stream_settings_audio':
@@ -292125,7 +292126,7 @@ extension on _StringsId {
       case 'game_stream_settings_adaptive':
         return 'Adaptive bitrate';
       case 'game_stream_settings_adaptive_hint':
-        return 'Lower the bitrate when the network is congested';
+        return 'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
       case 'game_stream_settings_apply_failed':
         return 'Could not apply stream settings';
       case 'game_stream_settings_audio':
@@ -303765,7 +303766,7 @@ extension on _StringsIt {
       case 'game_stream_settings_adaptive':
         return 'Adaptive bitrate';
       case 'game_stream_settings_adaptive_hint':
-        return 'Lower the bitrate when the network is congested';
+        return 'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
       case 'game_stream_settings_apply_failed':
         return 'Could not apply stream settings';
       case 'game_stream_settings_audio':
@@ -315329,7 +315330,7 @@ extension on _StringsJa {
       case 'game_stream_settings_adaptive':
         return 'Adaptive bitrate';
       case 'game_stream_settings_adaptive_hint':
-        return 'Lower the bitrate when the network is congested';
+        return 'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
       case 'game_stream_settings_apply_failed':
         return 'Could not apply stream settings';
       case 'game_stream_settings_audio':
@@ -326895,7 +326896,7 @@ extension on _StringsKo {
       case 'game_stream_settings_adaptive':
         return 'Adaptive bitrate';
       case 'game_stream_settings_adaptive_hint':
-        return 'Lower the bitrate when the network is congested';
+        return 'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
       case 'game_stream_settings_apply_failed':
         return 'Could not apply stream settings';
       case 'game_stream_settings_audio':
@@ -338530,7 +338531,7 @@ extension on _StringsNl {
       case 'game_stream_settings_adaptive':
         return 'Adaptive bitrate';
       case 'game_stream_settings_adaptive_hint':
-        return 'Lower the bitrate when the network is congested';
+        return 'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
       case 'game_stream_settings_apply_failed':
         return 'Could not apply stream settings';
       case 'game_stream_settings_audio':
@@ -350160,7 +350161,7 @@ extension on _StringsPtBr {
       case 'game_stream_settings_adaptive':
         return 'Adaptive bitrate';
       case 'game_stream_settings_adaptive_hint':
-        return 'Lower the bitrate when the network is congested';
+        return 'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
       case 'game_stream_settings_apply_failed':
         return 'Could not apply stream settings';
       case 'game_stream_settings_audio':
@@ -361796,7 +361797,7 @@ extension on _StringsRu {
       case 'game_stream_settings_adaptive':
         return 'Adaptive bitrate';
       case 'game_stream_settings_adaptive_hint':
-        return 'Lower the bitrate when the network is congested';
+        return 'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
       case 'game_stream_settings_apply_failed':
         return 'Could not apply stream settings';
       case 'game_stream_settings_audio':
@@ -373401,7 +373402,7 @@ extension on _StringsTh {
       case 'game_stream_settings_adaptive':
         return 'Adaptive bitrate';
       case 'game_stream_settings_adaptive_hint':
-        return 'Lower the bitrate when the network is congested';
+        return 'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
       case 'game_stream_settings_apply_failed':
         return 'Could not apply stream settings';
       case 'game_stream_settings_audio':
@@ -385022,7 +385023,7 @@ extension on _StringsTr {
       case 'game_stream_settings_adaptive':
         return 'Adaptive bitrate';
       case 'game_stream_settings_adaptive_hint':
-        return 'Lower the bitrate when the network is congested';
+        return 'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
       case 'game_stream_settings_apply_failed':
         return 'Could not apply stream settings';
       case 'game_stream_settings_audio':
@@ -396637,7 +396638,7 @@ extension on _StringsVi {
       case 'game_stream_settings_adaptive':
         return 'Adaptive bitrate';
       case 'game_stream_settings_adaptive_hint':
-        return 'Lower the bitrate when the network is congested';
+        return 'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
       case 'game_stream_settings_apply_failed':
         return 'Could not apply stream settings';
       case 'game_stream_settings_audio':
@@ -408144,7 +408145,7 @@ extension on _StringsZhCn {
       case 'game_stream_settings_adaptive':
         return '自适应码率';
       case 'game_stream_settings_adaptive_hint':
-        return '网络拥塞时自动降低码率';
+        return '从一半码率起步再逐步提升；关闭则直接以设定码率起步。两种方式在网络拥塞时都会降低码率';
       case 'game_stream_settings_apply_failed':
         return '未能应用串流设置';
       case 'game_stream_settings_audio':
@@ -419681,7 +419682,7 @@ extension on _StringsZhHk {
       case 'game_stream_settings_adaptive':
         return 'Adaptive bitrate';
       case 'game_stream_settings_adaptive_hint':
-        return 'Lower the bitrate when the network is congested';
+        return 'Start at half the bitrate and ramp up. When off, start at the full bitrate. Both lower it when the network is congested';
       case 'game_stream_settings_apply_failed':
         return 'Could not apply stream settings';
       case 'game_stream_settings_audio':
