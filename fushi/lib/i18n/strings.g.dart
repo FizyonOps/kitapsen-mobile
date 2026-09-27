@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 96747 (5691 per locale)
+/// Strings: 96730 (5690 per locale)
 ///
-/// Built on 2026-09-27 at 14:54 UTC
+/// Built on 2026-09-27 at 15:25 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8127,7 +8127,6 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get ai_web_knowledge_custom_endpoint_invalid =>
       'Enter an https:// address ending in api.php';
   String get ai_web_knowledge_custom_remove => 'Remove site';
-  String get video_item_rescrape => 'Rescrape metadata and cover';
   String get video_item_rescrape_not_planned =>
       'This video isn\'t in any local video source\'s scrape plan';
 }
@@ -21769,8 +21768,6 @@ class _StringsAr extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
-  @override
-  String get video_item_rescrape => 'Rescrape metadata and cover';
   @override
   String get video_item_rescrape_not_planned =>
       'This video isn\'t in any local video source\'s scrape plan';
@@ -35653,8 +35650,6 @@ class _StringsDe extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
-  @override
-  String get video_item_rescrape => 'Rescrape metadata and cover';
   @override
   String get video_item_rescrape_not_planned =>
       'This video isn\'t in any local video source\'s scrape plan';
@@ -49588,8 +49583,6 @@ class _StringsEs extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
-  @override
-  String get video_item_rescrape => 'Rescrape metadata and cover';
   @override
   String get video_item_rescrape_not_planned =>
       'This video isn\'t in any local video source\'s scrape plan';
@@ -63563,8 +63556,6 @@ class _StringsFr extends _StringsEn {
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
-  String get video_item_rescrape => 'Rescrape metadata and cover';
-  @override
   String get video_item_rescrape_not_planned =>
       'This video isn\'t in any local video source\'s scrape plan';
 }
@@ -77326,8 +77317,6 @@ class _StringsId extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
-  @override
-  String get video_item_rescrape => 'Rescrape metadata and cover';
   @override
   String get video_item_rescrape_not_planned =>
       'This video isn\'t in any local video source\'s scrape plan';
@@ -91192,8 +91181,6 @@ class _StringsIt extends _StringsEn {
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
-  String get video_item_rescrape => 'Rescrape metadata and cover';
-  @override
   String get video_item_rescrape_not_planned =>
       'This video isn\'t in any local video source\'s scrape plan';
 }
@@ -104411,8 +104398,6 @@ class _StringsJa extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
-  @override
-  String get video_item_rescrape => 'Rescrape metadata and cover';
   @override
   String get video_item_rescrape_not_planned =>
       'This video isn\'t in any local video source\'s scrape plan';
@@ -117648,8 +117633,6 @@ class _StringsKo extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
-  @override
-  String get video_item_rescrape => 'Rescrape metadata and cover';
   @override
   String get video_item_rescrape_not_planned =>
       'This video isn\'t in any local video source\'s scrape plan';
@@ -131467,8 +131450,6 @@ class _StringsNl extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
-  @override
-  String get video_item_rescrape => 'Rescrape metadata and cover';
   @override
   String get video_item_rescrape_not_planned =>
       'This video isn\'t in any local video source\'s scrape plan';
@@ -145340,8 +145321,6 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
-  String get video_item_rescrape => 'Rescrape metadata and cover';
-  @override
   String get video_item_rescrape_not_planned =>
       'This video isn\'t in any local video source\'s scrape plan';
 }
@@ -159187,8 +159166,6 @@ class _StringsRu extends _StringsEn {
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
-  String get video_item_rescrape => 'Rescrape metadata and cover';
-  @override
   String get video_item_rescrape_not_planned =>
       'This video isn\'t in any local video source\'s scrape plan';
 }
@@ -172830,8 +172807,6 @@ class _StringsTh extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
-  @override
-  String get video_item_rescrape => 'Rescrape metadata and cover';
   @override
   String get video_item_rescrape_not_planned =>
       'This video isn\'t in any local video source\'s scrape plan';
@@ -186589,8 +186564,6 @@ class _StringsTr extends _StringsEn {
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
-  String get video_item_rescrape => 'Rescrape metadata and cover';
-  @override
   String get video_item_rescrape_not_planned =>
       'This video isn\'t in any local video source\'s scrape plan';
 }
@@ -200318,8 +200291,6 @@ class _StringsVi extends _StringsEn {
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
-  String get video_item_rescrape => 'Rescrape metadata and cover';
-  @override
   String get video_item_rescrape_not_planned =>
       'This video isn\'t in any local video source\'s scrape plan';
 }
@@ -212876,8 +212847,6 @@ class _StringsZhCn extends _StringsEn {
       '请填写以 https:// 开头、以 api.php 结尾的地址';
   @override
   String get ai_web_knowledge_custom_remove => '删除站点';
-  @override
-  String get video_item_rescrape => '重新刮削资料与封面';
   @override
   String get video_item_rescrape_not_planned => '这个视频不在任何本地视频来源的刮削计划里';
 }
@@ -225776,10 +225745,7 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
-  String get video_item_rescrape => 'Rescrape metadata and cover';
-  @override
-  String get video_item_rescrape_not_planned =>
-      'This video isn\'t in any local video source\'s scrape plan';
+  String get video_item_rescrape_not_planned => '這個影片不在任何本機影片來源的刮削計劃裡';
 }
 
 /// Flat map(s) containing all translations.
@@ -237527,8 +237493,6 @@ extension on _StringsEn {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
-      case 'video_item_rescrape':
-        return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
         return 'This video isn\'t in any local video source\'s scrape plan';
       default:
@@ -249273,8 +249237,6 @@ extension on _StringsAr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
-      case 'video_item_rescrape':
-        return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
         return 'This video isn\'t in any local video source\'s scrape plan';
       default:
@@ -261068,8 +261030,6 @@ extension on _StringsDe {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
-      case 'video_item_rescrape':
-        return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
         return 'This video isn\'t in any local video source\'s scrape plan';
       default:
@@ -272853,8 +272813,6 @@ extension on _StringsEs {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
-      case 'video_item_rescrape':
-        return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
         return 'This video isn\'t in any local video source\'s scrape plan';
       default:
@@ -284646,8 +284604,6 @@ extension on _StringsFr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
-      case 'video_item_rescrape':
-        return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
         return 'This video isn\'t in any local video source\'s scrape plan';
       default:
@@ -296409,8 +296365,6 @@ extension on _StringsId {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
-      case 'video_item_rescrape':
-        return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
         return 'This video isn\'t in any local video source\'s scrape plan';
       default:
@@ -308195,8 +308149,6 @@ extension on _StringsIt {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
-      case 'video_item_rescrape':
-        return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
         return 'This video isn\'t in any local video source\'s scrape plan';
       default:
@@ -319902,8 +319854,6 @@ extension on _StringsJa {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
-      case 'video_item_rescrape':
-        return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
         return 'This video isn\'t in any local video source\'s scrape plan';
       default:
@@ -331617,8 +331567,6 @@ extension on _StringsKo {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
-      case 'video_item_rescrape':
-        return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
         return 'This video isn\'t in any local video source\'s scrape plan';
       default:
@@ -343398,8 +343346,6 @@ extension on _StringsNl {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
-      case 'video_item_rescrape':
-        return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
         return 'This video isn\'t in any local video source\'s scrape plan';
       default:
@@ -355174,8 +355120,6 @@ extension on _StringsPtBr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
-      case 'video_item_rescrape':
-        return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
         return 'This video isn\'t in any local video source\'s scrape plan';
       default:
@@ -366956,8 +366900,6 @@ extension on _StringsRu {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
-      case 'video_item_rescrape':
-        return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
         return 'This video isn\'t in any local video source\'s scrape plan';
       default:
@@ -378707,8 +378649,6 @@ extension on _StringsTh {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
-      case 'video_item_rescrape':
-        return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
         return 'This video isn\'t in any local video source\'s scrape plan';
       default:
@@ -390474,8 +390414,6 @@ extension on _StringsTr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
-      case 'video_item_rescrape':
-        return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
         return 'This video isn\'t in any local video source\'s scrape plan';
       default:
@@ -402235,8 +402173,6 @@ extension on _StringsVi {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
-      case 'video_item_rescrape':
-        return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
         return 'This video isn\'t in any local video source\'s scrape plan';
       default:
@@ -413880,8 +413816,6 @@ extension on _StringsZhCn {
         return '请填写以 https:// 开头、以 api.php 结尾的地址';
       case 'ai_web_knowledge_custom_remove':
         return '删除站点';
-      case 'video_item_rescrape':
-        return '重新刮削资料与封面';
       case 'video_item_rescrape_not_planned':
         return '这个视频不在任何本地视频来源的刮削计划里';
       default:
@@ -425566,10 +425500,8 @@ extension on _StringsZhHk {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
-      case 'video_item_rescrape':
-        return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
-        return 'This video isn\'t in any local video source\'s scrape plan';
+        return '這個影片不在任何本機影片來源的刮削計劃裡';
       default:
         return null;
     }
