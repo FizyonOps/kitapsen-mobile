@@ -5,28 +5,21 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:fushi/src/reader/reader_pagination_scripts.dart';
 import 'package:fushi/src/reader/reader_study_unit_script.dart';
 
-/// BUG-2652：iOS 上先以分页开书、再在书内切到滚动模式，落点每次都被钉回章首。
+/// BUG-2744：横排听书读到插图处「图片闪一下、被跳过」（Windows）。
 ///
-/// 书内切模式是在**同一个 WKWebView** 里原地重载本章。连续 shell 的恢复把滚动写对了
-/// （charOffset 663 → scrollX -1047），但随后几帧原生侧会让 scrollX / scrollY 瞬时读成
-/// 0（iOS 模拟器探针：t=3ms 写入 -1047，+16ms 读到 0，期间没有任何 JS 写入，约 40ms 时
-/// 滚动树里仍是 -1047）。恰在这个窗口里有两次重锚采样首字锚 = 章首，随后
-/// `scrollToChapterStart()`：
-///  1. `setChromeInsets()` 重发了已经烘焙进引擎配置的同一组 inset——没有重排要补偿，
-///     却照样采样重锚；
-///  2. TODO-718 的恢复完成重锚（`beginUiScaleReanchor`）现场采样视口，而不是用恢复
-///     自己的锚。
-/// 新开书是全新 WebView，没有这个瞬时态，所以用户「退出重进就好」。
+/// 恢复落点登记的「迟到图片重锚」锚只在用户手动翻页时作废；有声书跟读翻页
+/// （`scrollToRange` / `scrollToTarget`）与跨插图暂停滚到插图都不作废它。跟读翻过几页后
+/// 前方懒加载插图才 load，`reapplyImageLateAnchor()` 把视口拽回打开本章时的那页；开了
+/// 图片暂停时，插图刚被滚到、一 load 就被拽回，暂停停在错页。
 ///
-/// 这里在 `flutter test` 内用 Node 真执行分页 / 连续两个 shell 对象，采样器恒答
-/// 「章首」模拟未落定的视口，断言：inset 无变化时不采样、不重锚；有变化时照旧；
-/// `beginRestoreReanchor` 取恢复锚（含句尾锚）不采样，无精确锚时退回采样；播放中
-/// 恢复完成时跟读揭示（`scrollToTarget`）先于 begin 执行，也不得让 begin 丢掉恢复锚
-/// （BUG-2744 审查：恢复锚与迟到图片锚分开存）。撤掉修复，
-/// Node 断言失败、本 Dart 守卫转红。没有 node 的环境自动 skip。
+/// 修复后程序化揭示的目标就是新的锚。这里在 `flutter test` 内用 Node 真执行分页 / 连续
+/// 两个 shell 对象，用可移动几何的假 Range / 元素模拟懒图 load 引起的位移，断言：揭示后的
+/// 迟到重锚对齐到揭示目标、绝不回退到恢复锚；分页跨图暂停时占位在本页、load 后插图挪到
+/// 下一页，重锚要跟过去；之后新的恢复登记仍然生效。撤掉修复，Node 断言失败、本 Dart 守卫
+/// 转红。没有 node 的环境自动 skip。
 void main() {
   test(
-    'a re-anchor right after a restore never samples the unsettled viewport',
+    'a programmatic reveal replaces the restore anchor that late image loads re-apply',
     () async {
       final String? nodeExe = _resolveNode();
       if (nodeExe == null) {
@@ -37,7 +30,7 @@ void main() {
       }
 
       final File jsTest = File(
-        'test/reader/restore_reanchor_transient_viewport_behavior_test.js',
+        'test/reader/reader_follow_reveal_late_image_anchor_behavior_test.js',
       );
       expect(
         jsTest.existsSync(),
@@ -51,7 +44,7 @@ void main() {
         'studyUnits': kStudyUnitJs,
       });
       final Directory temp = Directory.systemTemp.createTempSync(
-        'fushi-restore-reanchor-transient-',
+        'fushi-follow-reveal-late-image-anchor-',
       );
       final File payloadFile = File('${temp.path}/payload.json')
         ..writeAsStringSync(payload);
@@ -72,7 +65,7 @@ void main() {
         result.exitCode,
         0,
         reason:
-            'restore re-anchor JS behavior test failed.\n'
+            'late image anchor JS behavior test failed.\n'
             'stdout:\n${result.stdout}\nstderr:\n${result.stderr}',
       );
       expect(
