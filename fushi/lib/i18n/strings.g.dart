@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 95557 (5621 per locale)
+/// Strings: 95608 (5624 per locale)
 ///
-/// Built on 2026-09-26 at 14:43 UTC
+/// Built on 2026-09-27 at 02:58 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8010,6 +8010,12 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
       '${count} downloads in progress';
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
+  String get video_subtitle_remote_audio_fetching =>
+      'Fetching the audio track from the host…';
+  String get video_subtitle_host_upload_done =>
+      'Subtitle uploaded to the host as this episode\'s default';
+  String get video_subtitle_host_upload_failed =>
+      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -21464,6 +21470,15 @@ class _StringsAr extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
+  @override
+  String get video_subtitle_remote_audio_fetching =>
+      'Fetching the audio track from the host…';
+  @override
+  String get video_subtitle_host_upload_done =>
+      'Subtitle uploaded to the host as this episode\'s default';
+  @override
+  String get video_subtitle_host_upload_failed =>
+      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -35158,6 +35173,15 @@ class _StringsDe extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
+  @override
+  String get video_subtitle_remote_audio_fetching =>
+      'Fetching the audio track from the host…';
+  @override
+  String get video_subtitle_host_upload_done =>
+      'Subtitle uploaded to the host as this episode\'s default';
+  @override
+  String get video_subtitle_host_upload_failed =>
+      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -48903,6 +48927,15 @@ class _StringsEs extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
+  @override
+  String get video_subtitle_remote_audio_fetching =>
+      'Fetching the audio track from the host…';
+  @override
+  String get video_subtitle_host_upload_done =>
+      'Subtitle uploaded to the host as this episode\'s default';
+  @override
+  String get video_subtitle_host_upload_failed =>
+      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -62687,6 +62720,15 @@ class _StringsFr extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
+  @override
+  String get video_subtitle_remote_audio_fetching =>
+      'Fetching the audio track from the host…';
+  @override
+  String get video_subtitle_host_upload_done =>
+      'Subtitle uploaded to the host as this episode\'s default';
+  @override
+  String get video_subtitle_host_upload_failed =>
+      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -76261,6 +76303,15 @@ class _StringsId extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
+  @override
+  String get video_subtitle_remote_audio_fetching =>
+      'Fetching the audio track from the host…';
+  @override
+  String get video_subtitle_host_upload_done =>
+      'Subtitle uploaded to the host as this episode\'s default';
+  @override
+  String get video_subtitle_host_upload_failed =>
+      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -89936,6 +89987,15 @@ class _StringsIt extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
+  @override
+  String get video_subtitle_remote_audio_fetching =>
+      'Fetching the audio track from the host…';
+  @override
+  String get video_subtitle_host_upload_done =>
+      'Subtitle uploaded to the host as this episode\'s default';
+  @override
+  String get video_subtitle_host_upload_failed =>
+      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -102966,6 +103026,15 @@ class _StringsJa extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
+  @override
+  String get video_subtitle_remote_audio_fetching =>
+      'Fetching the audio track from the host…';
+  @override
+  String get video_subtitle_host_upload_done =>
+      'Subtitle uploaded to the host as this episode\'s default';
+  @override
+  String get video_subtitle_host_upload_failed =>
+      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -116013,6 +116082,15 @@ class _StringsKo extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
+  @override
+  String get video_subtitle_remote_audio_fetching =>
+      'Fetching the audio track from the host…';
+  @override
+  String get video_subtitle_host_upload_done =>
+      'Subtitle uploaded to the host as this episode\'s default';
+  @override
+  String get video_subtitle_host_upload_failed =>
+      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -129642,6 +129720,15 @@ class _StringsNl extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
+  @override
+  String get video_subtitle_remote_audio_fetching =>
+      'Fetching the audio track from the host…';
+  @override
+  String get video_subtitle_host_upload_done =>
+      'Subtitle uploaded to the host as this episode\'s default';
+  @override
+  String get video_subtitle_host_upload_failed =>
+      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -143324,6 +143411,15 @@ class _StringsPtBr extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
+  @override
+  String get video_subtitle_remote_audio_fetching =>
+      'Fetching the audio track from the host…';
+  @override
+  String get video_subtitle_host_upload_done =>
+      'Subtitle uploaded to the host as this episode\'s default';
+  @override
+  String get video_subtitle_host_upload_failed =>
+      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -156981,6 +157077,15 @@ class _StringsRu extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
+  @override
+  String get video_subtitle_remote_audio_fetching =>
+      'Fetching the audio track from the host…';
+  @override
+  String get video_subtitle_host_upload_done =>
+      'Subtitle uploaded to the host as this episode\'s default';
+  @override
+  String get video_subtitle_host_upload_failed =>
+      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -170435,6 +170540,15 @@ class _StringsTh extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
+  @override
+  String get video_subtitle_remote_audio_fetching =>
+      'Fetching the audio track from the host…';
+  @override
+  String get video_subtitle_host_upload_done =>
+      'Subtitle uploaded to the host as this episode\'s default';
+  @override
+  String get video_subtitle_host_upload_failed =>
+      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -184003,6 +184117,15 @@ class _StringsTr extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
+  @override
+  String get video_subtitle_remote_audio_fetching =>
+      'Fetching the audio track from the host…';
+  @override
+  String get video_subtitle_host_upload_done =>
+      'Subtitle uploaded to the host as this episode\'s default';
+  @override
+  String get video_subtitle_host_upload_failed =>
+      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -197542,6 +197665,15 @@ class _StringsVi extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       'Downloading update ${version}';
+  @override
+  String get video_subtitle_remote_audio_fetching =>
+      'Fetching the audio track from the host…';
+  @override
+  String get video_subtitle_host_upload_done =>
+      'Subtitle uploaded to the host as this episode\'s default';
+  @override
+  String get video_subtitle_host_upload_failed =>
+      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 // Path: <root>
@@ -209927,6 +210059,12 @@ class _StringsZhCn extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       '正在下载更新 ${version}';
+  @override
+  String get video_subtitle_remote_audio_fetching => '正在从服务端获取音轨…';
+  @override
+  String get video_subtitle_host_upload_done => '字幕已上传到服务端，设为这一集的默认字幕';
+  @override
+  String get video_subtitle_host_upload_failed => '字幕上传服务端失败，仅保存在本机';
 }
 
 // Path: <root>
@@ -222638,6 +222776,15 @@ class _StringsZhHk extends _StringsEn {
   @override
   String update_download_notification_title({required Object version}) =>
       '正在下載更新 ${version}';
+  @override
+  String get video_subtitle_remote_audio_fetching =>
+      'Fetching the audio track from the host…';
+  @override
+  String get video_subtitle_host_upload_done =>
+      'Subtitle uploaded to the host as this episode\'s default';
+  @override
+  String get video_subtitle_host_upload_failed =>
+      'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
 }
 
 /// Flat map(s) containing all translations.
@@ -234235,6 +234382,12 @@ extension on _StringsEn {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
+      case 'video_subtitle_remote_audio_fetching':
+        return 'Fetching the audio track from the host…';
+      case 'video_subtitle_host_upload_done':
+        return 'Subtitle uploaded to the host as this episode\'s default';
+      case 'video_subtitle_host_upload_failed':
+        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -245827,6 +245980,12 @@ extension on _StringsAr {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
+      case 'video_subtitle_remote_audio_fetching':
+        return 'Fetching the audio track from the host…';
+      case 'video_subtitle_host_upload_done':
+        return 'Subtitle uploaded to the host as this episode\'s default';
+      case 'video_subtitle_host_upload_failed':
+        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -257468,6 +257627,12 @@ extension on _StringsDe {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
+      case 'video_subtitle_remote_audio_fetching':
+        return 'Fetching the audio track from the host…';
+      case 'video_subtitle_host_upload_done':
+        return 'Subtitle uploaded to the host as this episode\'s default';
+      case 'video_subtitle_host_upload_failed':
+        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -269099,6 +269264,12 @@ extension on _StringsEs {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
+      case 'video_subtitle_remote_audio_fetching':
+        return 'Fetching the audio track from the host…';
+      case 'video_subtitle_host_upload_done':
+        return 'Subtitle uploaded to the host as this episode\'s default';
+      case 'video_subtitle_host_upload_failed':
+        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -280738,6 +280909,12 @@ extension on _StringsFr {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
+      case 'video_subtitle_remote_audio_fetching':
+        return 'Fetching the audio track from the host…';
+      case 'video_subtitle_host_upload_done':
+        return 'Subtitle uploaded to the host as this episode\'s default';
+      case 'video_subtitle_host_upload_failed':
+        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -292347,6 +292524,12 @@ extension on _StringsId {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
+      case 'video_subtitle_remote_audio_fetching':
+        return 'Fetching the audio track from the host…';
+      case 'video_subtitle_host_upload_done':
+        return 'Subtitle uploaded to the host as this episode\'s default';
+      case 'video_subtitle_host_upload_failed':
+        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -303979,6 +304162,12 @@ extension on _StringsIt {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
+      case 'video_subtitle_remote_audio_fetching':
+        return 'Fetching the audio track from the host…';
+      case 'video_subtitle_host_upload_done':
+        return 'Subtitle uploaded to the host as this episode\'s default';
+      case 'video_subtitle_host_upload_failed':
+        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -315532,6 +315721,12 @@ extension on _StringsJa {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
+      case 'video_subtitle_remote_audio_fetching':
+        return 'Fetching the audio track from the host…';
+      case 'video_subtitle_host_upload_done':
+        return 'Subtitle uploaded to the host as this episode\'s default';
+      case 'video_subtitle_host_upload_failed':
+        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -327093,6 +327288,12 @@ extension on _StringsKo {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
+      case 'video_subtitle_remote_audio_fetching':
+        return 'Fetching the audio track from the host…';
+      case 'video_subtitle_host_upload_done':
+        return 'Subtitle uploaded to the host as this episode\'s default';
+      case 'video_subtitle_host_upload_failed':
+        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -338720,6 +338921,12 @@ extension on _StringsNl {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
+      case 'video_subtitle_remote_audio_fetching':
+        return 'Fetching the audio track from the host…';
+      case 'video_subtitle_host_upload_done':
+        return 'Subtitle uploaded to the host as this episode\'s default';
+      case 'video_subtitle_host_upload_failed':
+        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -350342,6 +350549,12 @@ extension on _StringsPtBr {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
+      case 'video_subtitle_remote_audio_fetching':
+        return 'Fetching the audio track from the host…';
+      case 'video_subtitle_host_upload_done':
+        return 'Subtitle uploaded to the host as this episode\'s default';
+      case 'video_subtitle_host_upload_failed':
+        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -361970,6 +362183,12 @@ extension on _StringsRu {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
+      case 'video_subtitle_remote_audio_fetching':
+        return 'Fetching the audio track from the host…';
+      case 'video_subtitle_host_upload_done':
+        return 'Subtitle uploaded to the host as this episode\'s default';
+      case 'video_subtitle_host_upload_failed':
+        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -373567,6 +373786,12 @@ extension on _StringsTh {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
+      case 'video_subtitle_remote_audio_fetching':
+        return 'Fetching the audio track from the host…';
+      case 'video_subtitle_host_upload_done':
+        return 'Subtitle uploaded to the host as this episode\'s default';
+      case 'video_subtitle_host_upload_failed':
+        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -385180,6 +385405,12 @@ extension on _StringsTr {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
+      case 'video_subtitle_remote_audio_fetching':
+        return 'Fetching the audio track from the host…';
+      case 'video_subtitle_host_upload_done':
+        return 'Subtitle uploaded to the host as this episode\'s default';
+      case 'video_subtitle_host_upload_failed':
+        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -396787,6 +397018,12 @@ extension on _StringsVi {
         return ({required Object count}) => '${count} downloads in progress';
       case 'update_download_notification_title':
         return ({required Object version}) => 'Downloading update ${version}';
+      case 'video_subtitle_remote_audio_fetching':
+        return 'Fetching the audio track from the host…';
+      case 'video_subtitle_host_upload_done':
+        return 'Subtitle uploaded to the host as this episode\'s default';
+      case 'video_subtitle_host_upload_failed':
+        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
@@ -408281,6 +408518,12 @@ extension on _StringsZhCn {
         return ({required Object count}) => '${count} 项下载进行中';
       case 'update_download_notification_title':
         return ({required Object version}) => '正在下载更新 ${version}';
+      case 'video_subtitle_remote_audio_fetching':
+        return '正在从服务端获取音轨…';
+      case 'video_subtitle_host_upload_done':
+        return '字幕已上传到服务端，设为这一集的默认字幕';
+      case 'video_subtitle_host_upload_failed':
+        return '字幕上传服务端失败，仅保存在本机';
       default:
         return null;
     }
@@ -419813,6 +420056,12 @@ extension on _StringsZhHk {
         return ({required Object count}) => '${count} 項下載進行中';
       case 'update_download_notification_title':
         return ({required Object version}) => '正在下載更新 ${version}';
+      case 'video_subtitle_remote_audio_fetching':
+        return 'Fetching the audio track from the host…';
+      case 'video_subtitle_host_upload_done':
+        return 'Subtitle uploaded to the host as this episode\'s default';
+      case 'video_subtitle_host_upload_failed':
+        return 'Couldn\'t upload the subtitle to the host; it\'s only saved on this device';
       default:
         return null;
     }
