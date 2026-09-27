@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 96798 (5694 per locale)
+/// Strings: 96815 (5695 per locale)
 ///
-/// Built on 2026-09-27 at 14:31 UTC
+/// Built on 2026-09-27 at 14:57 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8147,6 +8147,8 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get video_subtitle_reference_sync_restore_body =>
       'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
   String get video_subtitle_reference_sync_restore => 'Restore original';
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
 }
 
 // Path: <root>
@@ -21811,6 +21813,9 @@ class _StringsAr extends _StringsEn {
       'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
   @override
   String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
 }
 
 // Path: <root>
@@ -35715,6 +35720,9 @@ class _StringsDe extends _StringsEn {
       'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
   @override
   String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
 }
 
 // Path: <root>
@@ -49670,6 +49678,9 @@ class _StringsEs extends _StringsEn {
       'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
   @override
   String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
 }
 
 // Path: <root>
@@ -63664,6 +63675,9 @@ class _StringsFr extends _StringsEn {
       'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
   @override
   String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
 }
 
 // Path: <root>
@@ -77448,6 +77462,9 @@ class _StringsId extends _StringsEn {
       'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
   @override
   String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
 }
 
 // Path: <root>
@@ -91333,6 +91350,9 @@ class _StringsIt extends _StringsEn {
       'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
   @override
   String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
 }
 
 // Path: <root>
@@ -104573,6 +104593,9 @@ class _StringsJa extends _StringsEn {
       'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
   @override
   String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
 }
 
 // Path: <root>
@@ -117830,6 +117853,9 @@ class _StringsKo extends _StringsEn {
       'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
   @override
   String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
 }
 
 // Path: <root>
@@ -131669,6 +131695,9 @@ class _StringsNl extends _StringsEn {
       'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
   @override
   String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
 }
 
 // Path: <root>
@@ -145561,6 +145590,9 @@ class _StringsPtBr extends _StringsEn {
       'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
   @override
   String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
 }
 
 // Path: <root>
@@ -159428,6 +159460,9 @@ class _StringsRu extends _StringsEn {
       'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
   @override
   String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
 }
 
 // Path: <root>
@@ -173092,6 +173127,9 @@ class _StringsTh extends _StringsEn {
       'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
   @override
   String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
 }
 
 // Path: <root>
@@ -186870,6 +186908,9 @@ class _StringsTr extends _StringsEn {
       'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
   @override
   String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
 }
 
 // Path: <root>
@@ -200619,6 +200660,9 @@ class _StringsVi extends _StringsEn {
       'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
   @override
   String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
 }
 
 // Path: <root>
@@ -213190,6 +213234,8 @@ class _StringsZhCn extends _StringsEn {
       '下载时已按内嵌字幕轨调整过时间轴。要把原始时间轴恢复成一份新字幕吗？';
   @override
   String get video_subtitle_reference_sync_restore => '恢复原始字幕';
+  @override
+  String get video_subtitle_reference_sync_failed => '字幕文件读写失败';
 }
 
 // Path: <root>
@@ -226110,6 +226156,9 @@ class _StringsZhHk extends _StringsEn {
       'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
   @override
   String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
 }
 
 /// Flat map(s) containing all translations.
@@ -237872,6 +237921,8 @@ extension on _StringsEn {
         return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
       case 'video_subtitle_reference_sync_restore':
         return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       default:
         return null;
     }
@@ -249629,6 +249680,8 @@ extension on _StringsAr {
         return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
       case 'video_subtitle_reference_sync_restore':
         return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       default:
         return null;
     }
@@ -261435,6 +261488,8 @@ extension on _StringsDe {
         return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
       case 'video_subtitle_reference_sync_restore':
         return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       default:
         return null;
     }
@@ -273231,6 +273286,8 @@ extension on _StringsEs {
         return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
       case 'video_subtitle_reference_sync_restore':
         return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       default:
         return null;
     }
@@ -285035,6 +285092,8 @@ extension on _StringsFr {
         return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
       case 'video_subtitle_reference_sync_restore':
         return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       default:
         return null;
     }
@@ -296809,6 +296868,8 @@ extension on _StringsId {
         return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
       case 'video_subtitle_reference_sync_restore':
         return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       default:
         return null;
     }
@@ -308606,6 +308667,8 @@ extension on _StringsIt {
         return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
       case 'video_subtitle_reference_sync_restore':
         return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       default:
         return null;
     }
@@ -320324,6 +320387,8 @@ extension on _StringsJa {
         return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
       case 'video_subtitle_reference_sync_restore':
         return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       default:
         return null;
     }
@@ -332050,6 +332115,8 @@ extension on _StringsKo {
         return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
       case 'video_subtitle_reference_sync_restore':
         return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       default:
         return null;
     }
@@ -343842,6 +343909,8 @@ extension on _StringsNl {
         return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
       case 'video_subtitle_reference_sync_restore':
         return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       default:
         return null;
     }
@@ -355629,6 +355698,8 @@ extension on _StringsPtBr {
         return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
       case 'video_subtitle_reference_sync_restore':
         return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       default:
         return null;
     }
@@ -367422,6 +367493,8 @@ extension on _StringsRu {
         return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
       case 'video_subtitle_reference_sync_restore':
         return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       default:
         return null;
     }
@@ -379184,6 +379257,8 @@ extension on _StringsTh {
         return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
       case 'video_subtitle_reference_sync_restore':
         return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       default:
         return null;
     }
@@ -390962,6 +391037,8 @@ extension on _StringsTr {
         return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
       case 'video_subtitle_reference_sync_restore':
         return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       default:
         return null;
     }
@@ -402734,6 +402811,8 @@ extension on _StringsVi {
         return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
       case 'video_subtitle_reference_sync_restore':
         return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       default:
         return null;
     }
@@ -414390,6 +414469,8 @@ extension on _StringsZhCn {
         return '下载时已按内嵌字幕轨调整过时间轴。要把原始时间轴恢复成一份新字幕吗？';
       case 'video_subtitle_reference_sync_restore':
         return '恢复原始字幕';
+      case 'video_subtitle_reference_sync_failed':
+        return '字幕文件读写失败';
       default:
         return null;
     }
@@ -426087,6 +426168,8 @@ extension on _StringsZhHk {
         return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
       case 'video_subtitle_reference_sync_restore':
         return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       default:
         return null;
     }
