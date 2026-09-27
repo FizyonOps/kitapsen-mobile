@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 96526 (5678 per locale)
+/// Strings: 96628 (5684 per locale)
 ///
-/// Built on 2026-09-27 at 13:56 UTC
+/// Built on 2026-09-27 at 15:02 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -2707,7 +2707,7 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String go_to_chapter({required Object n}) => 'Chapter ${n}';
   String get handlebar_audio => 'Audio';
   String get handlebar_book_cover => 'Book cover';
-  String get handlebar_card_image => 'Card image (cover / GIF)';
+  String get handlebar_card_image => 'Card image (cover / clip)';
   String get handlebar_clip_timestamp => 'Clip timestamp';
   String get handlebar_cue_sentence => 'Cue sentence';
   String handlebar_deprecated_label({required Object label}) =>
@@ -6772,8 +6772,6 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get web_video_player_unavailable =>
       'The built-in web page player is temporarily disabled; this address cannot be played inside the app for now.';
   String get video_mining_image_mode_video_clip => 'Video clip with sound';
-  String get video_mining_image_mode_video_clip_hint =>
-      'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
   String get reader_gallery_title => 'Illustrations';
   String reader_gallery_unlocked_count({
     required Object unlocked,
@@ -8113,6 +8111,18 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  String get video_mining_image_mode_video_clip_inline_hint =>
+      'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+  String get video_mining_clip_format => 'Video clip format';
+  String get gal_mining_clip_format => 'Game clip format';
+  String get mining_clip_format_webm_vp9 =>
+      'WebM · VP9 (plays inside the card, recommended)';
+  String get mining_clip_format_webm_av1 =>
+      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+  String get mining_clip_format_mp4_h264 =>
+      'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+  String get mining_clip_format_hint =>
+      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
 }
 
 // Path: <root>
@@ -19498,9 +19508,6 @@ class _StringsAr extends _StringsEn {
   @override
   String get video_mining_image_mode_video_clip => 'Video clip with sound';
   @override
-  String get video_mining_image_mode_video_clip_hint =>
-      'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
-  @override
   String get reader_gallery_title => 'Illustrations';
   @override
   String reader_gallery_unlocked_count({
@@ -21727,6 +21734,25 @@ class _StringsAr extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_mining_image_mode_video_clip_inline_hint =>
+      'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+  @override
+  String get video_mining_clip_format => 'Video clip format';
+  @override
+  String get gal_mining_clip_format => 'Game clip format';
+  @override
+  String get mining_clip_format_webm_vp9 =>
+      'WebM · VP9 (plays inside the card, recommended)';
+  @override
+  String get mining_clip_format_webm_av1 =>
+      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+  @override
+  String get mining_clip_format_mp4_h264 =>
+      'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+  @override
+  String get mining_clip_format_hint =>
+      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
 }
 
 // Path: <root>
@@ -33346,9 +33372,6 @@ class _StringsDe extends _StringsEn {
   @override
   String get video_mining_image_mode_video_clip => 'Video clip with sound';
   @override
-  String get video_mining_image_mode_video_clip_hint =>
-      'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
-  @override
   String get reader_gallery_title => 'Illustrations';
   @override
   String reader_gallery_unlocked_count({
@@ -35581,6 +35604,25 @@ class _StringsDe extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_mining_image_mode_video_clip_inline_hint =>
+      'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+  @override
+  String get video_mining_clip_format => 'Video clip format';
+  @override
+  String get gal_mining_clip_format => 'Game clip format';
+  @override
+  String get mining_clip_format_webm_vp9 =>
+      'WebM · VP9 (plays inside the card, recommended)';
+  @override
+  String get mining_clip_format_webm_av1 =>
+      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+  @override
+  String get mining_clip_format_mp4_h264 =>
+      'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+  @override
+  String get mining_clip_format_hint =>
+      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
 }
 
 // Path: <root>
@@ -47251,9 +47293,6 @@ class _StringsEs extends _StringsEn {
   @override
   String get video_mining_image_mode_video_clip => 'Video clip with sound';
   @override
-  String get video_mining_image_mode_video_clip_hint =>
-      'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
-  @override
   String get reader_gallery_title => 'Illustrations';
   @override
   String reader_gallery_unlocked_count({
@@ -49486,6 +49525,25 @@ class _StringsEs extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_mining_image_mode_video_clip_inline_hint =>
+      'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+  @override
+  String get video_mining_clip_format => 'Video clip format';
+  @override
+  String get gal_mining_clip_format => 'Game clip format';
+  @override
+  String get mining_clip_format_webm_vp9 =>
+      'WebM · VP9 (plays inside the card, recommended)';
+  @override
+  String get mining_clip_format_webm_av1 =>
+      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+  @override
+  String get mining_clip_format_mp4_h264 =>
+      'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+  @override
+  String get mining_clip_format_hint =>
+      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
 }
 
 // Path: <root>
@@ -61189,9 +61247,6 @@ class _StringsFr extends _StringsEn {
   @override
   String get video_mining_image_mode_video_clip => 'Video clip with sound';
   @override
-  String get video_mining_image_mode_video_clip_hint =>
-      'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
-  @override
   String get reader_gallery_title => 'Illustrations';
   @override
   String reader_gallery_unlocked_count({
@@ -63430,6 +63485,25 @@ class _StringsFr extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_mining_image_mode_video_clip_inline_hint =>
+      'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+  @override
+  String get video_mining_clip_format => 'Video clip format';
+  @override
+  String get gal_mining_clip_format => 'Game clip format';
+  @override
+  String get mining_clip_format_webm_vp9 =>
+      'WebM · VP9 (plays inside the card, recommended)';
+  @override
+  String get mining_clip_format_webm_av1 =>
+      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+  @override
+  String get mining_clip_format_mp4_h264 =>
+      'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+  @override
+  String get mining_clip_format_hint =>
+      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
 }
 
 // Path: <root>
@@ -74934,9 +75008,6 @@ class _StringsId extends _StringsEn {
   @override
   String get video_mining_image_mode_video_clip => 'Video clip with sound';
   @override
-  String get video_mining_image_mode_video_clip_hint =>
-      'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
-  @override
   String get reader_gallery_title => 'Illustrations';
   @override
   String reader_gallery_unlocked_count({
@@ -77164,6 +77235,25 @@ class _StringsId extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_mining_image_mode_video_clip_inline_hint =>
+      'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+  @override
+  String get video_mining_clip_format => 'Video clip format';
+  @override
+  String get gal_mining_clip_format => 'Game clip format';
+  @override
+  String get mining_clip_format_webm_vp9 =>
+      'WebM · VP9 (plays inside the card, recommended)';
+  @override
+  String get mining_clip_format_webm_av1 =>
+      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+  @override
+  String get mining_clip_format_mp4_h264 =>
+      'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+  @override
+  String get mining_clip_format_hint =>
+      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
 }
 
 // Path: <root>
@@ -88764,9 +88854,6 @@ class _StringsIt extends _StringsEn {
   @override
   String get video_mining_image_mode_video_clip => 'Video clip with sound';
   @override
-  String get video_mining_image_mode_video_clip_hint =>
-      'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
-  @override
   String get reader_gallery_title => 'Illustrations';
   @override
   String reader_gallery_unlocked_count({
@@ -90999,6 +91086,25 @@ class _StringsIt extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_mining_image_mode_video_clip_inline_hint =>
+      'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+  @override
+  String get video_mining_clip_format => 'Video clip format';
+  @override
+  String get gal_mining_clip_format => 'Game clip format';
+  @override
+  String get mining_clip_format_webm_vp9 =>
+      'WebM · VP9 (plays inside the card, recommended)';
+  @override
+  String get mining_clip_format_webm_av1 =>
+      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+  @override
+  String get mining_clip_format_mp4_h264 =>
+      'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+  @override
+  String get mining_clip_format_hint =>
+      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
 }
 
 // Path: <root>
@@ -101972,9 +102078,6 @@ class _StringsJa extends _StringsEn {
   @override
   String get video_mining_image_mode_video_clip => 'Video clip with sound';
   @override
-  String get video_mining_image_mode_video_clip_hint =>
-      'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
-  @override
   String get reader_gallery_title => 'Illustrations';
   @override
   String reader_gallery_unlocked_count({
@@ -104189,6 +104292,25 @@ class _StringsJa extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_mining_image_mode_video_clip_inline_hint =>
+      'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+  @override
+  String get video_mining_clip_format => 'Video clip format';
+  @override
+  String get gal_mining_clip_format => 'Game clip format';
+  @override
+  String get mining_clip_format_webm_vp9 =>
+      'WebM · VP9 (plays inside the card, recommended)';
+  @override
+  String get mining_clip_format_webm_av1 =>
+      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+  @override
+  String get mining_clip_format_mp4_h264 =>
+      'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+  @override
+  String get mining_clip_format_hint =>
+      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
 }
 
 // Path: <root>
@@ -115172,9 +115294,6 @@ class _StringsKo extends _StringsEn {
   @override
   String get video_mining_image_mode_video_clip => 'Video clip with sound';
   @override
-  String get video_mining_image_mode_video_clip_hint =>
-      'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
-  @override
   String get reader_gallery_title => 'Illustrations';
   @override
   String reader_gallery_unlocked_count({
@@ -117396,6 +117515,25 @@ class _StringsKo extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_mining_image_mode_video_clip_inline_hint =>
+      'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+  @override
+  String get video_mining_clip_format => 'Video clip format';
+  @override
+  String get gal_mining_clip_format => 'Game clip format';
+  @override
+  String get mining_clip_format_webm_vp9 =>
+      'WebM · VP9 (plays inside the card, recommended)';
+  @override
+  String get mining_clip_format_webm_av1 =>
+      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+  @override
+  String get mining_clip_format_mp4_h264 =>
+      'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+  @override
+  String get mining_clip_format_hint =>
+      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
 }
 
 // Path: <root>
@@ -128950,9 +129088,6 @@ class _StringsNl extends _StringsEn {
   @override
   String get video_mining_image_mode_video_clip => 'Video clip with sound';
   @override
-  String get video_mining_image_mode_video_clip_hint =>
-      'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
-  @override
   String get reader_gallery_title => 'Illustrations';
   @override
   String reader_gallery_unlocked_count({
@@ -131185,6 +131320,25 @@ class _StringsNl extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_mining_image_mode_video_clip_inline_hint =>
+      'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+  @override
+  String get video_mining_clip_format => 'Video clip format';
+  @override
+  String get gal_mining_clip_format => 'Game clip format';
+  @override
+  String get mining_clip_format_webm_vp9 =>
+      'WebM · VP9 (plays inside the card, recommended)';
+  @override
+  String get mining_clip_format_webm_av1 =>
+      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+  @override
+  String get mining_clip_format_mp4_h264 =>
+      'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+  @override
+  String get mining_clip_format_hint =>
+      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
 }
 
 // Path: <root>
@@ -142792,9 +142946,6 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get video_mining_image_mode_video_clip => 'Video clip with sound';
   @override
-  String get video_mining_image_mode_video_clip_hint =>
-      'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
-  @override
   String get reader_gallery_title => 'Illustrations';
   @override
   String reader_gallery_unlocked_count({
@@ -145027,6 +145178,25 @@ class _StringsPtBr extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_mining_image_mode_video_clip_inline_hint =>
+      'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+  @override
+  String get video_mining_clip_format => 'Video clip format';
+  @override
+  String get gal_mining_clip_format => 'Game clip format';
+  @override
+  String get mining_clip_format_webm_vp9 =>
+      'WebM · VP9 (plays inside the card, recommended)';
+  @override
+  String get mining_clip_format_webm_av1 =>
+      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+  @override
+  String get mining_clip_format_mp4_h264 =>
+      'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+  @override
+  String get mining_clip_format_hint =>
+      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
 }
 
 // Path: <root>
@@ -156612,9 +156782,6 @@ class _StringsRu extends _StringsEn {
   @override
   String get video_mining_image_mode_video_clip => 'Video clip with sound';
   @override
-  String get video_mining_image_mode_video_clip_hint =>
-      'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
-  @override
   String get reader_gallery_title => 'Illustrations';
   @override
   String reader_gallery_unlocked_count({
@@ -158844,6 +159011,25 @@ class _StringsRu extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_mining_image_mode_video_clip_inline_hint =>
+      'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+  @override
+  String get video_mining_clip_format => 'Video clip format';
+  @override
+  String get gal_mining_clip_format => 'Game clip format';
+  @override
+  String get mining_clip_format_webm_vp9 =>
+      'WebM · VP9 (plays inside the card, recommended)';
+  @override
+  String get mining_clip_format_webm_av1 =>
+      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+  @override
+  String get mining_clip_format_mp4_h264 =>
+      'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+  @override
+  String get mining_clip_format_hint =>
+      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
 }
 
 // Path: <root>
@@ -170229,9 +170415,6 @@ class _StringsTh extends _StringsEn {
   @override
   String get video_mining_image_mode_video_clip => 'Video clip with sound';
   @override
-  String get video_mining_image_mode_video_clip_hint =>
-      'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
-  @override
   String get reader_gallery_title => 'Illustrations';
   @override
   String reader_gallery_unlocked_count({
@@ -172458,6 +172641,25 @@ class _StringsTh extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_mining_image_mode_video_clip_inline_hint =>
+      'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+  @override
+  String get video_mining_clip_format => 'Video clip format';
+  @override
+  String get gal_mining_clip_format => 'Game clip format';
+  @override
+  String get mining_clip_format_webm_vp9 =>
+      'WebM · VP9 (plays inside the card, recommended)';
+  @override
+  String get mining_clip_format_webm_av1 =>
+      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+  @override
+  String get mining_clip_format_mp4_h264 =>
+      'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+  @override
+  String get mining_clip_format_hint =>
+      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
 }
 
 // Path: <root>
@@ -183958,9 +184160,6 @@ class _StringsTr extends _StringsEn {
   @override
   String get video_mining_image_mode_video_clip => 'Video clip with sound';
   @override
-  String get video_mining_image_mode_video_clip_hint =>
-      'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
-  @override
   String get reader_gallery_title => 'Illustrations';
   @override
   String reader_gallery_unlocked_count({
@@ -186186,6 +186385,25 @@ class _StringsTr extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_mining_image_mode_video_clip_inline_hint =>
+      'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+  @override
+  String get video_mining_clip_format => 'Video clip format';
+  @override
+  String get gal_mining_clip_format => 'Game clip format';
+  @override
+  String get mining_clip_format_webm_vp9 =>
+      'WebM · VP9 (plays inside the card, recommended)';
+  @override
+  String get mining_clip_format_webm_av1 =>
+      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+  @override
+  String get mining_clip_format_mp4_h264 =>
+      'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+  @override
+  String get mining_clip_format_hint =>
+      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
 }
 
 // Path: <root>
@@ -197654,9 +197872,6 @@ class _StringsVi extends _StringsEn {
   @override
   String get video_mining_image_mode_video_clip => 'Video clip with sound';
   @override
-  String get video_mining_image_mode_video_clip_hint =>
-      'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
-  @override
   String get reader_gallery_title => 'Illustrations';
   @override
   String reader_gallery_unlocked_count({
@@ -199885,6 +200100,25 @@ class _StringsVi extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_mining_image_mode_video_clip_inline_hint =>
+      'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+  @override
+  String get video_mining_clip_format => 'Video clip format';
+  @override
+  String get gal_mining_clip_format => 'Game clip format';
+  @override
+  String get mining_clip_format_webm_vp9 =>
+      'WebM · VP9 (plays inside the card, recommended)';
+  @override
+  String get mining_clip_format_webm_av1 =>
+      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+  @override
+  String get mining_clip_format_mp4_h264 =>
+      'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+  @override
+  String get mining_clip_format_hint =>
+      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
 }
 
 // Path: <root>
@@ -203920,7 +204154,7 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get handlebar_book_cover => '书籍封面';
   @override
-  String get handlebar_card_image => '卡片图片（封面 / 视频 GIF）';
+  String get handlebar_card_image => '卡片图片（封面 / 视频片段）';
   @override
   String get handlebar_clip_timestamp => '片段时间';
   @override
@@ -210401,9 +210635,6 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get video_mining_image_mode_video_clip => '带声音的视频片段';
   @override
-  String get video_mining_image_mode_video_clip_hint =>
-      '将画面与例句声音导出为同一个 MP4，由 Anki 媒体播放器同步播放；自动播放遵循卡片设置。不同客户端可能在独立播放器中打开。';
-  @override
   String get reader_gallery_title => '插图册';
   @override
   String reader_gallery_unlocked_count({
@@ -212415,6 +212646,22 @@ class _StringsZhCn extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia（日本語）';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia（English）';
+  @override
+  String get video_mining_image_mode_video_clip_inline_hint =>
+      '画面与例句声音保存在同一个片段里，音画始终同步。WebM 在卡片内播放（翻面自动播放，点例句重播）；MP4 交给 Anki 自带的播放器。';
+  @override
+  String get video_mining_clip_format => '视频片段格式';
+  @override
+  String get gal_mining_clip_format => '游戏片段格式';
+  @override
+  String get mining_clip_format_webm_vp9 => 'WebM · VP9（卡片内播放，推荐）';
+  @override
+  String get mining_clip_format_webm_av1 => 'WebM · AV1（卡片内播放，体积最小，编码更慢）';
+  @override
+  String get mining_clip_format_mp4_h264 =>
+      'MP4 · H.264（Anki 自带播放器；AnkiMobile 用这个）';
+  @override
+  String get mining_clip_format_hint => '所选格式在本机编不出来时，自动退回 WebM VP9，再退回 MP4。';
 }
 
 // Path: <root>
@@ -223072,9 +223319,6 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get video_mining_image_mode_video_clip => 'Video clip with sound';
   @override
-  String get video_mining_image_mode_video_clip_hint =>
-      'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
-  @override
   String get reader_gallery_title => 'Illustrations';
   @override
   String reader_gallery_unlocked_count({
@@ -225285,6 +225529,25 @@ class _StringsZhHk extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_mining_image_mode_video_clip_inline_hint =>
+      'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+  @override
+  String get video_mining_clip_format => 'Video clip format';
+  @override
+  String get gal_mining_clip_format => 'Game clip format';
+  @override
+  String get mining_clip_format_webm_vp9 =>
+      'WebM · VP9 (plays inside the card, recommended)';
+  @override
+  String get mining_clip_format_webm_av1 =>
+      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+  @override
+  String get mining_clip_format_mp4_h264 =>
+      'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+  @override
+  String get mining_clip_format_hint =>
+      'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
 }
 
 /// Flat map(s) containing all translations.
@@ -229053,7 +229316,7 @@ extension on _StringsEn {
       case 'handlebar_book_cover':
         return 'Book cover';
       case 'handlebar_card_image':
-        return 'Card image (cover / GIF)';
+        return 'Card image (cover / clip)';
       case 'handlebar_clip_timestamp':
         return 'Clip timestamp';
       case 'handlebar_cue_sentence':
@@ -235176,8 +235439,6 @@ extension on _StringsEn {
         return 'The built-in web page player is temporarily disabled; this address cannot be played inside the app for now.';
       case 'video_mining_image_mode_video_clip':
         return 'Video clip with sound';
-      case 'video_mining_image_mode_video_clip_hint':
-        return 'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
       case 'reader_gallery_title':
         return 'Illustrations';
       case 'reader_gallery_unlocked_count':
@@ -237010,6 +237271,20 @@ extension on _StringsEn {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_mining_image_mode_video_clip_inline_hint':
+        return 'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+      case 'video_mining_clip_format':
+        return 'Video clip format';
+      case 'gal_mining_clip_format':
+        return 'Game clip format';
+      case 'mining_clip_format_webm_vp9':
+        return 'WebM · VP9 (plays inside the card, recommended)';
+      case 'mining_clip_format_webm_av1':
+        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      case 'mining_clip_format_mp4_h264':
+        return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+      case 'mining_clip_format_hint':
+        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
       default:
         return null;
     }
@@ -246896,8 +247171,6 @@ extension on _StringsAr {
         return 'The built-in web page player is temporarily disabled; this address cannot be played inside the app for now.';
       case 'video_mining_image_mode_video_clip':
         return 'Video clip with sound';
-      case 'video_mining_image_mode_video_clip_hint':
-        return 'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
       case 'reader_gallery_title':
         return 'Illustrations';
       case 'reader_gallery_unlocked_count':
@@ -248730,6 +249003,20 @@ extension on _StringsAr {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_mining_image_mode_video_clip_inline_hint':
+        return 'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+      case 'video_mining_clip_format':
+        return 'Video clip format';
+      case 'gal_mining_clip_format':
+        return 'Game clip format';
+      case 'mining_clip_format_webm_vp9':
+        return 'WebM · VP9 (plays inside the card, recommended)';
+      case 'mining_clip_format_webm_av1':
+        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      case 'mining_clip_format_mp4_h264':
+        return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+      case 'mining_clip_format_hint':
+        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
       default:
         return null;
     }
@@ -258665,8 +258952,6 @@ extension on _StringsDe {
         return 'The built-in web page player is temporarily disabled; this address cannot be played inside the app for now.';
       case 'video_mining_image_mode_video_clip':
         return 'Video clip with sound';
-      case 'video_mining_image_mode_video_clip_hint':
-        return 'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
       case 'reader_gallery_title':
         return 'Illustrations';
       case 'reader_gallery_unlocked_count':
@@ -260499,6 +260784,20 @@ extension on _StringsDe {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_mining_image_mode_video_clip_inline_hint':
+        return 'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+      case 'video_mining_clip_format':
+        return 'Video clip format';
+      case 'gal_mining_clip_format':
+        return 'Game clip format';
+      case 'mining_clip_format_webm_vp9':
+        return 'WebM · VP9 (plays inside the card, recommended)';
+      case 'mining_clip_format_webm_av1':
+        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      case 'mining_clip_format_mp4_h264':
+        return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+      case 'mining_clip_format_hint':
+        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
       default:
         return null;
     }
@@ -270424,8 +270723,6 @@ extension on _StringsEs {
         return 'The built-in web page player is temporarily disabled; this address cannot be played inside the app for now.';
       case 'video_mining_image_mode_video_clip':
         return 'Video clip with sound';
-      case 'video_mining_image_mode_video_clip_hint':
-        return 'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
       case 'reader_gallery_title':
         return 'Illustrations';
       case 'reader_gallery_unlocked_count':
@@ -272258,6 +272555,20 @@ extension on _StringsEs {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_mining_image_mode_video_clip_inline_hint':
+        return 'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+      case 'video_mining_clip_format':
+        return 'Video clip format';
+      case 'gal_mining_clip_format':
+        return 'Game clip format';
+      case 'mining_clip_format_webm_vp9':
+        return 'WebM · VP9 (plays inside the card, recommended)';
+      case 'mining_clip_format_webm_av1':
+        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      case 'mining_clip_format_mp4_h264':
+        return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+      case 'mining_clip_format_hint':
+        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
       default:
         return null;
     }
@@ -282191,8 +282502,6 @@ extension on _StringsFr {
         return 'The built-in web page player is temporarily disabled; this address cannot be played inside the app for now.';
       case 'video_mining_image_mode_video_clip':
         return 'Video clip with sound';
-      case 'video_mining_image_mode_video_clip_hint':
-        return 'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
       case 'reader_gallery_title':
         return 'Illustrations';
       case 'reader_gallery_unlocked_count':
@@ -284025,6 +284334,20 @@ extension on _StringsFr {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_mining_image_mode_video_clip_inline_hint':
+        return 'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+      case 'video_mining_clip_format':
+        return 'Video clip format';
+      case 'gal_mining_clip_format':
+        return 'Game clip format';
+      case 'mining_clip_format_webm_vp9':
+        return 'WebM · VP9 (plays inside the card, recommended)';
+      case 'mining_clip_format_webm_av1':
+        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      case 'mining_clip_format_mp4_h264':
+        return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+      case 'mining_clip_format_hint':
+        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
       default:
         return null;
     }
@@ -293928,8 +294251,6 @@ extension on _StringsId {
         return 'The built-in web page player is temporarily disabled; this address cannot be played inside the app for now.';
       case 'video_mining_image_mode_video_clip':
         return 'Video clip with sound';
-      case 'video_mining_image_mode_video_clip_hint':
-        return 'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
       case 'reader_gallery_title':
         return 'Illustrations';
       case 'reader_gallery_unlocked_count':
@@ -295762,6 +296083,20 @@ extension on _StringsId {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_mining_image_mode_video_clip_inline_hint':
+        return 'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+      case 'video_mining_clip_format':
+        return 'Video clip format';
+      case 'gal_mining_clip_format':
+        return 'Game clip format';
+      case 'mining_clip_format_webm_vp9':
+        return 'WebM · VP9 (plays inside the card, recommended)';
+      case 'mining_clip_format_webm_av1':
+        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      case 'mining_clip_format_mp4_h264':
+        return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+      case 'mining_clip_format_hint':
+        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
       default:
         return null;
     }
@@ -305688,8 +306023,6 @@ extension on _StringsIt {
         return 'The built-in web page player is temporarily disabled; this address cannot be played inside the app for now.';
       case 'video_mining_image_mode_video_clip':
         return 'Video clip with sound';
-      case 'video_mining_image_mode_video_clip_hint':
-        return 'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
       case 'reader_gallery_title':
         return 'Illustrations';
       case 'reader_gallery_unlocked_count':
@@ -307522,6 +307855,20 @@ extension on _StringsIt {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_mining_image_mode_video_clip_inline_hint':
+        return 'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+      case 'video_mining_clip_format':
+        return 'Video clip format';
+      case 'gal_mining_clip_format':
+        return 'Game clip format';
+      case 'mining_clip_format_webm_vp9':
+        return 'WebM · VP9 (plays inside the card, recommended)';
+      case 'mining_clip_format_webm_av1':
+        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      case 'mining_clip_format_mp4_h264':
+        return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+      case 'mining_clip_format_hint':
+        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
       default:
         return null;
     }
@@ -317372,8 +317719,6 @@ extension on _StringsJa {
         return '内蔵ウェブページプレーヤーは一時的に無効化されています。このアドレスは今のところアプリ内で再生できません。';
       case 'video_mining_image_mode_video_clip':
         return 'Video clip with sound';
-      case 'video_mining_image_mode_video_clip_hint':
-        return 'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
       case 'reader_gallery_title':
         return 'Illustrations';
       case 'reader_gallery_unlocked_count':
@@ -319203,6 +319548,20 @@ extension on _StringsJa {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_mining_image_mode_video_clip_inline_hint':
+        return 'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+      case 'video_mining_clip_format':
+        return 'Video clip format';
+      case 'gal_mining_clip_format':
+        return 'Game clip format';
+      case 'mining_clip_format_webm_vp9':
+        return 'WebM · VP9 (plays inside the card, recommended)';
+      case 'mining_clip_format_webm_av1':
+        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      case 'mining_clip_format_mp4_h264':
+        return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+      case 'mining_clip_format_hint':
+        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
       default:
         return null;
     }
@@ -329058,8 +329417,6 @@ extension on _StringsKo {
         return 'The built-in web page player is temporarily disabled; this address cannot be played inside the app for now.';
       case 'video_mining_image_mode_video_clip':
         return 'Video clip with sound';
-      case 'video_mining_image_mode_video_clip_hint':
-        return 'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
       case 'reader_gallery_title':
         return 'Illustrations';
       case 'reader_gallery_unlocked_count':
@@ -330892,6 +331249,20 @@ extension on _StringsKo {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_mining_image_mode_video_clip_inline_hint':
+        return 'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+      case 'video_mining_clip_format':
+        return 'Video clip format';
+      case 'gal_mining_clip_format':
+        return 'Game clip format';
+      case 'mining_clip_format_webm_vp9':
+        return 'WebM · VP9 (plays inside the card, recommended)';
+      case 'mining_clip_format_webm_av1':
+        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      case 'mining_clip_format_mp4_h264':
+        return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+      case 'mining_clip_format_hint':
+        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
       default:
         return null;
     }
@@ -340813,8 +341184,6 @@ extension on _StringsNl {
         return 'The built-in web page player is temporarily disabled; this address cannot be played inside the app for now.';
       case 'video_mining_image_mode_video_clip':
         return 'Video clip with sound';
-      case 'video_mining_image_mode_video_clip_hint':
-        return 'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
       case 'reader_gallery_title':
         return 'Illustrations';
       case 'reader_gallery_unlocked_count':
@@ -342647,6 +343016,20 @@ extension on _StringsNl {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_mining_image_mode_video_clip_inline_hint':
+        return 'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+      case 'video_mining_clip_format':
+        return 'Video clip format';
+      case 'gal_mining_clip_format':
+        return 'Game clip format';
+      case 'mining_clip_format_webm_vp9':
+        return 'WebM · VP9 (plays inside the card, recommended)';
+      case 'mining_clip_format_webm_av1':
+        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      case 'mining_clip_format_mp4_h264':
+        return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+      case 'mining_clip_format_hint':
+        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
       default:
         return null;
     }
@@ -352563,8 +352946,6 @@ extension on _StringsPtBr {
         return 'The built-in web page player is temporarily disabled; this address cannot be played inside the app for now.';
       case 'video_mining_image_mode_video_clip':
         return 'Video clip with sound';
-      case 'video_mining_image_mode_video_clip_hint':
-        return 'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
       case 'reader_gallery_title':
         return 'Illustrations';
       case 'reader_gallery_unlocked_count':
@@ -354397,6 +354778,20 @@ extension on _StringsPtBr {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_mining_image_mode_video_clip_inline_hint':
+        return 'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+      case 'video_mining_clip_format':
+        return 'Video clip format';
+      case 'gal_mining_clip_format':
+        return 'Game clip format';
+      case 'mining_clip_format_webm_vp9':
+        return 'WebM · VP9 (plays inside the card, recommended)';
+      case 'mining_clip_format_webm_av1':
+        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      case 'mining_clip_format_mp4_h264':
+        return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+      case 'mining_clip_format_hint':
+        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
       default:
         return null;
     }
@@ -364319,8 +364714,6 @@ extension on _StringsRu {
         return 'The built-in web page player is temporarily disabled; this address cannot be played inside the app for now.';
       case 'video_mining_image_mode_video_clip':
         return 'Video clip with sound';
-      case 'video_mining_image_mode_video_clip_hint':
-        return 'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
       case 'reader_gallery_title':
         return 'Illustrations';
       case 'reader_gallery_unlocked_count':
@@ -366153,6 +366546,20 @@ extension on _StringsRu {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_mining_image_mode_video_clip_inline_hint':
+        return 'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+      case 'video_mining_clip_format':
+        return 'Video clip format';
+      case 'gal_mining_clip_format':
+        return 'Game clip format';
+      case 'mining_clip_format_webm_vp9':
+        return 'WebM · VP9 (plays inside the card, recommended)';
+      case 'mining_clip_format_webm_av1':
+        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      case 'mining_clip_format_mp4_h264':
+        return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+      case 'mining_clip_format_hint':
+        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
       default:
         return null;
     }
@@ -376044,8 +376451,6 @@ extension on _StringsTh {
         return 'The built-in web page player is temporarily disabled; this address cannot be played inside the app for now.';
       case 'video_mining_image_mode_video_clip':
         return 'Video clip with sound';
-      case 'video_mining_image_mode_video_clip_hint':
-        return 'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
       case 'reader_gallery_title':
         return 'Illustrations';
       case 'reader_gallery_unlocked_count':
@@ -377878,6 +378283,20 @@ extension on _StringsTh {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_mining_image_mode_video_clip_inline_hint':
+        return 'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+      case 'video_mining_clip_format':
+        return 'Video clip format';
+      case 'gal_mining_clip_format':
+        return 'Game clip format';
+      case 'mining_clip_format_webm_vp9':
+        return 'WebM · VP9 (plays inside the card, recommended)';
+      case 'mining_clip_format_webm_av1':
+        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      case 'mining_clip_format_mp4_h264':
+        return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+      case 'mining_clip_format_hint':
+        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
       default:
         return null;
     }
@@ -387785,8 +388204,6 @@ extension on _StringsTr {
         return 'The built-in web page player is temporarily disabled; this address cannot be played inside the app for now.';
       case 'video_mining_image_mode_video_clip':
         return 'Video clip with sound';
-      case 'video_mining_image_mode_video_clip_hint':
-        return 'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
       case 'reader_gallery_title':
         return 'Illustrations';
       case 'reader_gallery_unlocked_count':
@@ -389619,6 +390036,20 @@ extension on _StringsTr {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_mining_image_mode_video_clip_inline_hint':
+        return 'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+      case 'video_mining_clip_format':
+        return 'Video clip format';
+      case 'gal_mining_clip_format':
+        return 'Game clip format';
+      case 'mining_clip_format_webm_vp9':
+        return 'WebM · VP9 (plays inside the card, recommended)';
+      case 'mining_clip_format_webm_av1':
+        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      case 'mining_clip_format_mp4_h264':
+        return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+      case 'mining_clip_format_hint':
+        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
       default:
         return null;
     }
@@ -399520,8 +399951,6 @@ extension on _StringsVi {
         return 'The built-in web page player is temporarily disabled; this address cannot be played inside the app for now.';
       case 'video_mining_image_mode_video_clip':
         return 'Video clip with sound';
-      case 'video_mining_image_mode_video_clip_hint':
-        return 'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
       case 'reader_gallery_title':
         return 'Illustrations';
       case 'reader_gallery_unlocked_count':
@@ -401354,6 +401783,20 @@ extension on _StringsVi {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_mining_image_mode_video_clip_inline_hint':
+        return 'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+      case 'video_mining_clip_format':
+        return 'Video clip format';
+      case 'gal_mining_clip_format':
+        return 'Game clip format';
+      case 'mining_clip_format_webm_vp9':
+        return 'WebM · VP9 (plays inside the card, recommended)';
+      case 'mining_clip_format_webm_av1':
+        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      case 'mining_clip_format_mp4_h264':
+        return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+      case 'mining_clip_format_hint':
+        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
       default:
         return null;
     }
@@ -405094,7 +405537,7 @@ extension on _StringsZhCn {
       case 'handlebar_book_cover':
         return '书籍封面';
       case 'handlebar_card_image':
-        return '卡片图片（封面 / 视频 GIF）';
+        return '卡片图片（封面 / 视频片段）';
       case 'handlebar_clip_timestamp':
         return '片段时间';
       case 'handlebar_cue_sentence':
@@ -411162,8 +411605,6 @@ extension on _StringsZhCn {
         return '内置网页播放器已暂时停用，此地址暂时无法在应用内播放。';
       case 'video_mining_image_mode_video_clip':
         return '带声音的视频片段';
-      case 'video_mining_image_mode_video_clip_hint':
-        return '将画面与例句声音导出为同一个 MP4，由 Anki 媒体播放器同步播放；自动播放遵循卡片设置。不同客户端可能在独立播放器中打开。';
       case 'reader_gallery_title':
         return '插图册';
       case 'reader_gallery_unlocked_count':
@@ -412973,6 +413414,20 @@ extension on _StringsZhCn {
         return 'Wikipedia（日本語）';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia（English）';
+      case 'video_mining_image_mode_video_clip_inline_hint':
+        return '画面与例句声音保存在同一个片段里，音画始终同步。WebM 在卡片内播放（翻面自动播放，点例句重播）；MP4 交给 Anki 自带的播放器。';
+      case 'video_mining_clip_format':
+        return '视频片段格式';
+      case 'gal_mining_clip_format':
+        return '游戏片段格式';
+      case 'mining_clip_format_webm_vp9':
+        return 'WebM · VP9（卡片内播放，推荐）';
+      case 'mining_clip_format_webm_av1':
+        return 'WebM · AV1（卡片内播放，体积最小，编码更慢）';
+      case 'mining_clip_format_mp4_h264':
+        return 'MP4 · H.264（Anki 自带播放器；AnkiMobile 用这个）';
+      case 'mining_clip_format_hint':
+        return '所选格式在本机编不出来时，自动退回 WebM VP9，再退回 MP4。';
       default:
         return null;
     }
@@ -422801,8 +423256,6 @@ extension on _StringsZhHk {
         return '內置網頁播放器已暫時停用，此地址暫時無法在應用內播放。';
       case 'video_mining_image_mode_video_clip':
         return 'Video clip with sound';
-      case 'video_mining_image_mode_video_clip_hint':
-        return 'Export picture and sentence sound together in one MP4. Anki plays it through its media player; autoplay follows the card settings. Playback may open in a separate player depending on the client.';
       case 'reader_gallery_title':
         return 'Illustrations';
       case 'reader_gallery_unlocked_count':
@@ -424633,6 +425086,20 @@ extension on _StringsZhHk {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_mining_image_mode_video_clip_inline_hint':
+        return 'Picture and sentence audio are saved as one clip, so they always stay in sync. WebM plays inside the card (auto-plays when the card is shown; tap the sentence to replay); MP4 opens in Anki\'s own player.';
+      case 'video_mining_clip_format':
+        return 'Video clip format';
+      case 'gal_mining_clip_format':
+        return 'Game clip format';
+      case 'mining_clip_format_webm_vp9':
+        return 'WebM · VP9 (plays inside the card, recommended)';
+      case 'mining_clip_format_webm_av1':
+        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      case 'mining_clip_format_mp4_h264':
+        return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
+      case 'mining_clip_format_hint':
+        return 'If the chosen format cannot be encoded on this device, Fushi falls back to WebM VP9, then MP4.';
       default:
         return null;
     }
