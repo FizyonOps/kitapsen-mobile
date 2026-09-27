@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 96526 (5678 per locale)
+/// Strings: 96798 (5694 per locale)
 ///
-/// Built on 2026-09-27 at 13:56 UTC
+/// Built on 2026-09-27 at 14:31 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8113,6 +8113,40 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  String get video_subtitle_reference_sync_restore => 'Restore original';
 }
 
 // Path: <root>
@@ -21727,6 +21761,56 @@ class _StringsAr extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
 }
 
 // Path: <root>
@@ -35581,6 +35665,56 @@ class _StringsDe extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
 }
 
 // Path: <root>
@@ -49486,6 +49620,56 @@ class _StringsEs extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
 }
 
 // Path: <root>
@@ -63430,6 +63614,56 @@ class _StringsFr extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
 }
 
 // Path: <root>
@@ -77164,6 +77398,56 @@ class _StringsId extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
 }
 
 // Path: <root>
@@ -90999,6 +91283,56 @@ class _StringsIt extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
 }
 
 // Path: <root>
@@ -104189,6 +104523,56 @@ class _StringsJa extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
 }
 
 // Path: <root>
@@ -117396,6 +117780,56 @@ class _StringsKo extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
 }
 
 // Path: <root>
@@ -131185,6 +131619,56 @@ class _StringsNl extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
 }
 
 // Path: <root>
@@ -145027,6 +145511,56 @@ class _StringsPtBr extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
 }
 
 // Path: <root>
@@ -158844,6 +159378,56 @@ class _StringsRu extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
 }
 
 // Path: <root>
@@ -172458,6 +173042,56 @@ class _StringsTh extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
 }
 
 // Path: <root>
@@ -186186,6 +186820,56 @@ class _StringsTr extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
 }
 
 // Path: <root>
@@ -199885,6 +200569,56 @@ class _StringsVi extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
 }
 
 // Path: <root>
@@ -212415,6 +213149,47 @@ class _StringsZhCn extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia（日本語）';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia（English）';
+  @override
+  String get video_setting_subtitle_reference_sync => '下载字幕自动对齐';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      '按视频自带的字幕轨给下载的字幕对时间轴。只在证据充分时才改，否则保持原样。';
+  @override
+  String get video_subtitle_reference_sync_action => '按内嵌字幕对齐';
+  @override
+  String get video_subtitle_reference_sync_need_external => '先选一条下载或导入的外挂字幕';
+  @override
+  String get video_subtitle_reference_sync_running => '正在按内嵌字幕轨对齐…';
+  @override
+  String get video_subtitle_reference_sync_no_reference => '这个视频没有可当参考的文本字幕轨';
+  @override
+  String get video_subtitle_reference_sync_unreadable => '这条字幕读不出足够的时间轴';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      '与内嵌字幕对不上（可能不是这一集，或剪辑不同），保持原样';
+  @override
+  String get video_subtitle_reference_sync_in_sync => '已经与内嵌字幕对齐，无需修改';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      '已对齐：${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title => '对齐结果不太确定';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      '建议平移：${offset}。匹配率是瞎碰概率的 ${excess} 倍，${groups} 组独立参考字幕轨给出一致结果。要另存为一份新字幕吗？原字幕不会改动。';
+  @override
+  String get video_subtitle_reference_sync_apply => '应用';
+  @override
+  String get video_subtitle_reference_sync_restore_title => '这条字幕下载时已自动对齐';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      '下载时已按内嵌字幕轨调整过时间轴。要把原始时间轴恢复成一份新字幕吗？';
+  @override
+  String get video_subtitle_reference_sync_restore => '恢复原始字幕';
 }
 
 // Path: <root>
@@ -225285,6 +226060,56 @@ class _StringsZhHk extends _StringsEn {
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
 }
 
 /// Flat map(s) containing all translations.
@@ -237010,6 +237835,43 @@ extension on _StringsEn {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
       default:
         return null;
     }
@@ -248730,6 +249592,43 @@ extension on _StringsAr {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
       default:
         return null;
     }
@@ -260499,6 +261398,43 @@ extension on _StringsDe {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
       default:
         return null;
     }
@@ -272258,6 +273194,43 @@ extension on _StringsEs {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
       default:
         return null;
     }
@@ -284025,6 +284998,43 @@ extension on _StringsFr {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
       default:
         return null;
     }
@@ -295762,6 +296772,43 @@ extension on _StringsId {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
       default:
         return null;
     }
@@ -307522,6 +308569,43 @@ extension on _StringsIt {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
       default:
         return null;
     }
@@ -319203,6 +320287,43 @@ extension on _StringsJa {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
       default:
         return null;
     }
@@ -330892,6 +332013,43 @@ extension on _StringsKo {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
       default:
         return null;
     }
@@ -342647,6 +343805,43 @@ extension on _StringsNl {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
       default:
         return null;
     }
@@ -354397,6 +355592,43 @@ extension on _StringsPtBr {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
       default:
         return null;
     }
@@ -366153,6 +367385,43 @@ extension on _StringsRu {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
       default:
         return null;
     }
@@ -377878,6 +379147,43 @@ extension on _StringsTh {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
       default:
         return null;
     }
@@ -389619,6 +390925,43 @@ extension on _StringsTr {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
       default:
         return null;
     }
@@ -401354,6 +402697,43 @@ extension on _StringsVi {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
       default:
         return null;
     }
@@ -412973,6 +414353,43 @@ extension on _StringsZhCn {
         return 'Wikipedia（日本語）';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia（English）';
+      case 'video_setting_subtitle_reference_sync':
+        return '下载字幕自动对齐';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return '按视频自带的字幕轨给下载的字幕对时间轴。只在证据充分时才改，否则保持原样。';
+      case 'video_subtitle_reference_sync_action':
+        return '按内嵌字幕对齐';
+      case 'video_subtitle_reference_sync_need_external':
+        return '先选一条下载或导入的外挂字幕';
+      case 'video_subtitle_reference_sync_running':
+        return '正在按内嵌字幕轨对齐…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return '这个视频没有可当参考的文本字幕轨';
+      case 'video_subtitle_reference_sync_unreadable':
+        return '这条字幕读不出足够的时间轴';
+      case 'video_subtitle_reference_sync_refused':
+        return '与内嵌字幕对不上（可能不是这一集，或剪辑不同），保持原样';
+      case 'video_subtitle_reference_sync_in_sync':
+        return '已经与内嵌字幕对齐，无需修改';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => '已对齐：${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return '对齐结果不太确定';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            '建议平移：${offset}。匹配率是瞎碰概率的 ${excess} 倍，${groups} 组独立参考字幕轨给出一致结果。要另存为一份新字幕吗？原字幕不会改动。';
+      case 'video_subtitle_reference_sync_apply':
+        return '应用';
+      case 'video_subtitle_reference_sync_restore_title':
+        return '这条字幕下载时已自动对齐';
+      case 'video_subtitle_reference_sync_restore_body':
+        return '下载时已按内嵌字幕轨调整过时间轴。要把原始时间轴恢复成一份新字幕吗？';
+      case 'video_subtitle_reference_sync_restore':
+        return '恢复原始字幕';
       default:
         return null;
     }
@@ -424633,6 +426050,43 @@ extension on _StringsZhHk {
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
       default:
         return null;
     }
