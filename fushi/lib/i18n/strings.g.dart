@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 96441 (5673 per locale)
+/// Strings: 96475 (5675 per locale)
 ///
-/// Built on 2026-09-27 at 12:21 UTC
+/// Built on 2026-09-27 at 13:51 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8107,6 +8107,9 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get ai_video_download_skip_extras => 'Skip extras';
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  String get video_item_rescrape => 'Rescrape metadata and cover';
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
 }
 
 // Path: <root>
@@ -21710,6 +21713,11 @@ class _StringsAr extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get video_item_rescrape => 'Rescrape metadata and cover';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
 }
 
 // Path: <root>
@@ -35553,6 +35561,11 @@ class _StringsDe extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get video_item_rescrape => 'Rescrape metadata and cover';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
 }
 
 // Path: <root>
@@ -49447,6 +49460,11 @@ class _StringsEs extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get video_item_rescrape => 'Rescrape metadata and cover';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
 }
 
 // Path: <root>
@@ -63380,6 +63398,11 @@ class _StringsFr extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get video_item_rescrape => 'Rescrape metadata and cover';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
 }
 
 // Path: <root>
@@ -77103,6 +77126,11 @@ class _StringsId extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get video_item_rescrape => 'Rescrape metadata and cover';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
 }
 
 // Path: <root>
@@ -90927,6 +90955,11 @@ class _StringsIt extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get video_item_rescrape => 'Rescrape metadata and cover';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
 }
 
 // Path: <root>
@@ -104106,6 +104139,11 @@ class _StringsJa extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get video_item_rescrape => 'Rescrape metadata and cover';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
 }
 
 // Path: <root>
@@ -117302,6 +117340,11 @@ class _StringsKo extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get video_item_rescrape => 'Rescrape metadata and cover';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
 }
 
 // Path: <root>
@@ -131080,6 +131123,11 @@ class _StringsNl extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get video_item_rescrape => 'Rescrape metadata and cover';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
 }
 
 // Path: <root>
@@ -144911,6 +144959,11 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get video_item_rescrape => 'Rescrape metadata and cover';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
 }
 
 // Path: <root>
@@ -158717,6 +158770,11 @@ class _StringsRu extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get video_item_rescrape => 'Rescrape metadata and cover';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
 }
 
 // Path: <root>
@@ -172320,6 +172378,11 @@ class _StringsTh extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get video_item_rescrape => 'Rescrape metadata and cover';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
 }
 
 // Path: <root>
@@ -186037,6 +186100,11 @@ class _StringsTr extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get video_item_rescrape => 'Rescrape metadata and cover';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
 }
 
 // Path: <root>
@@ -199725,6 +199793,11 @@ class _StringsVi extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get video_item_rescrape => 'Rescrape metadata and cover';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
 }
 
 // Path: <root>
@@ -212244,6 +212317,10 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV、CM、NCOP/NCED、菜单等。对所有下载到视频来源的任务生效：种子里的特典文件不下载，只有特典的发布也不会被选中。';
+  @override
+  String get video_item_rescrape => '重新刮削资料与封面';
+  @override
+  String get video_item_rescrape_not_planned => '这个视频不在任何本地视频来源的刮削计划里';
 }
 
 // Path: <root>
@@ -225103,6 +225180,11 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get video_item_rescrape => 'Rescrape metadata and cover';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
 }
 
 /// Flat map(s) containing all translations.
@@ -236818,6 +236900,10 @@ extension on _StringsEn {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'video_item_rescrape':
+        return 'Rescrape metadata and cover';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       default:
         return null;
     }
@@ -248528,6 +248614,10 @@ extension on _StringsAr {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'video_item_rescrape':
+        return 'Rescrape metadata and cover';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       default:
         return null;
     }
@@ -260287,6 +260377,10 @@ extension on _StringsDe {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'video_item_rescrape':
+        return 'Rescrape metadata and cover';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       default:
         return null;
     }
@@ -272036,6 +272130,10 @@ extension on _StringsEs {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'video_item_rescrape':
+        return 'Rescrape metadata and cover';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       default:
         return null;
     }
@@ -283793,6 +283891,10 @@ extension on _StringsFr {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'video_item_rescrape':
+        return 'Rescrape metadata and cover';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       default:
         return null;
     }
@@ -295520,6 +295622,10 @@ extension on _StringsId {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'video_item_rescrape':
+        return 'Rescrape metadata and cover';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       default:
         return null;
     }
@@ -307270,6 +307376,10 @@ extension on _StringsIt {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'video_item_rescrape':
+        return 'Rescrape metadata and cover';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       default:
         return null;
     }
@@ -318941,6 +319051,10 @@ extension on _StringsJa {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'video_item_rescrape':
+        return 'Rescrape metadata and cover';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       default:
         return null;
     }
@@ -330620,6 +330734,10 @@ extension on _StringsKo {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'video_item_rescrape':
+        return 'Rescrape metadata and cover';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       default:
         return null;
     }
@@ -342365,6 +342483,10 @@ extension on _StringsNl {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'video_item_rescrape':
+        return 'Rescrape metadata and cover';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       default:
         return null;
     }
@@ -354105,6 +354227,10 @@ extension on _StringsPtBr {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'video_item_rescrape':
+        return 'Rescrape metadata and cover';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       default:
         return null;
     }
@@ -365851,6 +365977,10 @@ extension on _StringsRu {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'video_item_rescrape':
+        return 'Rescrape metadata and cover';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       default:
         return null;
     }
@@ -377566,6 +377696,10 @@ extension on _StringsTh {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'video_item_rescrape':
+        return 'Rescrape metadata and cover';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       default:
         return null;
     }
@@ -389297,6 +389431,10 @@ extension on _StringsTr {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'video_item_rescrape':
+        return 'Rescrape metadata and cover';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       default:
         return null;
     }
@@ -401022,6 +401160,10 @@ extension on _StringsVi {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'video_item_rescrape':
+        return 'Rescrape metadata and cover';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       default:
         return null;
     }
@@ -412630,6 +412772,10 @@ extension on _StringsZhCn {
         return '跳过特典';
       case 'ai_video_download_skip_extras_hint':
         return 'PV、CM、NCOP/NCED、菜单等。对所有下载到视频来源的任务生效：种子里的特典文件不下载，只有特典的发布也不会被选中。';
+      case 'video_item_rescrape':
+        return '重新刮削资料与封面';
+      case 'video_item_rescrape_not_planned':
+        return '这个视频不在任何本地视频来源的刮削计划里';
       default:
         return null;
     }
@@ -424280,6 +424426,10 @@ extension on _StringsZhHk {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'video_item_rescrape':
+        return 'Rescrape metadata and cover';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
       default:
         return null;
     }
