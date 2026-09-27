@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 96441 (5673 per locale)
+/// Strings: 96526 (5678 per locale)
 ///
-/// Built on 2026-09-27 at 12:21 UTC
+/// Built on 2026-09-27 at 13:35 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8107,6 +8107,12 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get ai_video_download_skip_extras => 'Skip extras';
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  String get ai_web_knowledge_section => 'Web knowledge';
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
 }
 
 // Path: <root>
@@ -21710,6 +21716,17 @@ class _StringsAr extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
 }
 
 // Path: <root>
@@ -35553,6 +35570,17 @@ class _StringsDe extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
 }
 
 // Path: <root>
@@ -49447,6 +49475,17 @@ class _StringsEs extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
 }
 
 // Path: <root>
@@ -63380,6 +63419,17 @@ class _StringsFr extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
 }
 
 // Path: <root>
@@ -77103,6 +77153,17 @@ class _StringsId extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
 }
 
 // Path: <root>
@@ -90927,6 +90988,17 @@ class _StringsIt extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
 }
 
 // Path: <root>
@@ -104106,6 +104178,17 @@ class _StringsJa extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
 }
 
 // Path: <root>
@@ -117302,6 +117385,17 @@ class _StringsKo extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
 }
 
 // Path: <root>
@@ -131080,6 +131174,17 @@ class _StringsNl extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
 }
 
 // Path: <root>
@@ -144911,6 +145016,17 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
 }
 
 // Path: <root>
@@ -158717,6 +158833,17 @@ class _StringsRu extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
 }
 
 // Path: <root>
@@ -172320,6 +172447,17 @@ class _StringsTh extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
 }
 
 // Path: <root>
@@ -186037,6 +186175,17 @@ class _StringsTr extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
 }
 
 // Path: <root>
@@ -199725,6 +199874,17 @@ class _StringsVi extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
 }
 
 // Path: <root>
@@ -212244,6 +212404,17 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV、CM、NCOP/NCED、菜单等。对所有下载到视频来源的任务生效：种子里的特典文件不下载，只有特典的发布也不会被选中。';
+  @override
+  String get ai_web_knowledge_section => '联网资料';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi 自己抓取所选来源的条目正文交给 AI（AI 下视频列出系列作品、视频作品识别时使用），不需要 AI 提供商支持联网。AI 只能引用抓到的内容，列出的作品还会逐部在资料源里核对。';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => '维基百科（中文）';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia（日本語）';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia（English）';
 }
 
 // Path: <root>
@@ -225103,6 +225274,17 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
 }
 
 /// Flat map(s) containing all translations.
@@ -236818,6 +237000,16 @@ extension on _StringsEn {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
       default:
         return null;
     }
@@ -248528,6 +248720,16 @@ extension on _StringsAr {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
       default:
         return null;
     }
@@ -260287,6 +260489,16 @@ extension on _StringsDe {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
       default:
         return null;
     }
@@ -272036,6 +272248,16 @@ extension on _StringsEs {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
       default:
         return null;
     }
@@ -283793,6 +284015,16 @@ extension on _StringsFr {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
       default:
         return null;
     }
@@ -295520,6 +295752,16 @@ extension on _StringsId {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
       default:
         return null;
     }
@@ -307270,6 +307512,16 @@ extension on _StringsIt {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
       default:
         return null;
     }
@@ -318941,6 +319193,16 @@ extension on _StringsJa {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
       default:
         return null;
     }
@@ -330620,6 +330882,16 @@ extension on _StringsKo {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
       default:
         return null;
     }
@@ -342365,6 +342637,16 @@ extension on _StringsNl {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
       default:
         return null;
     }
@@ -354105,6 +354387,16 @@ extension on _StringsPtBr {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
       default:
         return null;
     }
@@ -365851,6 +366143,16 @@ extension on _StringsRu {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
       default:
         return null;
     }
@@ -377566,6 +377868,16 @@ extension on _StringsTh {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
       default:
         return null;
     }
@@ -389297,6 +389609,16 @@ extension on _StringsTr {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
       default:
         return null;
     }
@@ -401022,6 +401344,16 @@ extension on _StringsVi {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
       default:
         return null;
     }
@@ -412630,6 +412962,16 @@ extension on _StringsZhCn {
         return '跳过特典';
       case 'ai_video_download_skip_extras_hint':
         return 'PV、CM、NCOP/NCED、菜单等。对所有下载到视频来源的任务生效：种子里的特典文件不下载，只有特典的发布也不会被选中。';
+      case 'ai_web_knowledge_section':
+        return '联网资料';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi 自己抓取所选来源的条目正文交给 AI（AI 下视频列出系列作品、视频作品识别时使用），不需要 AI 提供商支持联网。AI 只能引用抓到的内容，列出的作品还会逐部在资料源里核对。';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return '维基百科（中文）';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia（日本語）';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia（English）';
       default:
         return null;
     }
@@ -424280,6 +424622,16 @@ extension on _StringsZhHk {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
       default:
         return null;
     }
