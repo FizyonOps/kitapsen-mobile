@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 96713 (5689 per locale)
+/// Strings: 97019 (5707 per locale)
 ///
-/// Built on 2026-09-27 at 14:13 UTC
+/// Built on 2026-09-27 at 17:48 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8127,6 +8127,30 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get ai_web_knowledge_custom_endpoint_invalid =>
       'Enter an https:// address ending in api.php';
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  String get sync_pair_link_unreachable =>
+      'None of the addresses in this pairing link are reachable, or they point to a different device';
+  String get sync_pair_link_invalid => 'This is not a valid Fushi pairing link';
+  String get sync_pair_qr_show => 'Show pairing QR code';
+  String get sync_pair_qr_title => 'Scan to pair';
+  String get sync_pair_qr_hint =>
+      'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+  String get sync_pair_qr_no_address =>
+      'No reachable address to put in the QR code. Check that this device is connected to a network.';
+  String get sync_pair_link_copy => 'Copy pairing link';
+  String get sync_pair_link_copied => 'Pairing link copied';
+  String get sync_pair_qr_unavailable => 'Start the host service first';
+  String get sync_pair_scan => 'Scan QR code';
+  String get sync_pair_scan_failed => 'Couldn\'t open the camera';
+  String get sync_pair_link_paste => 'Paste pairing link';
+  String get sync_pair_nfc_write => 'Write NFC tag';
+  String get sync_pair_nfc_write_hint =>
+      'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+  String get sync_pair_nfc_written => 'NFC tag written';
+  String get sync_pair_nfc_failed =>
+      'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+  String get sync_server_public_urls => 'Public / reverse proxy addresses';
+  String get sync_server_public_urls_hint =>
+      'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
 }
 
 // Path: <root>
@@ -21766,6 +21790,48 @@ class _StringsAr extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get sync_pair_link_unreachable =>
+      'None of the addresses in this pairing link are reachable, or they point to a different device';
+  @override
+  String get sync_pair_link_invalid => 'This is not a valid Fushi pairing link';
+  @override
+  String get sync_pair_qr_show => 'Show pairing QR code';
+  @override
+  String get sync_pair_qr_title => 'Scan to pair';
+  @override
+  String get sync_pair_qr_hint =>
+      'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+  @override
+  String get sync_pair_qr_no_address =>
+      'No reachable address to put in the QR code. Check that this device is connected to a network.';
+  @override
+  String get sync_pair_link_copy => 'Copy pairing link';
+  @override
+  String get sync_pair_link_copied => 'Pairing link copied';
+  @override
+  String get sync_pair_qr_unavailable => 'Start the host service first';
+  @override
+  String get sync_pair_scan => 'Scan QR code';
+  @override
+  String get sync_pair_scan_failed => 'Couldn\'t open the camera';
+  @override
+  String get sync_pair_link_paste => 'Paste pairing link';
+  @override
+  String get sync_pair_nfc_write => 'Write NFC tag';
+  @override
+  String get sync_pair_nfc_write_hint =>
+      'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+  @override
+  String get sync_pair_nfc_written => 'NFC tag written';
+  @override
+  String get sync_pair_nfc_failed =>
+      'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+  @override
+  String get sync_server_public_urls => 'Public / reverse proxy addresses';
+  @override
+  String get sync_server_public_urls_hint =>
+      'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
 }
 
 // Path: <root>
@@ -35645,6 +35711,48 @@ class _StringsDe extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get sync_pair_link_unreachable =>
+      'None of the addresses in this pairing link are reachable, or they point to a different device';
+  @override
+  String get sync_pair_link_invalid => 'This is not a valid Fushi pairing link';
+  @override
+  String get sync_pair_qr_show => 'Show pairing QR code';
+  @override
+  String get sync_pair_qr_title => 'Scan to pair';
+  @override
+  String get sync_pair_qr_hint =>
+      'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+  @override
+  String get sync_pair_qr_no_address =>
+      'No reachable address to put in the QR code. Check that this device is connected to a network.';
+  @override
+  String get sync_pair_link_copy => 'Copy pairing link';
+  @override
+  String get sync_pair_link_copied => 'Pairing link copied';
+  @override
+  String get sync_pair_qr_unavailable => 'Start the host service first';
+  @override
+  String get sync_pair_scan => 'Scan QR code';
+  @override
+  String get sync_pair_scan_failed => 'Couldn\'t open the camera';
+  @override
+  String get sync_pair_link_paste => 'Paste pairing link';
+  @override
+  String get sync_pair_nfc_write => 'Write NFC tag';
+  @override
+  String get sync_pair_nfc_write_hint =>
+      'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+  @override
+  String get sync_pair_nfc_written => 'NFC tag written';
+  @override
+  String get sync_pair_nfc_failed =>
+      'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+  @override
+  String get sync_server_public_urls => 'Public / reverse proxy addresses';
+  @override
+  String get sync_server_public_urls_hint =>
+      'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
 }
 
 // Path: <root>
@@ -49575,6 +49683,48 @@ class _StringsEs extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get sync_pair_link_unreachable =>
+      'None of the addresses in this pairing link are reachable, or they point to a different device';
+  @override
+  String get sync_pair_link_invalid => 'This is not a valid Fushi pairing link';
+  @override
+  String get sync_pair_qr_show => 'Show pairing QR code';
+  @override
+  String get sync_pair_qr_title => 'Scan to pair';
+  @override
+  String get sync_pair_qr_hint =>
+      'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+  @override
+  String get sync_pair_qr_no_address =>
+      'No reachable address to put in the QR code. Check that this device is connected to a network.';
+  @override
+  String get sync_pair_link_copy => 'Copy pairing link';
+  @override
+  String get sync_pair_link_copied => 'Pairing link copied';
+  @override
+  String get sync_pair_qr_unavailable => 'Start the host service first';
+  @override
+  String get sync_pair_scan => 'Scan QR code';
+  @override
+  String get sync_pair_scan_failed => 'Couldn\'t open the camera';
+  @override
+  String get sync_pair_link_paste => 'Paste pairing link';
+  @override
+  String get sync_pair_nfc_write => 'Write NFC tag';
+  @override
+  String get sync_pair_nfc_write_hint =>
+      'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+  @override
+  String get sync_pair_nfc_written => 'NFC tag written';
+  @override
+  String get sync_pair_nfc_failed =>
+      'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+  @override
+  String get sync_server_public_urls => 'Public / reverse proxy addresses';
+  @override
+  String get sync_server_public_urls_hint =>
+      'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
 }
 
 // Path: <root>
@@ -63544,6 +63694,48 @@ class _StringsFr extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get sync_pair_link_unreachable =>
+      'None of the addresses in this pairing link are reachable, or they point to a different device';
+  @override
+  String get sync_pair_link_invalid => 'This is not a valid Fushi pairing link';
+  @override
+  String get sync_pair_qr_show => 'Show pairing QR code';
+  @override
+  String get sync_pair_qr_title => 'Scan to pair';
+  @override
+  String get sync_pair_qr_hint =>
+      'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+  @override
+  String get sync_pair_qr_no_address =>
+      'No reachable address to put in the QR code. Check that this device is connected to a network.';
+  @override
+  String get sync_pair_link_copy => 'Copy pairing link';
+  @override
+  String get sync_pair_link_copied => 'Pairing link copied';
+  @override
+  String get sync_pair_qr_unavailable => 'Start the host service first';
+  @override
+  String get sync_pair_scan => 'Scan QR code';
+  @override
+  String get sync_pair_scan_failed => 'Couldn\'t open the camera';
+  @override
+  String get sync_pair_link_paste => 'Paste pairing link';
+  @override
+  String get sync_pair_nfc_write => 'Write NFC tag';
+  @override
+  String get sync_pair_nfc_write_hint =>
+      'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+  @override
+  String get sync_pair_nfc_written => 'NFC tag written';
+  @override
+  String get sync_pair_nfc_failed =>
+      'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+  @override
+  String get sync_server_public_urls => 'Public / reverse proxy addresses';
+  @override
+  String get sync_server_public_urls_hint =>
+      'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
 }
 
 // Path: <root>
@@ -77303,6 +77495,48 @@ class _StringsId extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get sync_pair_link_unreachable =>
+      'None of the addresses in this pairing link are reachable, or they point to a different device';
+  @override
+  String get sync_pair_link_invalid => 'This is not a valid Fushi pairing link';
+  @override
+  String get sync_pair_qr_show => 'Show pairing QR code';
+  @override
+  String get sync_pair_qr_title => 'Scan to pair';
+  @override
+  String get sync_pair_qr_hint =>
+      'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+  @override
+  String get sync_pair_qr_no_address =>
+      'No reachable address to put in the QR code. Check that this device is connected to a network.';
+  @override
+  String get sync_pair_link_copy => 'Copy pairing link';
+  @override
+  String get sync_pair_link_copied => 'Pairing link copied';
+  @override
+  String get sync_pair_qr_unavailable => 'Start the host service first';
+  @override
+  String get sync_pair_scan => 'Scan QR code';
+  @override
+  String get sync_pair_scan_failed => 'Couldn\'t open the camera';
+  @override
+  String get sync_pair_link_paste => 'Paste pairing link';
+  @override
+  String get sync_pair_nfc_write => 'Write NFC tag';
+  @override
+  String get sync_pair_nfc_write_hint =>
+      'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+  @override
+  String get sync_pair_nfc_written => 'NFC tag written';
+  @override
+  String get sync_pair_nfc_failed =>
+      'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+  @override
+  String get sync_server_public_urls => 'Public / reverse proxy addresses';
+  @override
+  String get sync_server_public_urls_hint =>
+      'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
 }
 
 // Path: <root>
@@ -91163,6 +91397,48 @@ class _StringsIt extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get sync_pair_link_unreachable =>
+      'None of the addresses in this pairing link are reachable, or they point to a different device';
+  @override
+  String get sync_pair_link_invalid => 'This is not a valid Fushi pairing link';
+  @override
+  String get sync_pair_qr_show => 'Show pairing QR code';
+  @override
+  String get sync_pair_qr_title => 'Scan to pair';
+  @override
+  String get sync_pair_qr_hint =>
+      'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+  @override
+  String get sync_pair_qr_no_address =>
+      'No reachable address to put in the QR code. Check that this device is connected to a network.';
+  @override
+  String get sync_pair_link_copy => 'Copy pairing link';
+  @override
+  String get sync_pair_link_copied => 'Pairing link copied';
+  @override
+  String get sync_pair_qr_unavailable => 'Start the host service first';
+  @override
+  String get sync_pair_scan => 'Scan QR code';
+  @override
+  String get sync_pair_scan_failed => 'Couldn\'t open the camera';
+  @override
+  String get sync_pair_link_paste => 'Paste pairing link';
+  @override
+  String get sync_pair_nfc_write => 'Write NFC tag';
+  @override
+  String get sync_pair_nfc_write_hint =>
+      'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+  @override
+  String get sync_pair_nfc_written => 'NFC tag written';
+  @override
+  String get sync_pair_nfc_failed =>
+      'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+  @override
+  String get sync_server_public_urls => 'Public / reverse proxy addresses';
+  @override
+  String get sync_server_public_urls_hint =>
+      'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
 }
 
 // Path: <root>
@@ -104378,6 +104654,48 @@ class _StringsJa extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get sync_pair_link_unreachable =>
+      'None of the addresses in this pairing link are reachable, or they point to a different device';
+  @override
+  String get sync_pair_link_invalid => 'This is not a valid Fushi pairing link';
+  @override
+  String get sync_pair_qr_show => 'Show pairing QR code';
+  @override
+  String get sync_pair_qr_title => 'Scan to pair';
+  @override
+  String get sync_pair_qr_hint =>
+      'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+  @override
+  String get sync_pair_qr_no_address =>
+      'No reachable address to put in the QR code. Check that this device is connected to a network.';
+  @override
+  String get sync_pair_link_copy => 'Copy pairing link';
+  @override
+  String get sync_pair_link_copied => 'Pairing link copied';
+  @override
+  String get sync_pair_qr_unavailable => 'Start the host service first';
+  @override
+  String get sync_pair_scan => 'Scan QR code';
+  @override
+  String get sync_pair_scan_failed => 'Couldn\'t open the camera';
+  @override
+  String get sync_pair_link_paste => 'Paste pairing link';
+  @override
+  String get sync_pair_nfc_write => 'Write NFC tag';
+  @override
+  String get sync_pair_nfc_write_hint =>
+      'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+  @override
+  String get sync_pair_nfc_written => 'NFC tag written';
+  @override
+  String get sync_pair_nfc_failed =>
+      'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+  @override
+  String get sync_server_public_urls => 'Public / reverse proxy addresses';
+  @override
+  String get sync_server_public_urls_hint =>
+      'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
 }
 
 // Path: <root>
@@ -117610,6 +117928,48 @@ class _StringsKo extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get sync_pair_link_unreachable =>
+      'None of the addresses in this pairing link are reachable, or they point to a different device';
+  @override
+  String get sync_pair_link_invalid => 'This is not a valid Fushi pairing link';
+  @override
+  String get sync_pair_qr_show => 'Show pairing QR code';
+  @override
+  String get sync_pair_qr_title => 'Scan to pair';
+  @override
+  String get sync_pair_qr_hint =>
+      'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+  @override
+  String get sync_pair_qr_no_address =>
+      'No reachable address to put in the QR code. Check that this device is connected to a network.';
+  @override
+  String get sync_pair_link_copy => 'Copy pairing link';
+  @override
+  String get sync_pair_link_copied => 'Pairing link copied';
+  @override
+  String get sync_pair_qr_unavailable => 'Start the host service first';
+  @override
+  String get sync_pair_scan => 'Scan QR code';
+  @override
+  String get sync_pair_scan_failed => 'Couldn\'t open the camera';
+  @override
+  String get sync_pair_link_paste => 'Paste pairing link';
+  @override
+  String get sync_pair_nfc_write => 'Write NFC tag';
+  @override
+  String get sync_pair_nfc_write_hint =>
+      'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+  @override
+  String get sync_pair_nfc_written => 'NFC tag written';
+  @override
+  String get sync_pair_nfc_failed =>
+      'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+  @override
+  String get sync_server_public_urls => 'Public / reverse proxy addresses';
+  @override
+  String get sync_server_public_urls_hint =>
+      'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
 }
 
 // Path: <root>
@@ -131424,6 +131784,48 @@ class _StringsNl extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get sync_pair_link_unreachable =>
+      'None of the addresses in this pairing link are reachable, or they point to a different device';
+  @override
+  String get sync_pair_link_invalid => 'This is not a valid Fushi pairing link';
+  @override
+  String get sync_pair_qr_show => 'Show pairing QR code';
+  @override
+  String get sync_pair_qr_title => 'Scan to pair';
+  @override
+  String get sync_pair_qr_hint =>
+      'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+  @override
+  String get sync_pair_qr_no_address =>
+      'No reachable address to put in the QR code. Check that this device is connected to a network.';
+  @override
+  String get sync_pair_link_copy => 'Copy pairing link';
+  @override
+  String get sync_pair_link_copied => 'Pairing link copied';
+  @override
+  String get sync_pair_qr_unavailable => 'Start the host service first';
+  @override
+  String get sync_pair_scan => 'Scan QR code';
+  @override
+  String get sync_pair_scan_failed => 'Couldn\'t open the camera';
+  @override
+  String get sync_pair_link_paste => 'Paste pairing link';
+  @override
+  String get sync_pair_nfc_write => 'Write NFC tag';
+  @override
+  String get sync_pair_nfc_write_hint =>
+      'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+  @override
+  String get sync_pair_nfc_written => 'NFC tag written';
+  @override
+  String get sync_pair_nfc_failed =>
+      'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+  @override
+  String get sync_server_public_urls => 'Public / reverse proxy addresses';
+  @override
+  String get sync_server_public_urls_hint =>
+      'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
 }
 
 // Path: <root>
@@ -145291,6 +145693,48 @@ class _StringsPtBr extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get sync_pair_link_unreachable =>
+      'None of the addresses in this pairing link are reachable, or they point to a different device';
+  @override
+  String get sync_pair_link_invalid => 'This is not a valid Fushi pairing link';
+  @override
+  String get sync_pair_qr_show => 'Show pairing QR code';
+  @override
+  String get sync_pair_qr_title => 'Scan to pair';
+  @override
+  String get sync_pair_qr_hint =>
+      'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+  @override
+  String get sync_pair_qr_no_address =>
+      'No reachable address to put in the QR code. Check that this device is connected to a network.';
+  @override
+  String get sync_pair_link_copy => 'Copy pairing link';
+  @override
+  String get sync_pair_link_copied => 'Pairing link copied';
+  @override
+  String get sync_pair_qr_unavailable => 'Start the host service first';
+  @override
+  String get sync_pair_scan => 'Scan QR code';
+  @override
+  String get sync_pair_scan_failed => 'Couldn\'t open the camera';
+  @override
+  String get sync_pair_link_paste => 'Paste pairing link';
+  @override
+  String get sync_pair_nfc_write => 'Write NFC tag';
+  @override
+  String get sync_pair_nfc_write_hint =>
+      'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+  @override
+  String get sync_pair_nfc_written => 'NFC tag written';
+  @override
+  String get sync_pair_nfc_failed =>
+      'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+  @override
+  String get sync_server_public_urls => 'Public / reverse proxy addresses';
+  @override
+  String get sync_server_public_urls_hint =>
+      'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
 }
 
 // Path: <root>
@@ -159133,6 +159577,48 @@ class _StringsRu extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get sync_pair_link_unreachable =>
+      'None of the addresses in this pairing link are reachable, or they point to a different device';
+  @override
+  String get sync_pair_link_invalid => 'This is not a valid Fushi pairing link';
+  @override
+  String get sync_pair_qr_show => 'Show pairing QR code';
+  @override
+  String get sync_pair_qr_title => 'Scan to pair';
+  @override
+  String get sync_pair_qr_hint =>
+      'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+  @override
+  String get sync_pair_qr_no_address =>
+      'No reachable address to put in the QR code. Check that this device is connected to a network.';
+  @override
+  String get sync_pair_link_copy => 'Copy pairing link';
+  @override
+  String get sync_pair_link_copied => 'Pairing link copied';
+  @override
+  String get sync_pair_qr_unavailable => 'Start the host service first';
+  @override
+  String get sync_pair_scan => 'Scan QR code';
+  @override
+  String get sync_pair_scan_failed => 'Couldn\'t open the camera';
+  @override
+  String get sync_pair_link_paste => 'Paste pairing link';
+  @override
+  String get sync_pair_nfc_write => 'Write NFC tag';
+  @override
+  String get sync_pair_nfc_write_hint =>
+      'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+  @override
+  String get sync_pair_nfc_written => 'NFC tag written';
+  @override
+  String get sync_pair_nfc_failed =>
+      'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+  @override
+  String get sync_server_public_urls => 'Public / reverse proxy addresses';
+  @override
+  String get sync_server_public_urls_hint =>
+      'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
 }
 
 // Path: <root>
@@ -172772,6 +173258,48 @@ class _StringsTh extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get sync_pair_link_unreachable =>
+      'None of the addresses in this pairing link are reachable, or they point to a different device';
+  @override
+  String get sync_pair_link_invalid => 'This is not a valid Fushi pairing link';
+  @override
+  String get sync_pair_qr_show => 'Show pairing QR code';
+  @override
+  String get sync_pair_qr_title => 'Scan to pair';
+  @override
+  String get sync_pair_qr_hint =>
+      'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+  @override
+  String get sync_pair_qr_no_address =>
+      'No reachable address to put in the QR code. Check that this device is connected to a network.';
+  @override
+  String get sync_pair_link_copy => 'Copy pairing link';
+  @override
+  String get sync_pair_link_copied => 'Pairing link copied';
+  @override
+  String get sync_pair_qr_unavailable => 'Start the host service first';
+  @override
+  String get sync_pair_scan => 'Scan QR code';
+  @override
+  String get sync_pair_scan_failed => 'Couldn\'t open the camera';
+  @override
+  String get sync_pair_link_paste => 'Paste pairing link';
+  @override
+  String get sync_pair_nfc_write => 'Write NFC tag';
+  @override
+  String get sync_pair_nfc_write_hint =>
+      'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+  @override
+  String get sync_pair_nfc_written => 'NFC tag written';
+  @override
+  String get sync_pair_nfc_failed =>
+      'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+  @override
+  String get sync_server_public_urls => 'Public / reverse proxy addresses';
+  @override
+  String get sync_server_public_urls_hint =>
+      'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
 }
 
 // Path: <root>
@@ -186525,6 +187053,48 @@ class _StringsTr extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get sync_pair_link_unreachable =>
+      'None of the addresses in this pairing link are reachable, or they point to a different device';
+  @override
+  String get sync_pair_link_invalid => 'This is not a valid Fushi pairing link';
+  @override
+  String get sync_pair_qr_show => 'Show pairing QR code';
+  @override
+  String get sync_pair_qr_title => 'Scan to pair';
+  @override
+  String get sync_pair_qr_hint =>
+      'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+  @override
+  String get sync_pair_qr_no_address =>
+      'No reachable address to put in the QR code. Check that this device is connected to a network.';
+  @override
+  String get sync_pair_link_copy => 'Copy pairing link';
+  @override
+  String get sync_pair_link_copied => 'Pairing link copied';
+  @override
+  String get sync_pair_qr_unavailable => 'Start the host service first';
+  @override
+  String get sync_pair_scan => 'Scan QR code';
+  @override
+  String get sync_pair_scan_failed => 'Couldn\'t open the camera';
+  @override
+  String get sync_pair_link_paste => 'Paste pairing link';
+  @override
+  String get sync_pair_nfc_write => 'Write NFC tag';
+  @override
+  String get sync_pair_nfc_write_hint =>
+      'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+  @override
+  String get sync_pair_nfc_written => 'NFC tag written';
+  @override
+  String get sync_pair_nfc_failed =>
+      'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+  @override
+  String get sync_server_public_urls => 'Public / reverse proxy addresses';
+  @override
+  String get sync_server_public_urls_hint =>
+      'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
 }
 
 // Path: <root>
@@ -200249,6 +200819,48 @@ class _StringsVi extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get sync_pair_link_unreachable =>
+      'None of the addresses in this pairing link are reachable, or they point to a different device';
+  @override
+  String get sync_pair_link_invalid => 'This is not a valid Fushi pairing link';
+  @override
+  String get sync_pair_qr_show => 'Show pairing QR code';
+  @override
+  String get sync_pair_qr_title => 'Scan to pair';
+  @override
+  String get sync_pair_qr_hint =>
+      'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+  @override
+  String get sync_pair_qr_no_address =>
+      'No reachable address to put in the QR code. Check that this device is connected to a network.';
+  @override
+  String get sync_pair_link_copy => 'Copy pairing link';
+  @override
+  String get sync_pair_link_copied => 'Pairing link copied';
+  @override
+  String get sync_pair_qr_unavailable => 'Start the host service first';
+  @override
+  String get sync_pair_scan => 'Scan QR code';
+  @override
+  String get sync_pair_scan_failed => 'Couldn\'t open the camera';
+  @override
+  String get sync_pair_link_paste => 'Paste pairing link';
+  @override
+  String get sync_pair_nfc_write => 'Write NFC tag';
+  @override
+  String get sync_pair_nfc_write_hint =>
+      'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+  @override
+  String get sync_pair_nfc_written => 'NFC tag written';
+  @override
+  String get sync_pair_nfc_failed =>
+      'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+  @override
+  String get sync_server_public_urls => 'Public / reverse proxy addresses';
+  @override
+  String get sync_server_public_urls_hint =>
+      'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
 }
 
 // Path: <root>
@@ -212803,6 +213415,44 @@ class _StringsZhCn extends _StringsEn {
       '请填写以 https:// 开头、以 api.php 结尾的地址';
   @override
   String get ai_web_knowledge_custom_remove => '删除站点';
+  @override
+  String get sync_pair_link_unreachable => '配对链接里的地址都连不上，或指向的不是那台设备';
+  @override
+  String get sync_pair_link_invalid => '不是有效的 Fushi 配对链接';
+  @override
+  String get sync_pair_qr_show => '显示配对二维码';
+  @override
+  String get sync_pair_qr_title => '扫码配对';
+  @override
+  String get sync_pair_qr_hint => '在另一台设备的 Fushi 里扫这个码。5 分钟内有效、只能配对一台；关闭窗口即作废。';
+  @override
+  String get sync_pair_qr_no_address => '没有可放进二维码的地址。请确认本机已联网。';
+  @override
+  String get sync_pair_link_copy => '复制配对链接';
+  @override
+  String get sync_pair_link_copied => '配对链接已复制';
+  @override
+  String get sync_pair_qr_unavailable => '请先启动主机服务';
+  @override
+  String get sync_pair_scan => '扫码配对';
+  @override
+  String get sync_pair_scan_failed => '无法打开相机';
+  @override
+  String get sync_pair_link_paste => '粘贴配对链接';
+  @override
+  String get sync_pair_nfc_write => '写入 NFC 贴纸';
+  @override
+  String get sync_pair_nfc_write_hint =>
+      '把 NFC 贴纸贴近手机背面。贴纸只存这台主机的地址，配对时仍需主机确认。';
+  @override
+  String get sync_pair_nfc_written => 'NFC 贴纸已写入';
+  @override
+  String get sync_pair_nfc_failed => '写入 NFC 贴纸失败。请确认已开启 NFC 且贴纸可写。';
+  @override
+  String get sync_server_public_urls => '公网 / 反代地址';
+  @override
+  String get sync_server_public_urls_hint =>
+      '每行一个，例如 https://home.example.com。已配对设备会自动学到。';
 }
 
 // Path: <root>
@@ -225698,6 +226348,48 @@ class _StringsZhHk extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get sync_pair_link_unreachable =>
+      'None of the addresses in this pairing link are reachable, or they point to a different device';
+  @override
+  String get sync_pair_link_invalid => 'This is not a valid Fushi pairing link';
+  @override
+  String get sync_pair_qr_show => 'Show pairing QR code';
+  @override
+  String get sync_pair_qr_title => 'Scan to pair';
+  @override
+  String get sync_pair_qr_hint =>
+      'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+  @override
+  String get sync_pair_qr_no_address =>
+      'No reachable address to put in the QR code. Check that this device is connected to a network.';
+  @override
+  String get sync_pair_link_copy => 'Copy pairing link';
+  @override
+  String get sync_pair_link_copied => 'Pairing link copied';
+  @override
+  String get sync_pair_qr_unavailable => 'Start the host service first';
+  @override
+  String get sync_pair_scan => 'Scan QR code';
+  @override
+  String get sync_pair_scan_failed => 'Couldn\'t open the camera';
+  @override
+  String get sync_pair_link_paste => 'Paste pairing link';
+  @override
+  String get sync_pair_nfc_write => 'Write NFC tag';
+  @override
+  String get sync_pair_nfc_write_hint =>
+      'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+  @override
+  String get sync_pair_nfc_written => 'NFC tag written';
+  @override
+  String get sync_pair_nfc_failed =>
+      'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+  @override
+  String get sync_server_public_urls => 'Public / reverse proxy addresses';
+  @override
+  String get sync_server_public_urls_hint =>
+      'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
 }
 
 /// Flat map(s) containing all translations.
@@ -237445,6 +238137,42 @@ extension on _StringsEn {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'sync_pair_link_unreachable':
+        return 'None of the addresses in this pairing link are reachable, or they point to a different device';
+      case 'sync_pair_link_invalid':
+        return 'This is not a valid Fushi pairing link';
+      case 'sync_pair_qr_show':
+        return 'Show pairing QR code';
+      case 'sync_pair_qr_title':
+        return 'Scan to pair';
+      case 'sync_pair_qr_hint':
+        return 'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+      case 'sync_pair_qr_no_address':
+        return 'No reachable address to put in the QR code. Check that this device is connected to a network.';
+      case 'sync_pair_link_copy':
+        return 'Copy pairing link';
+      case 'sync_pair_link_copied':
+        return 'Pairing link copied';
+      case 'sync_pair_qr_unavailable':
+        return 'Start the host service first';
+      case 'sync_pair_scan':
+        return 'Scan QR code';
+      case 'sync_pair_scan_failed':
+        return 'Couldn\'t open the camera';
+      case 'sync_pair_link_paste':
+        return 'Paste pairing link';
+      case 'sync_pair_nfc_write':
+        return 'Write NFC tag';
+      case 'sync_pair_nfc_write_hint':
+        return 'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+      case 'sync_pair_nfc_written':
+        return 'NFC tag written';
+      case 'sync_pair_nfc_failed':
+        return 'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+      case 'sync_server_public_urls':
+        return 'Public / reverse proxy addresses';
+      case 'sync_server_public_urls_hint':
+        return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
       default:
         return null;
     }
@@ -249187,6 +249915,42 @@ extension on _StringsAr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'sync_pair_link_unreachable':
+        return 'None of the addresses in this pairing link are reachable, or they point to a different device';
+      case 'sync_pair_link_invalid':
+        return 'This is not a valid Fushi pairing link';
+      case 'sync_pair_qr_show':
+        return 'Show pairing QR code';
+      case 'sync_pair_qr_title':
+        return 'Scan to pair';
+      case 'sync_pair_qr_hint':
+        return 'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+      case 'sync_pair_qr_no_address':
+        return 'No reachable address to put in the QR code. Check that this device is connected to a network.';
+      case 'sync_pair_link_copy':
+        return 'Copy pairing link';
+      case 'sync_pair_link_copied':
+        return 'Pairing link copied';
+      case 'sync_pair_qr_unavailable':
+        return 'Start the host service first';
+      case 'sync_pair_scan':
+        return 'Scan QR code';
+      case 'sync_pair_scan_failed':
+        return 'Couldn\'t open the camera';
+      case 'sync_pair_link_paste':
+        return 'Paste pairing link';
+      case 'sync_pair_nfc_write':
+        return 'Write NFC tag';
+      case 'sync_pair_nfc_write_hint':
+        return 'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+      case 'sync_pair_nfc_written':
+        return 'NFC tag written';
+      case 'sync_pair_nfc_failed':
+        return 'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+      case 'sync_server_public_urls':
+        return 'Public / reverse proxy addresses';
+      case 'sync_server_public_urls_hint':
+        return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
       default:
         return null;
     }
@@ -260978,6 +261742,42 @@ extension on _StringsDe {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'sync_pair_link_unreachable':
+        return 'None of the addresses in this pairing link are reachable, or they point to a different device';
+      case 'sync_pair_link_invalid':
+        return 'This is not a valid Fushi pairing link';
+      case 'sync_pair_qr_show':
+        return 'Show pairing QR code';
+      case 'sync_pair_qr_title':
+        return 'Scan to pair';
+      case 'sync_pair_qr_hint':
+        return 'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+      case 'sync_pair_qr_no_address':
+        return 'No reachable address to put in the QR code. Check that this device is connected to a network.';
+      case 'sync_pair_link_copy':
+        return 'Copy pairing link';
+      case 'sync_pair_link_copied':
+        return 'Pairing link copied';
+      case 'sync_pair_qr_unavailable':
+        return 'Start the host service first';
+      case 'sync_pair_scan':
+        return 'Scan QR code';
+      case 'sync_pair_scan_failed':
+        return 'Couldn\'t open the camera';
+      case 'sync_pair_link_paste':
+        return 'Paste pairing link';
+      case 'sync_pair_nfc_write':
+        return 'Write NFC tag';
+      case 'sync_pair_nfc_write_hint':
+        return 'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+      case 'sync_pair_nfc_written':
+        return 'NFC tag written';
+      case 'sync_pair_nfc_failed':
+        return 'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+      case 'sync_server_public_urls':
+        return 'Public / reverse proxy addresses';
+      case 'sync_server_public_urls_hint':
+        return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
       default:
         return null;
     }
@@ -272759,6 +273559,42 @@ extension on _StringsEs {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'sync_pair_link_unreachable':
+        return 'None of the addresses in this pairing link are reachable, or they point to a different device';
+      case 'sync_pair_link_invalid':
+        return 'This is not a valid Fushi pairing link';
+      case 'sync_pair_qr_show':
+        return 'Show pairing QR code';
+      case 'sync_pair_qr_title':
+        return 'Scan to pair';
+      case 'sync_pair_qr_hint':
+        return 'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+      case 'sync_pair_qr_no_address':
+        return 'No reachable address to put in the QR code. Check that this device is connected to a network.';
+      case 'sync_pair_link_copy':
+        return 'Copy pairing link';
+      case 'sync_pair_link_copied':
+        return 'Pairing link copied';
+      case 'sync_pair_qr_unavailable':
+        return 'Start the host service first';
+      case 'sync_pair_scan':
+        return 'Scan QR code';
+      case 'sync_pair_scan_failed':
+        return 'Couldn\'t open the camera';
+      case 'sync_pair_link_paste':
+        return 'Paste pairing link';
+      case 'sync_pair_nfc_write':
+        return 'Write NFC tag';
+      case 'sync_pair_nfc_write_hint':
+        return 'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+      case 'sync_pair_nfc_written':
+        return 'NFC tag written';
+      case 'sync_pair_nfc_failed':
+        return 'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+      case 'sync_server_public_urls':
+        return 'Public / reverse proxy addresses';
+      case 'sync_server_public_urls_hint':
+        return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
       default:
         return null;
     }
@@ -284548,6 +285384,42 @@ extension on _StringsFr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'sync_pair_link_unreachable':
+        return 'None of the addresses in this pairing link are reachable, or they point to a different device';
+      case 'sync_pair_link_invalid':
+        return 'This is not a valid Fushi pairing link';
+      case 'sync_pair_qr_show':
+        return 'Show pairing QR code';
+      case 'sync_pair_qr_title':
+        return 'Scan to pair';
+      case 'sync_pair_qr_hint':
+        return 'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+      case 'sync_pair_qr_no_address':
+        return 'No reachable address to put in the QR code. Check that this device is connected to a network.';
+      case 'sync_pair_link_copy':
+        return 'Copy pairing link';
+      case 'sync_pair_link_copied':
+        return 'Pairing link copied';
+      case 'sync_pair_qr_unavailable':
+        return 'Start the host service first';
+      case 'sync_pair_scan':
+        return 'Scan QR code';
+      case 'sync_pair_scan_failed':
+        return 'Couldn\'t open the camera';
+      case 'sync_pair_link_paste':
+        return 'Paste pairing link';
+      case 'sync_pair_nfc_write':
+        return 'Write NFC tag';
+      case 'sync_pair_nfc_write_hint':
+        return 'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+      case 'sync_pair_nfc_written':
+        return 'NFC tag written';
+      case 'sync_pair_nfc_failed':
+        return 'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+      case 'sync_server_public_urls':
+        return 'Public / reverse proxy addresses';
+      case 'sync_server_public_urls_hint':
+        return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
       default:
         return null;
     }
@@ -296307,6 +297179,42 @@ extension on _StringsId {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'sync_pair_link_unreachable':
+        return 'None of the addresses in this pairing link are reachable, or they point to a different device';
+      case 'sync_pair_link_invalid':
+        return 'This is not a valid Fushi pairing link';
+      case 'sync_pair_qr_show':
+        return 'Show pairing QR code';
+      case 'sync_pair_qr_title':
+        return 'Scan to pair';
+      case 'sync_pair_qr_hint':
+        return 'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+      case 'sync_pair_qr_no_address':
+        return 'No reachable address to put in the QR code. Check that this device is connected to a network.';
+      case 'sync_pair_link_copy':
+        return 'Copy pairing link';
+      case 'sync_pair_link_copied':
+        return 'Pairing link copied';
+      case 'sync_pair_qr_unavailable':
+        return 'Start the host service first';
+      case 'sync_pair_scan':
+        return 'Scan QR code';
+      case 'sync_pair_scan_failed':
+        return 'Couldn\'t open the camera';
+      case 'sync_pair_link_paste':
+        return 'Paste pairing link';
+      case 'sync_pair_nfc_write':
+        return 'Write NFC tag';
+      case 'sync_pair_nfc_write_hint':
+        return 'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+      case 'sync_pair_nfc_written':
+        return 'NFC tag written';
+      case 'sync_pair_nfc_failed':
+        return 'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+      case 'sync_server_public_urls':
+        return 'Public / reverse proxy addresses';
+      case 'sync_server_public_urls_hint':
+        return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
       default:
         return null;
     }
@@ -308089,6 +308997,42 @@ extension on _StringsIt {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'sync_pair_link_unreachable':
+        return 'None of the addresses in this pairing link are reachable, or they point to a different device';
+      case 'sync_pair_link_invalid':
+        return 'This is not a valid Fushi pairing link';
+      case 'sync_pair_qr_show':
+        return 'Show pairing QR code';
+      case 'sync_pair_qr_title':
+        return 'Scan to pair';
+      case 'sync_pair_qr_hint':
+        return 'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+      case 'sync_pair_qr_no_address':
+        return 'No reachable address to put in the QR code. Check that this device is connected to a network.';
+      case 'sync_pair_link_copy':
+        return 'Copy pairing link';
+      case 'sync_pair_link_copied':
+        return 'Pairing link copied';
+      case 'sync_pair_qr_unavailable':
+        return 'Start the host service first';
+      case 'sync_pair_scan':
+        return 'Scan QR code';
+      case 'sync_pair_scan_failed':
+        return 'Couldn\'t open the camera';
+      case 'sync_pair_link_paste':
+        return 'Paste pairing link';
+      case 'sync_pair_nfc_write':
+        return 'Write NFC tag';
+      case 'sync_pair_nfc_write_hint':
+        return 'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+      case 'sync_pair_nfc_written':
+        return 'NFC tag written';
+      case 'sync_pair_nfc_failed':
+        return 'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+      case 'sync_server_public_urls':
+        return 'Public / reverse proxy addresses';
+      case 'sync_server_public_urls_hint':
+        return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
       default:
         return null;
     }
@@ -319792,6 +320736,42 @@ extension on _StringsJa {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'sync_pair_link_unreachable':
+        return 'None of the addresses in this pairing link are reachable, or they point to a different device';
+      case 'sync_pair_link_invalid':
+        return 'This is not a valid Fushi pairing link';
+      case 'sync_pair_qr_show':
+        return 'Show pairing QR code';
+      case 'sync_pair_qr_title':
+        return 'Scan to pair';
+      case 'sync_pair_qr_hint':
+        return 'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+      case 'sync_pair_qr_no_address':
+        return 'No reachable address to put in the QR code. Check that this device is connected to a network.';
+      case 'sync_pair_link_copy':
+        return 'Copy pairing link';
+      case 'sync_pair_link_copied':
+        return 'Pairing link copied';
+      case 'sync_pair_qr_unavailable':
+        return 'Start the host service first';
+      case 'sync_pair_scan':
+        return 'Scan QR code';
+      case 'sync_pair_scan_failed':
+        return 'Couldn\'t open the camera';
+      case 'sync_pair_link_paste':
+        return 'Paste pairing link';
+      case 'sync_pair_nfc_write':
+        return 'Write NFC tag';
+      case 'sync_pair_nfc_write_hint':
+        return 'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+      case 'sync_pair_nfc_written':
+        return 'NFC tag written';
+      case 'sync_pair_nfc_failed':
+        return 'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+      case 'sync_server_public_urls':
+        return 'Public / reverse proxy addresses';
+      case 'sync_server_public_urls_hint':
+        return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
       default:
         return null;
     }
@@ -331503,6 +332483,42 @@ extension on _StringsKo {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'sync_pair_link_unreachable':
+        return 'None of the addresses in this pairing link are reachable, or they point to a different device';
+      case 'sync_pair_link_invalid':
+        return 'This is not a valid Fushi pairing link';
+      case 'sync_pair_qr_show':
+        return 'Show pairing QR code';
+      case 'sync_pair_qr_title':
+        return 'Scan to pair';
+      case 'sync_pair_qr_hint':
+        return 'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+      case 'sync_pair_qr_no_address':
+        return 'No reachable address to put in the QR code. Check that this device is connected to a network.';
+      case 'sync_pair_link_copy':
+        return 'Copy pairing link';
+      case 'sync_pair_link_copied':
+        return 'Pairing link copied';
+      case 'sync_pair_qr_unavailable':
+        return 'Start the host service first';
+      case 'sync_pair_scan':
+        return 'Scan QR code';
+      case 'sync_pair_scan_failed':
+        return 'Couldn\'t open the camera';
+      case 'sync_pair_link_paste':
+        return 'Paste pairing link';
+      case 'sync_pair_nfc_write':
+        return 'Write NFC tag';
+      case 'sync_pair_nfc_write_hint':
+        return 'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+      case 'sync_pair_nfc_written':
+        return 'NFC tag written';
+      case 'sync_pair_nfc_failed':
+        return 'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+      case 'sync_server_public_urls':
+        return 'Public / reverse proxy addresses';
+      case 'sync_server_public_urls_hint':
+        return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
       default:
         return null;
     }
@@ -343280,6 +344296,42 @@ extension on _StringsNl {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'sync_pair_link_unreachable':
+        return 'None of the addresses in this pairing link are reachable, or they point to a different device';
+      case 'sync_pair_link_invalid':
+        return 'This is not a valid Fushi pairing link';
+      case 'sync_pair_qr_show':
+        return 'Show pairing QR code';
+      case 'sync_pair_qr_title':
+        return 'Scan to pair';
+      case 'sync_pair_qr_hint':
+        return 'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+      case 'sync_pair_qr_no_address':
+        return 'No reachable address to put in the QR code. Check that this device is connected to a network.';
+      case 'sync_pair_link_copy':
+        return 'Copy pairing link';
+      case 'sync_pair_link_copied':
+        return 'Pairing link copied';
+      case 'sync_pair_qr_unavailable':
+        return 'Start the host service first';
+      case 'sync_pair_scan':
+        return 'Scan QR code';
+      case 'sync_pair_scan_failed':
+        return 'Couldn\'t open the camera';
+      case 'sync_pair_link_paste':
+        return 'Paste pairing link';
+      case 'sync_pair_nfc_write':
+        return 'Write NFC tag';
+      case 'sync_pair_nfc_write_hint':
+        return 'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+      case 'sync_pair_nfc_written':
+        return 'NFC tag written';
+      case 'sync_pair_nfc_failed':
+        return 'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+      case 'sync_server_public_urls':
+        return 'Public / reverse proxy addresses';
+      case 'sync_server_public_urls_hint':
+        return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
       default:
         return null;
     }
@@ -355052,6 +356104,42 @@ extension on _StringsPtBr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'sync_pair_link_unreachable':
+        return 'None of the addresses in this pairing link are reachable, or they point to a different device';
+      case 'sync_pair_link_invalid':
+        return 'This is not a valid Fushi pairing link';
+      case 'sync_pair_qr_show':
+        return 'Show pairing QR code';
+      case 'sync_pair_qr_title':
+        return 'Scan to pair';
+      case 'sync_pair_qr_hint':
+        return 'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+      case 'sync_pair_qr_no_address':
+        return 'No reachable address to put in the QR code. Check that this device is connected to a network.';
+      case 'sync_pair_link_copy':
+        return 'Copy pairing link';
+      case 'sync_pair_link_copied':
+        return 'Pairing link copied';
+      case 'sync_pair_qr_unavailable':
+        return 'Start the host service first';
+      case 'sync_pair_scan':
+        return 'Scan QR code';
+      case 'sync_pair_scan_failed':
+        return 'Couldn\'t open the camera';
+      case 'sync_pair_link_paste':
+        return 'Paste pairing link';
+      case 'sync_pair_nfc_write':
+        return 'Write NFC tag';
+      case 'sync_pair_nfc_write_hint':
+        return 'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+      case 'sync_pair_nfc_written':
+        return 'NFC tag written';
+      case 'sync_pair_nfc_failed':
+        return 'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+      case 'sync_server_public_urls':
+        return 'Public / reverse proxy addresses';
+      case 'sync_server_public_urls_hint':
+        return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
       default:
         return null;
     }
@@ -366830,6 +367918,42 @@ extension on _StringsRu {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'sync_pair_link_unreachable':
+        return 'None of the addresses in this pairing link are reachable, or they point to a different device';
+      case 'sync_pair_link_invalid':
+        return 'This is not a valid Fushi pairing link';
+      case 'sync_pair_qr_show':
+        return 'Show pairing QR code';
+      case 'sync_pair_qr_title':
+        return 'Scan to pair';
+      case 'sync_pair_qr_hint':
+        return 'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+      case 'sync_pair_qr_no_address':
+        return 'No reachable address to put in the QR code. Check that this device is connected to a network.';
+      case 'sync_pair_link_copy':
+        return 'Copy pairing link';
+      case 'sync_pair_link_copied':
+        return 'Pairing link copied';
+      case 'sync_pair_qr_unavailable':
+        return 'Start the host service first';
+      case 'sync_pair_scan':
+        return 'Scan QR code';
+      case 'sync_pair_scan_failed':
+        return 'Couldn\'t open the camera';
+      case 'sync_pair_link_paste':
+        return 'Paste pairing link';
+      case 'sync_pair_nfc_write':
+        return 'Write NFC tag';
+      case 'sync_pair_nfc_write_hint':
+        return 'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+      case 'sync_pair_nfc_written':
+        return 'NFC tag written';
+      case 'sync_pair_nfc_failed':
+        return 'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+      case 'sync_server_public_urls':
+        return 'Public / reverse proxy addresses';
+      case 'sync_server_public_urls_hint':
+        return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
       default:
         return null;
     }
@@ -378577,6 +379701,42 @@ extension on _StringsTh {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'sync_pair_link_unreachable':
+        return 'None of the addresses in this pairing link are reachable, or they point to a different device';
+      case 'sync_pair_link_invalid':
+        return 'This is not a valid Fushi pairing link';
+      case 'sync_pair_qr_show':
+        return 'Show pairing QR code';
+      case 'sync_pair_qr_title':
+        return 'Scan to pair';
+      case 'sync_pair_qr_hint':
+        return 'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+      case 'sync_pair_qr_no_address':
+        return 'No reachable address to put in the QR code. Check that this device is connected to a network.';
+      case 'sync_pair_link_copy':
+        return 'Copy pairing link';
+      case 'sync_pair_link_copied':
+        return 'Pairing link copied';
+      case 'sync_pair_qr_unavailable':
+        return 'Start the host service first';
+      case 'sync_pair_scan':
+        return 'Scan QR code';
+      case 'sync_pair_scan_failed':
+        return 'Couldn\'t open the camera';
+      case 'sync_pair_link_paste':
+        return 'Paste pairing link';
+      case 'sync_pair_nfc_write':
+        return 'Write NFC tag';
+      case 'sync_pair_nfc_write_hint':
+        return 'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+      case 'sync_pair_nfc_written':
+        return 'NFC tag written';
+      case 'sync_pair_nfc_failed':
+        return 'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+      case 'sync_server_public_urls':
+        return 'Public / reverse proxy addresses';
+      case 'sync_server_public_urls_hint':
+        return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
       default:
         return null;
     }
@@ -390340,6 +391500,42 @@ extension on _StringsTr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'sync_pair_link_unreachable':
+        return 'None of the addresses in this pairing link are reachable, or they point to a different device';
+      case 'sync_pair_link_invalid':
+        return 'This is not a valid Fushi pairing link';
+      case 'sync_pair_qr_show':
+        return 'Show pairing QR code';
+      case 'sync_pair_qr_title':
+        return 'Scan to pair';
+      case 'sync_pair_qr_hint':
+        return 'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+      case 'sync_pair_qr_no_address':
+        return 'No reachable address to put in the QR code. Check that this device is connected to a network.';
+      case 'sync_pair_link_copy':
+        return 'Copy pairing link';
+      case 'sync_pair_link_copied':
+        return 'Pairing link copied';
+      case 'sync_pair_qr_unavailable':
+        return 'Start the host service first';
+      case 'sync_pair_scan':
+        return 'Scan QR code';
+      case 'sync_pair_scan_failed':
+        return 'Couldn\'t open the camera';
+      case 'sync_pair_link_paste':
+        return 'Paste pairing link';
+      case 'sync_pair_nfc_write':
+        return 'Write NFC tag';
+      case 'sync_pair_nfc_write_hint':
+        return 'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+      case 'sync_pair_nfc_written':
+        return 'NFC tag written';
+      case 'sync_pair_nfc_failed':
+        return 'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+      case 'sync_server_public_urls':
+        return 'Public / reverse proxy addresses';
+      case 'sync_server_public_urls_hint':
+        return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
       default:
         return null;
     }
@@ -402097,6 +403293,42 @@ extension on _StringsVi {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'sync_pair_link_unreachable':
+        return 'None of the addresses in this pairing link are reachable, or they point to a different device';
+      case 'sync_pair_link_invalid':
+        return 'This is not a valid Fushi pairing link';
+      case 'sync_pair_qr_show':
+        return 'Show pairing QR code';
+      case 'sync_pair_qr_title':
+        return 'Scan to pair';
+      case 'sync_pair_qr_hint':
+        return 'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+      case 'sync_pair_qr_no_address':
+        return 'No reachable address to put in the QR code. Check that this device is connected to a network.';
+      case 'sync_pair_link_copy':
+        return 'Copy pairing link';
+      case 'sync_pair_link_copied':
+        return 'Pairing link copied';
+      case 'sync_pair_qr_unavailable':
+        return 'Start the host service first';
+      case 'sync_pair_scan':
+        return 'Scan QR code';
+      case 'sync_pair_scan_failed':
+        return 'Couldn\'t open the camera';
+      case 'sync_pair_link_paste':
+        return 'Paste pairing link';
+      case 'sync_pair_nfc_write':
+        return 'Write NFC tag';
+      case 'sync_pair_nfc_write_hint':
+        return 'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+      case 'sync_pair_nfc_written':
+        return 'NFC tag written';
+      case 'sync_pair_nfc_failed':
+        return 'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+      case 'sync_server_public_urls':
+        return 'Public / reverse proxy addresses';
+      case 'sync_server_public_urls_hint':
+        return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
       default:
         return null;
     }
@@ -413738,6 +414970,42 @@ extension on _StringsZhCn {
         return '请填写以 https:// 开头、以 api.php 结尾的地址';
       case 'ai_web_knowledge_custom_remove':
         return '删除站点';
+      case 'sync_pair_link_unreachable':
+        return '配对链接里的地址都连不上，或指向的不是那台设备';
+      case 'sync_pair_link_invalid':
+        return '不是有效的 Fushi 配对链接';
+      case 'sync_pair_qr_show':
+        return '显示配对二维码';
+      case 'sync_pair_qr_title':
+        return '扫码配对';
+      case 'sync_pair_qr_hint':
+        return '在另一台设备的 Fushi 里扫这个码。5 分钟内有效、只能配对一台；关闭窗口即作废。';
+      case 'sync_pair_qr_no_address':
+        return '没有可放进二维码的地址。请确认本机已联网。';
+      case 'sync_pair_link_copy':
+        return '复制配对链接';
+      case 'sync_pair_link_copied':
+        return '配对链接已复制';
+      case 'sync_pair_qr_unavailable':
+        return '请先启动主机服务';
+      case 'sync_pair_scan':
+        return '扫码配对';
+      case 'sync_pair_scan_failed':
+        return '无法打开相机';
+      case 'sync_pair_link_paste':
+        return '粘贴配对链接';
+      case 'sync_pair_nfc_write':
+        return '写入 NFC 贴纸';
+      case 'sync_pair_nfc_write_hint':
+        return '把 NFC 贴纸贴近手机背面。贴纸只存这台主机的地址，配对时仍需主机确认。';
+      case 'sync_pair_nfc_written':
+        return 'NFC 贴纸已写入';
+      case 'sync_pair_nfc_failed':
+        return '写入 NFC 贴纸失败。请确认已开启 NFC 且贴纸可写。';
+      case 'sync_server_public_urls':
+        return '公网 / 反代地址';
+      case 'sync_server_public_urls_hint':
+        return '每行一个，例如 https://home.example.com。已配对设备会自动学到。';
       default:
         return null;
     }
@@ -425420,6 +426688,42 @@ extension on _StringsZhHk {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'sync_pair_link_unreachable':
+        return 'None of the addresses in this pairing link are reachable, or they point to a different device';
+      case 'sync_pair_link_invalid':
+        return 'This is not a valid Fushi pairing link';
+      case 'sync_pair_qr_show':
+        return 'Show pairing QR code';
+      case 'sync_pair_qr_title':
+        return 'Scan to pair';
+      case 'sync_pair_qr_hint':
+        return 'Scan this with Fushi on the other device. Valid for 5 minutes and for one device; closing this window revokes it.';
+      case 'sync_pair_qr_no_address':
+        return 'No reachable address to put in the QR code. Check that this device is connected to a network.';
+      case 'sync_pair_link_copy':
+        return 'Copy pairing link';
+      case 'sync_pair_link_copied':
+        return 'Pairing link copied';
+      case 'sync_pair_qr_unavailable':
+        return 'Start the host service first';
+      case 'sync_pair_scan':
+        return 'Scan QR code';
+      case 'sync_pair_scan_failed':
+        return 'Couldn\'t open the camera';
+      case 'sync_pair_link_paste':
+        return 'Paste pairing link';
+      case 'sync_pair_nfc_write':
+        return 'Write NFC tag';
+      case 'sync_pair_nfc_write_hint':
+        return 'Hold an NFC tag to the back of the phone. The tag only stores this device\'s addresses; pairing still needs approval on the host.';
+      case 'sync_pair_nfc_written':
+        return 'NFC tag written';
+      case 'sync_pair_nfc_failed':
+        return 'Couldn\'t write the NFC tag. Make sure NFC is on and the tag is writable.';
+      case 'sync_server_public_urls':
+        return 'Public / reverse proxy addresses';
+      case 'sync_server_public_urls_hint':
+        return 'One per line, e.g. https://home.example.com. Paired devices pick these up automatically.';
       default:
         return null;
     }
