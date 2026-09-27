@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 96713 (5689 per locale)
+/// Strings: 96730 (5690 per locale)
 ///
-/// Built on 2026-09-27 at 14:13 UTC
+/// Built on 2026-09-27 at 14:55 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8127,6 +8127,7 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get ai_web_knowledge_custom_endpoint_invalid =>
       'Enter an https:// address ending in api.php';
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  String get remote_video_stream_play => 'Play (stream)';
 }
 
 // Path: <root>
@@ -21766,6 +21767,8 @@ class _StringsAr extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
 }
 
 // Path: <root>
@@ -35645,6 +35648,8 @@ class _StringsDe extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
 }
 
 // Path: <root>
@@ -49575,6 +49580,8 @@ class _StringsEs extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
 }
 
 // Path: <root>
@@ -63544,6 +63551,8 @@ class _StringsFr extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
 }
 
 // Path: <root>
@@ -77303,6 +77312,8 @@ class _StringsId extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
 }
 
 // Path: <root>
@@ -91163,6 +91174,8 @@ class _StringsIt extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
 }
 
 // Path: <root>
@@ -104378,6 +104391,8 @@ class _StringsJa extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
 }
 
 // Path: <root>
@@ -117610,6 +117625,8 @@ class _StringsKo extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
 }
 
 // Path: <root>
@@ -131424,6 +131441,8 @@ class _StringsNl extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
 }
 
 // Path: <root>
@@ -145291,6 +145310,8 @@ class _StringsPtBr extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
 }
 
 // Path: <root>
@@ -159133,6 +159154,8 @@ class _StringsRu extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
 }
 
 // Path: <root>
@@ -172772,6 +172795,8 @@ class _StringsTh extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
 }
 
 // Path: <root>
@@ -186525,6 +186550,8 @@ class _StringsTr extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
 }
 
 // Path: <root>
@@ -200249,6 +200276,8 @@ class _StringsVi extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
 }
 
 // Path: <root>
@@ -212803,6 +212832,8 @@ class _StringsZhCn extends _StringsEn {
       '请填写以 https:// 开头、以 api.php 结尾的地址';
   @override
   String get ai_web_knowledge_custom_remove => '删除站点';
+  @override
+  String get remote_video_stream_play => '播放（流播）';
 }
 
 // Path: <root>
@@ -225698,6 +225729,8 @@ class _StringsZhHk extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
 }
 
 /// Flat map(s) containing all translations.
@@ -237445,6 +237478,8 @@ extension on _StringsEn {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       default:
         return null;
     }
@@ -249187,6 +249222,8 @@ extension on _StringsAr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       default:
         return null;
     }
@@ -260978,6 +261015,8 @@ extension on _StringsDe {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       default:
         return null;
     }
@@ -272759,6 +272798,8 @@ extension on _StringsEs {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       default:
         return null;
     }
@@ -284548,6 +284589,8 @@ extension on _StringsFr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       default:
         return null;
     }
@@ -296307,6 +296350,8 @@ extension on _StringsId {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       default:
         return null;
     }
@@ -308089,6 +308134,8 @@ extension on _StringsIt {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       default:
         return null;
     }
@@ -319792,6 +319839,8 @@ extension on _StringsJa {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       default:
         return null;
     }
@@ -331503,6 +331552,8 @@ extension on _StringsKo {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       default:
         return null;
     }
@@ -343280,6 +343331,8 @@ extension on _StringsNl {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       default:
         return null;
     }
@@ -355052,6 +355105,8 @@ extension on _StringsPtBr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       default:
         return null;
     }
@@ -366830,6 +366885,8 @@ extension on _StringsRu {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       default:
         return null;
     }
@@ -378577,6 +378634,8 @@ extension on _StringsTh {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       default:
         return null;
     }
@@ -390340,6 +390399,8 @@ extension on _StringsTr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       default:
         return null;
     }
@@ -402097,6 +402158,8 @@ extension on _StringsVi {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       default:
         return null;
     }
@@ -413738,6 +413801,8 @@ extension on _StringsZhCn {
         return '请填写以 https:// 开头、以 api.php 结尾的地址';
       case 'ai_web_knowledge_custom_remove':
         return '删除站点';
+      case 'remote_video_stream_play':
+        return '播放（流播）';
       default:
         return null;
     }
@@ -425420,6 +425485,8 @@ extension on _StringsZhHk {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
       default:
         return null;
     }
