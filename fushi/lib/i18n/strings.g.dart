@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 96475 (5675 per locale)
+/// Strings: 96747 (5691 per locale)
 ///
-/// Built on 2026-09-27 at 13:51 UTC
+/// Built on 2026-09-27 at 14:54 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8058,7 +8058,7 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get ai_video_acquire_action_scope_work => 'Only this work';
   String get ai_video_acquire_restart => 'Download another';
   String ai_video_acquire_franchise_searching({required Object title}) =>
-      'Looking for every work in the series of “${title}”…';
+      'Looking for every work in the series of “${title}” (checking each work, this can take a minute)…';
   String ai_video_acquire_franchise_found({
     required Object name,
     required Object series,
@@ -8107,6 +8107,26 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get ai_video_download_skip_extras => 'Skip extras';
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  String get ai_web_knowledge_section => 'Web knowledge';
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  String get ai_web_knowledge_custom_name => 'Name';
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  String get ai_web_knowledge_custom_remove => 'Remove site';
   String get video_item_rescrape => 'Rescrape metadata and cover';
   String get video_item_rescrape_not_planned =>
       'This video isn\'t in any local video source\'s scrape plan';
@@ -21713,6 +21733,42 @@ class _StringsAr extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
   String get video_item_rescrape => 'Rescrape metadata and cover';
   @override
@@ -35561,6 +35617,42 @@ class _StringsDe extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
   String get video_item_rescrape => 'Rescrape metadata and cover';
   @override
@@ -49460,6 +49552,42 @@ class _StringsEs extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
   String get video_item_rescrape => 'Rescrape metadata and cover';
   @override
@@ -63399,6 +63527,42 @@ class _StringsFr extends _StringsEn {
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
   @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
   String get video_item_rescrape => 'Rescrape metadata and cover';
   @override
   String get video_item_rescrape_not_planned =>
@@ -77126,6 +77290,42 @@ class _StringsId extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
   String get video_item_rescrape => 'Rescrape metadata and cover';
   @override
@@ -90956,6 +91156,42 @@ class _StringsIt extends _StringsEn {
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
   @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
   String get video_item_rescrape => 'Rescrape metadata and cover';
   @override
   String get video_item_rescrape_not_planned =>
@@ -104139,6 +104375,42 @@ class _StringsJa extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
   String get video_item_rescrape => 'Rescrape metadata and cover';
   @override
@@ -117340,6 +117612,42 @@ class _StringsKo extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
   String get video_item_rescrape => 'Rescrape metadata and cover';
   @override
@@ -131123,6 +131431,42 @@ class _StringsNl extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
   String get video_item_rescrape => 'Rescrape metadata and cover';
   @override
@@ -144960,6 +145304,42 @@ class _StringsPtBr extends _StringsEn {
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
   @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
   String get video_item_rescrape => 'Rescrape metadata and cover';
   @override
   String get video_item_rescrape_not_planned =>
@@ -158771,6 +159151,42 @@ class _StringsRu extends _StringsEn {
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
   @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
   String get video_item_rescrape => 'Rescrape metadata and cover';
   @override
   String get video_item_rescrape_not_planned =>
@@ -172378,6 +172794,42 @@ class _StringsTh extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+  @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
   String get video_item_rescrape => 'Rescrape metadata and cover';
   @override
@@ -186101,6 +186553,42 @@ class _StringsTr extends _StringsEn {
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
   @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
   String get video_item_rescrape => 'Rescrape metadata and cover';
   @override
   String get video_item_rescrape_not_planned =>
@@ -199794,6 +200282,42 @@ class _StringsVi extends _StringsEn {
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
   @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
   String get video_item_rescrape => 'Rescrape metadata and cover';
   @override
   String get video_item_rescrape_not_planned =>
@@ -212257,7 +212781,7 @@ class _StringsZhCn extends _StringsEn {
   String get ai_video_acquire_restart => '再下一部';
   @override
   String ai_video_acquire_franchise_searching({required Object title}) =>
-      '正在找「${title}」这个系列的全部作品…';
+      '正在找「${title}」这个系列的全部作品（要逐部查资料，可能需要一分钟）…';
   @override
   String ai_video_acquire_franchise_found({
     required Object name,
@@ -212317,6 +212841,41 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get ai_video_download_skip_extras_hint =>
       'PV、CM、NCOP/NCED、菜单等。对所有下载到视频来源的任务生效：种子里的特典文件不下载，只有特典的发布也不会被选中。';
+  @override
+  String get ai_web_knowledge_section => '联网资料';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => '维基百科（中文）';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia（日本語）';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia（English）';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi 自己从所选来源抓取条目正文或作品清单交给 AI（AI 下视频列出系列作品、视频作品识别时使用），不需要 AI 提供商支持联网。AI 只能引用抓到的内容，列出的作品还会逐部在资料源里核对。其它 MediaWiki 站点（如 Fandom 上的作品维基）可在下方添加。';
+  @override
+  String get ai_web_knowledge_moegirl => '萌娘百科';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => '自定义 MediaWiki 站点';
+  @override
+  String get ai_web_knowledge_custom_add => '添加 MediaWiki 站点';
+  @override
+  String get ai_web_knowledge_custom_name => '名称';
+  @override
+  String get ai_web_knowledge_custom_name_hint => '留空则显示域名';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API 地址';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      '站点的 api.php，例如 https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      '请填写以 https:// 开头、以 api.php 结尾的地址';
+  @override
+  String get ai_web_knowledge_custom_remove => '删除站点';
   @override
   String get video_item_rescrape => '重新刮削资料与封面';
   @override
@@ -225181,6 +225740,42 @@ class _StringsZhHk extends _StringsEn {
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
   @override
+  String get ai_web_knowledge_section => 'Web knowledge';
+  @override
+  String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
+  @override
+  String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
+  @override
+  String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
   String get video_item_rescrape => 'Rescrape metadata and cover';
   @override
   String get video_item_rescrape_not_planned =>
@@ -236848,7 +237443,7 @@ extension on _StringsEn {
         return 'Download another';
       case 'ai_video_acquire_franchise_searching':
         return ({required Object title}) =>
-            'Looking for every work in the series of “${title}”…';
+            'Looking for every work in the series of “${title}” (checking each work, this can take a minute)…';
       case 'ai_video_acquire_franchise_found':
         return ({
           required Object name,
@@ -236900,6 +237495,38 @@ extension on _StringsEn {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
       case 'video_item_rescrape':
         return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
@@ -248614,6 +249241,38 @@ extension on _StringsAr {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
       case 'video_item_rescrape':
         return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
@@ -260377,6 +261036,38 @@ extension on _StringsDe {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
       case 'video_item_rescrape':
         return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
@@ -272130,6 +272821,38 @@ extension on _StringsEs {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
       case 'video_item_rescrape':
         return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
@@ -283891,6 +284614,38 @@ extension on _StringsFr {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
       case 'video_item_rescrape':
         return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
@@ -295622,6 +296377,38 @@ extension on _StringsId {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
       case 'video_item_rescrape':
         return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
@@ -307376,6 +308163,38 @@ extension on _StringsIt {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
       case 'video_item_rescrape':
         return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
@@ -319051,6 +319870,38 @@ extension on _StringsJa {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
       case 'video_item_rescrape':
         return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
@@ -330734,6 +331585,38 @@ extension on _StringsKo {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
       case 'video_item_rescrape':
         return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
@@ -342483,6 +343366,38 @@ extension on _StringsNl {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
       case 'video_item_rescrape':
         return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
@@ -354227,6 +355142,38 @@ extension on _StringsPtBr {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
       case 'video_item_rescrape':
         return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
@@ -365977,6 +366924,38 @@ extension on _StringsRu {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
       case 'video_item_rescrape':
         return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
@@ -377696,6 +378675,38 @@ extension on _StringsTh {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
       case 'video_item_rescrape':
         return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
@@ -389431,6 +390442,38 @@ extension on _StringsTr {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
       case 'video_item_rescrape':
         return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
@@ -401160,6 +402203,38 @@ extension on _StringsVi {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
       case 'video_item_rescrape':
         return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
@@ -412723,7 +413798,8 @@ extension on _StringsZhCn {
       case 'ai_video_acquire_restart':
         return '再下一部';
       case 'ai_video_acquire_franchise_searching':
-        return ({required Object title}) => '正在找「${title}」这个系列的全部作品…';
+        return ({required Object title}) =>
+            '正在找「${title}」这个系列的全部作品（要逐部查资料，可能需要一分钟）…';
       case 'ai_video_acquire_franchise_found':
         return ({
           required Object name,
@@ -412772,6 +413848,38 @@ extension on _StringsZhCn {
         return '跳过特典';
       case 'ai_video_download_skip_extras_hint':
         return 'PV、CM、NCOP/NCED、菜单等。对所有下载到视频来源的任务生效：种子里的特典文件不下载，只有特典的发布也不会被选中。';
+      case 'ai_web_knowledge_section':
+        return '联网资料';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return '维基百科（中文）';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia（日本語）';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia（English）';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi 自己从所选来源抓取条目正文或作品清单交给 AI（AI 下视频列出系列作品、视频作品识别时使用），不需要 AI 提供商支持联网。AI 只能引用抓到的内容，列出的作品还会逐部在资料源里核对。其它 MediaWiki 站点（如 Fandom 上的作品维基）可在下方添加。';
+      case 'ai_web_knowledge_moegirl':
+        return '萌娘百科';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return '自定义 MediaWiki 站点';
+      case 'ai_web_knowledge_custom_add':
+        return '添加 MediaWiki 站点';
+      case 'ai_web_knowledge_custom_name':
+        return '名称';
+      case 'ai_web_knowledge_custom_name_hint':
+        return '留空则显示域名';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API 地址';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return '站点的 api.php，例如 https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return '请填写以 https:// 开头、以 api.php 结尾的地址';
+      case 'ai_web_knowledge_custom_remove':
+        return '删除站点';
       case 'video_item_rescrape':
         return '重新刮削资料与封面';
       case 'video_item_rescrape_not_planned':
@@ -424426,6 +425534,38 @@ extension on _StringsZhHk {
         return 'Skip extras';
       case 'ai_video_download_skip_extras_hint':
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
+      case 'ai_web_knowledge_section':
+        return 'Web knowledge';
+      case 'ai_web_knowledge_wikipedia_zh':
+        return 'Wikipedia (中文)';
+      case 'ai_web_knowledge_wikipedia_ja':
+        return 'Wikipedia (日本語)';
+      case 'ai_web_knowledge_wikipedia_en':
+        return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
       case 'video_item_rescrape':
         return 'Rescrape metadata and cover';
       case 'video_item_rescrape_not_planned':
