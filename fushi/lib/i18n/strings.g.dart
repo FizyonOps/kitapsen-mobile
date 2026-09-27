@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 96815 (5695 per locale)
+/// Strings: 97206 (5718 per locale)
 ///
-/// Built on 2026-09-27 at 14:57 UTC
+/// Built on 2026-09-27 at 18:07 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8108,11 +8108,42 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get ai_video_download_skip_extras_hint =>
       'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
   String get ai_web_knowledge_section => 'Web knowledge';
-  String get ai_web_knowledge_section_hint =>
-      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
   String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  String get ai_web_knowledge_custom_name => 'Name';
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  String get ai_web_knowledge_custom_remove => 'Remove site';
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  String get plex_account_sign_in => 'Sign in with Plex';
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  String get plex_manual_title => 'Connect manually';
+  String get plex_token_label => 'X-Plex-Token';
+  String get plex_manual_connect => 'Connect';
+  String get plex_sign_in_failed => 'Plex sign-in failed';
   String get video_setting_subtitle_reference_sync =>
       'Auto-align downloaded subtitles';
   String get video_setting_subtitle_reference_sync_hint =>
@@ -21755,14 +21786,68 @@ class _StringsAr extends _StringsEn {
   @override
   String get ai_web_knowledge_section => 'Web knowledge';
   @override
-  String get ai_web_knowledge_section_hint =>
-      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
-  @override
   String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
   @override
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
   String get video_setting_subtitle_reference_sync =>
       'Auto-align downloaded subtitles';
@@ -35662,14 +35747,68 @@ class _StringsDe extends _StringsEn {
   @override
   String get ai_web_knowledge_section => 'Web knowledge';
   @override
-  String get ai_web_knowledge_section_hint =>
-      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
-  @override
   String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
   @override
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
   String get video_setting_subtitle_reference_sync =>
       'Auto-align downloaded subtitles';
@@ -49620,14 +49759,68 @@ class _StringsEs extends _StringsEn {
   @override
   String get ai_web_knowledge_section => 'Web knowledge';
   @override
-  String get ai_web_knowledge_section_hint =>
-      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
-  @override
   String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
   @override
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
   String get video_setting_subtitle_reference_sync =>
       'Auto-align downloaded subtitles';
@@ -63617,14 +63810,68 @@ class _StringsFr extends _StringsEn {
   @override
   String get ai_web_knowledge_section => 'Web knowledge';
   @override
-  String get ai_web_knowledge_section_hint =>
-      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
-  @override
   String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
   @override
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
   String get video_setting_subtitle_reference_sync =>
       'Auto-align downloaded subtitles';
@@ -77404,14 +77651,68 @@ class _StringsId extends _StringsEn {
   @override
   String get ai_web_knowledge_section => 'Web knowledge';
   @override
-  String get ai_web_knowledge_section_hint =>
-      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
-  @override
   String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
   @override
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
   String get video_setting_subtitle_reference_sync =>
       'Auto-align downloaded subtitles';
@@ -91292,14 +91593,68 @@ class _StringsIt extends _StringsEn {
   @override
   String get ai_web_knowledge_section => 'Web knowledge';
   @override
-  String get ai_web_knowledge_section_hint =>
-      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
-  @override
   String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
   @override
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
   String get video_setting_subtitle_reference_sync =>
       'Auto-align downloaded subtitles';
@@ -104535,14 +104890,68 @@ class _StringsJa extends _StringsEn {
   @override
   String get ai_web_knowledge_section => 'Web knowledge';
   @override
-  String get ai_web_knowledge_section_hint =>
-      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
-  @override
   String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
   @override
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
   String get video_setting_subtitle_reference_sync =>
       'Auto-align downloaded subtitles';
@@ -117795,14 +118204,68 @@ class _StringsKo extends _StringsEn {
   @override
   String get ai_web_knowledge_section => 'Web knowledge';
   @override
-  String get ai_web_knowledge_section_hint =>
-      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
-  @override
   String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
   @override
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
   String get video_setting_subtitle_reference_sync =>
       'Auto-align downloaded subtitles';
@@ -131637,14 +132100,68 @@ class _StringsNl extends _StringsEn {
   @override
   String get ai_web_knowledge_section => 'Web knowledge';
   @override
-  String get ai_web_knowledge_section_hint =>
-      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
-  @override
   String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
   @override
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
   String get video_setting_subtitle_reference_sync =>
       'Auto-align downloaded subtitles';
@@ -145532,14 +146049,68 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get ai_web_knowledge_section => 'Web knowledge';
   @override
-  String get ai_web_knowledge_section_hint =>
-      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
-  @override
   String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
   @override
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
   String get video_setting_subtitle_reference_sync =>
       'Auto-align downloaded subtitles';
@@ -159402,14 +159973,68 @@ class _StringsRu extends _StringsEn {
   @override
   String get ai_web_knowledge_section => 'Web knowledge';
   @override
-  String get ai_web_knowledge_section_hint =>
-      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
-  @override
   String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
   @override
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
   String get video_setting_subtitle_reference_sync =>
       'Auto-align downloaded subtitles';
@@ -173069,14 +173694,68 @@ class _StringsTh extends _StringsEn {
   @override
   String get ai_web_knowledge_section => 'Web knowledge';
   @override
-  String get ai_web_knowledge_section_hint =>
-      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
-  @override
   String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
   @override
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
   String get video_setting_subtitle_reference_sync =>
       'Auto-align downloaded subtitles';
@@ -186850,14 +187529,68 @@ class _StringsTr extends _StringsEn {
   @override
   String get ai_web_knowledge_section => 'Web knowledge';
   @override
-  String get ai_web_knowledge_section_hint =>
-      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
-  @override
   String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
   @override
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
   String get video_setting_subtitle_reference_sync =>
       'Auto-align downloaded subtitles';
@@ -200602,14 +201335,68 @@ class _StringsVi extends _StringsEn {
   @override
   String get ai_web_knowledge_section => 'Web knowledge';
   @override
-  String get ai_web_knowledge_section_hint =>
-      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
-  @override
   String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
   @override
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
   String get video_setting_subtitle_reference_sync =>
       'Auto-align downloaded subtitles';
@@ -213185,14 +213972,63 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get ai_web_knowledge_section => '联网资料';
   @override
-  String get ai_web_knowledge_section_hint =>
-      'Fushi 自己抓取所选来源的条目正文交给 AI（AI 下视频列出系列作品、视频作品识别时使用），不需要 AI 提供商支持联网。AI 只能引用抓到的内容，列出的作品还会逐部在资料源里核对。';
-  @override
   String get ai_web_knowledge_wikipedia_zh => '维基百科（中文）';
   @override
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia（日本語）';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia（English）';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi 自己从所选来源抓取条目正文或作品清单交给 AI（AI 下视频列出系列作品、视频作品识别时使用），不需要 AI 提供商支持联网。AI 只能引用抓到的内容，列出的作品还会逐部在资料源里核对。其它 MediaWiki 站点（如 Fandom 上的作品维基）可在下方添加。';
+  @override
+  String get ai_web_knowledge_moegirl => '萌娘百科';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => '自定义 MediaWiki 站点';
+  @override
+  String get ai_web_knowledge_custom_add => '添加 MediaWiki 站点';
+  @override
+  String get ai_web_knowledge_custom_name => '名称';
+  @override
+  String get ai_web_knowledge_custom_name_hint => '留空则显示域名';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API 地址';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      '站点的 api.php，例如 https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      '请填写以 https:// 开头、以 api.php 结尾的地址';
+  @override
+  String get ai_web_knowledge_custom_remove => '删除站点';
+  @override
+  String get video_item_rescrape_not_planned => '这个视频不在任何本地视频来源的刮削计划里';
+  @override
+  String get plex_settings_hint =>
+      '用 Plex 账号登录，或填写服务器地址与 X-Plex-Token 直连。播放直接串流原文件（direct play），不使用 Plex 转码。';
+  @override
+  String get plex_account_sign_in => '使用 Plex 账号登录';
+  @override
+  String get plex_pin_waiting => '等待在浏览器中授权 Fushi…';
+  @override
+  String get plex_pin_link_hint => '如果浏览器没有自动打开，请复制这个链接：';
+  @override
+  String get plex_pin_expired => '登录请求已过期，请重试。';
+  @override
+  String get plex_servers_none_reachable => '这个账号下没有找到可连接的 Plex 服务器。';
+  @override
+  String plex_servers_added({required Object n}) => '已添加 ${n} 台 Plex 服务器';
+  @override
+  String get plex_manual_title => '手动连接';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => '连接';
+  @override
+  String get plex_sign_in_failed => 'Plex 登录失败';
   @override
   String get video_setting_subtitle_reference_sync => '下载字幕自动对齐';
   @override
@@ -226098,14 +226934,67 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get ai_web_knowledge_section => 'Web knowledge';
   @override
-  String get ai_web_knowledge_section_hint =>
-      'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
-  @override
   String get ai_web_knowledge_wikipedia_zh => 'Wikipedia (中文)';
   @override
   String get ai_web_knowledge_wikipedia_ja => 'Wikipedia (日本語)';
   @override
   String get ai_web_knowledge_wikipedia_en => 'Wikipedia (English)';
+  @override
+  String get ai_web_knowledge_section_hint =>
+      'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+  @override
+  String get ai_web_knowledge_moegirl => 'Moegirlpedia (萌娘百科)';
+  @override
+  String get ai_web_knowledge_ann => 'Anime News Network';
+  @override
+  String get ai_web_knowledge_tvmaze => 'TVmaze';
+  @override
+  String get ai_web_knowledge_custom_title => 'Custom MediaWiki sites';
+  @override
+  String get ai_web_knowledge_custom_add => 'Add MediaWiki site';
+  @override
+  String get ai_web_knowledge_custom_name => 'Name';
+  @override
+  String get ai_web_knowledge_custom_name_hint =>
+      'Leave empty to use the host name';
+  @override
+  String get ai_web_knowledge_custom_endpoint => 'API address';
+  @override
+  String get ai_web_knowledge_custom_endpoint_hint =>
+      'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+  @override
+  String get ai_web_knowledge_custom_endpoint_invalid =>
+      'Enter an https:// address ending in api.php';
+  @override
+  String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned => '這個影片不在任何本機影片來源的刮削計劃裡';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
   String get video_setting_subtitle_reference_sync =>
       'Auto-align downloaded subtitles';
@@ -237876,14 +238765,60 @@ extension on _StringsEn {
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       case 'ai_web_knowledge_section':
         return 'Web knowledge';
-      case 'ai_web_knowledge_section_hint':
-        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
       case 'ai_web_knowledge_wikipedia_zh':
         return 'Wikipedia (中文)';
       case 'ai_web_knowledge_wikipedia_ja':
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'video_setting_subtitle_reference_sync':
         return 'Auto-align downloaded subtitles';
       case 'video_setting_subtitle_reference_sync_hint':
@@ -249635,14 +250570,60 @@ extension on _StringsAr {
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       case 'ai_web_knowledge_section':
         return 'Web knowledge';
-      case 'ai_web_knowledge_section_hint':
-        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
       case 'ai_web_knowledge_wikipedia_zh':
         return 'Wikipedia (中文)';
       case 'ai_web_knowledge_wikipedia_ja':
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'video_setting_subtitle_reference_sync':
         return 'Auto-align downloaded subtitles';
       case 'video_setting_subtitle_reference_sync_hint':
@@ -261443,14 +262424,60 @@ extension on _StringsDe {
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       case 'ai_web_knowledge_section':
         return 'Web knowledge';
-      case 'ai_web_knowledge_section_hint':
-        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
       case 'ai_web_knowledge_wikipedia_zh':
         return 'Wikipedia (中文)';
       case 'ai_web_knowledge_wikipedia_ja':
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'video_setting_subtitle_reference_sync':
         return 'Auto-align downloaded subtitles';
       case 'video_setting_subtitle_reference_sync_hint':
@@ -273241,14 +274268,60 @@ extension on _StringsEs {
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       case 'ai_web_knowledge_section':
         return 'Web knowledge';
-      case 'ai_web_knowledge_section_hint':
-        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
       case 'ai_web_knowledge_wikipedia_zh':
         return 'Wikipedia (中文)';
       case 'ai_web_knowledge_wikipedia_ja':
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'video_setting_subtitle_reference_sync':
         return 'Auto-align downloaded subtitles';
       case 'video_setting_subtitle_reference_sync_hint':
@@ -285047,14 +286120,60 @@ extension on _StringsFr {
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       case 'ai_web_knowledge_section':
         return 'Web knowledge';
-      case 'ai_web_knowledge_section_hint':
-        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
       case 'ai_web_knowledge_wikipedia_zh':
         return 'Wikipedia (中文)';
       case 'ai_web_knowledge_wikipedia_ja':
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'video_setting_subtitle_reference_sync':
         return 'Auto-align downloaded subtitles';
       case 'video_setting_subtitle_reference_sync_hint':
@@ -296823,14 +297942,60 @@ extension on _StringsId {
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       case 'ai_web_knowledge_section':
         return 'Web knowledge';
-      case 'ai_web_knowledge_section_hint':
-        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
       case 'ai_web_knowledge_wikipedia_zh':
         return 'Wikipedia (中文)';
       case 'ai_web_knowledge_wikipedia_ja':
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'video_setting_subtitle_reference_sync':
         return 'Auto-align downloaded subtitles';
       case 'video_setting_subtitle_reference_sync_hint':
@@ -308622,14 +309787,60 @@ extension on _StringsIt {
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       case 'ai_web_knowledge_section':
         return 'Web knowledge';
-      case 'ai_web_knowledge_section_hint':
-        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
       case 'ai_web_knowledge_wikipedia_zh':
         return 'Wikipedia (中文)';
       case 'ai_web_knowledge_wikipedia_ja':
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'video_setting_subtitle_reference_sync':
         return 'Auto-align downloaded subtitles';
       case 'video_setting_subtitle_reference_sync_hint':
@@ -320342,14 +321553,60 @@ extension on _StringsJa {
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       case 'ai_web_knowledge_section':
         return 'Web knowledge';
-      case 'ai_web_knowledge_section_hint':
-        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
       case 'ai_web_knowledge_wikipedia_zh':
         return 'Wikipedia (中文)';
       case 'ai_web_knowledge_wikipedia_ja':
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'video_setting_subtitle_reference_sync':
         return 'Auto-align downloaded subtitles';
       case 'video_setting_subtitle_reference_sync_hint':
@@ -332070,14 +333327,60 @@ extension on _StringsKo {
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       case 'ai_web_knowledge_section':
         return 'Web knowledge';
-      case 'ai_web_knowledge_section_hint':
-        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
       case 'ai_web_knowledge_wikipedia_zh':
         return 'Wikipedia (中文)';
       case 'ai_web_knowledge_wikipedia_ja':
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'video_setting_subtitle_reference_sync':
         return 'Auto-align downloaded subtitles';
       case 'video_setting_subtitle_reference_sync_hint':
@@ -343864,14 +345167,60 @@ extension on _StringsNl {
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       case 'ai_web_knowledge_section':
         return 'Web knowledge';
-      case 'ai_web_knowledge_section_hint':
-        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
       case 'ai_web_knowledge_wikipedia_zh':
         return 'Wikipedia (中文)';
       case 'ai_web_knowledge_wikipedia_ja':
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'video_setting_subtitle_reference_sync':
         return 'Auto-align downloaded subtitles';
       case 'video_setting_subtitle_reference_sync_hint':
@@ -355653,14 +357002,60 @@ extension on _StringsPtBr {
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       case 'ai_web_knowledge_section':
         return 'Web knowledge';
-      case 'ai_web_knowledge_section_hint':
-        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
       case 'ai_web_knowledge_wikipedia_zh':
         return 'Wikipedia (中文)';
       case 'ai_web_knowledge_wikipedia_ja':
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'video_setting_subtitle_reference_sync':
         return 'Auto-align downloaded subtitles';
       case 'video_setting_subtitle_reference_sync_hint':
@@ -367448,14 +368843,60 @@ extension on _StringsRu {
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       case 'ai_web_knowledge_section':
         return 'Web knowledge';
-      case 'ai_web_knowledge_section_hint':
-        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
       case 'ai_web_knowledge_wikipedia_zh':
         return 'Wikipedia (中文)';
       case 'ai_web_knowledge_wikipedia_ja':
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'video_setting_subtitle_reference_sync':
         return 'Auto-align downloaded subtitles';
       case 'video_setting_subtitle_reference_sync_hint':
@@ -379212,14 +380653,60 @@ extension on _StringsTh {
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       case 'ai_web_knowledge_section':
         return 'Web knowledge';
-      case 'ai_web_knowledge_section_hint':
-        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
       case 'ai_web_knowledge_wikipedia_zh':
         return 'Wikipedia (中文)';
       case 'ai_web_knowledge_wikipedia_ja':
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'video_setting_subtitle_reference_sync':
         return 'Auto-align downloaded subtitles';
       case 'video_setting_subtitle_reference_sync_hint':
@@ -390992,14 +392479,60 @@ extension on _StringsTr {
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       case 'ai_web_knowledge_section':
         return 'Web knowledge';
-      case 'ai_web_knowledge_section_hint':
-        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
       case 'ai_web_knowledge_wikipedia_zh':
         return 'Wikipedia (中文)';
       case 'ai_web_knowledge_wikipedia_ja':
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'video_setting_subtitle_reference_sync':
         return 'Auto-align downloaded subtitles';
       case 'video_setting_subtitle_reference_sync_hint':
@@ -402766,14 +404299,60 @@ extension on _StringsVi {
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       case 'ai_web_knowledge_section':
         return 'Web knowledge';
-      case 'ai_web_knowledge_section_hint':
-        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
       case 'ai_web_knowledge_wikipedia_zh':
         return 'Wikipedia (中文)';
       case 'ai_web_knowledge_wikipedia_ja':
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'video_setting_subtitle_reference_sync':
         return 'Auto-align downloaded subtitles';
       case 'video_setting_subtitle_reference_sync_hint':
@@ -414424,14 +416003,60 @@ extension on _StringsZhCn {
         return 'PV、CM、NCOP/NCED、菜单等。对所有下载到视频来源的任务生效：种子里的特典文件不下载，只有特典的发布也不会被选中。';
       case 'ai_web_knowledge_section':
         return '联网资料';
-      case 'ai_web_knowledge_section_hint':
-        return 'Fushi 自己抓取所选来源的条目正文交给 AI（AI 下视频列出系列作品、视频作品识别时使用），不需要 AI 提供商支持联网。AI 只能引用抓到的内容，列出的作品还会逐部在资料源里核对。';
       case 'ai_web_knowledge_wikipedia_zh':
         return '维基百科（中文）';
       case 'ai_web_knowledge_wikipedia_ja':
         return 'Wikipedia（日本語）';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia（English）';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi 自己从所选来源抓取条目正文或作品清单交给 AI（AI 下视频列出系列作品、视频作品识别时使用），不需要 AI 提供商支持联网。AI 只能引用抓到的内容，列出的作品还会逐部在资料源里核对。其它 MediaWiki 站点（如 Fandom 上的作品维基）可在下方添加。';
+      case 'ai_web_knowledge_moegirl':
+        return '萌娘百科';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return '自定义 MediaWiki 站点';
+      case 'ai_web_knowledge_custom_add':
+        return '添加 MediaWiki 站点';
+      case 'ai_web_knowledge_custom_name':
+        return '名称';
+      case 'ai_web_knowledge_custom_name_hint':
+        return '留空则显示域名';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API 地址';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return '站点的 api.php，例如 https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return '请填写以 https:// 开头、以 api.php 结尾的地址';
+      case 'ai_web_knowledge_custom_remove':
+        return '删除站点';
+      case 'video_item_rescrape_not_planned':
+        return '这个视频不在任何本地视频来源的刮削计划里';
+      case 'plex_settings_hint':
+        return '用 Plex 账号登录，或填写服务器地址与 X-Plex-Token 直连。播放直接串流原文件（direct play），不使用 Plex 转码。';
+      case 'plex_account_sign_in':
+        return '使用 Plex 账号登录';
+      case 'plex_pin_waiting':
+        return '等待在浏览器中授权 Fushi…';
+      case 'plex_pin_link_hint':
+        return '如果浏览器没有自动打开，请复制这个链接：';
+      case 'plex_pin_expired':
+        return '登录请求已过期，请重试。';
+      case 'plex_servers_none_reachable':
+        return '这个账号下没有找到可连接的 Plex 服务器。';
+      case 'plex_servers_added':
+        return ({required Object n}) => '已添加 ${n} 台 Plex 服务器';
+      case 'plex_manual_title':
+        return '手动连接';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return '连接';
+      case 'plex_sign_in_failed':
+        return 'Plex 登录失败';
       case 'video_setting_subtitle_reference_sync':
         return '下载字幕自动对齐';
       case 'video_setting_subtitle_reference_sync_hint':
@@ -426123,14 +427748,60 @@ extension on _StringsZhHk {
         return 'PV, CM, NCOP/NCED, menus and similar. Applies to every download into a video source: extras inside a torrent are not downloaded, and extras-only releases are never picked.';
       case 'ai_web_knowledge_section':
         return 'Web knowledge';
-      case 'ai_web_knowledge_section_hint':
-        return 'Fushi itself fetches article text from the selected sources and hands it to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one.';
       case 'ai_web_knowledge_wikipedia_zh':
         return 'Wikipedia (中文)';
       case 'ai_web_knowledge_wikipedia_ja':
         return 'Wikipedia (日本語)';
       case 'ai_web_knowledge_wikipedia_en':
         return 'Wikipedia (English)';
+      case 'ai_web_knowledge_section_hint':
+        return 'Fushi itself fetches article text or work lists from the selected sources and hands them to the AI (used when AI video download lists the works of a franchise and when identifying video works). Your AI provider does not need web access. The AI can only cite what was fetched, and every listed work is still checked against the metadata source one by one. Other MediaWiki sites (such as a franchise wiki on Fandom) can be added below.';
+      case 'ai_web_knowledge_moegirl':
+        return 'Moegirlpedia (萌娘百科)';
+      case 'ai_web_knowledge_ann':
+        return 'Anime News Network';
+      case 'ai_web_knowledge_tvmaze':
+        return 'TVmaze';
+      case 'ai_web_knowledge_custom_title':
+        return 'Custom MediaWiki sites';
+      case 'ai_web_knowledge_custom_add':
+        return 'Add MediaWiki site';
+      case 'ai_web_knowledge_custom_name':
+        return 'Name';
+      case 'ai_web_knowledge_custom_name_hint':
+        return 'Leave empty to use the host name';
+      case 'ai_web_knowledge_custom_endpoint':
+        return 'API address';
+      case 'ai_web_knowledge_custom_endpoint_hint':
+        return 'The site\'s api.php, e.g. https://onepiece.fandom.com/api.php';
+      case 'ai_web_knowledge_custom_endpoint_invalid':
+        return 'Enter an https:// address ending in api.php';
+      case 'ai_web_knowledge_custom_remove':
+        return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return '這個影片不在任何本機影片來源的刮削計劃裡';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
       case 'video_setting_subtitle_reference_sync':
         return 'Auto-align downloaded subtitles';
       case 'video_setting_subtitle_reference_sync_hint':
