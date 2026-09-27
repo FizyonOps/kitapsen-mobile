@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 97172 (5716 per locale)
+/// Strings: 97359 (5727 per locale)
 ///
-/// Built on 2026-09-27 at 18:25 UTC
+/// Built on 2026-09-27 at 18:28 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8171,6 +8171,22 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
     required Object modules,
   }) =>
       'Discovery and the online sources for manga, video and novels now live in the ${browse} tab, which is turned off on this device. To use them, turn on ${browse} in ${settings} › ${appearance} › ${modules}.';
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  String get video_iptv_import_action => 'Import IPTV list';
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  String get video_iptv_url_field => 'Channel list URL';
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -21881,6 +21897,33 @@ class _StringsAr extends _StringsEn {
     required Object modules,
   }) =>
       'أصبحت صفحة الاكتشاف والمصادر عبر الإنترنت للمانغا والفيديو والروايات في تبويب ${browse}، وهو متوقف على هذا الجهاز. لاستخدامها، فعّل ${browse} من ${settings} › ${appearance} › ${modules}.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -35831,6 +35874,33 @@ class _StringsDe extends _StringsEn {
     required Object modules,
   }) =>
       'Entdecken und die Online-Quellen für Manga, Videos und Romane befinden sich jetzt im Tab „${browse}“, der auf diesem Gerät ausgeschaltet ist. Um sie zu nutzen, schalten Sie „${browse}“ unter ${settings} › ${appearance} › ${modules} ein.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -49832,6 +49902,33 @@ class _StringsEs extends _StringsEn {
     required Object modules,
   }) =>
       'Descubrir y las fuentes en línea de manga, vídeo y novelas ahora están en la pestaña ${browse}, que está desactivada en este dispositivo. Para usarlas, activa ${browse} en ${settings} › ${appearance} › ${modules}.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -63872,6 +63969,33 @@ class _StringsFr extends _StringsEn {
     required Object modules,
   }) =>
       'Découvrir et les sources en ligne de manga, vidéos et romans se trouvent désormais dans l\'onglet ${browse}, désactivé sur cet appareil. Pour les utiliser, activez ${browse} dans ${settings} › ${appearance} › ${modules}.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -77702,6 +77826,33 @@ class _StringsId extends _StringsEn {
     required Object modules,
   }) =>
       'Halaman penemuan serta sumber online untuk manga, video, dan novel kini ada di tab ${browse}, yang dimatikan di perangkat ini. Untuk menggunakannya, aktifkan ${browse} di ${settings} › ${appearance} › ${modules}.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -91633,6 +91784,33 @@ class _StringsIt extends _StringsEn {
     required Object modules,
   }) =>
       'Scopri e le fonti online per manga, video e romanzi ora si trovano nella scheda ${browse}, disattivata su questo dispositivo. Per usarli, attiva ${browse} in ${settings} › ${appearance} › ${modules}.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -104917,6 +105095,33 @@ class _StringsJa extends _StringsEn {
     required Object modules,
   }) =>
       '発見ページと、マンガ・動画・小説のオンラインソースは「${browse}」タブに移動しました。このデバイスでは現在オフになっています。使うには「${settings} › ${appearance} › ${modules}」で「${browse}」をオンにしてください。';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -118218,6 +118423,33 @@ class _StringsKo extends _StringsEn {
     required Object modules,
   }) =>
       '발견 페이지와 만화·비디오·소설 온라인 소스가 ‘${browse}’ 탭으로 이동했습니다. 이 기기에서는 현재 꺼져 있습니다. 사용하려면 ‘${settings} › ${appearance} › ${modules}’에서 ‘${browse}’을(를) 켜세요.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -132104,6 +132336,33 @@ class _StringsNl extends _StringsEn {
     required Object modules,
   }) =>
       'Ontdekken en de online bronnen voor manga, video en romans staan nu op het tabblad ${browse}, dat op dit apparaat is uitgeschakeld. Schakel ${browse} in via ${settings} › ${appearance} › ${modules} om ze te gebruiken.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -146042,6 +146301,33 @@ class _StringsPtBr extends _StringsEn {
     required Object modules,
   }) =>
       'Descobrir e as fontes online de mangá, vídeo e romances agora ficam na aba ${browse}, que está desativada neste dispositivo. Para usá-los, ative ${browse} em ${settings} › ${appearance} › ${modules}.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -159955,6 +160241,33 @@ class _StringsRu extends _StringsEn {
     required Object modules,
   }) =>
       'Страницы поиска контента и онлайн-источники манги, видео и ранобэ теперь находятся на вкладке «${browse}», которая на этом устройстве выключена. Чтобы пользоваться ими, включите «${browse}» в разделе «${settings} › ${appearance} › ${modules}».';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -173664,6 +173977,33 @@ class _StringsTh extends _StringsEn {
     required Object modules,
   }) =>
       'หน้าค้นพบและแหล่งออนไลน์สำหรับมังงะ วิดีโอ และนิยาย ย้ายไปอยู่ในแท็บ ${browse} แล้ว ซึ่งปิดอยู่ในอุปกรณ์นี้ หากต้องการใช้ ให้เปิด ${browse} ที่ ${settings} › ${appearance} › ${modules}';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -187488,6 +187828,33 @@ class _StringsTr extends _StringsEn {
     required Object modules,
   }) =>
       'Keşfet sayfası ile manga, video ve roman için çevrimiçi kaynaklar artık ${browse} sekmesinde; bu sekme bu cihazda kapalı. Bunları kullanmak için ${settings} › ${appearance} › ${modules} bölümünden ${browse} seçeneğini açın.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -201283,6 +201650,33 @@ class _StringsVi extends _StringsEn {
     required Object modules,
   }) =>
       'Trang Khám phá cùng các nguồn trực tuyến cho truyện tranh, video và tiểu thuyết giờ nằm trong tab ${browse}, hiện đang tắt trên thiết bị này. Để sử dụng, hãy bật ${browse} trong ${settings} › ${appearance} › ${modules}.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -213901,6 +214295,32 @@ class _StringsZhCn extends _StringsEn {
     required Object modules,
   }) =>
       '发现页，以及漫画 / 视频 / 小说的在线来源，已经移到「${browse}」页签；它在本机目前是关闭的。要使用它们，请到「${settings} › ${appearance} › ${modules}」打开「${browse}」。';
+  @override
+  String get video_strm_target_local =>
+      '该 .strm 文件指向本机文件路径，暂不支持。请直接把视频文件放进来源库。';
+  @override
+  String get video_strm_target_unsupported =>
+      '该 .strm 文件里没有可播放的流地址（http、https、rtsp 等）。';
+  @override
+  String get video_strm_file_unreadable => '无法读取 .strm 文件。';
+  @override
+  String get video_iptv_import_action => '导入 IPTV 频道列表';
+  @override
+  String get video_iptv_import_title => '导入 M3U / IPTV 频道列表';
+  @override
+  String get video_iptv_url_field => '频道列表地址';
+  @override
+  String get video_iptv_pick_file => '选择本地 .m3u / .m3u8 文件';
+  @override
+  String get video_iptv_import_hint =>
+      '每个频道作为一条流入库，并按 group-title 分组成合集；HLS 流播放列表会作为单个视频导入。';
+  @override
+  String get video_iptv_list_empty => '列表里没有找到频道。';
+  @override
+  String video_iptv_imported({required Object count}) => '已导入 ${count} 个频道';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'iOS 与 macOS 暂不支持这种流协议（rtsps / rtmps / rtmpe）。';
 }
 
 // Path: <root>
@@ -226861,6 +227281,33 @@ class _StringsZhHk extends _StringsEn {
     required Object modules,
   }) =>
       '發現頁，以及漫畫／影片／小說的線上來源，已經移到「${browse}」分頁；它在本機目前是關閉的。要使用它們，請到「${settings} › ${appearance} › ${modules}」開啟「${browse}」。';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 /// Flat map(s) containing all translations.
@@ -238670,6 +239117,28 @@ extension on _StringsEn {
           required Object modules,
         }) =>
             'Discovery and the online sources for manga, video and novels now live in the ${browse} tab, which is turned off on this device. To use them, turn on ${browse} in ${settings} › ${appearance} › ${modules}.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -250473,6 +250942,28 @@ extension on _StringsAr {
           required Object modules,
         }) =>
             'أصبحت صفحة الاكتشاف والمصادر عبر الإنترنت للمانغا والفيديو والروايات في تبويب ${browse}، وهو متوقف على هذا الجهاز. لاستخدامها، فعّل ${browse} من ${settings} › ${appearance} › ${modules}.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -262326,6 +262817,28 @@ extension on _StringsDe {
           required Object modules,
         }) =>
             'Entdecken und die Online-Quellen für Manga, Videos und Romane befinden sich jetzt im Tab „${browse}“, der auf diesem Gerät ausgeschaltet ist. Um sie zu nutzen, schalten Sie „${browse}“ unter ${settings} › ${appearance} › ${modules} ein.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -274169,6 +274682,28 @@ extension on _StringsEs {
           required Object modules,
         }) =>
             'Descubrir y las fuentes en línea de manga, vídeo y novelas ahora están en la pestaña ${browse}, que está desactivada en este dispositivo. Para usarlas, activa ${browse} en ${settings} › ${appearance} › ${modules}.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -286020,6 +286555,28 @@ extension on _StringsFr {
           required Object modules,
         }) =>
             'Découvrir et les sources en ligne de manga, vidéos et romans se trouvent désormais dans l\'onglet ${browse}, désactivé sur cet appareil. Pour les utiliser, activez ${browse} dans ${settings} › ${appearance} › ${modules}.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -297841,6 +298398,28 @@ extension on _StringsId {
           required Object modules,
         }) =>
             'Halaman penemuan serta sumber online untuk manga, video, dan novel kini ada di tab ${browse}, yang dimatikan di perangkat ini. Untuk menggunakannya, aktifkan ${browse} di ${settings} › ${appearance} › ${modules}.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -309684,6 +310263,28 @@ extension on _StringsIt {
           required Object modules,
         }) =>
             'Scopri e le fonti online per manga, video e romanzi ora si trovano nella scheda ${browse}, disattivata su questo dispositivo. Per usarli, attiva ${browse} in ${settings} › ${appearance} › ${modules}.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -321447,6 +322048,28 @@ extension on _StringsJa {
           required Object modules,
         }) =>
             '発見ページと、マンガ・動画・小説のオンラインソースは「${browse}」タブに移動しました。このデバイスでは現在オフになっています。使うには「${settings} › ${appearance} › ${modules}」で「${browse}」をオンにしてください。';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -333219,6 +333842,28 @@ extension on _StringsKo {
           required Object modules,
         }) =>
             '발견 페이지와 만화·비디오·소설 온라인 소스가 ‘${browse}’ 탭으로 이동했습니다. 이 기기에서는 현재 꺼져 있습니다. 사용하려면 ‘${settings} › ${appearance} › ${modules}’에서 ‘${browse}’을(를) 켜세요.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -345058,6 +345703,28 @@ extension on _StringsNl {
           required Object modules,
         }) =>
             'Ontdekken en de online bronnen voor manga, video en romans staan nu op het tabblad ${browse}, dat op dit apparaat is uitgeschakeld. Schakel ${browse} in via ${settings} › ${appearance} › ${modules} om ze te gebruiken.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -356892,6 +357559,28 @@ extension on _StringsPtBr {
           required Object modules,
         }) =>
             'Descobrir e as fontes online de mangá, vídeo e romances agora ficam na aba ${browse}, que está desativada neste dispositivo. Para usá-los, ative ${browse} em ${settings} › ${appearance} › ${modules}.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -368731,6 +369420,28 @@ extension on _StringsRu {
           required Object modules,
         }) =>
             'Страницы поиска контента и онлайн-источники манги, видео и ранобэ теперь находятся на вкладке «${browse}», которая на этом устройстве выключена. Чтобы пользоваться ими, включите «${browse}» в разделе «${settings} › ${appearance} › ${modules}».';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -380539,6 +381250,28 @@ extension on _StringsTh {
           required Object modules,
         }) =>
             'หน้าค้นพบและแหล่งออนไลน์สำหรับมังงะ วิดีโอ และนิยาย ย้ายไปอยู่ในแท็บ ${browse} แล้ว ซึ่งปิดอยู่ในอุปกรณ์นี้ หากต้องการใช้ ให้เปิด ${browse} ที่ ${settings} › ${appearance} › ${modules}';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -392363,6 +393096,28 @@ extension on _StringsTr {
           required Object modules,
         }) =>
             'Keşfet sayfası ile manga, video ve roman için çevrimiçi kaynaklar artık ${browse} sekmesinde; bu sekme bu cihazda kapalı. Bunları kullanmak için ${settings} › ${appearance} › ${modules} bölümünden ${browse} seçeneğini açın.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -404181,6 +404936,28 @@ extension on _StringsVi {
           required Object modules,
         }) =>
             'Trang Khám phá cùng các nguồn trực tuyến cho truyện tranh, video và tiểu thuyết giờ nằm trong tab ${browse}, hiện đang tắt trên thiết bị này. Để sử dụng, hãy bật ${browse} trong ${settings} › ${appearance} › ${modules}.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -415882,6 +416659,28 @@ extension on _StringsZhCn {
           required Object modules,
         }) =>
             '发现页，以及漫画 / 视频 / 小说的在线来源，已经移到「${browse}」页签；它在本机目前是关闭的。要使用它们，请到「${settings} › ${appearance} › ${modules}」打开「${browse}」。';
+      case 'video_strm_target_local':
+        return '该 .strm 文件指向本机文件路径，暂不支持。请直接把视频文件放进来源库。';
+      case 'video_strm_target_unsupported':
+        return '该 .strm 文件里没有可播放的流地址（http、https、rtsp 等）。';
+      case 'video_strm_file_unreadable':
+        return '无法读取 .strm 文件。';
+      case 'video_iptv_import_action':
+        return '导入 IPTV 频道列表';
+      case 'video_iptv_import_title':
+        return '导入 M3U / IPTV 频道列表';
+      case 'video_iptv_url_field':
+        return '频道列表地址';
+      case 'video_iptv_pick_file':
+        return '选择本地 .m3u / .m3u8 文件';
+      case 'video_iptv_import_hint':
+        return '每个频道作为一条流入库，并按 group-title 分组成合集；HLS 流播放列表会作为单个视频导入。';
+      case 'video_iptv_list_empty':
+        return '列表里没有找到频道。';
+      case 'video_iptv_imported':
+        return ({required Object count}) => '已导入 ${count} 个频道';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'iOS 与 macOS 暂不支持这种流协议（rtsps / rtmps / rtmpe）。';
       default:
         return null;
     }
@@ -427624,6 +428423,28 @@ extension on _StringsZhHk {
           required Object modules,
         }) =>
             '發現頁，以及漫畫／影片／小說的線上來源，已經移到「${browse}」分頁；它在本機目前是關閉的。要使用它們，請到「${settings} › ${appearance} › ${modules}」開啟「${browse}」。';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
