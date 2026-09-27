@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 95659 (5627 per locale)
+/// Strings: 95710 (5630 per locale)
 ///
-/// Built on 2026-09-27 at 06:14 UTC
+/// Built on 2026-09-27 at 08:36 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8022,6 +8022,12 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
       'Auto-upload imported subtitles to host';
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
 }
 
 // Path: <root>
@@ -21494,6 +21500,15 @@ class _StringsAr extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
 }
 
 // Path: <root>
@@ -35206,6 +35221,15 @@ class _StringsDe extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
 }
 
 // Path: <root>
@@ -48969,6 +48993,15 @@ class _StringsEs extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
 }
 
 // Path: <root>
@@ -62771,6 +62804,15 @@ class _StringsFr extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
 }
 
 // Path: <root>
@@ -76363,6 +76405,15 @@ class _StringsId extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
 }
 
 // Path: <root>
@@ -90056,6 +90107,15 @@ class _StringsIt extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
 }
 
 // Path: <root>
@@ -103104,6 +103164,15 @@ class _StringsJa extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
 }
 
 // Path: <root>
@@ -116169,6 +116238,15 @@ class _StringsKo extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
 }
 
 // Path: <root>
@@ -129816,6 +129894,15 @@ class _StringsNl extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
 }
 
 // Path: <root>
@@ -143516,6 +143603,15 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
 }
 
 // Path: <root>
@@ -157191,6 +157287,15 @@ class _StringsRu extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
 }
 
 // Path: <root>
@@ -170663,6 +170768,15 @@ class _StringsTh extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
 }
 
 // Path: <root>
@@ -184249,6 +184363,15 @@ class _StringsTr extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
 }
 
 // Path: <root>
@@ -197806,6 +197929,15 @@ class _StringsVi extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get delete_statistics_book_desc =>
+      'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+  @override
+  String get delete_statistics_manga_desc =>
+      'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+  @override
+  String get delete_statistics_game_desc =>
+      'Play time and text characters for this game are removed from statistics on this device';
 }
 
 // Path: <root>
@@ -210206,6 +210338,14 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       '播放互联服务端上的视频时，导入或重定时的字幕会上传并设为该集默认字幕，所有设备都会看到。关闭后字幕只在本机生效。';
+  @override
+  String get delete_statistics_book_desc =>
+      '该书的阅读时长、阅读字数与查词/制卡计数将从统计中移除，并同步到其他设备';
+  @override
+  String get delete_statistics_manga_desc =>
+      '该漫画的阅读时长、字数、页数与查词/制卡计数将从统计中移除，并同步到其他设备';
+  @override
+  String get delete_statistics_game_desc => '该游戏的游玩时长与文本字数将从本机统计中移除';
 }
 
 // Path: <root>
@@ -222935,6 +223075,14 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+  @override
+  String get delete_statistics_book_desc =>
+      '該書的閱讀時長、閱讀字數與查詞/製卡計數將從統計中移除，並同步到其他裝置';
+  @override
+  String get delete_statistics_manga_desc =>
+      '該漫畫的閱讀時長、字數、頁數與查詞/製卡計數將從統計中移除，並同步到其他裝置';
+  @override
+  String get delete_statistics_game_desc => '該遊戲的遊玩時長與文字字數將從本機統計中移除';
 }
 
 /// Flat map(s) containing all translations.
@@ -234544,6 +234692,12 @@ extension on _StringsEn {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
       default:
         return null;
     }
@@ -246148,6 +246302,12 @@ extension on _StringsAr {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
       default:
         return null;
     }
@@ -257801,6 +257961,12 @@ extension on _StringsDe {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
       default:
         return null;
     }
@@ -269444,6 +269610,12 @@ extension on _StringsEs {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
       default:
         return null;
     }
@@ -281095,6 +281267,12 @@ extension on _StringsFr {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
       default:
         return null;
     }
@@ -292716,6 +292894,12 @@ extension on _StringsId {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
       default:
         return null;
     }
@@ -304360,6 +304544,12 @@ extension on _StringsIt {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
       default:
         return null;
     }
@@ -315925,6 +316115,12 @@ extension on _StringsJa {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
       default:
         return null;
     }
@@ -327498,6 +327694,12 @@ extension on _StringsKo {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
       default:
         return null;
     }
@@ -339137,6 +339339,12 @@ extension on _StringsNl {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
       default:
         return null;
     }
@@ -350771,6 +350979,12 @@ extension on _StringsPtBr {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
       default:
         return null;
     }
@@ -362411,6 +362625,12 @@ extension on _StringsRu {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
       default:
         return null;
     }
@@ -374020,6 +374240,12 @@ extension on _StringsTh {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
       default:
         return null;
     }
@@ -385645,6 +385871,12 @@ extension on _StringsTr {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
       default:
         return null;
     }
@@ -397264,6 +397496,12 @@ extension on _StringsVi {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'delete_statistics_book_desc':
+        return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
+      case 'delete_statistics_manga_desc':
+        return 'Reading time, characters, pages and lookup/mining counts for this manga are removed from statistics on every device';
+      case 'delete_statistics_game_desc':
+        return 'Play time and text characters for this game are removed from statistics on this device';
       default:
         return null;
     }
@@ -408770,6 +409008,12 @@ extension on _StringsZhCn {
         return '导入的字幕自动上传到服务端';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return '播放互联服务端上的视频时，导入或重定时的字幕会上传并设为该集默认字幕，所有设备都会看到。关闭后字幕只在本机生效。';
+      case 'delete_statistics_book_desc':
+        return '该书的阅读时长、阅读字数与查词/制卡计数将从统计中移除，并同步到其他设备';
+      case 'delete_statistics_manga_desc':
+        return '该漫画的阅读时长、字数、页数与查词/制卡计数将从统计中移除，并同步到其他设备';
+      case 'delete_statistics_game_desc':
+        return '该游戏的游玩时长与文本字数将从本机统计中移除';
       default:
         return null;
     }
@@ -420314,6 +420558,12 @@ extension on _StringsZhHk {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
+      case 'delete_statistics_book_desc':
+        return '該書的閱讀時長、閱讀字數與查詞/製卡計數將從統計中移除，並同步到其他裝置';
+      case 'delete_statistics_manga_desc':
+        return '該漫畫的閱讀時長、字數、頁數與查詞/製卡計數將從統計中移除，並同步到其他裝置';
+      case 'delete_statistics_game_desc':
+        return '該遊戲的遊玩時長與文字字數將從本機統計中移除';
       default:
         return null;
     }
