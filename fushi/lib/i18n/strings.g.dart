@@ -3,7 +3,7 @@
 /// Locales: 17
 /// Strings: 96730 (5690 per locale)
 ///
-/// Built on 2026-09-27 at 14:55 UTC
+/// Built on 2026-09-27 at 16:51 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -225730,7 +225730,7 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
   @override
-  String get remote_video_stream_play => 'Play (stream)';
+  String get remote_video_stream_play => '播放（串流）';
 }
 
 /// Flat map(s) containing all translations.
@@ -425486,7 +425486,7 @@ extension on _StringsZhHk {
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
       case 'remote_video_stream_play':
-        return 'Play (stream)';
+        return '播放（串流）';
       default:
         return null;
     }
