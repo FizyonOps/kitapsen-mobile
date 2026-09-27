@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 95727 (5631 per locale)
+/// Strings: 95880 (5640 per locale)
 ///
-/// Built on 2026-09-27 at 09:48 UTC
+/// Built on 2026-09-27 at 11:21 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8027,6 +8027,18 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
       'Remove this novel from the bookshelf? Cached chapters and reading progress will be deleted.';
   String get novel_detail_download => 'Download';
   String get novel_detail_library_added => 'Added to bookshelf';
+  String get video_online_extension_unavailable =>
+      'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+  String get video_online_library_add => 'Add to video library';
+  String get video_online_library_remove => 'Remove from video library';
+  String video_online_library_added({required Object n}) =>
+      'Added ${n} episodes to the video library';
+  String get video_online_library_removed => 'Removed from the video library';
+  String get video_online_download_all => 'Download all';
+  String get video_online_download_episode => 'Download this episode';
+  String get video_online_download_started =>
+      'Download started — see Browse › Downloads';
+  String get video_online_downloaded => 'Downloaded';
 }
 
 // Path: <root>
@@ -21508,6 +21520,27 @@ class _StringsAr extends _StringsEn {
   String get novel_detail_download => 'تنزيل';
   @override
   String get novel_detail_library_added => 'تمت الإضافة إلى رف الكتب';
+  @override
+  String get video_online_extension_unavailable =>
+      'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+  @override
+  String get video_online_library_add => 'Add to video library';
+  @override
+  String get video_online_library_remove => 'Remove from video library';
+  @override
+  String video_online_library_added({required Object n}) =>
+      'Added ${n} episodes to the video library';
+  @override
+  String get video_online_library_removed => 'Removed from the video library';
+  @override
+  String get video_online_download_all => 'Download all';
+  @override
+  String get video_online_download_episode => 'Download this episode';
+  @override
+  String get video_online_download_started =>
+      'Download started — see Browse › Downloads';
+  @override
+  String get video_online_downloaded => 'Downloaded';
 }
 
 // Path: <root>
@@ -35229,6 +35262,27 @@ class _StringsDe extends _StringsEn {
   String get novel_detail_download => 'Herunterladen';
   @override
   String get novel_detail_library_added => 'Zum Bücherregal hinzugefügt';
+  @override
+  String get video_online_extension_unavailable =>
+      'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+  @override
+  String get video_online_library_add => 'Add to video library';
+  @override
+  String get video_online_library_remove => 'Remove from video library';
+  @override
+  String video_online_library_added({required Object n}) =>
+      'Added ${n} episodes to the video library';
+  @override
+  String get video_online_library_removed => 'Removed from the video library';
+  @override
+  String get video_online_download_all => 'Download all';
+  @override
+  String get video_online_download_episode => 'Download this episode';
+  @override
+  String get video_online_download_started =>
+      'Download started — see Browse › Downloads';
+  @override
+  String get video_online_downloaded => 'Downloaded';
 }
 
 // Path: <root>
@@ -49001,6 +49055,27 @@ class _StringsEs extends _StringsEn {
   String get novel_detail_download => 'Descargar';
   @override
   String get novel_detail_library_added => 'Añadido a la estantería';
+  @override
+  String get video_online_extension_unavailable =>
+      'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+  @override
+  String get video_online_library_add => 'Add to video library';
+  @override
+  String get video_online_library_remove => 'Remove from video library';
+  @override
+  String video_online_library_added({required Object n}) =>
+      'Added ${n} episodes to the video library';
+  @override
+  String get video_online_library_removed => 'Removed from the video library';
+  @override
+  String get video_online_download_all => 'Download all';
+  @override
+  String get video_online_download_episode => 'Download this episode';
+  @override
+  String get video_online_download_started =>
+      'Download started — see Browse › Downloads';
+  @override
+  String get video_online_downloaded => 'Downloaded';
 }
 
 // Path: <root>
@@ -62812,6 +62887,27 @@ class _StringsFr extends _StringsEn {
   String get novel_detail_download => 'Télécharger';
   @override
   String get novel_detail_library_added => 'Ajouté à la bibliothèque';
+  @override
+  String get video_online_extension_unavailable =>
+      'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+  @override
+  String get video_online_library_add => 'Add to video library';
+  @override
+  String get video_online_library_remove => 'Remove from video library';
+  @override
+  String video_online_library_added({required Object n}) =>
+      'Added ${n} episodes to the video library';
+  @override
+  String get video_online_library_removed => 'Removed from the video library';
+  @override
+  String get video_online_download_all => 'Download all';
+  @override
+  String get video_online_download_episode => 'Download this episode';
+  @override
+  String get video_online_download_started =>
+      'Download started — see Browse › Downloads';
+  @override
+  String get video_online_downloaded => 'Downloaded';
 }
 
 // Path: <root>
@@ -76413,6 +76509,27 @@ class _StringsId extends _StringsEn {
   String get novel_detail_download => 'Unduh';
   @override
   String get novel_detail_library_added => 'Ditambahkan ke rak buku';
+  @override
+  String get video_online_extension_unavailable =>
+      'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+  @override
+  String get video_online_library_add => 'Add to video library';
+  @override
+  String get video_online_library_remove => 'Remove from video library';
+  @override
+  String video_online_library_added({required Object n}) =>
+      'Added ${n} episodes to the video library';
+  @override
+  String get video_online_library_removed => 'Removed from the video library';
+  @override
+  String get video_online_download_all => 'Download all';
+  @override
+  String get video_online_download_episode => 'Download this episode';
+  @override
+  String get video_online_download_started =>
+      'Download started — see Browse › Downloads';
+  @override
+  String get video_online_downloaded => 'Downloaded';
 }
 
 // Path: <root>
@@ -90115,6 +90232,27 @@ class _StringsIt extends _StringsEn {
   String get novel_detail_download => 'Scarica';
   @override
   String get novel_detail_library_added => 'Aggiunto alla libreria';
+  @override
+  String get video_online_extension_unavailable =>
+      'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+  @override
+  String get video_online_library_add => 'Add to video library';
+  @override
+  String get video_online_library_remove => 'Remove from video library';
+  @override
+  String video_online_library_added({required Object n}) =>
+      'Added ${n} episodes to the video library';
+  @override
+  String get video_online_library_removed => 'Removed from the video library';
+  @override
+  String get video_online_download_all => 'Download all';
+  @override
+  String get video_online_download_episode => 'Download this episode';
+  @override
+  String get video_online_download_started =>
+      'Download started — see Browse › Downloads';
+  @override
+  String get video_online_downloaded => 'Downloaded';
 }
 
 // Path: <root>
@@ -103172,6 +103310,27 @@ class _StringsJa extends _StringsEn {
   String get novel_detail_download => 'ダウンロード';
   @override
   String get novel_detail_library_added => '本棚に追加しました';
+  @override
+  String get video_online_extension_unavailable =>
+      'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+  @override
+  String get video_online_library_add => 'Add to video library';
+  @override
+  String get video_online_library_remove => 'Remove from video library';
+  @override
+  String video_online_library_added({required Object n}) =>
+      'Added ${n} episodes to the video library';
+  @override
+  String get video_online_library_removed => 'Removed from the video library';
+  @override
+  String get video_online_download_all => 'Download all';
+  @override
+  String get video_online_download_episode => 'Download this episode';
+  @override
+  String get video_online_download_started =>
+      'Download started — see Browse › Downloads';
+  @override
+  String get video_online_downloaded => 'Downloaded';
 }
 
 // Path: <root>
@@ -116246,6 +116405,27 @@ class _StringsKo extends _StringsEn {
   String get novel_detail_download => '다운로드';
   @override
   String get novel_detail_library_added => '책장에 추가했어요';
+  @override
+  String get video_online_extension_unavailable =>
+      'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+  @override
+  String get video_online_library_add => 'Add to video library';
+  @override
+  String get video_online_library_remove => 'Remove from video library';
+  @override
+  String video_online_library_added({required Object n}) =>
+      'Added ${n} episodes to the video library';
+  @override
+  String get video_online_library_removed => 'Removed from the video library';
+  @override
+  String get video_online_download_all => 'Download all';
+  @override
+  String get video_online_download_episode => 'Download this episode';
+  @override
+  String get video_online_download_started =>
+      'Download started — see Browse › Downloads';
+  @override
+  String get video_online_downloaded => 'Downloaded';
 }
 
 // Path: <root>
@@ -129902,6 +130082,27 @@ class _StringsNl extends _StringsEn {
   String get novel_detail_download => 'Downloaden';
   @override
   String get novel_detail_library_added => 'Aan boekenkast toegevoegd';
+  @override
+  String get video_online_extension_unavailable =>
+      'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+  @override
+  String get video_online_library_add => 'Add to video library';
+  @override
+  String get video_online_library_remove => 'Remove from video library';
+  @override
+  String video_online_library_added({required Object n}) =>
+      'Added ${n} episodes to the video library';
+  @override
+  String get video_online_library_removed => 'Removed from the video library';
+  @override
+  String get video_online_download_all => 'Download all';
+  @override
+  String get video_online_download_episode => 'Download this episode';
+  @override
+  String get video_online_download_started =>
+      'Download started — see Browse › Downloads';
+  @override
+  String get video_online_downloaded => 'Downloaded';
 }
 
 // Path: <root>
@@ -143611,6 +143812,27 @@ class _StringsPtBr extends _StringsEn {
   String get novel_detail_download => 'Baixar';
   @override
   String get novel_detail_library_added => 'Adicionado à estante';
+  @override
+  String get video_online_extension_unavailable =>
+      'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+  @override
+  String get video_online_library_add => 'Add to video library';
+  @override
+  String get video_online_library_remove => 'Remove from video library';
+  @override
+  String video_online_library_added({required Object n}) =>
+      'Added ${n} episodes to the video library';
+  @override
+  String get video_online_library_removed => 'Removed from the video library';
+  @override
+  String get video_online_download_all => 'Download all';
+  @override
+  String get video_online_download_episode => 'Download this episode';
+  @override
+  String get video_online_download_started =>
+      'Download started — see Browse › Downloads';
+  @override
+  String get video_online_downloaded => 'Downloaded';
 }
 
 // Path: <root>
@@ -157295,6 +157517,27 @@ class _StringsRu extends _StringsEn {
   String get novel_detail_download => 'Скачать';
   @override
   String get novel_detail_library_added => 'Добавлено на полку';
+  @override
+  String get video_online_extension_unavailable =>
+      'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+  @override
+  String get video_online_library_add => 'Add to video library';
+  @override
+  String get video_online_library_remove => 'Remove from video library';
+  @override
+  String video_online_library_added({required Object n}) =>
+      'Added ${n} episodes to the video library';
+  @override
+  String get video_online_library_removed => 'Removed from the video library';
+  @override
+  String get video_online_download_all => 'Download all';
+  @override
+  String get video_online_download_episode => 'Download this episode';
+  @override
+  String get video_online_download_started =>
+      'Download started — see Browse › Downloads';
+  @override
+  String get video_online_downloaded => 'Downloaded';
 }
 
 // Path: <root>
@@ -170776,6 +171019,27 @@ class _StringsTh extends _StringsEn {
   String get novel_detail_download => 'ดาวน์โหลด';
   @override
   String get novel_detail_library_added => 'เพิ่มลงชั้นหนังสือแล้ว';
+  @override
+  String get video_online_extension_unavailable =>
+      'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+  @override
+  String get video_online_library_add => 'Add to video library';
+  @override
+  String get video_online_library_remove => 'Remove from video library';
+  @override
+  String video_online_library_added({required Object n}) =>
+      'Added ${n} episodes to the video library';
+  @override
+  String get video_online_library_removed => 'Removed from the video library';
+  @override
+  String get video_online_download_all => 'Download all';
+  @override
+  String get video_online_download_episode => 'Download this episode';
+  @override
+  String get video_online_download_started =>
+      'Download started — see Browse › Downloads';
+  @override
+  String get video_online_downloaded => 'Downloaded';
 }
 
 // Path: <root>
@@ -184371,6 +184635,27 @@ class _StringsTr extends _StringsEn {
   String get novel_detail_download => 'İndir';
   @override
   String get novel_detail_library_added => 'Kitaplığa eklendi';
+  @override
+  String get video_online_extension_unavailable =>
+      'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+  @override
+  String get video_online_library_add => 'Add to video library';
+  @override
+  String get video_online_library_remove => 'Remove from video library';
+  @override
+  String video_online_library_added({required Object n}) =>
+      'Added ${n} episodes to the video library';
+  @override
+  String get video_online_library_removed => 'Removed from the video library';
+  @override
+  String get video_online_download_all => 'Download all';
+  @override
+  String get video_online_download_episode => 'Download this episode';
+  @override
+  String get video_online_download_started =>
+      'Download started — see Browse › Downloads';
+  @override
+  String get video_online_downloaded => 'Downloaded';
 }
 
 // Path: <root>
@@ -197937,6 +198222,27 @@ class _StringsVi extends _StringsEn {
   String get novel_detail_download => 'Tải xuống';
   @override
   String get novel_detail_library_added => 'Đã thêm vào kệ sách';
+  @override
+  String get video_online_extension_unavailable =>
+      'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+  @override
+  String get video_online_library_add => 'Add to video library';
+  @override
+  String get video_online_library_remove => 'Remove from video library';
+  @override
+  String video_online_library_added({required Object n}) =>
+      'Added ${n} episodes to the video library';
+  @override
+  String get video_online_library_removed => 'Removed from the video library';
+  @override
+  String get video_online_download_all => 'Download all';
+  @override
+  String get video_online_download_episode => 'Download this episode';
+  @override
+  String get video_online_download_started =>
+      'Download started — see Browse › Downloads';
+  @override
+  String get video_online_downloaded => 'Downloaded';
 }
 
 // Path: <root>
@@ -210346,6 +210652,25 @@ class _StringsZhCn extends _StringsEn {
   String get novel_detail_download => '下载';
   @override
   String get novel_detail_library_added => '已加入书架';
+  @override
+  String get video_online_extension_unavailable =>
+      '这一集所属的视频源扩展没有安装或已停用。请到「浏览 › 扩展」重新安装或启用。';
+  @override
+  String get video_online_library_add => '加入媒体库';
+  @override
+  String get video_online_library_remove => '移出媒体库';
+  @override
+  String video_online_library_added({required Object n}) => '已把 ${n} 集加入媒体库';
+  @override
+  String get video_online_library_removed => '已移出媒体库';
+  @override
+  String get video_online_download_all => '下载全部';
+  @override
+  String get video_online_download_episode => '下载本集';
+  @override
+  String get video_online_download_started => '已开始下载，进度见「浏览 › 下载」';
+  @override
+  String get video_online_downloaded => '已下载';
 }
 
 // Path: <root>
@@ -223084,6 +223409,27 @@ class _StringsZhHk extends _StringsEn {
   String get novel_detail_download => '下載';
   @override
   String get novel_detail_library_added => '已加入書架';
+  @override
+  String get video_online_extension_unavailable =>
+      'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+  @override
+  String get video_online_library_add => 'Add to video library';
+  @override
+  String get video_online_library_remove => 'Remove from video library';
+  @override
+  String video_online_library_added({required Object n}) =>
+      'Added ${n} episodes to the video library';
+  @override
+  String get video_online_library_removed => 'Removed from the video library';
+  @override
+  String get video_online_download_all => 'Download all';
+  @override
+  String get video_online_download_episode => 'Download this episode';
+  @override
+  String get video_online_download_started =>
+      'Download started — see Browse › Downloads';
+  @override
+  String get video_online_downloaded => 'Downloaded';
 }
 
 /// Flat map(s) containing all translations.
@@ -234701,6 +235047,25 @@ extension on _StringsEn {
         return 'Download';
       case 'novel_detail_library_added':
         return 'Added to bookshelf';
+      case 'video_online_extension_unavailable':
+        return 'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+      case 'video_online_library_add':
+        return 'Add to video library';
+      case 'video_online_library_remove':
+        return 'Remove from video library';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            'Added ${n} episodes to the video library';
+      case 'video_online_library_removed':
+        return 'Removed from the video library';
+      case 'video_online_download_all':
+        return 'Download all';
+      case 'video_online_download_episode':
+        return 'Download this episode';
+      case 'video_online_download_started':
+        return 'Download started — see Browse › Downloads';
+      case 'video_online_downloaded':
+        return 'Downloaded';
       default:
         return null;
     }
@@ -246313,6 +246678,25 @@ extension on _StringsAr {
         return 'تنزيل';
       case 'novel_detail_library_added':
         return 'تمت الإضافة إلى رف الكتب';
+      case 'video_online_extension_unavailable':
+        return 'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+      case 'video_online_library_add':
+        return 'Add to video library';
+      case 'video_online_library_remove':
+        return 'Remove from video library';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            'Added ${n} episodes to the video library';
+      case 'video_online_library_removed':
+        return 'Removed from the video library';
+      case 'video_online_download_all':
+        return 'Download all';
+      case 'video_online_download_episode':
+        return 'Download this episode';
+      case 'video_online_download_started':
+        return 'Download started — see Browse › Downloads';
+      case 'video_online_downloaded':
+        return 'Downloaded';
       default:
         return null;
     }
@@ -257974,6 +258358,25 @@ extension on _StringsDe {
         return 'Herunterladen';
       case 'novel_detail_library_added':
         return 'Zum Bücherregal hinzugefügt';
+      case 'video_online_extension_unavailable':
+        return 'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+      case 'video_online_library_add':
+        return 'Add to video library';
+      case 'video_online_library_remove':
+        return 'Remove from video library';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            'Added ${n} episodes to the video library';
+      case 'video_online_library_removed':
+        return 'Removed from the video library';
+      case 'video_online_download_all':
+        return 'Download all';
+      case 'video_online_download_episode':
+        return 'Download this episode';
+      case 'video_online_download_started':
+        return 'Download started — see Browse › Downloads';
+      case 'video_online_downloaded':
+        return 'Downloaded';
       default:
         return null;
     }
@@ -269625,6 +270028,25 @@ extension on _StringsEs {
         return 'Descargar';
       case 'novel_detail_library_added':
         return 'Añadido a la estantería';
+      case 'video_online_extension_unavailable':
+        return 'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+      case 'video_online_library_add':
+        return 'Add to video library';
+      case 'video_online_library_remove':
+        return 'Remove from video library';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            'Added ${n} episodes to the video library';
+      case 'video_online_library_removed':
+        return 'Removed from the video library';
+      case 'video_online_download_all':
+        return 'Download all';
+      case 'video_online_download_episode':
+        return 'Download this episode';
+      case 'video_online_download_started':
+        return 'Download started — see Browse › Downloads';
+      case 'video_online_downloaded':
+        return 'Downloaded';
       default:
         return null;
     }
@@ -281284,6 +281706,25 @@ extension on _StringsFr {
         return 'Télécharger';
       case 'novel_detail_library_added':
         return 'Ajouté à la bibliothèque';
+      case 'video_online_extension_unavailable':
+        return 'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+      case 'video_online_library_add':
+        return 'Add to video library';
+      case 'video_online_library_remove':
+        return 'Remove from video library';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            'Added ${n} episodes to the video library';
+      case 'video_online_library_removed':
+        return 'Removed from the video library';
+      case 'video_online_download_all':
+        return 'Download all';
+      case 'video_online_download_episode':
+        return 'Download this episode';
+      case 'video_online_download_started':
+        return 'Download started — see Browse › Downloads';
+      case 'video_online_downloaded':
+        return 'Downloaded';
       default:
         return null;
     }
@@ -292913,6 +293354,25 @@ extension on _StringsId {
         return 'Unduh';
       case 'novel_detail_library_added':
         return 'Ditambahkan ke rak buku';
+      case 'video_online_extension_unavailable':
+        return 'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+      case 'video_online_library_add':
+        return 'Add to video library';
+      case 'video_online_library_remove':
+        return 'Remove from video library';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            'Added ${n} episodes to the video library';
+      case 'video_online_library_removed':
+        return 'Removed from the video library';
+      case 'video_online_download_all':
+        return 'Download all';
+      case 'video_online_download_episode':
+        return 'Download this episode';
+      case 'video_online_download_started':
+        return 'Download started — see Browse › Downloads';
+      case 'video_online_downloaded':
+        return 'Downloaded';
       default:
         return null;
     }
@@ -304565,6 +305025,25 @@ extension on _StringsIt {
         return 'Scarica';
       case 'novel_detail_library_added':
         return 'Aggiunto alla libreria';
+      case 'video_online_extension_unavailable':
+        return 'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+      case 'video_online_library_add':
+        return 'Add to video library';
+      case 'video_online_library_remove':
+        return 'Remove from video library';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            'Added ${n} episodes to the video library';
+      case 'video_online_library_removed':
+        return 'Removed from the video library';
+      case 'video_online_download_all':
+        return 'Download all';
+      case 'video_online_download_episode':
+        return 'Download this episode';
+      case 'video_online_download_started':
+        return 'Download started — see Browse › Downloads';
+      case 'video_online_downloaded':
+        return 'Downloaded';
       default:
         return null;
     }
@@ -316138,6 +316617,25 @@ extension on _StringsJa {
         return 'ダウンロード';
       case 'novel_detail_library_added':
         return '本棚に追加しました';
+      case 'video_online_extension_unavailable':
+        return 'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+      case 'video_online_library_add':
+        return 'Add to video library';
+      case 'video_online_library_remove':
+        return 'Remove from video library';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            'Added ${n} episodes to the video library';
+      case 'video_online_library_removed':
+        return 'Removed from the video library';
+      case 'video_online_download_all':
+        return 'Download all';
+      case 'video_online_download_episode':
+        return 'Download this episode';
+      case 'video_online_download_started':
+        return 'Download started — see Browse › Downloads';
+      case 'video_online_downloaded':
+        return 'Downloaded';
       default:
         return null;
     }
@@ -327719,6 +328217,25 @@ extension on _StringsKo {
         return '다운로드';
       case 'novel_detail_library_added':
         return '책장에 추가했어요';
+      case 'video_online_extension_unavailable':
+        return 'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+      case 'video_online_library_add':
+        return 'Add to video library';
+      case 'video_online_library_remove':
+        return 'Remove from video library';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            'Added ${n} episodes to the video library';
+      case 'video_online_library_removed':
+        return 'Removed from the video library';
+      case 'video_online_download_all':
+        return 'Download all';
+      case 'video_online_download_episode':
+        return 'Download this episode';
+      case 'video_online_download_started':
+        return 'Download started — see Browse › Downloads';
+      case 'video_online_downloaded':
+        return 'Downloaded';
       default:
         return null;
     }
@@ -339366,6 +339883,25 @@ extension on _StringsNl {
         return 'Downloaden';
       case 'novel_detail_library_added':
         return 'Aan boekenkast toegevoegd';
+      case 'video_online_extension_unavailable':
+        return 'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+      case 'video_online_library_add':
+        return 'Add to video library';
+      case 'video_online_library_remove':
+        return 'Remove from video library';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            'Added ${n} episodes to the video library';
+      case 'video_online_library_removed':
+        return 'Removed from the video library';
+      case 'video_online_download_all':
+        return 'Download all';
+      case 'video_online_download_episode':
+        return 'Download this episode';
+      case 'video_online_download_started':
+        return 'Download started — see Browse › Downloads';
+      case 'video_online_downloaded':
+        return 'Downloaded';
       default:
         return null;
     }
@@ -351008,6 +351544,25 @@ extension on _StringsPtBr {
         return 'Baixar';
       case 'novel_detail_library_added':
         return 'Adicionado à estante';
+      case 'video_online_extension_unavailable':
+        return 'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+      case 'video_online_library_add':
+        return 'Add to video library';
+      case 'video_online_library_remove':
+        return 'Remove from video library';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            'Added ${n} episodes to the video library';
+      case 'video_online_library_removed':
+        return 'Removed from the video library';
+      case 'video_online_download_all':
+        return 'Download all';
+      case 'video_online_download_episode':
+        return 'Download this episode';
+      case 'video_online_download_started':
+        return 'Download started — see Browse › Downloads';
+      case 'video_online_downloaded':
+        return 'Downloaded';
       default:
         return null;
     }
@@ -362656,6 +363211,25 @@ extension on _StringsRu {
         return 'Скачать';
       case 'novel_detail_library_added':
         return 'Добавлено на полку';
+      case 'video_online_extension_unavailable':
+        return 'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+      case 'video_online_library_add':
+        return 'Add to video library';
+      case 'video_online_library_remove':
+        return 'Remove from video library';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            'Added ${n} episodes to the video library';
+      case 'video_online_library_removed':
+        return 'Removed from the video library';
+      case 'video_online_download_all':
+        return 'Download all';
+      case 'video_online_download_episode':
+        return 'Download this episode';
+      case 'video_online_download_started':
+        return 'Download started — see Browse › Downloads';
+      case 'video_online_downloaded':
+        return 'Downloaded';
       default:
         return null;
     }
@@ -374273,6 +374847,25 @@ extension on _StringsTh {
         return 'ดาวน์โหลด';
       case 'novel_detail_library_added':
         return 'เพิ่มลงชั้นหนังสือแล้ว';
+      case 'video_online_extension_unavailable':
+        return 'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+      case 'video_online_library_add':
+        return 'Add to video library';
+      case 'video_online_library_remove':
+        return 'Remove from video library';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            'Added ${n} episodes to the video library';
+      case 'video_online_library_removed':
+        return 'Removed from the video library';
+      case 'video_online_download_all':
+        return 'Download all';
+      case 'video_online_download_episode':
+        return 'Download this episode';
+      case 'video_online_download_started':
+        return 'Download started — see Browse › Downloads';
+      case 'video_online_downloaded':
+        return 'Downloaded';
       default:
         return null;
     }
@@ -385906,6 +386499,25 @@ extension on _StringsTr {
         return 'İndir';
       case 'novel_detail_library_added':
         return 'Kitaplığa eklendi';
+      case 'video_online_extension_unavailable':
+        return 'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+      case 'video_online_library_add':
+        return 'Add to video library';
+      case 'video_online_library_remove':
+        return 'Remove from video library';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            'Added ${n} episodes to the video library';
+      case 'video_online_library_removed':
+        return 'Removed from the video library';
+      case 'video_online_download_all':
+        return 'Download all';
+      case 'video_online_download_episode':
+        return 'Download this episode';
+      case 'video_online_download_started':
+        return 'Download started — see Browse › Downloads';
+      case 'video_online_downloaded':
+        return 'Downloaded';
       default:
         return null;
     }
@@ -397533,6 +398145,25 @@ extension on _StringsVi {
         return 'Tải xuống';
       case 'novel_detail_library_added':
         return 'Đã thêm vào kệ sách';
+      case 'video_online_extension_unavailable':
+        return 'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+      case 'video_online_library_add':
+        return 'Add to video library';
+      case 'video_online_library_remove':
+        return 'Remove from video library';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            'Added ${n} episodes to the video library';
+      case 'video_online_library_removed':
+        return 'Removed from the video library';
+      case 'video_online_download_all':
+        return 'Download all';
+      case 'video_online_download_episode':
+        return 'Download this episode';
+      case 'video_online_download_started':
+        return 'Download started — see Browse › Downloads';
+      case 'video_online_downloaded':
+        return 'Downloaded';
       default:
         return null;
     }
@@ -409047,6 +409678,24 @@ extension on _StringsZhCn {
         return '下载';
       case 'novel_detail_library_added':
         return '已加入书架';
+      case 'video_online_extension_unavailable':
+        return '这一集所属的视频源扩展没有安装或已停用。请到「浏览 › 扩展」重新安装或启用。';
+      case 'video_online_library_add':
+        return '加入媒体库';
+      case 'video_online_library_remove':
+        return '移出媒体库';
+      case 'video_online_library_added':
+        return ({required Object n}) => '已把 ${n} 集加入媒体库';
+      case 'video_online_library_removed':
+        return '已移出媒体库';
+      case 'video_online_download_all':
+        return '下载全部';
+      case 'video_online_download_episode':
+        return '下载本集';
+      case 'video_online_download_started':
+        return '已开始下载，进度见「浏览 › 下载」';
+      case 'video_online_downloaded':
+        return '已下载';
       default:
         return null;
     }
@@ -420599,6 +421248,25 @@ extension on _StringsZhHk {
         return '下載';
       case 'novel_detail_library_added':
         return '已加入書架';
+      case 'video_online_extension_unavailable':
+        return 'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+      case 'video_online_library_add':
+        return 'Add to video library';
+      case 'video_online_library_remove':
+        return 'Remove from video library';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            'Added ${n} episodes to the video library';
+      case 'video_online_library_removed':
+        return 'Removed from the video library';
+      case 'video_online_download_all':
+        return 'Download all';
+      case 'video_online_download_episode':
+        return 'Download this episode';
+      case 'video_online_download_started':
+        return 'Download started — see Browse › Downloads';
+      case 'video_online_downloaded':
+        return 'Downloaded';
       default:
         return null;
     }
