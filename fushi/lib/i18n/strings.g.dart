@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 96951 (5703 per locale)
+/// Strings: 97155 (5715 per locale)
 ///
-/// Built on 2026-09-27 at 16:20 UTC
+/// Built on 2026-09-27 at 17:56 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8019,24 +8019,6 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
       'Auto-upload imported subtitles to host';
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
-  String get nav_browse => 'Browse';
-  String get novel_detail_library_remove => 'Remove from bookshelf';
-  String get novel_detail_library_remove_confirm =>
-      'Remove this novel from the bookshelf? Cached chapters and reading progress will be deleted.';
-  String get novel_detail_download => 'Download';
-  String get novel_detail_library_added => 'Added to bookshelf';
-  String get video_online_extension_unavailable =>
-      'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
-  String get video_online_library_add => 'Add to video library';
-  String get video_online_library_remove => 'Remove from video library';
-  String video_online_library_added({required Object n}) =>
-      'Added ${n} episodes to the video library';
-  String get video_online_library_removed => 'Removed from the video library';
-  String get video_online_download_all => 'Download all';
-  String get video_online_download_episode => 'Download this episode';
-  String get video_online_download_started =>
-      'Download started — see Browse › Downloads';
-  String get video_online_downloaded => 'Downloaded';
   String get delete_statistics_book_desc =>
       'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
   String get delete_statistics_manga_desc =>
@@ -8142,6 +8124,41 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get ai_web_knowledge_custom_endpoint_invalid =>
       'Enter an https:// address ending in api.php';
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  String get plex_account_sign_in => 'Sign in with Plex';
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  String get plex_manual_title => 'Connect manually';
+  String get plex_token_label => 'X-Plex-Token';
+  String get plex_manual_connect => 'Connect';
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  String get nav_browse => 'Browse';
+  String get novel_detail_library_remove => 'Remove from bookshelf';
+  String get novel_detail_library_remove_confirm =>
+      'Remove this novel from the bookshelf? Cached chapters and reading progress will be deleted.';
+  String get novel_detail_download => 'Download';
+  String get novel_detail_library_added => 'Added to bookshelf';
+  String get video_online_extension_unavailable =>
+      'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+  String get video_online_library_add => 'Add to video library';
+  String get video_online_library_remove => 'Remove from video library';
+  String video_online_library_added({required Object n}) =>
+      'Added ${n} episodes to the video library';
+  String get video_online_library_removed => 'Removed from the video library';
+  String get video_online_download_all => 'Download all';
+  String get video_online_download_episode => 'Download this episode';
+  String get video_online_download_started =>
+      'Download started — see Browse › Downloads';
+  String get video_online_downloaded => 'Downloaded';
   String get onboarding_feature_browse_hint =>
       'Online sources, extensions, discovery and downloads';
   String browse_moved_notice_title({required Object browse}) =>
@@ -21620,38 +21637,6 @@ class _StringsAr extends _StringsEn {
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
-  String get nav_browse => 'تصفح';
-  @override
-  String get novel_detail_library_remove => 'إزالة من رف الكتب';
-  @override
-  String get novel_detail_library_remove_confirm =>
-      'إزالة هذه الرواية من رف الكتب؟ سيتم حذف الفصول المخزنة وتقدم القراءة.';
-  @override
-  String get novel_detail_download => 'تنزيل';
-  @override
-  String get novel_detail_library_added => 'تمت الإضافة إلى رف الكتب';
-  @override
-  String get video_online_extension_unavailable =>
-      'إضافة مصدر الفيديو لهذه الحلقة غير مثبّتة أو معطّلة. أعد تثبيتها أو فعّلها من تصفح › الإضافات.';
-  @override
-  String get video_online_library_add => 'إضافة إلى مكتبة الفيديو';
-  @override
-  String get video_online_library_remove => 'إزالة من مكتبة الفيديو';
-  @override
-  String video_online_library_added({required Object n}) =>
-      'تمت إضافة ${n} حلقة إلى مكتبة الفيديو';
-  @override
-  String get video_online_library_removed => 'تمت الإزالة من مكتبة الفيديو';
-  @override
-  String get video_online_download_all => 'تنزيل الكل';
-  @override
-  String get video_online_download_episode => 'تنزيل هذه الحلقة';
-  @override
-  String get video_online_download_started =>
-      'بدأ التنزيل — راجع تصفح › التحميلات';
-  @override
-  String get video_online_downloaded => 'تم التنزيل';
-  @override
   String get delete_statistics_book_desc =>
       'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
   @override
@@ -21818,6 +21803,67 @@ class _StringsAr extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get nav_browse => 'تصفح';
+  @override
+  String get novel_detail_library_remove => 'إزالة من رف الكتب';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'إزالة هذه الرواية من رف الكتب؟ سيتم حذف الفصول المخزنة وتقدم القراءة.';
+  @override
+  String get novel_detail_download => 'تنزيل';
+  @override
+  String get novel_detail_library_added => 'تمت الإضافة إلى رف الكتب';
+  @override
+  String get video_online_extension_unavailable =>
+      'إضافة مصدر الفيديو لهذه الحلقة غير مثبّتة أو معطّلة. أعد تثبيتها أو فعّلها من تصفح › الإضافات.';
+  @override
+  String get video_online_library_add => 'إضافة إلى مكتبة الفيديو';
+  @override
+  String get video_online_library_remove => 'إزالة من مكتبة الفيديو';
+  @override
+  String video_online_library_added({required Object n}) =>
+      'تمت إضافة ${n} حلقة إلى مكتبة الفيديو';
+  @override
+  String get video_online_library_removed => 'تمت الإزالة من مكتبة الفيديو';
+  @override
+  String get video_online_download_all => 'تنزيل الكل';
+  @override
+  String get video_online_download_episode => 'تنزيل هذه الحلقة';
+  @override
+  String get video_online_download_started =>
+      'بدأ التنزيل — راجع تصفح › التحميلات';
+  @override
+  String get video_online_downloaded => 'تم التنزيل';
   @override
   String get onboarding_feature_browse_hint =>
       'المصادر عبر الإنترنت والإضافات والاكتشاف والتنزيلات';
@@ -35539,38 +35585,6 @@ class _StringsDe extends _StringsEn {
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
-  String get nav_browse => 'Durchsuchen';
-  @override
-  String get novel_detail_library_remove => 'Aus dem Bücherregal entfernen';
-  @override
-  String get novel_detail_library_remove_confirm =>
-      'Diesen Roman aus dem Bücherregal entfernen? Zwischengespeicherte Kapitel und Lesefortschritt werden gelöscht.';
-  @override
-  String get novel_detail_download => 'Herunterladen';
-  @override
-  String get novel_detail_library_added => 'Zum Bücherregal hinzugefügt';
-  @override
-  String get video_online_extension_unavailable =>
-      'Die Videoquellen-Erweiterung dieser Folge ist nicht installiert oder deaktiviert. Installieren oder aktivieren Sie sie unter „Durchsuchen › Erweiterungen“ erneut.';
-  @override
-  String get video_online_library_add => 'Zur Videobibliothek hinzufügen';
-  @override
-  String get video_online_library_remove => 'Aus der Videobibliothek entfernen';
-  @override
-  String video_online_library_added({required Object n}) =>
-      '${n} Folgen zur Videobibliothek hinzugefügt';
-  @override
-  String get video_online_library_removed => 'Aus der Videobibliothek entfernt';
-  @override
-  String get video_online_download_all => 'Alle herunterladen';
-  @override
-  String get video_online_download_episode => 'Diese Folge herunterladen';
-  @override
-  String get video_online_download_started =>
-      'Download gestartet – siehe „Durchsuchen › Downloads“';
-  @override
-  String get video_online_downloaded => 'Heruntergeladen';
-  @override
   String get delete_statistics_book_desc =>
       'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
   @override
@@ -35737,6 +35751,67 @@ class _StringsDe extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get nav_browse => 'Durchsuchen';
+  @override
+  String get novel_detail_library_remove => 'Aus dem Bücherregal entfernen';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'Diesen Roman aus dem Bücherregal entfernen? Zwischengespeicherte Kapitel und Lesefortschritt werden gelöscht.';
+  @override
+  String get novel_detail_download => 'Herunterladen';
+  @override
+  String get novel_detail_library_added => 'Zum Bücherregal hinzugefügt';
+  @override
+  String get video_online_extension_unavailable =>
+      'Die Videoquellen-Erweiterung dieser Folge ist nicht installiert oder deaktiviert. Installieren oder aktivieren Sie sie unter „Durchsuchen › Erweiterungen“ erneut.';
+  @override
+  String get video_online_library_add => 'Zur Videobibliothek hinzufügen';
+  @override
+  String get video_online_library_remove => 'Aus der Videobibliothek entfernen';
+  @override
+  String video_online_library_added({required Object n}) =>
+      '${n} Folgen zur Videobibliothek hinzugefügt';
+  @override
+  String get video_online_library_removed => 'Aus der Videobibliothek entfernt';
+  @override
+  String get video_online_download_all => 'Alle herunterladen';
+  @override
+  String get video_online_download_episode => 'Diese Folge herunterladen';
+  @override
+  String get video_online_download_started =>
+      'Download gestartet – siehe „Durchsuchen › Downloads“';
+  @override
+  String get video_online_downloaded => 'Heruntergeladen';
   @override
   String get onboarding_feature_browse_hint =>
       'Online-Quellen, Erweiterungen, Entdecken und Downloads';
@@ -49509,38 +49584,6 @@ class _StringsEs extends _StringsEn {
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
-  String get nav_browse => 'Explorar';
-  @override
-  String get novel_detail_library_remove => 'Quitar de la estantería';
-  @override
-  String get novel_detail_library_remove_confirm =>
-      '¿Quitar esta novela de la estantería? Se eliminarán los capítulos en caché y el progreso de lectura.';
-  @override
-  String get novel_detail_download => 'Descargar';
-  @override
-  String get novel_detail_library_added => 'Añadido a la estantería';
-  @override
-  String get video_online_extension_unavailable =>
-      'La extensión de fuente de vídeo de este episodio no está instalada o está desactivada. Vuelve a instalarla o actívala en Explorar › Extensiones.';
-  @override
-  String get video_online_library_add => 'Añadir a la videoteca';
-  @override
-  String get video_online_library_remove => 'Quitar de la videoteca';
-  @override
-  String video_online_library_added({required Object n}) =>
-      'Se añadieron ${n} episodios a la videoteca';
-  @override
-  String get video_online_library_removed => 'Quitado de la videoteca';
-  @override
-  String get video_online_download_all => 'Descargar todo';
-  @override
-  String get video_online_download_episode => 'Descargar este episodio';
-  @override
-  String get video_online_download_started =>
-      'Descarga iniciada; consulta Explorar › Descargas';
-  @override
-  String get video_online_downloaded => 'Descargado';
-  @override
   String get delete_statistics_book_desc =>
       'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
   @override
@@ -49707,6 +49750,67 @@ class _StringsEs extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get nav_browse => 'Explorar';
+  @override
+  String get novel_detail_library_remove => 'Quitar de la estantería';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      '¿Quitar esta novela de la estantería? Se eliminarán los capítulos en caché y el progreso de lectura.';
+  @override
+  String get novel_detail_download => 'Descargar';
+  @override
+  String get novel_detail_library_added => 'Añadido a la estantería';
+  @override
+  String get video_online_extension_unavailable =>
+      'La extensión de fuente de vídeo de este episodio no está instalada o está desactivada. Vuelve a instalarla o actívala en Explorar › Extensiones.';
+  @override
+  String get video_online_library_add => 'Añadir a la videoteca';
+  @override
+  String get video_online_library_remove => 'Quitar de la videoteca';
+  @override
+  String video_online_library_added({required Object n}) =>
+      'Se añadieron ${n} episodios a la videoteca';
+  @override
+  String get video_online_library_removed => 'Quitado de la videoteca';
+  @override
+  String get video_online_download_all => 'Descargar todo';
+  @override
+  String get video_online_download_episode => 'Descargar este episodio';
+  @override
+  String get video_online_download_started =>
+      'Descarga iniciada; consulta Explorar › Descargas';
+  @override
+  String get video_online_downloaded => 'Descargado';
   @override
   String get onboarding_feature_browse_hint =>
       'Fuentes en línea, extensiones, descubrimiento y descargas';
@@ -63518,38 +63622,6 @@ class _StringsFr extends _StringsEn {
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
-  String get nav_browse => 'Parcourir';
-  @override
-  String get novel_detail_library_remove => 'Retirer de la bibliothèque';
-  @override
-  String get novel_detail_library_remove_confirm =>
-      'Retirer ce roman de la bibliothèque ? Les chapitres en cache et la progression de lecture seront supprimés.';
-  @override
-  String get novel_detail_download => 'Télécharger';
-  @override
-  String get novel_detail_library_added => 'Ajouté à la bibliothèque';
-  @override
-  String get video_online_extension_unavailable =>
-      'L\'extension de source vidéo de cet épisode n\'est pas installée ou est désactivée. Réinstallez-la ou activez-la dans Parcourir › Extensions.';
-  @override
-  String get video_online_library_add => 'Ajouter à la vidéothèque';
-  @override
-  String get video_online_library_remove => 'Retirer de la vidéothèque';
-  @override
-  String video_online_library_added({required Object n}) =>
-      '${n} épisodes ajoutés à la vidéothèque';
-  @override
-  String get video_online_library_removed => 'Retiré de la vidéothèque';
-  @override
-  String get video_online_download_all => 'Tout télécharger';
-  @override
-  String get video_online_download_episode => 'Télécharger cet épisode';
-  @override
-  String get video_online_download_started =>
-      'Téléchargement lancé — voir Parcourir › Téléchargements';
-  @override
-  String get video_online_downloaded => 'Téléchargé';
-  @override
   String get delete_statistics_book_desc =>
       'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
   @override
@@ -63716,6 +63788,67 @@ class _StringsFr extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get nav_browse => 'Parcourir';
+  @override
+  String get novel_detail_library_remove => 'Retirer de la bibliothèque';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'Retirer ce roman de la bibliothèque ? Les chapitres en cache et la progression de lecture seront supprimés.';
+  @override
+  String get novel_detail_download => 'Télécharger';
+  @override
+  String get novel_detail_library_added => 'Ajouté à la bibliothèque';
+  @override
+  String get video_online_extension_unavailable =>
+      'L\'extension de source vidéo de cet épisode n\'est pas installée ou est désactivée. Réinstallez-la ou activez-la dans Parcourir › Extensions.';
+  @override
+  String get video_online_library_add => 'Ajouter à la vidéothèque';
+  @override
+  String get video_online_library_remove => 'Retirer de la vidéothèque';
+  @override
+  String video_online_library_added({required Object n}) =>
+      '${n} épisodes ajoutés à la vidéothèque';
+  @override
+  String get video_online_library_removed => 'Retiré de la vidéothèque';
+  @override
+  String get video_online_download_all => 'Tout télécharger';
+  @override
+  String get video_online_download_episode => 'Télécharger cet épisode';
+  @override
+  String get video_online_download_started =>
+      'Téléchargement lancé — voir Parcourir › Téléchargements';
+  @override
+  String get video_online_downloaded => 'Téléchargé';
   @override
   String get onboarding_feature_browse_hint =>
       'Sources en ligne, extensions, découverte et téléchargements';
@@ -77317,38 +77450,6 @@ class _StringsId extends _StringsEn {
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
-  String get nav_browse => 'Jelajah';
-  @override
-  String get novel_detail_library_remove => 'Hapus dari rak buku';
-  @override
-  String get novel_detail_library_remove_confirm =>
-      'Hapus novel ini dari rak buku? Bab yang tersimpan dan progres membaca akan dihapus.';
-  @override
-  String get novel_detail_download => 'Unduh';
-  @override
-  String get novel_detail_library_added => 'Ditambahkan ke rak buku';
-  @override
-  String get video_online_extension_unavailable =>
-      'Ekstensi sumber video untuk episode ini tidak terpasang atau dinonaktifkan. Pasang ulang atau aktifkan di Jelajah › Ekstensi.';
-  @override
-  String get video_online_library_add => 'Tambahkan ke pustaka video';
-  @override
-  String get video_online_library_remove => 'Hapus dari pustaka video';
-  @override
-  String video_online_library_added({required Object n}) =>
-      '${n} episode ditambahkan ke pustaka video';
-  @override
-  String get video_online_library_removed => 'Dihapus dari pustaka video';
-  @override
-  String get video_online_download_all => 'Unduh semua';
-  @override
-  String get video_online_download_episode => 'Unduh episode ini';
-  @override
-  String get video_online_download_started =>
-      'Unduhan dimulai — lihat Jelajah › Unduhan';
-  @override
-  String get video_online_downloaded => 'Sudah diunduh';
-  @override
   String get delete_statistics_book_desc =>
       'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
   @override
@@ -77515,6 +77616,67 @@ class _StringsId extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get nav_browse => 'Jelajah';
+  @override
+  String get novel_detail_library_remove => 'Hapus dari rak buku';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'Hapus novel ini dari rak buku? Bab yang tersimpan dan progres membaca akan dihapus.';
+  @override
+  String get novel_detail_download => 'Unduh';
+  @override
+  String get novel_detail_library_added => 'Ditambahkan ke rak buku';
+  @override
+  String get video_online_extension_unavailable =>
+      'Ekstensi sumber video untuk episode ini tidak terpasang atau dinonaktifkan. Pasang ulang atau aktifkan di Jelajah › Ekstensi.';
+  @override
+  String get video_online_library_add => 'Tambahkan ke pustaka video';
+  @override
+  String get video_online_library_remove => 'Hapus dari pustaka video';
+  @override
+  String video_online_library_added({required Object n}) =>
+      '${n} episode ditambahkan ke pustaka video';
+  @override
+  String get video_online_library_removed => 'Dihapus dari pustaka video';
+  @override
+  String get video_online_download_all => 'Unduh semua';
+  @override
+  String get video_online_download_episode => 'Unduh episode ini';
+  @override
+  String get video_online_download_started =>
+      'Unduhan dimulai — lihat Jelajah › Unduhan';
+  @override
+  String get video_online_downloaded => 'Sudah diunduh';
   @override
   String get onboarding_feature_browse_hint =>
       'Sumber online, ekstensi, penemuan, dan unduhan';
@@ -91217,38 +91379,6 @@ class _StringsIt extends _StringsEn {
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
-  String get nav_browse => 'Sfoglia';
-  @override
-  String get novel_detail_library_remove => 'Rimuovi dalla libreria';
-  @override
-  String get novel_detail_library_remove_confirm =>
-      'Rimuovere questo romanzo dalla libreria? I capitoli in cache e i progressi di lettura verranno eliminati.';
-  @override
-  String get novel_detail_download => 'Scarica';
-  @override
-  String get novel_detail_library_added => 'Aggiunto alla libreria';
-  @override
-  String get video_online_extension_unavailable =>
-      'L\'estensione della fonte video di questo episodio non è installata o è disabilitata. Reinstallala o abilitala in Sfoglia › Estensioni.';
-  @override
-  String get video_online_library_add => 'Aggiungi alla videoteca';
-  @override
-  String get video_online_library_remove => 'Rimuovi dalla videoteca';
-  @override
-  String video_online_library_added({required Object n}) =>
-      '${n} episodi aggiunti alla videoteca';
-  @override
-  String get video_online_library_removed => 'Rimosso dalla videoteca';
-  @override
-  String get video_online_download_all => 'Scarica tutto';
-  @override
-  String get video_online_download_episode => 'Scarica questo episodio';
-  @override
-  String get video_online_download_started =>
-      'Download avviato: vedi Sfoglia › Download';
-  @override
-  String get video_online_downloaded => 'Scaricato';
-  @override
   String get delete_statistics_book_desc =>
       'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
   @override
@@ -91415,6 +91545,67 @@ class _StringsIt extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get nav_browse => 'Sfoglia';
+  @override
+  String get novel_detail_library_remove => 'Rimuovi dalla libreria';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'Rimuovere questo romanzo dalla libreria? I capitoli in cache e i progressi di lettura verranno eliminati.';
+  @override
+  String get novel_detail_download => 'Scarica';
+  @override
+  String get novel_detail_library_added => 'Aggiunto alla libreria';
+  @override
+  String get video_online_extension_unavailable =>
+      'L\'estensione della fonte video di questo episodio non è installata o è disabilitata. Reinstallala o abilitala in Sfoglia › Estensioni.';
+  @override
+  String get video_online_library_add => 'Aggiungi alla videoteca';
+  @override
+  String get video_online_library_remove => 'Rimuovi dalla videoteca';
+  @override
+  String video_online_library_added({required Object n}) =>
+      '${n} episodi aggiunti alla videoteca';
+  @override
+  String get video_online_library_removed => 'Rimosso dalla videoteca';
+  @override
+  String get video_online_download_all => 'Scarica tutto';
+  @override
+  String get video_online_download_episode => 'Scarica questo episodio';
+  @override
+  String get video_online_download_started =>
+      'Download avviato: vedi Sfoglia › Download';
+  @override
+  String get video_online_downloaded => 'Scaricato';
   @override
   String get onboarding_feature_browse_hint =>
       'Fonti online, estensioni, scoperta e download';
@@ -104471,38 +104662,6 @@ class _StringsJa extends _StringsEn {
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
-  String get nav_browse => 'ブラウズ';
-  @override
-  String get novel_detail_library_remove => '本棚から削除';
-  @override
-  String get novel_detail_library_remove_confirm =>
-      'この小説を本棚から削除しますか？キャッシュ済みの章と読書進捗も削除されます。';
-  @override
-  String get novel_detail_download => 'ダウンロード';
-  @override
-  String get novel_detail_library_added => '本棚に追加しました';
-  @override
-  String get video_online_extension_unavailable =>
-      'このエピソードの動画ソース拡張機能がインストールされていないか、無効になっています。「ブラウズ › 拡張機能」で再インストールするか有効にしてください。';
-  @override
-  String get video_online_library_add => '動画ライブラリに追加';
-  @override
-  String get video_online_library_remove => '動画ライブラリから削除';
-  @override
-  String video_online_library_added({required Object n}) =>
-      '${n} 話を動画ライブラリに追加しました';
-  @override
-  String get video_online_library_removed => '動画ライブラリから削除しました';
-  @override
-  String get video_online_download_all => 'すべてダウンロード';
-  @override
-  String get video_online_download_episode => 'このエピソードをダウンロード';
-  @override
-  String get video_online_download_started =>
-      'ダウンロードを開始しました。進捗は「ブラウズ › ダウンロード」で確認できます';
-  @override
-  String get video_online_downloaded => 'ダウンロード済み';
-  @override
   String get delete_statistics_book_desc =>
       'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
   @override
@@ -104669,6 +104828,67 @@ class _StringsJa extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get nav_browse => 'ブラウズ';
+  @override
+  String get novel_detail_library_remove => '本棚から削除';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'この小説を本棚から削除しますか？キャッシュ済みの章と読書進捗も削除されます。';
+  @override
+  String get novel_detail_download => 'ダウンロード';
+  @override
+  String get novel_detail_library_added => '本棚に追加しました';
+  @override
+  String get video_online_extension_unavailable =>
+      'このエピソードの動画ソース拡張機能がインストールされていないか、無効になっています。「ブラウズ › 拡張機能」で再インストールするか有効にしてください。';
+  @override
+  String get video_online_library_add => '動画ライブラリに追加';
+  @override
+  String get video_online_library_remove => '動画ライブラリから削除';
+  @override
+  String video_online_library_added({required Object n}) =>
+      '${n} 話を動画ライブラリに追加しました';
+  @override
+  String get video_online_library_removed => '動画ライブラリから削除しました';
+  @override
+  String get video_online_download_all => 'すべてダウンロード';
+  @override
+  String get video_online_download_episode => 'このエピソードをダウンロード';
+  @override
+  String get video_online_download_started =>
+      'ダウンロードを開始しました。進捗は「ブラウズ › ダウンロード」で確認できます';
+  @override
+  String get video_online_downloaded => 'ダウンロード済み';
   @override
   String get onboarding_feature_browse_hint => 'オンラインソース、拡張機能、発見、ダウンロード';
   @override
@@ -117741,38 +117961,6 @@ class _StringsKo extends _StringsEn {
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
-  String get nav_browse => '탐색';
-  @override
-  String get novel_detail_library_remove => '책장에서 제거';
-  @override
-  String get novel_detail_library_remove_confirm =>
-      '이 소설을 책장에서 제거할까요? 캐시된 챕터와 읽기 진행 상황이 삭제됩니다.';
-  @override
-  String get novel_detail_download => '다운로드';
-  @override
-  String get novel_detail_library_added => '책장에 추가했어요';
-  @override
-  String get video_online_extension_unavailable =>
-      '이 에피소드의 비디오 소스 확장 프로그램이 설치되어 있지 않거나 비활성화되어 있습니다. ‘탐색 › 확장 프로그램’에서 다시 설치하거나 활성화하세요.';
-  @override
-  String get video_online_library_add => '비디오 라이브러리에 추가';
-  @override
-  String get video_online_library_remove => '비디오 라이브러리에서 제거';
-  @override
-  String video_online_library_added({required Object n}) =>
-      '에피소드 ${n}개를 비디오 라이브러리에 추가했습니다';
-  @override
-  String get video_online_library_removed => '비디오 라이브러리에서 제거했습니다';
-  @override
-  String get video_online_download_all => '모두 다운로드';
-  @override
-  String get video_online_download_episode => '이 에피소드 다운로드';
-  @override
-  String get video_online_download_started =>
-      '다운로드를 시작했습니다. 진행 상황은 ‘탐색 › 다운로드’에서 확인하세요';
-  @override
-  String get video_online_downloaded => '다운로드됨';
-  @override
   String get delete_statistics_book_desc =>
       'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
   @override
@@ -117939,6 +118127,67 @@ class _StringsKo extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get nav_browse => '탐색';
+  @override
+  String get novel_detail_library_remove => '책장에서 제거';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      '이 소설을 책장에서 제거할까요? 캐시된 챕터와 읽기 진행 상황이 삭제됩니다.';
+  @override
+  String get novel_detail_download => '다운로드';
+  @override
+  String get novel_detail_library_added => '책장에 추가했어요';
+  @override
+  String get video_online_extension_unavailable =>
+      '이 에피소드의 비디오 소스 확장 프로그램이 설치되어 있지 않거나 비활성화되어 있습니다. ‘탐색 › 확장 프로그램’에서 다시 설치하거나 활성화하세요.';
+  @override
+  String get video_online_library_add => '비디오 라이브러리에 추가';
+  @override
+  String get video_online_library_remove => '비디오 라이브러리에서 제거';
+  @override
+  String video_online_library_added({required Object n}) =>
+      '에피소드 ${n}개를 비디오 라이브러리에 추가했습니다';
+  @override
+  String get video_online_library_removed => '비디오 라이브러리에서 제거했습니다';
+  @override
+  String get video_online_download_all => '모두 다운로드';
+  @override
+  String get video_online_download_episode => '이 에피소드 다운로드';
+  @override
+  String get video_online_download_started =>
+      '다운로드를 시작했습니다. 진행 상황은 ‘탐색 › 다운로드’에서 확인하세요';
+  @override
+  String get video_online_downloaded => '다운로드됨';
   @override
   String get onboarding_feature_browse_hint => '온라인 소스, 확장 프로그램, 발견, 다운로드';
   @override
@@ -131594,39 +131843,6 @@ class _StringsNl extends _StringsEn {
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
-  String get nav_browse => 'Bladeren';
-  @override
-  String get novel_detail_library_remove => 'Uit boekenkast verwijderen';
-  @override
-  String get novel_detail_library_remove_confirm =>
-      'Deze roman uit de boekenkast verwijderen? Gecachte hoofdstukken en leesvoortgang worden verwijderd.';
-  @override
-  String get novel_detail_download => 'Downloaden';
-  @override
-  String get novel_detail_library_added => 'Aan boekenkast toegevoegd';
-  @override
-  String get video_online_extension_unavailable =>
-      'De videobronextensie van deze aflevering is niet geïnstalleerd of uitgeschakeld. Installeer of schakel hem opnieuw in via Bladeren › Extensies.';
-  @override
-  String get video_online_library_add => 'Toevoegen aan videobibliotheek';
-  @override
-  String get video_online_library_remove => 'Verwijderen uit videobibliotheek';
-  @override
-  String video_online_library_added({required Object n}) =>
-      '${n} afleveringen toegevoegd aan de videobibliotheek';
-  @override
-  String get video_online_library_removed =>
-      'Verwijderd uit de videobibliotheek';
-  @override
-  String get video_online_download_all => 'Alles downloaden';
-  @override
-  String get video_online_download_episode => 'Deze aflevering downloaden';
-  @override
-  String get video_online_download_started =>
-      'Download gestart — zie Bladeren › Downloads';
-  @override
-  String get video_online_downloaded => 'Gedownload';
-  @override
   String get delete_statistics_book_desc =>
       'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
   @override
@@ -131793,6 +132009,68 @@ class _StringsNl extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get nav_browse => 'Bladeren';
+  @override
+  String get novel_detail_library_remove => 'Uit boekenkast verwijderen';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'Deze roman uit de boekenkast verwijderen? Gecachte hoofdstukken en leesvoortgang worden verwijderd.';
+  @override
+  String get novel_detail_download => 'Downloaden';
+  @override
+  String get novel_detail_library_added => 'Aan boekenkast toegevoegd';
+  @override
+  String get video_online_extension_unavailable =>
+      'De videobronextensie van deze aflevering is niet geïnstalleerd of uitgeschakeld. Installeer of schakel hem opnieuw in via Bladeren › Extensies.';
+  @override
+  String get video_online_library_add => 'Toevoegen aan videobibliotheek';
+  @override
+  String get video_online_library_remove => 'Verwijderen uit videobibliotheek';
+  @override
+  String video_online_library_added({required Object n}) =>
+      '${n} afleveringen toegevoegd aan de videobibliotheek';
+  @override
+  String get video_online_library_removed =>
+      'Verwijderd uit de videobibliotheek';
+  @override
+  String get video_online_download_all => 'Alles downloaden';
+  @override
+  String get video_online_download_episode => 'Deze aflevering downloaden';
+  @override
+  String get video_online_download_started =>
+      'Download gestart — zie Bladeren › Downloads';
+  @override
+  String get video_online_downloaded => 'Gedownload';
   @override
   String get onboarding_feature_browse_hint =>
       'Online bronnen, extensies, ontdekken en downloads';
@@ -145502,38 +145780,6 @@ class _StringsPtBr extends _StringsEn {
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
-  String get nav_browse => 'Navegar';
-  @override
-  String get novel_detail_library_remove => 'Remover da estante';
-  @override
-  String get novel_detail_library_remove_confirm =>
-      'Remover este romance da estante? Os capítulos em cache e o progresso de leitura serão apagados.';
-  @override
-  String get novel_detail_download => 'Baixar';
-  @override
-  String get novel_detail_library_added => 'Adicionado à estante';
-  @override
-  String get video_online_extension_unavailable =>
-      'A extensão de fonte de vídeo deste episódio não está instalada ou está desativada. Reinstale ou ative-a em Navegar › Extensões.';
-  @override
-  String get video_online_library_add => 'Adicionar à biblioteca de vídeos';
-  @override
-  String get video_online_library_remove => 'Remover da biblioteca de vídeos';
-  @override
-  String video_online_library_added({required Object n}) =>
-      '${n} episódios adicionados à biblioteca de vídeos';
-  @override
-  String get video_online_library_removed => 'Removido da biblioteca de vídeos';
-  @override
-  String get video_online_download_all => 'Baixar tudo';
-  @override
-  String get video_online_download_episode => 'Baixar este episódio';
-  @override
-  String get video_online_download_started =>
-      'Download iniciado — veja Navegar › Downloads';
-  @override
-  String get video_online_downloaded => 'Baixado';
-  @override
   String get delete_statistics_book_desc =>
       'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
   @override
@@ -145700,6 +145946,67 @@ class _StringsPtBr extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get nav_browse => 'Navegar';
+  @override
+  String get novel_detail_library_remove => 'Remover da estante';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'Remover este romance da estante? Os capítulos em cache e o progresso de leitura serão apagados.';
+  @override
+  String get novel_detail_download => 'Baixar';
+  @override
+  String get novel_detail_library_added => 'Adicionado à estante';
+  @override
+  String get video_online_extension_unavailable =>
+      'A extensão de fonte de vídeo deste episódio não está instalada ou está desativada. Reinstale ou ative-a em Navegar › Extensões.';
+  @override
+  String get video_online_library_add => 'Adicionar à biblioteca de vídeos';
+  @override
+  String get video_online_library_remove => 'Remover da biblioteca de vídeos';
+  @override
+  String video_online_library_added({required Object n}) =>
+      '${n} episódios adicionados à biblioteca de vídeos';
+  @override
+  String get video_online_library_removed => 'Removido da biblioteca de vídeos';
+  @override
+  String get video_online_download_all => 'Baixar tudo';
+  @override
+  String get video_online_download_episode => 'Baixar este episódio';
+  @override
+  String get video_online_download_started =>
+      'Download iniciado — veja Navegar › Downloads';
+  @override
+  String get video_online_downloaded => 'Baixado';
   @override
   String get onboarding_feature_browse_hint =>
       'Fontes online, extensões, descoberta e downloads';
@@ -159384,38 +159691,6 @@ class _StringsRu extends _StringsEn {
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
-  String get nav_browse => 'Обзор';
-  @override
-  String get novel_detail_library_remove => 'Убрать с полки';
-  @override
-  String get novel_detail_library_remove_confirm =>
-      'Убрать этот роман с полки? Кэшированные главы и прогресс чтения будут удалены.';
-  @override
-  String get novel_detail_download => 'Скачать';
-  @override
-  String get novel_detail_library_added => 'Добавлено на полку';
-  @override
-  String get video_online_extension_unavailable =>
-      'Расширение источника видео для этого эпизода не установлено или отключено. Переустановите или включите его в разделе «Обзор › Расширения».';
-  @override
-  String get video_online_library_add => 'Добавить в видеотеку';
-  @override
-  String get video_online_library_remove => 'Убрать из видеотеки';
-  @override
-  String video_online_library_added({required Object n}) =>
-      'Добавлено эпизодов в видеотеку: ${n}';
-  @override
-  String get video_online_library_removed => 'Убрано из видеотеки';
-  @override
-  String get video_online_download_all => 'Скачать все';
-  @override
-  String get video_online_download_episode => 'Скачать этот эпизод';
-  @override
-  String get video_online_download_started =>
-      'Загрузка началась — см. «Обзор › Загрузки»';
-  @override
-  String get video_online_downloaded => 'Скачано';
-  @override
   String get delete_statistics_book_desc =>
       'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
   @override
@@ -159582,6 +159857,67 @@ class _StringsRu extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get nav_browse => 'Обзор';
+  @override
+  String get novel_detail_library_remove => 'Убрать с полки';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'Убрать этот роман с полки? Кэшированные главы и прогресс чтения будут удалены.';
+  @override
+  String get novel_detail_download => 'Скачать';
+  @override
+  String get novel_detail_library_added => 'Добавлено на полку';
+  @override
+  String get video_online_extension_unavailable =>
+      'Расширение источника видео для этого эпизода не установлено или отключено. Переустановите или включите его в разделе «Обзор › Расширения».';
+  @override
+  String get video_online_library_add => 'Добавить в видеотеку';
+  @override
+  String get video_online_library_remove => 'Убрать из видеотеки';
+  @override
+  String video_online_library_added({required Object n}) =>
+      'Добавлено эпизодов в видеотеку: ${n}';
+  @override
+  String get video_online_library_removed => 'Убрано из видеотеки';
+  @override
+  String get video_online_download_all => 'Скачать все';
+  @override
+  String get video_online_download_episode => 'Скачать этот эпизод';
+  @override
+  String get video_online_download_started =>
+      'Загрузка началась — см. «Обзор › Загрузки»';
+  @override
+  String get video_online_downloaded => 'Скачано';
   @override
   String get onboarding_feature_browse_hint =>
       'Онлайн-источники, расширения, поиск контента и загрузки';
@@ -173062,38 +173398,6 @@ class _StringsTh extends _StringsEn {
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
-  String get nav_browse => 'เรียกดู';
-  @override
-  String get novel_detail_library_remove => 'นำออกจากชั้นหนังสือ';
-  @override
-  String get novel_detail_library_remove_confirm =>
-      'นำนิยายเรื่องนี้ออกจากชั้นหนังสือ? ตอนที่แคชไว้และความคืบหน้าการอ่านจะถูกลบ';
-  @override
-  String get novel_detail_download => 'ดาวน์โหลด';
-  @override
-  String get novel_detail_library_added => 'เพิ่มลงชั้นหนังสือแล้ว';
-  @override
-  String get video_online_extension_unavailable =>
-      'ส่วนขยายแหล่งวิดีโอของตอนนี้ไม่ได้ติดตั้งหรือถูกปิดใช้งาน ติดตั้งใหม่หรือเปิดใช้งานได้ที่ เรียกดู › ส่วนขยาย';
-  @override
-  String get video_online_library_add => 'เพิ่มในคลังวิดีโอ';
-  @override
-  String get video_online_library_remove => 'นำออกจากคลังวิดีโอ';
-  @override
-  String video_online_library_added({required Object n}) =>
-      'เพิ่ม ${n} ตอนในคลังวิดีโอแล้ว';
-  @override
-  String get video_online_library_removed => 'นำออกจากคลังวิดีโอแล้ว';
-  @override
-  String get video_online_download_all => 'ดาวน์โหลดทั้งหมด';
-  @override
-  String get video_online_download_episode => 'ดาวน์โหลดเฉพาะตอนนี้';
-  @override
-  String get video_online_download_started =>
-      'เริ่มดาวน์โหลดแล้ว — ดูที่ เรียกดู › ดาวน์โหลด';
-  @override
-  String get video_online_downloaded => 'ดาวน์โหลดแล้ว';
-  @override
   String get delete_statistics_book_desc =>
       'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
   @override
@@ -173260,6 +173564,67 @@ class _StringsTh extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get nav_browse => 'เรียกดู';
+  @override
+  String get novel_detail_library_remove => 'นำออกจากชั้นหนังสือ';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'นำนิยายเรื่องนี้ออกจากชั้นหนังสือ? ตอนที่แคชไว้และความคืบหน้าการอ่านจะถูกลบ';
+  @override
+  String get novel_detail_download => 'ดาวน์โหลด';
+  @override
+  String get novel_detail_library_added => 'เพิ่มลงชั้นหนังสือแล้ว';
+  @override
+  String get video_online_extension_unavailable =>
+      'ส่วนขยายแหล่งวิดีโอของตอนนี้ไม่ได้ติดตั้งหรือถูกปิดใช้งาน ติดตั้งใหม่หรือเปิดใช้งานได้ที่ เรียกดู › ส่วนขยาย';
+  @override
+  String get video_online_library_add => 'เพิ่มในคลังวิดีโอ';
+  @override
+  String get video_online_library_remove => 'นำออกจากคลังวิดีโอ';
+  @override
+  String video_online_library_added({required Object n}) =>
+      'เพิ่ม ${n} ตอนในคลังวิดีโอแล้ว';
+  @override
+  String get video_online_library_removed => 'นำออกจากคลังวิดีโอแล้ว';
+  @override
+  String get video_online_download_all => 'ดาวน์โหลดทั้งหมด';
+  @override
+  String get video_online_download_episode => 'ดาวน์โหลดเฉพาะตอนนี้';
+  @override
+  String get video_online_download_started =>
+      'เริ่มดาวน์โหลดแล้ว — ดูที่ เรียกดู › ดาวน์โหลด';
+  @override
+  String get video_online_downloaded => 'ดาวน์โหลดแล้ว';
   @override
   String get onboarding_feature_browse_hint =>
       'แหล่งออนไลน์ ส่วนขยาย การค้นพบ และการดาวน์โหลด';
@@ -186855,38 +187220,6 @@ class _StringsTr extends _StringsEn {
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
-  String get nav_browse => 'Göz at';
-  @override
-  String get novel_detail_library_remove => 'Kitaplıktan kaldır';
-  @override
-  String get novel_detail_library_remove_confirm =>
-      'Bu roman kitaplıktan kaldırılsın mı? Önbelleğe alınan bölümler ve okuma ilerlemesi silinecek.';
-  @override
-  String get novel_detail_download => 'İndir';
-  @override
-  String get novel_detail_library_added => 'Kitaplığa eklendi';
-  @override
-  String get video_online_extension_unavailable =>
-      'Bu bölümün video kaynağı eklentisi yüklü değil veya devre dışı. Göz at › Eklentiler bölümünden yeniden yükleyin veya etkinleştirin.';
-  @override
-  String get video_online_library_add => 'Video kitaplığına ekle';
-  @override
-  String get video_online_library_remove => 'Video kitaplığından kaldır';
-  @override
-  String video_online_library_added({required Object n}) =>
-      '${n} bölüm video kitaplığına eklendi';
-  @override
-  String get video_online_library_removed => 'Video kitaplığından kaldırıldı';
-  @override
-  String get video_online_download_all => 'Tümünü indir';
-  @override
-  String get video_online_download_episode => 'Bu bölümü indir';
-  @override
-  String get video_online_download_started =>
-      'İndirme başladı — Göz at › İndirmeler bölümüne bakın';
-  @override
-  String get video_online_downloaded => 'İndirildi';
-  @override
   String get delete_statistics_book_desc =>
       'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
   @override
@@ -187053,6 +187386,67 @@ class _StringsTr extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get nav_browse => 'Göz at';
+  @override
+  String get novel_detail_library_remove => 'Kitaplıktan kaldır';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'Bu roman kitaplıktan kaldırılsın mı? Önbelleğe alınan bölümler ve okuma ilerlemesi silinecek.';
+  @override
+  String get novel_detail_download => 'İndir';
+  @override
+  String get novel_detail_library_added => 'Kitaplığa eklendi';
+  @override
+  String get video_online_extension_unavailable =>
+      'Bu bölümün video kaynağı eklentisi yüklü değil veya devre dışı. Göz at › Eklentiler bölümünden yeniden yükleyin veya etkinleştirin.';
+  @override
+  String get video_online_library_add => 'Video kitaplığına ekle';
+  @override
+  String get video_online_library_remove => 'Video kitaplığından kaldır';
+  @override
+  String video_online_library_added({required Object n}) =>
+      '${n} bölüm video kitaplığına eklendi';
+  @override
+  String get video_online_library_removed => 'Video kitaplığından kaldırıldı';
+  @override
+  String get video_online_download_all => 'Tümünü indir';
+  @override
+  String get video_online_download_episode => 'Bu bölümü indir';
+  @override
+  String get video_online_download_started =>
+      'İndirme başladı — Göz at › İndirmeler bölümüne bakın';
+  @override
+  String get video_online_downloaded => 'İndirildi';
   @override
   String get onboarding_feature_browse_hint =>
       'Çevrimiçi kaynaklar, eklentiler, keşif ve indirmeler';
@@ -200619,38 +201013,6 @@ class _StringsVi extends _StringsEn {
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
-  String get nav_browse => 'Duyệt';
-  @override
-  String get novel_detail_library_remove => 'Xóa khỏi kệ sách';
-  @override
-  String get novel_detail_library_remove_confirm =>
-      'Xóa tiểu thuyết này khỏi kệ sách? Các chương đã lưu đệm và tiến độ đọc sẽ bị xóa.';
-  @override
-  String get novel_detail_download => 'Tải xuống';
-  @override
-  String get novel_detail_library_added => 'Đã thêm vào kệ sách';
-  @override
-  String get video_online_extension_unavailable =>
-      'Tiện ích nguồn video của tập này chưa được cài đặt hoặc đã bị tắt. Hãy cài lại hoặc bật nó trong Duyệt › Tiện ích.';
-  @override
-  String get video_online_library_add => 'Thêm vào thư viện video';
-  @override
-  String get video_online_library_remove => 'Xóa khỏi thư viện video';
-  @override
-  String video_online_library_added({required Object n}) =>
-      'Đã thêm ${n} tập vào thư viện video';
-  @override
-  String get video_online_library_removed => 'Đã xóa khỏi thư viện video';
-  @override
-  String get video_online_download_all => 'Tải tất cả';
-  @override
-  String get video_online_download_episode => 'Tải tập này';
-  @override
-  String get video_online_download_started =>
-      'Đã bắt đầu tải — xem Duyệt › Tải xuống';
-  @override
-  String get video_online_downloaded => 'Đã tải';
-  @override
   String get delete_statistics_book_desc =>
       'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
   @override
@@ -200817,6 +201179,67 @@ class _StringsVi extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get nav_browse => 'Duyệt';
+  @override
+  String get novel_detail_library_remove => 'Xóa khỏi kệ sách';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'Xóa tiểu thuyết này khỏi kệ sách? Các chương đã lưu đệm và tiến độ đọc sẽ bị xóa.';
+  @override
+  String get novel_detail_download => 'Tải xuống';
+  @override
+  String get novel_detail_library_added => 'Đã thêm vào kệ sách';
+  @override
+  String get video_online_extension_unavailable =>
+      'Tiện ích nguồn video của tập này chưa được cài đặt hoặc đã bị tắt. Hãy cài lại hoặc bật nó trong Duyệt › Tiện ích.';
+  @override
+  String get video_online_library_add => 'Thêm vào thư viện video';
+  @override
+  String get video_online_library_remove => 'Xóa khỏi thư viện video';
+  @override
+  String video_online_library_added({required Object n}) =>
+      'Đã thêm ${n} tập vào thư viện video';
+  @override
+  String get video_online_library_removed => 'Đã xóa khỏi thư viện video';
+  @override
+  String get video_online_download_all => 'Tải tất cả';
+  @override
+  String get video_online_download_episode => 'Tải tập này';
+  @override
+  String get video_online_download_started =>
+      'Đã bắt đầu tải — xem Duyệt › Tải xuống';
+  @override
+  String get video_online_downloaded => 'Đã tải';
   @override
   String get onboarding_feature_browse_hint =>
       'Nguồn trực tuyến, tiện ích, khám phá và tải xuống';
@@ -213227,36 +213650,6 @@ class _StringsZhCn extends _StringsEn {
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       '播放互联服务端上的视频时，导入或重定时的字幕会上传并设为该集默认字幕，所有设备都会看到。关闭后字幕只在本机生效。';
   @override
-  String get nav_browse => '浏览';
-  @override
-  String get novel_detail_library_remove => '移出书架';
-  @override
-  String get novel_detail_library_remove_confirm =>
-      '把这部小说移出书架？已缓存的章节和阅读进度会一并删除。';
-  @override
-  String get novel_detail_download => '下载';
-  @override
-  String get novel_detail_library_added => '已加入书架';
-  @override
-  String get video_online_extension_unavailable =>
-      '这一集所属的视频源扩展没有安装或已停用。请到「浏览 › 扩展」重新安装或启用。';
-  @override
-  String get video_online_library_add => '加入媒体库';
-  @override
-  String get video_online_library_remove => '移出媒体库';
-  @override
-  String video_online_library_added({required Object n}) => '已把 ${n} 集加入媒体库';
-  @override
-  String get video_online_library_removed => '已移出媒体库';
-  @override
-  String get video_online_download_all => '下载全部';
-  @override
-  String get video_online_download_episode => '下载本集';
-  @override
-  String get video_online_download_started => '已开始下载，进度见「浏览 › 下载」';
-  @override
-  String get video_online_downloaded => '已下载';
-  @override
   String get delete_statistics_book_desc =>
       '该书的阅读时长、阅读字数与查词/制卡计数将从统计中移除，并同步到其他设备';
   @override
@@ -213409,6 +213802,61 @@ class _StringsZhCn extends _StringsEn {
       '请填写以 https:// 开头、以 api.php 结尾的地址';
   @override
   String get ai_web_knowledge_custom_remove => '删除站点';
+  @override
+  String get video_item_rescrape_not_planned => '这个视频不在任何本地视频来源的刮削计划里';
+  @override
+  String get plex_settings_hint =>
+      '用 Plex 账号登录，或填写服务器地址与 X-Plex-Token 直连。播放直接串流原文件（direct play），不使用 Plex 转码。';
+  @override
+  String get plex_account_sign_in => '使用 Plex 账号登录';
+  @override
+  String get plex_pin_waiting => '等待在浏览器中授权 Fushi…';
+  @override
+  String get plex_pin_link_hint => '如果浏览器没有自动打开，请复制这个链接：';
+  @override
+  String get plex_pin_expired => '登录请求已过期，请重试。';
+  @override
+  String get plex_servers_none_reachable => '这个账号下没有找到可连接的 Plex 服务器。';
+  @override
+  String plex_servers_added({required Object n}) => '已添加 ${n} 台 Plex 服务器';
+  @override
+  String get plex_manual_title => '手动连接';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => '连接';
+  @override
+  String get plex_sign_in_failed => 'Plex 登录失败';
+  @override
+  String get nav_browse => '浏览';
+  @override
+  String get novel_detail_library_remove => '移出书架';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      '把这部小说移出书架？已缓存的章节和阅读进度会一并删除。';
+  @override
+  String get novel_detail_download => '下载';
+  @override
+  String get novel_detail_library_added => '已加入书架';
+  @override
+  String get video_online_extension_unavailable =>
+      '这一集所属的视频源扩展没有安装或已停用。请到「浏览 › 扩展」重新安装或启用。';
+  @override
+  String get video_online_library_add => '加入媒体库';
+  @override
+  String get video_online_library_remove => '移出媒体库';
+  @override
+  String video_online_library_added({required Object n}) => '已把 ${n} 集加入媒体库';
+  @override
+  String get video_online_library_removed => '已移出媒体库';
+  @override
+  String get video_online_download_all => '下载全部';
+  @override
+  String get video_online_download_episode => '下载本集';
+  @override
+  String get video_online_download_started => '已开始下载，进度见「浏览 › 下载」';
+  @override
+  String get video_online_downloaded => '已下载';
   @override
   String get onboarding_feature_browse_hint => '在线来源、扩展、发现与下载';
   @override
@@ -226144,36 +226592,6 @@ class _StringsZhHk extends _StringsEn {
   String get video_setting_subtitle_auto_upload_to_host_hint =>
       'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
   @override
-  String get nav_browse => '瀏覽';
-  @override
-  String get novel_detail_library_remove => '移出書架';
-  @override
-  String get novel_detail_library_remove_confirm =>
-      '把這部小說移出書架？已快取的章節和閱讀進度會一併刪除。';
-  @override
-  String get novel_detail_download => '下載';
-  @override
-  String get novel_detail_library_added => '已加入書架';
-  @override
-  String get video_online_extension_unavailable =>
-      '這一集所屬的影片源擴展未安裝或已停用。請到「瀏覽 › 擴展」重新安裝或啟用。';
-  @override
-  String get video_online_library_add => '加入媒體庫';
-  @override
-  String get video_online_library_remove => '移出媒體庫';
-  @override
-  String video_online_library_added({required Object n}) => '已把 ${n} 集加入媒體庫';
-  @override
-  String get video_online_library_removed => '已移出媒體庫';
-  @override
-  String get video_online_download_all => '全部下載';
-  @override
-  String get video_online_download_episode => '下載本集';
-  @override
-  String get video_online_download_started => '已開始下載，進度見「瀏覽 › 下載」';
-  @override
-  String get video_online_downloaded => '已下載';
-  @override
   String get delete_statistics_book_desc =>
       '該書的閱讀時長、閱讀字數與查詞/製卡計數將從統計中移除，並同步到其他裝置';
   @override
@@ -226339,6 +226757,64 @@ class _StringsZhHk extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned => '這個影片不在任何本機影片來源的刮削計劃裡';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get nav_browse => '瀏覽';
+  @override
+  String get novel_detail_library_remove => '移出書架';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      '把這部小說移出書架？已快取的章節和閱讀進度會一併刪除。';
+  @override
+  String get novel_detail_download => '下載';
+  @override
+  String get novel_detail_library_added => '已加入書架';
+  @override
+  String get video_online_extension_unavailable =>
+      '這一集所屬的影片源擴展未安裝或已停用。請到「瀏覽 › 擴展」重新安裝或啟用。';
+  @override
+  String get video_online_library_add => '加入媒體庫';
+  @override
+  String get video_online_library_remove => '移出媒體庫';
+  @override
+  String video_online_library_added({required Object n}) => '已把 ${n} 集加入媒體庫';
+  @override
+  String get video_online_library_removed => '已移出媒體庫';
+  @override
+  String get video_online_download_all => '全部下載';
+  @override
+  String get video_online_download_episode => '下載本集';
+  @override
+  String get video_online_download_started => '已開始下載，進度見「瀏覽 › 下載」';
+  @override
+  String get video_online_downloaded => '已下載';
   @override
   String get onboarding_feature_browse_hint => '線上來源、擴展、發現與下載';
   @override
@@ -237955,35 +238431,6 @@ extension on _StringsEn {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
-      case 'nav_browse':
-        return 'Browse';
-      case 'novel_detail_library_remove':
-        return 'Remove from bookshelf';
-      case 'novel_detail_library_remove_confirm':
-        return 'Remove this novel from the bookshelf? Cached chapters and reading progress will be deleted.';
-      case 'novel_detail_download':
-        return 'Download';
-      case 'novel_detail_library_added':
-        return 'Added to bookshelf';
-      case 'video_online_extension_unavailable':
-        return 'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
-      case 'video_online_library_add':
-        return 'Add to video library';
-      case 'video_online_library_remove':
-        return 'Remove from video library';
-      case 'video_online_library_added':
-        return ({required Object n}) =>
-            'Added ${n} episodes to the video library';
-      case 'video_online_library_removed':
-        return 'Removed from the video library';
-      case 'video_online_download_all':
-        return 'Download all';
-      case 'video_online_download_episode':
-        return 'Download this episode';
-      case 'video_online_download_started':
-        return 'Download started — see Browse › Downloads';
-      case 'video_online_downloaded':
-        return 'Downloaded';
       case 'delete_statistics_book_desc':
         return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
       case 'delete_statistics_manga_desc':
@@ -238122,6 +238569,59 @@ extension on _StringsEn {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'nav_browse':
+        return 'Browse';
+      case 'novel_detail_library_remove':
+        return 'Remove from bookshelf';
+      case 'novel_detail_library_remove_confirm':
+        return 'Remove this novel from the bookshelf? Cached chapters and reading progress will be deleted.';
+      case 'novel_detail_download':
+        return 'Download';
+      case 'novel_detail_library_added':
+        return 'Added to bookshelf';
+      case 'video_online_extension_unavailable':
+        return 'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+      case 'video_online_library_add':
+        return 'Add to video library';
+      case 'video_online_library_remove':
+        return 'Remove from video library';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            'Added ${n} episodes to the video library';
+      case 'video_online_library_removed':
+        return 'Removed from the video library';
+      case 'video_online_download_all':
+        return 'Download all';
+      case 'video_online_download_episode':
+        return 'Download this episode';
+      case 'video_online_download_started':
+        return 'Download started — see Browse › Downloads';
+      case 'video_online_downloaded':
+        return 'Downloaded';
       case 'onboarding_feature_browse_hint':
         return 'Online sources, extensions, discovery and downloads';
       case 'browse_moved_notice_title':
@@ -249733,34 +250233,6 @@ extension on _StringsAr {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
-      case 'nav_browse':
-        return 'تصفح';
-      case 'novel_detail_library_remove':
-        return 'إزالة من رف الكتب';
-      case 'novel_detail_library_remove_confirm':
-        return 'إزالة هذه الرواية من رف الكتب؟ سيتم حذف الفصول المخزنة وتقدم القراءة.';
-      case 'novel_detail_download':
-        return 'تنزيل';
-      case 'novel_detail_library_added':
-        return 'تمت الإضافة إلى رف الكتب';
-      case 'video_online_extension_unavailable':
-        return 'إضافة مصدر الفيديو لهذه الحلقة غير مثبّتة أو معطّلة. أعد تثبيتها أو فعّلها من تصفح › الإضافات.';
-      case 'video_online_library_add':
-        return 'إضافة إلى مكتبة الفيديو';
-      case 'video_online_library_remove':
-        return 'إزالة من مكتبة الفيديو';
-      case 'video_online_library_added':
-        return ({required Object n}) => 'تمت إضافة ${n} حلقة إلى مكتبة الفيديو';
-      case 'video_online_library_removed':
-        return 'تمت الإزالة من مكتبة الفيديو';
-      case 'video_online_download_all':
-        return 'تنزيل الكل';
-      case 'video_online_download_episode':
-        return 'تنزيل هذه الحلقة';
-      case 'video_online_download_started':
-        return 'بدأ التنزيل — راجع تصفح › التحميلات';
-      case 'video_online_downloaded':
-        return 'تم التنزيل';
       case 'delete_statistics_book_desc':
         return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
       case 'delete_statistics_manga_desc':
@@ -249899,6 +250371,58 @@ extension on _StringsAr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'nav_browse':
+        return 'تصفح';
+      case 'novel_detail_library_remove':
+        return 'إزالة من رف الكتب';
+      case 'novel_detail_library_remove_confirm':
+        return 'إزالة هذه الرواية من رف الكتب؟ سيتم حذف الفصول المخزنة وتقدم القراءة.';
+      case 'novel_detail_download':
+        return 'تنزيل';
+      case 'novel_detail_library_added':
+        return 'تمت الإضافة إلى رف الكتب';
+      case 'video_online_extension_unavailable':
+        return 'إضافة مصدر الفيديو لهذه الحلقة غير مثبّتة أو معطّلة. أعد تثبيتها أو فعّلها من تصفح › الإضافات.';
+      case 'video_online_library_add':
+        return 'إضافة إلى مكتبة الفيديو';
+      case 'video_online_library_remove':
+        return 'إزالة من مكتبة الفيديو';
+      case 'video_online_library_added':
+        return ({required Object n}) => 'تمت إضافة ${n} حلقة إلى مكتبة الفيديو';
+      case 'video_online_library_removed':
+        return 'تمت الإزالة من مكتبة الفيديو';
+      case 'video_online_download_all':
+        return 'تنزيل الكل';
+      case 'video_online_download_episode':
+        return 'تنزيل هذه الحلقة';
+      case 'video_online_download_started':
+        return 'بدأ التنزيل — راجع تصفح › التحميلات';
+      case 'video_online_downloaded':
+        return 'تم التنزيل';
       case 'onboarding_feature_browse_hint':
         return 'المصادر عبر الإنترنت والإضافات والاكتشاف والتنزيلات';
       case 'browse_moved_notice_title':
@@ -261559,35 +262083,6 @@ extension on _StringsDe {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
-      case 'nav_browse':
-        return 'Durchsuchen';
-      case 'novel_detail_library_remove':
-        return 'Aus dem Bücherregal entfernen';
-      case 'novel_detail_library_remove_confirm':
-        return 'Diesen Roman aus dem Bücherregal entfernen? Zwischengespeicherte Kapitel und Lesefortschritt werden gelöscht.';
-      case 'novel_detail_download':
-        return 'Herunterladen';
-      case 'novel_detail_library_added':
-        return 'Zum Bücherregal hinzugefügt';
-      case 'video_online_extension_unavailable':
-        return 'Die Videoquellen-Erweiterung dieser Folge ist nicht installiert oder deaktiviert. Installieren oder aktivieren Sie sie unter „Durchsuchen › Erweiterungen“ erneut.';
-      case 'video_online_library_add':
-        return 'Zur Videobibliothek hinzufügen';
-      case 'video_online_library_remove':
-        return 'Aus der Videobibliothek entfernen';
-      case 'video_online_library_added':
-        return ({required Object n}) =>
-            '${n} Folgen zur Videobibliothek hinzugefügt';
-      case 'video_online_library_removed':
-        return 'Aus der Videobibliothek entfernt';
-      case 'video_online_download_all':
-        return 'Alle herunterladen';
-      case 'video_online_download_episode':
-        return 'Diese Folge herunterladen';
-      case 'video_online_download_started':
-        return 'Download gestartet – siehe „Durchsuchen › Downloads“';
-      case 'video_online_downloaded':
-        return 'Heruntergeladen';
       case 'delete_statistics_book_desc':
         return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
       case 'delete_statistics_manga_desc':
@@ -261726,6 +262221,59 @@ extension on _StringsDe {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'nav_browse':
+        return 'Durchsuchen';
+      case 'novel_detail_library_remove':
+        return 'Aus dem Bücherregal entfernen';
+      case 'novel_detail_library_remove_confirm':
+        return 'Diesen Roman aus dem Bücherregal entfernen? Zwischengespeicherte Kapitel und Lesefortschritt werden gelöscht.';
+      case 'novel_detail_download':
+        return 'Herunterladen';
+      case 'novel_detail_library_added':
+        return 'Zum Bücherregal hinzugefügt';
+      case 'video_online_extension_unavailable':
+        return 'Die Videoquellen-Erweiterung dieser Folge ist nicht installiert oder deaktiviert. Installieren oder aktivieren Sie sie unter „Durchsuchen › Erweiterungen“ erneut.';
+      case 'video_online_library_add':
+        return 'Zur Videobibliothek hinzufügen';
+      case 'video_online_library_remove':
+        return 'Aus der Videobibliothek entfernen';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            '${n} Folgen zur Videobibliothek hinzugefügt';
+      case 'video_online_library_removed':
+        return 'Aus der Videobibliothek entfernt';
+      case 'video_online_download_all':
+        return 'Alle herunterladen';
+      case 'video_online_download_episode':
+        return 'Diese Folge herunterladen';
+      case 'video_online_download_started':
+        return 'Download gestartet – siehe „Durchsuchen › Downloads“';
+      case 'video_online_downloaded':
+        return 'Heruntergeladen';
       case 'onboarding_feature_browse_hint':
         return 'Online-Quellen, Erweiterungen, Entdecken und Downloads';
       case 'browse_moved_notice_title':
@@ -273376,35 +273924,6 @@ extension on _StringsEs {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
-      case 'nav_browse':
-        return 'Explorar';
-      case 'novel_detail_library_remove':
-        return 'Quitar de la estantería';
-      case 'novel_detail_library_remove_confirm':
-        return '¿Quitar esta novela de la estantería? Se eliminarán los capítulos en caché y el progreso de lectura.';
-      case 'novel_detail_download':
-        return 'Descargar';
-      case 'novel_detail_library_added':
-        return 'Añadido a la estantería';
-      case 'video_online_extension_unavailable':
-        return 'La extensión de fuente de vídeo de este episodio no está instalada o está desactivada. Vuelve a instalarla o actívala en Explorar › Extensiones.';
-      case 'video_online_library_add':
-        return 'Añadir a la videoteca';
-      case 'video_online_library_remove':
-        return 'Quitar de la videoteca';
-      case 'video_online_library_added':
-        return ({required Object n}) =>
-            'Se añadieron ${n} episodios a la videoteca';
-      case 'video_online_library_removed':
-        return 'Quitado de la videoteca';
-      case 'video_online_download_all':
-        return 'Descargar todo';
-      case 'video_online_download_episode':
-        return 'Descargar este episodio';
-      case 'video_online_download_started':
-        return 'Descarga iniciada; consulta Explorar › Descargas';
-      case 'video_online_downloaded':
-        return 'Descargado';
       case 'delete_statistics_book_desc':
         return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
       case 'delete_statistics_manga_desc':
@@ -273543,6 +274062,59 @@ extension on _StringsEs {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'nav_browse':
+        return 'Explorar';
+      case 'novel_detail_library_remove':
+        return 'Quitar de la estantería';
+      case 'novel_detail_library_remove_confirm':
+        return '¿Quitar esta novela de la estantería? Se eliminarán los capítulos en caché y el progreso de lectura.';
+      case 'novel_detail_download':
+        return 'Descargar';
+      case 'novel_detail_library_added':
+        return 'Añadido a la estantería';
+      case 'video_online_extension_unavailable':
+        return 'La extensión de fuente de vídeo de este episodio no está instalada o está desactivada. Vuelve a instalarla o actívala en Explorar › Extensiones.';
+      case 'video_online_library_add':
+        return 'Añadir a la videoteca';
+      case 'video_online_library_remove':
+        return 'Quitar de la videoteca';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            'Se añadieron ${n} episodios a la videoteca';
+      case 'video_online_library_removed':
+        return 'Quitado de la videoteca';
+      case 'video_online_download_all':
+        return 'Descargar todo';
+      case 'video_online_download_episode':
+        return 'Descargar este episodio';
+      case 'video_online_download_started':
+        return 'Descarga iniciada; consulta Explorar › Descargas';
+      case 'video_online_downloaded':
+        return 'Descargado';
       case 'onboarding_feature_browse_hint':
         return 'Fuentes en línea, extensiones, descubrimiento y descargas';
       case 'browse_moved_notice_title':
@@ -285201,35 +285773,6 @@ extension on _StringsFr {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
-      case 'nav_browse':
-        return 'Parcourir';
-      case 'novel_detail_library_remove':
-        return 'Retirer de la bibliothèque';
-      case 'novel_detail_library_remove_confirm':
-        return 'Retirer ce roman de la bibliothèque ? Les chapitres en cache et la progression de lecture seront supprimés.';
-      case 'novel_detail_download':
-        return 'Télécharger';
-      case 'novel_detail_library_added':
-        return 'Ajouté à la bibliothèque';
-      case 'video_online_extension_unavailable':
-        return 'L\'extension de source vidéo de cet épisode n\'est pas installée ou est désactivée. Réinstallez-la ou activez-la dans Parcourir › Extensions.';
-      case 'video_online_library_add':
-        return 'Ajouter à la vidéothèque';
-      case 'video_online_library_remove':
-        return 'Retirer de la vidéothèque';
-      case 'video_online_library_added':
-        return ({required Object n}) =>
-            '${n} épisodes ajoutés à la vidéothèque';
-      case 'video_online_library_removed':
-        return 'Retiré de la vidéothèque';
-      case 'video_online_download_all':
-        return 'Tout télécharger';
-      case 'video_online_download_episode':
-        return 'Télécharger cet épisode';
-      case 'video_online_download_started':
-        return 'Téléchargement lancé — voir Parcourir › Téléchargements';
-      case 'video_online_downloaded':
-        return 'Téléchargé';
       case 'delete_statistics_book_desc':
         return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
       case 'delete_statistics_manga_desc':
@@ -285368,6 +285911,59 @@ extension on _StringsFr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'nav_browse':
+        return 'Parcourir';
+      case 'novel_detail_library_remove':
+        return 'Retirer de la bibliothèque';
+      case 'novel_detail_library_remove_confirm':
+        return 'Retirer ce roman de la bibliothèque ? Les chapitres en cache et la progression de lecture seront supprimés.';
+      case 'novel_detail_download':
+        return 'Télécharger';
+      case 'novel_detail_library_added':
+        return 'Ajouté à la bibliothèque';
+      case 'video_online_extension_unavailable':
+        return 'L\'extension de source vidéo de cet épisode n\'est pas installée ou est désactivée. Réinstallez-la ou activez-la dans Parcourir › Extensions.';
+      case 'video_online_library_add':
+        return 'Ajouter à la vidéothèque';
+      case 'video_online_library_remove':
+        return 'Retirer de la vidéothèque';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            '${n} épisodes ajoutés à la vidéothèque';
+      case 'video_online_library_removed':
+        return 'Retiré de la vidéothèque';
+      case 'video_online_download_all':
+        return 'Tout télécharger';
+      case 'video_online_download_episode':
+        return 'Télécharger cet épisode';
+      case 'video_online_download_started':
+        return 'Téléchargement lancé — voir Parcourir › Téléchargements';
+      case 'video_online_downloaded':
+        return 'Téléchargé';
       case 'onboarding_feature_browse_hint':
         return 'Sources en ligne, extensions, découverte et téléchargements';
       case 'browse_moved_notice_title':
@@ -296996,35 +297592,6 @@ extension on _StringsId {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
-      case 'nav_browse':
-        return 'Jelajah';
-      case 'novel_detail_library_remove':
-        return 'Hapus dari rak buku';
-      case 'novel_detail_library_remove_confirm':
-        return 'Hapus novel ini dari rak buku? Bab yang tersimpan dan progres membaca akan dihapus.';
-      case 'novel_detail_download':
-        return 'Unduh';
-      case 'novel_detail_library_added':
-        return 'Ditambahkan ke rak buku';
-      case 'video_online_extension_unavailable':
-        return 'Ekstensi sumber video untuk episode ini tidak terpasang atau dinonaktifkan. Pasang ulang atau aktifkan di Jelajah › Ekstensi.';
-      case 'video_online_library_add':
-        return 'Tambahkan ke pustaka video';
-      case 'video_online_library_remove':
-        return 'Hapus dari pustaka video';
-      case 'video_online_library_added':
-        return ({required Object n}) =>
-            '${n} episode ditambahkan ke pustaka video';
-      case 'video_online_library_removed':
-        return 'Dihapus dari pustaka video';
-      case 'video_online_download_all':
-        return 'Unduh semua';
-      case 'video_online_download_episode':
-        return 'Unduh episode ini';
-      case 'video_online_download_started':
-        return 'Unduhan dimulai — lihat Jelajah › Unduhan';
-      case 'video_online_downloaded':
-        return 'Sudah diunduh';
       case 'delete_statistics_book_desc':
         return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
       case 'delete_statistics_manga_desc':
@@ -297163,6 +297730,59 @@ extension on _StringsId {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'nav_browse':
+        return 'Jelajah';
+      case 'novel_detail_library_remove':
+        return 'Hapus dari rak buku';
+      case 'novel_detail_library_remove_confirm':
+        return 'Hapus novel ini dari rak buku? Bab yang tersimpan dan progres membaca akan dihapus.';
+      case 'novel_detail_download':
+        return 'Unduh';
+      case 'novel_detail_library_added':
+        return 'Ditambahkan ke rak buku';
+      case 'video_online_extension_unavailable':
+        return 'Ekstensi sumber video untuk episode ini tidak terpasang atau dinonaktifkan. Pasang ulang atau aktifkan di Jelajah › Ekstensi.';
+      case 'video_online_library_add':
+        return 'Tambahkan ke pustaka video';
+      case 'video_online_library_remove':
+        return 'Hapus dari pustaka video';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            '${n} episode ditambahkan ke pustaka video';
+      case 'video_online_library_removed':
+        return 'Dihapus dari pustaka video';
+      case 'video_online_download_all':
+        return 'Unduh semua';
+      case 'video_online_download_episode':
+        return 'Unduh episode ini';
+      case 'video_online_download_started':
+        return 'Unduhan dimulai — lihat Jelajah › Unduhan';
+      case 'video_online_downloaded':
+        return 'Sudah diunduh';
       case 'onboarding_feature_browse_hint':
         return 'Sumber online, ekstensi, penemuan, dan unduhan';
       case 'browse_moved_notice_title':
@@ -308814,34 +309434,6 @@ extension on _StringsIt {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
-      case 'nav_browse':
-        return 'Sfoglia';
-      case 'novel_detail_library_remove':
-        return 'Rimuovi dalla libreria';
-      case 'novel_detail_library_remove_confirm':
-        return 'Rimuovere questo romanzo dalla libreria? I capitoli in cache e i progressi di lettura verranno eliminati.';
-      case 'novel_detail_download':
-        return 'Scarica';
-      case 'novel_detail_library_added':
-        return 'Aggiunto alla libreria';
-      case 'video_online_extension_unavailable':
-        return 'L\'estensione della fonte video di questo episodio non è installata o è disabilitata. Reinstallala o abilitala in Sfoglia › Estensioni.';
-      case 'video_online_library_add':
-        return 'Aggiungi alla videoteca';
-      case 'video_online_library_remove':
-        return 'Rimuovi dalla videoteca';
-      case 'video_online_library_added':
-        return ({required Object n}) => '${n} episodi aggiunti alla videoteca';
-      case 'video_online_library_removed':
-        return 'Rimosso dalla videoteca';
-      case 'video_online_download_all':
-        return 'Scarica tutto';
-      case 'video_online_download_episode':
-        return 'Scarica questo episodio';
-      case 'video_online_download_started':
-        return 'Download avviato: vedi Sfoglia › Download';
-      case 'video_online_downloaded':
-        return 'Scaricato';
       case 'delete_statistics_book_desc':
         return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
       case 'delete_statistics_manga_desc':
@@ -308980,6 +309572,58 @@ extension on _StringsIt {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'nav_browse':
+        return 'Sfoglia';
+      case 'novel_detail_library_remove':
+        return 'Rimuovi dalla libreria';
+      case 'novel_detail_library_remove_confirm':
+        return 'Rimuovere questo romanzo dalla libreria? I capitoli in cache e i progressi di lettura verranno eliminati.';
+      case 'novel_detail_download':
+        return 'Scarica';
+      case 'novel_detail_library_added':
+        return 'Aggiunto alla libreria';
+      case 'video_online_extension_unavailable':
+        return 'L\'estensione della fonte video di questo episodio non è installata o è disabilitata. Reinstallala o abilitala in Sfoglia › Estensioni.';
+      case 'video_online_library_add':
+        return 'Aggiungi alla videoteca';
+      case 'video_online_library_remove':
+        return 'Rimuovi dalla videoteca';
+      case 'video_online_library_added':
+        return ({required Object n}) => '${n} episodi aggiunti alla videoteca';
+      case 'video_online_library_removed':
+        return 'Rimosso dalla videoteca';
+      case 'video_online_download_all':
+        return 'Scarica tutto';
+      case 'video_online_download_episode':
+        return 'Scarica questo episodio';
+      case 'video_online_download_started':
+        return 'Download avviato: vedi Sfoglia › Download';
+      case 'video_online_downloaded':
+        return 'Scaricato';
       case 'onboarding_feature_browse_hint':
         return 'Fonti online, estensioni, scoperta e download';
       case 'browse_moved_notice_title':
@@ -320552,34 +321196,6 @@ extension on _StringsJa {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
-      case 'nav_browse':
-        return 'ブラウズ';
-      case 'novel_detail_library_remove':
-        return '本棚から削除';
-      case 'novel_detail_library_remove_confirm':
-        return 'この小説を本棚から削除しますか？キャッシュ済みの章と読書進捗も削除されます。';
-      case 'novel_detail_download':
-        return 'ダウンロード';
-      case 'novel_detail_library_added':
-        return '本棚に追加しました';
-      case 'video_online_extension_unavailable':
-        return 'このエピソードの動画ソース拡張機能がインストールされていないか、無効になっています。「ブラウズ › 拡張機能」で再インストールするか有効にしてください。';
-      case 'video_online_library_add':
-        return '動画ライブラリに追加';
-      case 'video_online_library_remove':
-        return '動画ライブラリから削除';
-      case 'video_online_library_added':
-        return ({required Object n}) => '${n} 話を動画ライブラリに追加しました';
-      case 'video_online_library_removed':
-        return '動画ライブラリから削除しました';
-      case 'video_online_download_all':
-        return 'すべてダウンロード';
-      case 'video_online_download_episode':
-        return 'このエピソードをダウンロード';
-      case 'video_online_download_started':
-        return 'ダウンロードを開始しました。進捗は「ブラウズ › ダウンロード」で確認できます';
-      case 'video_online_downloaded':
-        return 'ダウンロード済み';
       case 'delete_statistics_book_desc':
         return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
       case 'delete_statistics_manga_desc':
@@ -320718,6 +321334,58 @@ extension on _StringsJa {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'nav_browse':
+        return 'ブラウズ';
+      case 'novel_detail_library_remove':
+        return '本棚から削除';
+      case 'novel_detail_library_remove_confirm':
+        return 'この小説を本棚から削除しますか？キャッシュ済みの章と読書進捗も削除されます。';
+      case 'novel_detail_download':
+        return 'ダウンロード';
+      case 'novel_detail_library_added':
+        return '本棚に追加しました';
+      case 'video_online_extension_unavailable':
+        return 'このエピソードの動画ソース拡張機能がインストールされていないか、無効になっています。「ブラウズ › 拡張機能」で再インストールするか有効にしてください。';
+      case 'video_online_library_add':
+        return '動画ライブラリに追加';
+      case 'video_online_library_remove':
+        return '動画ライブラリから削除';
+      case 'video_online_library_added':
+        return ({required Object n}) => '${n} 話を動画ライブラリに追加しました';
+      case 'video_online_library_removed':
+        return '動画ライブラリから削除しました';
+      case 'video_online_download_all':
+        return 'すべてダウンロード';
+      case 'video_online_download_episode':
+        return 'このエピソードをダウンロード';
+      case 'video_online_download_started':
+        return 'ダウンロードを開始しました。進捗は「ブラウズ › ダウンロード」で確認できます';
+      case 'video_online_downloaded':
+        return 'ダウンロード済み';
       case 'onboarding_feature_browse_hint':
         return 'オンラインソース、拡張機能、発見、ダウンロード';
       case 'browse_moved_notice_title':
@@ -332297,34 +332965,6 @@ extension on _StringsKo {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
-      case 'nav_browse':
-        return '탐색';
-      case 'novel_detail_library_remove':
-        return '책장에서 제거';
-      case 'novel_detail_library_remove_confirm':
-        return '이 소설을 책장에서 제거할까요? 캐시된 챕터와 읽기 진행 상황이 삭제됩니다.';
-      case 'novel_detail_download':
-        return '다운로드';
-      case 'novel_detail_library_added':
-        return '책장에 추가했어요';
-      case 'video_online_extension_unavailable':
-        return '이 에피소드의 비디오 소스 확장 프로그램이 설치되어 있지 않거나 비활성화되어 있습니다. ‘탐색 › 확장 프로그램’에서 다시 설치하거나 활성화하세요.';
-      case 'video_online_library_add':
-        return '비디오 라이브러리에 추가';
-      case 'video_online_library_remove':
-        return '비디오 라이브러리에서 제거';
-      case 'video_online_library_added':
-        return ({required Object n}) => '에피소드 ${n}개를 비디오 라이브러리에 추가했습니다';
-      case 'video_online_library_removed':
-        return '비디오 라이브러리에서 제거했습니다';
-      case 'video_online_download_all':
-        return '모두 다운로드';
-      case 'video_online_download_episode':
-        return '이 에피소드 다운로드';
-      case 'video_online_download_started':
-        return '다운로드를 시작했습니다. 진행 상황은 ‘탐색 › 다운로드’에서 확인하세요';
-      case 'video_online_downloaded':
-        return '다운로드됨';
       case 'delete_statistics_book_desc':
         return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
       case 'delete_statistics_manga_desc':
@@ -332463,6 +333103,58 @@ extension on _StringsKo {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'nav_browse':
+        return '탐색';
+      case 'novel_detail_library_remove':
+        return '책장에서 제거';
+      case 'novel_detail_library_remove_confirm':
+        return '이 소설을 책장에서 제거할까요? 캐시된 챕터와 읽기 진행 상황이 삭제됩니다.';
+      case 'novel_detail_download':
+        return '다운로드';
+      case 'novel_detail_library_added':
+        return '책장에 추가했어요';
+      case 'video_online_extension_unavailable':
+        return '이 에피소드의 비디오 소스 확장 프로그램이 설치되어 있지 않거나 비활성화되어 있습니다. ‘탐색 › 확장 프로그램’에서 다시 설치하거나 활성화하세요.';
+      case 'video_online_library_add':
+        return '비디오 라이브러리에 추가';
+      case 'video_online_library_remove':
+        return '비디오 라이브러리에서 제거';
+      case 'video_online_library_added':
+        return ({required Object n}) => '에피소드 ${n}개를 비디오 라이브러리에 추가했습니다';
+      case 'video_online_library_removed':
+        return '비디오 라이브러리에서 제거했습니다';
+      case 'video_online_download_all':
+        return '모두 다운로드';
+      case 'video_online_download_episode':
+        return '이 에피소드 다운로드';
+      case 'video_online_download_started':
+        return '다운로드를 시작했습니다. 진행 상황은 ‘탐색 › 다운로드’에서 확인하세요';
+      case 'video_online_downloaded':
+        return '다운로드됨';
       case 'onboarding_feature_browse_hint':
         return '온라인 소스, 확장 프로그램, 발견, 다운로드';
       case 'browse_moved_notice_title':
@@ -344109,35 +344801,6 @@ extension on _StringsNl {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
-      case 'nav_browse':
-        return 'Bladeren';
-      case 'novel_detail_library_remove':
-        return 'Uit boekenkast verwijderen';
-      case 'novel_detail_library_remove_confirm':
-        return 'Deze roman uit de boekenkast verwijderen? Gecachte hoofdstukken en leesvoortgang worden verwijderd.';
-      case 'novel_detail_download':
-        return 'Downloaden';
-      case 'novel_detail_library_added':
-        return 'Aan boekenkast toegevoegd';
-      case 'video_online_extension_unavailable':
-        return 'De videobronextensie van deze aflevering is niet geïnstalleerd of uitgeschakeld. Installeer of schakel hem opnieuw in via Bladeren › Extensies.';
-      case 'video_online_library_add':
-        return 'Toevoegen aan videobibliotheek';
-      case 'video_online_library_remove':
-        return 'Verwijderen uit videobibliotheek';
-      case 'video_online_library_added':
-        return ({required Object n}) =>
-            '${n} afleveringen toegevoegd aan de videobibliotheek';
-      case 'video_online_library_removed':
-        return 'Verwijderd uit de videobibliotheek';
-      case 'video_online_download_all':
-        return 'Alles downloaden';
-      case 'video_online_download_episode':
-        return 'Deze aflevering downloaden';
-      case 'video_online_download_started':
-        return 'Download gestart — zie Bladeren › Downloads';
-      case 'video_online_downloaded':
-        return 'Gedownload';
       case 'delete_statistics_book_desc':
         return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
       case 'delete_statistics_manga_desc':
@@ -344276,6 +344939,59 @@ extension on _StringsNl {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'nav_browse':
+        return 'Bladeren';
+      case 'novel_detail_library_remove':
+        return 'Uit boekenkast verwijderen';
+      case 'novel_detail_library_remove_confirm':
+        return 'Deze roman uit de boekenkast verwijderen? Gecachte hoofdstukken en leesvoortgang worden verwijderd.';
+      case 'novel_detail_download':
+        return 'Downloaden';
+      case 'novel_detail_library_added':
+        return 'Aan boekenkast toegevoegd';
+      case 'video_online_extension_unavailable':
+        return 'De videobronextensie van deze aflevering is niet geïnstalleerd of uitgeschakeld. Installeer of schakel hem opnieuw in via Bladeren › Extensies.';
+      case 'video_online_library_add':
+        return 'Toevoegen aan videobibliotheek';
+      case 'video_online_library_remove':
+        return 'Verwijderen uit videobibliotheek';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            '${n} afleveringen toegevoegd aan de videobibliotheek';
+      case 'video_online_library_removed':
+        return 'Verwijderd uit de videobibliotheek';
+      case 'video_online_download_all':
+        return 'Alles downloaden';
+      case 'video_online_download_episode':
+        return 'Deze aflevering downloaden';
+      case 'video_online_download_started':
+        return 'Download gestart — zie Bladeren › Downloads';
+      case 'video_online_downloaded':
+        return 'Gedownload';
       case 'onboarding_feature_browse_hint':
         return 'Online bronnen, extensies, ontdekken en downloads';
       case 'browse_moved_notice_title':
@@ -355917,35 +356633,6 @@ extension on _StringsPtBr {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
-      case 'nav_browse':
-        return 'Navegar';
-      case 'novel_detail_library_remove':
-        return 'Remover da estante';
-      case 'novel_detail_library_remove_confirm':
-        return 'Remover este romance da estante? Os capítulos em cache e o progresso de leitura serão apagados.';
-      case 'novel_detail_download':
-        return 'Baixar';
-      case 'novel_detail_library_added':
-        return 'Adicionado à estante';
-      case 'video_online_extension_unavailable':
-        return 'A extensão de fonte de vídeo deste episódio não está instalada ou está desativada. Reinstale ou ative-a em Navegar › Extensões.';
-      case 'video_online_library_add':
-        return 'Adicionar à biblioteca de vídeos';
-      case 'video_online_library_remove':
-        return 'Remover da biblioteca de vídeos';
-      case 'video_online_library_added':
-        return ({required Object n}) =>
-            '${n} episódios adicionados à biblioteca de vídeos';
-      case 'video_online_library_removed':
-        return 'Removido da biblioteca de vídeos';
-      case 'video_online_download_all':
-        return 'Baixar tudo';
-      case 'video_online_download_episode':
-        return 'Baixar este episódio';
-      case 'video_online_download_started':
-        return 'Download iniciado — veja Navegar › Downloads';
-      case 'video_online_downloaded':
-        return 'Baixado';
       case 'delete_statistics_book_desc':
         return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
       case 'delete_statistics_manga_desc':
@@ -356084,6 +356771,59 @@ extension on _StringsPtBr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'nav_browse':
+        return 'Navegar';
+      case 'novel_detail_library_remove':
+        return 'Remover da estante';
+      case 'novel_detail_library_remove_confirm':
+        return 'Remover este romance da estante? Os capítulos em cache e o progresso de leitura serão apagados.';
+      case 'novel_detail_download':
+        return 'Baixar';
+      case 'novel_detail_library_added':
+        return 'Adicionado à estante';
+      case 'video_online_extension_unavailable':
+        return 'A extensão de fonte de vídeo deste episódio não está instalada ou está desativada. Reinstale ou ative-a em Navegar › Extensões.';
+      case 'video_online_library_add':
+        return 'Adicionar à biblioteca de vídeos';
+      case 'video_online_library_remove':
+        return 'Remover da biblioteca de vídeos';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            '${n} episódios adicionados à biblioteca de vídeos';
+      case 'video_online_library_removed':
+        return 'Removido da biblioteca de vídeos';
+      case 'video_online_download_all':
+        return 'Baixar tudo';
+      case 'video_online_download_episode':
+        return 'Baixar este episódio';
+      case 'video_online_download_started':
+        return 'Download iniciado — veja Navegar › Downloads';
+      case 'video_online_downloaded':
+        return 'Baixado';
       case 'onboarding_feature_browse_hint':
         return 'Fontes online, extensões, descoberta e downloads';
       case 'browse_moved_notice_title':
@@ -367731,34 +368471,6 @@ extension on _StringsRu {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
-      case 'nav_browse':
-        return 'Обзор';
-      case 'novel_detail_library_remove':
-        return 'Убрать с полки';
-      case 'novel_detail_library_remove_confirm':
-        return 'Убрать этот роман с полки? Кэшированные главы и прогресс чтения будут удалены.';
-      case 'novel_detail_download':
-        return 'Скачать';
-      case 'novel_detail_library_added':
-        return 'Добавлено на полку';
-      case 'video_online_extension_unavailable':
-        return 'Расширение источника видео для этого эпизода не установлено или отключено. Переустановите или включите его в разделе «Обзор › Расширения».';
-      case 'video_online_library_add':
-        return 'Добавить в видеотеку';
-      case 'video_online_library_remove':
-        return 'Убрать из видеотеки';
-      case 'video_online_library_added':
-        return ({required Object n}) => 'Добавлено эпизодов в видеотеку: ${n}';
-      case 'video_online_library_removed':
-        return 'Убрано из видеотеки';
-      case 'video_online_download_all':
-        return 'Скачать все';
-      case 'video_online_download_episode':
-        return 'Скачать этот эпизод';
-      case 'video_online_download_started':
-        return 'Загрузка началась — см. «Обзор › Загрузки»';
-      case 'video_online_downloaded':
-        return 'Скачано';
       case 'delete_statistics_book_desc':
         return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
       case 'delete_statistics_manga_desc':
@@ -367897,6 +368609,58 @@ extension on _StringsRu {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'nav_browse':
+        return 'Обзор';
+      case 'novel_detail_library_remove':
+        return 'Убрать с полки';
+      case 'novel_detail_library_remove_confirm':
+        return 'Убрать этот роман с полки? Кэшированные главы и прогресс чтения будут удалены.';
+      case 'novel_detail_download':
+        return 'Скачать';
+      case 'novel_detail_library_added':
+        return 'Добавлено на полку';
+      case 'video_online_extension_unavailable':
+        return 'Расширение источника видео для этого эпизода не установлено или отключено. Переустановите или включите его в разделе «Обзор › Расширения».';
+      case 'video_online_library_add':
+        return 'Добавить в видеотеку';
+      case 'video_online_library_remove':
+        return 'Убрать из видеотеки';
+      case 'video_online_library_added':
+        return ({required Object n}) => 'Добавлено эпизодов в видеотеку: ${n}';
+      case 'video_online_library_removed':
+        return 'Убрано из видеотеки';
+      case 'video_online_download_all':
+        return 'Скачать все';
+      case 'video_online_download_episode':
+        return 'Скачать этот эпизод';
+      case 'video_online_download_started':
+        return 'Загрузка началась — см. «Обзор › Загрузки»';
+      case 'video_online_downloaded':
+        return 'Скачано';
       case 'onboarding_feature_browse_hint':
         return 'Онлайн-источники, расширения, поиск контента и загрузки';
       case 'browse_moved_notice_title':
@@ -379513,34 +380277,6 @@ extension on _StringsTh {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
-      case 'nav_browse':
-        return 'เรียกดู';
-      case 'novel_detail_library_remove':
-        return 'นำออกจากชั้นหนังสือ';
-      case 'novel_detail_library_remove_confirm':
-        return 'นำนิยายเรื่องนี้ออกจากชั้นหนังสือ? ตอนที่แคชไว้และความคืบหน้าการอ่านจะถูกลบ';
-      case 'novel_detail_download':
-        return 'ดาวน์โหลด';
-      case 'novel_detail_library_added':
-        return 'เพิ่มลงชั้นหนังสือแล้ว';
-      case 'video_online_extension_unavailable':
-        return 'ส่วนขยายแหล่งวิดีโอของตอนนี้ไม่ได้ติดตั้งหรือถูกปิดใช้งาน ติดตั้งใหม่หรือเปิดใช้งานได้ที่ เรียกดู › ส่วนขยาย';
-      case 'video_online_library_add':
-        return 'เพิ่มในคลังวิดีโอ';
-      case 'video_online_library_remove':
-        return 'นำออกจากคลังวิดีโอ';
-      case 'video_online_library_added':
-        return ({required Object n}) => 'เพิ่ม ${n} ตอนในคลังวิดีโอแล้ว';
-      case 'video_online_library_removed':
-        return 'นำออกจากคลังวิดีโอแล้ว';
-      case 'video_online_download_all':
-        return 'ดาวน์โหลดทั้งหมด';
-      case 'video_online_download_episode':
-        return 'ดาวน์โหลดเฉพาะตอนนี้';
-      case 'video_online_download_started':
-        return 'เริ่มดาวน์โหลดแล้ว — ดูที่ เรียกดู › ดาวน์โหลด';
-      case 'video_online_downloaded':
-        return 'ดาวน์โหลดแล้ว';
       case 'delete_statistics_book_desc':
         return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
       case 'delete_statistics_manga_desc':
@@ -379679,6 +380415,58 @@ extension on _StringsTh {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'nav_browse':
+        return 'เรียกดู';
+      case 'novel_detail_library_remove':
+        return 'นำออกจากชั้นหนังสือ';
+      case 'novel_detail_library_remove_confirm':
+        return 'นำนิยายเรื่องนี้ออกจากชั้นหนังสือ? ตอนที่แคชไว้และความคืบหน้าการอ่านจะถูกลบ';
+      case 'novel_detail_download':
+        return 'ดาวน์โหลด';
+      case 'novel_detail_library_added':
+        return 'เพิ่มลงชั้นหนังสือแล้ว';
+      case 'video_online_extension_unavailable':
+        return 'ส่วนขยายแหล่งวิดีโอของตอนนี้ไม่ได้ติดตั้งหรือถูกปิดใช้งาน ติดตั้งใหม่หรือเปิดใช้งานได้ที่ เรียกดู › ส่วนขยาย';
+      case 'video_online_library_add':
+        return 'เพิ่มในคลังวิดีโอ';
+      case 'video_online_library_remove':
+        return 'นำออกจากคลังวิดีโอ';
+      case 'video_online_library_added':
+        return ({required Object n}) => 'เพิ่ม ${n} ตอนในคลังวิดีโอแล้ว';
+      case 'video_online_library_removed':
+        return 'นำออกจากคลังวิดีโอแล้ว';
+      case 'video_online_download_all':
+        return 'ดาวน์โหลดทั้งหมด';
+      case 'video_online_download_episode':
+        return 'ดาวน์โหลดเฉพาะตอนนี้';
+      case 'video_online_download_started':
+        return 'เริ่มดาวน์โหลดแล้ว — ดูที่ เรียกดู › ดาวน์โหลด';
+      case 'video_online_downloaded':
+        return 'ดาวน์โหลดแล้ว';
       case 'onboarding_feature_browse_hint':
         return 'แหล่งออนไลน์ ส่วนขยาย การค้นพบ และการดาวน์โหลด';
       case 'browse_moved_notice_title':
@@ -391311,34 +392099,6 @@ extension on _StringsTr {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
-      case 'nav_browse':
-        return 'Göz at';
-      case 'novel_detail_library_remove':
-        return 'Kitaplıktan kaldır';
-      case 'novel_detail_library_remove_confirm':
-        return 'Bu roman kitaplıktan kaldırılsın mı? Önbelleğe alınan bölümler ve okuma ilerlemesi silinecek.';
-      case 'novel_detail_download':
-        return 'İndir';
-      case 'novel_detail_library_added':
-        return 'Kitaplığa eklendi';
-      case 'video_online_extension_unavailable':
-        return 'Bu bölümün video kaynağı eklentisi yüklü değil veya devre dışı. Göz at › Eklentiler bölümünden yeniden yükleyin veya etkinleştirin.';
-      case 'video_online_library_add':
-        return 'Video kitaplığına ekle';
-      case 'video_online_library_remove':
-        return 'Video kitaplığından kaldır';
-      case 'video_online_library_added':
-        return ({required Object n}) => '${n} bölüm video kitaplığına eklendi';
-      case 'video_online_library_removed':
-        return 'Video kitaplığından kaldırıldı';
-      case 'video_online_download_all':
-        return 'Tümünü indir';
-      case 'video_online_download_episode':
-        return 'Bu bölümü indir';
-      case 'video_online_download_started':
-        return 'İndirme başladı — Göz at › İndirmeler bölümüne bakın';
-      case 'video_online_downloaded':
-        return 'İndirildi';
       case 'delete_statistics_book_desc':
         return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
       case 'delete_statistics_manga_desc':
@@ -391477,6 +392237,58 @@ extension on _StringsTr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'nav_browse':
+        return 'Göz at';
+      case 'novel_detail_library_remove':
+        return 'Kitaplıktan kaldır';
+      case 'novel_detail_library_remove_confirm':
+        return 'Bu roman kitaplıktan kaldırılsın mı? Önbelleğe alınan bölümler ve okuma ilerlemesi silinecek.';
+      case 'novel_detail_download':
+        return 'İndir';
+      case 'novel_detail_library_added':
+        return 'Kitaplığa eklendi';
+      case 'video_online_extension_unavailable':
+        return 'Bu bölümün video kaynağı eklentisi yüklü değil veya devre dışı. Göz at › Eklentiler bölümünden yeniden yükleyin veya etkinleştirin.';
+      case 'video_online_library_add':
+        return 'Video kitaplığına ekle';
+      case 'video_online_library_remove':
+        return 'Video kitaplığından kaldır';
+      case 'video_online_library_added':
+        return ({required Object n}) => '${n} bölüm video kitaplığına eklendi';
+      case 'video_online_library_removed':
+        return 'Video kitaplığından kaldırıldı';
+      case 'video_online_download_all':
+        return 'Tümünü indir';
+      case 'video_online_download_episode':
+        return 'Bu bölümü indir';
+      case 'video_online_download_started':
+        return 'İndirme başladı — Göz at › İndirmeler bölümüne bakın';
+      case 'video_online_downloaded':
+        return 'İndirildi';
       case 'onboarding_feature_browse_hint':
         return 'Çevrimiçi kaynaklar, eklentiler, keşif ve indirmeler';
       case 'browse_moved_notice_title':
@@ -403103,34 +403915,6 @@ extension on _StringsVi {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
-      case 'nav_browse':
-        return 'Duyệt';
-      case 'novel_detail_library_remove':
-        return 'Xóa khỏi kệ sách';
-      case 'novel_detail_library_remove_confirm':
-        return 'Xóa tiểu thuyết này khỏi kệ sách? Các chương đã lưu đệm và tiến độ đọc sẽ bị xóa.';
-      case 'novel_detail_download':
-        return 'Tải xuống';
-      case 'novel_detail_library_added':
-        return 'Đã thêm vào kệ sách';
-      case 'video_online_extension_unavailable':
-        return 'Tiện ích nguồn video của tập này chưa được cài đặt hoặc đã bị tắt. Hãy cài lại hoặc bật nó trong Duyệt › Tiện ích.';
-      case 'video_online_library_add':
-        return 'Thêm vào thư viện video';
-      case 'video_online_library_remove':
-        return 'Xóa khỏi thư viện video';
-      case 'video_online_library_added':
-        return ({required Object n}) => 'Đã thêm ${n} tập vào thư viện video';
-      case 'video_online_library_removed':
-        return 'Đã xóa khỏi thư viện video';
-      case 'video_online_download_all':
-        return 'Tải tất cả';
-      case 'video_online_download_episode':
-        return 'Tải tập này';
-      case 'video_online_download_started':
-        return 'Đã bắt đầu tải — xem Duyệt › Tải xuống';
-      case 'video_online_downloaded':
-        return 'Đã tải';
       case 'delete_statistics_book_desc':
         return 'Reading time, characters read and lookup/mining counts for this book are removed from statistics on every device';
       case 'delete_statistics_manga_desc':
@@ -403269,6 +404053,58 @@ extension on _StringsVi {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'nav_browse':
+        return 'Duyệt';
+      case 'novel_detail_library_remove':
+        return 'Xóa khỏi kệ sách';
+      case 'novel_detail_library_remove_confirm':
+        return 'Xóa tiểu thuyết này khỏi kệ sách? Các chương đã lưu đệm và tiến độ đọc sẽ bị xóa.';
+      case 'novel_detail_download':
+        return 'Tải xuống';
+      case 'novel_detail_library_added':
+        return 'Đã thêm vào kệ sách';
+      case 'video_online_extension_unavailable':
+        return 'Tiện ích nguồn video của tập này chưa được cài đặt hoặc đã bị tắt. Hãy cài lại hoặc bật nó trong Duyệt › Tiện ích.';
+      case 'video_online_library_add':
+        return 'Thêm vào thư viện video';
+      case 'video_online_library_remove':
+        return 'Xóa khỏi thư viện video';
+      case 'video_online_library_added':
+        return ({required Object n}) => 'Đã thêm ${n} tập vào thư viện video';
+      case 'video_online_library_removed':
+        return 'Đã xóa khỏi thư viện video';
+      case 'video_online_download_all':
+        return 'Tải tất cả';
+      case 'video_online_download_episode':
+        return 'Tải tập này';
+      case 'video_online_download_started':
+        return 'Đã bắt đầu tải — xem Duyệt › Tải xuống';
+      case 'video_online_downloaded':
+        return 'Đã tải';
       case 'onboarding_feature_browse_hint':
         return 'Nguồn trực tuyến, tiện ích, khám phá và tải xuống';
       case 'browse_moved_notice_title':
@@ -414782,34 +415618,6 @@ extension on _StringsZhCn {
         return '导入的字幕自动上传到服务端';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return '播放互联服务端上的视频时，导入或重定时的字幕会上传并设为该集默认字幕，所有设备都会看到。关闭后字幕只在本机生效。';
-      case 'nav_browse':
-        return '浏览';
-      case 'novel_detail_library_remove':
-        return '移出书架';
-      case 'novel_detail_library_remove_confirm':
-        return '把这部小说移出书架？已缓存的章节和阅读进度会一并删除。';
-      case 'novel_detail_download':
-        return '下载';
-      case 'novel_detail_library_added':
-        return '已加入书架';
-      case 'video_online_extension_unavailable':
-        return '这一集所属的视频源扩展没有安装或已停用。请到「浏览 › 扩展」重新安装或启用。';
-      case 'video_online_library_add':
-        return '加入媒体库';
-      case 'video_online_library_remove':
-        return '移出媒体库';
-      case 'video_online_library_added':
-        return ({required Object n}) => '已把 ${n} 集加入媒体库';
-      case 'video_online_library_removed':
-        return '已移出媒体库';
-      case 'video_online_download_all':
-        return '下载全部';
-      case 'video_online_download_episode':
-        return '下载本集';
-      case 'video_online_download_started':
-        return '已开始下载，进度见「浏览 › 下载」';
-      case 'video_online_downloaded':
-        return '已下载';
       case 'delete_statistics_book_desc':
         return '该书的阅读时长、阅读字数与查词/制卡计数将从统计中移除，并同步到其他设备';
       case 'delete_statistics_manga_desc':
@@ -414945,6 +415753,58 @@ extension on _StringsZhCn {
         return '请填写以 https:// 开头、以 api.php 结尾的地址';
       case 'ai_web_knowledge_custom_remove':
         return '删除站点';
+      case 'video_item_rescrape_not_planned':
+        return '这个视频不在任何本地视频来源的刮削计划里';
+      case 'plex_settings_hint':
+        return '用 Plex 账号登录，或填写服务器地址与 X-Plex-Token 直连。播放直接串流原文件（direct play），不使用 Plex 转码。';
+      case 'plex_account_sign_in':
+        return '使用 Plex 账号登录';
+      case 'plex_pin_waiting':
+        return '等待在浏览器中授权 Fushi…';
+      case 'plex_pin_link_hint':
+        return '如果浏览器没有自动打开，请复制这个链接：';
+      case 'plex_pin_expired':
+        return '登录请求已过期，请重试。';
+      case 'plex_servers_none_reachable':
+        return '这个账号下没有找到可连接的 Plex 服务器。';
+      case 'plex_servers_added':
+        return ({required Object n}) => '已添加 ${n} 台 Plex 服务器';
+      case 'plex_manual_title':
+        return '手动连接';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return '连接';
+      case 'plex_sign_in_failed':
+        return 'Plex 登录失败';
+      case 'nav_browse':
+        return '浏览';
+      case 'novel_detail_library_remove':
+        return '移出书架';
+      case 'novel_detail_library_remove_confirm':
+        return '把这部小说移出书架？已缓存的章节和阅读进度会一并删除。';
+      case 'novel_detail_download':
+        return '下载';
+      case 'novel_detail_library_added':
+        return '已加入书架';
+      case 'video_online_extension_unavailable':
+        return '这一集所属的视频源扩展没有安装或已停用。请到「浏览 › 扩展」重新安装或启用。';
+      case 'video_online_library_add':
+        return '加入媒体库';
+      case 'video_online_library_remove':
+        return '移出媒体库';
+      case 'video_online_library_added':
+        return ({required Object n}) => '已把 ${n} 集加入媒体库';
+      case 'video_online_library_removed':
+        return '已移出媒体库';
+      case 'video_online_download_all':
+        return '下载全部';
+      case 'video_online_download_episode':
+        return '下载本集';
+      case 'video_online_download_started':
+        return '已开始下载，进度见「浏览 › 下载」';
+      case 'video_online_downloaded':
+        return '已下载';
       case 'onboarding_feature_browse_hint':
         return '在线来源、扩展、发现与下载';
       case 'browse_moved_notice_title':
@@ -426495,34 +427355,6 @@ extension on _StringsZhHk {
         return 'Auto-upload imported subtitles to host';
       case 'video_setting_subtitle_auto_upload_to_host_hint':
         return 'When playing a video from a connected host, subtitles you import or retime are uploaded and set as that episode\'s default for every device. Turn off to keep them on this device only.';
-      case 'nav_browse':
-        return '瀏覽';
-      case 'novel_detail_library_remove':
-        return '移出書架';
-      case 'novel_detail_library_remove_confirm':
-        return '把這部小說移出書架？已快取的章節和閱讀進度會一併刪除。';
-      case 'novel_detail_download':
-        return '下載';
-      case 'novel_detail_library_added':
-        return '已加入書架';
-      case 'video_online_extension_unavailable':
-        return '這一集所屬的影片源擴展未安裝或已停用。請到「瀏覽 › 擴展」重新安裝或啟用。';
-      case 'video_online_library_add':
-        return '加入媒體庫';
-      case 'video_online_library_remove':
-        return '移出媒體庫';
-      case 'video_online_library_added':
-        return ({required Object n}) => '已把 ${n} 集加入媒體庫';
-      case 'video_online_library_removed':
-        return '已移出媒體庫';
-      case 'video_online_download_all':
-        return '全部下載';
-      case 'video_online_download_episode':
-        return '下載本集';
-      case 'video_online_download_started':
-        return '已開始下載，進度見「瀏覽 › 下載」';
-      case 'video_online_downloaded':
-        return '已下載';
       case 'delete_statistics_book_desc':
         return '該書的閱讀時長、閱讀字數與查詞/製卡計數將從統計中移除，並同步到其他裝置';
       case 'delete_statistics_manga_desc':
@@ -426661,6 +427493,58 @@ extension on _StringsZhHk {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return '這個影片不在任何本機影片來源的刮削計劃裡';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'nav_browse':
+        return '瀏覽';
+      case 'novel_detail_library_remove':
+        return '移出書架';
+      case 'novel_detail_library_remove_confirm':
+        return '把這部小說移出書架？已快取的章節和閱讀進度會一併刪除。';
+      case 'novel_detail_download':
+        return '下載';
+      case 'novel_detail_library_added':
+        return '已加入書架';
+      case 'video_online_extension_unavailable':
+        return '這一集所屬的影片源擴展未安裝或已停用。請到「瀏覽 › 擴展」重新安裝或啟用。';
+      case 'video_online_library_add':
+        return '加入媒體庫';
+      case 'video_online_library_remove':
+        return '移出媒體庫';
+      case 'video_online_library_added':
+        return ({required Object n}) => '已把 ${n} 集加入媒體庫';
+      case 'video_online_library_removed':
+        return '已移出媒體庫';
+      case 'video_online_download_all':
+        return '全部下載';
+      case 'video_online_download_episode':
+        return '下載本集';
+      case 'video_online_download_started':
+        return '已開始下載，進度見「瀏覽 › 下載」';
+      case 'video_online_downloaded':
+        return '已下載';
       case 'onboarding_feature_browse_hint':
         return '線上來源、擴展、發現與下載';
       case 'browse_moved_notice_title':
