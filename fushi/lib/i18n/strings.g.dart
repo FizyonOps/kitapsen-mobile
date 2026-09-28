@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 98192 (5776 per locale)
+/// Strings: 98345 (5785 per locale)
 ///
-/// Built on 2026-09-28 at 15:49 UTC
+/// Built on 2026-09-28 at 15:57 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8294,6 +8294,15 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get favorites_batch_mine_text_only =>
       'No sentence media — text-only card';
   String get favorites_batch_mine_skipped => 'Skipped';
+  String get stat_range_mode_day => 'Day';
+  String get stat_range_mode_week => 'Week';
+  String get stat_range_mode_month => 'Month';
+  String get stat_range_mode_year => 'Year';
+  String get stat_range_previous => 'Previous period';
+  String get stat_range_next => 'Next period';
+  String get stat_range_summary => 'Selected range';
+  String get stat_range_active_days => 'Active days';
+  String get stat_range_calendar => 'Study calendar';
   String get manga_import_ios_mokuro_needs_folder =>
       'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
   String import_folder_copy_failed({required Object error}) =>
@@ -22189,6 +22198,24 @@ class _StringsAr extends _StringsEn {
       'No sentence media — text-only card';
   @override
   String get favorites_batch_mine_skipped => 'Skipped';
+  @override
+  String get stat_range_mode_day => 'Day';
+  @override
+  String get stat_range_mode_week => 'Week';
+  @override
+  String get stat_range_mode_month => 'Month';
+  @override
+  String get stat_range_mode_year => 'Year';
+  @override
+  String get stat_range_previous => 'Previous period';
+  @override
+  String get stat_range_next => 'Next period';
+  @override
+  String get stat_range_summary => 'Selected range';
+  @override
+  String get stat_range_active_days => 'Active days';
+  @override
+  String get stat_range_calendar => 'Study calendar';
   @override
   String get manga_import_ios_mokuro_needs_folder =>
       'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
@@ -36326,6 +36353,24 @@ class _StringsDe extends _StringsEn {
       'No sentence media — text-only card';
   @override
   String get favorites_batch_mine_skipped => 'Skipped';
+  @override
+  String get stat_range_mode_day => 'Day';
+  @override
+  String get stat_range_mode_week => 'Week';
+  @override
+  String get stat_range_mode_month => 'Month';
+  @override
+  String get stat_range_mode_year => 'Year';
+  @override
+  String get stat_range_previous => 'Previous period';
+  @override
+  String get stat_range_next => 'Next period';
+  @override
+  String get stat_range_summary => 'Selected range';
+  @override
+  String get stat_range_active_days => 'Active days';
+  @override
+  String get stat_range_calendar => 'Study calendar';
   @override
   String get manga_import_ios_mokuro_needs_folder =>
       'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
@@ -50514,6 +50559,24 @@ class _StringsEs extends _StringsEn {
       'No sentence media — text-only card';
   @override
   String get favorites_batch_mine_skipped => 'Skipped';
+  @override
+  String get stat_range_mode_day => 'Day';
+  @override
+  String get stat_range_mode_week => 'Week';
+  @override
+  String get stat_range_mode_month => 'Month';
+  @override
+  String get stat_range_mode_year => 'Year';
+  @override
+  String get stat_range_previous => 'Previous period';
+  @override
+  String get stat_range_next => 'Next period';
+  @override
+  String get stat_range_summary => 'Selected range';
+  @override
+  String get stat_range_active_days => 'Active days';
+  @override
+  String get stat_range_calendar => 'Study calendar';
   @override
   String get manga_import_ios_mokuro_needs_folder =>
       'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
@@ -64742,6 +64805,24 @@ class _StringsFr extends _StringsEn {
   @override
   String get favorites_batch_mine_skipped => 'Skipped';
   @override
+  String get stat_range_mode_day => 'Day';
+  @override
+  String get stat_range_mode_week => 'Week';
+  @override
+  String get stat_range_mode_month => 'Month';
+  @override
+  String get stat_range_mode_year => 'Year';
+  @override
+  String get stat_range_previous => 'Previous period';
+  @override
+  String get stat_range_next => 'Next period';
+  @override
+  String get stat_range_summary => 'Selected range';
+  @override
+  String get stat_range_active_days => 'Active days';
+  @override
+  String get stat_range_calendar => 'Study calendar';
+  @override
   String get manga_import_ios_mokuro_needs_folder =>
       'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
   @override
@@ -78758,6 +78839,24 @@ class _StringsId extends _StringsEn {
       'No sentence media — text-only card';
   @override
   String get favorites_batch_mine_skipped => 'Skipped';
+  @override
+  String get stat_range_mode_day => 'Day';
+  @override
+  String get stat_range_mode_week => 'Week';
+  @override
+  String get stat_range_mode_month => 'Month';
+  @override
+  String get stat_range_mode_year => 'Year';
+  @override
+  String get stat_range_previous => 'Previous period';
+  @override
+  String get stat_range_next => 'Next period';
+  @override
+  String get stat_range_summary => 'Selected range';
+  @override
+  String get stat_range_active_days => 'Active days';
+  @override
+  String get stat_range_calendar => 'Study calendar';
   @override
   String get manga_import_ios_mokuro_needs_folder =>
       'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
@@ -92877,6 +92976,24 @@ class _StringsIt extends _StringsEn {
   @override
   String get favorites_batch_mine_skipped => 'Skipped';
   @override
+  String get stat_range_mode_day => 'Day';
+  @override
+  String get stat_range_mode_week => 'Week';
+  @override
+  String get stat_range_mode_month => 'Month';
+  @override
+  String get stat_range_mode_year => 'Year';
+  @override
+  String get stat_range_previous => 'Previous period';
+  @override
+  String get stat_range_next => 'Next period';
+  @override
+  String get stat_range_summary => 'Selected range';
+  @override
+  String get stat_range_active_days => 'Active days';
+  @override
+  String get stat_range_calendar => 'Study calendar';
+  @override
   String get manga_import_ios_mokuro_needs_folder =>
       'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
   @override
@@ -106347,6 +106464,24 @@ class _StringsJa extends _StringsEn {
       'No sentence media — text-only card';
   @override
   String get favorites_batch_mine_skipped => 'Skipped';
+  @override
+  String get stat_range_mode_day => '日';
+  @override
+  String get stat_range_mode_week => '週';
+  @override
+  String get stat_range_mode_month => '月';
+  @override
+  String get stat_range_mode_year => '年';
+  @override
+  String get stat_range_previous => '前の期間';
+  @override
+  String get stat_range_next => '次の期間';
+  @override
+  String get stat_range_summary => '選択した期間';
+  @override
+  String get stat_range_active_days => '活動日数';
+  @override
+  String get stat_range_calendar => '学習カレンダー';
   @override
   String get manga_import_ios_mokuro_needs_folder =>
       'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
@@ -119835,6 +119970,24 @@ class _StringsKo extends _StringsEn {
       'No sentence media — text-only card';
   @override
   String get favorites_batch_mine_skipped => 'Skipped';
+  @override
+  String get stat_range_mode_day => '일';
+  @override
+  String get stat_range_mode_week => '주';
+  @override
+  String get stat_range_mode_month => '월';
+  @override
+  String get stat_range_mode_year => '년';
+  @override
+  String get stat_range_previous => '이전 기간';
+  @override
+  String get stat_range_next => '다음 기간';
+  @override
+  String get stat_range_summary => '선택한 기간';
+  @override
+  String get stat_range_active_days => '활동 일수';
+  @override
+  String get stat_range_calendar => '학습 캘린더';
   @override
   String get manga_import_ios_mokuro_needs_folder =>
       'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
@@ -133908,6 +134061,24 @@ class _StringsNl extends _StringsEn {
       'No sentence media — text-only card';
   @override
   String get favorites_batch_mine_skipped => 'Skipped';
+  @override
+  String get stat_range_mode_day => 'Day';
+  @override
+  String get stat_range_mode_week => 'Week';
+  @override
+  String get stat_range_mode_month => 'Month';
+  @override
+  String get stat_range_mode_year => 'Year';
+  @override
+  String get stat_range_previous => 'Previous period';
+  @override
+  String get stat_range_next => 'Next period';
+  @override
+  String get stat_range_summary => 'Selected range';
+  @override
+  String get stat_range_active_days => 'Active days';
+  @override
+  String get stat_range_calendar => 'Study calendar';
   @override
   String get manga_import_ios_mokuro_needs_folder =>
       'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
@@ -148034,6 +148205,24 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get favorites_batch_mine_skipped => 'Skipped';
   @override
+  String get stat_range_mode_day => 'Day';
+  @override
+  String get stat_range_mode_week => 'Week';
+  @override
+  String get stat_range_mode_month => 'Month';
+  @override
+  String get stat_range_mode_year => 'Year';
+  @override
+  String get stat_range_previous => 'Previous period';
+  @override
+  String get stat_range_next => 'Next period';
+  @override
+  String get stat_range_summary => 'Selected range';
+  @override
+  String get stat_range_active_days => 'Active days';
+  @override
+  String get stat_range_calendar => 'Study calendar';
+  @override
   String get manga_import_ios_mokuro_needs_folder =>
       'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
   @override
@@ -162134,6 +162323,24 @@ class _StringsRu extends _StringsEn {
   @override
   String get favorites_batch_mine_skipped => 'Skipped';
   @override
+  String get stat_range_mode_day => 'Day';
+  @override
+  String get stat_range_mode_week => 'Week';
+  @override
+  String get stat_range_mode_month => 'Month';
+  @override
+  String get stat_range_mode_year => 'Year';
+  @override
+  String get stat_range_previous => 'Previous period';
+  @override
+  String get stat_range_next => 'Next period';
+  @override
+  String get stat_range_summary => 'Selected range';
+  @override
+  String get stat_range_active_days => 'Active days';
+  @override
+  String get stat_range_calendar => 'Study calendar';
+  @override
   String get manga_import_ios_mokuro_needs_folder =>
       'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
   @override
@@ -176029,6 +176236,24 @@ class _StringsTh extends _StringsEn {
       'No sentence media — text-only card';
   @override
   String get favorites_batch_mine_skipped => 'Skipped';
+  @override
+  String get stat_range_mode_day => 'Day';
+  @override
+  String get stat_range_mode_week => 'Week';
+  @override
+  String get stat_range_mode_month => 'Month';
+  @override
+  String get stat_range_mode_year => 'Year';
+  @override
+  String get stat_range_previous => 'Previous period';
+  @override
+  String get stat_range_next => 'Next period';
+  @override
+  String get stat_range_summary => 'Selected range';
+  @override
+  String get stat_range_active_days => 'Active days';
+  @override
+  String get stat_range_calendar => 'Study calendar';
   @override
   String get manga_import_ios_mokuro_needs_folder =>
       'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
@@ -190041,6 +190266,24 @@ class _StringsTr extends _StringsEn {
   @override
   String get favorites_batch_mine_skipped => 'Skipped';
   @override
+  String get stat_range_mode_day => 'Day';
+  @override
+  String get stat_range_mode_week => 'Week';
+  @override
+  String get stat_range_mode_month => 'Month';
+  @override
+  String get stat_range_mode_year => 'Year';
+  @override
+  String get stat_range_previous => 'Previous period';
+  @override
+  String get stat_range_next => 'Next period';
+  @override
+  String get stat_range_summary => 'Selected range';
+  @override
+  String get stat_range_active_days => 'Active days';
+  @override
+  String get stat_range_calendar => 'Study calendar';
+  @override
   String get manga_import_ios_mokuro_needs_folder =>
       'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
   @override
@@ -204023,6 +204266,24 @@ class _StringsVi extends _StringsEn {
   @override
   String get favorites_batch_mine_skipped => 'Skipped';
   @override
+  String get stat_range_mode_day => 'Day';
+  @override
+  String get stat_range_mode_week => 'Week';
+  @override
+  String get stat_range_mode_month => 'Month';
+  @override
+  String get stat_range_mode_year => 'Year';
+  @override
+  String get stat_range_previous => 'Previous period';
+  @override
+  String get stat_range_next => 'Next period';
+  @override
+  String get stat_range_summary => 'Selected range';
+  @override
+  String get stat_range_active_days => 'Active days';
+  @override
+  String get stat_range_calendar => 'Study calendar';
+  @override
   String get manga_import_ios_mokuro_needs_folder =>
       'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
   @override
@@ -216807,6 +217068,24 @@ class _StringsZhCn extends _StringsEn {
   String get favorites_batch_mine_text_only => '没有可用的句子媒体，已制成纯文字卡';
   @override
   String get favorites_batch_mine_skipped => '已跳过';
+  @override
+  String get stat_range_mode_day => '日';
+  @override
+  String get stat_range_mode_week => '周';
+  @override
+  String get stat_range_mode_month => '月';
+  @override
+  String get stat_range_mode_year => '年';
+  @override
+  String get stat_range_previous => '上一段';
+  @override
+  String get stat_range_next => '下一段';
+  @override
+  String get stat_range_summary => '所选范围';
+  @override
+  String get stat_range_active_days => '活跃天数';
+  @override
+  String get stat_range_calendar => '学习日历';
   @override
   String get manga_import_ios_mokuro_needs_folder =>
       'iOS 上单选 .mokuro 带不上它的页图。请选整卷文件夹（含 .mokuro 和它的页图文件夹），或把整卷打包成 .zip/.cbz 再导入。';
@@ -229955,6 +230234,24 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get favorites_batch_mine_skipped => 'Skipped';
   @override
+  String get stat_range_mode_day => '日';
+  @override
+  String get stat_range_mode_week => '週';
+  @override
+  String get stat_range_mode_month => '月';
+  @override
+  String get stat_range_mode_year => '年';
+  @override
+  String get stat_range_previous => '上一段';
+  @override
+  String get stat_range_next => '下一段';
+  @override
+  String get stat_range_summary => '所選範圍';
+  @override
+  String get stat_range_active_days => '活躍天數';
+  @override
+  String get stat_range_calendar => '學習日曆';
+  @override
   String get manga_import_ios_mokuro_needs_folder =>
       'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
   @override
@@ -241917,6 +242214,24 @@ extension on _StringsEn {
         return 'No sentence media — text-only card';
       case 'favorites_batch_mine_skipped':
         return 'Skipped';
+      case 'stat_range_mode_day':
+        return 'Day';
+      case 'stat_range_mode_week':
+        return 'Week';
+      case 'stat_range_mode_month':
+        return 'Month';
+      case 'stat_range_mode_year':
+        return 'Year';
+      case 'stat_range_previous':
+        return 'Previous period';
+      case 'stat_range_next':
+        return 'Next period';
+      case 'stat_range_summary':
+        return 'Selected range';
+      case 'stat_range_active_days':
+        return 'Active days';
+      case 'stat_range_calendar':
+        return 'Study calendar';
       case 'manga_import_ios_mokuro_needs_folder':
         return 'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
       case 'import_folder_copy_failed':
@@ -253873,6 +254188,24 @@ extension on _StringsAr {
         return 'No sentence media — text-only card';
       case 'favorites_batch_mine_skipped':
         return 'Skipped';
+      case 'stat_range_mode_day':
+        return 'Day';
+      case 'stat_range_mode_week':
+        return 'Week';
+      case 'stat_range_mode_month':
+        return 'Month';
+      case 'stat_range_mode_year':
+        return 'Year';
+      case 'stat_range_previous':
+        return 'Previous period';
+      case 'stat_range_next':
+        return 'Next period';
+      case 'stat_range_summary':
+        return 'Selected range';
+      case 'stat_range_active_days':
+        return 'Active days';
+      case 'stat_range_calendar':
+        return 'Study calendar';
       case 'manga_import_ios_mokuro_needs_folder':
         return 'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
       case 'import_folder_copy_failed':
@@ -265879,6 +266212,24 @@ extension on _StringsDe {
         return 'No sentence media — text-only card';
       case 'favorites_batch_mine_skipped':
         return 'Skipped';
+      case 'stat_range_mode_day':
+        return 'Day';
+      case 'stat_range_mode_week':
+        return 'Week';
+      case 'stat_range_mode_month':
+        return 'Month';
+      case 'stat_range_mode_year':
+        return 'Year';
+      case 'stat_range_previous':
+        return 'Previous period';
+      case 'stat_range_next':
+        return 'Next period';
+      case 'stat_range_summary':
+        return 'Selected range';
+      case 'stat_range_active_days':
+        return 'Active days';
+      case 'stat_range_calendar':
+        return 'Study calendar';
       case 'manga_import_ios_mokuro_needs_folder':
         return 'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
       case 'import_folder_copy_failed':
@@ -277875,6 +278226,24 @@ extension on _StringsEs {
         return 'No sentence media — text-only card';
       case 'favorites_batch_mine_skipped':
         return 'Skipped';
+      case 'stat_range_mode_day':
+        return 'Day';
+      case 'stat_range_mode_week':
+        return 'Week';
+      case 'stat_range_mode_month':
+        return 'Month';
+      case 'stat_range_mode_year':
+        return 'Year';
+      case 'stat_range_previous':
+        return 'Previous period';
+      case 'stat_range_next':
+        return 'Next period';
+      case 'stat_range_summary':
+        return 'Selected range';
+      case 'stat_range_active_days':
+        return 'Active days';
+      case 'stat_range_calendar':
+        return 'Study calendar';
       case 'manga_import_ios_mokuro_needs_folder':
         return 'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
       case 'import_folder_copy_failed':
@@ -289879,6 +290248,24 @@ extension on _StringsFr {
         return 'No sentence media — text-only card';
       case 'favorites_batch_mine_skipped':
         return 'Skipped';
+      case 'stat_range_mode_day':
+        return 'Day';
+      case 'stat_range_mode_week':
+        return 'Week';
+      case 'stat_range_mode_month':
+        return 'Month';
+      case 'stat_range_mode_year':
+        return 'Year';
+      case 'stat_range_previous':
+        return 'Previous period';
+      case 'stat_range_next':
+        return 'Next period';
+      case 'stat_range_summary':
+        return 'Selected range';
+      case 'stat_range_active_days':
+        return 'Active days';
+      case 'stat_range_calendar':
+        return 'Study calendar';
       case 'manga_import_ios_mokuro_needs_folder':
         return 'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
       case 'import_folder_copy_failed':
@@ -301853,6 +302240,24 @@ extension on _StringsId {
         return 'No sentence media — text-only card';
       case 'favorites_batch_mine_skipped':
         return 'Skipped';
+      case 'stat_range_mode_day':
+        return 'Day';
+      case 'stat_range_mode_week':
+        return 'Week';
+      case 'stat_range_mode_month':
+        return 'Month';
+      case 'stat_range_mode_year':
+        return 'Year';
+      case 'stat_range_previous':
+        return 'Previous period';
+      case 'stat_range_next':
+        return 'Next period';
+      case 'stat_range_summary':
+        return 'Selected range';
+      case 'stat_range_active_days':
+        return 'Active days';
+      case 'stat_range_calendar':
+        return 'Study calendar';
       case 'manga_import_ios_mokuro_needs_folder':
         return 'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
       case 'import_folder_copy_failed':
@@ -313849,6 +314254,24 @@ extension on _StringsIt {
         return 'No sentence media — text-only card';
       case 'favorites_batch_mine_skipped':
         return 'Skipped';
+      case 'stat_range_mode_day':
+        return 'Day';
+      case 'stat_range_mode_week':
+        return 'Week';
+      case 'stat_range_mode_month':
+        return 'Month';
+      case 'stat_range_mode_year':
+        return 'Year';
+      case 'stat_range_previous':
+        return 'Previous period';
+      case 'stat_range_next':
+        return 'Next period';
+      case 'stat_range_summary':
+        return 'Selected range';
+      case 'stat_range_active_days':
+        return 'Active days';
+      case 'stat_range_calendar':
+        return 'Study calendar';
       case 'manga_import_ios_mokuro_needs_folder':
         return 'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
       case 'import_folder_copy_failed':
@@ -325765,6 +326188,24 @@ extension on _StringsJa {
         return 'No sentence media — text-only card';
       case 'favorites_batch_mine_skipped':
         return 'Skipped';
+      case 'stat_range_mode_day':
+        return '日';
+      case 'stat_range_mode_week':
+        return '週';
+      case 'stat_range_mode_month':
+        return '月';
+      case 'stat_range_mode_year':
+        return '年';
+      case 'stat_range_previous':
+        return '前の期間';
+      case 'stat_range_next':
+        return '次の期間';
+      case 'stat_range_summary':
+        return '選択した期間';
+      case 'stat_range_active_days':
+        return '活動日数';
+      case 'stat_range_calendar':
+        return '学習カレンダー';
       case 'manga_import_ios_mokuro_needs_folder':
         return 'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
       case 'import_folder_copy_failed':
@@ -337690,6 +338131,24 @@ extension on _StringsKo {
         return 'No sentence media — text-only card';
       case 'favorites_batch_mine_skipped':
         return 'Skipped';
+      case 'stat_range_mode_day':
+        return '일';
+      case 'stat_range_mode_week':
+        return '주';
+      case 'stat_range_mode_month':
+        return '월';
+      case 'stat_range_mode_year':
+        return '년';
+      case 'stat_range_previous':
+        return '이전 기간';
+      case 'stat_range_next':
+        return '다음 기간';
+      case 'stat_range_summary':
+        return '선택한 기간';
+      case 'stat_range_active_days':
+        return '활동 일수';
+      case 'stat_range_calendar':
+        return '학습 캘린더';
       case 'manga_import_ios_mokuro_needs_folder':
         return 'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
       case 'import_folder_copy_failed':
@@ -349682,6 +350141,24 @@ extension on _StringsNl {
         return 'No sentence media — text-only card';
       case 'favorites_batch_mine_skipped':
         return 'Skipped';
+      case 'stat_range_mode_day':
+        return 'Day';
+      case 'stat_range_mode_week':
+        return 'Week';
+      case 'stat_range_mode_month':
+        return 'Month';
+      case 'stat_range_mode_year':
+        return 'Year';
+      case 'stat_range_previous':
+        return 'Previous period';
+      case 'stat_range_next':
+        return 'Next period';
+      case 'stat_range_summary':
+        return 'Selected range';
+      case 'stat_range_active_days':
+        return 'Active days';
+      case 'stat_range_calendar':
+        return 'Study calendar';
       case 'manga_import_ios_mokuro_needs_folder':
         return 'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
       case 'import_folder_copy_failed':
@@ -361669,6 +362146,24 @@ extension on _StringsPtBr {
         return 'No sentence media — text-only card';
       case 'favorites_batch_mine_skipped':
         return 'Skipped';
+      case 'stat_range_mode_day':
+        return 'Day';
+      case 'stat_range_mode_week':
+        return 'Week';
+      case 'stat_range_mode_month':
+        return 'Month';
+      case 'stat_range_mode_year':
+        return 'Year';
+      case 'stat_range_previous':
+        return 'Previous period';
+      case 'stat_range_next':
+        return 'Next period';
+      case 'stat_range_summary':
+        return 'Selected range';
+      case 'stat_range_active_days':
+        return 'Active days';
+      case 'stat_range_calendar':
+        return 'Study calendar';
       case 'manga_import_ios_mokuro_needs_folder':
         return 'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
       case 'import_folder_copy_failed':
@@ -373661,6 +374156,24 @@ extension on _StringsRu {
         return 'No sentence media — text-only card';
       case 'favorites_batch_mine_skipped':
         return 'Skipped';
+      case 'stat_range_mode_day':
+        return 'Day';
+      case 'stat_range_mode_week':
+        return 'Week';
+      case 'stat_range_mode_month':
+        return 'Month';
+      case 'stat_range_mode_year':
+        return 'Year';
+      case 'stat_range_previous':
+        return 'Previous period';
+      case 'stat_range_next':
+        return 'Next period';
+      case 'stat_range_summary':
+        return 'Selected range';
+      case 'stat_range_active_days':
+        return 'Active days';
+      case 'stat_range_calendar':
+        return 'Study calendar';
       case 'manga_import_ios_mokuro_needs_folder':
         return 'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
       case 'import_folder_copy_failed':
@@ -385622,6 +386135,24 @@ extension on _StringsTh {
         return 'No sentence media — text-only card';
       case 'favorites_batch_mine_skipped':
         return 'Skipped';
+      case 'stat_range_mode_day':
+        return 'Day';
+      case 'stat_range_mode_week':
+        return 'Week';
+      case 'stat_range_mode_month':
+        return 'Month';
+      case 'stat_range_mode_year':
+        return 'Year';
+      case 'stat_range_previous':
+        return 'Previous period';
+      case 'stat_range_next':
+        return 'Next period';
+      case 'stat_range_summary':
+        return 'Selected range';
+      case 'stat_range_active_days':
+        return 'Active days';
+      case 'stat_range_calendar':
+        return 'Study calendar';
       case 'manga_import_ios_mokuro_needs_folder':
         return 'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
       case 'import_folder_copy_failed':
@@ -397599,6 +398130,24 @@ extension on _StringsTr {
         return 'No sentence media — text-only card';
       case 'favorites_batch_mine_skipped':
         return 'Skipped';
+      case 'stat_range_mode_day':
+        return 'Day';
+      case 'stat_range_mode_week':
+        return 'Week';
+      case 'stat_range_mode_month':
+        return 'Month';
+      case 'stat_range_mode_year':
+        return 'Year';
+      case 'stat_range_previous':
+        return 'Previous period';
+      case 'stat_range_next':
+        return 'Next period';
+      case 'stat_range_summary':
+        return 'Selected range';
+      case 'stat_range_active_days':
+        return 'Active days';
+      case 'stat_range_calendar':
+        return 'Study calendar';
       case 'manga_import_ios_mokuro_needs_folder':
         return 'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
       case 'import_folder_copy_failed':
@@ -409570,6 +410119,24 @@ extension on _StringsVi {
         return 'No sentence media — text-only card';
       case 'favorites_batch_mine_skipped':
         return 'Skipped';
+      case 'stat_range_mode_day':
+        return 'Day';
+      case 'stat_range_mode_week':
+        return 'Week';
+      case 'stat_range_mode_month':
+        return 'Month';
+      case 'stat_range_mode_year':
+        return 'Year';
+      case 'stat_range_previous':
+        return 'Previous period';
+      case 'stat_range_next':
+        return 'Next period';
+      case 'stat_range_summary':
+        return 'Selected range';
+      case 'stat_range_active_days':
+        return 'Active days';
+      case 'stat_range_calendar':
+        return 'Study calendar';
       case 'manga_import_ios_mokuro_needs_folder':
         return 'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
       case 'import_folder_copy_failed':
@@ -421420,6 +421987,24 @@ extension on _StringsZhCn {
         return '没有可用的句子媒体，已制成纯文字卡';
       case 'favorites_batch_mine_skipped':
         return '已跳过';
+      case 'stat_range_mode_day':
+        return '日';
+      case 'stat_range_mode_week':
+        return '周';
+      case 'stat_range_mode_month':
+        return '月';
+      case 'stat_range_mode_year':
+        return '年';
+      case 'stat_range_previous':
+        return '上一段';
+      case 'stat_range_next':
+        return '下一段';
+      case 'stat_range_summary':
+        return '所选范围';
+      case 'stat_range_active_days':
+        return '活跃天数';
+      case 'stat_range_calendar':
+        return '学习日历';
       case 'manga_import_ios_mokuro_needs_folder':
         return 'iOS 上单选 .mokuro 带不上它的页图。请选整卷文件夹（含 .mokuro 和它的页图文件夹），或把整卷打包成 .zip/.cbz 再导入。';
       case 'import_folder_copy_failed':
@@ -433314,6 +433899,24 @@ extension on _StringsZhHk {
         return 'No sentence media — text-only card';
       case 'favorites_batch_mine_skipped':
         return 'Skipped';
+      case 'stat_range_mode_day':
+        return '日';
+      case 'stat_range_mode_week':
+        return '週';
+      case 'stat_range_mode_month':
+        return '月';
+      case 'stat_range_mode_year':
+        return '年';
+      case 'stat_range_previous':
+        return '上一段';
+      case 'stat_range_next':
+        return '下一段';
+      case 'stat_range_summary':
+        return '所選範圍';
+      case 'stat_range_active_days':
+        return '活躍天數';
+      case 'stat_range_calendar':
+        return '學習日曆';
       case 'manga_import_ios_mokuro_needs_folder':
         return 'On iOS a single .mokuro can\'t bring its page images along. Pick the whole volume folder (the .mokuro plus its image folder), or a .zip/.cbz of it.';
       case 'import_folder_copy_failed':
