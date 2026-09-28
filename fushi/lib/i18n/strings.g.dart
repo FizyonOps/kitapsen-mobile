@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 98311 (5783 per locale)
+/// Strings: 98379 (5787 per locale)
 ///
-/// Built on 2026-09-28 at 15:33 UTC
+/// Built on 2026-09-28 at 18:17 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8303,6 +8303,10 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get stat_range_summary => 'Selected range';
   String get stat_range_active_days => 'Active days';
   String get stat_range_calendar => 'Study calendar';
+  String get popup_bottom_docked_books => 'Dock in novels';
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  String get popup_bottom_docked_video => 'Dock in videos';
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -22212,6 +22216,14 @@ class _StringsAr extends _StringsEn {
   String get stat_range_active_days => 'Active days';
   @override
   String get stat_range_calendar => 'Study calendar';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -36361,6 +36373,14 @@ class _StringsDe extends _StringsEn {
   String get stat_range_active_days => 'Active days';
   @override
   String get stat_range_calendar => 'Study calendar';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -50561,6 +50581,14 @@ class _StringsEs extends _StringsEn {
   String get stat_range_active_days => 'Active days';
   @override
   String get stat_range_calendar => 'Study calendar';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -64800,6 +64828,14 @@ class _StringsFr extends _StringsEn {
   String get stat_range_active_days => 'Active days';
   @override
   String get stat_range_calendar => 'Study calendar';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -78829,6 +78865,14 @@ class _StringsId extends _StringsEn {
   String get stat_range_active_days => 'Active days';
   @override
   String get stat_range_calendar => 'Study calendar';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -92959,6 +93003,14 @@ class _StringsIt extends _StringsEn {
   String get stat_range_active_days => 'Active days';
   @override
   String get stat_range_calendar => 'Study calendar';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -106442,6 +106494,14 @@ class _StringsJa extends _StringsEn {
   String get stat_range_active_days => '活動日数';
   @override
   String get stat_range_calendar => '学習カレンダー';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -119942,6 +120002,14 @@ class _StringsKo extends _StringsEn {
   String get stat_range_active_days => '활동 일수';
   @override
   String get stat_range_calendar => '학습 캘린더';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -134027,6 +134095,14 @@ class _StringsNl extends _StringsEn {
   String get stat_range_active_days => 'Active days';
   @override
   String get stat_range_calendar => 'Study calendar';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -148164,6 +148240,14 @@ class _StringsPtBr extends _StringsEn {
   String get stat_range_active_days => 'Active days';
   @override
   String get stat_range_calendar => 'Study calendar';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -162276,6 +162360,14 @@ class _StringsRu extends _StringsEn {
   String get stat_range_active_days => 'Active days';
   @override
   String get stat_range_calendar => 'Study calendar';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -176184,6 +176276,14 @@ class _StringsTh extends _StringsEn {
   String get stat_range_active_days => 'Active days';
   @override
   String get stat_range_calendar => 'Study calendar';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -190207,6 +190307,14 @@ class _StringsTr extends _StringsEn {
   String get stat_range_active_days => 'Active days';
   @override
   String get stat_range_calendar => 'Study calendar';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -204201,6 +204309,14 @@ class _StringsVi extends _StringsEn {
   String get stat_range_active_days => 'Active days';
   @override
   String get stat_range_calendar => 'Study calendar';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -216998,6 +217114,14 @@ class _StringsZhCn extends _StringsEn {
   String get stat_range_active_days => '活跃天数';
   @override
   String get stat_range_calendar => '学习日历';
+  @override
+  String get popup_bottom_docked_books => '小说中底部停靠';
+  @override
+  String get popup_bottom_docked_manga => '漫画中底部停靠';
+  @override
+  String get popup_bottom_docked_video => '视频中底部停靠';
+  @override
+  String get popup_bottom_docked_games => '游戏中底部停靠';
 }
 
 // Path: <root>
@@ -230157,6 +230281,14 @@ class _StringsZhHk extends _StringsEn {
   String get stat_range_active_days => '活躍天數';
   @override
   String get stat_range_calendar => '學習日曆';
+  @override
+  String get popup_bottom_docked_books => '小說中底部停靠';
+  @override
+  String get popup_bottom_docked_manga => '漫畫中底部停靠';
+  @override
+  String get popup_bottom_docked_video => '影片中底部停靠';
+  @override
+  String get popup_bottom_docked_games => '遊戲中底部停靠';
 }
 
 /// Flat map(s) containing all translations.
@@ -242132,6 +242264,14 @@ extension on _StringsEn {
         return 'Active days';
       case 'stat_range_calendar':
         return 'Study calendar';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -254101,6 +254241,14 @@ extension on _StringsAr {
         return 'Active days';
       case 'stat_range_calendar':
         return 'Study calendar';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -266120,6 +266268,14 @@ extension on _StringsDe {
         return 'Active days';
       case 'stat_range_calendar':
         return 'Study calendar';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -278129,6 +278285,14 @@ extension on _StringsEs {
         return 'Active days';
       case 'stat_range_calendar':
         return 'Study calendar';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -290146,6 +290310,14 @@ extension on _StringsFr {
         return 'Active days';
       case 'stat_range_calendar':
         return 'Study calendar';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -302133,6 +302305,14 @@ extension on _StringsId {
         return 'Active days';
       case 'stat_range_calendar':
         return 'Study calendar';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -314142,6 +314322,14 @@ extension on _StringsIt {
         return 'Active days';
       case 'stat_range_calendar':
         return 'Study calendar';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -326071,6 +326259,14 @@ extension on _StringsJa {
         return '活動日数';
       case 'stat_range_calendar':
         return '学習カレンダー';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -338009,6 +338205,14 @@ extension on _StringsKo {
         return '활동 일수';
       case 'stat_range_calendar':
         return '학습 캘린더';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -350014,6 +350218,14 @@ extension on _StringsNl {
         return 'Active days';
       case 'stat_range_calendar':
         return 'Study calendar';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -362014,6 +362226,14 @@ extension on _StringsPtBr {
         return 'Active days';
       case 'stat_range_calendar':
         return 'Study calendar';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -374019,6 +374239,14 @@ extension on _StringsRu {
         return 'Active days';
       case 'stat_range_calendar':
         return 'Study calendar';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -385993,6 +386221,14 @@ extension on _StringsTh {
         return 'Active days';
       case 'stat_range_calendar':
         return 'Study calendar';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -397983,6 +398219,14 @@ extension on _StringsTr {
         return 'Active days';
       case 'stat_range_calendar':
         return 'Study calendar';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -409967,6 +410211,14 @@ extension on _StringsVi {
         return 'Active days';
       case 'stat_range_calendar':
         return 'Study calendar';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -421830,6 +422082,14 @@ extension on _StringsZhCn {
         return '活跃天数';
       case 'stat_range_calendar':
         return '学习日历';
+      case 'popup_bottom_docked_books':
+        return '小说中底部停靠';
+      case 'popup_bottom_docked_manga':
+        return '漫画中底部停靠';
+      case 'popup_bottom_docked_video':
+        return '视频中底部停靠';
+      case 'popup_bottom_docked_games':
+        return '游戏中底部停靠';
       default:
         return null;
     }
@@ -433738,6 +433998,14 @@ extension on _StringsZhHk {
         return '活躍天數';
       case 'stat_range_calendar':
         return '學習日曆';
+      case 'popup_bottom_docked_books':
+        return '小說中底部停靠';
+      case 'popup_bottom_docked_manga':
+        return '漫畫中底部停靠';
+      case 'popup_bottom_docked_video':
+        return '影片中底部停靠';
+      case 'popup_bottom_docked_games':
+        return '遊戲中底部停靠';
       default:
         return null;
     }
