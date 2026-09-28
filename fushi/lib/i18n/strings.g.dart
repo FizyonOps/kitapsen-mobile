@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 97648 (5744 per locale)
+/// Strings: 97954 (5762 per locale)
 ///
-/// Built on 2026-09-27 at 22:44 UTC
+/// Built on 2026-09-28 at 02:23 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8223,6 +8223,52 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
       'Imported ${count} channels';
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  String get hoshi_import_file_pick => 'Choose backup file';
+  String get hoshi_import_scan_running => 'Reading backup…';
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  String get hoshi_import_run_start => 'Start import';
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  String get hoshi_import_result_done => 'Import finished';
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
 }
 
 // Path: <root>
@@ -22013,6 +22059,70 @@ class _StringsAr extends _StringsEn {
   @override
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
 }
 
 // Path: <root>
@@ -36043,6 +36153,70 @@ class _StringsDe extends _StringsEn {
   @override
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
 }
 
 // Path: <root>
@@ -50124,6 +50298,70 @@ class _StringsEs extends _StringsEn {
   @override
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
 }
 
 // Path: <root>
@@ -64244,6 +64482,70 @@ class _StringsFr extends _StringsEn {
   @override
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
 }
 
 // Path: <root>
@@ -78154,6 +78456,70 @@ class _StringsId extends _StringsEn {
   @override
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
 }
 
 // Path: <root>
@@ -92165,6 +92531,70 @@ class _StringsIt extends _StringsEn {
   @override
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
 }
 
 // Path: <root>
@@ -105529,6 +105959,70 @@ class _StringsJa extends _StringsEn {
   @override
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
 }
 
 // Path: <root>
@@ -118910,6 +119404,70 @@ class _StringsKo extends _StringsEn {
   @override
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
 }
 
 // Path: <root>
@@ -132876,6 +133434,70 @@ class _StringsNl extends _StringsEn {
   @override
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
 }
 
 // Path: <root>
@@ -146894,6 +147516,70 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
 }
 
 // Path: <root>
@@ -160887,6 +161573,70 @@ class _StringsRu extends _StringsEn {
   @override
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
 }
 
 // Path: <root>
@@ -174676,6 +175426,70 @@ class _StringsTh extends _StringsEn {
   @override
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
 }
 
 // Path: <root>
@@ -188580,6 +189394,70 @@ class _StringsTr extends _StringsEn {
   @override
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
 }
 
 // Path: <root>
@@ -202455,6 +203333,70 @@ class _StringsVi extends _StringsEn {
   @override
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
 }
 
 // Path: <root>
@@ -215142,6 +216084,66 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get video_stream_protocol_unsupported_apple =>
       'iOS 与 macOS 暂不支持这种流协议（rtsps / rtmps / rtmpe）。';
+  @override
+  String get hoshi_import_entry => '从 Hoshi Reader 导入';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      '从 Hoshi Reader（iOS / Android）的书库备份导入书、阅读位置和统计';
+  @override
+  String get hoshi_import_how_to =>
+      '在 Hoshi Reader 里打开「设置 › Backup」备份书库，然后在这里选择生成的 Books_….hoshi 文件。库里已有的书不会重复导入；同一份备份重复导入不会重复计数。';
+  @override
+  String get hoshi_import_file_pick => '选择备份文件';
+  @override
+  String get hoshi_import_scan_running => '正在读取备份…';
+  @override
+  String get hoshi_import_scan_invalid => '这不是 Hoshi Reader 的书库备份。';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) => '新书 ${newBooks} 本 · 库中已有 ${existingBooks} 本 · 仅统计 ${statsOnlyBooks} 本';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => '统计记录 ${records} 条 · 阅读位置 ${positions} 个';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      '统计将导入到配置：${name}';
+  @override
+  String get hoshi_import_run_start => '开始导入';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => '正在导入 ${current} / ${total}：${title}';
+  @override
+  String get hoshi_import_result_done => '导入完成';
+  @override
+  String get hoshi_import_result_cancelled => '导入已停止，已导入的书会保留';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => '导入书 ${imported} 本 · 匹配库中已有 ${matched} 本';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) => '统计：会话 ${sessions} 次、按天 ${days} 天 · 阅读位置 ${positions} 个';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '跳过 ${count} 条记录：同一本书同一天的数据早先已经同步进来过';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '有 ${count} 段统计未恢复：你曾在 Fushi 里删除过这些书的统计';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      '有 ${count} 本书没能导入（它们的统计仍已导入）：';
 }
 
 // Path: <root>
@@ -228182,6 +229184,70 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
 }
 
 /// Flat map(s) containing all translations.
@@ -240052,6 +241118,62 @@ extension on _StringsEn {
         return ({required Object count}) => 'Imported ${count} channels';
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       default:
         return null;
     }
@@ -251916,6 +253038,62 @@ extension on _StringsAr {
         return ({required Object count}) => 'Imported ${count} channels';
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       default:
         return null;
     }
@@ -263830,6 +265008,62 @@ extension on _StringsDe {
         return ({required Object count}) => 'Imported ${count} channels';
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       default:
         return null;
     }
@@ -275734,6 +276968,62 @@ extension on _StringsEs {
         return ({required Object count}) => 'Imported ${count} channels';
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       default:
         return null;
     }
@@ -287646,6 +288936,62 @@ extension on _StringsFr {
         return ({required Object count}) => 'Imported ${count} channels';
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       default:
         return null;
     }
@@ -299528,6 +300874,62 @@ extension on _StringsId {
         return ({required Object count}) => 'Imported ${count} channels';
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       default:
         return null;
     }
@@ -311432,6 +312834,62 @@ extension on _StringsIt {
         return ({required Object count}) => 'Imported ${count} channels';
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       default:
         return null;
     }
@@ -323256,6 +324714,62 @@ extension on _StringsJa {
         return ({required Object count}) => 'Imported ${count} channels';
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       default:
         return null;
     }
@@ -335089,6 +336603,62 @@ extension on _StringsKo {
         return ({required Object count}) => 'Imported ${count} channels';
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       default:
         return null;
     }
@@ -346989,6 +348559,62 @@ extension on _StringsNl {
         return ({required Object count}) => 'Imported ${count} channels';
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       default:
         return null;
     }
@@ -358884,6 +360510,62 @@ extension on _StringsPtBr {
         return ({required Object count}) => 'Imported ${count} channels';
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       default:
         return null;
     }
@@ -370784,6 +372466,62 @@ extension on _StringsRu {
         return ({required Object count}) => 'Imported ${count} channels';
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       default:
         return null;
     }
@@ -382653,6 +384391,62 @@ extension on _StringsTh {
         return ({required Object count}) => 'Imported ${count} channels';
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       default:
         return null;
     }
@@ -394538,6 +396332,62 @@ extension on _StringsTr {
         return ({required Object count}) => 'Imported ${count} channels';
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       default:
         return null;
     }
@@ -406417,6 +408267,62 @@ extension on _StringsVi {
         return ({required Object count}) => 'Imported ${count} channels';
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       default:
         return null;
     }
@@ -418179,6 +420085,59 @@ extension on _StringsZhCn {
         return ({required Object count}) => '已导入 ${count} 个频道';
       case 'video_stream_protocol_unsupported_apple':
         return 'iOS 与 macOS 暂不支持这种流协议（rtsps / rtmps / rtmpe）。';
+      case 'hoshi_import_entry':
+        return '从 Hoshi Reader 导入';
+      case 'hoshi_import_entry_subtitle':
+        return '从 Hoshi Reader（iOS / Android）的书库备份导入书、阅读位置和统计';
+      case 'hoshi_import_how_to':
+        return '在 Hoshi Reader 里打开「设置 › Backup」备份书库，然后在这里选择生成的 Books_….hoshi 文件。库里已有的书不会重复导入；同一份备份重复导入不会重复计数。';
+      case 'hoshi_import_file_pick':
+        return '选择备份文件';
+      case 'hoshi_import_scan_running':
+        return '正在读取备份…';
+      case 'hoshi_import_scan_invalid':
+        return '这不是 Hoshi Reader 的书库备份。';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            '新书 ${newBooks} 本 · 库中已有 ${existingBooks} 本 · 仅统计 ${statsOnlyBooks} 本';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            '统计记录 ${records} 条 · 阅读位置 ${positions} 个';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) => '统计将导入到配置：${name}';
+      case 'hoshi_import_run_start':
+        return '开始导入';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => '正在导入 ${current} / ${total}：${title}';
+      case 'hoshi_import_result_done':
+        return '导入完成';
+      case 'hoshi_import_result_cancelled':
+        return '导入已停止，已导入的书会保留';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            '导入书 ${imported} 本 · 匹配库中已有 ${matched} 本';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) => '统计：会话 ${sessions} 次、按天 ${days} 天 · 阅读位置 ${positions} 个';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '跳过 ${count} 条记录：同一本书同一天的数据早先已经同步进来过';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '有 ${count} 段统计未恢复：你曾在 Fushi 里删除过这些书的统计';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) => '有 ${count} 本书没能导入（它们的统计仍已导入）：';
       default:
         return null;
     }
@@ -429982,6 +431941,62 @@ extension on _StringsZhHk {
         return ({required Object count}) => 'Imported ${count} channels';
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       default:
         return null;
     }
