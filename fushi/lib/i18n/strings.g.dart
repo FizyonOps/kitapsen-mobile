@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 97954 (5762 per locale)
+/// Strings: 98039 (5767 per locale)
 ///
-/// Built on 2026-09-28 at 02:23 UTC
+/// Built on 2026-09-28 at 14:03 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8269,6 +8269,16 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
       '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -22123,6 +22133,21 @@ class _StringsAr extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -36217,6 +36242,21 @@ class _StringsDe extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -50362,6 +50402,21 @@ class _StringsEs extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -64546,6 +64601,21 @@ class _StringsFr extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -78520,6 +78590,21 @@ class _StringsId extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -92595,6 +92680,21 @@ class _StringsIt extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -106023,6 +106123,21 @@ class _StringsJa extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -119468,6 +119583,21 @@ class _StringsKo extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -133498,6 +133628,21 @@ class _StringsNl extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -147580,6 +147725,21 @@ class _StringsPtBr extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -161637,6 +161797,21 @@ class _StringsRu extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -175490,6 +175665,21 @@ class _StringsTh extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -189458,6 +189648,21 @@ class _StringsTr extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -203397,6 +203602,21 @@ class _StringsVi extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -216144,6 +216364,21 @@ class _StringsZhCn extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       '有 ${count} 本书没能导入（它们的统计仍已导入）：';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      '在 ${device} 上执行';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      '与执行设备的连接中断，请确认它在线后重试。';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} 不支持 AI 下视频，请更新那台设备上的 Fushi。';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} 还没有给「AI 下视频」指派 AI 提供商，请在那台设备的「设置 › AI」里指派。';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} 的下载还没配好（下载后端或受管视频来源）。';
 }
 
 // Path: <root>
@@ -229248,6 +229483,21 @@ class _StringsZhHk extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 /// Flat map(s) containing all translations.
@@ -241174,6 +241424,19 @@ extension on _StringsEn {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -253094,6 +253357,19 @@ extension on _StringsAr {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -265064,6 +265340,19 @@ extension on _StringsDe {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -277024,6 +277313,19 @@ extension on _StringsEs {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -288992,6 +289294,19 @@ extension on _StringsFr {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -300930,6 +301245,19 @@ extension on _StringsId {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -312890,6 +313218,19 @@ extension on _StringsIt {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -324770,6 +325111,19 @@ extension on _StringsJa {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -336659,6 +337013,19 @@ extension on _StringsKo {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -348615,6 +348982,19 @@ extension on _StringsNl {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -360566,6 +360946,19 @@ extension on _StringsPtBr {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -372522,6 +372915,19 @@ extension on _StringsRu {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -384447,6 +384853,19 @@ extension on _StringsTh {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -396388,6 +396807,19 @@ extension on _StringsTr {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -408323,6 +408755,19 @@ extension on _StringsVi {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -420138,6 +420583,18 @@ extension on _StringsZhCn {
             '有 ${count} 段统计未恢复：你曾在 Fushi 里删除过这些书的统计';
       case 'hoshi_import_result_failed':
         return ({required Object count}) => '有 ${count} 本书没能导入（它们的统计仍已导入）：';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => '在 ${device} 上执行';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return '与执行设备的连接中断，请确认它在线后重试。';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} 不支持 AI 下视频，请更新那台设备上的 Fushi。';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} 还没有给「AI 下视频」指派 AI 提供商，请在那台设备的「设置 › AI」里指派。';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) => '${device} 的下载还没配好（下载后端或受管视频来源）。';
       default:
         return null;
     }
@@ -431997,6 +432454,19 @@ extension on _StringsZhHk {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
