@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 97954 (5762 per locale)
+/// Strings: 98294 (5782 per locale)
 ///
-/// Built on 2026-09-28 at 02:23 UTC
+/// Built on 2026-09-28 at 07:17 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8269,6 +8269,29 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
       '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  String get floating_ball_mode_title => 'Floating ball';
+  String get floating_ball_mode_hint =>
+      'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+  String get floating_ball_mode_off => 'Off';
+  String get floating_ball_mode_in_app => 'In app';
+  String get floating_ball_mode_system => 'System-wide';
+  String get floating_ball_action_lookup => 'Look up';
+  String get floating_ball_action_clipboard => 'Look up clipboard';
+  String get floating_ball_action_screen_ocr => 'Screen OCR';
+  String get floating_ball_action_open_app => 'Open Fushi';
+  String get floating_ball_action_close => 'Close floating ball';
+  String get floating_ball_notification => 'Floating ball is active';
+  String get floating_ball_overlay_permission_needed =>
+      'Allow Fushi to display over other apps to keep the ball on screen';
+  String get floating_ball_clipboard_empty => 'Clipboard has no text';
+  String get floating_ball_lookup_hint => 'Enter a word';
+  String get floating_ball_ocr_failed => 'Screen OCR failed';
+  String get floating_ball_ocr_empty => 'No text recognized';
+  String get floating_ball_ocr_model_unavailable =>
+      'The system OCR model is not ready yet';
+  String get floating_ball_ocr_pick_hint => 'Tap text to look it up';
+  String get floating_ball_actions_title => 'Global buttons';
+  String get floating_ball_ocr_notification => 'Screen OCR in progress';
 }
 
 // Path: <root>
@@ -22123,6 +22146,49 @@ class _StringsAr extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get floating_ball_mode_title => 'Floating ball';
+  @override
+  String get floating_ball_mode_hint =>
+      'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+  @override
+  String get floating_ball_mode_off => 'Off';
+  @override
+  String get floating_ball_mode_in_app => 'In app';
+  @override
+  String get floating_ball_mode_system => 'System-wide';
+  @override
+  String get floating_ball_action_lookup => 'Look up';
+  @override
+  String get floating_ball_action_clipboard => 'Look up clipboard';
+  @override
+  String get floating_ball_action_screen_ocr => 'Screen OCR';
+  @override
+  String get floating_ball_action_open_app => 'Open Fushi';
+  @override
+  String get floating_ball_action_close => 'Close floating ball';
+  @override
+  String get floating_ball_notification => 'Floating ball is active';
+  @override
+  String get floating_ball_overlay_permission_needed =>
+      'Allow Fushi to display over other apps to keep the ball on screen';
+  @override
+  String get floating_ball_clipboard_empty => 'Clipboard has no text';
+  @override
+  String get floating_ball_lookup_hint => 'Enter a word';
+  @override
+  String get floating_ball_ocr_failed => 'Screen OCR failed';
+  @override
+  String get floating_ball_ocr_empty => 'No text recognized';
+  @override
+  String get floating_ball_ocr_model_unavailable =>
+      'The system OCR model is not ready yet';
+  @override
+  String get floating_ball_ocr_pick_hint => 'Tap text to look it up';
+  @override
+  String get floating_ball_actions_title => 'Global buttons';
+  @override
+  String get floating_ball_ocr_notification => 'Screen OCR in progress';
 }
 
 // Path: <root>
@@ -36217,6 +36283,49 @@ class _StringsDe extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get floating_ball_mode_title => 'Floating ball';
+  @override
+  String get floating_ball_mode_hint =>
+      'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+  @override
+  String get floating_ball_mode_off => 'Off';
+  @override
+  String get floating_ball_mode_in_app => 'In app';
+  @override
+  String get floating_ball_mode_system => 'System-wide';
+  @override
+  String get floating_ball_action_lookup => 'Look up';
+  @override
+  String get floating_ball_action_clipboard => 'Look up clipboard';
+  @override
+  String get floating_ball_action_screen_ocr => 'Screen OCR';
+  @override
+  String get floating_ball_action_open_app => 'Open Fushi';
+  @override
+  String get floating_ball_action_close => 'Close floating ball';
+  @override
+  String get floating_ball_notification => 'Floating ball is active';
+  @override
+  String get floating_ball_overlay_permission_needed =>
+      'Allow Fushi to display over other apps to keep the ball on screen';
+  @override
+  String get floating_ball_clipboard_empty => 'Clipboard has no text';
+  @override
+  String get floating_ball_lookup_hint => 'Enter a word';
+  @override
+  String get floating_ball_ocr_failed => 'Screen OCR failed';
+  @override
+  String get floating_ball_ocr_empty => 'No text recognized';
+  @override
+  String get floating_ball_ocr_model_unavailable =>
+      'The system OCR model is not ready yet';
+  @override
+  String get floating_ball_ocr_pick_hint => 'Tap text to look it up';
+  @override
+  String get floating_ball_actions_title => 'Global buttons';
+  @override
+  String get floating_ball_ocr_notification => 'Screen OCR in progress';
 }
 
 // Path: <root>
@@ -50362,6 +50471,49 @@ class _StringsEs extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get floating_ball_mode_title => 'Floating ball';
+  @override
+  String get floating_ball_mode_hint =>
+      'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+  @override
+  String get floating_ball_mode_off => 'Off';
+  @override
+  String get floating_ball_mode_in_app => 'In app';
+  @override
+  String get floating_ball_mode_system => 'System-wide';
+  @override
+  String get floating_ball_action_lookup => 'Look up';
+  @override
+  String get floating_ball_action_clipboard => 'Look up clipboard';
+  @override
+  String get floating_ball_action_screen_ocr => 'Screen OCR';
+  @override
+  String get floating_ball_action_open_app => 'Open Fushi';
+  @override
+  String get floating_ball_action_close => 'Close floating ball';
+  @override
+  String get floating_ball_notification => 'Floating ball is active';
+  @override
+  String get floating_ball_overlay_permission_needed =>
+      'Allow Fushi to display over other apps to keep the ball on screen';
+  @override
+  String get floating_ball_clipboard_empty => 'Clipboard has no text';
+  @override
+  String get floating_ball_lookup_hint => 'Enter a word';
+  @override
+  String get floating_ball_ocr_failed => 'Screen OCR failed';
+  @override
+  String get floating_ball_ocr_empty => 'No text recognized';
+  @override
+  String get floating_ball_ocr_model_unavailable =>
+      'The system OCR model is not ready yet';
+  @override
+  String get floating_ball_ocr_pick_hint => 'Tap text to look it up';
+  @override
+  String get floating_ball_actions_title => 'Global buttons';
+  @override
+  String get floating_ball_ocr_notification => 'Screen OCR in progress';
 }
 
 // Path: <root>
@@ -64546,6 +64698,49 @@ class _StringsFr extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get floating_ball_mode_title => 'Floating ball';
+  @override
+  String get floating_ball_mode_hint =>
+      'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+  @override
+  String get floating_ball_mode_off => 'Off';
+  @override
+  String get floating_ball_mode_in_app => 'In app';
+  @override
+  String get floating_ball_mode_system => 'System-wide';
+  @override
+  String get floating_ball_action_lookup => 'Look up';
+  @override
+  String get floating_ball_action_clipboard => 'Look up clipboard';
+  @override
+  String get floating_ball_action_screen_ocr => 'Screen OCR';
+  @override
+  String get floating_ball_action_open_app => 'Open Fushi';
+  @override
+  String get floating_ball_action_close => 'Close floating ball';
+  @override
+  String get floating_ball_notification => 'Floating ball is active';
+  @override
+  String get floating_ball_overlay_permission_needed =>
+      'Allow Fushi to display over other apps to keep the ball on screen';
+  @override
+  String get floating_ball_clipboard_empty => 'Clipboard has no text';
+  @override
+  String get floating_ball_lookup_hint => 'Enter a word';
+  @override
+  String get floating_ball_ocr_failed => 'Screen OCR failed';
+  @override
+  String get floating_ball_ocr_empty => 'No text recognized';
+  @override
+  String get floating_ball_ocr_model_unavailable =>
+      'The system OCR model is not ready yet';
+  @override
+  String get floating_ball_ocr_pick_hint => 'Tap text to look it up';
+  @override
+  String get floating_ball_actions_title => 'Global buttons';
+  @override
+  String get floating_ball_ocr_notification => 'Screen OCR in progress';
 }
 
 // Path: <root>
@@ -78520,6 +78715,49 @@ class _StringsId extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get floating_ball_mode_title => 'Floating ball';
+  @override
+  String get floating_ball_mode_hint =>
+      'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+  @override
+  String get floating_ball_mode_off => 'Off';
+  @override
+  String get floating_ball_mode_in_app => 'In app';
+  @override
+  String get floating_ball_mode_system => 'System-wide';
+  @override
+  String get floating_ball_action_lookup => 'Look up';
+  @override
+  String get floating_ball_action_clipboard => 'Look up clipboard';
+  @override
+  String get floating_ball_action_screen_ocr => 'Screen OCR';
+  @override
+  String get floating_ball_action_open_app => 'Open Fushi';
+  @override
+  String get floating_ball_action_close => 'Close floating ball';
+  @override
+  String get floating_ball_notification => 'Floating ball is active';
+  @override
+  String get floating_ball_overlay_permission_needed =>
+      'Allow Fushi to display over other apps to keep the ball on screen';
+  @override
+  String get floating_ball_clipboard_empty => 'Clipboard has no text';
+  @override
+  String get floating_ball_lookup_hint => 'Enter a word';
+  @override
+  String get floating_ball_ocr_failed => 'Screen OCR failed';
+  @override
+  String get floating_ball_ocr_empty => 'No text recognized';
+  @override
+  String get floating_ball_ocr_model_unavailable =>
+      'The system OCR model is not ready yet';
+  @override
+  String get floating_ball_ocr_pick_hint => 'Tap text to look it up';
+  @override
+  String get floating_ball_actions_title => 'Global buttons';
+  @override
+  String get floating_ball_ocr_notification => 'Screen OCR in progress';
 }
 
 // Path: <root>
@@ -92595,6 +92833,49 @@ class _StringsIt extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get floating_ball_mode_title => 'Floating ball';
+  @override
+  String get floating_ball_mode_hint =>
+      'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+  @override
+  String get floating_ball_mode_off => 'Off';
+  @override
+  String get floating_ball_mode_in_app => 'In app';
+  @override
+  String get floating_ball_mode_system => 'System-wide';
+  @override
+  String get floating_ball_action_lookup => 'Look up';
+  @override
+  String get floating_ball_action_clipboard => 'Look up clipboard';
+  @override
+  String get floating_ball_action_screen_ocr => 'Screen OCR';
+  @override
+  String get floating_ball_action_open_app => 'Open Fushi';
+  @override
+  String get floating_ball_action_close => 'Close floating ball';
+  @override
+  String get floating_ball_notification => 'Floating ball is active';
+  @override
+  String get floating_ball_overlay_permission_needed =>
+      'Allow Fushi to display over other apps to keep the ball on screen';
+  @override
+  String get floating_ball_clipboard_empty => 'Clipboard has no text';
+  @override
+  String get floating_ball_lookup_hint => 'Enter a word';
+  @override
+  String get floating_ball_ocr_failed => 'Screen OCR failed';
+  @override
+  String get floating_ball_ocr_empty => 'No text recognized';
+  @override
+  String get floating_ball_ocr_model_unavailable =>
+      'The system OCR model is not ready yet';
+  @override
+  String get floating_ball_ocr_pick_hint => 'Tap text to look it up';
+  @override
+  String get floating_ball_actions_title => 'Global buttons';
+  @override
+  String get floating_ball_ocr_notification => 'Screen OCR in progress';
 }
 
 // Path: <root>
@@ -106023,6 +106304,49 @@ class _StringsJa extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get floating_ball_mode_title => 'Floating ball';
+  @override
+  String get floating_ball_mode_hint =>
+      'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+  @override
+  String get floating_ball_mode_off => 'Off';
+  @override
+  String get floating_ball_mode_in_app => 'In app';
+  @override
+  String get floating_ball_mode_system => 'System-wide';
+  @override
+  String get floating_ball_action_lookup => 'Look up';
+  @override
+  String get floating_ball_action_clipboard => 'Look up clipboard';
+  @override
+  String get floating_ball_action_screen_ocr => 'Screen OCR';
+  @override
+  String get floating_ball_action_open_app => 'Open Fushi';
+  @override
+  String get floating_ball_action_close => 'Close floating ball';
+  @override
+  String get floating_ball_notification => 'Floating ball is active';
+  @override
+  String get floating_ball_overlay_permission_needed =>
+      'Allow Fushi to display over other apps to keep the ball on screen';
+  @override
+  String get floating_ball_clipboard_empty => 'Clipboard has no text';
+  @override
+  String get floating_ball_lookup_hint => 'Enter a word';
+  @override
+  String get floating_ball_ocr_failed => 'Screen OCR failed';
+  @override
+  String get floating_ball_ocr_empty => 'No text recognized';
+  @override
+  String get floating_ball_ocr_model_unavailable =>
+      'The system OCR model is not ready yet';
+  @override
+  String get floating_ball_ocr_pick_hint => 'Tap text to look it up';
+  @override
+  String get floating_ball_actions_title => 'Global buttons';
+  @override
+  String get floating_ball_ocr_notification => 'Screen OCR in progress';
 }
 
 // Path: <root>
@@ -119468,6 +119792,49 @@ class _StringsKo extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get floating_ball_mode_title => 'Floating ball';
+  @override
+  String get floating_ball_mode_hint =>
+      'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+  @override
+  String get floating_ball_mode_off => 'Off';
+  @override
+  String get floating_ball_mode_in_app => 'In app';
+  @override
+  String get floating_ball_mode_system => 'System-wide';
+  @override
+  String get floating_ball_action_lookup => 'Look up';
+  @override
+  String get floating_ball_action_clipboard => 'Look up clipboard';
+  @override
+  String get floating_ball_action_screen_ocr => 'Screen OCR';
+  @override
+  String get floating_ball_action_open_app => 'Open Fushi';
+  @override
+  String get floating_ball_action_close => 'Close floating ball';
+  @override
+  String get floating_ball_notification => 'Floating ball is active';
+  @override
+  String get floating_ball_overlay_permission_needed =>
+      'Allow Fushi to display over other apps to keep the ball on screen';
+  @override
+  String get floating_ball_clipboard_empty => 'Clipboard has no text';
+  @override
+  String get floating_ball_lookup_hint => 'Enter a word';
+  @override
+  String get floating_ball_ocr_failed => 'Screen OCR failed';
+  @override
+  String get floating_ball_ocr_empty => 'No text recognized';
+  @override
+  String get floating_ball_ocr_model_unavailable =>
+      'The system OCR model is not ready yet';
+  @override
+  String get floating_ball_ocr_pick_hint => 'Tap text to look it up';
+  @override
+  String get floating_ball_actions_title => 'Global buttons';
+  @override
+  String get floating_ball_ocr_notification => 'Screen OCR in progress';
 }
 
 // Path: <root>
@@ -133498,6 +133865,49 @@ class _StringsNl extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get floating_ball_mode_title => 'Floating ball';
+  @override
+  String get floating_ball_mode_hint =>
+      'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+  @override
+  String get floating_ball_mode_off => 'Off';
+  @override
+  String get floating_ball_mode_in_app => 'In app';
+  @override
+  String get floating_ball_mode_system => 'System-wide';
+  @override
+  String get floating_ball_action_lookup => 'Look up';
+  @override
+  String get floating_ball_action_clipboard => 'Look up clipboard';
+  @override
+  String get floating_ball_action_screen_ocr => 'Screen OCR';
+  @override
+  String get floating_ball_action_open_app => 'Open Fushi';
+  @override
+  String get floating_ball_action_close => 'Close floating ball';
+  @override
+  String get floating_ball_notification => 'Floating ball is active';
+  @override
+  String get floating_ball_overlay_permission_needed =>
+      'Allow Fushi to display over other apps to keep the ball on screen';
+  @override
+  String get floating_ball_clipboard_empty => 'Clipboard has no text';
+  @override
+  String get floating_ball_lookup_hint => 'Enter a word';
+  @override
+  String get floating_ball_ocr_failed => 'Screen OCR failed';
+  @override
+  String get floating_ball_ocr_empty => 'No text recognized';
+  @override
+  String get floating_ball_ocr_model_unavailable =>
+      'The system OCR model is not ready yet';
+  @override
+  String get floating_ball_ocr_pick_hint => 'Tap text to look it up';
+  @override
+  String get floating_ball_actions_title => 'Global buttons';
+  @override
+  String get floating_ball_ocr_notification => 'Screen OCR in progress';
 }
 
 // Path: <root>
@@ -147580,6 +147990,49 @@ class _StringsPtBr extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get floating_ball_mode_title => 'Floating ball';
+  @override
+  String get floating_ball_mode_hint =>
+      'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+  @override
+  String get floating_ball_mode_off => 'Off';
+  @override
+  String get floating_ball_mode_in_app => 'In app';
+  @override
+  String get floating_ball_mode_system => 'System-wide';
+  @override
+  String get floating_ball_action_lookup => 'Look up';
+  @override
+  String get floating_ball_action_clipboard => 'Look up clipboard';
+  @override
+  String get floating_ball_action_screen_ocr => 'Screen OCR';
+  @override
+  String get floating_ball_action_open_app => 'Open Fushi';
+  @override
+  String get floating_ball_action_close => 'Close floating ball';
+  @override
+  String get floating_ball_notification => 'Floating ball is active';
+  @override
+  String get floating_ball_overlay_permission_needed =>
+      'Allow Fushi to display over other apps to keep the ball on screen';
+  @override
+  String get floating_ball_clipboard_empty => 'Clipboard has no text';
+  @override
+  String get floating_ball_lookup_hint => 'Enter a word';
+  @override
+  String get floating_ball_ocr_failed => 'Screen OCR failed';
+  @override
+  String get floating_ball_ocr_empty => 'No text recognized';
+  @override
+  String get floating_ball_ocr_model_unavailable =>
+      'The system OCR model is not ready yet';
+  @override
+  String get floating_ball_ocr_pick_hint => 'Tap text to look it up';
+  @override
+  String get floating_ball_actions_title => 'Global buttons';
+  @override
+  String get floating_ball_ocr_notification => 'Screen OCR in progress';
 }
 
 // Path: <root>
@@ -161637,6 +162090,49 @@ class _StringsRu extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get floating_ball_mode_title => 'Floating ball';
+  @override
+  String get floating_ball_mode_hint =>
+      'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+  @override
+  String get floating_ball_mode_off => 'Off';
+  @override
+  String get floating_ball_mode_in_app => 'In app';
+  @override
+  String get floating_ball_mode_system => 'System-wide';
+  @override
+  String get floating_ball_action_lookup => 'Look up';
+  @override
+  String get floating_ball_action_clipboard => 'Look up clipboard';
+  @override
+  String get floating_ball_action_screen_ocr => 'Screen OCR';
+  @override
+  String get floating_ball_action_open_app => 'Open Fushi';
+  @override
+  String get floating_ball_action_close => 'Close floating ball';
+  @override
+  String get floating_ball_notification => 'Floating ball is active';
+  @override
+  String get floating_ball_overlay_permission_needed =>
+      'Allow Fushi to display over other apps to keep the ball on screen';
+  @override
+  String get floating_ball_clipboard_empty => 'Clipboard has no text';
+  @override
+  String get floating_ball_lookup_hint => 'Enter a word';
+  @override
+  String get floating_ball_ocr_failed => 'Screen OCR failed';
+  @override
+  String get floating_ball_ocr_empty => 'No text recognized';
+  @override
+  String get floating_ball_ocr_model_unavailable =>
+      'The system OCR model is not ready yet';
+  @override
+  String get floating_ball_ocr_pick_hint => 'Tap text to look it up';
+  @override
+  String get floating_ball_actions_title => 'Global buttons';
+  @override
+  String get floating_ball_ocr_notification => 'Screen OCR in progress';
 }
 
 // Path: <root>
@@ -175490,6 +175986,49 @@ class _StringsTh extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get floating_ball_mode_title => 'Floating ball';
+  @override
+  String get floating_ball_mode_hint =>
+      'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+  @override
+  String get floating_ball_mode_off => 'Off';
+  @override
+  String get floating_ball_mode_in_app => 'In app';
+  @override
+  String get floating_ball_mode_system => 'System-wide';
+  @override
+  String get floating_ball_action_lookup => 'Look up';
+  @override
+  String get floating_ball_action_clipboard => 'Look up clipboard';
+  @override
+  String get floating_ball_action_screen_ocr => 'Screen OCR';
+  @override
+  String get floating_ball_action_open_app => 'Open Fushi';
+  @override
+  String get floating_ball_action_close => 'Close floating ball';
+  @override
+  String get floating_ball_notification => 'Floating ball is active';
+  @override
+  String get floating_ball_overlay_permission_needed =>
+      'Allow Fushi to display over other apps to keep the ball on screen';
+  @override
+  String get floating_ball_clipboard_empty => 'Clipboard has no text';
+  @override
+  String get floating_ball_lookup_hint => 'Enter a word';
+  @override
+  String get floating_ball_ocr_failed => 'Screen OCR failed';
+  @override
+  String get floating_ball_ocr_empty => 'No text recognized';
+  @override
+  String get floating_ball_ocr_model_unavailable =>
+      'The system OCR model is not ready yet';
+  @override
+  String get floating_ball_ocr_pick_hint => 'Tap text to look it up';
+  @override
+  String get floating_ball_actions_title => 'Global buttons';
+  @override
+  String get floating_ball_ocr_notification => 'Screen OCR in progress';
 }
 
 // Path: <root>
@@ -189458,6 +189997,49 @@ class _StringsTr extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get floating_ball_mode_title => 'Floating ball';
+  @override
+  String get floating_ball_mode_hint =>
+      'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+  @override
+  String get floating_ball_mode_off => 'Off';
+  @override
+  String get floating_ball_mode_in_app => 'In app';
+  @override
+  String get floating_ball_mode_system => 'System-wide';
+  @override
+  String get floating_ball_action_lookup => 'Look up';
+  @override
+  String get floating_ball_action_clipboard => 'Look up clipboard';
+  @override
+  String get floating_ball_action_screen_ocr => 'Screen OCR';
+  @override
+  String get floating_ball_action_open_app => 'Open Fushi';
+  @override
+  String get floating_ball_action_close => 'Close floating ball';
+  @override
+  String get floating_ball_notification => 'Floating ball is active';
+  @override
+  String get floating_ball_overlay_permission_needed =>
+      'Allow Fushi to display over other apps to keep the ball on screen';
+  @override
+  String get floating_ball_clipboard_empty => 'Clipboard has no text';
+  @override
+  String get floating_ball_lookup_hint => 'Enter a word';
+  @override
+  String get floating_ball_ocr_failed => 'Screen OCR failed';
+  @override
+  String get floating_ball_ocr_empty => 'No text recognized';
+  @override
+  String get floating_ball_ocr_model_unavailable =>
+      'The system OCR model is not ready yet';
+  @override
+  String get floating_ball_ocr_pick_hint => 'Tap text to look it up';
+  @override
+  String get floating_ball_actions_title => 'Global buttons';
+  @override
+  String get floating_ball_ocr_notification => 'Screen OCR in progress';
 }
 
 // Path: <root>
@@ -203397,6 +203979,49 @@ class _StringsVi extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get floating_ball_mode_title => 'Floating ball';
+  @override
+  String get floating_ball_mode_hint =>
+      'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+  @override
+  String get floating_ball_mode_off => 'Off';
+  @override
+  String get floating_ball_mode_in_app => 'In app';
+  @override
+  String get floating_ball_mode_system => 'System-wide';
+  @override
+  String get floating_ball_action_lookup => 'Look up';
+  @override
+  String get floating_ball_action_clipboard => 'Look up clipboard';
+  @override
+  String get floating_ball_action_screen_ocr => 'Screen OCR';
+  @override
+  String get floating_ball_action_open_app => 'Open Fushi';
+  @override
+  String get floating_ball_action_close => 'Close floating ball';
+  @override
+  String get floating_ball_notification => 'Floating ball is active';
+  @override
+  String get floating_ball_overlay_permission_needed =>
+      'Allow Fushi to display over other apps to keep the ball on screen';
+  @override
+  String get floating_ball_clipboard_empty => 'Clipboard has no text';
+  @override
+  String get floating_ball_lookup_hint => 'Enter a word';
+  @override
+  String get floating_ball_ocr_failed => 'Screen OCR failed';
+  @override
+  String get floating_ball_ocr_empty => 'No text recognized';
+  @override
+  String get floating_ball_ocr_model_unavailable =>
+      'The system OCR model is not ready yet';
+  @override
+  String get floating_ball_ocr_pick_hint => 'Tap text to look it up';
+  @override
+  String get floating_ball_actions_title => 'Global buttons';
+  @override
+  String get floating_ball_ocr_notification => 'Screen OCR in progress';
 }
 
 // Path: <root>
@@ -216144,6 +216769,47 @@ class _StringsZhCn extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       '有 ${count} 本书没能导入（它们的统计仍已导入）：';
+  @override
+  String get floating_ball_mode_title => '悬浮球';
+  @override
+  String get floating_ball_mode_hint => '常驻悬浮球：查词、剪贴板查词、截屏识字，各页面还会加上自己的按钮';
+  @override
+  String get floating_ball_mode_off => '关闭';
+  @override
+  String get floating_ball_mode_in_app => '应用内常驻';
+  @override
+  String get floating_ball_mode_system => '系统常驻';
+  @override
+  String get floating_ball_action_lookup => '查词';
+  @override
+  String get floating_ball_action_clipboard => '剪贴板查词';
+  @override
+  String get floating_ball_action_screen_ocr => '截屏识字';
+  @override
+  String get floating_ball_action_open_app => '打开 Fushi';
+  @override
+  String get floating_ball_action_close => '关闭悬浮球';
+  @override
+  String get floating_ball_notification => '悬浮球运行中';
+  @override
+  String get floating_ball_overlay_permission_needed =>
+      '需要授予「显示在其他应用上层」权限，悬浮球才能系统常驻';
+  @override
+  String get floating_ball_clipboard_empty => '剪贴板里没有文字';
+  @override
+  String get floating_ball_lookup_hint => '输入要查的词';
+  @override
+  String get floating_ball_ocr_failed => '截屏识字失败';
+  @override
+  String get floating_ball_ocr_empty => '没有识别到文字';
+  @override
+  String get floating_ball_ocr_model_unavailable => '系统 OCR 模型尚未就绪';
+  @override
+  String get floating_ball_ocr_pick_hint => '点文字查词';
+  @override
+  String get floating_ball_actions_title => '全局按钮';
+  @override
+  String get floating_ball_ocr_notification => '正在截屏识字';
 }
 
 // Path: <root>
@@ -229248,6 +229914,49 @@ class _StringsZhHk extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get floating_ball_mode_title => 'Floating ball';
+  @override
+  String get floating_ball_mode_hint =>
+      'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+  @override
+  String get floating_ball_mode_off => 'Off';
+  @override
+  String get floating_ball_mode_in_app => 'In app';
+  @override
+  String get floating_ball_mode_system => 'System-wide';
+  @override
+  String get floating_ball_action_lookup => 'Look up';
+  @override
+  String get floating_ball_action_clipboard => 'Look up clipboard';
+  @override
+  String get floating_ball_action_screen_ocr => 'Screen OCR';
+  @override
+  String get floating_ball_action_open_app => 'Open Fushi';
+  @override
+  String get floating_ball_action_close => 'Close floating ball';
+  @override
+  String get floating_ball_notification => 'Floating ball is active';
+  @override
+  String get floating_ball_overlay_permission_needed =>
+      'Allow Fushi to display over other apps to keep the ball on screen';
+  @override
+  String get floating_ball_clipboard_empty => 'Clipboard has no text';
+  @override
+  String get floating_ball_lookup_hint => 'Enter a word';
+  @override
+  String get floating_ball_ocr_failed => 'Screen OCR failed';
+  @override
+  String get floating_ball_ocr_empty => 'No text recognized';
+  @override
+  String get floating_ball_ocr_model_unavailable =>
+      'The system OCR model is not ready yet';
+  @override
+  String get floating_ball_ocr_pick_hint => 'Tap text to look it up';
+  @override
+  String get floating_ball_actions_title => 'Global buttons';
+  @override
+  String get floating_ball_ocr_notification => 'Screen OCR in progress';
 }
 
 /// Flat map(s) containing all translations.
@@ -241174,6 +241883,46 @@ extension on _StringsEn {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'floating_ball_mode_title':
+        return 'Floating ball';
+      case 'floating_ball_mode_hint':
+        return 'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+      case 'floating_ball_mode_off':
+        return 'Off';
+      case 'floating_ball_mode_in_app':
+        return 'In app';
+      case 'floating_ball_mode_system':
+        return 'System-wide';
+      case 'floating_ball_action_lookup':
+        return 'Look up';
+      case 'floating_ball_action_clipboard':
+        return 'Look up clipboard';
+      case 'floating_ball_action_screen_ocr':
+        return 'Screen OCR';
+      case 'floating_ball_action_open_app':
+        return 'Open Fushi';
+      case 'floating_ball_action_close':
+        return 'Close floating ball';
+      case 'floating_ball_notification':
+        return 'Floating ball is active';
+      case 'floating_ball_overlay_permission_needed':
+        return 'Allow Fushi to display over other apps to keep the ball on screen';
+      case 'floating_ball_clipboard_empty':
+        return 'Clipboard has no text';
+      case 'floating_ball_lookup_hint':
+        return 'Enter a word';
+      case 'floating_ball_ocr_failed':
+        return 'Screen OCR failed';
+      case 'floating_ball_ocr_empty':
+        return 'No text recognized';
+      case 'floating_ball_ocr_model_unavailable':
+        return 'The system OCR model is not ready yet';
+      case 'floating_ball_ocr_pick_hint':
+        return 'Tap text to look it up';
+      case 'floating_ball_actions_title':
+        return 'Global buttons';
+      case 'floating_ball_ocr_notification':
+        return 'Screen OCR in progress';
       default:
         return null;
     }
@@ -253094,6 +253843,46 @@ extension on _StringsAr {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'floating_ball_mode_title':
+        return 'Floating ball';
+      case 'floating_ball_mode_hint':
+        return 'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+      case 'floating_ball_mode_off':
+        return 'Off';
+      case 'floating_ball_mode_in_app':
+        return 'In app';
+      case 'floating_ball_mode_system':
+        return 'System-wide';
+      case 'floating_ball_action_lookup':
+        return 'Look up';
+      case 'floating_ball_action_clipboard':
+        return 'Look up clipboard';
+      case 'floating_ball_action_screen_ocr':
+        return 'Screen OCR';
+      case 'floating_ball_action_open_app':
+        return 'Open Fushi';
+      case 'floating_ball_action_close':
+        return 'Close floating ball';
+      case 'floating_ball_notification':
+        return 'Floating ball is active';
+      case 'floating_ball_overlay_permission_needed':
+        return 'Allow Fushi to display over other apps to keep the ball on screen';
+      case 'floating_ball_clipboard_empty':
+        return 'Clipboard has no text';
+      case 'floating_ball_lookup_hint':
+        return 'Enter a word';
+      case 'floating_ball_ocr_failed':
+        return 'Screen OCR failed';
+      case 'floating_ball_ocr_empty':
+        return 'No text recognized';
+      case 'floating_ball_ocr_model_unavailable':
+        return 'The system OCR model is not ready yet';
+      case 'floating_ball_ocr_pick_hint':
+        return 'Tap text to look it up';
+      case 'floating_ball_actions_title':
+        return 'Global buttons';
+      case 'floating_ball_ocr_notification':
+        return 'Screen OCR in progress';
       default:
         return null;
     }
@@ -265064,6 +265853,46 @@ extension on _StringsDe {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'floating_ball_mode_title':
+        return 'Floating ball';
+      case 'floating_ball_mode_hint':
+        return 'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+      case 'floating_ball_mode_off':
+        return 'Off';
+      case 'floating_ball_mode_in_app':
+        return 'In app';
+      case 'floating_ball_mode_system':
+        return 'System-wide';
+      case 'floating_ball_action_lookup':
+        return 'Look up';
+      case 'floating_ball_action_clipboard':
+        return 'Look up clipboard';
+      case 'floating_ball_action_screen_ocr':
+        return 'Screen OCR';
+      case 'floating_ball_action_open_app':
+        return 'Open Fushi';
+      case 'floating_ball_action_close':
+        return 'Close floating ball';
+      case 'floating_ball_notification':
+        return 'Floating ball is active';
+      case 'floating_ball_overlay_permission_needed':
+        return 'Allow Fushi to display over other apps to keep the ball on screen';
+      case 'floating_ball_clipboard_empty':
+        return 'Clipboard has no text';
+      case 'floating_ball_lookup_hint':
+        return 'Enter a word';
+      case 'floating_ball_ocr_failed':
+        return 'Screen OCR failed';
+      case 'floating_ball_ocr_empty':
+        return 'No text recognized';
+      case 'floating_ball_ocr_model_unavailable':
+        return 'The system OCR model is not ready yet';
+      case 'floating_ball_ocr_pick_hint':
+        return 'Tap text to look it up';
+      case 'floating_ball_actions_title':
+        return 'Global buttons';
+      case 'floating_ball_ocr_notification':
+        return 'Screen OCR in progress';
       default:
         return null;
     }
@@ -277024,6 +277853,46 @@ extension on _StringsEs {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'floating_ball_mode_title':
+        return 'Floating ball';
+      case 'floating_ball_mode_hint':
+        return 'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+      case 'floating_ball_mode_off':
+        return 'Off';
+      case 'floating_ball_mode_in_app':
+        return 'In app';
+      case 'floating_ball_mode_system':
+        return 'System-wide';
+      case 'floating_ball_action_lookup':
+        return 'Look up';
+      case 'floating_ball_action_clipboard':
+        return 'Look up clipboard';
+      case 'floating_ball_action_screen_ocr':
+        return 'Screen OCR';
+      case 'floating_ball_action_open_app':
+        return 'Open Fushi';
+      case 'floating_ball_action_close':
+        return 'Close floating ball';
+      case 'floating_ball_notification':
+        return 'Floating ball is active';
+      case 'floating_ball_overlay_permission_needed':
+        return 'Allow Fushi to display over other apps to keep the ball on screen';
+      case 'floating_ball_clipboard_empty':
+        return 'Clipboard has no text';
+      case 'floating_ball_lookup_hint':
+        return 'Enter a word';
+      case 'floating_ball_ocr_failed':
+        return 'Screen OCR failed';
+      case 'floating_ball_ocr_empty':
+        return 'No text recognized';
+      case 'floating_ball_ocr_model_unavailable':
+        return 'The system OCR model is not ready yet';
+      case 'floating_ball_ocr_pick_hint':
+        return 'Tap text to look it up';
+      case 'floating_ball_actions_title':
+        return 'Global buttons';
+      case 'floating_ball_ocr_notification':
+        return 'Screen OCR in progress';
       default:
         return null;
     }
@@ -288992,6 +289861,46 @@ extension on _StringsFr {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'floating_ball_mode_title':
+        return 'Floating ball';
+      case 'floating_ball_mode_hint':
+        return 'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+      case 'floating_ball_mode_off':
+        return 'Off';
+      case 'floating_ball_mode_in_app':
+        return 'In app';
+      case 'floating_ball_mode_system':
+        return 'System-wide';
+      case 'floating_ball_action_lookup':
+        return 'Look up';
+      case 'floating_ball_action_clipboard':
+        return 'Look up clipboard';
+      case 'floating_ball_action_screen_ocr':
+        return 'Screen OCR';
+      case 'floating_ball_action_open_app':
+        return 'Open Fushi';
+      case 'floating_ball_action_close':
+        return 'Close floating ball';
+      case 'floating_ball_notification':
+        return 'Floating ball is active';
+      case 'floating_ball_overlay_permission_needed':
+        return 'Allow Fushi to display over other apps to keep the ball on screen';
+      case 'floating_ball_clipboard_empty':
+        return 'Clipboard has no text';
+      case 'floating_ball_lookup_hint':
+        return 'Enter a word';
+      case 'floating_ball_ocr_failed':
+        return 'Screen OCR failed';
+      case 'floating_ball_ocr_empty':
+        return 'No text recognized';
+      case 'floating_ball_ocr_model_unavailable':
+        return 'The system OCR model is not ready yet';
+      case 'floating_ball_ocr_pick_hint':
+        return 'Tap text to look it up';
+      case 'floating_ball_actions_title':
+        return 'Global buttons';
+      case 'floating_ball_ocr_notification':
+        return 'Screen OCR in progress';
       default:
         return null;
     }
@@ -300930,6 +301839,46 @@ extension on _StringsId {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'floating_ball_mode_title':
+        return 'Floating ball';
+      case 'floating_ball_mode_hint':
+        return 'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+      case 'floating_ball_mode_off':
+        return 'Off';
+      case 'floating_ball_mode_in_app':
+        return 'In app';
+      case 'floating_ball_mode_system':
+        return 'System-wide';
+      case 'floating_ball_action_lookup':
+        return 'Look up';
+      case 'floating_ball_action_clipboard':
+        return 'Look up clipboard';
+      case 'floating_ball_action_screen_ocr':
+        return 'Screen OCR';
+      case 'floating_ball_action_open_app':
+        return 'Open Fushi';
+      case 'floating_ball_action_close':
+        return 'Close floating ball';
+      case 'floating_ball_notification':
+        return 'Floating ball is active';
+      case 'floating_ball_overlay_permission_needed':
+        return 'Allow Fushi to display over other apps to keep the ball on screen';
+      case 'floating_ball_clipboard_empty':
+        return 'Clipboard has no text';
+      case 'floating_ball_lookup_hint':
+        return 'Enter a word';
+      case 'floating_ball_ocr_failed':
+        return 'Screen OCR failed';
+      case 'floating_ball_ocr_empty':
+        return 'No text recognized';
+      case 'floating_ball_ocr_model_unavailable':
+        return 'The system OCR model is not ready yet';
+      case 'floating_ball_ocr_pick_hint':
+        return 'Tap text to look it up';
+      case 'floating_ball_actions_title':
+        return 'Global buttons';
+      case 'floating_ball_ocr_notification':
+        return 'Screen OCR in progress';
       default:
         return null;
     }
@@ -312890,6 +313839,46 @@ extension on _StringsIt {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'floating_ball_mode_title':
+        return 'Floating ball';
+      case 'floating_ball_mode_hint':
+        return 'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+      case 'floating_ball_mode_off':
+        return 'Off';
+      case 'floating_ball_mode_in_app':
+        return 'In app';
+      case 'floating_ball_mode_system':
+        return 'System-wide';
+      case 'floating_ball_action_lookup':
+        return 'Look up';
+      case 'floating_ball_action_clipboard':
+        return 'Look up clipboard';
+      case 'floating_ball_action_screen_ocr':
+        return 'Screen OCR';
+      case 'floating_ball_action_open_app':
+        return 'Open Fushi';
+      case 'floating_ball_action_close':
+        return 'Close floating ball';
+      case 'floating_ball_notification':
+        return 'Floating ball is active';
+      case 'floating_ball_overlay_permission_needed':
+        return 'Allow Fushi to display over other apps to keep the ball on screen';
+      case 'floating_ball_clipboard_empty':
+        return 'Clipboard has no text';
+      case 'floating_ball_lookup_hint':
+        return 'Enter a word';
+      case 'floating_ball_ocr_failed':
+        return 'Screen OCR failed';
+      case 'floating_ball_ocr_empty':
+        return 'No text recognized';
+      case 'floating_ball_ocr_model_unavailable':
+        return 'The system OCR model is not ready yet';
+      case 'floating_ball_ocr_pick_hint':
+        return 'Tap text to look it up';
+      case 'floating_ball_actions_title':
+        return 'Global buttons';
+      case 'floating_ball_ocr_notification':
+        return 'Screen OCR in progress';
       default:
         return null;
     }
@@ -324770,6 +325759,46 @@ extension on _StringsJa {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'floating_ball_mode_title':
+        return 'Floating ball';
+      case 'floating_ball_mode_hint':
+        return 'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+      case 'floating_ball_mode_off':
+        return 'Off';
+      case 'floating_ball_mode_in_app':
+        return 'In app';
+      case 'floating_ball_mode_system':
+        return 'System-wide';
+      case 'floating_ball_action_lookup':
+        return 'Look up';
+      case 'floating_ball_action_clipboard':
+        return 'Look up clipboard';
+      case 'floating_ball_action_screen_ocr':
+        return 'Screen OCR';
+      case 'floating_ball_action_open_app':
+        return 'Open Fushi';
+      case 'floating_ball_action_close':
+        return 'Close floating ball';
+      case 'floating_ball_notification':
+        return 'Floating ball is active';
+      case 'floating_ball_overlay_permission_needed':
+        return 'Allow Fushi to display over other apps to keep the ball on screen';
+      case 'floating_ball_clipboard_empty':
+        return 'Clipboard has no text';
+      case 'floating_ball_lookup_hint':
+        return 'Enter a word';
+      case 'floating_ball_ocr_failed':
+        return 'Screen OCR failed';
+      case 'floating_ball_ocr_empty':
+        return 'No text recognized';
+      case 'floating_ball_ocr_model_unavailable':
+        return 'The system OCR model is not ready yet';
+      case 'floating_ball_ocr_pick_hint':
+        return 'Tap text to look it up';
+      case 'floating_ball_actions_title':
+        return 'Global buttons';
+      case 'floating_ball_ocr_notification':
+        return 'Screen OCR in progress';
       default:
         return null;
     }
@@ -336659,6 +337688,46 @@ extension on _StringsKo {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'floating_ball_mode_title':
+        return 'Floating ball';
+      case 'floating_ball_mode_hint':
+        return 'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+      case 'floating_ball_mode_off':
+        return 'Off';
+      case 'floating_ball_mode_in_app':
+        return 'In app';
+      case 'floating_ball_mode_system':
+        return 'System-wide';
+      case 'floating_ball_action_lookup':
+        return 'Look up';
+      case 'floating_ball_action_clipboard':
+        return 'Look up clipboard';
+      case 'floating_ball_action_screen_ocr':
+        return 'Screen OCR';
+      case 'floating_ball_action_open_app':
+        return 'Open Fushi';
+      case 'floating_ball_action_close':
+        return 'Close floating ball';
+      case 'floating_ball_notification':
+        return 'Floating ball is active';
+      case 'floating_ball_overlay_permission_needed':
+        return 'Allow Fushi to display over other apps to keep the ball on screen';
+      case 'floating_ball_clipboard_empty':
+        return 'Clipboard has no text';
+      case 'floating_ball_lookup_hint':
+        return 'Enter a word';
+      case 'floating_ball_ocr_failed':
+        return 'Screen OCR failed';
+      case 'floating_ball_ocr_empty':
+        return 'No text recognized';
+      case 'floating_ball_ocr_model_unavailable':
+        return 'The system OCR model is not ready yet';
+      case 'floating_ball_ocr_pick_hint':
+        return 'Tap text to look it up';
+      case 'floating_ball_actions_title':
+        return 'Global buttons';
+      case 'floating_ball_ocr_notification':
+        return 'Screen OCR in progress';
       default:
         return null;
     }
@@ -348615,6 +349684,46 @@ extension on _StringsNl {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'floating_ball_mode_title':
+        return 'Floating ball';
+      case 'floating_ball_mode_hint':
+        return 'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+      case 'floating_ball_mode_off':
+        return 'Off';
+      case 'floating_ball_mode_in_app':
+        return 'In app';
+      case 'floating_ball_mode_system':
+        return 'System-wide';
+      case 'floating_ball_action_lookup':
+        return 'Look up';
+      case 'floating_ball_action_clipboard':
+        return 'Look up clipboard';
+      case 'floating_ball_action_screen_ocr':
+        return 'Screen OCR';
+      case 'floating_ball_action_open_app':
+        return 'Open Fushi';
+      case 'floating_ball_action_close':
+        return 'Close floating ball';
+      case 'floating_ball_notification':
+        return 'Floating ball is active';
+      case 'floating_ball_overlay_permission_needed':
+        return 'Allow Fushi to display over other apps to keep the ball on screen';
+      case 'floating_ball_clipboard_empty':
+        return 'Clipboard has no text';
+      case 'floating_ball_lookup_hint':
+        return 'Enter a word';
+      case 'floating_ball_ocr_failed':
+        return 'Screen OCR failed';
+      case 'floating_ball_ocr_empty':
+        return 'No text recognized';
+      case 'floating_ball_ocr_model_unavailable':
+        return 'The system OCR model is not ready yet';
+      case 'floating_ball_ocr_pick_hint':
+        return 'Tap text to look it up';
+      case 'floating_ball_actions_title':
+        return 'Global buttons';
+      case 'floating_ball_ocr_notification':
+        return 'Screen OCR in progress';
       default:
         return null;
     }
@@ -360566,6 +361675,46 @@ extension on _StringsPtBr {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'floating_ball_mode_title':
+        return 'Floating ball';
+      case 'floating_ball_mode_hint':
+        return 'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+      case 'floating_ball_mode_off':
+        return 'Off';
+      case 'floating_ball_mode_in_app':
+        return 'In app';
+      case 'floating_ball_mode_system':
+        return 'System-wide';
+      case 'floating_ball_action_lookup':
+        return 'Look up';
+      case 'floating_ball_action_clipboard':
+        return 'Look up clipboard';
+      case 'floating_ball_action_screen_ocr':
+        return 'Screen OCR';
+      case 'floating_ball_action_open_app':
+        return 'Open Fushi';
+      case 'floating_ball_action_close':
+        return 'Close floating ball';
+      case 'floating_ball_notification':
+        return 'Floating ball is active';
+      case 'floating_ball_overlay_permission_needed':
+        return 'Allow Fushi to display over other apps to keep the ball on screen';
+      case 'floating_ball_clipboard_empty':
+        return 'Clipboard has no text';
+      case 'floating_ball_lookup_hint':
+        return 'Enter a word';
+      case 'floating_ball_ocr_failed':
+        return 'Screen OCR failed';
+      case 'floating_ball_ocr_empty':
+        return 'No text recognized';
+      case 'floating_ball_ocr_model_unavailable':
+        return 'The system OCR model is not ready yet';
+      case 'floating_ball_ocr_pick_hint':
+        return 'Tap text to look it up';
+      case 'floating_ball_actions_title':
+        return 'Global buttons';
+      case 'floating_ball_ocr_notification':
+        return 'Screen OCR in progress';
       default:
         return null;
     }
@@ -372522,6 +373671,46 @@ extension on _StringsRu {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'floating_ball_mode_title':
+        return 'Floating ball';
+      case 'floating_ball_mode_hint':
+        return 'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+      case 'floating_ball_mode_off':
+        return 'Off';
+      case 'floating_ball_mode_in_app':
+        return 'In app';
+      case 'floating_ball_mode_system':
+        return 'System-wide';
+      case 'floating_ball_action_lookup':
+        return 'Look up';
+      case 'floating_ball_action_clipboard':
+        return 'Look up clipboard';
+      case 'floating_ball_action_screen_ocr':
+        return 'Screen OCR';
+      case 'floating_ball_action_open_app':
+        return 'Open Fushi';
+      case 'floating_ball_action_close':
+        return 'Close floating ball';
+      case 'floating_ball_notification':
+        return 'Floating ball is active';
+      case 'floating_ball_overlay_permission_needed':
+        return 'Allow Fushi to display over other apps to keep the ball on screen';
+      case 'floating_ball_clipboard_empty':
+        return 'Clipboard has no text';
+      case 'floating_ball_lookup_hint':
+        return 'Enter a word';
+      case 'floating_ball_ocr_failed':
+        return 'Screen OCR failed';
+      case 'floating_ball_ocr_empty':
+        return 'No text recognized';
+      case 'floating_ball_ocr_model_unavailable':
+        return 'The system OCR model is not ready yet';
+      case 'floating_ball_ocr_pick_hint':
+        return 'Tap text to look it up';
+      case 'floating_ball_actions_title':
+        return 'Global buttons';
+      case 'floating_ball_ocr_notification':
+        return 'Screen OCR in progress';
       default:
         return null;
     }
@@ -384447,6 +385636,46 @@ extension on _StringsTh {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'floating_ball_mode_title':
+        return 'Floating ball';
+      case 'floating_ball_mode_hint':
+        return 'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+      case 'floating_ball_mode_off':
+        return 'Off';
+      case 'floating_ball_mode_in_app':
+        return 'In app';
+      case 'floating_ball_mode_system':
+        return 'System-wide';
+      case 'floating_ball_action_lookup':
+        return 'Look up';
+      case 'floating_ball_action_clipboard':
+        return 'Look up clipboard';
+      case 'floating_ball_action_screen_ocr':
+        return 'Screen OCR';
+      case 'floating_ball_action_open_app':
+        return 'Open Fushi';
+      case 'floating_ball_action_close':
+        return 'Close floating ball';
+      case 'floating_ball_notification':
+        return 'Floating ball is active';
+      case 'floating_ball_overlay_permission_needed':
+        return 'Allow Fushi to display over other apps to keep the ball on screen';
+      case 'floating_ball_clipboard_empty':
+        return 'Clipboard has no text';
+      case 'floating_ball_lookup_hint':
+        return 'Enter a word';
+      case 'floating_ball_ocr_failed':
+        return 'Screen OCR failed';
+      case 'floating_ball_ocr_empty':
+        return 'No text recognized';
+      case 'floating_ball_ocr_model_unavailable':
+        return 'The system OCR model is not ready yet';
+      case 'floating_ball_ocr_pick_hint':
+        return 'Tap text to look it up';
+      case 'floating_ball_actions_title':
+        return 'Global buttons';
+      case 'floating_ball_ocr_notification':
+        return 'Screen OCR in progress';
       default:
         return null;
     }
@@ -396388,6 +397617,46 @@ extension on _StringsTr {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'floating_ball_mode_title':
+        return 'Floating ball';
+      case 'floating_ball_mode_hint':
+        return 'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+      case 'floating_ball_mode_off':
+        return 'Off';
+      case 'floating_ball_mode_in_app':
+        return 'In app';
+      case 'floating_ball_mode_system':
+        return 'System-wide';
+      case 'floating_ball_action_lookup':
+        return 'Look up';
+      case 'floating_ball_action_clipboard':
+        return 'Look up clipboard';
+      case 'floating_ball_action_screen_ocr':
+        return 'Screen OCR';
+      case 'floating_ball_action_open_app':
+        return 'Open Fushi';
+      case 'floating_ball_action_close':
+        return 'Close floating ball';
+      case 'floating_ball_notification':
+        return 'Floating ball is active';
+      case 'floating_ball_overlay_permission_needed':
+        return 'Allow Fushi to display over other apps to keep the ball on screen';
+      case 'floating_ball_clipboard_empty':
+        return 'Clipboard has no text';
+      case 'floating_ball_lookup_hint':
+        return 'Enter a word';
+      case 'floating_ball_ocr_failed':
+        return 'Screen OCR failed';
+      case 'floating_ball_ocr_empty':
+        return 'No text recognized';
+      case 'floating_ball_ocr_model_unavailable':
+        return 'The system OCR model is not ready yet';
+      case 'floating_ball_ocr_pick_hint':
+        return 'Tap text to look it up';
+      case 'floating_ball_actions_title':
+        return 'Global buttons';
+      case 'floating_ball_ocr_notification':
+        return 'Screen OCR in progress';
       default:
         return null;
     }
@@ -408323,6 +409592,46 @@ extension on _StringsVi {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'floating_ball_mode_title':
+        return 'Floating ball';
+      case 'floating_ball_mode_hint':
+        return 'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+      case 'floating_ball_mode_off':
+        return 'Off';
+      case 'floating_ball_mode_in_app':
+        return 'In app';
+      case 'floating_ball_mode_system':
+        return 'System-wide';
+      case 'floating_ball_action_lookup':
+        return 'Look up';
+      case 'floating_ball_action_clipboard':
+        return 'Look up clipboard';
+      case 'floating_ball_action_screen_ocr':
+        return 'Screen OCR';
+      case 'floating_ball_action_open_app':
+        return 'Open Fushi';
+      case 'floating_ball_action_close':
+        return 'Close floating ball';
+      case 'floating_ball_notification':
+        return 'Floating ball is active';
+      case 'floating_ball_overlay_permission_needed':
+        return 'Allow Fushi to display over other apps to keep the ball on screen';
+      case 'floating_ball_clipboard_empty':
+        return 'Clipboard has no text';
+      case 'floating_ball_lookup_hint':
+        return 'Enter a word';
+      case 'floating_ball_ocr_failed':
+        return 'Screen OCR failed';
+      case 'floating_ball_ocr_empty':
+        return 'No text recognized';
+      case 'floating_ball_ocr_model_unavailable':
+        return 'The system OCR model is not ready yet';
+      case 'floating_ball_ocr_pick_hint':
+        return 'Tap text to look it up';
+      case 'floating_ball_actions_title':
+        return 'Global buttons';
+      case 'floating_ball_ocr_notification':
+        return 'Screen OCR in progress';
       default:
         return null;
     }
@@ -420138,6 +421447,46 @@ extension on _StringsZhCn {
             '有 ${count} 段统计未恢复：你曾在 Fushi 里删除过这些书的统计';
       case 'hoshi_import_result_failed':
         return ({required Object count}) => '有 ${count} 本书没能导入（它们的统计仍已导入）：';
+      case 'floating_ball_mode_title':
+        return '悬浮球';
+      case 'floating_ball_mode_hint':
+        return '常驻悬浮球：查词、剪贴板查词、截屏识字，各页面还会加上自己的按钮';
+      case 'floating_ball_mode_off':
+        return '关闭';
+      case 'floating_ball_mode_in_app':
+        return '应用内常驻';
+      case 'floating_ball_mode_system':
+        return '系统常驻';
+      case 'floating_ball_action_lookup':
+        return '查词';
+      case 'floating_ball_action_clipboard':
+        return '剪贴板查词';
+      case 'floating_ball_action_screen_ocr':
+        return '截屏识字';
+      case 'floating_ball_action_open_app':
+        return '打开 Fushi';
+      case 'floating_ball_action_close':
+        return '关闭悬浮球';
+      case 'floating_ball_notification':
+        return '悬浮球运行中';
+      case 'floating_ball_overlay_permission_needed':
+        return '需要授予「显示在其他应用上层」权限，悬浮球才能系统常驻';
+      case 'floating_ball_clipboard_empty':
+        return '剪贴板里没有文字';
+      case 'floating_ball_lookup_hint':
+        return '输入要查的词';
+      case 'floating_ball_ocr_failed':
+        return '截屏识字失败';
+      case 'floating_ball_ocr_empty':
+        return '没有识别到文字';
+      case 'floating_ball_ocr_model_unavailable':
+        return '系统 OCR 模型尚未就绪';
+      case 'floating_ball_ocr_pick_hint':
+        return '点文字查词';
+      case 'floating_ball_actions_title':
+        return '全局按钮';
+      case 'floating_ball_ocr_notification':
+        return '正在截屏识字';
       default:
         return null;
     }
@@ -431997,6 +433346,46 @@ extension on _StringsZhHk {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'floating_ball_mode_title':
+        return 'Floating ball';
+      case 'floating_ball_mode_hint':
+        return 'A floating ball with lookup, clipboard and screen OCR buttons; each page adds its own buttons';
+      case 'floating_ball_mode_off':
+        return 'Off';
+      case 'floating_ball_mode_in_app':
+        return 'In app';
+      case 'floating_ball_mode_system':
+        return 'System-wide';
+      case 'floating_ball_action_lookup':
+        return 'Look up';
+      case 'floating_ball_action_clipboard':
+        return 'Look up clipboard';
+      case 'floating_ball_action_screen_ocr':
+        return 'Screen OCR';
+      case 'floating_ball_action_open_app':
+        return 'Open Fushi';
+      case 'floating_ball_action_close':
+        return 'Close floating ball';
+      case 'floating_ball_notification':
+        return 'Floating ball is active';
+      case 'floating_ball_overlay_permission_needed':
+        return 'Allow Fushi to display over other apps to keep the ball on screen';
+      case 'floating_ball_clipboard_empty':
+        return 'Clipboard has no text';
+      case 'floating_ball_lookup_hint':
+        return 'Enter a word';
+      case 'floating_ball_ocr_failed':
+        return 'Screen OCR failed';
+      case 'floating_ball_ocr_empty':
+        return 'No text recognized';
+      case 'floating_ball_ocr_model_unavailable':
+        return 'The system OCR model is not ready yet';
+      case 'floating_ball_ocr_pick_hint':
+        return 'Tap text to look it up';
+      case 'floating_ball_actions_title':
+        return 'Global buttons';
+      case 'floating_ball_ocr_notification':
+        return 'Screen OCR in progress';
       default:
         return null;
     }
