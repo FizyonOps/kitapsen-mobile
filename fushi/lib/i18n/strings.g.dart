@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 97427 (5731 per locale)
+/// Strings: 97478 (5734 per locale)
 ///
-/// Built on 2026-09-28 at 03:36 UTC
+/// Built on 2026-09-28 at 03:56 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8196,6 +8196,10 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
       'Sign-in failed: ${error}';
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+  String get anki_sync_client_relogin => 'Sign in again';
+  String anki_sync_client_discard_confirm({required Object count}) =>
+      '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+  String get anki_sync_client_discard_action => 'Discard and sign out';
 }
 
 // Path: <root>
@@ -21946,6 +21950,13 @@ class _StringsAr extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+  @override
+  String get anki_sync_client_relogin => 'Sign in again';
+  @override
+  String anki_sync_client_discard_confirm({required Object count}) =>
+      '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+  @override
+  String get anki_sync_client_discard_action => 'Discard and sign out';
 }
 
 // Path: <root>
@@ -35936,6 +35947,13 @@ class _StringsDe extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+  @override
+  String get anki_sync_client_relogin => 'Sign in again';
+  @override
+  String anki_sync_client_discard_confirm({required Object count}) =>
+      '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+  @override
+  String get anki_sync_client_discard_action => 'Discard and sign out';
 }
 
 // Path: <root>
@@ -49977,6 +49995,13 @@ class _StringsEs extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+  @override
+  String get anki_sync_client_relogin => 'Sign in again';
+  @override
+  String anki_sync_client_discard_confirm({required Object count}) =>
+      '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+  @override
+  String get anki_sync_client_discard_action => 'Discard and sign out';
 }
 
 // Path: <root>
@@ -64057,6 +64082,13 @@ class _StringsFr extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+  @override
+  String get anki_sync_client_relogin => 'Sign in again';
+  @override
+  String anki_sync_client_discard_confirm({required Object count}) =>
+      '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+  @override
+  String get anki_sync_client_discard_action => 'Discard and sign out';
 }
 
 // Path: <root>
@@ -77927,6 +77959,13 @@ class _StringsId extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+  @override
+  String get anki_sync_client_relogin => 'Sign in again';
+  @override
+  String anki_sync_client_discard_confirm({required Object count}) =>
+      '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+  @override
+  String get anki_sync_client_discard_action => 'Discard and sign out';
 }
 
 // Path: <root>
@@ -91898,6 +91937,13 @@ class _StringsIt extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+  @override
+  String get anki_sync_client_relogin => 'Sign in again';
+  @override
+  String anki_sync_client_discard_confirm({required Object count}) =>
+      '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+  @override
+  String get anki_sync_client_discard_action => 'Discard and sign out';
 }
 
 // Path: <root>
@@ -105224,6 +105270,13 @@ class _StringsJa extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+  @override
+  String get anki_sync_client_relogin => 'Sign in again';
+  @override
+  String anki_sync_client_discard_confirm({required Object count}) =>
+      '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+  @override
+  String get anki_sync_client_discard_action => 'Discard and sign out';
 }
 
 // Path: <root>
@@ -118567,6 +118620,13 @@ class _StringsKo extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+  @override
+  String get anki_sync_client_relogin => 'Sign in again';
+  @override
+  String anki_sync_client_discard_confirm({required Object count}) =>
+      '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+  @override
+  String get anki_sync_client_discard_action => 'Discard and sign out';
 }
 
 // Path: <root>
@@ -132492,6 +132552,13 @@ class _StringsNl extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+  @override
+  String get anki_sync_client_relogin => 'Sign in again';
+  @override
+  String anki_sync_client_discard_confirm({required Object count}) =>
+      '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+  @override
+  String get anki_sync_client_discard_action => 'Discard and sign out';
 }
 
 // Path: <root>
@@ -146470,6 +146537,13 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+  @override
+  String get anki_sync_client_relogin => 'Sign in again';
+  @override
+  String anki_sync_client_discard_confirm({required Object count}) =>
+      '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+  @override
+  String get anki_sync_client_discard_action => 'Discard and sign out';
 }
 
 // Path: <root>
@@ -160423,6 +160497,13 @@ class _StringsRu extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+  @override
+  String get anki_sync_client_relogin => 'Sign in again';
+  @override
+  String anki_sync_client_discard_confirm({required Object count}) =>
+      '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+  @override
+  String get anki_sync_client_discard_action => 'Discard and sign out';
 }
 
 // Path: <root>
@@ -174173,6 +174254,13 @@ class _StringsTh extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+  @override
+  String get anki_sync_client_relogin => 'Sign in again';
+  @override
+  String anki_sync_client_discard_confirm({required Object count}) =>
+      '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+  @override
+  String get anki_sync_client_discard_action => 'Discard and sign out';
 }
 
 // Path: <root>
@@ -188037,6 +188125,13 @@ class _StringsTr extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+  @override
+  String get anki_sync_client_relogin => 'Sign in again';
+  @override
+  String anki_sync_client_discard_confirm({required Object count}) =>
+      '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+  @override
+  String get anki_sync_client_discard_action => 'Discard and sign out';
 }
 
 // Path: <root>
@@ -201872,6 +201967,13 @@ class _StringsVi extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+  @override
+  String get anki_sync_client_relogin => 'Sign in again';
+  @override
+  String anki_sync_client_discard_confirm({required Object count}) =>
+      '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+  @override
+  String get anki_sync_client_discard_action => 'Discard and sign out';
 }
 
 // Path: <root>
@@ -214531,6 +214633,13 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       '没装 Anki 的设备存下的卡片，经你配置的同步（云盘，或本机作为互联客户端时的互联）送到这台设备，由这里的 Anki 加卡。同一时间只有一台设备负责。作为互联主机的电脑不担任这个角色：与它配对的手机请改开「制卡到 Fushi 互联服务端」（电脑关机时卡片先存在手机上）。Fushi 服务端可以担任。';
+  @override
+  String get anki_sync_client_relogin => '重新登录';
+  @override
+  String anki_sync_client_discard_confirm({required Object count}) =>
+      '还有 ${count} 张卡没有同步到 Anki。放弃这些卡并退出登录？放弃后无法找回。';
+  @override
+  String get anki_sync_client_discard_action => '放弃并退出';
 }
 
 // Path: <root>
@@ -227537,6 +227646,13 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+  @override
+  String get anki_sync_client_relogin => 'Sign in again';
+  @override
+  String anki_sync_client_discard_confirm({required Object count}) =>
+      '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+  @override
+  String get anki_sync_client_discard_action => 'Discard and sign out';
 }
 
 /// Flat map(s) containing all translations.
@@ -239374,6 +239490,13 @@ extension on _StringsEn {
         return ({required Object error}) => 'Sign-in failed: ${error}';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+      case 'anki_sync_client_relogin':
+        return 'Sign in again';
+      case 'anki_sync_client_discard_confirm':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+      case 'anki_sync_client_discard_action':
+        return 'Discard and sign out';
       default:
         return null;
     }
@@ -251206,6 +251329,13 @@ extension on _StringsAr {
         return ({required Object error}) => 'Sign-in failed: ${error}';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+      case 'anki_sync_client_relogin':
+        return 'Sign in again';
+      case 'anki_sync_client_discard_confirm':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+      case 'anki_sync_client_discard_action':
+        return 'Discard and sign out';
       default:
         return null;
     }
@@ -263087,6 +263217,13 @@ extension on _StringsDe {
         return ({required Object error}) => 'Sign-in failed: ${error}';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+      case 'anki_sync_client_relogin':
+        return 'Sign in again';
+      case 'anki_sync_client_discard_confirm':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+      case 'anki_sync_client_discard_action':
+        return 'Discard and sign out';
       default:
         return null;
     }
@@ -274958,6 +275095,13 @@ extension on _StringsEs {
         return ({required Object error}) => 'Sign-in failed: ${error}';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+      case 'anki_sync_client_relogin':
+        return 'Sign in again';
+      case 'anki_sync_client_discard_confirm':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+      case 'anki_sync_client_discard_action':
+        return 'Discard and sign out';
       default:
         return null;
     }
@@ -286837,6 +286981,13 @@ extension on _StringsFr {
         return ({required Object error}) => 'Sign-in failed: ${error}';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+      case 'anki_sync_client_relogin':
+        return 'Sign in again';
+      case 'anki_sync_client_discard_confirm':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+      case 'anki_sync_client_discard_action':
+        return 'Discard and sign out';
       default:
         return null;
     }
@@ -298686,6 +298837,13 @@ extension on _StringsId {
         return ({required Object error}) => 'Sign-in failed: ${error}';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+      case 'anki_sync_client_relogin':
+        return 'Sign in again';
+      case 'anki_sync_client_discard_confirm':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+      case 'anki_sync_client_discard_action':
+        return 'Discard and sign out';
       default:
         return null;
     }
@@ -310558,6 +310716,13 @@ extension on _StringsIt {
         return ({required Object error}) => 'Sign-in failed: ${error}';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+      case 'anki_sync_client_relogin':
+        return 'Sign in again';
+      case 'anki_sync_client_discard_confirm':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+      case 'anki_sync_client_discard_action':
+        return 'Discard and sign out';
       default:
         return null;
     }
@@ -322351,6 +322516,13 @@ extension on _StringsJa {
         return ({required Object error}) => 'Sign-in failed: ${error}';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+      case 'anki_sync_client_relogin':
+        return 'Sign in again';
+      case 'anki_sync_client_discard_confirm':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+      case 'anki_sync_client_discard_action':
+        return 'Discard and sign out';
       default:
         return null;
     }
@@ -334152,6 +334324,13 @@ extension on _StringsKo {
         return ({required Object error}) => 'Sign-in failed: ${error}';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+      case 'anki_sync_client_relogin':
+        return 'Sign in again';
+      case 'anki_sync_client_discard_confirm':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+      case 'anki_sync_client_discard_action':
+        return 'Discard and sign out';
       default:
         return null;
     }
@@ -346019,6 +346198,13 @@ extension on _StringsNl {
         return ({required Object error}) => 'Sign-in failed: ${error}';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+      case 'anki_sync_client_relogin':
+        return 'Sign in again';
+      case 'anki_sync_client_discard_confirm':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+      case 'anki_sync_client_discard_action':
+        return 'Discard and sign out';
       default:
         return null;
     }
@@ -357881,6 +358067,13 @@ extension on _StringsPtBr {
         return ({required Object error}) => 'Sign-in failed: ${error}';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+      case 'anki_sync_client_relogin':
+        return 'Sign in again';
+      case 'anki_sync_client_discard_confirm':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+      case 'anki_sync_client_discard_action':
+        return 'Discard and sign out';
       default:
         return null;
     }
@@ -369749,6 +369942,13 @@ extension on _StringsRu {
         return ({required Object error}) => 'Sign-in failed: ${error}';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+      case 'anki_sync_client_relogin':
+        return 'Sign in again';
+      case 'anki_sync_client_discard_confirm':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+      case 'anki_sync_client_discard_action':
+        return 'Discard and sign out';
       default:
         return null;
     }
@@ -381586,6 +381786,13 @@ extension on _StringsTh {
         return ({required Object error}) => 'Sign-in failed: ${error}';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+      case 'anki_sync_client_relogin':
+        return 'Sign in again';
+      case 'anki_sync_client_discard_confirm':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+      case 'anki_sync_client_discard_action':
+        return 'Discard and sign out';
       default:
         return null;
     }
@@ -393439,6 +393646,13 @@ extension on _StringsTr {
         return ({required Object error}) => 'Sign-in failed: ${error}';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+      case 'anki_sync_client_relogin':
+        return 'Sign in again';
+      case 'anki_sync_client_discard_confirm':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+      case 'anki_sync_client_discard_action':
+        return 'Discard and sign out';
       default:
         return null;
     }
@@ -405286,6 +405500,13 @@ extension on _StringsVi {
         return ({required Object error}) => 'Sign-in failed: ${error}';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+      case 'anki_sync_client_relogin':
+        return 'Sign in again';
+      case 'anki_sync_client_discard_confirm':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+      case 'anki_sync_client_discard_action':
+        return 'Discard and sign out';
       default:
         return null;
     }
@@ -417017,6 +417238,13 @@ extension on _StringsZhCn {
         return ({required Object error}) => '登录失败：${error}';
       case 'anki_pending_mine_landing_hint':
         return '没装 Anki 的设备存下的卡片，经你配置的同步（云盘，或本机作为互联客户端时的互联）送到这台设备，由这里的 Anki 加卡。同一时间只有一台设备负责。作为互联主机的电脑不担任这个角色：与它配对的手机请改开「制卡到 Fushi 互联服务端」（电脑关机时卡片先存在手机上）。Fushi 服务端可以担任。';
+      case 'anki_sync_client_relogin':
+        return '重新登录';
+      case 'anki_sync_client_discard_confirm':
+        return ({required Object count}) =>
+            '还有 ${count} 张卡没有同步到 Anki。放弃这些卡并退出登录？放弃后无法找回。';
+      case 'anki_sync_client_discard_action':
+        return '放弃并退出';
       default:
         return null;
     }
@@ -428789,6 +429017,13 @@ extension on _StringsZhHk {
         return ({required Object error}) => 'Sign-in failed: ${error}';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
+      case 'anki_sync_client_relogin':
+        return 'Sign in again';
+      case 'anki_sync_client_discard_confirm':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
+      case 'anki_sync_client_discard_action':
+        return 'Discard and sign out';
       default:
         return null;
     }
