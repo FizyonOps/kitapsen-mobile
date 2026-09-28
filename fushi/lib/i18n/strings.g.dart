@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 97954 (5762 per locale)
+/// Strings: 97988 (5764 per locale)
 ///
-/// Built on 2026-09-28 at 02:23 UTC
+/// Built on 2026-09-28 at 13:30 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8269,6 +8269,10 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
       '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
 }
 
 // Path: <root>
@@ -22123,6 +22127,12 @@ class _StringsAr extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
 }
 
 // Path: <root>
@@ -36217,6 +36227,12 @@ class _StringsDe extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
 }
 
 // Path: <root>
@@ -50362,6 +50378,12 @@ class _StringsEs extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
 }
 
 // Path: <root>
@@ -64546,6 +64568,12 @@ class _StringsFr extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
 }
 
 // Path: <root>
@@ -78520,6 +78548,12 @@ class _StringsId extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
 }
 
 // Path: <root>
@@ -92595,6 +92629,12 @@ class _StringsIt extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
 }
 
 // Path: <root>
@@ -106023,6 +106063,12 @@ class _StringsJa extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
 }
 
 // Path: <root>
@@ -119468,6 +119514,12 @@ class _StringsKo extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
 }
 
 // Path: <root>
@@ -133498,6 +133550,12 @@ class _StringsNl extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
 }
 
 // Path: <root>
@@ -147580,6 +147638,12 @@ class _StringsPtBr extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
 }
 
 // Path: <root>
@@ -161637,6 +161701,12 @@ class _StringsRu extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
 }
 
 // Path: <root>
@@ -175490,6 +175560,12 @@ class _StringsTh extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
 }
 
 // Path: <root>
@@ -189458,6 +189534,12 @@ class _StringsTr extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
 }
 
 // Path: <root>
@@ -203397,6 +203479,12 @@ class _StringsVi extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
 }
 
 // Path: <root>
@@ -216144,6 +216232,12 @@ class _StringsZhCn extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       '有 ${count} 本书没能导入（它们的统计仍已导入）：';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      '${n} 个视频删除失败，仍保留在媒体库中。';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      '删除失败：${reason}';
 }
 
 // Path: <root>
@@ -229248,6 +229342,12 @@ class _StringsZhHk extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
 }
 
 /// Flat map(s) containing all translations.
@@ -241174,6 +241274,11 @@ extension on _StringsEn {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
       default:
         return null;
     }
@@ -253094,6 +253199,11 @@ extension on _StringsAr {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
       default:
         return null;
     }
@@ -265064,6 +265174,11 @@ extension on _StringsDe {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
       default:
         return null;
     }
@@ -277024,6 +277139,11 @@ extension on _StringsEs {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
       default:
         return null;
     }
@@ -288992,6 +289112,11 @@ extension on _StringsFr {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
       default:
         return null;
     }
@@ -300930,6 +301055,11 @@ extension on _StringsId {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
       default:
         return null;
     }
@@ -312890,6 +313020,11 @@ extension on _StringsIt {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
       default:
         return null;
     }
@@ -324770,6 +324905,11 @@ extension on _StringsJa {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
       default:
         return null;
     }
@@ -336659,6 +336799,11 @@ extension on _StringsKo {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
       default:
         return null;
     }
@@ -348615,6 +348760,11 @@ extension on _StringsNl {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
       default:
         return null;
     }
@@ -360566,6 +360716,11 @@ extension on _StringsPtBr {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
       default:
         return null;
     }
@@ -372522,6 +372677,11 @@ extension on _StringsRu {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
       default:
         return null;
     }
@@ -384447,6 +384607,11 @@ extension on _StringsTh {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
       default:
         return null;
     }
@@ -396388,6 +396553,11 @@ extension on _StringsTr {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
       default:
         return null;
     }
@@ -408323,6 +408493,11 @@ extension on _StringsVi {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
       default:
         return null;
     }
@@ -420138,6 +420313,10 @@ extension on _StringsZhCn {
             '有 ${count} 段统计未恢复：你曾在 Fushi 里删除过这些书的统计';
       case 'hoshi_import_result_failed':
         return ({required Object count}) => '有 ${count} 本书没能导入（它们的统计仍已导入）：';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) => '${n} 个视频删除失败，仍保留在媒体库中。';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => '删除失败：${reason}';
       default:
         return null;
     }
@@ -431997,6 +432176,11 @@ extension on _StringsZhHk {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
       default:
         return null;
     }
