@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 97954 (5762 per locale)
+/// Strings: 98396 (5788 per locale)
 ///
-/// Built on 2026-09-28 at 02:23 UTC
+/// Built on 2026-09-28 at 12:36 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8269,6 +8269,38 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
       '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  String get media_stats_action => 'View statistics';
+  String get media_stats_title => 'Statistics';
+  String get media_stats_total => 'All time';
+  String get media_stats_last_7_days => 'Last 7 days';
+  String get media_stats_active_days => 'Active days';
+  String get media_stats_sessions => 'Sessions';
+  String get media_stats_first_date => 'First recorded';
+  String get media_stats_last_date => 'Last recorded';
+  String get media_stats_empty => 'No statistics recorded for this item yet.';
+  String get media_stats_load_failed => 'Couldn\'t load statistics.';
+  String get ai_media_acquire_entry => 'AI download';
+  String ai_media_acquire_title({required Object domain}) =>
+      'AI download · ${domain}';
+  String get ai_media_acquire_hint =>
+      'Tell AI what to download, e.g. a title plus any version you want';
+  String get ai_media_acquire_send => 'Search';
+  String get ai_media_acquire_parsing => 'Understanding your request…';
+  String get ai_media_acquire_searching => 'Searching sources…';
+  String get ai_media_acquire_picking => 'AI is picking the best matches…';
+  String get ai_media_acquire_ai_failed =>
+      'AI is unavailable right now; results are from your original text, sorted by seeders.';
+  String get ai_media_acquire_no_results =>
+      'Nothing found. Try another title, or check that sources are enabled.';
+  String get ai_media_acquire_recommended => 'AI picks';
+  String get ai_media_acquire_others => 'Other results';
+  String get ai_media_acquire_download => 'Download';
+  String get ai_media_acquire_started => 'Download started';
+  String ai_media_acquire_queries({required Object queries}) =>
+      'Searched for: ${queries}';
+  String get ai_feature_media_acquire => 'AI download (books, manga, games)';
+  String get ai_feature_media_acquire_summary =>
+      'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
 }
 
 // Path: <root>
@@ -22123,6 +22155,64 @@ class _StringsAr extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get media_stats_action => 'View statistics';
+  @override
+  String get media_stats_title => 'Statistics';
+  @override
+  String get media_stats_total => 'All time';
+  @override
+  String get media_stats_last_7_days => 'Last 7 days';
+  @override
+  String get media_stats_active_days => 'Active days';
+  @override
+  String get media_stats_sessions => 'Sessions';
+  @override
+  String get media_stats_first_date => 'First recorded';
+  @override
+  String get media_stats_last_date => 'Last recorded';
+  @override
+  String get media_stats_empty => 'No statistics recorded for this item yet.';
+  @override
+  String get media_stats_load_failed => 'Couldn\'t load statistics.';
+  @override
+  String get ai_media_acquire_entry => 'AI download';
+  @override
+  String ai_media_acquire_title({required Object domain}) =>
+      'AI download · ${domain}';
+  @override
+  String get ai_media_acquire_hint =>
+      'Tell AI what to download, e.g. a title plus any version you want';
+  @override
+  String get ai_media_acquire_send => 'Search';
+  @override
+  String get ai_media_acquire_parsing => 'Understanding your request…';
+  @override
+  String get ai_media_acquire_searching => 'Searching sources…';
+  @override
+  String get ai_media_acquire_picking => 'AI is picking the best matches…';
+  @override
+  String get ai_media_acquire_ai_failed =>
+      'AI is unavailable right now; results are from your original text, sorted by seeders.';
+  @override
+  String get ai_media_acquire_no_results =>
+      'Nothing found. Try another title, or check that sources are enabled.';
+  @override
+  String get ai_media_acquire_recommended => 'AI picks';
+  @override
+  String get ai_media_acquire_others => 'Other results';
+  @override
+  String get ai_media_acquire_download => 'Download';
+  @override
+  String get ai_media_acquire_started => 'Download started';
+  @override
+  String ai_media_acquire_queries({required Object queries}) =>
+      'Searched for: ${queries}';
+  @override
+  String get ai_feature_media_acquire => 'AI download (books, manga, games)';
+  @override
+  String get ai_feature_media_acquire_summary =>
+      'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
 }
 
 // Path: <root>
@@ -36217,6 +36307,64 @@ class _StringsDe extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get media_stats_action => 'View statistics';
+  @override
+  String get media_stats_title => 'Statistics';
+  @override
+  String get media_stats_total => 'All time';
+  @override
+  String get media_stats_last_7_days => 'Last 7 days';
+  @override
+  String get media_stats_active_days => 'Active days';
+  @override
+  String get media_stats_sessions => 'Sessions';
+  @override
+  String get media_stats_first_date => 'First recorded';
+  @override
+  String get media_stats_last_date => 'Last recorded';
+  @override
+  String get media_stats_empty => 'No statistics recorded for this item yet.';
+  @override
+  String get media_stats_load_failed => 'Couldn\'t load statistics.';
+  @override
+  String get ai_media_acquire_entry => 'AI download';
+  @override
+  String ai_media_acquire_title({required Object domain}) =>
+      'AI download · ${domain}';
+  @override
+  String get ai_media_acquire_hint =>
+      'Tell AI what to download, e.g. a title plus any version you want';
+  @override
+  String get ai_media_acquire_send => 'Search';
+  @override
+  String get ai_media_acquire_parsing => 'Understanding your request…';
+  @override
+  String get ai_media_acquire_searching => 'Searching sources…';
+  @override
+  String get ai_media_acquire_picking => 'AI is picking the best matches…';
+  @override
+  String get ai_media_acquire_ai_failed =>
+      'AI is unavailable right now; results are from your original text, sorted by seeders.';
+  @override
+  String get ai_media_acquire_no_results =>
+      'Nothing found. Try another title, or check that sources are enabled.';
+  @override
+  String get ai_media_acquire_recommended => 'AI picks';
+  @override
+  String get ai_media_acquire_others => 'Other results';
+  @override
+  String get ai_media_acquire_download => 'Download';
+  @override
+  String get ai_media_acquire_started => 'Download started';
+  @override
+  String ai_media_acquire_queries({required Object queries}) =>
+      'Searched for: ${queries}';
+  @override
+  String get ai_feature_media_acquire => 'AI download (books, manga, games)';
+  @override
+  String get ai_feature_media_acquire_summary =>
+      'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
 }
 
 // Path: <root>
@@ -50362,6 +50510,64 @@ class _StringsEs extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get media_stats_action => 'View statistics';
+  @override
+  String get media_stats_title => 'Statistics';
+  @override
+  String get media_stats_total => 'All time';
+  @override
+  String get media_stats_last_7_days => 'Last 7 days';
+  @override
+  String get media_stats_active_days => 'Active days';
+  @override
+  String get media_stats_sessions => 'Sessions';
+  @override
+  String get media_stats_first_date => 'First recorded';
+  @override
+  String get media_stats_last_date => 'Last recorded';
+  @override
+  String get media_stats_empty => 'No statistics recorded for this item yet.';
+  @override
+  String get media_stats_load_failed => 'Couldn\'t load statistics.';
+  @override
+  String get ai_media_acquire_entry => 'AI download';
+  @override
+  String ai_media_acquire_title({required Object domain}) =>
+      'AI download · ${domain}';
+  @override
+  String get ai_media_acquire_hint =>
+      'Tell AI what to download, e.g. a title plus any version you want';
+  @override
+  String get ai_media_acquire_send => 'Search';
+  @override
+  String get ai_media_acquire_parsing => 'Understanding your request…';
+  @override
+  String get ai_media_acquire_searching => 'Searching sources…';
+  @override
+  String get ai_media_acquire_picking => 'AI is picking the best matches…';
+  @override
+  String get ai_media_acquire_ai_failed =>
+      'AI is unavailable right now; results are from your original text, sorted by seeders.';
+  @override
+  String get ai_media_acquire_no_results =>
+      'Nothing found. Try another title, or check that sources are enabled.';
+  @override
+  String get ai_media_acquire_recommended => 'AI picks';
+  @override
+  String get ai_media_acquire_others => 'Other results';
+  @override
+  String get ai_media_acquire_download => 'Download';
+  @override
+  String get ai_media_acquire_started => 'Download started';
+  @override
+  String ai_media_acquire_queries({required Object queries}) =>
+      'Searched for: ${queries}';
+  @override
+  String get ai_feature_media_acquire => 'AI download (books, manga, games)';
+  @override
+  String get ai_feature_media_acquire_summary =>
+      'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
 }
 
 // Path: <root>
@@ -64546,6 +64752,64 @@ class _StringsFr extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get media_stats_action => 'View statistics';
+  @override
+  String get media_stats_title => 'Statistics';
+  @override
+  String get media_stats_total => 'All time';
+  @override
+  String get media_stats_last_7_days => 'Last 7 days';
+  @override
+  String get media_stats_active_days => 'Active days';
+  @override
+  String get media_stats_sessions => 'Sessions';
+  @override
+  String get media_stats_first_date => 'First recorded';
+  @override
+  String get media_stats_last_date => 'Last recorded';
+  @override
+  String get media_stats_empty => 'No statistics recorded for this item yet.';
+  @override
+  String get media_stats_load_failed => 'Couldn\'t load statistics.';
+  @override
+  String get ai_media_acquire_entry => 'AI download';
+  @override
+  String ai_media_acquire_title({required Object domain}) =>
+      'AI download · ${domain}';
+  @override
+  String get ai_media_acquire_hint =>
+      'Tell AI what to download, e.g. a title plus any version you want';
+  @override
+  String get ai_media_acquire_send => 'Search';
+  @override
+  String get ai_media_acquire_parsing => 'Understanding your request…';
+  @override
+  String get ai_media_acquire_searching => 'Searching sources…';
+  @override
+  String get ai_media_acquire_picking => 'AI is picking the best matches…';
+  @override
+  String get ai_media_acquire_ai_failed =>
+      'AI is unavailable right now; results are from your original text, sorted by seeders.';
+  @override
+  String get ai_media_acquire_no_results =>
+      'Nothing found. Try another title, or check that sources are enabled.';
+  @override
+  String get ai_media_acquire_recommended => 'AI picks';
+  @override
+  String get ai_media_acquire_others => 'Other results';
+  @override
+  String get ai_media_acquire_download => 'Download';
+  @override
+  String get ai_media_acquire_started => 'Download started';
+  @override
+  String ai_media_acquire_queries({required Object queries}) =>
+      'Searched for: ${queries}';
+  @override
+  String get ai_feature_media_acquire => 'AI download (books, manga, games)';
+  @override
+  String get ai_feature_media_acquire_summary =>
+      'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
 }
 
 // Path: <root>
@@ -78520,6 +78784,64 @@ class _StringsId extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get media_stats_action => 'View statistics';
+  @override
+  String get media_stats_title => 'Statistics';
+  @override
+  String get media_stats_total => 'All time';
+  @override
+  String get media_stats_last_7_days => 'Last 7 days';
+  @override
+  String get media_stats_active_days => 'Active days';
+  @override
+  String get media_stats_sessions => 'Sessions';
+  @override
+  String get media_stats_first_date => 'First recorded';
+  @override
+  String get media_stats_last_date => 'Last recorded';
+  @override
+  String get media_stats_empty => 'No statistics recorded for this item yet.';
+  @override
+  String get media_stats_load_failed => 'Couldn\'t load statistics.';
+  @override
+  String get ai_media_acquire_entry => 'AI download';
+  @override
+  String ai_media_acquire_title({required Object domain}) =>
+      'AI download · ${domain}';
+  @override
+  String get ai_media_acquire_hint =>
+      'Tell AI what to download, e.g. a title plus any version you want';
+  @override
+  String get ai_media_acquire_send => 'Search';
+  @override
+  String get ai_media_acquire_parsing => 'Understanding your request…';
+  @override
+  String get ai_media_acquire_searching => 'Searching sources…';
+  @override
+  String get ai_media_acquire_picking => 'AI is picking the best matches…';
+  @override
+  String get ai_media_acquire_ai_failed =>
+      'AI is unavailable right now; results are from your original text, sorted by seeders.';
+  @override
+  String get ai_media_acquire_no_results =>
+      'Nothing found. Try another title, or check that sources are enabled.';
+  @override
+  String get ai_media_acquire_recommended => 'AI picks';
+  @override
+  String get ai_media_acquire_others => 'Other results';
+  @override
+  String get ai_media_acquire_download => 'Download';
+  @override
+  String get ai_media_acquire_started => 'Download started';
+  @override
+  String ai_media_acquire_queries({required Object queries}) =>
+      'Searched for: ${queries}';
+  @override
+  String get ai_feature_media_acquire => 'AI download (books, manga, games)';
+  @override
+  String get ai_feature_media_acquire_summary =>
+      'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
 }
 
 // Path: <root>
@@ -92595,6 +92917,64 @@ class _StringsIt extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get media_stats_action => 'View statistics';
+  @override
+  String get media_stats_title => 'Statistics';
+  @override
+  String get media_stats_total => 'All time';
+  @override
+  String get media_stats_last_7_days => 'Last 7 days';
+  @override
+  String get media_stats_active_days => 'Active days';
+  @override
+  String get media_stats_sessions => 'Sessions';
+  @override
+  String get media_stats_first_date => 'First recorded';
+  @override
+  String get media_stats_last_date => 'Last recorded';
+  @override
+  String get media_stats_empty => 'No statistics recorded for this item yet.';
+  @override
+  String get media_stats_load_failed => 'Couldn\'t load statistics.';
+  @override
+  String get ai_media_acquire_entry => 'AI download';
+  @override
+  String ai_media_acquire_title({required Object domain}) =>
+      'AI download · ${domain}';
+  @override
+  String get ai_media_acquire_hint =>
+      'Tell AI what to download, e.g. a title plus any version you want';
+  @override
+  String get ai_media_acquire_send => 'Search';
+  @override
+  String get ai_media_acquire_parsing => 'Understanding your request…';
+  @override
+  String get ai_media_acquire_searching => 'Searching sources…';
+  @override
+  String get ai_media_acquire_picking => 'AI is picking the best matches…';
+  @override
+  String get ai_media_acquire_ai_failed =>
+      'AI is unavailable right now; results are from your original text, sorted by seeders.';
+  @override
+  String get ai_media_acquire_no_results =>
+      'Nothing found. Try another title, or check that sources are enabled.';
+  @override
+  String get ai_media_acquire_recommended => 'AI picks';
+  @override
+  String get ai_media_acquire_others => 'Other results';
+  @override
+  String get ai_media_acquire_download => 'Download';
+  @override
+  String get ai_media_acquire_started => 'Download started';
+  @override
+  String ai_media_acquire_queries({required Object queries}) =>
+      'Searched for: ${queries}';
+  @override
+  String get ai_feature_media_acquire => 'AI download (books, manga, games)';
+  @override
+  String get ai_feature_media_acquire_summary =>
+      'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
 }
 
 // Path: <root>
@@ -106023,6 +106403,64 @@ class _StringsJa extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get media_stats_action => 'View statistics';
+  @override
+  String get media_stats_title => 'Statistics';
+  @override
+  String get media_stats_total => 'All time';
+  @override
+  String get media_stats_last_7_days => 'Last 7 days';
+  @override
+  String get media_stats_active_days => 'Active days';
+  @override
+  String get media_stats_sessions => 'Sessions';
+  @override
+  String get media_stats_first_date => 'First recorded';
+  @override
+  String get media_stats_last_date => 'Last recorded';
+  @override
+  String get media_stats_empty => 'No statistics recorded for this item yet.';
+  @override
+  String get media_stats_load_failed => 'Couldn\'t load statistics.';
+  @override
+  String get ai_media_acquire_entry => 'AI download';
+  @override
+  String ai_media_acquire_title({required Object domain}) =>
+      'AI download · ${domain}';
+  @override
+  String get ai_media_acquire_hint =>
+      'Tell AI what to download, e.g. a title plus any version you want';
+  @override
+  String get ai_media_acquire_send => 'Search';
+  @override
+  String get ai_media_acquire_parsing => 'Understanding your request…';
+  @override
+  String get ai_media_acquire_searching => 'Searching sources…';
+  @override
+  String get ai_media_acquire_picking => 'AI is picking the best matches…';
+  @override
+  String get ai_media_acquire_ai_failed =>
+      'AI is unavailable right now; results are from your original text, sorted by seeders.';
+  @override
+  String get ai_media_acquire_no_results =>
+      'Nothing found. Try another title, or check that sources are enabled.';
+  @override
+  String get ai_media_acquire_recommended => 'AI picks';
+  @override
+  String get ai_media_acquire_others => 'Other results';
+  @override
+  String get ai_media_acquire_download => 'Download';
+  @override
+  String get ai_media_acquire_started => 'Download started';
+  @override
+  String ai_media_acquire_queries({required Object queries}) =>
+      'Searched for: ${queries}';
+  @override
+  String get ai_feature_media_acquire => 'AI download (books, manga, games)';
+  @override
+  String get ai_feature_media_acquire_summary =>
+      'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
 }
 
 // Path: <root>
@@ -119468,6 +119906,64 @@ class _StringsKo extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get media_stats_action => 'View statistics';
+  @override
+  String get media_stats_title => 'Statistics';
+  @override
+  String get media_stats_total => 'All time';
+  @override
+  String get media_stats_last_7_days => 'Last 7 days';
+  @override
+  String get media_stats_active_days => 'Active days';
+  @override
+  String get media_stats_sessions => 'Sessions';
+  @override
+  String get media_stats_first_date => 'First recorded';
+  @override
+  String get media_stats_last_date => 'Last recorded';
+  @override
+  String get media_stats_empty => 'No statistics recorded for this item yet.';
+  @override
+  String get media_stats_load_failed => 'Couldn\'t load statistics.';
+  @override
+  String get ai_media_acquire_entry => 'AI download';
+  @override
+  String ai_media_acquire_title({required Object domain}) =>
+      'AI download · ${domain}';
+  @override
+  String get ai_media_acquire_hint =>
+      'Tell AI what to download, e.g. a title plus any version you want';
+  @override
+  String get ai_media_acquire_send => 'Search';
+  @override
+  String get ai_media_acquire_parsing => 'Understanding your request…';
+  @override
+  String get ai_media_acquire_searching => 'Searching sources…';
+  @override
+  String get ai_media_acquire_picking => 'AI is picking the best matches…';
+  @override
+  String get ai_media_acquire_ai_failed =>
+      'AI is unavailable right now; results are from your original text, sorted by seeders.';
+  @override
+  String get ai_media_acquire_no_results =>
+      'Nothing found. Try another title, or check that sources are enabled.';
+  @override
+  String get ai_media_acquire_recommended => 'AI picks';
+  @override
+  String get ai_media_acquire_others => 'Other results';
+  @override
+  String get ai_media_acquire_download => 'Download';
+  @override
+  String get ai_media_acquire_started => 'Download started';
+  @override
+  String ai_media_acquire_queries({required Object queries}) =>
+      'Searched for: ${queries}';
+  @override
+  String get ai_feature_media_acquire => 'AI download (books, manga, games)';
+  @override
+  String get ai_feature_media_acquire_summary =>
+      'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
 }
 
 // Path: <root>
@@ -133498,6 +133994,64 @@ class _StringsNl extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get media_stats_action => 'View statistics';
+  @override
+  String get media_stats_title => 'Statistics';
+  @override
+  String get media_stats_total => 'All time';
+  @override
+  String get media_stats_last_7_days => 'Last 7 days';
+  @override
+  String get media_stats_active_days => 'Active days';
+  @override
+  String get media_stats_sessions => 'Sessions';
+  @override
+  String get media_stats_first_date => 'First recorded';
+  @override
+  String get media_stats_last_date => 'Last recorded';
+  @override
+  String get media_stats_empty => 'No statistics recorded for this item yet.';
+  @override
+  String get media_stats_load_failed => 'Couldn\'t load statistics.';
+  @override
+  String get ai_media_acquire_entry => 'AI download';
+  @override
+  String ai_media_acquire_title({required Object domain}) =>
+      'AI download · ${domain}';
+  @override
+  String get ai_media_acquire_hint =>
+      'Tell AI what to download, e.g. a title plus any version you want';
+  @override
+  String get ai_media_acquire_send => 'Search';
+  @override
+  String get ai_media_acquire_parsing => 'Understanding your request…';
+  @override
+  String get ai_media_acquire_searching => 'Searching sources…';
+  @override
+  String get ai_media_acquire_picking => 'AI is picking the best matches…';
+  @override
+  String get ai_media_acquire_ai_failed =>
+      'AI is unavailable right now; results are from your original text, sorted by seeders.';
+  @override
+  String get ai_media_acquire_no_results =>
+      'Nothing found. Try another title, or check that sources are enabled.';
+  @override
+  String get ai_media_acquire_recommended => 'AI picks';
+  @override
+  String get ai_media_acquire_others => 'Other results';
+  @override
+  String get ai_media_acquire_download => 'Download';
+  @override
+  String get ai_media_acquire_started => 'Download started';
+  @override
+  String ai_media_acquire_queries({required Object queries}) =>
+      'Searched for: ${queries}';
+  @override
+  String get ai_feature_media_acquire => 'AI download (books, manga, games)';
+  @override
+  String get ai_feature_media_acquire_summary =>
+      'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
 }
 
 // Path: <root>
@@ -147580,6 +148134,64 @@ class _StringsPtBr extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get media_stats_action => 'View statistics';
+  @override
+  String get media_stats_title => 'Statistics';
+  @override
+  String get media_stats_total => 'All time';
+  @override
+  String get media_stats_last_7_days => 'Last 7 days';
+  @override
+  String get media_stats_active_days => 'Active days';
+  @override
+  String get media_stats_sessions => 'Sessions';
+  @override
+  String get media_stats_first_date => 'First recorded';
+  @override
+  String get media_stats_last_date => 'Last recorded';
+  @override
+  String get media_stats_empty => 'No statistics recorded for this item yet.';
+  @override
+  String get media_stats_load_failed => 'Couldn\'t load statistics.';
+  @override
+  String get ai_media_acquire_entry => 'AI download';
+  @override
+  String ai_media_acquire_title({required Object domain}) =>
+      'AI download · ${domain}';
+  @override
+  String get ai_media_acquire_hint =>
+      'Tell AI what to download, e.g. a title plus any version you want';
+  @override
+  String get ai_media_acquire_send => 'Search';
+  @override
+  String get ai_media_acquire_parsing => 'Understanding your request…';
+  @override
+  String get ai_media_acquire_searching => 'Searching sources…';
+  @override
+  String get ai_media_acquire_picking => 'AI is picking the best matches…';
+  @override
+  String get ai_media_acquire_ai_failed =>
+      'AI is unavailable right now; results are from your original text, sorted by seeders.';
+  @override
+  String get ai_media_acquire_no_results =>
+      'Nothing found. Try another title, or check that sources are enabled.';
+  @override
+  String get ai_media_acquire_recommended => 'AI picks';
+  @override
+  String get ai_media_acquire_others => 'Other results';
+  @override
+  String get ai_media_acquire_download => 'Download';
+  @override
+  String get ai_media_acquire_started => 'Download started';
+  @override
+  String ai_media_acquire_queries({required Object queries}) =>
+      'Searched for: ${queries}';
+  @override
+  String get ai_feature_media_acquire => 'AI download (books, manga, games)';
+  @override
+  String get ai_feature_media_acquire_summary =>
+      'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
 }
 
 // Path: <root>
@@ -161637,6 +162249,64 @@ class _StringsRu extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get media_stats_action => 'View statistics';
+  @override
+  String get media_stats_title => 'Statistics';
+  @override
+  String get media_stats_total => 'All time';
+  @override
+  String get media_stats_last_7_days => 'Last 7 days';
+  @override
+  String get media_stats_active_days => 'Active days';
+  @override
+  String get media_stats_sessions => 'Sessions';
+  @override
+  String get media_stats_first_date => 'First recorded';
+  @override
+  String get media_stats_last_date => 'Last recorded';
+  @override
+  String get media_stats_empty => 'No statistics recorded for this item yet.';
+  @override
+  String get media_stats_load_failed => 'Couldn\'t load statistics.';
+  @override
+  String get ai_media_acquire_entry => 'AI download';
+  @override
+  String ai_media_acquire_title({required Object domain}) =>
+      'AI download · ${domain}';
+  @override
+  String get ai_media_acquire_hint =>
+      'Tell AI what to download, e.g. a title plus any version you want';
+  @override
+  String get ai_media_acquire_send => 'Search';
+  @override
+  String get ai_media_acquire_parsing => 'Understanding your request…';
+  @override
+  String get ai_media_acquire_searching => 'Searching sources…';
+  @override
+  String get ai_media_acquire_picking => 'AI is picking the best matches…';
+  @override
+  String get ai_media_acquire_ai_failed =>
+      'AI is unavailable right now; results are from your original text, sorted by seeders.';
+  @override
+  String get ai_media_acquire_no_results =>
+      'Nothing found. Try another title, or check that sources are enabled.';
+  @override
+  String get ai_media_acquire_recommended => 'AI picks';
+  @override
+  String get ai_media_acquire_others => 'Other results';
+  @override
+  String get ai_media_acquire_download => 'Download';
+  @override
+  String get ai_media_acquire_started => 'Download started';
+  @override
+  String ai_media_acquire_queries({required Object queries}) =>
+      'Searched for: ${queries}';
+  @override
+  String get ai_feature_media_acquire => 'AI download (books, manga, games)';
+  @override
+  String get ai_feature_media_acquire_summary =>
+      'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
 }
 
 // Path: <root>
@@ -175490,6 +176160,64 @@ class _StringsTh extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get media_stats_action => 'View statistics';
+  @override
+  String get media_stats_title => 'Statistics';
+  @override
+  String get media_stats_total => 'All time';
+  @override
+  String get media_stats_last_7_days => 'Last 7 days';
+  @override
+  String get media_stats_active_days => 'Active days';
+  @override
+  String get media_stats_sessions => 'Sessions';
+  @override
+  String get media_stats_first_date => 'First recorded';
+  @override
+  String get media_stats_last_date => 'Last recorded';
+  @override
+  String get media_stats_empty => 'No statistics recorded for this item yet.';
+  @override
+  String get media_stats_load_failed => 'Couldn\'t load statistics.';
+  @override
+  String get ai_media_acquire_entry => 'AI download';
+  @override
+  String ai_media_acquire_title({required Object domain}) =>
+      'AI download · ${domain}';
+  @override
+  String get ai_media_acquire_hint =>
+      'Tell AI what to download, e.g. a title plus any version you want';
+  @override
+  String get ai_media_acquire_send => 'Search';
+  @override
+  String get ai_media_acquire_parsing => 'Understanding your request…';
+  @override
+  String get ai_media_acquire_searching => 'Searching sources…';
+  @override
+  String get ai_media_acquire_picking => 'AI is picking the best matches…';
+  @override
+  String get ai_media_acquire_ai_failed =>
+      'AI is unavailable right now; results are from your original text, sorted by seeders.';
+  @override
+  String get ai_media_acquire_no_results =>
+      'Nothing found. Try another title, or check that sources are enabled.';
+  @override
+  String get ai_media_acquire_recommended => 'AI picks';
+  @override
+  String get ai_media_acquire_others => 'Other results';
+  @override
+  String get ai_media_acquire_download => 'Download';
+  @override
+  String get ai_media_acquire_started => 'Download started';
+  @override
+  String ai_media_acquire_queries({required Object queries}) =>
+      'Searched for: ${queries}';
+  @override
+  String get ai_feature_media_acquire => 'AI download (books, manga, games)';
+  @override
+  String get ai_feature_media_acquire_summary =>
+      'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
 }
 
 // Path: <root>
@@ -189458,6 +190186,64 @@ class _StringsTr extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get media_stats_action => 'View statistics';
+  @override
+  String get media_stats_title => 'Statistics';
+  @override
+  String get media_stats_total => 'All time';
+  @override
+  String get media_stats_last_7_days => 'Last 7 days';
+  @override
+  String get media_stats_active_days => 'Active days';
+  @override
+  String get media_stats_sessions => 'Sessions';
+  @override
+  String get media_stats_first_date => 'First recorded';
+  @override
+  String get media_stats_last_date => 'Last recorded';
+  @override
+  String get media_stats_empty => 'No statistics recorded for this item yet.';
+  @override
+  String get media_stats_load_failed => 'Couldn\'t load statistics.';
+  @override
+  String get ai_media_acquire_entry => 'AI download';
+  @override
+  String ai_media_acquire_title({required Object domain}) =>
+      'AI download · ${domain}';
+  @override
+  String get ai_media_acquire_hint =>
+      'Tell AI what to download, e.g. a title plus any version you want';
+  @override
+  String get ai_media_acquire_send => 'Search';
+  @override
+  String get ai_media_acquire_parsing => 'Understanding your request…';
+  @override
+  String get ai_media_acquire_searching => 'Searching sources…';
+  @override
+  String get ai_media_acquire_picking => 'AI is picking the best matches…';
+  @override
+  String get ai_media_acquire_ai_failed =>
+      'AI is unavailable right now; results are from your original text, sorted by seeders.';
+  @override
+  String get ai_media_acquire_no_results =>
+      'Nothing found. Try another title, or check that sources are enabled.';
+  @override
+  String get ai_media_acquire_recommended => 'AI picks';
+  @override
+  String get ai_media_acquire_others => 'Other results';
+  @override
+  String get ai_media_acquire_download => 'Download';
+  @override
+  String get ai_media_acquire_started => 'Download started';
+  @override
+  String ai_media_acquire_queries({required Object queries}) =>
+      'Searched for: ${queries}';
+  @override
+  String get ai_feature_media_acquire => 'AI download (books, manga, games)';
+  @override
+  String get ai_feature_media_acquire_summary =>
+      'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
 }
 
 // Path: <root>
@@ -203397,6 +204183,64 @@ class _StringsVi extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get media_stats_action => 'View statistics';
+  @override
+  String get media_stats_title => 'Statistics';
+  @override
+  String get media_stats_total => 'All time';
+  @override
+  String get media_stats_last_7_days => 'Last 7 days';
+  @override
+  String get media_stats_active_days => 'Active days';
+  @override
+  String get media_stats_sessions => 'Sessions';
+  @override
+  String get media_stats_first_date => 'First recorded';
+  @override
+  String get media_stats_last_date => 'Last recorded';
+  @override
+  String get media_stats_empty => 'No statistics recorded for this item yet.';
+  @override
+  String get media_stats_load_failed => 'Couldn\'t load statistics.';
+  @override
+  String get ai_media_acquire_entry => 'AI download';
+  @override
+  String ai_media_acquire_title({required Object domain}) =>
+      'AI download · ${domain}';
+  @override
+  String get ai_media_acquire_hint =>
+      'Tell AI what to download, e.g. a title plus any version you want';
+  @override
+  String get ai_media_acquire_send => 'Search';
+  @override
+  String get ai_media_acquire_parsing => 'Understanding your request…';
+  @override
+  String get ai_media_acquire_searching => 'Searching sources…';
+  @override
+  String get ai_media_acquire_picking => 'AI is picking the best matches…';
+  @override
+  String get ai_media_acquire_ai_failed =>
+      'AI is unavailable right now; results are from your original text, sorted by seeders.';
+  @override
+  String get ai_media_acquire_no_results =>
+      'Nothing found. Try another title, or check that sources are enabled.';
+  @override
+  String get ai_media_acquire_recommended => 'AI picks';
+  @override
+  String get ai_media_acquire_others => 'Other results';
+  @override
+  String get ai_media_acquire_download => 'Download';
+  @override
+  String get ai_media_acquire_started => 'Download started';
+  @override
+  String ai_media_acquire_queries({required Object queries}) =>
+      'Searched for: ${queries}';
+  @override
+  String get ai_feature_media_acquire => 'AI download (books, manga, games)';
+  @override
+  String get ai_feature_media_acquire_summary =>
+      'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
 }
 
 // Path: <root>
@@ -216144,6 +216988,61 @@ class _StringsZhCn extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       '有 ${count} 本书没能导入（它们的统计仍已导入）：';
+  @override
+  String get media_stats_action => '查看统计';
+  @override
+  String get media_stats_title => '统计';
+  @override
+  String get media_stats_total => '累计';
+  @override
+  String get media_stats_last_7_days => '近 7 天';
+  @override
+  String get media_stats_active_days => '活跃天数';
+  @override
+  String get media_stats_sessions => '会话';
+  @override
+  String get media_stats_first_date => '首次记录';
+  @override
+  String get media_stats_last_date => '最近记录';
+  @override
+  String get media_stats_empty => '这一项还没有统计记录。';
+  @override
+  String get media_stats_load_failed => '统计加载失败。';
+  @override
+  String get ai_media_acquire_entry => 'AI 下载';
+  @override
+  String ai_media_acquire_title({required Object domain}) =>
+      'AI 下载 · ${domain}';
+  @override
+  String get ai_media_acquire_hint => '告诉 AI 想下什么，例如作品名加上想要的版本';
+  @override
+  String get ai_media_acquire_send => '搜索';
+  @override
+  String get ai_media_acquire_parsing => '正在理解你的需求…';
+  @override
+  String get ai_media_acquire_searching => '正在搜索来源…';
+  @override
+  String get ai_media_acquire_picking => 'AI 正在挑选最匹配的结果…';
+  @override
+  String get ai_media_acquire_ai_failed => 'AI 暂不可用，已按原文搜索并按做种数排序。';
+  @override
+  String get ai_media_acquire_no_results => '没有找到结果。换个标题试试，或检查来源是否已启用。';
+  @override
+  String get ai_media_acquire_recommended => 'AI 推荐';
+  @override
+  String get ai_media_acquire_others => '其他结果';
+  @override
+  String get ai_media_acquire_download => '下载';
+  @override
+  String get ai_media_acquire_started => '已开始下载';
+  @override
+  String ai_media_acquire_queries({required Object queries}) =>
+      '搜索词：${queries}';
+  @override
+  String get ai_feature_media_acquire => 'AI 下载（小说 / 漫画 / 游戏）';
+  @override
+  String get ai_feature_media_acquire_summary =>
+      '在「浏览 › 发现」里说出想要的小说、漫画或游戏，AI 把它变成搜索词并推荐匹配结果，每次下载由你确认。';
 }
 
 // Path: <root>
@@ -229248,6 +230147,64 @@ class _StringsZhHk extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get media_stats_action => 'View statistics';
+  @override
+  String get media_stats_title => 'Statistics';
+  @override
+  String get media_stats_total => 'All time';
+  @override
+  String get media_stats_last_7_days => 'Last 7 days';
+  @override
+  String get media_stats_active_days => 'Active days';
+  @override
+  String get media_stats_sessions => 'Sessions';
+  @override
+  String get media_stats_first_date => 'First recorded';
+  @override
+  String get media_stats_last_date => 'Last recorded';
+  @override
+  String get media_stats_empty => 'No statistics recorded for this item yet.';
+  @override
+  String get media_stats_load_failed => 'Couldn\'t load statistics.';
+  @override
+  String get ai_media_acquire_entry => 'AI download';
+  @override
+  String ai_media_acquire_title({required Object domain}) =>
+      'AI download · ${domain}';
+  @override
+  String get ai_media_acquire_hint =>
+      'Tell AI what to download, e.g. a title plus any version you want';
+  @override
+  String get ai_media_acquire_send => 'Search';
+  @override
+  String get ai_media_acquire_parsing => 'Understanding your request…';
+  @override
+  String get ai_media_acquire_searching => 'Searching sources…';
+  @override
+  String get ai_media_acquire_picking => 'AI is picking the best matches…';
+  @override
+  String get ai_media_acquire_ai_failed =>
+      'AI is unavailable right now; results are from your original text, sorted by seeders.';
+  @override
+  String get ai_media_acquire_no_results =>
+      'Nothing found. Try another title, or check that sources are enabled.';
+  @override
+  String get ai_media_acquire_recommended => 'AI picks';
+  @override
+  String get ai_media_acquire_others => 'Other results';
+  @override
+  String get ai_media_acquire_download => 'Download';
+  @override
+  String get ai_media_acquire_started => 'Download started';
+  @override
+  String ai_media_acquire_queries({required Object queries}) =>
+      'Searched for: ${queries}';
+  @override
+  String get ai_feature_media_acquire => 'AI download (books, manga, games)';
+  @override
+  String get ai_feature_media_acquire_summary =>
+      'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
 }
 
 /// Flat map(s) containing all translations.
@@ -241174,6 +242131,58 @@ extension on _StringsEn {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'media_stats_action':
+        return 'View statistics';
+      case 'media_stats_title':
+        return 'Statistics';
+      case 'media_stats_total':
+        return 'All time';
+      case 'media_stats_last_7_days':
+        return 'Last 7 days';
+      case 'media_stats_active_days':
+        return 'Active days';
+      case 'media_stats_sessions':
+        return 'Sessions';
+      case 'media_stats_first_date':
+        return 'First recorded';
+      case 'media_stats_last_date':
+        return 'Last recorded';
+      case 'media_stats_empty':
+        return 'No statistics recorded for this item yet.';
+      case 'media_stats_load_failed':
+        return 'Couldn\'t load statistics.';
+      case 'ai_media_acquire_entry':
+        return 'AI download';
+      case 'ai_media_acquire_title':
+        return ({required Object domain}) => 'AI download · ${domain}';
+      case 'ai_media_acquire_hint':
+        return 'Tell AI what to download, e.g. a title plus any version you want';
+      case 'ai_media_acquire_send':
+        return 'Search';
+      case 'ai_media_acquire_parsing':
+        return 'Understanding your request…';
+      case 'ai_media_acquire_searching':
+        return 'Searching sources…';
+      case 'ai_media_acquire_picking':
+        return 'AI is picking the best matches…';
+      case 'ai_media_acquire_ai_failed':
+        return 'AI is unavailable right now; results are from your original text, sorted by seeders.';
+      case 'ai_media_acquire_no_results':
+        return 'Nothing found. Try another title, or check that sources are enabled.';
+      case 'ai_media_acquire_recommended':
+        return 'AI picks';
+      case 'ai_media_acquire_others':
+        return 'Other results';
+      case 'ai_media_acquire_download':
+        return 'Download';
+      case 'ai_media_acquire_started':
+        return 'Download started';
+      case 'ai_media_acquire_queries':
+        return ({required Object queries}) => 'Searched for: ${queries}';
+      case 'ai_feature_media_acquire':
+        return 'AI download (books, manga, games)';
+      case 'ai_feature_media_acquire_summary':
+        return 'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
       default:
         return null;
     }
@@ -253094,6 +254103,58 @@ extension on _StringsAr {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'media_stats_action':
+        return 'View statistics';
+      case 'media_stats_title':
+        return 'Statistics';
+      case 'media_stats_total':
+        return 'All time';
+      case 'media_stats_last_7_days':
+        return 'Last 7 days';
+      case 'media_stats_active_days':
+        return 'Active days';
+      case 'media_stats_sessions':
+        return 'Sessions';
+      case 'media_stats_first_date':
+        return 'First recorded';
+      case 'media_stats_last_date':
+        return 'Last recorded';
+      case 'media_stats_empty':
+        return 'No statistics recorded for this item yet.';
+      case 'media_stats_load_failed':
+        return 'Couldn\'t load statistics.';
+      case 'ai_media_acquire_entry':
+        return 'AI download';
+      case 'ai_media_acquire_title':
+        return ({required Object domain}) => 'AI download · ${domain}';
+      case 'ai_media_acquire_hint':
+        return 'Tell AI what to download, e.g. a title plus any version you want';
+      case 'ai_media_acquire_send':
+        return 'Search';
+      case 'ai_media_acquire_parsing':
+        return 'Understanding your request…';
+      case 'ai_media_acquire_searching':
+        return 'Searching sources…';
+      case 'ai_media_acquire_picking':
+        return 'AI is picking the best matches…';
+      case 'ai_media_acquire_ai_failed':
+        return 'AI is unavailable right now; results are from your original text, sorted by seeders.';
+      case 'ai_media_acquire_no_results':
+        return 'Nothing found. Try another title, or check that sources are enabled.';
+      case 'ai_media_acquire_recommended':
+        return 'AI picks';
+      case 'ai_media_acquire_others':
+        return 'Other results';
+      case 'ai_media_acquire_download':
+        return 'Download';
+      case 'ai_media_acquire_started':
+        return 'Download started';
+      case 'ai_media_acquire_queries':
+        return ({required Object queries}) => 'Searched for: ${queries}';
+      case 'ai_feature_media_acquire':
+        return 'AI download (books, manga, games)';
+      case 'ai_feature_media_acquire_summary':
+        return 'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
       default:
         return null;
     }
@@ -265064,6 +266125,58 @@ extension on _StringsDe {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'media_stats_action':
+        return 'View statistics';
+      case 'media_stats_title':
+        return 'Statistics';
+      case 'media_stats_total':
+        return 'All time';
+      case 'media_stats_last_7_days':
+        return 'Last 7 days';
+      case 'media_stats_active_days':
+        return 'Active days';
+      case 'media_stats_sessions':
+        return 'Sessions';
+      case 'media_stats_first_date':
+        return 'First recorded';
+      case 'media_stats_last_date':
+        return 'Last recorded';
+      case 'media_stats_empty':
+        return 'No statistics recorded for this item yet.';
+      case 'media_stats_load_failed':
+        return 'Couldn\'t load statistics.';
+      case 'ai_media_acquire_entry':
+        return 'AI download';
+      case 'ai_media_acquire_title':
+        return ({required Object domain}) => 'AI download · ${domain}';
+      case 'ai_media_acquire_hint':
+        return 'Tell AI what to download, e.g. a title plus any version you want';
+      case 'ai_media_acquire_send':
+        return 'Search';
+      case 'ai_media_acquire_parsing':
+        return 'Understanding your request…';
+      case 'ai_media_acquire_searching':
+        return 'Searching sources…';
+      case 'ai_media_acquire_picking':
+        return 'AI is picking the best matches…';
+      case 'ai_media_acquire_ai_failed':
+        return 'AI is unavailable right now; results are from your original text, sorted by seeders.';
+      case 'ai_media_acquire_no_results':
+        return 'Nothing found. Try another title, or check that sources are enabled.';
+      case 'ai_media_acquire_recommended':
+        return 'AI picks';
+      case 'ai_media_acquire_others':
+        return 'Other results';
+      case 'ai_media_acquire_download':
+        return 'Download';
+      case 'ai_media_acquire_started':
+        return 'Download started';
+      case 'ai_media_acquire_queries':
+        return ({required Object queries}) => 'Searched for: ${queries}';
+      case 'ai_feature_media_acquire':
+        return 'AI download (books, manga, games)';
+      case 'ai_feature_media_acquire_summary':
+        return 'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
       default:
         return null;
     }
@@ -277024,6 +278137,58 @@ extension on _StringsEs {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'media_stats_action':
+        return 'View statistics';
+      case 'media_stats_title':
+        return 'Statistics';
+      case 'media_stats_total':
+        return 'All time';
+      case 'media_stats_last_7_days':
+        return 'Last 7 days';
+      case 'media_stats_active_days':
+        return 'Active days';
+      case 'media_stats_sessions':
+        return 'Sessions';
+      case 'media_stats_first_date':
+        return 'First recorded';
+      case 'media_stats_last_date':
+        return 'Last recorded';
+      case 'media_stats_empty':
+        return 'No statistics recorded for this item yet.';
+      case 'media_stats_load_failed':
+        return 'Couldn\'t load statistics.';
+      case 'ai_media_acquire_entry':
+        return 'AI download';
+      case 'ai_media_acquire_title':
+        return ({required Object domain}) => 'AI download · ${domain}';
+      case 'ai_media_acquire_hint':
+        return 'Tell AI what to download, e.g. a title plus any version you want';
+      case 'ai_media_acquire_send':
+        return 'Search';
+      case 'ai_media_acquire_parsing':
+        return 'Understanding your request…';
+      case 'ai_media_acquire_searching':
+        return 'Searching sources…';
+      case 'ai_media_acquire_picking':
+        return 'AI is picking the best matches…';
+      case 'ai_media_acquire_ai_failed':
+        return 'AI is unavailable right now; results are from your original text, sorted by seeders.';
+      case 'ai_media_acquire_no_results':
+        return 'Nothing found. Try another title, or check that sources are enabled.';
+      case 'ai_media_acquire_recommended':
+        return 'AI picks';
+      case 'ai_media_acquire_others':
+        return 'Other results';
+      case 'ai_media_acquire_download':
+        return 'Download';
+      case 'ai_media_acquire_started':
+        return 'Download started';
+      case 'ai_media_acquire_queries':
+        return ({required Object queries}) => 'Searched for: ${queries}';
+      case 'ai_feature_media_acquire':
+        return 'AI download (books, manga, games)';
+      case 'ai_feature_media_acquire_summary':
+        return 'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
       default:
         return null;
     }
@@ -288992,6 +290157,58 @@ extension on _StringsFr {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'media_stats_action':
+        return 'View statistics';
+      case 'media_stats_title':
+        return 'Statistics';
+      case 'media_stats_total':
+        return 'All time';
+      case 'media_stats_last_7_days':
+        return 'Last 7 days';
+      case 'media_stats_active_days':
+        return 'Active days';
+      case 'media_stats_sessions':
+        return 'Sessions';
+      case 'media_stats_first_date':
+        return 'First recorded';
+      case 'media_stats_last_date':
+        return 'Last recorded';
+      case 'media_stats_empty':
+        return 'No statistics recorded for this item yet.';
+      case 'media_stats_load_failed':
+        return 'Couldn\'t load statistics.';
+      case 'ai_media_acquire_entry':
+        return 'AI download';
+      case 'ai_media_acquire_title':
+        return ({required Object domain}) => 'AI download · ${domain}';
+      case 'ai_media_acquire_hint':
+        return 'Tell AI what to download, e.g. a title plus any version you want';
+      case 'ai_media_acquire_send':
+        return 'Search';
+      case 'ai_media_acquire_parsing':
+        return 'Understanding your request…';
+      case 'ai_media_acquire_searching':
+        return 'Searching sources…';
+      case 'ai_media_acquire_picking':
+        return 'AI is picking the best matches…';
+      case 'ai_media_acquire_ai_failed':
+        return 'AI is unavailable right now; results are from your original text, sorted by seeders.';
+      case 'ai_media_acquire_no_results':
+        return 'Nothing found. Try another title, or check that sources are enabled.';
+      case 'ai_media_acquire_recommended':
+        return 'AI picks';
+      case 'ai_media_acquire_others':
+        return 'Other results';
+      case 'ai_media_acquire_download':
+        return 'Download';
+      case 'ai_media_acquire_started':
+        return 'Download started';
+      case 'ai_media_acquire_queries':
+        return ({required Object queries}) => 'Searched for: ${queries}';
+      case 'ai_feature_media_acquire':
+        return 'AI download (books, manga, games)';
+      case 'ai_feature_media_acquire_summary':
+        return 'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
       default:
         return null;
     }
@@ -300930,6 +302147,58 @@ extension on _StringsId {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'media_stats_action':
+        return 'View statistics';
+      case 'media_stats_title':
+        return 'Statistics';
+      case 'media_stats_total':
+        return 'All time';
+      case 'media_stats_last_7_days':
+        return 'Last 7 days';
+      case 'media_stats_active_days':
+        return 'Active days';
+      case 'media_stats_sessions':
+        return 'Sessions';
+      case 'media_stats_first_date':
+        return 'First recorded';
+      case 'media_stats_last_date':
+        return 'Last recorded';
+      case 'media_stats_empty':
+        return 'No statistics recorded for this item yet.';
+      case 'media_stats_load_failed':
+        return 'Couldn\'t load statistics.';
+      case 'ai_media_acquire_entry':
+        return 'AI download';
+      case 'ai_media_acquire_title':
+        return ({required Object domain}) => 'AI download · ${domain}';
+      case 'ai_media_acquire_hint':
+        return 'Tell AI what to download, e.g. a title plus any version you want';
+      case 'ai_media_acquire_send':
+        return 'Search';
+      case 'ai_media_acquire_parsing':
+        return 'Understanding your request…';
+      case 'ai_media_acquire_searching':
+        return 'Searching sources…';
+      case 'ai_media_acquire_picking':
+        return 'AI is picking the best matches…';
+      case 'ai_media_acquire_ai_failed':
+        return 'AI is unavailable right now; results are from your original text, sorted by seeders.';
+      case 'ai_media_acquire_no_results':
+        return 'Nothing found. Try another title, or check that sources are enabled.';
+      case 'ai_media_acquire_recommended':
+        return 'AI picks';
+      case 'ai_media_acquire_others':
+        return 'Other results';
+      case 'ai_media_acquire_download':
+        return 'Download';
+      case 'ai_media_acquire_started':
+        return 'Download started';
+      case 'ai_media_acquire_queries':
+        return ({required Object queries}) => 'Searched for: ${queries}';
+      case 'ai_feature_media_acquire':
+        return 'AI download (books, manga, games)';
+      case 'ai_feature_media_acquire_summary':
+        return 'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
       default:
         return null;
     }
@@ -312890,6 +314159,58 @@ extension on _StringsIt {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'media_stats_action':
+        return 'View statistics';
+      case 'media_stats_title':
+        return 'Statistics';
+      case 'media_stats_total':
+        return 'All time';
+      case 'media_stats_last_7_days':
+        return 'Last 7 days';
+      case 'media_stats_active_days':
+        return 'Active days';
+      case 'media_stats_sessions':
+        return 'Sessions';
+      case 'media_stats_first_date':
+        return 'First recorded';
+      case 'media_stats_last_date':
+        return 'Last recorded';
+      case 'media_stats_empty':
+        return 'No statistics recorded for this item yet.';
+      case 'media_stats_load_failed':
+        return 'Couldn\'t load statistics.';
+      case 'ai_media_acquire_entry':
+        return 'AI download';
+      case 'ai_media_acquire_title':
+        return ({required Object domain}) => 'AI download · ${domain}';
+      case 'ai_media_acquire_hint':
+        return 'Tell AI what to download, e.g. a title plus any version you want';
+      case 'ai_media_acquire_send':
+        return 'Search';
+      case 'ai_media_acquire_parsing':
+        return 'Understanding your request…';
+      case 'ai_media_acquire_searching':
+        return 'Searching sources…';
+      case 'ai_media_acquire_picking':
+        return 'AI is picking the best matches…';
+      case 'ai_media_acquire_ai_failed':
+        return 'AI is unavailable right now; results are from your original text, sorted by seeders.';
+      case 'ai_media_acquire_no_results':
+        return 'Nothing found. Try another title, or check that sources are enabled.';
+      case 'ai_media_acquire_recommended':
+        return 'AI picks';
+      case 'ai_media_acquire_others':
+        return 'Other results';
+      case 'ai_media_acquire_download':
+        return 'Download';
+      case 'ai_media_acquire_started':
+        return 'Download started';
+      case 'ai_media_acquire_queries':
+        return ({required Object queries}) => 'Searched for: ${queries}';
+      case 'ai_feature_media_acquire':
+        return 'AI download (books, manga, games)';
+      case 'ai_feature_media_acquire_summary':
+        return 'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
       default:
         return null;
     }
@@ -324770,6 +326091,58 @@ extension on _StringsJa {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'media_stats_action':
+        return 'View statistics';
+      case 'media_stats_title':
+        return 'Statistics';
+      case 'media_stats_total':
+        return 'All time';
+      case 'media_stats_last_7_days':
+        return 'Last 7 days';
+      case 'media_stats_active_days':
+        return 'Active days';
+      case 'media_stats_sessions':
+        return 'Sessions';
+      case 'media_stats_first_date':
+        return 'First recorded';
+      case 'media_stats_last_date':
+        return 'Last recorded';
+      case 'media_stats_empty':
+        return 'No statistics recorded for this item yet.';
+      case 'media_stats_load_failed':
+        return 'Couldn\'t load statistics.';
+      case 'ai_media_acquire_entry':
+        return 'AI download';
+      case 'ai_media_acquire_title':
+        return ({required Object domain}) => 'AI download · ${domain}';
+      case 'ai_media_acquire_hint':
+        return 'Tell AI what to download, e.g. a title plus any version you want';
+      case 'ai_media_acquire_send':
+        return 'Search';
+      case 'ai_media_acquire_parsing':
+        return 'Understanding your request…';
+      case 'ai_media_acquire_searching':
+        return 'Searching sources…';
+      case 'ai_media_acquire_picking':
+        return 'AI is picking the best matches…';
+      case 'ai_media_acquire_ai_failed':
+        return 'AI is unavailable right now; results are from your original text, sorted by seeders.';
+      case 'ai_media_acquire_no_results':
+        return 'Nothing found. Try another title, or check that sources are enabled.';
+      case 'ai_media_acquire_recommended':
+        return 'AI picks';
+      case 'ai_media_acquire_others':
+        return 'Other results';
+      case 'ai_media_acquire_download':
+        return 'Download';
+      case 'ai_media_acquire_started':
+        return 'Download started';
+      case 'ai_media_acquire_queries':
+        return ({required Object queries}) => 'Searched for: ${queries}';
+      case 'ai_feature_media_acquire':
+        return 'AI download (books, manga, games)';
+      case 'ai_feature_media_acquire_summary':
+        return 'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
       default:
         return null;
     }
@@ -336659,6 +338032,58 @@ extension on _StringsKo {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'media_stats_action':
+        return 'View statistics';
+      case 'media_stats_title':
+        return 'Statistics';
+      case 'media_stats_total':
+        return 'All time';
+      case 'media_stats_last_7_days':
+        return 'Last 7 days';
+      case 'media_stats_active_days':
+        return 'Active days';
+      case 'media_stats_sessions':
+        return 'Sessions';
+      case 'media_stats_first_date':
+        return 'First recorded';
+      case 'media_stats_last_date':
+        return 'Last recorded';
+      case 'media_stats_empty':
+        return 'No statistics recorded for this item yet.';
+      case 'media_stats_load_failed':
+        return 'Couldn\'t load statistics.';
+      case 'ai_media_acquire_entry':
+        return 'AI download';
+      case 'ai_media_acquire_title':
+        return ({required Object domain}) => 'AI download · ${domain}';
+      case 'ai_media_acquire_hint':
+        return 'Tell AI what to download, e.g. a title plus any version you want';
+      case 'ai_media_acquire_send':
+        return 'Search';
+      case 'ai_media_acquire_parsing':
+        return 'Understanding your request…';
+      case 'ai_media_acquire_searching':
+        return 'Searching sources…';
+      case 'ai_media_acquire_picking':
+        return 'AI is picking the best matches…';
+      case 'ai_media_acquire_ai_failed':
+        return 'AI is unavailable right now; results are from your original text, sorted by seeders.';
+      case 'ai_media_acquire_no_results':
+        return 'Nothing found. Try another title, or check that sources are enabled.';
+      case 'ai_media_acquire_recommended':
+        return 'AI picks';
+      case 'ai_media_acquire_others':
+        return 'Other results';
+      case 'ai_media_acquire_download':
+        return 'Download';
+      case 'ai_media_acquire_started':
+        return 'Download started';
+      case 'ai_media_acquire_queries':
+        return ({required Object queries}) => 'Searched for: ${queries}';
+      case 'ai_feature_media_acquire':
+        return 'AI download (books, manga, games)';
+      case 'ai_feature_media_acquire_summary':
+        return 'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
       default:
         return null;
     }
@@ -348615,6 +350040,58 @@ extension on _StringsNl {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'media_stats_action':
+        return 'View statistics';
+      case 'media_stats_title':
+        return 'Statistics';
+      case 'media_stats_total':
+        return 'All time';
+      case 'media_stats_last_7_days':
+        return 'Last 7 days';
+      case 'media_stats_active_days':
+        return 'Active days';
+      case 'media_stats_sessions':
+        return 'Sessions';
+      case 'media_stats_first_date':
+        return 'First recorded';
+      case 'media_stats_last_date':
+        return 'Last recorded';
+      case 'media_stats_empty':
+        return 'No statistics recorded for this item yet.';
+      case 'media_stats_load_failed':
+        return 'Couldn\'t load statistics.';
+      case 'ai_media_acquire_entry':
+        return 'AI download';
+      case 'ai_media_acquire_title':
+        return ({required Object domain}) => 'AI download · ${domain}';
+      case 'ai_media_acquire_hint':
+        return 'Tell AI what to download, e.g. a title plus any version you want';
+      case 'ai_media_acquire_send':
+        return 'Search';
+      case 'ai_media_acquire_parsing':
+        return 'Understanding your request…';
+      case 'ai_media_acquire_searching':
+        return 'Searching sources…';
+      case 'ai_media_acquire_picking':
+        return 'AI is picking the best matches…';
+      case 'ai_media_acquire_ai_failed':
+        return 'AI is unavailable right now; results are from your original text, sorted by seeders.';
+      case 'ai_media_acquire_no_results':
+        return 'Nothing found. Try another title, or check that sources are enabled.';
+      case 'ai_media_acquire_recommended':
+        return 'AI picks';
+      case 'ai_media_acquire_others':
+        return 'Other results';
+      case 'ai_media_acquire_download':
+        return 'Download';
+      case 'ai_media_acquire_started':
+        return 'Download started';
+      case 'ai_media_acquire_queries':
+        return ({required Object queries}) => 'Searched for: ${queries}';
+      case 'ai_feature_media_acquire':
+        return 'AI download (books, manga, games)';
+      case 'ai_feature_media_acquire_summary':
+        return 'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
       default:
         return null;
     }
@@ -360566,6 +362043,58 @@ extension on _StringsPtBr {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'media_stats_action':
+        return 'View statistics';
+      case 'media_stats_title':
+        return 'Statistics';
+      case 'media_stats_total':
+        return 'All time';
+      case 'media_stats_last_7_days':
+        return 'Last 7 days';
+      case 'media_stats_active_days':
+        return 'Active days';
+      case 'media_stats_sessions':
+        return 'Sessions';
+      case 'media_stats_first_date':
+        return 'First recorded';
+      case 'media_stats_last_date':
+        return 'Last recorded';
+      case 'media_stats_empty':
+        return 'No statistics recorded for this item yet.';
+      case 'media_stats_load_failed':
+        return 'Couldn\'t load statistics.';
+      case 'ai_media_acquire_entry':
+        return 'AI download';
+      case 'ai_media_acquire_title':
+        return ({required Object domain}) => 'AI download · ${domain}';
+      case 'ai_media_acquire_hint':
+        return 'Tell AI what to download, e.g. a title plus any version you want';
+      case 'ai_media_acquire_send':
+        return 'Search';
+      case 'ai_media_acquire_parsing':
+        return 'Understanding your request…';
+      case 'ai_media_acquire_searching':
+        return 'Searching sources…';
+      case 'ai_media_acquire_picking':
+        return 'AI is picking the best matches…';
+      case 'ai_media_acquire_ai_failed':
+        return 'AI is unavailable right now; results are from your original text, sorted by seeders.';
+      case 'ai_media_acquire_no_results':
+        return 'Nothing found. Try another title, or check that sources are enabled.';
+      case 'ai_media_acquire_recommended':
+        return 'AI picks';
+      case 'ai_media_acquire_others':
+        return 'Other results';
+      case 'ai_media_acquire_download':
+        return 'Download';
+      case 'ai_media_acquire_started':
+        return 'Download started';
+      case 'ai_media_acquire_queries':
+        return ({required Object queries}) => 'Searched for: ${queries}';
+      case 'ai_feature_media_acquire':
+        return 'AI download (books, manga, games)';
+      case 'ai_feature_media_acquire_summary':
+        return 'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
       default:
         return null;
     }
@@ -372522,6 +374051,58 @@ extension on _StringsRu {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'media_stats_action':
+        return 'View statistics';
+      case 'media_stats_title':
+        return 'Statistics';
+      case 'media_stats_total':
+        return 'All time';
+      case 'media_stats_last_7_days':
+        return 'Last 7 days';
+      case 'media_stats_active_days':
+        return 'Active days';
+      case 'media_stats_sessions':
+        return 'Sessions';
+      case 'media_stats_first_date':
+        return 'First recorded';
+      case 'media_stats_last_date':
+        return 'Last recorded';
+      case 'media_stats_empty':
+        return 'No statistics recorded for this item yet.';
+      case 'media_stats_load_failed':
+        return 'Couldn\'t load statistics.';
+      case 'ai_media_acquire_entry':
+        return 'AI download';
+      case 'ai_media_acquire_title':
+        return ({required Object domain}) => 'AI download · ${domain}';
+      case 'ai_media_acquire_hint':
+        return 'Tell AI what to download, e.g. a title plus any version you want';
+      case 'ai_media_acquire_send':
+        return 'Search';
+      case 'ai_media_acquire_parsing':
+        return 'Understanding your request…';
+      case 'ai_media_acquire_searching':
+        return 'Searching sources…';
+      case 'ai_media_acquire_picking':
+        return 'AI is picking the best matches…';
+      case 'ai_media_acquire_ai_failed':
+        return 'AI is unavailable right now; results are from your original text, sorted by seeders.';
+      case 'ai_media_acquire_no_results':
+        return 'Nothing found. Try another title, or check that sources are enabled.';
+      case 'ai_media_acquire_recommended':
+        return 'AI picks';
+      case 'ai_media_acquire_others':
+        return 'Other results';
+      case 'ai_media_acquire_download':
+        return 'Download';
+      case 'ai_media_acquire_started':
+        return 'Download started';
+      case 'ai_media_acquire_queries':
+        return ({required Object queries}) => 'Searched for: ${queries}';
+      case 'ai_feature_media_acquire':
+        return 'AI download (books, manga, games)';
+      case 'ai_feature_media_acquire_summary':
+        return 'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
       default:
         return null;
     }
@@ -384447,6 +386028,58 @@ extension on _StringsTh {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'media_stats_action':
+        return 'View statistics';
+      case 'media_stats_title':
+        return 'Statistics';
+      case 'media_stats_total':
+        return 'All time';
+      case 'media_stats_last_7_days':
+        return 'Last 7 days';
+      case 'media_stats_active_days':
+        return 'Active days';
+      case 'media_stats_sessions':
+        return 'Sessions';
+      case 'media_stats_first_date':
+        return 'First recorded';
+      case 'media_stats_last_date':
+        return 'Last recorded';
+      case 'media_stats_empty':
+        return 'No statistics recorded for this item yet.';
+      case 'media_stats_load_failed':
+        return 'Couldn\'t load statistics.';
+      case 'ai_media_acquire_entry':
+        return 'AI download';
+      case 'ai_media_acquire_title':
+        return ({required Object domain}) => 'AI download · ${domain}';
+      case 'ai_media_acquire_hint':
+        return 'Tell AI what to download, e.g. a title plus any version you want';
+      case 'ai_media_acquire_send':
+        return 'Search';
+      case 'ai_media_acquire_parsing':
+        return 'Understanding your request…';
+      case 'ai_media_acquire_searching':
+        return 'Searching sources…';
+      case 'ai_media_acquire_picking':
+        return 'AI is picking the best matches…';
+      case 'ai_media_acquire_ai_failed':
+        return 'AI is unavailable right now; results are from your original text, sorted by seeders.';
+      case 'ai_media_acquire_no_results':
+        return 'Nothing found. Try another title, or check that sources are enabled.';
+      case 'ai_media_acquire_recommended':
+        return 'AI picks';
+      case 'ai_media_acquire_others':
+        return 'Other results';
+      case 'ai_media_acquire_download':
+        return 'Download';
+      case 'ai_media_acquire_started':
+        return 'Download started';
+      case 'ai_media_acquire_queries':
+        return ({required Object queries}) => 'Searched for: ${queries}';
+      case 'ai_feature_media_acquire':
+        return 'AI download (books, manga, games)';
+      case 'ai_feature_media_acquire_summary':
+        return 'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
       default:
         return null;
     }
@@ -396388,6 +398021,58 @@ extension on _StringsTr {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'media_stats_action':
+        return 'View statistics';
+      case 'media_stats_title':
+        return 'Statistics';
+      case 'media_stats_total':
+        return 'All time';
+      case 'media_stats_last_7_days':
+        return 'Last 7 days';
+      case 'media_stats_active_days':
+        return 'Active days';
+      case 'media_stats_sessions':
+        return 'Sessions';
+      case 'media_stats_first_date':
+        return 'First recorded';
+      case 'media_stats_last_date':
+        return 'Last recorded';
+      case 'media_stats_empty':
+        return 'No statistics recorded for this item yet.';
+      case 'media_stats_load_failed':
+        return 'Couldn\'t load statistics.';
+      case 'ai_media_acquire_entry':
+        return 'AI download';
+      case 'ai_media_acquire_title':
+        return ({required Object domain}) => 'AI download · ${domain}';
+      case 'ai_media_acquire_hint':
+        return 'Tell AI what to download, e.g. a title plus any version you want';
+      case 'ai_media_acquire_send':
+        return 'Search';
+      case 'ai_media_acquire_parsing':
+        return 'Understanding your request…';
+      case 'ai_media_acquire_searching':
+        return 'Searching sources…';
+      case 'ai_media_acquire_picking':
+        return 'AI is picking the best matches…';
+      case 'ai_media_acquire_ai_failed':
+        return 'AI is unavailable right now; results are from your original text, sorted by seeders.';
+      case 'ai_media_acquire_no_results':
+        return 'Nothing found. Try another title, or check that sources are enabled.';
+      case 'ai_media_acquire_recommended':
+        return 'AI picks';
+      case 'ai_media_acquire_others':
+        return 'Other results';
+      case 'ai_media_acquire_download':
+        return 'Download';
+      case 'ai_media_acquire_started':
+        return 'Download started';
+      case 'ai_media_acquire_queries':
+        return ({required Object queries}) => 'Searched for: ${queries}';
+      case 'ai_feature_media_acquire':
+        return 'AI download (books, manga, games)';
+      case 'ai_feature_media_acquire_summary':
+        return 'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
       default:
         return null;
     }
@@ -408323,6 +410008,58 @@ extension on _StringsVi {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'media_stats_action':
+        return 'View statistics';
+      case 'media_stats_title':
+        return 'Statistics';
+      case 'media_stats_total':
+        return 'All time';
+      case 'media_stats_last_7_days':
+        return 'Last 7 days';
+      case 'media_stats_active_days':
+        return 'Active days';
+      case 'media_stats_sessions':
+        return 'Sessions';
+      case 'media_stats_first_date':
+        return 'First recorded';
+      case 'media_stats_last_date':
+        return 'Last recorded';
+      case 'media_stats_empty':
+        return 'No statistics recorded for this item yet.';
+      case 'media_stats_load_failed':
+        return 'Couldn\'t load statistics.';
+      case 'ai_media_acquire_entry':
+        return 'AI download';
+      case 'ai_media_acquire_title':
+        return ({required Object domain}) => 'AI download · ${domain}';
+      case 'ai_media_acquire_hint':
+        return 'Tell AI what to download, e.g. a title plus any version you want';
+      case 'ai_media_acquire_send':
+        return 'Search';
+      case 'ai_media_acquire_parsing':
+        return 'Understanding your request…';
+      case 'ai_media_acquire_searching':
+        return 'Searching sources…';
+      case 'ai_media_acquire_picking':
+        return 'AI is picking the best matches…';
+      case 'ai_media_acquire_ai_failed':
+        return 'AI is unavailable right now; results are from your original text, sorted by seeders.';
+      case 'ai_media_acquire_no_results':
+        return 'Nothing found. Try another title, or check that sources are enabled.';
+      case 'ai_media_acquire_recommended':
+        return 'AI picks';
+      case 'ai_media_acquire_others':
+        return 'Other results';
+      case 'ai_media_acquire_download':
+        return 'Download';
+      case 'ai_media_acquire_started':
+        return 'Download started';
+      case 'ai_media_acquire_queries':
+        return ({required Object queries}) => 'Searched for: ${queries}';
+      case 'ai_feature_media_acquire':
+        return 'AI download (books, manga, games)';
+      case 'ai_feature_media_acquire_summary':
+        return 'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
       default:
         return null;
     }
@@ -420138,6 +421875,58 @@ extension on _StringsZhCn {
             '有 ${count} 段统计未恢复：你曾在 Fushi 里删除过这些书的统计';
       case 'hoshi_import_result_failed':
         return ({required Object count}) => '有 ${count} 本书没能导入（它们的统计仍已导入）：';
+      case 'media_stats_action':
+        return '查看统计';
+      case 'media_stats_title':
+        return '统计';
+      case 'media_stats_total':
+        return '累计';
+      case 'media_stats_last_7_days':
+        return '近 7 天';
+      case 'media_stats_active_days':
+        return '活跃天数';
+      case 'media_stats_sessions':
+        return '会话';
+      case 'media_stats_first_date':
+        return '首次记录';
+      case 'media_stats_last_date':
+        return '最近记录';
+      case 'media_stats_empty':
+        return '这一项还没有统计记录。';
+      case 'media_stats_load_failed':
+        return '统计加载失败。';
+      case 'ai_media_acquire_entry':
+        return 'AI 下载';
+      case 'ai_media_acquire_title':
+        return ({required Object domain}) => 'AI 下载 · ${domain}';
+      case 'ai_media_acquire_hint':
+        return '告诉 AI 想下什么，例如作品名加上想要的版本';
+      case 'ai_media_acquire_send':
+        return '搜索';
+      case 'ai_media_acquire_parsing':
+        return '正在理解你的需求…';
+      case 'ai_media_acquire_searching':
+        return '正在搜索来源…';
+      case 'ai_media_acquire_picking':
+        return 'AI 正在挑选最匹配的结果…';
+      case 'ai_media_acquire_ai_failed':
+        return 'AI 暂不可用，已按原文搜索并按做种数排序。';
+      case 'ai_media_acquire_no_results':
+        return '没有找到结果。换个标题试试，或检查来源是否已启用。';
+      case 'ai_media_acquire_recommended':
+        return 'AI 推荐';
+      case 'ai_media_acquire_others':
+        return '其他结果';
+      case 'ai_media_acquire_download':
+        return '下载';
+      case 'ai_media_acquire_started':
+        return '已开始下载';
+      case 'ai_media_acquire_queries':
+        return ({required Object queries}) => '搜索词：${queries}';
+      case 'ai_feature_media_acquire':
+        return 'AI 下载（小说 / 漫画 / 游戏）';
+      case 'ai_feature_media_acquire_summary':
+        return '在「浏览 › 发现」里说出想要的小说、漫画或游戏，AI 把它变成搜索词并推荐匹配结果，每次下载由你确认。';
       default:
         return null;
     }
@@ -431997,6 +433786,58 @@ extension on _StringsZhHk {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'media_stats_action':
+        return 'View statistics';
+      case 'media_stats_title':
+        return 'Statistics';
+      case 'media_stats_total':
+        return 'All time';
+      case 'media_stats_last_7_days':
+        return 'Last 7 days';
+      case 'media_stats_active_days':
+        return 'Active days';
+      case 'media_stats_sessions':
+        return 'Sessions';
+      case 'media_stats_first_date':
+        return 'First recorded';
+      case 'media_stats_last_date':
+        return 'Last recorded';
+      case 'media_stats_empty':
+        return 'No statistics recorded for this item yet.';
+      case 'media_stats_load_failed':
+        return 'Couldn\'t load statistics.';
+      case 'ai_media_acquire_entry':
+        return 'AI download';
+      case 'ai_media_acquire_title':
+        return ({required Object domain}) => 'AI download · ${domain}';
+      case 'ai_media_acquire_hint':
+        return 'Tell AI what to download, e.g. a title plus any version you want';
+      case 'ai_media_acquire_send':
+        return 'Search';
+      case 'ai_media_acquire_parsing':
+        return 'Understanding your request…';
+      case 'ai_media_acquire_searching':
+        return 'Searching sources…';
+      case 'ai_media_acquire_picking':
+        return 'AI is picking the best matches…';
+      case 'ai_media_acquire_ai_failed':
+        return 'AI is unavailable right now; results are from your original text, sorted by seeders.';
+      case 'ai_media_acquire_no_results':
+        return 'Nothing found. Try another title, or check that sources are enabled.';
+      case 'ai_media_acquire_recommended':
+        return 'AI picks';
+      case 'ai_media_acquire_others':
+        return 'Other results';
+      case 'ai_media_acquire_download':
+        return 'Download';
+      case 'ai_media_acquire_started':
+        return 'Download started';
+      case 'ai_media_acquire_queries':
+        return ({required Object queries}) => 'Searched for: ${queries}';
+      case 'ai_feature_media_acquire':
+        return 'AI download (books, manga, games)';
+      case 'ai_feature_media_acquire_summary':
+        return 'In Browse › Discover, describe a book, manga or game. AI turns it into search terms and recommends matching results; you confirm each download.';
       default:
         return null;
     }
