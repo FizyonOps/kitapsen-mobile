@@ -3,7 +3,7 @@
 /// Locales: 17
 /// Strings: 97427 (5731 per locale)
 ///
-/// Built on 2026-09-28 at 02:24 UTC
+/// Built on 2026-09-28 at 03:36 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8155,8 +8155,6 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
   String get anki_pending_mine_landing_title =>
       'Deliver cards from other devices';
-  String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
   String get anki_error_sync_signed_out =>
       'Sign in to your Anki sync server first (Anki settings › Anki sync).';
   String get anki_error_sync_unavailable =>
@@ -8196,6 +8194,8 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
       '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
   String anki_sync_client_sign_in_failed({required Object error}) =>
       'Sign-in failed: ${error}';
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
 }
 
 // Path: <root>
@@ -21880,9 +21880,6 @@ class _StringsAr extends _StringsEn {
   String get anki_pending_mine_landing_title =>
       'Deliver cards from other devices';
   @override
-  String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
-  @override
   String get anki_error_sync_signed_out =>
       'Sign in to your Anki sync server first (Anki settings › Anki sync).';
   @override
@@ -21946,6 +21943,9 @@ class _StringsAr extends _StringsEn {
   @override
   String anki_sync_client_sign_in_failed({required Object error}) =>
       'Sign-in failed: ${error}';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
 }
 
 // Path: <root>
@@ -35870,9 +35870,6 @@ class _StringsDe extends _StringsEn {
   String get anki_pending_mine_landing_title =>
       'Deliver cards from other devices';
   @override
-  String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
-  @override
   String get anki_error_sync_signed_out =>
       'Sign in to your Anki sync server first (Anki settings › Anki sync).';
   @override
@@ -35936,6 +35933,9 @@ class _StringsDe extends _StringsEn {
   @override
   String anki_sync_client_sign_in_failed({required Object error}) =>
       'Sign-in failed: ${error}';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
 }
 
 // Path: <root>
@@ -49911,9 +49911,6 @@ class _StringsEs extends _StringsEn {
   String get anki_pending_mine_landing_title =>
       'Deliver cards from other devices';
   @override
-  String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
-  @override
   String get anki_error_sync_signed_out =>
       'Sign in to your Anki sync server first (Anki settings › Anki sync).';
   @override
@@ -49977,6 +49974,9 @@ class _StringsEs extends _StringsEn {
   @override
   String anki_sync_client_sign_in_failed({required Object error}) =>
       'Sign-in failed: ${error}';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
 }
 
 // Path: <root>
@@ -63991,9 +63991,6 @@ class _StringsFr extends _StringsEn {
   String get anki_pending_mine_landing_title =>
       'Deliver cards from other devices';
   @override
-  String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
-  @override
   String get anki_error_sync_signed_out =>
       'Sign in to your Anki sync server first (Anki settings › Anki sync).';
   @override
@@ -64057,6 +64054,9 @@ class _StringsFr extends _StringsEn {
   @override
   String anki_sync_client_sign_in_failed({required Object error}) =>
       'Sign-in failed: ${error}';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
 }
 
 // Path: <root>
@@ -77861,9 +77861,6 @@ class _StringsId extends _StringsEn {
   String get anki_pending_mine_landing_title =>
       'Deliver cards from other devices';
   @override
-  String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
-  @override
   String get anki_error_sync_signed_out =>
       'Sign in to your Anki sync server first (Anki settings › Anki sync).';
   @override
@@ -77927,6 +77924,9 @@ class _StringsId extends _StringsEn {
   @override
   String anki_sync_client_sign_in_failed({required Object error}) =>
       'Sign-in failed: ${error}';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
 }
 
 // Path: <root>
@@ -91832,9 +91832,6 @@ class _StringsIt extends _StringsEn {
   String get anki_pending_mine_landing_title =>
       'Deliver cards from other devices';
   @override
-  String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
-  @override
   String get anki_error_sync_signed_out =>
       'Sign in to your Anki sync server first (Anki settings › Anki sync).';
   @override
@@ -91898,6 +91895,9 @@ class _StringsIt extends _StringsEn {
   @override
   String anki_sync_client_sign_in_failed({required Object error}) =>
       'Sign-in failed: ${error}';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
 }
 
 // Path: <root>
@@ -105158,9 +105158,6 @@ class _StringsJa extends _StringsEn {
   String get anki_pending_mine_landing_title =>
       'Deliver cards from other devices';
   @override
-  String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
-  @override
   String get anki_error_sync_signed_out =>
       'Sign in to your Anki sync server first (Anki settings › Anki sync).';
   @override
@@ -105224,6 +105221,9 @@ class _StringsJa extends _StringsEn {
   @override
   String anki_sync_client_sign_in_failed({required Object error}) =>
       'Sign-in failed: ${error}';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
 }
 
 // Path: <root>
@@ -118501,9 +118501,6 @@ class _StringsKo extends _StringsEn {
   String get anki_pending_mine_landing_title =>
       'Deliver cards from other devices';
   @override
-  String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
-  @override
   String get anki_error_sync_signed_out =>
       'Sign in to your Anki sync server first (Anki settings › Anki sync).';
   @override
@@ -118567,6 +118564,9 @@ class _StringsKo extends _StringsEn {
   @override
   String anki_sync_client_sign_in_failed({required Object error}) =>
       'Sign-in failed: ${error}';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
 }
 
 // Path: <root>
@@ -132426,9 +132426,6 @@ class _StringsNl extends _StringsEn {
   String get anki_pending_mine_landing_title =>
       'Deliver cards from other devices';
   @override
-  String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
-  @override
   String get anki_error_sync_signed_out =>
       'Sign in to your Anki sync server first (Anki settings › Anki sync).';
   @override
@@ -132492,6 +132489,9 @@ class _StringsNl extends _StringsEn {
   @override
   String anki_sync_client_sign_in_failed({required Object error}) =>
       'Sign-in failed: ${error}';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
 }
 
 // Path: <root>
@@ -146404,9 +146404,6 @@ class _StringsPtBr extends _StringsEn {
   String get anki_pending_mine_landing_title =>
       'Deliver cards from other devices';
   @override
-  String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
-  @override
   String get anki_error_sync_signed_out =>
       'Sign in to your Anki sync server first (Anki settings › Anki sync).';
   @override
@@ -146470,6 +146467,9 @@ class _StringsPtBr extends _StringsEn {
   @override
   String anki_sync_client_sign_in_failed({required Object error}) =>
       'Sign-in failed: ${error}';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
 }
 
 // Path: <root>
@@ -160357,9 +160357,6 @@ class _StringsRu extends _StringsEn {
   String get anki_pending_mine_landing_title =>
       'Deliver cards from other devices';
   @override
-  String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
-  @override
   String get anki_error_sync_signed_out =>
       'Sign in to your Anki sync server first (Anki settings › Anki sync).';
   @override
@@ -160423,6 +160420,9 @@ class _StringsRu extends _StringsEn {
   @override
   String anki_sync_client_sign_in_failed({required Object error}) =>
       'Sign-in failed: ${error}';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
 }
 
 // Path: <root>
@@ -174107,9 +174107,6 @@ class _StringsTh extends _StringsEn {
   String get anki_pending_mine_landing_title =>
       'Deliver cards from other devices';
   @override
-  String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
-  @override
   String get anki_error_sync_signed_out =>
       'Sign in to your Anki sync server first (Anki settings › Anki sync).';
   @override
@@ -174173,6 +174170,9 @@ class _StringsTh extends _StringsEn {
   @override
   String anki_sync_client_sign_in_failed({required Object error}) =>
       'Sign-in failed: ${error}';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
 }
 
 // Path: <root>
@@ -187971,9 +187971,6 @@ class _StringsTr extends _StringsEn {
   String get anki_pending_mine_landing_title =>
       'Deliver cards from other devices';
   @override
-  String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
-  @override
   String get anki_error_sync_signed_out =>
       'Sign in to your Anki sync server first (Anki settings › Anki sync).';
   @override
@@ -188037,6 +188034,9 @@ class _StringsTr extends _StringsEn {
   @override
   String anki_sync_client_sign_in_failed({required Object error}) =>
       'Sign-in failed: ${error}';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
 }
 
 // Path: <root>
@@ -201806,9 +201806,6 @@ class _StringsVi extends _StringsEn {
   String get anki_pending_mine_landing_title =>
       'Deliver cards from other devices';
   @override
-  String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
-  @override
   String get anki_error_sync_signed_out =>
       'Sign in to your Anki sync server first (Anki settings › Anki sync).';
   @override
@@ -201872,6 +201869,9 @@ class _StringsVi extends _StringsEn {
   @override
   String anki_sync_client_sign_in_failed({required Object error}) =>
       'Sign-in failed: ${error}';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
 }
 
 // Path: <root>
@@ -214465,9 +214465,6 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get anki_pending_mine_landing_title => '本机负责落地其他设备的卡片';
   @override
-  String get anki_pending_mine_landing_hint =>
-      '没装 Anki 的设备存下的卡片，经你配置的同步（云盘，或本机作为互联客户端时的互联）送到这台设备，由这里的 Anki 加卡。同一时间只有一台设备负责。互联主机暂时不能担任。';
-  @override
   String get anki_error_sync_signed_out =>
       '请先登录 Anki 同步服务器（Anki 设置 › Anki 同步）。';
   @override
@@ -214531,6 +214528,9 @@ class _StringsZhCn extends _StringsEn {
   @override
   String anki_sync_client_sign_in_failed({required Object error}) =>
       '登录失败：${error}';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      '没装 Anki 的设备存下的卡片，经你配置的同步（云盘，或本机作为互联客户端时的互联）送到这台设备，由这里的 Anki 加卡。同一时间只有一台设备负责。作为互联主机的电脑不担任这个角色：与它配对的手机请改开「制卡到 Fushi 互联服务端」（电脑关机时卡片先存在手机上）。Fushi 服务端可以担任。';
 }
 
 // Path: <root>
@@ -227471,9 +227471,6 @@ class _StringsZhHk extends _StringsEn {
   String get anki_pending_mine_landing_title =>
       'Deliver cards from other devices';
   @override
-  String get anki_pending_mine_landing_hint =>
-      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
-  @override
   String get anki_error_sync_signed_out =>
       'Sign in to your Anki sync server first (Anki settings › Anki sync).';
   @override
@@ -227537,6 +227534,9 @@ class _StringsZhHk extends _StringsEn {
   @override
   String anki_sync_client_sign_in_failed({required Object error}) =>
       'Sign-in failed: ${error}';
+  @override
+  String get anki_pending_mine_landing_hint =>
+      'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
 }
 
 /// Flat map(s) containing all translations.
@@ -239320,8 +239320,6 @@ extension on _StringsEn {
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
-      case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       case 'anki_error_sync_signed_out':
         return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
       case 'anki_error_sync_unavailable':
@@ -239374,6 +239372,8 @@ extension on _StringsEn {
             '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
       case 'anki_sync_client_sign_in_failed':
         return ({required Object error}) => 'Sign-in failed: ${error}';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
       default:
         return null;
     }
@@ -251152,8 +251152,6 @@ extension on _StringsAr {
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
-      case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       case 'anki_error_sync_signed_out':
         return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
       case 'anki_error_sync_unavailable':
@@ -251206,6 +251204,8 @@ extension on _StringsAr {
             '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
       case 'anki_sync_client_sign_in_failed':
         return ({required Object error}) => 'Sign-in failed: ${error}';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
       default:
         return null;
     }
@@ -263033,8 +263033,6 @@ extension on _StringsDe {
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
-      case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       case 'anki_error_sync_signed_out':
         return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
       case 'anki_error_sync_unavailable':
@@ -263087,6 +263085,8 @@ extension on _StringsDe {
             '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
       case 'anki_sync_client_sign_in_failed':
         return ({required Object error}) => 'Sign-in failed: ${error}';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
       default:
         return null;
     }
@@ -274904,8 +274904,6 @@ extension on _StringsEs {
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
-      case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       case 'anki_error_sync_signed_out':
         return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
       case 'anki_error_sync_unavailable':
@@ -274958,6 +274956,8 @@ extension on _StringsEs {
             '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
       case 'anki_sync_client_sign_in_failed':
         return ({required Object error}) => 'Sign-in failed: ${error}';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
       default:
         return null;
     }
@@ -286783,8 +286783,6 @@ extension on _StringsFr {
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
-      case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       case 'anki_error_sync_signed_out':
         return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
       case 'anki_error_sync_unavailable':
@@ -286837,6 +286835,8 @@ extension on _StringsFr {
             '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
       case 'anki_sync_client_sign_in_failed':
         return ({required Object error}) => 'Sign-in failed: ${error}';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
       default:
         return null;
     }
@@ -298632,8 +298632,6 @@ extension on _StringsId {
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
-      case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       case 'anki_error_sync_signed_out':
         return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
       case 'anki_error_sync_unavailable':
@@ -298686,6 +298684,8 @@ extension on _StringsId {
             '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
       case 'anki_sync_client_sign_in_failed':
         return ({required Object error}) => 'Sign-in failed: ${error}';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
       default:
         return null;
     }
@@ -310504,8 +310504,6 @@ extension on _StringsIt {
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
-      case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       case 'anki_error_sync_signed_out':
         return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
       case 'anki_error_sync_unavailable':
@@ -310558,6 +310556,8 @@ extension on _StringsIt {
             '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
       case 'anki_sync_client_sign_in_failed':
         return ({required Object error}) => 'Sign-in failed: ${error}';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
       default:
         return null;
     }
@@ -322297,8 +322297,6 @@ extension on _StringsJa {
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
-      case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       case 'anki_error_sync_signed_out':
         return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
       case 'anki_error_sync_unavailable':
@@ -322351,6 +322349,8 @@ extension on _StringsJa {
             '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
       case 'anki_sync_client_sign_in_failed':
         return ({required Object error}) => 'Sign-in failed: ${error}';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
       default:
         return null;
     }
@@ -334098,8 +334098,6 @@ extension on _StringsKo {
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
-      case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       case 'anki_error_sync_signed_out':
         return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
       case 'anki_error_sync_unavailable':
@@ -334152,6 +334150,8 @@ extension on _StringsKo {
             '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
       case 'anki_sync_client_sign_in_failed':
         return ({required Object error}) => 'Sign-in failed: ${error}';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
       default:
         return null;
     }
@@ -345965,8 +345965,6 @@ extension on _StringsNl {
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
-      case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       case 'anki_error_sync_signed_out':
         return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
       case 'anki_error_sync_unavailable':
@@ -346019,6 +346017,8 @@ extension on _StringsNl {
             '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
       case 'anki_sync_client_sign_in_failed':
         return ({required Object error}) => 'Sign-in failed: ${error}';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
       default:
         return null;
     }
@@ -357827,8 +357827,6 @@ extension on _StringsPtBr {
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
-      case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       case 'anki_error_sync_signed_out':
         return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
       case 'anki_error_sync_unavailable':
@@ -357881,6 +357879,8 @@ extension on _StringsPtBr {
             '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
       case 'anki_sync_client_sign_in_failed':
         return ({required Object error}) => 'Sign-in failed: ${error}';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
       default:
         return null;
     }
@@ -369695,8 +369695,6 @@ extension on _StringsRu {
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
-      case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       case 'anki_error_sync_signed_out':
         return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
       case 'anki_error_sync_unavailable':
@@ -369749,6 +369747,8 @@ extension on _StringsRu {
             '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
       case 'anki_sync_client_sign_in_failed':
         return ({required Object error}) => 'Sign-in failed: ${error}';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
       default:
         return null;
     }
@@ -381532,8 +381532,6 @@ extension on _StringsTh {
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
-      case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       case 'anki_error_sync_signed_out':
         return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
       case 'anki_error_sync_unavailable':
@@ -381586,6 +381584,8 @@ extension on _StringsTh {
             '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
       case 'anki_sync_client_sign_in_failed':
         return ({required Object error}) => 'Sign-in failed: ${error}';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
       default:
         return null;
     }
@@ -393385,8 +393385,6 @@ extension on _StringsTr {
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
-      case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       case 'anki_error_sync_signed_out':
         return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
       case 'anki_error_sync_unavailable':
@@ -393439,6 +393437,8 @@ extension on _StringsTr {
             '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
       case 'anki_sync_client_sign_in_failed':
         return ({required Object error}) => 'Sign-in failed: ${error}';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
       default:
         return null;
     }
@@ -405232,8 +405232,6 @@ extension on _StringsVi {
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
-      case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       case 'anki_error_sync_signed_out':
         return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
       case 'anki_error_sync_unavailable':
@@ -405286,6 +405284,8 @@ extension on _StringsVi {
             '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
       case 'anki_sync_client_sign_in_failed':
         return ({required Object error}) => 'Sign-in failed: ${error}';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
       default:
         return null;
     }
@@ -416963,8 +416963,6 @@ extension on _StringsZhCn {
         }) => '已发送 ${delivered} 张，失败 ${failed} 张，剩余 ${remaining} 张';
       case 'anki_pending_mine_landing_title':
         return '本机负责落地其他设备的卡片';
-      case 'anki_pending_mine_landing_hint':
-        return '没装 Anki 的设备存下的卡片，经你配置的同步（云盘，或本机作为互联客户端时的互联）送到这台设备，由这里的 Anki 加卡。同一时间只有一台设备负责。互联主机暂时不能担任。';
       case 'anki_error_sync_signed_out':
         return '请先登录 Anki 同步服务器（Anki 设置 › Anki 同步）。';
       case 'anki_error_sync_unavailable':
@@ -417017,6 +417015,8 @@ extension on _StringsZhCn {
             '还有 ${count} 张卡没有同步，请先同步再切换账号或退出登录。';
       case 'anki_sync_client_sign_in_failed':
         return ({required Object error}) => '登录失败：${error}';
+      case 'anki_pending_mine_landing_hint':
+        return '没装 Anki 的设备存下的卡片，经你配置的同步（云盘，或本机作为互联客户端时的互联）送到这台设备，由这里的 Anki 加卡。同一时间只有一台设备负责。作为互联主机的电脑不担任这个角色：与它配对的手机请改开「制卡到 Fushi 互联服务端」（电脑关机时卡片先存在手机上）。Fushi 服务端可以担任。';
       default:
         return null;
     }
@@ -428735,8 +428735,6 @@ extension on _StringsZhHk {
         }) => 'Sent ${delivered}, failed ${failed}, remaining ${remaining}';
       case 'anki_pending_mine_landing_title':
         return 'Deliver cards from other devices';
-      case 'anki_pending_mine_landing_hint':
-        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
       case 'anki_error_sync_signed_out':
         return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
       case 'anki_error_sync_unavailable':
@@ -428789,6 +428787,8 @@ extension on _StringsZhHk {
             '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
       case 'anki_sync_client_sign_in_failed':
         return ({required Object error}) => 'Sign-in failed: ${error}';
+      case 'anki_pending_mine_landing_hint':
+        return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. A computer acting as an interconnect host doesn\'t take this role: phones paired with it should turn on Mine to Fushi Interconnect server instead (cards wait on the phone while the computer is off). A Fushi server can take this role.';
       default:
         return null;
     }
