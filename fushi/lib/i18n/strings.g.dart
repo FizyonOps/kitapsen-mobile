@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 97478 (5734 per locale)
+/// Strings: 97495 (5735 per locale)
 ///
-/// Built on 2026-09-28 at 03:56 UTC
+/// Built on 2026-09-28 at 04:33 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8200,6 +8200,11 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String anki_sync_client_discard_confirm({required Object count}) =>
       '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
   String get anki_sync_client_discard_action => 'Discard and sign out';
+  String anki_sync_client_status_failing({
+    required Object count,
+    required Object error,
+  }) =>
+      '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
 }
 
 // Path: <root>
@@ -21957,6 +21962,12 @@ class _StringsAr extends _StringsEn {
       '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
   @override
   String get anki_sync_client_discard_action => 'Discard and sign out';
+  @override
+  String anki_sync_client_status_failing({
+    required Object count,
+    required Object error,
+  }) =>
+      '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
 }
 
 // Path: <root>
@@ -35954,6 +35965,12 @@ class _StringsDe extends _StringsEn {
       '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
   @override
   String get anki_sync_client_discard_action => 'Discard and sign out';
+  @override
+  String anki_sync_client_status_failing({
+    required Object count,
+    required Object error,
+  }) =>
+      '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
 }
 
 // Path: <root>
@@ -50002,6 +50019,12 @@ class _StringsEs extends _StringsEn {
       '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
   @override
   String get anki_sync_client_discard_action => 'Discard and sign out';
+  @override
+  String anki_sync_client_status_failing({
+    required Object count,
+    required Object error,
+  }) =>
+      '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
 }
 
 // Path: <root>
@@ -64089,6 +64112,12 @@ class _StringsFr extends _StringsEn {
       '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
   @override
   String get anki_sync_client_discard_action => 'Discard and sign out';
+  @override
+  String anki_sync_client_status_failing({
+    required Object count,
+    required Object error,
+  }) =>
+      '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
 }
 
 // Path: <root>
@@ -77966,6 +77995,12 @@ class _StringsId extends _StringsEn {
       '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
   @override
   String get anki_sync_client_discard_action => 'Discard and sign out';
+  @override
+  String anki_sync_client_status_failing({
+    required Object count,
+    required Object error,
+  }) =>
+      '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
 }
 
 // Path: <root>
@@ -91944,6 +91979,12 @@ class _StringsIt extends _StringsEn {
       '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
   @override
   String get anki_sync_client_discard_action => 'Discard and sign out';
+  @override
+  String anki_sync_client_status_failing({
+    required Object count,
+    required Object error,
+  }) =>
+      '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
 }
 
 // Path: <root>
@@ -105277,6 +105318,12 @@ class _StringsJa extends _StringsEn {
       '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
   @override
   String get anki_sync_client_discard_action => 'Discard and sign out';
+  @override
+  String anki_sync_client_status_failing({
+    required Object count,
+    required Object error,
+  }) =>
+      '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
 }
 
 // Path: <root>
@@ -118627,6 +118674,12 @@ class _StringsKo extends _StringsEn {
       '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
   @override
   String get anki_sync_client_discard_action => 'Discard and sign out';
+  @override
+  String anki_sync_client_status_failing({
+    required Object count,
+    required Object error,
+  }) =>
+      '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
 }
 
 // Path: <root>
@@ -132559,6 +132612,12 @@ class _StringsNl extends _StringsEn {
       '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
   @override
   String get anki_sync_client_discard_action => 'Discard and sign out';
+  @override
+  String anki_sync_client_status_failing({
+    required Object count,
+    required Object error,
+  }) =>
+      '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
 }
 
 // Path: <root>
@@ -146544,6 +146603,12 @@ class _StringsPtBr extends _StringsEn {
       '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
   @override
   String get anki_sync_client_discard_action => 'Discard and sign out';
+  @override
+  String anki_sync_client_status_failing({
+    required Object count,
+    required Object error,
+  }) =>
+      '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
 }
 
 // Path: <root>
@@ -160504,6 +160569,12 @@ class _StringsRu extends _StringsEn {
       '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
   @override
   String get anki_sync_client_discard_action => 'Discard and sign out';
+  @override
+  String anki_sync_client_status_failing({
+    required Object count,
+    required Object error,
+  }) =>
+      '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
 }
 
 // Path: <root>
@@ -174261,6 +174332,12 @@ class _StringsTh extends _StringsEn {
       '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
   @override
   String get anki_sync_client_discard_action => 'Discard and sign out';
+  @override
+  String anki_sync_client_status_failing({
+    required Object count,
+    required Object error,
+  }) =>
+      '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
 }
 
 // Path: <root>
@@ -188132,6 +188209,12 @@ class _StringsTr extends _StringsEn {
       '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
   @override
   String get anki_sync_client_discard_action => 'Discard and sign out';
+  @override
+  String anki_sync_client_status_failing({
+    required Object count,
+    required Object error,
+  }) =>
+      '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
 }
 
 // Path: <root>
@@ -201974,6 +202057,12 @@ class _StringsVi extends _StringsEn {
       '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
   @override
   String get anki_sync_client_discard_action => 'Discard and sign out';
+  @override
+  String anki_sync_client_status_failing({
+    required Object count,
+    required Object error,
+  }) =>
+      '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
 }
 
 // Path: <root>
@@ -214640,6 +214729,11 @@ class _StringsZhCn extends _StringsEn {
       '还有 ${count} 张卡没有同步到 Anki。放弃这些卡并退出登录？放弃后无法找回。';
   @override
   String get anki_sync_client_discard_action => '放弃并退出';
+  @override
+  String anki_sync_client_status_failing({
+    required Object count,
+    required Object error,
+  }) => '${count} 张卡写入牌组集合失败，会自动重试：${error}';
 }
 
 // Path: <root>
@@ -227653,6 +227747,12 @@ class _StringsZhHk extends _StringsEn {
       '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
   @override
   String get anki_sync_client_discard_action => 'Discard and sign out';
+  @override
+  String anki_sync_client_status_failing({
+    required Object count,
+    required Object error,
+  }) =>
+      '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
 }
 
 /// Flat map(s) containing all translations.
@@ -239497,6 +239597,9 @@ extension on _StringsEn {
             '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
       case 'anki_sync_client_discard_action':
         return 'Discard and sign out';
+      case 'anki_sync_client_status_failing':
+        return ({required Object count, required Object error}) =>
+            '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
       default:
         return null;
     }
@@ -251336,6 +251439,9 @@ extension on _StringsAr {
             '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
       case 'anki_sync_client_discard_action':
         return 'Discard and sign out';
+      case 'anki_sync_client_status_failing':
+        return ({required Object count, required Object error}) =>
+            '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
       default:
         return null;
     }
@@ -263224,6 +263330,9 @@ extension on _StringsDe {
             '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
       case 'anki_sync_client_discard_action':
         return 'Discard and sign out';
+      case 'anki_sync_client_status_failing':
+        return ({required Object count, required Object error}) =>
+            '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
       default:
         return null;
     }
@@ -275102,6 +275211,9 @@ extension on _StringsEs {
             '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
       case 'anki_sync_client_discard_action':
         return 'Discard and sign out';
+      case 'anki_sync_client_status_failing':
+        return ({required Object count, required Object error}) =>
+            '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
       default:
         return null;
     }
@@ -286988,6 +287100,9 @@ extension on _StringsFr {
             '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
       case 'anki_sync_client_discard_action':
         return 'Discard and sign out';
+      case 'anki_sync_client_status_failing':
+        return ({required Object count, required Object error}) =>
+            '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
       default:
         return null;
     }
@@ -298844,6 +298959,9 @@ extension on _StringsId {
             '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
       case 'anki_sync_client_discard_action':
         return 'Discard and sign out';
+      case 'anki_sync_client_status_failing':
+        return ({required Object count, required Object error}) =>
+            '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
       default:
         return null;
     }
@@ -310723,6 +310841,9 @@ extension on _StringsIt {
             '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
       case 'anki_sync_client_discard_action':
         return 'Discard and sign out';
+      case 'anki_sync_client_status_failing':
+        return ({required Object count, required Object error}) =>
+            '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
       default:
         return null;
     }
@@ -322523,6 +322644,9 @@ extension on _StringsJa {
             '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
       case 'anki_sync_client_discard_action':
         return 'Discard and sign out';
+      case 'anki_sync_client_status_failing':
+        return ({required Object count, required Object error}) =>
+            '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
       default:
         return null;
     }
@@ -334331,6 +334455,9 @@ extension on _StringsKo {
             '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
       case 'anki_sync_client_discard_action':
         return 'Discard and sign out';
+      case 'anki_sync_client_status_failing':
+        return ({required Object count, required Object error}) =>
+            '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
       default:
         return null;
     }
@@ -346205,6 +346332,9 @@ extension on _StringsNl {
             '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
       case 'anki_sync_client_discard_action':
         return 'Discard and sign out';
+      case 'anki_sync_client_status_failing':
+        return ({required Object count, required Object error}) =>
+            '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
       default:
         return null;
     }
@@ -358074,6 +358204,9 @@ extension on _StringsPtBr {
             '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
       case 'anki_sync_client_discard_action':
         return 'Discard and sign out';
+      case 'anki_sync_client_status_failing':
+        return ({required Object count, required Object error}) =>
+            '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
       default:
         return null;
     }
@@ -369949,6 +370082,9 @@ extension on _StringsRu {
             '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
       case 'anki_sync_client_discard_action':
         return 'Discard and sign out';
+      case 'anki_sync_client_status_failing':
+        return ({required Object count, required Object error}) =>
+            '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
       default:
         return null;
     }
@@ -381793,6 +381929,9 @@ extension on _StringsTh {
             '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
       case 'anki_sync_client_discard_action':
         return 'Discard and sign out';
+      case 'anki_sync_client_status_failing':
+        return ({required Object count, required Object error}) =>
+            '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
       default:
         return null;
     }
@@ -393653,6 +393792,9 @@ extension on _StringsTr {
             '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
       case 'anki_sync_client_discard_action':
         return 'Discard and sign out';
+      case 'anki_sync_client_status_failing':
+        return ({required Object count, required Object error}) =>
+            '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
       default:
         return null;
     }
@@ -405507,6 +405649,9 @@ extension on _StringsVi {
             '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
       case 'anki_sync_client_discard_action':
         return 'Discard and sign out';
+      case 'anki_sync_client_status_failing':
+        return ({required Object count, required Object error}) =>
+            '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
       default:
         return null;
     }
@@ -417245,6 +417390,9 @@ extension on _StringsZhCn {
             '还有 ${count} 张卡没有同步到 Anki。放弃这些卡并退出登录？放弃后无法找回。';
       case 'anki_sync_client_discard_action':
         return '放弃并退出';
+      case 'anki_sync_client_status_failing':
+        return ({required Object count, required Object error}) =>
+            '${count} 张卡写入牌组集合失败，会自动重试：${error}';
       default:
         return null;
     }
@@ -429024,6 +429172,9 @@ extension on _StringsZhHk {
             '${count} card(s) haven\'t synced to Anki yet. Discard them and sign out? They can\'t be recovered.';
       case 'anki_sync_client_discard_action':
         return 'Discard and sign out';
+      case 'anki_sync_client_status_failing':
+        return ({required Object count, required Object error}) =>
+            '${count} card(s) couldn\'t be written to the collection and will be retried: ${error}';
       default:
         return null;
     }
