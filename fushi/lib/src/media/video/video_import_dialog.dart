@@ -29,6 +29,8 @@ import 'package:fushi_core/fushi_core.dart';
 import 'package:fushi/src/storage/app_paths.dart';
 import 'package:path/path.dart' as p;
 import 'package:fushi_engine/media/video/video_library_import.dart';
+import 'package:fushi_engine/media/video/video_subtitle_source.dart'
+    show kSubtitleFileExtensions;
 export 'package:fushi_engine/media/video/video_library_import.dart'
     show playlistBookUid, singleVideoBookUid, uniqueVideoBookUid, parseSubtitleCues;
 // TODO-817 M1c → 审计 §1-A: videoCoverFileName / extractVideoCover 已下沉到
@@ -263,7 +265,7 @@ class _VideoImportDialogState extends State<VideoImportDialog>
     final SidecarMatch m = await findSidecars(
       videoPath,
       wantAudio: false,
-      subtitleExts: const <String>{'srt', 'vtt', 'ass', 'ssa'},
+      subtitleExts: kSubtitleFileExtensions,
     );
     if (!mounted || m.subtitlePath == null || _subtitlePath != null) return;
     setState(() => _subtitlePath = m.subtitlePath);
@@ -281,7 +283,7 @@ class _VideoImportDialogState extends State<VideoImportDialog>
     // 集与 _autoAttachSubtitle / parseSubtitleCues 支持列表对齐。
     final String? path = await pickSystemFilePath(
       context: context,
-      allowedExtensions: const <String>{'srt', 'vtt', 'ass', 'ssa'},
+      allowedExtensions: kSubtitleFileExtensions,
     );
     if (path == null || !mounted) return;
     setState(() => _subtitlePath = path);

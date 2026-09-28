@@ -61,6 +61,8 @@ import 'package:fushi_engine/media/video/video_sidecar.dart'
 import 'package:fushi_engine/updates/update_feed_kind.dart';
 import 'package:fushi_engine/updates/update_feed_port.dart';
 import 'package:fushi_engine/foundation/engine_log.dart';
+import 'package:fushi_engine/media/video/video_subtitle_source.dart'
+    show isSubtitleFilePath;
 
 enum VideoDownloadSubtitlePolicy { none, bestEffort, required }
 
@@ -4491,13 +4493,8 @@ class VideoDownloadPipelineService {
 
   static String _safeSubtitleExtension(String fileName) {
     final String extension = p.extension(fileName).toLowerCase();
-    return const <String>{
-          '.srt',
-          '.ass',
-          '.ssa',
-          '.vtt',
-          '.sub',
-        }.contains(extension)
+    // `.sub` 不可解析，但历来原样保留扩展名（改成 .srt 只会让解析失败得更隐蔽）。
+    return isSubtitleFilePath(fileName) || extension == '.sub'
         ? extension
         : '.srt';
   }

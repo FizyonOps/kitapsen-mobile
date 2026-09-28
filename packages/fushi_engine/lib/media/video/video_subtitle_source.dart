@@ -70,7 +70,32 @@ class EmbeddedSubtitleTrackProbeResult {
 }
 
 /// 字幕文本格式（决定用哪个 parser）。
-enum SubtitleFormat { srt, ass, vtt }
+enum SubtitleFormat { srt, ass, vtt, sami, ttml, sbv }
+
+/// 外挂字幕文件扩展名（小写、不带点）→ 格式：**唯一真相源**。
+///
+/// 文件选择器白名单、同目录 sidecar 扫描、下载落盘保留扩展名、来源库扫描都从这里
+/// 派生（[kSubtitleFileExtensions]）。以前每处各写一份 `{srt,vtt,ass,ssa}`，加一种
+/// 格式要改十几处、漏一处就是「选得到却读不了」或「读得了却选不到」（BUG-2748）。
+const Map<String, SubtitleFormat> kSubtitleFormatByExtension =
+    <String, SubtitleFormat>{
+  'srt': SubtitleFormat.srt,
+  'ass': SubtitleFormat.ass,
+  'ssa': SubtitleFormat.ass,
+  'vtt': SubtitleFormat.vtt,
+  'smi': SubtitleFormat.sami,
+  'sami': SubtitleFormat.sami,
+  'ttml': SubtitleFormat.ttml,
+  'dfxp': SubtitleFormat.ttml,
+  'sbv': SubtitleFormat.sbv,
+};
+
+/// 受支持的外挂字幕扩展名（小写、不带点），即 [kSubtitleFormatByExtension] 的键集。
+final Set<String> kSubtitleFileExtensions =
+    Set<String>.unmodifiable(kSubtitleFormatByExtension.keys);
+
+/// 路径 / 文件名是否是受支持的外挂字幕（按扩展名，大小写不敏感）。
+bool isSubtitleFilePath(String path) => subtitleFormatForPath(path) != null;
 
 /// 匹配 `Stream #0:N(lang): Subtitle: codec ...` 行的正则。
 ///
@@ -175,21 +200,13 @@ String? _extractTrackTitle(List<String> lines, int start) {
   return handlerFallback;
 }
 
-/// 按文件扩展名判定字幕格式（外挂文件用）。`.ssa` 归入 [SubtitleFormat.ass]；
+/// 按文件扩展名判定字幕格式（外挂文件用，查 [kSubtitleFormatByExtension]）。
+/// `.ssa` 归入 [SubtitleFormat.ass]，`.smi` / `.sami` 归入 sami，`.dfxp` 归入 ttml；
 /// 未知扩展名返回 null。
 SubtitleFormat? subtitleFormatForPath(String path) {
   final String ext = p.extension(path).toLowerCase();
-  switch (ext) {
-    case '.srt':
-      return SubtitleFormat.srt;
-    case '.ass':
-    case '.ssa':
-      return SubtitleFormat.ass;
-    case '.vtt':
-      return SubtitleFormat.vtt;
-    default:
-      return null;
-  }
+  if (ext.isEmpty) return null;
+  return kSubtitleFormatByExtension[ext.substring(1)];
 }
 
 /// **纯函数**：判断持久化字幕源值 [persisted] 是否「显式导入/下载的外挂字幕文件」
@@ -291,6 +308,12 @@ String subtitleExtensionForFormat(SubtitleFormat format) {
       return '.ass';
     case SubtitleFormat.vtt:
       return '.vtt';
+    case SubtitleFormat.sami:
+      return '.smi';
+    case SubtitleFormat.ttml:
+      return '.ttml';
+    case SubtitleFormat.sbv:
+      return '.sbv';
   }
 }
 
@@ -318,6 +341,12 @@ List<AudioCue> parseSubtitleContent(
       );
     case SubtitleFormat.vtt:
       return VttParser.parseString(content: content, bookKey: bookUid);
+    case SubtitleFormat.sami:
+      return SamiParser.parseString(content: content, bookKey: bookUid);
+    case SubtitleFormat.ttml:
+      return TtmlParser.parseString(content: content, bookKey: bookUid);
+    case SubtitleFormat.sbv:
+      return SbvParser.parseString(content: content, bookKey: bookUid);
   }
 }
 
@@ -367,6 +396,12 @@ Future<List<AudioCue>> parseSubtitleContentAsync(
       );
     case SubtitleFormat.vtt:
       return VttParser.parseStringAsync(content: content, bookKey: bookUid);
+    case SubtitleFormat.sami:
+      return SamiParser.parseStringAsync(content: content, bookKey: bookUid);
+    case SubtitleFormat.ttml:
+      return TtmlParser.parseStringAsync(content: content, bookKey: bookUid);
+    case SubtitleFormat.sbv:
+      return SbvParser.parseStringAsync(content: content, bookKey: bookUid);
   }
 }
 
@@ -676,19 +711,11 @@ Future<List<EmbeddedSubtitleTrack>> listEmbeddedSubtitleTracks(
   return (await probeEmbeddedSubtitleTracks(videoPath)).tracks;
 }
 
-/// 视频同目录的外挂字幕扩展名（小写比较）。
-const Set<String> _externalSubtitleExtensions = <String>{
-  '.srt',
-  '.ass',
-  '.ssa',
-  '.vtt',
-};
-
 /// **纯函数**：从目录文件名列表 [dirFiles] 中挑出与 [videoBaseNoExt] **同前缀**的
 /// 外挂字幕文件名（大小写不敏感），返回原始文件名。
 ///
 /// 「同前缀」= 文件名（小写）以 `<videoBaseNoExt>` 开头，且扩展名 ∈
-/// {srt,ass,ssa,vtt}。即 `S01E01.mkv`（base=`S01E01`）只挑 `S01E01.srt` /
+/// [kSubtitleFileExtensions]。即 `S01E01.mkv`（base=`S01E01`）只挑 `S01E01.srt` /
 /// `S01E01.ja.srt` / `S01E01.en.srt`，**不挑** `S01E02.ja.srt`。这样换集/同目录混放
 /// 多集字幕时，字幕菜单只列当前集的字幕，不被别集刷屏。
 ///
@@ -709,8 +736,7 @@ List<String> pickSameNameSubs(
   for (final String name in dirFiles) {
     final String nameLower = name.toLowerCase();
     if (!nameLower.startsWith(baseLower)) continue;
-    final String ext = p.extension(nameLower);
-    if (!_externalSubtitleExtensions.contains(ext)) continue;
+    if (!isSubtitleFilePath(nameLower)) continue;
     if (nameLower.contains(langMarker)) {
       langFirst.add(name);
     } else {

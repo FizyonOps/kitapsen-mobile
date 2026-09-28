@@ -1308,7 +1308,7 @@ extension _VideoSubtitle on _VideoFushiPageState {
   Future<void> _pickAndImportSubtitle(VideoPlayerController controller) async {
     final String? path = await pickSystemFilePath(
       context: context,
-      allowedExtensions: const <String>{'srt', 'vtt', 'ass', 'ssa'},
+      allowedExtensions: kSubtitleFileExtensions,
     );
     _focusOwnership.reclaim(FocusReclaimCause.overlayClosed);
     if (path == null) return;
@@ -1321,7 +1321,7 @@ extension _VideoSubtitle on _VideoFushiPageState {
   ) async {
     final String? path = await pickSystemFilePath(
       context: context,
-      allowedExtensions: const <String>{'srt', 'vtt', 'ass', 'ssa'},
+      allowedExtensions: kSubtitleFileExtensions,
     );
     _focusOwnership.reclaim(FocusReclaimCause.overlayClosed);
     if (path == null) return;
@@ -1780,7 +1780,7 @@ extension _VideoSubtitle on _VideoFushiPageState {
   ) async {
     final String? path = await pickSystemFilePath(
       context: context,
-      allowedExtensions: const <String>{'srt', 'vtt', 'ass', 'ssa'},
+      allowedExtensions: kSubtitleFileExtensions,
     );
     _focusOwnership.reclaim(FocusReclaimCause.overlayClosed);
     if (path == null) return;

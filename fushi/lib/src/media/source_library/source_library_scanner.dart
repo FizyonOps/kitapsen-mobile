@@ -77,6 +77,8 @@ import 'package:fushi_engine/media/video/video_book_repository.dart';
 import 'package:fushi/src/media/video/video_folder_group_coordinator.dart';
 import 'package:fushi/src/media/video/video_import_dialog.dart';
 import 'package:fushi/src/media/video/metadata/video_source_metadata_indexer.dart';
+import 'package:fushi_engine/media/video/video_subtitle_source.dart'
+    show kSubtitleFileExtensions;
 
 /// 书文件扩展名（小写、不带点）。
 ///
@@ -86,8 +88,9 @@ import 'package:fushi/src/media/video/metadata/video_source_metadata_indexer.dar
 /// 文件（用户实报）。导入分流见 [SourceLibraryScanner._importBooks]。
 const Set<String> kScanBookExtensions = <String>{'epub', 'pdf'};
 
-/// Subtitle whitelist shared with the video import dialog (no lrc).
-const Set<String> kScanVideoSubtitleExts = <String>{'srt', 'vtt', 'ass', 'ssa'};
+/// Subtitle whitelist shared with the video import dialog (no lrc): the engine's
+/// single source of truth [kSubtitleFileExtensions].
+final Set<String> kScanVideoSubtitleExts = kSubtitleFileExtensions;
 
 /// 视频域允许的网络传输：条目路径本身是可原地流播的 http(s) URL。
 const Set<String> kStreamableVideoSourceTransports = <String>{

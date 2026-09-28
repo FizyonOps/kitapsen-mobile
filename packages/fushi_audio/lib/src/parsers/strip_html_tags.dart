@@ -50,7 +50,44 @@ final RegExp _inlineTagPattern = RegExp('<[^>]+>');
 /// **故意不同**的实现——那边把标签替换成**空格**再统一折叠（Anki 字段 HTML 里
 /// `<br>` / 块级标签承担换行分词，直接删空会把相邻词粘连）；而字幕行内标签
 /// 紧贴正文，替换成空格反而会在日文句中引入假空格。两份实现不强并。
-String stripHtmlTags(String text) => text
-    .replaceAll(_rubyAnnotationPattern, '')
-    .replaceAll(_inlineTagPattern, '')
-    .trim();
+String stripHtmlTags(String text) => decodeHtmlEntities(
+      text
+          .replaceAll(_rubyAnnotationPattern, '')
+          .replaceAll(_inlineTagPattern, ''),
+    ).trim();
+
+/// 字符实体：命名实体（字幕里实际出现的那几个）与十进制 / 十六进制数字实体。
+final RegExp _entityPattern = RegExp(r'&(#x[0-9a-fA-F]+|#\d+|[a-zA-Z]+);');
+
+const Map<String, String> _namedEntities = <String, String>{
+  'amp': '&',
+  'lt': '<',
+  'gt': '>',
+  'quot': '"',
+  'apos': "'",
+  'nbsp': '\u00A0',
+  'lrm': '\u200E',
+  'rlm': '\u200F',
+};
+
+/// 解码 HTML / WebVTT 字符实体（`&amp;` `&lt;` `&nbsp;` `&#12354;` `&#x3042;`）。
+///
+/// WebVTT 规范要求正文里的 `&` `<` `>` 写成实体，SAMI / TTML 与不少转换器产出的
+/// SRT 也带实体；不解码就原样显示 `Tom &amp; Jerry`（BUG-2748）。必须在**剥标签之后**
+/// 解码，否则 `&lt;b&gt;` 解出的 `<b>` 会被当标签吃掉。认不出的实体原样保留。
+String decodeHtmlEntities(String text) {
+  if (!text.contains('&')) return text;
+  return text.replaceAllMapped(_entityPattern, (Match m) {
+    final String body = m.group(1)!;
+    if (body.startsWith('#')) {
+      final bool hex = body.length > 1 && (body[1] == 'x' || body[1] == 'X');
+      final int? code = int.tryParse(
+        hex ? body.substring(2) : body.substring(1),
+        radix: hex ? 16 : 10,
+      );
+      if (code == null || code <= 0 || code > 0x10FFFF) return m.group(0)!;
+      return String.fromCharCode(code);
+    }
+    return _namedEntities[body.toLowerCase()] ?? m.group(0)!;
+  });
+}

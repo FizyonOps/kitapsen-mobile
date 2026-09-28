@@ -31,6 +31,8 @@ import 'package:path/path.dart' as p;
 import 'package:fushi/src/pages/implementations/video_resource_version_group_list.dart';
 import 'package:fushi/src/sync/interconnect_download_client.dart';
 import 'package:fushi/src/sync/interconnect_subscription_client.dart';
+import 'package:fushi_engine/media/video/video_subtitle_source.dart'
+    show isSubtitleFilePath;
 
 export 'package:fushi/src/media/video/download/video_discovery_selection.dart';
 
@@ -234,7 +236,7 @@ Future<String> installDiscoverySubtitle({
   }
 
   String extension = p.extension(download.fileName).toLowerCase();
-  if (!const <String>{'.ass', '.ssa', '.srt', '.vtt'}.contains(extension)) {
+  if (!isSubtitleFilePath(download.fileName)) {
     extension = '.srt';
   }
   final String safeStem = safeWindowsFileName(stem).trim().isEmpty

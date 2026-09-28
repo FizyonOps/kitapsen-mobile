@@ -30,6 +30,8 @@ import 'package:fushi_engine/media/video/subtitle/video_subtitle_provider.dart';
 import 'package:fushi_engine/media/video/video_duration_probe.dart';
 import 'package:fushi_engine/media/video/video_sidecar.dart'
     show listSidecarSubtitles;
+import 'package:fushi_engine/media/video/video_subtitle_source.dart'
+    show isSubtitleFilePath;
 
 /// 一个待补字幕的视频。身份来自刮削，不是从文件名现猜的。
 class SubtitleBackfillTarget {
@@ -375,7 +377,5 @@ String sidecarLanguageTag(String raw) {
 /// 会让这条字幕在菜单里根本不出现。来源站给的多半确实是文本字幕。
 String sidecarSubtitleExtension(String fileName) {
   final String ext = p.extension(fileName).toLowerCase();
-  return const <String>{'.srt', '.ass', '.ssa', '.vtt'}.contains(ext)
-      ? ext
-      : '.srt';
+  return isSubtitleFilePath(fileName) ? ext : '.srt';
 }

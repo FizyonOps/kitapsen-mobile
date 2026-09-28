@@ -131,6 +131,8 @@ import 'package:fushi/src/media/video/metadata/video_source_scrape_run_detail_di
         showVideoMetadataCandidateSearchDialog,
         showVideoSourceScrapeManualBindingDialog;
 import 'package:fushi/src/media/video/metadata/video_tmdb_ordering_dialog.dart';
+import 'package:fushi_engine/media/video/video_subtitle_source.dart'
+    show kSubtitleFileExtensions;
 
 /// 顶层 helper：打开本地视频播放页的**共享路由入口**（本页 hero/卡片与首页
 /// dashboard 继续卡/活动条同一条路径），统一经 [VideoFushiPage.neutralized]
@@ -3143,7 +3145,7 @@ class _HomeVideoPageState extends BaseModuleTabPageState<HomeVideoPage> {
   Future<void> _pickSubtitle(VideoBookRow book) async {
     final String? subtitlePath = await pickSystemFilePath(
       context: context,
-      allowedExtensions: const <String>{'srt', 'vtt', 'ass', 'ssa'},
+      allowedExtensions: kSubtitleFileExtensions,
     );
     if (subtitlePath == null || !mounted) return;
     await _attachSubtitleToVideoCard(book, subtitlePath);

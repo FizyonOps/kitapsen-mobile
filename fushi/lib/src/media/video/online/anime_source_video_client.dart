@@ -15,6 +15,8 @@ import 'package:fushi/src/media/manga/mihon/mihon_runtime.dart';
 import 'package:fushi/src/sync/remote_cover_fetcher.dart';
 import 'package:fushi/src/sync/remote_video_client.dart';
 import 'package:fushi_engine/utils/net/app_http.dart';
+import 'package:fushi_engine/media/video/video_subtitle_source.dart'
+    show isSubtitleFilePath;
 
 /// `RemoteVideoInfo.id` 的前缀：视频源扩展的一集。
 ///
@@ -423,8 +425,7 @@ class AnimeSourceVideoClient
     final String path = Uri.tryParse(track.url)?.path ?? '';
     final String extension = p.extension(path).toLowerCase();
     final String suffix =
-        const <String>{'.vtt', '.srt', '.ass', '.ssa'}.contains(extension)
-        ? extension
+        isSubtitleFilePath(path) ? extension
         : '.vtt';
     // `\w` 在 Dart 里只认 ASCII，源给的语言标签多半是「日本語」这类：按 Unicode
     // 字母/数字保留，其余（空格、斜杠、括号）折成下划线。

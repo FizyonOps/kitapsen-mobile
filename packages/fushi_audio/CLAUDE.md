@@ -4,7 +4,7 @@
 
 ## 模块职责
 
-音频播放与有声书匹配模块：提供字幕解析器（SRT/VTT/LRC/ASS/SMIL/JSON alignment）、有声书播放控制器、音频-文本对齐匹配算法、阅读位置管理和统计追踪。
+音频播放与有声书匹配模块：提供字幕解析器（SRT/VTT/SAMI/TTML/SBV/LRC/ASS/SMIL/JSON alignment）、有声书播放控制器、音频-文本对齐匹配算法、阅读位置管理和统计追踪。
 
 ## 入口与启动
 
@@ -15,7 +15,7 @@
 ## 对外接口
 
 ### 字幕解析器
-- `SrtParser` / `VttParser` / `LrcParser` / `AssParser` / `SmilParser` / `JsonAlignmentParser` -- 各格式字幕解析。
+- `SrtParser` / `VttParser` / `SamiParser` / `TtmlParser` / `SbvParser` / `LrcParser` / `AssParser` / `SmilParser` / `JsonAlignmentParser` -- 各格式字幕解析。
 - `TextFileIo` -- 文本文件读取（含编码检测）。
 
 ### 有声书核心

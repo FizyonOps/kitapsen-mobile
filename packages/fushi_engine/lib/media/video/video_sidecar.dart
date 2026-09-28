@@ -2,14 +2,22 @@ import 'dart:io';
 
 import 'package:path/path.dart' as p;
 
+import 'package:fushi_engine/media/video/video_subtitle_source.dart'
+    show kSubtitleFileExtensions;
+
 /// sidecar 字幕的「无语言标记」基础扩展名优先级（查词主语言用的是带语言标记版）。
 ///
-/// `.srt` > `.ass` > `.ssa` > `.vtt`。
-const List<String> _baseSubtitleExtensions = <String>[
-  '.srt',
-  '.ass',
-  '.ssa',
-  '.vtt',
+/// `.srt` > `.ass` > `.ssa` > `.vtt` > 其余受支持格式（SAMI / TTML / SBV，
+/// 按 [kSubtitleFileExtensions] 声明序）。前四个的相对顺序是既有行为，不动。
+final List<String> _baseSubtitleExtensions = <String>[
+  for (final String ext in <String>{
+    'srt',
+    'ass',
+    'ssa',
+    'vtt',
+    ...kSubtitleFileExtensions,
+  })
+    '.$ext',
 ];
 
 /// 按 app 目标学习语言为 [langCode] 构造 sidecar 字幕优先级后缀列表。
@@ -81,12 +89,15 @@ List<String> listSidecarSubtitles(
 }
 
 /// 纯函数：[suffix] 是否是合法的 sidecar 字幕后缀（`.<ext>` 或 `.<langTag>.<ext>`，
-/// ext ∈ srt/ass/ssa/vtt，langTag 只允许 `[A-Za-z0-9_-]`）。互联字幕上传端点用它做
-/// 服务端白名单校验（后缀由 client 报，绝不放行路径分隔符/穿越）。
-bool isSidecarSubtitleSuffix(String suffix) => RegExp(
-      r'^(\.[A-Za-z0-9_-]{1,32})?\.(srt|ass|ssa|vtt)$',
-      caseSensitive: false,
-    ).hasMatch(suffix);
+/// ext ∈ [kSubtitleFileExtensions]，langTag 只允许 `[A-Za-z0-9_-]`）。互联字幕上传
+/// 端点用它做服务端白名单校验（后缀由 client 报，绝不放行路径分隔符/穿越）。
+bool isSidecarSubtitleSuffix(String suffix) {
+  final RegExpMatch? m = _sidecarSuffixRe.firstMatch(suffix);
+  return m != null && kSubtitleFileExtensions.contains(m[1]!.toLowerCase());
+}
+
+final RegExp _sidecarSuffixRe =
+    RegExp(r'^(?:\.[A-Za-z0-9_-]{1,32})?\.([A-Za-z0-9]{1,8})$');
 
 /// 纯函数：「设为该视频默认字幕」时落盘用的 sidecar 后缀——学习语言标记版
 /// `.<langCode>.<ext>`（[pickSidecar] 优先级最高的那一组），[langCode] 为空时退回

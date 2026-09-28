@@ -27,6 +27,8 @@ import 'dart:typed_data';
 import 'package:fushi_engine/media/video/jimaku_client.dart'
     show detectSubtitleLanguage, parseSubtitleEpisode;
 import 'package:http/http.dart' as http;
+import 'package:fushi_engine/media/video/video_subtitle_source.dart'
+    show kSubtitleFileExtensions;
 
 /// 站点根。
 const String kAjattSiteBaseUrl = 'https://subtitles.ajatt.top/';
@@ -158,7 +160,7 @@ class AjattSubtitleFile {
 
   /// 可解析成 cue 的文本字幕（与 Jimaku 同一集合）。
   bool get isTextSubtitle =>
-      const <String>{'srt', 'ass', 'ssa', 'vtt'}.contains(extension);
+      kSubtitleFileExtensions.contains(extension);
 
   /// 文件名启发式集号（与 Jimaku 共用解析器）。
   int? get episode => parseSubtitleEpisode(name);
