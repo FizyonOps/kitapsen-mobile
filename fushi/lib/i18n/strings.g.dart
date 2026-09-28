@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 97988 (5764 per locale)
+/// Strings: 98022 (5766 per locale)
 ///
-/// Built on 2026-09-28 at 13:30 UTC
+/// Built on 2026-09-28 at 13:34 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8273,6 +8273,13 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
       'Could not delete ${n} video(s); they are still in the library.';
   String video_library_delete_failed({required Object reason}) =>
       'Delete failed: ${reason}';
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -22133,6 +22140,15 @@ class _StringsAr extends _StringsEn {
   @override
   String video_library_delete_failed({required Object reason}) =>
       'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -36233,6 +36249,15 @@ class _StringsDe extends _StringsEn {
   @override
   String video_library_delete_failed({required Object reason}) =>
       'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -50384,6 +50409,15 @@ class _StringsEs extends _StringsEn {
   @override
   String video_library_delete_failed({required Object reason}) =>
       'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -64574,6 +64608,15 @@ class _StringsFr extends _StringsEn {
   @override
   String video_library_delete_failed({required Object reason}) =>
       'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -78554,6 +78597,15 @@ class _StringsId extends _StringsEn {
   @override
   String video_library_delete_failed({required Object reason}) =>
       'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -92635,6 +92687,15 @@ class _StringsIt extends _StringsEn {
   @override
   String video_library_delete_failed({required Object reason}) =>
       'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -106069,6 +106130,15 @@ class _StringsJa extends _StringsEn {
   @override
   String video_library_delete_failed({required Object reason}) =>
       'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -119520,6 +119590,15 @@ class _StringsKo extends _StringsEn {
   @override
   String video_library_delete_failed({required Object reason}) =>
       'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -133556,6 +133635,15 @@ class _StringsNl extends _StringsEn {
   @override
   String video_library_delete_failed({required Object reason}) =>
       'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -147644,6 +147732,15 @@ class _StringsPtBr extends _StringsEn {
   @override
   String video_library_delete_failed({required Object reason}) =>
       'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -161707,6 +161804,15 @@ class _StringsRu extends _StringsEn {
   @override
   String video_library_delete_failed({required Object reason}) =>
       'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -175566,6 +175672,15 @@ class _StringsTh extends _StringsEn {
   @override
   String video_library_delete_failed({required Object reason}) =>
       'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -189540,6 +189655,15 @@ class _StringsTr extends _StringsEn {
   @override
   String video_library_delete_failed({required Object reason}) =>
       'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -203485,6 +203609,15 @@ class _StringsVi extends _StringsEn {
   @override
   String video_library_delete_failed({required Object reason}) =>
       'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -216238,6 +216371,13 @@ class _StringsZhCn extends _StringsEn {
   @override
   String video_library_delete_failed({required Object reason}) =>
       '删除失败：${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) => '有 ${subscriptions} 个下载订阅和 ${jobs} 个未完成的下载保存到此来源。迁移到：';
+  @override
+  String get media_source_remove_download_keep => '不迁移（暂停这些订阅）';
 }
 
 // Path: <root>
@@ -229348,6 +229488,15 @@ class _StringsZhHk extends _StringsEn {
   @override
   String video_library_delete_failed({required Object reason}) =>
       'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 /// Flat map(s) containing all translations.
@@ -241279,6 +241428,11 @@ extension on _StringsEn {
             'Could not delete ${n} video(s); they are still in the library.';
       case 'video_library_delete_failed':
         return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -253204,6 +253358,11 @@ extension on _StringsAr {
             'Could not delete ${n} video(s); they are still in the library.';
       case 'video_library_delete_failed':
         return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -265179,6 +265338,11 @@ extension on _StringsDe {
             'Could not delete ${n} video(s); they are still in the library.';
       case 'video_library_delete_failed':
         return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -277144,6 +277308,11 @@ extension on _StringsEs {
             'Could not delete ${n} video(s); they are still in the library.';
       case 'video_library_delete_failed':
         return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -289117,6 +289286,11 @@ extension on _StringsFr {
             'Could not delete ${n} video(s); they are still in the library.';
       case 'video_library_delete_failed':
         return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -301060,6 +301234,11 @@ extension on _StringsId {
             'Could not delete ${n} video(s); they are still in the library.';
       case 'video_library_delete_failed':
         return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -313025,6 +313204,11 @@ extension on _StringsIt {
             'Could not delete ${n} video(s); they are still in the library.';
       case 'video_library_delete_failed':
         return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -324910,6 +325094,11 @@ extension on _StringsJa {
             'Could not delete ${n} video(s); they are still in the library.';
       case 'video_library_delete_failed':
         return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -336804,6 +336993,11 @@ extension on _StringsKo {
             'Could not delete ${n} video(s); they are still in the library.';
       case 'video_library_delete_failed':
         return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -348765,6 +348959,11 @@ extension on _StringsNl {
             'Could not delete ${n} video(s); they are still in the library.';
       case 'video_library_delete_failed':
         return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -360721,6 +360920,11 @@ extension on _StringsPtBr {
             'Could not delete ${n} video(s); they are still in the library.';
       case 'video_library_delete_failed':
         return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -372682,6 +372886,11 @@ extension on _StringsRu {
             'Could not delete ${n} video(s); they are still in the library.';
       case 'video_library_delete_failed':
         return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -384612,6 +384821,11 @@ extension on _StringsTh {
             'Could not delete ${n} video(s); they are still in the library.';
       case 'video_library_delete_failed':
         return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -396558,6 +396772,11 @@ extension on _StringsTr {
             'Could not delete ${n} video(s); they are still in the library.';
       case 'video_library_delete_failed':
         return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -408498,6 +408717,11 @@ extension on _StringsVi {
             'Could not delete ${n} video(s); they are still in the library.';
       case 'video_library_delete_failed':
         return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -420317,6 +420541,11 @@ extension on _StringsZhCn {
         return ({required Object n}) => '${n} 个视频删除失败，仍保留在媒体库中。';
       case 'video_library_delete_failed':
         return ({required Object reason}) => '删除失败：${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '有 ${subscriptions} 个下载订阅和 ${jobs} 个未完成的下载保存到此来源。迁移到：';
+      case 'media_source_remove_download_keep':
+        return '不迁移（暂停这些订阅）';
       default:
         return null;
     }
@@ -432181,6 +432410,11 @@ extension on _StringsZhHk {
             'Could not delete ${n} video(s); they are still in the library.';
       case 'video_library_delete_failed':
         return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
