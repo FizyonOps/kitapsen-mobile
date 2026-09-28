@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 97750 (5750 per locale)
+/// Strings: 97784 (5752 per locale)
 ///
-/// Built on 2026-09-28 at 01:16 UTC
+/// Built on 2026-09-28 at 01:47 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8228,11 +8228,15 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get mining_clip_format_webm_vp9 =>
       'WebM · VP9 (plays inside the card, recommended)';
   String get mining_clip_format_webm_av1 =>
-      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
   String get mining_clip_format_mp4_h264 =>
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   String get mining_clip_format_hint =>
       'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+  String get mining_clip_format_webm_vp9_unsupported =>
+      'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+  String get mining_clip_format_webm_av1_unsupported =>
+      'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
 }
 
 // Path: <root>
@@ -12580,7 +12584,7 @@ class _StringsAr extends _StringsEn {
   @override
   String get handlebar_book_cover => 'غلاف الكتاب';
   @override
-  String get handlebar_card_image => 'Card Image (Cover / GIF)';
+  String get handlebar_card_image => 'Card Image (Cover / Clip)';
   @override
   String get handlebar_clip_timestamp => 'الطابع الزمني للمقطع';
   @override
@@ -22032,13 +22036,19 @@ class _StringsAr extends _StringsEn {
       'WebM · VP9 (plays inside the card, recommended)';
   @override
   String get mining_clip_format_webm_av1 =>
-      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
   @override
   String get mining_clip_format_mp4_h264 =>
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
       'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+  @override
+  String get mining_clip_format_webm_vp9_unsupported =>
+      'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+  @override
+  String get mining_clip_format_webm_av1_unsupported =>
+      'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
 }
 
 // Path: <root>
@@ -26484,7 +26494,7 @@ class _StringsDe extends _StringsEn {
   @override
   String get handlebar_book_cover => 'Buchcover';
   @override
-  String get handlebar_card_image => 'Card Image (Cover / GIF)';
+  String get handlebar_card_image => 'Card Image (Cover / Clip)';
   @override
   String get handlebar_clip_timestamp => 'Clip-Zeitstempel';
   @override
@@ -36078,13 +36088,19 @@ class _StringsDe extends _StringsEn {
       'WebM · VP9 (plays inside the card, recommended)';
   @override
   String get mining_clip_format_webm_av1 =>
-      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
   @override
   String get mining_clip_format_mp4_h264 =>
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
       'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+  @override
+  String get mining_clip_format_webm_vp9_unsupported =>
+      'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+  @override
+  String get mining_clip_format_webm_av1_unsupported =>
+      'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
 }
 
 // Path: <root>
@@ -40549,7 +40565,7 @@ class _StringsEs extends _StringsEn {
   @override
   String get handlebar_book_cover => 'Portada del libro';
   @override
-  String get handlebar_card_image => 'Card Image (Cover / GIF)';
+  String get handlebar_card_image => 'Card Image (Cover / Clip)';
   @override
   String get handlebar_clip_timestamp => 'Marca de tiempo del fragmento';
   @override
@@ -50175,13 +50191,19 @@ class _StringsEs extends _StringsEn {
       'WebM · VP9 (plays inside the card, recommended)';
   @override
   String get mining_clip_format_webm_av1 =>
-      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
   @override
   String get mining_clip_format_mp4_h264 =>
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
       'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+  @override
+  String get mining_clip_format_webm_vp9_unsupported =>
+      'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+  @override
+  String get mining_clip_format_webm_av1_unsupported =>
+      'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
 }
 
 // Path: <root>
@@ -54654,7 +54676,7 @@ class _StringsFr extends _StringsEn {
   @override
   String get handlebar_book_cover => 'Couverture du livre';
   @override
-  String get handlebar_card_image => 'Card Image (Cover / GIF)';
+  String get handlebar_card_image => 'Card Image (Cover / Clip)';
   @override
   String get handlebar_clip_timestamp => 'Horodatage de l\'extrait';
   @override
@@ -64311,13 +64333,19 @@ class _StringsFr extends _StringsEn {
       'WebM · VP9 (plays inside the card, recommended)';
   @override
   String get mining_clip_format_webm_av1 =>
-      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
   @override
   String get mining_clip_format_mp4_h264 =>
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
       'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+  @override
+  String get mining_clip_format_webm_vp9_unsupported =>
+      'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+  @override
+  String get mining_clip_format_webm_av1_unsupported =>
+      'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
 }
 
 // Path: <root>
@@ -68711,7 +68739,7 @@ class _StringsId extends _StringsEn {
   @override
   String get handlebar_book_cover => 'Sampul buku';
   @override
-  String get handlebar_card_image => 'Card Image (Cover / GIF)';
+  String get handlebar_card_image => 'Card Image (Cover / Clip)';
   @override
   String get handlebar_clip_timestamp => 'Stempel waktu klip';
   @override
@@ -78237,13 +78265,19 @@ class _StringsId extends _StringsEn {
       'WebM · VP9 (plays inside the card, recommended)';
   @override
   String get mining_clip_format_webm_av1 =>
-      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
   @override
   String get mining_clip_format_mp4_h264 =>
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
       'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+  @override
+  String get mining_clip_format_webm_vp9_unsupported =>
+      'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+  @override
+  String get mining_clip_format_webm_av1_unsupported =>
+      'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
 }
 
 // Path: <root>
@@ -82672,7 +82706,7 @@ class _StringsIt extends _StringsEn {
   @override
   String get handlebar_book_cover => 'Copertina del libro';
   @override
-  String get handlebar_card_image => 'Card Image (Cover / GIF)';
+  String get handlebar_card_image => 'Card Image (Cover / Clip)';
   @override
   String get handlebar_clip_timestamp => 'Timestamp della clip';
   @override
@@ -92264,13 +92298,19 @@ class _StringsIt extends _StringsEn {
       'WebM · VP9 (plays inside the card, recommended)';
   @override
   String get mining_clip_format_webm_av1 =>
-      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
   @override
   String get mining_clip_format_mp4_h264 =>
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
       'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+  @override
+  String get mining_clip_format_webm_vp9_unsupported =>
+      'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+  @override
+  String get mining_clip_format_webm_av1_unsupported =>
+      'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
 }
 
 // Path: <root>
@@ -96467,7 +96507,7 @@ class _StringsJa extends _StringsEn {
   @override
   String get handlebar_book_cover => '書籍カバー';
   @override
-  String get handlebar_card_image => 'Card Image (Cover / GIF)';
+  String get handlebar_card_image => 'Card Image (Cover / Clip)';
   @override
   String get handlebar_clip_timestamp => 'クリップの時間';
   @override
@@ -105644,13 +105684,19 @@ class _StringsJa extends _StringsEn {
       'WebM · VP9 (plays inside the card, recommended)';
   @override
   String get mining_clip_format_webm_av1 =>
-      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
   @override
   String get mining_clip_format_mp4_h264 =>
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
       'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+  @override
+  String get mining_clip_format_webm_vp9_unsupported =>
+      'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+  @override
+  String get mining_clip_format_webm_av1_unsupported =>
+      'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
 }
 
 // Path: <root>
@@ -109839,7 +109885,7 @@ class _StringsKo extends _StringsEn {
   @override
   String get handlebar_book_cover => '책 표지';
   @override
-  String get handlebar_card_image => 'Card Image (Cover / GIF)';
+  String get handlebar_card_image => 'Card Image (Cover / Clip)';
   @override
   String get handlebar_clip_timestamp => '클립 타임스탬프';
   @override
@@ -119041,13 +119087,19 @@ class _StringsKo extends _StringsEn {
       'WebM · VP9 (plays inside the card, recommended)';
   @override
   String get mining_clip_format_webm_av1 =>
-      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
   @override
   String get mining_clip_format_mp4_h264 =>
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
       'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+  @override
+  String get mining_clip_format_webm_vp9_unsupported =>
+      'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+  @override
+  String get mining_clip_format_webm_av1_unsupported =>
+      'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
 }
 
 // Path: <root>
@@ -123457,7 +123509,7 @@ class _StringsNl extends _StringsEn {
   @override
   String get handlebar_book_cover => 'Boekomslag';
   @override
-  String get handlebar_card_image => 'Card Image (Cover / GIF)';
+  String get handlebar_card_image => 'Card Image (Cover / Clip)';
   @override
   String get handlebar_clip_timestamp => 'Tijdstempel van fragment';
   @override
@@ -133023,13 +133075,19 @@ class _StringsNl extends _StringsEn {
       'WebM · VP9 (plays inside the card, recommended)';
   @override
   String get mining_clip_format_webm_av1 =>
-      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
   @override
   String get mining_clip_format_mp4_h264 =>
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
       'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+  @override
+  String get mining_clip_format_webm_vp9_unsupported =>
+      'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+  @override
+  String get mining_clip_format_webm_av1_unsupported =>
+      'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
 }
 
 // Path: <root>
@@ -137466,7 +137524,7 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get handlebar_book_cover => 'Capa do livro';
   @override
-  String get handlebar_card_image => 'Card Image (Cover / GIF)';
+  String get handlebar_card_image => 'Card Image (Cover / Clip)';
   @override
   String get handlebar_clip_timestamp => 'Marca de tempo do trecho';
   @override
@@ -147057,13 +147115,19 @@ class _StringsPtBr extends _StringsEn {
       'WebM · VP9 (plays inside the card, recommended)';
   @override
   String get mining_clip_format_webm_av1 =>
-      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
   @override
   String get mining_clip_format_mp4_h264 =>
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
       'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+  @override
+  String get mining_clip_format_webm_vp9_unsupported =>
+      'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+  @override
+  String get mining_clip_format_webm_av1_unsupported =>
+      'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
 }
 
 // Path: <root>
@@ -151477,7 +151541,7 @@ class _StringsRu extends _StringsEn {
   @override
   String get handlebar_book_cover => 'Обложка книги';
   @override
-  String get handlebar_card_image => 'Card Image (Cover / GIF)';
+  String get handlebar_card_image => 'Card Image (Cover / Clip)';
   @override
   String get handlebar_clip_timestamp => 'Метка времени фрагмента';
   @override
@@ -161066,13 +161130,19 @@ class _StringsRu extends _StringsEn {
       'WebM · VP9 (plays inside the card, recommended)';
   @override
   String get mining_clip_format_webm_av1 =>
-      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
   @override
   String get mining_clip_format_mp4_h264 =>
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
       'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+  @override
+  String get mining_clip_format_webm_vp9_unsupported =>
+      'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+  @override
+  String get mining_clip_format_webm_av1_unsupported =>
+      'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
 }
 
 // Path: <root>
@@ -165411,7 +165481,7 @@ class _StringsTh extends _StringsEn {
   @override
   String get handlebar_book_cover => 'ปกหนังสือ';
   @override
-  String get handlebar_card_image => 'Card Image (Cover / GIF)';
+  String get handlebar_card_image => 'Card Image (Cover / Clip)';
   @override
   String get handlebar_clip_timestamp => 'เวลาของคลิป';
   @override
@@ -174871,13 +174941,19 @@ class _StringsTh extends _StringsEn {
       'WebM · VP9 (plays inside the card, recommended)';
   @override
   String get mining_clip_format_webm_av1 =>
-      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
   @override
   String get mining_clip_format_mp4_h264 =>
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
       'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+  @override
+  String get mining_clip_format_webm_vp9_unsupported =>
+      'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+  @override
+  String get mining_clip_format_webm_av1_unsupported =>
+      'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
 }
 
 // Path: <root>
@@ -179275,7 +179351,7 @@ class _StringsTr extends _StringsEn {
   @override
   String get handlebar_book_cover => 'Kitap kapağı';
   @override
-  String get handlebar_card_image => 'Card Image (Cover / GIF)';
+  String get handlebar_card_image => 'Card Image (Cover / Clip)';
   @override
   String get handlebar_clip_timestamp => 'Klip zaman damgası';
   @override
@@ -188791,13 +188867,19 @@ class _StringsTr extends _StringsEn {
       'WebM · VP9 (plays inside the card, recommended)';
   @override
   String get mining_clip_format_webm_av1 =>
-      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
   @override
   String get mining_clip_format_mp4_h264 =>
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
       'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+  @override
+  String get mining_clip_format_webm_vp9_unsupported =>
+      'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+  @override
+  String get mining_clip_format_webm_av1_unsupported =>
+      'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
 }
 
 // Path: <root>
@@ -193190,7 +193272,7 @@ class _StringsVi extends _StringsEn {
   @override
   String get handlebar_book_cover => 'Bìa sách';
   @override
-  String get handlebar_card_image => 'Card Image (Cover / GIF)';
+  String get handlebar_card_image => 'Card Image (Cover / Clip)';
   @override
   String get handlebar_clip_timestamp => 'Dấu thời gian đoạn cắt';
   @override
@@ -202682,13 +202764,19 @@ class _StringsVi extends _StringsEn {
       'WebM · VP9 (plays inside the card, recommended)';
   @override
   String get mining_clip_format_webm_av1 =>
-      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
   @override
   String get mining_clip_format_mp4_h264 =>
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
       'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+  @override
+  String get mining_clip_format_webm_vp9_unsupported =>
+      'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+  @override
+  String get mining_clip_format_webm_av1_unsupported =>
+      'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
 }
 
 // Path: <root>
@@ -215383,13 +215471,20 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get mining_clip_format_webm_vp9 => 'WebM · VP9（卡片内播放，推荐）';
   @override
-  String get mining_clip_format_webm_av1 => 'WebM · AV1（卡片内播放，体积最小，编码更慢）';
+  String get mining_clip_format_webm_av1 =>
+      'WebM · AV1（卡片内播放；体积最小，编码耗时约为 VP9 的 2 倍；仅桌面端）';
   @override
   String get mining_clip_format_mp4_h264 =>
       'MP4 · H.264（Anki 自带播放器；AnkiMobile 用这个）';
   @override
   String get mining_clip_format_hint =>
       'WebM 在卡片内播放，但 iPhone 上的 AnkiMobile 放不了——在 iPhone 复习请选 MP4。WebM 在本机编不出来时自动退回 MP4。';
+  @override
+  String get mining_clip_format_webm_vp9_unsupported =>
+      'WebM · VP9（本机编不出，会自动退回 MP4）';
+  @override
+  String get mining_clip_format_webm_av1_unsupported =>
+      'WebM · AV1（本机编不出，会自动退回 MP4）';
 }
 
 // Path: <root>
@@ -219451,7 +219546,7 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get handlebar_book_cover => '書籍封面';
   @override
-  String get handlebar_card_image => 'Card Image (Cover / GIF)';
+  String get handlebar_card_image => 'Card Image (Cover / Clip)';
   @override
   String get handlebar_clip_timestamp => '片段時間';
   @override
@@ -228439,13 +228534,19 @@ class _StringsZhHk extends _StringsEn {
       'WebM · VP9 (plays inside the card, recommended)';
   @override
   String get mining_clip_format_webm_av1 =>
-      'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+      'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
   @override
   String get mining_clip_format_mp4_h264 =>
       'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
   @override
   String get mining_clip_format_hint =>
       'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+  @override
+  String get mining_clip_format_webm_vp9_unsupported =>
+      'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+  @override
+  String get mining_clip_format_webm_av1_unsupported =>
+      'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
 }
 
 /// Flat map(s) containing all translations.
@@ -240323,11 +240424,15 @@ extension on _StringsEn {
       case 'mining_clip_format_webm_vp9':
         return 'WebM · VP9 (plays inside the card, recommended)';
       case 'mining_clip_format_webm_av1':
-        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+        return 'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
         return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+      case 'mining_clip_format_webm_vp9_unsupported':
+        return 'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+      case 'mining_clip_format_webm_av1_unsupported':
+        return 'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
       default:
         return null;
     }
@@ -244092,7 +244197,7 @@ extension on _StringsAr {
       case 'handlebar_book_cover':
         return 'غلاف الكتاب';
       case 'handlebar_card_image':
-        return 'Card Image (Cover / GIF)';
+        return 'Card Image (Cover / Clip)';
       case 'handlebar_clip_timestamp':
         return 'الطابع الزمني للمقطع';
       case 'handlebar_cue_sentence':
@@ -252199,11 +252304,15 @@ extension on _StringsAr {
       case 'mining_clip_format_webm_vp9':
         return 'WebM · VP9 (plays inside the card, recommended)';
       case 'mining_clip_format_webm_av1':
-        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+        return 'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
         return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+      case 'mining_clip_format_webm_vp9_unsupported':
+        return 'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+      case 'mining_clip_format_webm_av1_unsupported':
+        return 'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
       default:
         return null;
     }
@@ -255988,7 +256097,7 @@ extension on _StringsDe {
       case 'handlebar_book_cover':
         return 'Buchcover';
       case 'handlebar_card_image':
-        return 'Card Image (Cover / GIF)';
+        return 'Card Image (Cover / Clip)';
       case 'handlebar_clip_timestamp':
         return 'Clip-Zeitstempel';
       case 'handlebar_cue_sentence':
@@ -264125,11 +264234,15 @@ extension on _StringsDe {
       case 'mining_clip_format_webm_vp9':
         return 'WebM · VP9 (plays inside the card, recommended)';
       case 'mining_clip_format_webm_av1':
-        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+        return 'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
         return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+      case 'mining_clip_format_webm_vp9_unsupported':
+        return 'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+      case 'mining_clip_format_webm_av1_unsupported':
+        return 'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
       default:
         return null;
     }
@@ -267907,7 +268020,7 @@ extension on _StringsEs {
       case 'handlebar_book_cover':
         return 'Portada del libro';
       case 'handlebar_card_image':
-        return 'Card Image (Cover / GIF)';
+        return 'Card Image (Cover / Clip)';
       case 'handlebar_clip_timestamp':
         return 'Marca de tiempo del fragmento';
       case 'handlebar_cue_sentence':
@@ -276041,11 +276154,15 @@ extension on _StringsEs {
       case 'mining_clip_format_webm_vp9':
         return 'WebM · VP9 (plays inside the card, recommended)';
       case 'mining_clip_format_webm_av1':
-        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+        return 'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
         return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+      case 'mining_clip_format_webm_vp9_unsupported':
+        return 'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+      case 'mining_clip_format_webm_av1_unsupported':
+        return 'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
       default:
         return null;
     }
@@ -279829,7 +279946,7 @@ extension on _StringsFr {
       case 'handlebar_book_cover':
         return 'Couverture du livre';
       case 'handlebar_card_image':
-        return 'Card Image (Cover / GIF)';
+        return 'Card Image (Cover / Clip)';
       case 'handlebar_clip_timestamp':
         return 'Horodatage de l\'extrait';
       case 'handlebar_cue_sentence':
@@ -287965,11 +288082,15 @@ extension on _StringsFr {
       case 'mining_clip_format_webm_vp9':
         return 'WebM · VP9 (plays inside the card, recommended)';
       case 'mining_clip_format_webm_av1':
-        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+        return 'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
         return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+      case 'mining_clip_format_webm_vp9_unsupported':
+        return 'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+      case 'mining_clip_format_webm_av1_unsupported':
+        return 'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
       default:
         return null;
     }
@@ -291743,7 +291864,7 @@ extension on _StringsId {
       case 'handlebar_book_cover':
         return 'Sampul buku';
       case 'handlebar_card_image':
-        return 'Card Image (Cover / GIF)';
+        return 'Card Image (Cover / Clip)';
       case 'handlebar_clip_timestamp':
         return 'Stempel waktu klip';
       case 'handlebar_cue_sentence':
@@ -299859,11 +299980,15 @@ extension on _StringsId {
       case 'mining_clip_format_webm_vp9':
         return 'WebM · VP9 (plays inside the card, recommended)';
       case 'mining_clip_format_webm_av1':
-        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+        return 'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
         return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+      case 'mining_clip_format_webm_vp9_unsupported':
+        return 'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+      case 'mining_clip_format_webm_av1_unsupported':
+        return 'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
       default:
         return null;
     }
@@ -303642,7 +303767,7 @@ extension on _StringsIt {
       case 'handlebar_book_cover':
         return 'Copertina del libro';
       case 'handlebar_card_image':
-        return 'Card Image (Cover / GIF)';
+        return 'Card Image (Cover / Clip)';
       case 'handlebar_clip_timestamp':
         return 'Timestamp della clip';
       case 'handlebar_cue_sentence':
@@ -311775,11 +311900,15 @@ extension on _StringsIt {
       case 'mining_clip_format_webm_vp9':
         return 'WebM · VP9 (plays inside the card, recommended)';
       case 'mining_clip_format_webm_av1':
-        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+        return 'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
         return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+      case 'mining_clip_format_webm_vp9_unsupported':
+        return 'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+      case 'mining_clip_format_webm_av1_unsupported':
+        return 'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
       default:
         return null;
     }
@@ -315533,7 +315662,7 @@ extension on _StringsJa {
       case 'handlebar_book_cover':
         return '書籍カバー';
       case 'handlebar_card_image':
-        return 'Card Image (Cover / GIF)';
+        return 'Card Image (Cover / Clip)';
       case 'handlebar_clip_timestamp':
         return 'クリップの時間';
       case 'handlebar_cue_sentence':
@@ -323611,11 +323740,15 @@ extension on _StringsJa {
       case 'mining_clip_format_webm_vp9':
         return 'WebM · VP9 (plays inside the card, recommended)';
       case 'mining_clip_format_webm_av1':
-        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+        return 'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
         return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+      case 'mining_clip_format_webm_vp9_unsupported':
+        return 'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+      case 'mining_clip_format_webm_av1_unsupported':
+        return 'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
       default:
         return null;
     }
@@ -327369,7 +327502,7 @@ extension on _StringsKo {
       case 'handlebar_book_cover':
         return '책 표지';
       case 'handlebar_card_image':
-        return 'Card Image (Cover / GIF)';
+        return 'Card Image (Cover / Clip)';
       case 'handlebar_clip_timestamp':
         return '클립 타임스탬프';
       case 'handlebar_cue_sentence':
@@ -335456,11 +335589,15 @@ extension on _StringsKo {
       case 'mining_clip_format_webm_vp9':
         return 'WebM · VP9 (plays inside the card, recommended)';
       case 'mining_clip_format_webm_av1':
-        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+        return 'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
         return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+      case 'mining_clip_format_webm_vp9_unsupported':
+        return 'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+      case 'mining_clip_format_webm_av1_unsupported':
+        return 'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
       default:
         return null;
     }
@@ -339237,7 +339374,7 @@ extension on _StringsNl {
       case 'handlebar_book_cover':
         return 'Boekomslag';
       case 'handlebar_card_image':
-        return 'Card Image (Cover / GIF)';
+        return 'Card Image (Cover / Clip)';
       case 'handlebar_clip_timestamp':
         return 'Tijdstempel van fragment';
       case 'handlebar_cue_sentence':
@@ -347368,11 +347505,15 @@ extension on _StringsNl {
       case 'mining_clip_format_webm_vp9':
         return 'WebM · VP9 (plays inside the card, recommended)';
       case 'mining_clip_format_webm_av1':
-        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+        return 'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
         return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+      case 'mining_clip_format_webm_vp9_unsupported':
+        return 'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+      case 'mining_clip_format_webm_av1_unsupported':
+        return 'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
       default:
         return null;
     }
@@ -351149,7 +351290,7 @@ extension on _StringsPtBr {
       case 'handlebar_book_cover':
         return 'Capa do livro';
       case 'handlebar_card_image':
-        return 'Card Image (Cover / GIF)';
+        return 'Card Image (Cover / Clip)';
       case 'handlebar_clip_timestamp':
         return 'Marca de tempo do trecho';
       case 'handlebar_cue_sentence':
@@ -359275,11 +359416,15 @@ extension on _StringsPtBr {
       case 'mining_clip_format_webm_vp9':
         return 'WebM · VP9 (plays inside the card, recommended)';
       case 'mining_clip_format_webm_av1':
-        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+        return 'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
         return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+      case 'mining_clip_format_webm_vp9_unsupported':
+        return 'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+      case 'mining_clip_format_webm_av1_unsupported':
+        return 'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
       default:
         return null;
     }
@@ -363063,7 +363208,7 @@ extension on _StringsRu {
       case 'handlebar_book_cover':
         return 'Обложка книги';
       case 'handlebar_card_image':
-        return 'Card Image (Cover / GIF)';
+        return 'Card Image (Cover / Clip)';
       case 'handlebar_clip_timestamp':
         return 'Метка времени фрагмента';
       case 'handlebar_cue_sentence':
@@ -371187,11 +371332,15 @@ extension on _StringsRu {
       case 'mining_clip_format_webm_vp9':
         return 'WebM · VP9 (plays inside the card, recommended)';
       case 'mining_clip_format_webm_av1':
-        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+        return 'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
         return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+      case 'mining_clip_format_webm_vp9_unsupported':
+        return 'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+      case 'mining_clip_format_webm_av1_unsupported':
+        return 'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
       default:
         return null;
     }
@@ -374959,7 +375108,7 @@ extension on _StringsTh {
       case 'handlebar_book_cover':
         return 'ปกหนังสือ';
       case 'handlebar_card_image':
-        return 'Card Image (Cover / GIF)';
+        return 'Card Image (Cover / Clip)';
       case 'handlebar_clip_timestamp':
         return 'เวลาของคลิป';
       case 'handlebar_cue_sentence':
@@ -383068,11 +383217,15 @@ extension on _StringsTh {
       case 'mining_clip_format_webm_vp9':
         return 'WebM · VP9 (plays inside the card, recommended)';
       case 'mining_clip_format_webm_av1':
-        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+        return 'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
         return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+      case 'mining_clip_format_webm_vp9_unsupported':
+        return 'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+      case 'mining_clip_format_webm_av1_unsupported':
+        return 'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
       default:
         return null;
     }
@@ -386848,7 +387001,7 @@ extension on _StringsTr {
       case 'handlebar_book_cover':
         return 'Kitap kapağı';
       case 'handlebar_card_image':
-        return 'Card Image (Cover / GIF)';
+        return 'Card Image (Cover / Clip)';
       case 'handlebar_clip_timestamp':
         return 'Klip zaman damgası';
       case 'handlebar_cue_sentence':
@@ -394965,11 +395118,15 @@ extension on _StringsTr {
       case 'mining_clip_format_webm_vp9':
         return 'WebM · VP9 (plays inside the card, recommended)';
       case 'mining_clip_format_webm_av1':
-        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+        return 'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
         return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+      case 'mining_clip_format_webm_vp9_unsupported':
+        return 'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+      case 'mining_clip_format_webm_av1_unsupported':
+        return 'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
       default:
         return null;
     }
@@ -398743,7 +398900,7 @@ extension on _StringsVi {
       case 'handlebar_book_cover':
         return 'Bìa sách';
       case 'handlebar_card_image':
-        return 'Card Image (Cover / GIF)';
+        return 'Card Image (Cover / Clip)';
       case 'handlebar_clip_timestamp':
         return 'Dấu thời gian đoạn cắt';
       case 'handlebar_cue_sentence':
@@ -406856,11 +407013,15 @@ extension on _StringsVi {
       case 'mining_clip_format_webm_vp9':
         return 'WebM · VP9 (plays inside the card, recommended)';
       case 'mining_clip_format_webm_av1':
-        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+        return 'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
         return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+      case 'mining_clip_format_webm_vp9_unsupported':
+        return 'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+      case 'mining_clip_format_webm_av1_unsupported':
+        return 'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
       default:
         return null;
     }
@@ -418630,11 +418791,15 @@ extension on _StringsZhCn {
       case 'mining_clip_format_webm_vp9':
         return 'WebM · VP9（卡片内播放，推荐）';
       case 'mining_clip_format_webm_av1':
-        return 'WebM · AV1（卡片内播放，体积最小，编码更慢）';
+        return 'WebM · AV1（卡片内播放；体积最小，编码耗时约为 VP9 的 2 倍；仅桌面端）';
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264（Anki 自带播放器；AnkiMobile 用这个）';
       case 'mining_clip_format_hint':
         return 'WebM 在卡片内播放，但 iPhone 上的 AnkiMobile 放不了——在 iPhone 复习请选 MP4。WebM 在本机编不出来时自动退回 MP4。';
+      case 'mining_clip_format_webm_vp9_unsupported':
+        return 'WebM · VP9（本机编不出，会自动退回 MP4）';
+      case 'mining_clip_format_webm_av1_unsupported':
+        return 'WebM · AV1（本机编不出，会自动退回 MP4）';
       default:
         return null;
     }
@@ -422378,7 +422543,7 @@ extension on _StringsZhHk {
       case 'handlebar_book_cover':
         return '書籍封面';
       case 'handlebar_card_image':
-        return 'Card Image (Cover / GIF)';
+        return 'Card Image (Cover / Clip)';
       case 'handlebar_clip_timestamp':
         return '片段時間';
       case 'handlebar_cue_sentence':
@@ -430445,11 +430610,15 @@ extension on _StringsZhHk {
       case 'mining_clip_format_webm_vp9':
         return 'WebM · VP9 (plays inside the card, recommended)';
       case 'mining_clip_format_webm_av1':
-        return 'WebM · AV1 (plays inside the card, smallest, slower to encode)';
+        return 'WebM · AV1 (plays inside the card; smallest file, about 2× the encode time of VP9; desktop only)';
       case 'mining_clip_format_mp4_h264':
         return 'MP4 · H.264 (Anki\'s own player; use for AnkiMobile)';
       case 'mining_clip_format_hint':
         return 'WebM plays inside the card, but AnkiMobile on iPhone cannot play it — choose MP4 if you review on iPhone. If WebM cannot be encoded on this device, Fushi falls back to MP4.';
+      case 'mining_clip_format_webm_vp9_unsupported':
+        return 'WebM · VP9 (can\'t be encoded on this device; falls back to MP4)';
+      case 'mining_clip_format_webm_av1_unsupported':
+        return 'WebM · AV1 (can\'t be encoded on this device; falls back to MP4)';
       default:
         return null;
     }
