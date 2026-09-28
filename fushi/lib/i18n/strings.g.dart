@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 97954 (5762 per locale)
+/// Strings: 98158 (5774 per locale)
 ///
-/// Built on 2026-09-28 at 02:23 UTC
+/// Built on 2026-09-28 at 12:01 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8269,6 +8269,31 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
       '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  String get collection_filter_all => 'All';
+  String get collection_batch_mine => 'Create cards';
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  String get collection_mine_card => 'Create card';
+  String get favorites_batch_mine_title => 'Create cards';
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  String get favorites_batch_mine_skipped => 'Skipped';
 }
 
 // Path: <root>
@@ -22123,6 +22148,43 @@ class _StringsAr extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
 }
 
 // Path: <root>
@@ -36217,6 +36279,43 @@ class _StringsDe extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
 }
 
 // Path: <root>
@@ -50362,6 +50461,43 @@ class _StringsEs extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
 }
 
 // Path: <root>
@@ -64546,6 +64682,43 @@ class _StringsFr extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
 }
 
 // Path: <root>
@@ -78520,6 +78693,43 @@ class _StringsId extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
 }
 
 // Path: <root>
@@ -92595,6 +92805,43 @@ class _StringsIt extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
 }
 
 // Path: <root>
@@ -106023,6 +106270,43 @@ class _StringsJa extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
 }
 
 // Path: <root>
@@ -119468,6 +119752,43 @@ class _StringsKo extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
 }
 
 // Path: <root>
@@ -133498,6 +133819,43 @@ class _StringsNl extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
 }
 
 // Path: <root>
@@ -147580,6 +147938,43 @@ class _StringsPtBr extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
 }
 
 // Path: <root>
@@ -161637,6 +162032,43 @@ class _StringsRu extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
 }
 
 // Path: <root>
@@ -175490,6 +175922,43 @@ class _StringsTh extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
 }
 
 // Path: <root>
@@ -189458,6 +189927,43 @@ class _StringsTr extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
 }
 
 // Path: <root>
@@ -203397,6 +203903,43 @@ class _StringsVi extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
 }
 
 // Path: <root>
@@ -216144,6 +216687,38 @@ class _StringsZhCn extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       '有 ${count} 本书没能导入（它们的统计仍已导入）：';
+  @override
+  String get collection_filter_all => '全部';
+  @override
+  String get collection_batch_mine => '批量制卡';
+  @override
+  String get collection_batch_mine_empty => '还没有可制卡的收藏：先在查词弹窗里收藏单词';
+  @override
+  String collection_batch_mine_start({required Object n}) => '制卡 ${n} 张';
+  @override
+  String get collection_mine_card => '制卡';
+  @override
+  String get favorites_batch_mine_title => '一键制卡';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => '正在制卡 ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) => '新增 ${added} · 已存在 ${duplicate} · 失败 ${failed} · 跳过 ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => '词典中没有找到这个词';
+  @override
+  String get favorites_batch_mine_render_failed => '查词弹窗没有加载出来';
+  @override
+  String get favorites_batch_mine_text_only => '没有可用的句子媒体，已制成纯文字卡';
+  @override
+  String get favorites_batch_mine_skipped => '已跳过';
 }
 
 // Path: <root>
@@ -229248,6 +229823,43 @@ class _StringsZhHk extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
 }
 
 /// Flat map(s) containing all translations.
@@ -241174,6 +241786,37 @@ extension on _StringsEn {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
       default:
         return null;
     }
@@ -253094,6 +253737,37 @@ extension on _StringsAr {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
       default:
         return null;
     }
@@ -265064,6 +265738,37 @@ extension on _StringsDe {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
       default:
         return null;
     }
@@ -277024,6 +277729,37 @@ extension on _StringsEs {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
       default:
         return null;
     }
@@ -288992,6 +289728,37 @@ extension on _StringsFr {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
       default:
         return null;
     }
@@ -300930,6 +301697,37 @@ extension on _StringsId {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
       default:
         return null;
     }
@@ -312890,6 +313688,37 @@ extension on _StringsIt {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
       default:
         return null;
     }
@@ -324770,6 +325599,37 @@ extension on _StringsJa {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
       default:
         return null;
     }
@@ -336659,6 +337519,37 @@ extension on _StringsKo {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
       default:
         return null;
     }
@@ -348615,6 +349506,37 @@ extension on _StringsNl {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
       default:
         return null;
     }
@@ -360566,6 +361488,37 @@ extension on _StringsPtBr {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
       default:
         return null;
     }
@@ -372522,6 +373475,37 @@ extension on _StringsRu {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
       default:
         return null;
     }
@@ -384447,6 +385431,37 @@ extension on _StringsTh {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
       default:
         return null;
     }
@@ -396388,6 +397403,37 @@ extension on _StringsTr {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
       default:
         return null;
     }
@@ -408323,6 +409369,37 @@ extension on _StringsVi {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
       default:
         return null;
     }
@@ -420138,6 +421215,36 @@ extension on _StringsZhCn {
             '有 ${count} 段统计未恢复：你曾在 Fushi 里删除过这些书的统计';
       case 'hoshi_import_result_failed':
         return ({required Object count}) => '有 ${count} 本书没能导入（它们的统计仍已导入）：';
+      case 'collection_filter_all':
+        return '全部';
+      case 'collection_batch_mine':
+        return '批量制卡';
+      case 'collection_batch_mine_empty':
+        return '还没有可制卡的收藏：先在查词弹窗里收藏单词';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => '制卡 ${n} 张';
+      case 'collection_mine_card':
+        return '制卡';
+      case 'favorites_batch_mine_title':
+        return '一键制卡';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            '正在制卡 ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) => '新增 ${added} · 已存在 ${duplicate} · 失败 ${failed} · 跳过 ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return '词典中没有找到这个词';
+      case 'favorites_batch_mine_render_failed':
+        return '查词弹窗没有加载出来';
+      case 'favorites_batch_mine_text_only':
+        return '没有可用的句子媒体，已制成纯文字卡';
+      case 'favorites_batch_mine_skipped':
+        return '已跳过';
       default:
         return null;
     }
@@ -431997,6 +433104,37 @@ extension on _StringsZhHk {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
       default:
         return null;
     }
