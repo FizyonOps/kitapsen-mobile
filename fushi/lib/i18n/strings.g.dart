@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 97206 (5718 per locale)
+/// Strings: 98447 (5791 per locale)
 ///
-/// Built on 2026-09-28 at 05:55 UTC
+/// Built on 2026-09-28 at 06:27 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -1781,7 +1781,6 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
       'Does not apply within your local network; LAN transfers always run at full speed.';
   String get download_rate_limit_lan_included =>
       'Also applies within your local network.';
-  String get download_resources_tab => 'Resources';
   String get download_save_root_change => 'Change folder';
   String get download_save_root_create_failed =>
       'Cannot create that folder. Check the drive and permissions.';
@@ -2915,7 +2914,6 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get keep_screen_awake => 'Keep screen awake';
   String get library_empty_go_import => 'Go to import';
   String get library_search => 'Search library';
-  String get library_view_browse => 'Discover';
   String get library_view_discover => 'Discover';
   String get library_view_import => 'Import';
   String get library_view_media => 'Library';
@@ -2993,8 +2991,8 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get manga_discovery_sources_browse => 'Browse a source';
   String get manga_global_search_hint => 'Search every enabled source';
   String get manga_global_search_no_sources =>
-      'No enabled manga sources yet. Add one in the Import tab.';
-  String get manga_global_search_open_sources => 'Go to Import';
+      'No enabled manga sources yet. Add one in the Browse tab.';
+  String get manga_global_search_open_sources => 'Go to Browse';
   String get manga_global_search_prompt =>
       'Type a title to search every enabled manga source at once.';
   String get manga_global_search_title => 'Search all sources';
@@ -3475,7 +3473,7 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get module_disabled_hint =>
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   String get module_downloads_hidden_hint =>
-      'The Downloads tab is hidden in Settings → Appearance → Feature modules; turn it back on to manage subscriptions.';
+      'The Browse tab is hidden in Settings → Appearance → Feature modules; turn it back on to manage subscriptions.';
   String get module_extension_label => 'Browser extension';
   String get move_down => 'Move down';
   String get move_up => 'Move up';
@@ -7169,7 +7167,6 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get video_online_episodes_empty => 'No episodes found.';
   String get video_online_stream_none =>
       'This episode returned no playable stream.';
-  String get media_import_segment_local => 'Local';
   String get media_import_segment_stores => 'Stores';
   String get media_import_segment_extensions => 'Extensions';
   String get media_import_segment_sources => 'Sources';
@@ -8127,6 +8124,151 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get ai_web_knowledge_custom_endpoint_invalid =>
       'Enter an https:// address ending in api.php';
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  String get plex_account_sign_in => 'Sign in with Plex';
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  String get plex_manual_title => 'Connect manually';
+  String get plex_token_label => 'X-Plex-Token';
+  String get plex_manual_connect => 'Connect';
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  String get remote_video_stream_play => 'Play (stream)';
+  String get nav_browse => 'Browse';
+  String get novel_detail_library_remove => 'Remove from bookshelf';
+  String get novel_detail_library_remove_confirm =>
+      'Remove this novel from the bookshelf? Cached chapters and reading progress will be deleted.';
+  String get novel_detail_download => 'Download';
+  String get novel_detail_library_added => 'Added to bookshelf';
+  String get video_online_extension_unavailable =>
+      'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+  String get video_online_library_add => 'Add to video library';
+  String get video_online_library_remove => 'Remove from video library';
+  String video_online_library_added({required Object n}) =>
+      'Added ${n} episodes to the video library';
+  String get video_online_library_removed => 'Removed from the video library';
+  String get video_online_download_all => 'Download all';
+  String get video_online_download_episode => 'Download this episode';
+  String get video_online_download_started =>
+      'Download started — see Browse › Downloads';
+  String get video_online_downloaded => 'Downloaded';
+  String get onboarding_feature_browse_hint =>
+      'Online sources, extensions, discovery and downloads';
+  String browse_moved_notice_title({required Object browse}) =>
+      'Discovery and online sources moved to ${browse}';
+  String browse_moved_notice_body({
+    required Object browse,
+    required Object settings,
+    required Object appearance,
+    required Object modules,
+  }) =>
+      'Discovery and the online sources for manga, video and novels now live in the ${browse} tab, which is turned off on this device. To use them, turn on ${browse} in ${settings} › ${appearance} › ${modules}.';
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  String get video_iptv_import_action => 'Import IPTV list';
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  String get video_iptv_url_field => 'Channel list URL';
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  String get hoshi_import_file_pick => 'Choose backup file';
+  String get hoshi_import_scan_running => 'Reading backup…';
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  String get hoshi_import_run_start => 'Start import';
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  String get hoshi_import_result_done => 'Import finished';
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
   String get sync_pair_link_unreachable =>
       'None of the addresses in this pairing link are reachable, or they point to a different device';
   String get sync_pair_link_invalid => 'This is not a valid Fushi pairing link';
@@ -10905,8 +11047,6 @@ class _StringsAr extends _StringsEn {
   String get download_rate_limit_lan_included =>
       'ينطبق أيضاً داخل شبكتك المحلية.';
   @override
-  String get download_resources_tab => 'الموارد';
-  @override
   String get download_save_root_change => 'تغيير المجلد';
   @override
   String get download_save_root_create_failed =>
@@ -12881,8 +13021,6 @@ class _StringsAr extends _StringsEn {
   @override
   String get library_search => 'بحث في المكتبة';
   @override
-  String get library_view_browse => 'استكشاف';
-  @override
   String get library_view_discover => 'اكتشاف';
   @override
   String get library_view_import => 'استيراد';
@@ -13021,9 +13159,9 @@ class _StringsAr extends _StringsEn {
   String get manga_global_search_hint => 'بحث في كل مصدر مُفعّل';
   @override
   String get manga_global_search_no_sources =>
-      'لا توجد مصادر مانغا مفعّلة بعد. أضف واحدًا من تبويب الاستيراد.';
+      'لا توجد مصادر مانغا مفعّلة بعد. أضف واحدًا من تبويب التصفح.';
   @override
-  String get manga_global_search_open_sources => 'الذهاب إلى الاستيراد';
+  String get manga_global_search_open_sources => 'الذهاب إلى التصفح';
   @override
   String get manga_global_search_prompt =>
       'اكتب عنواناً للبحث في جميع مصادر المانغا المُفعّلة دفعة واحدة.';
@@ -13842,7 +13980,7 @@ class _StringsAr extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      'تبويب التحميلات مخفي في الإعدادات → المظهر → وحدات الميزات؛ أعد تشغيله لإدارة الاشتراكات.';
+      'تبويب التصفح مخفي في الإعدادات → المظهر → وحدات الميزات؛ أعد تشغيله لإدارة الاشتراكات.';
   @override
   String get module_extension_label => 'إضافة المتصفح';
   @override
@@ -20209,25 +20347,23 @@ class _StringsAr extends _StringsEn {
   String get video_extensions_title => 'Video source extensions';
   @override
   String get video_online_sources_hint =>
-      'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+      'إضافات Aniyomi من جهات خارجية (extensions-lib 14). يأتي المحتوى من موقع كل إضافة ويُشغَّل في المشغّل المدمج.';
   @override
   String get video_online_sources_empty =>
-      'No enabled video sources. Install and enable an extension first.';
+      'لا توجد مصادر فيديو مفعّلة. ثبّت إضافة وفعّلها أولًا.';
   @override
-  String get video_online_episodes_title => 'Episodes';
+  String get video_online_episodes_title => 'الحلقات';
   @override
-  String get video_online_episodes_empty => 'No episodes found.';
+  String get video_online_episodes_empty => 'لم يُعثر على حلقات.';
   @override
   String get video_online_stream_none =>
-      'This episode returned no playable stream.';
+      'لم تُرجع هذه الحلقة أي بث قابل للتشغيل.';
   @override
-  String get media_import_segment_local => 'Local';
+  String get media_import_segment_stores => 'المستودعات';
   @override
-  String get media_import_segment_stores => 'Stores';
+  String get media_import_segment_extensions => 'الإضافات';
   @override
-  String get media_import_segment_extensions => 'Extensions';
-  @override
-  String get media_import_segment_sources => 'Sources';
+  String get media_import_segment_sources => 'المصادر';
   @override
   String get mihon_source_move_up => 'Move up';
   @override
@@ -21808,6 +21944,227 @@ class _StringsAr extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
+  @override
+  String get nav_browse => 'تصفح';
+  @override
+  String get novel_detail_library_remove => 'إزالة من رف الكتب';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'إزالة هذه الرواية من رف الكتب؟ سيتم حذف الفصول المخزنة وتقدم القراءة.';
+  @override
+  String get novel_detail_download => 'تنزيل';
+  @override
+  String get novel_detail_library_added => 'تمت الإضافة إلى رف الكتب';
+  @override
+  String get video_online_extension_unavailable =>
+      'إضافة مصدر الفيديو لهذه الحلقة غير مثبّتة أو معطّلة. أعد تثبيتها أو فعّلها من تصفح › الإضافات.';
+  @override
+  String get video_online_library_add => 'إضافة إلى مكتبة الفيديو';
+  @override
+  String get video_online_library_remove => 'إزالة من مكتبة الفيديو';
+  @override
+  String video_online_library_added({required Object n}) =>
+      'تمت إضافة ${n} حلقة إلى مكتبة الفيديو';
+  @override
+  String get video_online_library_removed => 'تمت الإزالة من مكتبة الفيديو';
+  @override
+  String get video_online_download_all => 'تنزيل الكل';
+  @override
+  String get video_online_download_episode => 'تنزيل هذه الحلقة';
+  @override
+  String get video_online_download_started =>
+      'بدأ التنزيل — راجع تصفح › التحميلات';
+  @override
+  String get video_online_downloaded => 'تم التنزيل';
+  @override
+  String get onboarding_feature_browse_hint =>
+      'المصادر عبر الإنترنت والإضافات والاكتشاف والتنزيلات';
+  @override
+  String browse_moved_notice_title({required Object browse}) =>
+      'نُقل الاكتشاف والمصادر عبر الإنترنت إلى ${browse}';
+  @override
+  String browse_moved_notice_body({
+    required Object browse,
+    required Object settings,
+    required Object appearance,
+    required Object modules,
+  }) =>
+      'أصبحت صفحة الاكتشاف والمصادر عبر الإنترنت للمانغا والفيديو والروايات في تبويب ${browse}، وهو متوقف على هذا الجهاز. لاستخدامها، فعّل ${browse} من ${settings} › ${appearance} › ${modules}.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
   @override
   String get sync_pair_link_unreachable =>
       'None of the addresses in this pairing link are reachable, or they point to a different device';
@@ -24672,8 +25029,6 @@ class _StringsDe extends _StringsEn {
   String get download_rate_limit_lan_included =>
       'Gilt auch innerhalb Ihres lokalen Netzwerks.';
   @override
-  String get download_resources_tab => 'Ressourcen';
-  @override
   String get download_save_root_change => 'Ordner ändern';
   @override
   String get download_save_root_create_failed =>
@@ -26693,8 +27048,6 @@ class _StringsDe extends _StringsEn {
   @override
   String get library_search => 'Bibliothek durchsuchen';
   @override
-  String get library_view_browse => 'Entdecken';
-  @override
   String get library_view_discover => 'Entdecken';
   @override
   String get library_view_import => 'Importieren';
@@ -26834,9 +27187,9 @@ class _StringsDe extends _StringsEn {
   String get manga_global_search_hint => 'Jede aktivierte Quelle durchsuchen';
   @override
   String get manga_global_search_no_sources =>
-      'Noch keine aktivierten Manga-Quellen. Füge eine im Tab „Importieren“ hinzu.';
+      'Noch keine aktivierten Manga-Quellen. Füge eine im Tab „Durchsuchen“ hinzu.';
   @override
-  String get manga_global_search_open_sources => 'Zum Import';
+  String get manga_global_search_open_sources => 'Zu „Durchsuchen“';
   @override
   String get manga_global_search_prompt =>
       'Geben Sie einen Titel ein, um alle aktivierten Manga-Quellen gleichzeitig zu durchsuchen.';
@@ -27678,7 +28031,7 @@ class _StringsDe extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      'Der Tab „Downloads“ ist unter Einstellungen → Erscheinungsbild → Funktionsmodule ausgeblendet; schalte ihn wieder ein, um Abos zu verwalten.';
+      'Der Tab „Durchsuchen“ ist unter Einstellungen → Erscheinungsbild → Funktionsmodule ausgeblendet; schalte ihn wieder ein, um Abos zu verwalten.';
   @override
   String get module_extension_label => 'Browser-Erweiterung';
   @override
@@ -34155,25 +34508,23 @@ class _StringsDe extends _StringsEn {
   String get video_extensions_title => 'Video source extensions';
   @override
   String get video_online_sources_hint =>
-      'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+      'Aniyomi-Erweiterungen von Drittanbietern (extensions-lib 14). Die Inhalte stammen von der Website der jeweiligen Erweiterung und werden im integrierten Player abgespielt.';
   @override
   String get video_online_sources_empty =>
-      'No enabled video sources. Install and enable an extension first.';
+      'Keine aktivierten Videoquellen. Installieren und aktivieren Sie zuerst eine Erweiterung.';
   @override
-  String get video_online_episodes_title => 'Episodes';
+  String get video_online_episodes_title => 'Folgen';
   @override
-  String get video_online_episodes_empty => 'No episodes found.';
+  String get video_online_episodes_empty => 'Keine Folgen gefunden.';
   @override
   String get video_online_stream_none =>
-      'This episode returned no playable stream.';
+      'Für diese Folge wurde kein abspielbarer Stream geliefert.';
   @override
-  String get media_import_segment_local => 'Local';
+  String get media_import_segment_stores => 'Repositorys';
   @override
-  String get media_import_segment_stores => 'Stores';
+  String get media_import_segment_extensions => 'Erweiterungen';
   @override
-  String get media_import_segment_extensions => 'Extensions';
-  @override
-  String get media_import_segment_sources => 'Sources';
+  String get media_import_segment_sources => 'Quellen';
   @override
   String get mihon_source_move_up => 'Move up';
   @override
@@ -35758,6 +36109,227 @@ class _StringsDe extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
+  @override
+  String get nav_browse => 'Durchsuchen';
+  @override
+  String get novel_detail_library_remove => 'Aus dem Bücherregal entfernen';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'Diesen Roman aus dem Bücherregal entfernen? Zwischengespeicherte Kapitel und Lesefortschritt werden gelöscht.';
+  @override
+  String get novel_detail_download => 'Herunterladen';
+  @override
+  String get novel_detail_library_added => 'Zum Bücherregal hinzugefügt';
+  @override
+  String get video_online_extension_unavailable =>
+      'Die Videoquellen-Erweiterung dieser Folge ist nicht installiert oder deaktiviert. Installieren oder aktivieren Sie sie unter „Durchsuchen › Erweiterungen“ erneut.';
+  @override
+  String get video_online_library_add => 'Zur Videobibliothek hinzufügen';
+  @override
+  String get video_online_library_remove => 'Aus der Videobibliothek entfernen';
+  @override
+  String video_online_library_added({required Object n}) =>
+      '${n} Folgen zur Videobibliothek hinzugefügt';
+  @override
+  String get video_online_library_removed => 'Aus der Videobibliothek entfernt';
+  @override
+  String get video_online_download_all => 'Alle herunterladen';
+  @override
+  String get video_online_download_episode => 'Diese Folge herunterladen';
+  @override
+  String get video_online_download_started =>
+      'Download gestartet – siehe „Durchsuchen › Downloads“';
+  @override
+  String get video_online_downloaded => 'Heruntergeladen';
+  @override
+  String get onboarding_feature_browse_hint =>
+      'Online-Quellen, Erweiterungen, Entdecken und Downloads';
+  @override
+  String browse_moved_notice_title({required Object browse}) =>
+      'Entdecken und Online-Quellen sind nach „${browse}“ umgezogen';
+  @override
+  String browse_moved_notice_body({
+    required Object browse,
+    required Object settings,
+    required Object appearance,
+    required Object modules,
+  }) =>
+      'Entdecken und die Online-Quellen für Manga, Videos und Romane befinden sich jetzt im Tab „${browse}“, der auf diesem Gerät ausgeschaltet ist. Um sie zu nutzen, schalten Sie „${browse}“ unter ${settings} › ${appearance} › ${modules} ein.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
   @override
   String get sync_pair_link_unreachable =>
       'None of the addresses in this pairing link are reachable, or they point to a different device';
@@ -38634,8 +39206,6 @@ class _StringsEs extends _StringsEn {
   String get download_rate_limit_lan_included =>
       'También se aplica en su red local.';
   @override
-  String get download_resources_tab => 'Recursos';
-  @override
   String get download_save_root_change => 'Cambiar carpeta';
   @override
   String get download_save_root_create_failed =>
@@ -40664,8 +41234,6 @@ class _StringsEs extends _StringsEn {
   @override
   String get library_search => 'Buscar biblioteca';
   @override
-  String get library_view_browse => 'Descubrir';
-  @override
   String get library_view_discover => 'Descubrir';
   @override
   String get library_view_import => 'Importar';
@@ -40806,9 +41374,9 @@ class _StringsEs extends _StringsEn {
   String get manga_global_search_hint => 'Buscar en todas las fuentes activas';
   @override
   String get manga_global_search_no_sources =>
-      'Aún no hay fuentes de manga habilitadas. Añade una en la pestaña Importar.';
+      'Aún no hay fuentes de manga habilitadas. Añade una en la pestaña Explorar.';
   @override
-  String get manga_global_search_open_sources => 'Ir a Importar';
+  String get manga_global_search_open_sources => 'Ir a Explorar';
   @override
   String get manga_global_search_prompt =>
       'Escriba un título para buscar en todas las fuentes de manga activas a la vez.';
@@ -41648,7 +42216,7 @@ class _StringsEs extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      'La pestaña Descargas está oculta en Configuración → Apariencia → Módulos de funciones; vuelve a activarla para gestionar las suscripciones.';
+      'La pestaña Explorar está oculta en Configuración → Apariencia → Módulos de funciones; vuelve a activarla para gestionar las suscripciones.';
   @override
   String get module_extension_label => 'Extensión del navegador';
   @override
@@ -48155,25 +48723,23 @@ class _StringsEs extends _StringsEn {
   String get video_extensions_title => 'Video source extensions';
   @override
   String get video_online_sources_hint =>
-      'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+      'Extensiones de Aniyomi de terceros (extensions-lib 14). El contenido procede del sitio web de cada extensión y se reproduce en el reproductor integrado.';
   @override
   String get video_online_sources_empty =>
-      'No enabled video sources. Install and enable an extension first.';
+      'No hay fuentes de vídeo activadas. Instala y activa primero una extensión.';
   @override
-  String get video_online_episodes_title => 'Episodes';
+  String get video_online_episodes_title => 'Episodios';
   @override
-  String get video_online_episodes_empty => 'No episodes found.';
+  String get video_online_episodes_empty => 'No se encontraron episodios.';
   @override
   String get video_online_stream_none =>
-      'This episode returned no playable stream.';
+      'Este episodio no devolvió ninguna transmisión reproducible.';
   @override
-  String get media_import_segment_local => 'Local';
+  String get media_import_segment_stores => 'Repositorios';
   @override
-  String get media_import_segment_stores => 'Stores';
+  String get media_import_segment_extensions => 'Extensiones';
   @override
-  String get media_import_segment_extensions => 'Extensions';
-  @override
-  String get media_import_segment_sources => 'Sources';
+  String get media_import_segment_sources => 'Fuentes';
   @override
   String get mihon_source_move_up => 'Move up';
   @override
@@ -49759,6 +50325,227 @@ class _StringsEs extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
+  @override
+  String get nav_browse => 'Explorar';
+  @override
+  String get novel_detail_library_remove => 'Quitar de la estantería';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      '¿Quitar esta novela de la estantería? Se eliminarán los capítulos en caché y el progreso de lectura.';
+  @override
+  String get novel_detail_download => 'Descargar';
+  @override
+  String get novel_detail_library_added => 'Añadido a la estantería';
+  @override
+  String get video_online_extension_unavailable =>
+      'La extensión de fuente de vídeo de este episodio no está instalada o está desactivada. Vuelve a instalarla o actívala en Explorar › Extensiones.';
+  @override
+  String get video_online_library_add => 'Añadir a la videoteca';
+  @override
+  String get video_online_library_remove => 'Quitar de la videoteca';
+  @override
+  String video_online_library_added({required Object n}) =>
+      'Se añadieron ${n} episodios a la videoteca';
+  @override
+  String get video_online_library_removed => 'Quitado de la videoteca';
+  @override
+  String get video_online_download_all => 'Descargar todo';
+  @override
+  String get video_online_download_episode => 'Descargar este episodio';
+  @override
+  String get video_online_download_started =>
+      'Descarga iniciada; consulta Explorar › Descargas';
+  @override
+  String get video_online_downloaded => 'Descargado';
+  @override
+  String get onboarding_feature_browse_hint =>
+      'Fuentes en línea, extensiones, descubrimiento y descargas';
+  @override
+  String browse_moved_notice_title({required Object browse}) =>
+      'Descubrir y las fuentes en línea se han movido a ${browse}';
+  @override
+  String browse_moved_notice_body({
+    required Object browse,
+    required Object settings,
+    required Object appearance,
+    required Object modules,
+  }) =>
+      'Descubrir y las fuentes en línea de manga, vídeo y novelas ahora están en la pestaña ${browse}, que está desactivada en este dispositivo. Para usarlas, activa ${browse} en ${settings} › ${appearance} › ${modules}.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
   @override
   String get sync_pair_link_unreachable =>
       'None of the addresses in this pairing link are reachable, or they point to a different device';
@@ -52648,8 +53435,6 @@ class _StringsFr extends _StringsEn {
   String get download_rate_limit_lan_included =>
       'S\'applique aussi sur votre réseau local.';
   @override
-  String get download_resources_tab => 'Ressources';
-  @override
   String get download_save_root_change => 'Changer le dossier';
   @override
   String get download_save_root_create_failed =>
@@ -54676,8 +55461,6 @@ class _StringsFr extends _StringsEn {
   @override
   String get library_search => 'Rechercher dans la bibliothèque';
   @override
-  String get library_view_browse => 'Découvrir';
-  @override
   String get library_view_discover => 'Découvrir';
   @override
   String get library_view_import => 'Importer';
@@ -54819,9 +55602,9 @@ class _StringsFr extends _StringsEn {
       'Rechercher dans chaque source activée';
   @override
   String get manga_global_search_no_sources =>
-      'Aucune source de manga activée pour l\'instant. Ajoutez-en une dans l\'onglet Importer.';
+      'Aucune source de manga activée pour l\'instant. Ajoutez-en une dans l\'onglet Parcourir.';
   @override
-  String get manga_global_search_open_sources => 'Aller à Importer';
+  String get manga_global_search_open_sources => 'Aller à Parcourir';
   @override
   String get manga_global_search_prompt =>
       'Tapez un titre pour rechercher dans toutes les sources de manga activées à la fois.';
@@ -55662,7 +56445,7 @@ class _StringsFr extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      'L\'onglet Téléchargements est masqué dans Paramètres → Apparence → Modules de fonctionnalités ; réactivez-le pour gérer les abonnements.';
+      'L\'onglet Parcourir est masqué dans Paramètres → Apparence → Modules de fonctionnalités ; réactivez-le pour gérer les abonnements.';
   @override
   String get module_extension_label => 'Extension navigateur';
   @override
@@ -62193,21 +62976,19 @@ class _StringsFr extends _StringsEn {
   String get video_extensions_title => 'Video source extensions';
   @override
   String get video_online_sources_hint =>
-      'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+      'Extensions Aniyomi tierces (extensions-lib 14). Le contenu provient du site de chaque extension et est lu dans le lecteur intégré.';
   @override
   String get video_online_sources_empty =>
-      'No enabled video sources. Install and enable an extension first.';
+      'Aucune source vidéo activée. Installez et activez d\'abord une extension.';
   @override
-  String get video_online_episodes_title => 'Episodes';
+  String get video_online_episodes_title => 'Épisodes';
   @override
-  String get video_online_episodes_empty => 'No episodes found.';
+  String get video_online_episodes_empty => 'Aucun épisode trouvé.';
   @override
   String get video_online_stream_none =>
-      'This episode returned no playable stream.';
+      'Cet épisode n\'a renvoyé aucun flux lisible.';
   @override
-  String get media_import_segment_local => 'Local';
-  @override
-  String get media_import_segment_stores => 'Stores';
+  String get media_import_segment_stores => 'Dépôts';
   @override
   String get media_import_segment_extensions => 'Extensions';
   @override
@@ -63799,6 +64580,227 @@ class _StringsFr extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
+  @override
+  String get nav_browse => 'Parcourir';
+  @override
+  String get novel_detail_library_remove => 'Retirer de la bibliothèque';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'Retirer ce roman de la bibliothèque ? Les chapitres en cache et la progression de lecture seront supprimés.';
+  @override
+  String get novel_detail_download => 'Télécharger';
+  @override
+  String get novel_detail_library_added => 'Ajouté à la bibliothèque';
+  @override
+  String get video_online_extension_unavailable =>
+      'L\'extension de source vidéo de cet épisode n\'est pas installée ou est désactivée. Réinstallez-la ou activez-la dans Parcourir › Extensions.';
+  @override
+  String get video_online_library_add => 'Ajouter à la vidéothèque';
+  @override
+  String get video_online_library_remove => 'Retirer de la vidéothèque';
+  @override
+  String video_online_library_added({required Object n}) =>
+      '${n} épisodes ajoutés à la vidéothèque';
+  @override
+  String get video_online_library_removed => 'Retiré de la vidéothèque';
+  @override
+  String get video_online_download_all => 'Tout télécharger';
+  @override
+  String get video_online_download_episode => 'Télécharger cet épisode';
+  @override
+  String get video_online_download_started =>
+      'Téléchargement lancé — voir Parcourir › Téléchargements';
+  @override
+  String get video_online_downloaded => 'Téléchargé';
+  @override
+  String get onboarding_feature_browse_hint =>
+      'Sources en ligne, extensions, découverte et téléchargements';
+  @override
+  String browse_moved_notice_title({required Object browse}) =>
+      'Découvrir et les sources en ligne sont déplacés dans ${browse}';
+  @override
+  String browse_moved_notice_body({
+    required Object browse,
+    required Object settings,
+    required Object appearance,
+    required Object modules,
+  }) =>
+      'Découvrir et les sources en ligne de manga, vidéos et romans se trouvent désormais dans l\'onglet ${browse}, désactivé sur cet appareil. Pour les utiliser, activez ${browse} dans ${settings} › ${appearance} › ${modules}.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
   @override
   String get sync_pair_link_unreachable =>
       'None of the addresses in this pairing link are reachable, or they point to a different device';
@@ -66632,8 +67634,6 @@ class _StringsId extends _StringsEn {
   String get download_rate_limit_lan_included =>
       'Juga berlaku dalam jaringan lokal Anda.';
   @override
-  String get download_resources_tab => 'Sumber daya';
-  @override
   String get download_save_root_change => 'Ubah folder';
   @override
   String get download_save_root_create_failed =>
@@ -68632,8 +69632,6 @@ class _StringsId extends _StringsEn {
   @override
   String get library_search => 'Cari pustaka';
   @override
-  String get library_view_browse => 'Jelajahi';
-  @override
   String get library_view_discover => 'Jelajahi';
   @override
   String get library_view_import => 'Impor';
@@ -68772,9 +69770,9 @@ class _StringsId extends _StringsEn {
   String get manga_global_search_hint => 'Cari setiap sumber yang aktif';
   @override
   String get manga_global_search_no_sources =>
-      'Belum ada sumber manga yang aktif. Tambahkan satu di tab Impor.';
+      'Belum ada sumber manga yang aktif. Tambahkan satu di tab Jelajah.';
   @override
-  String get manga_global_search_open_sources => 'Ke Impor';
+  String get manga_global_search_open_sources => 'Ke Jelajah';
   @override
   String get manga_global_search_prompt =>
       'Ketik judul untuk mencari setiap sumber manga yang aktif sekaligus.';
@@ -69606,7 +70604,7 @@ class _StringsId extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      'Tab Unduhan disembunyikan di Pengaturan → Tampilan → Modul fitur; nyalakan lagi untuk mengelola langganan.';
+      'Tab Jelajah disembunyikan di Pengaturan → Tampilan → Modul fitur; nyalakan lagi untuk mengelola langganan.';
   @override
   String get module_extension_label => 'Ekstensi browser';
   @override
@@ -76029,25 +77027,23 @@ class _StringsId extends _StringsEn {
   String get video_extensions_title => 'Video source extensions';
   @override
   String get video_online_sources_hint =>
-      'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+      'Ekstensi Aniyomi pihak ketiga (extensions-lib 14). Konten berasal dari situs web masing-masing ekstensi dan diputar di pemutar bawaan.';
   @override
   String get video_online_sources_empty =>
-      'No enabled video sources. Install and enable an extension first.';
+      'Tidak ada sumber video yang aktif. Instal dan aktifkan ekstensi terlebih dahulu.';
   @override
-  String get video_online_episodes_title => 'Episodes';
+  String get video_online_episodes_title => 'Episode';
   @override
-  String get video_online_episodes_empty => 'No episodes found.';
+  String get video_online_episodes_empty => 'Tidak ada episode.';
   @override
   String get video_online_stream_none =>
-      'This episode returned no playable stream.';
+      'Episode ini tidak mengembalikan stream yang dapat diputar.';
   @override
-  String get media_import_segment_local => 'Local';
+  String get media_import_segment_stores => 'Repositori';
   @override
-  String get media_import_segment_stores => 'Stores';
+  String get media_import_segment_extensions => 'Ekstensi';
   @override
-  String get media_import_segment_extensions => 'Extensions';
-  @override
-  String get media_import_segment_sources => 'Sources';
+  String get media_import_segment_sources => 'Sumber';
   @override
   String get mihon_source_move_up => 'Move up';
   @override
@@ -77629,6 +78625,227 @@ class _StringsId extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
+  @override
+  String get nav_browse => 'Jelajah';
+  @override
+  String get novel_detail_library_remove => 'Hapus dari rak buku';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'Hapus novel ini dari rak buku? Bab yang tersimpan dan progres membaca akan dihapus.';
+  @override
+  String get novel_detail_download => 'Unduh';
+  @override
+  String get novel_detail_library_added => 'Ditambahkan ke rak buku';
+  @override
+  String get video_online_extension_unavailable =>
+      'Ekstensi sumber video untuk episode ini tidak terpasang atau dinonaktifkan. Pasang ulang atau aktifkan di Jelajah › Ekstensi.';
+  @override
+  String get video_online_library_add => 'Tambahkan ke pustaka video';
+  @override
+  String get video_online_library_remove => 'Hapus dari pustaka video';
+  @override
+  String video_online_library_added({required Object n}) =>
+      '${n} episode ditambahkan ke pustaka video';
+  @override
+  String get video_online_library_removed => 'Dihapus dari pustaka video';
+  @override
+  String get video_online_download_all => 'Unduh semua';
+  @override
+  String get video_online_download_episode => 'Unduh episode ini';
+  @override
+  String get video_online_download_started =>
+      'Unduhan dimulai — lihat Jelajah › Unduhan';
+  @override
+  String get video_online_downloaded => 'Sudah diunduh';
+  @override
+  String get onboarding_feature_browse_hint =>
+      'Sumber online, ekstensi, penemuan, dan unduhan';
+  @override
+  String browse_moved_notice_title({required Object browse}) =>
+      'Penemuan dan sumber online dipindahkan ke ${browse}';
+  @override
+  String browse_moved_notice_body({
+    required Object browse,
+    required Object settings,
+    required Object appearance,
+    required Object modules,
+  }) =>
+      'Halaman penemuan serta sumber online untuk manga, video, dan novel kini ada di tab ${browse}, yang dimatikan di perangkat ini. Untuk menggunakannya, aktifkan ${browse} di ${settings} › ${appearance} › ${modules}.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
   @override
   String get sync_pair_link_unreachable =>
       'None of the addresses in this pairing link are reachable, or they point to a different device';
@@ -80486,8 +81703,6 @@ class _StringsIt extends _StringsEn {
   String get download_rate_limit_lan_included =>
       'Si applica anche alla rete locale.';
   @override
-  String get download_resources_tab => 'Risorse';
-  @override
   String get download_save_root_change => 'Cambia cartella';
   @override
   String get download_save_root_create_failed =>
@@ -82500,8 +83715,6 @@ class _StringsIt extends _StringsEn {
   @override
   String get library_search => 'Cerca nella libreria';
   @override
-  String get library_view_browse => 'Scopri';
-  @override
   String get library_view_discover => 'Scopri';
   @override
   String get library_view_import => 'Importa';
@@ -82641,9 +83854,9 @@ class _StringsIt extends _StringsEn {
   String get manga_global_search_hint => 'Cerca in ogni fonte abilitata';
   @override
   String get manga_global_search_no_sources =>
-      'Nessuna fonte manga attiva. Aggiungine una nella scheda Importa.';
+      'Nessuna fonte manga attiva. Aggiungine una nella scheda Sfoglia.';
   @override
-  String get manga_global_search_open_sources => 'Vai a Importa';
+  String get manga_global_search_open_sources => 'Vai a Sfoglia';
   @override
   String get manga_global_search_prompt =>
       'Digita un titolo per cercare in ogni fonte manga abilitata contemporaneamente.';
@@ -83483,7 +84696,7 @@ class _StringsIt extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      'La scheda Download è nascosta in Impostazioni → Aspetto → Moduli funzionalità; riattivala per gestire le sottoscrizioni.';
+      'La scheda Sfoglia è nascosta in Impostazioni → Aspetto → Moduli funzionalità; riattivala per gestire le sottoscrizioni.';
   @override
   String get module_extension_label => 'Estensione browser';
   @override
@@ -89956,25 +91169,23 @@ class _StringsIt extends _StringsEn {
   String get video_extensions_title => 'Video source extensions';
   @override
   String get video_online_sources_hint =>
-      'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+      'Estensioni Aniyomi di terze parti (extensions-lib 14). I contenuti provengono dal sito di ciascuna estensione e vengono riprodotti nel lettore integrato.';
   @override
   String get video_online_sources_empty =>
-      'No enabled video sources. Install and enable an extension first.';
+      'Nessuna fonte video abilitata. Installa e abilita prima un\'estensione.';
   @override
-  String get video_online_episodes_title => 'Episodes';
+  String get video_online_episodes_title => 'Episodi';
   @override
-  String get video_online_episodes_empty => 'No episodes found.';
+  String get video_online_episodes_empty => 'Nessun episodio trovato.';
   @override
   String get video_online_stream_none =>
-      'This episode returned no playable stream.';
+      'Questo episodio non ha restituito alcuno stream riproducibile.';
   @override
-  String get media_import_segment_local => 'Local';
+  String get media_import_segment_stores => 'Repository';
   @override
-  String get media_import_segment_stores => 'Stores';
+  String get media_import_segment_extensions => 'Estensioni';
   @override
-  String get media_import_segment_extensions => 'Extensions';
-  @override
-  String get media_import_segment_sources => 'Sources';
+  String get media_import_segment_sources => 'Fonti';
   @override
   String get mihon_source_move_up => 'Move up';
   @override
@@ -91560,6 +92771,227 @@ class _StringsIt extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
+  @override
+  String get nav_browse => 'Sfoglia';
+  @override
+  String get novel_detail_library_remove => 'Rimuovi dalla libreria';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'Rimuovere questo romanzo dalla libreria? I capitoli in cache e i progressi di lettura verranno eliminati.';
+  @override
+  String get novel_detail_download => 'Scarica';
+  @override
+  String get novel_detail_library_added => 'Aggiunto alla libreria';
+  @override
+  String get video_online_extension_unavailable =>
+      'L\'estensione della fonte video di questo episodio non è installata o è disabilitata. Reinstallala o abilitala in Sfoglia › Estensioni.';
+  @override
+  String get video_online_library_add => 'Aggiungi alla videoteca';
+  @override
+  String get video_online_library_remove => 'Rimuovi dalla videoteca';
+  @override
+  String video_online_library_added({required Object n}) =>
+      '${n} episodi aggiunti alla videoteca';
+  @override
+  String get video_online_library_removed => 'Rimosso dalla videoteca';
+  @override
+  String get video_online_download_all => 'Scarica tutto';
+  @override
+  String get video_online_download_episode => 'Scarica questo episodio';
+  @override
+  String get video_online_download_started =>
+      'Download avviato: vedi Sfoglia › Download';
+  @override
+  String get video_online_downloaded => 'Scaricato';
+  @override
+  String get onboarding_feature_browse_hint =>
+      'Fonti online, estensioni, scoperta e download';
+  @override
+  String browse_moved_notice_title({required Object browse}) =>
+      'Scopri e le fonti online sono stati spostati in ${browse}';
+  @override
+  String browse_moved_notice_body({
+    required Object browse,
+    required Object settings,
+    required Object appearance,
+    required Object modules,
+  }) =>
+      'Scopri e le fonti online per manga, video e romanzi ora si trovano nella scheda ${browse}, disattivata su questo dispositivo. Per usarli, attiva ${browse} in ${settings} › ${appearance} › ${modules}.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
   @override
   String get sync_pair_link_unreachable =>
       'None of the addresses in this pairing link are reachable, or they point to a different device';
@@ -94278,8 +95710,6 @@ class _StringsJa extends _StringsEn {
   @override
   String get download_rate_limit_lan_included => 'ローカルネットワーク内にも適用されます。';
   @override
-  String get download_resources_tab => 'リソース';
-  @override
   String get download_save_root_change => 'フォルダを変更';
   @override
   String get download_save_root_create_failed =>
@@ -96176,8 +97606,6 @@ class _StringsJa extends _StringsEn {
   @override
   String get library_search => 'ライブラリを検索';
   @override
-  String get library_view_browse => '発見';
-  @override
   String get library_view_discover => '見つける';
   @override
   String get library_view_import => 'インポート';
@@ -96308,9 +97736,9 @@ class _StringsJa extends _StringsEn {
   String get manga_global_search_hint => 'すべてのソースを検索';
   @override
   String get manga_global_search_no_sources =>
-      '有効なマンガソースがまだありません。「インポート」タブで追加してください。';
+      '有効なマンガソースがまだありません。「ブラウズ」タブで追加してください。';
   @override
-  String get manga_global_search_open_sources => 'インポートへ';
+  String get manga_global_search_open_sources => 'ブラウズへ';
   @override
   String get manga_global_search_prompt => 'タイトルを入力して、すべての有効なマンガソースを一括検索します。';
   @override
@@ -97095,7 +98523,7 @@ class _StringsJa extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      '「ダウンロード」タブは 設定 → 外観 → 機能モジュール で非表示になっています。購読を管理するには再度オンにしてください。';
+      '「ブラウズ」タブは 設定 → 外観 → 機能モジュール で非表示になっています。購読を管理するには再度オンにしてください。';
   @override
   String get module_extension_label => 'ブラウザ拡張機能';
   @override
@@ -103257,25 +104685,22 @@ class _StringsJa extends _StringsEn {
   String get video_extensions_title => 'Video source extensions';
   @override
   String get video_online_sources_hint =>
-      'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+      'サードパーティの Aniyomi 拡張機能（extensions-lib 14）。コンテンツは各拡張機能の配信元サイトから取得し、内蔵プレーヤーで再生します。';
   @override
   String get video_online_sources_empty =>
-      'No enabled video sources. Install and enable an extension first.';
+      '有効な動画ソースがありません。先に拡張機能をインストールして有効にしてください。';
   @override
-  String get video_online_episodes_title => 'Episodes';
+  String get video_online_episodes_title => 'エピソード';
   @override
-  String get video_online_episodes_empty => 'No episodes found.';
+  String get video_online_episodes_empty => 'エピソードが見つかりません。';
   @override
-  String get video_online_stream_none =>
-      'This episode returned no playable stream.';
+  String get video_online_stream_none => 'このエピソードには再生可能なストリームがありません。';
   @override
-  String get media_import_segment_local => 'Local';
+  String get media_import_segment_stores => 'リポジトリ';
   @override
-  String get media_import_segment_stores => 'Stores';
+  String get media_import_segment_extensions => '拡張機能';
   @override
-  String get media_import_segment_extensions => 'Extensions';
-  @override
-  String get media_import_segment_sources => 'Sources';
+  String get media_import_segment_sources => 'ソース';
   @override
   String get mihon_source_move_up => 'Move up';
   @override
@@ -104846,6 +106271,226 @@ class _StringsJa extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
+  @override
+  String get nav_browse => 'ブラウズ';
+  @override
+  String get novel_detail_library_remove => '本棚から削除';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'この小説を本棚から削除しますか？キャッシュ済みの章と読書進捗も削除されます。';
+  @override
+  String get novel_detail_download => 'ダウンロード';
+  @override
+  String get novel_detail_library_added => '本棚に追加しました';
+  @override
+  String get video_online_extension_unavailable =>
+      'このエピソードの動画ソース拡張機能がインストールされていないか、無効になっています。「ブラウズ › 拡張機能」で再インストールするか有効にしてください。';
+  @override
+  String get video_online_library_add => '動画ライブラリに追加';
+  @override
+  String get video_online_library_remove => '動画ライブラリから削除';
+  @override
+  String video_online_library_added({required Object n}) =>
+      '${n} 話を動画ライブラリに追加しました';
+  @override
+  String get video_online_library_removed => '動画ライブラリから削除しました';
+  @override
+  String get video_online_download_all => 'すべてダウンロード';
+  @override
+  String get video_online_download_episode => 'このエピソードをダウンロード';
+  @override
+  String get video_online_download_started =>
+      'ダウンロードを開始しました。進捗は「ブラウズ › ダウンロード」で確認できます';
+  @override
+  String get video_online_downloaded => 'ダウンロード済み';
+  @override
+  String get onboarding_feature_browse_hint => 'オンラインソース、拡張機能、発見、ダウンロード';
+  @override
+  String browse_moved_notice_title({required Object browse}) =>
+      '発見とオンラインソースは「${browse}」に移動しました';
+  @override
+  String browse_moved_notice_body({
+    required Object browse,
+    required Object settings,
+    required Object appearance,
+    required Object modules,
+  }) =>
+      '発見ページと、マンガ・動画・小説のオンラインソースは「${browse}」タブに移動しました。このデバイスでは現在オフになっています。使うには「${settings} › ${appearance} › ${modules}」で「${browse}」をオンにしてください。';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
   @override
   String get sync_pair_link_unreachable =>
       'None of the addresses in this pairing link are reachable, or they point to a different device';
@@ -107560,8 +109205,6 @@ class _StringsKo extends _StringsEn {
   @override
   String get download_rate_limit_lan_included => '로컬 네트워크에도 적용됩니다.';
   @override
-  String get download_resources_tab => '리소스';
-  @override
   String get download_save_root_change => '폴더 변경';
   @override
   String get download_save_root_create_failed =>
@@ -109456,8 +111099,6 @@ class _StringsKo extends _StringsEn {
   @override
   String get library_search => '라이브러리 검색';
   @override
-  String get library_view_browse => '발견';
-  @override
   String get library_view_discover => '발견';
   @override
   String get library_view_import => '가져오기';
@@ -109590,9 +111231,9 @@ class _StringsKo extends _StringsEn {
   String get manga_global_search_hint => '활성화된 모든 소스 검색';
   @override
   String get manga_global_search_no_sources =>
-      '활성화된 만화 소스가 아직 없어요. ‘가져오기’ 탭에서 하나 추가하세요.';
+      '활성화된 만화 소스가 아직 없어요. ‘탐색’ 탭에서 하나 추가하세요.';
   @override
-  String get manga_global_search_open_sources => '가져오기로 이동';
+  String get manga_global_search_open_sources => '탐색으로 이동';
   @override
   String get manga_global_search_prompt =>
       '제목을 입력하면 활성화된 모든 만화 소스를 한 번에 검색합니다.';
@@ -110384,7 +112025,7 @@ class _StringsKo extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      '‘다운로드’ 탭이 설정 → 외관 → 기능 모듈에서 숨겨져 있어요. 구독을 관리하려면 다시 켜세요.';
+      '‘탐색’ 탭이 설정 → 외관 → 기능 모듈에서 숨겨져 있어요. 구독을 관리하려면 다시 켜세요.';
   @override
   String get module_extension_label => '브라우저 확장';
   @override
@@ -116553,25 +118194,22 @@ class _StringsKo extends _StringsEn {
   String get video_extensions_title => 'Video source extensions';
   @override
   String get video_online_sources_hint =>
-      'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+      '서드파티 Aniyomi 확장 프로그램(extensions-lib 14)입니다. 콘텐츠는 각 확장 프로그램의 웹사이트에서 가져오며 내장 플레이어에서 재생됩니다.';
   @override
   String get video_online_sources_empty =>
-      'No enabled video sources. Install and enable an extension first.';
+      '활성화된 비디오 소스가 없습니다. 먼저 확장 프로그램을 설치하고 활성화하세요.';
   @override
-  String get video_online_episodes_title => 'Episodes';
+  String get video_online_episodes_title => '에피소드';
   @override
-  String get video_online_episodes_empty => 'No episodes found.';
+  String get video_online_episodes_empty => '에피소드를 찾을 수 없습니다.';
   @override
-  String get video_online_stream_none =>
-      'This episode returned no playable stream.';
+  String get video_online_stream_none => '이 에피소드에는 재생 가능한 스트림이 없습니다.';
   @override
-  String get media_import_segment_local => 'Local';
+  String get media_import_segment_stores => '저장소';
   @override
-  String get media_import_segment_stores => 'Stores';
+  String get media_import_segment_extensions => '확장 프로그램';
   @override
-  String get media_import_segment_extensions => 'Extensions';
-  @override
-  String get media_import_segment_sources => 'Sources';
+  String get media_import_segment_sources => '소스';
   @override
   String get mihon_source_move_up => 'Move up';
   @override
@@ -118149,6 +119787,226 @@ class _StringsKo extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
+  @override
+  String get nav_browse => '탐색';
+  @override
+  String get novel_detail_library_remove => '책장에서 제거';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      '이 소설을 책장에서 제거할까요? 캐시된 챕터와 읽기 진행 상황이 삭제됩니다.';
+  @override
+  String get novel_detail_download => '다운로드';
+  @override
+  String get novel_detail_library_added => '책장에 추가했어요';
+  @override
+  String get video_online_extension_unavailable =>
+      '이 에피소드의 비디오 소스 확장 프로그램이 설치되어 있지 않거나 비활성화되어 있습니다. ‘탐색 › 확장 프로그램’에서 다시 설치하거나 활성화하세요.';
+  @override
+  String get video_online_library_add => '비디오 라이브러리에 추가';
+  @override
+  String get video_online_library_remove => '비디오 라이브러리에서 제거';
+  @override
+  String video_online_library_added({required Object n}) =>
+      '에피소드 ${n}개를 비디오 라이브러리에 추가했습니다';
+  @override
+  String get video_online_library_removed => '비디오 라이브러리에서 제거했습니다';
+  @override
+  String get video_online_download_all => '모두 다운로드';
+  @override
+  String get video_online_download_episode => '이 에피소드 다운로드';
+  @override
+  String get video_online_download_started =>
+      '다운로드를 시작했습니다. 진행 상황은 ‘탐색 › 다운로드’에서 확인하세요';
+  @override
+  String get video_online_downloaded => '다운로드됨';
+  @override
+  String get onboarding_feature_browse_hint => '온라인 소스, 확장 프로그램, 발견, 다운로드';
+  @override
+  String browse_moved_notice_title({required Object browse}) =>
+      '발견과 온라인 소스가 ‘${browse}’(으)로 이동했습니다';
+  @override
+  String browse_moved_notice_body({
+    required Object browse,
+    required Object settings,
+    required Object appearance,
+    required Object modules,
+  }) =>
+      '발견 페이지와 만화·비디오·소설 온라인 소스가 ‘${browse}’ 탭으로 이동했습니다. 이 기기에서는 현재 꺼져 있습니다. 사용하려면 ‘${settings} › ${appearance} › ${modules}’에서 ‘${browse}’을(를) 켜세요.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
   @override
   String get sync_pair_link_unreachable =>
       'None of the addresses in this pairing link are reachable, or they point to a different device';
@@ -120997,8 +122855,6 @@ class _StringsNl extends _StringsEn {
   String get download_rate_limit_lan_included =>
       'Geldt ook binnen je lokale netwerk.';
   @override
-  String get download_resources_tab => 'Resources';
-  @override
   String get download_save_root_change => 'Map wijzigen';
   @override
   String get download_save_root_create_failed =>
@@ -122999,8 +124855,6 @@ class _StringsNl extends _StringsEn {
   @override
   String get library_search => 'Bibliotheek doorzoeken';
   @override
-  String get library_view_browse => 'Ontdekken';
-  @override
   String get library_view_discover => 'Ontdekken';
   @override
   String get library_view_import => 'Importeren';
@@ -123139,9 +124993,9 @@ class _StringsNl extends _StringsEn {
   String get manga_global_search_hint => 'Doorzoek elke ingeschakelde bron';
   @override
   String get manga_global_search_no_sources =>
-      'Nog geen ingeschakelde mangabronnen. Voeg er een toe op het tabblad Importeren.';
+      'Nog geen ingeschakelde mangabronnen. Voeg er een toe op het tabblad Bladeren.';
   @override
-  String get manga_global_search_open_sources => 'Naar Importeren';
+  String get manga_global_search_open_sources => 'Naar Bladeren';
   @override
   String get manga_global_search_prompt =>
       'Typ een titel om elke ingeschakelde mangabron tegelijk te doorzoeken.';
@@ -123975,7 +125829,7 @@ class _StringsNl extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      'Het tabblad Downloads is verborgen via Instellingen → Uiterlijk → Functiemodules; zet het weer aan om abonnementen te beheren.';
+      'Het tabblad Bladeren is verborgen via Instellingen → Uiterlijk → Functiemodules; zet het weer aan om abonnementen te beheren.';
   @override
   String get module_extension_label => 'Browserextensie';
   @override
@@ -130432,25 +132286,23 @@ class _StringsNl extends _StringsEn {
   String get video_extensions_title => 'Video source extensions';
   @override
   String get video_online_sources_hint =>
-      'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+      'Aniyomi-extensies van derden (extensions-lib 14). De inhoud komt van de website van elke extensie en wordt afgespeeld in de ingebouwde speler.';
   @override
   String get video_online_sources_empty =>
-      'No enabled video sources. Install and enable an extension first.';
+      'Geen ingeschakelde videobronnen. Installeer en schakel eerst een extensie in.';
   @override
-  String get video_online_episodes_title => 'Episodes';
+  String get video_online_episodes_title => 'Afleveringen';
   @override
-  String get video_online_episodes_empty => 'No episodes found.';
+  String get video_online_episodes_empty => 'Geen afleveringen gevonden.';
   @override
   String get video_online_stream_none =>
-      'This episode returned no playable stream.';
+      'Deze aflevering leverde geen afspeelbare stream op.';
   @override
-  String get media_import_segment_local => 'Local';
+  String get media_import_segment_stores => 'Repository\'s';
   @override
-  String get media_import_segment_stores => 'Stores';
+  String get media_import_segment_extensions => 'Extensies';
   @override
-  String get media_import_segment_extensions => 'Extensions';
-  @override
-  String get media_import_segment_sources => 'Sources';
+  String get media_import_segment_sources => 'Bronnen';
   @override
   String get mihon_source_move_up => 'Move up';
   @override
@@ -132034,6 +133886,228 @@ class _StringsNl extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
+  @override
+  String get nav_browse => 'Bladeren';
+  @override
+  String get novel_detail_library_remove => 'Uit boekenkast verwijderen';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'Deze roman uit de boekenkast verwijderen? Gecachte hoofdstukken en leesvoortgang worden verwijderd.';
+  @override
+  String get novel_detail_download => 'Downloaden';
+  @override
+  String get novel_detail_library_added => 'Aan boekenkast toegevoegd';
+  @override
+  String get video_online_extension_unavailable =>
+      'De videobronextensie van deze aflevering is niet geïnstalleerd of uitgeschakeld. Installeer of schakel hem opnieuw in via Bladeren › Extensies.';
+  @override
+  String get video_online_library_add => 'Toevoegen aan videobibliotheek';
+  @override
+  String get video_online_library_remove => 'Verwijderen uit videobibliotheek';
+  @override
+  String video_online_library_added({required Object n}) =>
+      '${n} afleveringen toegevoegd aan de videobibliotheek';
+  @override
+  String get video_online_library_removed =>
+      'Verwijderd uit de videobibliotheek';
+  @override
+  String get video_online_download_all => 'Alles downloaden';
+  @override
+  String get video_online_download_episode => 'Deze aflevering downloaden';
+  @override
+  String get video_online_download_started =>
+      'Download gestart — zie Bladeren › Downloads';
+  @override
+  String get video_online_downloaded => 'Gedownload';
+  @override
+  String get onboarding_feature_browse_hint =>
+      'Online bronnen, extensies, ontdekken en downloads';
+  @override
+  String browse_moved_notice_title({required Object browse}) =>
+      'Ontdekken en online bronnen zijn verplaatst naar ${browse}';
+  @override
+  String browse_moved_notice_body({
+    required Object browse,
+    required Object settings,
+    required Object appearance,
+    required Object modules,
+  }) =>
+      'Ontdekken en de online bronnen voor manga, video en romans staan nu op het tabblad ${browse}, dat op dit apparaat is uitgeschakeld. Schakel ${browse} in via ${settings} › ${appearance} › ${modules} om ze te gebruiken.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
   @override
   String get sync_pair_link_unreachable =>
       'None of the addresses in this pairing link are reachable, or they point to a different device';
@@ -134896,8 +136970,6 @@ class _StringsPtBr extends _StringsEn {
   String get download_rate_limit_lan_included =>
       'Também se aplica na rede local.';
   @override
-  String get download_resources_tab => 'Recursos';
-  @override
   String get download_save_root_change => 'Alterar pasta';
   @override
   String get download_save_root_create_failed =>
@@ -136911,8 +138983,6 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get library_search => 'Buscar na biblioteca';
   @override
-  String get library_view_browse => 'Descobrir';
-  @override
   String get library_view_discover => 'Descobrir';
   @override
   String get library_view_import => 'Importar';
@@ -137052,9 +139122,9 @@ class _StringsPtBr extends _StringsEn {
   String get manga_global_search_hint => 'Buscar em todas as fontes ativadas';
   @override
   String get manga_global_search_no_sources =>
-      'Ainda não há fontes de mangá ativadas. Adicione uma na aba Importar.';
+      'Ainda não há fontes de mangá ativadas. Adicione uma na aba Navegar.';
   @override
-  String get manga_global_search_open_sources => 'Ir para Importar';
+  String get manga_global_search_open_sources => 'Ir para Navegar';
   @override
   String get manga_global_search_prompt =>
       'Digite um título para buscar em todas as fontes de mangá ativadas de uma vez.';
@@ -137892,7 +139962,7 @@ class _StringsPtBr extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      'A aba Downloads está oculta em Configurações → Aparência → Módulos de funcionalidades; reative-a para gerenciar as assinaturas.';
+      'A aba Navegar está oculta em Configurações → Aparência → Módulos de funcionalidades; reative-a para gerenciar as assinaturas.';
   @override
   String get module_extension_label => 'Extensão do navegador';
   @override
@@ -144370,25 +146440,23 @@ class _StringsPtBr extends _StringsEn {
   String get video_extensions_title => 'Video source extensions';
   @override
   String get video_online_sources_hint =>
-      'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+      'Extensões Aniyomi de terceiros (extensions-lib 14). O conteúdo vem do site de cada extensão e é reproduzido no player integrado.';
   @override
   String get video_online_sources_empty =>
-      'No enabled video sources. Install and enable an extension first.';
+      'Nenhuma fonte de vídeo ativada. Instale e ative uma extensão primeiro.';
   @override
-  String get video_online_episodes_title => 'Episodes';
+  String get video_online_episodes_title => 'Episódios';
   @override
-  String get video_online_episodes_empty => 'No episodes found.';
+  String get video_online_episodes_empty => 'Nenhum episódio encontrado.';
   @override
   String get video_online_stream_none =>
-      'This episode returned no playable stream.';
+      'Este episódio não retornou nenhum stream reproduzível.';
   @override
-  String get media_import_segment_local => 'Local';
+  String get media_import_segment_stores => 'Repositórios';
   @override
-  String get media_import_segment_stores => 'Stores';
+  String get media_import_segment_extensions => 'Extensões';
   @override
-  String get media_import_segment_extensions => 'Extensions';
-  @override
-  String get media_import_segment_sources => 'Sources';
+  String get media_import_segment_sources => 'Fontes';
   @override
   String get mihon_source_move_up => 'Move up';
   @override
@@ -145972,6 +148040,227 @@ class _StringsPtBr extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
+  @override
+  String get nav_browse => 'Navegar';
+  @override
+  String get novel_detail_library_remove => 'Remover da estante';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'Remover este romance da estante? Os capítulos em cache e o progresso de leitura serão apagados.';
+  @override
+  String get novel_detail_download => 'Baixar';
+  @override
+  String get novel_detail_library_added => 'Adicionado à estante';
+  @override
+  String get video_online_extension_unavailable =>
+      'A extensão de fonte de vídeo deste episódio não está instalada ou está desativada. Reinstale ou ative-a em Navegar › Extensões.';
+  @override
+  String get video_online_library_add => 'Adicionar à biblioteca de vídeos';
+  @override
+  String get video_online_library_remove => 'Remover da biblioteca de vídeos';
+  @override
+  String video_online_library_added({required Object n}) =>
+      '${n} episódios adicionados à biblioteca de vídeos';
+  @override
+  String get video_online_library_removed => 'Removido da biblioteca de vídeos';
+  @override
+  String get video_online_download_all => 'Baixar tudo';
+  @override
+  String get video_online_download_episode => 'Baixar este episódio';
+  @override
+  String get video_online_download_started =>
+      'Download iniciado — veja Navegar › Downloads';
+  @override
+  String get video_online_downloaded => 'Baixado';
+  @override
+  String get onboarding_feature_browse_hint =>
+      'Fontes online, extensões, descoberta e downloads';
+  @override
+  String browse_moved_notice_title({required Object browse}) =>
+      'Descobrir e as fontes online foram movidos para ${browse}';
+  @override
+  String browse_moved_notice_body({
+    required Object browse,
+    required Object settings,
+    required Object appearance,
+    required Object modules,
+  }) =>
+      'Descobrir e as fontes online de mangá, vídeo e romances agora ficam na aba ${browse}, que está desativada neste dispositivo. Para usá-los, ative ${browse} em ${settings} › ${appearance} › ${modules}.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
   @override
   String get sync_pair_link_unreachable =>
       'None of the addresses in this pairing link are reachable, or they point to a different device';
@@ -148814,8 +151103,6 @@ class _StringsRu extends _StringsEn {
   String get download_rate_limit_lan_included =>
       'Также применяется в локальной сети.';
   @override
-  String get download_resources_tab => 'Ресурсы';
-  @override
   String get download_save_root_change => 'Изменить папку';
   @override
   String get download_save_root_create_failed =>
@@ -150826,8 +153113,6 @@ class _StringsRu extends _StringsEn {
   @override
   String get library_search => 'Поиск в библиотеке';
   @override
-  String get library_view_browse => 'Обзор';
-  @override
   String get library_view_discover => 'Обзор';
   @override
   String get library_view_import => 'Импорт';
@@ -150967,9 +153252,9 @@ class _StringsRu extends _StringsEn {
   String get manga_global_search_hint => 'Поиск по всем включённым источникам';
   @override
   String get manga_global_search_no_sources =>
-      'Включённых источников манги пока нет. Добавьте один на вкладке «Импорт».';
+      'Включённых источников манги пока нет. Добавьте один на вкладке «Обзор».';
   @override
-  String get manga_global_search_open_sources => 'К импорту';
+  String get manga_global_search_open_sources => 'К обзору';
   @override
   String get manga_global_search_prompt =>
       'Введите название для поиска по всем включённым источникам манги одновременно.';
@@ -151804,7 +154089,7 @@ class _StringsRu extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      'Вкладка «Загрузки» скрыта в разделе Настройки → Внешний вид → Функциональные модули; включите её снова, чтобы управлять подписками.';
+      'Вкладка «Обзор» скрыта в разделе Настройки → Внешний вид → Функциональные модули; включите её снова, чтобы управлять подписками.';
   @override
   String get module_extension_label => 'Расширение для браузера';
   @override
@@ -158284,25 +160569,23 @@ class _StringsRu extends _StringsEn {
   String get video_extensions_title => 'Video source extensions';
   @override
   String get video_online_sources_hint =>
-      'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+      'Сторонние расширения Aniyomi (extensions-lib 14). Контент берётся с сайта каждого расширения и воспроизводится во встроенном плеере.';
   @override
   String get video_online_sources_empty =>
-      'No enabled video sources. Install and enable an extension first.';
+      'Нет включённых источников видео. Сначала установите и включите расширение.';
   @override
-  String get video_online_episodes_title => 'Episodes';
+  String get video_online_episodes_title => 'Эпизоды';
   @override
-  String get video_online_episodes_empty => 'No episodes found.';
+  String get video_online_episodes_empty => 'Эпизоды не найдены.';
   @override
   String get video_online_stream_none =>
-      'This episode returned no playable stream.';
+      'Для этого эпизода не найдено воспроизводимого потока.';
   @override
-  String get media_import_segment_local => 'Local';
+  String get media_import_segment_stores => 'Репозитории';
   @override
-  String get media_import_segment_stores => 'Stores';
+  String get media_import_segment_extensions => 'Расширения';
   @override
-  String get media_import_segment_extensions => 'Extensions';
-  @override
-  String get media_import_segment_sources => 'Sources';
+  String get media_import_segment_sources => 'Источники';
   @override
   String get mihon_source_move_up => 'Move up';
   @override
@@ -159885,6 +162168,227 @@ class _StringsRu extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
+  @override
+  String get nav_browse => 'Обзор';
+  @override
+  String get novel_detail_library_remove => 'Убрать с полки';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'Убрать этот роман с полки? Кэшированные главы и прогресс чтения будут удалены.';
+  @override
+  String get novel_detail_download => 'Скачать';
+  @override
+  String get novel_detail_library_added => 'Добавлено на полку';
+  @override
+  String get video_online_extension_unavailable =>
+      'Расширение источника видео для этого эпизода не установлено или отключено. Переустановите или включите его в разделе «Обзор › Расширения».';
+  @override
+  String get video_online_library_add => 'Добавить в видеотеку';
+  @override
+  String get video_online_library_remove => 'Убрать из видеотеки';
+  @override
+  String video_online_library_added({required Object n}) =>
+      'Добавлено эпизодов в видеотеку: ${n}';
+  @override
+  String get video_online_library_removed => 'Убрано из видеотеки';
+  @override
+  String get video_online_download_all => 'Скачать все';
+  @override
+  String get video_online_download_episode => 'Скачать этот эпизод';
+  @override
+  String get video_online_download_started =>
+      'Загрузка началась — см. «Обзор › Загрузки»';
+  @override
+  String get video_online_downloaded => 'Скачано';
+  @override
+  String get onboarding_feature_browse_hint =>
+      'Онлайн-источники, расширения, поиск контента и загрузки';
+  @override
+  String browse_moved_notice_title({required Object browse}) =>
+      'Поиск контента и онлайн-источники перенесены в «${browse}»';
+  @override
+  String browse_moved_notice_body({
+    required Object browse,
+    required Object settings,
+    required Object appearance,
+    required Object modules,
+  }) =>
+      'Страницы поиска контента и онлайн-источники манги, видео и ранобэ теперь находятся на вкладке «${browse}», которая на этом устройстве выключена. Чтобы пользоваться ими, включите «${browse}» в разделе «${settings} › ${appearance} › ${modules}».';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
   @override
   String get sync_pair_link_unreachable =>
       'None of the addresses in this pairing link are reachable, or they point to a different device';
@@ -162689,8 +165193,6 @@ class _StringsTh extends _StringsEn {
   String get download_rate_limit_lan_included =>
       'ใช้กับเครือข่ายท้องถิ่นของคุณด้วย';
   @override
-  String get download_resources_tab => 'ทรัพยากร';
-  @override
   String get download_save_root_change => 'เปลี่ยนโฟลเดอร์';
   @override
   String get download_save_root_create_failed =>
@@ -164659,8 +167161,6 @@ class _StringsTh extends _StringsEn {
   @override
   String get library_search => 'ค้นหาคลัง';
   @override
-  String get library_view_browse => 'สำรวจ';
-  @override
   String get library_view_discover => 'ค้นพบ';
   @override
   String get library_view_import => 'นำเข้า';
@@ -164797,9 +167297,9 @@ class _StringsTh extends _StringsEn {
   String get manga_global_search_hint => 'ค้นหาทุกแหล่งที่เปิดใช้งาน';
   @override
   String get manga_global_search_no_sources =>
-      'ยังไม่มีแหล่งมังงะที่เปิดใช้งาน เพิ่มได้ที่แท็บนำเข้า';
+      'ยังไม่มีแหล่งมังงะที่เปิดใช้งาน เพิ่มได้ที่แท็บเรียกดู';
   @override
-  String get manga_global_search_open_sources => 'ไปที่นำเข้า';
+  String get manga_global_search_open_sources => 'ไปที่เรียกดู';
   @override
   String get manga_global_search_prompt =>
       'พิมพ์ชื่อเรื่องเพื่อค้นหาทุกแหล่งมังงะที่เปิดใช้งานพร้อมกัน';
@@ -165623,7 +168123,7 @@ class _StringsTh extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      'แท็บดาวน์โหลดถูกซ่อนไว้ใน การตั้งค่า → รูปลักษณ์ → โมดูลฟีเจอร์ ต้องเปิดกลับมาจึงจะจัดการรายการติดตามได้';
+      'แท็บเรียกดูถูกซ่อนไว้ใน การตั้งค่า → รูปลักษณ์ → โมดูลฟีเจอร์ ต้องเปิดกลับมาจึงจะจัดการรายการติดตามได้';
   @override
   String get module_extension_label => 'ส่วนขยายเบราว์เซอร์';
   @override
@@ -171996,25 +174496,22 @@ class _StringsTh extends _StringsEn {
   String get video_extensions_title => 'Video source extensions';
   @override
   String get video_online_sources_hint =>
-      'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+      'ส่วนขยาย Aniyomi จากบุคคลที่สาม (extensions-lib 14) เนื้อหามาจากเว็บไซต์ของแต่ละส่วนขยายและเล่นในเครื่องเล่นในตัว';
   @override
   String get video_online_sources_empty =>
-      'No enabled video sources. Install and enable an extension first.';
+      'ไม่มีแหล่งวิดีโอที่เปิดใช้งาน ติดตั้งและเปิดใช้งานส่วนขยายก่อน';
   @override
-  String get video_online_episodes_title => 'Episodes';
+  String get video_online_episodes_title => 'ตอน';
   @override
-  String get video_online_episodes_empty => 'No episodes found.';
+  String get video_online_episodes_empty => 'ไม่พบตอน';
   @override
-  String get video_online_stream_none =>
-      'This episode returned no playable stream.';
+  String get video_online_stream_none => 'ตอนนี้ไม่มีสตรีมที่เล่นได้';
   @override
-  String get media_import_segment_local => 'Local';
+  String get media_import_segment_stores => 'ที่เก็บ';
   @override
-  String get media_import_segment_stores => 'Stores';
+  String get media_import_segment_extensions => 'ส่วนขยาย';
   @override
-  String get media_import_segment_extensions => 'Extensions';
-  @override
-  String get media_import_segment_sources => 'Sources';
+  String get media_import_segment_sources => 'แหล่งที่มา';
   @override
   String get mihon_source_move_up => 'Move up';
   @override
@@ -173595,6 +176092,227 @@ class _StringsTh extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
+  @override
+  String get nav_browse => 'เรียกดู';
+  @override
+  String get novel_detail_library_remove => 'นำออกจากชั้นหนังสือ';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'นำนิยายเรื่องนี้ออกจากชั้นหนังสือ? ตอนที่แคชไว้และความคืบหน้าการอ่านจะถูกลบ';
+  @override
+  String get novel_detail_download => 'ดาวน์โหลด';
+  @override
+  String get novel_detail_library_added => 'เพิ่มลงชั้นหนังสือแล้ว';
+  @override
+  String get video_online_extension_unavailable =>
+      'ส่วนขยายแหล่งวิดีโอของตอนนี้ไม่ได้ติดตั้งหรือถูกปิดใช้งาน ติดตั้งใหม่หรือเปิดใช้งานได้ที่ เรียกดู › ส่วนขยาย';
+  @override
+  String get video_online_library_add => 'เพิ่มในคลังวิดีโอ';
+  @override
+  String get video_online_library_remove => 'นำออกจากคลังวิดีโอ';
+  @override
+  String video_online_library_added({required Object n}) =>
+      'เพิ่ม ${n} ตอนในคลังวิดีโอแล้ว';
+  @override
+  String get video_online_library_removed => 'นำออกจากคลังวิดีโอแล้ว';
+  @override
+  String get video_online_download_all => 'ดาวน์โหลดทั้งหมด';
+  @override
+  String get video_online_download_episode => 'ดาวน์โหลดเฉพาะตอนนี้';
+  @override
+  String get video_online_download_started =>
+      'เริ่มดาวน์โหลดแล้ว — ดูที่ เรียกดู › ดาวน์โหลด';
+  @override
+  String get video_online_downloaded => 'ดาวน์โหลดแล้ว';
+  @override
+  String get onboarding_feature_browse_hint =>
+      'แหล่งออนไลน์ ส่วนขยาย การค้นพบ และการดาวน์โหลด';
+  @override
+  String browse_moved_notice_title({required Object browse}) =>
+      'การค้นพบและแหล่งออนไลน์ย้ายไปที่ ${browse} แล้ว';
+  @override
+  String browse_moved_notice_body({
+    required Object browse,
+    required Object settings,
+    required Object appearance,
+    required Object modules,
+  }) =>
+      'หน้าค้นพบและแหล่งออนไลน์สำหรับมังงะ วิดีโอ และนิยาย ย้ายไปอยู่ในแท็บ ${browse} แล้ว ซึ่งปิดอยู่ในอุปกรณ์นี้ หากต้องการใช้ ให้เปิด ${browse} ที่ ${settings} › ${appearance} › ${modules}';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
   @override
   String get sync_pair_link_unreachable =>
       'None of the addresses in this pairing link are reachable, or they point to a different device';
@@ -176433,8 +179151,6 @@ class _StringsTr extends _StringsEn {
   String get download_rate_limit_lan_included =>
       'Yerel ağınızda da geçerlidir.';
   @override
-  String get download_resources_tab => 'Kaynaklar';
-  @override
   String get download_save_root_change => 'Klasörü değiştir';
   @override
   String get download_save_root_create_failed =>
@@ -178430,8 +181146,6 @@ class _StringsTr extends _StringsEn {
   @override
   String get library_search => 'Kütüphanede ara';
   @override
-  String get library_view_browse => 'Keşfet';
-  @override
   String get library_view_discover => 'Keşfet';
   @override
   String get library_view_import => 'İçe aktar';
@@ -178569,9 +181283,9 @@ class _StringsTr extends _StringsEn {
   String get manga_global_search_hint => 'Etkin tüm kaynaklarda ara';
   @override
   String get manga_global_search_no_sources =>
-      'Henüz etkin manga kaynağı yok. İçe aktar sekmesinden bir tane ekleyin.';
+      'Henüz etkin manga kaynağı yok. Göz at sekmesinden bir tane ekleyin.';
   @override
-  String get manga_global_search_open_sources => 'İçe aktarmaya git';
+  String get manga_global_search_open_sources => 'Göz at\'a git';
   @override
   String get manga_global_search_prompt =>
       'Etkin tüm manga kaynaklarında aynı anda aramak için bir başlık yazın.';
@@ -179403,7 +182117,7 @@ class _StringsTr extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      'İndirmeler sekmesi Ayarlar → Görünüm → Özellik modülleri altında gizli; abonelikleri yönetmek için yeniden açın.';
+      'Göz at sekmesi Ayarlar → Görünüm → Özellik modülleri altında gizli; abonelikleri yönetmek için yeniden açın.';
   @override
   String get module_extension_label => 'Tarayıcı eklentisi';
   @override
@@ -185821,25 +188535,23 @@ class _StringsTr extends _StringsEn {
   String get video_extensions_title => 'Video source extensions';
   @override
   String get video_online_sources_hint =>
-      'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+      'Üçüncü taraf Aniyomi eklentileri (extensions-lib 14). İçerik her eklentinin web sitesinden gelir ve yerleşik oynatıcıda oynatılır.';
   @override
   String get video_online_sources_empty =>
-      'No enabled video sources. Install and enable an extension first.';
+      'Etkin video kaynağı yok. Önce bir eklenti yükleyip etkinleştirin.';
   @override
-  String get video_online_episodes_title => 'Episodes';
+  String get video_online_episodes_title => 'Bölümler';
   @override
-  String get video_online_episodes_empty => 'No episodes found.';
+  String get video_online_episodes_empty => 'Bölüm bulunamadı.';
   @override
   String get video_online_stream_none =>
-      'This episode returned no playable stream.';
+      'Bu bölüm oynatılabilir bir akış döndürmedi.';
   @override
-  String get media_import_segment_local => 'Local';
+  String get media_import_segment_stores => 'Depolar';
   @override
-  String get media_import_segment_stores => 'Stores';
+  String get media_import_segment_extensions => 'Eklentiler';
   @override
-  String get media_import_segment_extensions => 'Extensions';
-  @override
-  String get media_import_segment_sources => 'Sources';
+  String get media_import_segment_sources => 'Kaynaklar';
   @override
   String get mihon_source_move_up => 'Move up';
   @override
@@ -187419,6 +190131,227 @@ class _StringsTr extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
+  @override
+  String get nav_browse => 'Göz at';
+  @override
+  String get novel_detail_library_remove => 'Kitaplıktan kaldır';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'Bu roman kitaplıktan kaldırılsın mı? Önbelleğe alınan bölümler ve okuma ilerlemesi silinecek.';
+  @override
+  String get novel_detail_download => 'İndir';
+  @override
+  String get novel_detail_library_added => 'Kitaplığa eklendi';
+  @override
+  String get video_online_extension_unavailable =>
+      'Bu bölümün video kaynağı eklentisi yüklü değil veya devre dışı. Göz at › Eklentiler bölümünden yeniden yükleyin veya etkinleştirin.';
+  @override
+  String get video_online_library_add => 'Video kitaplığına ekle';
+  @override
+  String get video_online_library_remove => 'Video kitaplığından kaldır';
+  @override
+  String video_online_library_added({required Object n}) =>
+      '${n} bölüm video kitaplığına eklendi';
+  @override
+  String get video_online_library_removed => 'Video kitaplığından kaldırıldı';
+  @override
+  String get video_online_download_all => 'Tümünü indir';
+  @override
+  String get video_online_download_episode => 'Bu bölümü indir';
+  @override
+  String get video_online_download_started =>
+      'İndirme başladı — Göz at › İndirmeler bölümüne bakın';
+  @override
+  String get video_online_downloaded => 'İndirildi';
+  @override
+  String get onboarding_feature_browse_hint =>
+      'Çevrimiçi kaynaklar, eklentiler, keşif ve indirmeler';
+  @override
+  String browse_moved_notice_title({required Object browse}) =>
+      'Keşfet ve çevrimiçi kaynaklar ${browse} sekmesine taşındı';
+  @override
+  String browse_moved_notice_body({
+    required Object browse,
+    required Object settings,
+    required Object appearance,
+    required Object modules,
+  }) =>
+      'Keşfet sayfası ile manga, video ve roman için çevrimiçi kaynaklar artık ${browse} sekmesinde; bu sekme bu cihazda kapalı. Bunları kullanmak için ${settings} › ${appearance} › ${modules} bölümünden ${browse} seçeneğini açın.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
   @override
   String get sync_pair_link_unreachable =>
       'None of the addresses in this pairing link are reachable, or they point to a different device';
@@ -190254,8 +193187,6 @@ class _StringsVi extends _StringsEn {
   String get download_rate_limit_lan_included =>
       'Cũng áp dụng trong mạng nội bộ.';
   @override
-  String get download_resources_tab => 'Tài nguyên';
-  @override
   String get download_save_root_change => 'Đổi thư mục';
   @override
   String get download_save_root_create_failed =>
@@ -192247,8 +195178,6 @@ class _StringsVi extends _StringsEn {
   @override
   String get library_search => 'Tìm kiếm thư viện';
   @override
-  String get library_view_browse => 'Khám phá';
-  @override
   String get library_view_discover => 'Khám phá';
   @override
   String get library_view_import => 'Nhập';
@@ -192388,9 +195317,9 @@ class _StringsVi extends _StringsEn {
   String get manga_global_search_hint => 'Tìm kiếm mọi nguồn đã bật';
   @override
   String get manga_global_search_no_sources =>
-      'Chưa có nguồn truyện tranh nào được bật. Thêm một nguồn ở tab Nhập.';
+      'Chưa có nguồn truyện tranh nào được bật. Thêm một nguồn ở tab Duyệt.';
   @override
-  String get manga_global_search_open_sources => 'Tới phần nhập';
+  String get manga_global_search_open_sources => 'Tới phần duyệt';
   @override
   String get manga_global_search_prompt =>
       'Nhập tựa đề để tìm kiếm tất cả nguồn truyện tranh đã bật cùng lúc.';
@@ -193215,7 +196144,7 @@ class _StringsVi extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      'Tab Tải xuống đang bị ẩn trong Cài đặt → Giao diện → Mô-đun tính năng; bật lại để quản lý đăng ký.';
+      'Tab Duyệt đang bị ẩn trong Cài đặt → Giao diện → Mô-đun tính năng; bật lại để quản lý đăng ký.';
   @override
   String get module_extension_label => 'Tiện ích mở rộng trình duyệt';
   @override
@@ -199616,25 +202545,23 @@ class _StringsVi extends _StringsEn {
   String get video_extensions_title => 'Video source extensions';
   @override
   String get video_online_sources_hint =>
-      'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+      'Tiện ích Aniyomi của bên thứ ba (extensions-lib 14). Nội dung lấy từ trang web của từng tiện ích và phát trong trình phát tích hợp.';
   @override
   String get video_online_sources_empty =>
-      'No enabled video sources. Install and enable an extension first.';
+      'Chưa có nguồn video nào được bật. Hãy cài đặt và bật tiện ích trước.';
   @override
-  String get video_online_episodes_title => 'Episodes';
+  String get video_online_episodes_title => 'Tập';
   @override
-  String get video_online_episodes_empty => 'No episodes found.';
+  String get video_online_episodes_empty => 'Không tìm thấy tập nào.';
   @override
   String get video_online_stream_none =>
-      'This episode returned no playable stream.';
+      'Tập này không trả về luồng phát được.';
   @override
-  String get media_import_segment_local => 'Local';
+  String get media_import_segment_stores => 'Kho';
   @override
-  String get media_import_segment_stores => 'Stores';
+  String get media_import_segment_extensions => 'Tiện ích';
   @override
-  String get media_import_segment_extensions => 'Extensions';
-  @override
-  String get media_import_segment_sources => 'Sources';
+  String get media_import_segment_sources => 'Nguồn';
   @override
   String get mihon_source_move_up => 'Move up';
   @override
@@ -201214,6 +204141,227 @@ class _StringsVi extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned =>
+      'This video isn\'t in any local video source\'s scrape plan';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
+  String get remote_video_stream_play => 'Play (stream)';
+  @override
+  String get nav_browse => 'Duyệt';
+  @override
+  String get novel_detail_library_remove => 'Xóa khỏi kệ sách';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      'Xóa tiểu thuyết này khỏi kệ sách? Các chương đã lưu đệm và tiến độ đọc sẽ bị xóa.';
+  @override
+  String get novel_detail_download => 'Tải xuống';
+  @override
+  String get novel_detail_library_added => 'Đã thêm vào kệ sách';
+  @override
+  String get video_online_extension_unavailable =>
+      'Tiện ích nguồn video của tập này chưa được cài đặt hoặc đã bị tắt. Hãy cài lại hoặc bật nó trong Duyệt › Tiện ích.';
+  @override
+  String get video_online_library_add => 'Thêm vào thư viện video';
+  @override
+  String get video_online_library_remove => 'Xóa khỏi thư viện video';
+  @override
+  String video_online_library_added({required Object n}) =>
+      'Đã thêm ${n} tập vào thư viện video';
+  @override
+  String get video_online_library_removed => 'Đã xóa khỏi thư viện video';
+  @override
+  String get video_online_download_all => 'Tải tất cả';
+  @override
+  String get video_online_download_episode => 'Tải tập này';
+  @override
+  String get video_online_download_started =>
+      'Đã bắt đầu tải — xem Duyệt › Tải xuống';
+  @override
+  String get video_online_downloaded => 'Đã tải';
+  @override
+  String get onboarding_feature_browse_hint =>
+      'Nguồn trực tuyến, tiện ích, khám phá và tải xuống';
+  @override
+  String browse_moved_notice_title({required Object browse}) =>
+      'Khám phá và nguồn trực tuyến đã chuyển sang ${browse}';
+  @override
+  String browse_moved_notice_body({
+    required Object browse,
+    required Object settings,
+    required Object appearance,
+    required Object modules,
+  }) =>
+      'Trang Khám phá cùng các nguồn trực tuyến cho truyện tranh, video và tiểu thuyết giờ nằm trong tab ${browse}, hiện đang tắt trên thiết bị này. Để sử dụng, hãy bật ${browse} trong ${settings} › ${appearance} › ${modules}.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
   @override
   String get sync_pair_link_unreachable =>
       'None of the addresses in this pairing link are reachable, or they point to a different device';
@@ -203835,8 +206983,6 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get download_rate_limit_lan_included => '同时作用于局域网内的传输。';
   @override
-  String get download_resources_tab => '资源';
-  @override
   String get download_save_root_change => '更改目录';
   @override
   String get download_save_root_create_failed => '无法创建该目录，请检查磁盘与权限。';
@@ -205652,8 +208798,6 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get library_search => '搜索库';
   @override
-  String get library_view_browse => '发现';
-  @override
   String get library_view_discover => '发现';
   @override
   String get library_view_import => '导入';
@@ -205780,9 +208924,9 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get manga_global_search_hint => '搜索所有已启用来源';
   @override
-  String get manga_global_search_no_sources => '还没有已启用的漫画来源，去「导入」添加一个。';
+  String get manga_global_search_no_sources => '还没有已启用的漫画来源，去「浏览」添加一个。';
   @override
-  String get manga_global_search_open_sources => '去导入';
+  String get manga_global_search_open_sources => '去浏览';
   @override
   String get manga_global_search_prompt => '输入书名，一次搜索所有已启用的漫画来源。';
   @override
@@ -206535,7 +209679,7 @@ class _StringsZhCn extends _StringsEn {
   String get module_disabled_hint => '该功能模块已在「设置 → 外观 → 功能模块」中关闭。';
   @override
   String get module_downloads_hidden_hint =>
-      '「下载」页已在 设置 → 外观 → 功能模块 中隐藏；重新打开它才能管理订阅。';
+      '「浏览」页已在 设置 → 外观 → 功能模块 中隐藏；重新打开它才能管理订阅。';
   @override
   String get module_extension_label => '浏览器扩展';
   @override
@@ -212394,8 +215538,6 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get video_online_stream_none => '该集没有可播放的流。';
   @override
-  String get media_import_segment_local => '本地';
-  @override
   String get media_import_segment_stores => '仓库';
   @override
   String get media_import_segment_extensions => '扩展';
@@ -213839,6 +216981,205 @@ class _StringsZhCn extends _StringsEn {
       '请填写以 https:// 开头、以 api.php 结尾的地址';
   @override
   String get ai_web_knowledge_custom_remove => '删除站点';
+  @override
+  String get video_item_rescrape_not_planned => '这个视频不在任何本地视频来源的刮削计划里';
+  @override
+  String get plex_settings_hint =>
+      '用 Plex 账号登录，或填写服务器地址与 X-Plex-Token 直连。播放直接串流原文件（direct play），不使用 Plex 转码。';
+  @override
+  String get plex_account_sign_in => '使用 Plex 账号登录';
+  @override
+  String get plex_pin_waiting => '等待在浏览器中授权 Fushi…';
+  @override
+  String get plex_pin_link_hint => '如果浏览器没有自动打开，请复制这个链接：';
+  @override
+  String get plex_pin_expired => '登录请求已过期，请重试。';
+  @override
+  String get plex_servers_none_reachable => '这个账号下没有找到可连接的 Plex 服务器。';
+  @override
+  String plex_servers_added({required Object n}) => '已添加 ${n} 台 Plex 服务器';
+  @override
+  String get plex_manual_title => '手动连接';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => '连接';
+  @override
+  String get plex_sign_in_failed => 'Plex 登录失败';
+  @override
+  String get video_setting_subtitle_reference_sync => '下载字幕自动对齐';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      '按视频自带的字幕轨给下载的字幕对时间轴。只在证据充分时才改，否则保持原样。';
+  @override
+  String get video_subtitle_reference_sync_action => '按内嵌字幕对齐';
+  @override
+  String get video_subtitle_reference_sync_need_external => '先选一条下载或导入的外挂字幕';
+  @override
+  String get video_subtitle_reference_sync_running => '正在按内嵌字幕轨对齐…';
+  @override
+  String get video_subtitle_reference_sync_no_reference => '这个视频没有可当参考的文本字幕轨';
+  @override
+  String get video_subtitle_reference_sync_unreadable => '这条字幕读不出足够的时间轴';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      '与内嵌字幕对不上（可能不是这一集，或剪辑不同），保持原样';
+  @override
+  String get video_subtitle_reference_sync_in_sync => '已经与内嵌字幕对齐，无需修改';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      '已对齐：${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title => '对齐结果不太确定';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      '建议平移：${offset}。匹配率是瞎碰概率的 ${excess} 倍，${groups} 组独立参考字幕轨给出一致结果。要另存为一份新字幕吗？原字幕不会改动。';
+  @override
+  String get video_subtitle_reference_sync_apply => '应用';
+  @override
+  String get video_subtitle_reference_sync_restore_title => '这条字幕下载时已自动对齐';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      '下载时已按内嵌字幕轨调整过时间轴。要把原始时间轴恢复成一份新字幕吗？';
+  @override
+  String get video_subtitle_reference_sync_restore => '恢复原始字幕';
+  @override
+  String get video_subtitle_reference_sync_failed => '字幕文件读写失败';
+  @override
+  String get remote_video_stream_play => '播放（流播）';
+  @override
+  String get nav_browse => '浏览';
+  @override
+  String get novel_detail_library_remove => '移出书架';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      '把这部小说移出书架？已缓存的章节和阅读进度会一并删除。';
+  @override
+  String get novel_detail_download => '下载';
+  @override
+  String get novel_detail_library_added => '已加入书架';
+  @override
+  String get video_online_extension_unavailable =>
+      '这一集所属的视频源扩展没有安装或已停用。请到「浏览 › 扩展」重新安装或启用。';
+  @override
+  String get video_online_library_add => '加入媒体库';
+  @override
+  String get video_online_library_remove => '移出媒体库';
+  @override
+  String video_online_library_added({required Object n}) => '已把 ${n} 集加入媒体库';
+  @override
+  String get video_online_library_removed => '已移出媒体库';
+  @override
+  String get video_online_download_all => '下载全部';
+  @override
+  String get video_online_download_episode => '下载本集';
+  @override
+  String get video_online_download_started => '已开始下载，进度见「浏览 › 下载」';
+  @override
+  String get video_online_downloaded => '已下载';
+  @override
+  String get onboarding_feature_browse_hint => '在线来源、扩展、发现与下载';
+  @override
+  String browse_moved_notice_title({required Object browse}) =>
+      '发现与在线来源已移到「${browse}」';
+  @override
+  String browse_moved_notice_body({
+    required Object browse,
+    required Object settings,
+    required Object appearance,
+    required Object modules,
+  }) =>
+      '发现页，以及漫画 / 视频 / 小说的在线来源，已经移到「${browse}」页签；它在本机目前是关闭的。要使用它们，请到「${settings} › ${appearance} › ${modules}」打开「${browse}」。';
+  @override
+  String get video_strm_target_local =>
+      '该 .strm 文件指向本机文件路径，暂不支持。请直接把视频文件放进来源库。';
+  @override
+  String get video_strm_target_unsupported =>
+      '该 .strm 文件里没有可播放的流地址（http、https、rtsp 等）。';
+  @override
+  String get video_strm_file_unreadable => '无法读取 .strm 文件。';
+  @override
+  String get video_iptv_import_action => '导入 IPTV 频道列表';
+  @override
+  String get video_iptv_import_title => '导入 M3U / IPTV 频道列表';
+  @override
+  String get video_iptv_url_field => '频道列表地址';
+  @override
+  String get video_iptv_pick_file => '选择本地 .m3u / .m3u8 文件';
+  @override
+  String get video_iptv_import_hint =>
+      '每个频道作为一条流入库，并按 group-title 分组成合集；HLS 流播放列表会作为单个视频导入。';
+  @override
+  String get video_iptv_list_empty => '列表里没有找到频道。';
+  @override
+  String video_iptv_imported({required Object count}) => '已导入 ${count} 个频道';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'iOS 与 macOS 暂不支持这种流协议（rtsps / rtmps / rtmpe）。';
+  @override
+  String get hoshi_import_entry => '从 Hoshi Reader 导入';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      '从 Hoshi Reader（iOS / Android）的书库备份导入书、阅读位置和统计';
+  @override
+  String get hoshi_import_how_to =>
+      '在 Hoshi Reader 里打开「设置 › Backup」备份书库，然后在这里选择生成的 Books_….hoshi 文件。库里已有的书不会重复导入；同一份备份重复导入不会重复计数。';
+  @override
+  String get hoshi_import_file_pick => '选择备份文件';
+  @override
+  String get hoshi_import_scan_running => '正在读取备份…';
+  @override
+  String get hoshi_import_scan_invalid => '这不是 Hoshi Reader 的书库备份。';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) => '新书 ${newBooks} 本 · 库中已有 ${existingBooks} 本 · 仅统计 ${statsOnlyBooks} 本';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => '统计记录 ${records} 条 · 阅读位置 ${positions} 个';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      '统计将导入到配置：${name}';
+  @override
+  String get hoshi_import_run_start => '开始导入';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => '正在导入 ${current} / ${total}：${title}';
+  @override
+  String get hoshi_import_result_done => '导入完成';
+  @override
+  String get hoshi_import_result_cancelled => '导入已停止，已导入的书会保留';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => '导入书 ${imported} 本 · 匹配库中已有 ${matched} 本';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) => '统计：会话 ${sessions} 次、按天 ${days} 天 · 阅读位置 ${positions} 个';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '跳过 ${count} 条记录：同一本书同一天的数据早先已经同步进来过';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '有 ${count} 段统计未恢复：你曾在 Fushi 里删除过这些书的统计';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      '有 ${count} 本书没能导入（它们的统计仍已导入）：';
   @override
   String get sync_pair_link_unreachable => '配对链接里的地址都连不上，或指向的不是那台设备';
   @override
@@ -216479,8 +219820,6 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get download_rate_limit_lan_included => '同時作用於局域網內的傳輸。';
   @override
-  String get download_resources_tab => '資源';
-  @override
   String get download_save_root_change => '更改目錄';
   @override
   String get download_save_root_create_failed => '無法創建該目錄，請檢查磁碟與權限。';
@@ -218307,8 +221646,6 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get library_search => '搜索庫';
   @override
-  String get library_view_browse => '發現';
-  @override
   String get library_view_discover => '發現';
   @override
   String get library_view_import => '導入';
@@ -218435,9 +221772,9 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get manga_global_search_hint => '搜索所有已啟用來源';
   @override
-  String get manga_global_search_no_sources => '尚未啟用任何漫畫來源，去「導入」加一個。';
+  String get manga_global_search_no_sources => '尚未啟用任何漫畫來源，去「瀏覽」加一個。';
   @override
-  String get manga_global_search_open_sources => '去匯入';
+  String get manga_global_search_open_sources => '去瀏覽';
   @override
   String get manga_global_search_prompt => '輸入書名，一次搜索所有已啟用的漫畫來源。';
   @override
@@ -219192,7 +222529,7 @@ class _StringsZhHk extends _StringsEn {
       'This feature module is turned off in Settings > Appearance > Feature modules.';
   @override
   String get module_downloads_hidden_hint =>
-      '「下載」頁已在 設定 → 外觀 → 功能模塊 中隱藏；重新開啟才能管理訂閱。';
+      '「瀏覽」頁已在 設定 → 外觀 → 功能模塊 中隱藏；重新開啟才能管理訂閱。';
   @override
   String get module_extension_label => '瀏覽器擴展';
   @override
@@ -225210,25 +228547,21 @@ class _StringsZhHk extends _StringsEn {
   String get video_extensions_title => 'Video source extensions';
   @override
   String get video_online_sources_hint =>
-      'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+      '第三方 Aniyomi 擴展（extensions-lib 14）。內容來自各擴展對應的網站，在內置播放器中播放。';
   @override
-  String get video_online_sources_empty =>
-      'No enabled video sources. Install and enable an extension first.';
+  String get video_online_sources_empty => '沒有已啟用的影片源。請先安裝並啟用影片擴展。';
   @override
-  String get video_online_episodes_title => 'Episodes';
+  String get video_online_episodes_title => '劇集';
   @override
-  String get video_online_episodes_empty => 'No episodes found.';
+  String get video_online_episodes_empty => '找不到劇集。';
   @override
-  String get video_online_stream_none =>
-      'This episode returned no playable stream.';
+  String get video_online_stream_none => '這一集沒有可播放的串流。';
   @override
-  String get media_import_segment_local => 'Local';
+  String get media_import_segment_stores => '倉庫';
   @override
-  String get media_import_segment_stores => 'Stores';
+  String get media_import_segment_extensions => '擴展';
   @override
-  String get media_import_segment_extensions => 'Extensions';
-  @override
-  String get media_import_segment_sources => 'Sources';
+  String get media_import_segment_sources => '線上源';
   @override
   String get mihon_source_move_up => 'Move up';
   @override
@@ -226797,6 +230130,223 @@ class _StringsZhHk extends _StringsEn {
       'Enter an https:// address ending in api.php';
   @override
   String get ai_web_knowledge_custom_remove => 'Remove site';
+  @override
+  String get video_item_rescrape_not_planned => '這個影片不在任何本機影片來源的刮削計劃裡';
+  @override
+  String get plex_settings_hint =>
+      'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+  @override
+  String get plex_account_sign_in => 'Sign in with Plex';
+  @override
+  String get plex_pin_waiting =>
+      'Waiting for you to approve Fushi in the browser…';
+  @override
+  String get plex_pin_link_hint =>
+      'If the browser did not open, copy this link:';
+  @override
+  String get plex_pin_expired => 'The sign-in request expired. Try again.';
+  @override
+  String get plex_servers_none_reachable =>
+      'No reachable Plex server was found for this account.';
+  @override
+  String plex_servers_added({required Object n}) => 'Added ${n} Plex server(s)';
+  @override
+  String get plex_manual_title => 'Connect manually';
+  @override
+  String get plex_token_label => 'X-Plex-Token';
+  @override
+  String get plex_manual_connect => 'Connect';
+  @override
+  String get plex_sign_in_failed => 'Plex sign-in failed';
+  @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
+  String get remote_video_stream_play => '播放（串流）';
+  @override
+  String get nav_browse => '瀏覽';
+  @override
+  String get novel_detail_library_remove => '移出書架';
+  @override
+  String get novel_detail_library_remove_confirm =>
+      '把這部小說移出書架？已快取的章節和閱讀進度會一併刪除。';
+  @override
+  String get novel_detail_download => '下載';
+  @override
+  String get novel_detail_library_added => '已加入書架';
+  @override
+  String get video_online_extension_unavailable =>
+      '這一集所屬的影片源擴展未安裝或已停用。請到「瀏覽 › 擴展」重新安裝或啟用。';
+  @override
+  String get video_online_library_add => '加入媒體庫';
+  @override
+  String get video_online_library_remove => '移出媒體庫';
+  @override
+  String video_online_library_added({required Object n}) => '已把 ${n} 集加入媒體庫';
+  @override
+  String get video_online_library_removed => '已移出媒體庫';
+  @override
+  String get video_online_download_all => '全部下載';
+  @override
+  String get video_online_download_episode => '下載本集';
+  @override
+  String get video_online_download_started => '已開始下載，進度見「瀏覽 › 下載」';
+  @override
+  String get video_online_downloaded => '已下載';
+  @override
+  String get onboarding_feature_browse_hint => '線上來源、擴展、發現與下載';
+  @override
+  String browse_moved_notice_title({required Object browse}) =>
+      '發現與線上來源已移到「${browse}」';
+  @override
+  String browse_moved_notice_body({
+    required Object browse,
+    required Object settings,
+    required Object appearance,
+    required Object modules,
+  }) =>
+      '發現頁，以及漫畫／影片／小說的線上來源，已經移到「${browse}」分頁；它在本機目前是關閉的。要使用它們，請到「${settings} › ${appearance} › ${modules}」開啟「${browse}」。';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+  @override
+  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  @override
+  String get hoshi_import_entry_subtitle =>
+      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+  @override
+  String get hoshi_import_how_to =>
+      'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+  @override
+  String get hoshi_import_file_pick => 'Choose backup file';
+  @override
+  String get hoshi_import_scan_running => 'Reading backup…';
+  @override
+  String get hoshi_import_scan_invalid =>
+      'This file is not a Hoshi Reader library backup.';
+  @override
+  String hoshi_import_summary_books({
+    required Object newBooks,
+    required Object existingBooks,
+    required Object statsOnlyBooks,
+  }) =>
+      'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+  @override
+  String hoshi_import_summary_records({
+    required Object records,
+    required Object positions,
+  }) => 'Statistics records: ${records} · reading positions: ${positions}';
+  @override
+  String hoshi_import_summary_profile({required Object name}) =>
+      'Statistics will be added to profile: ${name}';
+  @override
+  String get hoshi_import_run_start => 'Start import';
+  @override
+  String hoshi_import_book_running({
+    required Object current,
+    required Object total,
+    required Object title,
+  }) => 'Importing ${current} / ${total}: ${title}';
+  @override
+  String get hoshi_import_result_done => 'Import finished';
+  @override
+  String get hoshi_import_result_cancelled =>
+      'Import stopped; books already imported were kept';
+  @override
+  String hoshi_import_result_books({
+    required Object imported,
+    required Object matched,
+  }) => 'Books imported: ${imported} · matched in library: ${matched}';
+  @override
+  String hoshi_import_result_stats({
+    required Object sessions,
+    required Object days,
+    required Object positions,
+  }) =>
+      'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+  @override
+  String hoshi_import_result_legacy_skipped({required Object count}) =>
+      '${count} records skipped because the same book and day was already synced earlier';
+  @override
+  String hoshi_import_result_deleted_skipped({required Object count}) =>
+      '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+  @override
+  String hoshi_import_result_failed({required Object count}) =>
+      'Could not import ${count} books (their statistics were still imported):';
   @override
   String get sync_pair_link_unreachable =>
       'None of the addresses in this pairing link are reachable, or they point to a different device';
@@ -229237,8 +232787,6 @@ extension on _StringsEn {
         return 'Does not apply within your local network; LAN transfers always run at full speed.';
       case 'download_rate_limit_lan_included':
         return 'Also applies within your local network.';
-      case 'download_resources_tab':
-        return 'Resources';
       case 'download_save_root_change':
         return 'Change folder';
       case 'download_save_root_create_failed':
@@ -230950,8 +234498,6 @@ extension on _StringsEn {
         return 'Go to import';
       case 'library_search':
         return 'Search library';
-      case 'library_view_browse':
-        return 'Discover';
       case 'library_view_discover':
         return 'Discover';
       case 'library_view_import':
@@ -231074,9 +234620,9 @@ extension on _StringsEn {
       case 'manga_global_search_hint':
         return 'Search every enabled source';
       case 'manga_global_search_no_sources':
-        return 'No enabled manga sources yet. Add one in the Import tab.';
+        return 'No enabled manga sources yet. Add one in the Browse tab.';
       case 'manga_global_search_open_sources':
-        return 'Go to Import';
+        return 'Go to Browse';
       case 'manga_global_search_prompt':
         return 'Type a title to search every enabled manga source at once.';
       case 'manga_global_search_title':
@@ -231788,7 +235334,7 @@ extension on _StringsEn {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return 'The Downloads tab is hidden in Settings → Appearance → Feature modules; turn it back on to manage subscriptions.';
+        return 'The Browse tab is hidden in Settings → Appearance → Feature modules; turn it back on to manage subscriptions.';
       case 'module_extension_label':
         return 'Browser extension';
       case 'move_down':
@@ -237306,8 +240852,6 @@ extension on _StringsEn {
         return 'No episodes found.';
       case 'video_online_stream_none':
         return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
       case 'media_import_segment_stores':
         return 'Stores';
       case 'media_import_segment_extensions':
@@ -238615,6 +242159,191 @@ extension on _StringsEn {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
+      case 'nav_browse':
+        return 'Browse';
+      case 'novel_detail_library_remove':
+        return 'Remove from bookshelf';
+      case 'novel_detail_library_remove_confirm':
+        return 'Remove this novel from the bookshelf? Cached chapters and reading progress will be deleted.';
+      case 'novel_detail_download':
+        return 'Download';
+      case 'novel_detail_library_added':
+        return 'Added to bookshelf';
+      case 'video_online_extension_unavailable':
+        return 'The video source extension for this episode is not installed or is disabled. Reinstall or enable it in Browse › Extensions.';
+      case 'video_online_library_add':
+        return 'Add to video library';
+      case 'video_online_library_remove':
+        return 'Remove from video library';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            'Added ${n} episodes to the video library';
+      case 'video_online_library_removed':
+        return 'Removed from the video library';
+      case 'video_online_download_all':
+        return 'Download all';
+      case 'video_online_download_episode':
+        return 'Download this episode';
+      case 'video_online_download_started':
+        return 'Download started — see Browse › Downloads';
+      case 'video_online_downloaded':
+        return 'Downloaded';
+      case 'onboarding_feature_browse_hint':
+        return 'Online sources, extensions, discovery and downloads';
+      case 'browse_moved_notice_title':
+        return ({required Object browse}) =>
+            'Discovery and online sources moved to ${browse}';
+      case 'browse_moved_notice_body':
+        return ({
+          required Object browse,
+          required Object settings,
+          required Object appearance,
+          required Object modules,
+        }) =>
+            'Discovery and the online sources for manga, video and novels now live in the ${browse} tab, which is turned off on this device. To use them, turn on ${browse} in ${settings} › ${appearance} › ${modules}.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       case 'sync_pair_link_unreachable':
         return 'None of the addresses in this pairing link are reachable, or they point to a different device';
       case 'sync_pair_link_invalid':
@@ -241042,8 +244771,6 @@ extension on _StringsAr {
         return 'لا ينطبق داخل شبكتك المحلية؛ عمليات النقل عبر الشبكة المحلية تعمل بأقصى سرعة دائماً.';
       case 'download_rate_limit_lan_included':
         return 'ينطبق أيضاً داخل شبكتك المحلية.';
-      case 'download_resources_tab':
-        return 'الموارد';
       case 'download_save_root_change':
         return 'تغيير المجلد';
       case 'download_save_root_create_failed':
@@ -242752,8 +246479,6 @@ extension on _StringsAr {
         return 'الذهاب إلى الاستيراد';
       case 'library_search':
         return 'بحث في المكتبة';
-      case 'library_view_browse':
-        return 'استكشاف';
       case 'library_view_discover':
         return 'اكتشاف';
       case 'library_view_import':
@@ -242876,9 +246601,9 @@ extension on _StringsAr {
       case 'manga_global_search_hint':
         return 'بحث في كل مصدر مُفعّل';
       case 'manga_global_search_no_sources':
-        return 'لا توجد مصادر مانغا مفعّلة بعد. أضف واحدًا من تبويب الاستيراد.';
+        return 'لا توجد مصادر مانغا مفعّلة بعد. أضف واحدًا من تبويب التصفح.';
       case 'manga_global_search_open_sources':
-        return 'الذهاب إلى الاستيراد';
+        return 'الذهاب إلى التصفح';
       case 'manga_global_search_prompt':
         return 'اكتب عنواناً للبحث في جميع مصادر المانغا المُفعّلة دفعة واحدة.';
       case 'manga_global_search_title':
@@ -243590,7 +247315,7 @@ extension on _StringsAr {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return 'تبويب التحميلات مخفي في الإعدادات → المظهر → وحدات الميزات؛ أعد تشغيله لإدارة الاشتراكات.';
+        return 'تبويب التصفح مخفي في الإعدادات → المظهر → وحدات الميزات؛ أعد تشغيله لإدارة الاشتراكات.';
       case 'module_extension_label':
         return 'إضافة المتصفح';
       case 'move_down':
@@ -249097,23 +252822,21 @@ extension on _StringsAr {
       case 'video_extensions_title':
         return 'Video source extensions';
       case 'video_online_sources_hint':
-        return 'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+        return 'إضافات Aniyomi من جهات خارجية (extensions-lib 14). يأتي المحتوى من موقع كل إضافة ويُشغَّل في المشغّل المدمج.';
       case 'video_online_sources_empty':
-        return 'No enabled video sources. Install and enable an extension first.';
+        return 'لا توجد مصادر فيديو مفعّلة. ثبّت إضافة وفعّلها أولًا.';
       case 'video_online_episodes_title':
-        return 'Episodes';
+        return 'الحلقات';
       case 'video_online_episodes_empty':
-        return 'No episodes found.';
+        return 'لم يُعثر على حلقات.';
       case 'video_online_stream_none':
-        return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
+        return 'لم تُرجع هذه الحلقة أي بث قابل للتشغيل.';
       case 'media_import_segment_stores':
-        return 'Stores';
+        return 'المستودعات';
       case 'media_import_segment_extensions':
-        return 'Extensions';
+        return 'الإضافات';
       case 'media_import_segment_sources':
-        return 'Sources';
+        return 'المصادر';
       case 'mihon_source_move_up':
         return 'Move up';
       case 'mihon_source_move_down':
@@ -250415,6 +254138,190 @@ extension on _StringsAr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
+      case 'nav_browse':
+        return 'تصفح';
+      case 'novel_detail_library_remove':
+        return 'إزالة من رف الكتب';
+      case 'novel_detail_library_remove_confirm':
+        return 'إزالة هذه الرواية من رف الكتب؟ سيتم حذف الفصول المخزنة وتقدم القراءة.';
+      case 'novel_detail_download':
+        return 'تنزيل';
+      case 'novel_detail_library_added':
+        return 'تمت الإضافة إلى رف الكتب';
+      case 'video_online_extension_unavailable':
+        return 'إضافة مصدر الفيديو لهذه الحلقة غير مثبّتة أو معطّلة. أعد تثبيتها أو فعّلها من تصفح › الإضافات.';
+      case 'video_online_library_add':
+        return 'إضافة إلى مكتبة الفيديو';
+      case 'video_online_library_remove':
+        return 'إزالة من مكتبة الفيديو';
+      case 'video_online_library_added':
+        return ({required Object n}) => 'تمت إضافة ${n} حلقة إلى مكتبة الفيديو';
+      case 'video_online_library_removed':
+        return 'تمت الإزالة من مكتبة الفيديو';
+      case 'video_online_download_all':
+        return 'تنزيل الكل';
+      case 'video_online_download_episode':
+        return 'تنزيل هذه الحلقة';
+      case 'video_online_download_started':
+        return 'بدأ التنزيل — راجع تصفح › التحميلات';
+      case 'video_online_downloaded':
+        return 'تم التنزيل';
+      case 'onboarding_feature_browse_hint':
+        return 'المصادر عبر الإنترنت والإضافات والاكتشاف والتنزيلات';
+      case 'browse_moved_notice_title':
+        return ({required Object browse}) =>
+            'نُقل الاكتشاف والمصادر عبر الإنترنت إلى ${browse}';
+      case 'browse_moved_notice_body':
+        return ({
+          required Object browse,
+          required Object settings,
+          required Object appearance,
+          required Object modules,
+        }) =>
+            'أصبحت صفحة الاكتشاف والمصادر عبر الإنترنت للمانغا والفيديو والروايات في تبويب ${browse}، وهو متوقف على هذا الجهاز. لاستخدامها، فعّل ${browse} من ${settings} › ${appearance} › ${modules}.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       case 'sync_pair_link_unreachable':
         return 'None of the addresses in this pairing link are reachable, or they point to a different device';
       case 'sync_pair_link_invalid':
@@ -252858,8 +256765,6 @@ extension on _StringsDe {
         return 'Gilt nicht innerhalb Ihres lokalen Netzwerks; LAN-Übertragungen laufen immer mit voller Geschwindigkeit.';
       case 'download_rate_limit_lan_included':
         return 'Gilt auch innerhalb Ihres lokalen Netzwerks.';
-      case 'download_resources_tab':
-        return 'Ressourcen';
       case 'download_save_root_change':
         return 'Ordner ändern';
       case 'download_save_root_create_failed':
@@ -254576,8 +258481,6 @@ extension on _StringsDe {
         return 'Zum Import';
       case 'library_search':
         return 'Bibliothek durchsuchen';
-      case 'library_view_browse':
-        return 'Entdecken';
       case 'library_view_discover':
         return 'Entdecken';
       case 'library_view_import':
@@ -254700,9 +258603,9 @@ extension on _StringsDe {
       case 'manga_global_search_hint':
         return 'Jede aktivierte Quelle durchsuchen';
       case 'manga_global_search_no_sources':
-        return 'Noch keine aktivierten Manga-Quellen. Füge eine im Tab „Importieren“ hinzu.';
+        return 'Noch keine aktivierten Manga-Quellen. Füge eine im Tab „Durchsuchen“ hinzu.';
       case 'manga_global_search_open_sources':
-        return 'Zum Import';
+        return 'Zu „Durchsuchen“';
       case 'manga_global_search_prompt':
         return 'Geben Sie einen Titel ein, um alle aktivierten Manga-Quellen gleichzeitig zu durchsuchen.';
       case 'manga_global_search_title':
@@ -255420,7 +259323,7 @@ extension on _StringsDe {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return 'Der Tab „Downloads“ ist unter Einstellungen → Erscheinungsbild → Funktionsmodule ausgeblendet; schalte ihn wieder ein, um Abos zu verwalten.';
+        return 'Der Tab „Durchsuchen“ ist unter Einstellungen → Erscheinungsbild → Funktionsmodule ausgeblendet; schalte ihn wieder ein, um Abos zu verwalten.';
       case 'module_extension_label':
         return 'Browser-Erweiterung';
       case 'move_down':
@@ -260946,23 +264849,21 @@ extension on _StringsDe {
       case 'video_extensions_title':
         return 'Video source extensions';
       case 'video_online_sources_hint':
-        return 'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+        return 'Aniyomi-Erweiterungen von Drittanbietern (extensions-lib 14). Die Inhalte stammen von der Website der jeweiligen Erweiterung und werden im integrierten Player abgespielt.';
       case 'video_online_sources_empty':
-        return 'No enabled video sources. Install and enable an extension first.';
+        return 'Keine aktivierten Videoquellen. Installieren und aktivieren Sie zuerst eine Erweiterung.';
       case 'video_online_episodes_title':
-        return 'Episodes';
+        return 'Folgen';
       case 'video_online_episodes_empty':
-        return 'No episodes found.';
+        return 'Keine Folgen gefunden.';
       case 'video_online_stream_none':
-        return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
+        return 'Für diese Folge wurde kein abspielbarer Stream geliefert.';
       case 'media_import_segment_stores':
-        return 'Stores';
+        return 'Repositorys';
       case 'media_import_segment_extensions':
-        return 'Extensions';
+        return 'Erweiterungen';
       case 'media_import_segment_sources':
-        return 'Sources';
+        return 'Quellen';
       case 'mihon_source_move_up':
         return 'Move up';
       case 'mihon_source_move_down':
@@ -262264,6 +266165,191 @@ extension on _StringsDe {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
+      case 'nav_browse':
+        return 'Durchsuchen';
+      case 'novel_detail_library_remove':
+        return 'Aus dem Bücherregal entfernen';
+      case 'novel_detail_library_remove_confirm':
+        return 'Diesen Roman aus dem Bücherregal entfernen? Zwischengespeicherte Kapitel und Lesefortschritt werden gelöscht.';
+      case 'novel_detail_download':
+        return 'Herunterladen';
+      case 'novel_detail_library_added':
+        return 'Zum Bücherregal hinzugefügt';
+      case 'video_online_extension_unavailable':
+        return 'Die Videoquellen-Erweiterung dieser Folge ist nicht installiert oder deaktiviert. Installieren oder aktivieren Sie sie unter „Durchsuchen › Erweiterungen“ erneut.';
+      case 'video_online_library_add':
+        return 'Zur Videobibliothek hinzufügen';
+      case 'video_online_library_remove':
+        return 'Aus der Videobibliothek entfernen';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            '${n} Folgen zur Videobibliothek hinzugefügt';
+      case 'video_online_library_removed':
+        return 'Aus der Videobibliothek entfernt';
+      case 'video_online_download_all':
+        return 'Alle herunterladen';
+      case 'video_online_download_episode':
+        return 'Diese Folge herunterladen';
+      case 'video_online_download_started':
+        return 'Download gestartet – siehe „Durchsuchen › Downloads“';
+      case 'video_online_downloaded':
+        return 'Heruntergeladen';
+      case 'onboarding_feature_browse_hint':
+        return 'Online-Quellen, Erweiterungen, Entdecken und Downloads';
+      case 'browse_moved_notice_title':
+        return ({required Object browse}) =>
+            'Entdecken und Online-Quellen sind nach „${browse}“ umgezogen';
+      case 'browse_moved_notice_body':
+        return ({
+          required Object browse,
+          required Object settings,
+          required Object appearance,
+          required Object modules,
+        }) =>
+            'Entdecken und die Online-Quellen für Manga, Videos und Romane befinden sich jetzt im Tab „${browse}“, der auf diesem Gerät ausgeschaltet ist. Um sie zu nutzen, schalten Sie „${browse}“ unter ${settings} › ${appearance} › ${modules} ein.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       case 'sync_pair_link_unreachable':
         return 'None of the addresses in this pairing link are reachable, or they point to a different device';
       case 'sync_pair_link_invalid':
@@ -264701,8 +268787,6 @@ extension on _StringsEs {
         return 'No se aplica en su red local; las transferencias LAN siempre se ejecutan a máxima velocidad.';
       case 'download_rate_limit_lan_included':
         return 'También se aplica en su red local.';
-      case 'download_resources_tab':
-        return 'Recursos';
       case 'download_save_root_change':
         return 'Cambiar carpeta';
       case 'download_save_root_create_failed':
@@ -266417,8 +270501,6 @@ extension on _StringsEs {
         return 'Ir a importar';
       case 'library_search':
         return 'Buscar biblioteca';
-      case 'library_view_browse':
-        return 'Descubrir';
       case 'library_view_discover':
         return 'Descubrir';
       case 'library_view_import':
@@ -266541,9 +270623,9 @@ extension on _StringsEs {
       case 'manga_global_search_hint':
         return 'Buscar en todas las fuentes activas';
       case 'manga_global_search_no_sources':
-        return 'Aún no hay fuentes de manga habilitadas. Añade una en la pestaña Importar.';
+        return 'Aún no hay fuentes de manga habilitadas. Añade una en la pestaña Explorar.';
       case 'manga_global_search_open_sources':
-        return 'Ir a Importar';
+        return 'Ir a Explorar';
       case 'manga_global_search_prompt':
         return 'Escriba un título para buscar en todas las fuentes de manga activas a la vez.';
       case 'manga_global_search_title':
@@ -267261,7 +271343,7 @@ extension on _StringsEs {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return 'La pestaña Descargas está oculta en Configuración → Apariencia → Módulos de funciones; vuelve a activarla para gestionar las suscripciones.';
+        return 'La pestaña Explorar está oculta en Configuración → Apariencia → Módulos de funciones; vuelve a activarla para gestionar las suscripciones.';
       case 'module_extension_label':
         return 'Extensión del navegador';
       case 'move_down':
@@ -272785,23 +276867,21 @@ extension on _StringsEs {
       case 'video_extensions_title':
         return 'Video source extensions';
       case 'video_online_sources_hint':
-        return 'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+        return 'Extensiones de Aniyomi de terceros (extensions-lib 14). El contenido procede del sitio web de cada extensión y se reproduce en el reproductor integrado.';
       case 'video_online_sources_empty':
-        return 'No enabled video sources. Install and enable an extension first.';
+        return 'No hay fuentes de vídeo activadas. Instala y activa primero una extensión.';
       case 'video_online_episodes_title':
-        return 'Episodes';
+        return 'Episodios';
       case 'video_online_episodes_empty':
-        return 'No episodes found.';
+        return 'No se encontraron episodios.';
       case 'video_online_stream_none':
-        return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
+        return 'Este episodio no devolvió ninguna transmisión reproducible.';
       case 'media_import_segment_stores':
-        return 'Stores';
+        return 'Repositorios';
       case 'media_import_segment_extensions':
-        return 'Extensions';
+        return 'Extensiones';
       case 'media_import_segment_sources':
-        return 'Sources';
+        return 'Fuentes';
       case 'mihon_source_move_up':
         return 'Move up';
       case 'mihon_source_move_down':
@@ -274103,6 +278183,191 @@ extension on _StringsEs {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
+      case 'nav_browse':
+        return 'Explorar';
+      case 'novel_detail_library_remove':
+        return 'Quitar de la estantería';
+      case 'novel_detail_library_remove_confirm':
+        return '¿Quitar esta novela de la estantería? Se eliminarán los capítulos en caché y el progreso de lectura.';
+      case 'novel_detail_download':
+        return 'Descargar';
+      case 'novel_detail_library_added':
+        return 'Añadido a la estantería';
+      case 'video_online_extension_unavailable':
+        return 'La extensión de fuente de vídeo de este episodio no está instalada o está desactivada. Vuelve a instalarla o actívala en Explorar › Extensiones.';
+      case 'video_online_library_add':
+        return 'Añadir a la videoteca';
+      case 'video_online_library_remove':
+        return 'Quitar de la videoteca';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            'Se añadieron ${n} episodios a la videoteca';
+      case 'video_online_library_removed':
+        return 'Quitado de la videoteca';
+      case 'video_online_download_all':
+        return 'Descargar todo';
+      case 'video_online_download_episode':
+        return 'Descargar este episodio';
+      case 'video_online_download_started':
+        return 'Descarga iniciada; consulta Explorar › Descargas';
+      case 'video_online_downloaded':
+        return 'Descargado';
+      case 'onboarding_feature_browse_hint':
+        return 'Fuentes en línea, extensiones, descubrimiento y descargas';
+      case 'browse_moved_notice_title':
+        return ({required Object browse}) =>
+            'Descubrir y las fuentes en línea se han movido a ${browse}';
+      case 'browse_moved_notice_body':
+        return ({
+          required Object browse,
+          required Object settings,
+          required Object appearance,
+          required Object modules,
+        }) =>
+            'Descubrir y las fuentes en línea de manga, vídeo y novelas ahora están en la pestaña ${browse}, que está desactivada en este dispositivo. Para usarlas, activa ${browse} en ${settings} › ${appearance} › ${modules}.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       case 'sync_pair_link_unreachable':
         return 'None of the addresses in this pairing link are reachable, or they point to a different device';
       case 'sync_pair_link_invalid':
@@ -276545,8 +280810,6 @@ extension on _StringsFr {
         return 'Ne s\'applique pas sur votre réseau local ; les transferts LAN fonctionnent toujours à pleine vitesse.';
       case 'download_rate_limit_lan_included':
         return 'S\'applique aussi sur votre réseau local.';
-      case 'download_resources_tab':
-        return 'Ressources';
       case 'download_save_root_change':
         return 'Changer le dossier';
       case 'download_save_root_create_failed':
@@ -278263,8 +282526,6 @@ extension on _StringsFr {
         return 'Aller à l\'importation';
       case 'library_search':
         return 'Rechercher dans la bibliothèque';
-      case 'library_view_browse':
-        return 'Découvrir';
       case 'library_view_discover':
         return 'Découvrir';
       case 'library_view_import':
@@ -278387,9 +282648,9 @@ extension on _StringsFr {
       case 'manga_global_search_hint':
         return 'Rechercher dans chaque source activée';
       case 'manga_global_search_no_sources':
-        return 'Aucune source de manga activée pour l\'instant. Ajoutez-en une dans l\'onglet Importer.';
+        return 'Aucune source de manga activée pour l\'instant. Ajoutez-en une dans l\'onglet Parcourir.';
       case 'manga_global_search_open_sources':
-        return 'Aller à Importer';
+        return 'Aller à Parcourir';
       case 'manga_global_search_prompt':
         return 'Tapez un titre pour rechercher dans toutes les sources de manga activées à la fois.';
       case 'manga_global_search_title':
@@ -279105,7 +283366,7 @@ extension on _StringsFr {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return 'L\'onglet Téléchargements est masqué dans Paramètres → Apparence → Modules de fonctionnalités ; réactivez-le pour gérer les abonnements.';
+        return 'L\'onglet Parcourir est masqué dans Paramètres → Apparence → Modules de fonctionnalités ; réactivez-le pour gérer les abonnements.';
       case 'module_extension_label':
         return 'Extension navigateur';
       case 'move_down':
@@ -284632,19 +288893,17 @@ extension on _StringsFr {
       case 'video_extensions_title':
         return 'Video source extensions';
       case 'video_online_sources_hint':
-        return 'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+        return 'Extensions Aniyomi tierces (extensions-lib 14). Le contenu provient du site de chaque extension et est lu dans le lecteur intégré.';
       case 'video_online_sources_empty':
-        return 'No enabled video sources. Install and enable an extension first.';
+        return 'Aucune source vidéo activée. Installez et activez d\'abord une extension.';
       case 'video_online_episodes_title':
-        return 'Episodes';
+        return 'Épisodes';
       case 'video_online_episodes_empty':
-        return 'No episodes found.';
+        return 'Aucun épisode trouvé.';
       case 'video_online_stream_none':
-        return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
+        return 'Cet épisode n\'a renvoyé aucun flux lisible.';
       case 'media_import_segment_stores':
-        return 'Stores';
+        return 'Dépôts';
       case 'media_import_segment_extensions':
         return 'Extensions';
       case 'media_import_segment_sources':
@@ -285950,6 +290209,191 @@ extension on _StringsFr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
+      case 'nav_browse':
+        return 'Parcourir';
+      case 'novel_detail_library_remove':
+        return 'Retirer de la bibliothèque';
+      case 'novel_detail_library_remove_confirm':
+        return 'Retirer ce roman de la bibliothèque ? Les chapitres en cache et la progression de lecture seront supprimés.';
+      case 'novel_detail_download':
+        return 'Télécharger';
+      case 'novel_detail_library_added':
+        return 'Ajouté à la bibliothèque';
+      case 'video_online_extension_unavailable':
+        return 'L\'extension de source vidéo de cet épisode n\'est pas installée ou est désactivée. Réinstallez-la ou activez-la dans Parcourir › Extensions.';
+      case 'video_online_library_add':
+        return 'Ajouter à la vidéothèque';
+      case 'video_online_library_remove':
+        return 'Retirer de la vidéothèque';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            '${n} épisodes ajoutés à la vidéothèque';
+      case 'video_online_library_removed':
+        return 'Retiré de la vidéothèque';
+      case 'video_online_download_all':
+        return 'Tout télécharger';
+      case 'video_online_download_episode':
+        return 'Télécharger cet épisode';
+      case 'video_online_download_started':
+        return 'Téléchargement lancé — voir Parcourir › Téléchargements';
+      case 'video_online_downloaded':
+        return 'Téléchargé';
+      case 'onboarding_feature_browse_hint':
+        return 'Sources en ligne, extensions, découverte et téléchargements';
+      case 'browse_moved_notice_title':
+        return ({required Object browse}) =>
+            'Découvrir et les sources en ligne sont déplacés dans ${browse}';
+      case 'browse_moved_notice_body':
+        return ({
+          required Object browse,
+          required Object settings,
+          required Object appearance,
+          required Object modules,
+        }) =>
+            'Découvrir et les sources en ligne de manga, vidéos et romans se trouvent désormais dans l\'onglet ${browse}, désactivé sur cet appareil. Pour les utiliser, activez ${browse} dans ${settings} › ${appearance} › ${modules}.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       case 'sync_pair_link_unreachable':
         return 'None of the addresses in this pairing link are reachable, or they point to a different device';
       case 'sync_pair_link_invalid':
@@ -288384,8 +292828,6 @@ extension on _StringsId {
         return 'Tidak berlaku dalam jaringan lokal Anda; transfer LAN selalu berjalan pada kecepatan penuh.';
       case 'download_rate_limit_lan_included':
         return 'Juga berlaku dalam jaringan lokal Anda.';
-      case 'download_resources_tab':
-        return 'Sumber daya';
       case 'download_save_root_change':
         return 'Ubah folder';
       case 'download_save_root_create_failed':
@@ -290098,8 +294540,6 @@ extension on _StringsId {
         return 'Ke halaman impor';
       case 'library_search':
         return 'Cari pustaka';
-      case 'library_view_browse':
-        return 'Jelajahi';
       case 'library_view_discover':
         return 'Jelajahi';
       case 'library_view_import':
@@ -290222,9 +294662,9 @@ extension on _StringsId {
       case 'manga_global_search_hint':
         return 'Cari setiap sumber yang aktif';
       case 'manga_global_search_no_sources':
-        return 'Belum ada sumber manga yang aktif. Tambahkan satu di tab Impor.';
+        return 'Belum ada sumber manga yang aktif. Tambahkan satu di tab Jelajah.';
       case 'manga_global_search_open_sources':
-        return 'Ke Impor';
+        return 'Ke Jelajah';
       case 'manga_global_search_prompt':
         return 'Ketik judul untuk mencari setiap sumber manga yang aktif sekaligus.';
       case 'manga_global_search_title':
@@ -290937,7 +295377,7 @@ extension on _StringsId {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return 'Tab Unduhan disembunyikan di Pengaturan → Tampilan → Modul fitur; nyalakan lagi untuk mengelola langganan.';
+        return 'Tab Jelajah disembunyikan di Pengaturan → Tampilan → Modul fitur; nyalakan lagi untuk mengelola langganan.';
       case 'module_extension_label':
         return 'Ekstensi browser';
       case 'move_down':
@@ -296449,23 +300889,21 @@ extension on _StringsId {
       case 'video_extensions_title':
         return 'Video source extensions';
       case 'video_online_sources_hint':
-        return 'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+        return 'Ekstensi Aniyomi pihak ketiga (extensions-lib 14). Konten berasal dari situs web masing-masing ekstensi dan diputar di pemutar bawaan.';
       case 'video_online_sources_empty':
-        return 'No enabled video sources. Install and enable an extension first.';
+        return 'Tidak ada sumber video yang aktif. Instal dan aktifkan ekstensi terlebih dahulu.';
       case 'video_online_episodes_title':
-        return 'Episodes';
+        return 'Episode';
       case 'video_online_episodes_empty':
-        return 'No episodes found.';
+        return 'Tidak ada episode.';
       case 'video_online_stream_none':
-        return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
+        return 'Episode ini tidak mengembalikan stream yang dapat diputar.';
       case 'media_import_segment_stores':
-        return 'Stores';
+        return 'Repositori';
       case 'media_import_segment_extensions':
-        return 'Extensions';
+        return 'Ekstensi';
       case 'media_import_segment_sources':
-        return 'Sources';
+        return 'Sumber';
       case 'mihon_source_move_up':
         return 'Move up';
       case 'mihon_source_move_down':
@@ -297767,6 +302205,191 @@ extension on _StringsId {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
+      case 'nav_browse':
+        return 'Jelajah';
+      case 'novel_detail_library_remove':
+        return 'Hapus dari rak buku';
+      case 'novel_detail_library_remove_confirm':
+        return 'Hapus novel ini dari rak buku? Bab yang tersimpan dan progres membaca akan dihapus.';
+      case 'novel_detail_download':
+        return 'Unduh';
+      case 'novel_detail_library_added':
+        return 'Ditambahkan ke rak buku';
+      case 'video_online_extension_unavailable':
+        return 'Ekstensi sumber video untuk episode ini tidak terpasang atau dinonaktifkan. Pasang ulang atau aktifkan di Jelajah › Ekstensi.';
+      case 'video_online_library_add':
+        return 'Tambahkan ke pustaka video';
+      case 'video_online_library_remove':
+        return 'Hapus dari pustaka video';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            '${n} episode ditambahkan ke pustaka video';
+      case 'video_online_library_removed':
+        return 'Dihapus dari pustaka video';
+      case 'video_online_download_all':
+        return 'Unduh semua';
+      case 'video_online_download_episode':
+        return 'Unduh episode ini';
+      case 'video_online_download_started':
+        return 'Unduhan dimulai — lihat Jelajah › Unduhan';
+      case 'video_online_downloaded':
+        return 'Sudah diunduh';
+      case 'onboarding_feature_browse_hint':
+        return 'Sumber online, ekstensi, penemuan, dan unduhan';
+      case 'browse_moved_notice_title':
+        return ({required Object browse}) =>
+            'Penemuan dan sumber online dipindahkan ke ${browse}';
+      case 'browse_moved_notice_body':
+        return ({
+          required Object browse,
+          required Object settings,
+          required Object appearance,
+          required Object modules,
+        }) =>
+            'Halaman penemuan serta sumber online untuk manga, video, dan novel kini ada di tab ${browse}, yang dimatikan di perangkat ini. Untuk menggunakannya, aktifkan ${browse} di ${settings} › ${appearance} › ${modules}.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       case 'sync_pair_link_unreachable':
         return 'None of the addresses in this pairing link are reachable, or they point to a different device';
       case 'sync_pair_link_invalid':
@@ -300205,8 +304828,6 @@ extension on _StringsIt {
         return 'Non si applica alla rete locale; i trasferimenti LAN vanno sempre a velocità massima.';
       case 'download_rate_limit_lan_included':
         return 'Si applica anche alla rete locale.';
-      case 'download_resources_tab':
-        return 'Risorse';
       case 'download_save_root_change':
         return 'Cambia cartella';
       case 'download_save_root_create_failed':
@@ -301921,8 +306542,6 @@ extension on _StringsIt {
         return 'Vai a importa';
       case 'library_search':
         return 'Cerca nella libreria';
-      case 'library_view_browse':
-        return 'Scopri';
       case 'library_view_discover':
         return 'Scopri';
       case 'library_view_import':
@@ -302045,9 +306664,9 @@ extension on _StringsIt {
       case 'manga_global_search_hint':
         return 'Cerca in ogni fonte abilitata';
       case 'manga_global_search_no_sources':
-        return 'Nessuna fonte manga attiva. Aggiungine una nella scheda Importa.';
+        return 'Nessuna fonte manga attiva. Aggiungine una nella scheda Sfoglia.';
       case 'manga_global_search_open_sources':
-        return 'Vai a Importa';
+        return 'Vai a Sfoglia';
       case 'manga_global_search_prompt':
         return 'Digita un titolo per cercare in ogni fonte manga abilitata contemporaneamente.';
       case 'manga_global_search_title':
@@ -302763,7 +307382,7 @@ extension on _StringsIt {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return 'La scheda Download è nascosta in Impostazioni → Aspetto → Moduli funzionalità; riattivala per gestire le sottoscrizioni.';
+        return 'La scheda Sfoglia è nascosta in Impostazioni → Aspetto → Moduli funzionalità; riattivala per gestire le sottoscrizioni.';
       case 'module_extension_label':
         return 'Estensione browser';
       case 'move_down':
@@ -308289,23 +312908,21 @@ extension on _StringsIt {
       case 'video_extensions_title':
         return 'Video source extensions';
       case 'video_online_sources_hint':
-        return 'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+        return 'Estensioni Aniyomi di terze parti (extensions-lib 14). I contenuti provengono dal sito di ciascuna estensione e vengono riprodotti nel lettore integrato.';
       case 'video_online_sources_empty':
-        return 'No enabled video sources. Install and enable an extension first.';
+        return 'Nessuna fonte video abilitata. Installa e abilita prima un\'estensione.';
       case 'video_online_episodes_title':
-        return 'Episodes';
+        return 'Episodi';
       case 'video_online_episodes_empty':
-        return 'No episodes found.';
+        return 'Nessun episodio trovato.';
       case 'video_online_stream_none':
-        return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
+        return 'Questo episodio non ha restituito alcuno stream riproducibile.';
       case 'media_import_segment_stores':
-        return 'Stores';
+        return 'Repository';
       case 'media_import_segment_extensions':
-        return 'Extensions';
+        return 'Estensioni';
       case 'media_import_segment_sources':
-        return 'Sources';
+        return 'Fonti';
       case 'mihon_source_move_up':
         return 'Move up';
       case 'mihon_source_move_down':
@@ -309607,6 +314224,190 @@ extension on _StringsIt {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
+      case 'nav_browse':
+        return 'Sfoglia';
+      case 'novel_detail_library_remove':
+        return 'Rimuovi dalla libreria';
+      case 'novel_detail_library_remove_confirm':
+        return 'Rimuovere questo romanzo dalla libreria? I capitoli in cache e i progressi di lettura verranno eliminati.';
+      case 'novel_detail_download':
+        return 'Scarica';
+      case 'novel_detail_library_added':
+        return 'Aggiunto alla libreria';
+      case 'video_online_extension_unavailable':
+        return 'L\'estensione della fonte video di questo episodio non è installata o è disabilitata. Reinstallala o abilitala in Sfoglia › Estensioni.';
+      case 'video_online_library_add':
+        return 'Aggiungi alla videoteca';
+      case 'video_online_library_remove':
+        return 'Rimuovi dalla videoteca';
+      case 'video_online_library_added':
+        return ({required Object n}) => '${n} episodi aggiunti alla videoteca';
+      case 'video_online_library_removed':
+        return 'Rimosso dalla videoteca';
+      case 'video_online_download_all':
+        return 'Scarica tutto';
+      case 'video_online_download_episode':
+        return 'Scarica questo episodio';
+      case 'video_online_download_started':
+        return 'Download avviato: vedi Sfoglia › Download';
+      case 'video_online_downloaded':
+        return 'Scaricato';
+      case 'onboarding_feature_browse_hint':
+        return 'Fonti online, estensioni, scoperta e download';
+      case 'browse_moved_notice_title':
+        return ({required Object browse}) =>
+            'Scopri e le fonti online sono stati spostati in ${browse}';
+      case 'browse_moved_notice_body':
+        return ({
+          required Object browse,
+          required Object settings,
+          required Object appearance,
+          required Object modules,
+        }) =>
+            'Scopri e le fonti online per manga, video e romanzi ora si trovano nella scheda ${browse}, disattivata su questo dispositivo. Per usarli, attiva ${browse} in ${settings} › ${appearance} › ${modules}.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       case 'sync_pair_link_unreachable':
         return 'None of the addresses in this pairing link are reachable, or they point to a different device';
       case 'sync_pair_link_invalid':
@@ -312024,8 +316825,6 @@ extension on _StringsJa {
         return 'ローカルネットワーク内では適用されません。LAN転送は常に最大速度で実行されます。';
       case 'download_rate_limit_lan_included':
         return 'ローカルネットワーク内にも適用されます。';
-      case 'download_resources_tab':
-        return 'リソース';
       case 'download_save_root_change':
         return 'フォルダを変更';
       case 'download_save_root_create_failed':
@@ -313731,8 +318530,6 @@ extension on _StringsJa {
         return 'インポートへ';
       case 'library_search':
         return 'ライブラリを検索';
-      case 'library_view_browse':
-        return '発見';
       case 'library_view_discover':
         return '見つける';
       case 'library_view_import':
@@ -313854,9 +318651,9 @@ extension on _StringsJa {
       case 'manga_global_search_hint':
         return 'すべてのソースを検索';
       case 'manga_global_search_no_sources':
-        return '有効なマンガソースがまだありません。「インポート」タブで追加してください。';
+        return '有効なマンガソースがまだありません。「ブラウズ」タブで追加してください。';
       case 'manga_global_search_open_sources':
-        return 'インポートへ';
+        return 'ブラウズへ';
       case 'manga_global_search_prompt':
         return 'タイトルを入力して、すべての有効なマンガソースを一括検索します。';
       case 'manga_global_search_title':
@@ -314567,7 +319364,7 @@ extension on _StringsJa {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return '「ダウンロード」タブは 設定 → 外観 → 機能モジュール で非表示になっています。購読を管理するには再度オンにしてください。';
+        return '「ブラウズ」タブは 設定 → 外観 → 機能モジュール で非表示になっています。購読を管理するには再度オンにしてください。';
       case 'module_extension_label':
         return 'ブラウザ拡張機能';
       case 'move_down':
@@ -320053,23 +324850,21 @@ extension on _StringsJa {
       case 'video_extensions_title':
         return 'Video source extensions';
       case 'video_online_sources_hint':
-        return 'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+        return 'サードパーティの Aniyomi 拡張機能（extensions-lib 14）。コンテンツは各拡張機能の配信元サイトから取得し、内蔵プレーヤーで再生します。';
       case 'video_online_sources_empty':
-        return 'No enabled video sources. Install and enable an extension first.';
+        return '有効な動画ソースがありません。先に拡張機能をインストールして有効にしてください。';
       case 'video_online_episodes_title':
-        return 'Episodes';
+        return 'エピソード';
       case 'video_online_episodes_empty':
-        return 'No episodes found.';
+        return 'エピソードが見つかりません。';
       case 'video_online_stream_none':
-        return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
+        return 'このエピソードには再生可能なストリームがありません。';
       case 'media_import_segment_stores':
-        return 'Stores';
+        return 'リポジトリ';
       case 'media_import_segment_extensions':
-        return 'Extensions';
+        return '拡張機能';
       case 'media_import_segment_sources':
-        return 'Sources';
+        return 'ソース';
       case 'mihon_source_move_up':
         return 'Move up';
       case 'mihon_source_move_down':
@@ -321368,6 +326163,189 @@ extension on _StringsJa {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
+      case 'nav_browse':
+        return 'ブラウズ';
+      case 'novel_detail_library_remove':
+        return '本棚から削除';
+      case 'novel_detail_library_remove_confirm':
+        return 'この小説を本棚から削除しますか？キャッシュ済みの章と読書進捗も削除されます。';
+      case 'novel_detail_download':
+        return 'ダウンロード';
+      case 'novel_detail_library_added':
+        return '本棚に追加しました';
+      case 'video_online_extension_unavailable':
+        return 'このエピソードの動画ソース拡張機能がインストールされていないか、無効になっています。「ブラウズ › 拡張機能」で再インストールするか有効にしてください。';
+      case 'video_online_library_add':
+        return '動画ライブラリに追加';
+      case 'video_online_library_remove':
+        return '動画ライブラリから削除';
+      case 'video_online_library_added':
+        return ({required Object n}) => '${n} 話を動画ライブラリに追加しました';
+      case 'video_online_library_removed':
+        return '動画ライブラリから削除しました';
+      case 'video_online_download_all':
+        return 'すべてダウンロード';
+      case 'video_online_download_episode':
+        return 'このエピソードをダウンロード';
+      case 'video_online_download_started':
+        return 'ダウンロードを開始しました。進捗は「ブラウズ › ダウンロード」で確認できます';
+      case 'video_online_downloaded':
+        return 'ダウンロード済み';
+      case 'onboarding_feature_browse_hint':
+        return 'オンラインソース、拡張機能、発見、ダウンロード';
+      case 'browse_moved_notice_title':
+        return ({required Object browse}) => '発見とオンラインソースは「${browse}」に移動しました';
+      case 'browse_moved_notice_body':
+        return ({
+          required Object browse,
+          required Object settings,
+          required Object appearance,
+          required Object modules,
+        }) =>
+            '発見ページと、マンガ・動画・小説のオンラインソースは「${browse}」タブに移動しました。このデバイスでは現在オフになっています。使うには「${settings} › ${appearance} › ${modules}」で「${browse}」をオンにしてください。';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       case 'sync_pair_link_unreachable':
         return 'None of the addresses in this pairing link are reachable, or they point to a different device';
       case 'sync_pair_link_invalid':
@@ -323786,8 +328764,6 @@ extension on _StringsKo {
         return '로컬 네트워크에는 적용되지 않습니다. LAN 전송은 항상 최대 속도로 실행됩니다.';
       case 'download_rate_limit_lan_included':
         return '로컬 네트워크에도 적용됩니다.';
-      case 'download_resources_tab':
-        return '리소스';
       case 'download_save_root_change':
         return '폴더 변경';
       case 'download_save_root_create_failed':
@@ -325493,8 +330469,6 @@ extension on _StringsKo {
         return '가져오기로 이동';
       case 'library_search':
         return '라이브러리 검색';
-      case 'library_view_browse':
-        return '발견';
       case 'library_view_discover':
         return '발견';
       case 'library_view_import':
@@ -325616,9 +330590,9 @@ extension on _StringsKo {
       case 'manga_global_search_hint':
         return '활성화된 모든 소스 검색';
       case 'manga_global_search_no_sources':
-        return '활성화된 만화 소스가 아직 없어요. ‘가져오기’ 탭에서 하나 추가하세요.';
+        return '활성화된 만화 소스가 아직 없어요. ‘탐색’ 탭에서 하나 추가하세요.';
       case 'manga_global_search_open_sources':
-        return '가져오기로 이동';
+        return '탐색으로 이동';
       case 'manga_global_search_prompt':
         return '제목을 입력하면 활성화된 모든 만화 소스를 한 번에 검색합니다.';
       case 'manga_global_search_title':
@@ -326329,7 +331303,7 @@ extension on _StringsKo {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return '‘다운로드’ 탭이 설정 → 외관 → 기능 모듈에서 숨겨져 있어요. 구독을 관리하려면 다시 켜세요.';
+        return '‘탐색’ 탭이 설정 → 외관 → 기능 모듈에서 숨겨져 있어요. 구독을 관리하려면 다시 켜세요.';
       case 'module_extension_label':
         return '브라우저 확장';
       case 'move_down':
@@ -331819,23 +336793,21 @@ extension on _StringsKo {
       case 'video_extensions_title':
         return 'Video source extensions';
       case 'video_online_sources_hint':
-        return 'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+        return '서드파티 Aniyomi 확장 프로그램(extensions-lib 14)입니다. 콘텐츠는 각 확장 프로그램의 웹사이트에서 가져오며 내장 플레이어에서 재생됩니다.';
       case 'video_online_sources_empty':
-        return 'No enabled video sources. Install and enable an extension first.';
+        return '활성화된 비디오 소스가 없습니다. 먼저 확장 프로그램을 설치하고 활성화하세요.';
       case 'video_online_episodes_title':
-        return 'Episodes';
+        return '에피소드';
       case 'video_online_episodes_empty':
-        return 'No episodes found.';
+        return '에피소드를 찾을 수 없습니다.';
       case 'video_online_stream_none':
-        return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
+        return '이 에피소드에는 재생 가능한 스트림이 없습니다.';
       case 'media_import_segment_stores':
-        return 'Stores';
+        return '저장소';
       case 'media_import_segment_extensions':
-        return 'Extensions';
+        return '확장 프로그램';
       case 'media_import_segment_sources':
-        return 'Sources';
+        return '소스';
       case 'mihon_source_move_up':
         return 'Move up';
       case 'mihon_source_move_down':
@@ -333137,6 +338109,190 @@ extension on _StringsKo {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
+      case 'nav_browse':
+        return '탐색';
+      case 'novel_detail_library_remove':
+        return '책장에서 제거';
+      case 'novel_detail_library_remove_confirm':
+        return '이 소설을 책장에서 제거할까요? 캐시된 챕터와 읽기 진행 상황이 삭제됩니다.';
+      case 'novel_detail_download':
+        return '다운로드';
+      case 'novel_detail_library_added':
+        return '책장에 추가했어요';
+      case 'video_online_extension_unavailable':
+        return '이 에피소드의 비디오 소스 확장 프로그램이 설치되어 있지 않거나 비활성화되어 있습니다. ‘탐색 › 확장 프로그램’에서 다시 설치하거나 활성화하세요.';
+      case 'video_online_library_add':
+        return '비디오 라이브러리에 추가';
+      case 'video_online_library_remove':
+        return '비디오 라이브러리에서 제거';
+      case 'video_online_library_added':
+        return ({required Object n}) => '에피소드 ${n}개를 비디오 라이브러리에 추가했습니다';
+      case 'video_online_library_removed':
+        return '비디오 라이브러리에서 제거했습니다';
+      case 'video_online_download_all':
+        return '모두 다운로드';
+      case 'video_online_download_episode':
+        return '이 에피소드 다운로드';
+      case 'video_online_download_started':
+        return '다운로드를 시작했습니다. 진행 상황은 ‘탐색 › 다운로드’에서 확인하세요';
+      case 'video_online_downloaded':
+        return '다운로드됨';
+      case 'onboarding_feature_browse_hint':
+        return '온라인 소스, 확장 프로그램, 발견, 다운로드';
+      case 'browse_moved_notice_title':
+        return ({required Object browse}) =>
+            '발견과 온라인 소스가 ‘${browse}’(으)로 이동했습니다';
+      case 'browse_moved_notice_body':
+        return ({
+          required Object browse,
+          required Object settings,
+          required Object appearance,
+          required Object modules,
+        }) =>
+            '발견 페이지와 만화·비디오·소설 온라인 소스가 ‘${browse}’ 탭으로 이동했습니다. 이 기기에서는 현재 꺼져 있습니다. 사용하려면 ‘${settings} › ${appearance} › ${modules}’에서 ‘${browse}’을(를) 켜세요.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       case 'sync_pair_link_unreachable':
         return 'None of the addresses in this pairing link are reachable, or they point to a different device';
       case 'sync_pair_link_invalid':
@@ -335574,8 +340730,6 @@ extension on _StringsNl {
         return 'Geldt niet binnen je lokale netwerk; LAN-overdrachten lopen altijd op volle snelheid.';
       case 'download_rate_limit_lan_included':
         return 'Geldt ook binnen je lokale netwerk.';
-      case 'download_resources_tab':
-        return 'Resources';
       case 'download_save_root_change':
         return 'Map wijzigen';
       case 'download_save_root_create_failed':
@@ -337289,8 +342443,6 @@ extension on _StringsNl {
         return 'Naar importeren';
       case 'library_search':
         return 'Bibliotheek doorzoeken';
-      case 'library_view_browse':
-        return 'Ontdekken';
       case 'library_view_discover':
         return 'Ontdekken';
       case 'library_view_import':
@@ -337413,9 +342565,9 @@ extension on _StringsNl {
       case 'manga_global_search_hint':
         return 'Doorzoek elke ingeschakelde bron';
       case 'manga_global_search_no_sources':
-        return 'Nog geen ingeschakelde mangabronnen. Voeg er een toe op het tabblad Importeren.';
+        return 'Nog geen ingeschakelde mangabronnen. Voeg er een toe op het tabblad Bladeren.';
       case 'manga_global_search_open_sources':
-        return 'Naar Importeren';
+        return 'Naar Bladeren';
       case 'manga_global_search_prompt':
         return 'Typ een titel om elke ingeschakelde mangabron tegelijk te doorzoeken.';
       case 'manga_global_search_title':
@@ -338133,7 +343285,7 @@ extension on _StringsNl {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return 'Het tabblad Downloads is verborgen via Instellingen → Uiterlijk → Functiemodules; zet het weer aan om abonnementen te beheren.';
+        return 'Het tabblad Bladeren is verborgen via Instellingen → Uiterlijk → Functiemodules; zet het weer aan om abonnementen te beheren.';
       case 'module_extension_label':
         return 'Browserextensie';
       case 'move_down':
@@ -343654,23 +348806,21 @@ extension on _StringsNl {
       case 'video_extensions_title':
         return 'Video source extensions';
       case 'video_online_sources_hint':
-        return 'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+        return 'Aniyomi-extensies van derden (extensions-lib 14). De inhoud komt van de website van elke extensie en wordt afgespeeld in de ingebouwde speler.';
       case 'video_online_sources_empty':
-        return 'No enabled video sources. Install and enable an extension first.';
+        return 'Geen ingeschakelde videobronnen. Installeer en schakel eerst een extensie in.';
       case 'video_online_episodes_title':
-        return 'Episodes';
+        return 'Afleveringen';
       case 'video_online_episodes_empty':
-        return 'No episodes found.';
+        return 'Geen afleveringen gevonden.';
       case 'video_online_stream_none':
-        return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
+        return 'Deze aflevering leverde geen afspeelbare stream op.';
       case 'media_import_segment_stores':
-        return 'Stores';
+        return 'Repository\'s';
       case 'media_import_segment_extensions':
-        return 'Extensions';
+        return 'Extensies';
       case 'media_import_segment_sources':
-        return 'Sources';
+        return 'Bronnen';
       case 'mihon_source_move_up':
         return 'Move up';
       case 'mihon_source_move_down':
@@ -344972,6 +350122,191 @@ extension on _StringsNl {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
+      case 'nav_browse':
+        return 'Bladeren';
+      case 'novel_detail_library_remove':
+        return 'Uit boekenkast verwijderen';
+      case 'novel_detail_library_remove_confirm':
+        return 'Deze roman uit de boekenkast verwijderen? Gecachte hoofdstukken en leesvoortgang worden verwijderd.';
+      case 'novel_detail_download':
+        return 'Downloaden';
+      case 'novel_detail_library_added':
+        return 'Aan boekenkast toegevoegd';
+      case 'video_online_extension_unavailable':
+        return 'De videobronextensie van deze aflevering is niet geïnstalleerd of uitgeschakeld. Installeer of schakel hem opnieuw in via Bladeren › Extensies.';
+      case 'video_online_library_add':
+        return 'Toevoegen aan videobibliotheek';
+      case 'video_online_library_remove':
+        return 'Verwijderen uit videobibliotheek';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            '${n} afleveringen toegevoegd aan de videobibliotheek';
+      case 'video_online_library_removed':
+        return 'Verwijderd uit de videobibliotheek';
+      case 'video_online_download_all':
+        return 'Alles downloaden';
+      case 'video_online_download_episode':
+        return 'Deze aflevering downloaden';
+      case 'video_online_download_started':
+        return 'Download gestart — zie Bladeren › Downloads';
+      case 'video_online_downloaded':
+        return 'Gedownload';
+      case 'onboarding_feature_browse_hint':
+        return 'Online bronnen, extensies, ontdekken en downloads';
+      case 'browse_moved_notice_title':
+        return ({required Object browse}) =>
+            'Ontdekken en online bronnen zijn verplaatst naar ${browse}';
+      case 'browse_moved_notice_body':
+        return ({
+          required Object browse,
+          required Object settings,
+          required Object appearance,
+          required Object modules,
+        }) =>
+            'Ontdekken en de online bronnen voor manga, video en romans staan nu op het tabblad ${browse}, dat op dit apparaat is uitgeschakeld. Schakel ${browse} in via ${settings} › ${appearance} › ${modules} om ze te gebruiken.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       case 'sync_pair_link_unreachable':
         return 'None of the addresses in this pairing link are reachable, or they point to a different device';
       case 'sync_pair_link_invalid':
@@ -347409,8 +352744,6 @@ extension on _StringsPtBr {
         return 'Não se aplica na rede local; transferências LAN sempre rodam em velocidade máxima.';
       case 'download_rate_limit_lan_included':
         return 'Também se aplica na rede local.';
-      case 'download_resources_tab':
-        return 'Recursos';
       case 'download_save_root_change':
         return 'Alterar pasta';
       case 'download_save_root_create_failed':
@@ -349124,8 +354457,6 @@ extension on _StringsPtBr {
         return 'Ir para importação';
       case 'library_search':
         return 'Buscar na biblioteca';
-      case 'library_view_browse':
-        return 'Descobrir';
       case 'library_view_discover':
         return 'Descobrir';
       case 'library_view_import':
@@ -349248,9 +354579,9 @@ extension on _StringsPtBr {
       case 'manga_global_search_hint':
         return 'Buscar em todas as fontes ativadas';
       case 'manga_global_search_no_sources':
-        return 'Ainda não há fontes de mangá ativadas. Adicione uma na aba Importar.';
+        return 'Ainda não há fontes de mangá ativadas. Adicione uma na aba Navegar.';
       case 'manga_global_search_open_sources':
-        return 'Ir para Importar';
+        return 'Ir para Navegar';
       case 'manga_global_search_prompt':
         return 'Digite um título para buscar em todas as fontes de mangá ativadas de uma vez.';
       case 'manga_global_search_title':
@@ -349967,7 +355298,7 @@ extension on _StringsPtBr {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return 'A aba Downloads está oculta em Configurações → Aparência → Módulos de funcionalidades; reative-a para gerenciar as assinaturas.';
+        return 'A aba Navegar está oculta em Configurações → Aparência → Módulos de funcionalidades; reative-a para gerenciar as assinaturas.';
       case 'module_extension_label':
         return 'Extensão do navegador';
       case 'move_down':
@@ -355484,23 +360815,21 @@ extension on _StringsPtBr {
       case 'video_extensions_title':
         return 'Video source extensions';
       case 'video_online_sources_hint':
-        return 'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+        return 'Extensões Aniyomi de terceiros (extensions-lib 14). O conteúdo vem do site de cada extensão e é reproduzido no player integrado.';
       case 'video_online_sources_empty':
-        return 'No enabled video sources. Install and enable an extension first.';
+        return 'Nenhuma fonte de vídeo ativada. Instale e ative uma extensão primeiro.';
       case 'video_online_episodes_title':
-        return 'Episodes';
+        return 'Episódios';
       case 'video_online_episodes_empty':
-        return 'No episodes found.';
+        return 'Nenhum episódio encontrado.';
       case 'video_online_stream_none':
-        return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
+        return 'Este episódio não retornou nenhum stream reproduzível.';
       case 'media_import_segment_stores':
-        return 'Stores';
+        return 'Repositórios';
       case 'media_import_segment_extensions':
-        return 'Extensions';
+        return 'Extensões';
       case 'media_import_segment_sources':
-        return 'Sources';
+        return 'Fontes';
       case 'mihon_source_move_up':
         return 'Move up';
       case 'mihon_source_move_down':
@@ -356802,6 +362131,191 @@ extension on _StringsPtBr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
+      case 'nav_browse':
+        return 'Navegar';
+      case 'novel_detail_library_remove':
+        return 'Remover da estante';
+      case 'novel_detail_library_remove_confirm':
+        return 'Remover este romance da estante? Os capítulos em cache e o progresso de leitura serão apagados.';
+      case 'novel_detail_download':
+        return 'Baixar';
+      case 'novel_detail_library_added':
+        return 'Adicionado à estante';
+      case 'video_online_extension_unavailable':
+        return 'A extensão de fonte de vídeo deste episódio não está instalada ou está desativada. Reinstale ou ative-a em Navegar › Extensões.';
+      case 'video_online_library_add':
+        return 'Adicionar à biblioteca de vídeos';
+      case 'video_online_library_remove':
+        return 'Remover da biblioteca de vídeos';
+      case 'video_online_library_added':
+        return ({required Object n}) =>
+            '${n} episódios adicionados à biblioteca de vídeos';
+      case 'video_online_library_removed':
+        return 'Removido da biblioteca de vídeos';
+      case 'video_online_download_all':
+        return 'Baixar tudo';
+      case 'video_online_download_episode':
+        return 'Baixar este episódio';
+      case 'video_online_download_started':
+        return 'Download iniciado — veja Navegar › Downloads';
+      case 'video_online_downloaded':
+        return 'Baixado';
+      case 'onboarding_feature_browse_hint':
+        return 'Fontes online, extensões, descoberta e downloads';
+      case 'browse_moved_notice_title':
+        return ({required Object browse}) =>
+            'Descobrir e as fontes online foram movidos para ${browse}';
+      case 'browse_moved_notice_body':
+        return ({
+          required Object browse,
+          required Object settings,
+          required Object appearance,
+          required Object modules,
+        }) =>
+            'Descobrir e as fontes online de mangá, vídeo e romances agora ficam na aba ${browse}, que está desativada neste dispositivo. Para usá-los, ative ${browse} em ${settings} › ${appearance} › ${modules}.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       case 'sync_pair_link_unreachable':
         return 'None of the addresses in this pairing link are reachable, or they point to a different device';
       case 'sync_pair_link_invalid':
@@ -359245,8 +364759,6 @@ extension on _StringsRu {
         return 'Не применяется в локальной сети; передача по LAN всегда идёт на максимальной скорости.';
       case 'download_rate_limit_lan_included':
         return 'Также применяется в локальной сети.';
-      case 'download_resources_tab':
-        return 'Ресурсы';
       case 'download_save_root_change':
         return 'Изменить папку';
       case 'download_save_root_create_failed':
@@ -360961,8 +366473,6 @@ extension on _StringsRu {
         return 'Перейти к импорту';
       case 'library_search':
         return 'Поиск в библиотеке';
-      case 'library_view_browse':
-        return 'Обзор';
       case 'library_view_discover':
         return 'Обзор';
       case 'library_view_import':
@@ -361085,9 +366595,9 @@ extension on _StringsRu {
       case 'manga_global_search_hint':
         return 'Поиск по всем включённым источникам';
       case 'manga_global_search_no_sources':
-        return 'Включённых источников манги пока нет. Добавьте один на вкладке «Импорт».';
+        return 'Включённых источников манги пока нет. Добавьте один на вкладке «Обзор».';
       case 'manga_global_search_open_sources':
-        return 'К импорту';
+        return 'К обзору';
       case 'manga_global_search_prompt':
         return 'Введите название для поиска по всем включённым источникам манги одновременно.';
       case 'manga_global_search_title':
@@ -361804,7 +367314,7 @@ extension on _StringsRu {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return 'Вкладка «Загрузки» скрыта в разделе Настройки → Внешний вид → Функциональные модули; включите её снова, чтобы управлять подписками.';
+        return 'Вкладка «Обзор» скрыта в разделе Настройки → Внешний вид → Функциональные модули; включите её снова, чтобы управлять подписками.';
       case 'module_extension_label':
         return 'Расширение для браузера';
       case 'move_down':
@@ -367320,23 +372830,21 @@ extension on _StringsRu {
       case 'video_extensions_title':
         return 'Video source extensions';
       case 'video_online_sources_hint':
-        return 'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+        return 'Сторонние расширения Aniyomi (extensions-lib 14). Контент берётся с сайта каждого расширения и воспроизводится во встроенном плеере.';
       case 'video_online_sources_empty':
-        return 'No enabled video sources. Install and enable an extension first.';
+        return 'Нет включённых источников видео. Сначала установите и включите расширение.';
       case 'video_online_episodes_title':
-        return 'Episodes';
+        return 'Эпизоды';
       case 'video_online_episodes_empty':
-        return 'No episodes found.';
+        return 'Эпизоды не найдены.';
       case 'video_online_stream_none':
-        return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
+        return 'Для этого эпизода не найдено воспроизводимого потока.';
       case 'media_import_segment_stores':
-        return 'Stores';
+        return 'Репозитории';
       case 'media_import_segment_extensions':
-        return 'Extensions';
+        return 'Расширения';
       case 'media_import_segment_sources':
-        return 'Sources';
+        return 'Источники';
       case 'mihon_source_move_up':
         return 'Move up';
       case 'mihon_source_move_down':
@@ -368638,6 +374146,190 @@ extension on _StringsRu {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
+      case 'nav_browse':
+        return 'Обзор';
+      case 'novel_detail_library_remove':
+        return 'Убрать с полки';
+      case 'novel_detail_library_remove_confirm':
+        return 'Убрать этот роман с полки? Кэшированные главы и прогресс чтения будут удалены.';
+      case 'novel_detail_download':
+        return 'Скачать';
+      case 'novel_detail_library_added':
+        return 'Добавлено на полку';
+      case 'video_online_extension_unavailable':
+        return 'Расширение источника видео для этого эпизода не установлено или отключено. Переустановите или включите его в разделе «Обзор › Расширения».';
+      case 'video_online_library_add':
+        return 'Добавить в видеотеку';
+      case 'video_online_library_remove':
+        return 'Убрать из видеотеки';
+      case 'video_online_library_added':
+        return ({required Object n}) => 'Добавлено эпизодов в видеотеку: ${n}';
+      case 'video_online_library_removed':
+        return 'Убрано из видеотеки';
+      case 'video_online_download_all':
+        return 'Скачать все';
+      case 'video_online_download_episode':
+        return 'Скачать этот эпизод';
+      case 'video_online_download_started':
+        return 'Загрузка началась — см. «Обзор › Загрузки»';
+      case 'video_online_downloaded':
+        return 'Скачано';
+      case 'onboarding_feature_browse_hint':
+        return 'Онлайн-источники, расширения, поиск контента и загрузки';
+      case 'browse_moved_notice_title':
+        return ({required Object browse}) =>
+            'Поиск контента и онлайн-источники перенесены в «${browse}»';
+      case 'browse_moved_notice_body':
+        return ({
+          required Object browse,
+          required Object settings,
+          required Object appearance,
+          required Object modules,
+        }) =>
+            'Страницы поиска контента и онлайн-источники манги, видео и ранобэ теперь находятся на вкладке «${browse}», которая на этом устройстве выключена. Чтобы пользоваться ими, включите «${browse}» в разделе «${settings} › ${appearance} › ${modules}».';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       case 'sync_pair_link_unreachable':
         return 'None of the addresses in this pairing link are reachable, or they point to a different device';
       case 'sync_pair_link_invalid':
@@ -371065,8 +376757,6 @@ extension on _StringsTh {
         return 'ไม่ใช้กับเครือข่ายท้องถิ่นของคุณ; การถ่ายโอน LAN จะทำงานเต็มความเร็วเสมอ';
       case 'download_rate_limit_lan_included':
         return 'ใช้กับเครือข่ายท้องถิ่นของคุณด้วย';
-      case 'download_resources_tab':
-        return 'ทรัพยากร';
       case 'download_save_root_change':
         return 'เปลี่ยนโฟลเดอร์';
       case 'download_save_root_create_failed':
@@ -372779,8 +378469,6 @@ extension on _StringsTh {
         return 'ไปที่นำเข้า';
       case 'library_search':
         return 'ค้นหาคลัง';
-      case 'library_view_browse':
-        return 'สำรวจ';
       case 'library_view_discover':
         return 'ค้นพบ';
       case 'library_view_import':
@@ -372903,9 +378591,9 @@ extension on _StringsTh {
       case 'manga_global_search_hint':
         return 'ค้นหาทุกแหล่งที่เปิดใช้งาน';
       case 'manga_global_search_no_sources':
-        return 'ยังไม่มีแหล่งมังงะที่เปิดใช้งาน เพิ่มได้ที่แท็บนำเข้า';
+        return 'ยังไม่มีแหล่งมังงะที่เปิดใช้งาน เพิ่มได้ที่แท็บเรียกดู';
       case 'manga_global_search_open_sources':
-        return 'ไปที่นำเข้า';
+        return 'ไปที่เรียกดู';
       case 'manga_global_search_prompt':
         return 'พิมพ์ชื่อเรื่องเพื่อค้นหาทุกแหล่งมังงะที่เปิดใช้งานพร้อมกัน';
       case 'manga_global_search_title':
@@ -373617,7 +379305,7 @@ extension on _StringsTh {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return 'แท็บดาวน์โหลดถูกซ่อนไว้ใน การตั้งค่า → รูปลักษณ์ → โมดูลฟีเจอร์ ต้องเปิดกลับมาจึงจะจัดการรายการติดตามได้';
+        return 'แท็บเรียกดูถูกซ่อนไว้ใน การตั้งค่า → รูปลักษณ์ → โมดูลฟีเจอร์ ต้องเปิดกลับมาจึงจะจัดการรายการติดตามได้';
       case 'module_extension_label':
         return 'ส่วนขยายเบราว์เซอร์';
       case 'move_down':
@@ -379125,23 +384813,21 @@ extension on _StringsTh {
       case 'video_extensions_title':
         return 'Video source extensions';
       case 'video_online_sources_hint':
-        return 'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+        return 'ส่วนขยาย Aniyomi จากบุคคลที่สาม (extensions-lib 14) เนื้อหามาจากเว็บไซต์ของแต่ละส่วนขยายและเล่นในเครื่องเล่นในตัว';
       case 'video_online_sources_empty':
-        return 'No enabled video sources. Install and enable an extension first.';
+        return 'ไม่มีแหล่งวิดีโอที่เปิดใช้งาน ติดตั้งและเปิดใช้งานส่วนขยายก่อน';
       case 'video_online_episodes_title':
-        return 'Episodes';
+        return 'ตอน';
       case 'video_online_episodes_empty':
-        return 'No episodes found.';
+        return 'ไม่พบตอน';
       case 'video_online_stream_none':
-        return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
+        return 'ตอนนี้ไม่มีสตรีมที่เล่นได้';
       case 'media_import_segment_stores':
-        return 'Stores';
+        return 'ที่เก็บ';
       case 'media_import_segment_extensions':
-        return 'Extensions';
+        return 'ส่วนขยาย';
       case 'media_import_segment_sources':
-        return 'Sources';
+        return 'แหล่งที่มา';
       case 'mihon_source_move_up':
         return 'Move up';
       case 'mihon_source_move_down':
@@ -380443,6 +386129,190 @@ extension on _StringsTh {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
+      case 'nav_browse':
+        return 'เรียกดู';
+      case 'novel_detail_library_remove':
+        return 'นำออกจากชั้นหนังสือ';
+      case 'novel_detail_library_remove_confirm':
+        return 'นำนิยายเรื่องนี้ออกจากชั้นหนังสือ? ตอนที่แคชไว้และความคืบหน้าการอ่านจะถูกลบ';
+      case 'novel_detail_download':
+        return 'ดาวน์โหลด';
+      case 'novel_detail_library_added':
+        return 'เพิ่มลงชั้นหนังสือแล้ว';
+      case 'video_online_extension_unavailable':
+        return 'ส่วนขยายแหล่งวิดีโอของตอนนี้ไม่ได้ติดตั้งหรือถูกปิดใช้งาน ติดตั้งใหม่หรือเปิดใช้งานได้ที่ เรียกดู › ส่วนขยาย';
+      case 'video_online_library_add':
+        return 'เพิ่มในคลังวิดีโอ';
+      case 'video_online_library_remove':
+        return 'นำออกจากคลังวิดีโอ';
+      case 'video_online_library_added':
+        return ({required Object n}) => 'เพิ่ม ${n} ตอนในคลังวิดีโอแล้ว';
+      case 'video_online_library_removed':
+        return 'นำออกจากคลังวิดีโอแล้ว';
+      case 'video_online_download_all':
+        return 'ดาวน์โหลดทั้งหมด';
+      case 'video_online_download_episode':
+        return 'ดาวน์โหลดเฉพาะตอนนี้';
+      case 'video_online_download_started':
+        return 'เริ่มดาวน์โหลดแล้ว — ดูที่ เรียกดู › ดาวน์โหลด';
+      case 'video_online_downloaded':
+        return 'ดาวน์โหลดแล้ว';
+      case 'onboarding_feature_browse_hint':
+        return 'แหล่งออนไลน์ ส่วนขยาย การค้นพบ และการดาวน์โหลด';
+      case 'browse_moved_notice_title':
+        return ({required Object browse}) =>
+            'การค้นพบและแหล่งออนไลน์ย้ายไปที่ ${browse} แล้ว';
+      case 'browse_moved_notice_body':
+        return ({
+          required Object browse,
+          required Object settings,
+          required Object appearance,
+          required Object modules,
+        }) =>
+            'หน้าค้นพบและแหล่งออนไลน์สำหรับมังงะ วิดีโอ และนิยาย ย้ายไปอยู่ในแท็บ ${browse} แล้ว ซึ่งปิดอยู่ในอุปกรณ์นี้ หากต้องการใช้ ให้เปิด ${browse} ที่ ${settings} › ${appearance} › ${modules}';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       case 'sync_pair_link_unreachable':
         return 'None of the addresses in this pairing link are reachable, or they point to a different device';
       case 'sync_pair_link_invalid':
@@ -382879,8 +388749,6 @@ extension on _StringsTr {
         return 'Yerel ağınızda geçerli değildir; LAN aktarımları her zaman tam hızda çalışır.';
       case 'download_rate_limit_lan_included':
         return 'Yerel ağınızda da geçerlidir.';
-      case 'download_resources_tab':
-        return 'Kaynaklar';
       case 'download_save_root_change':
         return 'Klasörü değiştir';
       case 'download_save_root_create_failed':
@@ -384592,8 +390460,6 @@ extension on _StringsTr {
         return 'İçe aktarmaya git';
       case 'library_search':
         return 'Kütüphanede ara';
-      case 'library_view_browse':
-        return 'Keşfet';
       case 'library_view_discover':
         return 'Keşfet';
       case 'library_view_import':
@@ -384716,9 +390582,9 @@ extension on _StringsTr {
       case 'manga_global_search_hint':
         return 'Etkin tüm kaynaklarda ara';
       case 'manga_global_search_no_sources':
-        return 'Henüz etkin manga kaynağı yok. İçe aktar sekmesinden bir tane ekleyin.';
+        return 'Henüz etkin manga kaynağı yok. Göz at sekmesinden bir tane ekleyin.';
       case 'manga_global_search_open_sources':
-        return 'İçe aktarmaya git';
+        return 'Göz at\'a git';
       case 'manga_global_search_prompt':
         return 'Etkin tüm manga kaynaklarında aynı anda aramak için bir başlık yazın.';
       case 'manga_global_search_title':
@@ -385433,7 +391299,7 @@ extension on _StringsTr {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return 'İndirmeler sekmesi Ayarlar → Görünüm → Özellik modülleri altında gizli; abonelikleri yönetmek için yeniden açın.';
+        return 'Göz at sekmesi Ayarlar → Görünüm → Özellik modülleri altında gizli; abonelikleri yönetmek için yeniden açın.';
       case 'module_extension_label':
         return 'Tarayıcı eklentisi';
       case 'move_down':
@@ -390946,23 +396812,21 @@ extension on _StringsTr {
       case 'video_extensions_title':
         return 'Video source extensions';
       case 'video_online_sources_hint':
-        return 'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+        return 'Üçüncü taraf Aniyomi eklentileri (extensions-lib 14). İçerik her eklentinin web sitesinden gelir ve yerleşik oynatıcıda oynatılır.';
       case 'video_online_sources_empty':
-        return 'No enabled video sources. Install and enable an extension first.';
+        return 'Etkin video kaynağı yok. Önce bir eklenti yükleyip etkinleştirin.';
       case 'video_online_episodes_title':
-        return 'Episodes';
+        return 'Bölümler';
       case 'video_online_episodes_empty':
-        return 'No episodes found.';
+        return 'Bölüm bulunamadı.';
       case 'video_online_stream_none':
-        return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
+        return 'Bu bölüm oynatılabilir bir akış döndürmedi.';
       case 'media_import_segment_stores':
-        return 'Stores';
+        return 'Depolar';
       case 'media_import_segment_extensions':
-        return 'Extensions';
+        return 'Eklentiler';
       case 'media_import_segment_sources':
-        return 'Sources';
+        return 'Kaynaklar';
       case 'mihon_source_move_up':
         return 'Move up';
       case 'mihon_source_move_down':
@@ -392264,6 +398128,190 @@ extension on _StringsTr {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
+      case 'nav_browse':
+        return 'Göz at';
+      case 'novel_detail_library_remove':
+        return 'Kitaplıktan kaldır';
+      case 'novel_detail_library_remove_confirm':
+        return 'Bu roman kitaplıktan kaldırılsın mı? Önbelleğe alınan bölümler ve okuma ilerlemesi silinecek.';
+      case 'novel_detail_download':
+        return 'İndir';
+      case 'novel_detail_library_added':
+        return 'Kitaplığa eklendi';
+      case 'video_online_extension_unavailable':
+        return 'Bu bölümün video kaynağı eklentisi yüklü değil veya devre dışı. Göz at › Eklentiler bölümünden yeniden yükleyin veya etkinleştirin.';
+      case 'video_online_library_add':
+        return 'Video kitaplığına ekle';
+      case 'video_online_library_remove':
+        return 'Video kitaplığından kaldır';
+      case 'video_online_library_added':
+        return ({required Object n}) => '${n} bölüm video kitaplığına eklendi';
+      case 'video_online_library_removed':
+        return 'Video kitaplığından kaldırıldı';
+      case 'video_online_download_all':
+        return 'Tümünü indir';
+      case 'video_online_download_episode':
+        return 'Bu bölümü indir';
+      case 'video_online_download_started':
+        return 'İndirme başladı — Göz at › İndirmeler bölümüne bakın';
+      case 'video_online_downloaded':
+        return 'İndirildi';
+      case 'onboarding_feature_browse_hint':
+        return 'Çevrimiçi kaynaklar, eklentiler, keşif ve indirmeler';
+      case 'browse_moved_notice_title':
+        return ({required Object browse}) =>
+            'Keşfet ve çevrimiçi kaynaklar ${browse} sekmesine taşındı';
+      case 'browse_moved_notice_body':
+        return ({
+          required Object browse,
+          required Object settings,
+          required Object appearance,
+          required Object modules,
+        }) =>
+            'Keşfet sayfası ile manga, video ve roman için çevrimiçi kaynaklar artık ${browse} sekmesinde; bu sekme bu cihazda kapalı. Bunları kullanmak için ${settings} › ${appearance} › ${modules} bölümünden ${browse} seçeneğini açın.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       case 'sync_pair_link_unreachable':
         return 'None of the addresses in this pairing link are reachable, or they point to a different device';
       case 'sync_pair_link_invalid':
@@ -394696,8 +400744,6 @@ extension on _StringsVi {
         return 'Không áp dụng trong mạng nội bộ; truyền LAN luôn chạy tốc độ tối đa.';
       case 'download_rate_limit_lan_included':
         return 'Cũng áp dụng trong mạng nội bộ.';
-      case 'download_resources_tab':
-        return 'Tài nguyên';
       case 'download_save_root_change':
         return 'Đổi thư mục';
       case 'download_save_root_create_failed':
@@ -396411,8 +402457,6 @@ extension on _StringsVi {
         return 'Đi đến nhập';
       case 'library_search':
         return 'Tìm kiếm thư viện';
-      case 'library_view_browse':
-        return 'Khám phá';
       case 'library_view_discover':
         return 'Khám phá';
       case 'library_view_import':
@@ -396535,9 +402579,9 @@ extension on _StringsVi {
       case 'manga_global_search_hint':
         return 'Tìm kiếm mọi nguồn đã bật';
       case 'manga_global_search_no_sources':
-        return 'Chưa có nguồn truyện tranh nào được bật. Thêm một nguồn ở tab Nhập.';
+        return 'Chưa có nguồn truyện tranh nào được bật. Thêm một nguồn ở tab Duyệt.';
       case 'manga_global_search_open_sources':
-        return 'Tới phần nhập';
+        return 'Tới phần duyệt';
       case 'manga_global_search_prompt':
         return 'Nhập tựa đề để tìm kiếm tất cả nguồn truyện tranh đã bật cùng lúc.';
       case 'manga_global_search_title':
@@ -397249,7 +403293,7 @@ extension on _StringsVi {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return 'Tab Tải xuống đang bị ẩn trong Cài đặt → Giao diện → Mô-đun tính năng; bật lại để quản lý đăng ký.';
+        return 'Tab Duyệt đang bị ẩn trong Cài đặt → Giao diện → Mô-đun tính năng; bật lại để quản lý đăng ký.';
       case 'module_extension_label':
         return 'Tiện ích mở rộng trình duyệt';
       case 'move_down':
@@ -402761,23 +408805,21 @@ extension on _StringsVi {
       case 'video_extensions_title':
         return 'Video source extensions';
       case 'video_online_sources_hint':
-        return 'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+        return 'Tiện ích Aniyomi của bên thứ ba (extensions-lib 14). Nội dung lấy từ trang web của từng tiện ích và phát trong trình phát tích hợp.';
       case 'video_online_sources_empty':
-        return 'No enabled video sources. Install and enable an extension first.';
+        return 'Chưa có nguồn video nào được bật. Hãy cài đặt và bật tiện ích trước.';
       case 'video_online_episodes_title':
-        return 'Episodes';
+        return 'Tập';
       case 'video_online_episodes_empty':
-        return 'No episodes found.';
+        return 'Không tìm thấy tập nào.';
       case 'video_online_stream_none':
-        return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
+        return 'Tập này không trả về luồng phát được.';
       case 'media_import_segment_stores':
-        return 'Stores';
+        return 'Kho';
       case 'media_import_segment_extensions':
-        return 'Extensions';
+        return 'Tiện ích';
       case 'media_import_segment_sources':
-        return 'Sources';
+        return 'Nguồn';
       case 'mihon_source_move_up':
         return 'Move up';
       case 'mihon_source_move_down':
@@ -404079,6 +410121,190 @@ extension on _StringsVi {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return 'This video isn\'t in any local video source\'s scrape plan';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
+      case 'remote_video_stream_play':
+        return 'Play (stream)';
+      case 'nav_browse':
+        return 'Duyệt';
+      case 'novel_detail_library_remove':
+        return 'Xóa khỏi kệ sách';
+      case 'novel_detail_library_remove_confirm':
+        return 'Xóa tiểu thuyết này khỏi kệ sách? Các chương đã lưu đệm và tiến độ đọc sẽ bị xóa.';
+      case 'novel_detail_download':
+        return 'Tải xuống';
+      case 'novel_detail_library_added':
+        return 'Đã thêm vào kệ sách';
+      case 'video_online_extension_unavailable':
+        return 'Tiện ích nguồn video của tập này chưa được cài đặt hoặc đã bị tắt. Hãy cài lại hoặc bật nó trong Duyệt › Tiện ích.';
+      case 'video_online_library_add':
+        return 'Thêm vào thư viện video';
+      case 'video_online_library_remove':
+        return 'Xóa khỏi thư viện video';
+      case 'video_online_library_added':
+        return ({required Object n}) => 'Đã thêm ${n} tập vào thư viện video';
+      case 'video_online_library_removed':
+        return 'Đã xóa khỏi thư viện video';
+      case 'video_online_download_all':
+        return 'Tải tất cả';
+      case 'video_online_download_episode':
+        return 'Tải tập này';
+      case 'video_online_download_started':
+        return 'Đã bắt đầu tải — xem Duyệt › Tải xuống';
+      case 'video_online_downloaded':
+        return 'Đã tải';
+      case 'onboarding_feature_browse_hint':
+        return 'Nguồn trực tuyến, tiện ích, khám phá và tải xuống';
+      case 'browse_moved_notice_title':
+        return ({required Object browse}) =>
+            'Khám phá và nguồn trực tuyến đã chuyển sang ${browse}';
+      case 'browse_moved_notice_body':
+        return ({
+          required Object browse,
+          required Object settings,
+          required Object appearance,
+          required Object modules,
+        }) =>
+            'Trang Khám phá cùng các nguồn trực tuyến cho truyện tranh, video và tiểu thuyết giờ nằm trong tab ${browse}, hiện đang tắt trên thiết bị này. Để sử dụng, hãy bật ${browse} trong ${settings} › ${appearance} › ${modules}.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       case 'sync_pair_link_unreachable':
         return 'None of the addresses in this pairing link are reachable, or they point to a different device';
       case 'sync_pair_link_invalid':
@@ -406483,8 +412709,6 @@ extension on _StringsZhCn {
         return '不作用于局域网；局域网内的传输始终全速进行。';
       case 'download_rate_limit_lan_included':
         return '同时作用于局域网内的传输。';
-      case 'download_resources_tab':
-        return '资源';
       case 'download_save_root_change':
         return '更改目录';
       case 'download_save_root_create_failed':
@@ -408187,8 +414411,6 @@ extension on _StringsZhCn {
         return '去导入';
       case 'library_search':
         return '搜索库';
-      case 'library_view_browse':
-        return '发现';
       case 'library_view_discover':
         return '发现';
       case 'library_view_import':
@@ -408310,9 +414532,9 @@ extension on _StringsZhCn {
       case 'manga_global_search_hint':
         return '搜索所有已启用来源';
       case 'manga_global_search_no_sources':
-        return '还没有已启用的漫画来源，去「导入」添加一个。';
+        return '还没有已启用的漫画来源，去「浏览」添加一个。';
       case 'manga_global_search_open_sources':
-        return '去导入';
+        return '去浏览';
       case 'manga_global_search_prompt':
         return '输入书名，一次搜索所有已启用的漫画来源。';
       case 'manga_global_search_title':
@@ -409022,7 +415244,7 @@ extension on _StringsZhCn {
       case 'module_disabled_hint':
         return '该功能模块已在「设置 → 外观 → 功能模块」中关闭。';
       case 'module_downloads_hidden_hint':
-        return '「下载」页已在 设置 → 外观 → 功能模块 中隐藏；重新打开它才能管理订阅。';
+        return '「浏览」页已在 设置 → 外观 → 功能模块 中隐藏；重新打开它才能管理订阅。';
       case 'module_extension_label':
         return '浏览器扩展';
       case 'move_down':
@@ -414488,8 +420710,6 @@ extension on _StringsZhCn {
         return '没有找到剧集。';
       case 'video_online_stream_none':
         return '该集没有可播放的流。';
-      case 'media_import_segment_local':
-        return '本地';
       case 'media_import_segment_stores':
         return '仓库';
       case 'media_import_segment_extensions':
@@ -415778,6 +421998,186 @@ extension on _StringsZhCn {
         return '请填写以 https:// 开头、以 api.php 结尾的地址';
       case 'ai_web_knowledge_custom_remove':
         return '删除站点';
+      case 'video_item_rescrape_not_planned':
+        return '这个视频不在任何本地视频来源的刮削计划里';
+      case 'plex_settings_hint':
+        return '用 Plex 账号登录，或填写服务器地址与 X-Plex-Token 直连。播放直接串流原文件（direct play），不使用 Plex 转码。';
+      case 'plex_account_sign_in':
+        return '使用 Plex 账号登录';
+      case 'plex_pin_waiting':
+        return '等待在浏览器中授权 Fushi…';
+      case 'plex_pin_link_hint':
+        return '如果浏览器没有自动打开，请复制这个链接：';
+      case 'plex_pin_expired':
+        return '登录请求已过期，请重试。';
+      case 'plex_servers_none_reachable':
+        return '这个账号下没有找到可连接的 Plex 服务器。';
+      case 'plex_servers_added':
+        return ({required Object n}) => '已添加 ${n} 台 Plex 服务器';
+      case 'plex_manual_title':
+        return '手动连接';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return '连接';
+      case 'plex_sign_in_failed':
+        return 'Plex 登录失败';
+      case 'video_setting_subtitle_reference_sync':
+        return '下载字幕自动对齐';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return '按视频自带的字幕轨给下载的字幕对时间轴。只在证据充分时才改，否则保持原样。';
+      case 'video_subtitle_reference_sync_action':
+        return '按内嵌字幕对齐';
+      case 'video_subtitle_reference_sync_need_external':
+        return '先选一条下载或导入的外挂字幕';
+      case 'video_subtitle_reference_sync_running':
+        return '正在按内嵌字幕轨对齐…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return '这个视频没有可当参考的文本字幕轨';
+      case 'video_subtitle_reference_sync_unreadable':
+        return '这条字幕读不出足够的时间轴';
+      case 'video_subtitle_reference_sync_refused':
+        return '与内嵌字幕对不上（可能不是这一集，或剪辑不同），保持原样';
+      case 'video_subtitle_reference_sync_in_sync':
+        return '已经与内嵌字幕对齐，无需修改';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => '已对齐：${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return '对齐结果不太确定';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            '建议平移：${offset}。匹配率是瞎碰概率的 ${excess} 倍，${groups} 组独立参考字幕轨给出一致结果。要另存为一份新字幕吗？原字幕不会改动。';
+      case 'video_subtitle_reference_sync_apply':
+        return '应用';
+      case 'video_subtitle_reference_sync_restore_title':
+        return '这条字幕下载时已自动对齐';
+      case 'video_subtitle_reference_sync_restore_body':
+        return '下载时已按内嵌字幕轨调整过时间轴。要把原始时间轴恢复成一份新字幕吗？';
+      case 'video_subtitle_reference_sync_restore':
+        return '恢复原始字幕';
+      case 'video_subtitle_reference_sync_failed':
+        return '字幕文件读写失败';
+      case 'remote_video_stream_play':
+        return '播放（流播）';
+      case 'nav_browse':
+        return '浏览';
+      case 'novel_detail_library_remove':
+        return '移出书架';
+      case 'novel_detail_library_remove_confirm':
+        return '把这部小说移出书架？已缓存的章节和阅读进度会一并删除。';
+      case 'novel_detail_download':
+        return '下载';
+      case 'novel_detail_library_added':
+        return '已加入书架';
+      case 'video_online_extension_unavailable':
+        return '这一集所属的视频源扩展没有安装或已停用。请到「浏览 › 扩展」重新安装或启用。';
+      case 'video_online_library_add':
+        return '加入媒体库';
+      case 'video_online_library_remove':
+        return '移出媒体库';
+      case 'video_online_library_added':
+        return ({required Object n}) => '已把 ${n} 集加入媒体库';
+      case 'video_online_library_removed':
+        return '已移出媒体库';
+      case 'video_online_download_all':
+        return '下载全部';
+      case 'video_online_download_episode':
+        return '下载本集';
+      case 'video_online_download_started':
+        return '已开始下载，进度见「浏览 › 下载」';
+      case 'video_online_downloaded':
+        return '已下载';
+      case 'onboarding_feature_browse_hint':
+        return '在线来源、扩展、发现与下载';
+      case 'browse_moved_notice_title':
+        return ({required Object browse}) => '发现与在线来源已移到「${browse}」';
+      case 'browse_moved_notice_body':
+        return ({
+          required Object browse,
+          required Object settings,
+          required Object appearance,
+          required Object modules,
+        }) =>
+            '发现页，以及漫画 / 视频 / 小说的在线来源，已经移到「${browse}」页签；它在本机目前是关闭的。要使用它们，请到「${settings} › ${appearance} › ${modules}」打开「${browse}」。';
+      case 'video_strm_target_local':
+        return '该 .strm 文件指向本机文件路径，暂不支持。请直接把视频文件放进来源库。';
+      case 'video_strm_target_unsupported':
+        return '该 .strm 文件里没有可播放的流地址（http、https、rtsp 等）。';
+      case 'video_strm_file_unreadable':
+        return '无法读取 .strm 文件。';
+      case 'video_iptv_import_action':
+        return '导入 IPTV 频道列表';
+      case 'video_iptv_import_title':
+        return '导入 M3U / IPTV 频道列表';
+      case 'video_iptv_url_field':
+        return '频道列表地址';
+      case 'video_iptv_pick_file':
+        return '选择本地 .m3u / .m3u8 文件';
+      case 'video_iptv_import_hint':
+        return '每个频道作为一条流入库，并按 group-title 分组成合集；HLS 流播放列表会作为单个视频导入。';
+      case 'video_iptv_list_empty':
+        return '列表里没有找到频道。';
+      case 'video_iptv_imported':
+        return ({required Object count}) => '已导入 ${count} 个频道';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'iOS 与 macOS 暂不支持这种流协议（rtsps / rtmps / rtmpe）。';
+      case 'hoshi_import_entry':
+        return '从 Hoshi Reader 导入';
+      case 'hoshi_import_entry_subtitle':
+        return '从 Hoshi Reader（iOS / Android）的书库备份导入书、阅读位置和统计';
+      case 'hoshi_import_how_to':
+        return '在 Hoshi Reader 里打开「设置 › Backup」备份书库，然后在这里选择生成的 Books_….hoshi 文件。库里已有的书不会重复导入；同一份备份重复导入不会重复计数。';
+      case 'hoshi_import_file_pick':
+        return '选择备份文件';
+      case 'hoshi_import_scan_running':
+        return '正在读取备份…';
+      case 'hoshi_import_scan_invalid':
+        return '这不是 Hoshi Reader 的书库备份。';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            '新书 ${newBooks} 本 · 库中已有 ${existingBooks} 本 · 仅统计 ${statsOnlyBooks} 本';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            '统计记录 ${records} 条 · 阅读位置 ${positions} 个';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) => '统计将导入到配置：${name}';
+      case 'hoshi_import_run_start':
+        return '开始导入';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => '正在导入 ${current} / ${total}：${title}';
+      case 'hoshi_import_result_done':
+        return '导入完成';
+      case 'hoshi_import_result_cancelled':
+        return '导入已停止，已导入的书会保留';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            '导入书 ${imported} 本 · 匹配库中已有 ${matched} 本';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) => '统计：会话 ${sessions} 次、按天 ${days} 天 · 阅读位置 ${positions} 个';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '跳过 ${count} 条记录：同一本书同一天的数据早先已经同步进来过';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '有 ${count} 段统计未恢复：你曾在 Fushi 里删除过这些书的统计';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) => '有 ${count} 本书没能导入（它们的统计仍已导入）：';
       case 'sync_pair_link_unreachable':
         return '配对链接里的地址都连不上，或指向的不是那台设备';
       case 'sync_pair_link_invalid':
@@ -418187,8 +424587,6 @@ extension on _StringsZhHk {
         return '不作用於局域網；局域網內的傳輸始終全速進行。';
       case 'download_rate_limit_lan_included':
         return '同時作用於局域網內的傳輸。';
-      case 'download_resources_tab':
-        return '資源';
       case 'download_save_root_change':
         return '更改目錄';
       case 'download_save_root_create_failed':
@@ -419892,8 +426290,6 @@ extension on _StringsZhHk {
         return '去導入';
       case 'library_search':
         return '搜索庫';
-      case 'library_view_browse':
-        return '發現';
       case 'library_view_discover':
         return '發現';
       case 'library_view_import':
@@ -420015,9 +426411,9 @@ extension on _StringsZhHk {
       case 'manga_global_search_hint':
         return '搜索所有已啟用來源';
       case 'manga_global_search_no_sources':
-        return '尚未啟用任何漫畫來源，去「導入」加一個。';
+        return '尚未啟用任何漫畫來源，去「瀏覽」加一個。';
       case 'manga_global_search_open_sources':
-        return '去匯入';
+        return '去瀏覽';
       case 'manga_global_search_prompt':
         return '輸入書名，一次搜索所有已啟用的漫畫來源。';
       case 'manga_global_search_title':
@@ -420727,7 +427123,7 @@ extension on _StringsZhHk {
       case 'module_disabled_hint':
         return 'This feature module is turned off in Settings > Appearance > Feature modules.';
       case 'module_downloads_hidden_hint':
-        return '「下載」頁已在 設定 → 外觀 → 功能模塊 中隱藏；重新開啟才能管理訂閱。';
+        return '「瀏覽」頁已在 設定 → 外觀 → 功能模塊 中隱藏；重新開啟才能管理訂閱。';
       case 'module_extension_label':
         return '瀏覽器擴展';
       case 'move_down':
@@ -426202,23 +432598,21 @@ extension on _StringsZhHk {
       case 'video_extensions_title':
         return 'Video source extensions';
       case 'video_online_sources_hint':
-        return 'Third-party Aniyomi extensions (extensions-lib 14). Content comes from each extension\'s website and plays in the built-in player.';
+        return '第三方 Aniyomi 擴展（extensions-lib 14）。內容來自各擴展對應的網站，在內置播放器中播放。';
       case 'video_online_sources_empty':
-        return 'No enabled video sources. Install and enable an extension first.';
+        return '沒有已啟用的影片源。請先安裝並啟用影片擴展。';
       case 'video_online_episodes_title':
-        return 'Episodes';
+        return '劇集';
       case 'video_online_episodes_empty':
-        return 'No episodes found.';
+        return '找不到劇集。';
       case 'video_online_stream_none':
-        return 'This episode returned no playable stream.';
-      case 'media_import_segment_local':
-        return 'Local';
+        return '這一集沒有可播放的串流。';
       case 'media_import_segment_stores':
-        return 'Stores';
+        return '倉庫';
       case 'media_import_segment_extensions':
-        return 'Extensions';
+        return '擴展';
       case 'media_import_segment_sources':
-        return 'Sources';
+        return '線上源';
       case 'mihon_source_move_up':
         return 'Move up';
       case 'mihon_source_move_down':
@@ -427518,6 +433912,189 @@ extension on _StringsZhHk {
         return 'Enter an https:// address ending in api.php';
       case 'ai_web_knowledge_custom_remove':
         return 'Remove site';
+      case 'video_item_rescrape_not_planned':
+        return '這個影片不在任何本機影片來源的刮削計劃裡';
+      case 'plex_settings_hint':
+        return 'Sign in with your Plex account, or connect to a server with its address and X-Plex-Token. Playback streams the original file (direct play); Plex transcoding is not used.';
+      case 'plex_account_sign_in':
+        return 'Sign in with Plex';
+      case 'plex_pin_waiting':
+        return 'Waiting for you to approve Fushi in the browser…';
+      case 'plex_pin_link_hint':
+        return 'If the browser did not open, copy this link:';
+      case 'plex_pin_expired':
+        return 'The sign-in request expired. Try again.';
+      case 'plex_servers_none_reachable':
+        return 'No reachable Plex server was found for this account.';
+      case 'plex_servers_added':
+        return ({required Object n}) => 'Added ${n} Plex server(s)';
+      case 'plex_manual_title':
+        return 'Connect manually';
+      case 'plex_token_label':
+        return 'X-Plex-Token';
+      case 'plex_manual_connect':
+        return 'Connect';
+      case 'plex_sign_in_failed':
+        return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
+      case 'remote_video_stream_play':
+        return '播放（串流）';
+      case 'nav_browse':
+        return '瀏覽';
+      case 'novel_detail_library_remove':
+        return '移出書架';
+      case 'novel_detail_library_remove_confirm':
+        return '把這部小說移出書架？已快取的章節和閱讀進度會一併刪除。';
+      case 'novel_detail_download':
+        return '下載';
+      case 'novel_detail_library_added':
+        return '已加入書架';
+      case 'video_online_extension_unavailable':
+        return '這一集所屬的影片源擴展未安裝或已停用。請到「瀏覽 › 擴展」重新安裝或啟用。';
+      case 'video_online_library_add':
+        return '加入媒體庫';
+      case 'video_online_library_remove':
+        return '移出媒體庫';
+      case 'video_online_library_added':
+        return ({required Object n}) => '已把 ${n} 集加入媒體庫';
+      case 'video_online_library_removed':
+        return '已移出媒體庫';
+      case 'video_online_download_all':
+        return '全部下載';
+      case 'video_online_download_episode':
+        return '下載本集';
+      case 'video_online_download_started':
+        return '已開始下載，進度見「瀏覽 › 下載」';
+      case 'video_online_downloaded':
+        return '已下載';
+      case 'onboarding_feature_browse_hint':
+        return '線上來源、擴展、發現與下載';
+      case 'browse_moved_notice_title':
+        return ({required Object browse}) => '發現與線上來源已移到「${browse}」';
+      case 'browse_moved_notice_body':
+        return ({
+          required Object browse,
+          required Object settings,
+          required Object appearance,
+          required Object modules,
+        }) =>
+            '發現頁，以及漫畫／影片／小說的線上來源，已經移到「${browse}」分頁；它在本機目前是關閉的。要使用它們，請到「${settings} › ${appearance} › ${modules}」開啟「${browse}」。';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
+      case 'hoshi_import_entry':
+        return 'Import from Hoshi Reader';
+      case 'hoshi_import_entry_subtitle':
+        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      case 'hoshi_import_how_to':
+        return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
+      case 'hoshi_import_file_pick':
+        return 'Choose backup file';
+      case 'hoshi_import_scan_running':
+        return 'Reading backup…';
+      case 'hoshi_import_scan_invalid':
+        return 'This file is not a Hoshi Reader library backup.';
+      case 'hoshi_import_summary_books':
+        return ({
+          required Object newBooks,
+          required Object existingBooks,
+          required Object statsOnlyBooks,
+        }) =>
+            'New books: ${newBooks} · already in library: ${existingBooks} · statistics only: ${statsOnlyBooks}';
+      case 'hoshi_import_summary_records':
+        return ({required Object records, required Object positions}) =>
+            'Statistics records: ${records} · reading positions: ${positions}';
+      case 'hoshi_import_summary_profile':
+        return ({required Object name}) =>
+            'Statistics will be added to profile: ${name}';
+      case 'hoshi_import_run_start':
+        return 'Start import';
+      case 'hoshi_import_book_running':
+        return ({
+          required Object current,
+          required Object total,
+          required Object title,
+        }) => 'Importing ${current} / ${total}: ${title}';
+      case 'hoshi_import_result_done':
+        return 'Import finished';
+      case 'hoshi_import_result_cancelled':
+        return 'Import stopped; books already imported were kept';
+      case 'hoshi_import_result_books':
+        return ({required Object imported, required Object matched}) =>
+            'Books imported: ${imported} · matched in library: ${matched}';
+      case 'hoshi_import_result_stats':
+        return ({
+          required Object sessions,
+          required Object days,
+          required Object positions,
+        }) =>
+            'Statistics: ${sessions} sessions, ${days} days · reading positions: ${positions}';
+      case 'hoshi_import_result_legacy_skipped':
+        return ({required Object count}) =>
+            '${count} records skipped because the same book and day was already synced earlier';
+      case 'hoshi_import_result_deleted_skipped':
+        return ({required Object count}) =>
+            '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
+      case 'hoshi_import_result_failed':
+        return ({required Object count}) =>
+            'Could not import ${count} books (their statistics were still imported):';
       case 'sync_pair_link_unreachable':
         return 'None of the addresses in this pairing link are reachable, or they point to a different device';
       case 'sync_pair_link_invalid':
