@@ -38,15 +38,15 @@ import 'package:fushi/utils.dart';
 import 'package:fushi_core/fushi_core.dart'
     show VideoDownloadJobFileRow, VideoDownloadJobRow;
 
-/// 「浏览」页签（Mihon 的 Browse 形态）：来源 / 扩展 / 发现 / 下载。
+/// 「浏览」页签（Mihon 的 Browse 形态）：发现 / 来源 / 扩展 / 下载。
 ///
 /// 2026-09-27 由「下载」模块改名而来（持久化键 `module_downloads_enabled` 冻结），
 /// 同时把散在各库页与导入页的在线入口收拢到这里：
+/// - **发现**：书 / 漫画 / 游戏 / 视频四域的生产发现页（原「资源」页签）；
 /// - **来源**：小说（LNReader）/ 漫画（Mihon + mokuro.moe）/ 视频（Aniyomi）三域
 ///   已装扩展提供的在线源，点进源的浏览页；
 /// - **扩展**：三域的可装扩展目录与已装扩展管理，扩展仓库挂在本页签的「仓库」
 ///   动作上（Mihon 把 repo 放在 Extensions 的工具栏）；
-/// - **发现**：书 / 漫画 / 游戏 / 视频四域的生产发现页（原「资源」页签）；
 /// - **下载**：统一下载中心的任务与订阅，下载设置在页头齿轮里。
 ///
 /// 每个页签内先选内容域，再直接复用各域自己的生产组件，不另写第二套 UI。
@@ -83,7 +83,7 @@ class BrowsePage extends ConsumerStatefulWidget {
 
 /// 「浏览」的页签。**用枚举而不是下标**：页签随平台 / 模块开关增减，跨页跳转
 /// （视频发现详情「管理订阅」等）若按下标就会在页签少一个时静默落错页。
-enum BrowseTab { sources, extensions, discover, downloads }
+enum BrowseTab { discover, sources, extensions, downloads }
 
 /// 顶层页签接力（二级标签越界横滑）时，目标页签的二级标签要不要按衔接方向
 /// 重新落端（往后落首段、往前落末段）。
@@ -204,7 +204,8 @@ class _BrowsePageState extends ConsumerState<BrowsePage>
     return next;
   }
 
-  /// 此刻可见的页签，顺序即页头顺序。
+  /// 此刻可见的页签，顺序即页头顺序（也是没有跳转请求时的默认落点：第一个）。
+  /// 发现排第一（2026-09-28 用户口径：「发现应该在第一个」）。
   ///
   /// 来源 / 扩展两页签只在至少一个域有在线来源时出现（漫画域有内置 mokuro.moe，
   /// 不依赖扩展宿主；三个库模块全关时就只剩发现与下载）；发现页签跟四个库模块
@@ -223,9 +224,9 @@ class _BrowsePageState extends ConsumerState<BrowsePage>
           gamesForm: appModel.gamesModuleForm,
         ).isNotEmpty;
     return <BrowseTab>[
+      if (discover) BrowseTab.discover,
       if (online) BrowseTab.sources,
       if (online) BrowseTab.extensions,
-      if (discover) BrowseTab.discover,
       BrowseTab.downloads,
     ];
   }

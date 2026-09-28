@@ -16,7 +16,7 @@ String _read(String path) {
 }
 
 void main() {
-  test('BUG-1956：浏览页保留来源、扩展、发现、下载四个顶层页签', () {
+  test('BUG-1956：浏览页保留发现、来源、扩展、下载四个顶层页签', () {
     // 2026-09-27 起「下载」模块改名「浏览」（Mihon Browse 形态）：原「资源」页签
     // 变成「发现」，任务 / 订阅收进「下载」页签的两段，设置改成页头齿轮 push 的
     // 独立页。页签用枚举而不是下标（随平台 / 模块开关增减时不落错页）。
@@ -27,7 +27,7 @@ void main() {
     expect(
       code,
       contains(
-        'enum BrowseTab { sources, extensions, discover, downloads }',
+        'enum BrowseTab { discover, sources, extensions, downloads }',
       ),
       reason: '浏览页顶层只能有且必须有四个目的地，顺序即页头顺序',
     );

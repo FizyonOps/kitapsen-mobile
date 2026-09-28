@@ -132,6 +132,10 @@ class _FakeAppModel extends AppModel {
   ModuleVisibility get moduleVisibility =>
       visibilityOverride ?? super.moduleVisibility;
 
+  /// 钉住本机游戏库形态：games 域的「发现」只在这个形态下出现，不随宿主平台变。
+  @override
+  GamesModuleForm? get gamesModuleForm => GamesModuleForm.localLibrary;
+
   void setVisibility(ModuleVisibility visibility) {
     visibilityOverride = visibility;
     notifyListeners();
@@ -314,9 +318,12 @@ void main() {
       backendFactory: (_) => _NoopBackend(),
       search: (_) async => const [],
     );
+    // 只开 games：它只带出「发现」、不带在线源，页签恰为「发现 / 下载」——下载的
+    // 上一个页签就是发现（books 会在有小说在线源宿主的平台上多出来源 / 扩展，
+    // 而本夹具没有数据目录，渲染不了在线源页）。
     final _FakeAppModel appModel = _FakeAppModel(store, planStore, service)
       ..visibilityOverride =
-          const ModuleVisibility(<ModuleId>{ModuleId.browse, ModuleId.books});
+          const ModuleVisibility(<ModuleId>{ModuleId.browse, ModuleId.games});
     await tester.pumpWidget(
       ProviderScope(
         overrides: <Override>[
