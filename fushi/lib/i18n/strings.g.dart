@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 97172 (5716 per locale)
+/// Strings: 97648 (5744 per locale)
 ///
-/// Built on 2026-09-27 at 18:25 UTC
+/// Built on 2026-09-27 at 22:44 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8141,6 +8141,42 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get plex_token_label => 'X-Plex-Token';
   String get plex_manual_connect => 'Connect';
   String get plex_sign_in_failed => 'Plex sign-in failed';
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
   String get remote_video_stream_play => 'Play (stream)';
   String get nav_browse => 'Browse';
   String get novel_detail_library_remove => 'Remove from bookshelf';
@@ -8171,6 +8207,22 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
     required Object modules,
   }) =>
       'Discovery and the online sources for manga, video and novels now live in the ${browse} tab, which is turned off on this device. To use them, turn on ${browse} in ${settings} › ${appearance} › ${modules}.';
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  String get video_iptv_import_action => 'Import IPTV list';
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  String get video_iptv_url_field => 'Channel list URL';
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -21834,6 +21886,59 @@ class _StringsAr extends _StringsEn {
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
   String get remote_video_stream_play => 'Play (stream)';
   @override
   String get nav_browse => 'تصفح';
@@ -21881,6 +21986,33 @@ class _StringsAr extends _StringsEn {
     required Object modules,
   }) =>
       'أصبحت صفحة الاكتشاف والمصادر عبر الإنترنت للمانغا والفيديو والروايات في تبويب ${browse}، وهو متوقف على هذا الجهاز. لاستخدامها، فعّل ${browse} من ${settings} › ${appearance} › ${modules}.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -35784,6 +35916,59 @@ class _StringsDe extends _StringsEn {
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
   String get remote_video_stream_play => 'Play (stream)';
   @override
   String get nav_browse => 'Durchsuchen';
@@ -35831,6 +36016,33 @@ class _StringsDe extends _StringsEn {
     required Object modules,
   }) =>
       'Entdecken und die Online-Quellen für Manga, Videos und Romane befinden sich jetzt im Tab „${browse}“, der auf diesem Gerät ausgeschaltet ist. Um sie zu nutzen, schalten Sie „${browse}“ unter ${settings} › ${appearance} › ${modules} ein.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -49785,6 +49997,59 @@ class _StringsEs extends _StringsEn {
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
   String get remote_video_stream_play => 'Play (stream)';
   @override
   String get nav_browse => 'Explorar';
@@ -49832,6 +50097,33 @@ class _StringsEs extends _StringsEn {
     required Object modules,
   }) =>
       'Descubrir y las fuentes en línea de manga, vídeo y novelas ahora están en la pestaña ${browse}, que está desactivada en este dispositivo. Para usarlas, activa ${browse} en ${settings} › ${appearance} › ${modules}.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -63825,6 +64117,59 @@ class _StringsFr extends _StringsEn {
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
   String get remote_video_stream_play => 'Play (stream)';
   @override
   String get nav_browse => 'Parcourir';
@@ -63872,6 +64217,33 @@ class _StringsFr extends _StringsEn {
     required Object modules,
   }) =>
       'Découvrir et les sources en ligne de manga, vidéos et romans se trouvent désormais dans l\'onglet ${browse}, désactivé sur cet appareil. Pour les utiliser, activez ${browse} dans ${settings} › ${appearance} › ${modules}.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -77655,6 +78027,59 @@ class _StringsId extends _StringsEn {
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
   String get remote_video_stream_play => 'Play (stream)';
   @override
   String get nav_browse => 'Jelajah';
@@ -77702,6 +78127,33 @@ class _StringsId extends _StringsEn {
     required Object modules,
   }) =>
       'Halaman penemuan serta sumber online untuk manga, video, dan novel kini ada di tab ${browse}, yang dimatikan di perangkat ini. Untuk menggunakannya, aktifkan ${browse} di ${settings} › ${appearance} › ${modules}.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -91586,6 +92038,59 @@ class _StringsIt extends _StringsEn {
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
   String get remote_video_stream_play => 'Play (stream)';
   @override
   String get nav_browse => 'Sfoglia';
@@ -91633,6 +92138,33 @@ class _StringsIt extends _StringsEn {
     required Object modules,
   }) =>
       'Scopri e le fonti online per manga, video e romanzi ora si trovano nella scheda ${browse}, disattivata su questo dispositivo. Per usarli, attiva ${browse} in ${settings} › ${appearance} › ${modules}.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -104871,6 +105403,59 @@ class _StringsJa extends _StringsEn {
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
   String get remote_video_stream_play => 'Play (stream)';
   @override
   String get nav_browse => 'ブラウズ';
@@ -104917,6 +105502,33 @@ class _StringsJa extends _StringsEn {
     required Object modules,
   }) =>
       '発見ページと、マンガ・動画・小説のオンラインソースは「${browse}」タブに移動しました。このデバイスでは現在オフになっています。使うには「${settings} › ${appearance} › ${modules}」で「${browse}」をオンにしてください。';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -118172,6 +118784,59 @@ class _StringsKo extends _StringsEn {
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
   String get remote_video_stream_play => 'Play (stream)';
   @override
   String get nav_browse => '탐색';
@@ -118218,6 +118883,33 @@ class _StringsKo extends _StringsEn {
     required Object modules,
   }) =>
       '발견 페이지와 만화·비디오·소설 온라인 소스가 ‘${browse}’ 탭으로 이동했습니다. 이 기기에서는 현재 꺼져 있습니다. 사용하려면 ‘${settings} › ${appearance} › ${modules}’에서 ‘${browse}’을(를) 켜세요.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -132056,6 +132748,59 @@ class _StringsNl extends _StringsEn {
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
   String get remote_video_stream_play => 'Play (stream)';
   @override
   String get nav_browse => 'Bladeren';
@@ -132104,6 +132849,33 @@ class _StringsNl extends _StringsEn {
     required Object modules,
   }) =>
       'Ontdekken en de online bronnen voor manga, video en romans staan nu op het tabblad ${browse}, dat op dit apparaat is uitgeschakeld. Schakel ${browse} in via ${settings} › ${appearance} › ${modules} om ze te gebruiken.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -145995,6 +146767,59 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
   String get remote_video_stream_play => 'Play (stream)';
   @override
   String get nav_browse => 'Navegar';
@@ -146042,6 +146867,33 @@ class _StringsPtBr extends _StringsEn {
     required Object modules,
   }) =>
       'Descobrir e as fontes online de mangá, vídeo e romances agora ficam na aba ${browse}, que está desativada neste dispositivo. Para usá-los, ative ${browse} em ${settings} › ${appearance} › ${modules}.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -159908,6 +160760,59 @@ class _StringsRu extends _StringsEn {
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
   String get remote_video_stream_play => 'Play (stream)';
   @override
   String get nav_browse => 'Обзор';
@@ -159955,6 +160860,33 @@ class _StringsRu extends _StringsEn {
     required Object modules,
   }) =>
       'Страницы поиска контента и онлайн-источники манги, видео и ранобэ теперь находятся на вкладке «${browse}», которая на этом устройстве выключена. Чтобы пользоваться ими, включите «${browse}» в разделе «${settings} › ${appearance} › ${modules}».';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -173617,6 +174549,59 @@ class _StringsTh extends _StringsEn {
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
   String get remote_video_stream_play => 'Play (stream)';
   @override
   String get nav_browse => 'เรียกดู';
@@ -173664,6 +174649,33 @@ class _StringsTh extends _StringsEn {
     required Object modules,
   }) =>
       'หน้าค้นพบและแหล่งออนไลน์สำหรับมังงะ วิดีโอ และนิยาย ย้ายไปอยู่ในแท็บ ${browse} แล้ว ซึ่งปิดอยู่ในอุปกรณ์นี้ หากต้องการใช้ ให้เปิด ${browse} ที่ ${settings} › ${appearance} › ${modules}';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -187441,6 +188453,59 @@ class _StringsTr extends _StringsEn {
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
   String get remote_video_stream_play => 'Play (stream)';
   @override
   String get nav_browse => 'Göz at';
@@ -187488,6 +188553,33 @@ class _StringsTr extends _StringsEn {
     required Object modules,
   }) =>
       'Keşfet sayfası ile manga, video ve roman için çevrimiçi kaynaklar artık ${browse} sekmesinde; bu sekme bu cihazda kapalı. Bunları kullanmak için ${settings} › ${appearance} › ${modules} bölümünden ${browse} seçeneğini açın.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -201236,6 +202328,59 @@ class _StringsVi extends _StringsEn {
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
   String get remote_video_stream_play => 'Play (stream)';
   @override
   String get nav_browse => 'Duyệt';
@@ -201283,6 +202428,33 @@ class _StringsVi extends _StringsEn {
     required Object modules,
   }) =>
       'Trang Khám phá cùng các nguồn trực tuyến cho truyện tranh, video và tiểu thuyết giờ nằm trong tab ${browse}, hiện đang tắt trên thiết bị này. Để sử dụng, hãy bật ${browse} trong ${settings} › ${appearance} › ${modules}.';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 // Path: <root>
@@ -213857,6 +215029,49 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get plex_sign_in_failed => 'Plex 登录失败';
   @override
+  String get video_setting_subtitle_reference_sync => '下载字幕自动对齐';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      '按视频自带的字幕轨给下载的字幕对时间轴。只在证据充分时才改，否则保持原样。';
+  @override
+  String get video_subtitle_reference_sync_action => '按内嵌字幕对齐';
+  @override
+  String get video_subtitle_reference_sync_need_external => '先选一条下载或导入的外挂字幕';
+  @override
+  String get video_subtitle_reference_sync_running => '正在按内嵌字幕轨对齐…';
+  @override
+  String get video_subtitle_reference_sync_no_reference => '这个视频没有可当参考的文本字幕轨';
+  @override
+  String get video_subtitle_reference_sync_unreadable => '这条字幕读不出足够的时间轴';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      '与内嵌字幕对不上（可能不是这一集，或剪辑不同），保持原样';
+  @override
+  String get video_subtitle_reference_sync_in_sync => '已经与内嵌字幕对齐，无需修改';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      '已对齐：${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title => '对齐结果不太确定';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      '建议平移：${offset}。匹配率是瞎碰概率的 ${excess} 倍，${groups} 组独立参考字幕轨给出一致结果。要另存为一份新字幕吗？原字幕不会改动。';
+  @override
+  String get video_subtitle_reference_sync_apply => '应用';
+  @override
+  String get video_subtitle_reference_sync_restore_title => '这条字幕下载时已自动对齐';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      '下载时已按内嵌字幕轨调整过时间轴。要把原始时间轴恢复成一份新字幕吗？';
+  @override
+  String get video_subtitle_reference_sync_restore => '恢复原始字幕';
+  @override
+  String get video_subtitle_reference_sync_failed => '字幕文件读写失败';
+  @override
   String get remote_video_stream_play => '播放（流播）';
   @override
   String get nav_browse => '浏览';
@@ -213901,6 +215116,32 @@ class _StringsZhCn extends _StringsEn {
     required Object modules,
   }) =>
       '发现页，以及漫画 / 视频 / 小说的在线来源，已经移到「${browse}」页签；它在本机目前是关闭的。要使用它们，请到「${settings} › ${appearance} › ${modules}」打开「${browse}」。';
+  @override
+  String get video_strm_target_local =>
+      '该 .strm 文件指向本机文件路径，暂不支持。请直接把视频文件放进来源库。';
+  @override
+  String get video_strm_target_unsupported =>
+      '该 .strm 文件里没有可播放的流地址（http、https、rtsp 等）。';
+  @override
+  String get video_strm_file_unreadable => '无法读取 .strm 文件。';
+  @override
+  String get video_iptv_import_action => '导入 IPTV 频道列表';
+  @override
+  String get video_iptv_import_title => '导入 M3U / IPTV 频道列表';
+  @override
+  String get video_iptv_url_field => '频道列表地址';
+  @override
+  String get video_iptv_pick_file => '选择本地 .m3u / .m3u8 文件';
+  @override
+  String get video_iptv_import_hint =>
+      '每个频道作为一条流入库，并按 group-title 分组成合集；HLS 流播放列表会作为单个视频导入。';
+  @override
+  String get video_iptv_list_empty => '列表里没有找到频道。';
+  @override
+  String video_iptv_imported({required Object count}) => '已导入 ${count} 个频道';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'iOS 与 macOS 暂不支持这种流协议（rtsps / rtmps / rtmpe）。';
 }
 
 // Path: <root>
@@ -226817,6 +228058,59 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get plex_sign_in_failed => 'Plex sign-in failed';
   @override
+  String get video_setting_subtitle_reference_sync =>
+      'Auto-align downloaded subtitles';
+  @override
+  String get video_setting_subtitle_reference_sync_hint =>
+      'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+  @override
+  String get video_subtitle_reference_sync_action =>
+      'Align to embedded subtitles';
+  @override
+  String get video_subtitle_reference_sync_need_external =>
+      'Select a downloaded or imported subtitle first';
+  @override
+  String get video_subtitle_reference_sync_running =>
+      'Aligning to the embedded subtitle tracks…';
+  @override
+  String get video_subtitle_reference_sync_no_reference =>
+      'This video has no text subtitle track to align against';
+  @override
+  String get video_subtitle_reference_sync_unreadable =>
+      'Couldn\'t read enough timed lines from this subtitle';
+  @override
+  String get video_subtitle_reference_sync_refused =>
+      'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+  @override
+  String get video_subtitle_reference_sync_in_sync =>
+      'Already in sync with the embedded tracks';
+  @override
+  String video_subtitle_reference_sync_done({required Object offset}) =>
+      'Aligned: ${offset}';
+  @override
+  String get video_subtitle_reference_sync_confirm_title =>
+      'Alignment is uncertain';
+  @override
+  String video_subtitle_reference_sync_confirm_body({
+    required Object offset,
+    required Object excess,
+    required Object groups,
+  }) =>
+      'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+  @override
+  String get video_subtitle_reference_sync_apply => 'Apply';
+  @override
+  String get video_subtitle_reference_sync_restore_title =>
+      'Already auto-aligned';
+  @override
+  String get video_subtitle_reference_sync_restore_body =>
+      'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+  @override
+  String get video_subtitle_reference_sync_restore => 'Restore original';
+  @override
+  String get video_subtitle_reference_sync_failed =>
+      'Couldn\'t read or save the subtitle file';
+  @override
   String get remote_video_stream_play => '播放（串流）';
   @override
   String get nav_browse => '瀏覽';
@@ -226861,6 +228155,33 @@ class _StringsZhHk extends _StringsEn {
     required Object modules,
   }) =>
       '發現頁，以及漫畫／影片／小說的線上來源，已經移到「${browse}」分頁；它在本機目前是關閉的。要使用它們，請到「${settings} › ${appearance} › ${modules}」開啟「${browse}」。';
+  @override
+  String get video_strm_target_local =>
+      'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+  @override
+  String get video_strm_target_unsupported =>
+      'This .strm file has no playable stream address (http, https, rtsp, …).';
+  @override
+  String get video_strm_file_unreadable => 'Couldn\'t read the .strm file.';
+  @override
+  String get video_iptv_import_action => 'Import IPTV list';
+  @override
+  String get video_iptv_import_title => 'Import M3U / IPTV channel list';
+  @override
+  String get video_iptv_url_field => 'Channel list URL';
+  @override
+  String get video_iptv_pick_file => 'Choose a local .m3u / .m3u8 file';
+  @override
+  String get video_iptv_import_hint =>
+      'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+  @override
+  String get video_iptv_list_empty => 'No channels found in this list.';
+  @override
+  String video_iptv_imported({required Object count}) =>
+      'Imported ${count} channels';
+  @override
+  String get video_stream_protocol_unsupported_apple =>
+      'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
 }
 
 /// Flat map(s) containing all translations.
@@ -238626,6 +239947,45 @@ extension on _StringsEn {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       case 'nav_browse':
@@ -238670,6 +240030,28 @@ extension on _StringsEn {
           required Object modules,
         }) =>
             'Discovery and the online sources for manga, video and novels now live in the ${browse} tab, which is turned off on this device. To use them, turn on ${browse} in ${settings} › ${appearance} › ${modules}.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -250430,6 +251812,45 @@ extension on _StringsAr {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       case 'nav_browse':
@@ -250473,6 +251894,28 @@ extension on _StringsAr {
           required Object modules,
         }) =>
             'أصبحت صفحة الاكتشاف والمصادر عبر الإنترنت للمانغا والفيديو والروايات في تبويب ${browse}، وهو متوقف على هذا الجهاز. لاستخدامها، فعّل ${browse} من ${settings} › ${appearance} › ${modules}.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -262282,6 +263725,45 @@ extension on _StringsDe {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       case 'nav_browse':
@@ -262326,6 +263808,28 @@ extension on _StringsDe {
           required Object modules,
         }) =>
             'Entdecken und die Online-Quellen für Manga, Videos und Romane befinden sich jetzt im Tab „${browse}“, der auf diesem Gerät ausgeschaltet ist. Um sie zu nutzen, schalten Sie „${browse}“ unter ${settings} › ${appearance} › ${modules} ein.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -274125,6 +275629,45 @@ extension on _StringsEs {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       case 'nav_browse':
@@ -274169,6 +275712,28 @@ extension on _StringsEs {
           required Object modules,
         }) =>
             'Descubrir y las fuentes en línea de manga, vídeo y novelas ahora están en la pestaña ${browse}, que está desactivada en este dispositivo. Para usarlas, activa ${browse} en ${settings} › ${appearance} › ${modules}.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -285976,6 +287541,45 @@ extension on _StringsFr {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       case 'nav_browse':
@@ -286020,6 +287624,28 @@ extension on _StringsFr {
           required Object modules,
         }) =>
             'Découvrir et les sources en ligne de manga, vidéos et romans se trouvent désormais dans l\'onglet ${browse}, désactivé sur cet appareil. Pour les utiliser, activez ${browse} dans ${settings} › ${appearance} › ${modules}.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -297797,6 +299423,45 @@ extension on _StringsId {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       case 'nav_browse':
@@ -297841,6 +299506,28 @@ extension on _StringsId {
           required Object modules,
         }) =>
             'Halaman penemuan serta sumber online untuk manga, video, dan novel kini ada di tab ${browse}, yang dimatikan di perangkat ini. Untuk menggunakannya, aktifkan ${browse} di ${settings} › ${appearance} › ${modules}.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -309641,6 +311328,45 @@ extension on _StringsIt {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       case 'nav_browse':
@@ -309684,6 +311410,28 @@ extension on _StringsIt {
           required Object modules,
         }) =>
             'Scopri e le fonti online per manga, video e romanzi ora si trovano nella scheda ${browse}, disattivata su questo dispositivo. Per usarli, attiva ${browse} in ${settings} › ${appearance} › ${modules}.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -321405,6 +323153,45 @@ extension on _StringsJa {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       case 'nav_browse':
@@ -321447,6 +323234,28 @@ extension on _StringsJa {
           required Object modules,
         }) =>
             '発見ページと、マンガ・動画・小説のオンラインソースは「${browse}」タブに移動しました。このデバイスでは現在オフになっています。使うには「${settings} › ${appearance} › ${modules}」で「${browse}」をオンにしてください。';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -333176,6 +334985,45 @@ extension on _StringsKo {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       case 'nav_browse':
@@ -333219,6 +335067,28 @@ extension on _StringsKo {
           required Object modules,
         }) =>
             '발견 페이지와 만화·비디오·소설 온라인 소스가 ‘${browse}’ 탭으로 이동했습니다. 이 기기에서는 현재 꺼져 있습니다. 사용하려면 ‘${settings} › ${appearance} › ${modules}’에서 ‘${browse}’을(를) 켜세요.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -345014,6 +346884,45 @@ extension on _StringsNl {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       case 'nav_browse':
@@ -345058,6 +346967,28 @@ extension on _StringsNl {
           required Object modules,
         }) =>
             'Ontdekken en de online bronnen voor manga, video en romans staan nu op het tabblad ${browse}, dat op dit apparaat is uitgeschakeld. Schakel ${browse} in via ${settings} › ${appearance} › ${modules} om ze te gebruiken.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -356848,6 +358779,45 @@ extension on _StringsPtBr {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       case 'nav_browse':
@@ -356892,6 +358862,28 @@ extension on _StringsPtBr {
           required Object modules,
         }) =>
             'Descobrir e as fontes online de mangá, vídeo e romances agora ficam na aba ${browse}, que está desativada neste dispositivo. Para usá-los, ative ${browse} em ${settings} › ${appearance} › ${modules}.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -368688,6 +370680,45 @@ extension on _StringsRu {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       case 'nav_browse':
@@ -368731,6 +370762,28 @@ extension on _StringsRu {
           required Object modules,
         }) =>
             'Страницы поиска контента и онлайн-источники манги, видео и ранобэ теперь находятся на вкладке «${browse}», которая на этом устройстве выключена. Чтобы пользоваться ими, включите «${browse}» в разделе «${settings} › ${appearance} › ${modules}».';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -380496,6 +382549,45 @@ extension on _StringsTh {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       case 'nav_browse':
@@ -380539,6 +382631,28 @@ extension on _StringsTh {
           required Object modules,
         }) =>
             'หน้าค้นพบและแหล่งออนไลน์สำหรับมังงะ วิดีโอ และนิยาย ย้ายไปอยู่ในแท็บ ${browse} แล้ว ซึ่งปิดอยู่ในอุปกรณ์นี้ หากต้องการใช้ ให้เปิด ${browse} ที่ ${settings} › ${appearance} › ${modules}';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -392320,6 +394434,45 @@ extension on _StringsTr {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       case 'nav_browse':
@@ -392363,6 +394516,28 @@ extension on _StringsTr {
           required Object modules,
         }) =>
             'Keşfet sayfası ile manga, video ve roman için çevrimiçi kaynaklar artık ${browse} sekmesinde; bu sekme bu cihazda kapalı. Bunları kullanmak için ${settings} › ${appearance} › ${modules} bölümünden ${browse} seçeneğini açın.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -404138,6 +406313,45 @@ extension on _StringsVi {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       case 'remote_video_stream_play':
         return 'Play (stream)';
       case 'nav_browse':
@@ -404181,6 +406395,28 @@ extension on _StringsVi {
           required Object modules,
         }) =>
             'Trang Khám phá cùng các nguồn trực tuyến cho truyện tranh, video và tiểu thuyết giờ nằm trong tab ${browse}, hiện đang tắt trên thiết bị này. Để sử dụng, hãy bật ${browse} trong ${settings} › ${appearance} › ${modules}.';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
@@ -415840,6 +418076,45 @@ extension on _StringsZhCn {
         return '连接';
       case 'plex_sign_in_failed':
         return 'Plex 登录失败';
+      case 'video_setting_subtitle_reference_sync':
+        return '下载字幕自动对齐';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return '按视频自带的字幕轨给下载的字幕对时间轴。只在证据充分时才改，否则保持原样。';
+      case 'video_subtitle_reference_sync_action':
+        return '按内嵌字幕对齐';
+      case 'video_subtitle_reference_sync_need_external':
+        return '先选一条下载或导入的外挂字幕';
+      case 'video_subtitle_reference_sync_running':
+        return '正在按内嵌字幕轨对齐…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return '这个视频没有可当参考的文本字幕轨';
+      case 'video_subtitle_reference_sync_unreadable':
+        return '这条字幕读不出足够的时间轴';
+      case 'video_subtitle_reference_sync_refused':
+        return '与内嵌字幕对不上（可能不是这一集，或剪辑不同），保持原样';
+      case 'video_subtitle_reference_sync_in_sync':
+        return '已经与内嵌字幕对齐，无需修改';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => '已对齐：${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return '对齐结果不太确定';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            '建议平移：${offset}。匹配率是瞎碰概率的 ${excess} 倍，${groups} 组独立参考字幕轨给出一致结果。要另存为一份新字幕吗？原字幕不会改动。';
+      case 'video_subtitle_reference_sync_apply':
+        return '应用';
+      case 'video_subtitle_reference_sync_restore_title':
+        return '这条字幕下载时已自动对齐';
+      case 'video_subtitle_reference_sync_restore_body':
+        return '下载时已按内嵌字幕轨调整过时间轴。要把原始时间轴恢复成一份新字幕吗？';
+      case 'video_subtitle_reference_sync_restore':
+        return '恢复原始字幕';
+      case 'video_subtitle_reference_sync_failed':
+        return '字幕文件读写失败';
       case 'remote_video_stream_play':
         return '播放（流播）';
       case 'nav_browse':
@@ -415882,6 +418157,28 @@ extension on _StringsZhCn {
           required Object modules,
         }) =>
             '发现页，以及漫画 / 视频 / 小说的在线来源，已经移到「${browse}」页签；它在本机目前是关闭的。要使用它们，请到「${settings} › ${appearance} › ${modules}」打开「${browse}」。';
+      case 'video_strm_target_local':
+        return '该 .strm 文件指向本机文件路径，暂不支持。请直接把视频文件放进来源库。';
+      case 'video_strm_target_unsupported':
+        return '该 .strm 文件里没有可播放的流地址（http、https、rtsp 等）。';
+      case 'video_strm_file_unreadable':
+        return '无法读取 .strm 文件。';
+      case 'video_iptv_import_action':
+        return '导入 IPTV 频道列表';
+      case 'video_iptv_import_title':
+        return '导入 M3U / IPTV 频道列表';
+      case 'video_iptv_url_field':
+        return '频道列表地址';
+      case 'video_iptv_pick_file':
+        return '选择本地 .m3u / .m3u8 文件';
+      case 'video_iptv_import_hint':
+        return '每个频道作为一条流入库，并按 group-title 分组成合集；HLS 流播放列表会作为单个视频导入。';
+      case 'video_iptv_list_empty':
+        return '列表里没有找到频道。';
+      case 'video_iptv_imported':
+        return ({required Object count}) => '已导入 ${count} 个频道';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'iOS 与 macOS 暂不支持这种流协议（rtsps / rtmps / rtmpe）。';
       default:
         return null;
     }
@@ -427582,6 +429879,45 @@ extension on _StringsZhHk {
         return 'Connect';
       case 'plex_sign_in_failed':
         return 'Plex sign-in failed';
+      case 'video_setting_subtitle_reference_sync':
+        return 'Auto-align downloaded subtitles';
+      case 'video_setting_subtitle_reference_sync_hint':
+        return 'Retime downloaded subtitles to the video\'s embedded subtitle tracks. Applied only when the evidence is strong; otherwise the file is left as-is.';
+      case 'video_subtitle_reference_sync_action':
+        return 'Align to embedded subtitles';
+      case 'video_subtitle_reference_sync_need_external':
+        return 'Select a downloaded or imported subtitle first';
+      case 'video_subtitle_reference_sync_running':
+        return 'Aligning to the embedded subtitle tracks…';
+      case 'video_subtitle_reference_sync_no_reference':
+        return 'This video has no text subtitle track to align against';
+      case 'video_subtitle_reference_sync_unreadable':
+        return 'Couldn\'t read enough timed lines from this subtitle';
+      case 'video_subtitle_reference_sync_refused':
+        return 'The timing doesn\'t match the embedded tracks (wrong episode or a different cut?). Left unchanged.';
+      case 'video_subtitle_reference_sync_in_sync':
+        return 'Already in sync with the embedded tracks';
+      case 'video_subtitle_reference_sync_done':
+        return ({required Object offset}) => 'Aligned: ${offset}';
+      case 'video_subtitle_reference_sync_confirm_title':
+        return 'Alignment is uncertain';
+      case 'video_subtitle_reference_sync_confirm_body':
+        return ({
+          required Object offset,
+          required Object excess,
+          required Object groups,
+        }) =>
+            'Suggested shift: ${offset}. The match is ${excess}× what chance would give, and ${groups} independent reference track group(s) agree. Save it as a new subtitle file? The original stays unchanged.';
+      case 'video_subtitle_reference_sync_apply':
+        return 'Apply';
+      case 'video_subtitle_reference_sync_restore_title':
+        return 'Already auto-aligned';
+      case 'video_subtitle_reference_sync_restore_body':
+        return 'It was retimed to the embedded subtitle tracks when it was downloaded. Restore the original timing as a new subtitle file?';
+      case 'video_subtitle_reference_sync_restore':
+        return 'Restore original';
+      case 'video_subtitle_reference_sync_failed':
+        return 'Couldn\'t read or save the subtitle file';
       case 'remote_video_stream_play':
         return '播放（串流）';
       case 'nav_browse':
@@ -427624,6 +429960,28 @@ extension on _StringsZhHk {
           required Object modules,
         }) =>
             '發現頁，以及漫畫／影片／小說的線上來源，已經移到「${browse}」分頁；它在本機目前是關閉的。要使用它們，請到「${settings} › ${appearance} › ${modules}」開啟「${browse}」。';
+      case 'video_strm_target_local':
+        return 'This .strm file points to a local file path, which isn\'t supported. Put the video file in a source library directly.';
+      case 'video_strm_target_unsupported':
+        return 'This .strm file has no playable stream address (http, https, rtsp, …).';
+      case 'video_strm_file_unreadable':
+        return 'Couldn\'t read the .strm file.';
+      case 'video_iptv_import_action':
+        return 'Import IPTV list';
+      case 'video_iptv_import_title':
+        return 'Import M3U / IPTV channel list';
+      case 'video_iptv_url_field':
+        return 'Channel list URL';
+      case 'video_iptv_pick_file':
+        return 'Choose a local .m3u / .m3u8 file';
+      case 'video_iptv_import_hint':
+        return 'Each channel is added as a stream and grouped into collections by group-title. An HLS stream playlist is imported as a single video.';
+      case 'video_iptv_list_empty':
+        return 'No channels found in this list.';
+      case 'video_iptv_imported':
+        return ({required Object count}) => 'Imported ${count} channels';
+      case 'video_stream_protocol_unsupported_apple':
+        return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       default:
         return null;
     }
