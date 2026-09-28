@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 97087 (5711 per locale)
+/// Strings: 97155 (5715 per locale)
 ///
-/// Built on 2026-09-27 at 18:03 UTC
+/// Built on 2026-09-28 at 05:42 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8157,6 +8157,12 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get sync_p2p_relay_urls => 'Self-hosted relays (optional)';
   String get sync_p2p_relay_urls_hint =>
       'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+  String get sync_pair_nfc_lock => 'Lock the sticker after writing';
+  String get sync_pair_nfc_lock_hint =>
+      'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+  String get sync_pair_nfc_written_locked => 'Written and locked';
+  String get sync_pair_nfc_lock_unsupported =>
+      'Written, but this sticker can\'t be locked';
 }
 
 // Path: <root>
@@ -21848,6 +21854,16 @@ class _StringsAr extends _StringsEn {
   @override
   String get sync_p2p_relay_urls_hint =>
       'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+  @override
+  String get sync_pair_nfc_lock => 'Lock the sticker after writing';
+  @override
+  String get sync_pair_nfc_lock_hint =>
+      'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+  @override
+  String get sync_pair_nfc_written_locked => 'Written and locked';
+  @override
+  String get sync_pair_nfc_lock_unsupported =>
+      'Written, but this sticker can\'t be locked';
 }
 
 // Path: <root>
@@ -35779,6 +35795,16 @@ class _StringsDe extends _StringsEn {
   @override
   String get sync_p2p_relay_urls_hint =>
       'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+  @override
+  String get sync_pair_nfc_lock => 'Lock the sticker after writing';
+  @override
+  String get sync_pair_nfc_lock_hint =>
+      'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+  @override
+  String get sync_pair_nfc_written_locked => 'Written and locked';
+  @override
+  String get sync_pair_nfc_lock_unsupported =>
+      'Written, but this sticker can\'t be locked';
 }
 
 // Path: <root>
@@ -49761,6 +49787,16 @@ class _StringsEs extends _StringsEn {
   @override
   String get sync_p2p_relay_urls_hint =>
       'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+  @override
+  String get sync_pair_nfc_lock => 'Lock the sticker after writing';
+  @override
+  String get sync_pair_nfc_lock_hint =>
+      'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+  @override
+  String get sync_pair_nfc_written_locked => 'Written and locked';
+  @override
+  String get sync_pair_nfc_lock_unsupported =>
+      'Written, but this sticker can\'t be locked';
 }
 
 // Path: <root>
@@ -63782,6 +63818,16 @@ class _StringsFr extends _StringsEn {
   @override
   String get sync_p2p_relay_urls_hint =>
       'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+  @override
+  String get sync_pair_nfc_lock => 'Lock the sticker after writing';
+  @override
+  String get sync_pair_nfc_lock_hint =>
+      'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+  @override
+  String get sync_pair_nfc_written_locked => 'Written and locked';
+  @override
+  String get sync_pair_nfc_lock_unsupported =>
+      'Written, but this sticker can\'t be locked';
 }
 
 // Path: <root>
@@ -77593,6 +77639,16 @@ class _StringsId extends _StringsEn {
   @override
   String get sync_p2p_relay_urls_hint =>
       'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+  @override
+  String get sync_pair_nfc_lock => 'Lock the sticker after writing';
+  @override
+  String get sync_pair_nfc_lock_hint =>
+      'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+  @override
+  String get sync_pair_nfc_written_locked => 'Written and locked';
+  @override
+  String get sync_pair_nfc_lock_unsupported =>
+      'Written, but this sticker can\'t be locked';
 }
 
 // Path: <root>
@@ -91505,6 +91561,16 @@ class _StringsIt extends _StringsEn {
   @override
   String get sync_p2p_relay_urls_hint =>
       'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+  @override
+  String get sync_pair_nfc_lock => 'Lock the sticker after writing';
+  @override
+  String get sync_pair_nfc_lock_hint =>
+      'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+  @override
+  String get sync_pair_nfc_written_locked => 'Written and locked';
+  @override
+  String get sync_pair_nfc_lock_unsupported =>
+      'Written, but this sticker can\'t be locked';
 }
 
 // Path: <root>
@@ -104772,6 +104838,16 @@ class _StringsJa extends _StringsEn {
   @override
   String get sync_p2p_relay_urls_hint =>
       'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+  @override
+  String get sync_pair_nfc_lock => 'Lock the sticker after writing';
+  @override
+  String get sync_pair_nfc_lock_hint =>
+      'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+  @override
+  String get sync_pair_nfc_written_locked => 'Written and locked';
+  @override
+  String get sync_pair_nfc_lock_unsupported =>
+      'Written, but this sticker can\'t be locked';
 }
 
 // Path: <root>
@@ -118056,6 +118132,16 @@ class _StringsKo extends _StringsEn {
   @override
   String get sync_p2p_relay_urls_hint =>
       'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+  @override
+  String get sync_pair_nfc_lock => 'Lock the sticker after writing';
+  @override
+  String get sync_pair_nfc_lock_hint =>
+      'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+  @override
+  String get sync_pair_nfc_written_locked => 'Written and locked';
+  @override
+  String get sync_pair_nfc_lock_unsupported =>
+      'Written, but this sticker can\'t be locked';
 }
 
 // Path: <root>
@@ -131922,6 +132008,16 @@ class _StringsNl extends _StringsEn {
   @override
   String get sync_p2p_relay_urls_hint =>
       'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+  @override
+  String get sync_pair_nfc_lock => 'Lock the sticker after writing';
+  @override
+  String get sync_pair_nfc_lock_hint =>
+      'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+  @override
+  String get sync_pair_nfc_written_locked => 'Written and locked';
+  @override
+  String get sync_pair_nfc_lock_unsupported =>
+      'Written, but this sticker can\'t be locked';
 }
 
 // Path: <root>
@@ -145841,6 +145937,16 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get sync_p2p_relay_urls_hint =>
       'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+  @override
+  String get sync_pair_nfc_lock => 'Lock the sticker after writing';
+  @override
+  String get sync_pair_nfc_lock_hint =>
+      'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+  @override
+  String get sync_pair_nfc_written_locked => 'Written and locked';
+  @override
+  String get sync_pair_nfc_lock_unsupported =>
+      'Written, but this sticker can\'t be locked';
 }
 
 // Path: <root>
@@ -159735,6 +159841,16 @@ class _StringsRu extends _StringsEn {
   @override
   String get sync_p2p_relay_urls_hint =>
       'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+  @override
+  String get sync_pair_nfc_lock => 'Lock the sticker after writing';
+  @override
+  String get sync_pair_nfc_lock_hint =>
+      'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+  @override
+  String get sync_pair_nfc_written_locked => 'Written and locked';
+  @override
+  String get sync_pair_nfc_lock_unsupported =>
+      'Written, but this sticker can\'t be locked';
 }
 
 // Path: <root>
@@ -173426,6 +173542,16 @@ class _StringsTh extends _StringsEn {
   @override
   String get sync_p2p_relay_urls_hint =>
       'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+  @override
+  String get sync_pair_nfc_lock => 'Lock the sticker after writing';
+  @override
+  String get sync_pair_nfc_lock_hint =>
+      'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+  @override
+  String get sync_pair_nfc_written_locked => 'Written and locked';
+  @override
+  String get sync_pair_nfc_lock_unsupported =>
+      'Written, but this sticker can\'t be locked';
 }
 
 // Path: <root>
@@ -187231,6 +187357,16 @@ class _StringsTr extends _StringsEn {
   @override
   String get sync_p2p_relay_urls_hint =>
       'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+  @override
+  String get sync_pair_nfc_lock => 'Lock the sticker after writing';
+  @override
+  String get sync_pair_nfc_lock_hint =>
+      'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+  @override
+  String get sync_pair_nfc_written_locked => 'Written and locked';
+  @override
+  String get sync_pair_nfc_lock_unsupported =>
+      'Written, but this sticker can\'t be locked';
 }
 
 // Path: <root>
@@ -201007,6 +201143,16 @@ class _StringsVi extends _StringsEn {
   @override
   String get sync_p2p_relay_urls_hint =>
       'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+  @override
+  String get sync_pair_nfc_lock => 'Lock the sticker after writing';
+  @override
+  String get sync_pair_nfc_lock_hint =>
+      'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+  @override
+  String get sync_pair_nfc_written_locked => 'Written and locked';
+  @override
+  String get sync_pair_nfc_lock_unsupported =>
+      'Written, but this sticker can\'t be locked';
 }
 
 // Path: <root>
@@ -213608,6 +213754,15 @@ class _StringsZhCn extends _StringsEn {
   String get sync_p2p_relay_urls => '自建中继（可选）';
   @override
   String get sync_p2p_relay_urls_hint => '每行一个 iroh-relay 地址；留空则用 iroh 公共中继。';
+  @override
+  String get sync_pair_nfc_lock => '写入后锁定贴纸';
+  @override
+  String get sync_pair_nfc_lock_hint =>
+      '锁定不可撤销。别人无法把贴纸改写成恶意链接，但本机地址或证书变了之后你也无法更新它，只能换一张新贴纸。';
+  @override
+  String get sync_pair_nfc_written_locked => '已写入并锁定';
+  @override
+  String get sync_pair_nfc_lock_unsupported => '已写入，但这张贴纸不支持锁定';
 }
 
 // Path: <root>
@@ -226555,6 +226710,16 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get sync_p2p_relay_urls_hint =>
       'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+  @override
+  String get sync_pair_nfc_lock => 'Lock the sticker after writing';
+  @override
+  String get sync_pair_nfc_lock_hint =>
+      'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+  @override
+  String get sync_pair_nfc_written_locked => 'Written and locked';
+  @override
+  String get sync_pair_nfc_lock_unsupported =>
+      'Written, but this sticker can\'t be locked';
 }
 
 /// Flat map(s) containing all translations.
@@ -238346,6 +238511,14 @@ extension on _StringsEn {
         return 'Self-hosted relays (optional)';
       case 'sync_p2p_relay_urls_hint':
         return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+      case 'sync_pair_nfc_lock':
+        return 'Lock the sticker after writing';
+      case 'sync_pair_nfc_lock_hint':
+        return 'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+      case 'sync_pair_nfc_written_locked':
+        return 'Written and locked';
+      case 'sync_pair_nfc_lock_unsupported':
+        return 'Written, but this sticker can\'t be locked';
       default:
         return null;
     }
@@ -250132,6 +250305,14 @@ extension on _StringsAr {
         return 'Self-hosted relays (optional)';
       case 'sync_p2p_relay_urls_hint':
         return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+      case 'sync_pair_nfc_lock':
+        return 'Lock the sticker after writing';
+      case 'sync_pair_nfc_lock_hint':
+        return 'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+      case 'sync_pair_nfc_written_locked':
+        return 'Written and locked';
+      case 'sync_pair_nfc_lock_unsupported':
+        return 'Written, but this sticker can\'t be locked';
       default:
         return null;
     }
@@ -261967,6 +262148,14 @@ extension on _StringsDe {
         return 'Self-hosted relays (optional)';
       case 'sync_p2p_relay_urls_hint':
         return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+      case 'sync_pair_nfc_lock':
+        return 'Lock the sticker after writing';
+      case 'sync_pair_nfc_lock_hint':
+        return 'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+      case 'sync_pair_nfc_written_locked':
+        return 'Written and locked';
+      case 'sync_pair_nfc_lock_unsupported':
+        return 'Written, but this sticker can\'t be locked';
       default:
         return null;
     }
@@ -273792,6 +273981,14 @@ extension on _StringsEs {
         return 'Self-hosted relays (optional)';
       case 'sync_p2p_relay_urls_hint':
         return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+      case 'sync_pair_nfc_lock':
+        return 'Lock the sticker after writing';
+      case 'sync_pair_nfc_lock_hint':
+        return 'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+      case 'sync_pair_nfc_written_locked':
+        return 'Written and locked';
+      case 'sync_pair_nfc_lock_unsupported':
+        return 'Written, but this sticker can\'t be locked';
       default:
         return null;
     }
@@ -285625,6 +285822,14 @@ extension on _StringsFr {
         return 'Self-hosted relays (optional)';
       case 'sync_p2p_relay_urls_hint':
         return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+      case 'sync_pair_nfc_lock':
+        return 'Lock the sticker after writing';
+      case 'sync_pair_nfc_lock_hint':
+        return 'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+      case 'sync_pair_nfc_written_locked':
+        return 'Written and locked';
+      case 'sync_pair_nfc_lock_unsupported':
+        return 'Written, but this sticker can\'t be locked';
       default:
         return null;
     }
@@ -297428,6 +297633,14 @@ extension on _StringsId {
         return 'Self-hosted relays (optional)';
       case 'sync_p2p_relay_urls_hint':
         return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+      case 'sync_pair_nfc_lock':
+        return 'Lock the sticker after writing';
+      case 'sync_pair_nfc_lock_hint':
+        return 'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+      case 'sync_pair_nfc_written_locked':
+        return 'Written and locked';
+      case 'sync_pair_nfc_lock_unsupported':
+        return 'Written, but this sticker can\'t be locked';
       default:
         return null;
     }
@@ -309254,6 +309467,14 @@ extension on _StringsIt {
         return 'Self-hosted relays (optional)';
       case 'sync_p2p_relay_urls_hint':
         return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+      case 'sync_pair_nfc_lock':
+        return 'Lock the sticker after writing';
+      case 'sync_pair_nfc_lock_hint':
+        return 'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+      case 'sync_pair_nfc_written_locked':
+        return 'Written and locked';
+      case 'sync_pair_nfc_lock_unsupported':
+        return 'Written, but this sticker can\'t be locked';
       default:
         return null;
     }
@@ -321001,6 +321222,14 @@ extension on _StringsJa {
         return 'Self-hosted relays (optional)';
       case 'sync_p2p_relay_urls_hint':
         return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+      case 'sync_pair_nfc_lock':
+        return 'Lock the sticker after writing';
+      case 'sync_pair_nfc_lock_hint':
+        return 'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+      case 'sync_pair_nfc_written_locked':
+        return 'Written and locked';
+      case 'sync_pair_nfc_lock_unsupported':
+        return 'Written, but this sticker can\'t be locked';
       default:
         return null;
     }
@@ -332756,6 +332985,14 @@ extension on _StringsKo {
         return 'Self-hosted relays (optional)';
       case 'sync_p2p_relay_urls_hint':
         return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+      case 'sync_pair_nfc_lock':
+        return 'Lock the sticker after writing';
+      case 'sync_pair_nfc_lock_hint':
+        return 'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+      case 'sync_pair_nfc_written_locked':
+        return 'Written and locked';
+      case 'sync_pair_nfc_lock_unsupported':
+        return 'Written, but this sticker can\'t be locked';
       default:
         return null;
     }
@@ -344577,6 +344814,14 @@ extension on _StringsNl {
         return 'Self-hosted relays (optional)';
       case 'sync_p2p_relay_urls_hint':
         return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+      case 'sync_pair_nfc_lock':
+        return 'Lock the sticker after writing';
+      case 'sync_pair_nfc_lock_hint':
+        return 'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+      case 'sync_pair_nfc_written_locked':
+        return 'Written and locked';
+      case 'sync_pair_nfc_lock_unsupported':
+        return 'Written, but this sticker can\'t be locked';
       default:
         return null;
     }
@@ -356393,6 +356638,14 @@ extension on _StringsPtBr {
         return 'Self-hosted relays (optional)';
       case 'sync_p2p_relay_urls_hint':
         return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+      case 'sync_pair_nfc_lock':
+        return 'Lock the sticker after writing';
+      case 'sync_pair_nfc_lock_hint':
+        return 'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+      case 'sync_pair_nfc_written_locked':
+        return 'Written and locked';
+      case 'sync_pair_nfc_lock_unsupported':
+        return 'Written, but this sticker can\'t be locked';
       default:
         return null;
     }
@@ -368215,6 +368468,14 @@ extension on _StringsRu {
         return 'Self-hosted relays (optional)';
       case 'sync_p2p_relay_urls_hint':
         return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+      case 'sync_pair_nfc_lock':
+        return 'Lock the sticker after writing';
+      case 'sync_pair_nfc_lock_hint':
+        return 'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+      case 'sync_pair_nfc_written_locked':
+        return 'Written and locked';
+      case 'sync_pair_nfc_lock_unsupported':
+        return 'Written, but this sticker can\'t be locked';
       default:
         return null;
     }
@@ -380006,6 +380267,14 @@ extension on _StringsTh {
         return 'Self-hosted relays (optional)';
       case 'sync_p2p_relay_urls_hint':
         return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+      case 'sync_pair_nfc_lock':
+        return 'Lock the sticker after writing';
+      case 'sync_pair_nfc_lock_hint':
+        return 'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+      case 'sync_pair_nfc_written_locked':
+        return 'Written and locked';
+      case 'sync_pair_nfc_lock_unsupported':
+        return 'Written, but this sticker can\'t be locked';
       default:
         return null;
     }
@@ -391813,6 +392082,14 @@ extension on _StringsTr {
         return 'Self-hosted relays (optional)';
       case 'sync_p2p_relay_urls_hint':
         return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+      case 'sync_pair_nfc_lock':
+        return 'Lock the sticker after writing';
+      case 'sync_pair_nfc_lock_hint':
+        return 'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+      case 'sync_pair_nfc_written_locked':
+        return 'Written and locked';
+      case 'sync_pair_nfc_lock_unsupported':
+        return 'Written, but this sticker can\'t be locked';
       default:
         return null;
     }
@@ -403614,6 +403891,14 @@ extension on _StringsVi {
         return 'Self-hosted relays (optional)';
       case 'sync_p2p_relay_urls_hint':
         return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+      case 'sync_pair_nfc_lock':
+        return 'Lock the sticker after writing';
+      case 'sync_pair_nfc_lock_hint':
+        return 'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+      case 'sync_pair_nfc_written_locked':
+        return 'Written and locked';
+      case 'sync_pair_nfc_lock_unsupported':
+        return 'Written, but this sticker can\'t be locked';
       default:
         return null;
     }
@@ -415299,6 +415584,14 @@ extension on _StringsZhCn {
         return '自建中继（可选）';
       case 'sync_p2p_relay_urls_hint':
         return '每行一个 iroh-relay 地址；留空则用 iroh 公共中继。';
+      case 'sync_pair_nfc_lock':
+        return '写入后锁定贴纸';
+      case 'sync_pair_nfc_lock_hint':
+        return '锁定不可撤销。别人无法把贴纸改写成恶意链接，但本机地址或证书变了之后你也无法更新它，只能换一张新贴纸。';
+      case 'sync_pair_nfc_written_locked':
+        return '已写入并锁定';
+      case 'sync_pair_nfc_lock_unsupported':
+        return '已写入，但这张贴纸不支持锁定';
       default:
         return null;
     }
@@ -427025,6 +427318,14 @@ extension on _StringsZhHk {
         return 'Self-hosted relays (optional)';
       case 'sync_p2p_relay_urls_hint':
         return 'One iroh-relay URL per line. Leave empty to use iroh\'s public relays.';
+      case 'sync_pair_nfc_lock':
+        return 'Lock the sticker after writing';
+      case 'sync_pair_nfc_lock_hint':
+        return 'Locking can\'t be undone. Nobody can rewrite the sticker into a malicious link, but if this device\'s address or certificate changes you can\'t update it either — you\'ll need a new sticker.';
+      case 'sync_pair_nfc_written_locked':
+        return 'Written and locked';
+      case 'sync_pair_nfc_lock_unsupported':
+        return 'Written, but this sticker can\'t be locked';
       default:
         return null;
     }
