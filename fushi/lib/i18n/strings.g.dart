@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 97002 (5706 per locale)
+/// Strings: 97427 (5731 per locale)
 ///
-/// Built on 2026-09-27 at 17:58 UTC
+/// Built on 2026-09-28 at 02:24 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8157,6 +8157,45 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
       'Deliver cards from other devices';
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+  String get anki_error_sync_signed_out =>
+      'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+  String get anki_error_sync_unavailable =>
+      'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+  String get anki_sync_client_section_title => 'Anki sync (no Anki needed)';
+  String get anki_sync_client_use_title => 'Sync cards straight to Anki';
+  String get anki_sync_client_use_hint =>
+      'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+  String get anki_sync_client_server_title => 'Sync server';
+  String get anki_sync_client_server_hint =>
+      'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+  String get anki_sync_client_username_title => 'Username';
+  String get anki_sync_client_password_title => 'Password';
+  String get anki_sync_client_sign_in => 'Sign in and download collection';
+  String get anki_sync_client_sign_out => 'Sign out';
+  String get anki_sync_client_sync_now => 'Sync now';
+  String get anki_sync_client_status_signed_out => 'Not signed in';
+  String anki_sync_client_status_signed_in({
+    required Object user,
+    required Object server,
+  }) => 'Signed in as ${user} on ${server}';
+  String get anki_sync_client_status_busy => 'Syncing…';
+  String anki_sync_client_status_unsynced({required Object count}) =>
+      '${count} card(s) not synced yet';
+  String get anki_sync_client_status_all_synced => 'All cards synced';
+  String anki_sync_client_status_last_sync({required Object time}) =>
+      'Last synced ${time}';
+  String get anki_sync_client_status_blocked =>
+      'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+  String anki_sync_client_status_failed({required Object error}) =>
+      'Last sync failed: ${error}';
+  String get anki_sync_client_ankiweb_title => 'Sync with AnkiWeb?';
+  String get anki_sync_client_ankiweb_body =>
+      'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+  String get anki_sync_client_ankiweb_confirm => 'Use AnkiWeb anyway';
+  String anki_sync_client_has_unsynced({required Object count}) =>
+      '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+  String anki_sync_client_sign_in_failed({required Object error}) =>
+      'Sign-in failed: ${error}';
 }
 
 // Path: <root>
@@ -21843,6 +21882,70 @@ class _StringsAr extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+  @override
+  String get anki_error_sync_signed_out =>
+      'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+  @override
+  String get anki_error_sync_unavailable =>
+      'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+  @override
+  String get anki_sync_client_section_title => 'Anki sync (no Anki needed)';
+  @override
+  String get anki_sync_client_use_title => 'Sync cards straight to Anki';
+  @override
+  String get anki_sync_client_use_hint =>
+      'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+  @override
+  String get anki_sync_client_server_title => 'Sync server';
+  @override
+  String get anki_sync_client_server_hint =>
+      'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+  @override
+  String get anki_sync_client_username_title => 'Username';
+  @override
+  String get anki_sync_client_password_title => 'Password';
+  @override
+  String get anki_sync_client_sign_in => 'Sign in and download collection';
+  @override
+  String get anki_sync_client_sign_out => 'Sign out';
+  @override
+  String get anki_sync_client_sync_now => 'Sync now';
+  @override
+  String get anki_sync_client_status_signed_out => 'Not signed in';
+  @override
+  String anki_sync_client_status_signed_in({
+    required Object user,
+    required Object server,
+  }) => 'Signed in as ${user} on ${server}';
+  @override
+  String get anki_sync_client_status_busy => 'Syncing…';
+  @override
+  String anki_sync_client_status_unsynced({required Object count}) =>
+      '${count} card(s) not synced yet';
+  @override
+  String get anki_sync_client_status_all_synced => 'All cards synced';
+  @override
+  String anki_sync_client_status_last_sync({required Object time}) =>
+      'Last synced ${time}';
+  @override
+  String get anki_sync_client_status_blocked =>
+      'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+  @override
+  String anki_sync_client_status_failed({required Object error}) =>
+      'Last sync failed: ${error}';
+  @override
+  String get anki_sync_client_ankiweb_title => 'Sync with AnkiWeb?';
+  @override
+  String get anki_sync_client_ankiweb_body =>
+      'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+  @override
+  String get anki_sync_client_ankiweb_confirm => 'Use AnkiWeb anyway';
+  @override
+  String anki_sync_client_has_unsynced({required Object count}) =>
+      '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+  @override
+  String anki_sync_client_sign_in_failed({required Object error}) =>
+      'Sign-in failed: ${error}';
 }
 
 // Path: <root>
@@ -35769,6 +35872,70 @@ class _StringsDe extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+  @override
+  String get anki_error_sync_signed_out =>
+      'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+  @override
+  String get anki_error_sync_unavailable =>
+      'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+  @override
+  String get anki_sync_client_section_title => 'Anki sync (no Anki needed)';
+  @override
+  String get anki_sync_client_use_title => 'Sync cards straight to Anki';
+  @override
+  String get anki_sync_client_use_hint =>
+      'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+  @override
+  String get anki_sync_client_server_title => 'Sync server';
+  @override
+  String get anki_sync_client_server_hint =>
+      'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+  @override
+  String get anki_sync_client_username_title => 'Username';
+  @override
+  String get anki_sync_client_password_title => 'Password';
+  @override
+  String get anki_sync_client_sign_in => 'Sign in and download collection';
+  @override
+  String get anki_sync_client_sign_out => 'Sign out';
+  @override
+  String get anki_sync_client_sync_now => 'Sync now';
+  @override
+  String get anki_sync_client_status_signed_out => 'Not signed in';
+  @override
+  String anki_sync_client_status_signed_in({
+    required Object user,
+    required Object server,
+  }) => 'Signed in as ${user} on ${server}';
+  @override
+  String get anki_sync_client_status_busy => 'Syncing…';
+  @override
+  String anki_sync_client_status_unsynced({required Object count}) =>
+      '${count} card(s) not synced yet';
+  @override
+  String get anki_sync_client_status_all_synced => 'All cards synced';
+  @override
+  String anki_sync_client_status_last_sync({required Object time}) =>
+      'Last synced ${time}';
+  @override
+  String get anki_sync_client_status_blocked =>
+      'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+  @override
+  String anki_sync_client_status_failed({required Object error}) =>
+      'Last sync failed: ${error}';
+  @override
+  String get anki_sync_client_ankiweb_title => 'Sync with AnkiWeb?';
+  @override
+  String get anki_sync_client_ankiweb_body =>
+      'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+  @override
+  String get anki_sync_client_ankiweb_confirm => 'Use AnkiWeb anyway';
+  @override
+  String anki_sync_client_has_unsynced({required Object count}) =>
+      '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+  @override
+  String anki_sync_client_sign_in_failed({required Object error}) =>
+      'Sign-in failed: ${error}';
 }
 
 // Path: <root>
@@ -49746,6 +49913,70 @@ class _StringsEs extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+  @override
+  String get anki_error_sync_signed_out =>
+      'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+  @override
+  String get anki_error_sync_unavailable =>
+      'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+  @override
+  String get anki_sync_client_section_title => 'Anki sync (no Anki needed)';
+  @override
+  String get anki_sync_client_use_title => 'Sync cards straight to Anki';
+  @override
+  String get anki_sync_client_use_hint =>
+      'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+  @override
+  String get anki_sync_client_server_title => 'Sync server';
+  @override
+  String get anki_sync_client_server_hint =>
+      'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+  @override
+  String get anki_sync_client_username_title => 'Username';
+  @override
+  String get anki_sync_client_password_title => 'Password';
+  @override
+  String get anki_sync_client_sign_in => 'Sign in and download collection';
+  @override
+  String get anki_sync_client_sign_out => 'Sign out';
+  @override
+  String get anki_sync_client_sync_now => 'Sync now';
+  @override
+  String get anki_sync_client_status_signed_out => 'Not signed in';
+  @override
+  String anki_sync_client_status_signed_in({
+    required Object user,
+    required Object server,
+  }) => 'Signed in as ${user} on ${server}';
+  @override
+  String get anki_sync_client_status_busy => 'Syncing…';
+  @override
+  String anki_sync_client_status_unsynced({required Object count}) =>
+      '${count} card(s) not synced yet';
+  @override
+  String get anki_sync_client_status_all_synced => 'All cards synced';
+  @override
+  String anki_sync_client_status_last_sync({required Object time}) =>
+      'Last synced ${time}';
+  @override
+  String get anki_sync_client_status_blocked =>
+      'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+  @override
+  String anki_sync_client_status_failed({required Object error}) =>
+      'Last sync failed: ${error}';
+  @override
+  String get anki_sync_client_ankiweb_title => 'Sync with AnkiWeb?';
+  @override
+  String get anki_sync_client_ankiweb_body =>
+      'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+  @override
+  String get anki_sync_client_ankiweb_confirm => 'Use AnkiWeb anyway';
+  @override
+  String anki_sync_client_has_unsynced({required Object count}) =>
+      '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+  @override
+  String anki_sync_client_sign_in_failed({required Object error}) =>
+      'Sign-in failed: ${error}';
 }
 
 // Path: <root>
@@ -63762,6 +63993,70 @@ class _StringsFr extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+  @override
+  String get anki_error_sync_signed_out =>
+      'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+  @override
+  String get anki_error_sync_unavailable =>
+      'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+  @override
+  String get anki_sync_client_section_title => 'Anki sync (no Anki needed)';
+  @override
+  String get anki_sync_client_use_title => 'Sync cards straight to Anki';
+  @override
+  String get anki_sync_client_use_hint =>
+      'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+  @override
+  String get anki_sync_client_server_title => 'Sync server';
+  @override
+  String get anki_sync_client_server_hint =>
+      'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+  @override
+  String get anki_sync_client_username_title => 'Username';
+  @override
+  String get anki_sync_client_password_title => 'Password';
+  @override
+  String get anki_sync_client_sign_in => 'Sign in and download collection';
+  @override
+  String get anki_sync_client_sign_out => 'Sign out';
+  @override
+  String get anki_sync_client_sync_now => 'Sync now';
+  @override
+  String get anki_sync_client_status_signed_out => 'Not signed in';
+  @override
+  String anki_sync_client_status_signed_in({
+    required Object user,
+    required Object server,
+  }) => 'Signed in as ${user} on ${server}';
+  @override
+  String get anki_sync_client_status_busy => 'Syncing…';
+  @override
+  String anki_sync_client_status_unsynced({required Object count}) =>
+      '${count} card(s) not synced yet';
+  @override
+  String get anki_sync_client_status_all_synced => 'All cards synced';
+  @override
+  String anki_sync_client_status_last_sync({required Object time}) =>
+      'Last synced ${time}';
+  @override
+  String get anki_sync_client_status_blocked =>
+      'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+  @override
+  String anki_sync_client_status_failed({required Object error}) =>
+      'Last sync failed: ${error}';
+  @override
+  String get anki_sync_client_ankiweb_title => 'Sync with AnkiWeb?';
+  @override
+  String get anki_sync_client_ankiweb_body =>
+      'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+  @override
+  String get anki_sync_client_ankiweb_confirm => 'Use AnkiWeb anyway';
+  @override
+  String anki_sync_client_has_unsynced({required Object count}) =>
+      '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+  @override
+  String anki_sync_client_sign_in_failed({required Object error}) =>
+      'Sign-in failed: ${error}';
 }
 
 // Path: <root>
@@ -77568,6 +77863,70 @@ class _StringsId extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+  @override
+  String get anki_error_sync_signed_out =>
+      'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+  @override
+  String get anki_error_sync_unavailable =>
+      'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+  @override
+  String get anki_sync_client_section_title => 'Anki sync (no Anki needed)';
+  @override
+  String get anki_sync_client_use_title => 'Sync cards straight to Anki';
+  @override
+  String get anki_sync_client_use_hint =>
+      'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+  @override
+  String get anki_sync_client_server_title => 'Sync server';
+  @override
+  String get anki_sync_client_server_hint =>
+      'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+  @override
+  String get anki_sync_client_username_title => 'Username';
+  @override
+  String get anki_sync_client_password_title => 'Password';
+  @override
+  String get anki_sync_client_sign_in => 'Sign in and download collection';
+  @override
+  String get anki_sync_client_sign_out => 'Sign out';
+  @override
+  String get anki_sync_client_sync_now => 'Sync now';
+  @override
+  String get anki_sync_client_status_signed_out => 'Not signed in';
+  @override
+  String anki_sync_client_status_signed_in({
+    required Object user,
+    required Object server,
+  }) => 'Signed in as ${user} on ${server}';
+  @override
+  String get anki_sync_client_status_busy => 'Syncing…';
+  @override
+  String anki_sync_client_status_unsynced({required Object count}) =>
+      '${count} card(s) not synced yet';
+  @override
+  String get anki_sync_client_status_all_synced => 'All cards synced';
+  @override
+  String anki_sync_client_status_last_sync({required Object time}) =>
+      'Last synced ${time}';
+  @override
+  String get anki_sync_client_status_blocked =>
+      'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+  @override
+  String anki_sync_client_status_failed({required Object error}) =>
+      'Last sync failed: ${error}';
+  @override
+  String get anki_sync_client_ankiweb_title => 'Sync with AnkiWeb?';
+  @override
+  String get anki_sync_client_ankiweb_body =>
+      'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+  @override
+  String get anki_sync_client_ankiweb_confirm => 'Use AnkiWeb anyway';
+  @override
+  String anki_sync_client_has_unsynced({required Object count}) =>
+      '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+  @override
+  String anki_sync_client_sign_in_failed({required Object error}) =>
+      'Sign-in failed: ${error}';
 }
 
 // Path: <root>
@@ -91475,6 +91834,70 @@ class _StringsIt extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+  @override
+  String get anki_error_sync_signed_out =>
+      'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+  @override
+  String get anki_error_sync_unavailable =>
+      'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+  @override
+  String get anki_sync_client_section_title => 'Anki sync (no Anki needed)';
+  @override
+  String get anki_sync_client_use_title => 'Sync cards straight to Anki';
+  @override
+  String get anki_sync_client_use_hint =>
+      'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+  @override
+  String get anki_sync_client_server_title => 'Sync server';
+  @override
+  String get anki_sync_client_server_hint =>
+      'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+  @override
+  String get anki_sync_client_username_title => 'Username';
+  @override
+  String get anki_sync_client_password_title => 'Password';
+  @override
+  String get anki_sync_client_sign_in => 'Sign in and download collection';
+  @override
+  String get anki_sync_client_sign_out => 'Sign out';
+  @override
+  String get anki_sync_client_sync_now => 'Sync now';
+  @override
+  String get anki_sync_client_status_signed_out => 'Not signed in';
+  @override
+  String anki_sync_client_status_signed_in({
+    required Object user,
+    required Object server,
+  }) => 'Signed in as ${user} on ${server}';
+  @override
+  String get anki_sync_client_status_busy => 'Syncing…';
+  @override
+  String anki_sync_client_status_unsynced({required Object count}) =>
+      '${count} card(s) not synced yet';
+  @override
+  String get anki_sync_client_status_all_synced => 'All cards synced';
+  @override
+  String anki_sync_client_status_last_sync({required Object time}) =>
+      'Last synced ${time}';
+  @override
+  String get anki_sync_client_status_blocked =>
+      'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+  @override
+  String anki_sync_client_status_failed({required Object error}) =>
+      'Last sync failed: ${error}';
+  @override
+  String get anki_sync_client_ankiweb_title => 'Sync with AnkiWeb?';
+  @override
+  String get anki_sync_client_ankiweb_body =>
+      'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+  @override
+  String get anki_sync_client_ankiweb_confirm => 'Use AnkiWeb anyway';
+  @override
+  String anki_sync_client_has_unsynced({required Object count}) =>
+      '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+  @override
+  String anki_sync_client_sign_in_failed({required Object error}) =>
+      'Sign-in failed: ${error}';
 }
 
 // Path: <root>
@@ -104737,6 +105160,70 @@ class _StringsJa extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+  @override
+  String get anki_error_sync_signed_out =>
+      'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+  @override
+  String get anki_error_sync_unavailable =>
+      'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+  @override
+  String get anki_sync_client_section_title => 'Anki sync (no Anki needed)';
+  @override
+  String get anki_sync_client_use_title => 'Sync cards straight to Anki';
+  @override
+  String get anki_sync_client_use_hint =>
+      'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+  @override
+  String get anki_sync_client_server_title => 'Sync server';
+  @override
+  String get anki_sync_client_server_hint =>
+      'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+  @override
+  String get anki_sync_client_username_title => 'Username';
+  @override
+  String get anki_sync_client_password_title => 'Password';
+  @override
+  String get anki_sync_client_sign_in => 'Sign in and download collection';
+  @override
+  String get anki_sync_client_sign_out => 'Sign out';
+  @override
+  String get anki_sync_client_sync_now => 'Sync now';
+  @override
+  String get anki_sync_client_status_signed_out => 'Not signed in';
+  @override
+  String anki_sync_client_status_signed_in({
+    required Object user,
+    required Object server,
+  }) => 'Signed in as ${user} on ${server}';
+  @override
+  String get anki_sync_client_status_busy => 'Syncing…';
+  @override
+  String anki_sync_client_status_unsynced({required Object count}) =>
+      '${count} card(s) not synced yet';
+  @override
+  String get anki_sync_client_status_all_synced => 'All cards synced';
+  @override
+  String anki_sync_client_status_last_sync({required Object time}) =>
+      'Last synced ${time}';
+  @override
+  String get anki_sync_client_status_blocked =>
+      'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+  @override
+  String anki_sync_client_status_failed({required Object error}) =>
+      'Last sync failed: ${error}';
+  @override
+  String get anki_sync_client_ankiweb_title => 'Sync with AnkiWeb?';
+  @override
+  String get anki_sync_client_ankiweb_body =>
+      'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+  @override
+  String get anki_sync_client_ankiweb_confirm => 'Use AnkiWeb anyway';
+  @override
+  String anki_sync_client_has_unsynced({required Object count}) =>
+      '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+  @override
+  String anki_sync_client_sign_in_failed({required Object error}) =>
+      'Sign-in failed: ${error}';
 }
 
 // Path: <root>
@@ -118016,6 +118503,70 @@ class _StringsKo extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+  @override
+  String get anki_error_sync_signed_out =>
+      'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+  @override
+  String get anki_error_sync_unavailable =>
+      'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+  @override
+  String get anki_sync_client_section_title => 'Anki sync (no Anki needed)';
+  @override
+  String get anki_sync_client_use_title => 'Sync cards straight to Anki';
+  @override
+  String get anki_sync_client_use_hint =>
+      'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+  @override
+  String get anki_sync_client_server_title => 'Sync server';
+  @override
+  String get anki_sync_client_server_hint =>
+      'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+  @override
+  String get anki_sync_client_username_title => 'Username';
+  @override
+  String get anki_sync_client_password_title => 'Password';
+  @override
+  String get anki_sync_client_sign_in => 'Sign in and download collection';
+  @override
+  String get anki_sync_client_sign_out => 'Sign out';
+  @override
+  String get anki_sync_client_sync_now => 'Sync now';
+  @override
+  String get anki_sync_client_status_signed_out => 'Not signed in';
+  @override
+  String anki_sync_client_status_signed_in({
+    required Object user,
+    required Object server,
+  }) => 'Signed in as ${user} on ${server}';
+  @override
+  String get anki_sync_client_status_busy => 'Syncing…';
+  @override
+  String anki_sync_client_status_unsynced({required Object count}) =>
+      '${count} card(s) not synced yet';
+  @override
+  String get anki_sync_client_status_all_synced => 'All cards synced';
+  @override
+  String anki_sync_client_status_last_sync({required Object time}) =>
+      'Last synced ${time}';
+  @override
+  String get anki_sync_client_status_blocked =>
+      'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+  @override
+  String anki_sync_client_status_failed({required Object error}) =>
+      'Last sync failed: ${error}';
+  @override
+  String get anki_sync_client_ankiweb_title => 'Sync with AnkiWeb?';
+  @override
+  String get anki_sync_client_ankiweb_body =>
+      'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+  @override
+  String get anki_sync_client_ankiweb_confirm => 'Use AnkiWeb anyway';
+  @override
+  String anki_sync_client_has_unsynced({required Object count}) =>
+      '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+  @override
+  String anki_sync_client_sign_in_failed({required Object error}) =>
+      'Sign-in failed: ${error}';
 }
 
 // Path: <root>
@@ -131877,6 +132428,70 @@ class _StringsNl extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+  @override
+  String get anki_error_sync_signed_out =>
+      'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+  @override
+  String get anki_error_sync_unavailable =>
+      'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+  @override
+  String get anki_sync_client_section_title => 'Anki sync (no Anki needed)';
+  @override
+  String get anki_sync_client_use_title => 'Sync cards straight to Anki';
+  @override
+  String get anki_sync_client_use_hint =>
+      'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+  @override
+  String get anki_sync_client_server_title => 'Sync server';
+  @override
+  String get anki_sync_client_server_hint =>
+      'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+  @override
+  String get anki_sync_client_username_title => 'Username';
+  @override
+  String get anki_sync_client_password_title => 'Password';
+  @override
+  String get anki_sync_client_sign_in => 'Sign in and download collection';
+  @override
+  String get anki_sync_client_sign_out => 'Sign out';
+  @override
+  String get anki_sync_client_sync_now => 'Sync now';
+  @override
+  String get anki_sync_client_status_signed_out => 'Not signed in';
+  @override
+  String anki_sync_client_status_signed_in({
+    required Object user,
+    required Object server,
+  }) => 'Signed in as ${user} on ${server}';
+  @override
+  String get anki_sync_client_status_busy => 'Syncing…';
+  @override
+  String anki_sync_client_status_unsynced({required Object count}) =>
+      '${count} card(s) not synced yet';
+  @override
+  String get anki_sync_client_status_all_synced => 'All cards synced';
+  @override
+  String anki_sync_client_status_last_sync({required Object time}) =>
+      'Last synced ${time}';
+  @override
+  String get anki_sync_client_status_blocked =>
+      'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+  @override
+  String anki_sync_client_status_failed({required Object error}) =>
+      'Last sync failed: ${error}';
+  @override
+  String get anki_sync_client_ankiweb_title => 'Sync with AnkiWeb?';
+  @override
+  String get anki_sync_client_ankiweb_body =>
+      'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+  @override
+  String get anki_sync_client_ankiweb_confirm => 'Use AnkiWeb anyway';
+  @override
+  String anki_sync_client_has_unsynced({required Object count}) =>
+      '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+  @override
+  String anki_sync_client_sign_in_failed({required Object error}) =>
+      'Sign-in failed: ${error}';
 }
 
 // Path: <root>
@@ -145791,6 +146406,70 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+  @override
+  String get anki_error_sync_signed_out =>
+      'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+  @override
+  String get anki_error_sync_unavailable =>
+      'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+  @override
+  String get anki_sync_client_section_title => 'Anki sync (no Anki needed)';
+  @override
+  String get anki_sync_client_use_title => 'Sync cards straight to Anki';
+  @override
+  String get anki_sync_client_use_hint =>
+      'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+  @override
+  String get anki_sync_client_server_title => 'Sync server';
+  @override
+  String get anki_sync_client_server_hint =>
+      'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+  @override
+  String get anki_sync_client_username_title => 'Username';
+  @override
+  String get anki_sync_client_password_title => 'Password';
+  @override
+  String get anki_sync_client_sign_in => 'Sign in and download collection';
+  @override
+  String get anki_sync_client_sign_out => 'Sign out';
+  @override
+  String get anki_sync_client_sync_now => 'Sync now';
+  @override
+  String get anki_sync_client_status_signed_out => 'Not signed in';
+  @override
+  String anki_sync_client_status_signed_in({
+    required Object user,
+    required Object server,
+  }) => 'Signed in as ${user} on ${server}';
+  @override
+  String get anki_sync_client_status_busy => 'Syncing…';
+  @override
+  String anki_sync_client_status_unsynced({required Object count}) =>
+      '${count} card(s) not synced yet';
+  @override
+  String get anki_sync_client_status_all_synced => 'All cards synced';
+  @override
+  String anki_sync_client_status_last_sync({required Object time}) =>
+      'Last synced ${time}';
+  @override
+  String get anki_sync_client_status_blocked =>
+      'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+  @override
+  String anki_sync_client_status_failed({required Object error}) =>
+      'Last sync failed: ${error}';
+  @override
+  String get anki_sync_client_ankiweb_title => 'Sync with AnkiWeb?';
+  @override
+  String get anki_sync_client_ankiweb_body =>
+      'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+  @override
+  String get anki_sync_client_ankiweb_confirm => 'Use AnkiWeb anyway';
+  @override
+  String anki_sync_client_has_unsynced({required Object count}) =>
+      '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+  @override
+  String anki_sync_client_sign_in_failed({required Object error}) =>
+      'Sign-in failed: ${error}';
 }
 
 // Path: <root>
@@ -159680,6 +160359,70 @@ class _StringsRu extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+  @override
+  String get anki_error_sync_signed_out =>
+      'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+  @override
+  String get anki_error_sync_unavailable =>
+      'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+  @override
+  String get anki_sync_client_section_title => 'Anki sync (no Anki needed)';
+  @override
+  String get anki_sync_client_use_title => 'Sync cards straight to Anki';
+  @override
+  String get anki_sync_client_use_hint =>
+      'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+  @override
+  String get anki_sync_client_server_title => 'Sync server';
+  @override
+  String get anki_sync_client_server_hint =>
+      'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+  @override
+  String get anki_sync_client_username_title => 'Username';
+  @override
+  String get anki_sync_client_password_title => 'Password';
+  @override
+  String get anki_sync_client_sign_in => 'Sign in and download collection';
+  @override
+  String get anki_sync_client_sign_out => 'Sign out';
+  @override
+  String get anki_sync_client_sync_now => 'Sync now';
+  @override
+  String get anki_sync_client_status_signed_out => 'Not signed in';
+  @override
+  String anki_sync_client_status_signed_in({
+    required Object user,
+    required Object server,
+  }) => 'Signed in as ${user} on ${server}';
+  @override
+  String get anki_sync_client_status_busy => 'Syncing…';
+  @override
+  String anki_sync_client_status_unsynced({required Object count}) =>
+      '${count} card(s) not synced yet';
+  @override
+  String get anki_sync_client_status_all_synced => 'All cards synced';
+  @override
+  String anki_sync_client_status_last_sync({required Object time}) =>
+      'Last synced ${time}';
+  @override
+  String get anki_sync_client_status_blocked =>
+      'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+  @override
+  String anki_sync_client_status_failed({required Object error}) =>
+      'Last sync failed: ${error}';
+  @override
+  String get anki_sync_client_ankiweb_title => 'Sync with AnkiWeb?';
+  @override
+  String get anki_sync_client_ankiweb_body =>
+      'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+  @override
+  String get anki_sync_client_ankiweb_confirm => 'Use AnkiWeb anyway';
+  @override
+  String anki_sync_client_has_unsynced({required Object count}) =>
+      '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+  @override
+  String anki_sync_client_sign_in_failed({required Object error}) =>
+      'Sign-in failed: ${error}';
 }
 
 // Path: <root>
@@ -173366,6 +174109,70 @@ class _StringsTh extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+  @override
+  String get anki_error_sync_signed_out =>
+      'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+  @override
+  String get anki_error_sync_unavailable =>
+      'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+  @override
+  String get anki_sync_client_section_title => 'Anki sync (no Anki needed)';
+  @override
+  String get anki_sync_client_use_title => 'Sync cards straight to Anki';
+  @override
+  String get anki_sync_client_use_hint =>
+      'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+  @override
+  String get anki_sync_client_server_title => 'Sync server';
+  @override
+  String get anki_sync_client_server_hint =>
+      'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+  @override
+  String get anki_sync_client_username_title => 'Username';
+  @override
+  String get anki_sync_client_password_title => 'Password';
+  @override
+  String get anki_sync_client_sign_in => 'Sign in and download collection';
+  @override
+  String get anki_sync_client_sign_out => 'Sign out';
+  @override
+  String get anki_sync_client_sync_now => 'Sync now';
+  @override
+  String get anki_sync_client_status_signed_out => 'Not signed in';
+  @override
+  String anki_sync_client_status_signed_in({
+    required Object user,
+    required Object server,
+  }) => 'Signed in as ${user} on ${server}';
+  @override
+  String get anki_sync_client_status_busy => 'Syncing…';
+  @override
+  String anki_sync_client_status_unsynced({required Object count}) =>
+      '${count} card(s) not synced yet';
+  @override
+  String get anki_sync_client_status_all_synced => 'All cards synced';
+  @override
+  String anki_sync_client_status_last_sync({required Object time}) =>
+      'Last synced ${time}';
+  @override
+  String get anki_sync_client_status_blocked =>
+      'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+  @override
+  String anki_sync_client_status_failed({required Object error}) =>
+      'Last sync failed: ${error}';
+  @override
+  String get anki_sync_client_ankiweb_title => 'Sync with AnkiWeb?';
+  @override
+  String get anki_sync_client_ankiweb_body =>
+      'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+  @override
+  String get anki_sync_client_ankiweb_confirm => 'Use AnkiWeb anyway';
+  @override
+  String anki_sync_client_has_unsynced({required Object count}) =>
+      '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+  @override
+  String anki_sync_client_sign_in_failed({required Object error}) =>
+      'Sign-in failed: ${error}';
 }
 
 // Path: <root>
@@ -187166,6 +187973,70 @@ class _StringsTr extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+  @override
+  String get anki_error_sync_signed_out =>
+      'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+  @override
+  String get anki_error_sync_unavailable =>
+      'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+  @override
+  String get anki_sync_client_section_title => 'Anki sync (no Anki needed)';
+  @override
+  String get anki_sync_client_use_title => 'Sync cards straight to Anki';
+  @override
+  String get anki_sync_client_use_hint =>
+      'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+  @override
+  String get anki_sync_client_server_title => 'Sync server';
+  @override
+  String get anki_sync_client_server_hint =>
+      'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+  @override
+  String get anki_sync_client_username_title => 'Username';
+  @override
+  String get anki_sync_client_password_title => 'Password';
+  @override
+  String get anki_sync_client_sign_in => 'Sign in and download collection';
+  @override
+  String get anki_sync_client_sign_out => 'Sign out';
+  @override
+  String get anki_sync_client_sync_now => 'Sync now';
+  @override
+  String get anki_sync_client_status_signed_out => 'Not signed in';
+  @override
+  String anki_sync_client_status_signed_in({
+    required Object user,
+    required Object server,
+  }) => 'Signed in as ${user} on ${server}';
+  @override
+  String get anki_sync_client_status_busy => 'Syncing…';
+  @override
+  String anki_sync_client_status_unsynced({required Object count}) =>
+      '${count} card(s) not synced yet';
+  @override
+  String get anki_sync_client_status_all_synced => 'All cards synced';
+  @override
+  String anki_sync_client_status_last_sync({required Object time}) =>
+      'Last synced ${time}';
+  @override
+  String get anki_sync_client_status_blocked =>
+      'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+  @override
+  String anki_sync_client_status_failed({required Object error}) =>
+      'Last sync failed: ${error}';
+  @override
+  String get anki_sync_client_ankiweb_title => 'Sync with AnkiWeb?';
+  @override
+  String get anki_sync_client_ankiweb_body =>
+      'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+  @override
+  String get anki_sync_client_ankiweb_confirm => 'Use AnkiWeb anyway';
+  @override
+  String anki_sync_client_has_unsynced({required Object count}) =>
+      '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+  @override
+  String anki_sync_client_sign_in_failed({required Object error}) =>
+      'Sign-in failed: ${error}';
 }
 
 // Path: <root>
@@ -200937,6 +201808,70 @@ class _StringsVi extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+  @override
+  String get anki_error_sync_signed_out =>
+      'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+  @override
+  String get anki_error_sync_unavailable =>
+      'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+  @override
+  String get anki_sync_client_section_title => 'Anki sync (no Anki needed)';
+  @override
+  String get anki_sync_client_use_title => 'Sync cards straight to Anki';
+  @override
+  String get anki_sync_client_use_hint =>
+      'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+  @override
+  String get anki_sync_client_server_title => 'Sync server';
+  @override
+  String get anki_sync_client_server_hint =>
+      'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+  @override
+  String get anki_sync_client_username_title => 'Username';
+  @override
+  String get anki_sync_client_password_title => 'Password';
+  @override
+  String get anki_sync_client_sign_in => 'Sign in and download collection';
+  @override
+  String get anki_sync_client_sign_out => 'Sign out';
+  @override
+  String get anki_sync_client_sync_now => 'Sync now';
+  @override
+  String get anki_sync_client_status_signed_out => 'Not signed in';
+  @override
+  String anki_sync_client_status_signed_in({
+    required Object user,
+    required Object server,
+  }) => 'Signed in as ${user} on ${server}';
+  @override
+  String get anki_sync_client_status_busy => 'Syncing…';
+  @override
+  String anki_sync_client_status_unsynced({required Object count}) =>
+      '${count} card(s) not synced yet';
+  @override
+  String get anki_sync_client_status_all_synced => 'All cards synced';
+  @override
+  String anki_sync_client_status_last_sync({required Object time}) =>
+      'Last synced ${time}';
+  @override
+  String get anki_sync_client_status_blocked =>
+      'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+  @override
+  String anki_sync_client_status_failed({required Object error}) =>
+      'Last sync failed: ${error}';
+  @override
+  String get anki_sync_client_ankiweb_title => 'Sync with AnkiWeb?';
+  @override
+  String get anki_sync_client_ankiweb_body =>
+      'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+  @override
+  String get anki_sync_client_ankiweb_confirm => 'Use AnkiWeb anyway';
+  @override
+  String anki_sync_client_has_unsynced({required Object count}) =>
+      '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+  @override
+  String anki_sync_client_sign_in_failed({required Object error}) =>
+      'Sign-in failed: ${error}';
 }
 
 // Path: <root>
@@ -213532,6 +214467,70 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       '没装 Anki 的设备存下的卡片，经你配置的同步（云盘，或本机作为互联客户端时的互联）送到这台设备，由这里的 Anki 加卡。同一时间只有一台设备负责。互联主机暂时不能担任。';
+  @override
+  String get anki_error_sync_signed_out =>
+      '请先登录 Anki 同步服务器（Anki 设置 › Anki 同步）。';
+  @override
+  String get anki_error_sync_unavailable =>
+      '本机没有 fushi-anki-sync，无法直接同步到 Anki。';
+  @override
+  String get anki_sync_client_section_title => 'Anki 同步（无需安装 Anki）';
+  @override
+  String get anki_sync_client_use_title => '直接同步到 Anki';
+  @override
+  String get anki_sync_client_use_hint =>
+      'Fushi 在本机保存一份你的牌组集合，直接与 Anki 同步服务器同步；本机不需要安装 Anki 或 AnkiConnect。';
+  @override
+  String get anki_sync_client_server_title => '同步服务器';
+  @override
+  String get anki_sync_client_server_hint =>
+      '自建服务器地址，如 http://nas:8080/；留空为 AnkiWeb';
+  @override
+  String get anki_sync_client_username_title => '用户名';
+  @override
+  String get anki_sync_client_password_title => '密码';
+  @override
+  String get anki_sync_client_sign_in => '登录并下载牌组集合';
+  @override
+  String get anki_sync_client_sign_out => '退出登录';
+  @override
+  String get anki_sync_client_sync_now => '立即同步';
+  @override
+  String get anki_sync_client_status_signed_out => '未登录';
+  @override
+  String anki_sync_client_status_signed_in({
+    required Object user,
+    required Object server,
+  }) => '已登录：${user}（${server}）';
+  @override
+  String get anki_sync_client_status_busy => '同步中…';
+  @override
+  String anki_sync_client_status_unsynced({required Object count}) =>
+      '${count} 张卡尚未同步';
+  @override
+  String get anki_sync_client_status_all_synced => '卡片已全部同步';
+  @override
+  String anki_sync_client_status_last_sync({required Object time}) =>
+      '上次同步：${time}';
+  @override
+  String get anki_sync_client_status_blocked =>
+      '服务器要求整库上传，Fushi 不会这么做。请先在官方 Anki 里同步一次再重试；在那之前卡片保留在本机。';
+  @override
+  String anki_sync_client_status_failed({required Object error}) =>
+      '上次同步失败：${error}';
+  @override
+  String get anki_sync_client_ankiweb_title => '要同步到 AnkiWeb 吗？';
+  @override
+  String get anki_sync_client_ankiweb_body =>
+      'AnkiWeb 的服务条款只允许官方 Anki 客户端同步。Fushi 会如实表明自己是 Fushi，因此 AnkiWeb 可能拒绝连接，或对你的账号采取措施。自建同步服务器没有这项限制。';
+  @override
+  String get anki_sync_client_ankiweb_confirm => '仍然使用 AnkiWeb';
+  @override
+  String anki_sync_client_has_unsynced({required Object count}) =>
+      '还有 ${count} 张卡没有同步，请先同步再切换账号或退出登录。';
+  @override
+  String anki_sync_client_sign_in_failed({required Object error}) =>
+      '登录失败：${error}';
 }
 
 // Path: <root>
@@ -226474,6 +227473,70 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get anki_pending_mine_landing_hint =>
       'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+  @override
+  String get anki_error_sync_signed_out =>
+      'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+  @override
+  String get anki_error_sync_unavailable =>
+      'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+  @override
+  String get anki_sync_client_section_title => 'Anki sync (no Anki needed)';
+  @override
+  String get anki_sync_client_use_title => 'Sync cards straight to Anki';
+  @override
+  String get anki_sync_client_use_hint =>
+      'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+  @override
+  String get anki_sync_client_server_title => 'Sync server';
+  @override
+  String get anki_sync_client_server_hint =>
+      'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+  @override
+  String get anki_sync_client_username_title => 'Username';
+  @override
+  String get anki_sync_client_password_title => 'Password';
+  @override
+  String get anki_sync_client_sign_in => 'Sign in and download collection';
+  @override
+  String get anki_sync_client_sign_out => 'Sign out';
+  @override
+  String get anki_sync_client_sync_now => 'Sync now';
+  @override
+  String get anki_sync_client_status_signed_out => 'Not signed in';
+  @override
+  String anki_sync_client_status_signed_in({
+    required Object user,
+    required Object server,
+  }) => 'Signed in as ${user} on ${server}';
+  @override
+  String get anki_sync_client_status_busy => 'Syncing…';
+  @override
+  String anki_sync_client_status_unsynced({required Object count}) =>
+      '${count} card(s) not synced yet';
+  @override
+  String get anki_sync_client_status_all_synced => 'All cards synced';
+  @override
+  String anki_sync_client_status_last_sync({required Object time}) =>
+      'Last synced ${time}';
+  @override
+  String get anki_sync_client_status_blocked =>
+      'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+  @override
+  String anki_sync_client_status_failed({required Object error}) =>
+      'Last sync failed: ${error}';
+  @override
+  String get anki_sync_client_ankiweb_title => 'Sync with AnkiWeb?';
+  @override
+  String get anki_sync_client_ankiweb_body =>
+      'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+  @override
+  String get anki_sync_client_ankiweb_confirm => 'Use AnkiWeb anyway';
+  @override
+  String anki_sync_client_has_unsynced({required Object count}) =>
+      '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+  @override
+  String anki_sync_client_sign_in_failed({required Object error}) =>
+      'Sign-in failed: ${error}';
 }
 
 /// Flat map(s) containing all translations.
@@ -238259,6 +239322,58 @@ extension on _StringsEn {
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+      case 'anki_error_sync_signed_out':
+        return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+      case 'anki_error_sync_unavailable':
+        return 'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+      case 'anki_sync_client_section_title':
+        return 'Anki sync (no Anki needed)';
+      case 'anki_sync_client_use_title':
+        return 'Sync cards straight to Anki';
+      case 'anki_sync_client_use_hint':
+        return 'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+      case 'anki_sync_client_server_title':
+        return 'Sync server';
+      case 'anki_sync_client_server_hint':
+        return 'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+      case 'anki_sync_client_username_title':
+        return 'Username';
+      case 'anki_sync_client_password_title':
+        return 'Password';
+      case 'anki_sync_client_sign_in':
+        return 'Sign in and download collection';
+      case 'anki_sync_client_sign_out':
+        return 'Sign out';
+      case 'anki_sync_client_sync_now':
+        return 'Sync now';
+      case 'anki_sync_client_status_signed_out':
+        return 'Not signed in';
+      case 'anki_sync_client_status_signed_in':
+        return ({required Object user, required Object server}) =>
+            'Signed in as ${user} on ${server}';
+      case 'anki_sync_client_status_busy':
+        return 'Syncing…';
+      case 'anki_sync_client_status_unsynced':
+        return ({required Object count}) => '${count} card(s) not synced yet';
+      case 'anki_sync_client_status_all_synced':
+        return 'All cards synced';
+      case 'anki_sync_client_status_last_sync':
+        return ({required Object time}) => 'Last synced ${time}';
+      case 'anki_sync_client_status_blocked':
+        return 'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+      case 'anki_sync_client_status_failed':
+        return ({required Object error}) => 'Last sync failed: ${error}';
+      case 'anki_sync_client_ankiweb_title':
+        return 'Sync with AnkiWeb?';
+      case 'anki_sync_client_ankiweb_body':
+        return 'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+      case 'anki_sync_client_ankiweb_confirm':
+        return 'Use AnkiWeb anyway';
+      case 'anki_sync_client_has_unsynced':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+      case 'anki_sync_client_sign_in_failed':
+        return ({required Object error}) => 'Sign-in failed: ${error}';
       default:
         return null;
     }
@@ -250039,6 +251154,58 @@ extension on _StringsAr {
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+      case 'anki_error_sync_signed_out':
+        return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+      case 'anki_error_sync_unavailable':
+        return 'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+      case 'anki_sync_client_section_title':
+        return 'Anki sync (no Anki needed)';
+      case 'anki_sync_client_use_title':
+        return 'Sync cards straight to Anki';
+      case 'anki_sync_client_use_hint':
+        return 'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+      case 'anki_sync_client_server_title':
+        return 'Sync server';
+      case 'anki_sync_client_server_hint':
+        return 'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+      case 'anki_sync_client_username_title':
+        return 'Username';
+      case 'anki_sync_client_password_title':
+        return 'Password';
+      case 'anki_sync_client_sign_in':
+        return 'Sign in and download collection';
+      case 'anki_sync_client_sign_out':
+        return 'Sign out';
+      case 'anki_sync_client_sync_now':
+        return 'Sync now';
+      case 'anki_sync_client_status_signed_out':
+        return 'Not signed in';
+      case 'anki_sync_client_status_signed_in':
+        return ({required Object user, required Object server}) =>
+            'Signed in as ${user} on ${server}';
+      case 'anki_sync_client_status_busy':
+        return 'Syncing…';
+      case 'anki_sync_client_status_unsynced':
+        return ({required Object count}) => '${count} card(s) not synced yet';
+      case 'anki_sync_client_status_all_synced':
+        return 'All cards synced';
+      case 'anki_sync_client_status_last_sync':
+        return ({required Object time}) => 'Last synced ${time}';
+      case 'anki_sync_client_status_blocked':
+        return 'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+      case 'anki_sync_client_status_failed':
+        return ({required Object error}) => 'Last sync failed: ${error}';
+      case 'anki_sync_client_ankiweb_title':
+        return 'Sync with AnkiWeb?';
+      case 'anki_sync_client_ankiweb_body':
+        return 'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+      case 'anki_sync_client_ankiweb_confirm':
+        return 'Use AnkiWeb anyway';
+      case 'anki_sync_client_has_unsynced':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+      case 'anki_sync_client_sign_in_failed':
+        return ({required Object error}) => 'Sign-in failed: ${error}';
       default:
         return null;
     }
@@ -261868,6 +263035,58 @@ extension on _StringsDe {
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+      case 'anki_error_sync_signed_out':
+        return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+      case 'anki_error_sync_unavailable':
+        return 'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+      case 'anki_sync_client_section_title':
+        return 'Anki sync (no Anki needed)';
+      case 'anki_sync_client_use_title':
+        return 'Sync cards straight to Anki';
+      case 'anki_sync_client_use_hint':
+        return 'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+      case 'anki_sync_client_server_title':
+        return 'Sync server';
+      case 'anki_sync_client_server_hint':
+        return 'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+      case 'anki_sync_client_username_title':
+        return 'Username';
+      case 'anki_sync_client_password_title':
+        return 'Password';
+      case 'anki_sync_client_sign_in':
+        return 'Sign in and download collection';
+      case 'anki_sync_client_sign_out':
+        return 'Sign out';
+      case 'anki_sync_client_sync_now':
+        return 'Sync now';
+      case 'anki_sync_client_status_signed_out':
+        return 'Not signed in';
+      case 'anki_sync_client_status_signed_in':
+        return ({required Object user, required Object server}) =>
+            'Signed in as ${user} on ${server}';
+      case 'anki_sync_client_status_busy':
+        return 'Syncing…';
+      case 'anki_sync_client_status_unsynced':
+        return ({required Object count}) => '${count} card(s) not synced yet';
+      case 'anki_sync_client_status_all_synced':
+        return 'All cards synced';
+      case 'anki_sync_client_status_last_sync':
+        return ({required Object time}) => 'Last synced ${time}';
+      case 'anki_sync_client_status_blocked':
+        return 'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+      case 'anki_sync_client_status_failed':
+        return ({required Object error}) => 'Last sync failed: ${error}';
+      case 'anki_sync_client_ankiweb_title':
+        return 'Sync with AnkiWeb?';
+      case 'anki_sync_client_ankiweb_body':
+        return 'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+      case 'anki_sync_client_ankiweb_confirm':
+        return 'Use AnkiWeb anyway';
+      case 'anki_sync_client_has_unsynced':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+      case 'anki_sync_client_sign_in_failed':
+        return ({required Object error}) => 'Sign-in failed: ${error}';
       default:
         return null;
     }
@@ -273687,6 +274906,58 @@ extension on _StringsEs {
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+      case 'anki_error_sync_signed_out':
+        return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+      case 'anki_error_sync_unavailable':
+        return 'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+      case 'anki_sync_client_section_title':
+        return 'Anki sync (no Anki needed)';
+      case 'anki_sync_client_use_title':
+        return 'Sync cards straight to Anki';
+      case 'anki_sync_client_use_hint':
+        return 'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+      case 'anki_sync_client_server_title':
+        return 'Sync server';
+      case 'anki_sync_client_server_hint':
+        return 'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+      case 'anki_sync_client_username_title':
+        return 'Username';
+      case 'anki_sync_client_password_title':
+        return 'Password';
+      case 'anki_sync_client_sign_in':
+        return 'Sign in and download collection';
+      case 'anki_sync_client_sign_out':
+        return 'Sign out';
+      case 'anki_sync_client_sync_now':
+        return 'Sync now';
+      case 'anki_sync_client_status_signed_out':
+        return 'Not signed in';
+      case 'anki_sync_client_status_signed_in':
+        return ({required Object user, required Object server}) =>
+            'Signed in as ${user} on ${server}';
+      case 'anki_sync_client_status_busy':
+        return 'Syncing…';
+      case 'anki_sync_client_status_unsynced':
+        return ({required Object count}) => '${count} card(s) not synced yet';
+      case 'anki_sync_client_status_all_synced':
+        return 'All cards synced';
+      case 'anki_sync_client_status_last_sync':
+        return ({required Object time}) => 'Last synced ${time}';
+      case 'anki_sync_client_status_blocked':
+        return 'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+      case 'anki_sync_client_status_failed':
+        return ({required Object error}) => 'Last sync failed: ${error}';
+      case 'anki_sync_client_ankiweb_title':
+        return 'Sync with AnkiWeb?';
+      case 'anki_sync_client_ankiweb_body':
+        return 'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+      case 'anki_sync_client_ankiweb_confirm':
+        return 'Use AnkiWeb anyway';
+      case 'anki_sync_client_has_unsynced':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+      case 'anki_sync_client_sign_in_failed':
+        return ({required Object error}) => 'Sign-in failed: ${error}';
       default:
         return null;
     }
@@ -285514,6 +286785,58 @@ extension on _StringsFr {
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+      case 'anki_error_sync_signed_out':
+        return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+      case 'anki_error_sync_unavailable':
+        return 'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+      case 'anki_sync_client_section_title':
+        return 'Anki sync (no Anki needed)';
+      case 'anki_sync_client_use_title':
+        return 'Sync cards straight to Anki';
+      case 'anki_sync_client_use_hint':
+        return 'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+      case 'anki_sync_client_server_title':
+        return 'Sync server';
+      case 'anki_sync_client_server_hint':
+        return 'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+      case 'anki_sync_client_username_title':
+        return 'Username';
+      case 'anki_sync_client_password_title':
+        return 'Password';
+      case 'anki_sync_client_sign_in':
+        return 'Sign in and download collection';
+      case 'anki_sync_client_sign_out':
+        return 'Sign out';
+      case 'anki_sync_client_sync_now':
+        return 'Sync now';
+      case 'anki_sync_client_status_signed_out':
+        return 'Not signed in';
+      case 'anki_sync_client_status_signed_in':
+        return ({required Object user, required Object server}) =>
+            'Signed in as ${user} on ${server}';
+      case 'anki_sync_client_status_busy':
+        return 'Syncing…';
+      case 'anki_sync_client_status_unsynced':
+        return ({required Object count}) => '${count} card(s) not synced yet';
+      case 'anki_sync_client_status_all_synced':
+        return 'All cards synced';
+      case 'anki_sync_client_status_last_sync':
+        return ({required Object time}) => 'Last synced ${time}';
+      case 'anki_sync_client_status_blocked':
+        return 'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+      case 'anki_sync_client_status_failed':
+        return ({required Object error}) => 'Last sync failed: ${error}';
+      case 'anki_sync_client_ankiweb_title':
+        return 'Sync with AnkiWeb?';
+      case 'anki_sync_client_ankiweb_body':
+        return 'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+      case 'anki_sync_client_ankiweb_confirm':
+        return 'Use AnkiWeb anyway';
+      case 'anki_sync_client_has_unsynced':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+      case 'anki_sync_client_sign_in_failed':
+        return ({required Object error}) => 'Sign-in failed: ${error}';
       default:
         return null;
     }
@@ -297311,6 +298634,58 @@ extension on _StringsId {
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+      case 'anki_error_sync_signed_out':
+        return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+      case 'anki_error_sync_unavailable':
+        return 'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+      case 'anki_sync_client_section_title':
+        return 'Anki sync (no Anki needed)';
+      case 'anki_sync_client_use_title':
+        return 'Sync cards straight to Anki';
+      case 'anki_sync_client_use_hint':
+        return 'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+      case 'anki_sync_client_server_title':
+        return 'Sync server';
+      case 'anki_sync_client_server_hint':
+        return 'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+      case 'anki_sync_client_username_title':
+        return 'Username';
+      case 'anki_sync_client_password_title':
+        return 'Password';
+      case 'anki_sync_client_sign_in':
+        return 'Sign in and download collection';
+      case 'anki_sync_client_sign_out':
+        return 'Sign out';
+      case 'anki_sync_client_sync_now':
+        return 'Sync now';
+      case 'anki_sync_client_status_signed_out':
+        return 'Not signed in';
+      case 'anki_sync_client_status_signed_in':
+        return ({required Object user, required Object server}) =>
+            'Signed in as ${user} on ${server}';
+      case 'anki_sync_client_status_busy':
+        return 'Syncing…';
+      case 'anki_sync_client_status_unsynced':
+        return ({required Object count}) => '${count} card(s) not synced yet';
+      case 'anki_sync_client_status_all_synced':
+        return 'All cards synced';
+      case 'anki_sync_client_status_last_sync':
+        return ({required Object time}) => 'Last synced ${time}';
+      case 'anki_sync_client_status_blocked':
+        return 'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+      case 'anki_sync_client_status_failed':
+        return ({required Object error}) => 'Last sync failed: ${error}';
+      case 'anki_sync_client_ankiweb_title':
+        return 'Sync with AnkiWeb?';
+      case 'anki_sync_client_ankiweb_body':
+        return 'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+      case 'anki_sync_client_ankiweb_confirm':
+        return 'Use AnkiWeb anyway';
+      case 'anki_sync_client_has_unsynced':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+      case 'anki_sync_client_sign_in_failed':
+        return ({required Object error}) => 'Sign-in failed: ${error}';
       default:
         return null;
     }
@@ -309131,6 +310506,58 @@ extension on _StringsIt {
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+      case 'anki_error_sync_signed_out':
+        return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+      case 'anki_error_sync_unavailable':
+        return 'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+      case 'anki_sync_client_section_title':
+        return 'Anki sync (no Anki needed)';
+      case 'anki_sync_client_use_title':
+        return 'Sync cards straight to Anki';
+      case 'anki_sync_client_use_hint':
+        return 'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+      case 'anki_sync_client_server_title':
+        return 'Sync server';
+      case 'anki_sync_client_server_hint':
+        return 'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+      case 'anki_sync_client_username_title':
+        return 'Username';
+      case 'anki_sync_client_password_title':
+        return 'Password';
+      case 'anki_sync_client_sign_in':
+        return 'Sign in and download collection';
+      case 'anki_sync_client_sign_out':
+        return 'Sign out';
+      case 'anki_sync_client_sync_now':
+        return 'Sync now';
+      case 'anki_sync_client_status_signed_out':
+        return 'Not signed in';
+      case 'anki_sync_client_status_signed_in':
+        return ({required Object user, required Object server}) =>
+            'Signed in as ${user} on ${server}';
+      case 'anki_sync_client_status_busy':
+        return 'Syncing…';
+      case 'anki_sync_client_status_unsynced':
+        return ({required Object count}) => '${count} card(s) not synced yet';
+      case 'anki_sync_client_status_all_synced':
+        return 'All cards synced';
+      case 'anki_sync_client_status_last_sync':
+        return ({required Object time}) => 'Last synced ${time}';
+      case 'anki_sync_client_status_blocked':
+        return 'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+      case 'anki_sync_client_status_failed':
+        return ({required Object error}) => 'Last sync failed: ${error}';
+      case 'anki_sync_client_ankiweb_title':
+        return 'Sync with AnkiWeb?';
+      case 'anki_sync_client_ankiweb_body':
+        return 'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+      case 'anki_sync_client_ankiweb_confirm':
+        return 'Use AnkiWeb anyway';
+      case 'anki_sync_client_has_unsynced':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+      case 'anki_sync_client_sign_in_failed':
+        return ({required Object error}) => 'Sign-in failed: ${error}';
       default:
         return null;
     }
@@ -320872,6 +322299,58 @@ extension on _StringsJa {
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+      case 'anki_error_sync_signed_out':
+        return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+      case 'anki_error_sync_unavailable':
+        return 'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+      case 'anki_sync_client_section_title':
+        return 'Anki sync (no Anki needed)';
+      case 'anki_sync_client_use_title':
+        return 'Sync cards straight to Anki';
+      case 'anki_sync_client_use_hint':
+        return 'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+      case 'anki_sync_client_server_title':
+        return 'Sync server';
+      case 'anki_sync_client_server_hint':
+        return 'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+      case 'anki_sync_client_username_title':
+        return 'Username';
+      case 'anki_sync_client_password_title':
+        return 'Password';
+      case 'anki_sync_client_sign_in':
+        return 'Sign in and download collection';
+      case 'anki_sync_client_sign_out':
+        return 'Sign out';
+      case 'anki_sync_client_sync_now':
+        return 'Sync now';
+      case 'anki_sync_client_status_signed_out':
+        return 'Not signed in';
+      case 'anki_sync_client_status_signed_in':
+        return ({required Object user, required Object server}) =>
+            'Signed in as ${user} on ${server}';
+      case 'anki_sync_client_status_busy':
+        return 'Syncing…';
+      case 'anki_sync_client_status_unsynced':
+        return ({required Object count}) => '${count} card(s) not synced yet';
+      case 'anki_sync_client_status_all_synced':
+        return 'All cards synced';
+      case 'anki_sync_client_status_last_sync':
+        return ({required Object time}) => 'Last synced ${time}';
+      case 'anki_sync_client_status_blocked':
+        return 'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+      case 'anki_sync_client_status_failed':
+        return ({required Object error}) => 'Last sync failed: ${error}';
+      case 'anki_sync_client_ankiweb_title':
+        return 'Sync with AnkiWeb?';
+      case 'anki_sync_client_ankiweb_body':
+        return 'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+      case 'anki_sync_client_ankiweb_confirm':
+        return 'Use AnkiWeb anyway';
+      case 'anki_sync_client_has_unsynced':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+      case 'anki_sync_client_sign_in_failed':
+        return ({required Object error}) => 'Sign-in failed: ${error}';
       default:
         return null;
     }
@@ -332621,6 +334100,58 @@ extension on _StringsKo {
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+      case 'anki_error_sync_signed_out':
+        return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+      case 'anki_error_sync_unavailable':
+        return 'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+      case 'anki_sync_client_section_title':
+        return 'Anki sync (no Anki needed)';
+      case 'anki_sync_client_use_title':
+        return 'Sync cards straight to Anki';
+      case 'anki_sync_client_use_hint':
+        return 'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+      case 'anki_sync_client_server_title':
+        return 'Sync server';
+      case 'anki_sync_client_server_hint':
+        return 'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+      case 'anki_sync_client_username_title':
+        return 'Username';
+      case 'anki_sync_client_password_title':
+        return 'Password';
+      case 'anki_sync_client_sign_in':
+        return 'Sign in and download collection';
+      case 'anki_sync_client_sign_out':
+        return 'Sign out';
+      case 'anki_sync_client_sync_now':
+        return 'Sync now';
+      case 'anki_sync_client_status_signed_out':
+        return 'Not signed in';
+      case 'anki_sync_client_status_signed_in':
+        return ({required Object user, required Object server}) =>
+            'Signed in as ${user} on ${server}';
+      case 'anki_sync_client_status_busy':
+        return 'Syncing…';
+      case 'anki_sync_client_status_unsynced':
+        return ({required Object count}) => '${count} card(s) not synced yet';
+      case 'anki_sync_client_status_all_synced':
+        return 'All cards synced';
+      case 'anki_sync_client_status_last_sync':
+        return ({required Object time}) => 'Last synced ${time}';
+      case 'anki_sync_client_status_blocked':
+        return 'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+      case 'anki_sync_client_status_failed':
+        return ({required Object error}) => 'Last sync failed: ${error}';
+      case 'anki_sync_client_ankiweb_title':
+        return 'Sync with AnkiWeb?';
+      case 'anki_sync_client_ankiweb_body':
+        return 'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+      case 'anki_sync_client_ankiweb_confirm':
+        return 'Use AnkiWeb anyway';
+      case 'anki_sync_client_has_unsynced':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+      case 'anki_sync_client_sign_in_failed':
+        return ({required Object error}) => 'Sign-in failed: ${error}';
       default:
         return null;
     }
@@ -344436,6 +345967,58 @@ extension on _StringsNl {
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+      case 'anki_error_sync_signed_out':
+        return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+      case 'anki_error_sync_unavailable':
+        return 'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+      case 'anki_sync_client_section_title':
+        return 'Anki sync (no Anki needed)';
+      case 'anki_sync_client_use_title':
+        return 'Sync cards straight to Anki';
+      case 'anki_sync_client_use_hint':
+        return 'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+      case 'anki_sync_client_server_title':
+        return 'Sync server';
+      case 'anki_sync_client_server_hint':
+        return 'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+      case 'anki_sync_client_username_title':
+        return 'Username';
+      case 'anki_sync_client_password_title':
+        return 'Password';
+      case 'anki_sync_client_sign_in':
+        return 'Sign in and download collection';
+      case 'anki_sync_client_sign_out':
+        return 'Sign out';
+      case 'anki_sync_client_sync_now':
+        return 'Sync now';
+      case 'anki_sync_client_status_signed_out':
+        return 'Not signed in';
+      case 'anki_sync_client_status_signed_in':
+        return ({required Object user, required Object server}) =>
+            'Signed in as ${user} on ${server}';
+      case 'anki_sync_client_status_busy':
+        return 'Syncing…';
+      case 'anki_sync_client_status_unsynced':
+        return ({required Object count}) => '${count} card(s) not synced yet';
+      case 'anki_sync_client_status_all_synced':
+        return 'All cards synced';
+      case 'anki_sync_client_status_last_sync':
+        return ({required Object time}) => 'Last synced ${time}';
+      case 'anki_sync_client_status_blocked':
+        return 'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+      case 'anki_sync_client_status_failed':
+        return ({required Object error}) => 'Last sync failed: ${error}';
+      case 'anki_sync_client_ankiweb_title':
+        return 'Sync with AnkiWeb?';
+      case 'anki_sync_client_ankiweb_body':
+        return 'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+      case 'anki_sync_client_ankiweb_confirm':
+        return 'Use AnkiWeb anyway';
+      case 'anki_sync_client_has_unsynced':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+      case 'anki_sync_client_sign_in_failed':
+        return ({required Object error}) => 'Sign-in failed: ${error}';
       default:
         return null;
     }
@@ -356246,6 +357829,58 @@ extension on _StringsPtBr {
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+      case 'anki_error_sync_signed_out':
+        return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+      case 'anki_error_sync_unavailable':
+        return 'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+      case 'anki_sync_client_section_title':
+        return 'Anki sync (no Anki needed)';
+      case 'anki_sync_client_use_title':
+        return 'Sync cards straight to Anki';
+      case 'anki_sync_client_use_hint':
+        return 'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+      case 'anki_sync_client_server_title':
+        return 'Sync server';
+      case 'anki_sync_client_server_hint':
+        return 'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+      case 'anki_sync_client_username_title':
+        return 'Username';
+      case 'anki_sync_client_password_title':
+        return 'Password';
+      case 'anki_sync_client_sign_in':
+        return 'Sign in and download collection';
+      case 'anki_sync_client_sign_out':
+        return 'Sign out';
+      case 'anki_sync_client_sync_now':
+        return 'Sync now';
+      case 'anki_sync_client_status_signed_out':
+        return 'Not signed in';
+      case 'anki_sync_client_status_signed_in':
+        return ({required Object user, required Object server}) =>
+            'Signed in as ${user} on ${server}';
+      case 'anki_sync_client_status_busy':
+        return 'Syncing…';
+      case 'anki_sync_client_status_unsynced':
+        return ({required Object count}) => '${count} card(s) not synced yet';
+      case 'anki_sync_client_status_all_synced':
+        return 'All cards synced';
+      case 'anki_sync_client_status_last_sync':
+        return ({required Object time}) => 'Last synced ${time}';
+      case 'anki_sync_client_status_blocked':
+        return 'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+      case 'anki_sync_client_status_failed':
+        return ({required Object error}) => 'Last sync failed: ${error}';
+      case 'anki_sync_client_ankiweb_title':
+        return 'Sync with AnkiWeb?';
+      case 'anki_sync_client_ankiweb_body':
+        return 'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+      case 'anki_sync_client_ankiweb_confirm':
+        return 'Use AnkiWeb anyway';
+      case 'anki_sync_client_has_unsynced':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+      case 'anki_sync_client_sign_in_failed':
+        return ({required Object error}) => 'Sign-in failed: ${error}';
       default:
         return null;
     }
@@ -368062,6 +369697,58 @@ extension on _StringsRu {
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+      case 'anki_error_sync_signed_out':
+        return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+      case 'anki_error_sync_unavailable':
+        return 'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+      case 'anki_sync_client_section_title':
+        return 'Anki sync (no Anki needed)';
+      case 'anki_sync_client_use_title':
+        return 'Sync cards straight to Anki';
+      case 'anki_sync_client_use_hint':
+        return 'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+      case 'anki_sync_client_server_title':
+        return 'Sync server';
+      case 'anki_sync_client_server_hint':
+        return 'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+      case 'anki_sync_client_username_title':
+        return 'Username';
+      case 'anki_sync_client_password_title':
+        return 'Password';
+      case 'anki_sync_client_sign_in':
+        return 'Sign in and download collection';
+      case 'anki_sync_client_sign_out':
+        return 'Sign out';
+      case 'anki_sync_client_sync_now':
+        return 'Sync now';
+      case 'anki_sync_client_status_signed_out':
+        return 'Not signed in';
+      case 'anki_sync_client_status_signed_in':
+        return ({required Object user, required Object server}) =>
+            'Signed in as ${user} on ${server}';
+      case 'anki_sync_client_status_busy':
+        return 'Syncing…';
+      case 'anki_sync_client_status_unsynced':
+        return ({required Object count}) => '${count} card(s) not synced yet';
+      case 'anki_sync_client_status_all_synced':
+        return 'All cards synced';
+      case 'anki_sync_client_status_last_sync':
+        return ({required Object time}) => 'Last synced ${time}';
+      case 'anki_sync_client_status_blocked':
+        return 'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+      case 'anki_sync_client_status_failed':
+        return ({required Object error}) => 'Last sync failed: ${error}';
+      case 'anki_sync_client_ankiweb_title':
+        return 'Sync with AnkiWeb?';
+      case 'anki_sync_client_ankiweb_body':
+        return 'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+      case 'anki_sync_client_ankiweb_confirm':
+        return 'Use AnkiWeb anyway';
+      case 'anki_sync_client_has_unsynced':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+      case 'anki_sync_client_sign_in_failed':
+        return ({required Object error}) => 'Sign-in failed: ${error}';
       default:
         return null;
     }
@@ -379847,6 +381534,58 @@ extension on _StringsTh {
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+      case 'anki_error_sync_signed_out':
+        return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+      case 'anki_error_sync_unavailable':
+        return 'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+      case 'anki_sync_client_section_title':
+        return 'Anki sync (no Anki needed)';
+      case 'anki_sync_client_use_title':
+        return 'Sync cards straight to Anki';
+      case 'anki_sync_client_use_hint':
+        return 'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+      case 'anki_sync_client_server_title':
+        return 'Sync server';
+      case 'anki_sync_client_server_hint':
+        return 'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+      case 'anki_sync_client_username_title':
+        return 'Username';
+      case 'anki_sync_client_password_title':
+        return 'Password';
+      case 'anki_sync_client_sign_in':
+        return 'Sign in and download collection';
+      case 'anki_sync_client_sign_out':
+        return 'Sign out';
+      case 'anki_sync_client_sync_now':
+        return 'Sync now';
+      case 'anki_sync_client_status_signed_out':
+        return 'Not signed in';
+      case 'anki_sync_client_status_signed_in':
+        return ({required Object user, required Object server}) =>
+            'Signed in as ${user} on ${server}';
+      case 'anki_sync_client_status_busy':
+        return 'Syncing…';
+      case 'anki_sync_client_status_unsynced':
+        return ({required Object count}) => '${count} card(s) not synced yet';
+      case 'anki_sync_client_status_all_synced':
+        return 'All cards synced';
+      case 'anki_sync_client_status_last_sync':
+        return ({required Object time}) => 'Last synced ${time}';
+      case 'anki_sync_client_status_blocked':
+        return 'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+      case 'anki_sync_client_status_failed':
+        return ({required Object error}) => 'Last sync failed: ${error}';
+      case 'anki_sync_client_ankiweb_title':
+        return 'Sync with AnkiWeb?';
+      case 'anki_sync_client_ankiweb_body':
+        return 'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+      case 'anki_sync_client_ankiweb_confirm':
+        return 'Use AnkiWeb anyway';
+      case 'anki_sync_client_has_unsynced':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+      case 'anki_sync_client_sign_in_failed':
+        return ({required Object error}) => 'Sign-in failed: ${error}';
       default:
         return null;
     }
@@ -391648,6 +393387,58 @@ extension on _StringsTr {
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+      case 'anki_error_sync_signed_out':
+        return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+      case 'anki_error_sync_unavailable':
+        return 'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+      case 'anki_sync_client_section_title':
+        return 'Anki sync (no Anki needed)';
+      case 'anki_sync_client_use_title':
+        return 'Sync cards straight to Anki';
+      case 'anki_sync_client_use_hint':
+        return 'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+      case 'anki_sync_client_server_title':
+        return 'Sync server';
+      case 'anki_sync_client_server_hint':
+        return 'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+      case 'anki_sync_client_username_title':
+        return 'Username';
+      case 'anki_sync_client_password_title':
+        return 'Password';
+      case 'anki_sync_client_sign_in':
+        return 'Sign in and download collection';
+      case 'anki_sync_client_sign_out':
+        return 'Sign out';
+      case 'anki_sync_client_sync_now':
+        return 'Sync now';
+      case 'anki_sync_client_status_signed_out':
+        return 'Not signed in';
+      case 'anki_sync_client_status_signed_in':
+        return ({required Object user, required Object server}) =>
+            'Signed in as ${user} on ${server}';
+      case 'anki_sync_client_status_busy':
+        return 'Syncing…';
+      case 'anki_sync_client_status_unsynced':
+        return ({required Object count}) => '${count} card(s) not synced yet';
+      case 'anki_sync_client_status_all_synced':
+        return 'All cards synced';
+      case 'anki_sync_client_status_last_sync':
+        return ({required Object time}) => 'Last synced ${time}';
+      case 'anki_sync_client_status_blocked':
+        return 'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+      case 'anki_sync_client_status_failed':
+        return ({required Object error}) => 'Last sync failed: ${error}';
+      case 'anki_sync_client_ankiweb_title':
+        return 'Sync with AnkiWeb?';
+      case 'anki_sync_client_ankiweb_body':
+        return 'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+      case 'anki_sync_client_ankiweb_confirm':
+        return 'Use AnkiWeb anyway';
+      case 'anki_sync_client_has_unsynced':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+      case 'anki_sync_client_sign_in_failed':
+        return ({required Object error}) => 'Sign-in failed: ${error}';
       default:
         return null;
     }
@@ -403443,6 +405234,58 @@ extension on _StringsVi {
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+      case 'anki_error_sync_signed_out':
+        return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+      case 'anki_error_sync_unavailable':
+        return 'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+      case 'anki_sync_client_section_title':
+        return 'Anki sync (no Anki needed)';
+      case 'anki_sync_client_use_title':
+        return 'Sync cards straight to Anki';
+      case 'anki_sync_client_use_hint':
+        return 'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+      case 'anki_sync_client_server_title':
+        return 'Sync server';
+      case 'anki_sync_client_server_hint':
+        return 'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+      case 'anki_sync_client_username_title':
+        return 'Username';
+      case 'anki_sync_client_password_title':
+        return 'Password';
+      case 'anki_sync_client_sign_in':
+        return 'Sign in and download collection';
+      case 'anki_sync_client_sign_out':
+        return 'Sign out';
+      case 'anki_sync_client_sync_now':
+        return 'Sync now';
+      case 'anki_sync_client_status_signed_out':
+        return 'Not signed in';
+      case 'anki_sync_client_status_signed_in':
+        return ({required Object user, required Object server}) =>
+            'Signed in as ${user} on ${server}';
+      case 'anki_sync_client_status_busy':
+        return 'Syncing…';
+      case 'anki_sync_client_status_unsynced':
+        return ({required Object count}) => '${count} card(s) not synced yet';
+      case 'anki_sync_client_status_all_synced':
+        return 'All cards synced';
+      case 'anki_sync_client_status_last_sync':
+        return ({required Object time}) => 'Last synced ${time}';
+      case 'anki_sync_client_status_blocked':
+        return 'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+      case 'anki_sync_client_status_failed':
+        return ({required Object error}) => 'Last sync failed: ${error}';
+      case 'anki_sync_client_ankiweb_title':
+        return 'Sync with AnkiWeb?';
+      case 'anki_sync_client_ankiweb_body':
+        return 'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+      case 'anki_sync_client_ankiweb_confirm':
+        return 'Use AnkiWeb anyway';
+      case 'anki_sync_client_has_unsynced':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+      case 'anki_sync_client_sign_in_failed':
+        return ({required Object error}) => 'Sign-in failed: ${error}';
       default:
         return null;
     }
@@ -415122,6 +416965,58 @@ extension on _StringsZhCn {
         return '本机负责落地其他设备的卡片';
       case 'anki_pending_mine_landing_hint':
         return '没装 Anki 的设备存下的卡片，经你配置的同步（云盘，或本机作为互联客户端时的互联）送到这台设备，由这里的 Anki 加卡。同一时间只有一台设备负责。互联主机暂时不能担任。';
+      case 'anki_error_sync_signed_out':
+        return '请先登录 Anki 同步服务器（Anki 设置 › Anki 同步）。';
+      case 'anki_error_sync_unavailable':
+        return '本机没有 fushi-anki-sync，无法直接同步到 Anki。';
+      case 'anki_sync_client_section_title':
+        return 'Anki 同步（无需安装 Anki）';
+      case 'anki_sync_client_use_title':
+        return '直接同步到 Anki';
+      case 'anki_sync_client_use_hint':
+        return 'Fushi 在本机保存一份你的牌组集合，直接与 Anki 同步服务器同步；本机不需要安装 Anki 或 AnkiConnect。';
+      case 'anki_sync_client_server_title':
+        return '同步服务器';
+      case 'anki_sync_client_server_hint':
+        return '自建服务器地址，如 http://nas:8080/；留空为 AnkiWeb';
+      case 'anki_sync_client_username_title':
+        return '用户名';
+      case 'anki_sync_client_password_title':
+        return '密码';
+      case 'anki_sync_client_sign_in':
+        return '登录并下载牌组集合';
+      case 'anki_sync_client_sign_out':
+        return '退出登录';
+      case 'anki_sync_client_sync_now':
+        return '立即同步';
+      case 'anki_sync_client_status_signed_out':
+        return '未登录';
+      case 'anki_sync_client_status_signed_in':
+        return ({required Object user, required Object server}) =>
+            '已登录：${user}（${server}）';
+      case 'anki_sync_client_status_busy':
+        return '同步中…';
+      case 'anki_sync_client_status_unsynced':
+        return ({required Object count}) => '${count} 张卡尚未同步';
+      case 'anki_sync_client_status_all_synced':
+        return '卡片已全部同步';
+      case 'anki_sync_client_status_last_sync':
+        return ({required Object time}) => '上次同步：${time}';
+      case 'anki_sync_client_status_blocked':
+        return '服务器要求整库上传，Fushi 不会这么做。请先在官方 Anki 里同步一次再重试；在那之前卡片保留在本机。';
+      case 'anki_sync_client_status_failed':
+        return ({required Object error}) => '上次同步失败：${error}';
+      case 'anki_sync_client_ankiweb_title':
+        return '要同步到 AnkiWeb 吗？';
+      case 'anki_sync_client_ankiweb_body':
+        return 'AnkiWeb 的服务条款只允许官方 Anki 客户端同步。Fushi 会如实表明自己是 Fushi，因此 AnkiWeb 可能拒绝连接，或对你的账号采取措施。自建同步服务器没有这项限制。';
+      case 'anki_sync_client_ankiweb_confirm':
+        return '仍然使用 AnkiWeb';
+      case 'anki_sync_client_has_unsynced':
+        return ({required Object count}) =>
+            '还有 ${count} 张卡没有同步，请先同步再切换账号或退出登录。';
+      case 'anki_sync_client_sign_in_failed':
+        return ({required Object error}) => '登录失败：${error}';
       default:
         return null;
     }
@@ -426842,6 +428737,58 @@ extension on _StringsZhHk {
         return 'Deliver cards from other devices';
       case 'anki_pending_mine_landing_hint':
         return 'Cards saved on devices without Anki travel through your sync service (cloud storage, or interconnect when this device syncs to a host) and are added to Anki on this device. Only one device does this at a time. An interconnect host can\'t do this yet.';
+      case 'anki_error_sync_signed_out':
+        return 'Sign in to your Anki sync server first (Anki settings › Anki sync).';
+      case 'anki_error_sync_unavailable':
+        return 'This device doesn\'t have fushi-anki-sync, so it can\'t sync to Anki directly.';
+      case 'anki_sync_client_section_title':
+        return 'Anki sync (no Anki needed)';
+      case 'anki_sync_client_use_title':
+        return 'Sync cards straight to Anki';
+      case 'anki_sync_client_use_hint':
+        return 'Fushi keeps its own copy of your collection and syncs it with your Anki sync server, so this device needs neither Anki nor AnkiConnect.';
+      case 'anki_sync_client_server_title':
+        return 'Sync server';
+      case 'anki_sync_client_server_hint':
+        return 'Self-hosted server, e.g. http://nas:8080/ — leave empty for AnkiWeb';
+      case 'anki_sync_client_username_title':
+        return 'Username';
+      case 'anki_sync_client_password_title':
+        return 'Password';
+      case 'anki_sync_client_sign_in':
+        return 'Sign in and download collection';
+      case 'anki_sync_client_sign_out':
+        return 'Sign out';
+      case 'anki_sync_client_sync_now':
+        return 'Sync now';
+      case 'anki_sync_client_status_signed_out':
+        return 'Not signed in';
+      case 'anki_sync_client_status_signed_in':
+        return ({required Object user, required Object server}) =>
+            'Signed in as ${user} on ${server}';
+      case 'anki_sync_client_status_busy':
+        return 'Syncing…';
+      case 'anki_sync_client_status_unsynced':
+        return ({required Object count}) => '${count} card(s) not synced yet';
+      case 'anki_sync_client_status_all_synced':
+        return 'All cards synced';
+      case 'anki_sync_client_status_last_sync':
+        return ({required Object time}) => 'Last synced ${time}';
+      case 'anki_sync_client_status_blocked':
+        return 'The server wants a full upload, which Fushi never does. Sync once in the official Anki app, then try again. Your cards stay here until then.';
+      case 'anki_sync_client_status_failed':
+        return ({required Object error}) => 'Last sync failed: ${error}';
+      case 'anki_sync_client_ankiweb_title':
+        return 'Sync with AnkiWeb?';
+      case 'anki_sync_client_ankiweb_body':
+        return 'AnkiWeb\'s terms only allow the official Anki apps to sync. Fushi identifies itself honestly as Fushi, so AnkiWeb may refuse it or take action on your account. Self-hosted sync servers have no such restriction.';
+      case 'anki_sync_client_ankiweb_confirm':
+        return 'Use AnkiWeb anyway';
+      case 'anki_sync_client_has_unsynced':
+        return ({required Object count}) =>
+            '${count} card(s) haven\'t synced yet. Sync them before switching account or signing out.';
+      case 'anki_sync_client_sign_in_failed':
+        return ({required Object error}) => 'Sign-in failed: ${error}';
       default:
         return null;
     }
