@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 97155 (5715 per locale)
+/// Strings: 97206 (5718 per locale)
 ///
-/// Built on 2026-09-28 at 05:42 UTC
+/// Built on 2026-09-28 at 05:55 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8163,6 +8163,12 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get sync_pair_nfc_written_locked => 'Written and locked';
   String get sync_pair_nfc_lock_unsupported =>
       'Written, but this sticker can\'t be locked';
+  String sync_p2p_path_direct({required Object rtt}) =>
+      'P2P direct · ${rtt} ms';
+  String sync_p2p_path_relay({required Object rtt}) =>
+      'P2P via relay · ${rtt} ms';
+  String get sync_p2p_relay_only_hint =>
+      'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
 }
 
 // Path: <root>
@@ -21864,6 +21870,15 @@ class _StringsAr extends _StringsEn {
   @override
   String get sync_pair_nfc_lock_unsupported =>
       'Written, but this sticker can\'t be locked';
+  @override
+  String sync_p2p_path_direct({required Object rtt}) =>
+      'P2P direct · ${rtt} ms';
+  @override
+  String sync_p2p_path_relay({required Object rtt}) =>
+      'P2P via relay · ${rtt} ms';
+  @override
+  String get sync_p2p_relay_only_hint =>
+      'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
 }
 
 // Path: <root>
@@ -35805,6 +35820,15 @@ class _StringsDe extends _StringsEn {
   @override
   String get sync_pair_nfc_lock_unsupported =>
       'Written, but this sticker can\'t be locked';
+  @override
+  String sync_p2p_path_direct({required Object rtt}) =>
+      'P2P direct · ${rtt} ms';
+  @override
+  String sync_p2p_path_relay({required Object rtt}) =>
+      'P2P via relay · ${rtt} ms';
+  @override
+  String get sync_p2p_relay_only_hint =>
+      'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
 }
 
 // Path: <root>
@@ -49797,6 +49821,15 @@ class _StringsEs extends _StringsEn {
   @override
   String get sync_pair_nfc_lock_unsupported =>
       'Written, but this sticker can\'t be locked';
+  @override
+  String sync_p2p_path_direct({required Object rtt}) =>
+      'P2P direct · ${rtt} ms';
+  @override
+  String sync_p2p_path_relay({required Object rtt}) =>
+      'P2P via relay · ${rtt} ms';
+  @override
+  String get sync_p2p_relay_only_hint =>
+      'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
 }
 
 // Path: <root>
@@ -63828,6 +63861,15 @@ class _StringsFr extends _StringsEn {
   @override
   String get sync_pair_nfc_lock_unsupported =>
       'Written, but this sticker can\'t be locked';
+  @override
+  String sync_p2p_path_direct({required Object rtt}) =>
+      'P2P direct · ${rtt} ms';
+  @override
+  String sync_p2p_path_relay({required Object rtt}) =>
+      'P2P via relay · ${rtt} ms';
+  @override
+  String get sync_p2p_relay_only_hint =>
+      'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
 }
 
 // Path: <root>
@@ -77649,6 +77691,15 @@ class _StringsId extends _StringsEn {
   @override
   String get sync_pair_nfc_lock_unsupported =>
       'Written, but this sticker can\'t be locked';
+  @override
+  String sync_p2p_path_direct({required Object rtt}) =>
+      'P2P direct · ${rtt} ms';
+  @override
+  String sync_p2p_path_relay({required Object rtt}) =>
+      'P2P via relay · ${rtt} ms';
+  @override
+  String get sync_p2p_relay_only_hint =>
+      'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
 }
 
 // Path: <root>
@@ -91571,6 +91622,15 @@ class _StringsIt extends _StringsEn {
   @override
   String get sync_pair_nfc_lock_unsupported =>
       'Written, but this sticker can\'t be locked';
+  @override
+  String sync_p2p_path_direct({required Object rtt}) =>
+      'P2P direct · ${rtt} ms';
+  @override
+  String sync_p2p_path_relay({required Object rtt}) =>
+      'P2P via relay · ${rtt} ms';
+  @override
+  String get sync_p2p_relay_only_hint =>
+      'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
 }
 
 // Path: <root>
@@ -104848,6 +104908,15 @@ class _StringsJa extends _StringsEn {
   @override
   String get sync_pair_nfc_lock_unsupported =>
       'Written, but this sticker can\'t be locked';
+  @override
+  String sync_p2p_path_direct({required Object rtt}) =>
+      'P2P direct · ${rtt} ms';
+  @override
+  String sync_p2p_path_relay({required Object rtt}) =>
+      'P2P via relay · ${rtt} ms';
+  @override
+  String get sync_p2p_relay_only_hint =>
+      'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
 }
 
 // Path: <root>
@@ -118142,6 +118211,15 @@ class _StringsKo extends _StringsEn {
   @override
   String get sync_pair_nfc_lock_unsupported =>
       'Written, but this sticker can\'t be locked';
+  @override
+  String sync_p2p_path_direct({required Object rtt}) =>
+      'P2P direct · ${rtt} ms';
+  @override
+  String sync_p2p_path_relay({required Object rtt}) =>
+      'P2P via relay · ${rtt} ms';
+  @override
+  String get sync_p2p_relay_only_hint =>
+      'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
 }
 
 // Path: <root>
@@ -132018,6 +132096,15 @@ class _StringsNl extends _StringsEn {
   @override
   String get sync_pair_nfc_lock_unsupported =>
       'Written, but this sticker can\'t be locked';
+  @override
+  String sync_p2p_path_direct({required Object rtt}) =>
+      'P2P direct · ${rtt} ms';
+  @override
+  String sync_p2p_path_relay({required Object rtt}) =>
+      'P2P via relay · ${rtt} ms';
+  @override
+  String get sync_p2p_relay_only_hint =>
+      'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
 }
 
 // Path: <root>
@@ -145947,6 +146034,15 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get sync_pair_nfc_lock_unsupported =>
       'Written, but this sticker can\'t be locked';
+  @override
+  String sync_p2p_path_direct({required Object rtt}) =>
+      'P2P direct · ${rtt} ms';
+  @override
+  String sync_p2p_path_relay({required Object rtt}) =>
+      'P2P via relay · ${rtt} ms';
+  @override
+  String get sync_p2p_relay_only_hint =>
+      'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
 }
 
 // Path: <root>
@@ -159851,6 +159947,15 @@ class _StringsRu extends _StringsEn {
   @override
   String get sync_pair_nfc_lock_unsupported =>
       'Written, but this sticker can\'t be locked';
+  @override
+  String sync_p2p_path_direct({required Object rtt}) =>
+      'P2P direct · ${rtt} ms';
+  @override
+  String sync_p2p_path_relay({required Object rtt}) =>
+      'P2P via relay · ${rtt} ms';
+  @override
+  String get sync_p2p_relay_only_hint =>
+      'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
 }
 
 // Path: <root>
@@ -173552,6 +173657,15 @@ class _StringsTh extends _StringsEn {
   @override
   String get sync_pair_nfc_lock_unsupported =>
       'Written, but this sticker can\'t be locked';
+  @override
+  String sync_p2p_path_direct({required Object rtt}) =>
+      'P2P direct · ${rtt} ms';
+  @override
+  String sync_p2p_path_relay({required Object rtt}) =>
+      'P2P via relay · ${rtt} ms';
+  @override
+  String get sync_p2p_relay_only_hint =>
+      'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
 }
 
 // Path: <root>
@@ -187367,6 +187481,15 @@ class _StringsTr extends _StringsEn {
   @override
   String get sync_pair_nfc_lock_unsupported =>
       'Written, but this sticker can\'t be locked';
+  @override
+  String sync_p2p_path_direct({required Object rtt}) =>
+      'P2P direct · ${rtt} ms';
+  @override
+  String sync_p2p_path_relay({required Object rtt}) =>
+      'P2P via relay · ${rtt} ms';
+  @override
+  String get sync_p2p_relay_only_hint =>
+      'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
 }
 
 // Path: <root>
@@ -201153,6 +201276,15 @@ class _StringsVi extends _StringsEn {
   @override
   String get sync_pair_nfc_lock_unsupported =>
       'Written, but this sticker can\'t be locked';
+  @override
+  String sync_p2p_path_direct({required Object rtt}) =>
+      'P2P direct · ${rtt} ms';
+  @override
+  String sync_p2p_path_relay({required Object rtt}) =>
+      'P2P via relay · ${rtt} ms';
+  @override
+  String get sync_p2p_relay_only_hint =>
+      'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
 }
 
 // Path: <root>
@@ -213763,6 +213895,13 @@ class _StringsZhCn extends _StringsEn {
   String get sync_pair_nfc_written_locked => '已写入并锁定';
   @override
   String get sync_pair_nfc_lock_unsupported => '已写入，但这张贴纸不支持锁定';
+  @override
+  String sync_p2p_path_direct({required Object rtt}) => 'P2P 直连 · ${rtt} 毫秒';
+  @override
+  String sync_p2p_path_relay({required Object rtt}) => 'P2P 经中继 · ${rtt} 毫秒';
+  @override
+  String get sync_p2p_relay_only_hint =>
+      '一直在走中继（较慢）。任一端开着 Clash TUN、全局 VPN 等会改写 UDP 端口的工具时打洞通常会失败——把 Fushi 或 UDP 流量加进它的直连规则。';
 }
 
 // Path: <root>
@@ -226720,6 +226859,15 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get sync_pair_nfc_lock_unsupported =>
       'Written, but this sticker can\'t be locked';
+  @override
+  String sync_p2p_path_direct({required Object rtt}) =>
+      'P2P direct · ${rtt} ms';
+  @override
+  String sync_p2p_path_relay({required Object rtt}) =>
+      'P2P via relay · ${rtt} ms';
+  @override
+  String get sync_p2p_relay_only_hint =>
+      'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
 }
 
 /// Flat map(s) containing all translations.
@@ -238519,6 +238667,12 @@ extension on _StringsEn {
         return 'Written and locked';
       case 'sync_pair_nfc_lock_unsupported':
         return 'Written, but this sticker can\'t be locked';
+      case 'sync_p2p_path_direct':
+        return ({required Object rtt}) => 'P2P direct · ${rtt} ms';
+      case 'sync_p2p_path_relay':
+        return ({required Object rtt}) => 'P2P via relay · ${rtt} ms';
+      case 'sync_p2p_relay_only_hint':
+        return 'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
       default:
         return null;
     }
@@ -250313,6 +250467,12 @@ extension on _StringsAr {
         return 'Written and locked';
       case 'sync_pair_nfc_lock_unsupported':
         return 'Written, but this sticker can\'t be locked';
+      case 'sync_p2p_path_direct':
+        return ({required Object rtt}) => 'P2P direct · ${rtt} ms';
+      case 'sync_p2p_path_relay':
+        return ({required Object rtt}) => 'P2P via relay · ${rtt} ms';
+      case 'sync_p2p_relay_only_hint':
+        return 'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
       default:
         return null;
     }
@@ -262156,6 +262316,12 @@ extension on _StringsDe {
         return 'Written and locked';
       case 'sync_pair_nfc_lock_unsupported':
         return 'Written, but this sticker can\'t be locked';
+      case 'sync_p2p_path_direct':
+        return ({required Object rtt}) => 'P2P direct · ${rtt} ms';
+      case 'sync_p2p_path_relay':
+        return ({required Object rtt}) => 'P2P via relay · ${rtt} ms';
+      case 'sync_p2p_relay_only_hint':
+        return 'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
       default:
         return null;
     }
@@ -273989,6 +274155,12 @@ extension on _StringsEs {
         return 'Written and locked';
       case 'sync_pair_nfc_lock_unsupported':
         return 'Written, but this sticker can\'t be locked';
+      case 'sync_p2p_path_direct':
+        return ({required Object rtt}) => 'P2P direct · ${rtt} ms';
+      case 'sync_p2p_path_relay':
+        return ({required Object rtt}) => 'P2P via relay · ${rtt} ms';
+      case 'sync_p2p_relay_only_hint':
+        return 'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
       default:
         return null;
     }
@@ -285830,6 +286002,12 @@ extension on _StringsFr {
         return 'Written and locked';
       case 'sync_pair_nfc_lock_unsupported':
         return 'Written, but this sticker can\'t be locked';
+      case 'sync_p2p_path_direct':
+        return ({required Object rtt}) => 'P2P direct · ${rtt} ms';
+      case 'sync_p2p_path_relay':
+        return ({required Object rtt}) => 'P2P via relay · ${rtt} ms';
+      case 'sync_p2p_relay_only_hint':
+        return 'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
       default:
         return null;
     }
@@ -297641,6 +297819,12 @@ extension on _StringsId {
         return 'Written and locked';
       case 'sync_pair_nfc_lock_unsupported':
         return 'Written, but this sticker can\'t be locked';
+      case 'sync_p2p_path_direct':
+        return ({required Object rtt}) => 'P2P direct · ${rtt} ms';
+      case 'sync_p2p_path_relay':
+        return ({required Object rtt}) => 'P2P via relay · ${rtt} ms';
+      case 'sync_p2p_relay_only_hint':
+        return 'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
       default:
         return null;
     }
@@ -309475,6 +309659,12 @@ extension on _StringsIt {
         return 'Written and locked';
       case 'sync_pair_nfc_lock_unsupported':
         return 'Written, but this sticker can\'t be locked';
+      case 'sync_p2p_path_direct':
+        return ({required Object rtt}) => 'P2P direct · ${rtt} ms';
+      case 'sync_p2p_path_relay':
+        return ({required Object rtt}) => 'P2P via relay · ${rtt} ms';
+      case 'sync_p2p_relay_only_hint':
+        return 'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
       default:
         return null;
     }
@@ -321230,6 +321420,12 @@ extension on _StringsJa {
         return 'Written and locked';
       case 'sync_pair_nfc_lock_unsupported':
         return 'Written, but this sticker can\'t be locked';
+      case 'sync_p2p_path_direct':
+        return ({required Object rtt}) => 'P2P direct · ${rtt} ms';
+      case 'sync_p2p_path_relay':
+        return ({required Object rtt}) => 'P2P via relay · ${rtt} ms';
+      case 'sync_p2p_relay_only_hint':
+        return 'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
       default:
         return null;
     }
@@ -332993,6 +333189,12 @@ extension on _StringsKo {
         return 'Written and locked';
       case 'sync_pair_nfc_lock_unsupported':
         return 'Written, but this sticker can\'t be locked';
+      case 'sync_p2p_path_direct':
+        return ({required Object rtt}) => 'P2P direct · ${rtt} ms';
+      case 'sync_p2p_path_relay':
+        return ({required Object rtt}) => 'P2P via relay · ${rtt} ms';
+      case 'sync_p2p_relay_only_hint':
+        return 'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
       default:
         return null;
     }
@@ -344822,6 +345024,12 @@ extension on _StringsNl {
         return 'Written and locked';
       case 'sync_pair_nfc_lock_unsupported':
         return 'Written, but this sticker can\'t be locked';
+      case 'sync_p2p_path_direct':
+        return ({required Object rtt}) => 'P2P direct · ${rtt} ms';
+      case 'sync_p2p_path_relay':
+        return ({required Object rtt}) => 'P2P via relay · ${rtt} ms';
+      case 'sync_p2p_relay_only_hint':
+        return 'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
       default:
         return null;
     }
@@ -356646,6 +356854,12 @@ extension on _StringsPtBr {
         return 'Written and locked';
       case 'sync_pair_nfc_lock_unsupported':
         return 'Written, but this sticker can\'t be locked';
+      case 'sync_p2p_path_direct':
+        return ({required Object rtt}) => 'P2P direct · ${rtt} ms';
+      case 'sync_p2p_path_relay':
+        return ({required Object rtt}) => 'P2P via relay · ${rtt} ms';
+      case 'sync_p2p_relay_only_hint':
+        return 'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
       default:
         return null;
     }
@@ -368476,6 +368690,12 @@ extension on _StringsRu {
         return 'Written and locked';
       case 'sync_pair_nfc_lock_unsupported':
         return 'Written, but this sticker can\'t be locked';
+      case 'sync_p2p_path_direct':
+        return ({required Object rtt}) => 'P2P direct · ${rtt} ms';
+      case 'sync_p2p_path_relay':
+        return ({required Object rtt}) => 'P2P via relay · ${rtt} ms';
+      case 'sync_p2p_relay_only_hint':
+        return 'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
       default:
         return null;
     }
@@ -380275,6 +380495,12 @@ extension on _StringsTh {
         return 'Written and locked';
       case 'sync_pair_nfc_lock_unsupported':
         return 'Written, but this sticker can\'t be locked';
+      case 'sync_p2p_path_direct':
+        return ({required Object rtt}) => 'P2P direct · ${rtt} ms';
+      case 'sync_p2p_path_relay':
+        return ({required Object rtt}) => 'P2P via relay · ${rtt} ms';
+      case 'sync_p2p_relay_only_hint':
+        return 'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
       default:
         return null;
     }
@@ -392090,6 +392316,12 @@ extension on _StringsTr {
         return 'Written and locked';
       case 'sync_pair_nfc_lock_unsupported':
         return 'Written, but this sticker can\'t be locked';
+      case 'sync_p2p_path_direct':
+        return ({required Object rtt}) => 'P2P direct · ${rtt} ms';
+      case 'sync_p2p_path_relay':
+        return ({required Object rtt}) => 'P2P via relay · ${rtt} ms';
+      case 'sync_p2p_relay_only_hint':
+        return 'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
       default:
         return null;
     }
@@ -403899,6 +404131,12 @@ extension on _StringsVi {
         return 'Written and locked';
       case 'sync_pair_nfc_lock_unsupported':
         return 'Written, but this sticker can\'t be locked';
+      case 'sync_p2p_path_direct':
+        return ({required Object rtt}) => 'P2P direct · ${rtt} ms';
+      case 'sync_p2p_path_relay':
+        return ({required Object rtt}) => 'P2P via relay · ${rtt} ms';
+      case 'sync_p2p_relay_only_hint':
+        return 'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
       default:
         return null;
     }
@@ -415592,6 +415830,12 @@ extension on _StringsZhCn {
         return '已写入并锁定';
       case 'sync_pair_nfc_lock_unsupported':
         return '已写入，但这张贴纸不支持锁定';
+      case 'sync_p2p_path_direct':
+        return ({required Object rtt}) => 'P2P 直连 · ${rtt} 毫秒';
+      case 'sync_p2p_path_relay':
+        return ({required Object rtt}) => 'P2P 经中继 · ${rtt} 毫秒';
+      case 'sync_p2p_relay_only_hint':
+        return '一直在走中继（较慢）。任一端开着 Clash TUN、全局 VPN 等会改写 UDP 端口的工具时打洞通常会失败——把 Fushi 或 UDP 流量加进它的直连规则。';
       default:
         return null;
     }
@@ -427326,6 +427570,12 @@ extension on _StringsZhHk {
         return 'Written and locked';
       case 'sync_pair_nfc_lock_unsupported':
         return 'Written, but this sticker can\'t be locked';
+      case 'sync_p2p_path_direct':
+        return ({required Object rtt}) => 'P2P direct · ${rtt} ms';
+      case 'sync_p2p_path_relay':
+        return ({required Object rtt}) => 'P2P via relay · ${rtt} ms';
+      case 'sync_p2p_relay_only_hint':
+        return 'Stuck on the relay (slower). Hole punching usually fails when Clash TUN, a global VPN or a similar tool rewrites UDP ports on either device — add Fushi or UDP traffic to its direct rules.';
       default:
         return null;
     }
