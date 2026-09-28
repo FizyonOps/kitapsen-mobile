@@ -3,7 +3,7 @@
 /// Locales: 17
 /// Strings: 98158 (5774 per locale)
 ///
-/// Built on 2026-09-28 at 12:01 UTC
+/// Built on 2026-09-28 at 15:43 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8223,9 +8223,9 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
       'Imported ${count} channels';
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
-  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  String get hoshi_import_entry => 'Third-party import';
   String get hoshi_import_entry_subtitle =>
-      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
   String get hoshi_import_how_to =>
       'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
   String get hoshi_import_file_pick => 'Choose backup file';
@@ -22085,10 +22085,10 @@ class _StringsAr extends _StringsEn {
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
   @override
-  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  String get hoshi_import_entry => 'Third-party import';
   @override
   String get hoshi_import_entry_subtitle =>
-      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
   @override
   String get hoshi_import_how_to =>
       'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
@@ -36216,10 +36216,10 @@ class _StringsDe extends _StringsEn {
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
   @override
-  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  String get hoshi_import_entry => 'Third-party import';
   @override
   String get hoshi_import_entry_subtitle =>
-      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
   @override
   String get hoshi_import_how_to =>
       'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
@@ -50398,10 +50398,10 @@ class _StringsEs extends _StringsEn {
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
   @override
-  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  String get hoshi_import_entry => 'Third-party import';
   @override
   String get hoshi_import_entry_subtitle =>
-      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
   @override
   String get hoshi_import_how_to =>
       'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
@@ -64619,10 +64619,10 @@ class _StringsFr extends _StringsEn {
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
   @override
-  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  String get hoshi_import_entry => 'Third-party import';
   @override
   String get hoshi_import_entry_subtitle =>
-      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
   @override
   String get hoshi_import_how_to =>
       'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
@@ -78630,10 +78630,10 @@ class _StringsId extends _StringsEn {
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
   @override
-  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  String get hoshi_import_entry => 'Third-party import';
   @override
   String get hoshi_import_entry_subtitle =>
-      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
   @override
   String get hoshi_import_how_to =>
       'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
@@ -92742,10 +92742,10 @@ class _StringsIt extends _StringsEn {
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
   @override
-  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  String get hoshi_import_entry => 'Third-party import';
   @override
   String get hoshi_import_entry_subtitle =>
-      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
   @override
   String get hoshi_import_how_to =>
       'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
@@ -106207,10 +106207,10 @@ class _StringsJa extends _StringsEn {
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
   @override
-  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  String get hoshi_import_entry => 'Third-party import';
   @override
   String get hoshi_import_entry_subtitle =>
-      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
   @override
   String get hoshi_import_how_to =>
       'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
@@ -119689,10 +119689,10 @@ class _StringsKo extends _StringsEn {
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
   @override
-  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  String get hoshi_import_entry => 'Third-party import';
   @override
   String get hoshi_import_entry_subtitle =>
-      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
   @override
   String get hoshi_import_how_to =>
       'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
@@ -133756,10 +133756,10 @@ class _StringsNl extends _StringsEn {
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
   @override
-  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  String get hoshi_import_entry => 'Third-party import';
   @override
   String get hoshi_import_entry_subtitle =>
-      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
   @override
   String get hoshi_import_how_to =>
       'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
@@ -147875,10 +147875,10 @@ class _StringsPtBr extends _StringsEn {
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
   @override
-  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  String get hoshi_import_entry => 'Third-party import';
   @override
   String get hoshi_import_entry_subtitle =>
-      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
   @override
   String get hoshi_import_how_to =>
       'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
@@ -161969,10 +161969,10 @@ class _StringsRu extends _StringsEn {
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
   @override
-  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  String get hoshi_import_entry => 'Third-party import';
   @override
   String get hoshi_import_entry_subtitle =>
-      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
   @override
   String get hoshi_import_how_to =>
       'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
@@ -175859,10 +175859,10 @@ class _StringsTh extends _StringsEn {
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
   @override
-  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  String get hoshi_import_entry => 'Third-party import';
   @override
   String get hoshi_import_entry_subtitle =>
-      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
   @override
   String get hoshi_import_how_to =>
       'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
@@ -189864,10 +189864,10 @@ class _StringsTr extends _StringsEn {
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
   @override
-  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  String get hoshi_import_entry => 'Third-party import';
   @override
   String get hoshi_import_entry_subtitle =>
-      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
   @override
   String get hoshi_import_how_to =>
       'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
@@ -203840,10 +203840,10 @@ class _StringsVi extends _StringsEn {
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
   @override
-  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  String get hoshi_import_entry => 'Third-party import';
   @override
   String get hoshi_import_entry_subtitle =>
-      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
   @override
   String get hoshi_import_how_to =>
       'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
@@ -216628,10 +216628,10 @@ class _StringsZhCn extends _StringsEn {
   String get video_stream_protocol_unsupported_apple =>
       'iOS 与 macOS 暂不支持这种流协议（rtsps / rtmps / rtmpe）。';
   @override
-  String get hoshi_import_entry => '从 Hoshi Reader 导入';
+  String get hoshi_import_entry => '第三方导入';
   @override
   String get hoshi_import_entry_subtitle =>
-      '从 Hoshi Reader（iOS / Android）的书库备份导入书、阅读位置和统计';
+      '从其他阅读器的书库备份（如 Hoshi Reader 的 .hoshi 文件）导入书、阅读位置和统计';
   @override
   String get hoshi_import_how_to =>
       '在 Hoshi Reader 里打开「设置 › Backup」备份书库，然后在这里选择生成的 Books_….hoshi 文件。库里已有的书不会重复导入；同一份备份重复导入不会重复计数。';
@@ -229760,10 +229760,10 @@ class _StringsZhHk extends _StringsEn {
   String get video_stream_protocol_unsupported_apple =>
       'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
   @override
-  String get hoshi_import_entry => 'Import from Hoshi Reader';
+  String get hoshi_import_entry => 'Third-party import';
   @override
   String get hoshi_import_entry_subtitle =>
-      'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+      'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
   @override
   String get hoshi_import_how_to =>
       'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
@@ -241731,9 +241731,9 @@ extension on _StringsEn {
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       case 'hoshi_import_entry':
-        return 'Import from Hoshi Reader';
+        return 'Third-party import';
       case 'hoshi_import_entry_subtitle':
-        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+        return 'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
       case 'hoshi_import_how_to':
         return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
       case 'hoshi_import_file_pick':
@@ -253682,9 +253682,9 @@ extension on _StringsAr {
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       case 'hoshi_import_entry':
-        return 'Import from Hoshi Reader';
+        return 'Third-party import';
       case 'hoshi_import_entry_subtitle':
-        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+        return 'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
       case 'hoshi_import_how_to':
         return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
       case 'hoshi_import_file_pick':
@@ -265683,9 +265683,9 @@ extension on _StringsDe {
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       case 'hoshi_import_entry':
-        return 'Import from Hoshi Reader';
+        return 'Third-party import';
       case 'hoshi_import_entry_subtitle':
-        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+        return 'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
       case 'hoshi_import_how_to':
         return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
       case 'hoshi_import_file_pick':
@@ -277674,9 +277674,9 @@ extension on _StringsEs {
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       case 'hoshi_import_entry':
-        return 'Import from Hoshi Reader';
+        return 'Third-party import';
       case 'hoshi_import_entry_subtitle':
-        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+        return 'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
       case 'hoshi_import_how_to':
         return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
       case 'hoshi_import_file_pick':
@@ -289673,9 +289673,9 @@ extension on _StringsFr {
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       case 'hoshi_import_entry':
-        return 'Import from Hoshi Reader';
+        return 'Third-party import';
       case 'hoshi_import_entry_subtitle':
-        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+        return 'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
       case 'hoshi_import_how_to':
         return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
       case 'hoshi_import_file_pick':
@@ -301642,9 +301642,9 @@ extension on _StringsId {
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       case 'hoshi_import_entry':
-        return 'Import from Hoshi Reader';
+        return 'Third-party import';
       case 'hoshi_import_entry_subtitle':
-        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+        return 'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
       case 'hoshi_import_how_to':
         return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
       case 'hoshi_import_file_pick':
@@ -313633,9 +313633,9 @@ extension on _StringsIt {
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       case 'hoshi_import_entry':
-        return 'Import from Hoshi Reader';
+        return 'Third-party import';
       case 'hoshi_import_entry_subtitle':
-        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+        return 'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
       case 'hoshi_import_how_to':
         return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
       case 'hoshi_import_file_pick':
@@ -325544,9 +325544,9 @@ extension on _StringsJa {
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       case 'hoshi_import_entry':
-        return 'Import from Hoshi Reader';
+        return 'Third-party import';
       case 'hoshi_import_entry_subtitle':
-        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+        return 'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
       case 'hoshi_import_how_to':
         return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
       case 'hoshi_import_file_pick':
@@ -337464,9 +337464,9 @@ extension on _StringsKo {
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       case 'hoshi_import_entry':
-        return 'Import from Hoshi Reader';
+        return 'Third-party import';
       case 'hoshi_import_entry_subtitle':
-        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+        return 'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
       case 'hoshi_import_how_to':
         return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
       case 'hoshi_import_file_pick':
@@ -349451,9 +349451,9 @@ extension on _StringsNl {
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       case 'hoshi_import_entry':
-        return 'Import from Hoshi Reader';
+        return 'Third-party import';
       case 'hoshi_import_entry_subtitle':
-        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+        return 'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
       case 'hoshi_import_how_to':
         return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
       case 'hoshi_import_file_pick':
@@ -361433,9 +361433,9 @@ extension on _StringsPtBr {
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       case 'hoshi_import_entry':
-        return 'Import from Hoshi Reader';
+        return 'Third-party import';
       case 'hoshi_import_entry_subtitle':
-        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+        return 'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
       case 'hoshi_import_how_to':
         return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
       case 'hoshi_import_file_pick':
@@ -373420,9 +373420,9 @@ extension on _StringsRu {
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       case 'hoshi_import_entry':
-        return 'Import from Hoshi Reader';
+        return 'Third-party import';
       case 'hoshi_import_entry_subtitle':
-        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+        return 'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
       case 'hoshi_import_how_to':
         return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
       case 'hoshi_import_file_pick':
@@ -385376,9 +385376,9 @@ extension on _StringsTh {
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       case 'hoshi_import_entry':
-        return 'Import from Hoshi Reader';
+        return 'Third-party import';
       case 'hoshi_import_entry_subtitle':
-        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+        return 'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
       case 'hoshi_import_how_to':
         return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
       case 'hoshi_import_file_pick':
@@ -397348,9 +397348,9 @@ extension on _StringsTr {
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       case 'hoshi_import_entry':
-        return 'Import from Hoshi Reader';
+        return 'Third-party import';
       case 'hoshi_import_entry_subtitle':
-        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+        return 'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
       case 'hoshi_import_how_to':
         return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
       case 'hoshi_import_file_pick':
@@ -409314,9 +409314,9 @@ extension on _StringsVi {
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       case 'hoshi_import_entry':
-        return 'Import from Hoshi Reader';
+        return 'Third-party import';
       case 'hoshi_import_entry_subtitle':
-        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+        return 'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
       case 'hoshi_import_how_to':
         return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
       case 'hoshi_import_file_pick':
@@ -421163,9 +421163,9 @@ extension on _StringsZhCn {
       case 'video_stream_protocol_unsupported_apple':
         return 'iOS 与 macOS 暂不支持这种流协议（rtsps / rtmps / rtmpe）。';
       case 'hoshi_import_entry':
-        return '从 Hoshi Reader 导入';
+        return '第三方导入';
       case 'hoshi_import_entry_subtitle':
-        return '从 Hoshi Reader（iOS / Android）的书库备份导入书、阅读位置和统计';
+        return '从其他阅读器的书库备份（如 Hoshi Reader 的 .hoshi 文件）导入书、阅读位置和统计';
       case 'hoshi_import_how_to':
         return '在 Hoshi Reader 里打开「设置 › Backup」备份书库，然后在这里选择生成的 Books_….hoshi 文件。库里已有的书不会重复导入；同一份备份重复导入不会重复计数。';
       case 'hoshi_import_file_pick':
@@ -433049,9 +433049,9 @@ extension on _StringsZhHk {
       case 'video_stream_protocol_unsupported_apple':
         return 'This stream protocol (rtsps / rtmps / rtmpe) isn\'t supported on iOS or macOS yet.';
       case 'hoshi_import_entry':
-        return 'Import from Hoshi Reader';
+        return 'Third-party import';
       case 'hoshi_import_entry_subtitle':
-        return 'Books, reading positions and statistics from a Hoshi Reader (iOS / Android) library backup';
+        return 'Import books, reading positions and statistics from another reader\'s library backup, such as a Hoshi Reader .hoshi file';
       case 'hoshi_import_how_to':
         return 'In Hoshi Reader, open Settings › Backup and back up your books, then choose the generated Books_….hoshi file here. Books already in your library are not imported twice; importing the same backup again changes nothing.';
       case 'hoshi_import_file_pick':
