@@ -1,7 +1,7 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 98362 (5786 per locale)
+/// Strings: 98447 (5791 per locale)
 ///
 /// Built on 2026-09-29 at 01:27 UTC
 
@@ -8306,6 +8306,16 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get popup_bottom_docked_manga => 'Dock in manga';
   String get popup_bottom_docked_video => 'Dock in videos';
   String get popup_bottom_docked_games => 'Dock in games';
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -22221,6 +22231,21 @@ class _StringsAr extends _StringsEn {
   String get popup_bottom_docked_video => 'Dock in videos';
   @override
   String get popup_bottom_docked_games => 'Dock in games';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -36376,6 +36401,21 @@ class _StringsDe extends _StringsEn {
   String get popup_bottom_docked_video => 'Dock in videos';
   @override
   String get popup_bottom_docked_games => 'Dock in games';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -50582,6 +50622,21 @@ class _StringsEs extends _StringsEn {
   String get popup_bottom_docked_video => 'Dock in videos';
   @override
   String get popup_bottom_docked_games => 'Dock in games';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -64827,6 +64882,21 @@ class _StringsFr extends _StringsEn {
   String get popup_bottom_docked_video => 'Dock in videos';
   @override
   String get popup_bottom_docked_games => 'Dock in games';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -78862,6 +78932,21 @@ class _StringsId extends _StringsEn {
   String get popup_bottom_docked_video => 'Dock in videos';
   @override
   String get popup_bottom_docked_games => 'Dock in games';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -92998,6 +93083,21 @@ class _StringsIt extends _StringsEn {
   String get popup_bottom_docked_video => 'Dock in videos';
   @override
   String get popup_bottom_docked_games => 'Dock in games';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -106487,6 +106587,21 @@ class _StringsJa extends _StringsEn {
   String get popup_bottom_docked_video => 'Dock in videos';
   @override
   String get popup_bottom_docked_games => 'Dock in games';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -119993,6 +120108,21 @@ class _StringsKo extends _StringsEn {
   String get popup_bottom_docked_video => 'Dock in videos';
   @override
   String get popup_bottom_docked_games => 'Dock in games';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -134084,6 +134214,21 @@ class _StringsNl extends _StringsEn {
   String get popup_bottom_docked_video => 'Dock in videos';
   @override
   String get popup_bottom_docked_games => 'Dock in games';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -148227,6 +148372,21 @@ class _StringsPtBr extends _StringsEn {
   String get popup_bottom_docked_video => 'Dock in videos';
   @override
   String get popup_bottom_docked_games => 'Dock in games';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -162345,6 +162505,21 @@ class _StringsRu extends _StringsEn {
   String get popup_bottom_docked_video => 'Dock in videos';
   @override
   String get popup_bottom_docked_games => 'Dock in games';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -176259,6 +176434,21 @@ class _StringsTh extends _StringsEn {
   String get popup_bottom_docked_video => 'Dock in videos';
   @override
   String get popup_bottom_docked_games => 'Dock in games';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -190288,6 +190478,21 @@ class _StringsTr extends _StringsEn {
   String get popup_bottom_docked_video => 'Dock in videos';
   @override
   String get popup_bottom_docked_games => 'Dock in games';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -204288,6 +204493,21 @@ class _StringsVi extends _StringsEn {
   String get popup_bottom_docked_video => 'Dock in videos';
   @override
   String get popup_bottom_docked_games => 'Dock in games';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 // Path: <root>
@@ -217091,6 +217311,21 @@ class _StringsZhCn extends _StringsEn {
   String get popup_bottom_docked_video => '视频中底部停靠';
   @override
   String get popup_bottom_docked_games => '游戏中底部停靠';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      '在 ${device} 上执行';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      '与执行设备的连接中断，请确认它在线后重试。';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} 不支持 AI 下视频，请更新那台设备上的 Fushi。';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} 还没有给「AI 下视频」指派 AI 提供商，请在那台设备的「设置 › AI」里指派。';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} 的下载还没配好（下载后端或受管视频来源）。';
 }
 
 // Path: <root>
@@ -230257,6 +230492,21 @@ class _StringsZhHk extends _StringsEn {
   String get popup_bottom_docked_video => '影片中底部停靠';
   @override
   String get popup_bottom_docked_games => '遊戲中底部停靠';
+  @override
+  String ai_video_acquire_remote_executor({required Object device}) =>
+      'Running on ${device}';
+  @override
+  String get ai_video_acquire_failure_remote_unavailable =>
+      'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+  @override
+  String ai_video_acquire_remote_unsupported({required Object device}) =>
+      '${device} doesn\'t support AI video download. Update Fushi on that device.';
+  @override
+  String ai_video_acquire_remote_no_provider({required Object device}) =>
+      '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+  @override
+  String ai_video_acquire_remote_not_ready({required Object device}) =>
+      '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
 }
 
 /// Flat map(s) containing all translations.
@@ -242238,6 +242488,19 @@ extension on _StringsEn {
         return 'Dock in videos';
       case 'popup_bottom_docked_games':
         return 'Dock in games';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -254213,6 +254476,19 @@ extension on _StringsAr {
         return 'Dock in videos';
       case 'popup_bottom_docked_games':
         return 'Dock in games';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -266238,6 +266514,19 @@ extension on _StringsDe {
         return 'Dock in videos';
       case 'popup_bottom_docked_games':
         return 'Dock in games';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -278253,6 +278542,19 @@ extension on _StringsEs {
         return 'Dock in videos';
       case 'popup_bottom_docked_games':
         return 'Dock in games';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -290276,6 +290578,19 @@ extension on _StringsFr {
         return 'Dock in videos';
       case 'popup_bottom_docked_games':
         return 'Dock in games';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -302269,6 +302584,19 @@ extension on _StringsId {
         return 'Dock in videos';
       case 'popup_bottom_docked_games':
         return 'Dock in games';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -314284,6 +314612,19 @@ extension on _StringsIt {
         return 'Dock in videos';
       case 'popup_bottom_docked_games':
         return 'Dock in games';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -326219,6 +326560,19 @@ extension on _StringsJa {
         return 'Dock in videos';
       case 'popup_bottom_docked_games':
         return 'Dock in games';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -338163,6 +338517,19 @@ extension on _StringsKo {
         return 'Dock in videos';
       case 'popup_bottom_docked_games':
         return 'Dock in games';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -350174,6 +350541,19 @@ extension on _StringsNl {
         return 'Dock in videos';
       case 'popup_bottom_docked_games':
         return 'Dock in games';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -362180,6 +362560,19 @@ extension on _StringsPtBr {
         return 'Dock in videos';
       case 'popup_bottom_docked_games':
         return 'Dock in games';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -374191,6 +374584,19 @@ extension on _StringsRu {
         return 'Dock in videos';
       case 'popup_bottom_docked_games':
         return 'Dock in games';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -386171,6 +386577,19 @@ extension on _StringsTh {
         return 'Dock in videos';
       case 'popup_bottom_docked_games':
         return 'Dock in games';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -398167,6 +398586,19 @@ extension on _StringsTr {
         return 'Dock in videos';
       case 'popup_bottom_docked_games':
         return 'Dock in games';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -410157,6 +410589,19 @@ extension on _StringsVi {
         return 'Dock in videos';
       case 'popup_bottom_docked_games':
         return 'Dock in games';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
@@ -422026,6 +422471,18 @@ extension on _StringsZhCn {
         return '视频中底部停靠';
       case 'popup_bottom_docked_games':
         return '游戏中底部停靠';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => '在 ${device} 上执行';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return '与执行设备的连接中断，请确认它在线后重试。';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} 不支持 AI 下视频，请更新那台设备上的 Fushi。';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} 还没有给「AI 下视频」指派 AI 提供商，请在那台设备的「设置 › AI」里指派。';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) => '${device} 的下载还没配好（下载后端或受管视频来源）。';
       default:
         return null;
     }
@@ -433940,6 +434397,19 @@ extension on _StringsZhHk {
         return '影片中底部停靠';
       case 'popup_bottom_docked_games':
         return '遊戲中底部停靠';
+      case 'ai_video_acquire_remote_executor':
+        return ({required Object device}) => 'Running on ${device}';
+      case 'ai_video_acquire_failure_remote_unavailable':
+        return 'Lost connection to the device running this conversation. Check that it\'s online and try again.';
+      case 'ai_video_acquire_remote_unsupported':
+        return ({required Object device}) =>
+            '${device} doesn\'t support AI video download. Update Fushi on that device.';
+      case 'ai_video_acquire_remote_no_provider':
+        return ({required Object device}) =>
+            '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
+      case 'ai_video_acquire_remote_not_ready':
+        return ({required Object device}) =>
+            '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
       default:
         return null;
     }
