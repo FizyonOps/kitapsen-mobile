@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 98379 (5787 per locale)
+/// Strings: 98464 (5792 per locale)
 ///
-/// Built on 2026-09-29 at 00:41 UTC
+/// Built on 2026-09-29 at 01:23 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8314,6 +8314,12 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
       '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
   String get media_source_remove_download_keep =>
       'Don\'t move (pause those subscriptions)';
+  String get download_selection_already_queued =>
+      'This item is already in the download queue.';
+  String get popup_bottom_docked_books => 'Dock in novels';
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  String get popup_bottom_docked_video => 'Dock in videos';
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -22238,6 +22244,17 @@ class _StringsAr extends _StringsEn {
   @override
   String get media_source_remove_download_keep =>
       'Don\'t move (pause those subscriptions)';
+  @override
+  String get download_selection_already_queued =>
+      'This item is already in the download queue.';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -36402,6 +36419,17 @@ class _StringsDe extends _StringsEn {
   @override
   String get media_source_remove_download_keep =>
       'Don\'t move (pause those subscriptions)';
+  @override
+  String get download_selection_already_queued =>
+      'This item is already in the download queue.';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -50617,6 +50645,17 @@ class _StringsEs extends _StringsEn {
   @override
   String get media_source_remove_download_keep =>
       'Don\'t move (pause those subscriptions)';
+  @override
+  String get download_selection_already_queued =>
+      'This item is already in the download queue.';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -64871,6 +64910,17 @@ class _StringsFr extends _StringsEn {
   @override
   String get media_source_remove_download_keep =>
       'Don\'t move (pause those subscriptions)';
+  @override
+  String get download_selection_already_queued =>
+      'This item is already in the download queue.';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -78915,6 +78965,17 @@ class _StringsId extends _StringsEn {
   @override
   String get media_source_remove_download_keep =>
       'Don\'t move (pause those subscriptions)';
+  @override
+  String get download_selection_already_queued =>
+      'This item is already in the download queue.';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -93060,6 +93121,17 @@ class _StringsIt extends _StringsEn {
   @override
   String get media_source_remove_download_keep =>
       'Don\'t move (pause those subscriptions)';
+  @override
+  String get download_selection_already_queued =>
+      'This item is already in the download queue.';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -106558,6 +106630,17 @@ class _StringsJa extends _StringsEn {
   @override
   String get media_source_remove_download_keep =>
       'Don\'t move (pause those subscriptions)';
+  @override
+  String get download_selection_already_queued =>
+      'This item is already in the download queue.';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -120073,6 +120156,17 @@ class _StringsKo extends _StringsEn {
   @override
   String get media_source_remove_download_keep =>
       'Don\'t move (pause those subscriptions)';
+  @override
+  String get download_selection_already_queued =>
+      'This item is already in the download queue.';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -134173,6 +134267,17 @@ class _StringsNl extends _StringsEn {
   @override
   String get media_source_remove_download_keep =>
       'Don\'t move (pause those subscriptions)';
+  @override
+  String get download_selection_already_queued =>
+      'This item is already in the download queue.';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -148325,6 +148430,17 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get media_source_remove_download_keep =>
       'Don\'t move (pause those subscriptions)';
+  @override
+  String get download_selection_already_queued =>
+      'This item is already in the download queue.';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -162452,6 +162568,17 @@ class _StringsRu extends _StringsEn {
   @override
   String get media_source_remove_download_keep =>
       'Don\'t move (pause those subscriptions)';
+  @override
+  String get download_selection_already_queued =>
+      'This item is already in the download queue.';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -176375,6 +176502,17 @@ class _StringsTh extends _StringsEn {
   @override
   String get media_source_remove_download_keep =>
       'Don\'t move (pause those subscriptions)';
+  @override
+  String get download_selection_already_queued =>
+      'This item is already in the download queue.';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -190413,6 +190551,17 @@ class _StringsTr extends _StringsEn {
   @override
   String get media_source_remove_download_keep =>
       'Don\'t move (pause those subscriptions)';
+  @override
+  String get download_selection_already_queued =>
+      'This item is already in the download queue.';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -204422,6 +204571,17 @@ class _StringsVi extends _StringsEn {
   @override
   String get media_source_remove_download_keep =>
       'Don\'t move (pause those subscriptions)';
+  @override
+  String get download_selection_already_queued =>
+      'This item is already in the download queue.';
+  @override
+  String get popup_bottom_docked_books => 'Dock in novels';
+  @override
+  String get popup_bottom_docked_manga => 'Dock in manga';
+  @override
+  String get popup_bottom_docked_video => 'Dock in videos';
+  @override
+  String get popup_bottom_docked_games => 'Dock in games';
 }
 
 // Path: <root>
@@ -217232,6 +217392,16 @@ class _StringsZhCn extends _StringsEn {
   }) => '有 ${subscriptions} 个下载订阅和 ${jobs} 个未完成的下载保存到此来源。迁移到：';
   @override
   String get media_source_remove_download_keep => '不迁移（暂停这些订阅）';
+  @override
+  String get download_selection_already_queued => '这一项已在下载队列中。';
+  @override
+  String get popup_bottom_docked_books => '小说中底部停靠';
+  @override
+  String get popup_bottom_docked_manga => '漫画中底部停靠';
+  @override
+  String get popup_bottom_docked_video => '视频中底部停靠';
+  @override
+  String get popup_bottom_docked_games => '游戏中底部停靠';
 }
 
 // Path: <root>
@@ -230406,6 +230576,17 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get media_source_remove_download_keep =>
       'Don\'t move (pause those subscriptions)';
+  @override
+  String get download_selection_already_queued =>
+      'This item is already in the download queue.';
+  @override
+  String get popup_bottom_docked_books => '小說中底部停靠';
+  @override
+  String get popup_bottom_docked_manga => '漫畫中底部停靠';
+  @override
+  String get popup_bottom_docked_video => '影片中底部停靠';
+  @override
+  String get popup_bottom_docked_games => '遊戲中底部停靠';
 }
 
 /// Flat map(s) containing all translations.
@@ -242391,6 +242572,16 @@ extension on _StringsEn {
             '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
       case 'media_source_remove_download_keep':
         return 'Don\'t move (pause those subscriptions)';
+      case 'download_selection_already_queued':
+        return 'This item is already in the download queue.';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -254370,6 +254561,16 @@ extension on _StringsAr {
             '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
       case 'media_source_remove_download_keep':
         return 'Don\'t move (pause those subscriptions)';
+      case 'download_selection_already_queued':
+        return 'This item is already in the download queue.';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -266399,6 +266600,16 @@ extension on _StringsDe {
             '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
       case 'media_source_remove_download_keep':
         return 'Don\'t move (pause those subscriptions)';
+      case 'download_selection_already_queued':
+        return 'This item is already in the download queue.';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -278418,6 +278629,16 @@ extension on _StringsEs {
             '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
       case 'media_source_remove_download_keep':
         return 'Don\'t move (pause those subscriptions)';
+      case 'download_selection_already_queued':
+        return 'This item is already in the download queue.';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -290445,6 +290666,16 @@ extension on _StringsFr {
             '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
       case 'media_source_remove_download_keep':
         return 'Don\'t move (pause those subscriptions)';
+      case 'download_selection_already_queued':
+        return 'This item is already in the download queue.';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -302442,6 +302673,16 @@ extension on _StringsId {
             '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
       case 'media_source_remove_download_keep':
         return 'Don\'t move (pause those subscriptions)';
+      case 'download_selection_already_queued':
+        return 'This item is already in the download queue.';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -314461,6 +314702,16 @@ extension on _StringsIt {
             '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
       case 'media_source_remove_download_keep':
         return 'Don\'t move (pause those subscriptions)';
+      case 'download_selection_already_queued':
+        return 'This item is already in the download queue.';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -326400,6 +326651,16 @@ extension on _StringsJa {
             '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
       case 'media_source_remove_download_keep':
         return 'Don\'t move (pause those subscriptions)';
+      case 'download_selection_already_queued':
+        return 'This item is already in the download queue.';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -338348,6 +338609,16 @@ extension on _StringsKo {
             '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
       case 'media_source_remove_download_keep':
         return 'Don\'t move (pause those subscriptions)';
+      case 'download_selection_already_queued':
+        return 'This item is already in the download queue.';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -350363,6 +350634,16 @@ extension on _StringsNl {
             '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
       case 'media_source_remove_download_keep':
         return 'Don\'t move (pause those subscriptions)';
+      case 'download_selection_already_queued':
+        return 'This item is already in the download queue.';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -362373,6 +362654,16 @@ extension on _StringsPtBr {
             '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
       case 'media_source_remove_download_keep':
         return 'Don\'t move (pause those subscriptions)';
+      case 'download_selection_already_queued':
+        return 'This item is already in the download queue.';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -374388,6 +374679,16 @@ extension on _StringsRu {
             '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
       case 'media_source_remove_download_keep':
         return 'Don\'t move (pause those subscriptions)';
+      case 'download_selection_already_queued':
+        return 'This item is already in the download queue.';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -386372,6 +386673,16 @@ extension on _StringsTh {
             '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
       case 'media_source_remove_download_keep':
         return 'Don\'t move (pause those subscriptions)';
+      case 'download_selection_already_queued':
+        return 'This item is already in the download queue.';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -398372,6 +398683,16 @@ extension on _StringsTr {
             '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
       case 'media_source_remove_download_keep':
         return 'Don\'t move (pause those subscriptions)';
+      case 'download_selection_already_queued':
+        return 'This item is already in the download queue.';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -410366,6 +410687,16 @@ extension on _StringsVi {
             '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
       case 'media_source_remove_download_keep':
         return 'Don\'t move (pause those subscriptions)';
+      case 'download_selection_already_queued':
+        return 'This item is already in the download queue.';
+      case 'popup_bottom_docked_books':
+        return 'Dock in novels';
+      case 'popup_bottom_docked_manga':
+        return 'Dock in manga';
+      case 'popup_bottom_docked_video':
+        return 'Dock in videos';
+      case 'popup_bottom_docked_games':
+        return 'Dock in games';
       default:
         return null;
     }
@@ -422238,6 +422569,16 @@ extension on _StringsZhCn {
             '有 ${subscriptions} 个下载订阅和 ${jobs} 个未完成的下载保存到此来源。迁移到：';
       case 'media_source_remove_download_keep':
         return '不迁移（暂停这些订阅）';
+      case 'download_selection_already_queued':
+        return '这一项已在下载队列中。';
+      case 'popup_bottom_docked_books':
+        return '小说中底部停靠';
+      case 'popup_bottom_docked_manga':
+        return '漫画中底部停靠';
+      case 'popup_bottom_docked_video':
+        return '视频中底部停靠';
+      case 'popup_bottom_docked_games':
+        return '游戏中底部停靠';
       default:
         return null;
     }
@@ -434156,6 +434497,16 @@ extension on _StringsZhHk {
             '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
       case 'media_source_remove_download_keep':
         return 'Don\'t move (pause those subscriptions)';
+      case 'download_selection_already_queued':
+        return 'This item is already in the download queue.';
+      case 'popup_bottom_docked_books':
+        return '小說中底部停靠';
+      case 'popup_bottom_docked_manga':
+        return '漫畫中底部停靠';
+      case 'popup_bottom_docked_video':
+        return '影片中底部停靠';
+      case 'popup_bottom_docked_games':
+        return '遊戲中底部停靠';
       default:
         return null;
     }
