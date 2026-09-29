@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 98022 (5766 per locale)
+/// Strings: 98379 (5787 per locale)
 ///
-/// Built on 2026-09-28 at 13:34 UTC
+/// Built on 2026-09-29 at 00:41 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8269,6 +8269,40 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
       '${count} statistics segments were not restored because you deleted those books’ statistics in Fushi';
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  String get collection_filter_all => 'All';
+  String get collection_batch_mine => 'Create cards';
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  String get collection_mine_card => 'Create card';
+  String get favorites_batch_mine_title => 'Create cards';
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  String get favorites_batch_mine_skipped => 'Skipped';
+  String get stat_range_mode_day => 'Day';
+  String get stat_range_mode_week => 'Week';
+  String get stat_range_mode_month => 'Month';
+  String get stat_range_mode_year => 'Year';
+  String get stat_range_previous => 'Previous period';
+  String get stat_range_next => 'Next period';
+  String get stat_range_summary => 'Selected range';
+  String get stat_range_active_days => 'Active days';
+  String get stat_range_calendar => 'Study calendar';
   String video_library_delete_rows_failed({required Object n}) =>
       'Could not delete ${n} video(s); they are still in the library.';
   String video_library_delete_failed({required Object reason}) =>
@@ -22134,6 +22168,61 @@ class _StringsAr extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
+  @override
+  String get stat_range_mode_day => 'Day';
+  @override
+  String get stat_range_mode_week => 'Week';
+  @override
+  String get stat_range_mode_month => 'Month';
+  @override
+  String get stat_range_mode_year => 'Year';
+  @override
+  String get stat_range_previous => 'Previous period';
+  @override
+  String get stat_range_next => 'Next period';
+  @override
+  String get stat_range_summary => 'Selected range';
+  @override
+  String get stat_range_active_days => 'Active days';
+  @override
+  String get stat_range_calendar => 'Study calendar';
   @override
   String video_library_delete_rows_failed({required Object n}) =>
       'Could not delete ${n} video(s); they are still in the library.';
@@ -36243,6 +36332,61 @@ class _StringsDe extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
+  @override
+  String get stat_range_mode_day => 'Day';
+  @override
+  String get stat_range_mode_week => 'Week';
+  @override
+  String get stat_range_mode_month => 'Month';
+  @override
+  String get stat_range_mode_year => 'Year';
+  @override
+  String get stat_range_previous => 'Previous period';
+  @override
+  String get stat_range_next => 'Next period';
+  @override
+  String get stat_range_summary => 'Selected range';
+  @override
+  String get stat_range_active_days => 'Active days';
+  @override
+  String get stat_range_calendar => 'Study calendar';
   @override
   String video_library_delete_rows_failed({required Object n}) =>
       'Could not delete ${n} video(s); they are still in the library.';
@@ -50403,6 +50547,61 @@ class _StringsEs extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
+  @override
+  String get stat_range_mode_day => 'Day';
+  @override
+  String get stat_range_mode_week => 'Week';
+  @override
+  String get stat_range_mode_month => 'Month';
+  @override
+  String get stat_range_mode_year => 'Year';
+  @override
+  String get stat_range_previous => 'Previous period';
+  @override
+  String get stat_range_next => 'Next period';
+  @override
+  String get stat_range_summary => 'Selected range';
+  @override
+  String get stat_range_active_days => 'Active days';
+  @override
+  String get stat_range_calendar => 'Study calendar';
   @override
   String video_library_delete_rows_failed({required Object n}) =>
       'Could not delete ${n} video(s); they are still in the library.';
@@ -64603,6 +64802,61 @@ class _StringsFr extends _StringsEn {
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
   @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
+  @override
+  String get stat_range_mode_day => 'Day';
+  @override
+  String get stat_range_mode_week => 'Week';
+  @override
+  String get stat_range_mode_month => 'Month';
+  @override
+  String get stat_range_mode_year => 'Year';
+  @override
+  String get stat_range_previous => 'Previous period';
+  @override
+  String get stat_range_next => 'Next period';
+  @override
+  String get stat_range_summary => 'Selected range';
+  @override
+  String get stat_range_active_days => 'Active days';
+  @override
+  String get stat_range_calendar => 'Study calendar';
+  @override
   String video_library_delete_rows_failed({required Object n}) =>
       'Could not delete ${n} video(s); they are still in the library.';
   @override
@@ -78591,6 +78845,61 @@ class _StringsId extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
+  @override
+  String get stat_range_mode_day => 'Day';
+  @override
+  String get stat_range_mode_week => 'Week';
+  @override
+  String get stat_range_mode_month => 'Month';
+  @override
+  String get stat_range_mode_year => 'Year';
+  @override
+  String get stat_range_previous => 'Previous period';
+  @override
+  String get stat_range_next => 'Next period';
+  @override
+  String get stat_range_summary => 'Selected range';
+  @override
+  String get stat_range_active_days => 'Active days';
+  @override
+  String get stat_range_calendar => 'Study calendar';
   @override
   String video_library_delete_rows_failed({required Object n}) =>
       'Could not delete ${n} video(s); they are still in the library.';
@@ -92682,6 +92991,61 @@ class _StringsIt extends _StringsEn {
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
   @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
+  @override
+  String get stat_range_mode_day => 'Day';
+  @override
+  String get stat_range_mode_week => 'Week';
+  @override
+  String get stat_range_mode_month => 'Month';
+  @override
+  String get stat_range_mode_year => 'Year';
+  @override
+  String get stat_range_previous => 'Previous period';
+  @override
+  String get stat_range_next => 'Next period';
+  @override
+  String get stat_range_summary => 'Selected range';
+  @override
+  String get stat_range_active_days => 'Active days';
+  @override
+  String get stat_range_calendar => 'Study calendar';
+  @override
   String video_library_delete_rows_failed({required Object n}) =>
       'Could not delete ${n} video(s); they are still in the library.';
   @override
@@ -106124,6 +106488,61 @@ class _StringsJa extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
+  @override
+  String get stat_range_mode_day => '日';
+  @override
+  String get stat_range_mode_week => '週';
+  @override
+  String get stat_range_mode_month => '月';
+  @override
+  String get stat_range_mode_year => '年';
+  @override
+  String get stat_range_previous => '前の期間';
+  @override
+  String get stat_range_next => '次の期間';
+  @override
+  String get stat_range_summary => '選択した期間';
+  @override
+  String get stat_range_active_days => '活動日数';
+  @override
+  String get stat_range_calendar => '学習カレンダー';
   @override
   String video_library_delete_rows_failed({required Object n}) =>
       'Could not delete ${n} video(s); they are still in the library.';
@@ -119584,6 +120003,61 @@ class _StringsKo extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
+  @override
+  String get stat_range_mode_day => '일';
+  @override
+  String get stat_range_mode_week => '주';
+  @override
+  String get stat_range_mode_month => '월';
+  @override
+  String get stat_range_mode_year => '년';
+  @override
+  String get stat_range_previous => '이전 기간';
+  @override
+  String get stat_range_next => '다음 기간';
+  @override
+  String get stat_range_summary => '선택한 기간';
+  @override
+  String get stat_range_active_days => '활동 일수';
+  @override
+  String get stat_range_calendar => '학습 캘린더';
   @override
   String video_library_delete_rows_failed({required Object n}) =>
       'Could not delete ${n} video(s); they are still in the library.';
@@ -133629,6 +134103,61 @@ class _StringsNl extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
+  @override
+  String get stat_range_mode_day => 'Day';
+  @override
+  String get stat_range_mode_week => 'Week';
+  @override
+  String get stat_range_mode_month => 'Month';
+  @override
+  String get stat_range_mode_year => 'Year';
+  @override
+  String get stat_range_previous => 'Previous period';
+  @override
+  String get stat_range_next => 'Next period';
+  @override
+  String get stat_range_summary => 'Selected range';
+  @override
+  String get stat_range_active_days => 'Active days';
+  @override
+  String get stat_range_calendar => 'Study calendar';
   @override
   String video_library_delete_rows_failed({required Object n}) =>
       'Could not delete ${n} video(s); they are still in the library.';
@@ -147727,6 +148256,61 @@ class _StringsPtBr extends _StringsEn {
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
   @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
+  @override
+  String get stat_range_mode_day => 'Day';
+  @override
+  String get stat_range_mode_week => 'Week';
+  @override
+  String get stat_range_mode_month => 'Month';
+  @override
+  String get stat_range_mode_year => 'Year';
+  @override
+  String get stat_range_previous => 'Previous period';
+  @override
+  String get stat_range_next => 'Next period';
+  @override
+  String get stat_range_summary => 'Selected range';
+  @override
+  String get stat_range_active_days => 'Active days';
+  @override
+  String get stat_range_calendar => 'Study calendar';
+  @override
   String video_library_delete_rows_failed({required Object n}) =>
       'Could not delete ${n} video(s); they are still in the library.';
   @override
@@ -161799,6 +162383,61 @@ class _StringsRu extends _StringsEn {
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
   @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
+  @override
+  String get stat_range_mode_day => 'Day';
+  @override
+  String get stat_range_mode_week => 'Week';
+  @override
+  String get stat_range_mode_month => 'Month';
+  @override
+  String get stat_range_mode_year => 'Year';
+  @override
+  String get stat_range_previous => 'Previous period';
+  @override
+  String get stat_range_next => 'Next period';
+  @override
+  String get stat_range_summary => 'Selected range';
+  @override
+  String get stat_range_active_days => 'Active days';
+  @override
+  String get stat_range_calendar => 'Study calendar';
+  @override
   String video_library_delete_rows_failed({required Object n}) =>
       'Could not delete ${n} video(s); they are still in the library.';
   @override
@@ -175666,6 +176305,61 @@ class _StringsTh extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
+  @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
+  @override
+  String get stat_range_mode_day => 'Day';
+  @override
+  String get stat_range_mode_week => 'Week';
+  @override
+  String get stat_range_mode_month => 'Month';
+  @override
+  String get stat_range_mode_year => 'Year';
+  @override
+  String get stat_range_previous => 'Previous period';
+  @override
+  String get stat_range_next => 'Next period';
+  @override
+  String get stat_range_summary => 'Selected range';
+  @override
+  String get stat_range_active_days => 'Active days';
+  @override
+  String get stat_range_calendar => 'Study calendar';
   @override
   String video_library_delete_rows_failed({required Object n}) =>
       'Could not delete ${n} video(s); they are still in the library.';
@@ -189650,6 +190344,61 @@ class _StringsTr extends _StringsEn {
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
   @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
+  @override
+  String get stat_range_mode_day => 'Day';
+  @override
+  String get stat_range_mode_week => 'Week';
+  @override
+  String get stat_range_mode_month => 'Month';
+  @override
+  String get stat_range_mode_year => 'Year';
+  @override
+  String get stat_range_previous => 'Previous period';
+  @override
+  String get stat_range_next => 'Next period';
+  @override
+  String get stat_range_summary => 'Selected range';
+  @override
+  String get stat_range_active_days => 'Active days';
+  @override
+  String get stat_range_calendar => 'Study calendar';
+  @override
   String video_library_delete_rows_failed({required Object n}) =>
       'Could not delete ${n} video(s); they are still in the library.';
   @override
@@ -203604,6 +204353,61 @@ class _StringsVi extends _StringsEn {
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
   @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
+  @override
+  String get stat_range_mode_day => 'Day';
+  @override
+  String get stat_range_mode_week => 'Week';
+  @override
+  String get stat_range_mode_month => 'Month';
+  @override
+  String get stat_range_mode_year => 'Year';
+  @override
+  String get stat_range_previous => 'Previous period';
+  @override
+  String get stat_range_next => 'Next period';
+  @override
+  String get stat_range_summary => 'Selected range';
+  @override
+  String get stat_range_active_days => 'Active days';
+  @override
+  String get stat_range_calendar => 'Study calendar';
+  @override
   String video_library_delete_rows_failed({required Object n}) =>
       'Could not delete ${n} video(s); they are still in the library.';
   @override
@@ -216365,6 +217169,56 @@ class _StringsZhCn extends _StringsEn {
   @override
   String hoshi_import_result_failed({required Object count}) =>
       '有 ${count} 本书没能导入（它们的统计仍已导入）：';
+  @override
+  String get collection_filter_all => '全部';
+  @override
+  String get collection_batch_mine => '批量制卡';
+  @override
+  String get collection_batch_mine_empty => '还没有可制卡的收藏：先在查词弹窗里收藏单词';
+  @override
+  String collection_batch_mine_start({required Object n}) => '制卡 ${n} 张';
+  @override
+  String get collection_mine_card => '制卡';
+  @override
+  String get favorites_batch_mine_title => '一键制卡';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => '正在制卡 ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) => '新增 ${added} · 已存在 ${duplicate} · 失败 ${failed} · 跳过 ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => '词典中没有找到这个词';
+  @override
+  String get favorites_batch_mine_render_failed => '查词弹窗没有加载出来';
+  @override
+  String get favorites_batch_mine_text_only => '没有可用的句子媒体，已制成纯文字卡';
+  @override
+  String get favorites_batch_mine_skipped => '已跳过';
+  @override
+  String get stat_range_mode_day => '日';
+  @override
+  String get stat_range_mode_week => '周';
+  @override
+  String get stat_range_mode_month => '月';
+  @override
+  String get stat_range_mode_year => '年';
+  @override
+  String get stat_range_previous => '上一段';
+  @override
+  String get stat_range_next => '下一段';
+  @override
+  String get stat_range_summary => '所选范围';
+  @override
+  String get stat_range_active_days => '活跃天数';
+  @override
+  String get stat_range_calendar => '学习日历';
   @override
   String video_library_delete_rows_failed({required Object n}) =>
       '${n} 个视频删除失败，仍保留在媒体库中。';
@@ -229483,6 +230337,61 @@ class _StringsZhHk extends _StringsEn {
   String hoshi_import_result_failed({required Object count}) =>
       'Could not import ${count} books (their statistics were still imported):';
   @override
+  String get collection_filter_all => 'All';
+  @override
+  String get collection_batch_mine => 'Create cards';
+  @override
+  String get collection_batch_mine_empty =>
+      'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+  @override
+  String collection_batch_mine_start({required Object n}) =>
+      'Create ${n} cards';
+  @override
+  String get collection_mine_card => 'Create card';
+  @override
+  String get favorites_batch_mine_title => 'Create cards';
+  @override
+  String favorites_batch_mine_progress({
+    required Object done,
+    required Object total,
+  }) => 'Creating cards ${done} / ${total}';
+  @override
+  String favorites_batch_mine_summary({
+    required Object added,
+    required Object duplicate,
+    required Object failed,
+    required Object skipped,
+  }) =>
+      'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+  @override
+  String get favorites_batch_mine_no_entry => 'Not found in your dictionaries';
+  @override
+  String get favorites_batch_mine_render_failed =>
+      'The dictionary popup did not load';
+  @override
+  String get favorites_batch_mine_text_only =>
+      'No sentence media — text-only card';
+  @override
+  String get favorites_batch_mine_skipped => 'Skipped';
+  @override
+  String get stat_range_mode_day => '日';
+  @override
+  String get stat_range_mode_week => '週';
+  @override
+  String get stat_range_mode_month => '月';
+  @override
+  String get stat_range_mode_year => '年';
+  @override
+  String get stat_range_previous => '上一段';
+  @override
+  String get stat_range_next => '下一段';
+  @override
+  String get stat_range_summary => '所選範圍';
+  @override
+  String get stat_range_active_days => '活躍天數';
+  @override
+  String get stat_range_calendar => '學習日曆';
+  @override
   String video_library_delete_rows_failed({required Object n}) =>
       'Could not delete ${n} video(s); they are still in the library.';
   @override
@@ -241423,6 +242332,55 @@ extension on _StringsEn {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
+      case 'stat_range_mode_day':
+        return 'Day';
+      case 'stat_range_mode_week':
+        return 'Week';
+      case 'stat_range_mode_month':
+        return 'Month';
+      case 'stat_range_mode_year':
+        return 'Year';
+      case 'stat_range_previous':
+        return 'Previous period';
+      case 'stat_range_next':
+        return 'Next period';
+      case 'stat_range_summary':
+        return 'Selected range';
+      case 'stat_range_active_days':
+        return 'Active days';
+      case 'stat_range_calendar':
+        return 'Study calendar';
       case 'video_library_delete_rows_failed':
         return ({required Object n}) =>
             'Could not delete ${n} video(s); they are still in the library.';
@@ -253353,6 +254311,55 @@ extension on _StringsAr {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
+      case 'stat_range_mode_day':
+        return 'Day';
+      case 'stat_range_mode_week':
+        return 'Week';
+      case 'stat_range_mode_month':
+        return 'Month';
+      case 'stat_range_mode_year':
+        return 'Year';
+      case 'stat_range_previous':
+        return 'Previous period';
+      case 'stat_range_next':
+        return 'Next period';
+      case 'stat_range_summary':
+        return 'Selected range';
+      case 'stat_range_active_days':
+        return 'Active days';
+      case 'stat_range_calendar':
+        return 'Study calendar';
       case 'video_library_delete_rows_failed':
         return ({required Object n}) =>
             'Could not delete ${n} video(s); they are still in the library.';
@@ -265333,6 +266340,55 @@ extension on _StringsDe {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
+      case 'stat_range_mode_day':
+        return 'Day';
+      case 'stat_range_mode_week':
+        return 'Week';
+      case 'stat_range_mode_month':
+        return 'Month';
+      case 'stat_range_mode_year':
+        return 'Year';
+      case 'stat_range_previous':
+        return 'Previous period';
+      case 'stat_range_next':
+        return 'Next period';
+      case 'stat_range_summary':
+        return 'Selected range';
+      case 'stat_range_active_days':
+        return 'Active days';
+      case 'stat_range_calendar':
+        return 'Study calendar';
       case 'video_library_delete_rows_failed':
         return ({required Object n}) =>
             'Could not delete ${n} video(s); they are still in the library.';
@@ -277303,6 +278359,55 @@ extension on _StringsEs {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
+      case 'stat_range_mode_day':
+        return 'Day';
+      case 'stat_range_mode_week':
+        return 'Week';
+      case 'stat_range_mode_month':
+        return 'Month';
+      case 'stat_range_mode_year':
+        return 'Year';
+      case 'stat_range_previous':
+        return 'Previous period';
+      case 'stat_range_next':
+        return 'Next period';
+      case 'stat_range_summary':
+        return 'Selected range';
+      case 'stat_range_active_days':
+        return 'Active days';
+      case 'stat_range_calendar':
+        return 'Study calendar';
       case 'video_library_delete_rows_failed':
         return ({required Object n}) =>
             'Could not delete ${n} video(s); they are still in the library.';
@@ -289281,6 +290386,55 @@ extension on _StringsFr {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
+      case 'stat_range_mode_day':
+        return 'Day';
+      case 'stat_range_mode_week':
+        return 'Week';
+      case 'stat_range_mode_month':
+        return 'Month';
+      case 'stat_range_mode_year':
+        return 'Year';
+      case 'stat_range_previous':
+        return 'Previous period';
+      case 'stat_range_next':
+        return 'Next period';
+      case 'stat_range_summary':
+        return 'Selected range';
+      case 'stat_range_active_days':
+        return 'Active days';
+      case 'stat_range_calendar':
+        return 'Study calendar';
       case 'video_library_delete_rows_failed':
         return ({required Object n}) =>
             'Could not delete ${n} video(s); they are still in the library.';
@@ -301229,6 +302383,55 @@ extension on _StringsId {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
+      case 'stat_range_mode_day':
+        return 'Day';
+      case 'stat_range_mode_week':
+        return 'Week';
+      case 'stat_range_mode_month':
+        return 'Month';
+      case 'stat_range_mode_year':
+        return 'Year';
+      case 'stat_range_previous':
+        return 'Previous period';
+      case 'stat_range_next':
+        return 'Next period';
+      case 'stat_range_summary':
+        return 'Selected range';
+      case 'stat_range_active_days':
+        return 'Active days';
+      case 'stat_range_calendar':
+        return 'Study calendar';
       case 'video_library_delete_rows_failed':
         return ({required Object n}) =>
             'Could not delete ${n} video(s); they are still in the library.';
@@ -313199,6 +314402,55 @@ extension on _StringsIt {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
+      case 'stat_range_mode_day':
+        return 'Day';
+      case 'stat_range_mode_week':
+        return 'Week';
+      case 'stat_range_mode_month':
+        return 'Month';
+      case 'stat_range_mode_year':
+        return 'Year';
+      case 'stat_range_previous':
+        return 'Previous period';
+      case 'stat_range_next':
+        return 'Next period';
+      case 'stat_range_summary':
+        return 'Selected range';
+      case 'stat_range_active_days':
+        return 'Active days';
+      case 'stat_range_calendar':
+        return 'Study calendar';
       case 'video_library_delete_rows_failed':
         return ({required Object n}) =>
             'Could not delete ${n} video(s); they are still in the library.';
@@ -325089,6 +326341,55 @@ extension on _StringsJa {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
+      case 'stat_range_mode_day':
+        return '日';
+      case 'stat_range_mode_week':
+        return '週';
+      case 'stat_range_mode_month':
+        return '月';
+      case 'stat_range_mode_year':
+        return '年';
+      case 'stat_range_previous':
+        return '前の期間';
+      case 'stat_range_next':
+        return '次の期間';
+      case 'stat_range_summary':
+        return '選択した期間';
+      case 'stat_range_active_days':
+        return '活動日数';
+      case 'stat_range_calendar':
+        return '学習カレンダー';
       case 'video_library_delete_rows_failed':
         return ({required Object n}) =>
             'Could not delete ${n} video(s); they are still in the library.';
@@ -336988,6 +338289,55 @@ extension on _StringsKo {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
+      case 'stat_range_mode_day':
+        return '일';
+      case 'stat_range_mode_week':
+        return '주';
+      case 'stat_range_mode_month':
+        return '월';
+      case 'stat_range_mode_year':
+        return '년';
+      case 'stat_range_previous':
+        return '이전 기간';
+      case 'stat_range_next':
+        return '다음 기간';
+      case 'stat_range_summary':
+        return '선택한 기간';
+      case 'stat_range_active_days':
+        return '활동 일수';
+      case 'stat_range_calendar':
+        return '학습 캘린더';
       case 'video_library_delete_rows_failed':
         return ({required Object n}) =>
             'Could not delete ${n} video(s); they are still in the library.';
@@ -348954,6 +350304,55 @@ extension on _StringsNl {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
+      case 'stat_range_mode_day':
+        return 'Day';
+      case 'stat_range_mode_week':
+        return 'Week';
+      case 'stat_range_mode_month':
+        return 'Month';
+      case 'stat_range_mode_year':
+        return 'Year';
+      case 'stat_range_previous':
+        return 'Previous period';
+      case 'stat_range_next':
+        return 'Next period';
+      case 'stat_range_summary':
+        return 'Selected range';
+      case 'stat_range_active_days':
+        return 'Active days';
+      case 'stat_range_calendar':
+        return 'Study calendar';
       case 'video_library_delete_rows_failed':
         return ({required Object n}) =>
             'Could not delete ${n} video(s); they are still in the library.';
@@ -360915,6 +362314,55 @@ extension on _StringsPtBr {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
+      case 'stat_range_mode_day':
+        return 'Day';
+      case 'stat_range_mode_week':
+        return 'Week';
+      case 'stat_range_mode_month':
+        return 'Month';
+      case 'stat_range_mode_year':
+        return 'Year';
+      case 'stat_range_previous':
+        return 'Previous period';
+      case 'stat_range_next':
+        return 'Next period';
+      case 'stat_range_summary':
+        return 'Selected range';
+      case 'stat_range_active_days':
+        return 'Active days';
+      case 'stat_range_calendar':
+        return 'Study calendar';
       case 'video_library_delete_rows_failed':
         return ({required Object n}) =>
             'Could not delete ${n} video(s); they are still in the library.';
@@ -372881,6 +374329,55 @@ extension on _StringsRu {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
+      case 'stat_range_mode_day':
+        return 'Day';
+      case 'stat_range_mode_week':
+        return 'Week';
+      case 'stat_range_mode_month':
+        return 'Month';
+      case 'stat_range_mode_year':
+        return 'Year';
+      case 'stat_range_previous':
+        return 'Previous period';
+      case 'stat_range_next':
+        return 'Next period';
+      case 'stat_range_summary':
+        return 'Selected range';
+      case 'stat_range_active_days':
+        return 'Active days';
+      case 'stat_range_calendar':
+        return 'Study calendar';
       case 'video_library_delete_rows_failed':
         return ({required Object n}) =>
             'Could not delete ${n} video(s); they are still in the library.';
@@ -384816,6 +386313,55 @@ extension on _StringsTh {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
+      case 'stat_range_mode_day':
+        return 'Day';
+      case 'stat_range_mode_week':
+        return 'Week';
+      case 'stat_range_mode_month':
+        return 'Month';
+      case 'stat_range_mode_year':
+        return 'Year';
+      case 'stat_range_previous':
+        return 'Previous period';
+      case 'stat_range_next':
+        return 'Next period';
+      case 'stat_range_summary':
+        return 'Selected range';
+      case 'stat_range_active_days':
+        return 'Active days';
+      case 'stat_range_calendar':
+        return 'Study calendar';
       case 'video_library_delete_rows_failed':
         return ({required Object n}) =>
             'Could not delete ${n} video(s); they are still in the library.';
@@ -396767,6 +398313,55 @@ extension on _StringsTr {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
+      case 'stat_range_mode_day':
+        return 'Day';
+      case 'stat_range_mode_week':
+        return 'Week';
+      case 'stat_range_mode_month':
+        return 'Month';
+      case 'stat_range_mode_year':
+        return 'Year';
+      case 'stat_range_previous':
+        return 'Previous period';
+      case 'stat_range_next':
+        return 'Next period';
+      case 'stat_range_summary':
+        return 'Selected range';
+      case 'stat_range_active_days':
+        return 'Active days';
+      case 'stat_range_calendar':
+        return 'Study calendar';
       case 'video_library_delete_rows_failed':
         return ({required Object n}) =>
             'Could not delete ${n} video(s); they are still in the library.';
@@ -408712,6 +410307,55 @@ extension on _StringsVi {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
+      case 'stat_range_mode_day':
+        return 'Day';
+      case 'stat_range_mode_week':
+        return 'Week';
+      case 'stat_range_mode_month':
+        return 'Month';
+      case 'stat_range_mode_year':
+        return 'Year';
+      case 'stat_range_previous':
+        return 'Previous period';
+      case 'stat_range_next':
+        return 'Next period';
+      case 'stat_range_summary':
+        return 'Selected range';
+      case 'stat_range_active_days':
+        return 'Active days';
+      case 'stat_range_calendar':
+        return 'Study calendar';
       case 'video_library_delete_rows_failed':
         return ({required Object n}) =>
             'Could not delete ${n} video(s); they are still in the library.';
@@ -420537,6 +422181,54 @@ extension on _StringsZhCn {
             '有 ${count} 段统计未恢复：你曾在 Fushi 里删除过这些书的统计';
       case 'hoshi_import_result_failed':
         return ({required Object count}) => '有 ${count} 本书没能导入（它们的统计仍已导入）：';
+      case 'collection_filter_all':
+        return '全部';
+      case 'collection_batch_mine':
+        return '批量制卡';
+      case 'collection_batch_mine_empty':
+        return '还没有可制卡的收藏：先在查词弹窗里收藏单词';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => '制卡 ${n} 张';
+      case 'collection_mine_card':
+        return '制卡';
+      case 'favorites_batch_mine_title':
+        return '一键制卡';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            '正在制卡 ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) => '新增 ${added} · 已存在 ${duplicate} · 失败 ${failed} · 跳过 ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return '词典中没有找到这个词';
+      case 'favorites_batch_mine_render_failed':
+        return '查词弹窗没有加载出来';
+      case 'favorites_batch_mine_text_only':
+        return '没有可用的句子媒体，已制成纯文字卡';
+      case 'favorites_batch_mine_skipped':
+        return '已跳过';
+      case 'stat_range_mode_day':
+        return '日';
+      case 'stat_range_mode_week':
+        return '周';
+      case 'stat_range_mode_month':
+        return '月';
+      case 'stat_range_mode_year':
+        return '年';
+      case 'stat_range_previous':
+        return '上一段';
+      case 'stat_range_next':
+        return '下一段';
+      case 'stat_range_summary':
+        return '所选范围';
+      case 'stat_range_active_days':
+        return '活跃天数';
+      case 'stat_range_calendar':
+        return '学习日历';
       case 'video_library_delete_rows_failed':
         return ({required Object n}) => '${n} 个视频删除失败，仍保留在媒体库中。';
       case 'video_library_delete_failed':
@@ -432405,6 +434097,55 @@ extension on _StringsZhHk {
       case 'hoshi_import_result_failed':
         return ({required Object count}) =>
             'Could not import ${count} books (their statistics were still imported):';
+      case 'collection_filter_all':
+        return 'All';
+      case 'collection_batch_mine':
+        return 'Create cards';
+      case 'collection_batch_mine_empty':
+        return 'Nothing to make cards from yet. Favorite a word in the lookup popup first.';
+      case 'collection_batch_mine_start':
+        return ({required Object n}) => 'Create ${n} cards';
+      case 'collection_mine_card':
+        return 'Create card';
+      case 'favorites_batch_mine_title':
+        return 'Create cards';
+      case 'favorites_batch_mine_progress':
+        return ({required Object done, required Object total}) =>
+            'Creating cards ${done} / ${total}';
+      case 'favorites_batch_mine_summary':
+        return ({
+          required Object added,
+          required Object duplicate,
+          required Object failed,
+          required Object skipped,
+        }) =>
+            'Added ${added} · Already in Anki ${duplicate} · Failed ${failed} · Skipped ${skipped}';
+      case 'favorites_batch_mine_no_entry':
+        return 'Not found in your dictionaries';
+      case 'favorites_batch_mine_render_failed':
+        return 'The dictionary popup did not load';
+      case 'favorites_batch_mine_text_only':
+        return 'No sentence media — text-only card';
+      case 'favorites_batch_mine_skipped':
+        return 'Skipped';
+      case 'stat_range_mode_day':
+        return '日';
+      case 'stat_range_mode_week':
+        return '週';
+      case 'stat_range_mode_month':
+        return '月';
+      case 'stat_range_mode_year':
+        return '年';
+      case 'stat_range_previous':
+        return '上一段';
+      case 'stat_range_next':
+        return '下一段';
+      case 'stat_range_summary':
+        return '所選範圍';
+      case 'stat_range_active_days':
+        return '活躍天數';
+      case 'stat_range_calendar':
+        return '學習日曆';
       case 'video_library_delete_rows_failed':
         return ({required Object n}) =>
             'Could not delete ${n} video(s); they are still in the library.';
