@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 98447 (5791 per locale)
+/// Strings: 98515 (5795 per locale)
 ///
-/// Built on 2026-09-29 at 01:27 UTC
+/// Built on 2026-09-29 at 01:28 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8316,6 +8316,17 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
       '${device} has no AI provider assigned to AI video download. Assign one in Settings › AI on that device.';
   String ai_video_acquire_remote_not_ready({required Object device}) =>
       '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -22246,6 +22257,21 @@ class _StringsAr extends _StringsEn {
   @override
   String ai_video_acquire_remote_not_ready({required Object device}) =>
       '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -36416,6 +36442,21 @@ class _StringsDe extends _StringsEn {
   @override
   String ai_video_acquire_remote_not_ready({required Object device}) =>
       '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -50637,6 +50678,21 @@ class _StringsEs extends _StringsEn {
   @override
   String ai_video_acquire_remote_not_ready({required Object device}) =>
       '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -64897,6 +64953,21 @@ class _StringsFr extends _StringsEn {
   @override
   String ai_video_acquire_remote_not_ready({required Object device}) =>
       '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -78947,6 +79018,21 @@ class _StringsId extends _StringsEn {
   @override
   String ai_video_acquire_remote_not_ready({required Object device}) =>
       '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -93098,6 +93184,21 @@ class _StringsIt extends _StringsEn {
   @override
   String ai_video_acquire_remote_not_ready({required Object device}) =>
       '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -106602,6 +106703,21 @@ class _StringsJa extends _StringsEn {
   @override
   String ai_video_acquire_remote_not_ready({required Object device}) =>
       '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -120123,6 +120239,21 @@ class _StringsKo extends _StringsEn {
   @override
   String ai_video_acquire_remote_not_ready({required Object device}) =>
       '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -134229,6 +134360,21 @@ class _StringsNl extends _StringsEn {
   @override
   String ai_video_acquire_remote_not_ready({required Object device}) =>
       '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -148387,6 +148533,21 @@ class _StringsPtBr extends _StringsEn {
   @override
   String ai_video_acquire_remote_not_ready({required Object device}) =>
       '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -162520,6 +162681,21 @@ class _StringsRu extends _StringsEn {
   @override
   String ai_video_acquire_remote_not_ready({required Object device}) =>
       '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -176449,6 +176625,21 @@ class _StringsTh extends _StringsEn {
   @override
   String ai_video_acquire_remote_not_ready({required Object device}) =>
       '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -190493,6 +190684,21 @@ class _StringsTr extends _StringsEn {
   @override
   String ai_video_acquire_remote_not_ready({required Object device}) =>
       '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -204508,6 +204714,21 @@ class _StringsVi extends _StringsEn {
   @override
   String ai_video_acquire_remote_not_ready({required Object device}) =>
       '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 // Path: <root>
@@ -217326,6 +217547,19 @@ class _StringsZhCn extends _StringsEn {
   @override
   String ai_video_acquire_remote_not_ready({required Object device}) =>
       '${device} 的下载还没配好（下载后端或受管视频来源）。';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      '${n} 个视频删除失败，仍保留在媒体库中。';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      '删除失败：${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) => '有 ${subscriptions} 个下载订阅和 ${jobs} 个未完成的下载保存到此来源。迁移到：';
+  @override
+  String get media_source_remove_download_keep => '不迁移（暂停这些订阅）';
 }
 
 // Path: <root>
@@ -230507,6 +230741,21 @@ class _StringsZhHk extends _StringsEn {
   @override
   String ai_video_acquire_remote_not_ready({required Object device}) =>
       '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+  @override
+  String video_library_delete_rows_failed({required Object n}) =>
+      'Could not delete ${n} video(s); they are still in the library.';
+  @override
+  String video_library_delete_failed({required Object reason}) =>
+      'Delete failed: ${reason}';
+  @override
+  String media_source_remove_download_refs({
+    required Object subscriptions,
+    required Object jobs,
+  }) =>
+      '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+  @override
+  String get media_source_remove_download_keep =>
+      'Don\'t move (pause those subscriptions)';
 }
 
 /// Flat map(s) containing all translations.
@@ -242501,6 +242750,16 @@ extension on _StringsEn {
       case 'ai_video_acquire_remote_not_ready':
         return ({required Object device}) =>
             '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -254489,6 +254748,16 @@ extension on _StringsAr {
       case 'ai_video_acquire_remote_not_ready':
         return ({required Object device}) =>
             '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -266527,6 +266796,16 @@ extension on _StringsDe {
       case 'ai_video_acquire_remote_not_ready':
         return ({required Object device}) =>
             '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -278555,6 +278834,16 @@ extension on _StringsEs {
       case 'ai_video_acquire_remote_not_ready':
         return ({required Object device}) =>
             '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -290591,6 +290880,16 @@ extension on _StringsFr {
       case 'ai_video_acquire_remote_not_ready':
         return ({required Object device}) =>
             '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -302597,6 +302896,16 @@ extension on _StringsId {
       case 'ai_video_acquire_remote_not_ready':
         return ({required Object device}) =>
             '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -314625,6 +314934,16 @@ extension on _StringsIt {
       case 'ai_video_acquire_remote_not_ready':
         return ({required Object device}) =>
             '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -326573,6 +326892,16 @@ extension on _StringsJa {
       case 'ai_video_acquire_remote_not_ready':
         return ({required Object device}) =>
             '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -338530,6 +338859,16 @@ extension on _StringsKo {
       case 'ai_video_acquire_remote_not_ready':
         return ({required Object device}) =>
             '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -350554,6 +350893,16 @@ extension on _StringsNl {
       case 'ai_video_acquire_remote_not_ready':
         return ({required Object device}) =>
             '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -362573,6 +362922,16 @@ extension on _StringsPtBr {
       case 'ai_video_acquire_remote_not_ready':
         return ({required Object device}) =>
             '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -374597,6 +374956,16 @@ extension on _StringsRu {
       case 'ai_video_acquire_remote_not_ready':
         return ({required Object device}) =>
             '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -386590,6 +386959,16 @@ extension on _StringsTh {
       case 'ai_video_acquire_remote_not_ready':
         return ({required Object device}) =>
             '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -398599,6 +398978,16 @@ extension on _StringsTr {
       case 'ai_video_acquire_remote_not_ready':
         return ({required Object device}) =>
             '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -410602,6 +410991,16 @@ extension on _StringsVi {
       case 'ai_video_acquire_remote_not_ready':
         return ({required Object device}) =>
             '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
@@ -422483,6 +422882,15 @@ extension on _StringsZhCn {
             '${device} 还没有给「AI 下视频」指派 AI 提供商，请在那台设备的「设置 › AI」里指派。';
       case 'ai_video_acquire_remote_not_ready':
         return ({required Object device}) => '${device} 的下载还没配好（下载后端或受管视频来源）。';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) => '${n} 个视频删除失败，仍保留在媒体库中。';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => '删除失败：${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '有 ${subscriptions} 个下载订阅和 ${jobs} 个未完成的下载保存到此来源。迁移到：';
+      case 'media_source_remove_download_keep':
+        return '不迁移（暂停这些订阅）';
       default:
         return null;
     }
@@ -434410,6 +434818,16 @@ extension on _StringsZhHk {
       case 'ai_video_acquire_remote_not_ready':
         return ({required Object device}) =>
             '${device} isn\'t ready to download yet (download backend or managed video source not set up).';
+      case 'video_library_delete_rows_failed':
+        return ({required Object n}) =>
+            'Could not delete ${n} video(s); they are still in the library.';
+      case 'video_library_delete_failed':
+        return ({required Object reason}) => 'Delete failed: ${reason}';
+      case 'media_source_remove_download_refs':
+        return ({required Object subscriptions, required Object jobs}) =>
+            '${subscriptions} download subscriptions and ${jobs} unfinished downloads save into this source. Move them to:';
+      case 'media_source_remove_download_keep':
+        return 'Don\'t move (pause those subscriptions)';
       default:
         return null;
     }
