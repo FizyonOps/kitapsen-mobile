@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 98396 (5788 per locale)
+/// Strings: 98362 (5786 per locale)
 ///
-/// Built on 2026-09-29 at 01:26 UTC
+/// Built on 2026-09-29 at 01:27 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -2877,9 +2877,6 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get interconnect_upload_content => 'Upload book files';
   String get interconnect_upload_content_hint =>
       'Sync this device\'s books and reading content up to the interconnect peer.';
-  String get interconnect_upload_dictionary => 'Upload dictionaries';
-  String get interconnect_upload_dictionary_hint =>
-      'Sync this device\'s dictionaries up to the interconnect peer.';
   String get interconnect_upload_section => 'Upload to interconnect peer';
   String get interconnect_upload_section_footer =>
       'Choose what this device uploads to the connected peer. Independent from the cloud backup switches and off by default. These switches only apply while Enable interconnect is on: turning interconnect off stops every upload here.';
@@ -12956,11 +12953,6 @@ class _StringsAr extends _StringsEn {
   @override
   String get interconnect_upload_content_hint =>
       'مزامنة كتب ومحتوى القراءة على هذا الجهاز إلى نظير الترابط.';
-  @override
-  String get interconnect_upload_dictionary => 'رفع القواميس';
-  @override
-  String get interconnect_upload_dictionary_hint =>
-      'مزامنة قواميس هذا الجهاز إلى نظير الترابط.';
   @override
   String get interconnect_upload_section => 'الرفع إلى نظير الترابط';
   @override
@@ -26976,11 +26968,6 @@ class _StringsDe extends _StringsEn {
   @override
   String get interconnect_upload_content_hint =>
       'Bücher und Leseinhalte dieses Geräts zum Interconnect-Peer synchronisieren.';
-  @override
-  String get interconnect_upload_dictionary => 'Wörterbücher hochladen';
-  @override
-  String get interconnect_upload_dictionary_hint =>
-      'Wörterbücher dieses Geräts zum Interconnect-Peer synchronisieren.';
   @override
   String get interconnect_upload_section => 'Zum Interconnect-Peer hochladen';
   @override
@@ -41157,11 +41144,6 @@ class _StringsEs extends _StringsEn {
   @override
   String get interconnect_upload_content_hint =>
       'Sincroniza los libros y contenido de lectura de este dispositivo al par de Interconnect.';
-  @override
-  String get interconnect_upload_dictionary => 'Subir diccionarios';
-  @override
-  String get interconnect_upload_dictionary_hint =>
-      'Sincroniza los diccionarios de este dispositivo al par de Interconnect.';
   @override
   String get interconnect_upload_section => 'Subir al par de Interconnect';
   @override
@@ -55378,11 +55360,6 @@ class _StringsFr extends _StringsEn {
   String get interconnect_upload_content_hint =>
       'Synchroniser les livres et le contenu de lecture de cet appareil vers le pair d\'interconnexion.';
   @override
-  String get interconnect_upload_dictionary => 'Envoyer les dictionnaires';
-  @override
-  String get interconnect_upload_dictionary_hint =>
-      'Synchroniser les dictionnaires de cet appareil vers le pair d\'interconnexion.';
-  @override
   String get interconnect_upload_section =>
       'Envoyer vers le pair d\'interconnexion';
   @override
@@ -69545,11 +69522,6 @@ class _StringsId extends _StringsEn {
   String get interconnect_upload_content_hint =>
       'Sinkronkan buku dan konten bacaan perangkat ini ke peer interconnect.';
   @override
-  String get interconnect_upload_dictionary => 'Unggah kamus';
-  @override
-  String get interconnect_upload_dictionary_hint =>
-      'Sinkronkan kamus perangkat ini ke peer interconnect.';
-  @override
   String get interconnect_upload_section => 'Unggah ke peer interconnect';
   @override
   String get interconnect_upload_section_footer =>
@@ -83623,11 +83595,6 @@ class _StringsIt extends _StringsEn {
   String get interconnect_upload_content_hint =>
       'Sincronizza i libri e i contenuti di lettura di questo dispositivo sul peer interconnect.';
   @override
-  String get interconnect_upload_dictionary => 'Carica dizionari';
-  @override
-  String get interconnect_upload_dictionary_hint =>
-      'Sincronizza i dizionari di questo dispositivo sul peer interconnect.';
-  @override
   String get interconnect_upload_section => 'Carica sul peer interconnect';
   @override
   String get interconnect_upload_section_footer =>
@@ -97514,11 +97481,6 @@ class _StringsJa extends _StringsEn {
   String get interconnect_upload_content_hint =>
       'このデバイスの書籍と読書コンテンツをインターコネクトピアに同期します。';
   @override
-  String get interconnect_upload_dictionary => '辞書';
-  @override
-  String get interconnect_upload_dictionary_hint =>
-      'このデバイスの辞書をインターコネクトピアに同期します。';
-  @override
   String get interconnect_upload_section => 'インターコネクトピアにアップロード';
   @override
   String get interconnect_upload_section_footer =>
@@ -111001,11 +110963,6 @@ class _StringsKo extends _StringsEn {
   @override
   String get interconnect_upload_content_hint =>
       '이 기기의 도서 및 읽기 콘텐츠를 인터커넥트 피어로 동기화합니다.';
-  @override
-  String get interconnect_upload_dictionary => '사전 업로드';
-  @override
-  String get interconnect_upload_dictionary_hint =>
-      '이 기기의 사전을 인터커넥트 피어로 동기화합니다.';
   @override
   String get interconnect_upload_section => '인터커넥트 피어로 업로드';
   @override
@@ -124748,11 +124705,6 @@ class _StringsNl extends _StringsEn {
   @override
   String get interconnect_upload_content_hint =>
       'Synchroniseer de boeken en leesinhoud van dit apparaat naar de interconnectpeer.';
-  @override
-  String get interconnect_upload_dictionary => 'Woordenboeken uploaden';
-  @override
-  String get interconnect_upload_dictionary_hint =>
-      'Synchroniseer de woordenboeken van dit apparaat naar de interconnectpeer.';
   @override
   String get interconnect_upload_section => 'Uploaden naar interconnectpeer';
   @override
@@ -138871,11 +138823,6 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get interconnect_upload_content_hint =>
       'Sincronizar livros e conteúdo de leitura deste dispositivo para o par da interconexão.';
-  @override
-  String get interconnect_upload_dictionary => 'Upload de dicionários';
-  @override
-  String get interconnect_upload_dictionary_hint =>
-      'Sincronizar dicionários deste dispositivo para o par da interconexão.';
   @override
   String get interconnect_upload_section => 'Upload para par da interconexão';
   @override
@@ -152996,11 +152943,6 @@ class _StringsRu extends _StringsEn {
   String get interconnect_upload_content_hint =>
       'Синхронизировать книги и контент для чтения этого устройства с партнёром по взаимосвязи.';
   @override
-  String get interconnect_upload_dictionary => 'Загрузить словари';
-  @override
-  String get interconnect_upload_dictionary_hint =>
-      'Синхронизировать словари этого устройства с партнёром по взаимосвязи.';
-  @override
   String get interconnect_upload_section =>
       'Загрузка на партнёра по взаимосвязи';
   @override
@@ -167041,11 +166983,6 @@ class _StringsTh extends _StringsEn {
   String get interconnect_upload_content_hint =>
       'ซิงค์หนังสือและเนื้อหาการอ่านของอุปกรณ์นี้ไปยังอุปกรณ์เชื่อมต่อ';
   @override
-  String get interconnect_upload_dictionary => 'อัปโหลดพจนานุกรม';
-  @override
-  String get interconnect_upload_dictionary_hint =>
-      'ซิงค์พจนานุกรมของอุปกรณ์นี้ไปยังอุปกรณ์เชื่อมต่อ';
-  @override
   String get interconnect_upload_section => 'อัปโหลดไปยังอุปกรณ์เชื่อมต่อ';
   @override
   String get interconnect_upload_section_footer =>
@@ -181020,11 +180957,6 @@ class _StringsTr extends _StringsEn {
   @override
   String get interconnect_upload_content_hint =>
       'Bu cihazın kitap ve okuma içeriğini bağlantı eşine senkronize edin.';
-  @override
-  String get interconnect_upload_dictionary => 'Sözlükleri yükle';
-  @override
-  String get interconnect_upload_dictionary_hint =>
-      'Bu cihazın sözlüklerini bağlantı eşine senkronize edin.';
   @override
   String get interconnect_upload_section => 'Bağlantı eşine yükle';
   @override
@@ -195048,11 +194980,6 @@ class _StringsVi extends _StringsEn {
   String get interconnect_upload_content_hint =>
       'Đồng bộ sách và nội dung đọc của thiết bị này lên thiết bị ghép nối.';
   @override
-  String get interconnect_upload_dictionary => 'Tải lên từ điển';
-  @override
-  String get interconnect_upload_dictionary_hint =>
-      'Đồng bộ từ điển của thiết bị này lên thiết bị ghép nối.';
-  @override
   String get interconnect_upload_section => 'Tải lên thiết bị ghép nối';
   @override
   String get interconnect_upload_section_footer =>
@@ -208667,10 +208594,6 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get interconnect_upload_content_hint => '把本设备的书籍/阅读内容上传同步到互联对端。';
   @override
-  String get interconnect_upload_dictionary => '上传词典';
-  @override
-  String get interconnect_upload_dictionary_hint => '把本设备的词典上传同步到互联对端。';
-  @override
   String get interconnect_upload_section => '上传到互联对端';
   @override
   String get interconnect_upload_section_footer =>
@@ -221511,10 +221434,6 @@ class _StringsZhHk extends _StringsEn {
   String get interconnect_upload_content => '上傳書籍檔案';
   @override
   String get interconnect_upload_content_hint => '把本設備的書籍/閱讀內容上傳同步到互聯對端。';
-  @override
-  String get interconnect_upload_dictionary => '上傳詞典';
-  @override
-  String get interconnect_upload_dictionary_hint => '把本設備的詞典上傳同步到互聯對端。';
   @override
   String get interconnect_upload_section => '上傳到互聯對端';
   @override
@@ -234365,10 +234284,6 @@ extension on _StringsEn {
         return 'Upload book files';
       case 'interconnect_upload_content_hint':
         return 'Sync this device\'s books and reading content up to the interconnect peer.';
-      case 'interconnect_upload_dictionary':
-        return 'Upload dictionaries';
-      case 'interconnect_upload_dictionary_hint':
-        return 'Sync this device\'s dictionaries up to the interconnect peer.';
       case 'interconnect_upload_section':
         return 'Upload to interconnect peer';
       case 'interconnect_upload_section_footer':
@@ -246347,10 +246262,6 @@ extension on _StringsAr {
         return 'رفع ملفات الكتب';
       case 'interconnect_upload_content_hint':
         return 'مزامنة كتب ومحتوى القراءة على هذا الجهاز إلى نظير الترابط.';
-      case 'interconnect_upload_dictionary':
-        return 'رفع القواميس';
-      case 'interconnect_upload_dictionary_hint':
-        return 'مزامنة قواميس هذا الجهاز إلى نظير الترابط.';
       case 'interconnect_upload_section':
         return 'الرفع إلى نظير الترابط';
       case 'interconnect_upload_section_footer':
@@ -258350,10 +258261,6 @@ extension on _StringsDe {
         return 'Buchdateien hochladen';
       case 'interconnect_upload_content_hint':
         return 'Bücher und Leseinhalte dieses Geräts zum Interconnect-Peer synchronisieren.';
-      case 'interconnect_upload_dictionary':
-        return 'Wörterbücher hochladen';
-      case 'interconnect_upload_dictionary_hint':
-        return 'Wörterbücher dieses Geräts zum Interconnect-Peer synchronisieren.';
       case 'interconnect_upload_section':
         return 'Zum Interconnect-Peer hochladen';
       case 'interconnect_upload_section_footer':
@@ -270371,10 +270278,6 @@ extension on _StringsEs {
         return 'Subir archivos de libros';
       case 'interconnect_upload_content_hint':
         return 'Sincroniza los libros y contenido de lectura de este dispositivo al par de Interconnect.';
-      case 'interconnect_upload_dictionary':
-        return 'Subir diccionarios';
-      case 'interconnect_upload_dictionary_hint':
-        return 'Sincroniza los diccionarios de este dispositivo al par de Interconnect.';
       case 'interconnect_upload_section':
         return 'Subir al par de Interconnect';
       case 'interconnect_upload_section_footer':
@@ -282397,10 +282300,6 @@ extension on _StringsFr {
         return 'Envoyer les fichiers de livres';
       case 'interconnect_upload_content_hint':
         return 'Synchroniser les livres et le contenu de lecture de cet appareil vers le pair d\'interconnexion.';
-      case 'interconnect_upload_dictionary':
-        return 'Envoyer les dictionnaires';
-      case 'interconnect_upload_dictionary_hint':
-        return 'Synchroniser les dictionnaires de cet appareil vers le pair d\'interconnexion.';
       case 'interconnect_upload_section':
         return 'Envoyer vers le pair d\'interconnexion';
       case 'interconnect_upload_section_footer':
@@ -294412,10 +294311,6 @@ extension on _StringsId {
         return 'Unggah file buku';
       case 'interconnect_upload_content_hint':
         return 'Sinkronkan buku dan konten bacaan perangkat ini ke peer interconnect.';
-      case 'interconnect_upload_dictionary':
-        return 'Unggah kamus';
-      case 'interconnect_upload_dictionary_hint':
-        return 'Sinkronkan kamus perangkat ini ke peer interconnect.';
       case 'interconnect_upload_section':
         return 'Unggah ke peer interconnect';
       case 'interconnect_upload_section_footer':
@@ -306415,10 +306310,6 @@ extension on _StringsIt {
         return 'Carica file dei libri';
       case 'interconnect_upload_content_hint':
         return 'Sincronizza i libri e i contenuti di lettura di questo dispositivo sul peer interconnect.';
-      case 'interconnect_upload_dictionary':
-        return 'Carica dizionari';
-      case 'interconnect_upload_dictionary_hint':
-        return 'Sincronizza i dizionari di questo dispositivo sul peer interconnect.';
       case 'interconnect_upload_section':
         return 'Carica sul peer interconnect';
       case 'interconnect_upload_section_footer':
@@ -318404,10 +318295,6 @@ extension on _StringsJa {
         return '書籍ファイルをアップロード';
       case 'interconnect_upload_content_hint':
         return 'このデバイスの書籍と読書コンテンツをインターコネクトピアに同期します。';
-      case 'interconnect_upload_dictionary':
-        return '辞書';
-      case 'interconnect_upload_dictionary_hint':
-        return 'このデバイスの辞書をインターコネクトピアに同期します。';
       case 'interconnect_upload_section':
         return 'インターコネクトピアにアップロード';
       case 'interconnect_upload_section_footer':
@@ -330344,10 +330231,6 @@ extension on _StringsKo {
         return '도서 파일 업로드';
       case 'interconnect_upload_content_hint':
         return '이 기기의 도서 및 읽기 콘텐츠를 인터커넥트 피어로 동기화합니다.';
-      case 'interconnect_upload_dictionary':
-        return '사전 업로드';
-      case 'interconnect_upload_dictionary_hint':
-        return '이 기기의 사전을 인터커넥트 피어로 동기화합니다.';
       case 'interconnect_upload_section':
         return '인터커넥트 피어로 업로드';
       case 'interconnect_upload_section_footer':
@@ -342319,10 +342202,6 @@ extension on _StringsNl {
         return 'Boekbestanden uploaden';
       case 'interconnect_upload_content_hint':
         return 'Synchroniseer de boeken en leesinhoud van dit apparaat naar de interconnectpeer.';
-      case 'interconnect_upload_dictionary':
-        return 'Woordenboeken uploaden';
-      case 'interconnect_upload_dictionary_hint':
-        return 'Synchroniseer de woordenboeken van dit apparaat naar de interconnectpeer.';
       case 'interconnect_upload_section':
         return 'Uploaden naar interconnectpeer';
       case 'interconnect_upload_section_footer':
@@ -354334,10 +354213,6 @@ extension on _StringsPtBr {
         return 'Upload de arquivos de livros';
       case 'interconnect_upload_content_hint':
         return 'Sincronizar livros e conteúdo de leitura deste dispositivo para o par da interconexão.';
-      case 'interconnect_upload_dictionary':
-        return 'Upload de dicionários';
-      case 'interconnect_upload_dictionary_hint':
-        return 'Sincronizar dicionários deste dispositivo para o par da interconexão.';
       case 'interconnect_upload_section':
         return 'Upload para par da interconexão';
       case 'interconnect_upload_section_footer':
@@ -366351,10 +366226,6 @@ extension on _StringsRu {
         return 'Загрузить файлы книг';
       case 'interconnect_upload_content_hint':
         return 'Синхронизировать книги и контент для чтения этого устройства с партнёром по взаимосвязи.';
-      case 'interconnect_upload_dictionary':
-        return 'Загрузить словари';
-      case 'interconnect_upload_dictionary_hint':
-        return 'Синхронизировать словари этого устройства с партнёром по взаимосвязи.';
       case 'interconnect_upload_section':
         return 'Загрузка на партнёра по взаимосвязи';
       case 'interconnect_upload_section_footer':
@@ -378348,10 +378219,6 @@ extension on _StringsTh {
         return 'อัปโหลดไฟล์หนังสือ';
       case 'interconnect_upload_content_hint':
         return 'ซิงค์หนังสือและเนื้อหาการอ่านของอุปกรณ์นี้ไปยังอุปกรณ์เชื่อมต่อ';
-      case 'interconnect_upload_dictionary':
-        return 'อัปโหลดพจนานุกรม';
-      case 'interconnect_upload_dictionary_hint':
-        return 'ซิงค์พจนานุกรมของอุปกรณ์นี้ไปยังอุปกรณ์เชื่อมต่อ';
       case 'interconnect_upload_section':
         return 'อัปโหลดไปยังอุปกรณ์เชื่อมต่อ';
       case 'interconnect_upload_section_footer':
@@ -390340,10 +390207,6 @@ extension on _StringsTr {
         return 'Kitap dosyalarını yükle';
       case 'interconnect_upload_content_hint':
         return 'Bu cihazın kitap ve okuma içeriğini bağlantı eşine senkronize edin.';
-      case 'interconnect_upload_dictionary':
-        return 'Sözlükleri yükle';
-      case 'interconnect_upload_dictionary_hint':
-        return 'Bu cihazın sözlüklerini bağlantı eşine senkronize edin.';
       case 'interconnect_upload_section':
         return 'Bağlantı eşine yükle';
       case 'interconnect_upload_section_footer':
@@ -402338,10 +402201,6 @@ extension on _StringsVi {
         return 'Tải lên tệp sách';
       case 'interconnect_upload_content_hint':
         return 'Đồng bộ sách và nội dung đọc của thiết bị này lên thiết bị ghép nối.';
-      case 'interconnect_upload_dictionary':
-        return 'Tải lên từ điển';
-      case 'interconnect_upload_dictionary_hint':
-        return 'Đồng bộ từ điển của thiết bị này lên thiết bị ghép nối.';
       case 'interconnect_upload_section':
         return 'Tải lên thiết bị ghép nối';
       case 'interconnect_upload_section_footer':
@@ -414293,10 +414152,6 @@ extension on _StringsZhCn {
         return '上传书籍文件';
       case 'interconnect_upload_content_hint':
         return '把本设备的书籍/阅读内容上传同步到互联对端。';
-      case 'interconnect_upload_dictionary':
-        return '上传词典';
-      case 'interconnect_upload_dictionary_hint':
-        return '把本设备的词典上传同步到互联对端。';
       case 'interconnect_upload_section':
         return '上传到互联对端';
       case 'interconnect_upload_section_footer':
@@ -426172,10 +426027,6 @@ extension on _StringsZhHk {
         return '上傳書籍檔案';
       case 'interconnect_upload_content_hint':
         return '把本設備的書籍/閱讀內容上傳同步到互聯對端。';
-      case 'interconnect_upload_dictionary':
-        return '上傳詞典';
-      case 'interconnect_upload_dictionary_hint':
-        return '把本設備的詞典上傳同步到互聯對端。';
       case 'interconnect_upload_section':
         return '上傳到互聯對端';
       case 'interconnect_upload_section_footer':
