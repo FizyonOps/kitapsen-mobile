@@ -56,9 +56,11 @@ npx wrangler deploy
 
 当前线上部署（2026-09-29）：Worker `fushi-leaderboard`（`https://rank.fushi.moe`）、D1 `fushi-leaderboard`、
 R2 `fushi-leaderboard-media`；`ADMIN_USER` / `ADMIN_PASS` / `EMAIL_PEPPER` 已设，本机副本在维护者机器
-`~/.fushi/leaderboard-secrets.json`（不入库；**`EMAIL_PEPPER` 丢了所有邮箱都对不上**）。发信渠道待定：
-Workers Paid 账户用 Cloudflare Email Service（在 `wrangler.toml` 加 `[[send_email]] name = "EMAIL"`，并在
-dashboard 的 Email Sending 里 Onboard 发件域名），否则用 Resend（`wrangler secret put RESEND_API_KEY`）。
+`~/.fushi/leaderboard-secrets.json`（不入库；**`EMAIL_PEPPER` 丢了所有邮箱都对不上**）。发信渠道：**Resend 免费档**
+（2026-09-29 配好：域名 `fushi.moe` 在 Resend 区域 Tokyo 已 Verified，DKIM/SPF 经其 Cloudflare 自动配置写入；
+`RESEND_API_KEY` 为仅发送权限的 Key，已 `secret put`，本机副本同上文件；`EMAIL_FROM = Fushi <no-reply@fushi.moe>`）。
+换 Key：Resend 新建 Sending access Key → `secret put RESEND_API_KEY` → 删旧 Key。账户若升 Workers Paid 也可改走
+Cloudflare Email Service（`[[send_email]] name = "EMAIL"`，代码已支持，优先级高于 SMTP / Resend）。
 
 部署后还要知道的：
 
