@@ -1,8 +1,8 @@
 name: fushi
 resolution: workspace
-description: A focused Japanese EPUB reader with popup dictionary and Anki integration.
+description: Kitapsen e-book reader by FizyonOps, based on Fushi (GPLv3).
 publish_to: 'none'
-version: 2.9.1+1351
+version: 1.0.0+1
 environment:
   sdk: ">=3.8.0 <4.0.0"
   flutter: "^3.41.6"
@@ -119,6 +119,9 @@ dependencies:
   json_serializable: ^6.6.1
   just_audio: ^0.9.31
   just_audio_media_kit: ^2.1.0
+  # Kitapsen: Google Play In-App Updates (store-native update prompt that
+  # replaces the GitHub release updater; see lib/src/updates/store_update_check.dart).
+  in_app_update: ^5.0.0
   # media_kit_libs_windows_audio 移除：与视频用的 media_kit_libs_video 抢同名 libmpv
   # 归档(同下载路径不同 MD5)，video libs 是 audio 超集，统一提供 libmpv。
   kana_kit: ^2.0.0
