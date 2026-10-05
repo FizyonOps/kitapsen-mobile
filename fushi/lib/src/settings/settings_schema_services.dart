@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fushi_engine/media/torrent/torznab_client.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/media/video/dandanplay_client.dart';
 import 'package:fushi_engine/media/video/metadata/video_metadata_languages.dart';
 import 'package:fushi_engine/media/video/metadata/video_source_scrape_config.dart';
@@ -41,6 +42,18 @@ import 'package:fushi_engine/media/video/subtitle/open_subtitles_client.dart';
 ///
 /// 原分区各留一条 [buildOpenServicesItem] 跳转行，用户在字幕/下载语境里仍一步可达。
 SettingsDestination buildServicesDestination() {
+  // Kitapsen: the only online service is the store account, so the category is
+  // the account page itself (one tap from Settings, no third-party services).
+  if (kKitapsenEdition) {
+    return SettingsDestination(
+      id: SettingsDestinationId.services,
+      title: t.kitapsen_account_title,
+      summary: t.kitapsen_account_summary,
+      icon: Icons.account_circle_outlined,
+      sections: const <SettingsSection>[],
+      body: (SettingsContext c) => const KitapsenAccountSettingsSection(),
+    );
+  }
   return SettingsDestination(
     id: SettingsDestinationId.services,
     // 「功能模块」门控：关掉本模块 = 整条分类不渲染 / 不进搜索索引 / 主从详情不可选

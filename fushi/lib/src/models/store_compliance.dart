@@ -18,6 +18,8 @@ library;
 
 import 'dart:io' show Platform;
 
+import 'package:fushi/src/models/kitapsen_edition.dart';
+
 /// 一类因商店合规而在 iOS 构建里整体缺席的能力。
 enum StoreRestrictedCapability {
   /// 内置外部发现源与各库页的「发现 / 浏览」视图。
@@ -58,7 +60,9 @@ enum StoreRestrictedCapability {
   /// 各值当前判据相同，仍逐个走枚举而不是塌成一个裸常量：它们是互相独立的几条
   /// 合规理由，将来任意一条被单独放开（例如只保留用户自配 OPDS）时，改动面应该
   /// 是这里的一行，而不是回头去把一个被共享的布尔拆开。
-  bool availableOn({required bool isIOS}) => !isIOS;
+  ///
+  /// Kitapsen (store e-book reader) ships none of these on any platform.
+  bool availableOn({required bool isIOS}) => !kKitapsenEdition && !isIOS;
 
   /// 真实平台上的判据。widget / 页面层用它，避免把平台参数一路透传下去。
   ///

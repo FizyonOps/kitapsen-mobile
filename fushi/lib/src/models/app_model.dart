@@ -9,6 +9,7 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/updates/local_update_notifier.dart';
 import 'package:fushi/src/updates/update_check_scheduler.dart';
 import 'package:fushi_engine/updates/update_feed_kind.dart';
@@ -1041,7 +1042,7 @@ class AppModel with ChangeNotifier {
         prefs: prefsRepo,
         notifier: LocalUpdateNotifier.isSupportedPlatform
             ? LocalUpdateNotifier(
-                appName: 'Fushi',
+                appName: 'Kitapsen',
                 groupTitle: t.updates_notification_header,
                 onResponse: _onUpdateNotificationResponse,
               )
@@ -1215,8 +1216,8 @@ class AppModel with ChangeNotifier {
 
   String _mediaTrackingAppVersion = 'unknown';
   String get _mediaTrackingUserAgent =>
-      'hajisensai/Fushi/$_mediaTrackingAppVersion '
-      '(https://github.com/hajisensai/fushi)';
+      'FizyonOps/Kitapsen/$_mediaTrackingAppVersion '
+      '(https://github.com/FizyonOps/kitapsen-mobile)';
 
   /// Dictionary metadata, history, and search caches.
   late DictionaryRepository dictRepo;
@@ -3296,7 +3297,8 @@ class AppModel with ChangeNotifier {
       // 能力（端口 19633），开关落在恒在的「设置 → 查词」分类里，且移动端同样可用
       // （browserExtension 模块仅桌面存在）。挂 browserExtension 门会一次犯两个错：
       // 移动端直接失去该服务，桌面端则开关显示「开」而服务不跑。
-      if (yomitanApiServerEnabled) {
+      // Kitapsen: no dictionaries, so no local lookup servers either.
+      if (!kKitapsenEdition && yomitanApiServerEnabled) {
         // fail-open：自启动失败绝不阻塞 init、不改开关语义，但必须留痕（BUG-911），
         // 与邻居 startSyncServer / refreshBrowserExtensionCopy 一致记日志，避免静默吞异常。
         unawaited(startYomitanApiServer().catchError((Object e, StackTrace s) {
@@ -3323,16 +3325,18 @@ class AppModel with ChangeNotifier {
       // 文本拿去查词」的查词能力（不只 galgame），开关同样落在恒在的「设置 → 查词」
       // 分类里，且那个开关自己就直接 start/stop 本管理器——只在启动侧加门会让
       // 「开关是开的但重启后不连」，两处判据当场漂开。
-      if (texthookerEnabled) {
+      if (!kKitapsenEdition && texthookerEnabled) {
         TexthookerWsClientManager.instance.start(texthookerUrls);
       }
       // TODO-861③：启动 check-due 词典自动更新（前台、静默、不弹错）。fire-and-forget，
       // 失败自吞 + 记日志，绝不阻塞 / 中断 app init（守卫见 maybeAutoUpdateDictionaries）。
-      unawaited(
-          maybeAutoUpdateDictionaries().catchError((Object e, StackTrace s) {
-        ErrorLogService.instance
-            .log('AppModel.maybeAutoUpdateDictionaries', e, s);
-      }));
+      if (!kKitapsenEdition) {
+        unawaited(
+            maybeAutoUpdateDictionaries().catchError((Object e, StackTrace s) {
+          ErrorLogService.instance
+              .log('AppModel.maybeAutoUpdateDictionaries', e, s);
+        }));
+      }
       // 番剧下载：启动 qb 完成监听 + 自动入库（fire-and-forget；未配置 qb 时每
       // tick 直接返回，无网络开销，绝不阻塞/中断 init）。
       // 模块门（downloads）：番剧下载完成监听是「下载中心」专属后台（计划仓储 +

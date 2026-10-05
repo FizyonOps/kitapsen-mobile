@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/asr_host/asr_host.dart';
 import 'package:fushi/src/media/audiobook/asr_models_settings_section.dart';
 import 'package:fushi/src/media/manga/manga_ocr_models_storage_section.dart';
@@ -44,7 +45,9 @@ SettingsDestination buildStorageDestination() {
       SettingsSection(
         id: 'storage.section.models_components',
         title: t.storage_models_components,
-        visible: (_) => isAsrSupported || _isMangaOcrLocalSupported,
+        // Speech-to-text and manga OCR models do not exist in Kitapsen.
+        visible: (_) =>
+            !kKitapsenEdition && (isAsrSupported || _isMangaOcrLocalSupported),
         items: <SettingsItem>[
           SettingsNavigationItem(
             // Preserve the existing search anchor while changing its owner.

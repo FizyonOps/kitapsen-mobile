@@ -20,6 +20,8 @@ import 'package:fushi/src/onboarding/recommended_pack_download_mini_bar.dart';
 import 'package:fushi/src/onboarding/recommended_pack_tutorial_prompt.dart';
 import 'package:fushi/src/onboarding/recommended_pack_tutorial_state.dart';
 import 'package:fushi/src/updates/update_probes.dart';
+import 'package:fushi/src/updates/store_update_check.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/utils/components/fushi_desktop_title_bar.dart';
 import 'package:fushi/src/utils/components/nav_rail_brand_button.dart';
 import 'package:fushi/src/utils/misc/build_version.dart';
@@ -34,6 +36,8 @@ import 'package:fushi/src/anki/anki_view_model.dart'
 import 'package:fushi/src/anki/lapis_template_service.dart';
 import 'package:fushi/src/leaderboard/leaderboard_service.dart';
 import 'package:fushi/src/sync/sync_auto_trigger.dart';
+import 'package:fushi/src/sync/kitapsen_client.dart'
+    show syncKitapsenLibraryProgress;
 import 'package:fushi_engine/media/external_provider.dart';
 import 'package:fushi_engine/media/source_library/source_library_row.dart';
 import 'package:fushi/src/media/source_library/source_library_scanner.dart';
@@ -480,7 +484,8 @@ class _HomePageState extends BasePageState<HomePage>
       final bool freshInstall = appModelNoUpdate.isFirstTimeSetup;
       final RecommendedPackTutorialState tutorialState =
           RecommendedPackTutorialState(appModelNoUpdate.appDirectory);
-      if (await tutorialState.shouldPrompt) {
+      // Kitapsen ships no recommended dictionary pack.
+      if (!kKitapsenEdition && await tutorialState.shouldPrompt) {
         // Persist before the prompt can consume its receipt or open a tutorial.
         // Killing the app in the tutorial must not replay the setup wizard.
         appModelNoUpdate.setFirstTimeSetupFlag();
@@ -488,7 +493,8 @@ class _HomePageState extends BasePageState<HomePage>
       }
       if (!mounted) return;
       // Serialize follow-up with ordinary onboarding and update dialogs.
-      final bool tutorialOffered = await showRecommendedPackTutorialPrompt(
+      final bool tutorialOffered = !kKitapsenEdition &&
+          await showRecommendedPackTutorialPrompt(
         context: context,
         state: tutorialState,
         onStart: () async {
@@ -529,7 +535,7 @@ class _HomePageState extends BasePageState<HomePage>
       // 「下载」改名「浏览」：升级前关着下载的用户照旧关着，但一次性告诉他们发现与
       // 在线来源搬到了哪里、在哪里打开（所有者 2026-09-28 拍板）。排在新手引导之后、
       // 更新弹窗之前，与它们串行，不抢同一帧。
-      if (mounted) {
+      if (mounted && !kKitapsenEdition) {
         await maybeShowBrowseMovedNotice(
           context: context,
           appModel: appModelNoUpdate,
@@ -537,7 +543,11 @@ class _HomePageState extends BasePageState<HomePage>
         );
       }
 
-      if (mounted) {
+      // Kitapsen never talks to the Fushi release feed: store builds ask
+      // Google Play / the App Store instead (store_update_check.dart).
+      if (mounted && kKitapsenEdition) {
+        unawaited(checkStoreUpdate(context));
+      } else if (mounted) {
         UpdateChecker.scheduleCheck(
           context,
           appVersion,
@@ -568,11 +578,14 @@ class _HomePageState extends BasePageState<HomePage>
       // v101 后台更新检查（漫画新章 / 漫画扩展）。与上面的 app 版本检查并列放在
       // 启动期：用户最想知道「我不在的时候更新了什么」的时刻就是刚打开应用。
       // 各域自己的到期判据挡住频繁重启造成的重复请求。
-      appModel.startUpdateChecks();
-      // 在线漫画章节下载 worker（设计稿 2026-09-12 §4）：复位上次进程死亡留下的
-      // running 行并续跑队列。放在这里而不是 initialise()：完成钩子的自动 OCR 要
-      // 从 navigator 的 context 装配引擎，HomePage 就绪之前拿不到。
-      unawaited(appModel.startMangaDownloads());
+      // Kitapsen has no manga / extension update feeds or chapter downloads.
+      if (!kKitapsenEdition) {
+        appModel.startUpdateChecks();
+        // 在线漫画章节下载 worker（设计稿 2026-09-12 §4）：复位上次进程死亡留下的
+        // running 行并续跑队列。放在这里而不是 initialise()：完成钩子的自动 OCR 要
+        // 从 navigator 的 context 装配引擎，HomePage 就绪之前拿不到。
+        unawaited(appModel.startMangaDownloads());
+      }
 
       // 这一段是 HomePage 层的模块专属后台自启：同步（sync）与视频索引（video）。
       // 模块关掉就不再拉起——「关掉的模块下次启动不该还在后台跑」。已经在飞的
@@ -580,6 +593,11 @@ class _HomePageState extends BasePageState<HomePage>
       final ModuleVisibility startupModules = appModelNoUpdate.moduleVisibility;
       if (startupModules.isEnabled(ModuleId.sync)) {
         _triggerFullAutoSync();
+      } else {
+        // The sync module (cloud / interconnect) is off — always so in Kitapsen —
+        // but books read on kitapsen.com still bring their position back on
+        // app open (5 min cooldown inside).
+        unawaited(syncKitapsenLibraryProgress(appModel.database));
       }
       if (startupModules.isEnabled(ModuleId.video)) {
         unawaited(
@@ -604,15 +622,17 @@ class _HomePageState extends BasePageState<HomePage>
       // [_periodicSyncInterval] 注释）。dispose 时 cancel。排行榜书架同步挂在同一个
       // 定时器上（它自己有 30 分钟节流），所以定时器不再只随同步模块开启。
       final bool periodicAutoSync = startupModules.isEnabled(ModuleId.sync);
-      _periodicSyncTimer = Timer.periodic(_periodicSyncInterval, (_) {
-        if (periodicAutoSync) _triggerFullAutoSync();
-        _maybeSyncLeaderboard();
-      });
+      if (periodicAutoSync || !kKitapsenEdition) {
+        _periodicSyncTimer = Timer.periodic(_periodicSyncInterval, (_) {
+          if (periodicAutoSync) _triggerFullAutoSync();
+          _maybeSyncLeaderboard();
+        });
+      }
 
       // Lapis 模板启动自动迁移：Hibiki 基线/客制化变了且 Anki 端仍是 Hibiki
       // 已知产物时，自动备份后推送新 styling（手改内容绝不自动覆盖，Anki 未
       // 运行静默跳过）。服务内部有每进程一次的闸门，HomePage 重建不会重跑。
-      if (mounted) {
+      if (mounted && !kKitapsenEdition) {
         unawaited(LapisTemplateService(ref.read(ankiRepositoryProvider))
             .maybeAutoMigrateOnStartup()
             .catchError((Object e, StackTrace s) {
@@ -624,7 +644,7 @@ class _HomePageState extends BasePageState<HomePage>
       // 打开之后也只是自动干跑并把清单提示出来，用户确认后才真删；只有再显式
       // 打开「自动直接删除」才跳过确认（判定全在
       // [AnkiMediaDedupRunner.maybeAutoRunOnStartup]，这里不做二次决策）。
-      if (mounted) {
+      if (mounted && !kKitapsenEdition) {
         unawaited(
             _maybeAutoDedupAnkiMedia().catchError((Object e, StackTrace s) {
           ErrorLogService.instance.log('HomePage.ankiMediaDedupAuto', e, s);
@@ -638,7 +658,8 @@ class _HomePageState extends BasePageState<HomePage>
   /// 排行榜书架后台同步：启动时一次，此后随 [_periodicSyncTimer] 每分钟探一次。未开启 /
   /// 上传关闭 / 30 分钟内同步或尝试过都是 no-op（节流在服务里）；失败只记日志。
   void _maybeSyncLeaderboard() {
-    if (!mounted) return;
+    // Kitapsen has no leaderboard (rank.fushi.moe is upstream infrastructure).
+    if (kKitapsenEdition || !mounted) return;
     unawaited(Future<void>(
       () => ref.read(leaderboardServiceProvider).maybeSyncInBackground(),
     ).catchError((Object e, StackTrace s) {

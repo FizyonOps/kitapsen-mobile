@@ -12,6 +12,7 @@ import 'package:pdfrx/pdfrx.dart';
 import 'package:fushi_anki/fushi_anki.dart';
 import 'package:fushi_audio/fushi_audio.dart';
 import 'package:fushi_core/fushi_core.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/anki/anki_view_model.dart';
 import 'package:fushi/src/epub/book_file_location.dart';
 import 'package:fushi/src/lookup/sentence_extraction.dart';
@@ -801,6 +802,8 @@ class _ReaderPdfPageState extends BaseSourcePageState<ReaderPdfPage>
               PdfViewerController controller,
               PdfViewerGeneralTapHandlerDetails details,
             ) {
+              // Kitapsen has no dictionary: taps keep pdfrx's own behaviour.
+              if (kKitapsenEdition) return false;
               if (details.type != PdfViewerGeneralTapType.tap) return false;
               if (details.tapOn == PdfViewerPart.background) return false;
               unawaited(_lookupAtDocumentPosition(details.documentPosition));

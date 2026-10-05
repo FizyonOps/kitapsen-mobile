@@ -1806,7 +1806,10 @@ updateLive: function(patch) {
               settings: ContextMenuSettings(
                 hideDefaultSystemContextMenuItems: true,
               ),
+              // Kitapsen: no dictionary and no audio clips; selected text can
+              // be copied but never shared or sent out of the app.
               menuItems: [
+                if (!kKitapsenEdition)
                 ContextMenuItem(
                   id: 1,
                   title: t.search,
@@ -1846,6 +1849,7 @@ updateLive: function(patch) {
                 // TODO-954：移动端选区右键也提供「导出片段」，与 Windows 一致都从选区
                 // 触发；handler 内部判 hasCue/音频，无音频时走 noAudio 兜底 toast。
                 // BUG-544：提到第二位（复制之前），不再垫底。
+                if (!kKitapsenEdition)
                 ContextMenuItem(
                   id: 2,
                   title: t.audiobook_export_clip,
@@ -1871,7 +1875,7 @@ updateLive: function(patch) {
                     await _clearReaderAppSelection();
                   },
                 ),
-                if (isAndroidPlatform)
+                if (isAndroidPlatform && !kKitapsenEdition)
                   ContextMenuItem(
                     id: 4,
                     title: t.share,
@@ -1890,7 +1894,7 @@ updateLive: function(patch) {
                       await _clearReaderAppSelection();
                     },
                   ),
-                if (isAndroidPlatform)
+                if (isAndroidPlatform && !kKitapsenEdition)
                   ContextMenuItem(
                     id: 5,
                     title: t.selection_web_search,
@@ -2149,7 +2153,9 @@ updateLive: function(patch) {
             if (args.length < 2) return;
             // BUG-2276：抽屉压着正文时，这次点击是「点遮罩关抽屉」，不是正文点击。
             if (_closeSideSheetForWebViewPointer()) return;
-            final bool shiftKey = args.length >= 3 && args[2] == true;
+            // Kitapsen has no lookup, so Shift+tap is just a tap.
+            final bool shiftKey =
+                !kKitapsenEdition && args.length >= 3 && args[2] == true;
             if (!_tapGateChrome && !shiftKey) {
               _toggleChrome();
               // Tap handed OS focus to the WebView; reclaim it so ESC still
@@ -2159,7 +2165,17 @@ updateLive: function(patch) {
               return;
             }
             if (!shiftKey && !ReaderFushiSource.instance.highlightOnTap) {
-              // Tap consumed without a selection/popup — reclaim reader focus.
+              // Without tap-to-look-up the JS side reports every tap here (text
+              // or blank alike), so a tap must do what a tap on blank space
+              // does: drop a leftover selection and reveal / hide the floating
+              // toolbar. Otherwise the auto-hidden toolbar could never come
+              // back by tapping the page.
+              unawaited(_clearReaderAppSelection());
+              if (_anyChromeFloating) {
+                _handleFloatingChromeReveal();
+              } else if (ReaderFushiSource.instance.tapEmptyToHideChrome) {
+                _toggleChrome();
+              }
               _focusOwnership.reclaim(FocusReclaimCause.gesture);
               return;
             }
@@ -2174,7 +2190,7 @@ updateLive: function(patch) {
         controller.addJavaScriptHandler(
           handlerName: 'onShiftHover',
           callback: (args) {
-            if (args.length < 2) return;
+            if (kKitapsenEdition || args.length < 2) return;
             // 连续查词（和鼠标一样）：**不再**门控 isDictionaryShown（旧 TODO-851
             // 放开）。弹窗未出时这里出首弹；某些平台弹窗出现后 WebView DOM 仍收
             // mousemove（barrier 不拦原生视图指针），此时也照常换词——与

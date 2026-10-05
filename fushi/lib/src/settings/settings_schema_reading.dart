@@ -1,6 +1,7 @@
 import 'dart:io' show Platform;
 
 import 'package:flutter/material.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/models/preferences_repository.dart';
 import 'package:fushi/src/reader/reader_control_layout.dart';
 import 'package:fushi/src/reader/reader_control_layout_editor.dart';
@@ -63,11 +64,13 @@ SettingsDestination buildReadingDestination() {
                 label: t.reader_scroll,
                 tooltip: t.reader_scroll,
               ),
-              SettingsSegmentOption<String>(
-                value: 'vn',
-                label: t.reader_vn,
-                tooltip: t.reader_vn,
-              ),
+              // Visual-novel mode is a Japanese-learning layout Kitapsen omits.
+              if (!kKitapsenEdition)
+                SettingsSegmentOption<String>(
+                  value: 'vn',
+                  label: t.reader_vn,
+                  tooltip: t.reader_vn,
+                ),
             ],
             selected: (SettingsContext c) => c.readerSource.readerViewMode,
             onChanged: (SettingsContext c, String v) async {
@@ -80,8 +83,10 @@ SettingsDestination buildReadingDestination() {
               notifyReaderLayoutChanged(c);
             },
           ),
+          // Kitapsen books are horizontal left-to-right (Turkish / European).
           SettingsSegmentedItem<String>(
             id: 'reading_display.writing_mode',
+            visible: (_) => !kKitapsenEdition,
             title: t.reader_writing_direction,
             icon: Icons.text_rotate_vertical,
             controlBelow: true,
@@ -191,6 +196,7 @@ SettingsDestination buildReadingDestination() {
           ),
           SettingsSegmentedItem<String>(
             id: 'reading_display.furigana_mode',
+            visible: (_) => !kKitapsenEdition,
             title: t.reader_furigana_mode,
             icon: Icons.translate_outlined,
             controlBelow: true,
@@ -543,8 +549,10 @@ SettingsDestination buildReadingDestination() {
         title: t.settings_section_page_turn_input,
         collapsedByDefault: true,
         items: <SettingsItem>[
+          // Kitapsen has no dictionary: tap-to-look-up is off and not offered.
           SettingsSwitchItem(
             id: 'reading_controls.highlight_on_tap',
+            visible: (_) => !kKitapsenEdition,
             title: t.highlight_on_tap,
             icon: Icons.touch_app_outlined,
             reader: const ReaderPlacement(
@@ -691,6 +699,7 @@ SettingsDestination buildReadingDestination() {
           // TODO-830: 反转有声书底栏 ⏮⏭ 前进/后退按钮的功能方向（per-reader）。
           SettingsSwitchItem(
             id: 'reading_controls.invert_audiobook_skip_direction',
+            visible: (_) => !kKitapsenEdition,
             title: t.invert_audiobook_skip_direction,
             icon: Icons.swap_horizontal_circle_outlined,
             reader: const ReaderPlacement(
@@ -785,8 +794,11 @@ SettingsDestination buildReadingDestination() {
           // 偏好只在应用内悬浮球开着时生效（readerToolbarsHidden），所以拨开时球若
           // 关着就一并打开（setHideReaderToolbars）；球后来被关掉则栏自动回来，
           // 副标题说明原因。改变栏的占位 → 走重锚通道。
+          // Hiding the toolbars hands their buttons to the floating ball,
+          // which Kitapsen does not ship.
           SettingsSwitchItem(
             id: 'reading_controls.hide_toolbars',
+            visible: (_) => !kKitapsenEdition,
             title: t.reader_toolbars_hide,
             icon: Icons.web_asset_off_outlined,
             subtitleBuilder: (SettingsContext c) =>
@@ -840,8 +852,11 @@ SettingsDestination buildReadingDestination() {
           // 写 appModel.setReaderControlLayout → prefsRepo 通知 → 阅读器页重建，
           // 开着的书立即换布局。底栏「空 ↔ 非空」会翻转挤压态的底栏预留高
           // （_bottomChromeReserve），所以走重锚通道重下 chrome insets。
+          // Kitapsen keeps the default toolbar: the editor's tray would offer
+          // audiobook / floating-ball buttons for features it does not ship.
           SettingsCustomItem(
             id: 'reading_controls.controls_editor',
+            visible: (_) => !kKitapsenEdition,
             searchTitle: t.reader_control_editor_title,
             reader: const ReaderPlacement(
               group: ReaderGroup.behavior,
@@ -851,6 +866,7 @@ SettingsDestination buildReadingDestination() {
           ),
           SettingsActionItem(
             id: 'reading_controls.reset_control_layout',
+            visible: (_) => !kKitapsenEdition,
             title: t.reader_control_reset_layout,
             icon: Icons.restart_alt_outlined,
             reader: const ReaderPlacement(

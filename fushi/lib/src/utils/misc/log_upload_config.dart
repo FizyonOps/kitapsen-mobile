@@ -1,6 +1,7 @@
 // 日志上传配置。端点/token 的默认空值入库在 `log_upload_secret.dart`（保证可编译）；
 // 真值只在本机填该文件并 `git update-index --skip-worktree` 隐藏，不入库。
 // 端点留空则「上传」按钮自动隐藏。
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/utils/misc/log_upload_secret.dart';
 
 export 'package:fushi/src/utils/misc/log_upload_secret.dart'
@@ -16,4 +17,7 @@ bool isLogUploadConfigured(String endpoint) {
 }
 
 /// 当前构建是否展示「上传」按钮（端点已配置才显示）。
-bool get showUploadLogAction => isLogUploadConfigured(kLogUploadEndpoint);
+///
+/// Kitapsen never uploads logs to the upstream collector (logs.wrds.xyz).
+bool get showUploadLogAction =>
+    !kKitapsenEdition && isLogUploadConfigured(kLogUploadEndpoint);

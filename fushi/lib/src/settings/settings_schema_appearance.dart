@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/pages.dart';
 import 'package:fushi/src/models/module_id.dart';
 import 'package:fushi/src/models/module_registry.dart';
@@ -261,6 +262,9 @@ SettingsDestination buildAppearanceDestination() {
         id: 'appearance.section.modules',
         presentation: SettingsSectionPresentation.alwaysExpanded,
         title: t.settings_section_modules,
+        // Kitapsen ships the book module only; a lone "Books" switch would just
+        // let the user hide the whole app.
+        visible: (_) => !kKitapsenEdition,
         // 遍历 ModuleId.values 生成，不再逐个手写：加模块只加一个 enum 值，
         // 枚举顺序就是这里的展示顺序（库页 → 工具页 → 横切能力 → 设备数据）。
         // 平台上不存在的模块由 _moduleSwitch 自己的 visible 判掉。
@@ -277,7 +281,9 @@ SettingsDestination buildAppearanceDestination() {
             id: 'appearance.app_icon',
             title: t.app_icon_label,
             icon: Icons.widgets_outlined,
-            visible: (_) => Platform.isAndroid || Platform.isWindows,
+            // Kitapsen has a single launcher icon, so there is nothing to pick.
+            visible: (_) =>
+                !kKitapsenEdition && (Platform.isAndroid || Platform.isWindows),
             builder: (_) => const MiscellaneousSettingsPage(),
           ),
           SettingsSwitchItem(

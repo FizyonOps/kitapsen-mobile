@@ -7,6 +7,7 @@ import 'package:path/path.dart' as p;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:fushi_dictionary/fushi_dictionary.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/media.dart';
 import 'package:fushi/models.dart';
 import 'package:fushi/pages.dart';
@@ -1513,8 +1514,12 @@ class ReaderFushiSource extends ReaderMediaSource {
   }
 
   bool get highlightOnTap =>
-      readerSettings?.highlightOnTap ??
-      getPreference<bool>(key: 'highlight_on_tap', defaultValue: true);
+      !kKitapsenEdition &&
+      (readerSettings?.highlightOnTap ??
+          getPreference<bool>(
+            key: 'highlight_on_tap',
+            defaultValue: ReaderSettings.defaultHighlightOnTap,
+          ));
 
   void toggleHighlightOnTap() async {
     await (readerSettings?.toggleHighlightOnTap() ??
@@ -1787,7 +1792,7 @@ class ReaderFushiSource extends ReaderMediaSource {
       readerSettings?.writingMode ??
       getPreference<String>(
         key: 'writing_mode',
-        defaultValue: 'vertical-rl',
+        defaultValue: ReaderSettings.defaultWritingMode,
       );
   Future<void> setReaderWritingMode(String v) async {
     await (readerSettings?.setWritingMode(v) ??
@@ -2024,7 +2029,10 @@ class ReaderFushiSource extends ReaderMediaSource {
 
   String get readerSpreadDirection =>
       readerSettings?.spreadDirection ??
-      getPreference<String>(key: 'spread_direction', defaultValue: 'rtl');
+      getPreference<String>(
+        key: 'spread_direction',
+        defaultValue: ReaderSettings.defaultSpreadDirection,
+      );
   Future<void> setReaderSpreadDirection(String v) async {
     await (readerSettings?.setSpreadDirection(v) ??
         setPreference<String>(key: 'spread_direction', value: v));

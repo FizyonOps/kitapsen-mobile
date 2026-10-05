@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/media.dart';
 import 'package:fushi/utils.dart';
 import 'package:fushi/src/models/app_model.dart';
@@ -1104,15 +1105,18 @@ class _HomeDashboardPageState
           children: <Widget>[
             // v101 更新提醒：有未读时才占位（横幅自己在 total==0 时收成
             // SizedBox.shrink），没有更新的日子首页不多一块空卡。
-            UpdatesDashboardBanner(service: appModel.updateFeedService),
+            // Kitapsen: no update feeds and no Hibiki -> Fushi migration.
+            if (!kKitapsenEdition)
+              UpdatesDashboardBanner(service: appModel.updateFeedService),
             // 已迁移只读态（Fushi 迁移 P1-4，仅老包生效）：首屏常驻引导。
-            if (appModel.isMigrationReadonly) ...<Widget>[
+            if (!kKitapsenEdition && appModel.isMigrationReadonly) ...<Widget>[
               _MigrationReadonlyBanner(appModel: appModel),
               SizedBox(height: tokens.spacing.card),
             ],
             // Fushi 侧（P2-2/P2-3）：检测到迁移数据 → 导入引导；导入完成且旧包
             // 仍在 → 卸载引导（ACTION_DELETE + 复查）。仅 Android。
-            if (!kIsWeb &&
+            if (!kKitapsenEdition &&
+                !kIsWeb &&
                 Platform.isAndroid &&
                 appModel.packageInfo.packageName !=
                     kHibikiPackageName) ...<Widget>[
@@ -2024,14 +2028,17 @@ class _HomeDashboardPageState
             icon: Icons.bar_chart_outlined,
             onTap: _openStatisticsCenter,
           ),
-          SizedBox(width: tokens.spacing.gap),
           // 排行榜：统计中心隔壁单独一颗按钮（2026-10-01 从统计中心 tab 抽出）。
-          FushiIconButton(
-            tooltip: t.leaderboard_title,
-            label: t.leaderboard_title,
-            icon: Icons.emoji_events_outlined,
-            onTap: _openLeaderboard,
-          ),
+          // Kitapsen has no leaderboard (it is a Fushi-hosted service).
+          if (!kKitapsenEdition) ...<Widget>[
+            SizedBox(width: tokens.spacing.gap),
+            FushiIconButton(
+              tooltip: t.leaderboard_title,
+              label: t.leaderboard_title,
+              icon: Icons.emoji_events_outlined,
+              onTap: _openLeaderboard,
+            ),
+          ],
         ],
       ),
       child: Column(

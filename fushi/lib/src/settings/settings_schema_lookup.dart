@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/models.dart';
 import 'package:fushi/pages.dart';
 import 'package:fushi/src/lookup/gal_hook_text_overlay_controller.dart';
@@ -164,6 +165,8 @@ SettingsSwitchItem _popupBottomDockedModuleSwitch(ModuleId module) {
 SettingsDestination buildLookupDestination() {
   return SettingsDestination(
     id: SettingsDestinationId.lookup,
+    // Kitapsen is a plain e-book reader: no dictionaries, no lookup popup.
+    visible: (_) => !kKitapsenEdition,
     title: t.settings_destination_lookup,
     summary: t.dictionary_settings,
     icon: Icons.manage_search_outlined,

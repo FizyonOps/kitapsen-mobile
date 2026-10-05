@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:audio_service/audio_service.dart' as ag;
 import 'package:flutter/material.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/utils/misc/fushi_audio_handler.dart';
 
 class AudioController {
@@ -60,6 +61,14 @@ class AudioController {
   Future<void> _initialiseHandlerOnce() async {
     if (_audioHandler != null) return;
 
+    // Kitapsen plays no audio (audiobooks / video are not shipped), so the
+    // audio_service media-playback foreground service is not even declared
+    // in its manifest; use the in-process handler directly.
+    if (kKitapsenEdition) {
+      _audioHandler = _localHandler();
+      return;
+    }
+
     try {
       _audioHandler = await ag.AudioService.init<FushiAudioHandler>(
         builder: () => FushiAudioHandler(
@@ -82,7 +91,12 @@ class AudioController {
       );
     } catch (e) {
       debugPrint('[Fushi] AudioService.init failed (non-fatal): $e');
-      _audioHandler = FushiAudioHandler(
+      _audioHandler = _localHandler();
+    }
+  }
+
+  /// In-process handler without the audio_service platform session.
+  FushiAudioHandler _localHandler() => FushiAudioHandler(
         onPlayPause: () => _playController.add(null),
         onSeek: (pos) => _seekController.add(pos),
         onRewind: () => _rewindController.add(null),
@@ -91,8 +105,6 @@ class AudioController {
         onSkipToPrevious: () => _skipPreviousController.add(null),
         onToggleFloatingLyric: () => _toggleFloatingLyricController.add(null),
       );
-    }
-  }
 
   void dispose() {
     _mediaPauseController.close();

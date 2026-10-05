@@ -16,6 +16,7 @@ import 'package:fushi_engine/ai/web_knowledge.dart'
         kLegacyWebKnowledgeSiteIds,
         parseWebKnowledgeCustomSites,
         parseWebKnowledgeEnabledIds;
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/dictionary/dict_style_rules.dart';
 import 'package:fushi/src/floating_ball/floating_ball_config.dart';
 import 'package:fushi/src/media/discovery/alist_site_config.dart';
@@ -443,8 +444,12 @@ class PreferencesRepository extends ChangeNotifier
   /// `dc:language`、hook 出来的 galgame 文本更没有任何声明。逐个资源手动指定能解
   /// 决，但用户装的内容通常以某一种语言为主，给一个默认值比让他点几十次省事。
   /// 默认空串而不是 `ja`：本仓不做「内容恒为日语」这种全局假设。
+  ///
+  /// Kitapsen sells Turkish books, so its unset default is `tr`.
   String get defaultContentLanguage =>
-      getPref('default_content_language', defaultValue: '') as String;
+      getPref('default_content_language',
+              defaultValue: kKitapsenEdition ? 'tr' : '')
+          as String;
 
   Future<void> setDefaultContentLanguage(String language) async {
     await setPref('default_content_language', language);
@@ -715,6 +720,9 @@ class PreferencesRepository extends ChangeNotifier
   /// 应用内悬浮球（设置 → 悬浮球，`docs/specs/2026-09-28-floating-ball.md`）。
   /// 默认开。旧版三态 `floating_ball.mode` 里显式选过「关」的用户保持关。
   bool get floatingBallInApp {
+    // Kitapsen has no floating ball at all (its settings category is hidden),
+    // so a stored value can never turn it back on.
+    if (kKitapsenEdition) return false;
     final Object? value = getPref('floating_ball.in_app', defaultValue: null);
     if (value is bool) return value;
     return getPref('floating_ball.mode', defaultValue: '') != 'off';
@@ -728,6 +736,7 @@ class PreferencesRepository extends ChangeNotifier
   /// 应用外悬浮球（Android 悬浮窗服务 / Windows、macOS 置顶窗口）。默认关。旧版
   /// 选过 `system` 的用户保持开。不支持的平台（iOS / Linux）读到 true 也不起球。
   bool get floatingBallSystem {
+    if (kKitapsenEdition) return false;
     final Object? value = getPref('floating_ball.system', defaultValue: null);
     if (value is bool) return value;
     return getPref('floating_ball.mode', defaultValue: '') == 'system';

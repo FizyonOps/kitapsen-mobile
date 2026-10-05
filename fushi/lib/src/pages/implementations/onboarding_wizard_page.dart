@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show ByteData, rootBundle;
+import 'package:fushi/src/models/kitapsen_edition.dart';
+import 'package:fushi/src/pages/implementations/kitapsen_account_settings_section.dart';
 import 'package:fushi/pages.dart';
 import 'package:fushi/models.dart' show AppModel;
 import 'package:fushi/src/anki/anki_config_controls.dart';
@@ -173,7 +175,9 @@ class _OnboardingWizardPageState extends BasePageState<OnboardingWizardPage>
     );
   }
 
-  List<OnboardingStepId> get _steps => widget.tutorialOnly
+  List<OnboardingStepId> get _steps => kKitapsenEdition
+      ? kKitapsenOnboardingSteps
+      : widget.tutorialOnly
       ? onboardingTutorialStepSequence(
           globalLookupAvailable: _globalLookupAvailable)
       : onboardingStepSequence(
@@ -207,7 +211,7 @@ class _OnboardingWizardPageState extends BasePageState<OnboardingWizardPage>
     }
     // 包目录进场收尾（删已导入的残包、搬旧命名的半截文件、按磁盘对齐阶段）。
     // 下载正在跑时 controller 整体跳过——那些都是在动同一批文件。
-    unawaited(_packController.prepareDiskState());
+    if (!kKitapsenEdition) unawaited(_packController.prepareDiskState());
   }
 
   // dispose 里**没有**取消下载：BUG-2097 的根因就是这里曾经有一句
@@ -1023,7 +1027,27 @@ class _OnboardingWizardPageState extends BasePageState<OnboardingWizardPage>
         return _buildFirstAnkiCardTutorial();
       case OnboardingStepId.finish:
         return _buildFinishStep();
+      case OnboardingStepId.kitapsenAccount:
+        return _buildKitapsenAccountStep();
     }
+  }
+
+  /// Kitapsen sign-in step: the same account section as Settings › Kitapsen
+  /// account. Skippable (Skip / Start both close the wizard).
+  Widget _buildKitapsenAccountStep() {
+    final FushiDesignTokens tokens = FushiDesignTokens.of(context);
+    return ListView(
+      padding: EdgeInsets.all(tokens.spacing.card),
+      children: <Widget>[
+        OnboardingStepHero(
+          icon: Icons.menu_book_outlined,
+          title: t.kitapsen_onboarding_title,
+          body: t.kitapsen_onboarding_body,
+        ),
+        SizedBox(height: tokens.spacing.card),
+        const KitapsenAccountSettingsSection(),
+      ],
+    );
   }
 
   Widget _buildManualResourcesStep() {

@@ -10,7 +10,11 @@
 library;
 
 /// 项目主页；随 UA 一起报出去，方便被访问方联系到上游。
-const String kFushiUserAgentHomepage = 'https://github.com/hajisensai/fushi';
+///
+/// Kitapsen build: identifies as Kitapsen and points at its own source fork, so
+/// third parties never attribute this app's traffic to the upstream project.
+const String kFushiUserAgentHomepage =
+    'https://github.com/FizyonOps/kitapsen-mobile';
 
 /// 组件名 [component] 的对外 UA，形如
 /// `fushi/<component> (https://github.com/hajisensai/fushi)`。
@@ -21,7 +25,7 @@ const String kFushiUserAgentHomepage = 'https://github.com/hajisensai/fushi';
 String fushiUserAgent(String component) {
   final String trimmed = component.trim();
   assert(trimmed.isNotEmpty, 'UA 组件名不能为空');
-  return 'fushi/$trimmed ($kFushiUserAgentHomepage)';
+  return 'kitapsen/$trimmed ($kFushiUserAgentHomepage)';
 }
 
 /// OpenSubtitles 配置里存量的旧默认 UA。

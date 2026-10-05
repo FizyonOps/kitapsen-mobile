@@ -1,3 +1,4 @@
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/media/audiobook/audiobook_controller.dart';
 import 'package:fushi_dictionary/fushi_dictionary.dart';
 import 'dart:async';
@@ -1560,7 +1561,8 @@ class _ReaderFushiPageState extends BaseSourcePageState<ReaderFushiPage>
   // BUG-099: true for right-to-left reading (vertical-rl, the Japanese default),
   // which flips the bare Left/Right arrow page-turn direction.
   bool get _isRtlReading =>
-      (_settings?.writingMode ?? 'vertical-rl') == 'vertical-rl';
+      (_settings?.writingMode ?? ReaderSettings.defaultWritingMode) ==
+      'vertical-rl';
 
   int _currentChapter = 0;
   // 压平目录的按书缓存（见 [_buildTtuToc]）：顶栏章名逐帧要查，压平却要走整棵 TOC

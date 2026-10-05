@@ -15,6 +15,8 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
     final KitapsenClient? kitapsen =
         await KitapsenClient.restore(appModel.database);
     if (kitapsen != null) return kitapsen;
+    // Kitapsen: the store is the only remote library (no interconnect / cloud).
+    if (kKitapsenEdition) return null;
 
     // 互联（局域网 hibiki server）已从 backendType 解耦成独立开关，可与云备份并存。
     // 互联启用且已配对对端时优先用它的 live 库 API（listRemoteBooks/getRemoteBook），
@@ -58,9 +60,13 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
   /// 「同步与备份 + 互联」模块（[ModuleId.sync]）关掉时同样在此早退：远端书列表来自
   /// 互联对端 / 云盘后端，属该模块。门控放在取数之前（与 BUG-1182 同一位置）才能做到
   /// **零网络请求**，而不是拉完再丢。
+  ///
+  /// Kitapsen: the store library is the app's book source, not an optional
+  /// sync feature, so it always loads (the sync module does not exist there).
   bool get _shouldLoadRemoteBooks =>
-      appModelNoUpdate.prefsRepo.showRemoteEntries &&
-      _moduleVisibility.isEnabled(ModuleId.sync);
+      kKitapsenEdition ||
+      (appModelNoUpdate.prefsRepo.showRemoteEntries &&
+          _moduleVisibility.isEnabled(ModuleId.sync));
 
   Future<_RemoteBookState?> _loadRemoteBooks(
       {bool forceRefresh = false}) async {
@@ -70,6 +76,7 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
     }
     final RemoteBookClient? client = await _resolveRemoteBookClient();
     _remoteBookClient = client;
+    _kitapsenSignedIn = client is KitapsenClient;
     if (client == null) return null;
     try {
       // BUG-1180：经共享缓存取清单——切回书架 tab（[_onShellTabActivated]）不再必然
@@ -828,6 +835,16 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
       // 在 throw 之后仍执行，故 audiobook 键只在此清一次即可。
       if (markedAudiobookKey != null) {
         _markAudiobookDownloading(markedAudiobookKey, downloading: false);
+      }
+      // A Kitapsen store EPUB is licensed to this app only: once imported (or
+      // on failure) the downloaded file must not linger in the temp folder.
+      if (client is KitapsenClient) {
+        try {
+          if (await dest.exists()) await dest.delete();
+        } on FileSystemException catch (e, stack) {
+          ErrorLogService.instance
+              .log('ReaderFushiHistoryPage.deleteKitapsenDownload', e, stack);
+        }
       }
     }
   }

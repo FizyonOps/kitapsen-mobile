@@ -175,6 +175,8 @@ extension _ReaderChrome on _ReaderFushiPageState {
     Offset webViewOffset,
   ) async {
     if (!mounted) return;
+    // Kitapsen: book images are not shared or copied out of the app.
+    if (kKitapsenEdition) return;
     if (!isWindowsPlatform) {
       await _shareReaderImage(imgUrl);
       return;
@@ -522,16 +524,21 @@ extension _ReaderChrome on _ReaderFushiPageState {
             clipBehavior: Clip.antiAlias,
             child: Row(
               mainAxisSize: MainAxisSize.min,
+              // Kitapsen: copy only. No dictionary lookup, sentence
+              // favorites or audio clips, and store books never leave the
+              // app through share / web search.
               children: <Widget>[
-                button(Icons.search_outlined, t.search, 'search'),
+                if (!kKitapsenEdition)
+                  button(Icons.search_outlined, t.search, 'search'),
                 button(Icons.copy_outlined, t.copy, 'copy'),
-                if (isAndroidPlatform)
+                if (isAndroidPlatform && !kKitapsenEdition)
                   button(Icons.share_outlined, t.share, 'share'),
-                if (isAndroidPlatform)
+                if (isAndroidPlatform && !kKitapsenEdition)
                   button(Icons.travel_explore, t.selection_web_search,
                       'webSearch'),
-                button(Icons.star_border, t.action_favorite, 'favorite'),
-                if (hasAudio)
+                if (!kKitapsenEdition)
+                  button(Icons.star_border, t.action_favorite, 'favorite'),
+                if (hasAudio && !kKitapsenEdition)
                   button(Icons.movie_creation_outlined, t.audiobook_export_clip,
                       'export'),
               ],
@@ -854,6 +861,7 @@ extension _ReaderChrome on _ReaderFushiPageState {
   /// [copyImageFileToClipboard]），与书架端插图册共用；这里只把 fushi.local URL
   /// 解析成本书解压目录里的文件。
   Future<void> _shareReaderImage(String imgUrl) async {
+    if (kKitapsenEdition) return;
     final File? file = _readerImageFileForUrl(imgUrl);
     if (file == null) {
       FushiToast.show(
@@ -1601,8 +1609,9 @@ extension _ReaderChrome on _ReaderFushiPageState {
       // 桌面才有窗口可全屏，移动端不渲染这颗按钮。
       case ReaderControlItem.fullscreen:
         return desktopWindowFullscreenSupported;
+      // Kitapsen has no floating ball to take the toolbar buttons over.
       case ReaderControlItem.toolbars:
-        return true;
+        return !kKitapsenEdition;
       // 有声书传输键：没挂控制器就没有可控的音频，整颗不出现（不论拖在哪个槽）。
       case ReaderControlItem.audiobookPrev:
       case ReaderControlItem.audiobookPlayPause:

@@ -18,6 +18,7 @@ library;
 
 import 'package:flutter/foundation.dart';
 
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/models/store_compliance.dart';
 
 /// 一个可被用户整体关闭的功能模块。
@@ -95,7 +96,12 @@ enum ModuleId {
     required bool isDesktop,
     required bool isIOS,
     required bool isAndroid,
-  }) => switch (this) {
+  }) {
+    // Kitapsen ships the book reader only: every other module is absent on
+    // every platform, so its tab, settings category, shortcuts and module
+    // toggle all disappear through the existing gates.
+    if (kKitapsenEdition && this != ModuleId.books) return false;
+    return switch (this) {
     // galgame hook 只做 Windows 端（见 CLAUDE.md「Galgame Hook 硬规则」）；
     // Android 上同一个模块换成串流接收端的远端游戏库。
     ModuleId.games =>
@@ -117,6 +123,7 @@ enum ModuleId {
     ModuleId.services ||
     ModuleId.sync => true,
   };
+  }
 
   /// 把持久化键解析回枚举；未知键返回 `null`（备份/同步可能带来旧键或对端新键，
   /// **绝不抛异常**）。

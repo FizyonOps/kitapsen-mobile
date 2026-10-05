@@ -28,6 +28,7 @@ const List<({String? tag, String label})> kContentLanguageOptions =
   (tag: 'zh-Hant', label: '繁體中文 (zh-Hant)'),
   (tag: 'ko', label: '한국어 (ko)'),
   (tag: 'en', label: 'English (en)'),
+  (tag: 'tr', label: 'Türkçe (tr)'),
 ];
 
 /// BCP-47 标签 -> 显示名。不认识的标签原样返回（用户可能手动写了别的语言）。

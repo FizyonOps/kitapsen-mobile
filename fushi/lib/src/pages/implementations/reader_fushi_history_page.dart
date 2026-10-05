@@ -8,9 +8,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/shortcuts/context_menu_trigger.dart';
 import 'package:fushi/media.dart';
 import 'package:fushi/pages.dart';
+import 'package:fushi/src/settings/settings_detail_page.dart';
+import 'package:fushi/src/settings/settings_schema_services.dart'
+    show buildServicesDestination;
 import 'package:fushi_audio/fushi_audio.dart';
 import 'package:fushi/src/epub/book_file_location.dart';
 import 'package:fushi_engine/epub/epub_book.dart' show EpubImageRef;
@@ -290,6 +294,10 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
   Future<_RemoteBookState?>? _remoteBooksFuture;
   // BUG-992：上次成功的远端书态，自动刷新重拉（future→waiting）时沿用，避免闪屏。
   _RemoteBookState? _lastRemoteState;
+
+  /// Kitapsen: whether a store account was signed in at the last remote load
+  /// (null = not resolved yet). Drives the signed-out shelf empty state.
+  bool? _kitapsenSignedIn;
 
   /// 排序交互重设计层次 A：当前排序方式（偏好 `shelf_sort_mode` 持久化，默认
   /// 最近阅读=历史序，现状零变化）。旧 `ShelfEntries.sortOrder` 手动权重已废弃。
@@ -2078,8 +2086,9 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
   bool get _remotePlaceholdersAllowed =>
       ref.read(selectedTagIdsProvider).isEmpty &&
       _readStatusFilter == null &&
-      appModel.prefsRepo.showRemoteEntries &&
-      _moduleVisibility.isEnabled(ModuleId.sync);
+      (kKitapsenEdition ||
+          (appModel.prefsRepo.showRemoteEntries &&
+              _moduleVisibility.isEnabled(ModuleId.sync)));
 
   /// 远端占位卡在**合集详情页**的可见门控：目录拉取成功 + [_remotePlaceholdersAllowed]。
   /// 详情页的本地成员卡同样取自被筛选过的 [_visibleEpubBooks] / [_visibleSrtBooks]，
@@ -2273,6 +2282,51 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
     return decision;
   }
 
+  /// Settings › Kitapsen account, then reload the store shelf on return.
+  Future<void> _openKitapsenAccount() async {
+    await Navigator.of(context).push(
+      adaptivePageRoute<void>(
+        context: context,
+        builder: (_) =>
+            SettingsDetailPage(destination: buildServicesDestination()),
+      ),
+    );
+    if (mounted) _refreshRemoteBooks();
+  }
+
+  /// Kitapsen signed-out empty shelf: the library comes from the store
+  /// account, so the first action is signing in (no shopping wording, no
+  /// storefront link). Local import stays as the secondary action.
+  Widget _buildKitapsenSignedOutPlaceholder(MediaLibraryShellScope? shell) {
+    final FushiDesignTokens tokens = FushiDesignTokens.of(context);
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          FushiPlaceholderMessage(
+            icon: Icons.account_circle_outlined,
+            message: t.kitapsen_shelf_signed_out_body,
+          ),
+          SizedBox(height: tokens.spacing.gap + tokens.spacing.gap / 2),
+          FilledButton.icon(
+            key: const ValueKey<String>('kitapsen-shelf-sign-in'),
+            icon: const Icon(Icons.login, size: 18),
+            label: Text(t.kitapsen_shelf_sign_in),
+            onPressed: () => unawaited(_openKitapsenAccount()),
+          ),
+          if (shell != null) ...<Widget>[
+            SizedBox(height: tokens.spacing.gap),
+            TextButton.icon(
+              icon: const Icon(Icons.library_add_outlined, size: 18),
+              label: Text(t.library_empty_go_import),
+              onPressed: () => shell.select(MediaLibraryViewKind.sources),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
   @override
   Widget buildPlaceholder() {
     final FushiDesignTokens tokens = FushiDesignTokens.of(context);
@@ -2280,6 +2334,12 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
     // 用户唯一入库位置；独立使用（无壳）时回退为直接开导入对话框。
     final MediaLibraryShellScope? shell =
         MediaLibraryShellScope.maybeOf(context);
+    if (kKitapsenEdition && !_mangaOnly) {
+      final bool? signedIn = _kitapsenSignedIn;
+      // Still resolving the account: stay blank rather than flash a prompt.
+      if (signedIn == null) return const SizedBox.shrink();
+      if (!signedIn) return _buildKitapsenSignedOutPlaceholder(shell);
+    }
 
     return Center(
       child: Column(
@@ -2523,7 +2583,8 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
       // 桌面才有文件管理器契约（[currentRevealHost] 在移动端返回 null）——整条隐藏，
       // 而不是画一个点了没反应的按钮。漫画卷要手改 mokuro 数据时，这一条直接把书目录
       // 里的 manga.json 选中，省掉「书在哪个 bookKey 目录」这层猜。
-      if (currentRevealHost() != null)
+      // Kitapsen: book files stay in app storage, never revealed.
+      if (currentRevealHost() != null && !kKitapsenEdition)
         DialogListAction(
           label: t.media_file_location_open,
           icon: Icons.folder_open_outlined,
@@ -2571,11 +2632,13 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
           MediaRef(kind: MediaKind.epub, entryKey: bookKey),
         ),
       ),
-      DialogListAction(
-        label: t.profile_book_profile,
-        icon: Icons.account_circle_outlined,
-        onPressed: () => _openBookProfilePicker(item, bookKey),
-      ),
+      // Kitapsen hides per-media profiles (see settings_schema_profiles).
+      if (!kKitapsenEdition)
+        DialogListAction(
+          label: t.profile_book_profile,
+          icon: Icons.account_circle_outlined,
+          onPressed: () => _openBookProfilePicker(item, bookKey),
+        ),
       // 内容语言：决定这本书正文用哪条字体链。导入时从 EPUB OPF 的 dc:language
       // 自动回填，但自制/旧 EPUB 常常不声明，那时只有用户知道这本是什么语言的。
       DialogListAction(
@@ -2583,11 +2646,12 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
         icon: Icons.translate,
         onPressed: () => _openBookLanguagePicker(bookKey),
       ),
-      DialogListAction(
-        label: t.book_css_editor_edit_css,
-        icon: Icons.code_outlined,
-        onPressed: () => _openCssEditor(bookKey),
-      ),
+      if (!kKitapsenEdition)
+        DialogListAction(
+          label: t.book_css_editor_edit_css,
+          icon: Icons.code_outlined,
+          onPressed: () => _openCssEditor(bookKey),
+        ),
       // 「书 ↔ 漫画」转化。放这张卡菜单里，因为漫画库与书架本就是同一个页面
       // （`manga_library_page` 只是 `mangaOnly: true` 的壳）、同一张卡、同一份
       // 菜单——转化恰好是「这本书用哪个阅读器打开」的开关，与「标记已读完」

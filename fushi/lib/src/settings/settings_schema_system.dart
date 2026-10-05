@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:fushi/pages.dart';
 import 'package:fushi/src/models/app_model.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/onboarding/recommended_pack_discard.dart';
 import 'package:fushi/src/onboarding/recommended_pack_download_row.dart';
 import 'package:fushi/src/onboarding/recommended_pack_import.dart';
@@ -39,7 +40,8 @@ SettingsDestination buildSystemDestination() {
         // 更新分区在所有平台可见（至少能「检查→打开发布页」）；自动安装开关
         // 仅在支持应用内安装的平台显示（platformSupportsInAppInstall，见
         // platform_updater.dart 单一真相源）。
-        visible: (_) => platformSupportsUpdateCheck(),
+        // Kitapsen updates through Google Play / the App Store only.
+        visible: (_) => !kKitapsenEdition && platformSupportsUpdateCheck(),
         items: <SettingsItem>[
           SettingsSegmentedItem<String>(
             id: 'system.update_channel',
@@ -189,6 +191,7 @@ SettingsDestination buildSystemDestination() {
           // startup_default_dictionary_tab' 不变（历史命名，非持久化 key），仅换分区。
           SettingsSwitchItem(
             id: 'appearance.startup_default_dictionary_tab',
+            visible: (_) => !kKitapsenEdition,
             title: t.startup_default_dictionary_tab,
             subtitle: t.startup_default_dictionary_tab_hint,
             icon: Icons.manage_search_outlined,
@@ -223,10 +226,12 @@ SettingsDestination buildSystemDestination() {
             id: 'system.recommended_pack_download',
             searchTitle: t.onboarding_step_pack_title,
             subtitle: t.onboarding_pack_intro,
-            visible: (SettingsContext settingsContext) => settingsContext
-                .appModel
-                .recommendedPackDownloadController
-                .isActive,
+            visible: (SettingsContext settingsContext) =>
+                !kKitapsenEdition &&
+                settingsContext
+                    .appModel
+                    .recommendedPackDownloadController
+                    .isActive,
             builder: _buildRecommendedPackDownloadRow,
           ),
           SettingsSwitchItem(
@@ -248,8 +253,11 @@ SettingsDestination buildSystemDestination() {
           ),
           // 官网。与宽屏侧栏左上角的 app 图标是同一个入口（openOfficialWebsite），
           // URL 只存在 official_links.dart 一处。
+          // Kitapsen: no link to the web storefront (store reader-app policy);
+          // its legal / support / source links live in the About section.
           SettingsActionItem(
             id: 'system.website',
+            visible: (_) => !kKitapsenEdition,
             title: t.options_website,
             icon: Icons.language_outlined,
             onTap: (_) async {
@@ -258,6 +266,7 @@ SettingsDestination buildSystemDestination() {
           ),
           SettingsActionItem(
             id: 'system.github',
+            visible: (_) => !kKitapsenEdition,
             title: t.options_github,
             icon: Icons.public_outlined,
             onTap: (_) async {
@@ -269,6 +278,7 @@ SettingsDestination buildSystemDestination() {
           ),
           SettingsActionItem(
             id: 'system.github_sponsors',
+            visible: (_) => !kKitapsenEdition,
             title: t.options_github_sponsors,
             icon: Icons.favorite_border,
             onTap: (_) async {
@@ -292,8 +302,10 @@ SettingsDestination buildSystemDestination() {
           // 原图已逐字节入库（assets/attribution/tmdb/，provenance 见该目录
           // README.md）。文字与 logo 是**一对合约义务**——删 about_tmdb_attribution
           // 前不要先删 logo，反之亦然；要走一起走（连同内置 key 一并移除时）。
+          // Kitapsen never calls TMDB (no video module), so no attribution.
           SettingsCustomItem(
             id: 'system.tmdb_attribution',
+            visible: (_) => !kKitapsenEdition,
             searchTitle: 'TMDB',
             // 免责声明正文同时挂在 schema 上：custom 行的正文由 builder 自绘
             //（settings_schema_widgets 的 switch 只调 builder，不读 title/
@@ -305,6 +317,52 @@ SettingsDestination buildSystemDestination() {
             subtitle: t.about_tmdb_attribution,
             icon: Icons.movie_outlined,
             builder: _buildTmdbAttributionRow,
+          ),
+        ],
+      ),
+      // Kitapsen › About: privacy policy, support, GPL source + upstream credit
+      // and the open-source licenses. Deliberately no storefront link.
+      SettingsSection(
+        id: 'system.section.kitapsen_about',
+        presentation: SettingsSectionPresentation.alwaysExpanded,
+        title: t.kitapsen_about_section,
+        visible: (_) => kKitapsenEdition,
+        items: <SettingsItem>[
+          SettingsActionItem(
+            id: 'system.kitapsen_privacy_policy',
+            title: t.kitapsen_about_privacy_policy,
+            icon: Icons.privacy_tip_outlined,
+            onTap: (_) => _openExternal(Uri.parse(kKitapsenPrivacyPolicyUrl)),
+          ),
+          SettingsActionItem(
+            id: 'system.kitapsen_support',
+            title: t.kitapsen_about_support,
+            subtitle: kKitapsenSupportEmail,
+            icon: Icons.mail_outline,
+            onTap: (_) => _openExternal(
+              Uri(scheme: 'mailto', path: kKitapsenSupportEmail),
+            ),
+          ),
+          SettingsActionItem(
+            id: 'system.kitapsen_source_code',
+            title: t.kitapsen_about_source_code,
+            subtitle: t.kitapsen_about_based_on_fushi,
+            icon: Icons.code_outlined,
+            onTap: (_) => _openExternal(Uri.parse(kKitapsenSourceUrl)),
+          ),
+          SettingsActionItem(
+            id: 'system.kitapsen_licenses',
+            title: t.kitapsen_about_licenses,
+            icon: Icons.description_outlined,
+            onTap: (SettingsContext c) {
+              showLicensePage(
+                context: c.context,
+                applicationName: 'Kitapsen',
+                applicationVersion: c.appModel.packageInfo.version,
+                applicationLegalese:
+                    '${t.kitapsen_about_based_on_fushi}\n$kFushiUpstreamUrl',
+              );
+            },
           ),
         ],
       ),
@@ -416,6 +474,7 @@ SettingsDestination buildSystemDestination() {
           // 用户的 qB 设置。
           SettingsSegmentedItem<String>(
             id: 'system.network_proxy_p2p',
+            visible: (_) => !kKitapsenEdition,
             title: t.network_proxy_p2p_label,
             subtitle: t.network_proxy_p2p_warning,
             icon: Icons.swap_vert_outlined,
@@ -455,6 +514,8 @@ SettingsDestination buildSystemDestination() {
       // 会解引用数据库。
       SettingsSection(
         id: 'system.section.update_notifications',
+        // Kitapsen has no video / manga / release update feeds.
+        visible: (_) => !kKitapsenEdition,
         title: t.updates_notify_section,
         items: <SettingsItem>[
           for (final (
@@ -591,6 +652,7 @@ SettingsDestination buildSystemDestination() {
           // 桌面弹保存对话框、移动端走系统分享（saveLogToFile 内部分流）。
           SettingsActionItem(
             id: 'diagnostics.study_diag_export',
+            visible: (_) => !kKitapsenEdition,
             title: t.settings_study_diag_export,
             subtitle: t.settings_study_diag_export_hint,
             icon: Icons.save_alt_outlined,
@@ -602,6 +664,7 @@ SettingsDestination buildSystemDestination() {
           // log-file，常开会白白吃 IO，所以默认关闭、复现期才打开。
           SettingsSwitchItem(
             id: 'diagnostics.video_diag_log_enabled',
+            visible: (_) => !kKitapsenEdition,
             title: t.settings_video_diag_toggle,
             subtitle: t.settings_video_diag_toggle_hint,
             icon: Icons.videocam_outlined,
@@ -613,6 +676,7 @@ SettingsDestination buildSystemDestination() {
           ),
           SettingsActionItem(
             id: 'diagnostics.video_diag_export',
+            visible: (_) => !kKitapsenEdition,
             title: t.settings_video_diag_export,
             subtitle: t.settings_video_diag_export_hint,
             icon: Icons.save_alt_outlined,
@@ -624,6 +688,16 @@ SettingsDestination buildSystemDestination() {
       ),
     ],
   );
+}
+
+/// Opens [uri] outside the app; a missing handler (no mail app / browser) is
+/// logged, never thrown into the settings tap handler.
+Future<void> _openExternal(Uri uri) async {
+  try {
+    await launchUrl(uri, mode: LaunchMode.externalApplication);
+  } on Object catch (e, stack) {
+    ErrorLogService.instance.log('SettingsSystem.openExternal', e, stack);
+  }
 }
 
 /// 设置 › 诊断 › 导出统计诊断日志（正文见 [buildStudyDiagExport]）。

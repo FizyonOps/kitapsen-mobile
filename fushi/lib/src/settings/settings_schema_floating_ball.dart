@@ -8,6 +8,7 @@ library;
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/floating_ball/floating_ball_channel.dart';
 import 'package:fushi/src/floating_ball/floating_ball_config.dart';
 import 'package:fushi/src/models/module_id.dart';
@@ -21,6 +22,8 @@ import 'package:fushi/utils.dart';
 SettingsDestination buildFloatingBallDestination() {
   return SettingsDestination(
     id: SettingsDestinationId.floatingBall,
+    // Kitapsen has no floating ball.
+    visible: (_) => !kKitapsenEdition,
     title: t.settings_destination_floating_ball,
     summary: t.floating_ball_summary,
     icon: Icons.blur_circular_outlined,

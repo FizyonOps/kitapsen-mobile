@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:fushi_core/fushi_core.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/media/media_source.dart' show dbSourcePrefKey;
 import 'package:fushi/src/reader/font_catalog.dart';
 import 'package:fushi/src/reader/reader_chrome_floating.dart';
@@ -239,7 +240,11 @@ class ReaderSettings {
   double get lineHeight => _get<double>('line_height', 1.65);
   Future<void> setLineHeight(double v) => _set<double>('line_height', v);
 
-  String get writingMode => _get<String>('writing_mode', 'vertical-rl');
+  /// Kitapsen reads Turkish / European books: horizontal, left-to-right.
+  static const String defaultWritingMode =
+      kKitapsenEdition ? 'horizontal-tb' : 'vertical-rl';
+
+  String get writingMode => _get<String>('writing_mode', defaultWritingMode);
   Future<void> setWritingMode(String v) => _set<String>('writing_mode', v);
 
   String get viewMode => _get<String>('view_mode', 'paginated');
@@ -391,7 +396,11 @@ class ReaderSettings {
   Future<void> setSpreadMode(String v) => _set<String>('spread_mode', v);
 
   /// `ltr` or `rtl`.
-  String get spreadDirection => _get<String>('spread_direction', 'rtl');
+  static const String defaultSpreadDirection =
+      kKitapsenEdition ? 'ltr' : 'rtl';
+
+  String get spreadDirection =>
+      _get<String>('spread_direction', defaultSpreadDirection);
   Future<void> setSpreadDirection(String v) =>
       _set<String>('spread_direction', v);
 
@@ -582,7 +591,14 @@ class ReaderSettings {
   Future<void> setWheelPageTurnInterval(int v) =>
       _set<int>('wheel_page_turn_interval', v);
 
-  bool get highlightOnTap => _get<bool>('highlight_on_tap', true);
+  /// Tap-to-look-up. Kitapsen has no dictionary, so a tap on text must never
+  /// open a lookup popup; taps fall through to the toolbar toggle instead.
+  static const bool defaultHighlightOnTap = !kKitapsenEdition;
+
+  bool get highlightOnTap {
+    if (kKitapsenEdition) return false;
+    return _get<bool>('highlight_on_tap', defaultHighlightOnTap);
+  }
   Future<void> toggleHighlightOnTap() =>
       _set<bool>('highlight_on_tap', !highlightOnTap);
 

@@ -173,7 +173,17 @@ enum OnboardingStepId {
   /// 完成第一张 Anki 卡片（仅本次向导已验证连接并选好牌组/笔记类型时）。
   firstAnkiCard,
   finish,
+
+  /// Kitapsen: sign in to the store account (skippable).
+  kitapsenAccount,
 }
+
+/// Kitapsen's first-run flow: welcome (language / theme) then the store
+/// sign-in. No feature picker, dictionaries, Anki or tutorials.
+const List<OnboardingStepId> kKitapsenOnboardingSteps = <OnboardingStepId>[
+  OnboardingStepId.welcome,
+  OnboardingStepId.kitapsenAccount,
+];
 
 /// 给定勾选集合与平台能力，返回向导要走的步骤序列。
 ///

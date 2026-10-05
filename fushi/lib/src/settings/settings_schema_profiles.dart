@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/pages.dart';
 import 'package:fushi/src/settings/settings_actions.dart';
 import 'package:fushi/src/settings/settings_destination.dart';
@@ -7,6 +8,9 @@ import 'package:fushi/utils.dart';
 SettingsDestination buildProfilesDestination() {
   return SettingsDestination(
     id: SettingsDestinationId.profiles,
+    // Per-media profiles (Anki decks, lookup languages, ...) are a Fushi power
+    // feature Kitapsen does not surface.
+    visible: (_) => !kKitapsenEdition,
     title: t.settings_destination_profile_presets,
     summary: t.profile_management,
     icon: Icons.manage_accounts_outlined,

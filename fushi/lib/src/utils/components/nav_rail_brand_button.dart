@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/i18n/strings.g.dart';
 import 'package:fushi/src/focus/fushi_focus_controller.dart' show FushiFocusId;
 import 'package:fushi/src/focus/fushi_focus_target.dart';
@@ -37,6 +38,26 @@ class NavRailBrandButton extends StatelessWidget {
     // SafeArea(right: false)，left inset 一旦大于 0（带刘海的平板/折叠屏横屏）
     // 可用宽度就不足 80，写死的 64 会溢出。用 FittedBox 兜住：有地方时仍是 64，
     // 挤了就等比缩小，而不是画到框外。
+    // Kitapsen: the brand mark is not a link (a store reader app must not
+    // point at the web storefront).
+    if (kKitapsenEdition) {
+      return Padding(
+        padding: EdgeInsets.all(tokens.spacing.gap),
+        child: Semantics(
+          label: 'Kitapsen',
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: SizedBox.square(
+              dimension: 64,
+              child: ClipRRect(
+                borderRadius: tokens.radii.controlRadius,
+                child: const CurrentAppIcon(),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
     return Padding(
       padding: EdgeInsets.all(tokens.spacing.gap),
       child: Tooltip(
@@ -47,7 +68,7 @@ class NavRailBrandButton extends StatelessWidget {
           borderRadius: tokens.radii.controlRadius,
           child: Semantics(
             button: true,
-            label: 'Fushi',
+            label: 'Kitapsen',
             child: FushiFocusTarget(
               id: focusId,
               autoHome: false,
