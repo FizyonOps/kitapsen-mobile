@@ -378,7 +378,7 @@ void main([List<String> args = const <String>[]]) {
         }
       }
     }
-    JustAudioMediaKit.title = 'Fushi';
+    JustAudioMediaKit.title = 'Kitapsen';
     // 关闭 pitch-shift 控制（默认 true）。开启时 media_kit 的 setRate 会在每次调速时
     // 重写 mpv 的 `af` 音频滤镜图（scaletempo:scale=…）；在 Windows 上播放过程中反复
     // 重配滤镜图会触发 libmpv 进程级崩溃（有声书拖动倍速闪退，BUG-070）。本 app 从不
@@ -2203,6 +2203,7 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
       key: ValueKey<String>('app-locale-${locale.toLanguageTag()}'),
       child: TranslationProvider(
         child: MaterialApp(
+          title: 'Kitapsen',
           debugShowCheckedModeBanner: false,
           navigatorKey: appModel.navigatorKey,
           // Resets the focus highlight to touch on every route push/pop so a ring

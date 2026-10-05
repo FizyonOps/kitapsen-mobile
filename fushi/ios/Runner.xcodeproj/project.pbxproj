@@ -453,7 +453,9 @@
 					CoreFoundation,
 					"$(FUSHI_P2P_LDFLAGS)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = app.fushi.reader;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2M24M884LP;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fizyonops.kitapsen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_STYLE = "non-global";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -594,7 +596,9 @@
 					CoreFoundation,
 					"$(FUSHI_P2P_LDFLAGS)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = app.fushi.reader;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2M24M884LP;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fizyonops.kitapsen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_STYLE = "non-global";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -629,7 +633,9 @@
 					CoreFoundation,
 					"$(FUSHI_P2P_LDFLAGS)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = app.fushi.reader;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2M24M884LP;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fizyonops.kitapsen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_STYLE = "non-global";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";

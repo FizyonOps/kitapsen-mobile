@@ -3,12 +3,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 /// 启动品牌标的前景图：与 Android 12+ 系统启动画面
-/// `windowSplashScreenAnimatedIcon`（`ic_splash_minimal_foreground`）同一张图。
+/// `windowSplashScreenAnimatedIcon`（flutter_native_splash 由
+/// `branding/splash_android12.png` 生成的 `android12splash`）同一几何。
 const String kStartupSplashForegroundAsset =
     'assets/meta/splash_foreground.png';
 
 /// 与 `values*-v31/styles.xml` 的 `windowSplashScreenIconBackgroundColor` 同值。
-const Color kStartupSplashIconBackground = Color(0xFFE6E2F6);
+const Color kStartupSplashIconBackground = Color(0xFFFFFFFF);
 
 /// Android 12+ 带图标背景的启动图标规格：图标画布 240dp，被直径 160dp 的圆裁切。
 const double kStartupSplashIconCanvas = 240;

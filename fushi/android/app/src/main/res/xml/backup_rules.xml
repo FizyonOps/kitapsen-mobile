@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Android 自动备份规则（API ≤ 30；API 31+ 走 data_extraction_rules.xml，两份必须同步）。
-  只有 exclude、没有 include：其余文件照旧备份，只排除下面这些。
+  Android auto-backup rules (API <= 30; API 31+ uses data_extraction_rules.xml,
+  keep both in step). The manifest also sets android:allowBackup="false".
 
-  排行榜账户文件 <support>/leaderboard/profile_<id>.json 里是设备私钥（等同密码），
-  不得随系统备份上云 / 迁到新设备。<support> 在 Android 上是
-  getApplicationSupportDirectory() = Context.getFilesDir()，即 domain="file" 的根。
-  见 fushi/lib/src/leaderboard/leaderboard_store.dart。
+  Kitapsen: nothing leaves the device through system backup. Store books are
+  licensed to this app only (their unzipped content lives in app_flutter/), and
+  the database holds the store account credentials. The library and reading
+  progress come back from kitapsen.com after signing in on a new device.
 -->
 <full-backup-content>
-    <exclude domain="file" path="leaderboard/" />
+    <exclude domain="root" path="." />
+    <exclude domain="file" path="." />
+    <exclude domain="database" path="." />
+    <exclude domain="sharedpref" path="." />
+    <exclude domain="external" path="." />
 </full-backup-content>

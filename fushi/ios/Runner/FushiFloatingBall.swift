@@ -1,9 +1,6 @@
 import Flutter
 import UIKit
 
-#if canImport(AppIntents)
-  import AppIntents
-#endif
 
 /// 全局悬浮球的 iOS 半边（契约见 docs/specs/2026-09-28-floating-ball.md，
 /// 通道 `app.fushi.reader/floating_ball`）。
@@ -165,44 +162,6 @@ enum FushiFloatingBall {
   }
 }
 
-#if canImport(AppIntents)
-  /// 「Look up in Fushi」：快捷指令 / Siri / 操作按钮可用。主 app target 内实现，
-  /// 不新增扩展 target、不需要新 entitlement。`openAppWhenRun` 让系统先把 app
-  /// 拉到前台再执行 perform()，查词弹窗是应用内的。
-  @available(iOS 16.0, *)
-  struct LookupInFushiIntent: AppIntent {
-    static var title: LocalizedStringResource = "Look up in Fushi"
-    static var description = IntentDescription(
-      "Opens Fushi and looks the word up in your dictionaries.")
-    static var openAppWhenRun: Bool = true
-
-    @Parameter(title: "Word")
-    var word: String
-
-    static var parameterSummary: some ParameterSummary {
-      Summary("Look up \(\.$word) in Fushi")
-    }
-
-    init() {}
-
-    @MainActor
-    func perform() async throws -> some IntentResult {
-      FushiFloatingBall.deliverIntentLookup(word)
-      return .result()
-    }
-  }
-
-  /// 让意图不经用户配置就出现在快捷指令 / Siri 里。短语必须含 `.applicationName`；
-  /// String 参数不能放进短语，Siri 会按 @Parameter 追问要查的词。
-  @available(iOS 16.0, *)
-  struct FushiAppShortcuts: AppShortcutsProvider {
-    static var appShortcuts: [AppShortcut] {
-      AppShortcut(
-        intent: LookupInFushiIntent(),
-        phrases: [
-          "Look up in \(.applicationName)",
-          "Look up a word in \(.applicationName)",
-        ])
-    }
-  }
-#endif
+// Kitapsen: the "Look up in Fushi" App Intent / AppShortcutsProvider is not
+// compiled in. Kitapsen has no dictionary, so it must not surface a lookup
+// action in Shortcuts, Siri or Spotlight.

@@ -199,7 +199,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
   // 那一个调用点，所以不可见 ⇔ 正在退出。等它释放互斥量再按首实例正常启动——复用
   // 重启标志那条路已经在用的等待机械，新实例自己就能打开那个视频。
   if (another_instance && !test_runner) {
-    const HWND exiting = ::FindWindowW(nullptr, L"Fushi");
+    const HWND exiting = ::FindWindowW(nullptr, L"Kitapsen");
     if (exiting != nullptr && !::IsWindowVisible(exiting)) {
       // 窗口存在但不可见 ⇔ 正在退出：等它释放所有权即可按首实例启动。
       if (single_instance_mutex.Wait(10000)) {
@@ -216,7 +216,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
           another_instance = false;
           break;
         }
-        if (::FindWindowW(nullptr, L"Fushi") != nullptr) {
+        if (::FindWindowW(nullptr, L"Kitapsen") != nullptr) {
           break;
         }
       }
@@ -224,7 +224,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
   }
   if (another_instance) {
     // 已有实例在跑：找到首实例主窗口。
-    HWND existing = ::FindWindowW(nullptr, L"Fushi");
+    HWND existing = ::FindWindowW(nullptr, L"Kitapsen");
     if (existing != nullptr) {
       // TODO-904 P0 回归修复：本次启动若带视频文件参数（文件关联 / 拖到 exe /
       // CLI `fushi.exe "%1"`），必须把路径**转交**首实例，否则第二实例只前置窗口
@@ -273,7 +273,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
   FlutterWindow window(project);
   Win32Window::Point origin(10, 10);
   Win32Window::Size size(1280, 720);
-  if (!window.CreateAndShow(L"Fushi", origin, size)) {
+  if (!window.CreateAndShow(L"Kitapsen", origin, size)) {
     return EXIT_FAILURE;
   }
   window.SetQuitOnClose(true);

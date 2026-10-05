@@ -25,7 +25,7 @@ namespace {
 // 各自的窗口过程分开，免得一个 WndProc 里靠 HWND 比较分流。
 constexpr wchar_t kBallClassName[] = L"FushiFloatingBallWindow";
 constexpr wchar_t kMenuClassName[] = L"FushiFloatingBallMenuWindow";
-// 标题**不能**是 "Fushi"：main.cpp 按标题 FindWindow 找主窗（单实例转发）。
+// 标题**不能**是 "Kitapsen"：main.cpp 按标题 FindWindow 找主窗（单实例转发）。
 constexpr wchar_t kBallTitle[] = L"Fushi Floating Ball";
 constexpr wchar_t kMenuTitle[] = L"Fushi Floating Ball Menu";
 

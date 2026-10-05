@@ -8,10 +8,10 @@
 PRODUCT_NAME = fushi
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = app.fushi.reader
+PRODUCT_BUNDLE_IDENTIFIER = com.fizyonops.kitapsen
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2026 Fushi. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2026 Fizyonops Yazilim Limited Sirketi. Based on Fushi (GPLv3).
 
 // Native fushidicts FFI library, built by the macOS Runner target and copied
 // into Contents/Frameworks so DynamicLibrary.open can resolve it from the app.

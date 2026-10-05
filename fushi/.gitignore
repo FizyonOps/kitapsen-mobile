@@ -71,4 +71,9 @@ ui-*.xml
 test_screenshots/
 
 # Codex test outputs
-.codex-test/
+.codex-test/# Kitapsen branding: flutter_native_splash sources and its generated splash
+# drawables / launch images must be tracked despite the *.png rule above.
+!branding/*.png
+!android/app/src/main/res/drawable*/splash.png
+!android/app/src/main/res/drawable*/android12splash.png
+!ios/Runner/Assets.xcassets/LaunchImage.imageset/*.png

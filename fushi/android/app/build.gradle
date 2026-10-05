@@ -124,7 +124,11 @@ if (flutterVersionName == null) {
 // which overflowed int32 and exceeded Android's 2.1e9 limit, so beta/release
 // Android packages could not be built. The maxVersionCode assertion in
 // applicationVariants below fails the build loudly if it ever nears the ceiling.
-def versionCodeBase = 1000000000
+// Kitapsen: a new store listing with no installed base, so the upstream
+// 1_000_000_000 floor is dropped and the universal APK / AAB versionCode is
+// exactly the pubspec build number (1.0.0+1 -> 1). Split-ABI APKs keep the
+// 100 * build + abi offset scheme; they are never uploaded to the stores.
+def versionCodeBase = 0
 def maxVersionCode = 2100000000
 
 def keystoreProperties = new Properties()
@@ -133,26 +137,13 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
 
-def requireReleaseKeystore = {
-    if (!keystorePropertiesFile.exists()) {
-        throw new GradleException("Release signing requires android/key.properties; refusing to build a debug-signed release APK.")
-    }
-    ["keyAlias", "keyPassword", "storeFile", "storePassword"].each { key ->
-        if (!keystoreProperties[key]) {
-            throw new GradleException("Release signing property '${key}' is missing in android/key.properties.")
-        }
-    }
-    def releaseStoreFile = file("${rootProject.projectDir}/${keystoreProperties['storeFile']}")
-    if (!releaseStoreFile.exists()) {
-        throw new GradleException("Release signing storeFile '${keystoreProperties['storeFile']}' does not exist.")
-    }
-}
-
-gradle.taskGraph.whenReady { taskGraph ->
-    if (taskGraph.allTasks.any { it.name.toLowerCase().contains("release") }) {
-        requireReleaseKeystore()
-    }
-}
+// Kitapsen: release builds sign with the upload key from android/key.properties
+// (Flutter template convention: storeFile resolves relative to android/app/).
+// When the file is absent (fresh checkout, CI without secrets) the release
+// variant falls back to the debug key so `flutter build appbundle --release`
+// still works locally; such an artifact must never be uploaded to the stores.
+def hasReleaseKeystore = keystorePropertiesFile.exists() &&
+    ["keyAlias", "keyPassword", "storeFile", "storePassword"].every { keystoreProperties[it] }
 
 android {
     namespace "app.fushi.reader"
@@ -190,7 +181,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "app.fushi.reader"
+        applicationId "com.fizyonops.kitapsen"
         minSdkVersion 24
         targetSdk 35
         versionCode flutterVersionCode.toInteger()
@@ -221,10 +212,10 @@ android {
 
     signingConfigs {
         release {
-            if (keystorePropertiesFile.exists()) {
+            if (hasReleaseKeystore) {
                 keyAlias keystoreProperties['keyAlias']
                 keyPassword keystoreProperties['keyPassword']
-                storeFile file("${rootProject.projectDir}/${keystoreProperties['storeFile']}")
+                storeFile file(keystoreProperties['storeFile'])
                 storePassword keystoreProperties['storePassword']
             }
         }
@@ -234,7 +225,7 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+            signingConfig hasReleaseKeystore ? signingConfigs.release : signingConfigs.debug
         }
         debug {
         }
@@ -247,7 +238,7 @@ android {
 
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
-            def appName = "fushi"
+            def appName = "kitapsen"
             def buildType = variant.buildType.name
             def architecture = output.getFilter(com.android.build.OutputFile.ABI)
             def newName
@@ -268,7 +259,7 @@ android {
                 // applied it, so the fat APK kept the default app-<type>.apk
                 // name. Assign it like the split-ABI branch does.
                 outputFileName = newName
-                def computed = versionCodeBase + (100 * project.android.defaultConfig.versionCode)
+                def computed = versionCodeBase + project.android.defaultConfig.versionCode
                 if (computed > maxVersionCode) {
                     throw new GradleException("Android versionCode ${computed} exceeds the ${maxVersionCode} ceiling (int32 / Android limit). Reduce versionCodeBase or the build number; see TODO-414.")
                 }
