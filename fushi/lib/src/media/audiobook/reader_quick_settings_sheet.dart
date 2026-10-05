@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/media/audiobook/audiobook_controller.dart';
 import 'package:intl/intl.dart';
 import 'package:fushi_engine/epub/epub_book.dart';
@@ -633,11 +634,13 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
         icon: Icons.touch_app_outlined,
         label: t.settings_destination_reading_controls,
       ),
-      (
-        id: 'lookup',
-        icon: Icons.manage_search_outlined,
-        label: t.settings_destination_lookup,
-      ),
+      // Kitapsen has no dictionary lookup, so no lookup settings page.
+      if (!kKitapsenEdition)
+        (
+          id: 'lookup',
+          icon: Icons.manage_search_outlined,
+          label: t.settings_destination_lookup,
+        ),
       if (widget.controller != null && _listeningEnabled)
         (
           id: 'audiobook',
@@ -670,11 +673,12 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
         label: t.settings_destination_reading_controls,
         page: 'behavior',
       ),
-      _categoryTile(
-        icon: Icons.manage_search_outlined,
-        label: t.settings_destination_lookup,
-        page: 'lookup',
-      ),
+      if (!kKitapsenEdition)
+        _categoryTile(
+          icon: Icons.manage_search_outlined,
+          label: t.settings_destination_lookup,
+          page: 'lookup',
+        ),
       if (widget.controller != null && _listeningEnabled)
         _categoryTile(
           icon: Icons.headphones_outlined,

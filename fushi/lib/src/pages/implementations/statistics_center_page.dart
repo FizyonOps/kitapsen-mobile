@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/media.dart';
 import 'package:fushi/pages.dart';
 import 'package:fushi/src/media/display_title.dart';
@@ -66,6 +67,11 @@ class _StatisticsCenterPageState extends BasePageState<StatisticsCenterPage> {
     super.dispose();
   }
 
+  /// Tabs of the domains this build ships.
+  static const List<StatsCenterTab> _visibleTabs = kKitapsenEdition
+      ? <StatsCenterTab>[StatsCenterTab.overview, StatsCenterTab.reading]
+      : StatsCenterTab.values;
+
   @override
   Widget build(BuildContext context) {
     // v105：统计按 Profile 隔离——页头点明当前看的是哪个 Profile 的数字，否则
@@ -90,35 +96,48 @@ class _StatisticsCenterPageState extends BasePageState<StatisticsCenterPage> {
               showStatDayResetHourDialog(context, ref.read(appProvider)),
         ),
       ],
+      // Kitapsen has no video / games: overview + reading only.
       body: DefaultTabController(
-        length: StatsCenterTab.values.length,
-        initialIndex: widget.initialTab.index,
+        length: _visibleTabs.length,
+        initialIndex: _visibleTabs.contains(widget.initialTab)
+            ? _visibleTabs.indexOf(widget.initialTab)
+            : 0,
         child: Column(
           children: <Widget>[
             TabBar(
               tabs: <Widget>[
-                Tab(text: t.stat_center_tab_overview),
-                Tab(text: t.home_filter_read),
-                Tab(text: t.home_filter_watch),
-                Tab(text: t.home_filter_game),
+                for (final StatsCenterTab tab in _visibleTabs)
+                  Tab(
+                    text: switch (tab) {
+                      StatsCenterTab.overview => t.stat_center_tab_overview,
+                      StatsCenterTab.reading => t.home_filter_read,
+                      StatsCenterTab.video => t.home_filter_watch,
+                      StatsCenterTab.game => t.home_filter_game,
+                    },
+                  ),
               ],
             ),
             Expanded(
               child: TabBarView(
                 children: <Widget>[
-                  _StatsOverviewTab(rangeSelection: _rangeSelection),
-                  ReadingStatisticsPage(
-                    embedded: true,
-                    rangeSelection: _rangeSelection,
-                  ),
-                  VideoStatisticsPage(
-                    embedded: true,
-                    rangeSelection: _rangeSelection,
-                  ),
-                  GameStatisticsPage(
-                    embedded: true,
-                    rangeSelection: _rangeSelection,
-                  ),
+                  for (final StatsCenterTab tab in _visibleTabs)
+                    switch (tab) {
+                      StatsCenterTab.overview => _StatsOverviewTab(
+                        rangeSelection: _rangeSelection,
+                      ),
+                      StatsCenterTab.reading => ReadingStatisticsPage(
+                        embedded: true,
+                        rangeSelection: _rangeSelection,
+                      ),
+                      StatsCenterTab.video => VideoStatisticsPage(
+                        embedded: true,
+                        rangeSelection: _rangeSelection,
+                      ),
+                      StatsCenterTab.game => GameStatisticsPage(
+                        embedded: true,
+                        rangeSelection: _rangeSelection,
+                      ),
+                    },
                 ],
               ),
             ),

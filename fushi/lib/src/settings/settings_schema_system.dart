@@ -160,8 +160,12 @@ SettingsDestination buildSystemDestination() {
           // 「界面语言」（id 'appearance.language'）已归位到「外观 · 界面」分区
           //（与主题/明暗/缩放并列）；id 前缀本就是 appearance，此前放系统分类
           // 是历史错配。
+          // Kitapsen (a phone / tablet reader) does not surface the keyboard /
+          // gamepad customisation pages, whose scopes are mostly Fushi
+          // features (dictionary popup, video, games).
           SettingsNavigationItem(
             id: 'system.keyboard_shortcuts',
+            visible: (_) => !kKitapsenEdition,
             title: t.shortcut_settings_title,
             // 「实验性」后缀已摘除（用户决策）：改键/冲突重分配/可视化键盘与
             // 手柄图/三通道实时录键均已齐备，页面不再是实验功能。
@@ -175,6 +179,7 @@ SettingsDestination buildSystemDestination() {
           ),
           SettingsSwitchItem(
             id: 'system.focus_navigation',
+            visible: (_) => !kKitapsenEdition,
             title: t.focus_navigation_enabled,
             subtitle: t.focus_navigation_enabled_hint,
             icon: Icons.gamepad_outlined,

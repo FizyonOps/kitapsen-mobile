@@ -845,11 +845,14 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
           icon: Icons.movie_outlined,
           onTap: _openVideoImport,
         ),
-      _headerAction(
-        tooltip: t.collections,
-        icon: Icons.collections_bookmark_outlined,
-        onTap: _openCollections,
-      ),
+      // Favorites (saved sentences / mined cards / words) are Fushi study
+      // tools; Kitapsen cannot create them, so the page is not offered.
+      if (!kKitapsenEdition)
+        _headerAction(
+          tooltip: t.collections,
+          icon: Icons.collections_bookmark_outlined,
+          onTap: _openCollections,
+        ),
       // 统计入口已收敛到首页 dashboard（用户定案 2026-09-01：各媒体页头不再
       // 各挂一个「xx统计」，统一从首页进统计中心）。
     ];
