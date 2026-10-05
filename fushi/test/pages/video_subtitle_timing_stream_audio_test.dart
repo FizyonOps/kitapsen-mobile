@@ -110,20 +110,18 @@ void main() {
     });
   });
 
-  // 端到端：与 `_extractStreamTimingAudio` 同一串调用——中继以长读登记 → 等登记 →
-  // `ffmpegRemoteInputFor` → 带本集控制面从 0 抽当前音轨 → 喂波形包络。原点是自签
-  // https 的 Emby 形状直出流，字节只经本机中继到 ffmpeg。
+  // 端到端：与 `_extractStreamTimingAudio` 同一串调用——长读登记拿到 ffmpeg 输入 →
+  // 带本集控制面从 0 抽当前音轨 → 喂波形包络。原点是自签 https 的 Emby 形状直出流，
+  // 字节只经本机中继到 ffmpeg。
   final String? bundled = bundledFfmpegMin();
   test(
     'Emby 形状的 https 直出流：经中继抽出的音轨能画出波形包络',
     () async {
       final EmbyRelayRig rig = await EmbyRelayRig.start(bundled!);
-      final ({String url, Future<void> ready}) relayed = relayFfmpegRemoteInput(
+      final String input = await relayFfmpegLongReadInput(
         rig.source,
         isHls: Future<bool>.value(false),
-        longRead: true,
       );
-      await relayed.ready;
 
       final List<String> failures = <String>[];
       final int endMs = subtitleTimingStreamEndMs(
@@ -131,7 +129,7 @@ void main() {
         limitMs: kSubtitleAutoAlignProbeLimitMs,
       );
       final String? audio = await extractAudioSegmentViaFfmpeg(
-        inputPath: ffmpegRemoteInputFor(relayed.url),
+        inputPath: input,
         startMs: 0,
         endMs: endMs,
         outputPath: p.join(rig.tmp.path, 'timing.aac'),
@@ -197,27 +195,33 @@ void main() {
       );
     });
 
-    test('换集与退页叫停在途长读：本集共用的控制面被 cancel 后换新', () {
+    test('真换集才叫停在途长读；已拿到的文件留到退页再删', () {
+      final String retire = methodBody(subtitle, 'void _retireTimingAudio(');
+      expect(retire, contains('_timingAudioControl.cancel()'));
+      expect(
+        retire,
+        contains('_timingAudioControl = newSubtitleTimingAudioControl()'),
+      );
+      expect(
+        retire,
+        isNot(contains('deleteSync')),
+        reason: 'ASR 弹层可能还在读上一集的音轨',
+      );
       final String discard = methodBody(
         subtitle,
         'void _discardRemoteTimingAudio(',
       );
-      expect(discard, contains('_timingAudioControl.cancel()'));
-      expect(
-        discard,
-        contains('_timingAudioControl = newSubtitleTimingAudioControl()'),
-      );
+      expect(discard, contains('_retireTimingAudio()'));
+      expect(discard, contains('_retiredTimingAudioFetches'));
       final String page = File(
         'lib/src/pages/implementations/video_fushi_page.dart',
       ).readAsStringSync();
       final String load = methodBody(page, 'Future<void> _loadRemoteEpisode(');
-      final int bump = load.indexOf('++_episodeLoadSeq');
-      expect(bump, isNonNegative);
-      expect(
-        load.indexOf('_discardRemoteTimingAudio()', bump),
-        isNonNegative,
-        reason: '远端换集要叫停上一集的对轴读流',
+      final int gate = load.indexOf(
+        'if (timingAudioEpisode != _timingAudioEpisode)',
       );
+      expect(gate, isNonNegative, reason: '换画质 / 换线路不是换集');
+      expect(load.indexOf('_retireTimingAudio()', gate), isNonNegative);
       expect(
         methodBody(page, 'void dispose('),
         contains('_discardRemoteTimingAudio()'),
@@ -254,21 +258,23 @@ void main() {
         subtitle,
         'Future<String?> _extractStreamTimingAudio(',
       );
-      expect(body, contains('_routeFfmpegPlaybackInput('));
-      expect(body, contains('longRead: true'));
-      expect(body, contains('await routed.ready'));
-      expect(body, contains('ffmpegRemoteInputFor(routed.url)'));
-      expect(body, contains('httpHeaders: _streamHttpHeaderFields'));
+      expect(body, contains('_ffmpegLongReadInput('));
+      expect(body, contains('_streamHttpHeaderFields'));
+      expect(body, contains('control: control'));
+      // 分离的 googlevideo audio-only 流整段直读会被限速：与制卡同一判据先物化再
+      // 抽；合流流（播放流本身）不物化，否则会把视频字节一起下满。
+      final int separate = body.indexOf('!stream.usesPlayerAudioTrack &&');
+      expect(separate, isNonNegative);
       expect(
-        RegExp(r'control: control').allMatches(body).length,
-        2,
-        reason: '物化后本地抽取与经中继抽取两条 ffmpeg 都挂本集控制面',
+        body.indexOf('audioSourceNeedsRangeMaterialization(stream.url)'),
+        greaterThan(separate),
       );
-      // googlevideo audio-only 整段直读会被限速：与制卡同一判据先物化再抽。
-      expect(
-        body,
-        contains('audioSourceNeedsRangeMaterialization(stream.url)'),
+      final String longRead = methodBody(
+        mining,
+        'Future<String> _ffmpegLongReadInput(',
       );
+      expect(longRead, contains('videoMiningInputUsesPlaybackRelay('));
+      expect(longRead, contains('relayFfmpegLongReadInput('));
       expect(
         methodBody(
           mining,

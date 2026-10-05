@@ -59,18 +59,10 @@ FfmpegRemoteInputRoute? ffmpegRelayRouteFor(String inputPath) =>
 /// [selectHlsMasterVariant]），经中继、带 [headers]（与 ffmpeg 同一组防盗链头）取，
 /// 引擎经 `ffmpegRemoteInputFor` 让 ffmpeg 直接读那一档。这一步失败只是少一个优化，
 /// 不影响登记。
-///
-/// [longRead]（BUG-2957）：字幕对轴从头抽前 20 分钟 / 整集音轨，而不是制卡那样只裁
-/// 几秒。两处制卡优化在这里都是反优化：关分片预取（`-http_multiple 0`）让几十分钟的
-/// 读取变成逐片串行；master 选最高码率档只为拿音轨白拉 1080p 画面。长读保留预取、
-/// 选最低码率档。登记仍按地址：同一地址被制卡与对轴先后登记时后者覆盖前者，调用方
-/// 应在 `ready` 完成后**同步**组好 ffmpeg 参数（`buildFfmpegRemoteInputArgs` 只在组
-/// 参数那一刻读登记）。
 ({String url, Future<void> ready}) relayFfmpegRemoteInput(
   String url, {
   required Future<bool> isHls,
   Map<String, String> headers = const <String, String>{},
-  bool longRead = false,
 }) {
   final String relayed = nativePlaybackUri(url);
   final Future<void> ready = () async {
@@ -82,14 +74,9 @@ FfmpegRemoteInputRoute? ffmpegRelayRouteFor(String inputPath) =>
       // `-http_multiple` 与扩展名那几个一样是 hls demuxer 私有选项：只给 HLS 输入、
       // 且只在当前 ffmpeg 认得时给，否则 `Option not found` 让整张卡抽取失败。
       final bool noPrefetch =
-          hls && !longRead && await ffmpegSupportsHlsHttpMultipleOption();
+          hls && await ffmpegSupportsHlsHttpMultipleOption();
       final String? variant = hls
-          ? await _resolveMasterVariant(
-              relayed,
-              endpoint,
-              headers,
-              lowest: longRead,
-            )
+          ? await _resolveMasterVariant(relayed, endpoint, headers)
           : null;
       _register(
         relayed,
@@ -117,6 +104,50 @@ FfmpegRemoteInputRoute? ffmpegRelayRouteFor(String inputPath) =>
   return (url: relayed, ready: ready);
 }
 
+/// 字幕对轴的长读（BUG-2957）：从头抽前 20 分钟 / 整集音轨，经与播放器同一条中继。
+/// 返回 ffmpeg 该读的地址（已登记好连接方式，调用方直接交给 ffmpeg）。
+///
+/// 与 [relayFfmpegRemoteInput] 的两处差别都因为这是长读而不是只裁几秒：
+/// - 不关 HLS 分片预取：几十分钟的读取逐片串行会慢到失去意义；
+/// - master 选**最低**码率档：只要音轨，读最高画质档是白拉视频字节。
+///
+/// 只登记 ffmpeg 真正要读的那一条：制卡把 master 映射到最高档，长读若也登记 master
+/// 就会覆盖那条映射，排队中的制卡随之抽到最低档的 GIF / 截图。不是 master 时登记的
+/// 就是中继地址本身，与制卡同 key，差别只有是否关预取（不影响抽出来的内容）。
+/// 中继起不来时记日志、原样返回中继形式地址，ffmpeg 读不到即以抽取失败收场。
+Future<String> relayFfmpegLongReadInput(
+  String url, {
+  required Future<bool> isHls,
+  Map<String, String> headers = const <String, String>{},
+}) async {
+  final String relayed = nativePlaybackUri(url);
+  try {
+    final Uri endpoint = await ensureAppNativeProxyEndpoint();
+    final bool hls = await isHls;
+    final bool relax = hls && await ffmpegSupportsHlsSegmentExtensionOptions();
+    final String input = (hls
+            ? await _resolveMasterVariant(
+                relayed,
+                endpoint,
+                headers,
+                lowest: true,
+              )
+            : null) ??
+        relayed;
+    _register(
+      input,
+      FfmpegRemoteInputRoute(
+        httpProxy: endpoint.toString(),
+        relaxHlsSegmentExtensions: relax,
+      ),
+    );
+    return input;
+  } on Object catch (error, stack) {
+    ErrorLogService.instance.log('relayFfmpegLongReadInput', error, stack);
+    return relayed;
+  }
+}
+
 void _register(String input, FfmpegRemoteInputRoute route) {
   _routes.remove(input);
   _routes[input] = route;
@@ -134,7 +165,7 @@ Future<String?> _resolveMasterVariant(
   String relayed,
   Uri endpoint,
   Map<String, String> headers, {
-  required bool lowest,
+  bool lowest = false,
 }) async {
   final HttpClient client = HttpClient()
     ..findProxy = (Uri _) =>

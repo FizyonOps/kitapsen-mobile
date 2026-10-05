@@ -194,33 +194,71 @@ void _controlGroup() {
       expect(result.output, contains('cancelled'));
     });
 
-    test('有进度就一直等，进度停了才判 stalled', () async {
-      final List<int> cancelledIds = <int>[];
-      final StreamController<void> progress = StreamController<void>();
-      addTearDown(progress.close);
-      final Stopwatch watch = Stopwatch()..start();
-      final Future<FfmpegRunResult> pending = runKitFfmpegSession(
+    // 阈值留足余量：重活租约下测试进程是低优先级，Future.delayed 抖动可达百毫秒级。
+    const Duration stall = Duration(seconds: 1);
+
+    Future<FfmpegRunResult> runWith(
+      Stream<String> progress,
+      List<int> cancelledIds,
+    ) {
+      return runKitFfmpegSession(
         start: (void Function() onComplete) async => _FakeSession(sessionId: 5),
         timeout: long,
         executable: 'ffmpeg-kit',
         cancelSession: (int id) async => cancelledIds.add(id),
-        control: FfmpegRunControl(
-          stallTimeout: const Duration(milliseconds: 150),
-        ),
-        progress: progress.stream,
+        control: FfmpegRunControl(stallTimeout: stall),
+        progress: progress,
       );
-      // 每 50 ms 一次进度、持续 400 ms：总时长远超 stallTimeout，但从未停过。
-      for (int i = 0; i < 8; i++) {
-        await Future<void>.delayed(const Duration(milliseconds: 50));
-        progress.add(null);
+    }
+
+    test('time 在前进就一直等，前进停了才判 stalled', () async {
+      final List<int> cancelledIds = <int>[];
+      final StreamController<String> progress = StreamController<String>();
+      addTearDown(progress.close);
+      final Stopwatch watch = Stopwatch()..start();
+      final Future<FfmpegRunResult> pending = runWith(
+        progress.stream,
+        cancelledIds,
+      );
+      // 每 200 ms 一行 time 递增的统计、持续 2.4 秒：总时长远超 stallTimeout，
+      // 但进度从未停过。
+      for (int i = 1; i <= 12; i++) {
+        await Future<void>.delayed(const Duration(milliseconds: 200));
+        progress.add('size=  ${i * 10}KiB time=00:00:0$i.00 speed=2x\r');
       }
       final FfmpegRunResult result = await pending;
       expect(
         watch.elapsedMilliseconds,
-        greaterThanOrEqualTo(400),
-        reason: '还在动的会话不能被判超时',
+        greaterThanOrEqualTo(2400),
+        reason: '还在前进的会话不能被判超时',
       );
       expect(result.output, contains('stalled'));
+      expect(cancelledIds, <int>[5]);
+    });
+
+    test('统计行照打但 time 不变 = 读流卡住，照样判 stalled', () async {
+      // ffmpeg 7 起读流线程卡住时主线程仍按 stats_period 打进度行，time 不再变。
+      final List<int> cancelledIds = <int>[];
+      final StreamController<String> progress = StreamController<String>();
+      addTearDown(progress.close);
+      final Stopwatch watch = Stopwatch()..start();
+      final Future<FfmpegRunResult> pending = runWith(
+        progress.stream,
+        cancelledIds,
+      );
+      bool settled = false;
+      unawaited(pending.whenComplete(() => settled = true));
+      for (int i = 0; i < 40 && !settled; i++) {
+        await Future<void>.delayed(const Duration(milliseconds: 100));
+        progress.add('size=  256KiB time=00:00:16.27 speed=N/A\r');
+      }
+      final FfmpegRunResult result = await pending;
+      expect(result.output, contains('stalled'));
+      expect(
+        watch.elapsedMilliseconds,
+        lessThan(3500),
+        reason: '不变的统计行不能续命',
+      );
       expect(cancelledIds, <int>[5]);
     });
   });

@@ -92,6 +92,88 @@ void main() {
     timeout: const Timeout(Duration(seconds: 90)),
   );
 
+  test(
+    '读到一半卡住：ffmpeg 7 照打 time 不变的进度行，也照样判 stalled',
+    () async {
+      final Directory tmp = Directory.systemTemp.createTempSync('ff_mid_');
+      addTearDown(() => tmp.deleteSync(recursive: true));
+      // 一段真 TS：原点先把它整段发出去、再声称后面还有，然后再不给字节——ffmpeg
+      // 解出这 2 秒后卡在读下一块上，调度循环继续按 stats_period 打 time 不变的行。
+      final String ts = p.join(tmp.path, 'seg.ts');
+      final ProcessResult mux = await Process.run(bundled!, <String>[
+        '-hide_banner',
+        '-loglevel',
+        'error',
+        '-y',
+        '-i',
+        p.join('..', 'docs', 'todo-524-video.mp4'),
+        '-c',
+        'copy',
+        '-f',
+        'mpegts',
+        ts,
+      ]);
+      expect(mux.exitCode, 0, reason: '${mux.stderr}');
+      final List<int> segment = File(ts).readAsBytesSync();
+      final HttpServer server = await HttpServer.bind(
+        InternetAddress.loopbackIPv4,
+        0,
+      );
+      addTearDown(() => server.close(force: true));
+      server.listen((HttpRequest request) {
+        final HttpResponse res = request.response;
+        res.headers.contentType = ContentType('video', 'mp2t');
+        res.contentLength = segment.length * 100;
+        res.add(segment);
+        res.flush().ignore();
+      });
+      final Stopwatch watch = Stopwatch()..start();
+      final FfmpegRunResult result = await run(
+        'http://127.0.0.1:${server.port}/live.ts',
+        p.join(tmp.path, 'out.aac'),
+        FfmpegRunControl(stallTimeout: const Duration(seconds: 3)),
+      );
+      expect(result.returnCode, isNull);
+      expect(result.output, contains('stalled'));
+      expect(watch.elapsed, lessThan(const Duration(seconds: 30)));
+    },
+    skip: bundled == null ? '只在带捆绑 ffmpeg-min 的平台跑（Windows / macOS）' : false,
+    timeout: const Timeout(Duration(seconds: 90)),
+  );
+
+  group('FfmpegProgressWatch', () {
+    test('非统计行（banner / 流信息 / 警告）都算前进', () {
+      final FfmpegProgressWatch watch = FfmpegProgressWatch();
+      expect(watch.feed('ffmpeg version n7.1.5\n'), isTrue);
+      expect(watch.feed("Input #0, mpegts, from 'x':\n"), isTrue);
+    });
+
+    test('统计行只有 time 变了才算前进', () {
+      final FfmpegProgressWatch watch = FfmpegProgressWatch();
+      expect(
+        watch.feed('size=     256KiB time=00:00:16.27 bitrate= 128k speed=32x\r'),
+        isTrue,
+      );
+      expect(
+        watch.feed('size=     256KiB time=00:00:16.27 bitrate= 128k speed=N/A\r'),
+        isFalse,
+        reason: 'ffmpeg 7 读流卡住时照打的行',
+      );
+      expect(
+        watch.feed('size=     260KiB time=00:00:16.80 bitrate= 128k speed=31x\r'),
+        isTrue,
+      );
+    });
+
+    test('跨块的半行拼上再判', () {
+      final FfmpegProgressWatch watch = FfmpegProgressWatch();
+      expect(watch.feed('size=  1KiB time=00:00:01.00 speed=1x\r'), isTrue);
+      expect(watch.feed('size=  1KiB ti'), isFalse, reason: '半行先不判');
+      expect(watch.feed('me=00:00:01.00 speed=1x\r'), isFalse);
+      expect(watch.feed('size=  2KiB time=00:00:02.00 speed=1x\r'), isTrue);
+    });
+  });
+
   test('已叫停的控制面不再起进程', () async {
     final FfmpegRunResult result = await runFfmpegProcess(
       // 不存在的可执行：若真去起进程会抛 ProcessException。

@@ -271,22 +271,76 @@ abstract class FfmpegBackend {
 ///
 /// - [cancel]：调用方不再需要结果时（退页、换集）立即杀掉这次 ffmpeg。没有它，一次
 ///   整集读流会在后台跑满全程，和新一集的播放抢同一条中继与带宽。
-/// - [stallTimeout]：多久**没有任何进度输出**就判超时。读网络流的速度取决于链路，
-///   按片长估的壁钟时限要么太紧（读到最后几分钟作废），要么太松（卡死几十分钟不报）；
-///   「还在动就等」才是这类任务的正确语义。壁钟时限仍在，只作兜底上限。
+/// - [stallTimeout]：多久**进度没有前进**就判超时（判据见 [FfmpegProgressWatch]）。
+///   读网络流的速度取决于链路，按片长估的壁钟时限要么太紧（读到最后几分钟作废），
+///   要么太松（卡死几十分钟不报）；「还在前进就等」才是这类任务的正确语义。壁钟时限
+///   仍在，只作兜底上限。
+///
+/// 一个控制面可以被多次运行共用（页面一集一个），所以叫停的通知是可注销的监听器，
+/// 而不是 Future：每次运行结束就注销，长寿的控制面上不留已结束运行的闭包。
 class FfmpegRunControl {
   FfmpegRunControl({this.stallTimeout});
 
   final Duration? stallTimeout;
-  final Completer<void> _cancelled = Completer<void>();
+  bool _cancelled = false;
+  final Set<void Function()> _listeners = <void Function()>{};
 
-  bool get isCancelled => _cancelled.isCompleted;
+  bool get isCancelled => _cancelled;
 
-  /// 调过 [cancel] 后完成。
-  Future<void> get whenCancelled => _cancelled.future;
+  /// 叫停时调 [listener]；返回注销函数。已叫停时不登记、不回调（调用方先查
+  /// [isCancelled]）。
+  void Function() onCancel(void Function() listener) {
+    if (_cancelled) return () {};
+    _listeners.add(listener);
+    return () => _listeners.remove(listener);
+  }
 
   void cancel() {
-    if (!_cancelled.isCompleted) _cancelled.complete();
+    if (_cancelled) return;
+    _cancelled = true;
+    final List<void Function()> listeners = _listeners.toList();
+    _listeners.clear();
+    for (final void Function() listener in listeners) {
+      listener();
+    }
+  }
+}
+
+/// ffmpeg 输出里「进度真的前进了」的判据（BUG-2957）。
+///
+/// 不能用「有没有输出」：ffmpeg 7 起主线程按 `stats_period` 定时打进度行，**读流线程
+/// 卡住时也照打**，只是 `time=` 不再变（桌面随包的是 n7.1.5）。所以统计行（同时带
+/// `time=` 与 `size=` / `speed=` 的那种）只有 `time=` 值变了才算前进；其它输出行
+/// （banner、`Input #0`、流信息、警告）都是 ffmpeg 在推进打开 / 探测，算前进。
+/// 输出按 `\r` / `\n` 切行，跨块的半行留到下一块拼上再判。
+class FfmpegProgressWatch {
+  String _pending = '';
+  String? _lastTime;
+
+  /// 喂一块输出；这块里有任何前进就返回 true。
+  bool feed(String chunk) {
+    final List<String> parts = (_pending + chunk).split(RegExp(r'[\r\n]'));
+    _pending = parts.removeLast();
+    bool advanced = false;
+    for (final String line in parts) {
+      if (_lineAdvances(line)) advanced = true;
+    }
+    return advanced;
+  }
+
+  static final RegExp _time = RegExp(r'\btime=\s*(\S+)');
+
+  bool _lineAdvances(String line) {
+    final String trimmed = line.trim();
+    if (trimmed.isEmpty) return false;
+    final Match? time = _time.firstMatch(trimmed);
+    final bool isStats = time != null &&
+        (trimmed.contains('size=') || trimmed.contains('speed='));
+    if (!isStats) return true;
+    final String value = time.group(1)!;
+    if (value == _lastTime) return false;
+    _lastTime = value;
+    return true;
   }
 }
 
@@ -445,9 +499,9 @@ String? _bundledExecutablePath(String name) {
 /// `Process.start` 抛 [ProcessException]，**向上传播**（各调用方自行 catch，沿用旧契约）。
 /// stderr 用宽容 UTF-8 解码（`allowMalformed`），绝不因个别非法字节抛错。
 ///
-/// [control]（BUG-2957）：取消时、或 stderr 连续 `stallTimeout` 没有任何输出（ffmpeg
-/// 默认每半秒打一行进度，读网络流卡住时才会沉默）时，与壁钟超时同样 SIGKILL 并返回
-/// `returnCode: null`，[FfmpegRunResult.output] 写明是哪一种。
+/// [control]（BUG-2957）：叫停时、或进度连续 `stallTimeout` 没有前进（判据见
+/// [FfmpegProgressWatch]）时，与壁钟超时同样 SIGKILL 并返回 `returnCode: null`，
+/// [FfmpegRunResult.output] 写明是哪一种。
 Future<FfmpegRunResult> runFfmpegProcess(
   String executable,
   List<String> args,
@@ -462,14 +516,18 @@ Future<FfmpegRunResult> runFfmpegProcess(
     args,
   );
   final Completer<String> abort = Completer<String>();
+  // 结论一出就不再挂任何计时器：进程退出后残余的 stderr 块不能把 stall 计时器
+  // 重新挂上（在 fake-async 测试里会留下 pending timer）。
+  bool settled = false;
   void abortWith(String reason) {
     if (!abort.isCompleted) abort.complete(reason);
   }
 
   final Duration? stallTimeout = control?.stallTimeout;
+  final FfmpegProgressWatch progress = FfmpegProgressWatch();
   Timer? stallTimer;
   void armStallTimer() {
-    if (stallTimeout == null) return;
+    if (stallTimeout == null || settled) return;
     stallTimer?.cancel();
     stallTimer = Timer(
       stallTimeout,
@@ -480,24 +538,35 @@ Future<FfmpegRunResult> runFfmpegProcess(
   // Drain both pipes: a full OS pipe buffer (ffmpeg writes progress to stderr)
   // would otherwise deadlock the process before it can exit.
   unawaited(process.stdout.drain<void>());
-  final Future<String> stderrText = process.stderr
-      .map((List<int> chunk) {
-        armStallTimer();
-        return chunk;
-      })
-      .transform(const Utf8Decoder(allowMalformed: true))
-      .join();
+  final StringBuffer stderrBuffer = StringBuffer();
+  final Completer<String> stderrDone = Completer<String>();
+  process.stderr.transform(const Utf8Decoder(allowMalformed: true)).listen(
+    (String text) {
+      stderrBuffer.write(text);
+      if (progress.feed(text)) armStallTimer();
+    },
+    onDone: () => stderrDone.complete(stderrBuffer.toString()),
+    onError: (Object _) {
+      if (!stderrDone.isCompleted) {
+        stderrDone.complete(stderrBuffer.toString());
+      }
+    },
+    cancelOnError: true,
+  );
   armStallTimer();
   final Timer wallTimer = Timer(timeout, () => abortWith(''));
-  unawaited(control?.whenCancelled.then((_) => abortWith('cancelled')));
+  final void Function() stopListening =
+      control?.onCancel(() => abortWith('cancelled')) ?? () {};
   final Object outcome = await Future.any<Object>(<Future<Object>>[
     process.exitCode,
     abort.future,
   ]);
+  settled = true;
+  stopListening();
   wallTimer.cancel();
   stallTimer?.cancel();
   if (outcome is int) {
-    final String output = await stderrText;
+    final String output = await stderrDone.future;
     return FfmpegRunResult(
       returnCode: outcome,
       output: output,
@@ -509,7 +578,7 @@ Future<FfmpegRunResult> runFfmpegProcess(
   // Reap the killed process before its caller removes command-scoped inputs.
   // On Windows an open concat manifest cannot be deleted while FFmpeg lives.
   await process.exitCode;
-  await stderrText;
+  await stderrDone.future;
   return _abortedProcessResult(executable, outcome as String);
 }
 

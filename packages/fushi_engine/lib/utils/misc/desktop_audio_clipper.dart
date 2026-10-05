@@ -1750,7 +1750,10 @@ Future<String?> extractAudioSegmentViaFfmpeg({
         output.deleteSync();
       } catch (_) {}
     }
-    _reportFfmpegFailure('extractAudioSegmentViaFfmpeg', result, onFailure);
+    // 调用方叫停（换集 / 退页）不是失败，不进错误日志（BUG-2957）。
+    if (!(control?.isCancelled ?? false)) {
+      _reportFfmpegFailure('extractAudioSegmentViaFfmpeg', result, onFailure);
+    }
     return null;
   } on ProcessException catch (e, stack) {
     // ffmpeg not installed / not on PATH — graceful no-audio fallback.

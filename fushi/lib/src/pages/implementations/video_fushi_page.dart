@@ -1434,9 +1434,15 @@ class _VideoFushiPageState extends ConsumerState<VideoFushiPage>
   final Map<String, Future<String?>> _remoteTimingAudioFetches =
       <String, Future<String?>>{};
 
-  /// 本集对轴取音共用的 ffmpeg 控制面（BUG-2957）：换集 / 退页时由
-  /// `_discardRemoteTimingAudio` 叫停在途的长读并换一个新的。
+  /// 本集对轴取音共用的 ffmpeg 控制面（BUG-2957）：远端换集时 `_retireTimingAudio`
+  /// 叫停在途的长读并换一个新的。
   FfmpegRunControl _timingAudioControl = newSubtitleTimingAudioControl();
+
+  /// 当前对轴音轨所属的远端集（`视频 id|集下标`）；变了才算换集。
+  String? _timingAudioEpisode;
+
+  /// 已换走的集拉下来的音轨：ASR 弹层可能还在读，退页时才删（BUG-2957）。
+  final List<Future<String?>> _retiredTimingAudioFetches = <Future<String?>>[];
 
   /// 进度条 hover 缩略图预览调度器（TODO-669，方案 A）。仅桌面本地文件视频时创建；
   /// 移动端 / 远端流为 null（不取帧，仅经 [_onSeekBarHover] 走 timestampOnly）。
@@ -3508,9 +3514,14 @@ class _VideoFushiPageState extends ConsumerState<VideoFushiPage>
       return;
     }
     final int seq = ++_episodeLoadSeq;
-    // 上一集为对轴拉的音轨不再有用：叫停在途的长读（否则它会读满整集、与新一集的
-    // 播放抢中继与带宽），删掉已落盘的临时文件（BUG-2957）。
-    _discardRemoteTimingAudio();
+    // 真换了一集才叫停上一集在途的对轴长读（否则它会读满整集、与新一集的播放抢中继
+    // 与带宽）；同一集换画质 / 换线路 / 互联自适应换档不动，已抽好的音轨照样能用
+    // （BUG-2957）。
+    final String timingAudioEpisode = '${info.id}|$streamEpisodeIndex';
+    if (timingAudioEpisode != _timingAudioEpisode) {
+      _timingAudioEpisode = timingAudioEpisode;
+      _retireTimingAudio();
+    }
     _remoteLastAttemptedEpisode = index;
     // 换集（页上已有在播的 controller）才亮换集 OSD；首开走页级加载态。
     final bool switching = _controller != null;

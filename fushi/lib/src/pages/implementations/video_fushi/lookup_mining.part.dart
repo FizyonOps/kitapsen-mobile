@@ -770,17 +770,11 @@ extension _VideoLookupMining on _VideoFushiPageState {
   /// 粘贴的流 / 媒体服务器时改写成与播放器同一条中继（判据
   /// [videoMiningInputUsesPlaybackRelay]），`ready` 是登记完成信号，ffmpeg 开跑前必须
   /// 等它；其余输入（本地文件 / 互联主机）原样返回、`ready` 为 null。制卡与字幕对轴
-  /// 音源（`_resolveSubtitleTimingAudio`）共用这一处决定，不各写一份改道判断（BUG-2957）。
-  ///
-  /// [isHls] 缺省按播放器识别的容器判（[source] 就是播放流时）；对轴读的若是另一条流
-  /// （分离音轨 / 媒体服务器直出），由调用方按那条流判。[longRead] 见
-  /// [relayFfmpegRemoteInput]。
+  /// 音源（[_ffmpegLongReadInput]）共用同一个改道判据，不各写一份（BUG-2957）。
   ({String url, Future<void>? ready}) _routeFfmpegPlaybackInput(
     String source,
-    VideoPlayerController controller, {
-    Future<bool>? isHls,
-    bool longRead = false,
-  }) {
+    VideoPlayerController controller,
+  ) {
     if (!videoMiningInputUsesPlaybackRelay(
       remoteClient: _effectiveRemoteClient,
       mediaSource: source,
@@ -789,11 +783,31 @@ extension _VideoLookupMining on _VideoFushiPageState {
     }
     final ({String url, Future<void> ready}) relayed = relayFfmpegRemoteInput(
       source,
-      isHls: isHls ?? controller.isHlsStream(),
+      isHls: controller.isHlsStream(),
       headers: _streamHttpHeaderFields,
-      longRead: longRead,
     );
     return (url: relayed.url, ready: relayed.ready);
+  }
+
+  /// 字幕对轴长读时本机 ffmpeg 该读的地址（BUG-2957）：与制卡同一个改道判据
+  /// [videoMiningInputUsesPlaybackRelay]，改道时走长读专用登记
+  /// [relayFfmpegLongReadInput]（保留分片预取、master 选最低档、不覆盖制卡的映射）。
+  /// [isHls] 由调用方按要读的那条流判（它未必是播放流：分离音轨 / 媒体服务器直出）。
+  Future<String> _ffmpegLongReadInput(
+    String source, {
+    required Future<bool> isHls,
+  }) async {
+    if (!videoMiningInputUsesPlaybackRelay(
+      remoteClient: _effectiveRemoteClient,
+      mediaSource: source,
+    )) {
+      return source;
+    }
+    return relayFfmpegLongReadInput(
+      source,
+      isHls: isHls,
+      headers: _streamHttpHeaderFields,
+    );
   }
 }
 

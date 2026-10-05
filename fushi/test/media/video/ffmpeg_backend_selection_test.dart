@@ -33,7 +33,19 @@ void main() {
   test('用自编 ffmpeg-kit：KitFfmpegBackend + ffmpeg_kit_flutter API（app 侧）', () {
     expect(
         kit, contains('import \'package:ffmpeg_kit_flutter/ffmpeg_kit.dart\''));
-    expect(kit, contains('class KitFfmpegBackend implements FfmpegBackend'));
+    // BUG-2957：Kit 后端经可选能力 ControllableFfmpegBackend（叫停 / 无进展超时）
+    // 实现 FfmpegBackend；能力接口本身必须仍是 FfmpegBackend。
+    expect(
+      kit,
+      contains('class KitFfmpegBackend implements ControllableFfmpegBackend'),
+    );
+    expect(
+      src,
+      contains(
+        'abstract interface class ControllableFfmpegBackend '
+        'implements FfmpegBackend',
+      ),
+    );
     expect(kit, contains('FFmpegKit.executeWithArguments'));
     // 引擎不得反向碰插件（纯度守卫另钉，这里顺手钉住后端文件本身）。
     expect(src.contains('ffmpeg_kit_flutter'), isFalse,

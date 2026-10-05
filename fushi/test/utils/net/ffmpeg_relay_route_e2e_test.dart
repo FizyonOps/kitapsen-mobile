@@ -326,18 +326,20 @@ void main() {
         containsAll(<String>['/m/lo/index', '/m/mid/index', '/m/hi/index']),
       );
 
-      // BUG-2957：字幕对轴的长读只要音轨——选最低码率档、保留分片预取。
+      // BUG-2957：字幕对轴的长读只要音轨——选最低码率档、保留分片预取，且不覆盖
+      // 制卡登记的「master → 最高档」映射（否则排队中的制卡会抽到最低档画面）。
       ffmpegRemoteInputRouteResolver = ffmpegRelayRouteFor;
-      final ({String url, Future<void> ready}) longRead =
-          relayFfmpegRemoteInput(
-            'http://native-source.invalid/m/master',
-            isHls: Future<bool>.value(true),
-            headers: const <String, String>{'Referer': 'https://site.example/'},
-            longRead: true,
-          );
-      await longRead.ready;
-      final String lowInput = ffmpegRemoteInputFor(longRead.url);
+      final String lowInput = await relayFfmpegLongReadInput(
+        'http://native-source.invalid/m/master',
+        isHls: Future<bool>.value(true),
+        headers: const <String, String>{'Referer': 'https://site.example/'},
+      );
       expect(lowInput, endsWith('/m/lo/index'));
+      expect(
+        ffmpegRemoteInputFor(relayed.url),
+        endsWith('/m/hi/index'),
+        reason: '制卡的 master 映射不被长读覆盖',
+      );
       expect(
         ffmpegRelayRouteFor(lowInput)?.disableHlsSegmentPrefetch,
         isFalse,

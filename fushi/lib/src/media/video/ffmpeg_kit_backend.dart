@@ -10,8 +10,10 @@ import 'dart:async';
 import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:ffmpeg_kit_flutter/ffmpeg_kit.dart';
 import 'package:ffmpeg_kit_flutter/ffprobe_kit.dart';
+import 'package:ffmpeg_kit_flutter/log.dart';
 import 'package:ffmpeg_kit_flutter/return_code.dart';
 import 'package:ffmpeg_kit_flutter/session.dart';
+import 'package:ffmpeg_kit_flutter/statistics.dart';
 import 'package:fushi_engine/media/video/ffmpeg_backend.dart';
 
 /// 会话收尾（取消 / 读退出码 / 读日志）各自的独立上限。
@@ -78,20 +80,19 @@ class KitFfmpegBackend implements ControllableFfmpegBackend {
     );
   }
 
-  /// 与 [run] 同一会话驱动；ffmpeg-kit 的日志 / 统计回调就是「还在动」的信号，
-  /// 喂给 [FfmpegRunControl.stallTimeout] 判据（BUG-2957）。
+  /// 与 [run] 同一会话驱动；ffmpeg-kit 的日志 / 统计回调转成 ffmpeg 输出文本，
+  /// 交给 [FfmpegProgressWatch] 判断进度是否真的前进（BUG-2957）。
   @override
   Future<FfmpegRunResult> runControlled(
     List<String> args,
     Duration timeout,
     FfmpegRunControl control,
   ) async {
-    final StreamController<void> progress = StreamController<void>.broadcast(
-      sync: true,
-    );
+    final StreamController<String> progress =
+        StreamController<String>.broadcast(sync: true);
     // 取消后 native 侧仍可能回调几行日志：那时控制器已关，丢掉即可。
-    void onProgress(Object? _) {
-      if (!progress.isClosed) progress.add(null);
+    void emit(String text) {
+      if (!progress.isClosed) progress.add(text);
     }
 
     try {
@@ -104,8 +105,9 @@ class KitFfmpegBackend implements ControllableFfmpegBackend {
             FFmpegKit.executeWithArgumentsAsync(
               args,
               (_) => onComplete(),
-              onProgress,
-              onProgress,
+              (Log log) => emit(log.getMessage()),
+              // 统计回调按 ffmpeg 统计行的形状喂：time 不变就不算前进。
+              (Statistics s) => emit('size= time=${s.getTime()}\n'),
             ),
       );
     } finally {
@@ -148,7 +150,7 @@ Future<FfmpegRunResult> runKitFfmpegSession({
   Duration epilogueTimeout = _kKitSessionEpilogueTimeout,
   Duration startTimeout = _kKitSessionStartTimeout,
   FfmpegRunControl? control,
-  Stream<void>? progress,
+  Stream<String>? progress,
 }) async {
   if (control?.isCancelled ?? false) {
     return _kitAbortedResult(executable, 'cancelled');
@@ -209,13 +211,13 @@ Future<FfmpegRunResult> runKitFfmpegSession({
 }
 
 /// 等会话完成。正常完成返回 null；否则返回中止原因：空串 = 壁钟超时（与历史行为
-/// 一致），`cancelled` = 调用方叫停，`stalled …` = [progress] 连续
-/// [FfmpegRunControl.stallTimeout] 没有事件（BUG-2957）。
+/// 一致），`cancelled` = 调用方叫停，`stalled …` = [progress]（ffmpeg 输出文本）
+/// 连续 [FfmpegRunControl.stallTimeout] 没有前进（[FfmpegProgressWatch]，BUG-2957）。
 Future<String?> _awaitKitSession(
   Future<void> done, {
   required Duration timeout,
   required FfmpegRunControl? control,
-  required Stream<void>? progress,
+  required Stream<String>? progress,
 }) async {
   final Completer<String?> outcome = Completer<String?>();
   void finish(String? reason) {
@@ -234,15 +236,20 @@ Future<String?> _awaitKitSession(
   }
 
   armStallTimer();
-  final StreamSubscription<void>? progressSub = progress?.listen(
-    (_) => armStallTimer(),
+  final FfmpegProgressWatch watch = FfmpegProgressWatch();
+  final StreamSubscription<String>? progressSub = progress?.listen(
+    (String text) {
+      if (!outcome.isCompleted && watch.feed(text)) armStallTimer();
+    },
   );
   final Timer wallTimer = Timer(timeout, () => finish(''));
   unawaited(done.then((_) => finish(null)));
-  unawaited(control?.whenCancelled.then((_) => finish('cancelled')));
+  final void Function() stopListening =
+      control?.onCancel(() => finish('cancelled')) ?? () {};
   try {
     return await outcome.future;
   } finally {
+    stopListening();
     wallTimer.cancel();
     stallTimer?.cancel();
     await progressSub?.cancel();
