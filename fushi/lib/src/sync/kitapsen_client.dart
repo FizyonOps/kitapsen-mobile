@@ -330,14 +330,19 @@ class KitapsenClient implements RemoteBookClient, RemoteCoverFetcher {
     ];
     if (!formats.contains('epub')) return null;
     final String? cover = item['cover_image_url'] as String?;
+    final int? grantedAt = _parseServerTime(item['granted_at'] as String?);
     return RemoteBookInfo(
       // Raw store title: the shelf dedupes and labels by it.
       title: title,
+      // The EPUB's own metadata title is often a bare file name; the store
+      // title becomes the local name unless the reader renamed the book later.
+      displayTitle: title,
+      displayTitleAt: grantedAt ?? 0,
       hasContent: true,
       // The store id is the download / progress key, never the title.
       bookKey: '$bookId',
       coverUrl: cover == null || cover.isEmpty ? null : _absoluteUrl(cover),
-      importedAt: _parseServerTime(item['granted_at'] as String?),
+      importedAt: grantedAt,
     );
   }
 
