@@ -130,6 +130,40 @@ void main() {
       expect(c.debugActiveSession('ep1')?.playMethod, 'Transcode');
     });
 
+    test('字幕对轴音源：转码会话改读原文件直出，直出播放不另给（BUG-2957）', () async {
+      bool transcode = true;
+      final JellyfinVideoClient c = clientWith((http.Request req) async {
+        if (req.url.path == '/Users/u1/Items/ep1') return json(_episodeJson());
+        if (req.url.path == '/Items/ep1/PlaybackInfo') {
+          return json(_playbackInfoJson(
+            directPlay: !transcode,
+            transcodingUrl: '/videos/ep1/master.m3u8?PlaySessionId=ps-1'
+                '&api_key=tok',
+          ));
+        }
+        return http.Response('', 204);
+      });
+      final RemoteVideoStreamUrls transcoded =
+          await c.remoteVideoStreamUrls('ep1');
+      final String? timing = c.timingAudioUrl('ep1');
+      expect(timing, isNotNull);
+      final Uri timingUri = Uri.parse(timing!);
+      expect(timingUri.path, '/Videos/ep1/stream');
+      expect(timingUri.queryParameters['static'], 'true');
+      expect(timingUri.queryParameters['MediaSourceId'], 'src1');
+      expect(
+        timingUri.queryParameters.containsKey('PlaySessionId'),
+        isFalse,
+        reason: '对轴不挂在播放会话上，否则服务器会为两边来回重启转码',
+      );
+      expect(timing, isNot(transcoded.streamUrl));
+
+      // 同一条目下次协商成直出：播放流就是原文件，对轴直接读它，表里不能留旧值。
+      transcode = false;
+      await c.remoteVideoStreamUrls('ep1');
+      expect(c.timingAudioUrl('ep1'), isNull);
+    });
+
     test('选了画质档：PlaybackInfo 带 MaxStreamingBitrate + 宽度条件', () async {
       final JellyfinVideoClient c = clientWith((http.Request req) async {
         if (req.url.path == '/Users/u1/Items/ep1') return json(_episodeJson());

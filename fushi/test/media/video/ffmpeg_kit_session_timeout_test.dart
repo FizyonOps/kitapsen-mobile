@@ -148,10 +148,84 @@ void main() {
     expect(result.returnCode, 1);
     expect(result.output, 'Unknown encoder');
   });
+
+  _controlGroup();
 }
 
 /// 只实现本驱动真正会调的三个 [Session] 成员（`getSessionId` / `getReturnCode` /
 /// `getOutput`），其余经 `noSuchMethod` 兜住——被调到就是驱动越界了。
+/// BUG-2957：对轴从网络流抽长段音轨走带控制面的会话——换集 / 退页时叫停，按
+/// 「无进展」判超时（读网络流的速度取决于链路，按片长估的壁钟时限不可靠）。
+void _controlGroup() {
+  group('FfmpegRunControl（BUG-2957）', () {
+    const Duration long = Duration(minutes: 5);
+
+    test('叫停：在途会话被精确取消，结果写明 cancelled', () async {
+      final List<int> cancelledIds = <int>[];
+      final FfmpegRunControl control = FfmpegRunControl();
+      final Future<FfmpegRunResult> pending = runKitFfmpegSession(
+        start: (void Function() onComplete) async => _FakeSession(sessionId: 9),
+        timeout: long,
+        executable: 'ffmpeg-kit',
+        cancelSession: (int id) async => cancelledIds.add(id),
+        control: control,
+      );
+      await Future<void>.delayed(const Duration(milliseconds: 10));
+      control.cancel();
+      final FfmpegRunResult result = await pending;
+      expect(result.returnCode, isNull);
+      expect(result.output, contains('cancelled'));
+      expect(cancelledIds, <int>[9]);
+    });
+
+    test('已叫停的控制面不再启动会话', () async {
+      bool started = false;
+      final FfmpegRunControl control = FfmpegRunControl()..cancel();
+      final FfmpegRunResult result = await runKitFfmpegSession(
+        start: (void Function() onComplete) async {
+          started = true;
+          return _FakeSession(sessionId: 1);
+        },
+        timeout: long,
+        executable: 'ffmpeg-kit',
+        control: control,
+      );
+      expect(started, isFalse);
+      expect(result.output, contains('cancelled'));
+    });
+
+    test('有进度就一直等，进度停了才判 stalled', () async {
+      final List<int> cancelledIds = <int>[];
+      final StreamController<void> progress = StreamController<void>();
+      addTearDown(progress.close);
+      final Stopwatch watch = Stopwatch()..start();
+      final Future<FfmpegRunResult> pending = runKitFfmpegSession(
+        start: (void Function() onComplete) async => _FakeSession(sessionId: 5),
+        timeout: long,
+        executable: 'ffmpeg-kit',
+        cancelSession: (int id) async => cancelledIds.add(id),
+        control: FfmpegRunControl(
+          stallTimeout: const Duration(milliseconds: 150),
+        ),
+        progress: progress.stream,
+      );
+      // 每 50 ms 一次进度、持续 400 ms：总时长远超 stallTimeout，但从未停过。
+      for (int i = 0; i < 8; i++) {
+        await Future<void>.delayed(const Duration(milliseconds: 50));
+        progress.add(null);
+      }
+      final FfmpegRunResult result = await pending;
+      expect(
+        watch.elapsedMilliseconds,
+        greaterThanOrEqualTo(400),
+        reason: '还在动的会话不能被判超时',
+      );
+      expect(result.output, contains('stalled'));
+      expect(cancelledIds, <int>[5]);
+    });
+  });
+}
+
 class _FakeSession implements Session {
   _FakeSession({
     required this.sessionId,

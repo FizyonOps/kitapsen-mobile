@@ -1892,6 +1892,7 @@ class JellyfinVideoClient
         RemoteVideoPlaybackSession,
         RemoteVideoQualityLimit,
         RemoteVideoCollectionIsWork,
+        RemoteVideoTimingAudioSource,
         MediaServerBrowser {
   JellyfinVideoClient({
     required this.api,
@@ -1942,6 +1943,14 @@ class JellyfinVideoClient
   /// Stopped 可能晚于新页的 PlaybackInfo 到达，先进先出才不会拿新会话去报旧停止）。
   final Map<String, List<JellyfinPlaybackSession>> _sessions =
       <String, List<JellyfinPlaybackSession>>{};
+
+  /// 本次播放走转码会话的条目 → 字幕对轴改读的原文件直出地址（BUG-2957，见
+  /// [RemoteVideoTimingAudioSource]）。直出播放的条目不在表里：播放流就是原文件，
+  /// 静态读取不经转码作业，对轴直接读它。
+  final Map<String, String> _timingAudioUrls = <String, String>{};
+
+  @override
+  String? timingAudioUrl(String id) => _timingAudioUrls[id];
 
   JellyfinPlaybackSession? _latestSession(String itemId) {
     final List<JellyfinPlaybackSession>? list = _sessions[itemId];
@@ -2669,6 +2678,13 @@ class JellyfinVideoClient
     final String? mediaSourceId = item.mediaSourceId;
     final ({String streamUrl, JellyfinPlaybackSession? session}) playback =
         await _negotiatePlayback(id, item);
+    // 转码会话不给对轴读（会扰乱播放器所在的转码位置），对轴改读原文件直出——与
+    // 「下载到本机」同一条 URL（BUG-2957）。
+    if (playback.session?.isTranscoding ?? false) {
+      _timingAudioUrls[id] = api.streamUrl(id, mediaSourceId: mediaSourceId);
+    } else {
+      _timingAudioUrls.remove(id);
+    }
 
     // 外挂文本字幕优先作为默认外挂轨；其余文本轨全部报给播放页的字幕轨选择器。
     JellyfinSubtitleStream? external;

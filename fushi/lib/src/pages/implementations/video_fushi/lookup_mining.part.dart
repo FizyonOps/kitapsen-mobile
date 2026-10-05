@@ -766,15 +766,21 @@ extension _VideoLookupMining on _VideoFushiPageState {
     }
   }
 
-  /// 本机 ffmpeg 读当前播放的 [source] 时实际该用的地址：在线视频源 / 媒体服务器改写成
-  /// 与播放器同一条中继（判据 [videoMiningInputUsesPlaybackRelay]），`ready` 是登记完成
-  /// 信号，ffmpeg 开跑前必须等它；其余输入（本地文件 / YouTube / 互联主机）原样返回、
-  /// `ready` 为 null。制卡与字幕对轴音源（`_resolveSubtitleTimingAudio`）共用这一处
-  /// 决定，不各写一份改道判断（BUG-2957）。
+  /// 本机 ffmpeg 读当前播放的 [source] 时实际该用的地址：远端 client 是在线视频源 /
+  /// 粘贴的流 / 媒体服务器时改写成与播放器同一条中继（判据
+  /// [videoMiningInputUsesPlaybackRelay]），`ready` 是登记完成信号，ffmpeg 开跑前必须
+  /// 等它；其余输入（本地文件 / 互联主机）原样返回、`ready` 为 null。制卡与字幕对轴
+  /// 音源（`_resolveSubtitleTimingAudio`）共用这一处决定，不各写一份改道判断（BUG-2957）。
+  ///
+  /// [isHls] 缺省按播放器识别的容器判（[source] 就是播放流时）；对轴读的若是另一条流
+  /// （分离音轨 / 媒体服务器直出），由调用方按那条流判。[longRead] 见
+  /// [relayFfmpegRemoteInput]。
   ({String url, Future<void>? ready}) _routeFfmpegPlaybackInput(
     String source,
-    VideoPlayerController controller,
-  ) {
+    VideoPlayerController controller, {
+    Future<bool>? isHls,
+    bool longRead = false,
+  }) {
     if (!videoMiningInputUsesPlaybackRelay(
       remoteClient: _effectiveRemoteClient,
       mediaSource: source,
@@ -783,8 +789,9 @@ extension _VideoLookupMining on _VideoFushiPageState {
     }
     final ({String url, Future<void> ready}) relayed = relayFfmpegRemoteInput(
       source,
-      isHls: controller.isHlsStream(),
+      isHls: isHls ?? controller.isHlsStream(),
       headers: _streamHttpHeaderFields,
+      longRead: longRead,
     );
     return (url: relayed.url, ready: relayed.ready);
   }

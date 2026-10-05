@@ -193,7 +193,12 @@ final RegExp _mediaTypeAttribute = RegExp(r'(?:^|[:,])TYPE=([A-Z-]+)');
 /// 的音轨（或画面）是独立的 rendition 播放列表，单读一档变体会丢掉它们，句子音频直接
 /// 抽不出来。字幕 / 隐藏字幕 rendition 不影响制卡。`#EXT-X-I-FRAME-STREAM-INF`（只有
 /// 关键帧的 trick-play 档）不算变体。
-String? selectHlsMasterVariant(String playlist) {
+///
+/// [lowest]（BUG-2957）：改选 `BANDWIDTH` **最低**那一档（并列取先出现的）。给只要
+/// 音轨的长读用——字幕对轴抽前 20 分钟 / 整集音频时，读最高画质档只是白拉视频字节；
+/// 同一 master 的各档在没有独立音频 rendition（上面那条返回 null 的规则）时共用同一路
+/// 节目音频，最低档的音频足够画波形与转录。
+String? selectHlsMasterVariant(String playlist, {bool lowest = false}) {
   String? best;
   int bestBandwidth = -1;
   int? pendingBandwidth;
@@ -215,7 +220,12 @@ String? selectHlsMasterVariant(String playlist) {
     } else if (line.startsWith('#')) {
       continue;
     } else if (pendingBandwidth != null) {
-      if (pendingBandwidth > bestBandwidth) {
+      final bool better =
+          best == null ||
+          (lowest
+              ? pendingBandwidth < bestBandwidth
+              : pendingBandwidth > bestBandwidth);
+      if (better) {
         best = line;
         bestBandwidth = pendingBandwidth;
       }

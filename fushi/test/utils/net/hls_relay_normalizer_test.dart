@@ -243,6 +243,24 @@ void main() {
       },
     );
 
+    test('lowest picks the cheapest BANDWIDTH for audio-only long reads '
+        '(BUG-2957)', () {
+      const String master =
+          '#EXTM3U\n'
+          '#EXT-X-STREAM-INF:BANDWIDTH=5000000,RESOLUTION=1920x1080\n'
+          'hi/index.m3u8\n'
+          '#EXT-X-I-FRAME-STREAM-INF:BANDWIDTH=1000,URI="iframe.m3u8"\n'
+          '#EXT-X-STREAM-INF:BANDWIDTH=800000,RESOLUTION=640x360\n'
+          'lo/index.m3u8\n'
+          '#EXT-X-STREAM-INF:BANDWIDTH=800000,RESOLUTION=640x360\n'
+          'lo-dup/index.m3u8\n'
+          '#EXT-X-STREAM-INF:BANDWIDTH=2500000,RESOLUTION=1280x720\n'
+          'mid/index.m3u8\n';
+      // trick-play 档不算；并列取先出现的。
+      expect(selectHlsMasterVariant(master, lowest: true), 'lo/index.m3u8');
+      expect(selectHlsMasterVariant(master), 'hi/index.m3u8');
+    });
+
     test('ties keep the first variant', () {
       expect(
         selectHlsMasterVariant(

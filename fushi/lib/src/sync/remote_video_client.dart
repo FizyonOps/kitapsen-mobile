@@ -108,6 +108,19 @@ abstract interface class RemoteVideoStreamHeaders {
   Map<String, String> get httpHeaderFields;
 }
 
+/// 「字幕对轴要另读一条流」的可选能力（BUG-2957）。
+///
+/// 字幕对轴 / 语音模型重定时要从头抽前 20 分钟乃至整集音轨。默认读的是制卡抽取源
+/// （= 播放流）；但当播放流是**服务器为本次播放开的转码会话**（Jellyfin / Emby 的
+/// `TranscodingUrl`，HLS，带 `PlaySessionId`）时不能这么做：对轴从第 0 片顺序往后读，
+/// 播放器停在第 50 分钟，服务器会为两边来回重启转码作业，播放跟着卡；服务器还得为一条
+/// 音轨把画面也转码一遍。实现方在 [RemoteVideoClient.remoteVideoStreamUrls] 返回时
+/// 记下该集应读的地址（如原文件直出），播放页对轴时取它。
+abstract interface class RemoteVideoTimingAudioSource {
+  /// 远端视频 [id] 的对轴音源地址；null = 播放流本身就能读（直出 / 非会话流）。
+  String? timingAudioUrl(String id);
+}
+
 /// 「知道某一集的集号」的可选能力（BUG-2626）。
 ///
 /// [RemoteVideoInfo] 只有 `title` 与合集内的 `sortIndex`：前者是分集标题（在线视频源

@@ -65,7 +65,7 @@ enum KitSessionPhase {
 /// 桌面 CLI 后端不受影响（子进程有独立超时），所以这是移动端专属的挂死面。
 /// 收敛后每一步都有上限，超时一律返回 `returnCode: null` 的失败结果，并在
 /// [FfmpegRunResult.output] 里写明卡在哪个阶段。
-class KitFfmpegBackend implements FfmpegBackend {
+class KitFfmpegBackend implements ControllableFfmpegBackend {
   const KitFfmpegBackend();
 
   @override
@@ -76,6 +76,41 @@ class KitFfmpegBackend implements FfmpegBackend {
       start: (void Function() onComplete) =>
           FFmpegKit.executeWithArgumentsAsync(args, (_) => onComplete()),
     );
+  }
+
+  /// 与 [run] 同一会话驱动；ffmpeg-kit 的日志 / 统计回调就是「还在动」的信号，
+  /// 喂给 [FfmpegRunControl.stallTimeout] 判据（BUG-2957）。
+  @override
+  Future<FfmpegRunResult> runControlled(
+    List<String> args,
+    Duration timeout,
+    FfmpegRunControl control,
+  ) async {
+    final StreamController<void> progress = StreamController<void>.broadcast(
+      sync: true,
+    );
+    // 取消后 native 侧仍可能回调几行日志：那时控制器已关，丢掉即可。
+    void onProgress(Object? _) {
+      if (!progress.isClosed) progress.add(null);
+    }
+
+    try {
+      return await runKitFfmpegSession(
+        timeout: timeout,
+        executable: 'ffmpeg-kit',
+        control: control,
+        progress: progress.stream,
+        start: (void Function() onComplete) =>
+            FFmpegKit.executeWithArgumentsAsync(
+              args,
+              (_) => onComplete(),
+              onProgress,
+              onProgress,
+            ),
+      );
+    } finally {
+      await progress.close();
+    }
   }
 
   /// 移动端 ffprobe：进程内 `FFprobeKit.executeWithArgumentsAsync`，
@@ -112,7 +147,12 @@ Future<FfmpegRunResult> runKitFfmpegSession({
   Future<void> Function(int sessionId) cancelSession = FFmpegKit.cancel,
   Duration epilogueTimeout = _kKitSessionEpilogueTimeout,
   Duration startTimeout = _kKitSessionStartTimeout,
+  FfmpegRunControl? control,
+  Stream<void>? progress,
 }) async {
+  if (control?.isCancelled ?? false) {
+    return _kitAbortedResult(executable, 'cancelled');
+  }
   final Completer<void> done = Completer<void>();
   final Session session;
   try {
@@ -127,27 +167,34 @@ Future<FfmpegRunResult> runKitFfmpegSession({
     return _kitTimeoutResult(executable, KitSessionPhase.start);
   }
 
-  try {
-    await done.future.timeout(timeout);
-  } on TimeoutException {
+  final String? abortReason = await _awaitKitSession(
+    done.future,
+    timeout: timeout,
+    control: control,
+    progress: progress,
+  );
+  if (abortReason != null) {
     final int? sessionId = session.getSessionId();
     if (sessionId != null) {
       try {
         // 取消也是 method channel 往返：不加上限，超时机制就会被它自己要取消
-        // 的东西挂住。取消失败不改变结论（这次会话已判超时）。
+        // 的东西挂住。取消失败不改变结论（这次会话已判超时 / 已被叫停）。
         await cancelSession(sessionId).timeout(epilogueTimeout);
       } on TimeoutException {
-        // 落进下面的统一超时结果，阶段仍记 execute：真因是会话没跑完。
+        // 落进下面的统一结果，阶段仍记 execute：真因是会话没跑完。
       }
     }
-    return _kitTimeoutResult(executable, KitSessionPhase.execute);
+    return abortReason.isEmpty
+        ? _kitTimeoutResult(executable, KitSessionPhase.execute)
+        : _kitAbortedResult(executable, abortReason);
   }
 
   // 会话已完成，读退出码与合并日志。这两步再挂住就只能当结果拿不到——但绝不
   // 能因此让 run() 永不返回。
   try {
-    final ReturnCode? rc =
-        await session.getReturnCode().timeout(epilogueTimeout);
+    final ReturnCode? rc = await session.getReturnCode().timeout(
+      epilogueTimeout,
+    );
     final String output =
         (await session.getOutput().timeout(epilogueTimeout)) ?? '';
     return FfmpegRunResult(
@@ -159,6 +206,57 @@ Future<FfmpegRunResult> runKitFfmpegSession({
   } on TimeoutException {
     return _kitTimeoutResult(executable, KitSessionPhase.epilogue);
   }
+}
+
+/// 等会话完成。正常完成返回 null；否则返回中止原因：空串 = 壁钟超时（与历史行为
+/// 一致），`cancelled` = 调用方叫停，`stalled …` = [progress] 连续
+/// [FfmpegRunControl.stallTimeout] 没有事件（BUG-2957）。
+Future<String?> _awaitKitSession(
+  Future<void> done, {
+  required Duration timeout,
+  required FfmpegRunControl? control,
+  required Stream<void>? progress,
+}) async {
+  final Completer<String?> outcome = Completer<String?>();
+  void finish(String? reason) {
+    if (!outcome.isCompleted) outcome.complete(reason);
+  }
+
+  final Duration? stallTimeout = control?.stallTimeout;
+  Timer? stallTimer;
+  void armStallTimer() {
+    if (stallTimeout == null) return;
+    stallTimer?.cancel();
+    stallTimer = Timer(
+      stallTimeout,
+      () => finish('stalled (no progress for ${stallTimeout.inSeconds}s)'),
+    );
+  }
+
+  armStallTimer();
+  final StreamSubscription<void>? progressSub = progress?.listen(
+    (_) => armStallTimer(),
+  );
+  final Timer wallTimer = Timer(timeout, () => finish(''));
+  unawaited(done.then((_) => finish(null)));
+  unawaited(control?.whenCancelled.then((_) => finish('cancelled')));
+  try {
+    return await outcome.future;
+  } finally {
+    wallTimer.cancel();
+    stallTimer?.cancel();
+    await progressSub?.cancel();
+  }
+}
+
+/// 被叫停 / 判无进展的会话：`returnCode: null`，[FfmpegRunResult.output] 写明原因。
+FfmpegRunResult _kitAbortedResult(String executable, String reason) {
+  return FfmpegRunResult(
+    returnCode: null,
+    output: '$executable $reason',
+    executable: executable,
+    attemptedExecutables: <String>[executable],
+  );
 }
 
 /// 统一的超时失败结果。`returnCode: null` 与既有契约一致（`isSuccess == false`，

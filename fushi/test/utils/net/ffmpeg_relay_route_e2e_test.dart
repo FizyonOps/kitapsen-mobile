@@ -325,6 +325,32 @@ void main() {
         seen,
         containsAll(<String>['/m/lo/index', '/m/mid/index', '/m/hi/index']),
       );
+
+      // BUG-2957：字幕对轴的长读只要音轨——选最低码率档、保留分片预取。
+      ffmpegRemoteInputRouteResolver = ffmpegRelayRouteFor;
+      final ({String url, Future<void> ready}) longRead =
+          relayFfmpegRemoteInput(
+            'http://native-source.invalid/m/master',
+            isHls: Future<bool>.value(true),
+            headers: const <String, String>{'Referer': 'https://site.example/'},
+            longRead: true,
+          );
+      await longRead.ready;
+      final String lowInput = ffmpegRemoteInputFor(longRead.url);
+      expect(lowInput, endsWith('/m/lo/index'));
+      expect(
+        ffmpegRelayRouteFor(lowInput)?.disableHlsSegmentPrefetch,
+        isFalse,
+        reason: '几十分钟的读取不能逐片串行',
+      );
+      seen.clear();
+      failures.clear();
+      expect(await cut(lowInput, 'long'), isNotNull, reason: '$failures');
+      expect(
+        seen.where((String s) => s.startsWith('/m/hi/') || s.contains('/mid/')),
+        isEmpty,
+        reason: '只读最低档',
+      );
     },
     skip: bundled == null ? '只在带捆绑 ffmpeg-min 的平台跑（Windows / macOS）' : false,
     timeout: const Timeout(Duration(seconds: 90)),

@@ -267,6 +267,54 @@ abstract class FfmpegBackend {
   Future<FfmpegRunResult> runProbe(List<String> args, Duration timeout);
 }
 
+/// 长时间 ffmpeg 任务的控制面（BUG-2957：从网络流抽整集 / 前 20 分钟音轨）。
+///
+/// - [cancel]：调用方不再需要结果时（退页、换集）立即杀掉这次 ffmpeg。没有它，一次
+///   整集读流会在后台跑满全程，和新一集的播放抢同一条中继与带宽。
+/// - [stallTimeout]：多久**没有任何进度输出**就判超时。读网络流的速度取决于链路，
+///   按片长估的壁钟时限要么太紧（读到最后几分钟作废），要么太松（卡死几十分钟不报）；
+///   「还在动就等」才是这类任务的正确语义。壁钟时限仍在，只作兜底上限。
+class FfmpegRunControl {
+  FfmpegRunControl({this.stallTimeout});
+
+  final Duration? stallTimeout;
+  final Completer<void> _cancelled = Completer<void>();
+
+  bool get isCancelled => _cancelled.isCompleted;
+
+  /// 调过 [cancel] 后完成。
+  Future<void> get whenCancelled => _cancelled.future;
+
+  void cancel() {
+    if (!_cancelled.isCompleted) _cancelled.complete();
+  }
+}
+
+/// 认得 [FfmpegRunControl] 的后端：桌面 CLI、移动端 ffmpeg-kit、蓝光包装层。
+///
+/// 做成可选能力而不是改 [FfmpegBackend.run] 的签名：后者有二十多个测试假件，它们
+/// 与取消无关。不实现本接口的后端经 [runFfmpegWithControl] 按普通 run 跑。
+abstract interface class ControllableFfmpegBackend implements FfmpegBackend {
+  Future<FfmpegRunResult> runControlled(
+    List<String> args,
+    Duration timeout,
+    FfmpegRunControl control,
+  );
+}
+
+/// 带控制面跑一次 ffmpeg：[control] 为 null 或后端不认得控制面时就是 [FfmpegBackend.run]。
+Future<FfmpegRunResult> runFfmpegWithControl(
+  FfmpegBackend backend,
+  List<String> args,
+  Duration timeout,
+  FfmpegRunControl? control,
+) {
+  if (control != null && backend is ControllableFfmpegBackend) {
+    return backend.runControlled(args, timeout, control);
+  }
+  return backend.run(args, timeout);
+}
+
 /// 解析 ffmpeg 可执行文件（桌面 [CliFfmpegBackend] 用）。优先级：
 /// 1. `FUSHI_FFMPEG`（绝对路径，显式覆盖，开发/特殊部署）；
 /// 2. **app 程序旁捆绑的 `ffmpeg(.exe)`**（打包时塞进各桌面产物 → 开箱即用，不依赖
@@ -396,44 +444,84 @@ String? _bundledExecutablePath(String name) {
 /// `exitCode.timeout` 超时则 SIGKILL 返回 `returnCode:null`。可执行文件不存在时
 /// `Process.start` 抛 [ProcessException]，**向上传播**（各调用方自行 catch，沿用旧契约）。
 /// stderr 用宽容 UTF-8 解码（`allowMalformed`），绝不因个别非法字节抛错。
+///
+/// [control]（BUG-2957）：取消时、或 stderr 连续 `stallTimeout` 没有任何输出（ffmpeg
+/// 默认每半秒打一行进度，读网络流卡住时才会沉默）时，与壁钟超时同样 SIGKILL 并返回
+/// `returnCode: null`，[FfmpegRunResult.output] 写明是哪一种。
 Future<FfmpegRunResult> runFfmpegProcess(
   String executable,
   List<String> args,
-  Duration timeout,
-) async {
+  Duration timeout, {
+  FfmpegRunControl? control,
+}) async {
+  if (control?.isCancelled ?? false) {
+    return _abortedProcessResult(executable, 'cancelled');
+  }
   final Process process = await HelperProcessRegistry.instance.start(
     executable,
     args,
   );
+  final Completer<String> abort = Completer<String>();
+  void abortWith(String reason) {
+    if (!abort.isCompleted) abort.complete(reason);
+  }
+
+  final Duration? stallTimeout = control?.stallTimeout;
+  Timer? stallTimer;
+  void armStallTimer() {
+    if (stallTimeout == null) return;
+    stallTimer?.cancel();
+    stallTimer = Timer(
+      stallTimeout,
+      () => abortWith('stalled (no progress for ${stallTimeout.inSeconds}s)'),
+    );
+  }
+
   // Drain both pipes: a full OS pipe buffer (ffmpeg writes progress to stderr)
   // would otherwise deadlock the process before it can exit.
   unawaited(process.stdout.drain<void>());
   final Future<String> stderrText = process.stderr
+      .map((List<int> chunk) {
+        armStallTimer();
+        return chunk;
+      })
       .transform(const Utf8Decoder(allowMalformed: true))
       .join();
-  try {
-    final int code = await process.exitCode.timeout(timeout);
+  armStallTimer();
+  final Timer wallTimer = Timer(timeout, () => abortWith(''));
+  unawaited(control?.whenCancelled.then((_) => abortWith('cancelled')));
+  final Object outcome = await Future.any<Object>(<Future<Object>>[
+    process.exitCode,
+    abort.future,
+  ]);
+  wallTimer.cancel();
+  stallTimer?.cancel();
+  if (outcome is int) {
     final String output = await stderrText;
     return FfmpegRunResult(
-      returnCode: code,
+      returnCode: outcome,
       output: output,
       executable: executable,
       attemptedExecutables: <String>[executable],
     );
-  } on TimeoutException {
-    process.kill(ProcessSignal.sigkill);
-    // Reap the killed process before its caller removes command-scoped inputs.
-    // On Windows an open concat manifest cannot be deleted while FFmpeg lives.
-    await process.exitCode;
-    await stderrText;
-    return FfmpegRunResult(
+  }
+  process.kill(ProcessSignal.sigkill);
+  // Reap the killed process before its caller removes command-scoped inputs.
+  // On Windows an open concat manifest cannot be deleted while FFmpeg lives.
+  await process.exitCode;
+  await stderrText;
+  return _abortedProcessResult(executable, outcome as String);
+}
+
+/// 被杀掉的一次 ffmpeg：`returnCode: null`。壁钟超时 [reason] 为空串（与历史输出
+/// 逐字节一致），取消 / 无进展超时写明原因，错误日志页据此区分。
+FfmpegRunResult _abortedProcessResult(String executable, String reason) =>
+    FfmpegRunResult(
       returnCode: null,
-      output: '',
+      output: reason.isEmpty ? '' : 'ffmpeg $reason',
       executable: executable,
       attemptedExecutables: <String>[executable],
     );
-  }
-}
 
 /// 共享：跑一次指定可执行文件的 **ffprobe**，返回退出码 + **stdout** 文本。
 ///
@@ -697,7 +785,7 @@ Future<FfmpegRunResult> runCliFfprobeForTesting({
 
 /// 系统 ffmpeg（`Process.start`）后端：桌面三端（Windows/macOS/Linux）。
 /// 委托 [runFfmpegProcess]，可执行文件经 [resolveFfmpegExecutable] 解析（覆盖>捆绑>PATH）。
-class CliFfmpegBackend implements FfmpegBackend {
+class CliFfmpegBackend implements ControllableFfmpegBackend {
   const CliFfmpegBackend();
 
   @override
@@ -710,6 +798,22 @@ class CliFfmpegBackend implements FfmpegBackend {
         timeout: timeout,
         runner: runFfmpegProcess,
       );
+
+  /// 与 [run] 同一条「覆盖 > 捆绑（损坏回退）> PATH」链，每一次尝试都带 [control]。
+  @override
+  Future<FfmpegRunResult> runControlled(
+    List<String> args,
+    Duration timeout,
+    FfmpegRunControl control,
+  ) => _runCliFfmpeg(
+    override: ffmpegExplicitOverride(),
+    bundledPath: _bundledFfmpegPath(),
+    isWindows: Platform.isWindows,
+    args: args,
+    timeout: timeout,
+    runner: (String executable, List<String> a, Duration t) =>
+        runFfmpegProcess(executable, a, t, control: control),
+  );
 
   @override
   Future<FfmpegRunResult> runProbe(List<String> args, Duration timeout) =>
@@ -735,13 +839,28 @@ FfmpegBackend resolveFfmpegBackend() =>
     _cachedBackend ??= BlurayFfmpegBackend(_selectBackend());
 
 /// Adapts the shared input contract for desktop and platform FFmpeg backends.
-class BlurayFfmpegBackend implements FfmpegBackend {
+class BlurayFfmpegBackend implements ControllableFfmpegBackend {
   const BlurayFfmpegBackend(this.delegate);
 
   final FfmpegBackend delegate;
 
   @override
-  Future<FfmpegRunResult> run(List<String> args, Duration timeout) async {
+  Future<FfmpegRunResult> run(List<String> args, Duration timeout) =>
+      _runPrepared(args, timeout, null);
+
+  /// 控制面原样转给 [delegate]（它不认得时按普通 run 跑，见 [runFfmpegWithControl]）。
+  @override
+  Future<FfmpegRunResult> runControlled(
+    List<String> args,
+    Duration timeout,
+    FfmpegRunControl control,
+  ) => _runPrepared(args, timeout, control);
+
+  Future<FfmpegRunResult> _runPrepared(
+    List<String> args,
+    Duration timeout,
+    FfmpegRunControl? control,
+  ) async {
     final AacsMediaSession session = AacsMediaSession();
     BlurayFfmpegInput? input;
     try {
@@ -749,9 +868,11 @@ class BlurayFfmpegBackend implements FfmpegBackend {
         args,
         resolveStream: session.resolve,
       );
-      final FfmpegRunResult result = await delegate.run(
+      final FfmpegRunResult result = await runFfmpegWithControl(
+        delegate,
         await session.ffmpegInputs(input.args),
         timeout,
+        control,
       );
       return _redactResult(result, session);
     } finally {

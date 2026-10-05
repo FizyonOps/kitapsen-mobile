@@ -247,6 +247,9 @@ import 'package:fushi/src/utils/adaptive/adaptive_platform.dart'
     show einkSafeDuration;
 import 'package:fushi/src/utils/app_ui_scale.dart';
 import 'package:fushi_engine/utils/misc/desktop_audio_clipper.dart';
+import 'package:fushi_engine/media/video/ffmpeg_backend.dart'
+    show FfmpegRunControl;
+import 'package:fushi_engine/utils/net/app_http.dart' show createAppHttpIoClient;
 import 'package:fushi/src/utils/misc/error_log_service.dart';
 import 'package:fushi/src/utils/misc/render_backend_service.dart';
 import 'package:fushi/src/platform/screen_brightness_controller.dart';
@@ -263,6 +266,8 @@ import 'package:fushi/src/utils/components/fushi_destructive_confirm_dialog.dart
 import 'package:fushi/src/utils/components/fushi_icon_button.dart';
 import 'package:fushi/src/utils/components/fushi_material_components.dart';
 import 'package:fushi/src/utils/net/ffmpeg_relay_route.dart';
+import 'package:fushi/src/utils/net/hls_relay_normalizer.dart'
+    show isHlsPlaylistPath;
 import 'package:fushi_engine/media/video/subtitle/subtitle_language_preference.dart';
 import 'package:fushi_engine/media/video/anime_source_video_path.dart';
 import 'package:fushi/src/media/video/online/anime_source_video_client.dart';
@@ -1428,6 +1433,10 @@ class _VideoFushiPageState extends ConsumerState<VideoFushiPage>
   /// 重试；退页时删文件。
   final Map<String, Future<String?>> _remoteTimingAudioFetches =
       <String, Future<String?>>{};
+
+  /// 本集对轴取音共用的 ffmpeg 控制面（BUG-2957）：换集 / 退页时由
+  /// `_discardRemoteTimingAudio` 叫停在途的长读并换一个新的。
+  FfmpegRunControl _timingAudioControl = newSubtitleTimingAudioControl();
 
   /// 进度条 hover 缩略图预览调度器（TODO-669，方案 A）。仅桌面本地文件视频时创建；
   /// 移动端 / 远端流为 null（不取帧，仅经 [_onSeekBarHover] 走 timestampOnly）。
@@ -3499,6 +3508,9 @@ class _VideoFushiPageState extends ConsumerState<VideoFushiPage>
       return;
     }
     final int seq = ++_episodeLoadSeq;
+    // 上一集为对轴拉的音轨不再有用：叫停在途的长读（否则它会读满整集、与新一集的
+    // 播放抢中继与带宽），删掉已落盘的临时文件（BUG-2957）。
+    _discardRemoteTimingAudio();
     _remoteLastAttemptedEpisode = index;
     // 换集（页上已有在播的 controller）才亮换集 OSD；首开走页级加载态。
     final bool switching = _controller != null;

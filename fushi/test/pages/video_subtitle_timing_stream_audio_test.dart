@@ -20,24 +20,42 @@ void main() {
   HttpOverrides.global = null;
 
   group('subtitleTimingStreamSource', () {
-    test('媒体服务器 / 在线源的 http(s) 流就是音源', () {
+    test('媒体服务器直出 / 在线源：播放流就是音源，沿用播放器的音轨下标', () {
       expect(
         subtitleTimingStreamSource(
           miningSource: kEmbyStreamUrl,
           miningAudioSource: null,
         ),
-        kEmbyStreamUrl,
+        (url: kEmbyStreamUrl, usesPlayerAudioTrack: true),
       );
     });
 
-    test('YouTube 分离流取 audio-only 那一路', () {
+    test('YouTube 分离流取 audio-only 那一路，播放器下标不适用', () {
       expect(
         subtitleTimingStreamSource(
           miningSource: 'https://rr1.googlevideo.com/videoplayback?itag=137',
           miningAudioSource:
               'https://rr1.googlevideo.com/videoplayback?itag=140',
         ),
-        'https://rr1.googlevideo.com/videoplayback?itag=140',
+        (
+          url: 'https://rr1.googlevideo.com/videoplayback?itag=140',
+          usesPlayerAudioTrack: false,
+        ),
+      );
+    });
+
+    test('来源声明的对轴地址（转码会话的原文件直出）优先，播放器下标不适用', () {
+      const String transcodeHls =
+          'https://emby.example.com/videos/1/master.m3u8?PlaySessionId=p';
+      const String direct =
+          'https://emby.example.com/Videos/1/stream?static=true&api_key=k';
+      expect(
+        subtitleTimingStreamSource(
+          miningSource: transcodeHls,
+          miningAudioSource: null,
+          timingAudioUrl: direct,
+        ),
+        (url: direct, usesPlayerAudioTrack: false),
       );
     });
 
@@ -92,9 +110,9 @@ void main() {
     });
   });
 
-  // 端到端：与 `_extractStreamTimingAudio` 同一串调用——中继改写 → 等登记 →
-  // `ffmpegRemoteInputFor` → 从 0 抽当前音轨 → 喂波形包络。原点是自签 https 的
-  // Emby 形状直出流，字节只经本机中继到 ffmpeg。
+  // 端到端：与 `_extractStreamTimingAudio` 同一串调用——中继以长读登记 → 等登记 →
+  // `ffmpegRemoteInputFor` → 带本集控制面从 0 抽当前音轨 → 喂波形包络。原点是自签
+  // https 的 Emby 形状直出流，字节只经本机中继到 ffmpeg。
   final String? bundled = bundledFfmpegMin();
   test(
     'Emby 形状的 https 直出流：经中继抽出的音轨能画出波形包络',
@@ -103,6 +121,7 @@ void main() {
       final ({String url, Future<void> ready}) relayed = relayFfmpegRemoteInput(
         rig.source,
         isHls: Future<bool>.value(false),
+        longRead: true,
       );
       await relayed.ready;
 
@@ -117,7 +136,8 @@ void main() {
         endMs: endMs,
         outputPath: p.join(rig.tmp.path, 'timing.aac'),
         onFailure: failures.add,
-        timeout: Duration(milliseconds: endMs + 120000),
+        timeout: subtitleTimingAudioWallTimeout(endMs),
+        control: newSubtitleTimingAudioControl(),
       );
       expect(
         audio,
@@ -156,11 +176,60 @@ void main() {
       ).readAsStringSync();
     });
 
-    test('入口判据认网络流音源', () {
-      expect(
-        methodBody(subtitle, 'bool get _canResolveSubtitleTimingAudio'),
-        contains('_subtitleTimingStreamSource != null'),
+    test('入口判据认网络流音源，远端分支要求时长已知（直播流点了必然拿不到）', () {
+      final String gate = methodBody(
+        subtitle,
+        'bool get _canResolveSubtitleTimingAudio',
       );
+      expect(gate, contains('_subtitleTimingStreamSource != null'));
+      final int duration = gate.indexOf('durationMs');
+      expect(duration, isNonNegative);
+      expect(duration, lessThan(gate.indexOf('_remoteHostVideoTarget()')));
+    });
+
+    test('媒体服务器转码会话改读来源声明的对轴地址', () {
+      expect(
+        methodBody(
+          subtitle,
+          'SubtitleTimingStream? get _subtitleTimingStreamSource',
+        ),
+        contains('client.timingAudioUrl(info.id)'),
+      );
+    });
+
+    test('换集与退页叫停在途长读：本集共用的控制面被 cancel 后换新', () {
+      final String discard = methodBody(
+        subtitle,
+        'void _discardRemoteTimingAudio(',
+      );
+      expect(discard, contains('_timingAudioControl.cancel()'));
+      expect(
+        discard,
+        contains('_timingAudioControl = newSubtitleTimingAudioControl()'),
+      );
+      final String page = File(
+        'lib/src/pages/implementations/video_fushi_page.dart',
+      ).readAsStringSync();
+      final String load = methodBody(page, 'Future<void> _loadRemoteEpisode(');
+      final int bump = load.indexOf('++_episodeLoadSeq');
+      expect(bump, isNonNegative);
+      expect(
+        load.indexOf('_discardRemoteTimingAudio()', bump),
+        isNonNegative,
+        reason: '远端换集要叫停上一集的对轴读流',
+      );
+      expect(
+        methodBody(page, 'void dispose('),
+        contains('_discardRemoteTimingAudio()'),
+      );
+    });
+
+    test('整集已抽过时，带上界的请求复用它', () {
+      final String body = methodBody(
+        subtitle,
+        'Future<_SubtitleTimingAudio?> _resolveSubtitleTimingAudio(',
+      );
+      expect(body, contains('_remoteTimingAudioFetches.containsKey(wholeKey)'));
     });
 
     test('音源解析：互联 host 优先，其次网络流，截止时刻按调用方上界', () {
@@ -185,10 +254,21 @@ void main() {
         subtitle,
         'Future<String?> _extractStreamTimingAudio(',
       );
-      expect(body, contains('_routeFfmpegPlaybackInput(source, controller)'));
+      expect(body, contains('_routeFfmpegPlaybackInput('));
+      expect(body, contains('longRead: true'));
       expect(body, contains('await routed.ready'));
       expect(body, contains('ffmpegRemoteInputFor(routed.url)'));
       expect(body, contains('httpHeaders: _streamHttpHeaderFields'));
+      expect(
+        RegExp(r'control: control').allMatches(body).length,
+        2,
+        reason: '物化后本地抽取与经中继抽取两条 ffmpeg 都挂本集控制面',
+      );
+      // googlevideo audio-only 整段直读会被限速：与制卡同一判据先物化再抽。
+      expect(
+        body,
+        contains('audioSourceNeedsRangeMaterialization(stream.url)'),
+      );
       expect(
         methodBody(
           mining,

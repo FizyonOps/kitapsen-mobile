@@ -1664,11 +1664,12 @@ Future<Map<int, String>> extractEmbeddedSubtitlesViaFfmpeg({
 /// `Process.start` path — [CliFfmpegBackend] replicates it; the mobile
 /// [KitFfmpegBackend] (self-built ffmpeg-kit) slots in transparently. Throws
 /// [ProcessException] when ffmpeg is unavailable — callers handle that.
-Future<FfmpegRunResult> _runFfmpeg(List<String> args, Duration timeout) async {
-  final FfmpegRunResult result =
-      await resolveFfmpegBackend().run(args, timeout);
-  return result;
-}
+Future<FfmpegRunResult> _runFfmpeg(
+  List<String> args,
+  Duration timeout, {
+  FfmpegRunControl? control,
+}) =>
+    runFfmpegWithControl(resolveFfmpegBackend(), args, timeout, control);
 
 /// Cuts `[startMs, endMs)` out of [inputPath] into [outputPath] using ffmpeg.
 /// Returns [outputPath] on success, or null if the range is invalid, the input
@@ -1692,6 +1693,8 @@ Future<String?> extractAudioSegmentViaFfmpeg({
   double? tempo,
   // 句子级片段默认 120s 足够；整集音轨（远端对轴 / 重定时）由调用方按时长放大。
   Duration timeout = const Duration(seconds: 120),
+  // BUG-2957：从网络流抽长段音轨时的取消 / 无进展超时，见 [FfmpegRunControl]。
+  FfmpegRunControl? control,
 }) async {
   // TODO-1005 / BUG-472：这两条「ffmpeg 还没跑」的早返回历来静默 return null——
   // 有声书片段导出 / 句子音频 TTS / 视频制卡 只看到「失败但日志空白」，无从诊断。
@@ -1736,6 +1739,7 @@ Future<String?> extractAudioSegmentViaFfmpeg({
         tempo: tempo,
       ),
       timeout,
+      control: control,
     );
     final int? code = result.returnCode;
     if (code == 0 && output.existsSync() && output.lengthSync() > 0) {
