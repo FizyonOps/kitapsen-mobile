@@ -10,6 +10,7 @@ import 'package:fushi/src/media/sources/reader_fushi_source.dart';
 import 'package:fushi/src/models/local_audio_manager.dart';
 import 'package:fushi/src/sync/book_exit_sync_scope.dart';
 import 'package:fushi/src/sync/interconnect_sync_backend.dart';
+import 'package:fushi/src/sync/kitapsen_client.dart';
 import 'package:fushi/src/sync/sync_activity.dart';
 import 'package:fushi_engine/sync/sync_asset_package_service.dart';
 import 'package:fushi/src/sync/sync_backend.dart';
@@ -399,6 +400,12 @@ void triggerAutoSyncAfterClose({
   // 时关书 export 被打成半截（与 132A/BUG-201 的 baseline 原子化互补）。
   // messenger 仍传入（保留签名 + 留给冲突对话框的祖先上下文经 onReport 走
   // navigatorKey，不依赖它），但**不再**用它弹打断式「同步成功」SnackBar。
+  //
+  // Kitapsen 书店进度独立于云备份 / 互联通道（不受自动同步开关约束）：书来自书店
+  // 就把本机位置报回去，网页阅读器下次打开即从这里接着读。
+  BookExitSyncScope.instance.register(
+    syncKitapsenBookProgress(db, mediaIdentifier),
+  );
   BookExitSyncScope.instance.register(
     _runAutoSync(
       db: db,
@@ -415,6 +422,7 @@ void triggerAutoSyncOnBackground({
 }) {
   // Background (app→paused) intentionally has NO onReport: the user can't see a
   // dialog, so conflicts stay silent until a later visible sync surfaces them.
+  unawaited(syncKitapsenBookProgress(db, mediaIdentifier));
   _runAutoSync(db: db, mediaIdentifier: mediaIdentifier, messenger: null);
 }
 
@@ -433,6 +441,8 @@ void triggerAutoSyncOnAppOpen({
   SyncReportCallback? onReport,
   SyncPostRunCallback? onPostRun,
 }) {
+  // Kitapsen 书店进度：在网页上读过的书，打开 app 时把位置带回本机。
+  unawaited(syncKitapsenLibraryProgress(db));
   _runAutoSyncAll(
     db: db,
     dictionaryResourceRoot: dictionaryResourceRoot,

@@ -6247,5 +6247,15 @@
   "ocr_system_model_play_services_resolvable": "System OCR needs Google Play services, which is missing, disabled or outdated on this device.",
   "ocr_system_model_play_services_fix": "Fix Google Play services",
   "ocr_system_model_play_services_unavailable": "This device has no usable Google Play services, so system OCR can't run here.",
-  "manga_ocr_ai_mode_low_confidence_legacy": "Volumes recognized before this option existed carry no confidence scores, so this mode leaves them untouched. Re-run OCR on such a volume (with an on-device model) to let the AI re-read its uncertain text."
+  "manga_ocr_ai_mode_low_confidence_legacy": "Volumes recognized before this option existed carry no confidence scores, so this mode leaves them untouched. Re-run OCR on such a volume (with an on-device model) to let the AI re-read its uncertain text.",
+  "kitapsen_section_title": "Kitapsen",
+  "kitapsen_account_title": "Kitapsen hesabı",
+  "kitapsen_account_hint": "Kitapsen'de satın aldığınız kitapları okumak için giriş yapın. Kitaplar kitaplığınızda görünür, okuma konumunuz kitapsen.com ile eşitlenir.",
+  "kitapsen_account_server_url": "Sunucu adresi",
+  "kitapsen_account_username": "E-posta veya kullanıcı adı",
+  "kitapsen_account_password": "Şifre",
+  "kitapsen_account_sign_in": "Giriş yap",
+  "kitapsen_account_sign_out": "Çıkış yap",
+  "kitapsen_account_sign_in_rejected": "E-posta veya şifre hatalı",
+  "kitapsen_account_sign_in_failed": "Kitapsen'e ulaşılamadı. Adresi ve bağlantınızı kontrol edin."
 }

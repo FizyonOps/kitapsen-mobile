@@ -10,6 +10,12 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
 
     final SyncRepository syncRepo = SyncRepository(appModel.database);
 
+    // Kitapsen 书店账号已登录时，书架远端区展示该账号已购的书（书店是本应用的
+    // 书源本体，优先于互联与云备份）。未登录（未配置）才往下走互联 / 云。
+    final KitapsenClient? kitapsen =
+        await KitapsenClient.restore(appModel.database);
+    if (kitapsen != null) return kitapsen;
+
     // 互联（局域网 hibiki server）已从 backendType 解耦成独立开关，可与云备份并存。
     // 互联启用且已配对对端时优先用它的 live 库 API（listRemoteBooks/getRemoteBook），
     // 因为端到端 live 库比云盘备份更适合浏览对端在读书。未启用/未配对则回退云后端。
@@ -88,6 +94,10 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
         ...localBooks.map((EpubBookMeta r) => r.bookKey),
         ...(await CollectionBookIdentityIndex.load(appModel.database))
             .uidByKey.keys,
+        // Kitapsen：EPUB 内的书名可能与书店书名不同，按标题去重会漏；已下载的书
+        // 按「书店 id → 本地 uid」映射认领。
+        if (client is KitapsenClient)
+          ...await client.downloadedTitleKeys(books),
       };
       // BUG-2505：本端已有 EPUB 但还没有配套有声书的 bookKey，要与远端 hasAudiobook
       // 对上——这些书被下面的去重整条藏掉，它们的有声书只能从本地书卡菜单补拉。
@@ -722,6 +732,10 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
           await RemoteCollectionAdoptionService(
             appModel.database,
           ).adoptBook(book, localBook: localBook);
+        }
+        // 记下书店 id ↔ 本地书，供进度同步与书架去重（在下面的进度回填之前）。
+        if (client is KitapsenClient) {
+          await client.recordDownloaded(book, localBookKey);
         }
       }
       // 漫画：把 host 端按本阅读模式作为初始值落地（互联完整支持批次；一次性，

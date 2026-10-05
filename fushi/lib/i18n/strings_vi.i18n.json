@@ -6247,5 +6247,15 @@
   "ocr_system_model_play_services_resolvable": "System OCR needs Google Play services, which is missing, disabled or outdated on this device.",
   "ocr_system_model_play_services_fix": "Fix Google Play services",
   "ocr_system_model_play_services_unavailable": "This device has no usable Google Play services, so system OCR can't run here.",
-  "manga_ocr_ai_mode_low_confidence_legacy": "Volumes recognized before this option existed carry no confidence scores, so this mode leaves them untouched. Re-run OCR on such a volume (with an on-device model) to let the AI re-read its uncertain text."
+  "manga_ocr_ai_mode_low_confidence_legacy": "Volumes recognized before this option existed carry no confidence scores, so this mode leaves them untouched. Re-run OCR on such a volume (with an on-device model) to let the AI re-read its uncertain text.",
+  "kitapsen_section_title": "Kitapsen",
+  "kitapsen_account_title": "Kitapsen account",
+  "kitapsen_account_hint": "Sign in to read the books you bought on Kitapsen. They appear on your bookshelf, and your reading position syncs with kitapsen.com.",
+  "kitapsen_account_server_url": "Server address",
+  "kitapsen_account_username": "Email or username",
+  "kitapsen_account_password": "Password",
+  "kitapsen_account_sign_in": "Sign in",
+  "kitapsen_account_sign_out": "Sign out",
+  "kitapsen_account_sign_in_rejected": "Email or password is incorrect",
+  "kitapsen_account_sign_in_failed": "Could not reach Kitapsen. Check the address and your connection."
 }

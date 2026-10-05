@@ -7,6 +7,7 @@ import 'package:fushi/src/media/video/scraper/tmdb_default_key.dart';
 import 'package:fushi/src/media/video/video_settings_actions.dart';
 import 'package:fushi/src/pages/implementations/discovery_source_settings_section.dart';
 import 'package:fushi/src/pages/implementations/alist_site_settings_section.dart';
+import 'package:fushi/src/pages/implementations/kitapsen_account_settings_section.dart';
 import 'package:fushi/src/pages/implementations/opds_server_settings_section.dart';
 import 'package:fushi/src/pages/implementations/video_external_provider_settings_section.dart';
 import 'package:fushi/src/models/module_registry.dart';
@@ -52,6 +53,19 @@ SettingsDestination buildServicesDestination() {
     summary: t.settings_destination_services_summary,
     icon: Icons.cloud_outlined,
     sections: <SettingsSection>[
+      // 书店账号放最前：它是书架书源本体，不受 iOS 合规门限制（只读用户已购的书）。
+      SettingsSection(
+        id: 'services.kitapsen',
+        title: t.kitapsen_section_title,
+        items: <SettingsItem>[
+          _servicePage(
+            id: 'services.kitapsen.account',
+            title: t.kitapsen_account_title,
+            status: (SettingsContext c) => null,
+            body: (SettingsContext c) => const KitapsenAccountSettingsSection(),
+          ),
+        ],
+      ),
       SettingsSection(
         id: 'services.subtitles',
         title: t.section_services_subtitles,

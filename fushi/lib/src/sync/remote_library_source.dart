@@ -34,6 +34,10 @@ abstract class RemoteLibrarySource {
 /// `sessionIdentityRevision` → `invalidateAll()` 兜底，故不按对端地址细分。
 const String kInterconnectRemoteLibrarySourceId = 'interconnect';
 
+/// Kitapsen 书店（`KitapsenClient`）的来源身份。全局只有一个登录账号；换账号走
+/// 登录页，TTL 内可能看到上一个账号的清单，与云盘换账号同一已知残留。
+const String kKitapsenRemoteLibrarySourceId = 'kitapsen';
+
 /// 云盘备份后端的来源身份：按**后端类型**细分（Google Drive / WebDAV / OneDrive /
 /// Dropbox / FTP / SFTP 各一个槽），因为换后端类型是设置页里一个开关就能做到的事，
 /// 换完两边的清单毫无关系。
