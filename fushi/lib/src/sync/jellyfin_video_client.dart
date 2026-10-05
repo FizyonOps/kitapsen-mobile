@@ -387,6 +387,7 @@ class JellyfinItem {
     this.playedPercentage,
     this.mediaSourceId,
     this.subtitleStreams = const <JellyfinSubtitleStream>[],
+    this.audioStreamIndices = const <int>[],
     this.hasTextSubtitle = false,
     this.videoRequiresDolbyVisionReshape = false,
     this.sizeBytes,
@@ -461,6 +462,10 @@ class JellyfinItem {
   /// 默认媒体源 id（字幕流 URL 需要）。
   final String? mediaSourceId;
   final List<JellyfinSubtitleStream> subtitleStreams;
+
+  /// 容器内音轨的 `MediaStreams[].Index`（升序，外挂音轨不算）：服务器的音轨号换成
+  /// ffmpeg 的 `0:a:N` 序号要用（BUG-2957）。
+  final List<int> audioStreamIndices;
 
   /// 有**可下载文本**字幕（外挂或可提取的内嵌文本轨）。
   ///
@@ -575,6 +580,7 @@ class JellyfinPlaybackMediaSource {
     this.transcodingSubProtocol,
     this.container,
     this.bitrate,
+    this.defaultAudioStreamIndex,
   });
 
   final String id;
@@ -587,6 +593,9 @@ class JellyfinPlaybackMediaSource {
   final String? transcodingSubProtocol;
   final String? container;
   final int? bitrate;
+
+  /// 服务器认定的默认音轨（`MediaStreams[].Index`）。
+  final int? defaultAudioStreamIndex;
 }
 
 /// 一次播放的会话身份：Progress / Stopped / ActiveEncodings 清理都按它关联。
@@ -596,6 +605,7 @@ class JellyfinPlaybackSession {
     required this.mediaSourceId,
     required this.playSessionId,
     required this.playMethod,
+    this.audioStreamIndex,
   });
 
   final String itemId;
@@ -604,6 +614,11 @@ class JellyfinPlaybackSession {
 
   /// `DirectPlay` / `DirectStream` / `Transcode`（服务器的 PlayMethod 枚举名）。
   final String playMethod;
+
+  /// 转码会话里服务器选的那条音轨（`MediaStreams[].Index`，容器全局流号）：转码 URL
+  /// 的 `AudioStreamIndex`，没写就是媒体源的 `DefaultAudioStreamIndex`。直出为 null
+  /// （播放器自己在原容器里选轨）。字幕对轴改读原文件时据此选同一条（BUG-2957）。
+  final int? audioStreamIndex;
 
   bool get isTranscoding => playMethod == 'Transcode';
 }
@@ -1460,6 +1475,8 @@ class JellyfinApi {
         transcodingSubProtocol: src['TranscodingSubProtocol'] as String?,
         container: src['Container'] as String?,
         bitrate: (src['Bitrate'] as num?)?.toInt(),
+        defaultAudioStreamIndex:
+            (src['DefaultAudioStreamIndex'] as num?)?.toInt(),
       ));
     }
     return JellyfinPlaybackInfo(
@@ -1778,6 +1795,7 @@ class JellyfinApi {
     int? sizeBytes;
     bool videoRequiresDolbyVisionReshape = false;
     final List<JellyfinSubtitleStream> subs = <JellyfinSubtitleStream>[];
+    final List<int> audioIndices = <int>[];
     final List<Object?> sources =
         (json['MediaSources'] as List?) ?? const <Object?>[];
     if (sources.isNotEmpty && sources.first is Map) {
@@ -1792,6 +1810,11 @@ class JellyfinApi {
         final Map<String, Object?> s = raw.cast<String, Object?>();
         if (s['Type'] == 'Video' && mediaStreamRequiresDolbyVisionReshape(s)) {
           videoRequiresDolbyVisionReshape = true;
+        }
+        if (s['Type'] == 'Audio' &&
+            !((s['IsExternal'] as bool?) ?? false) &&
+            s['Index'] is num) {
+          audioIndices.add((s['Index'] as num).toInt());
         }
         if (s['Type'] != 'Subtitle') continue;
         subs.add(JellyfinSubtitleStream(
@@ -1830,6 +1853,7 @@ class JellyfinApi {
       playedPercentage: (userData['PlayedPercentage'] as num?)?.toDouble(),
       mediaSourceId: mediaSourceId,
       subtitleStreams: subs,
+      audioStreamIndices: (audioIndices..sort()),
       // 流表拿得到就以文本轨为准；拿不到（未请求 MediaSources 字段）才回落服务器
       // 的粗粒度 HasSubtitles——它把图形轨也算 true，见 [JellyfinItem.hasTextSubtitle]。
       hasTextSubtitle: subs.isEmpty
@@ -1944,13 +1968,36 @@ class JellyfinVideoClient
   final Map<String, List<JellyfinPlaybackSession>> _sessions =
       <String, List<JellyfinPlaybackSession>>{};
 
-  /// 本次播放走转码会话的条目 → 字幕对轴改读的原文件直出地址（BUG-2957，见
+  /// 本次播放走转码会话的条目 → 字幕对轴改读的原文件直出与音轨（BUG-2957，见
   /// [RemoteVideoTimingAudioSource]）。直出播放的条目不在表里：播放流就是原文件，
   /// 静态读取不经转码作业，对轴直接读它。
-  final Map<String, String> _timingAudioUrls = <String, String>{};
+  final Map<String, RemoteVideoTimingAudio> _timingAudio =
+      <String, RemoteVideoTimingAudio>{};
 
   @override
-  String? timingAudioUrl(String id) => _timingAudioUrls[id];
+  RemoteVideoTimingAudio? timingAudio(String id) => _timingAudio[id];
+
+  /// **纯函数**：转码 URL 里服务器写明的音轨（`AudioStreamIndex`，参数名大小写不定）；
+  /// 没写返回 null。
+  static int? transcodingAudioStreamIndex(String transcodingUrl) {
+    final Uri? uri = Uri.tryParse(transcodingUrl);
+    if (uri == null) return null;
+    for (final MapEntry<String, String> e in uri.queryParameters.entries) {
+      if (e.key.toLowerCase() == 'audiostreamindex') return int.tryParse(e.value);
+    }
+    return null;
+  }
+
+  /// **纯函数**：容器全局流号 [globalIndex] → 它在容器内音轨里的 0 基序号（ffmpeg
+  /// `0:a:N` 的 N）；不在 [audioStreamIndices] 里（外挂音轨 / 不知道）返回 null。
+  static int? containerAudioOrdinal(
+    List<int> audioStreamIndices,
+    int? globalIndex,
+  ) {
+    if (globalIndex == null) return null;
+    final int ordinal = audioStreamIndices.indexOf(globalIndex);
+    return ordinal < 0 ? null : ordinal;
+  }
 
   JellyfinPlaybackSession? _latestSession(String itemId) {
     final List<JellyfinPlaybackSession>? list = _sessions[itemId];
@@ -2661,6 +2708,8 @@ class JellyfinVideoClient
         mediaSourceId: source.id,
         playSessionId: playSessionId,
         playMethod: 'Transcode',
+        audioStreamIndex: transcodingAudioStreamIndex(transcodingUrl) ??
+            source.defaultAudioStreamIndex,
       );
       streamUrl = api.transcodingStreamUrl(transcodingUrl);
     }
@@ -2680,10 +2729,20 @@ class JellyfinVideoClient
         await _negotiatePlayback(id, item);
     // 转码会话不给对轴读（会扰乱播放器所在的转码位置），对轴改读原文件直出——与
     // 「下载到本机」同一条 URL（BUG-2957）。
-    if (playback.session?.isTranscoding ?? false) {
-      _timingAudioUrls[id] = api.streamUrl(id, mediaSourceId: mediaSourceId);
+    // 读原文件时按转码会话选的那条音轨读，否则 ffmpeg 自己挑（按声道数），双语盘上
+    // 会对着另一种配音做对轴。
+    final JellyfinPlaybackSession? session = playback.session;
+    if (session != null && session.isTranscoding) {
+      _timingAudio[id] = RemoteVideoTimingAudio(
+        url: api.streamUrl(id, mediaSourceId: mediaSourceId),
+        audioStreamIndex: containerAudioOrdinal(
+          item.audioStreamIndices,
+          session.audioStreamIndex,
+        ),
+        audioStreamCount: item.audioStreamIndices.length,
+      );
     } else {
-      _timingAudioUrls.remove(id);
+      _timingAudio.remove(id);
     }
 
     // 外挂文本字幕优先作为默认外挂轨；其余文本轨全部报给播放页的字幕轨选择器。

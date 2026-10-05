@@ -3045,8 +3045,8 @@ extension _VideoSubtitle on _VideoFushiPageState {
     return subtitleTimingStreamSource(
       miningSource: _controller?.miningSource,
       miningAudioSource: _controller?.miningAudioSource,
-      timingAudioUrl: client is RemoteVideoTimingAudioSource && info != null
-          ? client.timingAudioUrl(info.id)
+      timingAudio: client is RemoteVideoTimingAudioSource && info != null
+          ? client.timingAudio(info.id)
           : null,
     );
   }
@@ -3099,7 +3099,10 @@ extension _VideoSubtitle on _VideoFushiPageState {
     if (stream == null) return null;
     final int? trackIndex = stream.usesPlayerAudioTrack
         ? audioStreamIndex
-        : null;
+        : stream.audioStreamIndex;
+    final int? trackCount = stream.usesPlayerAudioTrack
+        ? controller.realAudioStreamCount
+        : stream.audioStreamCount;
     String keyFor(int endMs) =>
         'stream|${stream.url}|${trackIndex ?? '-'}|$endMs';
     final int endMs = subtitleTimingStreamEndMs(
@@ -3116,9 +3119,7 @@ extension _VideoSubtitle on _VideoFushiPageState {
         stream,
         endMs: endMs,
         audioStreamIndex: trackIndex,
-        audioStreamCount: stream.usesPlayerAudioTrack
-            ? controller.realAudioStreamCount
-            : null,
+        audioStreamCount: trackCount,
         control: _timingAudioControl,
       ),
     );
@@ -3569,13 +3570,19 @@ typedef _SubtitleTimingAudio = ({
 });
 
 /// 字幕对轴从哪条网络流抽音（BUG-2957）。[usesPlayerAudioTrack]：播放器当前选的音轨
-/// 下标是否适用于这条流——只有它就是播放流本身时才适用。
-typedef SubtitleTimingStream = ({String url, bool usesPlayerAudioTrack});
+/// 下标是否适用于这条流——只有它就是播放流本身时才适用；不适用时用来源声明的
+/// [audioStreamIndex] / [audioStreamCount]（null = 交给 ffmpeg 默认选择）。
+typedef SubtitleTimingStream = ({
+  String url,
+  bool usesPlayerAudioTrack,
+  int? audioStreamIndex,
+  int? audioStreamCount,
+});
 
 /// 字幕对轴 / 重定时可用的网络流音源（BUG-2957），按优先级：
-/// 1. [timingAudioUrl]：来源声明的对轴专用地址（媒体服务器转码会话时的原文件直出，
-///    见 `RemoteVideoTimingAudioSource`）。它不是播放流，播放器的音轨下标（对应转码
-///    输出）不适用，ffmpeg 取原文件的默认音轨——与服务器转码默认取的那条一致。
+/// 1. [timingAudio]：来源声明的对轴音源（媒体服务器转码会话时的原文件直出 + 会话选的
+///    那条音轨，见 `RemoteVideoTimingAudioSource`）。它不是播放流，播放器的音轨下标
+///    （对应转码输出）不适用。
 /// 2. [miningAudioSource]：YouTube 分离流的 audio-only 流，只有一条音轨。
 /// 3. [miningSource]：播放流本身（媒体服务器直出 / 在线视频源 / 粘贴的流）。
 ///
@@ -3583,14 +3590,29 @@ typedef SubtitleTimingStream = ({String url, bool usesPlayerAudioTrack});
 SubtitleTimingStream? subtitleTimingStreamSource({
   required String? miningSource,
   required String? miningAudioSource,
-  String? timingAudioUrl,
+  RemoteVideoTimingAudio? timingAudio,
 }) {
-  final SubtitleTimingStream? candidate = timingAudioUrl != null
-      ? (url: timingAudioUrl, usesPlayerAudioTrack: false)
+  final SubtitleTimingStream? candidate = timingAudio != null
+      ? (
+          url: timingAudio.url,
+          usesPlayerAudioTrack: false,
+          audioStreamIndex: timingAudio.audioStreamIndex,
+          audioStreamCount: timingAudio.audioStreamCount,
+        )
       : miningAudioSource != null
-      ? (url: miningAudioSource, usesPlayerAudioTrack: false)
+      ? (
+          url: miningAudioSource,
+          usesPlayerAudioTrack: false,
+          audioStreamIndex: null,
+          audioStreamCount: null,
+        )
       : miningSource != null
-      ? (url: miningSource, usesPlayerAudioTrack: true)
+      ? (
+          url: miningSource,
+          usesPlayerAudioTrack: true,
+          audioStreamIndex: null,
+          audioStreamCount: null,
+        )
       : null;
   if (candidate == null || !isNetworkStreamUri(candidate.url)) return null;
   return candidate;

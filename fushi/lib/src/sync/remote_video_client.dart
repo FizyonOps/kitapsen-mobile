@@ -115,10 +115,28 @@ abstract interface class RemoteVideoStreamHeaders {
 /// `TranscodingUrl`，HLS，带 `PlaySessionId`）时不能这么做：对轴从第 0 片顺序往后读，
 /// 播放器停在第 50 分钟，服务器会为两边来回重启转码作业，播放跟着卡；服务器还得为一条
 /// 音轨把画面也转码一遍。实现方在 [RemoteVideoClient.remoteVideoStreamUrls] 返回时
-/// 记下该集应读的地址（如原文件直出），播放页对轴时取它。
+/// 记下该集应读的地址（如原文件直出）与该读的音轨，播放页对轴时取它。
 abstract interface class RemoteVideoTimingAudioSource {
-  /// 远端视频 [id] 的对轴音源地址；null = 播放流本身就能读（直出 / 非会话流）。
-  String? timingAudioUrl(String id);
+  /// 远端视频 [id] 的对轴音源；null = 播放流本身就能读（直出 / 非会话流）。
+  RemoteVideoTimingAudio? timingAudio(String id);
+}
+
+/// [RemoteVideoTimingAudioSource] 给出的对轴音源。
+class RemoteVideoTimingAudio {
+  const RemoteVideoTimingAudio({
+    required this.url,
+    this.audioStreamIndex,
+    this.audioStreamCount,
+  });
+
+  final String url;
+
+  /// 该读 [url] 容器内的第几条音轨（0 基，ffmpeg `0:a:N`）——与播放会话里服务器选的
+  /// 是同一条；null = 不知道，交给 ffmpeg 默认选择。
+  final int? audioStreamIndex;
+
+  /// [url] 容器内的音轨数（越界保护用，见 `resolveAudioMapIndex`）；null = 不知道。
+  final int? audioStreamCount;
 }
 
 /// 「知道某一集的集号」的可选能力（BUG-2626）。

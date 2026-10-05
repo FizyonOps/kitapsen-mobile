@@ -130,24 +130,42 @@ void main() {
       expect(c.debugActiveSession('ep1')?.playMethod, 'Transcode');
     });
 
-    test('字幕对轴音源：转码会话改读原文件直出，直出播放不另给（BUG-2957）', () async {
+    test('字幕对轴音源：转码会话改读原文件直出，按会话选的音轨读；直出不另给（BUG-2957）',
+        () async {
+      // 双语盘：英配 5.1（全局流号 1）+ 日语 2.0（2）+ 外挂音轨（不在容器里）。
+      final Map<String, Object?> item = _episodeJson();
+      ((item['MediaSources'] as List).first as Map)['MediaStreams'] =
+          <Object?>[
+        <String, Object?>{'Type': 'Video', 'Index': 0},
+        <String, Object?>{'Type': 'Audio', 'Index': 1, 'Channels': 6},
+        <String, Object?>{'Type': 'Audio', 'Index': 2, 'Channels': 2},
+        <String, Object?>{'Type': 'Subtitle', 'Index': 3, 'Codec': 'ass'},
+        <String, Object?>{'Type': 'Audio', 'Index': 4, 'IsExternal': true},
+      ];
       bool transcode = true;
+      String transcodingUrl = '/videos/ep1/master.m3u8?PlaySessionId=ps-1'
+          '&audioStreamIndex=2&api_key=tok';
+      int? defaultAudio;
       final JellyfinVideoClient c = clientWith((http.Request req) async {
-        if (req.url.path == '/Users/u1/Items/ep1') return json(_episodeJson());
+        if (req.url.path == '/Users/u1/Items/ep1') return json(item);
         if (req.url.path == '/Items/ep1/PlaybackInfo') {
-          return json(_playbackInfoJson(
+          final Map<String, Object?> info = _playbackInfoJson(
             directPlay: !transcode,
-            transcodingUrl: '/videos/ep1/master.m3u8?PlaySessionId=ps-1'
-                '&api_key=tok',
-          ));
+            transcodingUrl: transcodingUrl,
+          );
+          if (defaultAudio != null) {
+            ((info['MediaSources'] as List).first
+                as Map)['DefaultAudioStreamIndex'] = defaultAudio;
+          }
+          return json(info);
         }
         return http.Response('', 204);
       });
       final RemoteVideoStreamUrls transcoded =
           await c.remoteVideoStreamUrls('ep1');
-      final String? timing = c.timingAudioUrl('ep1');
+      final RemoteVideoTimingAudio? timing = c.timingAudio('ep1');
       expect(timing, isNotNull);
-      final Uri timingUri = Uri.parse(timing!);
+      final Uri timingUri = Uri.parse(timing!.url);
       expect(timingUri.path, '/Videos/ep1/stream');
       expect(timingUri.queryParameters['static'], 'true');
       expect(timingUri.queryParameters['MediaSourceId'], 'src1');
@@ -156,12 +174,60 @@ void main() {
         isFalse,
         reason: '对轴不挂在播放会话上，否则服务器会为两边来回重启转码',
       );
-      expect(timing, isNot(transcoded.streamUrl));
+      expect(timing.url, isNot(transcoded.streamUrl));
+      expect(
+        timing.audioStreamIndex,
+        1,
+        reason: '会话选的是日语（全局流号 2）= 容器内第 2 条音轨，'
+            '不能让 ffmpeg 按声道数挑英配 5.1',
+      );
+      expect(timing.audioStreamCount, 2, reason: '外挂音轨不在容器里');
+
+      // 转码 URL 没写音轨：用媒体源的默认音轨。
+      transcodingUrl = '/videos/ep1/master.m3u8?PlaySessionId=ps-1&api_key=tok';
+      defaultAudio = 1;
+      await c.remoteVideoStreamUrls('ep1');
+      expect(c.timingAudio('ep1')?.audioStreamIndex, 0);
 
       // 同一条目下次协商成直出：播放流就是原文件，对轴直接读它，表里不能留旧值。
       transcode = false;
       await c.remoteVideoStreamUrls('ep1');
-      expect(c.timingAudioUrl('ep1'), isNull);
+      expect(c.timingAudio('ep1'), isNull);
+    });
+
+    test('containerAudioOrdinal / transcodingAudioStreamIndex（BUG-2957）', () {
+      expect(
+        JellyfinVideoClient.containerAudioOrdinal(const <int>[1, 2], 2),
+        1,
+      );
+      expect(
+        JellyfinVideoClient.containerAudioOrdinal(const <int>[1, 2], 4),
+        isNull,
+        reason: '外挂 / 不认识的流号交给 ffmpeg 默认选择，不瞎猜',
+      );
+      expect(
+        JellyfinVideoClient.containerAudioOrdinal(const <int>[1, 2], null),
+        isNull,
+      );
+      expect(
+        JellyfinVideoClient.transcodingAudioStreamIndex(
+          '/videos/1/master.m3u8?AudioStreamIndex=3&api_key=k',
+        ),
+        3,
+      );
+      expect(
+        JellyfinVideoClient.transcodingAudioStreamIndex(
+          '/videos/1/master.m3u8?audiostreamindex=5',
+        ),
+        5,
+        reason: 'Emby / Jellyfin 参数名大小写不一',
+      );
+      expect(
+        JellyfinVideoClient.transcodingAudioStreamIndex(
+          '/videos/1/master.m3u8?api_key=k',
+        ),
+        isNull,
+      );
     });
 
     test('选了画质档：PlaybackInfo 带 MaxStreamingBitrate + 宽度条件', () async {

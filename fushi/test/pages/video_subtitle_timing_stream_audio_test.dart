@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fushi/src/media/video/audio_energy_probe.dart';
 import 'package:fushi/src/pages/implementations/video_fushi_page.dart';
+import 'package:fushi/src/sync/remote_video_client.dart'
+    show RemoteVideoTimingAudio;
 import 'package:fushi/src/utils/net/ffmpeg_relay_route.dart';
 import 'package:fushi_engine/utils/misc/desktop_audio_clipper.dart';
 import 'package:path/path.dart' as p;
@@ -26,7 +28,12 @@ void main() {
           miningSource: kEmbyStreamUrl,
           miningAudioSource: null,
         ),
-        (url: kEmbyStreamUrl, usesPlayerAudioTrack: true),
+        (
+          url: kEmbyStreamUrl,
+          usesPlayerAudioTrack: true,
+          audioStreamIndex: null,
+          audioStreamCount: null,
+        ),
       );
     });
 
@@ -40,11 +47,13 @@ void main() {
         (
           url: 'https://rr1.googlevideo.com/videoplayback?itag=140',
           usesPlayerAudioTrack: false,
+          audioStreamIndex: null,
+          audioStreamCount: null,
         ),
       );
     });
 
-    test('来源声明的对轴地址（转码会话的原文件直出）优先，播放器下标不适用', () {
+    test('来源声明的对轴音源（转码会话的原文件直出 + 会话选的音轨）优先', () {
       const String transcodeHls =
           'https://emby.example.com/videos/1/master.m3u8?PlaySessionId=p';
       const String direct =
@@ -53,9 +62,18 @@ void main() {
         subtitleTimingStreamSource(
           miningSource: transcodeHls,
           miningAudioSource: null,
-          timingAudioUrl: direct,
+          timingAudio: const RemoteVideoTimingAudio(
+            url: direct,
+            audioStreamIndex: 1,
+            audioStreamCount: 2,
+          ),
         ),
-        (url: direct, usesPlayerAudioTrack: false),
+        (
+          url: direct,
+          usesPlayerAudioTrack: false,
+          audioStreamIndex: 1,
+          audioStreamCount: 2,
+        ),
       );
     });
 
@@ -191,7 +209,7 @@ void main() {
           subtitle,
           'SubtitleTimingStream? get _subtitleTimingStreamSource',
         ),
-        contains('client.timingAudioUrl(info.id)'),
+        contains('client.timingAudio(info.id)'),
       );
     });
 
