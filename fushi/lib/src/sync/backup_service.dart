@@ -13,6 +13,7 @@ import 'package:fushi_engine/media/video/strm_file.dart'
 import 'package:fushi/src/models/local_audio_manager.dart';
 import 'package:fushi/src/models/module_id.dart';
 import 'package:fushi/src/sync/backup_merge_engine.dart';
+import 'package:fushi/src/sync/kitapsen_client.dart' show kitapsenBookUids;
 import 'package:fushi/src/sync/pref_redaction_policy.dart';
 import 'package:fushi/src/sync/sync_repository.dart';
 import 'package:fushi_engine/utils/misc/fushi_time_format.dart';
@@ -1269,8 +1270,20 @@ class BackupService {
       //  - book content unticked      → keep NONE (strip every epub_books row).
       //  - a per-book selection given  → keep ONLY the selected book_keys.
       //  - otherwise                   → keep all (null = legacy full export).
-      final Set<String>? retainBookKeys =
-          !includeBooks ? const <String>{} : bookKeys; // null = every book
+      // Kitapsen store books are licensed to this app only: neither their
+      // records nor their content ever go into an archive that leaves the
+      // device, whatever the selection.
+      final Set<String> kitapsenUids = await kitapsenBookUids(_db);
+      final Set<String>? retainBookKeys = !includeBooks
+          ? const <String>{}
+          : kitapsenUids.isEmpty
+              ? bookKeys // null = every book
+              : <String>{
+                  for (final EpubBookRow row in await _db.getAllEpubBooks())
+                    if (!kitapsenUids.contains(row.uid) &&
+                        (bookKeys == null || bookKeys.contains(row.bookKey)))
+                      row.bookKey,
+                };
       if (retainBookKeys != null) {
         await _retainBooks(tmpDir.path, retainBookKeys);
       }
@@ -1462,7 +1475,7 @@ class BackupService {
             dictionaryResourceRoot!, dictionaryPlan.packable, files);
       }
       if (_booksRootDirectory != null && includeBooks) {
-        if (bookKeys == null) {
+        if (retainBookKeys == null) {
           // Legacy full export: pack the whole books tree.
           await _collectTreeFiles(
               Directory(_booksRootDirectory), _booksPrefix, files);
@@ -1472,7 +1485,7 @@ class BackupService {
           // the archive layout matches the full-tree export (import restores
           // the whole hoshi_books/ prefix onto this device's root either way).
           await _collectSelectedBookFiles(
-              bookKeys, books, _booksRootDirectory, files);
+              retainBookKeys, books, _booksRootDirectory, files);
         }
       }
       if (_audiobooksRootDirectory != null &&

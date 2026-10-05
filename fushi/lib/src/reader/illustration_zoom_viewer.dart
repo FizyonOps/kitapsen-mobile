@@ -11,6 +11,7 @@ import 'package:path/path.dart' as p;
 import 'package:share_plus/share_plus.dart';
 
 import 'package:fushi_engine/epub/epub_book.dart' show fallbackMimeType;
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/utils/misc/channel_constants.dart';
 import 'package:fushi/src/utils/misc/fushi_share.dart';
 import 'package:fushi/utils.dart';
@@ -69,7 +70,11 @@ class IllustrationZoomViewer extends StatelessWidget {
 }
 
 /// 移动端：把图片文件交给系统分享面板。
+///
+/// Kitapsen: book images never leave the app, so this is a no-op (the hosts
+/// below also stop wiring the gestures that would call it).
 Future<void> shareImageFile(File file) async {
+  if (kKitapsenEdition) return;
   if (!file.existsSync()) {
     FushiToast.show(
       msg: t.reader_image_file_unavailable,
@@ -91,6 +96,7 @@ Future<void> shareImageFile(File file) async {
 
 /// Windows：经原生 `copyImageFile` channel 把图片文件放进剪贴板（CF_DIB）。
 Future<void> copyImageFileToClipboard(File file) async {
+  if (kKitapsenEdition) return;
   if (!file.existsSync()) {
     FushiToast.show(
       msg: t.reader_image_file_unavailable,

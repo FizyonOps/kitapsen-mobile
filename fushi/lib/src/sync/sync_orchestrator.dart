@@ -20,6 +20,7 @@ import 'package:fushi_engine/sync/manga_sync_package.dart'
 import 'package:fushi_engine/sync/collection_sync_engine.dart';
 import 'package:fushi_engine/sync/tag_sync.dart';
 import 'package:fushi_engine/sync/deletion_propagation.dart';
+import 'package:fushi/src/sync/kitapsen_client.dart' show isKitapsenBook;
 import 'package:fushi/src/sync/interconnect_book_progress_sync.dart';
 import 'package:fushi/src/sync/interconnect_sync_backend.dart';
 import 'package:fushi_engine/sync/override_title_lookup.dart';

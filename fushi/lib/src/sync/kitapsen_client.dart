@@ -26,6 +26,35 @@ const String _kBookUidPrefPrefix = 'kitapsen_book_uid__';
 /// Store book id of a downloaded Kitapsen book, keyed by the local book uid.
 const String _kUidBookPrefPrefix = 'kitapsen_uid_book__';
 
+/// Whether the local book with uid [bookUid] was downloaded from the Kitapsen
+/// store.
+///
+/// Store books are licensed for reading inside this app only, so every path
+/// that would copy their content out (backup archives, cloud / interconnect
+/// uploads, the LAN host, share sheets) must skip them. The link is written
+/// right after import ([KitapsenClient.recordDownloaded]); the Kitapsen
+/// edition additionally hides those features for all books, which covers the
+/// short window before the link exists.
+Future<bool> isKitapsenBook(FushiDatabase db, String bookUid) async {
+  if (bookUid.isEmpty) return false;
+  final String? mapped = await db.getPref('$_kUidBookPrefPrefix$bookUid');
+  return mapped != null && mapped.isNotEmpty;
+}
+
+/// Uids of every local book downloaded from the Kitapsen store.
+Future<Set<String>> kitapsenBookUids(FushiDatabase db) async {
+  final Map<String, String> links = await db.getPrefsByPrefix(
+    _kUidBookPrefPrefix,
+  );
+  return <String>{
+    for (final MapEntry<String, String> link in links.entries)
+      if (link.value.isNotEmpty)
+        link.key.startsWith(_kUidBookPrefPrefix)
+            ? link.key.substring(_kUidBookPrefPrefix.length)
+            : link.key,
+  };
+}
+
 /// Credentials of a Kitapsen account (stored by
 /// [SyncRepository.setKitapsenAccount]).
 class KitapsenAccount {
@@ -75,9 +104,11 @@ class _KitapsenSession {
 /// `epubcfi(...)` is read as a percentage). CFIs written by the web reader
 /// are not mapped; `progress_percent` stands in for them.
 ///
-/// Out of scope here: HARD-protected books (their content endpoint would hand
-/// out the unprotected file, so they stay in the Kitapsen reader), PDF-only
-/// books, and bookmark / highlight / note sync.
+/// HARD-protected books are included: this app is the licensed Kitapsen
+/// reader, and a downloaded book is kept in app-private storage with every
+/// export / share / backup / sync path closed for it (see [isKitapsenBook]).
+///
+/// Out of scope here: PDF-only books and bookmark / highlight / note sync.
 class KitapsenClient implements RemoteBookClient, RemoteCoverFetcher {
   KitapsenClient({required FushiDatabase db, required this.account}) : _db = db;
 
@@ -320,9 +351,9 @@ class KitapsenClient implements RemoteBookClient, RemoteCoverFetcher {
     final int? bookId = (item['book_id'] as num?)?.toInt();
     final String title = (item['title'] as String? ?? '').trim();
     if (bookId == null || title.isEmpty) return null;
-    final String protection = (item['protection'] as String? ?? '')
-        .toUpperCase();
-    if (protection == 'HARD') return null;
+    // Every protection level (NONE / SOCIAL / HARD) is listed: this app is the
+    // licensed Kitapsen reader, and a downloaded book never leaves it (see
+    // [isKitapsenBook]).
     final List<String> formats = <String>[
       for (final dynamic f
           in item['formats'] as List<dynamic>? ?? const <dynamic>[])

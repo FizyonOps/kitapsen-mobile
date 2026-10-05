@@ -6,6 +6,7 @@ import 'package:drift/drift.dart';
 import 'package:flutter/foundation.dart';
 import 'package:fushi_engine/sync/manga_sync_package.dart';
 import 'package:fushi_engine/sync/online_novel_book.dart';
+import 'package:fushi/src/sync/kitapsen_client.dart' show isKitapsenBook;
 import 'package:fushi/src/sync/position_converter.dart';
 import 'package:fushi/src/sync/sync_backend.dart';
 import 'package:fushi/src/sync/sync_remote_listing.dart';
@@ -745,8 +746,11 @@ class SyncManager {
     final BookFormat format = BookFormat.parseOrEpub(book.format);
     // PDF 无内容同步通道（与互联侧 _syncBooksContentLive 同判据）：不打包、不上传。
     // 在线小说占位书（LNReader）不上传：对端拿到的会是一本补不全的书。
+    // Kitapsen store books are licensed to this device's reader only and are
+    // never uploaded.
     if (format != BookFormat.pdf &&
         !isLnReaderOnlineBookMetadata(book.sourceMetadata) &&
+        !await isKitapsenBook(_db, book.uid) &&
         book.extractDir.isNotEmpty &&
         Directory(book.extractDir).existsSync()) {
       // 漫画包与 EPUB 共用同一个资产名 `<title>.epub`——与互联通道同契约（扩展名

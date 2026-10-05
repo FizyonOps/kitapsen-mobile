@@ -89,6 +89,11 @@ extension _SyncOrchestratorBooks on SyncOrchestrator {
           index++;
           continue;
         }
+        // Kitapsen store books are licensed to this device's reader only.
+        if (await isKitapsenBook(_db, row.uid)) {
+          index++;
+          continue;
+        }
         tmp = _tmpFile('.epub');
         // 漫画 → 书目录整树 zip（manga.json 标记，host importBook 内容嗅探分流）；
         // EPUB → 既有 repackage。

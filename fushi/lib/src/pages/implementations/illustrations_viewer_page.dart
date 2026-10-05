@@ -7,6 +7,7 @@ import 'package:fushi_audio/fushi_audio.dart'
     show ReaderPosition, ReaderPositionRepository;
 import 'package:fushi_core/fushi_core.dart' show FushiDatabase;
 import 'package:fushi_engine/epub/epub_book.dart' show EpubBook, EpubImageRef;
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/media/audiobook/audiobook_bridge.dart'
     show TtuTocEntry;
 import 'package:fushi/src/media/sources/reader_fushi_source.dart'
@@ -185,7 +186,7 @@ class _IllustrationsViewerPageState extends State<IllustrationsViewerPage> {
       illustrationZoomRoute(
         context,
         (BuildContext routeContext) => ContextMenuTrigger(
-          onInvoke: isWindowsPlatform
+          onInvoke: isWindowsPlatform && !kKitapsenEdition
               ? (Offset position) => unawaited(showImageCopyContextMenu(
                     routeContext,
                     position,
@@ -195,7 +196,7 @@ class _IllustrationsViewerPageState extends State<IllustrationsViewerPage> {
           child: IllustrationZoomViewer(
             file: file,
             diagnosticTag: 'IllustrationsViewer.zoom',
-            onLongPress: isWindowsPlatform
+            onLongPress: isWindowsPlatform || kKitapsenEdition
                 ? null
                 : () => unawaited(shareImageFile(file)),
           ),
