@@ -2,11 +2,15 @@
 /// 已购的书（[KitapsenClient]），阅读进度与 kitapsen.com 双向同步。
 library;
 
+import 'package:flutter/foundation.dart' show kReleaseMode;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fushi_core/fushi_core.dart';
 
+import 'package:fushi/src/media/sources/reader_fushi_source.dart';
 import 'package:fushi/src/models/app_model.dart';
+import 'package:fushi/src/pages/implementations/tag_filter_sheet.dart'
+    show bookTagMapProvider, srtBookTagMapProvider;
 import 'package:fushi/src/pages/implementations/source_toggle_section.dart';
 import 'package:fushi/src/sync/kitapsen_client.dart';
 import 'package:fushi/src/sync/remote_library_cache.dart';
@@ -62,9 +66,16 @@ class _KitapsenAccountSettingsSectionState
     });
   }
 
+  /// The store address. Release builds always use [kKitapsenDefaultUrl]; the
+  /// editable field exists only in debug / profile builds for local testing
+  /// (e.g. http://10.0.2.2:8000 from the Android emulator).
+  String get _serverUrl => !kReleaseMode && _url.text.trim().isNotEmpty
+      ? _url.text.trim()
+      : kKitapsenDefaultUrl;
+
   Future<void> _signIn() async {
     final KitapsenAccount account = KitapsenAccount(
-      url: _url.text.trim().isEmpty ? kKitapsenDefaultUrl : _url.text.trim(),
+      url: _serverUrl,
       username: _username.text.trim(),
       password: _password.text,
     );
@@ -98,11 +109,35 @@ class _KitapsenAccountSettingsSectionState
   }
 
   Future<void> _signOut() async {
+    // Store books are licensed to the account, so signing out removes the
+    // downloaded ones from this device; confirm once when there are any.
+    final Set<String> storeBookUids = await kitapsenBookUids(_db);
+    if (!mounted) return;
+    if (storeBookUids.isNotEmpty) {
+      final bool? confirmed = await showAppDialog<bool>(
+        context: context,
+        builder: (BuildContext dialogContext) => AlertDialog(
+          content: Text(t.kitapsen_sign_out_removes_books),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext, false),
+              child: Text(t.dialog_cancel),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.pop(dialogContext, true),
+              child: Text(t.kitapsen_account_sign_out),
+            ),
+          ],
+        ),
+      );
+      if (confirmed != true || !mounted) return;
+    }
     setState(() => _busy = true);
     try {
       final KitapsenClient? client = await KitapsenClient.restore(_db);
       await client?.signOut();
       await SyncRepository(_db).clearKitapsenAccount();
+      await _removeStoreBooks(storeBookUids);
       ref
           .read(remoteLibraryCacheProvider)
           .invalidateSource(kKitapsenRemoteLibrarySourceId);
@@ -110,6 +145,40 @@ class _KitapsenAccountSettingsSectionState
     } finally {
       if (mounted) setState(() => _busy = false);
     }
+  }
+
+  /// Deletes every downloaded store book through the shelf's own deletion
+  /// path (DB rows, reader positions, extracted files, cover overrides) and
+  /// drops its store link. A failing book is logged and skipped; reading
+  /// statistics are kept, as on the shelf's default delete.
+  Future<void> _removeStoreBooks(Set<String> uids) async {
+    if (uids.isEmpty) return;
+    final AppModel appModel = ref.read(appProvider);
+    for (final String uid in uids) {
+      try {
+        final EpubBookRow? book = await _db.getEpubBookByUid(uid);
+        if (book != null) {
+          final DeleteBookResult result = await ReaderFushiSource.instance
+              .deleteBook(db: _db, bookKey: book.bookKey, appModel: appModel);
+          if (!result.deleted) {
+            ErrorLogService.instance.logDiagnostic(
+              'KitapsenAccountSettings.removeStoreBook',
+              '$uid: ${result.failureReason ?? 'not deleted'}',
+            );
+          }
+        }
+        await forgetKitapsenBook(_db, uid);
+      } catch (e, stack) {
+        ErrorLogService.instance.log(
+          'KitapsenAccountSettings.removeStoreBook',
+          e,
+          stack,
+        );
+      }
+    }
+    ref.invalidate(fushiBooksProvider);
+    ref.invalidate(bookTagMapProvider);
+    ref.invalidate(srtBookTagMapProvider);
   }
 
   @override
@@ -172,15 +241,18 @@ class _KitapsenAccountSettingsSectionState
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            TextField(
-              key: const ValueKey<String>('kitapsen-url'),
-              controller: _url,
-              keyboardType: TextInputType.url,
-              decoration: InputDecoration(
-                labelText: t.kitapsen_account_server_url,
+            // Server address: debug / profile builds only (local backends).
+            if (!kReleaseMode) ...<Widget>[
+              TextField(
+                key: const ValueKey<String>('kitapsen-url'),
+                controller: _url,
+                keyboardType: TextInputType.url,
+                decoration: InputDecoration(
+                  labelText: t.kitapsen_account_server_url,
+                ),
               ),
-            ),
-            const SizedBox(height: 8),
+              const SizedBox(height: 8),
+            ],
             TextField(
               key: const ValueKey<String>('kitapsen-username'),
               controller: _username,

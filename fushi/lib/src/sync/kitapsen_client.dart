@@ -55,6 +55,16 @@ Future<Set<String>> kitapsenBookUids(FushiDatabase db) async {
   };
 }
 
+/// Drops the store-book link of local book [bookUid] (both directions).
+Future<void> forgetKitapsenBook(FushiDatabase db, String bookUid) async {
+  final String key = '$_kUidBookPrefPrefix$bookUid';
+  final String? storeId = await db.getPref(key);
+  await db.deletePref(key);
+  if (storeId != null && storeId.isNotEmpty) {
+    await db.deletePref('$_kBookUidPrefPrefix$storeId');
+  }
+}
+
 /// Credentials of a Kitapsen account (stored by
 /// [SyncRepository.setKitapsenAccount]).
 class KitapsenAccount {

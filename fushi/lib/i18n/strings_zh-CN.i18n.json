@@ -6272,5 +6272,6 @@
   "kitapsen_about_based_on_fushi": "Kitapsen 基于 Fushi（GPLv3）开发——源代码：https://github.com/FizyonOps/kitapsen-mobile",
   "kitapsen_about_licenses": "开源许可",
   "kitapsen_about_section": "关于 Kitapsen",
-  "kitapsen_import_hint": "选择要导入的 EPUB 或 PDF 文件。"
+  "kitapsen_import_hint": "选择要导入的 EPUB 或 PDF 文件。",
+  "kitapsen_sign_out_removes_books": "退出登录会从本设备移除已下载的 Kitapsen 书籍。"
 }
