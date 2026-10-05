@@ -80,10 +80,12 @@ class ReaderSettings {
   /// 因此变窄；上下默认 0%（垂直预留由 chrome inset + 字号决定，见
   /// `ReaderContentStyles`）。四个值是「单一真相」默认，被 `ReaderFushiSource`
   /// 的 fallback 默认引用，避免三处来源（settings / source / aggregate）互相矛盾。
-  static const double defaultMarginTopPercent = 0;
-  static const double defaultMarginBottomPercent = 0;
-  static const double defaultMarginLeftPercent = 2;
-  static const double defaultMarginRightPercent = 2;
+  // Kitapsen: horizontal Latin-script books read better with print-like side
+  // margins and a little air above and below the text block.
+  static const double defaultMarginTopPercent = kKitapsenEdition ? 3 : 0;
+  static const double defaultMarginBottomPercent = kKitapsenEdition ? 3 : 0;
+  static const double defaultMarginLeftPercent = kKitapsenEdition ? 6 : 2;
+  static const double defaultMarginRightPercent = kKitapsenEdition ? 6 : 2;
 
   /// 边距是百分比（vw/vh），CSS padding 不接受负值且过大会吃光正文；统一夹在
   /// `[0, 50]`，非有限值（NaN/∞）落 0。
