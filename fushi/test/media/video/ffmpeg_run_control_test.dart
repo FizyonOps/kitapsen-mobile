@@ -97,14 +97,18 @@ void main() {
     () async {
       final Directory tmp = Directory.systemTemp.createTempSync('ff_mid_');
       addTearDown(() => tmp.deleteSync(recursive: true));
-      // 一段真 TS：原点先把它整段发出去、再声称后面还有，然后再不给字节——ffmpeg
-      // 解出这 2 秒后卡在读下一块上，调度循环继续按 stats_period 打 time 不变的行。
+      // 一条约 10 分钟的真 TS（2 秒样本循环拼接，约 9 MB——必须大于 ffmpeg 的探测
+      // 窗口，否则它停在打开阶段，测到的只是「打开时卡住」）。原点只发前 60%、声称
+      // 后面还有，然后再不给字节：ffmpeg 转出六分钟左右后卡在读下一块上，调度循环
+      // 继续按 stats_period 打 time 不变的行（实测 n7.1.5：time 冻结、speed 递减）。
       final String ts = p.join(tmp.path, 'seg.ts');
       final ProcessResult mux = await Process.run(bundled!, <String>[
         '-hide_banner',
         '-loglevel',
         'error',
         '-y',
+        '-stream_loop',
+        '300',
         '-i',
         p.join('..', 'docs', 'todo-524-video.mp4'),
         '-c',
@@ -123,8 +127,8 @@ void main() {
       server.listen((HttpRequest request) {
         final HttpResponse res = request.response;
         res.headers.contentType = ContentType('video', 'mp2t');
-        res.contentLength = segment.length * 100;
-        res.add(segment);
+        res.contentLength = segment.length * 2;
+        res.add(segment.sublist(0, segment.length * 6 ~/ 10));
         res.flush().ignore();
       });
       final Stopwatch watch = Stopwatch()..start();
