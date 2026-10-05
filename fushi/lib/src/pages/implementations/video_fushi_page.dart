@@ -1421,9 +1421,11 @@ class _VideoFushiPageState extends ConsumerState<VideoFushiPage>
   /// 复用，不再重跑 ffmpeg（切视频/切音轨时 key 变化自动失效，见 [WaveformEnvelopeCache]）。
   final WaveformEnvelopeCache _subtitleWaveformCache = WaveformEnvelopeCache();
 
-  /// 互联远端视频的对轴 / 重定时音轨：host 在本地裁出整集音轨，落到本机临时文件后喂给
-  /// 波形 / 自动对轴 / 语音模型重定时（远端流本身 ffmpeg 抓不动，见 BUG-1004）。按
-  /// `视频 id|集|音轨` 记住进行中与已完成的下载，失败的条目会被移除以便重试；退页时删文件。
+  /// 远端视频的对轴 / 重定时音轨，落到本机临时文件后喂给波形 / 自动对轴 / 语音模型
+  /// 重定时：互联视频由 host 在本地裁出整集音轨（远端流本身 ffmpeg 抓不动，见
+  /// BUG-1004），其它网络流由本机 ffmpeg 经制卡同一条取流路径抽出（BUG-2957）。按
+  /// 来源 + 音轨（流还带截止时刻）记住进行中与已完成的获取，失败的条目会被移除以便
+  /// 重试；退页时删文件。
   final Map<String, Future<String?>> _remoteTimingAudioFetches =
       <String, Future<String?>>{};
 

@@ -221,7 +221,8 @@ extension _VideoSubtitle on _VideoFushiPageState {
       ),
       // 模型重定时：与上面两行同属「拿到 / 修好一份字幕」，所以并在同一组。
       // 它要把整条音轨喂给设备端转录：本地视频直接用文件，互联远端视频由 host 在
-      // 本地裁出整集音轨回传（[_resolveSubtitleTimingAudio]）；其它远端流拿不到音轨。
+      // 本地裁出整集音轨回传，媒体服务器 / 在线源等网络流由本机 ffmpeg 抽出
+      // （[_resolveSubtitleTimingAudio]）。
       // 空 cue 时也显示（点了会说「先选一条字幕轨」），不显示反而更像功能坏了。
       if (_canResolveSubtitleTimingAudio && isAsrSupported)
         FushiListTileControl(
@@ -3017,17 +3018,33 @@ extension _VideoSubtitle on _VideoFushiPageState {
   }
 
   /// 字幕对轴 / 重定时有没有音源可用（同步判据，决定入口显不显示）：本地视频有文件，
-  /// 或互联远端视频能请 host 裁整集音轨。
+  /// 互联远端视频能请 host 裁整集音轨，或当前播放的网络流本机 ffmpeg 读得到（媒体
+  /// 服务器 / 在线视频源 / 粘贴的流 / YouTube，与制卡同一条取流路径，BUG-2957）。
   bool get _canResolveSubtitleTimingAudio =>
       (_controller?.videoPath?.isNotEmpty ?? false) ||
-      _remoteHostVideoTarget() != null;
+      _remoteHostVideoTarget() != null ||
+      _subtitleTimingStreamSource != null;
+
+  /// 当前播放的网络流里带声音的那一路，见 [subtitleTimingStreamSource]。
+  String? get _subtitleTimingStreamSource => subtitleTimingStreamSource(
+    miningSource: _controller?.miningSource,
+    miningAudioSource: _controller?.miningAudioSource,
+  );
 
   /// 字幕对轴 / 重定时的音频输入。本地视频就是视频文件本身（带当前音轨下标）；互联
   /// 远端视频请 host 在本地裁出**整集**当前音轨（复用制卡的 clipaudio 端点，老 host
   /// 也有）落到本机临时文件——远端流本身 client ffmpeg 抓不动（自签 https / token，
-  /// BUG-891 / BUG-1004），而波形、互相关、设备端转录都要一个本地文件。产物是单音轨
-  /// 音频，下标不再适用。拿不到时返回 null（调用方各自降级）。
-  Future<_SubtitleTimingAudio?> _resolveSubtitleTimingAudio() async {
+  /// BUG-891 / BUG-1004）。其它网络流（媒体服务器 / 在线视频源 / YouTube）由本机
+  /// ffmpeg 经与制卡同一条取流路径抽出当前音轨落到本机临时文件（BUG-2957）。波形、
+  /// 互相关、设备端转录都要一个本地文件；后两种产物是单音轨音频，下标不再适用。
+  ///
+  /// [limitMs]：调用方只用得到开头多长（波形 / 自动对轴传探测上界）。只有网络流分支
+  /// 据此少拉——它的代价是按码率读整段视频流，一部两小时的 REMUX 不能为了画前 20
+  /// 分钟的波形读完整部；本地文件不受影响，host 端裁剪只回传音频、本就便宜。null =
+  /// 整集（语音模型转录）。拿不到时返回 null（调用方各自降级）。
+  Future<_SubtitleTimingAudio?> _resolveSubtitleTimingAudio({
+    int? limitMs,
+  }) async {
     final VideoPlayerController? controller = _controller;
     if (controller == null) return null;
     final String? videoPath = controller.videoPath;
@@ -3038,33 +3055,110 @@ extension _VideoSubtitle on _VideoFushiPageState {
         audioStreamCount: controller.realAudioStreamCount,
       );
     }
+    final int durationMs = controller.durationMs ?? 0;
+    if (durationMs <= 0) return null;
+    final int? audioStreamIndex = controller.currentAudioStreamIndex;
     final (InterconnectSyncBackend, String, int)? target =
         _remoteHostVideoTarget();
-    final int durationMs = controller.durationMs ?? 0;
-    if (target == null || durationMs <= 0) return null;
-    final (InterconnectSyncBackend backend, String id, int episode) = target;
-    final int? audioStreamIndex = controller.currentAudioStreamIndex;
-    final String key = '$id|$episode|${audioStreamIndex ?? '-'}';
+    if (target != null) {
+      final (InterconnectSyncBackend backend, String id, int episode) = target;
+      return _cachedTimingAudio(
+        '$id|$episode|${audioStreamIndex ?? '-'}',
+        () => _fetchRemoteTimingAudio(
+          backend,
+          id,
+          episode: episode,
+          durationMs: durationMs,
+          audioStreamIndex: audioStreamIndex,
+          audioStreamCount: controller.realAudioStreamCount,
+        ),
+      );
+    }
+    final String? source = _subtitleTimingStreamSource;
+    if (source == null) return null;
+    final int endMs = subtitleTimingStreamEndMs(
+      durationMs: durationMs,
+      limitMs: limitMs,
+    );
+    // audio-only 流（YouTube 分离流）只有一条音轨，播放器的音轨下标属于视频流那一路。
+    final bool separateAudio = controller.miningAudioSource != null;
+    return _cachedTimingAudio(
+      'stream|$source|${separateAudio ? '-' : audioStreamIndex ?? '-'}|$endMs',
+      () => _extractStreamTimingAudio(
+        controller,
+        source,
+        endMs: endMs,
+        audioStreamIndex: separateAudio ? null : audioStreamIndex,
+        audioStreamCount: separateAudio
+            ? null
+            : controller.realAudioStreamCount,
+      ),
+    );
+  }
+
+  /// 按 [key] 复用进行中 / 已完成的音轨获取；失败不缓存，下次点入口重新取（host 可能
+  /// 刚升级、网络刚恢复、流地址刚续上）。
+  Future<_SubtitleTimingAudio?> _cachedTimingAudio(
+    String key,
+    Future<String?> Function() fetchAudio,
+  ) async {
     final Future<String?> fetch = _remoteTimingAudioFetches.putIfAbsent(
       key,
-      () => _fetchRemoteTimingAudio(
-        backend,
-        id,
-        episode: episode,
-        durationMs: durationMs,
-        audioStreamIndex: audioStreamIndex,
-        audioStreamCount: controller.realAudioStreamCount,
-      ),
+      fetchAudio,
     );
     final String? path = await fetch;
     if (path == null) {
-      // 失败不缓存：下次点入口重新请求（host 可能刚升级 / 网络刚恢复）。
       if (identical(_remoteTimingAudioFetches[key], fetch)) {
         _remoteTimingAudioFetches.remove(key);
       }
       return null;
     }
     return (path: path, audioStreamIndex: null, audioStreamCount: null);
+  }
+
+  /// 本机 ffmpeg 从网络流 [source] 抽出 `[0, endMs)` 的当前音轨到临时文件（BUG-2957）。
+  /// 取流经 [_routeFfmpegPlaybackInput]——与制卡同一条路径：媒体服务器 / 在线源走本机
+  /// 中继（移动端 ffmpeg-kit 自带 TLS、不认应用代理，BUG-2692），防盗链头同源下发。
+  /// 时限按流的实时长度给：能播放的流至少以实时速度可读。
+  Future<String?> _extractStreamTimingAudio(
+    VideoPlayerController controller,
+    String source, {
+    required int endMs,
+    required int? audioStreamIndex,
+    required int? audioStreamCount,
+  }) async {
+    if (mounted) {
+      _showOsd(
+        t.video_subtitle_remote_audio_fetching,
+        icon: Icons.graphic_eq,
+        severity: ToastSeverity.info,
+      );
+    }
+    try {
+      final ({String url, Future<void>? ready}) routed =
+          _routeFfmpegPlaybackInput(source, controller);
+      await routed.ready;
+      final Directory dir = Directory(
+        p.join((await getTemporaryDirectory()).path, 'fushi_timing_audio'),
+      );
+      await dir.create(recursive: true);
+      return await extractAudioSegmentViaFfmpeg(
+        inputPath: ffmpegRemoteInputFor(routed.url),
+        startMs: 0,
+        endMs: endMs,
+        outputPath: p.join(
+          dir.path,
+          'stream_${DateTime.now().microsecondsSinceEpoch}.aac',
+        ),
+        audioStreamIndex: audioStreamIndex,
+        audioStreamCount: audioStreamCount,
+        httpHeaders: _streamHttpHeaderFields,
+        timeout: Duration(milliseconds: endMs + 120000),
+      );
+    } catch (e, st) {
+      ErrorLogService.instance.log('video.streamTimingAudio', e, st);
+      return null;
+    }
   }
 
   Future<String?> _fetchRemoteTimingAudio(
@@ -3169,7 +3263,9 @@ extension _VideoSubtitle on _VideoFushiPageState {
       severity: ToastSeverity.info,
     );
 
-    final _SubtitleTimingAudio? audio = await _resolveSubtitleTimingAudio();
+    final _SubtitleTimingAudio? audio = await _resolveSubtitleTimingAudio(
+      limitMs: kSubtitleAutoAlignProbeLimitMs,
+    );
     if (!mounted) return null;
     final List<double> rawRms = audio == null
         ? const <double>[]
@@ -3225,7 +3321,9 @@ extension _VideoSubtitle on _VideoFushiPageState {
   Future<List<double>> _loadSubtitleWaveformEnvelope() async {
     final VideoPlayerController? controller = _controller;
     if (controller == null) return const <double>[];
-    final _SubtitleTimingAudio? audio = await _resolveSubtitleTimingAudio();
+    final _SubtitleTimingAudio? audio = await _resolveSubtitleTimingAudio(
+      limitMs: kSubtitleAutoAlignProbeLimitMs,
+    );
     if (audio == null) return const <double>[];
     final String videoPath = audio.path;
     // TODO-1244：按「视频路径 + 当前音轨」缓存已抽出的波形包络。同一视频/音轨重复打开
@@ -3252,7 +3350,7 @@ extension _VideoSubtitle on _VideoFushiPageState {
   /// 完全一致、零第二套状态：调轴仍经 [_setDelayMs] 写回权威 `_delayMs`，自动对轴复用
   /// [_autoAlignSubtitle]，逐句试听 / 播放头 / 弹窗内快捷键与快速设置面板路径同源。
   ///
-  /// 降级路径与面板入口同款：无 controller / 无字幕 cue / 无本地视频路径 / 抽波形返回空
+  /// 降级路径与面板入口同款：无 controller / 无字幕 cue / 无可用音源 / 抽波形返回空
   /// （无音轨 / ffmpeg 不可用 / 超时）时不弹窗，改弹 OSD 提示不可用（不崩不空白）。
   Future<void> _openSubtitleWaveformAlign() async {
     final VideoPlayerController? controller = _controller;
@@ -3347,3 +3445,24 @@ typedef _SubtitleTimingAudio = ({
   int? audioStreamIndex,
   int? audioStreamCount,
 });
+
+/// 字幕对轴 / 重定时可用的网络流音源（BUG-2957）：制卡抽取源里带声音的那一路——
+/// YouTube 分离流时是 audio-only 的 [miningAudioSource]，其余是 [miningSource]
+/// 本身（媒体服务器 / 在线视频源 / 粘贴的流）。不是 http(s) 流（本地文件、
+/// `anime-source://` 这类未解析的库内路径）时返回 null。
+String? subtitleTimingStreamSource({
+  required String? miningSource,
+  required String? miningAudioSource,
+}) {
+  final String? source = miningAudioSource ?? miningSource;
+  if (source == null || !isNetworkStreamUri(source)) return null;
+  return source;
+}
+
+/// 网络流音源实际抽到哪一刻（BUG-2957）：调用方给了 [limitMs]（波形 / 自动对轴的
+/// 探测上界）就只抽开头那段——网络流的代价是按码率读整段视频流；没给（语音模型
+/// 转录）就抽整集。
+int subtitleTimingStreamEndMs({required int durationMs, int? limitMs}) =>
+    (limitMs != null && limitMs > 0)
+    ? math.min(durationMs, limitMs)
+    : durationMs;

@@ -7,14 +7,11 @@ import 'package:fushi/src/pages/implementations/video_fushi_page.dart';
 import 'package:fushi/src/sync/interconnect_sync_backend.dart';
 import 'package:fushi/src/sync/jellyfin_video_client.dart';
 import 'package:fushi/src/sync/remote_video_client.dart';
-import 'package:fushi/src/utils/net/app_native_proxy.dart';
 import 'package:fushi/src/utils/net/ffmpeg_relay_route.dart';
-import 'package:fushi_engine/media/video/ffmpeg_backend.dart';
-import 'package:fushi_engine/sync/tls/fushi_tls_identity.dart';
 import 'package:fushi_engine/utils/misc/desktop_audio_clipper.dart';
-import 'package:fushi_engine/utils/net/app_http.dart';
-import 'package:fushi_engine/utils/net/app_proxy.dart';
 import 'package:path/path.dart' as p;
+
+import '../helpers/emby_relay_rig.dart';
 
 /// BUG-2692：Emby / Jellyfin 能播放、制不了卡（截图 / 动图 / 句子音频三条抽取全报
 /// `ffmpeg exit 1; executable=ffmpeg-kit; ... stream?static=true&...: I/O error`）。
@@ -39,10 +36,6 @@ class _FakePlainRemoteClient extends RemoteVideoClient {
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
 
-const String _embyStream =
-    'https://emby.example.com/Videos/136641/stream?static=true'
-    '&MediaSourceId=mediasource_136641&PlaySessionId=p&DeviceId=d&api_key=k';
-
 void main() {
   // 截图抽取完会经 PaintingBinding 解码缩放；测试绑定默认把 HttpClient 换成一律回
   // 400 的桩，这里要的是真中继 + 真原点，撤掉它。
@@ -53,7 +46,7 @@ void main() {
       expect(
         videoMiningInputUsesPlaybackRelay(
           remoteClient: _FakeMediaServerClient(),
-          mediaSource: _embyStream,
+          mediaSource: kEmbyStreamUrl,
         ),
         isTrue,
       );
@@ -90,7 +83,7 @@ void main() {
       expect(
         videoMiningInputUsesPlaybackRelay(
           remoteClient: null,
-          mediaSource: _embyStream,
+          mediaSource: kEmbyStreamUrl,
         ),
         isFalse,
       );
@@ -119,98 +112,14 @@ void main() {
   // （`/Videos/{id}/stream?static=true&…&api_key=`，mp4 整文件 + Range）。
   // ffmpeg 拿到的是中继的明文形式、只经 `-http_proxy` 取字节，TLS 全由中继做——
   // 与播放器同一条路径。
-  final String? bundled = _bundledFfmpeg();
+  final String? bundled = bundledFfmpegMin();
   test(
     'Emby 形状的 https 直出流：经中继后 ffmpeg 抽得出句子音频与截图',
     () async {
-      final Directory tmp = Directory.systemTemp.createTempSync('emby_relay_');
-      final String? oldOverride = ffmpegPathOverride;
-      final String? oldProbeOverride = ffprobePathOverride;
-      final String Function() oldMode = appUserProxyModeReader;
-      final HttpClient Function() oldFactory =
-          appNativeProxyUpstreamClientFactory;
-      addTearDown(() {
-        tmp.deleteSync(recursive: true);
-        ffmpegPathOverride = oldOverride;
-        ffprobePathOverride = oldProbeOverride;
-        setFfmpegBackendForTesting(null);
-        debugResetFfmpegHlsSegmentExtensionSupport();
-        ffmpegRemoteInputRouteResolver = null;
-        debugClearFfmpegRelayRoutes();
-        appUserProxyModeReader = oldMode;
-        appNativeProxyUpstreamClientFactory = oldFactory;
-        clearPinnedNativeOriginsForTesting();
-      });
-      ffmpegPathOverride = bundled;
-      ffprobePathOverride = p.join(
-        p.dirname(bundled!),
-        Platform.isWindows ? 'ffprobe.exe' : 'ffprobe',
-      );
-      setFfmpegBackendForTesting(null);
-      debugResetFfmpegHlsSegmentExtensionSupport();
-      appUserProxyModeReader = () => kProxyModeDirect;
-
-      final List<int> video = File(
-        p.join('..', 'docs', 'todo-524-video.mp4'),
-      ).readAsBytesSync();
-      final ({String certificatePem, String privateKeyPem}) cert =
-          FushiSelfSignedCertGenerator.generate(
-            commonName: 'fushi-test',
-            sanIpAddresses: <String>['127.0.0.1'],
-          );
-      final SecurityContext ctx = SecurityContext()
-        ..useCertificateChainBytes(cert.certificatePem.codeUnits)
-        ..usePrivateKeyBytes(cert.privateKeyPem.codeUnits);
-      final HttpServer origin = await HttpServer.bindSecure(
-        InternetAddress.loopbackIPv4,
-        0,
-        ctx,
-      );
-      addTearDown(() => origin.close(force: true));
-      final List<String> seen = <String>[];
-      origin.listen((HttpRequest request) async {
-        final HttpResponse res = request.response;
-        seen.add(request.uri.toString());
-        if (request.uri.path != '/Videos/136641/stream' ||
-            request.uri.queryParameters['api_key'] != 'k') {
-          res.statusCode = HttpStatus.unauthorized;
-          await res.close();
-          return;
-        }
-        res.headers.contentType = ContentType('video', 'mp4');
-        res.headers.set(HttpHeaders.acceptRangesHeader, 'bytes');
-        final String? range = request.headers.value(HttpHeaders.rangeHeader);
-        final RegExpMatch? m = range == null
-            ? null
-            : RegExp(r'bytes=(\d+)-(\d*)').firstMatch(range);
-        if (m == null) {
-          res.contentLength = video.length;
-          res.add(video);
-        } else {
-          final int start = int.parse(m.group(1)!);
-          final int end = m.group(2)!.isEmpty
-              ? video.length - 1
-              : int.parse(m.group(2)!);
-          res.statusCode = HttpStatus.partialContent;
-          res.headers.set(
-            HttpHeaders.contentRangeHeader,
-            'bytes $start-$end/${video.length}',
-          );
-          res.contentLength = end - start + 1;
-          res.add(video.sublist(start, end + 1));
-        }
-        await res.close();
-      });
-      // 系统信任根不认测试自签证书：测试里换成信任它的客户端；生产走默认工厂。
-      appNativeProxyUpstreamClientFactory = () => createAppHttpClient()
-        ..badCertificateCallback = (X509Certificate _, String __, int ___) =>
-            true;
-      ffmpegRemoteInputRouteResolver = ffmpegRelayRouteFor;
-
-      final String source = _embyStream.replaceFirst(
-        'emby.example.com',
-        '127.0.0.1:${origin.port}',
-      );
+      final EmbyRelayRig rig = await EmbyRelayRig.start(bundled!);
+      final Directory tmp = rig.tmp;
+      final List<String> seen = rig.seen;
+      final String source = rig.source;
       final ({String url, Future<void> ready}) relayed = relayFfmpegRemoteInput(
         source,
         isHls: Future<bool>.value(false),
@@ -218,7 +127,9 @@ void main() {
       await relayed.ready;
       expect(
         relayed.url,
-        startsWith('http://127.0.0.1:${origin.port}/Videos/136641/stream?'),
+        startsWith(
+          'http://127.0.0.1:${Uri.parse(source).port}/Videos/136641/stream?',
+        ),
         reason: 'ffmpeg 拿到明文形式，不再自己做 TLS',
       );
       expect(ffmpegRelayRouteFor(relayed.url)?.httpProxy, isNotNull);
@@ -257,13 +168,3 @@ void main() {
 
 /// [A] 是否是 [B] 的子类型（不用实例，生产 client 的构造要一堆依赖）。
 bool _implements<A, B>() => <A>[] is List<B>;
-
-String? _bundledFfmpeg() {
-  final String? rel = Platform.isWindows
-      ? p.join('..', 'third_party', 'ffmpeg-min', 'windows', 'ffmpeg.exe')
-      : Platform.isMacOS
-      ? p.join('..', 'third_party', 'ffmpeg-min', 'macos', 'ffmpeg')
-      : null;
-  if (rel == null) return null;
-  return File(rel).existsSync() ? File(rel).absolute.path : null;
-}

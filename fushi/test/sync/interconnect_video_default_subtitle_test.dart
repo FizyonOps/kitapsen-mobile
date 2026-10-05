@@ -557,7 +557,8 @@ void main() {
       ]) {
         expect(
           body(part, fn),
-          contains('_resolveSubtitleTimingAudio()'),
+          // 波形 / 自动对轴带 `limitMs:` 上界（BUG-2957），所以只认调用开头。
+          contains('_resolveSubtitleTimingAudio('),
           reason: '$fn 要经统一音源解析，远端才拿得到 host 裁的整集音轨',
         );
       }

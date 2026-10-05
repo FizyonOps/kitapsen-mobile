@@ -359,18 +359,11 @@ extension _VideoLookupMining on _VideoFushiPageState {
     // 同一条中继；地址当场改写（同步，保持点击顺序入队），登记在队列里等。
     // 媒体服务器同理，判据见 [videoMiningInputUsesPlaybackRelay]。
     Future<void>? mediaSourceRouteReady;
-    if (mediaSource != null &&
-        videoMiningInputUsesPlaybackRelay(
-          remoteClient: _effectiveRemoteClient,
-          mediaSource: mediaSource,
-        )) {
-      final ({String url, Future<void> ready}) relayed = relayFfmpegRemoteInput(
-        mediaSource,
-        isHls: controller.isHlsStream(),
-        headers: _streamHttpHeaderFields,
-      );
-      mediaSource = relayed.url;
-      mediaSourceRouteReady = relayed.ready;
+    if (mediaSource != null) {
+      final ({String url, Future<void>? ready}) routed =
+          _routeFfmpegPlaybackInput(mediaSource, controller);
+      mediaSource = routed.url;
+      mediaSourceRouteReady = routed.ready;
     }
     final int? audioStreamIndex = controller.currentAudioStreamIndex;
     final int audioStreamCount = controller.realAudioStreamCount;
@@ -771,6 +764,29 @@ extension _VideoLookupMining on _VideoFushiPageState {
     } catch (e, st) {
       debugPrint('[fushi-stats] video addMinedSentence failed: $e\n$st');
     }
+  }
+
+  /// 本机 ffmpeg 读当前播放的 [source] 时实际该用的地址：在线视频源 / 媒体服务器改写成
+  /// 与播放器同一条中继（判据 [videoMiningInputUsesPlaybackRelay]），`ready` 是登记完成
+  /// 信号，ffmpeg 开跑前必须等它；其余输入（本地文件 / YouTube / 互联主机）原样返回、
+  /// `ready` 为 null。制卡与字幕对轴音源（`_resolveSubtitleTimingAudio`）共用这一处
+  /// 决定，不各写一份改道判断（BUG-2957）。
+  ({String url, Future<void>? ready}) _routeFfmpegPlaybackInput(
+    String source,
+    VideoPlayerController controller,
+  ) {
+    if (!videoMiningInputUsesPlaybackRelay(
+      remoteClient: _effectiveRemoteClient,
+      mediaSource: source,
+    )) {
+      return (url: source, ready: null);
+    }
+    final ({String url, Future<void> ready}) relayed = relayFfmpegRemoteInput(
+      source,
+      isHls: controller.isHlsStream(),
+      headers: _streamHttpHeaderFields,
+    );
+    return (url: relayed.url, ready: relayed.ready);
   }
 }
 

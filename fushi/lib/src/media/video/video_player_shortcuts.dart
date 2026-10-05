@@ -169,8 +169,8 @@ class VideoPlayerShortcutActions {
   final VoidCallback nextChapter;
 
   /// 打开字幕波形对轴放大视图（用户请求，默认 Shift+A）：复用快速设置面板里的
-  /// SubtitleWaveformZoomView，一键从键盘直达埋得很深的「字幕调轴」。无字幕 / 无本地
-  /// 视频路径 / 移动端抽不到波形时降级弹提示、不弹窗。
+  /// SubtitleWaveformZoomView，一键从键盘直达埋得很深的「字幕调轴」。无字幕 / 无可用
+  /// 音源 / 抽不到波形时降级弹提示、不弹窗。
   final VoidCallback openSubtitleAlign;
 
   /// 字幕延迟 +/-（用户请求，默认 z/x）：像 mpv 一样按固定步进整体平移字幕延迟，
