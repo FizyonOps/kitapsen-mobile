@@ -583,7 +583,7 @@ class KitapsenClient implements RemoteBookClient, RemoteCoverFetcher {
         'book_id': bookId,
         'current_location': location,
         'progress_percent': double.parse(location),
-        'device_type': 'fushi',
+        'device_type': 'mobile',
         'client_timestamp': DateTime.fromMillisecondsSinceEpoch(
           progress.updatedAtMs,
           isUtc: true,
