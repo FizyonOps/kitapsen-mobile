@@ -6271,5 +6271,6 @@
   "kitapsen_about_source_code": "Source code",
   "kitapsen_about_based_on_fushi": "Kitapsen is based on Fushi (GPLv3) — source: https://github.com/FizyonOps/kitapsen-mobile",
   "kitapsen_about_licenses": "Open-source licenses",
-  "kitapsen_about_section": "About Kitapsen"
+  "kitapsen_about_section": "About Kitapsen",
+  "kitapsen_import_hint": "Pick an EPUB or PDF file to import."
 }

@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fushi_audio/fushi_audio.dart';
 import 'package:fushi_dictionary/fushi_dictionary.dart';
 
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/media.dart';
 import 'package:fushi/models.dart';
 import 'package:fushi/src/media/audiobook/book_import_dialog.dart';
@@ -170,8 +171,13 @@ class _MediaSourcesPageState extends ConsumerState<MediaSourcesPage> {
           QuickImportSection(actions: quickActions),
           const SizedBox(height: 28),
         ],
-        _buildSourcesSectionHeader(),
-        const SizedBox(height: 8),
+        // Kitapsen imports single files only: folder sources and scan roots
+        // need all-files access, which a store e-book reader does not request.
+        if (!kKitapsenEdition) ...<Widget>[
+          _buildSourcesSectionHeader(),
+          const SizedBox(height: 8),
+        ],
+        if (!kKitapsenEdition)
         MediaSourcesView(
           key: _viewKey,
           mediaKind: widget.mediaKind,
@@ -196,11 +202,12 @@ class _MediaSourcesPageState extends ConsumerState<MediaSourcesPage> {
             label: t.srt_import,
             onTap: _importBookFile,
           ),
-          QuickImportAction(
-            icon: Icons.drive_folder_upload_outlined,
-            label: t.media_import_folder,
-            onTap: _importFolder,
-          ),
+          if (!kKitapsenEdition)
+            QuickImportAction(
+              icon: Icons.drive_folder_upload_outlined,
+              label: t.media_import_folder,
+              onTap: _importFolder,
+            ),
         ],
       'video' => <QuickImportAction>[
           QuickImportAction(

@@ -6569,6 +6569,9 @@ class AppModel with ChangeNotifier {
   /// （CAMERA 未在 manifest 声明 → permission_handler 直接判 denied），使得存储已授权时
   /// 也永远走不进早退分支。
   Future<void> requestExternalStoragePermissions() async {
+    // Kitapsen declares no storage permissions: file imports go through the
+    // system picker (SAF / Files), which needs none, so never ask.
+    if (kKitapsenEdition) return;
     if (await platformServices.permission.hasExternalStoragePermission()) {
       return;
     }

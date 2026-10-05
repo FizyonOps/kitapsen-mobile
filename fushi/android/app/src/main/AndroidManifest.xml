@@ -2,20 +2,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="app.fushi.reader">
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
-    <!-- Kitapsen: permissions of features this edition does not ship (all-files
-         access, package installs, overlays, screen capture, microphone, NFC
-         pairing, every foreground service: audio playback, special-use overlays,
-         data sync, media projection) are not declared; the tools:node="remove"
-         entries strip the ones plugin manifests would merge back in. The
-         audio_service player is not declared either (AudioController uses the
-         in-process handler in the Kitapsen edition). -->
+    <!-- Kitapsen needs only INTERNET (+ ACCESS_NETWORK_STATE merged from a
+         library) and WAKE_LOCK (keep the screen on while reading). Permissions
+         of features this edition does not ship (all-files access, package
+         installs, overlays, screen capture, microphone, NFC pairing, every
+         foreground service: audio playback, special-use overlays, data sync,
+         media projection) are not declared; the tools:node="remove" entries
+         strip the ones plugin manifests would merge back in. The audio_service
+         player is not declared either (AudioController uses the in-process
+         handler in the Kitapsen edition). -->
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" tools:node="remove"/>
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" tools:node="remove"/>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" tools:node="remove"/>
     <uses-permission android:name="android.permission.RECORD_AUDIO" tools:node="remove"/>
+    <!-- Merged in by libraries for features Kitapsen does not ship: storage
+         (imports use the system picker), notifications (no update / download
+         notifications), camera (mobile_scanner), phone state (RxLogs), boot +
+         foreground service (WorkManager), Bluetooth / audio settings
+         (flutter_webrtc audioswitch), multicast (bonsoir LAN discovery),
+         vibration (flutter_local_notifications) and AnkiDroid. -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" tools:node="remove"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:node="remove"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" tools:node="remove"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" tools:node="remove"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" tools:node="remove"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" tools:node="remove"/>
+    <uses-permission android:name="android.permission.CAMERA" tools:node="remove"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" tools:node="remove"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" tools:node="remove"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" tools:node="remove"/>
+    <uses-permission android:name="android.permission.BLUETOOTH" tools:node="remove"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" tools:node="remove"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" tools:node="remove"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" tools:node="remove"/>
+    <uses-permission android:name="android.permission.VIBRATE" tools:node="remove"/>
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" tools:node="remove"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" tools:node="remove"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" tools:node="remove"/>
+    <uses-permission android:name="com.ichi2.anki.permission.READ_WRITE_DATABASE" tools:node="remove"/>
+    <uses-feature android:name="android.hardware.camera" tools:node="remove"/>
     <application
         android:label="Kitapsen"
         android:name="${applicationName}"
@@ -26,7 +52,7 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:enableOnBackInvokedCallback="true"
         xmlns:tools="http://schemas.android.com/tools"
-        tools:replace="android:label">
+        tools:replace="android:label,android:allowBackup">
         <activity
             android:name=".mihon.CloudflareChallengeActivity"
             android:exported="false"
@@ -103,6 +129,13 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+        <!-- Kitapsen runs no ML Kit OCR (manga / screen OCR are not shipped), so
+             ML Kit's auto-initialising provider (and its usage-log transport)
+             is stripped from the merged manifest. -->
+        <provider
+            android:name="com.google.mlkit.common.internal.MlKitInitProvider"
+            android:authorities="${applicationId}.mlkitinitprovider"
+            tools:node="remove" />
         <!-- TODO-1110 / BUG-535：禁用 Flutter 的 Android SurfaceControl 后端。
              media_kit_video 1.3.0 起把 Android 纹理从 SurfaceTextureEntry 迁到
              TextureRegistry.SurfaceProducer。在部分 Android 11 ROM/GPU 驱动

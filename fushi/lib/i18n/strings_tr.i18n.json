@@ -6271,5 +6271,6 @@
   "kitapsen_about_source_code": "Kaynak kodu",
   "kitapsen_about_based_on_fushi": "Kitapsen, Fushi (GPLv3) tabanlıdır — kaynak kodu: https://github.com/FizyonOps/kitapsen-mobile",
   "kitapsen_about_licenses": "Açık kaynak lisansları",
-  "kitapsen_about_section": "Kitapsen hakkında"
+  "kitapsen_about_section": "Kitapsen hakkında",
+  "kitapsen_import_hint": "İçe aktarmak için bir EPUB veya PDF dosyası seçin."
 }

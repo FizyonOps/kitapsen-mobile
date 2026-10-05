@@ -10,6 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:fushi_audio/fushi_audio.dart';
 import 'package:path/path.dart' as p;
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/media/drag_drop/drop_classification.dart';
 import 'package:fushi/src/media/drag_drop/fushi_file_drop_target.dart';
 import 'package:fushi/src/media/drag_drop/import_dialog_drop.dart';
@@ -323,15 +324,18 @@ class _BookImportDialogState extends State<BookImportDialog>
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
-          t.srt_import_hint_epub_or_srt,
+          kKitapsenEdition
+              ? t.kitapsen_import_hint
+              : t.srt_import_hint_epub_or_srt,
           style: tokens.type.metadata,
         ),
         SizedBox(height: tokens.spacing.gap),
         AdaptiveSettingsSection(
           children: [
             _epubRow(),
-            _subtitleRow(),
-            _audioRow(),
+            // Kitapsen imports plain books: no subtitle / audiobook alignment.
+            if (!kKitapsenEdition) _subtitleRow(),
+            if (!kKitapsenEdition) _audioRow(),
             _coverRow(),
           ],
         ),
