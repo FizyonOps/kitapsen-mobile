@@ -77,7 +77,12 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
     final RemoteBookClient? client = await _resolveRemoteBookClient();
     _remoteBookClient = client;
     _kitapsenSignedIn = client is KitapsenClient;
-    if (client == null) return null;
+    if (client == null) {
+      // 没有远端来源（如退出了 Kitapsen 账号）≠ 正在加载：清掉缓存的上次远端态，
+      // 否则 build 的 waiting 兜底会继续显示已退出账号的占位卡。
+      _lastRemoteState = null;
+      return null;
+    }
     try {
       // BUG-1180：经共享缓存取清单——切回书架 tab（[_onShellTabActivated]）不再必然
       // 打一轮网络，TTL 内直接复用；首页 dashboard 刚拉过的同一份列表也在这里命中。
