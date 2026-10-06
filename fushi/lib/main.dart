@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:ui'
     show AppExitResponse, PlatformDispatcher;
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fushi/src/asr_host/asr_host.dart';
@@ -385,8 +386,12 @@ void main([List<String> args = const <String>[]]) {
     // 调用 setPitch（无变调 UI），关掉后调速改走 mpv 原生 `speed` 属性（稳定，不重配
     // 滤镜图），mpv 默认 `audio-pitch-correction=yes` 仍保留音高 → 有声书加速不变调。
     JustAudioMediaKit.pitch = false;
-    JustAudioMediaKit.ensureInitialized();
-    MediaKit.ensureInitialized();
+    // Kitapsen: no video and no desktop audio backend, and libmpv is not
+    // bundled (media_kit_libs_video removed), so media_kit is never started.
+    if (!kKitapsenEdition) {
+      JustAudioMediaKit.ensureInitialized();
+      MediaKit.ensureInitialized();
+    }
 
     // BUG-1015 的查词播放器冷启动静音预热**不在启动路径**（BUG-1690）：预热要在真实
     // 音频输出设备上开渲染流，启动即预热会打断其他 app 正在播的音乐（iOS 激活音频会话
