@@ -234,6 +234,21 @@ android {
     packagingOptions {
         pickFirst 'lib/**/libc++_shared.so'
         pickFirst 'META-INF/versions/9/OSGI-INF/MANIFEST.MF'
+        // Kitapsen edition: ffmpeg-kit (video, audiobook, card audio) and async_zip
+        // (Yomichan dictionary import) ship 4 KB-aligned native libraries, which
+        // Google Play rejects (16 KB page size requirement). None of their features
+        // exist in this edition; the ffmpeg-kit plugin already reports the native
+        // library as unavailable instead of crashing when it is missing.
+        exclude 'lib/*/libavcodec.so'
+        exclude 'lib/*/libavdevice.so'
+        exclude 'lib/*/libavfilter.so'
+        exclude 'lib/*/libavformat.so'
+        exclude 'lib/*/libavutil.so'
+        exclude 'lib/*/libswresample.so'
+        exclude 'lib/*/libswscale.so'
+        exclude 'lib/*/libffmpegkit.so'
+        exclude 'lib/*/libffmpegkit_abidetect.so'
+        exclude 'lib/*/libasync_zip.so'
     }
 
     applicationVariants.all { variant ->
