@@ -1,3 +1,4 @@
+import 'package:fushi_engine/kitapsen_edition.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -731,8 +732,12 @@ FfmpegBackend? _cachedBackend;
 /// - Android / iOS → app 经 [ffmpegPlatformBackendProvider] 装的 `KitFfmpegBackend`
 ///   （进程内自编 ffmpeg-kit；移动端无系统 ffmpeg 且 iOS 禁 exec 子进程）。
 /// - 桌面（Windows/macOS/Linux）→ 系统 CLI（打包/用户提供 ffmpeg）。
-FfmpegBackend resolveFfmpegBackend() =>
-    _cachedBackend ??= BlurayFfmpegBackend(_selectBackend());
+///
+/// Kitapsen edition: no Blu-ray (AACS) input layer; the platform backend is
+/// used directly so the AACS code is not compiled in.
+FfmpegBackend resolveFfmpegBackend() => _cachedBackend ??= kEngineKitapsenEdition
+    ? _selectBackend()
+    : BlurayFfmpegBackend(_selectBackend());
 
 /// Adapts the shared input contract for desktop and platform FFmpeg backends.
 class BlurayFfmpegBackend implements FfmpegBackend {

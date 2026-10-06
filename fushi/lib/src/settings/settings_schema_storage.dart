@@ -42,6 +42,7 @@ SettingsDestination buildStorageDestination() {
     icon: Icons.sd_storage_outlined,
     sections: <SettingsSection>[
       buildDataStorageLocationSection(),
+      if (!kKitapsenEdition)
       SettingsSection(
         id: 'storage.section.models_components',
         title: t.storage_models_components,

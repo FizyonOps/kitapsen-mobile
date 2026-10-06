@@ -1,3 +1,4 @@
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'dart:async';
 import 'dart:io';
 
@@ -44,9 +45,13 @@ Future<void> openCardSource({
   required WidgetRef ref,
   required CardSourceLink link,
 }) =>
-    ExternalMediaNavigation.instance.navigate(
-      () => _openCardSource(ref: ref, link: link),
-    );
+    // Kitapsen: no cards, so card sources (video / manga pages) are compiled
+    // out: [_openCardSource] is never referenced, closures included.
+    kKitapsenEdition
+        ? Future<void>.value()
+        : ExternalMediaNavigation.instance.navigate(
+            () => _openCardSource(ref: ref, link: link),
+          );
 
 Future<void> _openCardSource({
   required WidgetRef ref,

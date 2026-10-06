@@ -33,24 +33,7 @@ dev_dependencies:
   # Used only by tests to fake getTemporaryDirectory() (already a transitive dep of path_provider).
   path_provider_platform_interface: ^2.1.2
 
-flutter:
-  plugin:
-    platforms:
-      android:
-        package: com.masicai.flutteronnxruntime
-        pluginClass: FlutterOnnxruntimePlugin
-      ios:
-        pluginClass: FlutterOnnxruntimePlugin
-      linux:
-        pluginClass: FlutterOnnxruntimePlugin
-      macos:
-        pluginClass: FlutterOnnxruntimePlugin
-      web:
-        pluginClass: FlutterOnnxruntimeWebPlugin
-        fileName: web/flutter_onnxruntime_web_plugin.dart
-      windows:
-        pluginClass: FlutterOnnxruntimePlugin
-
+flutter: {}
 topics:
  - onnx
  - onnxruntime

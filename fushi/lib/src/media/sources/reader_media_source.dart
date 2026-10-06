@@ -1,3 +1,4 @@
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:fushi/media.dart';
@@ -32,7 +33,7 @@ abstract class ReaderMediaSource extends MediaSource {
   @override
   List<MediaSource> get legacyOverrideStores => <MediaSource>[
         ReaderFushiSource.instance,
-        MangaFushiSource.instance,
+        if (!kKitapsenEdition) MangaFushiSource.instance,
         ReaderPdfSource.instance,
       ];
 

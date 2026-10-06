@@ -1,3 +1,4 @@
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:flutter/material.dart';
 import 'package:fushi/i18n/strings.g.dart';
 import 'package:fushi/src/settings/settings_context.dart';
@@ -87,21 +88,25 @@ List<SettingsDestination> buildSettingsSchema(SettingsContext context) =>
 List<SettingsDestination> _buildDestinations() {
   // 导航分组与此处共用固定顺序；平台/模块可见性仍在展示时求值。
   return List<SettingsDestination>.unmodifiable(<SettingsDestination>[
+    // Kitapsen: categories the edition hides are left out at compile time,
+    // so their pages (video, manga, torrent, interconnect, ...) are not in
+    // the binary at all.
     buildAppearanceDestination(),
-    buildFloatingBallDestination(),
+    if (!kKitapsenEdition) buildFloatingBallDestination(),
     buildReadingDestination(),
-    buildMangaDestination(),
-    buildVideoDestination(),
-    buildGameDestination(),
-    if (kMediaTrackingEnabled) buildMediaTrackingDestination(),
-    buildLookupDestination(),
-    buildCardCreationDestination(),
-    buildDownloadsDestination(),
+    if (!kKitapsenEdition) buildMangaDestination(),
+    if (!kKitapsenEdition) buildVideoDestination(),
+    if (!kKitapsenEdition) buildGameDestination(),
+    if (!kKitapsenEdition && kMediaTrackingEnabled)
+      buildMediaTrackingDestination(),
+    if (!kKitapsenEdition) buildLookupDestination(),
+    if (!kKitapsenEdition) buildCardCreationDestination(),
+    if (!kKitapsenEdition) buildDownloadsDestination(),
     buildServicesDestination(),
-    buildAiDestination(),
-    buildProfilesDestination(),
-    buildSyncBackupDestination(),
-    buildInterconnectDestination(),
+    if (!kKitapsenEdition) buildAiDestination(),
+    if (!kKitapsenEdition) buildProfilesDestination(),
+    if (!kKitapsenEdition) buildSyncBackupDestination(),
+    if (!kKitapsenEdition) buildInterconnectDestination(),
     buildStorageDestination(),
     buildSystemDestination(),
   ]);

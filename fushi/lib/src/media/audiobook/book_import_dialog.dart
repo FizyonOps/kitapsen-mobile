@@ -286,7 +286,7 @@ class _BookImportDialogState extends State<BookImportDialog>
     if (r.isEmpty) return;
     final String? droppedEpub = r.epubPath;
     // 拖进来的「书」其实是漫画（图片型 zip / 扫描版 epub）→ 确认后转交漫画流程。
-    if (droppedEpub != null && await _handoffIfManga(droppedEpub)) return;
+    if (!kKitapsenEdition && droppedEpub != null && await _handoffIfManga(droppedEpub)) return;
     if (!mounted) return;
     final bool gotAudio = r.audioPaths.isNotEmpty;
     setState(() {
@@ -514,7 +514,10 @@ class _BookImportDialogState extends State<BookImportDialog>
     // 语言初值跟随书本身的语言；此时书还没导入，只能从文件上读 OPF 元数据。
     final AsrLanguage? languageHint = await _asrLanguageHintFromPendingBook();
     if (!mounted) return;
-    final String? srtPath = await showAsrTranscribeSheet(
+    // Kitapsen: no speech-to-text; the transcription sheet is compiled out.
+    final String? srtPath = kKitapsenEdition
+        ? null
+        : await showAsrTranscribeSheet(
       context: context,
       audioPaths: List<String>.of(_audioPaths),
       languageHint: languageHint,
@@ -588,7 +591,7 @@ class _BookImportDialogState extends State<BookImportDialog>
       final String? path = file?.path;
       if (path != null && file != null && mounted) {
         // 选中的其实是漫画载体 → 明确确认后转交漫画流程，不再静默按书导入。
-        if (await _handoffIfManga(path)) return;
+        if (!kKitapsenEdition && await _handoffIfManga(path)) return;
         if (!mounted) return;
         setState(() {
           _epubPath = path;
@@ -927,7 +930,7 @@ class _BookImportDialogState extends State<BookImportDialog>
     // 是构造参数直接塞进来的（书架拖入决策层刻意不为每个 EPUB 开包，图片型 .epub 会
     // 以 books 身份到达这里）。同一个闸门在此再守一次，漫画绝不会走进书籍导入分支。
     final String? epubPath = _epubPath;
-    if (epubPath != null && await _handoffIfManga(epubPath)) return;
+    if (!kKitapsenEdition && epubPath != null && await _handoffIfManga(epubPath)) return;
     if (!mounted) return;
     if (_epubPath != null && !_hasSubtitles && _audioPaths.isNotEmpty) {
       // 有音频没字幕：本机能转录就直接问字幕来源（选文件 / 转录），拿到字幕后接着

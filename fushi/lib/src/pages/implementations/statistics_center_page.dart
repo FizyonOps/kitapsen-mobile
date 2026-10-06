@@ -129,14 +129,19 @@ class _StatisticsCenterPageState extends BasePageState<StatisticsCenterPage> {
                         embedded: true,
                         rangeSelection: _rangeSelection,
                       ),
-                      StatsCenterTab.video => VideoStatisticsPage(
-                        embedded: true,
-                        rangeSelection: _rangeSelection,
-                      ),
-                      StatsCenterTab.game => GameStatisticsPage(
-                        embedded: true,
-                        rangeSelection: _rangeSelection,
-                      ),
+                      // Kitapsen: no video / game statistics in the build.
+                      StatsCenterTab.video => kKitapsenEdition
+                          ? const SizedBox.shrink()
+                          : VideoStatisticsPage(
+                              embedded: true,
+                              rangeSelection: _rangeSelection,
+                            ),
+                      StatsCenterTab.game => kKitapsenEdition
+                          ? const SizedBox.shrink()
+                          : GameStatisticsPage(
+                              embedded: true,
+                              rangeSelection: _rangeSelection,
+                            ),
                     },
                 ],
               ),
@@ -261,12 +266,14 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
           c.id: c.name,
       };
       _primaryCollectionByEntry = await db.getPrimaryCollectionIdByEntry();
-      _games = await appModel.galgameRepo.load();
-      _videoCoverPathByUid = <String, String>{
-        for (final VideoBookRow b in await VideoBookRepository(db).listAll())
-          if (b.coverPath case final String path when path.isNotEmpty)
-            b.bookUid: path,
-      };
+      if (!kKitapsenEdition) {
+        _games = await appModel.galgameRepo.load();
+        _videoCoverPathByUid = <String, String>{
+          for (final VideoBookRow b in await VideoBookRepository(db).listAll())
+            if (b.coverPath case final String path when path.isNotEmpty)
+              b.bookUid: path,
+        };
+      }
       _bookItemsByKey = <String, MediaItem>{
         for (final MediaItem item
             in ref
@@ -691,7 +698,7 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
   Future<void> _openEntry(String mediaKind, String mediaKey) async {
     if (mediaKey.isEmpty || !mounted) return;
     final AppModel appModel = ref.read(appProvider);
-    if (mediaKind == kActivityMediaVideo) {
+    if (!kKitapsenEdition && mediaKind == kActivityMediaVideo) {
       await openLocalVideoBook(
         context: context,
         repo: VideoBookRepository(appModel.database),
@@ -701,7 +708,7 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
       );
       return;
     }
-    if (mediaKind == kActivityMediaGame) {
+    if (!kKitapsenEdition && mediaKind == kActivityMediaGame) {
       for (final GalgameEntry game in _games) {
         if (game.id == mediaKey) {
           await Navigator.of(context).push(

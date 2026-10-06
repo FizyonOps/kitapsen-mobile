@@ -7,6 +7,7 @@
 /// 走应用内检查 + 下载安装。这里没有 `launchUrl`——「更新」不该把人送出 app。
 library;
 
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' show ProviderScope;
 import 'package:fushi_core/fushi_core.dart'
@@ -49,6 +50,8 @@ Future<void> openUpdateFeedEntry(
   BuildContext context,
   UpdateFeedEntryRow entry,
 ) async {
+  // Kitapsen: no update feeds; keeps the manga / video pages out of the build.
+  if (kKitapsenEdition) return;
   final UpdateFeedKind? kind = UpdateFeedKind.fromDbValue(entry.kind);
   if (kind == null) return;
   final Map<String, Object?> detail = decodeUpdateFeedDetail(entry.detailJson);

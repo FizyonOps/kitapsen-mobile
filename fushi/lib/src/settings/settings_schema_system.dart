@@ -447,7 +447,10 @@ SettingsDestination buildSystemDestination() {
             // （`ht_apply_proxy`）只接 type/host/port，libtorrent 的
             // `settings_pack::proxy_username/password` 根本没被导出，凭据到不了
             // P2P 那一侧；不写出来用户会以为「开了 P2P 走代理」就连上了。
-            subtitle: t.network_proxy_credentials_scope_hint,
+            // Kitapsen: the hint is about the torrent engine, which this
+            // edition does not have.
+            subtitle:
+                kKitapsenEdition ? null : t.network_proxy_credentials_scope_hint,
             icon: Icons.person_outline,
             visible: (SettingsContext c) =>
                 c.appModel.networkProxyMode == kProxyModeManual,
@@ -477,6 +480,7 @@ SettingsDestination buildSystemDestination() {
           // tracker（连通性工具，非隐私工具）。副标题就是警告。只对内置引擎
           // 生效；外接 qBittorrent 的代理在它自己的 WebUI 里配，这里不越权改
           // 用户的 qB 设置。
+          if (!kKitapsenEdition)
           SettingsSegmentedItem<String>(
             id: 'system.network_proxy_p2p',
             visible: (_) => !kKitapsenEdition,

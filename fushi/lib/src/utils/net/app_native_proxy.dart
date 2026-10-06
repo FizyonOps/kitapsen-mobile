@@ -1,3 +1,4 @@
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -125,7 +126,8 @@ String redactAppNativeProxySecrets(String value) {
   for (final String secret in _nativeProxySecrets) {
     value = value.replaceAll(secret, '[native-proxy]');
   }
-  return redactAacsRelayUrls(value);
+  // Kitapsen: no Blu-ray relay, so nothing to redact (keeps AACS code out).
+  return kKitapsenEdition ? value : redactAacsRelayUrls(value);
 }
 
 /// 中继失败原因的落点。默认 [debugPrint]（被 `DebugLogService` 钩住，进得了

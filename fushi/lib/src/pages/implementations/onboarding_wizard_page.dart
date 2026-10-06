@@ -882,6 +882,13 @@ class _OnboardingWizardPageState extends BasePageState<OnboardingWizardPage>
   }
 
   Widget _buildStep(OnboardingStepId step) {
+    // Kitapsen: only the welcome and account steps exist ([kKitapsenOnboardingSteps]);
+    // returning before the switch compiles every other step page out.
+    if (kKitapsenEdition) {
+      return step == OnboardingStepId.kitapsenAccount
+          ? _buildKitapsenAccountStep()
+          : _buildWelcomeStep();
+    }
     switch (step) {
       case OnboardingStepId.welcome:
         return _buildWelcomeStep();

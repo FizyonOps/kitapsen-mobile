@@ -1,3 +1,4 @@
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -37,8 +38,11 @@ class StorageUsageView extends ConsumerStatefulWidget {
     required this.deleteDictionary,
     required this.deleteDatabaseSnapshots,
     required this.deleteFiles,
-    this.anime4kBytesProvider = anime4kInstalledBytes,
-    this.anime4kDelete = deleteAnime4kShaderFiles,
+    // Kitapsen: no video shaders; keeps the shader downloader out of the build.
+    this.anime4kBytesProvider =
+        kKitapsenEdition ? _noAnime4kBytes : anime4kInstalledBytes,
+    this.anime4kDelete =
+        kKitapsenEdition ? _noAnime4kFiles : deleteAnime4kShaderFiles,
     super.key,
   });
 
@@ -454,7 +458,7 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            if (showAnime4kDelete)
+            if (!kKitapsenEdition && showAnime4kDelete)
               _anime4kBusy
                   ? const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 8),
@@ -562,3 +566,7 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
     );
   }
 }
+
+Future<int> _noAnime4kBytes() async => 0;
+
+Future<List<String>> _noAnime4kFiles() async => const <String>[];

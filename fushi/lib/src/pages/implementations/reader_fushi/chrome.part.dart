@@ -2827,7 +2827,10 @@ extension _ReaderChrome on _ReaderFushiPageState {
     final EpubBookRow? book =
         await appModel.database.getEpubBook(widget.bookKey);
     if (!mounted) return;
-    final String? srtPath = await _withStudyClockPaused(
+    // Kitapsen: no speech-to-text; the transcription sheet is compiled out.
+    final String? srtPath = kKitapsenEdition
+        ? null
+        : await _withStudyClockPaused(
       () => showAsrTranscribeSheet(
         context: context,
         audioPaths: List<String>.of(audio),

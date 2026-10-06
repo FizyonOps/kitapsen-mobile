@@ -501,9 +501,12 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
     // 统一下载中心：mokuro.moe 卷经漫画下载服务后台落库（可能在「在线目录」
     // 页关闭后才完成）。监听 mokuroImportedCount 增量失效书架 provider，取代旧的
     // 「对话框关闭回传导入数」信号（该信号已随对话框改队列化而移除）。
-    _mokuroImported = ref.read(appProvider).mangaDownloadService.mokuroImportedCount;
-    _mokuroImportedSeen = _mokuroImported!.value;
-    _mokuroImported!.addListener(_onMokuroImportedChanged);
+    if (!kKitapsenEdition) {
+      _mokuroImported =
+          ref.read(appProvider).mangaDownloadService.mokuroImportedCount;
+      _mokuroImportedSeen = _mokuroImported!.value;
+      _mokuroImported!.addListener(_onMokuroImportedChanged);
+    }
     // BUG-992：顶层 tab IndexedStack 保活（BUG-750）后，切回书架不再隐式重拉远端书 →
     // 远端占位卡 + 书库概览总数要等用户手动下拉刷新才补齐。监听全局 tab 信号，切回
     // 书架 tab 时自动重拉一次远端（缓存 _lastRemoteState 顶住 waiting、不闪屏）。
@@ -801,7 +804,7 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
       // 够不到「导入」视图）时保留导入按钮兜底。漫画和书籍载体不同，兜底按钮
       // 仍指向两个不同的对话框。
       if (_pageWidget.navigation == null)
-        if (_mangaOnly)
+        if (!kKitapsenEdition && _mangaOnly)
           MangaFushiSource.instance.buildMangaImportButton(
             context: context,
             ref: ref,
@@ -818,7 +821,7 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
             label: t.srt_import,
           ),
       // 批量在线刮削同样属「在线服务」模块（整批第三方 API 请求）。
-      if (_moduleVisibility.isEnabled(ModuleId.services))
+      if (!kKitapsenEdition && _moduleVisibility.isEnabled(ModuleId.services))
         _headerAction(
           tooltip: t.scrape_all,
           icon: Icons.manage_search_outlined,
@@ -2059,6 +2062,8 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
             await repo.delete(m.entryKey);
           }
         case MediaKind.video:
+          // Kitapsen: no video library, so there is no video member to delete.
+          if (kKitapsenEdition) break;
           // 混合合集里若混入视频成员：删视频 DB 行 + app 拥有副本，保留原始视频文件。
           await _videoRepo.deleteVideoBookAndReclaimAssets(
             m.entryKey,
@@ -2469,7 +2474,7 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
         // 浏览的库页面（章节列表、已读标记、刷新），当媒体会话打开会让它顶着
         // 隐藏的系统 UI、亮着屏。真正的会话由作品页内部再 `openMedia` 开阅读器
         // 时启动，语义与 v88 前逐字相同。
-        if (_isMangaItem(item) && bookKey != null) {
+        if (!kKitapsenEdition && _isMangaItem(item) && bookKey != null) {
           await Navigator.of(context).push(
             adaptivePageRoute<void>(
               context: context,
@@ -2666,7 +2671,7 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
       // 一个够不到的库）；反向的「转回书」**恒可用**——已经是 manga 格式的书被
       // [filterShelfEntriesByMangaSplit] 从普通书架排除、漫画库又不可达，把回程也
       // 关掉就等于把这些书永久锁死。
-      if (isManga || modules.isEnabled(ModuleId.manga))
+      if (!kKitapsenEdition && (isManga || modules.isEnabled(ModuleId.manga)))
         DialogListAction(
           label: isManga
               ? t.book_convert_to_book_action
@@ -2680,7 +2685,7 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
         ),
       // 漫画作品页：卡片点击已经先进这里，但键盘/手柄用户长按 A 弹的是本对话框，
       // 没有这一条就只能从对话框退出去再确认一次卡片。菜单里给出同一个入口。
-      if (isManga && modules.isEnabled(ModuleId.manga))
+      if (!kKitapsenEdition && isManga && modules.isEnabled(ModuleId.manga))
         DialogListAction(
           label: t.manga_series_open_series,
           icon: Icons.auto_stories_outlined,

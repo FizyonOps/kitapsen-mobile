@@ -1,3 +1,4 @@
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'dart:async';
 import 'dart:developer' as developer;
 import 'dart:io';
@@ -213,6 +214,9 @@ Future<List<SyncChannel>> Function(SyncRepository repo)?
 Future<List<SyncChannel>> enabledSyncChannelBackends(
   SyncRepository repo,
 ) async {
+  // Kitapsen: no cloud / interconnect sync (reading progress goes through
+  // KitapsenClient), so none of those backends are compiled in.
+  if (kKitapsenEdition) return const <SyncChannel>[];
   final Future<List<SyncChannel>> Function(SyncRepository repo)? override =
       debugSyncChannelsOverride;
   if (override != null) return override(repo);
@@ -406,14 +410,18 @@ void triggerAutoSyncAfterClose({
   BookExitSyncScope.instance.register(
     syncKitapsenBookProgress(db, mediaIdentifier),
   );
-  BookExitSyncScope.instance.register(
-    _runAutoSync(
-      db: db,
-      mediaIdentifier: mediaIdentifier,
-      messenger: messenger,
-      onReport: onReport,
-    ),
-  );
+  // Kitapsen: no cloud / interconnect channels, so the generic sync runner
+  // (and the backends behind it) is compiled out.
+  if (!kKitapsenEdition) {
+    BookExitSyncScope.instance.register(
+      _runAutoSync(
+        db: db,
+        mediaIdentifier: mediaIdentifier,
+        messenger: messenger,
+        onReport: onReport,
+      ),
+    );
+  }
 }
 
 void triggerAutoSyncOnBackground({
@@ -423,7 +431,9 @@ void triggerAutoSyncOnBackground({
   // Background (app→paused) intentionally has NO onReport: the user can't see a
   // dialog, so conflicts stay silent until a later visible sync surfaces them.
   unawaited(syncKitapsenBookProgress(db, mediaIdentifier));
-  _runAutoSync(db: db, mediaIdentifier: mediaIdentifier, messenger: null);
+  if (!kKitapsenEdition) {
+    _runAutoSync(db: db, mediaIdentifier: mediaIdentifier, messenger: null);
+  }
 }
 
 /// Full bidirectional sweep on app open: imports remote-only books, syncs all
@@ -443,16 +453,18 @@ void triggerAutoSyncOnAppOpen({
 }) {
   // Kitapsen 书店进度：在网页上读过的书，打开 app 时把位置带回本机。
   unawaited(syncKitapsenLibraryProgress(db));
-  _runAutoSyncAll(
-    db: db,
-    dictionaryResourceRoot: dictionaryResourceRoot,
-    audioDatabaseRoot: audioDatabaseRoot,
-    tempDir: tempDir,
-    localAudioEntries: localAudioEntries,
-    onLocalAudioImported: onLocalAudioImported,
-    onReport: onReport,
-    onPostRun: onPostRun,
-  );
+  if (!kKitapsenEdition) {
+    _runAutoSyncAll(
+      db: db,
+      dictionaryResourceRoot: dictionaryResourceRoot,
+      audioDatabaseRoot: audioDatabaseRoot,
+      tempDir: tempDir,
+      localAudioEntries: localAudioEntries,
+      onLocalAudioImported: onLocalAudioImported,
+      onReport: onReport,
+      onPostRun: onPostRun,
+    );
+  }
 }
 
 /// BUG-1569① 测试入口：以可 await 的方式跑一轮自动全量 sweep（生产入口
@@ -746,6 +758,10 @@ Future<ManualSyncResult> runManualFullSync({
   SyncPostRunCallback? onPostRun,
   SyncProgressCallback? onProgress,
 }) async {
+  // Kitapsen: no sync channels exist (see [enabledSyncChannelBackends]).
+  if (kKitapsenEdition) {
+    return const ManualSyncResult(ManualSyncOutcome.notConfigured);
+  }
   if (!_syncingIds.add('__all__')) {
     return const ManualSyncResult(ManualSyncOutcome.busy);
   }

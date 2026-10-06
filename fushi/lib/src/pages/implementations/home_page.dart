@@ -445,8 +445,10 @@ class _HomePageState extends BasePageState<HomePage>
     super.initState();
     // 7a：把本页持有的刮削控制器借给互联 host（远程候选搜索 / 重刮）。getter 按
     // 当前偏好惰性建，所以解析器每次都返回配置正确的那一个。
-    appModelNoUpdate.videoScrapeControllerResolver =
-        () async => _videoSourceScrapeController;
+    if (!kKitapsenEdition) {
+      appModelNoUpdate.videoScrapeControllerResolver =
+          () async => _videoSourceScrapeController;
+    }
 
     _currentTab = homeInitialTab(
       startupDefaultDictionaryTab: appModelNoUpdate.startupDefaultDictionaryTab,
@@ -591,7 +593,7 @@ class _HomePageState extends BasePageState<HomePage>
       // 模块关掉就不再拉起——「关掉的模块下次启动不该还在后台跑」。已经在飞的
       // 任务不受影响（这里只决定启不启，不去 stop 任何东西）。
       final ModuleVisibility startupModules = appModelNoUpdate.moduleVisibility;
-      if (startupModules.isEnabled(ModuleId.sync)) {
+      if (!kKitapsenEdition && startupModules.isEnabled(ModuleId.sync)) {
         _triggerFullAutoSync();
       } else {
         // The sync module (cloud / interconnect) is off — always so in Kitapsen —
@@ -599,7 +601,7 @@ class _HomePageState extends BasePageState<HomePage>
         // app open (5 min cooldown inside).
         unawaited(syncKitapsenLibraryProgress(appModel.database));
       }
-      if (startupModules.isEnabled(ModuleId.video)) {
+      if (!kKitapsenEdition && startupModules.isEnabled(ModuleId.video)) {
         unawaited(
           appModel.database.interruptStaleVideoSourceScrapeRuns().catchError((
             Object error,
@@ -1527,9 +1529,9 @@ class _HomePageState extends BasePageState<HomePage>
       key: _homeBodyKey,
       children: <Widget>[
         Expanded(child: buildBody()),
-        if (visibility.isEnabled(ModuleId.browse))
+        if (!kKitapsenEdition && visibility.isEnabled(ModuleId.browse))
           const RecommendedPackDownloadMiniBar(),
-        if (visibility.isEnabled(ModuleId.listening))
+        if (!kKitapsenEdition && visibility.isEnabled(ModuleId.listening))
           const NowListeningMiniBar(),
       ],
     );
@@ -2992,6 +2994,7 @@ class _HomePageState extends BasePageState<HomePage>
             key: ValueKey<HomeTab>(visible),
             child: _buildTabContent(visible),
           ),
+        if (!kKitapsenEdition)
         if (_videoSourceScrapeTaskController case final controller?)
           if (controller.isBusy)
             Positioned(
@@ -3049,7 +3052,10 @@ class _HomePageState extends BasePageState<HomePage>
   Widget _buildTabContent(HomeTab tab) {
     final Widget content = switch (tab) {
       HomeTab.home => HomeDashboardPage(videoRepo: _videoRepository),
-      HomeTab.video => VideoLibraryShell(
+      // Kitapsen: hidden tabs build nothing, so their pages are tree-shaken out.
+      HomeTab.video => kKitapsenEdition
+          ? const SizedBox.shrink()
+          : VideoLibraryShell(
           repository: _videoRepository,
           libraryRefreshSignal: _videoLibraryRefreshSignal,
           scrapeTaskController: _videoSourceScrapeController,
@@ -3070,27 +3076,35 @@ class _HomePageState extends BasePageState<HomePage>
           discoveryActions: _productionVideoDiscoveryActions,
           systemBackActive: _visibleTab == HomeTab.video,
         ),
-      HomeTab.browse => BrowsePage(
+      HomeTab.browse => kKitapsenEdition
+          ? const SizedBox.shrink()
+          : BrowsePage(
           navigationRequest: _browseRequest,
           videoDiscoveryController: _productionVideoDiscoveryController,
           videoDiscoveryActions: _productionVideoDiscoveryActions,
         ),
-      HomeTab.dictionaries => HomeDictionaryPage(
+      HomeTab.dictionaries => kKitapsenEdition
+          ? const SizedBox.shrink()
+          : HomeDictionaryPage(
           focusSignal: _dictFocusSignal,
         ),
       // Android 的 games 模块是串流接收端：远端主机游戏库 + 远程启动串流；
       // Windows 仍是本机 galgame 库。形态判据只在 [GamesModuleForm.on]。
-      HomeTab.games => appModelNoUpdate.gamesModuleForm ==
+      HomeTab.games => kKitapsenEdition
+          ? const SizedBox.shrink()
+          : appModelNoUpdate.gamesModuleForm ==
               GamesModuleForm.streamClient
           ? GameStreamLibraryPage(services: _gameStreamLibraryServices)
           : const HomeGamePage(),
-      HomeTab.browserExtension => const BrowserExtensionPage(),
+      HomeTab.browserExtension =>
+        kKitapsenEdition ? const SizedBox.shrink() : const BrowserExtensionPage(),
       HomeTab.settings =>
         // 设置 tab 走侧栏/底栏切回，不显示页头返回箭头；但仍需 PopScope 拦截系统
         // 返回键（否则冒泡到顶层 PopScope = 退出 app，见 BUG-236）。
         _buildSettingsTabContent(showBackButton: false),
       HomeTab.books => const HomeReaderPage(),
-      HomeTab.manga => const MangaLibraryPage(),
+      HomeTab.manga =>
+        kKitapsenEdition ? const SizedBox.shrink() : const MangaLibraryPage(),
     };
     return PrimaryScrollController(
       controller: _tabScrollControllers.putIfAbsent(

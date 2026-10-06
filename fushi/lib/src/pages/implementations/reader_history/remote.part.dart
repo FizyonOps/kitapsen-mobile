@@ -212,7 +212,7 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
   Future<void> _pullToRefreshBooks() async {
     // 同步模块关掉时只摘掉「同步」这一段，下拉手势本身保留（后半段重读本地列表照跑）
     // ——下拉刷新本地书架与同步无关，一起关掉是误伤。
-    if (_moduleVisibility.isEnabled(ModuleId.sync)) {
+    if (!kKitapsenEdition && _moduleVisibility.isEnabled(ModuleId.sync)) {
       await runManualSyncWithFeedback(
         context: context,
         appModel: appModel,
@@ -393,7 +393,8 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
   ///   （[CloudRemoteBookClient]）无此能力，按类型门控隐藏（真实能力边界）。
   void _showRemoteBookDialog(RemoteBookInfo book) {
     final RemoteBookClient? client = _remoteBookClient;
-    final bool canDelete = client is InterconnectSyncBackend;
+    final bool canDelete =
+        !kKitapsenEdition && client is InterconnectSyncBackend;
     showAppDialog<void>(
       context: context,
       builder: (BuildContext dialogContext) => MediaItemDialogFrame(
@@ -595,7 +596,7 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
     }
     // BUG-2474：对端的在线漫画没有可搬的整卷包——「下载」= 以互联运行时加入本机
     // 漫画书架，之后章节走既有的在线章下载链（先下载再读）从对端逐章拉。
-    if (book.hasMangaChapters) {
+    if (!kKitapsenEdition && book.hasMangaChapters) {
       await _adoptRemoteChapteredManga(book, client);
       return;
     }
@@ -659,7 +660,7 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
     RemoteBookInfo book,
     RemoteBookClient client,
   ) async {
-    if (client is! InterconnectSyncBackend) {
+    if (kKitapsenEdition || client is! InterconnectSyncBackend) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(t.remote_book_unavailable)),
@@ -942,7 +943,9 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
 
     // 有声书播放断点 → prefs（与 resume/播放写键空间同源，见 sync sweep）。
     // `remoteAudiobookPosition` 仅互联后端具备（live API），故此段按类型门控。
-    if (book.hasAudiobook && client is InterconnectSyncBackend) {
+    if (!kKitapsenEdition &&
+        book.hasAudiobook &&
+        client is InterconnectSyncBackend) {
       try {
         final ({int positionMs, int updatedAtMs}) pos =
             await client.remoteAudiobookPosition(book.downloadId);
@@ -991,9 +994,10 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
 
     // 生产路径：有声书 live API 仅存在于互联后端。云盘后端无此能力，按类型分支
     // 跳过（真实能力边界）。注入钩子缺省时才据此门控。
-    if (injectedFetch == null &&
-        injectedImport == null &&
-        client is! InterconnectSyncBackend) {
+    if (kKitapsenEdition ||
+        (injectedFetch == null &&
+            injectedImport == null &&
+            client is! InterconnectSyncBackend)) {
       return;
     }
 
@@ -1134,7 +1138,7 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
     RemoteBookClient client, {
     bool forceRefresh = false,
   }) async {
-    if (client is! InterconnectSyncBackend) {
+    if (kKitapsenEdition || client is! InterconnectSyncBackend) {
       return (audiobooks: const <RemoteAudiobookInfo>[], failed: false);
     }
     List<RemoteAudiobookInfo> all;
@@ -1261,7 +1265,8 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
   void _showRemoteSrtDialog(RemoteAudiobookInfo book) {
     final String title = book.title ?? book.identity;
     final RemoteBookClient? client = _remoteBookClient;
-    final bool canDelete = client is InterconnectSyncBackend;
+    final bool canDelete =
+        !kKitapsenEdition && client is InterconnectSyncBackend;
     showAppDialog<void>(
       context: context,
       builder: (BuildContext dialogContext) => MediaItemDialogFrame(
@@ -1366,7 +1371,7 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
   /// 照样推进，失败态由占位卡失败角标恒定可见。
   Future<void> _downloadRemoteSrtAudiobook(RemoteAudiobookInfo book) async {
     final RemoteBookClient? client = _remoteBookClient;
-    if (client is! InterconnectSyncBackend) {
+    if (kKitapsenEdition || client is! InterconnectSyncBackend) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(t.remote_book_unavailable)),

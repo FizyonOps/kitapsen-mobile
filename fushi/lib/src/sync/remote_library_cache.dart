@@ -1,3 +1,4 @@
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
@@ -230,11 +231,15 @@ class _CacheSlot {
 /// 判据 = 所有入口自动覆盖。
 final remoteLibraryCacheProvider = Provider<RemoteLibraryCache>((ref) {
   final RemoteLibraryCache cache = RemoteLibraryCache();
-  final ValueNotifier<int> revision =
-      InterconnectSyncBackend.instance.sessionIdentityRevision;
-  void onIdentityChanged() => cache.invalidateAll();
-  revision.addListener(onIdentityChanged);
-  ref.onDispose(() => revision.removeListener(onIdentityChanged));
+  // Kitapsen: no interconnect peer, so nothing to subscribe to (and the
+  // interconnect client stays out of the build).
+  if (!kKitapsenEdition) {
+    final ValueNotifier<int> revision =
+        InterconnectSyncBackend.instance.sessionIdentityRevision;
+    void onIdentityChanged() => cache.invalidateAll();
+    revision.addListener(onIdentityChanged);
+    ref.onDispose(() => revision.removeListener(onIdentityChanged));
+  }
   return cache;
 });
 

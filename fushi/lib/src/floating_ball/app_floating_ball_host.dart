@@ -15,6 +15,7 @@
 ///     两边始终一致（否则下次回到 Fushi 又会按开关把球拉起来）。
 library;
 
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'dart:async';
 import 'dart:io';
 
@@ -751,7 +752,8 @@ class _AppFloatingBallHostState extends ConsumerState<AppFloatingBallHost>
   /// 提示、逐通道冲突裁决、鉴权失效登出全由它处理。
   Future<void> _manualSync() async {
     final BuildContext? ctx = _navigatorContext;
-    if (ctx == null) return;
+    // Kitapsen: no floating ball and no sync channels.
+    if (kKitapsenEdition || ctx == null) return;
     await runManualSyncWithFeedback(
       context: ctx,
       appModel: ref.read(appProvider),

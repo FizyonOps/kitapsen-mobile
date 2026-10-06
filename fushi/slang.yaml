@@ -4,3 +4,6 @@ input_directory: lib/i18n
 input_file_pattern: .i18n.json
 output_directory: lib/i18n
 output_file_name: strings.g.dart
+# Kitapsen edition: no flat key map, so translations nothing references are
+# tree-shaken out of the release binary (store review reads binary strings).
+flat_map: false

@@ -2,7 +2,7 @@ name: fushi
 resolution: workspace
 description: Kitapsen e-book reader by FizyonOps, based on Fushi (GPLv3).
 publish_to: 'none'
-version: 1.0.0+2
+version: 1.0.0+3
 environment:
   sdk: ">=3.8.0 <4.0.0"
   flutter: "^3.41.6"
@@ -172,7 +172,8 @@ dependencies:
   bonsoir: ^7.1.1
   media_kit: ^1.2.6
   media_kit_video: ^2.0.1
-  media_kit_libs_video: ^1.0.7
+  # Kitapsen edition: no video playback, so libmpv / ffmpeg are not bundled.
+  # media_kit_libs_video: ^1.0.7
   # 移动端 ffmpeg：用「自编」的 ffmpeg-kit（arthenica 源码 + NDK r25 重编最小变体），
   # 替代崩溃的第三方预编译 ffmpeg-kit 变体（其 libffmpegkit_abidetect.so 在
   # Android 16/API 36 上 JNI_OnLoad 返回非法版本，启动即崩，BUG-122）。vendored 包见
@@ -222,23 +223,21 @@ flutter:
     # TMDB 官方 logo（合约署名素材）。逐文件登记而非整目录，是为了只打包实际渲染
     # 的 PNG，把同目录的矢量原图 blue_square_1.svg（provenance 真相源）与 README.md
     # （来源/哈希/禁改说明 + 栅格化配方）留在仓库里、不进应用包。
-    - assets/attribution/tmdb/logo_tmdb.png
     # 内置 AnkiConnect 插件包（新手引导「一键安装插件」解压进 Anki 的
     # addons21；来源/许可见 assets/licenses/anki-connect.txt）。
+    # Kitapsen edition: the browser extension, web video (EME/DRM shims),
+    # LNReader plugin host and TMDB attribution assets are not bundled; their
+    # features are compiled out and App Review treats unused assets as hidden
+    # features (guideline 2.3.1).
     - assets/anki/
-    - assets/browser_extension/
-    - assets/browser_extension/vendor/
-    - assets/browser_extension/locales/
     # 内置网页播放器（WebView2 站点播放）主世界胶水；站点 bridge / 字幕 provider 复用
     # 上面的扩展镜像（同一份文件，见 lib/src/media/video/web_video_bridge.dart）。
-    - assets/web_video/
     - assets/gamepad/xbox/
     - assets/gamepad/playstation/
     - assets/gamepad/switch/
     - assets/fonts/
     - assets/licenses/
     # 小说在线源（LNReader 插件）宿主：lnreader_libs.js 由 tool/lnreader/ 重建。
-    - assets/lnreader/
     - assets/meta/
     - assets/popup/
     - assets/transforms/

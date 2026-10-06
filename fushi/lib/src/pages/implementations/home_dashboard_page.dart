@@ -587,8 +587,10 @@ class _HomeDashboardPageState
     // 也要刷新日明细/时间轴的游戏显示名——galgames 表不在
     // watchDashboardDataChanges 的表集里，走仓储 ChangeNotifier 这条既有通道
     // 与视频（videoBooks 表级信号）对齐失效语义。
-    _galgameRepo = ref.read(appProvider).galgameRepo
-      ..addListener(_scheduleReload);
+    if (!kKitapsenEdition) {
+      _galgameRepo = ref.read(appProvider).galgameRepo
+        ..addListener(_scheduleReload);
+    }
     // Bangumi 同步状态：outbox 与偏好都不在 watchDashboardDataChanges 的表集里，
     // 由服务层每轮同步结束后自增的 revision 通知（后台自动同步完成也会刷新本卡）。
     _trackingRevision = ref
@@ -674,7 +676,9 @@ class _HomeDashboardPageState
     _armMidnightReload(loadedAt);
     // 视频书架、统计事实面、合集/附加图四张表互不依赖：一次全部发出，让 Drift
     // 后台执行器流水线化（首页首绘被这串 await 串行 gate）。
-    final Future<List<VideoBookRow>> videosF = widget.videoRepo.listForShelf();
+    final Future<List<VideoBookRow>> videosF = kKitapsenEdition
+        ? Future<List<VideoBookRow>>.value(const <VideoBookRow>[])
+        : widget.videoRepo.listForShelf();
     // v92：学习统计只经统一事实面读取（study_segments + 冻结的 legacy 投影表，
     // 游戏时长来自 galgame_sessions、游戏 hook 字数来自 legacy game 行 + 段），
     // 首页不再自己读六张表各自累加——与阅读/视频/游戏统计页同一份事实。
@@ -706,9 +710,14 @@ class _HomeDashboardPageState
     // P4：游戏库整表（日明细/时间轴的游戏显示名反查）。仓储缓存与表恒一致，
     // 未载入过才真查 DB（毫秒级）；load() 会 notify → 本页监听器防抖重载一次
     // 后 isLoaded=true，不再形成回环。
-    final GalgameRepository galgameRepo = appModel.galgameRepo;
-    final List<GalgameEntry> games =
-        galgameRepo.isLoaded ? galgameRepo.games : await galgameRepo.load();
+    final List<GalgameEntry> games;
+    if (kKitapsenEdition) {
+      games = const <GalgameEntry>[];
+    } else {
+      final GalgameRepository galgameRepo = appModel.galgameRepo;
+      games =
+          galgameRepo.isLoaded ? galgameRepo.games : await galgameRepo.load();
+    }
     // 合集归属映射（统计页/书架同源）：显示名规则「非合集上下文拼合集名」用。
     final Map<int, String> collectionNamesById = <int, String>{
       for (final MediaCollectionRow c in await collectionsF) c.id: c.name,
@@ -865,6 +874,8 @@ class _HomeDashboardPageState
       _clearRemoteDashboardData();
       return;
     }
+    // Kitapsen: the dashboard's remote data is interconnect-only; none in this edition.
+    if (kKitapsenEdition) return;
     final SyncRepository syncRepo = SyncRepository(appModel.database);
     // 互联是独立开关（已与云备份后端解耦），未启用/未配对直接跳过。
     if (!await syncRepo.isInterconnectEnabled()) return;
@@ -1589,7 +1600,7 @@ class _HomeDashboardPageState
     // 16:9。「继续」与「最近添加」两行同口径（BUG-2005）；书 / 游戏恒竖版
     // （BUG-1299 口径不变）。探测与卡内渲染共用同一 provider 键，零额外解码
     // （CoverOrientationBuilder 契约）。
-    if (videoLandscape && entry.isVideo) {
+    if (!kKitapsenEdition && videoLandscape && entry.isVideo) {
       final ImageProvider? probe =
           _continueArtworkProvider(entry) ?? _continueVideoCoverProvider(entry);
       return CoverOrientationBuilder(
@@ -1960,6 +1971,7 @@ class _HomeDashboardPageState
   /// 播放页关闭后无需手动刷新——lastPositionMs 落库触发 videoBooks 表级变更，
   /// [_scheduleReload] 自动重查。测试经 [HomeDashboardPage.openVideoOverride] 注入替身。
   Future<void> _openLocalVideo(String bookUid) async {
+    if (kKitapsenEdition) return; // no video library in the Kitapsen edition
     final int? playlistCollectionId =
         _primaryCollectionByEntry[MediaKind.video.compositeKey(bookUid)];
     final Future<void> Function(

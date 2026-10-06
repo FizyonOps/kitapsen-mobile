@@ -1,3 +1,4 @@
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi_dictionary/fushi_dictionary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -74,9 +75,13 @@ class MangaFushiSource extends ReaderMediaSource {
         ReaderFushiSource.parseBookKey(item?.mediaIdentifier ?? '') ?? '';
     // 漫画在 WebView 里按原生密度渲染；与阅读器一致包 UI-scale 中和层，
     // 保证弹窗坐标契约（JS getClientRects 视口坐标 → 屏幕坐标恒等映射）。
-    return FushiAppUiScaleNeutralizer(
-      child: MangaFushiPage(item: item, bookKey: bookKey),
-    );
+    // Kitapsen: no manga reader in the build (this source is never
+    // registered, but dispatch through [MediaSource] still sees it).
+    return kKitapsenEdition
+        ? const SizedBox.shrink()
+        : FushiAppUiScaleNeutralizer(
+            child: MangaFushiPage(item: item, bookKey: bookKey),
+          );
   }
 
   @override
@@ -105,7 +110,9 @@ class MangaFushiSource extends ReaderMediaSource {
     FushiFocusId? focusId,
     String? label,
   }) {
-    return FushiIconButton(
+    return kKitapsenEdition
+        ? const SizedBox.shrink()
+        : FushiIconButton(
       tooltip: t.manga_import_action,
       label: label,
       icon: Icons.library_add_outlined,

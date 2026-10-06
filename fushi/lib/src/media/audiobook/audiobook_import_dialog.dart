@@ -1,3 +1,4 @@
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -522,7 +523,10 @@ class _AudiobookImportDialogState extends State<AudiobookImportDialog>
     final EpubBookRow? book =
         await widget.repo.database.getEpubBook(widget.bookKey);
     if (!mounted) return;
-    final String? srtPath = await showAsrTranscribeSheet(
+    // Kitapsen: no speech-to-text; the transcription sheet is compiled out.
+    final String? srtPath = kKitapsenEdition
+        ? null
+        : await showAsrTranscribeSheet(
       context: context,
       audioPaths: List<String>.of(audio),
       languageHint: asrLanguageHintFromBookLanguage(book?.language),

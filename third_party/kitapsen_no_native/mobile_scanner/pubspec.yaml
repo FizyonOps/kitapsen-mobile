@@ -1,0 +1,24 @@
+# Kitapsen edition: Dart API of this package without its native plugin
+# (no Android/iOS code is bundled). Its feature is compiled out of the
+# app; see third_party/kitapsen_no_native/README.md.
+name: mobile_scanner
+description: A universal Flutter barcode and QR code scanner using CameraX/ML Kit for Android, AVFoundation/Apple Vision for iOS & macOS, and ZXing for web.
+version: 7.4.2
+repository: https://github.com/juliansteenbakker/mobile_scanner
+
+
+environment:
+  sdk: ^3.7.0
+  flutter: ">=3.29.0"
+
+dependencies:
+  collection: ^1.15.0
+  flutter:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+  meta: ^1.16.0
+  plugin_platform_interface: ^2.0.2
+  web: ^1.0.0
+
+flutter: {}

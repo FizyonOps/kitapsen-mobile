@@ -898,13 +898,16 @@ class AppModel with ChangeNotifier {
               scope: DeleteScope.keepLocalOnly,
             );
           case SyncTombstoneKind.video:
-            final bool deleted = await VideoBookRepository(database)
-                .deleteVideoBookAndReclaimAssets(
-              c.itemKey,
-              scope: DeleteScope.keepLocalOnly,
-              compactDatabase: false,
-            );
-            deletedVideoBook = deletedVideoBook || deleted;
+            // Kitapsen: no video library; the video repository stays out.
+            if (!kKitapsenEdition) {
+              final bool deleted = await VideoBookRepository(database)
+                  .deleteVideoBookAndReclaimAssets(
+                c.itemKey,
+                scope: DeleteScope.keepLocalOnly,
+                compactDatabase: false,
+              );
+              deletedVideoBook = deletedVideoBook || deleted;
+            }
           case SyncTombstoneKind.audiobook:
             await AudiobookRepository(database)
                 .deleteAudiobook(c.itemKey, propagateDeletion: false);
@@ -942,7 +945,7 @@ class AppModel with ChangeNotifier {
         debugPrint('[sync] apply deletion ${c.mediaType}/${c.itemKey}: $e');
       }
     }
-    if (deletedVideoBook) {
+    if (!kKitapsenEdition && deletedVideoBook) {
       await VideoBookRepository(database).compactAfterVideoDeleteBestEffort();
     }
     // 删完刷新受影响的本地库缓存/书架（书 + 视频 + 有声书都可能变）。
@@ -1044,7 +1047,10 @@ class AppModel with ChangeNotifier {
             ? LocalUpdateNotifier(
                 appName: 'Kitapsen',
                 groupTitle: t.updates_notification_header,
-                onResponse: _onUpdateNotificationResponse,
+                // Kitapsen: no update feeds; keeps the updates center out.
+                onResponse: kKitapsenEdition
+                    ? (UpdateNotificationResponse _) async {}
+                    : _onUpdateNotificationResponse,
               )
             : const NoopUpdateNotifier(),
         notificationText: localizedUpdateNotificationText,
@@ -2626,7 +2632,8 @@ class AppModel with ChangeNotifier {
         ReaderPdfSource.instance,
         // 漫画 OCR P1：第三个 reader 源。format=='manga' 的行在打开时经
         // mediaSourceIdentifier='reader_manga' 路由到本源、进 MangaFushiPage。
-        MangaFushiSource.instance,
+        // Kitapsen: no manga, so the manga reader is not compiled in.
+        if (!kKitapsenEdition) MangaFushiSource.instance,
       ],
       DictionaryMediaType.instance: [],
     };
@@ -3035,7 +3042,7 @@ class AppModel with ChangeNotifier {
       appUpdateDownloadSourceReader = () => prefsRepo.updateDownloadSource;
       // 主入口与精简词典入口共用装配，并等系统代理就绪后再启动网络服务。
       await installAppNetworkBindings();
-      _applyEmbeddedTorrentProxy();
+      if (!kKitapsenEdition) _applyEmbeddedTorrentProxy();
       _applyMemoryPolicy();
       // BUG-1647：lazy getter 可能已提前建过实例；替换前先取消其重试定时器，
       // 否则旧定时器会拿着旧 repository 继续同步。
@@ -3267,7 +3274,8 @@ class AppModel with ChangeNotifier {
       // 模块门（sync）：这两条都是「同步与备份 + 互联」专属后台——服务器要绑端口
       // 起发现广播，监听器要挂 DB 订阅并按写入推同步。关掉 sync 模块后不再自启，
       // 代价是本机不再作为互联 host 被别的设备发现/连接，合集增删也不再自动推送。
-      if (modules.isEnabled(ModuleId.sync)) {
+      // Kitapsen: no LAN host / interconnect, so none of it is compiled in.
+      if (!kKitapsenEdition && modules.isEnabled(ModuleId.sync)) {
         if (modules.isEnabled(ModuleId.games)) _configureGameStreamLibrary();
         unawaited(syncServerController.startIfEnabled().then((
           FushiServerStartOutcome outcome,
@@ -3345,7 +3353,7 @@ class AppModel with ChangeNotifier {
       //
       // 门只加在调用点：[startAnimeDownloadService] 函数体内部顺序敏感（懒建 session、
       // resume 剪枝哨兵），守卫测试按源码顺序扫它，绝不能把判断插进函数中段。
-      if (modules.isEnabled(ModuleId.browse)) {
+      if (!kKitapsenEdition && modules.isEnabled(ModuleId.browse)) {
         unawaited(
             startAnimeDownloadService().catchError((Object e, StackTrace s) {
           ErrorLogService.instance
@@ -3368,12 +3376,14 @@ class AppModel with ChangeNotifier {
       // BUG-2109：同时这也是 `stage` 在新进程里唯一的对盘点。不跑它，stage 永远
       // 停在 idle，设置 → 系统里那行（判据是 `isActive`）就不渲染：下完没导入就
       // 关 app 的用户，重开后磁盘上躺着的 9.5 GB 既看不见也导不了。
-      unawaited(recommendedPackDownloadController
+      if (!kKitapsenEdition) {
+        unawaited(recommendedPackDownloadController
           .prepareDiskState()
           .catchError((Object e, StackTrace s) {
         ErrorLogService.instance
             .log('AppModel.recommendedPackPrepareDiskState', e, s);
       }));
+      }
       notifyListeners();
     } on DataRootUnavailableException catch (e, stack) {
       // BUG-815: a custom data root IS configured but is currently unreachable
@@ -4450,7 +4460,7 @@ class AppModel with ChangeNotifier {
     // 上传/做种策略（默认关上传；开启后做种时长/分享率上限），即时生效。
     host.setUploadPolicy(effective);
     // P2P 代理（默认直连；用户在系统设置里单独开启才跟全局代理）。
-    _applyEmbeddedTorrentProxy();
+    if (!kKitapsenEdition) _applyEmbeddedTorrentProxy();
   }
 
   /// 番剧下载：计划存储（选种对话框写计划/暂存字幕，与完成监听服务共用同一实例）。
@@ -7516,7 +7526,8 @@ class AppModel with ChangeNotifier {
     // BUG-913：对称释放 initialise() 起的 4 个 app-wide 常驻子系统。dispose 是同步的、
     // 这些 stop 多为 Future → fire-and-forget（unawaited）；先停常驻服务，再走现有
     // notifier/repo dispose，最后 super.dispose()。
-    if (_isInitialised) {
+    // Kitapsen: the LAN sync server is never started, so it is not compiled in.
+    if (!kKitapsenEdition && _isInitialised) {
       // syncServerController 是 late final 带初始化器（读即构造）：仅在已 init（即已被
       // startIfEnabled 构造）时读它，避免「从未 init 却只为销毁而构造」。它既是常驻
       // 服务又是 ChangeNotifier，故 stop() 后还需 dispose()。
@@ -8743,13 +8754,13 @@ class AppModel with ChangeNotifier {
     await prefsRepo.setUpdateCustomProxy(value);
     // HttpClient 侧的 findProxy 请求时现读，不用通知；libtorrent 是把值
     // 固化进 session 的，改了就得重新下发。
-    _applyEmbeddedTorrentProxy();
+    if (!kKitapsenEdition) _applyEmbeddedTorrentProxy();
   }
 
   String get networkProxyMode => prefsRepo.networkProxyMode;
   Future<void> setNetworkProxyMode(String value) async {
     await prefsRepo.setNetworkProxyMode(value);
-    _applyEmbeddedTorrentProxy();
+    if (!kKitapsenEdition) _applyEmbeddedTorrentProxy();
   }
 
   String get networkProxyUsername => prefsRepo.networkProxyUsername;
@@ -8770,7 +8781,7 @@ class AppModel with ChangeNotifier {
   String get p2pProxyMode => prefsRepo.p2pProxyMode;
   Future<void> setP2pProxyMode(String mode) async {
     await prefsRepo.setP2pProxyMode(mode);
-    _applyEmbeddedTorrentProxy();
+    if (!kKitapsenEdition) _applyEmbeddedTorrentProxy();
   }
 
   /// 把「P2P 该不该走代理、走哪个、哪一档」下发给内置引擎（宿主不存在则

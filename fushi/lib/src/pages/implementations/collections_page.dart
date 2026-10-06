@@ -1,3 +1,4 @@
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'dart:convert';
 import 'dart:io';
 
@@ -709,6 +710,7 @@ class _CollectionsPageState extends BasePageState<CollectionsPage> {
   }
 
   Future<void> _openVideoSentence(_CollectionItem item) async {
+    if (kKitapsenEdition) return; // no video library in the Kitapsen edition
     final String? bookUid = item.bookKey;
     if (bookUid == null || bookUid.isEmpty) return;
 
