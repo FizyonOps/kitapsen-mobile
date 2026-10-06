@@ -5,13 +5,9 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   desktop_drop
   dynamic_color
-  flutter_onnxruntime
-  flutter_webrtc
   gamepads_linux
   hotkey_manager_linux
-  media_kit_libs_linux
   media_kit_video
-  record_linux
   screen_retriever_linux
   sqlite3_flutter_libs
   url_launcher_linux
