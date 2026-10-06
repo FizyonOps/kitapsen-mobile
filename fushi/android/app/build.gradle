@@ -183,7 +183,7 @@ android {
     defaultConfig {
         applicationId "com.fizyonops.kitapsen"
         minSdkVersion 24
-        targetSdk 35
+        targetSdk 36
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
 
