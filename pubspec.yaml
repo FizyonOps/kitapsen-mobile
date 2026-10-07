@@ -96,8 +96,12 @@ dependency_overrides:
   # full-FFmpeg libmpv (zhongfly/mpv-winbuild) that decodes TrueHD; see
   # third_party/media_kit_libs_windows_video/windows/CMakeLists.txt. Same DLL
   # also backs the audiobook player, so this fixes TrueHD audiobooks too.
-  media_kit_libs_windows_video:
-    path: third_party/media_kit_libs_windows_video
+  # Kitapsen edition: media_kit_libs_video is not a dependency (no video), so
+  # these overrides are commented out. Left in, they put the libs packages in
+  # pubspec.lock and media_kit_video's iOS podspec then links -framework Mpv,
+  # which no longer exists ("Framework 'Mpv' not found").
+  # media_kit_libs_windows_video:
+  #   path: third_party/media_kit_libs_windows_video
   # BUG-073 (cont.): the SAME TrueHD gap exists on macOS/iOS/Android — media-kit's
   # "default" FFmpeg flavor enables the truehd demuxer but not its decoder, so
   # TrueHD audio is silent on every platform, not just Windows. These forks switch
@@ -114,12 +118,12 @@ dependency_overrides:
   # so mpv itself is unchanged (7.x would force a mpv bump, which in turn makes
   # libplacebo a hard dependency neither build repo has).
   # See each package's Makefile / build.gradle for the repoint + checksums.
-  media_kit_libs_macos_video:
-    path: third_party/media_kit_libs_macos_video
-  media_kit_libs_ios_video:
-    path: third_party/media_kit_libs_ios_video
-  media_kit_libs_android_video:
-    path: third_party/media_kit_libs_android_video
+  # media_kit_libs_macos_video:
+  #   path: third_party/media_kit_libs_macos_video
+  # media_kit_libs_ios_video:
+  #   path: third_party/media_kit_libs_ios_video
+  # media_kit_libs_android_video:
+  #   path: third_party/media_kit_libs_android_video
   # BUG-235: media_kit_video 2.0.1's MaterialDesktopSeekBarState.onPointerUp /
   # onPointerMove call controller(context) (dereferences State.context) with no
   # mounted guard. Fushi tears down the controls subtree on fullscreen
