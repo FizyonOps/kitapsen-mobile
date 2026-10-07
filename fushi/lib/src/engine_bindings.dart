@@ -103,7 +103,8 @@ void installEngineHostBindings() {
   ffmpegPlatformBackendProvider = _platformFfmpegBackend;
   // 制卡 ffmpeg 的远端输入经本机中继（在线视频源伪装分片，BUG-2642 残留）：
   // 视频页登记，引擎按输入地址来查。
-  ffmpegRemoteInputRouteResolver = ffmpegRelayRouteFor;
+  // Kitapsen: no stream mining, so no ffmpeg relay routes.
+  if (!kKitapsenEdition) ffmpegRemoteInputRouteResolver = ffmpegRelayRouteFor;
   // 蓝光 AACS 解密的商店合规门：判据只在 StoreRestrictedCapability 写一次。
   if (!kKitapsenEdition) {
     aacsDecryptionAvailable =

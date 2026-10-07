@@ -29,6 +29,7 @@
 //   AList 换签名直链，见 source_stream_headers.dart）；SFTP/FTP 无 HTTP 直链、
 //   播放器吃不了，仍拒绝。
 
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'dart:convert';
 import 'dart:io';
 
@@ -663,7 +664,8 @@ class SourceLibraryScanner {
         mangaRootPath: files.isLocal && kind == SourceLibraryKind.manga
             ? source.rootPath
             : null,
-        detectBlurayDiscs: files.isLocal && kind == SourceLibraryKind.video,
+        detectBlurayDiscs:
+            !kKitapsenEdition && files.isLocal && kind == SourceLibraryKind.video,
         includeAudioAsVideo: kind == SourceLibraryKind.video,
       );
       discoveredPaths = <String>[
@@ -683,52 +685,58 @@ class SourceLibraryScanner {
         case SourceLibraryKind.book:
           mediaCount = await _importBooks(plan, source.id, files);
         case SourceLibraryKind.video:
-          // Video source imports both single videos and m3u8/m3u playlists
-          // (TODO-1237).
-          final ({
-            List<String> createdPaths,
-            List<String> failedPaths,
-            Object? firstError,
-          }) imported = await _importVideos(plan, source.id, files);
-          final List<String> createdVideoPaths = imported.createdPaths;
-          mediaCount = createdVideoPaths.length;
-          // BUG-2570：部分文件失败不再作废整批。把「几个失败 / 第一个是谁 / 为什么」
-          // 汇总成一条能照着查的错误，成功的条目照常计数入库。真正中断扫描的异常
-          // 仍走下面的总 catch 覆盖它（那是整次扫描没跑完，比部分失败更严重）。
-          if (imported.failedPaths.isNotEmpty) {
-            partialError = 'Imported ${createdVideoPaths.length} video(s); '
-                '${imported.failedPaths.length} failed. First failure: '
-                '${p.basename(imported.failedPaths.first)} — '
-                '${imported.firstError}';
-          }
-          // 来源扫描与旧「导入视频文件夹」共用同一套作品/季/集解析规则：散片
-          // 保持独立，多集整理为 playlist 合集。先完成逐文件入库，字幕 cue / 封面
-          // 的既有增强不变；再只做归组，重扫复用已有成员且不删除缺失文件。
-          // 网络（WebDAV）来源同样归组：文件名解析统一走解码 basename
-          // （sourceEntryBasename）。来源库条目路径进到这里已是解码态（见该函数
-          // 文档），所以取末段即可，不能再解一次。
-          grouping = await VideoFolderGroupCoordinator(
-            database: _db,
-            repository: _videoRepo,
-          ).groupPaths(
-            videoPaths: <String>[
-              for (final ScanVideoItem item in plan.videos)
-                if (source.videoGroupingMode == 'folder' ||
-                    classifyLocalVideoExtra(item.videoPath) == null)
-                  item.videoPath,
-            ],
-            createdVideoPaths: createdVideoPaths,
-            sourceId: source.id,
-            groupingMode: source.videoGroupingMode,
-            sourceRoot: source.rootPath,
-          );
-          mediaCount += await _importPlaylists(plan, source.id, files);
-          mediaCount += await _importBlurayDiscs(plan, source.id);
-          if (source.videoGroupingMode != 'folder') {
-            await VideoSourceMetadataIndexer(_db).index(source);
+          // Kitapsen: no video or manga libraries; those importers (and the
+          // Blu-ray disc reader) are compiled out.
+          if (!kKitapsenEdition) {
+            // Video source imports both single videos and m3u8/m3u playlists
+            // (TODO-1237).
+            final ({
+              List<String> createdPaths,
+              List<String> failedPaths,
+              Object? firstError,
+            }) imported = await _importVideos(plan, source.id, files);
+            final List<String> createdVideoPaths = imported.createdPaths;
+            mediaCount = createdVideoPaths.length;
+            // BUG-2570：部分文件失败不再作废整批。把「几个失败 / 第一个是谁 / 为什么」
+            // 汇总成一条能照着查的错误，成功的条目照常计数入库。真正中断扫描的异常
+            // 仍走下面的总 catch 覆盖它（那是整次扫描没跑完，比部分失败更严重）。
+            if (imported.failedPaths.isNotEmpty) {
+              partialError = 'Imported ${createdVideoPaths.length} video(s); '
+                  '${imported.failedPaths.length} failed. First failure: '
+                  '${p.basename(imported.failedPaths.first)} — '
+                  '${imported.firstError}';
+            }
+            // 来源扫描与旧「导入视频文件夹」共用同一套作品/季/集解析规则：散片
+            // 保持独立，多集整理为 playlist 合集。先完成逐文件入库，字幕 cue / 封面
+            // 的既有增强不变；再只做归组，重扫复用已有成员且不删除缺失文件。
+            // 网络（WebDAV）来源同样归组：文件名解析统一走解码 basename
+            // （sourceEntryBasename）。来源库条目路径进到这里已是解码态（见该函数
+            // 文档），所以取末段即可，不能再解一次。
+            grouping = await VideoFolderGroupCoordinator(
+              database: _db,
+              repository: _videoRepo,
+            ).groupPaths(
+              videoPaths: <String>[
+                for (final ScanVideoItem item in plan.videos)
+                  if (source.videoGroupingMode == 'folder' ||
+                      classifyLocalVideoExtra(item.videoPath) == null)
+                    item.videoPath,
+              ],
+              createdVideoPaths: createdVideoPaths,
+              sourceId: source.id,
+              groupingMode: source.videoGroupingMode,
+              sourceRoot: source.rootPath,
+            );
+            mediaCount += await _importPlaylists(plan, source.id, files);
+            mediaCount += await _importBlurayDiscs(plan, source.id);
+            if (source.videoGroupingMode != 'folder') {
+              await VideoSourceMetadataIndexer(_db).index(source);
+            }
           }
         case SourceLibraryKind.manga:
-          mediaCount = await _importManga(plan, source.id, files);
+          if (!kKitapsenEdition) {
+            mediaCount = await _importManga(plan, source.id, files);
+          }
       }
     } catch (e, stack) {
       scanError = e.toString();

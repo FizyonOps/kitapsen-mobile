@@ -244,10 +244,13 @@ void main([List<String> args = const <String>[]]) {
     // 时序前置条件，而 `initialise()` 有两个 entry point 绕开它（弹窗词典与悬浮
     // 词典），写在 main 里哪个入口都不会漏。
     installEngineHostBindings();
-    installAsrHostBindings();
-    // 用户的模型选择 / 自带模型包住在数据根下，必须在装完数据根解析器之后读。
-    // 不 await 的话第一次转录会按内置表规划，用户的选择要等下一次才生效。
-    await loadAsrModelCatalog();
+    // Kitapsen: no speech-to-text, so the ASR host is not compiled in.
+    if (!kKitapsenEdition) {
+      installAsrHostBindings();
+      // 用户的模型选择 / 自带模型包住在数据根下，必须在装完数据根解析器之后读。
+      // 不 await 的话第一次转录会按内置表规划，用户的选择要等下一次才生效。
+      await loadAsrModelCatalog();
+    }
     AppIconSelection startupAppIcon = currentAppIconSelection.value;
     try {
       // BUG-1920：在 runApp 前把持久化选择灌入 Flutter 侧唯一真值，避免侧栏
@@ -992,7 +995,7 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
     if (state == AppLifecycleState.resumed) {
       ref.read(appProvider).refreshSystemPalette();
       _flushPendingMines();
-      if (Platform.isIOS) {
+      if (!kKitapsenEdition && Platform.isIOS) {
         unawaited(_consumeAnkiMobileInfoReturn(
           AnkiMobileInfoReturnTrigger.appResumed,
         ));
@@ -1106,11 +1109,13 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
     // ①② 并行：切断 Bonsoir 事件源只动 mDNS 订阅，页面 flush 只写 Drift，两者互不
     //    依赖。过去串行 await 让各自的超时预算直接相加。
     await Future.wait(<Future<void>>[
-      _guardedExitStep('sync source fast shutdown', () async {
-        await appModel.syncServerController
-            .shutdownForExitFast()
-            .timeout(const Duration(milliseconds: 1500));
-      }),
+      // Kitapsen: no LAN sync server (reading it here would construct one).
+      if (!kKitapsenEdition)
+        _guardedExitStep('sync source fast shutdown', () async {
+          await appModel.syncServerController
+              .shutdownForExitFast()
+              .timeout(const Duration(milliseconds: 1500));
+        }),
       // ② flush 活跃页面 pending 进度/统计（缓存值落库，不碰退出期正在拆的 WebView）。
       _guardedExitStep('exit flush', () async {
         await ExitFlushRegistry.instance.flushAll();
@@ -1186,9 +1191,12 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
     _shutdownStarted = true;
     final AppModel appModel = ref.read(appProvider);
     try {
-      await appModel.syncServerController
-          .shutdownForExit()
-          .timeout(const Duration(milliseconds: 1500));
+      // Kitapsen: no LAN sync server (reading it here would construct one).
+      if (!kKitapsenEdition) {
+        await appModel.syncServerController
+            .shutdownForExit()
+            .timeout(const Duration(milliseconds: 1500));
+      }
     } on TimeoutException {
       debugPrint('[Fushi] sync source shutdown on exit timed out; continuing');
     } catch (e) {
@@ -1251,37 +1259,43 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
     required bool isInitial,
   }) async {
     if (data == null || !mounted) return false;
-    if (SourceUrlChannel.isSourceUrl(data)) {
+    // Kitapsen: none of these deep links exist in the edition (card sources,
+    // interconnect pairing, shortcuts, lookup, cloud OAuth, AnkiMobile).
+    if (!kKitapsenEdition && SourceUrlChannel.isSourceUrl(data)) {
       _queueCardSourceUrl(data);
       return true;
     }
-    if (FushiPairLink.tryParse(data) != null) {
+    if (!kKitapsenEdition && FushiPairLink.tryParse(data) != null) {
       _queuePairLink(data);
       return true;
     }
-    final AppShortcut? shortcut = AppShortcut.tryParse(data);
-    if (shortcut != null) {
+    final AppShortcut? shortcut =
+        kKitapsenEdition ? null : AppShortcut.tryParse(data);
+    if (!kKitapsenEdition && shortcut != null) {
       _queueAppShortcut(shortcut);
       return true;
     }
     // iOS：快捷指令 / 其它 app 打开的 `fushi://lookup?word=` 交给应用内查词弹窗
     // （Android 的这条链接由 manifest 直接路由到 :popup 查词窗，到不了这里；
     // Windows 走 argv / WM_COPYDATA，见 [lookupWordFromDeepLink]）。
-    final String? lookupWord = lookupWordFromDeepLink(data);
-    if (lookupWord != null) {
+    final String? lookupWord =
+        kKitapsenEdition ? null : lookupWordFromDeepLink(data);
+    if (!kKitapsenEdition && lookupWord != null) {
       deliverExternalLookup(lookupWord);
       return true;
     }
     final String normalized = data.toLowerCase();
-    if (normalized.startsWith('fushi://auth/')) {
+    if (!kKitapsenEdition && normalized.startsWith('fushi://auth/')) {
       await _handleOAuthRedirect(data);
       return true;
     }
-    if (normalized.startsWith(fushiAnkiFetchCallback.toLowerCase())) {
+    if (!kKitapsenEdition &&
+        normalized.startsWith(fushiAnkiFetchCallback.toLowerCase())) {
       await _handleAnkiMobileInfoCallback();
       return true;
     }
-    if (normalized.startsWith(fushiAnkiSuccessCallback.toLowerCase())) {
+    if (!kKitapsenEdition &&
+        normalized.startsWith(fushiAnkiSuccessCallback.toLowerCase())) {
       await _recordAnkiMobileMinedNote(data);
       return true;
     }

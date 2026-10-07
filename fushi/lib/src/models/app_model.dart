@@ -5144,6 +5144,9 @@ class AppModel with ChangeNotifier {
   Future<VideoDownloadBackendIdentity> _currentVideoDownloadBackendIdentity(
     QbConnectionConfig config,
   ) async {
+    if (kKitapsenEdition) {
+      throw UnsupportedError('video downloads are not part of Kitapsen');
+    }
     final String resolved =
         config.resolveBackend(embeddedSupported: _supportsEmbeddedTorrent());
     final String installationId =
@@ -5166,6 +5169,11 @@ class AppModel with ChangeNotifier {
   /// `currentVideoDownloadBackendIdentity()` 让调用方能拿到一个缺分类的落点，
   /// 已随 BUG-1879 一并删除，别再加回来。
   Future<VideoDownloadBackendTarget> currentVideoDownloadBackendTarget() async {
+    // Kitapsen: no video downloads, so no download backend (qBittorrent /
+    // built-in torrent) code is compiled in.
+    if (kKitapsenEdition) {
+      throw UnsupportedError('video downloads are not part of Kitapsen');
+    }
     final QbConnectionConfig config =
         effectiveTorrentConfig(prefsRepo.qbConnectionConfig);
     return VideoDownloadBackendTarget(
@@ -5183,6 +5191,7 @@ class AppModel with ChangeNotifier {
   /// `127.0.0.1:8080`；两套判据一松一严时「非空」会放行 → 落库 → 身份解析抛
   /// ArgumentError → 调用方当「未配置」再弹一次配置引导，用户出不去。
   String? get readyVideoDownloadBackend {
+    if (kKitapsenEdition) return null;
     final QbConnectionConfig config = effectiveTorrentConfig(qbConnectionConfig);
     if (isEmbeddedTorrentReady &&
         config.backend != QbConnectionConfig.backendQbittorrent) {
