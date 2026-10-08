@@ -305,6 +305,8 @@ class KitapsenClient implements RemoteBookClient, RemoteCoverFetcher {
     }
     final Map<String, String> params = Uri.parse(result).queryParameters;
     final String? code = params['code'];
+    // Cancel on Google's consent screen: same as closing the browser.
+    if (params['error'] == 'access_denied') return null;
     if (code == null) {
       throw SyncAuthError(
         'Kitapsen Google sign-in failed',
