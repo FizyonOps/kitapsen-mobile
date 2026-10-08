@@ -6273,5 +6273,13 @@
   "kitapsen_about_licenses": "Open-source licenses",
   "kitapsen_about_section": "About Kitapsen",
   "kitapsen_import_hint": "Pick an EPUB or PDF file to import.",
-  "kitapsen_sign_out_removes_books": "Signing out removes your downloaded Kitapsen books from this device."
+  "kitapsen_sign_out_removes_books": "Signing out removes your downloaded Kitapsen books from this device.",
+  "kitapsen_account_or": "or",
+  "kitapsen_account_continue_with_google": "Continue with Google",
+  "kitapsen_account_continue_with_apple": "Continue with Apple",
+  "kitapsen_account_social_sign_in_failed": "Sign-in failed. Please try again.",
+  "kitapsen_account_deleted": "This Kitapsen account has been deleted.",
+  "kitapsen_account_delete": "Delete account",
+  "kitapsen_account_delete_confirm": "Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.",
+  "kitapsen_account_delete_failed": "The account could not be deleted. Please try again."
 }

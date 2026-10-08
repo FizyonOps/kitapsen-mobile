@@ -255,6 +255,9 @@ class SyncRepository {
   static const _keyKitapsenUrl = 'sync_kitapsen_url';
   static const _keyKitapsenUsername = 'sync_kitapsen_username';
   static const _keyKitapsenPassword = 'sync_kitapsen_password';
+  // Google / Apple sign-in stores the app token kitapsen.com handed out
+  // (`POST /auth/mobile/session`) instead of a password.
+  static const _keyKitapsenToken = 'sync_kitapsen_token';
 
   static const String syncStatsPreferenceKey = _keySyncStats;
   static const String syncAudioBookPreferenceKey = _keySyncAudioBook;
@@ -761,24 +764,40 @@ class SyncRepository {
 
   // ── Kitapsen account ──────────────────────────────────────────────
 
-  /// 已登录的 Kitapsen 账号；三项缺一即视为未登录。
-  Future<({String url, String username, String password})?>
+  /// 已登录的 Kitapsen 账号；地址、用户名与凭据（密码或 app token）缺一即视为未登录。
+  /// A Google / Apple account has a [token] and an empty password.
+  Future<({String url, String username, String password, String? token})?>
       getKitapsenAccount() async {
     final String? url = await _getStringOrNull(_keyKitapsenUrl);
     final String? username = await _getStringOrNull(_keyKitapsenUsername);
     final String? encoded = await _getStringOrNull(_keyKitapsenPassword);
-    if (url == null || username == null || encoded == null) return null;
-    return (url: url, username: username, password: _decodeSecret(encoded));
+    final String? encodedToken = await _getStringOrNull(_keyKitapsenToken);
+    if (url == null || username == null) return null;
+    if (encoded == null && encodedToken == null) return null;
+    return (
+      url: url,
+      username: username,
+      password: encoded == null ? '' : _decodeSecret(encoded),
+      token: encodedToken == null ? null : _decodeSecret(encodedToken),
+    );
   }
 
+  /// Stores a password account, or with [token] a Google / Apple account.
   Future<void> setKitapsenAccount({
     required String url,
     required String username,
-    required String password,
+    String password = '',
+    String? token,
   }) async {
     await _setString(_keyKitapsenUrl, url);
     await _setString(_keyKitapsenUsername, username);
-    await _setString(_keyKitapsenPassword, _encodeSecret(password));
+    if (token != null) {
+      await _setString(_keyKitapsenToken, _encodeSecret(token));
+      await _deleteKey(_keyKitapsenPassword);
+    } else {
+      await _setString(_keyKitapsenPassword, _encodeSecret(password));
+      await _deleteKey(_keyKitapsenToken);
+    }
   }
 
   Future<void> clearKitapsenAccount() async {
@@ -787,6 +806,7 @@ class SyncRepository {
                 _keyKitapsenUrl,
                 _keyKitapsenUsername,
                 _keyKitapsenPassword,
+                _keyKitapsenToken,
               ])))
         .go();
   }
@@ -1557,6 +1577,7 @@ class SyncRepository {
     _keyKitapsenUrl,
     _keyKitapsenUsername,
     _keyKitapsenPassword,
+    _keyKitapsenToken,
     _keyFtpHost,
     _keyFtpPort,
     _keyFtpUsername,

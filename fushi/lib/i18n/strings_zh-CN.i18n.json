@@ -6273,5 +6273,13 @@
   "kitapsen_about_licenses": "开源许可",
   "kitapsen_about_section": "关于 Kitapsen",
   "kitapsen_import_hint": "选择要导入的 EPUB 或 PDF 文件。",
-  "kitapsen_sign_out_removes_books": "退出登录会从本设备移除已下载的 Kitapsen 书籍。"
+  "kitapsen_sign_out_removes_books": "退出登录会从本设备移除已下载的 Kitapsen 书籍。",
+  "kitapsen_account_or": "或",
+  "kitapsen_account_continue_with_google": "使用 Google 继续",
+  "kitapsen_account_continue_with_apple": "通过 Apple 继续",
+  "kitapsen_account_social_sign_in_failed": "登录失败，请重试。",
+  "kitapsen_account_deleted": "此 Kitapsen 账号已被删除。",
+  "kitapsen_account_delete": "删除账号",
+  "kitapsen_account_delete_confirm": "你的 Kitapsen 账号将被删除，并退出此设备。你将无法再阅读书库中的书籍。此操作无法撤销。",
+  "kitapsen_account_delete_failed": "无法删除账号，请重试。"
 }

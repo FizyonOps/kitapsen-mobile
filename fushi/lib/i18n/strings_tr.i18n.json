@@ -6273,5 +6273,13 @@
   "kitapsen_about_licenses": "Açık kaynak lisansları",
   "kitapsen_about_section": "Kitapsen hakkında",
   "kitapsen_import_hint": "İçe aktarmak için bir EPUB veya PDF dosyası seçin.",
-  "kitapsen_sign_out_removes_books": "Çıkış yaptığınızda indirdiğiniz Kitapsen kitapları bu cihazdan kaldırılır."
+  "kitapsen_sign_out_removes_books": "Çıkış yaptığınızda indirdiğiniz Kitapsen kitapları bu cihazdan kaldırılır.",
+  "kitapsen_account_or": "veya",
+  "kitapsen_account_continue_with_google": "Google ile devam et",
+  "kitapsen_account_continue_with_apple": "Apple ile devam et",
+  "kitapsen_account_social_sign_in_failed": "Giriş yapılamadı. Lütfen tekrar deneyin.",
+  "kitapsen_account_deleted": "Bu Kitapsen hesabı silinmiş.",
+  "kitapsen_account_delete": "Hesabı sil",
+  "kitapsen_account_delete_confirm": "Kitapsen hesabınız silinecek ve bu cihazdaki oturumunuz kapatılacak. Kitaplığınızdaki kitapları artık okuyamazsınız. Bu işlem geri alınamaz.",
+  "kitapsen_account_delete_failed": "Hesap silinemedi. Lütfen tekrar deneyin."
 }

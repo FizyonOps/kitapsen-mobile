@@ -188,6 +188,8 @@ dependencies:
   window_manager: ^0.5.1
   qr_flutter: ^4.1.0
   mobile_scanner: ^7.4.2
+  flutter_web_auth_2: ^5.1.0
+  sign_in_with_apple: ^8.2.0
 dev_dependencies:
   build_runner: ^2.3.3
   just_audio_platform_interface: ^4.6.0

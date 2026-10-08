@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 106675 (6275 per locale)
+/// Strings: 106811 (6283 per locale)
 ///
-/// Built on 2026-10-06 at 22:27 UTC
+/// Built on 2026-10-08 at 15:49 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -9037,6 +9037,18 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get kitapsen_import_hint => 'Pick an EPUB or PDF file to import.';
   String get kitapsen_sign_out_removes_books =>
       'Signing out removes your downloaded Kitapsen books from this device.';
+  String get kitapsen_account_or => 'or';
+  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  String get kitapsen_account_social_sign_in_failed =>
+      'Sign-in failed. Please try again.';
+  String get kitapsen_account_deleted =>
+      'This Kitapsen account has been deleted.';
+  String get kitapsen_account_delete => 'Delete account';
+  String get kitapsen_account_delete_confirm =>
+      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+  String get kitapsen_account_delete_failed =>
+      'The account could not be deleted. Please try again.';
 }
 
 // Path: <root>
@@ -24137,6 +24149,26 @@ class _StringsAr extends _StringsEn {
   @override
   String get kitapsen_sign_out_removes_books =>
       'Signing out removes your downloaded Kitapsen books from this device.';
+  @override
+  String get kitapsen_account_or => 'or';
+  @override
+  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  @override
+  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  @override
+  String get kitapsen_account_social_sign_in_failed =>
+      'Sign-in failed. Please try again.';
+  @override
+  String get kitapsen_account_deleted =>
+      'This Kitapsen account has been deleted.';
+  @override
+  String get kitapsen_account_delete => 'Delete account';
+  @override
+  String get kitapsen_account_delete_confirm =>
+      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+  @override
+  String get kitapsen_account_delete_failed =>
+      'The account could not be deleted. Please try again.';
 }
 
 // Path: <root>
@@ -39629,6 +39661,26 @@ class _StringsDe extends _StringsEn {
   @override
   String get kitapsen_sign_out_removes_books =>
       'Signing out removes your downloaded Kitapsen books from this device.';
+  @override
+  String get kitapsen_account_or => 'or';
+  @override
+  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  @override
+  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  @override
+  String get kitapsen_account_social_sign_in_failed =>
+      'Sign-in failed. Please try again.';
+  @override
+  String get kitapsen_account_deleted =>
+      'This Kitapsen account has been deleted.';
+  @override
+  String get kitapsen_account_delete => 'Delete account';
+  @override
+  String get kitapsen_account_delete_confirm =>
+      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+  @override
+  String get kitapsen_account_delete_failed =>
+      'The account could not be deleted. Please try again.';
 }
 
 // Path: <root>
@@ -55180,6 +55232,26 @@ class _StringsEs extends _StringsEn {
   @override
   String get kitapsen_sign_out_removes_books =>
       'Signing out removes your downloaded Kitapsen books from this device.';
+  @override
+  String get kitapsen_account_or => 'or';
+  @override
+  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  @override
+  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  @override
+  String get kitapsen_account_social_sign_in_failed =>
+      'Sign-in failed. Please try again.';
+  @override
+  String get kitapsen_account_deleted =>
+      'This Kitapsen account has been deleted.';
+  @override
+  String get kitapsen_account_delete => 'Delete account';
+  @override
+  String get kitapsen_account_delete_confirm =>
+      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+  @override
+  String get kitapsen_account_delete_failed =>
+      'The account could not be deleted. Please try again.';
 }
 
 // Path: <root>
@@ -70809,6 +70881,26 @@ class _StringsFr extends _StringsEn {
   @override
   String get kitapsen_sign_out_removes_books =>
       'Signing out removes your downloaded Kitapsen books from this device.';
+  @override
+  String get kitapsen_account_or => 'or';
+  @override
+  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  @override
+  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  @override
+  String get kitapsen_account_social_sign_in_failed =>
+      'Sign-in failed. Please try again.';
+  @override
+  String get kitapsen_account_deleted =>
+      'This Kitapsen account has been deleted.';
+  @override
+  String get kitapsen_account_delete => 'Delete account';
+  @override
+  String get kitapsen_account_delete_confirm =>
+      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+  @override
+  String get kitapsen_account_delete_failed =>
+      'The account could not be deleted. Please try again.';
 }
 
 // Path: <root>
@@ -86096,6 +86188,26 @@ class _StringsId extends _StringsEn {
   @override
   String get kitapsen_sign_out_removes_books =>
       'Signing out removes your downloaded Kitapsen books from this device.';
+  @override
+  String get kitapsen_account_or => 'or';
+  @override
+  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  @override
+  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  @override
+  String get kitapsen_account_social_sign_in_failed =>
+      'Sign-in failed. Please try again.';
+  @override
+  String get kitapsen_account_deleted =>
+      'This Kitapsen account has been deleted.';
+  @override
+  String get kitapsen_account_delete => 'Delete account';
+  @override
+  String get kitapsen_account_delete_confirm =>
+      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+  @override
+  String get kitapsen_account_delete_failed =>
+      'The account could not be deleted. Please try again.';
 }
 
 // Path: <root>
@@ -101545,6 +101657,26 @@ class _StringsIt extends _StringsEn {
   @override
   String get kitapsen_sign_out_removes_books =>
       'Signing out removes your downloaded Kitapsen books from this device.';
+  @override
+  String get kitapsen_account_or => 'or';
+  @override
+  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  @override
+  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  @override
+  String get kitapsen_account_social_sign_in_failed =>
+      'Sign-in failed. Please try again.';
+  @override
+  String get kitapsen_account_deleted =>
+      'This Kitapsen account has been deleted.';
+  @override
+  String get kitapsen_account_delete => 'Delete account';
+  @override
+  String get kitapsen_account_delete_confirm =>
+      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+  @override
+  String get kitapsen_account_delete_failed =>
+      'The account could not be deleted. Please try again.';
 }
 
 // Path: <root>
@@ -116025,6 +116157,26 @@ class _StringsJa extends _StringsEn {
   @override
   String get kitapsen_sign_out_removes_books =>
       'Signing out removes your downloaded Kitapsen books from this device.';
+  @override
+  String get kitapsen_account_or => 'or';
+  @override
+  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  @override
+  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  @override
+  String get kitapsen_account_social_sign_in_failed =>
+      'Sign-in failed. Please try again.';
+  @override
+  String get kitapsen_account_deleted =>
+      'This Kitapsen account has been deleted.';
+  @override
+  String get kitapsen_account_delete => 'Delete account';
+  @override
+  String get kitapsen_account_delete_confirm =>
+      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+  @override
+  String get kitapsen_account_delete_failed =>
+      'The account could not be deleted. Please try again.';
 }
 
 // Path: <root>
@@ -130510,6 +130662,26 @@ class _StringsKo extends _StringsEn {
   @override
   String get kitapsen_sign_out_removes_books =>
       'Signing out removes your downloaded Kitapsen books from this device.';
+  @override
+  String get kitapsen_account_or => 'or';
+  @override
+  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  @override
+  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  @override
+  String get kitapsen_account_social_sign_in_failed =>
+      'Sign-in failed. Please try again.';
+  @override
+  String get kitapsen_account_deleted =>
+      'This Kitapsen account has been deleted.';
+  @override
+  String get kitapsen_account_delete => 'Delete account';
+  @override
+  String get kitapsen_account_delete_confirm =>
+      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+  @override
+  String get kitapsen_account_delete_failed =>
+      'The account could not be deleted. Please try again.';
 }
 
 // Path: <root>
@@ -145906,6 +146078,26 @@ class _StringsNl extends _StringsEn {
   @override
   String get kitapsen_sign_out_removes_books =>
       'Signing out removes your downloaded Kitapsen books from this device.';
+  @override
+  String get kitapsen_account_or => 'or';
+  @override
+  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  @override
+  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  @override
+  String get kitapsen_account_social_sign_in_failed =>
+      'Sign-in failed. Please try again.';
+  @override
+  String get kitapsen_account_deleted =>
+      'This Kitapsen account has been deleted.';
+  @override
+  String get kitapsen_account_delete => 'Delete account';
+  @override
+  String get kitapsen_account_delete_confirm =>
+      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+  @override
+  String get kitapsen_account_delete_failed =>
+      'The account could not be deleted. Please try again.';
 }
 
 // Path: <root>
@@ -161375,6 +161567,26 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get kitapsen_sign_out_removes_books =>
       'Signing out removes your downloaded Kitapsen books from this device.';
+  @override
+  String get kitapsen_account_or => 'or';
+  @override
+  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  @override
+  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  @override
+  String get kitapsen_account_social_sign_in_failed =>
+      'Sign-in failed. Please try again.';
+  @override
+  String get kitapsen_account_deleted =>
+      'This Kitapsen account has been deleted.';
+  @override
+  String get kitapsen_account_delete => 'Delete account';
+  @override
+  String get kitapsen_account_delete_confirm =>
+      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+  @override
+  String get kitapsen_account_delete_failed =>
+      'The account could not be deleted. Please try again.';
 }
 
 // Path: <root>
@@ -176788,6 +177000,26 @@ class _StringsRu extends _StringsEn {
   @override
   String get kitapsen_sign_out_removes_books =>
       'Signing out removes your downloaded Kitapsen books from this device.';
+  @override
+  String get kitapsen_account_or => 'or';
+  @override
+  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  @override
+  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  @override
+  String get kitapsen_account_social_sign_in_failed =>
+      'Sign-in failed. Please try again.';
+  @override
+  String get kitapsen_account_deleted =>
+      'This Kitapsen account has been deleted.';
+  @override
+  String get kitapsen_account_delete => 'Delete account';
+  @override
+  String get kitapsen_account_delete_confirm =>
+      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+  @override
+  String get kitapsen_account_delete_failed =>
+      'The account could not be deleted. Please try again.';
 }
 
 // Path: <root>
@@ -191878,6 +192110,26 @@ class _StringsTh extends _StringsEn {
   @override
   String get kitapsen_sign_out_removes_books =>
       'Signing out removes your downloaded Kitapsen books from this device.';
+  @override
+  String get kitapsen_account_or => 'or';
+  @override
+  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  @override
+  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  @override
+  String get kitapsen_account_social_sign_in_failed =>
+      'Sign-in failed. Please try again.';
+  @override
+  String get kitapsen_account_deleted =>
+      'This Kitapsen account has been deleted.';
+  @override
+  String get kitapsen_account_delete => 'Delete account';
+  @override
+  String get kitapsen_account_delete_confirm =>
+      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+  @override
+  String get kitapsen_account_delete_failed =>
+      'The account could not be deleted. Please try again.';
 }
 
 // Path: <root>
@@ -207172,6 +207424,25 @@ class _StringsTr extends _StringsEn {
   @override
   String get kitapsen_sign_out_removes_books =>
       'Çıkış yaptığınızda indirdiğiniz Kitapsen kitapları bu cihazdan kaldırılır.';
+  @override
+  String get kitapsen_account_or => 'veya';
+  @override
+  String get kitapsen_account_continue_with_google => 'Google ile devam et';
+  @override
+  String get kitapsen_account_continue_with_apple => 'Apple ile devam et';
+  @override
+  String get kitapsen_account_social_sign_in_failed =>
+      'Giriş yapılamadı. Lütfen tekrar deneyin.';
+  @override
+  String get kitapsen_account_deleted => 'Bu Kitapsen hesabı silinmiş.';
+  @override
+  String get kitapsen_account_delete => 'Hesabı sil';
+  @override
+  String get kitapsen_account_delete_confirm =>
+      'Kitapsen hesabınız silinecek ve bu cihazdaki oturumunuz kapatılacak. Kitaplığınızdaki kitapları artık okuyamazsınız. Bu işlem geri alınamaz.';
+  @override
+  String get kitapsen_account_delete_failed =>
+      'Hesap silinemedi. Lütfen tekrar deneyin.';
 }
 
 // Path: <root>
@@ -222393,6 +222664,26 @@ class _StringsVi extends _StringsEn {
   @override
   String get kitapsen_sign_out_removes_books =>
       'Signing out removes your downloaded Kitapsen books from this device.';
+  @override
+  String get kitapsen_account_or => 'or';
+  @override
+  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  @override
+  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  @override
+  String get kitapsen_account_social_sign_in_failed =>
+      'Sign-in failed. Please try again.';
+  @override
+  String get kitapsen_account_deleted =>
+      'This Kitapsen account has been deleted.';
+  @override
+  String get kitapsen_account_delete => 'Delete account';
+  @override
+  String get kitapsen_account_delete_confirm =>
+      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+  @override
+  String get kitapsen_account_delete_failed =>
+      'The account could not be deleted. Please try again.';
 }
 
 // Path: <root>
@@ -236312,6 +236603,23 @@ class _StringsZhCn extends _StringsEn {
   String get kitapsen_import_hint => '选择要导入的 EPUB 或 PDF 文件。';
   @override
   String get kitapsen_sign_out_removes_books => '退出登录会从本设备移除已下载的 Kitapsen 书籍。';
+  @override
+  String get kitapsen_account_or => '或';
+  @override
+  String get kitapsen_account_continue_with_google => '使用 Google 继续';
+  @override
+  String get kitapsen_account_continue_with_apple => '通过 Apple 继续';
+  @override
+  String get kitapsen_account_social_sign_in_failed => '登录失败，请重试。';
+  @override
+  String get kitapsen_account_deleted => '此 Kitapsen 账号已被删除。';
+  @override
+  String get kitapsen_account_delete => '删除账号';
+  @override
+  String get kitapsen_account_delete_confirm =>
+      '你的 Kitapsen 账号将被删除，并退出此设备。你将无法再阅读书库中的书籍。此操作无法撤销。';
+  @override
+  String get kitapsen_account_delete_failed => '无法删除账号，请重试。';
 }
 
 // Path: <root>
@@ -250265,4 +250573,24 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get kitapsen_sign_out_removes_books =>
       'Signing out removes your downloaded Kitapsen books from this device.';
+  @override
+  String get kitapsen_account_or => 'or';
+  @override
+  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  @override
+  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  @override
+  String get kitapsen_account_social_sign_in_failed =>
+      'Sign-in failed. Please try again.';
+  @override
+  String get kitapsen_account_deleted =>
+      'This Kitapsen account has been deleted.';
+  @override
+  String get kitapsen_account_delete => 'Delete account';
+  @override
+  String get kitapsen_account_delete_confirm =>
+      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+  @override
+  String get kitapsen_account_delete_failed =>
+      'The account could not be deleted. Please try again.';
 }

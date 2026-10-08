@@ -79,10 +79,25 @@
                 />
             <!-- ReceiveIntent owns URL dispatch; do not also create a Flutter route. -->
             <meta-data android:name="flutter_deeplinking_enabled" android:value="false" />
-            <!-- Kitapsen registers no external URL scheme: fushi://auth|source|pair
-                 belonged to cloud OAuth, Anki source links and device pairing, none
-                 of which ship. App shortcuts still use fushi://shortcut/<id>, but as
-                 an explicit intent (AppShortcutsHelper), so no filter is needed. -->
+            <!-- The only external URL scheme is kitapsen://auth (Google sign-in,
+                 below): fushi://auth|source|pair belonged to cloud OAuth, Anki
+                 source links and device pairing, none of which ship. App shortcuts
+                 still use fushi://shortcut/<id>, but as an explicit intent
+                 (AppShortcutsHelper), so no filter is needed. -->
+        </activity>
+        <!-- Google sign-in (KitapsenSocialSignIn): kitapsen.com ends the
+             Custom Tab on kitapsen://auth?code=…, which flutter_web_auth_2
+             hands back to the waiting sign-in call. -->
+        <activity
+            android:name="com.linusu.flutter_web_auth_2.CallbackActivity"
+            android:exported="true"
+            android:taskAffinity="">
+            <intent-filter android:label="flutter_web_auth_2">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="kitapsen" android:host="auth" />
+            </intent-filter>
         </activity>
 
         <!-- Launcher icon aliases for runtime icon switching -->

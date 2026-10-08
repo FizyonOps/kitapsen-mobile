@@ -1,9 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 import 'dart:typed_data';
 
+import 'package:crypto/crypto.dart' show sha256;
 import 'package:drift/drift.dart' show Value;
+import 'package:flutter/services.dart' show PlatformException;
+import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 import 'package:fushi/src/media/sources/reader_fushi_source.dart';
 import 'package:fushi/src/sync/remote_book_client.dart';
 import 'package:fushi/src/sync/remote_cover_fetcher.dart';
@@ -16,6 +20,7 @@ import 'package:fushi_core/fushi_core.dart';
 import 'package:fushi_engine/sync/fushi_library_host_service.dart';
 import 'package:fushi_engine/sync/ttu_filename.dart';
 import 'package:fushi_engine/utils/net/app_http.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 /// Default store address; the API lives under `/api/v1` on the same origin.
 const String kKitapsenDefaultUrl = 'https://kitapsen.com';
@@ -66,17 +71,20 @@ Future<void> forgetKitapsenBook(FushiDatabase db, String bookUid) async {
 }
 
 /// Credentials of a Kitapsen account (stored by
-/// [SyncRepository.setKitapsenAccount]).
+/// [SyncRepository.setKitapsenAccount]): a password, or for an account that
+/// signed in with Google / Apple the app [token] kitapsen.com handed out.
 class KitapsenAccount {
   const KitapsenAccount({
     required this.url,
     required this.username,
-    required this.password,
+    this.password = '',
+    this.token,
   });
 
   final String url;
   final String username;
   final String password;
+  final String? token;
 
   /// `https://kitapsen.com` → `https://kitapsen.com/api/v1`. An address that
   /// already ends in `/api/v1` is kept as is.
@@ -137,8 +145,8 @@ class KitapsenClient implements RemoteBookClient, RemoteCoverFetcher {
 
   /// The client for the signed-in account, or null when nobody is signed in.
   static Future<KitapsenClient?> restore(FushiDatabase db) async {
-    final ({String url, String username, String password})? stored =
-        await SyncRepository(db).getKitapsenAccount();
+    final ({String url, String username, String password, String? token})?
+    stored = await SyncRepository(db).getKitapsenAccount();
     if (stored == null) return null;
     return KitapsenClient(
       db: db,
@@ -146,6 +154,7 @@ class KitapsenClient implements RemoteBookClient, RemoteCoverFetcher {
         url: stored.url,
         username: stored.username,
         password: stored.password,
+        token: stored.token,
       ),
     );
   }
@@ -164,28 +173,37 @@ class KitapsenClient implements RemoteBookClient, RemoteCoverFetcher {
 
   // ── Session ───────────────────────────────────────────────────────
 
-  /// Logs in with the stored credentials. Throws [SyncAuthError] when the
-  /// server rejects them.
+  /// Logs in with the stored credentials (the password, or the app token of a
+  /// Google / Apple account). Throws [SyncAuthError] when the server rejects
+  /// them.
   Future<void> signIn() async {
     _sessions.remove(_sessionKey);
+    final String? token = account.token;
     final HttpClientRequest request = await _client().postUrl(
-      Uri.parse('${account.apiBase}/auth/login'),
+      Uri.parse(
+        '${account.apiBase}${token == null ? '/auth/login' : '/auth/mobile/session'}',
+      ),
     );
     request.followRedirects = false;
-    request.headers.contentType = ContentType(
-      'application',
-      'x-www-form-urlencoded',
-      charset: 'utf-8',
-    );
     request.headers.set(HttpHeaders.acceptHeader, 'application/json');
-    request.write(
-      Uri(
-        queryParameters: <String, String>{
-          'username': account.username,
-          'password': account.password,
-        },
-      ).query,
-    );
+    if (token != null) {
+      request.headers.contentType = ContentType.json;
+      request.write(jsonEncode(<String, String>{'token': token}));
+    } else {
+      request.headers.contentType = ContentType(
+        'application',
+        'x-www-form-urlencoded',
+        charset: 'utf-8',
+      );
+      request.write(
+        Uri(
+          queryParameters: <String, String>{
+            'username': account.username,
+            'password': account.password,
+          },
+        ).query,
+      );
+    }
     final HttpClientResponse response = await request.close();
     final String body = await utf8.decodeStream(response);
     if (response.statusCode == HttpStatus.unauthorized ||
@@ -217,19 +235,158 @@ class KitapsenClient implements RemoteBookClient, RemoteCoverFetcher {
     );
   }
 
-  /// Ends the server session (best effort) and forgets it locally.
+  /// Ends the server session and revokes the app token of a Google / Apple
+  /// account (both best effort), and forgets the session locally.
   Future<void> signOut() async {
     final _KitapsenSession? session = _sessions.remove(_sessionKey);
-    if (session == null) return;
+    final String? token = account.token;
     try {
-      final HttpClientRequest request = await _client().postUrl(
-        Uri.parse('${account.apiBase}/auth/logout'),
-      );
-      _authorize(request, session, isWrite: true);
-      await (await request.close()).drain<void>();
+      if (session != null) {
+        final HttpClientRequest request = await _client().postUrl(
+          Uri.parse('${account.apiBase}/auth/logout'),
+        );
+        _authorize(request, session, isWrite: true);
+        await (await request.close()).drain<void>();
+      }
+      if (token != null) {
+        await _postJson(
+          account.apiBase,
+          '/auth/mobile/revoke',
+          <String, String>{'token': token},
+        );
+      }
     } catch (e, stack) {
       ErrorLogService.instance.log('KitapsenClient.signOut', e, stack);
     }
+  }
+
+  /// Deletes the Kitapsen account itself (`DELETE /users/me`, the website's
+  /// own account deletion). The caller still signs the app out.
+  Future<void> deleteAccount() async {
+    final HttpClientResponse response = await _send('DELETE', '/users/me');
+    _checkStatus(response.statusCode, await utf8.decodeStream(response));
+    _sessions.remove(_sessionKey);
+  }
+
+  // ── Google / Apple sign-in ────────────────────────────────────────
+
+  /// Callback scheme kitapsen.com ends the Google sign-in browser on
+  /// (`kitapsen://auth?code=…` or `?error=…`).
+  static const String _authCallbackScheme = 'kitapsen';
+
+  /// Signs in with Google in the system browser (ASWebAuthenticationSession /
+  /// Custom Tabs) through kitapsen.com's own Google client, and returns the
+  /// account holding the app token. Null when the person closes the browser.
+  ///
+  /// The browser returns a one-time code bound to a PKCE challenge, so the
+  /// app token never travels through the URL.
+  static Future<KitapsenAccount?> signInWithGoogle(String url) async {
+    final String apiBase = KitapsenAccount(url: url, username: '').apiBase;
+    final Random random = Random.secure();
+    final String verifier = base64Url
+        .encode(List<int>.generate(48, (_) => random.nextInt(256)))
+        .replaceAll('=', '');
+    final String challenge = base64Url
+        .encode(sha256.convert(ascii.encode(verifier)).bytes)
+        .replaceAll('=', '');
+    final String result;
+    try {
+      result = await FlutterWebAuth2.authenticate(
+        url: Uri.parse('$apiBase/auth/mobile/oauth/google')
+            .replace(
+              queryParameters: <String, String>{'code_challenge': challenge},
+            )
+            .toString(),
+        callbackUrlScheme: _authCallbackScheme,
+      );
+    } on PlatformException catch (e) {
+      if (e.code == 'CANCELED') return null;
+      rethrow;
+    }
+    final Map<String, String> params = Uri.parse(result).queryParameters;
+    final String? code = params['code'];
+    if (code == null) {
+      throw SyncAuthError(
+        'Kitapsen Google sign-in failed',
+        kind: params['error'] == 'account_deleted'
+            ? SyncAuthFailureKind.forbidden
+            : SyncAuthFailureKind.credentials,
+        serverReason: params['error'],
+      );
+    }
+    return _accountFromSignIn(
+      url,
+      await _postJson(apiBase, '/auth/mobile/google', <String, String>{
+        'code': code,
+        'code_verifier': verifier,
+      }),
+    );
+  }
+
+  /// Signs in with Apple (native, iOS) and returns the account holding the
+  /// app token. Null when the person cancels the Apple sheet.
+  static Future<KitapsenAccount?> signInWithApple(String url) async {
+    final AuthorizationCredentialAppleID credential;
+    try {
+      credential = await SignInWithApple.getAppleIDCredential(
+        scopes: <AppleIDAuthorizationScopes>[
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+      );
+    } on SignInWithAppleAuthorizationException catch (e) {
+      if (e.code == AuthorizationErrorCode.canceled) return null;
+      rethrow;
+    }
+    final String? identityToken = credential.identityToken;
+    if (identityToken == null) {
+      throw SyncAuthError('Apple returned no identity token');
+    }
+    // Apple shares the name only on the first authorization, and only with
+    // the app, so it travels next to the token.
+    return _accountFromSignIn(
+      url,
+      await _postJson(
+        KitapsenAccount(url: url, username: '').apiBase,
+        '/auth/mobile/apple',
+        <String, String>{
+          'identity_token': identityToken,
+          if (credential.givenName != null) 'given_name': credential.givenName!,
+          if (credential.familyName != null)
+            'family_name': credential.familyName!,
+        },
+      ),
+    );
+  }
+
+  static KitapsenAccount _accountFromSignIn(String url, Object? body) {
+    if (body is! Map<String, dynamic> || body['token'] is! String) {
+      throw SyncBackendError('Kitapsen sign-in returned no token');
+    }
+    return KitapsenAccount(
+      url: url,
+      username: body['email'] as String? ?? body['username'] as String,
+      token: body['token'] as String,
+    );
+  }
+
+  /// Unauthenticated JSON POST (the sign-in endpoints).
+  static Future<Object?> _postJson(
+    String apiBase,
+    String path,
+    Map<String, String> payload,
+  ) async {
+    final HttpClientRequest request = await _client().postUrl(
+      Uri.parse('$apiBase$path'),
+    );
+    request.followRedirects = false;
+    request.headers.set(HttpHeaders.acceptHeader, 'application/json');
+    request.headers.contentType = ContentType.json;
+    request.write(jsonEncode(payload));
+    final HttpClientResponse response = await request.close();
+    final String body = await utf8.decodeStream(response);
+    _checkStatus(response.statusCode, body);
+    return _decodeJson(body);
   }
 
   void _authorize(
