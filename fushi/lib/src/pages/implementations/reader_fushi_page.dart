@@ -1,4 +1,6 @@
 import 'package:fushi/src/models/kitapsen_edition.dart';
+import 'package:fushi/src/pages/implementations/kitapsen_reader_annotations.dart';
+import 'package:fushi/src/sync/kitapsen_annotations.dart';
 import 'package:fushi/src/media/audiobook/audiobook_controller.dart';
 import 'package:fushi_dictionary/fushi_dictionary.dart';
 import 'dart:async';
@@ -2618,6 +2620,9 @@ class _ReaderFushiPageState extends BaseSourcePageState<ReaderFushiPage>
     _openTrace.mark('parsed');
     // 同合集卷上下文与首屏无关，后台装载；失败只记日志（卷切换入口不出现）。
     unawaited(_loadVolumeContext(db));
+    // Kitapsen: bring in bookmarks / highlights made on kitapsen.com or
+    // another device (and send ones made here), then redraw highlights.
+    if (kKitapsenEdition) unawaited(_syncKitapsenAnnotations(db));
 
     // Source links must resolve exactly. Ordinary stale bookmarks may fall
     // back to a saved position, which would show unrelated text for this card.

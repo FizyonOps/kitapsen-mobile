@@ -524,9 +524,9 @@ extension _ReaderChrome on _ReaderFushiPageState {
             clipBehavior: Clip.antiAlias,
             child: Row(
               mainAxisSize: MainAxisSize.min,
-              // Kitapsen: copy only. No dictionary lookup, sentence
-              // favorites or audio clips, and store books never leave the
-              // app through share / web search.
+              // Kitapsen: copy and highlight (synced to kitapsen.com). No
+              // dictionary lookup or audio clips, and store books never leave
+              // the app through share / web search.
               children: <Widget>[
                 if (!kKitapsenEdition)
                   button(Icons.search_outlined, t.search, 'search'),
@@ -536,8 +536,10 @@ extension _ReaderChrome on _ReaderFushiPageState {
                 if (isAndroidPlatform && !kKitapsenEdition)
                   button(Icons.travel_explore, t.selection_web_search,
                       'webSearch'),
-                if (!kKitapsenEdition)
-                  button(Icons.star_border, t.action_favorite, 'favorite'),
+                kKitapsenEdition
+                    ? button(Icons.border_color_outlined,
+                        t.kitapsen_reader_highlight, 'favorite')
+                    : button(Icons.star_border, t.action_favorite, 'favorite'),
                 if (hasAudio && !kKitapsenEdition)
                   button(Icons.movie_creation_outlined, t.audiobook_export_clip,
                       'export'),
@@ -2322,6 +2324,21 @@ extension _ReaderChrome on _ReaderFushiPageState {
         }
       },
       onJumpToFavorite: _jumpToFavoriteSentence,
+      extraLocationSection: kKitapsenEdition && !_lyricsMode
+          ? KitapsenReaderAnnotations(
+              db: appModel.database,
+              bookKey: widget.bookKey,
+              currentPosition: () async {
+                await _syncPositionFromWebViewProgress();
+                return (
+                  section: _lastProgressSection < 0 ? _currentChapter : _lastProgressSection,
+                  fraction: _lastProgressValue,
+                  label: _currentChapterLabel(),
+                );
+              },
+              onJump: _jumpToSectionFraction,
+            )
+          : null,
       onPlayFavorite: _audiobookController == null
           ? null
           : (fav) async {
@@ -2355,6 +2372,17 @@ extension _ReaderChrome on _ReaderFushiPageState {
   // ── 同合集卷切换（BUG-2521） ──────────────────────────────────────────
 
   /// 开书后装载同合集卷上下文；当前书的已解析结构 seed 进缓存（不重复解析）。
+  /// Kitapsen: syncs this book's bookmarks and highlights with kitapsen.com,
+  /// then redraws the open chapter's highlights (new ones may have arrived).
+  Future<void> _syncKitapsenAnnotations(FushiDatabase db) async {
+    await KitapsenAnnotations.syncBook(db, widget.bookKey);
+    if (!mounted) return;
+    _invalidateFavoriteSentenceCache();
+    if (_controller != null && !_lyricsMode) {
+      await _refreshSectionHighlights(_currentChapter);
+    }
+  }
+
   Future<void> _loadVolumeContext(FushiDatabase db) async {
     final String? uid = _bookUid;
     final EpubBook? book = _book;

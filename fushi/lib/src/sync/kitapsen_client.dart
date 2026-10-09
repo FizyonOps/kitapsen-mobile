@@ -10,6 +10,7 @@ import 'package:flutter/services.dart' show PlatformException;
 import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 import 'package:fushi/src/media/sources/reader_fushi_source.dart';
 import 'package:fushi/src/sync/remote_book_client.dart';
+import 'package:fushi/src/sync/kitapsen_annotations.dart';
 import 'package:fushi/src/sync/remote_cover_fetcher.dart';
 import 'package:fushi/src/sync/remote_library_source.dart';
 import 'package:fushi/src/sync/sync_backend.dart'
@@ -852,6 +853,61 @@ class KitapsenClient implements RemoteBookClient, RemoteCoverFetcher {
     }
   }
 
+  // ── Annotation locations ──────────────────────────────────────────
+
+  /// The location string of an annotation at [fraction] (0..1) into section
+  /// [section]: a book-wide percentage with four decimals, the convention
+  /// reading progress already uses (the web reader jumps to it with
+  /// goToPercent; four decimals keep it within a character or so).
+  static String percentLocation(
+    EpubBookRow book,
+    int section,
+    double fraction,
+  ) {
+    final List<int> chars = _sectionChars(book);
+    final int total = chars.fold<int>(0, (int a, int b) => a + b);
+    if (total <= 0) return '0.0000';
+    final int s = section.clamp(0, chars.length - 1);
+    final int before = chars.take(s).fold<int>(0, (int a, int b) => a + b);
+    final double at = before + fraction.clamp(0.0, 1.0) * chars[s];
+    return (at * 100 / total).clamp(0, 100).toStringAsFixed(4);
+  }
+
+  /// Section and in-section fraction of an annotation location: a
+  /// percentage written by this app, an `epubcfi(…)` from the web reader
+  /// (its spine step; the app's sections are the spine), or the web reader's
+  /// `chapter-N` fallback. Null when it cannot be read.
+  static ({int section, double fraction})? positionAt(
+    EpubBookRow book,
+    String location,
+  ) {
+    final int last = book.chapterCount > 0 ? book.chapterCount - 1 : 0;
+    if (location.startsWith('epubcfi(')) {
+      final RegExpMatch? m = RegExp(r'^epubcfi\(/6/(\d+)').firstMatch(location);
+      if (m == null) return null;
+      return (section: (int.parse(m[1]!) ~/ 2 - 1).clamp(0, last), fraction: 0);
+    }
+    if (location.startsWith('chapter-')) {
+      final int? n = int.tryParse(location.substring('chapter-'.length));
+      return n == null ? null : (section: n.clamp(0, last), fraction: 0);
+    }
+    final double? percent = double.tryParse(location);
+    if (percent == null) return null;
+    final RemoteBookProgress at = _positionAtPercent(
+      _sectionChars(book),
+      percent.clamp(0, 100),
+      0,
+    );
+    return (section: at.sectionIndex, fraction: at.normCharOffset / 10000);
+  }
+
+  /// Character count of section [section] in the units highlights measure
+  /// their offset in.
+  static int sectionLength(EpubBookRow book, int section) {
+    final List<int> chars = _sectionChars(book);
+    return section >= 0 && section < chars.length ? chars[section] : 0;
+  }
+
   /// Per-chapter character counts, the unit Fushi measures positions in. A
   /// PDF's sections are its pages, each weighted the same.
   static List<int> _sectionChars(EpubBookRow book) {
@@ -941,6 +997,8 @@ Future<void> syncKitapsenBookProgress(
     final int? bookId = await client.storeBookIdOf(book);
     if (bookId == null) return;
     await client.syncProgress(bookId, book);
+    // Bookmarks and highlights made in this session (EPUB and PDF alike).
+    await KitapsenAnnotations.syncBook(db, bookKey);
   } catch (e, stack) {
     ErrorLogService.instance.log('KitapsenClient.syncBookProgress', e, stack);
   }

@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:fushi/src/models/app_model.dart';
 import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_book_list_page.dart';
+import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_following_page.dart';
 import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_notifications_page.dart';
 import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_store_widgets.dart';
 import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_wishlist_page.dart';
@@ -152,6 +153,14 @@ class _KitapsenStorePageState extends ConsumerState<KitapsenStorePage> {
                     title: t.kitapsen_nav_store,
                     actions: <Widget>[
                       if (store != null && store.signedIn) ...<Widget>[
+                        FushiIconButton(
+                          key: const ValueKey<String>(
+                            'kitapsen-store-following',
+                          ),
+                          icon: Icons.people_outline,
+                          tooltip: t.kitapsen_following_title,
+                          onTap: () => _push(const KitapsenFollowingPage()),
+                        ),
                         FushiIconButton(
                           key: const ValueKey<String>(
                             'kitapsen-store-wishlist',

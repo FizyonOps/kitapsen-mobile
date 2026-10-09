@@ -87,6 +87,7 @@ class ReaderQuickSettingsSheet extends StatefulWidget {
     this.onDeleteFavorite,
     this.onJumpToFavorite,
     this.onPlayFavorite,
+    this.extraLocationSection,
     this.showMediaNotification = true,
     this.onToggleMediaNotification,
     this.showFloatingLyric = false,
@@ -155,6 +156,10 @@ class ReaderQuickSettingsSheet extends StatefulWidget {
   final Future<void> Function(FavoriteSentence fav)? onDeleteFavorite;
   final Future<void> Function(FavoriteSentence fav)? onJumpToFavorite;
   final Future<void> Function(FavoriteSentence fav)? onPlayFavorite;
+
+  /// Shown last in the navigation sheet's location section (the Kitapsen
+  /// edition's bookmarks and notes).
+  final Widget? extraLocationSection;
   final bool showMediaNotification;
   final VoidCallback? onToggleMediaNotification;
   final bool showFloatingLyric;
@@ -928,6 +933,10 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
         if (_favorites.isNotEmpty) ...[
           SizedBox(height: sectionGap),
           _buildFavoritesSection(context, theme),
+        ],
+        if (widget.extraLocationSection != null) ...[
+          SizedBox(height: sectionGap),
+          widget.extraLocationSection!,
         ],
       ],
     );

@@ -148,6 +148,8 @@ class StoreReview {
     this.content,
     this.createdAt,
     this.verified = false,
+    this.likeCount = 0,
+    this.commentCount = 0,
   });
 
   final int id;
@@ -157,6 +159,48 @@ class StoreReview {
   final String? content;
   final DateTime? createdAt;
   final bool verified;
+  final int likeCount;
+  final int commentCount;
+}
+
+/// A comment under a review or a chapter.
+class StoreComment {
+  const StoreComment({
+    required this.id,
+    required this.userName,
+    required this.content,
+    this.createdAt,
+  });
+
+  final int id;
+  final String userName;
+  final String content;
+  final DateTime? createdAt;
+
+  static StoreComment? fromJson(Map<String, dynamic> json) {
+    final int? id = _int(json['id']);
+    final String? content = _text(json['content']);
+    if (id == null || content == null) return null;
+    return StoreComment(
+      id: id,
+      userName: _text(json['user_name']) ?? _text(json['username']) ?? '—',
+      content: content,
+      createdAt: DateTime.tryParse('${json['created_at']}'),
+    );
+  }
+}
+
+/// An author the reader follows.
+class StoreFollowedAuthor {
+  const StoreFollowedAuthor({
+    required this.username,
+    required this.name,
+    this.imageUrl,
+  });
+
+  final String username;
+  final String name;
+  final String? imageUrl;
 }
 
 class StoreAuthor {
@@ -446,6 +490,71 @@ class KitapsenStore {
     );
   }
 
+  Future<({int votes, bool voted})> chapterVotes(
+    int bookId,
+    int chapterId,
+  ) async {
+    final Object? decoded = await _get(
+      '/books/$bookId/chapters/$chapterId/votes',
+    );
+    final Map<String, dynamic> map = decoded is Map<String, dynamic>
+        ? decoded
+        : const <String, dynamic>{};
+    return (votes: _int(map['votes']) ?? 0, voted: map['voted'] == true);
+  }
+
+  Future<void> setChapterVote(int bookId, int chapterId, bool vote) =>
+      _signedIn.requestJson(
+        vote ? 'POST' : 'DELETE',
+        '/books/$bookId/chapters/$chapterId/vote',
+      );
+
+  Future<List<StoreComment>> chapterComments(int bookId, int chapterId) async {
+    final Object? decoded = await _get(
+      '/books/$bookId/chapters/$chapterId/comments',
+      query: const <String, String>{'sort': 'oldest', 'limit': '100'},
+    );
+    return _comments(decoded is Map<String, dynamic> ? decoded['items'] : null);
+  }
+
+  Future<void> addChapterComment(int bookId, int chapterId, String content) =>
+      _signedIn.requestJson(
+        'POST',
+        '/books/$bookId/chapters/$chapterId/comments',
+        jsonBody: <String, String>{'content': content.trim()},
+      );
+
+  Future<({int followers, bool following})> storyFollow(int bookId) async {
+    final Object? decoded = await _get('/books/$bookId/follow');
+    final Map<String, dynamic> map = decoded is Map<String, dynamic>
+        ? decoded
+        : const <String, dynamic>{};
+    return (
+      followers: _int(map['followers']) ?? 0,
+      following: map['following'] == true,
+    );
+  }
+
+  Future<void> setStoryFollow(int bookId, bool follow) => _signedIn.requestJson(
+    follow ? 'POST' : 'DELETE',
+    '/books/$bookId/follow',
+  );
+
+  /// Stories the reader follows, with their unread chapter count.
+  Future<List<({StoreBook book, int unread})>> followedStories() async {
+    final Object? decoded = await _signedIn.requestJson(
+      'GET',
+      '/books/stories/following',
+    );
+    return <({StoreBook book, int unread})>[
+      if (decoded is List<dynamic>)
+        for (final dynamic item in decoded)
+          if (item is Map<String, dynamic>)
+            if (StoreBook.fromJson(item, apiBase) case final StoreBook book)
+              (book: book, unread: _int(item['unread']) ?? 0),
+    ];
+  }
+
   // ── Library ───────────────────────────────────────────────────────
 
   Future<bool> owns(int bookId) async {
@@ -524,6 +633,8 @@ class KitapsenStore {
               content: _text(r['content']),
               createdAt: DateTime.tryParse('${r['created_at']}'),
               verified: r['is_verified_purchase'] == true,
+              likeCount: _int(r['like_count']) ?? 0,
+              commentCount: _int(r['comment_count']) ?? 0,
             ),
       ],
       hasMore: decoded['has_more'] == true,
@@ -546,6 +657,42 @@ class KitapsenStore {
         'content': content.trim(),
     },
   );
+
+  /// Likes or unlikes review [reviewId] (the endpoint toggles).
+  Future<({int likes, bool liked})> toggleReviewLike(int reviewId) async {
+    final Object? decoded = await _signedIn.requestJson(
+      'POST',
+      '/reviews/$reviewId/like',
+    );
+    final Map<String, dynamic> map = decoded is Map<String, dynamic>
+        ? decoded
+        : const <String, dynamic>{};
+    return (
+      likes: _int(map['like_count']) ?? 0,
+      liked: map['is_liked'] == true,
+    );
+  }
+
+  List<StoreComment> _comments(Object? list) => <StoreComment>[
+    if (list is List<dynamic>)
+      for (final dynamic c in list)
+        if (c is Map<String, dynamic>)
+          if (StoreComment.fromJson(c) case final StoreComment comment) comment,
+  ];
+
+  Future<List<StoreComment>> reviewComments(int reviewId) async {
+    final Object? decoded = await _get('/reviews/$reviewId/comments');
+    return _comments(
+      decoded is Map<String, dynamic> ? decoded['comments'] : null,
+    );
+  }
+
+  Future<void> addReviewComment(int reviewId, String content) =>
+      _signedIn.requestJson(
+        'POST',
+        '/reviews/$reviewId/comments',
+        jsonBody: <String, String>{'content': content.trim()},
+      );
 
   // ── Authors ───────────────────────────────────────────────────────
 
@@ -607,6 +754,32 @@ class KitapsenStore {
       following: map['following'] == true,
       followers: _int(map['follower_count']) ?? 0,
     );
+  }
+
+  Future<List<StoreFollowedAuthor>> followedAuthors() async {
+    final Object? decoded = await _signedIn.requestJson(
+      'GET',
+      '/authors/me/following',
+      query: const <String, String>{'items_per_page': '100'},
+    );
+    final Object? list = decoded is Map<String, dynamic>
+        ? decoded['authors']
+        : null;
+    return <StoreFollowedAuthor>[
+      if (list is List<dynamic>)
+        for (final dynamic a in list)
+          if (a is Map<String, dynamic> && _text(a['username']) != null)
+            StoreFollowedAuthor(
+              username: _text(a['username'])!,
+              name: _text(a['display_name']) ?? _text(a['username'])!,
+              imageUrl: _text(a['author_image_url']) == null
+                  ? null
+                  : KitapsenClient.absoluteUrl(
+                      apiBase,
+                      _text(a['author_image_url'])!,
+                    ),
+            ),
+    ];
   }
 
   // ── Notifications ─────────────────────────────────────────────────

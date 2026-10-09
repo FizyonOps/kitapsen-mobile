@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 107780 (6340 per locale)
+/// Strings: 108103 (6359 per locale)
 ///
-/// Built on 2026-10-09 at 16:50 UTC
+/// Built on 2026-10-09 at 18:13 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -9110,6 +9110,25 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get kitapsen_story_no_chapters => 'No chapters yet';
   String get kitapsen_story_next => 'Next chapter';
   String get kitapsen_story_previous => 'Previous chapter';
+  String get kitapsen_review_like => 'Like';
+  String get kitapsen_comments_title => 'Comments';
+  String get kitapsen_comments_empty => 'No comments yet';
+  String get kitapsen_comment_hint => 'Write a comment';
+  String get kitapsen_story_vote => 'Vote';
+  String get kitapsen_story_voted => 'Voted';
+  String get kitapsen_story_follow => 'Follow story';
+  String get kitapsen_following_title => 'Following';
+  String get kitapsen_following_authors => 'Authors';
+  String get kitapsen_following_stories => 'Stories';
+  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  String get kitapsen_reader_highlight => 'Highlight';
+  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  String get kitapsen_bookmark_add => 'Add bookmark';
+  String get kitapsen_bookmark_added => 'Bookmark added';
+  String get kitapsen_note_add => 'Add note';
+  String get kitapsen_note_hint => 'Your note';
+  String get kitapsen_note_saved => 'Note saved';
+  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
 }
 
 // Path: <root>
@@ -24348,6 +24367,44 @@ class _StringsAr extends _StringsEn {
   String get kitapsen_story_next => 'Next chapter';
   @override
   String get kitapsen_story_previous => 'Previous chapter';
+  @override
+  String get kitapsen_review_like => 'Like';
+  @override
+  String get kitapsen_comments_title => 'Comments';
+  @override
+  String get kitapsen_comments_empty => 'No comments yet';
+  @override
+  String get kitapsen_comment_hint => 'Write a comment';
+  @override
+  String get kitapsen_story_vote => 'Vote';
+  @override
+  String get kitapsen_story_voted => 'Voted';
+  @override
+  String get kitapsen_story_follow => 'Follow story';
+  @override
+  String get kitapsen_following_title => 'Following';
+  @override
+  String get kitapsen_following_authors => 'Authors';
+  @override
+  String get kitapsen_following_stories => 'Stories';
+  @override
+  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  @override
+  String get kitapsen_reader_highlight => 'Highlight';
+  @override
+  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  @override
+  String get kitapsen_bookmark_add => 'Add bookmark';
+  @override
+  String get kitapsen_bookmark_added => 'Bookmark added';
+  @override
+  String get kitapsen_note_add => 'Add note';
+  @override
+  String get kitapsen_note_hint => 'Your note';
+  @override
+  String get kitapsen_note_saved => 'Note saved';
+  @override
+  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
 }
 
 // Path: <root>
@@ -39978,6 +40035,44 @@ class _StringsDe extends _StringsEn {
   String get kitapsen_story_next => 'Next chapter';
   @override
   String get kitapsen_story_previous => 'Previous chapter';
+  @override
+  String get kitapsen_review_like => 'Like';
+  @override
+  String get kitapsen_comments_title => 'Comments';
+  @override
+  String get kitapsen_comments_empty => 'No comments yet';
+  @override
+  String get kitapsen_comment_hint => 'Write a comment';
+  @override
+  String get kitapsen_story_vote => 'Vote';
+  @override
+  String get kitapsen_story_voted => 'Voted';
+  @override
+  String get kitapsen_story_follow => 'Follow story';
+  @override
+  String get kitapsen_following_title => 'Following';
+  @override
+  String get kitapsen_following_authors => 'Authors';
+  @override
+  String get kitapsen_following_stories => 'Stories';
+  @override
+  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  @override
+  String get kitapsen_reader_highlight => 'Highlight';
+  @override
+  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  @override
+  String get kitapsen_bookmark_add => 'Add bookmark';
+  @override
+  String get kitapsen_bookmark_added => 'Bookmark added';
+  @override
+  String get kitapsen_note_add => 'Add note';
+  @override
+  String get kitapsen_note_hint => 'Your note';
+  @override
+  String get kitapsen_note_saved => 'Note saved';
+  @override
+  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
 }
 
 // Path: <root>
@@ -55667,6 +55762,44 @@ class _StringsEs extends _StringsEn {
   String get kitapsen_story_next => 'Next chapter';
   @override
   String get kitapsen_story_previous => 'Previous chapter';
+  @override
+  String get kitapsen_review_like => 'Like';
+  @override
+  String get kitapsen_comments_title => 'Comments';
+  @override
+  String get kitapsen_comments_empty => 'No comments yet';
+  @override
+  String get kitapsen_comment_hint => 'Write a comment';
+  @override
+  String get kitapsen_story_vote => 'Vote';
+  @override
+  String get kitapsen_story_voted => 'Voted';
+  @override
+  String get kitapsen_story_follow => 'Follow story';
+  @override
+  String get kitapsen_following_title => 'Following';
+  @override
+  String get kitapsen_following_authors => 'Authors';
+  @override
+  String get kitapsen_following_stories => 'Stories';
+  @override
+  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  @override
+  String get kitapsen_reader_highlight => 'Highlight';
+  @override
+  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  @override
+  String get kitapsen_bookmark_add => 'Add bookmark';
+  @override
+  String get kitapsen_bookmark_added => 'Bookmark added';
+  @override
+  String get kitapsen_note_add => 'Add note';
+  @override
+  String get kitapsen_note_hint => 'Your note';
+  @override
+  String get kitapsen_note_saved => 'Note saved';
+  @override
+  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
 }
 
 // Path: <root>
@@ -71434,6 +71567,44 @@ class _StringsFr extends _StringsEn {
   String get kitapsen_story_next => 'Next chapter';
   @override
   String get kitapsen_story_previous => 'Previous chapter';
+  @override
+  String get kitapsen_review_like => 'Like';
+  @override
+  String get kitapsen_comments_title => 'Comments';
+  @override
+  String get kitapsen_comments_empty => 'No comments yet';
+  @override
+  String get kitapsen_comment_hint => 'Write a comment';
+  @override
+  String get kitapsen_story_vote => 'Vote';
+  @override
+  String get kitapsen_story_voted => 'Voted';
+  @override
+  String get kitapsen_story_follow => 'Follow story';
+  @override
+  String get kitapsen_following_title => 'Following';
+  @override
+  String get kitapsen_following_authors => 'Authors';
+  @override
+  String get kitapsen_following_stories => 'Stories';
+  @override
+  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  @override
+  String get kitapsen_reader_highlight => 'Highlight';
+  @override
+  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  @override
+  String get kitapsen_bookmark_add => 'Add bookmark';
+  @override
+  String get kitapsen_bookmark_added => 'Bookmark added';
+  @override
+  String get kitapsen_note_add => 'Add note';
+  @override
+  String get kitapsen_note_hint => 'Your note';
+  @override
+  String get kitapsen_note_saved => 'Note saved';
+  @override
+  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
 }
 
 // Path: <root>
@@ -86859,6 +87030,44 @@ class _StringsId extends _StringsEn {
   String get kitapsen_story_next => 'Next chapter';
   @override
   String get kitapsen_story_previous => 'Previous chapter';
+  @override
+  String get kitapsen_review_like => 'Like';
+  @override
+  String get kitapsen_comments_title => 'Comments';
+  @override
+  String get kitapsen_comments_empty => 'No comments yet';
+  @override
+  String get kitapsen_comment_hint => 'Write a comment';
+  @override
+  String get kitapsen_story_vote => 'Vote';
+  @override
+  String get kitapsen_story_voted => 'Voted';
+  @override
+  String get kitapsen_story_follow => 'Follow story';
+  @override
+  String get kitapsen_following_title => 'Following';
+  @override
+  String get kitapsen_following_authors => 'Authors';
+  @override
+  String get kitapsen_following_stories => 'Stories';
+  @override
+  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  @override
+  String get kitapsen_reader_highlight => 'Highlight';
+  @override
+  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  @override
+  String get kitapsen_bookmark_add => 'Add bookmark';
+  @override
+  String get kitapsen_bookmark_added => 'Bookmark added';
+  @override
+  String get kitapsen_note_add => 'Add note';
+  @override
+  String get kitapsen_note_hint => 'Your note';
+  @override
+  String get kitapsen_note_saved => 'Note saved';
+  @override
+  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
 }
 
 // Path: <root>
@@ -102446,6 +102655,44 @@ class _StringsIt extends _StringsEn {
   String get kitapsen_story_next => 'Next chapter';
   @override
   String get kitapsen_story_previous => 'Previous chapter';
+  @override
+  String get kitapsen_review_like => 'Like';
+  @override
+  String get kitapsen_comments_title => 'Comments';
+  @override
+  String get kitapsen_comments_empty => 'No comments yet';
+  @override
+  String get kitapsen_comment_hint => 'Write a comment';
+  @override
+  String get kitapsen_story_vote => 'Vote';
+  @override
+  String get kitapsen_story_voted => 'Voted';
+  @override
+  String get kitapsen_story_follow => 'Follow story';
+  @override
+  String get kitapsen_following_title => 'Following';
+  @override
+  String get kitapsen_following_authors => 'Authors';
+  @override
+  String get kitapsen_following_stories => 'Stories';
+  @override
+  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  @override
+  String get kitapsen_reader_highlight => 'Highlight';
+  @override
+  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  @override
+  String get kitapsen_bookmark_add => 'Add bookmark';
+  @override
+  String get kitapsen_bookmark_added => 'Bookmark added';
+  @override
+  String get kitapsen_note_add => 'Add note';
+  @override
+  String get kitapsen_note_hint => 'Your note';
+  @override
+  String get kitapsen_note_saved => 'Note saved';
+  @override
+  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
 }
 
 // Path: <root>
@@ -117064,6 +117311,44 @@ class _StringsJa extends _StringsEn {
   String get kitapsen_story_next => 'Next chapter';
   @override
   String get kitapsen_story_previous => 'Previous chapter';
+  @override
+  String get kitapsen_review_like => 'Like';
+  @override
+  String get kitapsen_comments_title => 'Comments';
+  @override
+  String get kitapsen_comments_empty => 'No comments yet';
+  @override
+  String get kitapsen_comment_hint => 'Write a comment';
+  @override
+  String get kitapsen_story_vote => 'Vote';
+  @override
+  String get kitapsen_story_voted => 'Voted';
+  @override
+  String get kitapsen_story_follow => 'Follow story';
+  @override
+  String get kitapsen_following_title => 'Following';
+  @override
+  String get kitapsen_following_authors => 'Authors';
+  @override
+  String get kitapsen_following_stories => 'Stories';
+  @override
+  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  @override
+  String get kitapsen_reader_highlight => 'Highlight';
+  @override
+  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  @override
+  String get kitapsen_bookmark_add => 'Add bookmark';
+  @override
+  String get kitapsen_bookmark_added => 'Bookmark added';
+  @override
+  String get kitapsen_note_add => 'Add note';
+  @override
+  String get kitapsen_note_hint => 'Your note';
+  @override
+  String get kitapsen_note_saved => 'Note saved';
+  @override
+  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
 }
 
 // Path: <root>
@@ -131687,6 +131972,44 @@ class _StringsKo extends _StringsEn {
   String get kitapsen_story_next => 'Next chapter';
   @override
   String get kitapsen_story_previous => 'Previous chapter';
+  @override
+  String get kitapsen_review_like => 'Like';
+  @override
+  String get kitapsen_comments_title => 'Comments';
+  @override
+  String get kitapsen_comments_empty => 'No comments yet';
+  @override
+  String get kitapsen_comment_hint => 'Write a comment';
+  @override
+  String get kitapsen_story_vote => 'Vote';
+  @override
+  String get kitapsen_story_voted => 'Voted';
+  @override
+  String get kitapsen_story_follow => 'Follow story';
+  @override
+  String get kitapsen_following_title => 'Following';
+  @override
+  String get kitapsen_following_authors => 'Authors';
+  @override
+  String get kitapsen_following_stories => 'Stories';
+  @override
+  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  @override
+  String get kitapsen_reader_highlight => 'Highlight';
+  @override
+  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  @override
+  String get kitapsen_bookmark_add => 'Add bookmark';
+  @override
+  String get kitapsen_bookmark_added => 'Bookmark added';
+  @override
+  String get kitapsen_note_add => 'Add note';
+  @override
+  String get kitapsen_note_hint => 'Your note';
+  @override
+  String get kitapsen_note_saved => 'Note saved';
+  @override
+  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
 }
 
 // Path: <root>
@@ -147221,6 +147544,44 @@ class _StringsNl extends _StringsEn {
   String get kitapsen_story_next => 'Next chapter';
   @override
   String get kitapsen_story_previous => 'Previous chapter';
+  @override
+  String get kitapsen_review_like => 'Like';
+  @override
+  String get kitapsen_comments_title => 'Comments';
+  @override
+  String get kitapsen_comments_empty => 'No comments yet';
+  @override
+  String get kitapsen_comment_hint => 'Write a comment';
+  @override
+  String get kitapsen_story_vote => 'Vote';
+  @override
+  String get kitapsen_story_voted => 'Voted';
+  @override
+  String get kitapsen_story_follow => 'Follow story';
+  @override
+  String get kitapsen_following_title => 'Following';
+  @override
+  String get kitapsen_following_authors => 'Authors';
+  @override
+  String get kitapsen_following_stories => 'Stories';
+  @override
+  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  @override
+  String get kitapsen_reader_highlight => 'Highlight';
+  @override
+  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  @override
+  String get kitapsen_bookmark_add => 'Add bookmark';
+  @override
+  String get kitapsen_bookmark_added => 'Bookmark added';
+  @override
+  String get kitapsen_note_add => 'Add note';
+  @override
+  String get kitapsen_note_hint => 'Your note';
+  @override
+  String get kitapsen_note_saved => 'Note saved';
+  @override
+  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
 }
 
 // Path: <root>
@@ -162828,6 +163189,44 @@ class _StringsPtBr extends _StringsEn {
   String get kitapsen_story_next => 'Next chapter';
   @override
   String get kitapsen_story_previous => 'Previous chapter';
+  @override
+  String get kitapsen_review_like => 'Like';
+  @override
+  String get kitapsen_comments_title => 'Comments';
+  @override
+  String get kitapsen_comments_empty => 'No comments yet';
+  @override
+  String get kitapsen_comment_hint => 'Write a comment';
+  @override
+  String get kitapsen_story_vote => 'Vote';
+  @override
+  String get kitapsen_story_voted => 'Voted';
+  @override
+  String get kitapsen_story_follow => 'Follow story';
+  @override
+  String get kitapsen_following_title => 'Following';
+  @override
+  String get kitapsen_following_authors => 'Authors';
+  @override
+  String get kitapsen_following_stories => 'Stories';
+  @override
+  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  @override
+  String get kitapsen_reader_highlight => 'Highlight';
+  @override
+  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  @override
+  String get kitapsen_bookmark_add => 'Add bookmark';
+  @override
+  String get kitapsen_bookmark_added => 'Bookmark added';
+  @override
+  String get kitapsen_note_add => 'Add note';
+  @override
+  String get kitapsen_note_hint => 'Your note';
+  @override
+  String get kitapsen_note_saved => 'Note saved';
+  @override
+  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
 }
 
 // Path: <root>
@@ -178379,6 +178778,44 @@ class _StringsRu extends _StringsEn {
   String get kitapsen_story_next => 'Next chapter';
   @override
   String get kitapsen_story_previous => 'Previous chapter';
+  @override
+  String get kitapsen_review_like => 'Like';
+  @override
+  String get kitapsen_comments_title => 'Comments';
+  @override
+  String get kitapsen_comments_empty => 'No comments yet';
+  @override
+  String get kitapsen_comment_hint => 'Write a comment';
+  @override
+  String get kitapsen_story_vote => 'Vote';
+  @override
+  String get kitapsen_story_voted => 'Voted';
+  @override
+  String get kitapsen_story_follow => 'Follow story';
+  @override
+  String get kitapsen_following_title => 'Following';
+  @override
+  String get kitapsen_following_authors => 'Authors';
+  @override
+  String get kitapsen_following_stories => 'Stories';
+  @override
+  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  @override
+  String get kitapsen_reader_highlight => 'Highlight';
+  @override
+  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  @override
+  String get kitapsen_bookmark_add => 'Add bookmark';
+  @override
+  String get kitapsen_bookmark_added => 'Bookmark added';
+  @override
+  String get kitapsen_note_add => 'Add note';
+  @override
+  String get kitapsen_note_hint => 'Your note';
+  @override
+  String get kitapsen_note_saved => 'Note saved';
+  @override
+  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
 }
 
 // Path: <root>
@@ -193607,6 +194044,44 @@ class _StringsTh extends _StringsEn {
   String get kitapsen_story_next => 'Next chapter';
   @override
   String get kitapsen_story_previous => 'Previous chapter';
+  @override
+  String get kitapsen_review_like => 'Like';
+  @override
+  String get kitapsen_comments_title => 'Comments';
+  @override
+  String get kitapsen_comments_empty => 'No comments yet';
+  @override
+  String get kitapsen_comment_hint => 'Write a comment';
+  @override
+  String get kitapsen_story_vote => 'Vote';
+  @override
+  String get kitapsen_story_voted => 'Voted';
+  @override
+  String get kitapsen_story_follow => 'Follow story';
+  @override
+  String get kitapsen_following_title => 'Following';
+  @override
+  String get kitapsen_following_authors => 'Authors';
+  @override
+  String get kitapsen_following_stories => 'Stories';
+  @override
+  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  @override
+  String get kitapsen_reader_highlight => 'Highlight';
+  @override
+  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  @override
+  String get kitapsen_bookmark_add => 'Add bookmark';
+  @override
+  String get kitapsen_bookmark_added => 'Bookmark added';
+  @override
+  String get kitapsen_note_add => 'Add note';
+  @override
+  String get kitapsen_note_hint => 'Your note';
+  @override
+  String get kitapsen_note_saved => 'Note saved';
+  @override
+  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
 }
 
 // Path: <root>
@@ -209039,6 +209514,44 @@ class _StringsTr extends _StringsEn {
   String get kitapsen_story_next => 'Sonraki bölüm';
   @override
   String get kitapsen_story_previous => 'Önceki bölüm';
+  @override
+  String get kitapsen_review_like => 'Beğen';
+  @override
+  String get kitapsen_comments_title => 'Yorumlar';
+  @override
+  String get kitapsen_comments_empty => 'Henüz yorum yok';
+  @override
+  String get kitapsen_comment_hint => 'Yorum yaz';
+  @override
+  String get kitapsen_story_vote => 'Oy ver';
+  @override
+  String get kitapsen_story_voted => 'Oy verildi';
+  @override
+  String get kitapsen_story_follow => 'Hikâyeyi takip et';
+  @override
+  String get kitapsen_following_title => 'Takip ettiklerim';
+  @override
+  String get kitapsen_following_authors => 'Yazarlar';
+  @override
+  String get kitapsen_following_stories => 'Hikâyeler';
+  @override
+  String get kitapsen_following_empty => 'Henüz kimseyi takip etmiyorsunuz';
+  @override
+  String get kitapsen_reader_highlight => 'Vurgula';
+  @override
+  String get kitapsen_annotations_title => 'Yer imleri ve notlar';
+  @override
+  String get kitapsen_bookmark_add => 'Yer imi ekle';
+  @override
+  String get kitapsen_bookmark_added => 'Yer imi eklendi';
+  @override
+  String get kitapsen_note_add => 'Not ekle';
+  @override
+  String get kitapsen_note_hint => 'Notunuz';
+  @override
+  String get kitapsen_note_saved => 'Not kaydedildi';
+  @override
+  String get kitapsen_annotations_empty => 'Henüz yer imi veya not yok';
 }
 
 // Path: <root>
@@ -224398,6 +224911,44 @@ class _StringsVi extends _StringsEn {
   String get kitapsen_story_next => 'Next chapter';
   @override
   String get kitapsen_story_previous => 'Previous chapter';
+  @override
+  String get kitapsen_review_like => 'Like';
+  @override
+  String get kitapsen_comments_title => 'Comments';
+  @override
+  String get kitapsen_comments_empty => 'No comments yet';
+  @override
+  String get kitapsen_comment_hint => 'Write a comment';
+  @override
+  String get kitapsen_story_vote => 'Vote';
+  @override
+  String get kitapsen_story_voted => 'Voted';
+  @override
+  String get kitapsen_story_follow => 'Follow story';
+  @override
+  String get kitapsen_following_title => 'Following';
+  @override
+  String get kitapsen_following_authors => 'Authors';
+  @override
+  String get kitapsen_following_stories => 'Stories';
+  @override
+  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  @override
+  String get kitapsen_reader_highlight => 'Highlight';
+  @override
+  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  @override
+  String get kitapsen_bookmark_add => 'Add bookmark';
+  @override
+  String get kitapsen_bookmark_added => 'Bookmark added';
+  @override
+  String get kitapsen_note_add => 'Add note';
+  @override
+  String get kitapsen_note_hint => 'Your note';
+  @override
+  String get kitapsen_note_saved => 'Note saved';
+  @override
+  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
 }
 
 // Path: <root>
@@ -238448,6 +238999,44 @@ class _StringsZhCn extends _StringsEn {
   String get kitapsen_story_next => '下一章';
   @override
   String get kitapsen_story_previous => '上一章';
+  @override
+  String get kitapsen_review_like => '赞';
+  @override
+  String get kitapsen_comments_title => '评论';
+  @override
+  String get kitapsen_comments_empty => '暂无评论';
+  @override
+  String get kitapsen_comment_hint => '写评论';
+  @override
+  String get kitapsen_story_vote => '投票';
+  @override
+  String get kitapsen_story_voted => '已投票';
+  @override
+  String get kitapsen_story_follow => '关注故事';
+  @override
+  String get kitapsen_following_title => '我的关注';
+  @override
+  String get kitapsen_following_authors => '作者';
+  @override
+  String get kitapsen_following_stories => '故事';
+  @override
+  String get kitapsen_following_empty => '你还没有关注任何人';
+  @override
+  String get kitapsen_reader_highlight => '高亮';
+  @override
+  String get kitapsen_annotations_title => '书签和笔记';
+  @override
+  String get kitapsen_bookmark_add => '添加书签';
+  @override
+  String get kitapsen_bookmark_added => '已添加书签';
+  @override
+  String get kitapsen_note_add => '添加笔记';
+  @override
+  String get kitapsen_note_hint => '你的笔记';
+  @override
+  String get kitapsen_note_saved => '笔记已保存';
+  @override
+  String get kitapsen_annotations_empty => '暂无书签或笔记';
 }
 
 // Path: <root>
@@ -252539,4 +253128,42 @@ class _StringsZhHk extends _StringsEn {
   String get kitapsen_story_next => 'Next chapter';
   @override
   String get kitapsen_story_previous => 'Previous chapter';
+  @override
+  String get kitapsen_review_like => 'Like';
+  @override
+  String get kitapsen_comments_title => 'Comments';
+  @override
+  String get kitapsen_comments_empty => 'No comments yet';
+  @override
+  String get kitapsen_comment_hint => 'Write a comment';
+  @override
+  String get kitapsen_story_vote => 'Vote';
+  @override
+  String get kitapsen_story_voted => 'Voted';
+  @override
+  String get kitapsen_story_follow => 'Follow story';
+  @override
+  String get kitapsen_following_title => 'Following';
+  @override
+  String get kitapsen_following_authors => 'Authors';
+  @override
+  String get kitapsen_following_stories => 'Stories';
+  @override
+  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  @override
+  String get kitapsen_reader_highlight => 'Highlight';
+  @override
+  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  @override
+  String get kitapsen_bookmark_add => 'Add bookmark';
+  @override
+  String get kitapsen_bookmark_added => 'Bookmark added';
+  @override
+  String get kitapsen_note_add => 'Add note';
+  @override
+  String get kitapsen_note_hint => 'Your note';
+  @override
+  String get kitapsen_note_saved => 'Note saved';
+  @override
+  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
 }

@@ -6,6 +6,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
+import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_comments_page.dart';
 import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_store_widgets.dart';
 import 'package:fushi/src/sync/kitapsen_store.dart';
 import 'package:fushi/utils.dart';
@@ -34,6 +35,8 @@ class _KitapsenChapterPageState extends State<KitapsenChapterPage> {
   late int _index = widget.index;
   late Future<StoreChapter> _load = _fetch();
   final ScrollController _scroll = ScrollController();
+  ({int votes, bool voted})? _votes;
+  bool _voting = false;
 
   @override
   void dispose() {
@@ -47,6 +50,8 @@ class _KitapsenChapterPageState extends State<KitapsenChapterPage> {
       widget.bookId,
       summary.id,
     );
+    _votes = null;
+    unawaited(_loadVotes(summary.id));
     unawaited(
       widget.store
           .recordChapterRead(widget.bookId, summary.id)
@@ -59,6 +64,39 @@ class _KitapsenChapterPageState extends State<KitapsenChapterPage> {
           ),
     );
     return chapter;
+  }
+
+  Future<void> _loadVotes(int chapterId) async {
+    try {
+      final ({int votes, bool voted}) votes = await widget.store.chapterVotes(
+        widget.bookId,
+        chapterId,
+      );
+      if (mounted && widget.chapters[_index].id == chapterId) {
+        setState(() => _votes = votes);
+      }
+    } catch (e, stack) {
+      ErrorLogService.instance.log('KitapsenChapterPage.votes', e, stack);
+    }
+  }
+
+  Future<void> _toggleVote() async {
+    final ({int votes, bool voted})? votes = _votes;
+    if (votes == null || _voting) return;
+    final int chapterId = widget.chapters[_index].id;
+    setState(() => _voting = true);
+    try {
+      await widget.store.setChapterVote(widget.bookId, chapterId, !votes.voted);
+      await _loadVotes(chapterId);
+    } catch (e, stack) {
+      ErrorLogService.instance.log('KitapsenChapterPage.vote', e, stack);
+      FushiToast.show(
+        msg: t.kitapsen_book_action_failed,
+        severity: ToastSeverity.error,
+      );
+    } finally {
+      if (mounted) setState(() => _voting = false);
+    }
   }
 
   void _go(int index) {
@@ -105,6 +143,47 @@ class _KitapsenChapterPageState extends State<KitapsenChapterPage> {
                     ),
               ),
               SizedBox(height: tokens.spacing.section),
+              Row(
+                children: <Widget>[
+                  if (_votes != null)
+                    TextButton.icon(
+                      key: const ValueKey<String>('kitapsen-chapter-vote'),
+                      onPressed: widget.store.signedIn && !_voting
+                          ? _toggleVote
+                          : null,
+                      icon: Icon(
+                        _votes!.voted ? Icons.star : Icons.star_border,
+                      ),
+                      label: Text(
+                        '${_votes!.voted ? t.kitapsen_story_voted : t.kitapsen_story_vote} · ${_votes!.votes}',
+                      ),
+                    ),
+                  TextButton.icon(
+                    key: const ValueKey<String>('kitapsen-chapter-comments'),
+                    onPressed: () => Navigator.of(context).push(
+                      adaptivePageRoute<void>(
+                        context: context,
+                        builder: (_) => KitapsenCommentsPage(
+                          subtitle: summary.title,
+                          load: () => widget.store.chapterComments(
+                            widget.bookId,
+                            summary.id,
+                          ),
+                          add: widget.store.signedIn
+                              ? (String c) => widget.store.addChapterComment(
+                                  widget.bookId,
+                                  summary.id,
+                                  c,
+                                )
+                              : null,
+                        ),
+                      ),
+                    ),
+                    icon: const Icon(Icons.chat_bubble_outline),
+                    label: Text(t.kitapsen_comments_title),
+                  ),
+                ],
+              ),
               Row(
                 children: <Widget>[
                   if (_index > 0)

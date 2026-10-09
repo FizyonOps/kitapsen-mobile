@@ -1735,6 +1735,23 @@ extension _ReaderNavigation on _ReaderFushiPageState {
     }
   }
 
+  /// Jumps the open reader to [fraction] (0..1) into [section] — a Kitapsen
+  /// bookmark or note. Same atomic navigate-with-progress chain as the
+  /// character-offset jump above.
+  Future<void> _jumpToSectionFraction(int section, double fraction) async {
+    if (_controller == null || _book == null) return;
+    final int target = section.clamp(0, _book!.chapters.length - 1);
+    final double p = fraction.clamp(0, 1).toDouble();
+    if (target != _currentChapter) {
+      await _navigateToChapterAndWait(target, manual: true, progress: p);
+    } else {
+      _readLedger.leave();
+      await _controller!.evaluateJavascript(
+        source: 'window.fushiReader && window.fushiReader.restoreProgress($p);',
+      );
+    }
+  }
+
   /// 把本 session 累积的字数 + 阅读时长落库。返回的 Future 在 DB 写完成后才完成，
   /// 供进程退出路径 await（TODO-086/BUG-191）；其余生命周期调用点 fire-and-forget
   /// （不 await 返回的 Future，行为同旧版）。计数器在发起写之前清零，保证同一段

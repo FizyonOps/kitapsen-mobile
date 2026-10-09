@@ -20,6 +20,7 @@ import 'package:fushi/src/pages/implementations/home_page.dart'
 import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_author_page.dart';
 import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_book_list_page.dart';
 import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_chapter_page.dart';
+import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_comments_page.dart';
 import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_store_widgets.dart';
 import 'package:fushi/src/sync/kitapsen_store.dart';
 import 'package:fushi/src/sync/remote_library_cache.dart';
@@ -46,6 +47,9 @@ class _BookState {
   /// Set when the book is already downloaded to this device.
   final String? localBookKey;
   final List<StoreChapter> chapters;
+
+  /// Serialized stories only.
+  ({int followers, bool following})? storyFollow;
 }
 
 class KitapsenBookPage extends ConsumerStatefulWidget {
@@ -61,6 +65,11 @@ class _KitapsenBookPageState extends ConsumerState<KitapsenBookPage> {
   late Future<_BookState> _load = _fetch();
   final List<StoreReview> _reviews = <StoreReview>[];
   int _reviewPage = 0;
+
+  /// Likes changed on this page, by review id (the list itself is not
+  /// reloaded for a like).
+  final Map<int, ({int likes, bool liked})> _likes =
+      <int, ({int likes, bool liked})>{};
   bool _moreReviews = false;
   bool _busy = false;
 
@@ -85,6 +94,9 @@ class _KitapsenBookPageState extends ConsumerState<KitapsenBookPage> {
     final List<StoreChapter> chapters = detail.isSerialized
         ? await store.chapters(widget.bookId)
         : const <StoreChapter>[];
+    final ({int followers, bool following})? storyFollow = detail.isSerialized
+        ? await store.storyFollow(widget.bookId)
+        : null;
     _reviews.clear();
     _reviewPage = 0;
     unawaited(_loadReviews(store));
@@ -95,7 +107,7 @@ class _KitapsenBookPageState extends ConsumerState<KitapsenBookPage> {
       wishlisted: wishlisted,
       localBookKey: localBookKey,
       chapters: chapters,
-    );
+    )..storyFollow = storyFollow;
   }
 
   Future<void> _loadReviews(KitapsenStore store) async {
@@ -171,6 +183,35 @@ class _KitapsenBookPageState extends ConsumerState<KitapsenBookPage> {
   Future<void> _toggleWishlist(_BookState s) => _run(() async {
     await s.store.setWishlisted(widget.bookId, !s.wishlisted);
     if (mounted) setState(() => s.wishlisted = !s.wishlisted);
+  });
+
+  Future<void> _toggleLike(KitapsenStore store, StoreReview r) =>
+      _run(() async {
+        final ({int likes, bool liked}) state = await store.toggleReviewLike(
+          r.id,
+        );
+        if (mounted) setState(() => _likes[r.id] = state);
+      });
+
+  Future<void> _openComments({
+    required Future<List<StoreComment>> Function() load,
+    Future<void> Function(String)? add,
+    String? subtitle,
+  }) => Navigator.of(context).push(
+    adaptivePageRoute<void>(
+      context: context,
+      builder: (_) =>
+          KitapsenCommentsPage(load: load, add: add, subtitle: subtitle),
+    ),
+  );
+
+  Future<void> _toggleStoryFollow(_BookState s) => _run(() async {
+    final bool follow = !(s.storyFollow?.following ?? false);
+    await s.store.setStoryFollow(widget.bookId, follow);
+    final ({int followers, bool following}) now = await s.store.storyFollow(
+      widget.bookId,
+    );
+    if (mounted) setState(() => s.storyFollow = now);
   });
 
   Future<void> _signIn() async {
@@ -435,9 +476,33 @@ class _KitapsenBookPageState extends ConsumerState<KitapsenBookPage> {
 
   List<Widget> _chapters(BuildContext context, _BookState s) {
     final FushiDesignTokens tokens = FushiDesignTokens.of(context);
+    final ({int followers, bool following})? follow = s.storyFollow;
     return <Widget>[
       SizedBox(height: tokens.spacing.section),
-      Text(t.kitapsen_story_chapters, style: tokens.type.sectionLabel),
+      Row(
+        children: <Widget>[
+          Expanded(
+            child: Text(
+              t.kitapsen_story_chapters,
+              style: tokens.type.sectionLabel,
+            ),
+          ),
+          if (s.store.signedIn && follow != null)
+            follow.following
+                ? OutlinedButton(
+                    key: const ValueKey<String>('kitapsen-story-unfollow'),
+                    onPressed: _busy ? null : () => _toggleStoryFollow(s),
+                    child: Text(
+                      '${t.kitapsen_author_following} · ${follow.followers}',
+                    ),
+                  )
+                : FilledButton.tonal(
+                    key: const ValueKey<String>('kitapsen-story-follow'),
+                    onPressed: _busy ? null : () => _toggleStoryFollow(s),
+                    child: Text(t.kitapsen_story_follow),
+                  ),
+        ],
+      ),
       if (s.chapters.isEmpty)
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
@@ -532,6 +597,33 @@ class _KitapsenBookPageState extends ConsumerState<KitapsenBookPage> {
                   padding: const EdgeInsets.only(top: 2),
                   child: Text(r.content!),
                 ),
+              Row(
+                children: <Widget>[
+                  TextButton.icon(
+                    onPressed: !s.store.signedIn || _busy
+                        ? null
+                        : () => _toggleLike(s.store, r),
+                    icon: Icon(
+                      _likes[r.id]?.liked ?? false
+                          ? Icons.thumb_up
+                          : Icons.thumb_up_outlined,
+                      size: 16,
+                    ),
+                    label: Text('${_likes[r.id]?.likes ?? r.likeCount}'),
+                  ),
+                  TextButton.icon(
+                    onPressed: () => _openComments(
+                      load: () => s.store.reviewComments(r.id),
+                      add: s.store.signedIn
+                          ? (String c) => s.store.addReviewComment(r.id, c)
+                          : null,
+                      subtitle: r.title ?? r.userName,
+                    ),
+                    icon: const Icon(Icons.chat_bubble_outline, size: 16),
+                    label: Text('${r.commentCount}'),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
