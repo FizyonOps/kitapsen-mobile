@@ -28,6 +28,7 @@ ModuleId? moduleOfHomeTab(HomeTab tab) => switch (tab) {
   HomeTab.home => null,
   HomeTab.settings => null,
   HomeTab.books => ModuleId.books,
+  HomeTab.store => null,
   HomeTab.manga => ModuleId.manga,
   HomeTab.video => ModuleId.video,
   HomeTab.browse => ModuleId.browse,

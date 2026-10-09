@@ -22,6 +22,7 @@ import 'package:fushi/src/onboarding/recommended_pack_tutorial_state.dart';
 import 'package:fushi/src/updates/update_probes.dart';
 import 'package:fushi/src/updates/store_update_check.dart';
 import 'package:fushi/src/models/kitapsen_edition.dart';
+import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_store_page.dart';
 import 'package:fushi/src/utils/components/fushi_desktop_title_bar.dart';
 import 'package:fushi/src/utils/components/nav_rail_brand_button.dart';
 import 'package:fushi/src/utils/misc/build_version.dart';
@@ -157,6 +158,7 @@ List<HomeTab> homeActiveTabs(ModuleVisibility visibility) => <HomeTab>[
       // 七个库页/工具 tab 都可按「功能模块」偏好隐藏（设置 → 外观 → 功能模块）；
       // 首页/设置恒在，是全部隐藏后的安全回退面（故 [ModuleId] 里没有它们）。
       if (visibility.isEnabled(ModuleId.books)) HomeTab.books,
+      if (kKitapsenEdition) HomeTab.store,
       if (visibility.isEnabled(ModuleId.manga)) HomeTab.manga,
       if (visibility.isEnabled(ModuleId.video)) HomeTab.video,
       if (visibility.isEnabled(ModuleId.games)) HomeTab.games,
@@ -233,6 +235,12 @@ AdaptiveNavItem homeNavItemFor(HomeTab tab) {
         icon: Icons.menu_book_outlined,
         selectedIcon: Icons.menu_book,
         label: t.books,
+      );
+    case HomeTab.store:
+      return AdaptiveNavItem(
+        icon: Icons.storefront_outlined,
+        selectedIcon: Icons.storefront,
+        label: t.kitapsen_nav_store,
       );
     case HomeTab.manga:
       return AdaptiveNavItem(
@@ -3052,6 +3060,8 @@ class _HomePageState extends BasePageState<HomePage>
   Widget _buildTabContent(HomeTab tab) {
     final Widget content = switch (tab) {
       HomeTab.home => HomeDashboardPage(videoRepo: _videoRepository),
+      HomeTab.store =>
+        kKitapsenEdition ? const KitapsenStorePage() : const SizedBox.shrink(),
       // Kitapsen: hidden tabs build nothing, so their pages are tree-shaken out.
       HomeTab.video => kKitapsenEdition
           ? const SizedBox.shrink()

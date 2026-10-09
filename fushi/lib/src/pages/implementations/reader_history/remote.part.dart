@@ -161,12 +161,14 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
                   client,
                   forceRefresh: forceRefresh,
                 );
+      final List<RemoteBookInfo> shelfBooks = dedupeRemoteBooks(
+        remote: notAdopted,
+        localBookKeys: localKeys,
+        keyOf: sanitizeTtuFilename,
+      );
+      _consumeKitapsenDownloadRequest(shelfBooks);
       return _RemoteBookState(
-        books: dedupeRemoteBooks(
-          remote: notAdopted,
-          localBookKeys: localKeys,
-          keyOf: sanitizeTtuFilename,
-        ),
+        books: shelfBooks,
         audiobookOnly: remoteAudiobookOnlyCandidates(
           remote: withContent,
           localBookKeys: localKeys,
@@ -183,6 +185,23 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
         books: const <RemoteBookInfo>[],
         failed: true,
       );
+    }
+  }
+
+  /// Store › "Oku" on a book that is in the library but not on this device:
+  /// the store tab names it in [kitapsenShelfDownloadRequest] and switches
+  /// here (which reloads this list); the download starts once the list
+  /// holding it has loaded.
+  void _consumeKitapsenDownloadRequest(List<RemoteBookInfo> books) {
+    final String? requested = kitapsenShelfDownloadRequest.value;
+    if (requested == null) return;
+    for (final RemoteBookInfo book in books) {
+      if (book.bookKey != requested) continue;
+      kitapsenShelfDownloadRequest.value = null;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) unawaited(_downloadRemoteBook(book));
+      });
+      return;
     }
   }
 
@@ -1505,11 +1524,29 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
         title: mangaTitleHint,
       );
     }
+    // A Kitapsen book without an EPUB arrives as its PDF.
+    if (await _isPdfFile(file)) {
+      return PdfImporter.importFromPath(
+        db: appModel.database,
+        filePath: file.path,
+        fileName: p.setExtension(p.basename(file.path), '.pdf'),
+        title: mangaTitleHint ?? p.basenameWithoutExtension(file.path),
+      );
+    }
     return EpubImporter.importFromPath(
       db: appModel.database,
       filePath: file.path,
       fileName: p.basename(file.path),
     );
+  }
+
+  Future<bool> _isPdfFile(File file) async {
+    final RandomAccessFile raf = await file.open();
+    try {
+      return String.fromCharCodes(await raf.read(5)) == '%PDF-';
+    } finally {
+      await raf.close();
+    }
   }
 
   String _safeRemoteBookKey(String title) =>

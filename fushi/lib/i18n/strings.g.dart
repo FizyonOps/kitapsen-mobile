@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 106811 (6283 per locale)
+/// Strings: 107780 (6340 per locale)
 ///
-/// Built on 2026-10-08 at 15:49 UTC
+/// Built on 2026-10-09 at 16:50 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -9049,6 +9049,67 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
       'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
   String get kitapsen_account_delete_failed =>
       'The account could not be deleted. Please try again.';
+  String get kitapsen_nav_store => 'Store';
+  String get kitapsen_store_search_hint => 'Search books and authors';
+  String get kitapsen_store_new_arrivals => 'New arrivals';
+  String get kitapsen_store_most_read => 'Most read';
+  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  String get kitapsen_store_free_books => 'Free books';
+  String get kitapsen_store_stories => 'Serialized stories';
+  String get kitapsen_store_categories => 'Categories';
+  String get kitapsen_store_see_all => 'See all';
+  String get kitapsen_store_no_results => 'No books found';
+  String get kitapsen_store_load_failed =>
+      'Couldn\'t load. Check your connection.';
+  String get kitapsen_store_free_only => 'Free only';
+  String get kitapsen_sort_relevance => 'Most relevant';
+  String get kitapsen_sort_newest => 'Newest';
+  String get kitapsen_sort_most_read => 'Most read';
+  String get kitapsen_sort_rating => 'Top rated';
+  String get kitapsen_sort_title => 'Title A–Z';
+  String get kitapsen_book_read => 'Read';
+  String get kitapsen_book_get_free => 'Get for free';
+  String get kitapsen_book_claimed => 'Added to your library';
+  String get kitapsen_book_in_library => 'In your library';
+  String get kitapsen_book_not_in_library => 'Not in your library';
+  String get kitapsen_book_sign_in_prompt =>
+      'Sign in to add books to your library and keep a wishlist.';
+  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  String get kitapsen_book_downloading => 'Downloading to your library…';
+  String get kitapsen_book_about => 'About this book';
+  String get kitapsen_book_pages => 'Pages';
+  String get kitapsen_book_language => 'Language';
+  String get kitapsen_book_publisher => 'Publisher';
+  String get kitapsen_book_published => 'Published';
+  String get kitapsen_book_action_failed =>
+      'Something went wrong. Please try again.';
+  String get kitapsen_book_reviews => 'Reviews';
+  String get kitapsen_book_no_reviews => 'No reviews yet';
+  String get kitapsen_book_write_review => 'Write a review';
+  String get kitapsen_review_title_hint => 'Title (optional)';
+  String get kitapsen_review_content_hint => 'Your review (optional)';
+  String get kitapsen_review_submit => 'Send';
+  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  String get kitapsen_review_already => 'You have already reviewed this book.';
+  String get kitapsen_review_not_allowed =>
+      'Only readers who have this book in their library can review it.';
+  String get kitapsen_review_more => 'Show more reviews';
+  String get kitapsen_review_verified => 'Verified reader';
+  String get kitapsen_author_follow => 'Follow';
+  String get kitapsen_author_following => 'Following';
+  String get kitapsen_author_followers => 'Followers';
+  String get kitapsen_author_books => 'Books';
+  String get kitapsen_author_open => 'Author page';
+  String get kitapsen_wishlist_title => 'Wishlist';
+  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  String get kitapsen_notifications_title => 'Notifications';
+  String get kitapsen_notifications_empty => 'No notifications';
+  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  String get kitapsen_story_chapters => 'Chapters';
+  String get kitapsen_story_no_chapters => 'No chapters yet';
+  String get kitapsen_story_next => 'Next chapter';
+  String get kitapsen_story_previous => 'Previous chapter';
 }
 
 // Path: <root>
@@ -24169,6 +24230,124 @@ class _StringsAr extends _StringsEn {
   @override
   String get kitapsen_account_delete_failed =>
       'The account could not be deleted. Please try again.';
+  @override
+  String get kitapsen_nav_store => 'Store';
+  @override
+  String get kitapsen_store_search_hint => 'Search books and authors';
+  @override
+  String get kitapsen_store_new_arrivals => 'New arrivals';
+  @override
+  String get kitapsen_store_most_read => 'Most read';
+  @override
+  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  @override
+  String get kitapsen_store_free_books => 'Free books';
+  @override
+  String get kitapsen_store_stories => 'Serialized stories';
+  @override
+  String get kitapsen_store_categories => 'Categories';
+  @override
+  String get kitapsen_store_see_all => 'See all';
+  @override
+  String get kitapsen_store_no_results => 'No books found';
+  @override
+  String get kitapsen_store_load_failed =>
+      'Couldn\'t load. Check your connection.';
+  @override
+  String get kitapsen_store_free_only => 'Free only';
+  @override
+  String get kitapsen_sort_relevance => 'Most relevant';
+  @override
+  String get kitapsen_sort_newest => 'Newest';
+  @override
+  String get kitapsen_sort_most_read => 'Most read';
+  @override
+  String get kitapsen_sort_rating => 'Top rated';
+  @override
+  String get kitapsen_sort_title => 'Title A–Z';
+  @override
+  String get kitapsen_book_read => 'Read';
+  @override
+  String get kitapsen_book_get_free => 'Get for free';
+  @override
+  String get kitapsen_book_claimed => 'Added to your library';
+  @override
+  String get kitapsen_book_in_library => 'In your library';
+  @override
+  String get kitapsen_book_not_in_library => 'Not in your library';
+  @override
+  String get kitapsen_book_sign_in_prompt =>
+      'Sign in to add books to your library and keep a wishlist.';
+  @override
+  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  @override
+  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  @override
+  String get kitapsen_book_downloading => 'Downloading to your library…';
+  @override
+  String get kitapsen_book_about => 'About this book';
+  @override
+  String get kitapsen_book_pages => 'Pages';
+  @override
+  String get kitapsen_book_language => 'Language';
+  @override
+  String get kitapsen_book_publisher => 'Publisher';
+  @override
+  String get kitapsen_book_published => 'Published';
+  @override
+  String get kitapsen_book_action_failed =>
+      'Something went wrong. Please try again.';
+  @override
+  String get kitapsen_book_reviews => 'Reviews';
+  @override
+  String get kitapsen_book_no_reviews => 'No reviews yet';
+  @override
+  String get kitapsen_book_write_review => 'Write a review';
+  @override
+  String get kitapsen_review_title_hint => 'Title (optional)';
+  @override
+  String get kitapsen_review_content_hint => 'Your review (optional)';
+  @override
+  String get kitapsen_review_submit => 'Send';
+  @override
+  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  @override
+  String get kitapsen_review_already => 'You have already reviewed this book.';
+  @override
+  String get kitapsen_review_not_allowed =>
+      'Only readers who have this book in their library can review it.';
+  @override
+  String get kitapsen_review_more => 'Show more reviews';
+  @override
+  String get kitapsen_review_verified => 'Verified reader';
+  @override
+  String get kitapsen_author_follow => 'Follow';
+  @override
+  String get kitapsen_author_following => 'Following';
+  @override
+  String get kitapsen_author_followers => 'Followers';
+  @override
+  String get kitapsen_author_books => 'Books';
+  @override
+  String get kitapsen_author_open => 'Author page';
+  @override
+  String get kitapsen_wishlist_title => 'Wishlist';
+  @override
+  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  @override
+  String get kitapsen_notifications_title => 'Notifications';
+  @override
+  String get kitapsen_notifications_empty => 'No notifications';
+  @override
+  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  @override
+  String get kitapsen_story_chapters => 'Chapters';
+  @override
+  String get kitapsen_story_no_chapters => 'No chapters yet';
+  @override
+  String get kitapsen_story_next => 'Next chapter';
+  @override
+  String get kitapsen_story_previous => 'Previous chapter';
 }
 
 // Path: <root>
@@ -39681,6 +39860,124 @@ class _StringsDe extends _StringsEn {
   @override
   String get kitapsen_account_delete_failed =>
       'The account could not be deleted. Please try again.';
+  @override
+  String get kitapsen_nav_store => 'Store';
+  @override
+  String get kitapsen_store_search_hint => 'Search books and authors';
+  @override
+  String get kitapsen_store_new_arrivals => 'New arrivals';
+  @override
+  String get kitapsen_store_most_read => 'Most read';
+  @override
+  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  @override
+  String get kitapsen_store_free_books => 'Free books';
+  @override
+  String get kitapsen_store_stories => 'Serialized stories';
+  @override
+  String get kitapsen_store_categories => 'Categories';
+  @override
+  String get kitapsen_store_see_all => 'See all';
+  @override
+  String get kitapsen_store_no_results => 'No books found';
+  @override
+  String get kitapsen_store_load_failed =>
+      'Couldn\'t load. Check your connection.';
+  @override
+  String get kitapsen_store_free_only => 'Free only';
+  @override
+  String get kitapsen_sort_relevance => 'Most relevant';
+  @override
+  String get kitapsen_sort_newest => 'Newest';
+  @override
+  String get kitapsen_sort_most_read => 'Most read';
+  @override
+  String get kitapsen_sort_rating => 'Top rated';
+  @override
+  String get kitapsen_sort_title => 'Title A–Z';
+  @override
+  String get kitapsen_book_read => 'Read';
+  @override
+  String get kitapsen_book_get_free => 'Get for free';
+  @override
+  String get kitapsen_book_claimed => 'Added to your library';
+  @override
+  String get kitapsen_book_in_library => 'In your library';
+  @override
+  String get kitapsen_book_not_in_library => 'Not in your library';
+  @override
+  String get kitapsen_book_sign_in_prompt =>
+      'Sign in to add books to your library and keep a wishlist.';
+  @override
+  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  @override
+  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  @override
+  String get kitapsen_book_downloading => 'Downloading to your library…';
+  @override
+  String get kitapsen_book_about => 'About this book';
+  @override
+  String get kitapsen_book_pages => 'Pages';
+  @override
+  String get kitapsen_book_language => 'Language';
+  @override
+  String get kitapsen_book_publisher => 'Publisher';
+  @override
+  String get kitapsen_book_published => 'Published';
+  @override
+  String get kitapsen_book_action_failed =>
+      'Something went wrong. Please try again.';
+  @override
+  String get kitapsen_book_reviews => 'Reviews';
+  @override
+  String get kitapsen_book_no_reviews => 'No reviews yet';
+  @override
+  String get kitapsen_book_write_review => 'Write a review';
+  @override
+  String get kitapsen_review_title_hint => 'Title (optional)';
+  @override
+  String get kitapsen_review_content_hint => 'Your review (optional)';
+  @override
+  String get kitapsen_review_submit => 'Send';
+  @override
+  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  @override
+  String get kitapsen_review_already => 'You have already reviewed this book.';
+  @override
+  String get kitapsen_review_not_allowed =>
+      'Only readers who have this book in their library can review it.';
+  @override
+  String get kitapsen_review_more => 'Show more reviews';
+  @override
+  String get kitapsen_review_verified => 'Verified reader';
+  @override
+  String get kitapsen_author_follow => 'Follow';
+  @override
+  String get kitapsen_author_following => 'Following';
+  @override
+  String get kitapsen_author_followers => 'Followers';
+  @override
+  String get kitapsen_author_books => 'Books';
+  @override
+  String get kitapsen_author_open => 'Author page';
+  @override
+  String get kitapsen_wishlist_title => 'Wishlist';
+  @override
+  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  @override
+  String get kitapsen_notifications_title => 'Notifications';
+  @override
+  String get kitapsen_notifications_empty => 'No notifications';
+  @override
+  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  @override
+  String get kitapsen_story_chapters => 'Chapters';
+  @override
+  String get kitapsen_story_no_chapters => 'No chapters yet';
+  @override
+  String get kitapsen_story_next => 'Next chapter';
+  @override
+  String get kitapsen_story_previous => 'Previous chapter';
 }
 
 // Path: <root>
@@ -55252,6 +55549,124 @@ class _StringsEs extends _StringsEn {
   @override
   String get kitapsen_account_delete_failed =>
       'The account could not be deleted. Please try again.';
+  @override
+  String get kitapsen_nav_store => 'Store';
+  @override
+  String get kitapsen_store_search_hint => 'Search books and authors';
+  @override
+  String get kitapsen_store_new_arrivals => 'New arrivals';
+  @override
+  String get kitapsen_store_most_read => 'Most read';
+  @override
+  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  @override
+  String get kitapsen_store_free_books => 'Free books';
+  @override
+  String get kitapsen_store_stories => 'Serialized stories';
+  @override
+  String get kitapsen_store_categories => 'Categories';
+  @override
+  String get kitapsen_store_see_all => 'See all';
+  @override
+  String get kitapsen_store_no_results => 'No books found';
+  @override
+  String get kitapsen_store_load_failed =>
+      'Couldn\'t load. Check your connection.';
+  @override
+  String get kitapsen_store_free_only => 'Free only';
+  @override
+  String get kitapsen_sort_relevance => 'Most relevant';
+  @override
+  String get kitapsen_sort_newest => 'Newest';
+  @override
+  String get kitapsen_sort_most_read => 'Most read';
+  @override
+  String get kitapsen_sort_rating => 'Top rated';
+  @override
+  String get kitapsen_sort_title => 'Title A–Z';
+  @override
+  String get kitapsen_book_read => 'Read';
+  @override
+  String get kitapsen_book_get_free => 'Get for free';
+  @override
+  String get kitapsen_book_claimed => 'Added to your library';
+  @override
+  String get kitapsen_book_in_library => 'In your library';
+  @override
+  String get kitapsen_book_not_in_library => 'Not in your library';
+  @override
+  String get kitapsen_book_sign_in_prompt =>
+      'Sign in to add books to your library and keep a wishlist.';
+  @override
+  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  @override
+  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  @override
+  String get kitapsen_book_downloading => 'Downloading to your library…';
+  @override
+  String get kitapsen_book_about => 'About this book';
+  @override
+  String get kitapsen_book_pages => 'Pages';
+  @override
+  String get kitapsen_book_language => 'Language';
+  @override
+  String get kitapsen_book_publisher => 'Publisher';
+  @override
+  String get kitapsen_book_published => 'Published';
+  @override
+  String get kitapsen_book_action_failed =>
+      'Something went wrong. Please try again.';
+  @override
+  String get kitapsen_book_reviews => 'Reviews';
+  @override
+  String get kitapsen_book_no_reviews => 'No reviews yet';
+  @override
+  String get kitapsen_book_write_review => 'Write a review';
+  @override
+  String get kitapsen_review_title_hint => 'Title (optional)';
+  @override
+  String get kitapsen_review_content_hint => 'Your review (optional)';
+  @override
+  String get kitapsen_review_submit => 'Send';
+  @override
+  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  @override
+  String get kitapsen_review_already => 'You have already reviewed this book.';
+  @override
+  String get kitapsen_review_not_allowed =>
+      'Only readers who have this book in their library can review it.';
+  @override
+  String get kitapsen_review_more => 'Show more reviews';
+  @override
+  String get kitapsen_review_verified => 'Verified reader';
+  @override
+  String get kitapsen_author_follow => 'Follow';
+  @override
+  String get kitapsen_author_following => 'Following';
+  @override
+  String get kitapsen_author_followers => 'Followers';
+  @override
+  String get kitapsen_author_books => 'Books';
+  @override
+  String get kitapsen_author_open => 'Author page';
+  @override
+  String get kitapsen_wishlist_title => 'Wishlist';
+  @override
+  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  @override
+  String get kitapsen_notifications_title => 'Notifications';
+  @override
+  String get kitapsen_notifications_empty => 'No notifications';
+  @override
+  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  @override
+  String get kitapsen_story_chapters => 'Chapters';
+  @override
+  String get kitapsen_story_no_chapters => 'No chapters yet';
+  @override
+  String get kitapsen_story_next => 'Next chapter';
+  @override
+  String get kitapsen_story_previous => 'Previous chapter';
 }
 
 // Path: <root>
@@ -70901,6 +71316,124 @@ class _StringsFr extends _StringsEn {
   @override
   String get kitapsen_account_delete_failed =>
       'The account could not be deleted. Please try again.';
+  @override
+  String get kitapsen_nav_store => 'Store';
+  @override
+  String get kitapsen_store_search_hint => 'Search books and authors';
+  @override
+  String get kitapsen_store_new_arrivals => 'New arrivals';
+  @override
+  String get kitapsen_store_most_read => 'Most read';
+  @override
+  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  @override
+  String get kitapsen_store_free_books => 'Free books';
+  @override
+  String get kitapsen_store_stories => 'Serialized stories';
+  @override
+  String get kitapsen_store_categories => 'Categories';
+  @override
+  String get kitapsen_store_see_all => 'See all';
+  @override
+  String get kitapsen_store_no_results => 'No books found';
+  @override
+  String get kitapsen_store_load_failed =>
+      'Couldn\'t load. Check your connection.';
+  @override
+  String get kitapsen_store_free_only => 'Free only';
+  @override
+  String get kitapsen_sort_relevance => 'Most relevant';
+  @override
+  String get kitapsen_sort_newest => 'Newest';
+  @override
+  String get kitapsen_sort_most_read => 'Most read';
+  @override
+  String get kitapsen_sort_rating => 'Top rated';
+  @override
+  String get kitapsen_sort_title => 'Title A–Z';
+  @override
+  String get kitapsen_book_read => 'Read';
+  @override
+  String get kitapsen_book_get_free => 'Get for free';
+  @override
+  String get kitapsen_book_claimed => 'Added to your library';
+  @override
+  String get kitapsen_book_in_library => 'In your library';
+  @override
+  String get kitapsen_book_not_in_library => 'Not in your library';
+  @override
+  String get kitapsen_book_sign_in_prompt =>
+      'Sign in to add books to your library and keep a wishlist.';
+  @override
+  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  @override
+  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  @override
+  String get kitapsen_book_downloading => 'Downloading to your library…';
+  @override
+  String get kitapsen_book_about => 'About this book';
+  @override
+  String get kitapsen_book_pages => 'Pages';
+  @override
+  String get kitapsen_book_language => 'Language';
+  @override
+  String get kitapsen_book_publisher => 'Publisher';
+  @override
+  String get kitapsen_book_published => 'Published';
+  @override
+  String get kitapsen_book_action_failed =>
+      'Something went wrong. Please try again.';
+  @override
+  String get kitapsen_book_reviews => 'Reviews';
+  @override
+  String get kitapsen_book_no_reviews => 'No reviews yet';
+  @override
+  String get kitapsen_book_write_review => 'Write a review';
+  @override
+  String get kitapsen_review_title_hint => 'Title (optional)';
+  @override
+  String get kitapsen_review_content_hint => 'Your review (optional)';
+  @override
+  String get kitapsen_review_submit => 'Send';
+  @override
+  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  @override
+  String get kitapsen_review_already => 'You have already reviewed this book.';
+  @override
+  String get kitapsen_review_not_allowed =>
+      'Only readers who have this book in their library can review it.';
+  @override
+  String get kitapsen_review_more => 'Show more reviews';
+  @override
+  String get kitapsen_review_verified => 'Verified reader';
+  @override
+  String get kitapsen_author_follow => 'Follow';
+  @override
+  String get kitapsen_author_following => 'Following';
+  @override
+  String get kitapsen_author_followers => 'Followers';
+  @override
+  String get kitapsen_author_books => 'Books';
+  @override
+  String get kitapsen_author_open => 'Author page';
+  @override
+  String get kitapsen_wishlist_title => 'Wishlist';
+  @override
+  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  @override
+  String get kitapsen_notifications_title => 'Notifications';
+  @override
+  String get kitapsen_notifications_empty => 'No notifications';
+  @override
+  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  @override
+  String get kitapsen_story_chapters => 'Chapters';
+  @override
+  String get kitapsen_story_no_chapters => 'No chapters yet';
+  @override
+  String get kitapsen_story_next => 'Next chapter';
+  @override
+  String get kitapsen_story_previous => 'Previous chapter';
 }
 
 // Path: <root>
@@ -86208,6 +86741,124 @@ class _StringsId extends _StringsEn {
   @override
   String get kitapsen_account_delete_failed =>
       'The account could not be deleted. Please try again.';
+  @override
+  String get kitapsen_nav_store => 'Store';
+  @override
+  String get kitapsen_store_search_hint => 'Search books and authors';
+  @override
+  String get kitapsen_store_new_arrivals => 'New arrivals';
+  @override
+  String get kitapsen_store_most_read => 'Most read';
+  @override
+  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  @override
+  String get kitapsen_store_free_books => 'Free books';
+  @override
+  String get kitapsen_store_stories => 'Serialized stories';
+  @override
+  String get kitapsen_store_categories => 'Categories';
+  @override
+  String get kitapsen_store_see_all => 'See all';
+  @override
+  String get kitapsen_store_no_results => 'No books found';
+  @override
+  String get kitapsen_store_load_failed =>
+      'Couldn\'t load. Check your connection.';
+  @override
+  String get kitapsen_store_free_only => 'Free only';
+  @override
+  String get kitapsen_sort_relevance => 'Most relevant';
+  @override
+  String get kitapsen_sort_newest => 'Newest';
+  @override
+  String get kitapsen_sort_most_read => 'Most read';
+  @override
+  String get kitapsen_sort_rating => 'Top rated';
+  @override
+  String get kitapsen_sort_title => 'Title A–Z';
+  @override
+  String get kitapsen_book_read => 'Read';
+  @override
+  String get kitapsen_book_get_free => 'Get for free';
+  @override
+  String get kitapsen_book_claimed => 'Added to your library';
+  @override
+  String get kitapsen_book_in_library => 'In your library';
+  @override
+  String get kitapsen_book_not_in_library => 'Not in your library';
+  @override
+  String get kitapsen_book_sign_in_prompt =>
+      'Sign in to add books to your library and keep a wishlist.';
+  @override
+  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  @override
+  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  @override
+  String get kitapsen_book_downloading => 'Downloading to your library…';
+  @override
+  String get kitapsen_book_about => 'About this book';
+  @override
+  String get kitapsen_book_pages => 'Pages';
+  @override
+  String get kitapsen_book_language => 'Language';
+  @override
+  String get kitapsen_book_publisher => 'Publisher';
+  @override
+  String get kitapsen_book_published => 'Published';
+  @override
+  String get kitapsen_book_action_failed =>
+      'Something went wrong. Please try again.';
+  @override
+  String get kitapsen_book_reviews => 'Reviews';
+  @override
+  String get kitapsen_book_no_reviews => 'No reviews yet';
+  @override
+  String get kitapsen_book_write_review => 'Write a review';
+  @override
+  String get kitapsen_review_title_hint => 'Title (optional)';
+  @override
+  String get kitapsen_review_content_hint => 'Your review (optional)';
+  @override
+  String get kitapsen_review_submit => 'Send';
+  @override
+  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  @override
+  String get kitapsen_review_already => 'You have already reviewed this book.';
+  @override
+  String get kitapsen_review_not_allowed =>
+      'Only readers who have this book in their library can review it.';
+  @override
+  String get kitapsen_review_more => 'Show more reviews';
+  @override
+  String get kitapsen_review_verified => 'Verified reader';
+  @override
+  String get kitapsen_author_follow => 'Follow';
+  @override
+  String get kitapsen_author_following => 'Following';
+  @override
+  String get kitapsen_author_followers => 'Followers';
+  @override
+  String get kitapsen_author_books => 'Books';
+  @override
+  String get kitapsen_author_open => 'Author page';
+  @override
+  String get kitapsen_wishlist_title => 'Wishlist';
+  @override
+  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  @override
+  String get kitapsen_notifications_title => 'Notifications';
+  @override
+  String get kitapsen_notifications_empty => 'No notifications';
+  @override
+  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  @override
+  String get kitapsen_story_chapters => 'Chapters';
+  @override
+  String get kitapsen_story_no_chapters => 'No chapters yet';
+  @override
+  String get kitapsen_story_next => 'Next chapter';
+  @override
+  String get kitapsen_story_previous => 'Previous chapter';
 }
 
 // Path: <root>
@@ -101677,6 +102328,124 @@ class _StringsIt extends _StringsEn {
   @override
   String get kitapsen_account_delete_failed =>
       'The account could not be deleted. Please try again.';
+  @override
+  String get kitapsen_nav_store => 'Store';
+  @override
+  String get kitapsen_store_search_hint => 'Search books and authors';
+  @override
+  String get kitapsen_store_new_arrivals => 'New arrivals';
+  @override
+  String get kitapsen_store_most_read => 'Most read';
+  @override
+  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  @override
+  String get kitapsen_store_free_books => 'Free books';
+  @override
+  String get kitapsen_store_stories => 'Serialized stories';
+  @override
+  String get kitapsen_store_categories => 'Categories';
+  @override
+  String get kitapsen_store_see_all => 'See all';
+  @override
+  String get kitapsen_store_no_results => 'No books found';
+  @override
+  String get kitapsen_store_load_failed =>
+      'Couldn\'t load. Check your connection.';
+  @override
+  String get kitapsen_store_free_only => 'Free only';
+  @override
+  String get kitapsen_sort_relevance => 'Most relevant';
+  @override
+  String get kitapsen_sort_newest => 'Newest';
+  @override
+  String get kitapsen_sort_most_read => 'Most read';
+  @override
+  String get kitapsen_sort_rating => 'Top rated';
+  @override
+  String get kitapsen_sort_title => 'Title A–Z';
+  @override
+  String get kitapsen_book_read => 'Read';
+  @override
+  String get kitapsen_book_get_free => 'Get for free';
+  @override
+  String get kitapsen_book_claimed => 'Added to your library';
+  @override
+  String get kitapsen_book_in_library => 'In your library';
+  @override
+  String get kitapsen_book_not_in_library => 'Not in your library';
+  @override
+  String get kitapsen_book_sign_in_prompt =>
+      'Sign in to add books to your library and keep a wishlist.';
+  @override
+  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  @override
+  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  @override
+  String get kitapsen_book_downloading => 'Downloading to your library…';
+  @override
+  String get kitapsen_book_about => 'About this book';
+  @override
+  String get kitapsen_book_pages => 'Pages';
+  @override
+  String get kitapsen_book_language => 'Language';
+  @override
+  String get kitapsen_book_publisher => 'Publisher';
+  @override
+  String get kitapsen_book_published => 'Published';
+  @override
+  String get kitapsen_book_action_failed =>
+      'Something went wrong. Please try again.';
+  @override
+  String get kitapsen_book_reviews => 'Reviews';
+  @override
+  String get kitapsen_book_no_reviews => 'No reviews yet';
+  @override
+  String get kitapsen_book_write_review => 'Write a review';
+  @override
+  String get kitapsen_review_title_hint => 'Title (optional)';
+  @override
+  String get kitapsen_review_content_hint => 'Your review (optional)';
+  @override
+  String get kitapsen_review_submit => 'Send';
+  @override
+  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  @override
+  String get kitapsen_review_already => 'You have already reviewed this book.';
+  @override
+  String get kitapsen_review_not_allowed =>
+      'Only readers who have this book in their library can review it.';
+  @override
+  String get kitapsen_review_more => 'Show more reviews';
+  @override
+  String get kitapsen_review_verified => 'Verified reader';
+  @override
+  String get kitapsen_author_follow => 'Follow';
+  @override
+  String get kitapsen_author_following => 'Following';
+  @override
+  String get kitapsen_author_followers => 'Followers';
+  @override
+  String get kitapsen_author_books => 'Books';
+  @override
+  String get kitapsen_author_open => 'Author page';
+  @override
+  String get kitapsen_wishlist_title => 'Wishlist';
+  @override
+  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  @override
+  String get kitapsen_notifications_title => 'Notifications';
+  @override
+  String get kitapsen_notifications_empty => 'No notifications';
+  @override
+  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  @override
+  String get kitapsen_story_chapters => 'Chapters';
+  @override
+  String get kitapsen_story_no_chapters => 'No chapters yet';
+  @override
+  String get kitapsen_story_next => 'Next chapter';
+  @override
+  String get kitapsen_story_previous => 'Previous chapter';
 }
 
 // Path: <root>
@@ -116177,6 +116946,124 @@ class _StringsJa extends _StringsEn {
   @override
   String get kitapsen_account_delete_failed =>
       'The account could not be deleted. Please try again.';
+  @override
+  String get kitapsen_nav_store => 'Store';
+  @override
+  String get kitapsen_store_search_hint => 'Search books and authors';
+  @override
+  String get kitapsen_store_new_arrivals => 'New arrivals';
+  @override
+  String get kitapsen_store_most_read => 'Most read';
+  @override
+  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  @override
+  String get kitapsen_store_free_books => 'Free books';
+  @override
+  String get kitapsen_store_stories => 'Serialized stories';
+  @override
+  String get kitapsen_store_categories => 'Categories';
+  @override
+  String get kitapsen_store_see_all => 'See all';
+  @override
+  String get kitapsen_store_no_results => 'No books found';
+  @override
+  String get kitapsen_store_load_failed =>
+      'Couldn\'t load. Check your connection.';
+  @override
+  String get kitapsen_store_free_only => 'Free only';
+  @override
+  String get kitapsen_sort_relevance => 'Most relevant';
+  @override
+  String get kitapsen_sort_newest => 'Newest';
+  @override
+  String get kitapsen_sort_most_read => 'Most read';
+  @override
+  String get kitapsen_sort_rating => 'Top rated';
+  @override
+  String get kitapsen_sort_title => 'Title A–Z';
+  @override
+  String get kitapsen_book_read => 'Read';
+  @override
+  String get kitapsen_book_get_free => 'Get for free';
+  @override
+  String get kitapsen_book_claimed => 'Added to your library';
+  @override
+  String get kitapsen_book_in_library => 'In your library';
+  @override
+  String get kitapsen_book_not_in_library => 'Not in your library';
+  @override
+  String get kitapsen_book_sign_in_prompt =>
+      'Sign in to add books to your library and keep a wishlist.';
+  @override
+  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  @override
+  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  @override
+  String get kitapsen_book_downloading => 'Downloading to your library…';
+  @override
+  String get kitapsen_book_about => 'About this book';
+  @override
+  String get kitapsen_book_pages => 'Pages';
+  @override
+  String get kitapsen_book_language => 'Language';
+  @override
+  String get kitapsen_book_publisher => 'Publisher';
+  @override
+  String get kitapsen_book_published => 'Published';
+  @override
+  String get kitapsen_book_action_failed =>
+      'Something went wrong. Please try again.';
+  @override
+  String get kitapsen_book_reviews => 'Reviews';
+  @override
+  String get kitapsen_book_no_reviews => 'No reviews yet';
+  @override
+  String get kitapsen_book_write_review => 'Write a review';
+  @override
+  String get kitapsen_review_title_hint => 'Title (optional)';
+  @override
+  String get kitapsen_review_content_hint => 'Your review (optional)';
+  @override
+  String get kitapsen_review_submit => 'Send';
+  @override
+  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  @override
+  String get kitapsen_review_already => 'You have already reviewed this book.';
+  @override
+  String get kitapsen_review_not_allowed =>
+      'Only readers who have this book in their library can review it.';
+  @override
+  String get kitapsen_review_more => 'Show more reviews';
+  @override
+  String get kitapsen_review_verified => 'Verified reader';
+  @override
+  String get kitapsen_author_follow => 'Follow';
+  @override
+  String get kitapsen_author_following => 'Following';
+  @override
+  String get kitapsen_author_followers => 'Followers';
+  @override
+  String get kitapsen_author_books => 'Books';
+  @override
+  String get kitapsen_author_open => 'Author page';
+  @override
+  String get kitapsen_wishlist_title => 'Wishlist';
+  @override
+  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  @override
+  String get kitapsen_notifications_title => 'Notifications';
+  @override
+  String get kitapsen_notifications_empty => 'No notifications';
+  @override
+  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  @override
+  String get kitapsen_story_chapters => 'Chapters';
+  @override
+  String get kitapsen_story_no_chapters => 'No chapters yet';
+  @override
+  String get kitapsen_story_next => 'Next chapter';
+  @override
+  String get kitapsen_story_previous => 'Previous chapter';
 }
 
 // Path: <root>
@@ -130682,6 +131569,124 @@ class _StringsKo extends _StringsEn {
   @override
   String get kitapsen_account_delete_failed =>
       'The account could not be deleted. Please try again.';
+  @override
+  String get kitapsen_nav_store => 'Store';
+  @override
+  String get kitapsen_store_search_hint => 'Search books and authors';
+  @override
+  String get kitapsen_store_new_arrivals => 'New arrivals';
+  @override
+  String get kitapsen_store_most_read => 'Most read';
+  @override
+  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  @override
+  String get kitapsen_store_free_books => 'Free books';
+  @override
+  String get kitapsen_store_stories => 'Serialized stories';
+  @override
+  String get kitapsen_store_categories => 'Categories';
+  @override
+  String get kitapsen_store_see_all => 'See all';
+  @override
+  String get kitapsen_store_no_results => 'No books found';
+  @override
+  String get kitapsen_store_load_failed =>
+      'Couldn\'t load. Check your connection.';
+  @override
+  String get kitapsen_store_free_only => 'Free only';
+  @override
+  String get kitapsen_sort_relevance => 'Most relevant';
+  @override
+  String get kitapsen_sort_newest => 'Newest';
+  @override
+  String get kitapsen_sort_most_read => 'Most read';
+  @override
+  String get kitapsen_sort_rating => 'Top rated';
+  @override
+  String get kitapsen_sort_title => 'Title A–Z';
+  @override
+  String get kitapsen_book_read => 'Read';
+  @override
+  String get kitapsen_book_get_free => 'Get for free';
+  @override
+  String get kitapsen_book_claimed => 'Added to your library';
+  @override
+  String get kitapsen_book_in_library => 'In your library';
+  @override
+  String get kitapsen_book_not_in_library => 'Not in your library';
+  @override
+  String get kitapsen_book_sign_in_prompt =>
+      'Sign in to add books to your library and keep a wishlist.';
+  @override
+  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  @override
+  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  @override
+  String get kitapsen_book_downloading => 'Downloading to your library…';
+  @override
+  String get kitapsen_book_about => 'About this book';
+  @override
+  String get kitapsen_book_pages => 'Pages';
+  @override
+  String get kitapsen_book_language => 'Language';
+  @override
+  String get kitapsen_book_publisher => 'Publisher';
+  @override
+  String get kitapsen_book_published => 'Published';
+  @override
+  String get kitapsen_book_action_failed =>
+      'Something went wrong. Please try again.';
+  @override
+  String get kitapsen_book_reviews => 'Reviews';
+  @override
+  String get kitapsen_book_no_reviews => 'No reviews yet';
+  @override
+  String get kitapsen_book_write_review => 'Write a review';
+  @override
+  String get kitapsen_review_title_hint => 'Title (optional)';
+  @override
+  String get kitapsen_review_content_hint => 'Your review (optional)';
+  @override
+  String get kitapsen_review_submit => 'Send';
+  @override
+  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  @override
+  String get kitapsen_review_already => 'You have already reviewed this book.';
+  @override
+  String get kitapsen_review_not_allowed =>
+      'Only readers who have this book in their library can review it.';
+  @override
+  String get kitapsen_review_more => 'Show more reviews';
+  @override
+  String get kitapsen_review_verified => 'Verified reader';
+  @override
+  String get kitapsen_author_follow => 'Follow';
+  @override
+  String get kitapsen_author_following => 'Following';
+  @override
+  String get kitapsen_author_followers => 'Followers';
+  @override
+  String get kitapsen_author_books => 'Books';
+  @override
+  String get kitapsen_author_open => 'Author page';
+  @override
+  String get kitapsen_wishlist_title => 'Wishlist';
+  @override
+  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  @override
+  String get kitapsen_notifications_title => 'Notifications';
+  @override
+  String get kitapsen_notifications_empty => 'No notifications';
+  @override
+  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  @override
+  String get kitapsen_story_chapters => 'Chapters';
+  @override
+  String get kitapsen_story_no_chapters => 'No chapters yet';
+  @override
+  String get kitapsen_story_next => 'Next chapter';
+  @override
+  String get kitapsen_story_previous => 'Previous chapter';
 }
 
 // Path: <root>
@@ -146098,6 +147103,124 @@ class _StringsNl extends _StringsEn {
   @override
   String get kitapsen_account_delete_failed =>
       'The account could not be deleted. Please try again.';
+  @override
+  String get kitapsen_nav_store => 'Store';
+  @override
+  String get kitapsen_store_search_hint => 'Search books and authors';
+  @override
+  String get kitapsen_store_new_arrivals => 'New arrivals';
+  @override
+  String get kitapsen_store_most_read => 'Most read';
+  @override
+  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  @override
+  String get kitapsen_store_free_books => 'Free books';
+  @override
+  String get kitapsen_store_stories => 'Serialized stories';
+  @override
+  String get kitapsen_store_categories => 'Categories';
+  @override
+  String get kitapsen_store_see_all => 'See all';
+  @override
+  String get kitapsen_store_no_results => 'No books found';
+  @override
+  String get kitapsen_store_load_failed =>
+      'Couldn\'t load. Check your connection.';
+  @override
+  String get kitapsen_store_free_only => 'Free only';
+  @override
+  String get kitapsen_sort_relevance => 'Most relevant';
+  @override
+  String get kitapsen_sort_newest => 'Newest';
+  @override
+  String get kitapsen_sort_most_read => 'Most read';
+  @override
+  String get kitapsen_sort_rating => 'Top rated';
+  @override
+  String get kitapsen_sort_title => 'Title A–Z';
+  @override
+  String get kitapsen_book_read => 'Read';
+  @override
+  String get kitapsen_book_get_free => 'Get for free';
+  @override
+  String get kitapsen_book_claimed => 'Added to your library';
+  @override
+  String get kitapsen_book_in_library => 'In your library';
+  @override
+  String get kitapsen_book_not_in_library => 'Not in your library';
+  @override
+  String get kitapsen_book_sign_in_prompt =>
+      'Sign in to add books to your library and keep a wishlist.';
+  @override
+  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  @override
+  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  @override
+  String get kitapsen_book_downloading => 'Downloading to your library…';
+  @override
+  String get kitapsen_book_about => 'About this book';
+  @override
+  String get kitapsen_book_pages => 'Pages';
+  @override
+  String get kitapsen_book_language => 'Language';
+  @override
+  String get kitapsen_book_publisher => 'Publisher';
+  @override
+  String get kitapsen_book_published => 'Published';
+  @override
+  String get kitapsen_book_action_failed =>
+      'Something went wrong. Please try again.';
+  @override
+  String get kitapsen_book_reviews => 'Reviews';
+  @override
+  String get kitapsen_book_no_reviews => 'No reviews yet';
+  @override
+  String get kitapsen_book_write_review => 'Write a review';
+  @override
+  String get kitapsen_review_title_hint => 'Title (optional)';
+  @override
+  String get kitapsen_review_content_hint => 'Your review (optional)';
+  @override
+  String get kitapsen_review_submit => 'Send';
+  @override
+  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  @override
+  String get kitapsen_review_already => 'You have already reviewed this book.';
+  @override
+  String get kitapsen_review_not_allowed =>
+      'Only readers who have this book in their library can review it.';
+  @override
+  String get kitapsen_review_more => 'Show more reviews';
+  @override
+  String get kitapsen_review_verified => 'Verified reader';
+  @override
+  String get kitapsen_author_follow => 'Follow';
+  @override
+  String get kitapsen_author_following => 'Following';
+  @override
+  String get kitapsen_author_followers => 'Followers';
+  @override
+  String get kitapsen_author_books => 'Books';
+  @override
+  String get kitapsen_author_open => 'Author page';
+  @override
+  String get kitapsen_wishlist_title => 'Wishlist';
+  @override
+  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  @override
+  String get kitapsen_notifications_title => 'Notifications';
+  @override
+  String get kitapsen_notifications_empty => 'No notifications';
+  @override
+  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  @override
+  String get kitapsen_story_chapters => 'Chapters';
+  @override
+  String get kitapsen_story_no_chapters => 'No chapters yet';
+  @override
+  String get kitapsen_story_next => 'Next chapter';
+  @override
+  String get kitapsen_story_previous => 'Previous chapter';
 }
 
 // Path: <root>
@@ -161587,6 +162710,124 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get kitapsen_account_delete_failed =>
       'The account could not be deleted. Please try again.';
+  @override
+  String get kitapsen_nav_store => 'Store';
+  @override
+  String get kitapsen_store_search_hint => 'Search books and authors';
+  @override
+  String get kitapsen_store_new_arrivals => 'New arrivals';
+  @override
+  String get kitapsen_store_most_read => 'Most read';
+  @override
+  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  @override
+  String get kitapsen_store_free_books => 'Free books';
+  @override
+  String get kitapsen_store_stories => 'Serialized stories';
+  @override
+  String get kitapsen_store_categories => 'Categories';
+  @override
+  String get kitapsen_store_see_all => 'See all';
+  @override
+  String get kitapsen_store_no_results => 'No books found';
+  @override
+  String get kitapsen_store_load_failed =>
+      'Couldn\'t load. Check your connection.';
+  @override
+  String get kitapsen_store_free_only => 'Free only';
+  @override
+  String get kitapsen_sort_relevance => 'Most relevant';
+  @override
+  String get kitapsen_sort_newest => 'Newest';
+  @override
+  String get kitapsen_sort_most_read => 'Most read';
+  @override
+  String get kitapsen_sort_rating => 'Top rated';
+  @override
+  String get kitapsen_sort_title => 'Title A–Z';
+  @override
+  String get kitapsen_book_read => 'Read';
+  @override
+  String get kitapsen_book_get_free => 'Get for free';
+  @override
+  String get kitapsen_book_claimed => 'Added to your library';
+  @override
+  String get kitapsen_book_in_library => 'In your library';
+  @override
+  String get kitapsen_book_not_in_library => 'Not in your library';
+  @override
+  String get kitapsen_book_sign_in_prompt =>
+      'Sign in to add books to your library and keep a wishlist.';
+  @override
+  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  @override
+  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  @override
+  String get kitapsen_book_downloading => 'Downloading to your library…';
+  @override
+  String get kitapsen_book_about => 'About this book';
+  @override
+  String get kitapsen_book_pages => 'Pages';
+  @override
+  String get kitapsen_book_language => 'Language';
+  @override
+  String get kitapsen_book_publisher => 'Publisher';
+  @override
+  String get kitapsen_book_published => 'Published';
+  @override
+  String get kitapsen_book_action_failed =>
+      'Something went wrong. Please try again.';
+  @override
+  String get kitapsen_book_reviews => 'Reviews';
+  @override
+  String get kitapsen_book_no_reviews => 'No reviews yet';
+  @override
+  String get kitapsen_book_write_review => 'Write a review';
+  @override
+  String get kitapsen_review_title_hint => 'Title (optional)';
+  @override
+  String get kitapsen_review_content_hint => 'Your review (optional)';
+  @override
+  String get kitapsen_review_submit => 'Send';
+  @override
+  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  @override
+  String get kitapsen_review_already => 'You have already reviewed this book.';
+  @override
+  String get kitapsen_review_not_allowed =>
+      'Only readers who have this book in their library can review it.';
+  @override
+  String get kitapsen_review_more => 'Show more reviews';
+  @override
+  String get kitapsen_review_verified => 'Verified reader';
+  @override
+  String get kitapsen_author_follow => 'Follow';
+  @override
+  String get kitapsen_author_following => 'Following';
+  @override
+  String get kitapsen_author_followers => 'Followers';
+  @override
+  String get kitapsen_author_books => 'Books';
+  @override
+  String get kitapsen_author_open => 'Author page';
+  @override
+  String get kitapsen_wishlist_title => 'Wishlist';
+  @override
+  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  @override
+  String get kitapsen_notifications_title => 'Notifications';
+  @override
+  String get kitapsen_notifications_empty => 'No notifications';
+  @override
+  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  @override
+  String get kitapsen_story_chapters => 'Chapters';
+  @override
+  String get kitapsen_story_no_chapters => 'No chapters yet';
+  @override
+  String get kitapsen_story_next => 'Next chapter';
+  @override
+  String get kitapsen_story_previous => 'Previous chapter';
 }
 
 // Path: <root>
@@ -177020,6 +178261,124 @@ class _StringsRu extends _StringsEn {
   @override
   String get kitapsen_account_delete_failed =>
       'The account could not be deleted. Please try again.';
+  @override
+  String get kitapsen_nav_store => 'Store';
+  @override
+  String get kitapsen_store_search_hint => 'Search books and authors';
+  @override
+  String get kitapsen_store_new_arrivals => 'New arrivals';
+  @override
+  String get kitapsen_store_most_read => 'Most read';
+  @override
+  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  @override
+  String get kitapsen_store_free_books => 'Free books';
+  @override
+  String get kitapsen_store_stories => 'Serialized stories';
+  @override
+  String get kitapsen_store_categories => 'Categories';
+  @override
+  String get kitapsen_store_see_all => 'See all';
+  @override
+  String get kitapsen_store_no_results => 'No books found';
+  @override
+  String get kitapsen_store_load_failed =>
+      'Couldn\'t load. Check your connection.';
+  @override
+  String get kitapsen_store_free_only => 'Free only';
+  @override
+  String get kitapsen_sort_relevance => 'Most relevant';
+  @override
+  String get kitapsen_sort_newest => 'Newest';
+  @override
+  String get kitapsen_sort_most_read => 'Most read';
+  @override
+  String get kitapsen_sort_rating => 'Top rated';
+  @override
+  String get kitapsen_sort_title => 'Title A–Z';
+  @override
+  String get kitapsen_book_read => 'Read';
+  @override
+  String get kitapsen_book_get_free => 'Get for free';
+  @override
+  String get kitapsen_book_claimed => 'Added to your library';
+  @override
+  String get kitapsen_book_in_library => 'In your library';
+  @override
+  String get kitapsen_book_not_in_library => 'Not in your library';
+  @override
+  String get kitapsen_book_sign_in_prompt =>
+      'Sign in to add books to your library and keep a wishlist.';
+  @override
+  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  @override
+  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  @override
+  String get kitapsen_book_downloading => 'Downloading to your library…';
+  @override
+  String get kitapsen_book_about => 'About this book';
+  @override
+  String get kitapsen_book_pages => 'Pages';
+  @override
+  String get kitapsen_book_language => 'Language';
+  @override
+  String get kitapsen_book_publisher => 'Publisher';
+  @override
+  String get kitapsen_book_published => 'Published';
+  @override
+  String get kitapsen_book_action_failed =>
+      'Something went wrong. Please try again.';
+  @override
+  String get kitapsen_book_reviews => 'Reviews';
+  @override
+  String get kitapsen_book_no_reviews => 'No reviews yet';
+  @override
+  String get kitapsen_book_write_review => 'Write a review';
+  @override
+  String get kitapsen_review_title_hint => 'Title (optional)';
+  @override
+  String get kitapsen_review_content_hint => 'Your review (optional)';
+  @override
+  String get kitapsen_review_submit => 'Send';
+  @override
+  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  @override
+  String get kitapsen_review_already => 'You have already reviewed this book.';
+  @override
+  String get kitapsen_review_not_allowed =>
+      'Only readers who have this book in their library can review it.';
+  @override
+  String get kitapsen_review_more => 'Show more reviews';
+  @override
+  String get kitapsen_review_verified => 'Verified reader';
+  @override
+  String get kitapsen_author_follow => 'Follow';
+  @override
+  String get kitapsen_author_following => 'Following';
+  @override
+  String get kitapsen_author_followers => 'Followers';
+  @override
+  String get kitapsen_author_books => 'Books';
+  @override
+  String get kitapsen_author_open => 'Author page';
+  @override
+  String get kitapsen_wishlist_title => 'Wishlist';
+  @override
+  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  @override
+  String get kitapsen_notifications_title => 'Notifications';
+  @override
+  String get kitapsen_notifications_empty => 'No notifications';
+  @override
+  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  @override
+  String get kitapsen_story_chapters => 'Chapters';
+  @override
+  String get kitapsen_story_no_chapters => 'No chapters yet';
+  @override
+  String get kitapsen_story_next => 'Next chapter';
+  @override
+  String get kitapsen_story_previous => 'Previous chapter';
 }
 
 // Path: <root>
@@ -192130,6 +193489,124 @@ class _StringsTh extends _StringsEn {
   @override
   String get kitapsen_account_delete_failed =>
       'The account could not be deleted. Please try again.';
+  @override
+  String get kitapsen_nav_store => 'Store';
+  @override
+  String get kitapsen_store_search_hint => 'Search books and authors';
+  @override
+  String get kitapsen_store_new_arrivals => 'New arrivals';
+  @override
+  String get kitapsen_store_most_read => 'Most read';
+  @override
+  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  @override
+  String get kitapsen_store_free_books => 'Free books';
+  @override
+  String get kitapsen_store_stories => 'Serialized stories';
+  @override
+  String get kitapsen_store_categories => 'Categories';
+  @override
+  String get kitapsen_store_see_all => 'See all';
+  @override
+  String get kitapsen_store_no_results => 'No books found';
+  @override
+  String get kitapsen_store_load_failed =>
+      'Couldn\'t load. Check your connection.';
+  @override
+  String get kitapsen_store_free_only => 'Free only';
+  @override
+  String get kitapsen_sort_relevance => 'Most relevant';
+  @override
+  String get kitapsen_sort_newest => 'Newest';
+  @override
+  String get kitapsen_sort_most_read => 'Most read';
+  @override
+  String get kitapsen_sort_rating => 'Top rated';
+  @override
+  String get kitapsen_sort_title => 'Title A–Z';
+  @override
+  String get kitapsen_book_read => 'Read';
+  @override
+  String get kitapsen_book_get_free => 'Get for free';
+  @override
+  String get kitapsen_book_claimed => 'Added to your library';
+  @override
+  String get kitapsen_book_in_library => 'In your library';
+  @override
+  String get kitapsen_book_not_in_library => 'Not in your library';
+  @override
+  String get kitapsen_book_sign_in_prompt =>
+      'Sign in to add books to your library and keep a wishlist.';
+  @override
+  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  @override
+  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  @override
+  String get kitapsen_book_downloading => 'Downloading to your library…';
+  @override
+  String get kitapsen_book_about => 'About this book';
+  @override
+  String get kitapsen_book_pages => 'Pages';
+  @override
+  String get kitapsen_book_language => 'Language';
+  @override
+  String get kitapsen_book_publisher => 'Publisher';
+  @override
+  String get kitapsen_book_published => 'Published';
+  @override
+  String get kitapsen_book_action_failed =>
+      'Something went wrong. Please try again.';
+  @override
+  String get kitapsen_book_reviews => 'Reviews';
+  @override
+  String get kitapsen_book_no_reviews => 'No reviews yet';
+  @override
+  String get kitapsen_book_write_review => 'Write a review';
+  @override
+  String get kitapsen_review_title_hint => 'Title (optional)';
+  @override
+  String get kitapsen_review_content_hint => 'Your review (optional)';
+  @override
+  String get kitapsen_review_submit => 'Send';
+  @override
+  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  @override
+  String get kitapsen_review_already => 'You have already reviewed this book.';
+  @override
+  String get kitapsen_review_not_allowed =>
+      'Only readers who have this book in their library can review it.';
+  @override
+  String get kitapsen_review_more => 'Show more reviews';
+  @override
+  String get kitapsen_review_verified => 'Verified reader';
+  @override
+  String get kitapsen_author_follow => 'Follow';
+  @override
+  String get kitapsen_author_following => 'Following';
+  @override
+  String get kitapsen_author_followers => 'Followers';
+  @override
+  String get kitapsen_author_books => 'Books';
+  @override
+  String get kitapsen_author_open => 'Author page';
+  @override
+  String get kitapsen_wishlist_title => 'Wishlist';
+  @override
+  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  @override
+  String get kitapsen_notifications_title => 'Notifications';
+  @override
+  String get kitapsen_notifications_empty => 'No notifications';
+  @override
+  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  @override
+  String get kitapsen_story_chapters => 'Chapters';
+  @override
+  String get kitapsen_story_no_chapters => 'No chapters yet';
+  @override
+  String get kitapsen_story_next => 'Next chapter';
+  @override
+  String get kitapsen_story_previous => 'Previous chapter';
 }
 
 // Path: <root>
@@ -207443,6 +208920,125 @@ class _StringsTr extends _StringsEn {
   @override
   String get kitapsen_account_delete_failed =>
       'Hesap silinemedi. Lütfen tekrar deneyin.';
+  @override
+  String get kitapsen_nav_store => 'Mağaza';
+  @override
+  String get kitapsen_store_search_hint => 'Kitap veya yazar ara';
+  @override
+  String get kitapsen_store_new_arrivals => 'Yeni çıkanlar';
+  @override
+  String get kitapsen_store_most_read => 'Çok okunanlar';
+  @override
+  String get kitapsen_store_staff_picks => 'Editörün seçtikleri';
+  @override
+  String get kitapsen_store_free_books => 'Ücretsiz kitaplar';
+  @override
+  String get kitapsen_store_stories => 'Bölüm bölüm hikâyeler';
+  @override
+  String get kitapsen_store_categories => 'Kategoriler';
+  @override
+  String get kitapsen_store_see_all => 'Tümü';
+  @override
+  String get kitapsen_store_no_results => 'Kitap bulunamadı';
+  @override
+  String get kitapsen_store_load_failed =>
+      'Yüklenemedi. Bağlantınızı kontrol edin.';
+  @override
+  String get kitapsen_store_free_only => 'Yalnızca ücretsiz';
+  @override
+  String get kitapsen_sort_relevance => 'En alakalı';
+  @override
+  String get kitapsen_sort_newest => 'En yeni';
+  @override
+  String get kitapsen_sort_most_read => 'En çok okunan';
+  @override
+  String get kitapsen_sort_rating => 'En yüksek puan';
+  @override
+  String get kitapsen_sort_title => 'Ada göre (A–Z)';
+  @override
+  String get kitapsen_book_read => 'Oku';
+  @override
+  String get kitapsen_book_get_free => 'Ücretsiz al';
+  @override
+  String get kitapsen_book_claimed => 'Kitaplığınıza eklendi';
+  @override
+  String get kitapsen_book_in_library => 'Kitaplığınızda';
+  @override
+  String get kitapsen_book_not_in_library => 'Kitaplığınızda değil';
+  @override
+  String get kitapsen_book_sign_in_prompt =>
+      'Kitap eklemek ve istek listesi tutmak için giriş yapın.';
+  @override
+  String get kitapsen_book_wishlist_add => 'İstek listesine ekle';
+  @override
+  String get kitapsen_book_wishlist_remove => 'İstek listesinden çıkar';
+  @override
+  String get kitapsen_book_downloading => 'Kitaplığınıza indiriliyor…';
+  @override
+  String get kitapsen_book_about => 'Kitap hakkında';
+  @override
+  String get kitapsen_book_pages => 'Sayfa';
+  @override
+  String get kitapsen_book_language => 'Dil';
+  @override
+  String get kitapsen_book_publisher => 'Yayınevi';
+  @override
+  String get kitapsen_book_published => 'Yayın tarihi';
+  @override
+  String get kitapsen_book_action_failed =>
+      'Bir sorun oluştu. Lütfen tekrar deneyin.';
+  @override
+  String get kitapsen_book_reviews => 'Değerlendirmeler';
+  @override
+  String get kitapsen_book_no_reviews => 'Henüz değerlendirme yok';
+  @override
+  String get kitapsen_book_write_review => 'Değerlendir';
+  @override
+  String get kitapsen_review_title_hint => 'Başlık (isteğe bağlı)';
+  @override
+  String get kitapsen_review_content_hint => 'Yorumunuz (isteğe bağlı)';
+  @override
+  String get kitapsen_review_submit => 'Gönder';
+  @override
+  String get kitapsen_review_sent =>
+      'Teşekkürler! Değerlendirmeniz gönderildi.';
+  @override
+  String get kitapsen_review_already => 'Bu kitabı zaten değerlendirdiniz.';
+  @override
+  String get kitapsen_review_not_allowed =>
+      'Yalnızca kitabı kitaplığında olan okurlar değerlendirebilir.';
+  @override
+  String get kitapsen_review_more => 'Daha fazla değerlendirme';
+  @override
+  String get kitapsen_review_verified => 'Doğrulanmış okur';
+  @override
+  String get kitapsen_author_follow => 'Takip et';
+  @override
+  String get kitapsen_author_following => 'Takip ediliyor';
+  @override
+  String get kitapsen_author_followers => 'Takipçi';
+  @override
+  String get kitapsen_author_books => 'Kitapları';
+  @override
+  String get kitapsen_author_open => 'Yazar sayfası';
+  @override
+  String get kitapsen_wishlist_title => 'İstek listem';
+  @override
+  String get kitapsen_wishlist_empty => 'İstek listeniz boş';
+  @override
+  String get kitapsen_notifications_title => 'Bildirimler';
+  @override
+  String get kitapsen_notifications_empty => 'Bildirim yok';
+  @override
+  String get kitapsen_notifications_mark_all => 'Tümünü okundu say';
+  @override
+  String get kitapsen_story_chapters => 'Bölümler';
+  @override
+  String get kitapsen_story_no_chapters => 'Henüz bölüm yok';
+  @override
+  String get kitapsen_story_next => 'Sonraki bölüm';
+  @override
+  String get kitapsen_story_previous => 'Önceki bölüm';
 }
 
 // Path: <root>
@@ -222684,6 +224280,124 @@ class _StringsVi extends _StringsEn {
   @override
   String get kitapsen_account_delete_failed =>
       'The account could not be deleted. Please try again.';
+  @override
+  String get kitapsen_nav_store => 'Store';
+  @override
+  String get kitapsen_store_search_hint => 'Search books and authors';
+  @override
+  String get kitapsen_store_new_arrivals => 'New arrivals';
+  @override
+  String get kitapsen_store_most_read => 'Most read';
+  @override
+  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  @override
+  String get kitapsen_store_free_books => 'Free books';
+  @override
+  String get kitapsen_store_stories => 'Serialized stories';
+  @override
+  String get kitapsen_store_categories => 'Categories';
+  @override
+  String get kitapsen_store_see_all => 'See all';
+  @override
+  String get kitapsen_store_no_results => 'No books found';
+  @override
+  String get kitapsen_store_load_failed =>
+      'Couldn\'t load. Check your connection.';
+  @override
+  String get kitapsen_store_free_only => 'Free only';
+  @override
+  String get kitapsen_sort_relevance => 'Most relevant';
+  @override
+  String get kitapsen_sort_newest => 'Newest';
+  @override
+  String get kitapsen_sort_most_read => 'Most read';
+  @override
+  String get kitapsen_sort_rating => 'Top rated';
+  @override
+  String get kitapsen_sort_title => 'Title A–Z';
+  @override
+  String get kitapsen_book_read => 'Read';
+  @override
+  String get kitapsen_book_get_free => 'Get for free';
+  @override
+  String get kitapsen_book_claimed => 'Added to your library';
+  @override
+  String get kitapsen_book_in_library => 'In your library';
+  @override
+  String get kitapsen_book_not_in_library => 'Not in your library';
+  @override
+  String get kitapsen_book_sign_in_prompt =>
+      'Sign in to add books to your library and keep a wishlist.';
+  @override
+  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  @override
+  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  @override
+  String get kitapsen_book_downloading => 'Downloading to your library…';
+  @override
+  String get kitapsen_book_about => 'About this book';
+  @override
+  String get kitapsen_book_pages => 'Pages';
+  @override
+  String get kitapsen_book_language => 'Language';
+  @override
+  String get kitapsen_book_publisher => 'Publisher';
+  @override
+  String get kitapsen_book_published => 'Published';
+  @override
+  String get kitapsen_book_action_failed =>
+      'Something went wrong. Please try again.';
+  @override
+  String get kitapsen_book_reviews => 'Reviews';
+  @override
+  String get kitapsen_book_no_reviews => 'No reviews yet';
+  @override
+  String get kitapsen_book_write_review => 'Write a review';
+  @override
+  String get kitapsen_review_title_hint => 'Title (optional)';
+  @override
+  String get kitapsen_review_content_hint => 'Your review (optional)';
+  @override
+  String get kitapsen_review_submit => 'Send';
+  @override
+  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  @override
+  String get kitapsen_review_already => 'You have already reviewed this book.';
+  @override
+  String get kitapsen_review_not_allowed =>
+      'Only readers who have this book in their library can review it.';
+  @override
+  String get kitapsen_review_more => 'Show more reviews';
+  @override
+  String get kitapsen_review_verified => 'Verified reader';
+  @override
+  String get kitapsen_author_follow => 'Follow';
+  @override
+  String get kitapsen_author_following => 'Following';
+  @override
+  String get kitapsen_author_followers => 'Followers';
+  @override
+  String get kitapsen_author_books => 'Books';
+  @override
+  String get kitapsen_author_open => 'Author page';
+  @override
+  String get kitapsen_wishlist_title => 'Wishlist';
+  @override
+  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  @override
+  String get kitapsen_notifications_title => 'Notifications';
+  @override
+  String get kitapsen_notifications_empty => 'No notifications';
+  @override
+  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  @override
+  String get kitapsen_story_chapters => 'Chapters';
+  @override
+  String get kitapsen_story_no_chapters => 'No chapters yet';
+  @override
+  String get kitapsen_story_next => 'Next chapter';
+  @override
+  String get kitapsen_story_previous => 'Previous chapter';
 }
 
 // Path: <root>
@@ -236620,6 +238334,120 @@ class _StringsZhCn extends _StringsEn {
       '你的 Kitapsen 账号将被删除，并退出此设备。你将无法再阅读书库中的书籍。此操作无法撤销。';
   @override
   String get kitapsen_account_delete_failed => '无法删除账号，请重试。';
+  @override
+  String get kitapsen_nav_store => '书店';
+  @override
+  String get kitapsen_store_search_hint => '搜索书籍和作者';
+  @override
+  String get kitapsen_store_new_arrivals => '新书';
+  @override
+  String get kitapsen_store_most_read => '热门';
+  @override
+  String get kitapsen_store_staff_picks => '编辑推荐';
+  @override
+  String get kitapsen_store_free_books => '免费书籍';
+  @override
+  String get kitapsen_store_stories => '连载故事';
+  @override
+  String get kitapsen_store_categories => '分类';
+  @override
+  String get kitapsen_store_see_all => '全部';
+  @override
+  String get kitapsen_store_no_results => '未找到书籍';
+  @override
+  String get kitapsen_store_load_failed => '加载失败，请检查网络连接。';
+  @override
+  String get kitapsen_store_free_only => '仅免费';
+  @override
+  String get kitapsen_sort_relevance => '最相关';
+  @override
+  String get kitapsen_sort_newest => '最新';
+  @override
+  String get kitapsen_sort_most_read => '最热门';
+  @override
+  String get kitapsen_sort_rating => '评分最高';
+  @override
+  String get kitapsen_sort_title => '书名 A–Z';
+  @override
+  String get kitapsen_book_read => '阅读';
+  @override
+  String get kitapsen_book_get_free => '免费获取';
+  @override
+  String get kitapsen_book_claimed => '已加入书库';
+  @override
+  String get kitapsen_book_in_library => '已在书库中';
+  @override
+  String get kitapsen_book_not_in_library => '不在书库中';
+  @override
+  String get kitapsen_book_sign_in_prompt => '登录后可将书加入书库并使用愿望清单。';
+  @override
+  String get kitapsen_book_wishlist_add => '加入愿望清单';
+  @override
+  String get kitapsen_book_wishlist_remove => '移出愿望清单';
+  @override
+  String get kitapsen_book_downloading => '正在下载到书库…';
+  @override
+  String get kitapsen_book_about => '关于本书';
+  @override
+  String get kitapsen_book_pages => '页数';
+  @override
+  String get kitapsen_book_language => '语言';
+  @override
+  String get kitapsen_book_publisher => '出版社';
+  @override
+  String get kitapsen_book_published => '出版日期';
+  @override
+  String get kitapsen_book_action_failed => '出错了，请重试。';
+  @override
+  String get kitapsen_book_reviews => '评价';
+  @override
+  String get kitapsen_book_no_reviews => '暂无评价';
+  @override
+  String get kitapsen_book_write_review => '写评价';
+  @override
+  String get kitapsen_review_title_hint => '标题（可选）';
+  @override
+  String get kitapsen_review_content_hint => '你的评价（可选）';
+  @override
+  String get kitapsen_review_submit => '发送';
+  @override
+  String get kitapsen_review_sent => '谢谢！评价已发送。';
+  @override
+  String get kitapsen_review_already => '你已评价过这本书。';
+  @override
+  String get kitapsen_review_not_allowed => '只有书库中有这本书的读者才能评价。';
+  @override
+  String get kitapsen_review_more => '显示更多评价';
+  @override
+  String get kitapsen_review_verified => '已验证读者';
+  @override
+  String get kitapsen_author_follow => '关注';
+  @override
+  String get kitapsen_author_following => '已关注';
+  @override
+  String get kitapsen_author_followers => '关注者';
+  @override
+  String get kitapsen_author_books => '书籍';
+  @override
+  String get kitapsen_author_open => '作者主页';
+  @override
+  String get kitapsen_wishlist_title => '愿望清单';
+  @override
+  String get kitapsen_wishlist_empty => '愿望清单为空';
+  @override
+  String get kitapsen_notifications_title => '通知';
+  @override
+  String get kitapsen_notifications_empty => '没有通知';
+  @override
+  String get kitapsen_notifications_mark_all => '全部标为已读';
+  @override
+  String get kitapsen_story_chapters => '章节';
+  @override
+  String get kitapsen_story_no_chapters => '暂无章节';
+  @override
+  String get kitapsen_story_next => '下一章';
+  @override
+  String get kitapsen_story_previous => '上一章';
 }
 
 // Path: <root>
@@ -250593,4 +252421,122 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get kitapsen_account_delete_failed =>
       'The account could not be deleted. Please try again.';
+  @override
+  String get kitapsen_nav_store => 'Store';
+  @override
+  String get kitapsen_store_search_hint => 'Search books and authors';
+  @override
+  String get kitapsen_store_new_arrivals => 'New arrivals';
+  @override
+  String get kitapsen_store_most_read => 'Most read';
+  @override
+  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  @override
+  String get kitapsen_store_free_books => 'Free books';
+  @override
+  String get kitapsen_store_stories => 'Serialized stories';
+  @override
+  String get kitapsen_store_categories => 'Categories';
+  @override
+  String get kitapsen_store_see_all => 'See all';
+  @override
+  String get kitapsen_store_no_results => 'No books found';
+  @override
+  String get kitapsen_store_load_failed =>
+      'Couldn\'t load. Check your connection.';
+  @override
+  String get kitapsen_store_free_only => 'Free only';
+  @override
+  String get kitapsen_sort_relevance => 'Most relevant';
+  @override
+  String get kitapsen_sort_newest => 'Newest';
+  @override
+  String get kitapsen_sort_most_read => 'Most read';
+  @override
+  String get kitapsen_sort_rating => 'Top rated';
+  @override
+  String get kitapsen_sort_title => 'Title A–Z';
+  @override
+  String get kitapsen_book_read => 'Read';
+  @override
+  String get kitapsen_book_get_free => 'Get for free';
+  @override
+  String get kitapsen_book_claimed => 'Added to your library';
+  @override
+  String get kitapsen_book_in_library => 'In your library';
+  @override
+  String get kitapsen_book_not_in_library => 'Not in your library';
+  @override
+  String get kitapsen_book_sign_in_prompt =>
+      'Sign in to add books to your library and keep a wishlist.';
+  @override
+  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  @override
+  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  @override
+  String get kitapsen_book_downloading => 'Downloading to your library…';
+  @override
+  String get kitapsen_book_about => 'About this book';
+  @override
+  String get kitapsen_book_pages => 'Pages';
+  @override
+  String get kitapsen_book_language => 'Language';
+  @override
+  String get kitapsen_book_publisher => 'Publisher';
+  @override
+  String get kitapsen_book_published => 'Published';
+  @override
+  String get kitapsen_book_action_failed =>
+      'Something went wrong. Please try again.';
+  @override
+  String get kitapsen_book_reviews => 'Reviews';
+  @override
+  String get kitapsen_book_no_reviews => 'No reviews yet';
+  @override
+  String get kitapsen_book_write_review => 'Write a review';
+  @override
+  String get kitapsen_review_title_hint => 'Title (optional)';
+  @override
+  String get kitapsen_review_content_hint => 'Your review (optional)';
+  @override
+  String get kitapsen_review_submit => 'Send';
+  @override
+  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  @override
+  String get kitapsen_review_already => 'You have already reviewed this book.';
+  @override
+  String get kitapsen_review_not_allowed =>
+      'Only readers who have this book in their library can review it.';
+  @override
+  String get kitapsen_review_more => 'Show more reviews';
+  @override
+  String get kitapsen_review_verified => 'Verified reader';
+  @override
+  String get kitapsen_author_follow => 'Follow';
+  @override
+  String get kitapsen_author_following => 'Following';
+  @override
+  String get kitapsen_author_followers => 'Followers';
+  @override
+  String get kitapsen_author_books => 'Books';
+  @override
+  String get kitapsen_author_open => 'Author page';
+  @override
+  String get kitapsen_wishlist_title => 'Wishlist';
+  @override
+  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  @override
+  String get kitapsen_notifications_title => 'Notifications';
+  @override
+  String get kitapsen_notifications_empty => 'No notifications';
+  @override
+  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  @override
+  String get kitapsen_story_chapters => 'Chapters';
+  @override
+  String get kitapsen_story_no_chapters => 'No chapters yet';
+  @override
+  String get kitapsen_story_next => 'Next chapter';
+  @override
+  String get kitapsen_story_previous => 'Previous chapter';
 }

@@ -9,6 +9,10 @@
 enum HomeTab {
   home,
   books,
+
+  /// Kitapsen edition only: the kitapsen.com catalog (no prices, see
+  /// `kitapsen_edition.dart`).
+  store,
   manga,
   video,
 

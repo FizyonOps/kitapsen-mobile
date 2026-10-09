@@ -126,7 +126,8 @@ class _KitapsenSession {
 /// reader, and a downloaded book is kept in app-private storage with every
 /// export / share / backup / sync path closed for it (see [isKitapsenBook]).
 ///
-/// Out of scope here: PDF-only books and bookmark / highlight / note sync.
+/// PDF-only books download as PDF; their progress counts pages. Out of
+/// scope here: bookmark / highlight / note sync.
 class KitapsenClient implements RemoteBookClient, RemoteCoverFetcher {
   KitapsenClient({required FushiDatabase db, required this.account}) : _db = db;
 
@@ -450,6 +451,55 @@ class KitapsenClient implements RemoteBookClient, RemoteCoverFetcher {
     return _decodeJson(body);
   }
 
+  // ── Store API (store tab, book pages, wishlist, notifications) ────
+
+  /// Signed-in JSON request against [path] under `/api/v1`; same session and
+  /// re-login handling as the library calls. Throws [SyncAuthError] /
+  /// [SyncBackendError] on a non-2xx answer.
+  Future<Object?> requestJson(
+    String method,
+    String path, {
+    Map<String, String>? query,
+    Object? jsonBody,
+  }) async {
+    final HttpClientResponse response = await _send(
+      method,
+      path,
+      query: query,
+      jsonBody: jsonBody,
+    );
+    final String body = await utf8.decodeStream(response);
+    _checkStatus(response.statusCode, body);
+    return _decodeJson(body);
+  }
+
+  /// Anonymous POST without a body (counters such as a chapter read).
+  static Future<void> publicPostJson(String apiBase, String path) async {
+    final HttpClientRequest request = await _client().postUrl(
+      Uri.parse('$apiBase$path'),
+    );
+    request.headers.set(HttpHeaders.acceptHeader, 'application/json');
+    final HttpClientResponse response = await request.close();
+    _checkStatus(response.statusCode, await utf8.decodeStream(response));
+  }
+
+  /// Anonymous GET of a public store endpoint (catalog, book, reviews), for
+  /// when nobody is signed in.
+  static Future<Object?> publicGetJson(
+    String apiBase,
+    String path, {
+    Map<String, String>? query,
+  }) async {
+    final HttpClientRequest request = await _client().getUrl(
+      Uri.parse('$apiBase$path').replace(queryParameters: query),
+    );
+    request.headers.set(HttpHeaders.acceptHeader, 'application/json');
+    final HttpClientResponse response = await request.close();
+    final String body = await utf8.decodeStream(response);
+    _checkStatus(response.statusCode, body);
+    return _decodeJson(body);
+  }
+
   static void _checkStatus(int status, String body) {
     if (status >= 200 && status < 300) return;
     if (status == HttpStatus.unauthorized) {
@@ -528,7 +578,9 @@ class KitapsenClient implements RemoteBookClient, RemoteCoverFetcher {
           in item['formats'] as List<dynamic>? ?? const <dynamic>[])
         if (f is String) f.toLowerCase(),
     ];
-    if (!formats.contains('epub')) return null;
+    // EPUB when the book has one, else its PDF (`getRemoteBook` asks for EPUB
+    // and the server falls back to the PDF).
+    if (!formats.contains('epub') && !formats.contains('pdf')) return null;
     final String? cover = item['cover_image_url'] as String?;
     final int? grantedAt = _parseServerTime(item['granted_at'] as String?);
     return RemoteBookInfo(
@@ -541,15 +593,20 @@ class KitapsenClient implements RemoteBookClient, RemoteCoverFetcher {
       hasContent: true,
       // The store id is the download / progress key, never the title.
       bookKey: '$bookId',
+      format: formats.contains('epub')
+          ? BookFormat.epub.dbValue
+          : BookFormat.pdf.dbValue,
       coverUrl: cover == null || cover.isEmpty ? null : _absoluteUrl(cover),
       importedAt: grantedAt,
     );
   }
 
   /// Covers come back as site-relative paths (`/api/v1/files/covers/…`).
-  String _absoluteUrl(String url) {
+  String _absoluteUrl(String url) => absoluteUrl(account.apiBase, url);
+
+  static String absoluteUrl(String apiBase, String url) {
     if (url.startsWith('http://') || url.startsWith('https://')) return url;
-    return Uri.parse(account.apiBase).resolve(url).toString();
+    return Uri.parse(apiBase).resolve(url).toString();
   }
 
   @override
@@ -567,8 +624,9 @@ class KitapsenClient implements RemoteBookClient, RemoteCoverFetcher {
     return bytes.takeBytes();
   }
 
-  /// Downloads the full EPUB of store book [downloadId] to [destination].
-  /// Import is the shelf's job (`_importRemoteBookFile`).
+  /// Downloads store book [downloadId] to [destination]: its EPUB, or its PDF
+  /// when it has no EPUB. Import is the shelf's job (`_importRemoteBookFile`,
+  /// which tells the two apart by content).
   @override
   Future<void> getRemoteBook(
     String downloadId,
@@ -587,11 +645,13 @@ class KitapsenClient implements RemoteBookClient, RemoteCoverFetcher {
     if (response.statusCode != HttpStatus.ok) {
       _checkStatus(response.statusCode, await utf8.decodeStream(response));
     }
-    // Without an EPUB upload the endpoint falls back to the first file.
+    // Without an EPUB upload the endpoint falls back to the first file;
+    // uploads are EPUB or PDF only.
     final String? served = response.headers.value('x-book-format');
-    if (served != null && served.toLowerCase() != 'epub') {
+    if (served != null &&
+        !<String>{'epub', 'pdf'}.contains(served.toLowerCase())) {
       await response.drain<void>();
-      throw SyncBackendError('Kitapsen book $bookId has no EPUB');
+      throw SyncBackendError('Kitapsen book $bookId: unsupported $served');
     }
     final int total = response.contentLength;
     int received = 0;
@@ -792,8 +852,12 @@ class KitapsenClient implements RemoteBookClient, RemoteCoverFetcher {
     }
   }
 
-  /// Per-chapter character counts, the unit Fushi measures positions in.
+  /// Per-chapter character counts, the unit Fushi measures positions in. A
+  /// PDF's sections are its pages, each weighted the same.
   static List<int> _sectionChars(EpubBookRow book) {
+    if (book.format == BookFormat.pdf.dbValue) {
+      return List<int>.filled(book.chapterCount, 1);
+    }
     if (book.chaptersJson.isEmpty) return const <int>[];
     try {
       return <int>[
