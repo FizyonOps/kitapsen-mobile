@@ -153,6 +153,11 @@ class _KitapsenBookPageState extends ConsumerState<KitapsenBookPage> {
     _toast(t.kitapsen_book_claimed, severity: ToastSeverity.success);
   });
 
+  Future<void> _claimAndRead(_BookState s) async {
+    await _claim(s);
+    if (mounted && s.owned) await _read(s);
+  }
+
   /// Opens a downloaded book in the reader; otherwise hands the download to
   /// the Books tab, which owns the download pipeline and its progress card.
   Future<void> _read(_BookState s) async {
@@ -260,8 +265,9 @@ class _KitapsenBookPageState extends ConsumerState<KitapsenBookPage> {
       future: _load,
       builder: (BuildContext context, AsyncSnapshot<_BookState> snapshot) {
         final _BookState? s = snapshot.data;
+        // The title sits under the cover, as on the website.
         return FushiPageScaffold(
-          title: s?.detail.book.title ?? '',
+          title: '',
           body: snapshot.hasError
               ? StoreLoadError(onRetry: _reload)
               : s == null
@@ -272,88 +278,169 @@ class _KitapsenBookPageState extends ConsumerState<KitapsenBookPage> {
     );
   }
 
+  void _openAuthor(StoreBookDetail d) => Navigator.of(context).push(
+    adaptivePageRoute<void>(
+      context: context,
+      // The author's page when the credited author is the uploading
+      // account, otherwise their other books.
+      builder: (_) => d.authorUsername != null
+          ? KitapsenAuthorPage(username: d.authorUsername!)
+          : KitapsenBookListPage(
+              title: d.book.authorName!,
+              authorName: d.book.authorName,
+            ),
+    ),
+  );
+
+  /// Website heading style (bold, ink) for the page's sections.
+  Widget _heading(BuildContext context, String text) => Text(
+    text,
+    style: TextStyle(
+      color: StoreColors.of(context).ink,
+      fontSize: 20,
+      fontWeight: FontWeight.w700,
+    ),
+  );
+
   Widget _content(BuildContext context, _BookState s) {
+    final StoreColors c = StoreColors.of(context);
     final FushiDesignTokens tokens = FushiDesignTokens.of(context);
     final StoreBookDetail d = s.detail;
+    final double coverWidth =
+        (MediaQuery.sizeOf(context).width - 2 * tokens.spacing.page)
+            .clamp(0, 320)
+            .toDouble();
     return ListView(
       padding: withBottomSafeInset(
         context,
         EdgeInsets.all(tokens.spacing.page),
       ),
       children: <Widget>[
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(width: 120, child: StoreCover(url: d.book.coverUrl)),
-            SizedBox(width: tokens.spacing.page),
-            Expanded(
+        Center(
+          child: SizedBox(
+            width: coverWidth,
+            child: StoreCover(url: d.book.coverUrl, shadow: true),
+          ),
+        ),
+        const SizedBox(height: 24),
+        Text(
+          d.book.title,
+          style: TextStyle(
+            color: c.ink,
+            fontSize: 26,
+            fontWeight: FontWeight.w700,
+            height: 1.25,
+          ),
+        ),
+        if (d.subtitle != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: Text(
+              d.subtitle!,
+              style: TextStyle(color: c.body, fontSize: 16),
+            ),
+          ),
+        if (d.book.authorName != null) ...<Widget>[
+          const SizedBox(height: 16),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Material(
+              color: c.tile,
+              borderRadius: BorderRadius.circular(999),
+              child: InkWell(
+                key: const ValueKey<String>('kitapsen-book-author'),
+                borderRadius: BorderRadius.circular(999),
+                onTap: () => _openAuthor(d),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(6, 6, 16, 6),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      StoreInitialAvatar(name: d.book.authorName!),
+                      const SizedBox(width: 10),
+                      Flexible(
+                        child: Text(
+                          d.book.authorName!,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: c.ink,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+        const SizedBox(height: 16),
+        StoreRating(rating: d.book.averageRating, count: d.book.ratingCount),
+        const SizedBox(height: 20),
+        _actions(context, s),
+        const SizedBox(height: 24),
+        _facts(context, d),
+        if (d.description != null) ...<Widget>[
+          const SizedBox(height: 28),
+          _heading(context, t.kitapsen_book_description),
+          const SizedBox(height: 12),
+          Text(
+            d.description!,
+            style: TextStyle(color: c.body, fontSize: 16, height: 1.6),
+          ),
+        ],
+        if (d.authorBio != null) ...<Widget>[
+          const SizedBox(height: 28),
+          DecoratedBox(
+            decoration: BoxDecoration(
+              color: c.tile,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: c.border),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(d.book.title, style: tokens.type.pageTitle),
-                  if (d.subtitle != null)
-                    Text(d.subtitle!, style: tokens.type.listSubtitle),
+                  _heading(context, t.kitapsen_book_about_author),
                   if (d.book.authorName != null) ...<Widget>[
-                    const SizedBox(height: 6),
-                    InkWell(
-                      // The author's page when the credited author is the
-                      // uploading account, otherwise their other books.
-                      onTap: () => Navigator.of(context).push(
-                        adaptivePageRoute<void>(
-                          context: context,
-                          builder: (_) => d.authorUsername != null
-                              ? KitapsenAuthorPage(username: d.authorUsername!)
-                              : KitapsenBookListPage(
-                                  title: d.book.authorName!,
-                                  authorName: d.book.authorName,
-                                ),
-                        ),
-                      ),
-                      child: Text(
-                        d.book.authorName!,
-                        style: tokens.type.listTitle.copyWith(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
+                    const SizedBox(height: 12),
+                    Text(
+                      d.book.authorName!,
+                      style: TextStyle(
+                        color: c.ink,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ],
-                  if (d.book.ratingCount > 0) ...<Widget>[
-                    const SizedBox(height: 6),
-                    StoreRating(
-                      rating: d.book.averageRating,
-                      count: d.book.ratingCount,
-                    ),
-                  ],
+                  const SizedBox(height: 8),
+                  Text(
+                    d.authorBio!,
+                    style: TextStyle(color: c.body, fontSize: 14, height: 1.5),
+                  ),
                 ],
               ),
             ),
-          ],
-        ),
-        SizedBox(height: tokens.spacing.section),
-        _actions(context, s),
-        if (d.description != null) ...<Widget>[
-          SizedBox(height: tokens.spacing.section),
-          Text(t.kitapsen_book_about, style: tokens.type.sectionLabel),
-          const SizedBox(height: 6),
-          Text(d.description!),
+          ),
         ],
-        SizedBox(height: tokens.spacing.section),
-        _facts(context, d),
         if (d.categories.isNotEmpty) ...<Widget>[
-          SizedBox(height: tokens.spacing.gap),
+          const SizedBox(height: 24),
           Wrap(
-            spacing: tokens.spacing.gap,
-            runSpacing: tokens.spacing.gap,
+            spacing: 8,
+            runSpacing: 8,
             children: <Widget>[
-              for (final ({String name, String slug}) c in d.categories)
-                ActionChip(
-                  label: Text(c.name),
-                  onPressed: () => Navigator.of(context).push(
+              for (final ({String name, String slug}) cat in d.categories)
+                StorePill(
+                  label: cat.name,
+                  onTap: () => Navigator.of(context).push(
                     adaptivePageRoute<void>(
                       context: context,
                       builder: (_) => KitapsenBookListPage(
-                        title: c.name,
-                        categorySlug: c.slug,
+                        title: cat.name,
+                        categorySlug: cat.slug,
                       ),
                     ),
                   ),
@@ -367,106 +454,168 @@ class _KitapsenBookPageState extends ConsumerState<KitapsenBookPage> {
     );
   }
 
+  /// The website's purchase card, minus the price: "Şimdi Oku" (green),
+  /// "Ücretsiz Edin" for a free book not yet in the library, and the
+  /// "Favoriler" (wishlist) toggle.
   Widget _actions(BuildContext context, _BookState s) {
+    final StoreColors c = StoreColors.of(context);
     final StoreBookDetail d = s.detail;
-    final FushiDesignTokens tokens = FushiDesignTokens.of(context);
+    final ButtonStyle readStyle = FilledButton.styleFrom(
+      backgroundColor: c.green,
+      foregroundColor: Colors.white,
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+    );
+    final ButtonStyle outlineStyle = OutlinedButton.styleFrom(
+      foregroundColor: c.ink,
+      side: BorderSide(color: c.border),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+    );
+    final List<Widget> children;
     if (!s.store.signedIn) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Text(t.kitapsen_book_sign_in_prompt, style: tokens.type.metadata),
-          const SizedBox(height: 8),
-          FilledButton.icon(
-            key: const ValueKey<String>('kitapsen-book-sign-in'),
-            onPressed: _signIn,
-            icon: const Icon(Icons.login),
-            label: Text(t.kitapsen_account_sign_in),
+      children = <Widget>[
+        Text(
+          t.kitapsen_book_sign_in_prompt,
+          style: TextStyle(color: c.body, fontSize: 14),
+        ),
+        const SizedBox(height: 12),
+        FilledButton.icon(
+          key: const ValueKey<String>('kitapsen-book-sign-in'),
+          style: FilledButton.styleFrom(
+            backgroundColor: c.accent,
+            foregroundColor: c.onAccent,
+            padding: const EdgeInsets.symmetric(vertical: 14),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
           ),
+          onPressed: _signIn,
+          icon: const Icon(Icons.login),
+          label: Text(t.kitapsen_account_sign_in),
+        ),
+      ];
+    } else {
+      children = <Widget>[
+        if (d.isFree && !d.isSerialized) ...<Widget>[
+          Text(
+            t.kitapsen_store_badge_free,
+            style: TextStyle(
+              color: c.greenText,
+              fontSize: 26,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(height: 12),
+        ] else if (!d.isSerialized) ...<Widget>[
+          Row(
+            children: <Widget>[
+              Icon(
+                s.owned ? Icons.check_circle_outline : Icons.info_outline,
+                size: 18,
+                color: s.owned ? c.greenText : c.muted,
+              ),
+              const SizedBox(width: 6),
+              Text(
+                s.owned
+                    ? t.kitapsen_book_in_library
+                    : t.kitapsen_book_not_in_library,
+                style: TextStyle(color: c.body, fontSize: 14),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
         ],
-      );
-    }
-    final Widget? primary = d.isSerialized
-        ? null
-        : s.owned
-        ? FilledButton.icon(
-            key: const ValueKey<String>('kitapsen-book-read'),
-            onPressed: _busy ? null : () => _read(s),
-            icon: const Icon(Icons.chrome_reader_mode_outlined),
-            label: Text(t.kitapsen_book_read),
-          )
-        : d.isFree
-        ? FilledButton.icon(
-            key: const ValueKey<String>('kitapsen-book-get-free'),
-            onPressed: _busy ? null : () => _claim(s),
-            icon: const Icon(Icons.library_add_outlined),
-            label: Text(t.kitapsen_book_get_free),
-          )
-        : null;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        if (!d.isSerialized)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: Row(
-              children: <Widget>[
-                Icon(
-                  s.owned ? Icons.check_circle_outline : Icons.info_outline,
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: <Widget>[
+            if (!d.isSerialized && (s.owned || d.isFree))
+              FilledButton.icon(
+                key: const ValueKey<String>('kitapsen-book-read'),
+                style: readStyle,
+                // A free book not yet in the library is claimed on the way.
+                onPressed: _busy
+                    ? null
+                    : () => s.owned ? _read(s) : _claimAndRead(s),
+                icon: const Icon(Icons.menu_book_outlined, size: 18),
+                label: Text(t.kitapsen_book_read_now),
+              ),
+            if (!d.isSerialized && !s.owned && d.isFree)
+              OutlinedButton.icon(
+                key: const ValueKey<String>('kitapsen-book-get-free'),
+                style: outlineStyle,
+                onPressed: _busy ? null : () => _claim(s),
+                icon: const Icon(Icons.library_add_outlined, size: 18),
+                label: Text(t.kitapsen_book_get_free_web),
+              ),
+            if (!s.owned)
+              OutlinedButton.icon(
+                key: const ValueKey<String>('kitapsen-book-wishlist'),
+                style: outlineStyle,
+                onPressed: _busy ? null : () => _toggleWishlist(s),
+                icon: Icon(
+                  s.wishlisted ? Icons.favorite : Icons.favorite_border,
                   size: 18,
-                  color: tokens.surfaces.onVariant,
+                  color: s.wishlisted ? c.accent : null,
                 ),
-                const SizedBox(width: 6),
-                Text(
-                  s.owned
-                      ? t.kitapsen_book_in_library
-                      : t.kitapsen_book_not_in_library,
-                  style: tokens.type.metadata,
-                ),
-              ],
-            ),
-          ),
-        ?primary,
-        if (!s.owned) ...<Widget>[
-          const SizedBox(height: 8),
-          OutlinedButton.icon(
-            key: const ValueKey<String>('kitapsen-book-wishlist'),
-            onPressed: _busy ? null : () => _toggleWishlist(s),
-            icon: Icon(s.wishlisted ? Icons.favorite : Icons.favorite_border),
-            label: Text(
-              s.wishlisted
-                  ? t.kitapsen_book_wishlist_remove
-                  : t.kitapsen_book_wishlist_add,
-            ),
-          ),
-        ],
-      ],
+                label: Text(t.kitapsen_book_favorites),
+              ),
+          ],
+        ),
+      ];
+    }
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: Theme.of(context).brightness == Brightness.dark
+            ? c.tile
+            : const Color(0xFFF9FAFB),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: c.border),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: children,
+        ),
+      ),
     );
   }
 
+  /// Label-over-value rows, as in the website's details panel.
   Widget _facts(BuildContext context, StoreBookDetail d) {
-    final FushiDesignTokens tokens = FushiDesignTokens.of(context);
+    final StoreColors c = StoreColors.of(context);
     final List<(String, String)> rows = <(String, String)>[
       if (d.publisherName != null)
         (t.kitapsen_book_publisher, d.publisherName!),
+      if (d.language != null) (t.kitapsen_book_language, d.language!),
       if (d.pageCount != null && d.pageCount! > 0)
         (t.kitapsen_book_pages, '${d.pageCount}'),
-      if (d.language != null)
-        (t.kitapsen_book_language, d.language!.toUpperCase()),
+      if (d.format != null) (t.kitapsen_book_format, d.format!),
+      if (d.isbn != null) (t.kitapsen_book_isbn, d.isbn!),
       if (d.publishingDate != null)
         (t.kitapsen_book_published, d.publishingDate!.split('T').first),
     ];
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         for (final (String label, String value) in rows)
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 2),
-            child: Row(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(
-                  width: 110,
-                  child: Text(label, style: tokens.type.metadata),
+                Text(label, style: TextStyle(color: c.muted, fontSize: 14)),
+                const SizedBox(height: 2),
+                Text(
+                  value,
+                  style: TextStyle(
+                    color: c.ink,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-                Expanded(child: Text(value)),
               ],
             ),
           ),
@@ -481,12 +630,7 @@ class _KitapsenBookPageState extends ConsumerState<KitapsenBookPage> {
       SizedBox(height: tokens.spacing.section),
       Row(
         children: <Widget>[
-          Expanded(
-            child: Text(
-              t.kitapsen_story_chapters,
-              style: tokens.type.sectionLabel,
-            ),
-          ),
+          Expanded(child: _heading(context, t.kitapsen_story_chapters)),
           if (s.store.signedIn && follow != null)
             follow.following
                 ? OutlinedButton(
@@ -542,12 +686,7 @@ class _KitapsenBookPageState extends ConsumerState<KitapsenBookPage> {
       SizedBox(height: tokens.spacing.section),
       Row(
         children: <Widget>[
-          Expanded(
-            child: Text(
-              t.kitapsen_book_reviews,
-              style: tokens.type.sectionLabel,
-            ),
-          ),
+          Expanded(child: _heading(context, t.kitapsen_book_reviews)),
           // The server takes reviews only from readers holding a license.
           if (s.store.signedIn && s.owned)
             TextButton.icon(

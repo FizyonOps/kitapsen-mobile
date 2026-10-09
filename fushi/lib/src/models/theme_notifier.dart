@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fushi/i18n/strings.g.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/utils/adaptive/adaptive_platform.dart';
 import 'package:fushi/src/utils/adaptive/predictive_back_page_transitions.dart';
 import 'package:fushi/src/utils/misc/channel_constants.dart';
@@ -1290,6 +1291,18 @@ class ThemeNotifier extends ChangeNotifier {
     // toggle off restores the previous colors without any migration.
     if (einkMode) {
       return buildEinkColorScheme(brightness);
+    }
+    if (appThemeKey == 'system-theme' && kKitapsenEdition) {
+      // Kitapsen: the default theme is the website's — brand crimson on
+      // neutral gray surfaces — rather than the phone's wallpaper colors.
+      return applyFushiSurfaceLadder(buildFushiColorScheme(
+        seedColor: kKitapsenBrandColor,
+        brightness: brightness,
+        primary: brightness == Brightness.dark
+            ? kKitapsenBrandColorDark
+            : kKitapsenBrandColor,
+        neutralDerived: true,
+      ));
     }
     if (appThemeKey == 'system-theme') {
       // 系统取色的中性阶梯有两个来源（Android 壁纸调色板 / 桌面 accent seed），

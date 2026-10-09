@@ -41,6 +41,7 @@ class StoreBook {
     this.coverUrl,
     this.averageRating = 0,
     this.ratingCount = 0,
+    this.isFree,
   });
 
   final int id;
@@ -49,6 +50,11 @@ class StoreBook {
   final String? coverUrl;
   final double averageRating;
   final int ratingCount;
+
+  /// From the row's effective price when it carries one (catalog rows do,
+  /// author and wishlist rows may not). Only "free" is ever shown — never a
+  /// price.
+  final bool? isFree;
 
   static StoreBook? fromJson(Map<String, dynamic> json, String apiBase) {
     // Wishlist rows carry their own `id` next to `book_id`; catalog rows
@@ -66,6 +72,9 @@ class StoreBook {
           : KitapsenClient.absoluteUrl(apiBase, cover),
       averageRating: _double(json['average_rating']),
       ratingCount: _int(json['rating_count']) ?? 0,
+      isFree: json['effective_price'] is num
+          ? (json['effective_price'] as num) <= 0
+          : null,
     );
   }
 }
@@ -120,9 +129,17 @@ class StoreBookDetail {
     this.categories = const <({String name, String slug})>[],
     this.isFree = false,
     this.isSerialized = false,
+    this.isbn,
+    this.format,
+    this.authorBio,
   });
 
   final StoreBook book;
+  final String? isbn;
+  final String? format;
+
+  /// Biography of the credited author, typed with the book.
+  final String? authorBio;
   final String? subtitle;
   final String? description;
 
@@ -271,11 +288,35 @@ class StoreChapter {
   }
 }
 
+/// An author whose name matched a search (website "Eşleşen yazarlar").
+class StoreAuthorMatch {
+  const StoreAuthorMatch({
+    required this.name,
+    required this.bookCount,
+    required this.books,
+    this.username,
+    this.imageUrl,
+  });
+
+  final String name;
+  final int bookCount;
+  final List<StoreBook> books;
+
+  /// Set when the author has an account (and so an author page).
+  final String? username;
+  final String? imageUrl;
+}
+
 /// A page of books from the catalog search.
 class StoreBookPage {
-  const StoreBookPage(this.books, this.total);
+  const StoreBookPage(
+    this.books,
+    this.total, {
+    this.authors = const <StoreAuthorMatch>[],
+  });
   final List<StoreBook> books;
   final int total;
+  final List<StoreAuthorMatch> authors;
 }
 
 /// Sort orders of the catalog search offered in the app (no price sorts).
@@ -383,7 +424,46 @@ class KitapsenStore {
     return StoreBookPage(
       _books(decoded['results']),
       _int(decoded['total']) ?? 0,
+      authors: <StoreAuthorMatch>[
+        for (final dynamic a
+            in decoded['author_matches'] as List<dynamic>? ?? const <dynamic>[])
+          if (a is Map<String, dynamic> && _text(a['name']) != null)
+            StoreAuthorMatch(
+              name: _text(a['name'])!,
+              bookCount: _int(a['book_count']) ?? 0,
+              books: _books(a['books']),
+              username: _text(a['username']),
+              imageUrl: _text(a['author_image_url']) == null
+                  ? null
+                  : KitapsenClient.absoluteUrl(
+                      apiBase,
+                      _text(a['author_image_url'])!,
+                    ),
+            ),
+      ],
     );
+  }
+
+  /// Website home "Okuma listenize yeni bir kitap", optionally for one
+  /// category (an unknown slug answers 404).
+  Future<List<StoreBook>> readingList({String? categorySlug}) async => _books(
+    await _get(
+      '/recommendations/reading-list',
+      query: <String, String>{
+        'limit': '12',
+        if (categorySlug != null) 'category': categorySlug,
+      },
+    ),
+  );
+
+  /// The author's own books (credited to the account), as the website's
+  /// author page lists them.
+  Future<List<StoreBook>> authorBooks(String username) async {
+    final Object? decoded = await _get(
+      '/authors/books/${Uri.encodeComponent(username)}',
+      query: const <String, String>{'items_per_page': '100'},
+    );
+    return _books(decoded is Map<String, dynamic> ? decoded['data'] : null);
   }
 
   Future<List<StoreCategory>> categories() async {
@@ -444,6 +524,9 @@ class KitapsenStore {
       ],
       isFree: isFree,
       isSerialized: decoded['is_serialized'] == true,
+      isbn: _text(decoded['isbn']),
+      format: _text(decoded['format']),
+      authorBio: _text(decoded['author_bio']),
     );
   }
 
@@ -737,6 +820,31 @@ class KitapsenStore {
       following: map['following'] == true,
       followers: _int(map['follower_count']) ?? 0,
     );
+  }
+
+  /// The author's "Beğen" count and whether the reader likes them. A like
+  /// sends the author no notification (unlike following).
+  Future<({bool liked, int likes})> authorLikes(String username) async =>
+      _likeState(
+        await _get('/authors/user/${Uri.encodeComponent(username)}/likes'),
+      );
+
+  Future<({bool liked, int likes})> setAuthorLike(
+    String username,
+    bool like,
+  ) async => _likeState(
+    await _signedIn.requestJson(
+      'POST',
+      '/authors/user/${Uri.encodeComponent(username)}/like',
+      jsonBody: <String, Object>{'value': like},
+    ),
+  );
+
+  ({bool liked, int likes}) _likeState(Object? decoded) {
+    final Map<String, dynamic> map = decoded is Map<String, dynamic>
+        ? decoded
+        : const <String, dynamic>{};
+    return (liked: map['liked'] == true, likes: _int(map['likes']) ?? 0);
   }
 
   Future<({bool following, int followers})> setFollowing(

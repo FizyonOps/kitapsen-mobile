@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 108103 (6359 per locale)
+/// Strings: 108715 (6395 per locale)
 ///
-/// Built on 2026-10-09 at 18:13 UTC
+/// Built on 2026-10-09 at 20:06 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -9129,6 +9129,47 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get kitapsen_note_hint => 'Your note';
   String get kitapsen_note_saved => 'Note saved';
   String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  String get kitapsen_store_badge_free => 'Free';
+  String get kitapsen_store_badge_new => 'New';
+  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  String get kitapsen_store_hero_body =>
+      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+  String get kitapsen_store_explore_books => 'Explore books';
+  String get kitapsen_store_start_free => 'Start with free books';
+  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  String get kitapsen_store_library_always => 'Your library is always with you';
+  String get kitapsen_store_library_always_body =>
+      'Read on your phone, tablet and computer.';
+  String get kitapsen_store_meet_authors => 'Meet the authors';
+  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  String get kitapsen_store_all_categories => 'All categories';
+  String get kitapsen_store_discover_title => 'Time to discover';
+  String get kitapsen_store_discover_body =>
+      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+  String get kitapsen_store_discover_now => 'Discover now';
+  String kitapsen_store_results_for({required Object q}) =>
+      'Results for "${q}"';
+  String get kitapsen_store_matching_authors => 'Matching authors';
+  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  String get kitapsen_store_author_cta =>
+      'Discover the author\'s books and pick your next read.';
+  String get kitapsen_store_see_author_books => 'See their books';
+  String get kitapsen_store_authors_books => 'The author\'s books';
+  String get kitapsen_book_read_now => 'Read now';
+  String get kitapsen_book_get_free_web => 'Get it free';
+  String get kitapsen_book_favorites => 'Favorites';
+  String get kitapsen_book_description => 'Description';
+  String get kitapsen_book_about_author => 'About the author';
+  String get kitapsen_book_isbn => 'ISBN';
+  String get kitapsen_book_format => 'Format';
+  String get kitapsen_author_role => 'Author';
+  String get kitapsen_author_notify => 'Notify me of new books';
+  String get kitapsen_author_about => 'About';
+  String get kitapsen_review_more_bio => 'Read the full biography';
+  String get kitapsen_author_like => 'Like';
+  String get kitapsen_author_likes => 'Likes';
 }
 
 // Path: <root>
@@ -24405,6 +24446,83 @@ class _StringsAr extends _StringsEn {
   String get kitapsen_note_saved => 'Note saved';
   @override
   String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  @override
+  String get kitapsen_store_badge_free => 'Free';
+  @override
+  String get kitapsen_store_badge_new => 'New';
+  @override
+  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  @override
+  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  @override
+  String get kitapsen_store_hero_body =>
+      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+  @override
+  String get kitapsen_store_explore_books => 'Explore books';
+  @override
+  String get kitapsen_store_start_free => 'Start with free books';
+  @override
+  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  @override
+  String get kitapsen_store_library_always => 'Your library is always with you';
+  @override
+  String get kitapsen_store_library_always_body =>
+      'Read on your phone, tablet and computer.';
+  @override
+  String get kitapsen_store_meet_authors => 'Meet the authors';
+  @override
+  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  @override
+  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  @override
+  String get kitapsen_store_all_categories => 'All categories';
+  @override
+  String get kitapsen_store_discover_title => 'Time to discover';
+  @override
+  String get kitapsen_store_discover_body =>
+      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+  @override
+  String get kitapsen_store_discover_now => 'Discover now';
+  @override
+  String kitapsen_store_results_for({required Object q}) =>
+      'Results for "${q}"';
+  @override
+  String get kitapsen_store_matching_authors => 'Matching authors';
+  @override
+  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  @override
+  String get kitapsen_store_author_cta =>
+      'Discover the author\'s books and pick your next read.';
+  @override
+  String get kitapsen_store_see_author_books => 'See their books';
+  @override
+  String get kitapsen_store_authors_books => 'The author\'s books';
+  @override
+  String get kitapsen_book_read_now => 'Read now';
+  @override
+  String get kitapsen_book_get_free_web => 'Get it free';
+  @override
+  String get kitapsen_book_favorites => 'Favorites';
+  @override
+  String get kitapsen_book_description => 'Description';
+  @override
+  String get kitapsen_book_about_author => 'About the author';
+  @override
+  String get kitapsen_book_isbn => 'ISBN';
+  @override
+  String get kitapsen_book_format => 'Format';
+  @override
+  String get kitapsen_author_role => 'Author';
+  @override
+  String get kitapsen_author_notify => 'Notify me of new books';
+  @override
+  String get kitapsen_author_about => 'About';
+  @override
+  String get kitapsen_review_more_bio => 'Read the full biography';
+  @override
+  String get kitapsen_author_like => 'Like';
+  @override
+  String get kitapsen_author_likes => 'Likes';
 }
 
 // Path: <root>
@@ -40073,6 +40191,83 @@ class _StringsDe extends _StringsEn {
   String get kitapsen_note_saved => 'Note saved';
   @override
   String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  @override
+  String get kitapsen_store_badge_free => 'Free';
+  @override
+  String get kitapsen_store_badge_new => 'New';
+  @override
+  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  @override
+  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  @override
+  String get kitapsen_store_hero_body =>
+      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+  @override
+  String get kitapsen_store_explore_books => 'Explore books';
+  @override
+  String get kitapsen_store_start_free => 'Start with free books';
+  @override
+  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  @override
+  String get kitapsen_store_library_always => 'Your library is always with you';
+  @override
+  String get kitapsen_store_library_always_body =>
+      'Read on your phone, tablet and computer.';
+  @override
+  String get kitapsen_store_meet_authors => 'Meet the authors';
+  @override
+  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  @override
+  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  @override
+  String get kitapsen_store_all_categories => 'All categories';
+  @override
+  String get kitapsen_store_discover_title => 'Time to discover';
+  @override
+  String get kitapsen_store_discover_body =>
+      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+  @override
+  String get kitapsen_store_discover_now => 'Discover now';
+  @override
+  String kitapsen_store_results_for({required Object q}) =>
+      'Results for "${q}"';
+  @override
+  String get kitapsen_store_matching_authors => 'Matching authors';
+  @override
+  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  @override
+  String get kitapsen_store_author_cta =>
+      'Discover the author\'s books and pick your next read.';
+  @override
+  String get kitapsen_store_see_author_books => 'See their books';
+  @override
+  String get kitapsen_store_authors_books => 'The author\'s books';
+  @override
+  String get kitapsen_book_read_now => 'Read now';
+  @override
+  String get kitapsen_book_get_free_web => 'Get it free';
+  @override
+  String get kitapsen_book_favorites => 'Favorites';
+  @override
+  String get kitapsen_book_description => 'Description';
+  @override
+  String get kitapsen_book_about_author => 'About the author';
+  @override
+  String get kitapsen_book_isbn => 'ISBN';
+  @override
+  String get kitapsen_book_format => 'Format';
+  @override
+  String get kitapsen_author_role => 'Author';
+  @override
+  String get kitapsen_author_notify => 'Notify me of new books';
+  @override
+  String get kitapsen_author_about => 'About';
+  @override
+  String get kitapsen_review_more_bio => 'Read the full biography';
+  @override
+  String get kitapsen_author_like => 'Like';
+  @override
+  String get kitapsen_author_likes => 'Likes';
 }
 
 // Path: <root>
@@ -55800,6 +55995,83 @@ class _StringsEs extends _StringsEn {
   String get kitapsen_note_saved => 'Note saved';
   @override
   String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  @override
+  String get kitapsen_store_badge_free => 'Free';
+  @override
+  String get kitapsen_store_badge_new => 'New';
+  @override
+  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  @override
+  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  @override
+  String get kitapsen_store_hero_body =>
+      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+  @override
+  String get kitapsen_store_explore_books => 'Explore books';
+  @override
+  String get kitapsen_store_start_free => 'Start with free books';
+  @override
+  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  @override
+  String get kitapsen_store_library_always => 'Your library is always with you';
+  @override
+  String get kitapsen_store_library_always_body =>
+      'Read on your phone, tablet and computer.';
+  @override
+  String get kitapsen_store_meet_authors => 'Meet the authors';
+  @override
+  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  @override
+  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  @override
+  String get kitapsen_store_all_categories => 'All categories';
+  @override
+  String get kitapsen_store_discover_title => 'Time to discover';
+  @override
+  String get kitapsen_store_discover_body =>
+      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+  @override
+  String get kitapsen_store_discover_now => 'Discover now';
+  @override
+  String kitapsen_store_results_for({required Object q}) =>
+      'Results for "${q}"';
+  @override
+  String get kitapsen_store_matching_authors => 'Matching authors';
+  @override
+  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  @override
+  String get kitapsen_store_author_cta =>
+      'Discover the author\'s books and pick your next read.';
+  @override
+  String get kitapsen_store_see_author_books => 'See their books';
+  @override
+  String get kitapsen_store_authors_books => 'The author\'s books';
+  @override
+  String get kitapsen_book_read_now => 'Read now';
+  @override
+  String get kitapsen_book_get_free_web => 'Get it free';
+  @override
+  String get kitapsen_book_favorites => 'Favorites';
+  @override
+  String get kitapsen_book_description => 'Description';
+  @override
+  String get kitapsen_book_about_author => 'About the author';
+  @override
+  String get kitapsen_book_isbn => 'ISBN';
+  @override
+  String get kitapsen_book_format => 'Format';
+  @override
+  String get kitapsen_author_role => 'Author';
+  @override
+  String get kitapsen_author_notify => 'Notify me of new books';
+  @override
+  String get kitapsen_author_about => 'About';
+  @override
+  String get kitapsen_review_more_bio => 'Read the full biography';
+  @override
+  String get kitapsen_author_like => 'Like';
+  @override
+  String get kitapsen_author_likes => 'Likes';
 }
 
 // Path: <root>
@@ -71605,6 +71877,83 @@ class _StringsFr extends _StringsEn {
   String get kitapsen_note_saved => 'Note saved';
   @override
   String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  @override
+  String get kitapsen_store_badge_free => 'Free';
+  @override
+  String get kitapsen_store_badge_new => 'New';
+  @override
+  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  @override
+  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  @override
+  String get kitapsen_store_hero_body =>
+      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+  @override
+  String get kitapsen_store_explore_books => 'Explore books';
+  @override
+  String get kitapsen_store_start_free => 'Start with free books';
+  @override
+  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  @override
+  String get kitapsen_store_library_always => 'Your library is always with you';
+  @override
+  String get kitapsen_store_library_always_body =>
+      'Read on your phone, tablet and computer.';
+  @override
+  String get kitapsen_store_meet_authors => 'Meet the authors';
+  @override
+  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  @override
+  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  @override
+  String get kitapsen_store_all_categories => 'All categories';
+  @override
+  String get kitapsen_store_discover_title => 'Time to discover';
+  @override
+  String get kitapsen_store_discover_body =>
+      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+  @override
+  String get kitapsen_store_discover_now => 'Discover now';
+  @override
+  String kitapsen_store_results_for({required Object q}) =>
+      'Results for "${q}"';
+  @override
+  String get kitapsen_store_matching_authors => 'Matching authors';
+  @override
+  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  @override
+  String get kitapsen_store_author_cta =>
+      'Discover the author\'s books and pick your next read.';
+  @override
+  String get kitapsen_store_see_author_books => 'See their books';
+  @override
+  String get kitapsen_store_authors_books => 'The author\'s books';
+  @override
+  String get kitapsen_book_read_now => 'Read now';
+  @override
+  String get kitapsen_book_get_free_web => 'Get it free';
+  @override
+  String get kitapsen_book_favorites => 'Favorites';
+  @override
+  String get kitapsen_book_description => 'Description';
+  @override
+  String get kitapsen_book_about_author => 'About the author';
+  @override
+  String get kitapsen_book_isbn => 'ISBN';
+  @override
+  String get kitapsen_book_format => 'Format';
+  @override
+  String get kitapsen_author_role => 'Author';
+  @override
+  String get kitapsen_author_notify => 'Notify me of new books';
+  @override
+  String get kitapsen_author_about => 'About';
+  @override
+  String get kitapsen_review_more_bio => 'Read the full biography';
+  @override
+  String get kitapsen_author_like => 'Like';
+  @override
+  String get kitapsen_author_likes => 'Likes';
 }
 
 // Path: <root>
@@ -87068,6 +87417,83 @@ class _StringsId extends _StringsEn {
   String get kitapsen_note_saved => 'Note saved';
   @override
   String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  @override
+  String get kitapsen_store_badge_free => 'Free';
+  @override
+  String get kitapsen_store_badge_new => 'New';
+  @override
+  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  @override
+  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  @override
+  String get kitapsen_store_hero_body =>
+      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+  @override
+  String get kitapsen_store_explore_books => 'Explore books';
+  @override
+  String get kitapsen_store_start_free => 'Start with free books';
+  @override
+  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  @override
+  String get kitapsen_store_library_always => 'Your library is always with you';
+  @override
+  String get kitapsen_store_library_always_body =>
+      'Read on your phone, tablet and computer.';
+  @override
+  String get kitapsen_store_meet_authors => 'Meet the authors';
+  @override
+  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  @override
+  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  @override
+  String get kitapsen_store_all_categories => 'All categories';
+  @override
+  String get kitapsen_store_discover_title => 'Time to discover';
+  @override
+  String get kitapsen_store_discover_body =>
+      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+  @override
+  String get kitapsen_store_discover_now => 'Discover now';
+  @override
+  String kitapsen_store_results_for({required Object q}) =>
+      'Results for "${q}"';
+  @override
+  String get kitapsen_store_matching_authors => 'Matching authors';
+  @override
+  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  @override
+  String get kitapsen_store_author_cta =>
+      'Discover the author\'s books and pick your next read.';
+  @override
+  String get kitapsen_store_see_author_books => 'See their books';
+  @override
+  String get kitapsen_store_authors_books => 'The author\'s books';
+  @override
+  String get kitapsen_book_read_now => 'Read now';
+  @override
+  String get kitapsen_book_get_free_web => 'Get it free';
+  @override
+  String get kitapsen_book_favorites => 'Favorites';
+  @override
+  String get kitapsen_book_description => 'Description';
+  @override
+  String get kitapsen_book_about_author => 'About the author';
+  @override
+  String get kitapsen_book_isbn => 'ISBN';
+  @override
+  String get kitapsen_book_format => 'Format';
+  @override
+  String get kitapsen_author_role => 'Author';
+  @override
+  String get kitapsen_author_notify => 'Notify me of new books';
+  @override
+  String get kitapsen_author_about => 'About';
+  @override
+  String get kitapsen_review_more_bio => 'Read the full biography';
+  @override
+  String get kitapsen_author_like => 'Like';
+  @override
+  String get kitapsen_author_likes => 'Likes';
 }
 
 // Path: <root>
@@ -102693,6 +103119,83 @@ class _StringsIt extends _StringsEn {
   String get kitapsen_note_saved => 'Note saved';
   @override
   String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  @override
+  String get kitapsen_store_badge_free => 'Free';
+  @override
+  String get kitapsen_store_badge_new => 'New';
+  @override
+  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  @override
+  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  @override
+  String get kitapsen_store_hero_body =>
+      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+  @override
+  String get kitapsen_store_explore_books => 'Explore books';
+  @override
+  String get kitapsen_store_start_free => 'Start with free books';
+  @override
+  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  @override
+  String get kitapsen_store_library_always => 'Your library is always with you';
+  @override
+  String get kitapsen_store_library_always_body =>
+      'Read on your phone, tablet and computer.';
+  @override
+  String get kitapsen_store_meet_authors => 'Meet the authors';
+  @override
+  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  @override
+  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  @override
+  String get kitapsen_store_all_categories => 'All categories';
+  @override
+  String get kitapsen_store_discover_title => 'Time to discover';
+  @override
+  String get kitapsen_store_discover_body =>
+      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+  @override
+  String get kitapsen_store_discover_now => 'Discover now';
+  @override
+  String kitapsen_store_results_for({required Object q}) =>
+      'Results for "${q}"';
+  @override
+  String get kitapsen_store_matching_authors => 'Matching authors';
+  @override
+  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  @override
+  String get kitapsen_store_author_cta =>
+      'Discover the author\'s books and pick your next read.';
+  @override
+  String get kitapsen_store_see_author_books => 'See their books';
+  @override
+  String get kitapsen_store_authors_books => 'The author\'s books';
+  @override
+  String get kitapsen_book_read_now => 'Read now';
+  @override
+  String get kitapsen_book_get_free_web => 'Get it free';
+  @override
+  String get kitapsen_book_favorites => 'Favorites';
+  @override
+  String get kitapsen_book_description => 'Description';
+  @override
+  String get kitapsen_book_about_author => 'About the author';
+  @override
+  String get kitapsen_book_isbn => 'ISBN';
+  @override
+  String get kitapsen_book_format => 'Format';
+  @override
+  String get kitapsen_author_role => 'Author';
+  @override
+  String get kitapsen_author_notify => 'Notify me of new books';
+  @override
+  String get kitapsen_author_about => 'About';
+  @override
+  String get kitapsen_review_more_bio => 'Read the full biography';
+  @override
+  String get kitapsen_author_like => 'Like';
+  @override
+  String get kitapsen_author_likes => 'Likes';
 }
 
 // Path: <root>
@@ -117349,6 +117852,83 @@ class _StringsJa extends _StringsEn {
   String get kitapsen_note_saved => 'Note saved';
   @override
   String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  @override
+  String get kitapsen_store_badge_free => 'Free';
+  @override
+  String get kitapsen_store_badge_new => 'New';
+  @override
+  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  @override
+  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  @override
+  String get kitapsen_store_hero_body =>
+      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+  @override
+  String get kitapsen_store_explore_books => 'Explore books';
+  @override
+  String get kitapsen_store_start_free => 'Start with free books';
+  @override
+  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  @override
+  String get kitapsen_store_library_always => 'Your library is always with you';
+  @override
+  String get kitapsen_store_library_always_body =>
+      'Read on your phone, tablet and computer.';
+  @override
+  String get kitapsen_store_meet_authors => 'Meet the authors';
+  @override
+  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  @override
+  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  @override
+  String get kitapsen_store_all_categories => 'All categories';
+  @override
+  String get kitapsen_store_discover_title => 'Time to discover';
+  @override
+  String get kitapsen_store_discover_body =>
+      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+  @override
+  String get kitapsen_store_discover_now => 'Discover now';
+  @override
+  String kitapsen_store_results_for({required Object q}) =>
+      'Results for "${q}"';
+  @override
+  String get kitapsen_store_matching_authors => 'Matching authors';
+  @override
+  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  @override
+  String get kitapsen_store_author_cta =>
+      'Discover the author\'s books and pick your next read.';
+  @override
+  String get kitapsen_store_see_author_books => 'See their books';
+  @override
+  String get kitapsen_store_authors_books => 'The author\'s books';
+  @override
+  String get kitapsen_book_read_now => 'Read now';
+  @override
+  String get kitapsen_book_get_free_web => 'Get it free';
+  @override
+  String get kitapsen_book_favorites => 'Favorites';
+  @override
+  String get kitapsen_book_description => 'Description';
+  @override
+  String get kitapsen_book_about_author => 'About the author';
+  @override
+  String get kitapsen_book_isbn => 'ISBN';
+  @override
+  String get kitapsen_book_format => 'Format';
+  @override
+  String get kitapsen_author_role => 'Author';
+  @override
+  String get kitapsen_author_notify => 'Notify me of new books';
+  @override
+  String get kitapsen_author_about => 'About';
+  @override
+  String get kitapsen_review_more_bio => 'Read the full biography';
+  @override
+  String get kitapsen_author_like => 'Like';
+  @override
+  String get kitapsen_author_likes => 'Likes';
 }
 
 // Path: <root>
@@ -132010,6 +132590,83 @@ class _StringsKo extends _StringsEn {
   String get kitapsen_note_saved => 'Note saved';
   @override
   String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  @override
+  String get kitapsen_store_badge_free => 'Free';
+  @override
+  String get kitapsen_store_badge_new => 'New';
+  @override
+  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  @override
+  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  @override
+  String get kitapsen_store_hero_body =>
+      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+  @override
+  String get kitapsen_store_explore_books => 'Explore books';
+  @override
+  String get kitapsen_store_start_free => 'Start with free books';
+  @override
+  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  @override
+  String get kitapsen_store_library_always => 'Your library is always with you';
+  @override
+  String get kitapsen_store_library_always_body =>
+      'Read on your phone, tablet and computer.';
+  @override
+  String get kitapsen_store_meet_authors => 'Meet the authors';
+  @override
+  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  @override
+  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  @override
+  String get kitapsen_store_all_categories => 'All categories';
+  @override
+  String get kitapsen_store_discover_title => 'Time to discover';
+  @override
+  String get kitapsen_store_discover_body =>
+      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+  @override
+  String get kitapsen_store_discover_now => 'Discover now';
+  @override
+  String kitapsen_store_results_for({required Object q}) =>
+      'Results for "${q}"';
+  @override
+  String get kitapsen_store_matching_authors => 'Matching authors';
+  @override
+  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  @override
+  String get kitapsen_store_author_cta =>
+      'Discover the author\'s books and pick your next read.';
+  @override
+  String get kitapsen_store_see_author_books => 'See their books';
+  @override
+  String get kitapsen_store_authors_books => 'The author\'s books';
+  @override
+  String get kitapsen_book_read_now => 'Read now';
+  @override
+  String get kitapsen_book_get_free_web => 'Get it free';
+  @override
+  String get kitapsen_book_favorites => 'Favorites';
+  @override
+  String get kitapsen_book_description => 'Description';
+  @override
+  String get kitapsen_book_about_author => 'About the author';
+  @override
+  String get kitapsen_book_isbn => 'ISBN';
+  @override
+  String get kitapsen_book_format => 'Format';
+  @override
+  String get kitapsen_author_role => 'Author';
+  @override
+  String get kitapsen_author_notify => 'Notify me of new books';
+  @override
+  String get kitapsen_author_about => 'About';
+  @override
+  String get kitapsen_review_more_bio => 'Read the full biography';
+  @override
+  String get kitapsen_author_like => 'Like';
+  @override
+  String get kitapsen_author_likes => 'Likes';
 }
 
 // Path: <root>
@@ -147582,6 +148239,83 @@ class _StringsNl extends _StringsEn {
   String get kitapsen_note_saved => 'Note saved';
   @override
   String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  @override
+  String get kitapsen_store_badge_free => 'Free';
+  @override
+  String get kitapsen_store_badge_new => 'New';
+  @override
+  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  @override
+  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  @override
+  String get kitapsen_store_hero_body =>
+      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+  @override
+  String get kitapsen_store_explore_books => 'Explore books';
+  @override
+  String get kitapsen_store_start_free => 'Start with free books';
+  @override
+  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  @override
+  String get kitapsen_store_library_always => 'Your library is always with you';
+  @override
+  String get kitapsen_store_library_always_body =>
+      'Read on your phone, tablet and computer.';
+  @override
+  String get kitapsen_store_meet_authors => 'Meet the authors';
+  @override
+  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  @override
+  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  @override
+  String get kitapsen_store_all_categories => 'All categories';
+  @override
+  String get kitapsen_store_discover_title => 'Time to discover';
+  @override
+  String get kitapsen_store_discover_body =>
+      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+  @override
+  String get kitapsen_store_discover_now => 'Discover now';
+  @override
+  String kitapsen_store_results_for({required Object q}) =>
+      'Results for "${q}"';
+  @override
+  String get kitapsen_store_matching_authors => 'Matching authors';
+  @override
+  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  @override
+  String get kitapsen_store_author_cta =>
+      'Discover the author\'s books and pick your next read.';
+  @override
+  String get kitapsen_store_see_author_books => 'See their books';
+  @override
+  String get kitapsen_store_authors_books => 'The author\'s books';
+  @override
+  String get kitapsen_book_read_now => 'Read now';
+  @override
+  String get kitapsen_book_get_free_web => 'Get it free';
+  @override
+  String get kitapsen_book_favorites => 'Favorites';
+  @override
+  String get kitapsen_book_description => 'Description';
+  @override
+  String get kitapsen_book_about_author => 'About the author';
+  @override
+  String get kitapsen_book_isbn => 'ISBN';
+  @override
+  String get kitapsen_book_format => 'Format';
+  @override
+  String get kitapsen_author_role => 'Author';
+  @override
+  String get kitapsen_author_notify => 'Notify me of new books';
+  @override
+  String get kitapsen_author_about => 'About';
+  @override
+  String get kitapsen_review_more_bio => 'Read the full biography';
+  @override
+  String get kitapsen_author_like => 'Like';
+  @override
+  String get kitapsen_author_likes => 'Likes';
 }
 
 // Path: <root>
@@ -163227,6 +163961,83 @@ class _StringsPtBr extends _StringsEn {
   String get kitapsen_note_saved => 'Note saved';
   @override
   String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  @override
+  String get kitapsen_store_badge_free => 'Free';
+  @override
+  String get kitapsen_store_badge_new => 'New';
+  @override
+  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  @override
+  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  @override
+  String get kitapsen_store_hero_body =>
+      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+  @override
+  String get kitapsen_store_explore_books => 'Explore books';
+  @override
+  String get kitapsen_store_start_free => 'Start with free books';
+  @override
+  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  @override
+  String get kitapsen_store_library_always => 'Your library is always with you';
+  @override
+  String get kitapsen_store_library_always_body =>
+      'Read on your phone, tablet and computer.';
+  @override
+  String get kitapsen_store_meet_authors => 'Meet the authors';
+  @override
+  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  @override
+  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  @override
+  String get kitapsen_store_all_categories => 'All categories';
+  @override
+  String get kitapsen_store_discover_title => 'Time to discover';
+  @override
+  String get kitapsen_store_discover_body =>
+      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+  @override
+  String get kitapsen_store_discover_now => 'Discover now';
+  @override
+  String kitapsen_store_results_for({required Object q}) =>
+      'Results for "${q}"';
+  @override
+  String get kitapsen_store_matching_authors => 'Matching authors';
+  @override
+  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  @override
+  String get kitapsen_store_author_cta =>
+      'Discover the author\'s books and pick your next read.';
+  @override
+  String get kitapsen_store_see_author_books => 'See their books';
+  @override
+  String get kitapsen_store_authors_books => 'The author\'s books';
+  @override
+  String get kitapsen_book_read_now => 'Read now';
+  @override
+  String get kitapsen_book_get_free_web => 'Get it free';
+  @override
+  String get kitapsen_book_favorites => 'Favorites';
+  @override
+  String get kitapsen_book_description => 'Description';
+  @override
+  String get kitapsen_book_about_author => 'About the author';
+  @override
+  String get kitapsen_book_isbn => 'ISBN';
+  @override
+  String get kitapsen_book_format => 'Format';
+  @override
+  String get kitapsen_author_role => 'Author';
+  @override
+  String get kitapsen_author_notify => 'Notify me of new books';
+  @override
+  String get kitapsen_author_about => 'About';
+  @override
+  String get kitapsen_review_more_bio => 'Read the full biography';
+  @override
+  String get kitapsen_author_like => 'Like';
+  @override
+  String get kitapsen_author_likes => 'Likes';
 }
 
 // Path: <root>
@@ -178816,6 +179627,83 @@ class _StringsRu extends _StringsEn {
   String get kitapsen_note_saved => 'Note saved';
   @override
   String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  @override
+  String get kitapsen_store_badge_free => 'Free';
+  @override
+  String get kitapsen_store_badge_new => 'New';
+  @override
+  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  @override
+  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  @override
+  String get kitapsen_store_hero_body =>
+      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+  @override
+  String get kitapsen_store_explore_books => 'Explore books';
+  @override
+  String get kitapsen_store_start_free => 'Start with free books';
+  @override
+  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  @override
+  String get kitapsen_store_library_always => 'Your library is always with you';
+  @override
+  String get kitapsen_store_library_always_body =>
+      'Read on your phone, tablet and computer.';
+  @override
+  String get kitapsen_store_meet_authors => 'Meet the authors';
+  @override
+  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  @override
+  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  @override
+  String get kitapsen_store_all_categories => 'All categories';
+  @override
+  String get kitapsen_store_discover_title => 'Time to discover';
+  @override
+  String get kitapsen_store_discover_body =>
+      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+  @override
+  String get kitapsen_store_discover_now => 'Discover now';
+  @override
+  String kitapsen_store_results_for({required Object q}) =>
+      'Results for "${q}"';
+  @override
+  String get kitapsen_store_matching_authors => 'Matching authors';
+  @override
+  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  @override
+  String get kitapsen_store_author_cta =>
+      'Discover the author\'s books and pick your next read.';
+  @override
+  String get kitapsen_store_see_author_books => 'See their books';
+  @override
+  String get kitapsen_store_authors_books => 'The author\'s books';
+  @override
+  String get kitapsen_book_read_now => 'Read now';
+  @override
+  String get kitapsen_book_get_free_web => 'Get it free';
+  @override
+  String get kitapsen_book_favorites => 'Favorites';
+  @override
+  String get kitapsen_book_description => 'Description';
+  @override
+  String get kitapsen_book_about_author => 'About the author';
+  @override
+  String get kitapsen_book_isbn => 'ISBN';
+  @override
+  String get kitapsen_book_format => 'Format';
+  @override
+  String get kitapsen_author_role => 'Author';
+  @override
+  String get kitapsen_author_notify => 'Notify me of new books';
+  @override
+  String get kitapsen_author_about => 'About';
+  @override
+  String get kitapsen_review_more_bio => 'Read the full biography';
+  @override
+  String get kitapsen_author_like => 'Like';
+  @override
+  String get kitapsen_author_likes => 'Likes';
 }
 
 // Path: <root>
@@ -194082,6 +194970,83 @@ class _StringsTh extends _StringsEn {
   String get kitapsen_note_saved => 'Note saved';
   @override
   String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  @override
+  String get kitapsen_store_badge_free => 'Free';
+  @override
+  String get kitapsen_store_badge_new => 'New';
+  @override
+  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  @override
+  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  @override
+  String get kitapsen_store_hero_body =>
+      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+  @override
+  String get kitapsen_store_explore_books => 'Explore books';
+  @override
+  String get kitapsen_store_start_free => 'Start with free books';
+  @override
+  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  @override
+  String get kitapsen_store_library_always => 'Your library is always with you';
+  @override
+  String get kitapsen_store_library_always_body =>
+      'Read on your phone, tablet and computer.';
+  @override
+  String get kitapsen_store_meet_authors => 'Meet the authors';
+  @override
+  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  @override
+  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  @override
+  String get kitapsen_store_all_categories => 'All categories';
+  @override
+  String get kitapsen_store_discover_title => 'Time to discover';
+  @override
+  String get kitapsen_store_discover_body =>
+      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+  @override
+  String get kitapsen_store_discover_now => 'Discover now';
+  @override
+  String kitapsen_store_results_for({required Object q}) =>
+      'Results for "${q}"';
+  @override
+  String get kitapsen_store_matching_authors => 'Matching authors';
+  @override
+  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  @override
+  String get kitapsen_store_author_cta =>
+      'Discover the author\'s books and pick your next read.';
+  @override
+  String get kitapsen_store_see_author_books => 'See their books';
+  @override
+  String get kitapsen_store_authors_books => 'The author\'s books';
+  @override
+  String get kitapsen_book_read_now => 'Read now';
+  @override
+  String get kitapsen_book_get_free_web => 'Get it free';
+  @override
+  String get kitapsen_book_favorites => 'Favorites';
+  @override
+  String get kitapsen_book_description => 'Description';
+  @override
+  String get kitapsen_book_about_author => 'About the author';
+  @override
+  String get kitapsen_book_isbn => 'ISBN';
+  @override
+  String get kitapsen_book_format => 'Format';
+  @override
+  String get kitapsen_author_role => 'Author';
+  @override
+  String get kitapsen_author_notify => 'Notify me of new books';
+  @override
+  String get kitapsen_author_about => 'About';
+  @override
+  String get kitapsen_review_more_bio => 'Read the full biography';
+  @override
+  String get kitapsen_author_like => 'Like';
+  @override
+  String get kitapsen_author_likes => 'Likes';
 }
 
 // Path: <root>
@@ -209400,13 +210365,13 @@ class _StringsTr extends _StringsEn {
   @override
   String get kitapsen_store_search_hint => 'Kitap veya yazar ara';
   @override
-  String get kitapsen_store_new_arrivals => 'Yeni çıkanlar';
+  String get kitapsen_store_new_arrivals => 'Yeni Çıkanlar';
   @override
-  String get kitapsen_store_most_read => 'Çok okunanlar';
+  String get kitapsen_store_most_read => 'Çok okunan kitaplar';
   @override
-  String get kitapsen_store_staff_picks => 'Editörün seçtikleri';
+  String get kitapsen_store_staff_picks => 'Editörün Seçtikleri';
   @override
-  String get kitapsen_store_free_books => 'Ücretsiz kitaplar';
+  String get kitapsen_store_free_books => 'Ücretsiz Kitaplar';
   @override
   String get kitapsen_store_stories => 'Bölüm bölüm hikâyeler';
   @override
@@ -209452,7 +210417,7 @@ class _StringsTr extends _StringsEn {
   @override
   String get kitapsen_book_about => 'Kitap hakkında';
   @override
-  String get kitapsen_book_pages => 'Sayfa';
+  String get kitapsen_book_pages => 'Sayfalar';
   @override
   String get kitapsen_book_language => 'Dil';
   @override
@@ -209491,9 +210456,9 @@ class _StringsTr extends _StringsEn {
   @override
   String get kitapsen_author_following => 'Takip ediliyor';
   @override
-  String get kitapsen_author_followers => 'Takipçi';
+  String get kitapsen_author_followers => 'Takipçiler';
   @override
-  String get kitapsen_author_books => 'Kitapları';
+  String get kitapsen_author_books => 'Kitaplar';
   @override
   String get kitapsen_author_open => 'Yazar sayfası';
   @override
@@ -209552,6 +210517,85 @@ class _StringsTr extends _StringsEn {
   String get kitapsen_note_saved => 'Not kaydedildi';
   @override
   String get kitapsen_annotations_empty => 'Henüz yer imi veya not yok';
+  @override
+  String get kitapsen_store_badge_free => 'Ücretsiz';
+  @override
+  String get kitapsen_store_badge_new => 'Yeni';
+  @override
+  String kitapsen_store_rating_count({required Object n}) =>
+      '${n} değerlendirme';
+  @override
+  String get kitapsen_store_hero_title => 'Bir sonraki güzel kitabınız burada.';
+  @override
+  String get kitapsen_store_hero_body =>
+      'Yeni hikâyelerle tanışın, sevdiğiniz yazarları keşfedin. Kitabınızı seçin; telefon, tablet veya bilgisayarınızda okumaya başlayın.';
+  @override
+  String get kitapsen_store_explore_books => 'Kitapları keşfet';
+  @override
+  String get kitapsen_store_start_free => 'Ücretsiz kitaplarla başla';
+  @override
+  String get kitapsen_store_start_free_body => 'İlk kitabınızı keşfedin.';
+  @override
+  String get kitapsen_store_library_always => 'Kitaplığınız hep yanınızda';
+  @override
+  String get kitapsen_store_library_always_body =>
+      'Telefon, tablet ve bilgisayarda okuyun.';
+  @override
+  String get kitapsen_store_meet_authors => 'Yazarlarla tanışın';
+  @override
+  String get kitapsen_store_meet_authors_body =>
+      'Sevdiğiniz kalemleri takip edin.';
+  @override
+  String get kitapsen_store_reading_list => 'Okuma listenize yeni bir kitap';
+  @override
+  String get kitapsen_store_all_categories => 'Tüm Kategoriler';
+  @override
+  String get kitapsen_store_discover_title => 'Keşfetmenin tam zamanı';
+  @override
+  String get kitapsen_store_discover_body =>
+      'Bir hikâye, yeni bir bakış açısı, beklenmedik bir keşif. Okuma listenize bir sonraki kitabınızı ekleyin.';
+  @override
+  String get kitapsen_store_discover_now => 'Şimdi keşfet';
+  @override
+  String kitapsen_store_results_for({required Object q}) =>
+      '"${q}" için sonuçlar';
+  @override
+  String get kitapsen_store_matching_authors => 'Eşleşen yazarlar';
+  @override
+  String kitapsen_store_author_books_count({required Object n}) => '${n} kitap';
+  @override
+  String get kitapsen_store_author_cta =>
+      'Yazarın kitaplarını keşfedin, sıradaki okumanızı seçin.';
+  @override
+  String get kitapsen_store_see_author_books => 'Kitaplarını gör';
+  @override
+  String get kitapsen_store_authors_books => 'Yazarın kitapları';
+  @override
+  String get kitapsen_book_read_now => 'Şimdi Oku';
+  @override
+  String get kitapsen_book_get_free_web => 'Ücretsiz Edin';
+  @override
+  String get kitapsen_book_favorites => 'Favoriler';
+  @override
+  String get kitapsen_book_description => 'Açıklama';
+  @override
+  String get kitapsen_book_about_author => 'Yazar hakkında';
+  @override
+  String get kitapsen_book_isbn => 'ISBN';
+  @override
+  String get kitapsen_book_format => 'Format';
+  @override
+  String get kitapsen_author_role => 'Yazar';
+  @override
+  String get kitapsen_author_notify => 'Yeni kitaplarını haber ver';
+  @override
+  String get kitapsen_author_about => 'Hakkında';
+  @override
+  String get kitapsen_review_more_bio => 'Biyografinin tamamını oku';
+  @override
+  String get kitapsen_author_like => 'Beğen';
+  @override
+  String get kitapsen_author_likes => 'Beğeniler';
 }
 
 // Path: <root>
@@ -224949,6 +225993,83 @@ class _StringsVi extends _StringsEn {
   String get kitapsen_note_saved => 'Note saved';
   @override
   String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  @override
+  String get kitapsen_store_badge_free => 'Free';
+  @override
+  String get kitapsen_store_badge_new => 'New';
+  @override
+  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  @override
+  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  @override
+  String get kitapsen_store_hero_body =>
+      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+  @override
+  String get kitapsen_store_explore_books => 'Explore books';
+  @override
+  String get kitapsen_store_start_free => 'Start with free books';
+  @override
+  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  @override
+  String get kitapsen_store_library_always => 'Your library is always with you';
+  @override
+  String get kitapsen_store_library_always_body =>
+      'Read on your phone, tablet and computer.';
+  @override
+  String get kitapsen_store_meet_authors => 'Meet the authors';
+  @override
+  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  @override
+  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  @override
+  String get kitapsen_store_all_categories => 'All categories';
+  @override
+  String get kitapsen_store_discover_title => 'Time to discover';
+  @override
+  String get kitapsen_store_discover_body =>
+      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+  @override
+  String get kitapsen_store_discover_now => 'Discover now';
+  @override
+  String kitapsen_store_results_for({required Object q}) =>
+      'Results for "${q}"';
+  @override
+  String get kitapsen_store_matching_authors => 'Matching authors';
+  @override
+  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  @override
+  String get kitapsen_store_author_cta =>
+      'Discover the author\'s books and pick your next read.';
+  @override
+  String get kitapsen_store_see_author_books => 'See their books';
+  @override
+  String get kitapsen_store_authors_books => 'The author\'s books';
+  @override
+  String get kitapsen_book_read_now => 'Read now';
+  @override
+  String get kitapsen_book_get_free_web => 'Get it free';
+  @override
+  String get kitapsen_book_favorites => 'Favorites';
+  @override
+  String get kitapsen_book_description => 'Description';
+  @override
+  String get kitapsen_book_about_author => 'About the author';
+  @override
+  String get kitapsen_book_isbn => 'ISBN';
+  @override
+  String get kitapsen_book_format => 'Format';
+  @override
+  String get kitapsen_author_role => 'Author';
+  @override
+  String get kitapsen_author_notify => 'Notify me of new books';
+  @override
+  String get kitapsen_author_about => 'About';
+  @override
+  String get kitapsen_review_more_bio => 'Read the full biography';
+  @override
+  String get kitapsen_author_like => 'Like';
+  @override
+  String get kitapsen_author_likes => 'Likes';
 }
 
 // Path: <root>
@@ -239037,6 +240158,79 @@ class _StringsZhCn extends _StringsEn {
   String get kitapsen_note_saved => '笔记已保存';
   @override
   String get kitapsen_annotations_empty => '暂无书签或笔记';
+  @override
+  String get kitapsen_store_badge_free => '免费';
+  @override
+  String get kitapsen_store_badge_new => '新书';
+  @override
+  String kitapsen_store_rating_count({required Object n}) => '${n} 条评价';
+  @override
+  String get kitapsen_store_hero_title => '你的下一本好书就在这里。';
+  @override
+  String get kitapsen_store_hero_body => '发现新故事和你喜爱的作者。选好你的书，在手机、平板或电脑上开始阅读。';
+  @override
+  String get kitapsen_store_explore_books => '浏览书籍';
+  @override
+  String get kitapsen_store_start_free => '从免费书开始';
+  @override
+  String get kitapsen_store_start_free_body => '发现你的第一本书。';
+  @override
+  String get kitapsen_store_library_always => '你的书库随身相伴';
+  @override
+  String get kitapsen_store_library_always_body => '在手机、平板和电脑上阅读。';
+  @override
+  String get kitapsen_store_meet_authors => '认识作者';
+  @override
+  String get kitapsen_store_meet_authors_body => '关注你喜爱的作家。';
+  @override
+  String get kitapsen_store_reading_list => '为你的阅读清单添一本新书';
+  @override
+  String get kitapsen_store_all_categories => '全部分类';
+  @override
+  String get kitapsen_store_discover_title => '是时候去发现了';
+  @override
+  String get kitapsen_store_discover_body =>
+      '一个故事、一个新视角、一次意外的发现。把下一本书加入你的阅读清单。';
+  @override
+  String get kitapsen_store_discover_now => '立即探索';
+  @override
+  String kitapsen_store_results_for({required Object q}) => '“${q}”的搜索结果';
+  @override
+  String get kitapsen_store_matching_authors => '匹配的作者';
+  @override
+  String kitapsen_store_author_books_count({required Object n}) => '${n} 本书';
+  @override
+  String get kitapsen_store_author_cta => '浏览作者的书，挑选下一本读物。';
+  @override
+  String get kitapsen_store_see_author_books => '查看作品';
+  @override
+  String get kitapsen_store_authors_books => '作者的书';
+  @override
+  String get kitapsen_book_read_now => '立即阅读';
+  @override
+  String get kitapsen_book_get_free_web => '免费获取';
+  @override
+  String get kitapsen_book_favorites => '收藏';
+  @override
+  String get kitapsen_book_description => '简介';
+  @override
+  String get kitapsen_book_about_author => '关于作者';
+  @override
+  String get kitapsen_book_isbn => 'ISBN';
+  @override
+  String get kitapsen_book_format => '格式';
+  @override
+  String get kitapsen_author_role => '作者';
+  @override
+  String get kitapsen_author_notify => '新书上架时通知我';
+  @override
+  String get kitapsen_author_about => '简介';
+  @override
+  String get kitapsen_review_more_bio => '阅读完整简介';
+  @override
+  String get kitapsen_author_like => '喜欢';
+  @override
+  String get kitapsen_author_likes => '喜欢数';
 }
 
 // Path: <root>
@@ -253166,4 +254360,81 @@ class _StringsZhHk extends _StringsEn {
   String get kitapsen_note_saved => 'Note saved';
   @override
   String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  @override
+  String get kitapsen_store_badge_free => 'Free';
+  @override
+  String get kitapsen_store_badge_new => 'New';
+  @override
+  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  @override
+  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  @override
+  String get kitapsen_store_hero_body =>
+      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+  @override
+  String get kitapsen_store_explore_books => 'Explore books';
+  @override
+  String get kitapsen_store_start_free => 'Start with free books';
+  @override
+  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  @override
+  String get kitapsen_store_library_always => 'Your library is always with you';
+  @override
+  String get kitapsen_store_library_always_body =>
+      'Read on your phone, tablet and computer.';
+  @override
+  String get kitapsen_store_meet_authors => 'Meet the authors';
+  @override
+  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  @override
+  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  @override
+  String get kitapsen_store_all_categories => 'All categories';
+  @override
+  String get kitapsen_store_discover_title => 'Time to discover';
+  @override
+  String get kitapsen_store_discover_body =>
+      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+  @override
+  String get kitapsen_store_discover_now => 'Discover now';
+  @override
+  String kitapsen_store_results_for({required Object q}) =>
+      'Results for "${q}"';
+  @override
+  String get kitapsen_store_matching_authors => 'Matching authors';
+  @override
+  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  @override
+  String get kitapsen_store_author_cta =>
+      'Discover the author\'s books and pick your next read.';
+  @override
+  String get kitapsen_store_see_author_books => 'See their books';
+  @override
+  String get kitapsen_store_authors_books => 'The author\'s books';
+  @override
+  String get kitapsen_book_read_now => 'Read now';
+  @override
+  String get kitapsen_book_get_free_web => 'Get it free';
+  @override
+  String get kitapsen_book_favorites => 'Favorites';
+  @override
+  String get kitapsen_book_description => 'Description';
+  @override
+  String get kitapsen_book_about_author => 'About the author';
+  @override
+  String get kitapsen_book_isbn => 'ISBN';
+  @override
+  String get kitapsen_book_format => 'Format';
+  @override
+  String get kitapsen_author_role => 'Author';
+  @override
+  String get kitapsen_author_notify => 'Notify me of new books';
+  @override
+  String get kitapsen_author_about => 'About';
+  @override
+  String get kitapsen_review_more_bio => 'Read the full biography';
+  @override
+  String get kitapsen_author_like => 'Like';
+  @override
+  String get kitapsen_author_likes => 'Likes';
 }
