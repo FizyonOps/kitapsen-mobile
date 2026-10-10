@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 111282 (6546 per locale)
+/// Strings: 111401 (6553 per locale)
 ///
-/// Built on 2026-10-10 at 03:31 UTC
+/// Built on 2026-10-10 at 14:11 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -9357,6 +9357,14 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get kitapsen_clubs_send => 'Send';
   String get kitapsen_register_taken =>
       'This username or email address already has an account.';
+  String get kitapsen_report => 'Report';
+  String get kitapsen_reported => 'Reported';
+  String get kitapsen_report_title => 'Report this content';
+  String get kitapsen_report_reason => 'Reason (optional)';
+  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  String get kitapsen_report_submit => 'Submit Report';
+  String get kitapsen_report_thanks =>
+      'Reported. Thank you for helping keep the community safe.';
 }
 
 // Path: <root>
@@ -25048,6 +25056,21 @@ class _StringsAr extends _StringsEn {
   @override
   String get kitapsen_register_taken =>
       'This username or email address already has an account.';
+  @override
+  String get kitapsen_report => 'Report';
+  @override
+  String get kitapsen_reported => 'Reported';
+  @override
+  String get kitapsen_report_title => 'Report this content';
+  @override
+  String get kitapsen_report_reason => 'Reason (optional)';
+  @override
+  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  @override
+  String get kitapsen_report_submit => 'Submit Report';
+  @override
+  String get kitapsen_report_thanks =>
+      'Reported. Thank you for helping keep the community safe.';
 }
 
 // Path: <root>
@@ -41131,6 +41154,21 @@ class _StringsDe extends _StringsEn {
   @override
   String get kitapsen_register_taken =>
       'This username or email address already has an account.';
+  @override
+  String get kitapsen_report => 'Report';
+  @override
+  String get kitapsen_reported => 'Reported';
+  @override
+  String get kitapsen_report_title => 'Report this content';
+  @override
+  String get kitapsen_report_reason => 'Reason (optional)';
+  @override
+  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  @override
+  String get kitapsen_report_submit => 'Submit Report';
+  @override
+  String get kitapsen_report_thanks =>
+      'Reported. Thank you for helping keep the community safe.';
 }
 
 // Path: <root>
@@ -57273,6 +57311,21 @@ class _StringsEs extends _StringsEn {
   @override
   String get kitapsen_register_taken =>
       'This username or email address already has an account.';
+  @override
+  String get kitapsen_report => 'Report';
+  @override
+  String get kitapsen_reported => 'Reported';
+  @override
+  String get kitapsen_report_title => 'Report this content';
+  @override
+  String get kitapsen_report_reason => 'Reason (optional)';
+  @override
+  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  @override
+  String get kitapsen_report_submit => 'Submit Report';
+  @override
+  String get kitapsen_report_thanks =>
+      'Reported. Thank you for helping keep the community safe.';
 }
 
 // Path: <root>
@@ -73493,6 +73546,21 @@ class _StringsFr extends _StringsEn {
   @override
   String get kitapsen_register_taken =>
       'This username or email address already has an account.';
+  @override
+  String get kitapsen_report => 'Report';
+  @override
+  String get kitapsen_reported => 'Reported';
+  @override
+  String get kitapsen_report_title => 'Report this content';
+  @override
+  String get kitapsen_report_reason => 'Reason (optional)';
+  @override
+  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  @override
+  String get kitapsen_report_submit => 'Submit Report';
+  @override
+  String get kitapsen_report_thanks =>
+      'Reported. Thank you for helping keep the community safe.';
 }
 
 // Path: <root>
@@ -89371,6 +89439,21 @@ class _StringsId extends _StringsEn {
   @override
   String get kitapsen_register_taken =>
       'This username or email address already has an account.';
+  @override
+  String get kitapsen_report => 'Report';
+  @override
+  String get kitapsen_reported => 'Reported';
+  @override
+  String get kitapsen_report_title => 'Report this content';
+  @override
+  String get kitapsen_report_reason => 'Reason (optional)';
+  @override
+  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  @override
+  String get kitapsen_report_submit => 'Submit Report';
+  @override
+  String get kitapsen_report_thanks =>
+      'Reported. Thank you for helping keep the community safe.';
 }
 
 // Path: <root>
@@ -105411,6 +105494,21 @@ class _StringsIt extends _StringsEn {
   @override
   String get kitapsen_register_taken =>
       'This username or email address already has an account.';
+  @override
+  String get kitapsen_report => 'Report';
+  @override
+  String get kitapsen_reported => 'Reported';
+  @override
+  String get kitapsen_report_title => 'Report this content';
+  @override
+  String get kitapsen_report_reason => 'Reason (optional)';
+  @override
+  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  @override
+  String get kitapsen_report_submit => 'Submit Report';
+  @override
+  String get kitapsen_report_thanks =>
+      'Reported. Thank you for helping keep the community safe.';
 }
 
 // Path: <root>
@@ -120482,6 +120580,21 @@ class _StringsJa extends _StringsEn {
   @override
   String get kitapsen_register_taken =>
       'This username or email address already has an account.';
+  @override
+  String get kitapsen_report => 'Report';
+  @override
+  String get kitapsen_reported => 'Reported';
+  @override
+  String get kitapsen_report_title => 'Report this content';
+  @override
+  String get kitapsen_report_reason => 'Reason (optional)';
+  @override
+  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  @override
+  String get kitapsen_report_submit => 'Submit Report';
+  @override
+  String get kitapsen_report_thanks =>
+      'Reported. Thank you for helping keep the community safe.';
 }
 
 // Path: <root>
@@ -135558,6 +135671,21 @@ class _StringsKo extends _StringsEn {
   @override
   String get kitapsen_register_taken =>
       'This username or email address already has an account.';
+  @override
+  String get kitapsen_report => 'Report';
+  @override
+  String get kitapsen_reported => 'Reported';
+  @override
+  String get kitapsen_report_title => 'Report this content';
+  @override
+  String get kitapsen_report_reason => 'Reason (optional)';
+  @override
+  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  @override
+  String get kitapsen_report_submit => 'Submit Report';
+  @override
+  String get kitapsen_report_thanks =>
+      'Reported. Thank you for helping keep the community safe.';
 }
 
 // Path: <root>
@@ -151545,6 +151673,21 @@ class _StringsNl extends _StringsEn {
   @override
   String get kitapsen_register_taken =>
       'This username or email address already has an account.';
+  @override
+  String get kitapsen_report => 'Report';
+  @override
+  String get kitapsen_reported => 'Reported';
+  @override
+  String get kitapsen_report_title => 'Report this content';
+  @override
+  String get kitapsen_report_reason => 'Reason (optional)';
+  @override
+  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  @override
+  String get kitapsen_report_submit => 'Submit Report';
+  @override
+  String get kitapsen_report_thanks =>
+      'Reported. Thank you for helping keep the community safe.';
 }
 
 // Path: <root>
@@ -167605,6 +167748,21 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get kitapsen_register_taken =>
       'This username or email address already has an account.';
+  @override
+  String get kitapsen_report => 'Report';
+  @override
+  String get kitapsen_reported => 'Reported';
+  @override
+  String get kitapsen_report_title => 'Report this content';
+  @override
+  String get kitapsen_report_reason => 'Reason (optional)';
+  @override
+  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  @override
+  String get kitapsen_report_submit => 'Submit Report';
+  @override
+  String get kitapsen_report_thanks =>
+      'Reported. Thank you for helping keep the community safe.';
 }
 
 // Path: <root>
@@ -183609,6 +183767,21 @@ class _StringsRu extends _StringsEn {
   @override
   String get kitapsen_register_taken =>
       'This username or email address already has an account.';
+  @override
+  String get kitapsen_report => 'Report';
+  @override
+  String get kitapsen_reported => 'Reported';
+  @override
+  String get kitapsen_report_title => 'Report this content';
+  @override
+  String get kitapsen_report_reason => 'Reason (optional)';
+  @override
+  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  @override
+  String get kitapsen_report_submit => 'Submit Report';
+  @override
+  String get kitapsen_report_thanks =>
+      'Reported. Thank you for helping keep the community safe.';
 }
 
 // Path: <root>
@@ -199290,6 +199463,21 @@ class _StringsTh extends _StringsEn {
   @override
   String get kitapsen_register_taken =>
       'This username or email address already has an account.';
+  @override
+  String get kitapsen_report => 'Report';
+  @override
+  String get kitapsen_reported => 'Reported';
+  @override
+  String get kitapsen_report_title => 'Report this content';
+  @override
+  String get kitapsen_report_reason => 'Reason (optional)';
+  @override
+  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  @override
+  String get kitapsen_report_submit => 'Submit Report';
+  @override
+  String get kitapsen_report_thanks =>
+      'Reported. Thank you for helping keep the community safe.';
 }
 
 // Path: <root>
@@ -215180,6 +215368,21 @@ class _StringsTr extends _StringsEn {
   @override
   String get kitapsen_register_taken =>
       'Bu kullanıcı adı veya e-posta adresiyle zaten bir hesap var.';
+  @override
+  String get kitapsen_report => 'Bildir';
+  @override
+  String get kitapsen_reported => 'Bildirildi';
+  @override
+  String get kitapsen_report_title => 'Bu içeriği bildir';
+  @override
+  String get kitapsen_report_reason => 'Sebep (isteğe bağlı)';
+  @override
+  String get kitapsen_report_reason_hint => 'Neden uygunsuz?';
+  @override
+  String get kitapsen_report_submit => 'Bildirimi Gönder';
+  @override
+  String get kitapsen_report_thanks =>
+      'Bildirildi. Topluluğu güvenli tutmaya yardımcı olduğunuz için teşekkür ederiz.';
 }
 
 // Path: <root>
@@ -230992,6 +231195,21 @@ class _StringsVi extends _StringsEn {
   @override
   String get kitapsen_register_taken =>
       'This username or email address already has an account.';
+  @override
+  String get kitapsen_report => 'Report';
+  @override
+  String get kitapsen_reported => 'Reported';
+  @override
+  String get kitapsen_report_title => 'Report this content';
+  @override
+  String get kitapsen_report_reason => 'Reason (optional)';
+  @override
+  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  @override
+  String get kitapsen_report_submit => 'Submit Report';
+  @override
+  String get kitapsen_report_thanks =>
+      'Reported. Thank you for helping keep the community safe.';
 }
 
 // Path: <root>
@@ -245459,6 +245677,20 @@ class _StringsZhCn extends _StringsEn {
   String get kitapsen_clubs_send => '发送';
   @override
   String get kitapsen_register_taken => '该用户名或邮箱已注册账号。';
+  @override
+  String get kitapsen_report => '举报';
+  @override
+  String get kitapsen_reported => '已举报';
+  @override
+  String get kitapsen_report_title => '举报此内容';
+  @override
+  String get kitapsen_report_reason => '原因（可选）';
+  @override
+  String get kitapsen_report_reason_hint => '为什么不恰当？';
+  @override
+  String get kitapsen_report_submit => '提交举报';
+  @override
+  String get kitapsen_report_thanks => '已举报。感谢你帮助维护社区安全。';
 }
 
 // Path: <root>
@@ -260003,4 +260235,19 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get kitapsen_register_taken =>
       'This username or email address already has an account.';
+  @override
+  String get kitapsen_report => 'Report';
+  @override
+  String get kitapsen_reported => 'Reported';
+  @override
+  String get kitapsen_report_title => 'Report this content';
+  @override
+  String get kitapsen_report_reason => 'Reason (optional)';
+  @override
+  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  @override
+  String get kitapsen_report_submit => 'Submit Report';
+  @override
+  String get kitapsen_report_thanks =>
+      'Reported. Thank you for helping keep the community safe.';
 }

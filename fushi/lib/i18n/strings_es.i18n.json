@@ -6544,5 +6544,12 @@
   "kitapsen_clubs_no_messages": "No messages yet.",
   "kitapsen_clubs_message_hint": "Write a message...",
   "kitapsen_clubs_send": "Send",
-  "kitapsen_register_taken": "This username or email address already has an account."
+  "kitapsen_register_taken": "This username or email address already has an account.",
+  "kitapsen_report": "Report",
+  "kitapsen_reported": "Reported",
+  "kitapsen_report_title": "Report this content",
+  "kitapsen_report_reason": "Reason (optional)",
+  "kitapsen_report_reason_hint": "Why is this inappropriate?",
+  "kitapsen_report_submit": "Submit Report",
+  "kitapsen_report_thanks": "Reported. Thank you for helping keep the community safe."
 }

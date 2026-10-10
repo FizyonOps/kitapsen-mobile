@@ -15,6 +15,8 @@ class KitapsenCommentsPage extends StatefulWidget {
     super.key,
     required this.load,
     this.add,
+    this.report,
+    this.viewerId,
     this.subtitle,
   });
 
@@ -22,6 +24,12 @@ class KitapsenCommentsPage extends StatefulWidget {
 
   /// Null when signed out: the list is read-only.
   final Future<void> Function(String content)? add;
+
+  /// Files a comment into the moderation queue; null when signed out.
+  final Future<void> Function(int commentId, String? reason)? report;
+
+  /// The reader's own account id, to keep "Bildir" off their own comments.
+  final Future<int?>? viewerId;
   final String? subtitle;
 
   @override
@@ -32,6 +40,26 @@ class _KitapsenCommentsPageState extends State<KitapsenCommentsPage> {
   late Future<List<StoreComment>> _comments = widget.load();
   final TextEditingController _input = TextEditingController();
   bool _sending = false;
+  int? _viewerId;
+  final Set<int> _reported = <int>{};
+
+  @override
+  void initState() {
+    super.initState();
+    widget.viewerId?.then((int? id) {
+      if (mounted && id != null) setState(() => _viewerId = id);
+    });
+  }
+
+  Future<void> _report(StoreComment comment) async {
+    final Future<void> Function(int, String?)? report = widget.report;
+    if (report == null) return;
+    final bool sent = await showStoreReport(
+      context,
+      (String? reason) => report(comment.id, reason),
+    );
+    if (sent && mounted) setState(() => _reported.add(comment.id));
+  }
 
   @override
   void dispose() {
@@ -99,6 +127,19 @@ class _KitapsenCommentsPageState extends State<KitapsenCommentsPage> {
                       Text(comments[i].userName, style: tokens.type.metadata),
                       const SizedBox(height: 2),
                       Text(comments[i].content),
+                      if (widget.report != null &&
+                          (comments[i].userId == null ||
+                              comments[i].userId != _viewerId))
+                        Align(
+                          alignment: AlignmentDirectional.centerEnd,
+                          child: StoreReportButton(
+                            key: ValueKey<String>(
+                              'kitapsen-comment-report-${comments[i].id}',
+                            ),
+                            reported: _reported.contains(comments[i].id),
+                            onPressed: () => _report(comments[i]),
+                          ),
+                        ),
                     ],
                   ),
                 );

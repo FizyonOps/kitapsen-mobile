@@ -75,6 +75,11 @@ class _KitapsenBookPageState extends ConsumerState<KitapsenBookPage> {
   bool _moreReviews = false;
   bool _busy = false;
 
+  /// The reader's own account id (no "Bildir" on their own reviews) and the
+  /// reviews they reported on this page.
+  int? _viewerId;
+  final Set<int> _reportedReviews = <int>{};
+
   Future<_BookState> _fetch() async {
     final KitapsenStore store = await KitapsenStore.open(
       ref.read(appProvider).database,
@@ -102,6 +107,11 @@ class _KitapsenBookPageState extends ConsumerState<KitapsenBookPage> {
     _reviews.clear();
     _reviewPage = 0;
     unawaited(_loadReviews(store));
+    unawaited(
+      store.viewerId().then((int? id) {
+        if (mounted && id != null) setState(() => _viewerId = id);
+      }),
+    );
     return _BookState(
       store: store,
       detail: detail,
@@ -200,15 +210,30 @@ class _KitapsenBookPageState extends ConsumerState<KitapsenBookPage> {
         if (mounted) setState(() => _likes[r.id] = state);
       });
 
+  Future<void> _reportReview(KitapsenStore store, StoreReview r) async {
+    final bool sent = await showStoreReport(
+      context,
+      (String? reason) => store.reportReview(r.id, reason),
+    );
+    if (sent && mounted) setState(() => _reportedReviews.add(r.id));
+  }
+
   Future<void> _openComments({
     required Future<List<StoreComment>> Function() load,
     Future<void> Function(String)? add,
+    Future<void> Function(int commentId, String? reason)? report,
+    Future<int?>? viewerId,
     String? subtitle,
   }) => Navigator.of(context).push(
     adaptivePageRoute<void>(
       context: context,
-      builder: (_) =>
-          KitapsenCommentsPage(load: load, add: add, subtitle: subtitle),
+      builder: (_) => KitapsenCommentsPage(
+        load: load,
+        add: add,
+        report: report,
+        viewerId: viewerId,
+        subtitle: subtitle,
+      ),
     ),
   );
 
@@ -788,11 +813,24 @@ class _KitapsenBookPageState extends ConsumerState<KitapsenBookPage> {
                       add: s.store.signedIn
                           ? (String c) => s.store.addReviewComment(r.id, c)
                           : null,
+                      report: s.store.signedIn
+                          ? (int id, String? reason) =>
+                                s.store.reportReviewComment(id, reason)
+                          : null,
+                      viewerId: s.store.viewerId(),
                       subtitle: r.title ?? r.userName,
                     ),
                     icon: const Icon(Icons.chat_bubble_outline, size: 16),
                     label: Text('${r.commentCount}'),
                   ),
+                  const Spacer(),
+                  if (s.store.signedIn &&
+                      (r.userId == null || r.userId != _viewerId))
+                    StoreReportButton(
+                      key: ValueKey<String>('kitapsen-review-report-${r.id}'),
+                      reported: _reportedReviews.contains(r.id),
+                      onPressed: () => _reportReview(s.store, r),
+                    ),
                 ],
               ),
             ],

@@ -762,6 +762,94 @@ void storeActionFailed(Object e, StackTrace stack, String where) {
   );
 }
 
+/// Asks for an optional reason and files a report through [send] into the
+/// site's moderation queue (App Review 1.2: user content must be reportable).
+/// True once the report went through; a failure shows the usual toast.
+Future<bool> showStoreReport(
+  BuildContext context,
+  Future<void> Function(String? reason) send,
+) async {
+  final String? reason = await showAppDialog<String>(
+    context: context,
+    builder: (_) => const _StoreReportDialog(),
+  );
+  if (reason == null) return false;
+  try {
+    await send(reason);
+  } catch (e, stack) {
+    storeActionFailed(e, stack, 'showStoreReport');
+    return false;
+  }
+  FushiToast.show(
+    msg: t.kitapsen_report_thanks,
+    severity: ToastSeverity.success,
+  );
+  return true;
+}
+
+class _StoreReportDialog extends StatefulWidget {
+  const _StoreReportDialog();
+
+  @override
+  State<_StoreReportDialog> createState() => _StoreReportDialogState();
+}
+
+class _StoreReportDialogState extends State<_StoreReportDialog> {
+  final TextEditingController _reason = TextEditingController();
+
+  @override
+  void dispose() {
+    _reason.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => AlertDialog(
+    title: Text(t.kitapsen_report_title),
+    content: TextField(
+      key: const ValueKey<String>('kitapsen-report-reason'),
+      controller: _reason,
+      maxLength: 255,
+      minLines: 2,
+      maxLines: 4,
+      decoration: InputDecoration(
+        labelText: t.kitapsen_report_reason,
+        hintText: t.kitapsen_report_reason_hint,
+      ),
+    ),
+    actions: <Widget>[
+      TextButton(
+        onPressed: () => Navigator.pop(context),
+        child: Text(t.dialog_cancel),
+      ),
+      FilledButton(
+        key: const ValueKey<String>('kitapsen-report-submit'),
+        onPressed: () => Navigator.pop(context, _reason.text),
+        child: Text(t.kitapsen_report_submit),
+      ),
+    ],
+  );
+}
+
+/// "Bildir" under a review or comment; "Bildirildi" once sent.
+class StoreReportButton extends StatelessWidget {
+  const StoreReportButton({
+    super.key,
+    required this.reported,
+    required this.onPressed,
+  });
+
+  final bool reported;
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) => TextButton.icon(
+    onPressed: reported ? null : onPressed,
+    icon: Icon(reported ? Icons.flag : Icons.flag_outlined, size: 16),
+    label: Text(reported ? t.kitapsen_reported : t.kitapsen_report),
+  );
+}
+
 /// A row in the account hub and settings lists.
 class StoreMenuRow extends StatelessWidget {
   const StoreMenuRow({

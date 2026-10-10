@@ -6544,5 +6544,12 @@
   "kitapsen_clubs_no_messages": "还没有消息。",
   "kitapsen_clubs_message_hint": "写一条消息…",
   "kitapsen_clubs_send": "发送",
-  "kitapsen_register_taken": "该用户名或邮箱已注册账号。"
+  "kitapsen_register_taken": "该用户名或邮箱已注册账号。",
+  "kitapsen_report": "举报",
+  "kitapsen_reported": "已举报",
+  "kitapsen_report_title": "举报此内容",
+  "kitapsen_report_reason": "原因（可选）",
+  "kitapsen_report_reason_hint": "为什么不恰当？",
+  "kitapsen_report_submit": "提交举报",
+  "kitapsen_report_thanks": "已举报。感谢你帮助维护社区安全。"
 }

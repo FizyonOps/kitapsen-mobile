@@ -176,6 +176,11 @@ class _KitapsenChapterPageState extends State<KitapsenChapterPage> {
                                   c,
                                 )
                               : null,
+                          report: widget.store.signedIn
+                              ? (int id, String? reason) => widget.store
+                                    .reportChapterComment(id, reason)
+                              : null,
+                          viewerId: widget.store.viewerId(),
                         ),
                       ),
                     ),

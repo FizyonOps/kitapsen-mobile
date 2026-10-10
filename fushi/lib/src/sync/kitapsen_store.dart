@@ -171,6 +171,7 @@ class StoreReview {
     this.verified = false,
     this.likeCount = 0,
     this.commentCount = 0,
+    this.userId,
   });
 
   final int id;
@@ -182,6 +183,9 @@ class StoreReview {
   final bool verified;
   final int likeCount;
   final int commentCount;
+
+  /// The reviewer's account id, to keep "Bildir" off the reader's own review.
+  final int? userId;
 }
 
 /// A comment under a review or a chapter.
@@ -191,12 +195,14 @@ class StoreComment {
     required this.userName,
     required this.content,
     this.createdAt,
+    this.userId,
   });
 
   final int id;
   final String userName;
   final String content;
   final DateTime? createdAt;
+  final int? userId;
 
   static StoreComment? fromJson(Map<String, dynamic> json) {
     final int? id = _int(json['id']);
@@ -207,6 +213,7 @@ class StoreComment {
       userName: _text(json['user_name']) ?? _text(json['username']) ?? '—',
       content: content,
       createdAt: DateTime.tryParse('${json['created_at']}'),
+      userId: _int(json['user_id']),
     );
   }
 }
@@ -356,6 +363,25 @@ class KitapsenStore {
     final KitapsenClient? c = client;
     if (c == null) throw SyncBackendError('Not signed in to Kitapsen');
     return c;
+  }
+
+  Future<int?>? _viewerId;
+
+  /// The signed-in account's id (`/users/me`, fetched once per store), so
+  /// "Bildir" stays off the reader's own reviews and comments. Null when
+  /// signed out; a failed lookup is retried on the next call.
+  Future<int?> viewerId() {
+    final KitapsenClient? c = client;
+    if (c == null) return Future<int?>.value();
+    return _viewerId ??= c
+        .requestJson('GET', '/users/me')
+        .then(
+          (Object? d) => d is Map<String, dynamic> ? _int(d['id']) : null,
+          onError: (Object _) {
+            _viewerId = null;
+            return null;
+          },
+        );
   }
 
   /// GET for the store's other API files (`kitapsen_community.dart`):
@@ -743,6 +769,7 @@ class KitapsenStore {
               verified: r['is_verified_purchase'] == true,
               likeCount: _int(r['like_count']) ?? 0,
               commentCount: _int(r['comment_count']) ?? 0,
+              userId: _int(r['user_id']),
             ),
       ],
       hasMore: decoded['has_more'] == true,
@@ -801,6 +828,40 @@ class KitapsenStore {
         '/reviews/$reviewId/comments',
         jsonBody: <String, String>{'content': content.trim()},
       );
+
+  // ── Reports (moderation queue) ────────────────────────────────────
+
+  Future<void> reportReview(int reviewId, String? reason) =>
+      _signedIn.requestJson(
+        'POST',
+        '/reviews/$reviewId/report',
+        jsonBody: <String, String?>{'reason': _reason(reason)},
+      );
+
+  Future<void> reportReviewComment(int commentId, String? reason) =>
+      _signedIn.requestJson(
+        'POST',
+        '/reviews/comments/$commentId/report',
+        jsonBody: <String, String?>{'reason': _reason(reason)},
+      );
+
+  Future<void> reportChapterComment(int commentId, String? reason) =>
+      _signedIn.requestJson(
+        'POST',
+        '/books/stories/report',
+        jsonBody: <String, Object?>{
+          'kind': 'comment',
+          'target_id': commentId,
+          'reason': _reason(reason),
+        },
+      );
+
+  /// The servers cap the reason at 255 (stories) and 500 (reviews) chars.
+  static String? _reason(String? reason) {
+    final String r = (reason ?? '').trim();
+    if (r.isEmpty) return null;
+    return r.length > 255 ? r.substring(0, 255) : r;
+  }
 
   // ── Authors ───────────────────────────────────────────────────────
 

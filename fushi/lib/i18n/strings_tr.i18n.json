@@ -6544,5 +6544,12 @@
   "kitapsen_clubs_no_messages": "Henüz mesaj yok.",
   "kitapsen_clubs_message_hint": "Bir mesaj yazın...",
   "kitapsen_clubs_send": "Gönder",
-  "kitapsen_register_taken": "Bu kullanıcı adı veya e-posta adresiyle zaten bir hesap var."
+  "kitapsen_register_taken": "Bu kullanıcı adı veya e-posta adresiyle zaten bir hesap var.",
+  "kitapsen_report": "Bildir",
+  "kitapsen_reported": "Bildirildi",
+  "kitapsen_report_title": "Bu içeriği bildir",
+  "kitapsen_report_reason": "Sebep (isteğe bağlı)",
+  "kitapsen_report_reason_hint": "Neden uygunsuz?",
+  "kitapsen_report_submit": "Bildirimi Gönder",
+  "kitapsen_report_thanks": "Bildirildi. Topluluğu güvenli tutmaya yardımcı olduğunuz için teşekkür ederiz."
 }
