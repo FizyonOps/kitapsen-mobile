@@ -31,6 +31,7 @@ class KitapsenBookListPage extends ConsumerStatefulWidget {
     this.categorySlug,
     this.authorUserId,
     this.authorName,
+    this.publisherId,
     this.freeOnly = false,
     this.serializedOnly = false,
     this.initialSort,
@@ -43,6 +44,7 @@ class KitapsenBookListPage extends ConsumerStatefulWidget {
 
   /// Exact credited author name (books whose author has no account).
   final String? authorName;
+  final int? publisherId;
   final bool freeOnly;
   final bool serializedOnly;
   final StoreSort? initialSort;
@@ -105,6 +107,7 @@ class _KitapsenBookListPageState extends ConsumerState<KitapsenBookListPage> {
         categorySlug: widget.categorySlug,
         authorUserId: widget.authorUserId,
         authorName: widget.authorName,
+        publisherId: widget.publisherId,
         freeOnly: _freeOnly,
         serializedOnly: widget.serializedOnly,
         sort: _sort,

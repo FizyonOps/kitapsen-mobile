@@ -19,6 +19,8 @@ import 'package:fushi/src/pages/implementations/home_page.dart'
     show homeShellTabNotifier;
 import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_author_page.dart';
 import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_book_list_page.dart';
+import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_collections_pages.dart';
+import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_directory_pages.dart';
 import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_chapter_page.dart';
 import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_comments_page.dart';
 import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_store_widgets.dart';
@@ -549,6 +551,19 @@ class _KitapsenBookPageState extends ConsumerState<KitapsenBookPage> {
                 icon: const Icon(Icons.library_add_outlined, size: 18),
                 label: Text(t.kitapsen_book_get_free_web),
               ),
+            OutlinedButton.icon(
+              key: const ValueKey<String>('kitapsen-book-collection'),
+              style: outlineStyle,
+              onPressed: _busy
+                  ? null
+                  : () => showAddToCollectionSheet(
+                      context,
+                      s.store,
+                      widget.bookId,
+                    ),
+              icon: const Icon(Icons.playlist_add, size: 18),
+              label: Text(t.kitapsen_collections_add),
+            ),
             if (!s.owned)
               OutlinedButton.icon(
                 key: const ValueKey<String>('kitapsen-book-wishlist'),
@@ -587,6 +602,7 @@ class _KitapsenBookPageState extends ConsumerState<KitapsenBookPage> {
   Widget _facts(BuildContext context, StoreBookDetail d) {
     final StoreColors c = StoreColors.of(context);
     final List<(String, String)> rows = <(String, String)>[
+      // The publisher row links to the publisher's page, built below.
       if (d.publisherName != null)
         (t.kitapsen_book_publisher, d.publisherName!),
       if (d.language != null) (t.kitapsen_book_language, d.language!),
@@ -603,20 +619,36 @@ class _KitapsenBookPageState extends ConsumerState<KitapsenBookPage> {
         for (final (String label, String value) in rows)
           Padding(
             padding: const EdgeInsets.only(bottom: 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(label, style: TextStyle(color: c.muted, fontSize: 14)),
-                const SizedBox(height: 2),
-                Text(
-                  value,
-                  style: TextStyle(
-                    color: c.ink,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
+            child: InkWell(
+              onTap:
+                  label == t.kitapsen_book_publisher && d.publisherSlug != null
+                  ? () => Navigator.of(context).push(
+                      adaptivePageRoute<void>(
+                        context: context,
+                        builder: (_) =>
+                            KitapsenPublisherPage(slug: d.publisherSlug!),
+                      ),
+                    )
+                  : null,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(label, style: TextStyle(color: c.muted, fontSize: 14)),
+                  const SizedBox(height: 2),
+                  Text(
+                    value,
+                    style: TextStyle(
+                      color:
+                          label == t.kitapsen_book_publisher &&
+                              d.publisherSlug != null
+                          ? c.accent
+                          : c.ink,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
       ],

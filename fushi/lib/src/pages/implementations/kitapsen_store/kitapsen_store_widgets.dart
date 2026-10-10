@@ -591,3 +591,264 @@ class StoreRating extends StatelessWidget {
     );
   }
 }
+
+/// The usual spinner / error-with-retry / empty states around a store
+/// future's result.
+Widget storeAsync<T>(
+  AsyncSnapshot<T> snapshot, {
+  required VoidCallback onRetry,
+  required Widget Function(T data) builder,
+  bool Function(T data)? isEmpty,
+  IconData emptyIcon = Icons.inbox_outlined,
+  String? emptyMessage,
+}) {
+  if (snapshot.hasError) return StoreLoadError(onRetry: onRetry);
+  if (!snapshot.hasData) {
+    return const Center(child: CircularProgressIndicator());
+  }
+  final T data = snapshot.data as T;
+  if (isEmpty != null && isEmpty(data)) {
+    return Center(
+      child: FushiPlaceholderMessage(
+        icon: emptyIcon,
+        message: emptyMessage ?? t.kitapsen_store_no_results,
+      ),
+    );
+  }
+  return builder(data);
+}
+
+/// One-field (or one field plus an optional second) text dialog; null when
+/// cancelled or left empty.
+Future<({String text, String? extra})?> showStoreTextDialog(
+  BuildContext context, {
+  required String title,
+  required String label,
+  String initial = '',
+  String? extraLabel,
+  String initialExtra = '',
+  bool multiline = false,
+}) => showAppDialog<({String text, String? extra})>(
+  context: context,
+  builder: (_) => _StoreTextDialog(
+    title: title,
+    label: label,
+    initial: initial,
+    extraLabel: extraLabel,
+    initialExtra: initialExtra,
+    multiline: multiline,
+  ),
+);
+
+class _StoreTextDialog extends StatefulWidget {
+  const _StoreTextDialog({
+    required this.title,
+    required this.label,
+    required this.initial,
+    required this.extraLabel,
+    required this.initialExtra,
+    required this.multiline,
+  });
+
+  final String title;
+  final String label;
+  final String initial;
+  final String? extraLabel;
+  final String initialExtra;
+  final bool multiline;
+
+  @override
+  State<_StoreTextDialog> createState() => _StoreTextDialogState();
+}
+
+class _StoreTextDialogState extends State<_StoreTextDialog> {
+  late final TextEditingController _text = TextEditingController(
+    text: widget.initial,
+  );
+  late final TextEditingController _extra = TextEditingController(
+    text: widget.initialExtra,
+  );
+
+  @override
+  void dispose() {
+    _text.dispose();
+    _extra.dispose();
+    super.dispose();
+  }
+
+  void _submit() {
+    final String text = _text.text.trim();
+    if (text.isEmpty) return;
+    Navigator.pop(context, (
+      text: text,
+      extra: widget.extraLabel == null ? null : _extra.text.trim(),
+    ));
+  }
+
+  @override
+  Widget build(BuildContext context) => AlertDialog(
+    title: Text(widget.title),
+    content: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        TextField(
+          controller: _text,
+          autofocus: true,
+          minLines: widget.multiline ? 3 : 1,
+          maxLines: widget.multiline ? 8 : 1,
+          decoration: InputDecoration(labelText: widget.label),
+          onSubmitted: widget.multiline ? null : (_) => _submit(),
+        ),
+        if (widget.extraLabel != null) ...<Widget>[
+          const SizedBox(height: 8),
+          TextField(
+            controller: _extra,
+            minLines: 2,
+            maxLines: 5,
+            decoration: InputDecoration(labelText: widget.extraLabel),
+          ),
+        ],
+      ],
+    ),
+    actions: <Widget>[
+      TextButton(
+        onPressed: () => Navigator.pop(context),
+        child: Text(t.dialog_cancel),
+      ),
+      FilledButton(onPressed: _submit, child: Text(t.kitapsen_common_save)),
+    ],
+  );
+}
+
+/// Yes / no question; true only when confirmed.
+Future<bool> showStoreConfirm(
+  BuildContext context,
+  String message, {
+  required String action,
+  bool destructive = false,
+}) async =>
+    await showAppDialog<bool>(
+      context: context,
+      builder: (BuildContext dialogContext) => AlertDialog(
+        content: Text(message),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: Text(t.dialog_cancel),
+          ),
+          FilledButton(
+            style: destructive
+                ? FilledButton.styleFrom(
+                    backgroundColor: Theme.of(dialogContext).colorScheme.error,
+                    foregroundColor: Theme.of(
+                      dialogContext,
+                    ).colorScheme.onError,
+                  )
+                : null,
+            onPressed: () => Navigator.pop(dialogContext, true),
+            child: Text(action),
+          ),
+        ],
+      ),
+    ) ==
+    true;
+
+/// A failed store write, as a toast.
+void storeActionFailed(Object e, StackTrace stack, String where) {
+  ErrorLogService.instance.log(where, e, stack);
+  FushiToast.show(
+    msg: t.kitapsen_book_action_failed,
+    severity: ToastSeverity.error,
+  );
+}
+
+/// A row in the account hub and settings lists.
+class StoreMenuRow extends StatelessWidget {
+  const StoreMenuRow({
+    super.key,
+    required this.icon,
+    required this.title,
+    required this.onTap,
+    this.subtitle,
+  });
+
+  final IconData icon;
+  final String title;
+  final String? subtitle;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final StoreColors c = StoreColors.of(context);
+    return ListTile(
+      leading: Icon(icon, color: c.ink),
+      title: Text(
+        title,
+        style: TextStyle(color: c.ink, fontWeight: FontWeight.w500),
+      ),
+      subtitle: subtitle == null
+          ? null
+          : Text(subtitle!, style: TextStyle(color: c.muted)),
+      trailing: Icon(Icons.chevron_right, color: c.muted),
+      onTap: onTap,
+    );
+  }
+}
+
+/// Section label of the website's menus and settings ("Okuma", "Sosyal").
+class StoreSectionLabel extends StatelessWidget {
+  const StoreSectionLabel(this.text, {super.key});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    final FushiDesignTokens tokens = FushiDesignTokens.of(context);
+    return Padding(
+      padding: EdgeInsets.fromLTRB(
+        tokens.spacing.page,
+        tokens.spacing.section,
+        tokens.spacing.page,
+        4,
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          color: StoreColors.of(context).muted,
+          fontSize: 13,
+          fontWeight: FontWeight.w600,
+          letterSpacing: 0.4,
+        ),
+      ),
+    );
+  }
+}
+
+/// "2 gün önce"-style relative time is the website's; the app shows the
+/// date (and the time for today).
+String storeDate(DateTime? d, {bool dateOnly = false}) {
+  if (d == null) return '';
+  final DateTime l = d.toLocal();
+  final DateTime now = DateTime.now();
+  String two(int v) => v.toString().padLeft(2, '0');
+  if (!dateOnly &&
+      l.year == now.year &&
+      l.month == now.month &&
+      l.day == now.day) {
+    return '${two(l.hour)}:${two(l.minute)}';
+  }
+  return '${two(l.day)}.${two(l.month)}.${l.year}';
+}
+
+/// A small labelled chip ("Tamamlandı", "Sahip"), the card corner badge's
+/// look on its own.
+class StoreBadgeChip extends StatelessWidget {
+  const StoreBadgeChip({super.key, required this.label, required this.color});
+
+  final String label;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) =>
+      _BadgeChip(tag: StoreBadge(label, color));
+}

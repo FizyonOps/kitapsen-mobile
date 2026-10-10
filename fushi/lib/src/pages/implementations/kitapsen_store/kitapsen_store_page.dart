@@ -13,8 +13,10 @@ import 'package:fushi/src/models/app_model.dart';
 import 'package:fushi/src/models/home_tab.dart';
 import 'package:fushi/src/pages/implementations/home_page.dart'
     show homeShellTabNotifier;
+import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_account_hub_page.dart';
+import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_blog_pages.dart';
 import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_book_list_page.dart';
-import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_following_page.dart';
+import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_directory_pages.dart';
 import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_notifications_page.dart';
 import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_store_widgets.dart';
 import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_wishlist_page.dart';
@@ -230,10 +232,10 @@ class _KitapsenStorePageState extends ConsumerState<KitapsenStorePage> {
               const Spacer(),
               if (signedIn) ...<Widget>[
                 IconButton(
-                  key: const ValueKey<String>('kitapsen-store-following'),
-                  tooltip: t.kitapsen_following_title,
-                  icon: Icon(Icons.people_outline, color: c.ink),
-                  onPressed: () => _push(const KitapsenFollowingPage()),
+                  key: const ValueKey<String>('kitapsen-store-account'),
+                  tooltip: t.kitapsen_hub_title,
+                  icon: Icon(Icons.account_circle_outlined, color: c.ink),
+                  onPressed: () => _push(const KitapsenAccountHubPage()),
                 ),
                 IconButton(
                   key: const ValueKey<String>('kitapsen-store-wishlist'),
@@ -348,8 +350,8 @@ class _KitapsenStorePageState extends ConsumerState<KitapsenStorePage> {
         icon: Icons.people_outline,
         title: t.kitapsen_store_meet_authors,
         body: t.kitapsen_store_meet_authors_body,
-        onTap: () =>
-            store.signedIn ? _push(const KitapsenFollowingPage()) : _signIn(),
+        // The website's row goes to /authors.
+        onTap: () => _push(const KitapsenAuthorsPage()),
       ),
       Padding(
         padding: EdgeInsets.symmetric(horizontal: tokens.spacing.page),
@@ -393,6 +395,26 @@ class _KitapsenStorePageState extends ConsumerState<KitapsenStorePage> {
           sort: StoreSort.newest,
         ),
       ),
+      Padding(
+        padding: EdgeInsets.symmetric(horizontal: tokens.spacing.page),
+        child: StoreSectionHeader(title: t.kitapsen_hub_discover),
+      ),
+      const SizedBox(height: 4),
+      _featureRow(
+        context,
+        icon: Icons.domain_outlined,
+        title: t.kitapsen_publishers_title,
+        body: t.kitapsen_publishers_body,
+        onTap: () => _push(const KitapsenPublishersPage()),
+      ),
+      _featureRow(
+        context,
+        icon: Icons.article_outlined,
+        title: t.kitapsen_blog_title,
+        body: t.kitapsen_blog_subtitle,
+        onTap: () => _push(const KitapsenBlogPage()),
+      ),
+      SizedBox(height: tokens.spacing.section * 1.5),
       if (home.categories.isNotEmpty) ...<Widget>[
         Padding(
           padding: EdgeInsets.symmetric(horizontal: tokens.spacing.page),

@@ -123,6 +123,7 @@ class StoreBookDetail {
     this.description,
     this.authorUsername,
     this.publisherName,
+    this.publisherSlug,
     this.language,
     this.pageCount,
     this.publishingDate,
@@ -148,6 +149,9 @@ class StoreBookDetail {
   /// account is not "the author" in general — same rule as the website).
   final String? authorUsername;
   final String? publisherName;
+
+  /// The publisher's page (`/publishers/slug/{slug}`).
+  final String? publisherSlug;
   final String? language;
   final int? pageCount;
   final String? publishingDate;
@@ -354,6 +358,22 @@ class KitapsenStore {
     return c;
   }
 
+  /// GET for the store's other API files (`kitapsen_community.dart`):
+  /// signed in when someone is, anonymous otherwise.
+  Future<Object?> getJson(String path, {Map<String, String>? query}) =>
+      _get(path, query: query);
+
+  /// Signed-in request for the store's other API files; throws when nobody
+  /// is signed in.
+  Future<Object?> send(
+    String method,
+    String path, {
+    Map<String, String>? query,
+    Object? jsonBody,
+  }) => _signedIn.requestJson(method, path, query: query, jsonBody: jsonBody);
+
+  List<StoreBook> booksFrom(Object? list) => _books(list);
+
   List<StoreBook> _books(Object? list) => <StoreBook>[
     if (list is List<dynamic>)
       for (final dynamic item in list)
@@ -392,6 +412,7 @@ class KitapsenStore {
     String? categorySlug,
     int? authorUserId,
     String? authorName,
+    int? publisherId,
     bool freeOnly = false,
     bool serializedOnly = false,
     StoreSort sort = StoreSort.relevance,
@@ -405,6 +426,7 @@ class KitapsenStore {
         if (categorySlug != null) 'category': categorySlug,
         if (authorUserId != null) 'author_ids': '$authorUserId',
         if (authorName != null) 'author_name': authorName,
+        if (publisherId != null) 'publisher_ids': '$publisherId',
         if (freeOnly) 'is_free': 'true',
         if (serializedOnly) 'is_serialized': 'true',
         'sort': switch (sort) {
@@ -511,6 +533,9 @@ class KitapsenStore {
       publisherName: publisher is Map<String, dynamic>
           ? _text(publisher['name'])
           : _text(decoded['publisher_name']),
+      publisherSlug: publisher is Map<String, dynamic>
+          ? _text(publisher['slug'])
+          : null,
       language: _text(decoded['language']),
       pageCount: _int(decoded['page_count']),
       publishingDate: _text(decoded['publishing_date']),

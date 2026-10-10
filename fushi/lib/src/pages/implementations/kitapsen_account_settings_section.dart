@@ -1,7 +1,9 @@
 /// 设置 › 在线服务 › Kitapsen：书店账号的登录 / 退出。登录后书架远端区列出该账号
 /// 已购的书（[KitapsenClient]），阅读进度与 kitapsen.com 双向同步。
-/// Sign-in is by password, Google, or Apple (iOS only); a signed-in account
-/// can also be deleted here (App Store 5.1.1(v): the app creates accounts).
+/// Sign-in is by password, Google, or Apple (iOS only); a new account can be
+/// created with an email address, as on the website's sign-up form, and a
+/// signed-in account can be deleted here (App Store 5.1.1(v): the app creates
+/// accounts).
 library;
 
 import 'dart:io' show Platform;
@@ -21,7 +23,8 @@ import 'package:fushi/src/pages/implementations/source_toggle_section.dart';
 import 'package:fushi/src/sync/kitapsen_client.dart';
 import 'package:fushi/src/sync/remote_library_cache.dart';
 import 'package:fushi/src/sync/remote_library_source.dart';
-import 'package:fushi/src/sync/sync_backend.dart' show SyncAuthError;
+import 'package:fushi/src/sync/sync_backend.dart'
+    show SyncAuthError, SyncBackendError;
 import 'package:fushi/src/sync/sync_repository.dart';
 import 'package:fushi/utils.dart';
 
@@ -40,6 +43,13 @@ class _KitapsenAccountSettingsSectionState
   );
   final TextEditingController _username = TextEditingController();
   final TextEditingController _password = TextEditingController();
+  final TextEditingController _regName = TextEditingController();
+  final TextEditingController _regUsername = TextEditingController();
+  final TextEditingController _regEmail = TextEditingController();
+  final TextEditingController _regPassword = TextEditingController();
+
+  /// The sign-up form is showing instead of the sign-in form.
+  bool _registering = false;
 
   /// null = 还没读出存储的账号；空串 = 未登录。
   String? _signedInAs;
@@ -61,6 +71,10 @@ class _KitapsenAccountSettingsSectionState
     _url.dispose();
     _username.dispose();
     _password.dispose();
+    _regName.dispose();
+    _regUsername.dispose();
+    _regEmail.dispose();
+    _regPassword.dispose();
     super.dispose();
   }
 
@@ -102,6 +116,75 @@ class _KitapsenAccountSettingsSectionState
     } catch (e, stack) {
       ErrorLogService.instance.log('KitapsenAccountSettings.signIn', e, stack);
       if (mounted) setState(() => _error = t.kitapsen_account_sign_in_failed);
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  /// Creates the account with the website's rules (username: 2–20 lowercase
+  /// letters or digits; name: 2–30 characters, the username when left empty;
+  /// password: 8+ characters), then signs in with it.
+  Future<void> _register() async {
+    final String username = _regUsername.text.trim().toLowerCase();
+    final String email = _regEmail.text.trim();
+    final String name = _regName.text.trim().isEmpty
+        ? username
+        : _regName.text.trim();
+    final String password = _regPassword.text;
+    final String? invalid = !RegExp(r'^[a-z0-9]{2,20}$').hasMatch(username)
+        ? t.kitapsen_register_username_invalid
+        : name.length < 2 || name.length > 30
+        ? t.kitapsen_register_name_invalid
+        : !RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$').hasMatch(email)
+        ? t.kitapsen_register_email_invalid
+        : password.length < 8
+        ? t.kitapsen_register_password_short
+        : null;
+    if (invalid != null) {
+      setState(() => _error = invalid);
+      return;
+    }
+    setState(() {
+      _busy = true;
+      _error = null;
+      _providerError = null;
+    });
+    try {
+      await KitapsenClient.register(
+        _serverUrl,
+        name: name,
+        username: username,
+        email: email,
+        password: password,
+      );
+      await _signInAs(
+        KitapsenAccount(
+          url: _serverUrl,
+          username: username,
+          password: password,
+        ),
+      );
+      _regPassword.clear();
+      if (mounted) setState(() => _registering = false);
+    } on SyncBackendError catch (e) {
+      // The server answers a taken username or email alike (422 "This
+      // resource already exists."), so the message names both, as the
+      // website's does.
+      final String message = e.message;
+      if (mounted) {
+        setState(
+          () => _error = message.contains('already exists')
+              ? t.kitapsen_register_taken
+              : t.kitapsen_register_failed,
+        );
+      }
+    } catch (e, stack) {
+      ErrorLogService.instance.log(
+        'KitapsenAccountSettings.register',
+        e,
+        stack,
+      );
+      if (mounted) setState(() => _error = t.kitapsen_register_failed);
     } finally {
       if (mounted) setState(() => _busy = false);
     }
@@ -302,6 +385,8 @@ class _KitapsenAccountSettingsSectionState
             const SizedBox.shrink()
           else if (signedInAs.isNotEmpty)
             _signedIn(signedInAs)
+          else if (_registering)
+            _registerForm()
           else
             _signInForm(),
         ],
@@ -460,6 +545,105 @@ class _KitapsenAccountSettingsSectionState
                 style: TextStyle(color: Theme.of(context).colorScheme.error),
               ),
             ],
+            const SizedBox(height: 8),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton(
+                key: const ValueKey<String>('kitapsen-register-open'),
+                onPressed: _busy
+                    ? null
+                    : () => setState(() {
+                        _registering = true;
+                        _error = null;
+                        _providerError = null;
+                      }),
+                child: Text(t.kitapsen_register_open),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// The website's sign-up form: username, email, optional name, password.
+  Widget _registerForm() {
+    return FushiCard(
+      padding: const EdgeInsets.all(12),
+      child: AutofillGroup(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            TextField(
+              key: const ValueKey<String>('kitapsen-register-username'),
+              controller: _regUsername,
+              autocorrect: false,
+              autofillHints: const <String>[AutofillHints.newUsername],
+              decoration: InputDecoration(
+                labelText: t.kitapsen_register_username,
+                helperText: t.kitapsen_register_username_hint,
+              ),
+            ),
+            const SizedBox(height: 8),
+            TextField(
+              key: const ValueKey<String>('kitapsen-register-email'),
+              controller: _regEmail,
+              keyboardType: TextInputType.emailAddress,
+              autocorrect: false,
+              autofillHints: const <String>[AutofillHints.email],
+              decoration: InputDecoration(labelText: t.kitapsen_register_email),
+            ),
+            const SizedBox(height: 8),
+            TextField(
+              key: const ValueKey<String>('kitapsen-register-name'),
+              controller: _regName,
+              textCapitalization: TextCapitalization.words,
+              autofillHints: const <String>[AutofillHints.name],
+              decoration: InputDecoration(labelText: t.kitapsen_register_name),
+            ),
+            const SizedBox(height: 8),
+            TextField(
+              key: const ValueKey<String>('kitapsen-register-password'),
+              controller: _regPassword,
+              obscureText: true,
+              autofillHints: const <String>[AutofillHints.newPassword],
+              onSubmitted: _busy ? null : (_) => _register(),
+              decoration: InputDecoration(
+                labelText: t.kitapsen_account_password,
+                helperText: t.kitapsen_register_password_hint,
+                errorText: _error,
+                errorMaxLines: 3,
+              ),
+            ),
+            const SizedBox(height: 12),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: FilledButton.icon(
+                key: const ValueKey<String>('kitapsen-register-submit'),
+                onPressed: _busy ? null : _register,
+                icon: _busy
+                    ? const SizedBox.square(
+                        dimension: 16,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : const Icon(Icons.person_add_alt_1_outlined),
+                label: Text(t.kitapsen_register_submit),
+              ),
+            ),
+            const SizedBox(height: 8),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton(
+                key: const ValueKey<String>('kitapsen-register-close'),
+                onPressed: _busy
+                    ? null
+                    : () => setState(() {
+                        _registering = false;
+                        _error = null;
+                      }),
+                child: Text(t.kitapsen_register_have_account),
+              ),
+            ),
           ],
         ),
       ),

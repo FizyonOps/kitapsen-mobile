@@ -363,6 +363,29 @@ class KitapsenClient implements RemoteBookClient, RemoteCoverFetcher {
     );
   }
 
+  /// Creates a kitapsen.com account the way the website's sign-up form does
+  /// (`POST /users/`); the caller then signs in with [username] and
+  /// [password]. A taken username or email answers 422 "This resource
+  /// already exists." (the server does not say which).
+  static Future<void> register(
+    String url, {
+    required String name,
+    required String username,
+    required String email,
+    required String password,
+  }) async {
+    await _postJson(
+      KitapsenAccount(url: url, username: '').apiBase,
+      '/users/',
+      <String, String>{
+        'name': name,
+        'username': username,
+        'email': email,
+        'password': password,
+      },
+    );
+  }
+
   static KitapsenAccount _accountFromSignIn(String url, Object? body) {
     if (body is! Map<String, dynamic> || body['token'] is! String) {
       throw SyncBackendError('Kitapsen sign-in returned no token');
