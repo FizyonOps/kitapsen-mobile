@@ -347,7 +347,9 @@ class KitapsenClient implements RemoteBookClient, RemoteCoverFetcher {
       throw SyncAuthError('Apple returned no identity token');
     }
     // Apple shares the name only on the first authorization, and only with
-    // the app, so it travels next to the token.
+    // the app, so it travels next to the token. The one-time authorization
+    // code lets the server keep Apple's refresh token, which it revokes when
+    // the account is deleted (App Review 5.1.1(v)).
     return _accountFromSignIn(
       url,
       await _postJson(
@@ -355,6 +357,7 @@ class KitapsenClient implements RemoteBookClient, RemoteCoverFetcher {
         '/auth/mobile/apple',
         <String, String>{
           'identity_token': identityToken,
+          'authorization_code': credential.authorizationCode,
           if (credential.givenName != null) 'given_name': credential.givenName!,
           if (credential.familyName != null)
             'family_name': credential.familyName!,
