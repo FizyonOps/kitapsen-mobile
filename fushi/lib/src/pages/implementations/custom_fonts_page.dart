@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fushi/media.dart';
@@ -475,7 +476,7 @@ Future<void> persistCustomFontState({
   // 平台门在**取单例之前**：GalHookTextOverlayController.instance 会把整套 galgame
   // 单例图（含 GalIngameLookupController 与它挂上去、永不释放的监听器）建起来。
   // 非 Windows 用户只是存了一次字体，不该因此拉起一整个 Windows 专属子系统。
-  if (GalHookTextOverlayController.isSupported) {
+  if (!kKitapsenEdition && GalHookTextOverlayController.isSupported) {
     await GalHookTextOverlayController.instance.applyFontFromSettings();
   }
   ReaderFushiSource.onSettingsChangedLive?.call();

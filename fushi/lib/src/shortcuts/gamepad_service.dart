@@ -51,6 +51,8 @@ bool tryGlobalExternalLookupGamepadButton(
   FushiShortcutRegistry? registry,
   GamepadButton button,
 ) {
+  // Kitapsen: no app-external lookup.
+  if (kKitapsenEdition) return false;
   if (registry?.resolveGamepad(button, scope: ShortcutScope.globalExternal) !=
       ShortcutAction.globalExternalLookup) {
     return false;

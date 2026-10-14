@@ -656,7 +656,8 @@ void main([List<String> args = const <String>[]]) {
 
     // TODO-617: start the global lookup overlay trigger on desktop (Windows MVP).
     // After the first frame so the Flutter view / WebView2 host is attached.
-    if (isDesktopPlatform) {
+    // Kitapsen: no global lookup or galgame overlay.
+    if (!kKitapsenEdition && isDesktopPlatform) {
       unawaited(Future(() async {
         try {
           await WidgetsBinding.instance.endOfFrame;
@@ -674,7 +675,8 @@ void main([List<String> args = const <String>[]]) {
           // shortcut_settings_page）；模块门在 followLookupModule 里判，会话
           // 中途打开模块时它沿同一条 start() 补起。
           await GlobalLookupController.instance.followLookupModule(appModel);
-          if (modules.isEnabled(ModuleId.games) &&
+          if (!kKitapsenEdition &&
+              modules.isEnabled(ModuleId.games) &&
               GalHookTextOverlayController.isSupported) {
             await GalHookTextOverlayController.instance
                 .start(appModel: appModel);
