@@ -6551,5 +6551,19 @@
   "kitapsen_report_reason": "Reason (optional)",
   "kitapsen_report_reason_hint": "Why is this inappropriate?",
   "kitapsen_report_submit": "Submit Report",
-  "kitapsen_report_thanks": "Reported. Thank you for helping keep the community safe."
+  "kitapsen_report_thanks": "Reported. Thank you for helping keep the community safe.",
+  "kitapsen_delete_statistics_book_desc": "這本書的閱讀時間與已讀字數將從所有裝置的統計中移除",
+  "kitapsen_stat_clear_all_reading_message": "清除全部閱讀時間與字數？你的螢光標記與筆記會保留。此操作無法復原。",
+  "kitapsen_stat_clear_all_overview_message": "清除全部閱讀統計？閱讀時間與字數會被清除。你的螢光標記、筆記與活動時間線會保留。此操作無法復原。",
+  "kitapsen_stat_delete_message": "刪除此項目的閱讀時間與字數統計？你的螢光標記與筆記不受影響。",
+  "kitapsen_stat_sessions_clear_all_message": "清除全部 $n 筆閱讀記錄？其時間、字數與頁數會被清除。你的螢光標記與筆記會保留。此操作無法復原。",
+  "kitapsen_stat_session_delete_message": "刪除這次閱讀的時間、字數與頁數？你的螢光標記與筆記不受影響。",
+  "kitapsen_loading_slow_message_mobile": "啟動比平時慢——Kitapsen 可能正在載入較大的書庫。請稍候，或點「重試」重新載入。你的資料是安全的，不會遺失。",
+  "kitapsen_settings_content_language_description": "未聲明語言的書所用的後備語言。個別書本的設定優先。",
+  "kitapsen_theme_role_reader_text_desc": "閱讀器內文與工具列圖示",
+  "kitapsen_theme_role_reader_background_desc": "閱讀器頁面與工具列背景",
+  "kitapsen_theme_role_selection_desc": "選取文字的背景",
+  "kitapsen_reading_stats_idle_timeout_hint": "超過這麼多分鐘沒有翻頁或捲動時，停止計算閱讀時間。",
+  "kitapsen_source_description_epub": "EPUB 與 PDF 閱讀",
+  "kitapsen_stat_range_calendar": "閱讀日曆"
 }

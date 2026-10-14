@@ -1539,6 +1539,7 @@ class _CollectionsPageState extends BasePageState<CollectionsPage> {
               label: Text(t.collection_mine_card),
               onPressed: () {
                 Navigator.pop(ctx);
+                if (kKitapsenEdition) return;
                 showFavoriteBatchMining(context, <FavoriteMiningItem>[
                   miningItem,
                 ]);
@@ -1768,11 +1769,14 @@ class _CollectionsPageState extends BasePageState<CollectionsPage> {
 
   /// 「制卡」模块关掉时批量 / 单条制卡入口整颗不出现（与弹窗 + 按钮同一判据）。
   bool get _cardCreationEnabled =>
+      !kKitapsenEdition &&
       appModel.moduleVisibility.isEnabled(ModuleId.cardCreation);
 
   /// 收藏行 → 批量制卡输入。收藏词以词条本身制卡、原句作例句；收藏句只有记着查词
   /// 对象（顶栏 ★ 收藏）时才有词可制；制卡句本来就是制过的卡，不再进。
   FavoriteMiningItem? _miningItemOf(_CollectionItem item) {
+    // Kitapsen: no card creation.
+    if (kKitapsenEdition) return null;
     switch (item.type) {
       case _CollectionType.word:
         final String expression = item.text ?? '';
@@ -1815,6 +1819,7 @@ class _CollectionsPageState extends BasePageState<CollectionsPage> {
   /// 批量制卡：勾选要制卡的收藏（默认全选当前筛选下全部可制卡条目），逐条串行
   /// 写进 Anki。视频 / 有声书来源自动带该句音频（与截图）。
   Future<void> _openBatchMineSheet() async {
+    if (kKitapsenEdition) return;
     final List<_CollectionItem> candidates = _mineableItems;
     if (candidates.isEmpty) {
       FushiToast.show(

@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:flutter/material.dart';
 import 'package:fushi/src/pages/implementations/stat_charts.dart';
 import 'package:fushi/src/pages/implementations/stat_shared.dart';
@@ -297,7 +298,9 @@ Widget buildStatRangeCalendarSection(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         Text(
-          t.stat_range_calendar,
+          kKitapsenEdition
+              ? t.kitapsen_stat_range_calendar
+              : t.stat_range_calendar,
           style: Theme.of(context).textTheme.titleMedium,
         ),
         SizedBox(height: tokens.spacing.gap),

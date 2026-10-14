@@ -3,7 +3,6 @@ import 'dart:async' show unawaited;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fushi_audio/fushi_audio.dart';
-import 'package:fushi_dictionary/fushi_dictionary.dart';
 
 import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/media.dart';
@@ -302,7 +301,7 @@ class _MediaSourcesPageState extends ConsumerState<MediaSourcesPage> {
   /// 书架 provider 失效（快速导入落库后书架 / 漫画库立即刷新）。
   void _invalidateBookProviders() {
     if (!mounted) return;
-    ref.invalidate(fushiBooksProvider(JapaneseLanguage.instance));
+    ref.invalidate(fushiBooksProvider);
     ref.invalidate(srtBooksProvider);
     widget.onLibraryChanged?.call();
   }

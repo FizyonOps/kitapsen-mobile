@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 111401 (6553 per locale)
+/// Strings: 111639 (6567 per locale)
 ///
-/// Built on 2026-10-10 at 14:11 UTC
+/// Built on 2026-10-14 at 10:03 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -9365,6 +9365,32 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get kitapsen_report_submit => 'Submit Report';
   String get kitapsen_report_thanks =>
       'Reported. Thank you for helping keep the community safe.';
+  String get kitapsen_delete_statistics_book_desc =>
+      'Reading time and characters read for this book are removed from statistics on every device';
+  String get kitapsen_stat_clear_all_reading_message =>
+      'Clear all reading time and character counts? Your highlights and notes are kept. This cannot be undone.';
+  String get kitapsen_stat_clear_all_overview_message =>
+      'Clear all reading statistics? Reading time and character counts go away. Your highlights, notes and activity timeline are kept. This cannot be undone.';
+  String get kitapsen_stat_delete_message =>
+      'Delete this item\'s reading time and character count statistics? Your highlights and notes are not affected.';
+  String kitapsen_stat_sessions_clear_all_message({required Object n}) =>
+      'Clear all ${n} session records? Their time, character and page counts go away. Your highlights and notes are kept. This cannot be undone.';
+  String get kitapsen_stat_session_delete_message =>
+      'Delete this session\'s time, character and page counts? Your highlights and notes are not affected.';
+  String get kitapsen_loading_slow_message_mobile =>
+      'Startup is taking longer than usual — Kitapsen may be loading a large library. Please wait a moment, or tap Retry to reload. Your data is safe and won\'t be lost.';
+  String get kitapsen_settings_content_language_description =>
+      'Fallback language for books that do not declare one. A book\'s own setting overrides this.';
+  String get kitapsen_theme_role_reader_text_desc =>
+      'Reader text and toolbar icons';
+  String get kitapsen_theme_role_reader_background_desc =>
+      'Reader page and toolbar background';
+  String get kitapsen_theme_role_selection_desc =>
+      'Background of selected text';
+  String get kitapsen_reading_stats_idle_timeout_hint =>
+      'Stop counting reading time after this many minutes without turning or scrolling a page.';
+  String get kitapsen_source_description_epub => 'EPUB and PDF reading';
+  String get kitapsen_stat_range_calendar => 'Reading calendar';
 }
 
 // Path: <root>
@@ -25071,6 +25097,45 @@ class _StringsAr extends _StringsEn {
   @override
   String get kitapsen_report_thanks =>
       'Reported. Thank you for helping keep the community safe.';
+  @override
+  String get kitapsen_delete_statistics_book_desc =>
+      'تُزال مدة قراءة هذا الكتاب والأحرف المقروءة منه من الإحصاءات على جميع الأجهزة';
+  @override
+  String get kitapsen_stat_clear_all_reading_message =>
+      'هل تريد مسح كل وقت القراءة وأعداد الأحرف؟ ستبقى تمييزاتك وملاحظاتك. لا يمكن التراجع عن ذلك.';
+  @override
+  String get kitapsen_stat_clear_all_overview_message =>
+      'هل تريد مسح كل إحصاءات القراءة؟ سيُحذف وقت القراءة وأعداد الأحرف. ستبقى تمييزاتك وملاحظاتك وسجل نشاطك. لا يمكن التراجع عن ذلك.';
+  @override
+  String get kitapsen_stat_delete_message =>
+      'هل تريد حذف إحصاءات وقت القراءة وعدد الأحرف لهذا العنصر؟ لن تتأثر تمييزاتك وملاحظاتك.';
+  @override
+  String kitapsen_stat_sessions_clear_all_message({required Object n}) =>
+      'هل تريد مسح كل سجلات الجلسات (${n})؟ سيُحذف وقتها وأعداد أحرفها وصفحاتها. ستبقى تمييزاتك وملاحظاتك. لا يمكن التراجع عن ذلك.';
+  @override
+  String get kitapsen_stat_session_delete_message =>
+      'هل تريد حذف وقت هذه الجلسة وعدد أحرفها وصفحاتها؟ لن تتأثر تمييزاتك وملاحظاتك.';
+  @override
+  String get kitapsen_loading_slow_message_mobile =>
+      'يستغرق بدء التشغيل وقتًا أطول من المعتاد — ربما يحمّل Kitapsen مكتبة كبيرة. يُرجى الانتظار قليلًا أو النقر على إعادة المحاولة. بياناتك آمنة ولن تضيع.';
+  @override
+  String get kitapsen_settings_content_language_description =>
+      'لغة احتياطية للكتب التي لا تحدد لغتها. يتقدم إعداد الكتاب نفسه على هذا الإعداد.';
+  @override
+  String get kitapsen_theme_role_reader_text_desc =>
+      'نص القراءة وأيقونات شريط الأدوات';
+  @override
+  String get kitapsen_theme_role_reader_background_desc =>
+      'خلفية صفحة القراءة وشريط الأدوات';
+  @override
+  String get kitapsen_theme_role_selection_desc => 'خلفية النص المحدد';
+  @override
+  String get kitapsen_reading_stats_idle_timeout_hint =>
+      'التوقف عن احتساب وقت القراءة بعد هذا العدد من الدقائق دون تقليب الصفحة أو تمريرها.';
+  @override
+  String get kitapsen_source_description_epub => 'قراءة EPUB وPDF';
+  @override
+  String get kitapsen_stat_range_calendar => 'تقويم القراءة';
 }
 
 // Path: <root>
@@ -41169,6 +41234,46 @@ class _StringsDe extends _StringsEn {
   @override
   String get kitapsen_report_thanks =>
       'Reported. Thank you for helping keep the community safe.';
+  @override
+  String get kitapsen_delete_statistics_book_desc =>
+      'Lesezeit und gelesene Zeichen dieses Buchs werden auf allen Geräten aus der Statistik entfernt';
+  @override
+  String get kitapsen_stat_clear_all_reading_message =>
+      'Gesamte Lesezeit und alle Zeichenzahlen löschen? Deine Markierungen und Notizen bleiben erhalten. Dies kann nicht rückgängig gemacht werden.';
+  @override
+  String get kitapsen_stat_clear_all_overview_message =>
+      'Alle Lesestatistiken löschen? Lesezeit und Zeichenzahlen werden entfernt. Deine Markierungen, Notizen und der Aktivitätsverlauf bleiben erhalten. Dies kann nicht rückgängig gemacht werden.';
+  @override
+  String get kitapsen_stat_delete_message =>
+      'Lesezeit- und Zeichenstatistik dieses Eintrags löschen? Deine Markierungen und Notizen sind nicht betroffen.';
+  @override
+  String kitapsen_stat_sessions_clear_all_message({required Object n}) =>
+      'Alle ${n} Sitzungen löschen? Ihre Zeit-, Zeichen- und Seitenzahlen werden entfernt. Deine Markierungen und Notizen bleiben erhalten. Dies kann nicht rückgängig gemacht werden.';
+  @override
+  String get kitapsen_stat_session_delete_message =>
+      'Zeit, Zeichen- und Seitenzahl dieser Sitzung löschen? Deine Markierungen und Notizen sind nicht betroffen.';
+  @override
+  String get kitapsen_loading_slow_message_mobile =>
+      'Der Start dauert länger als üblich – Kitapsen lädt möglicherweise eine große Bibliothek. Bitte warte einen Moment oder tippe auf „Erneut versuchen“. Deine Daten sind sicher und gehen nicht verloren.';
+  @override
+  String get kitapsen_settings_content_language_description =>
+      'Ersatzsprache für Bücher, die keine Sprache angeben. Die Einstellung eines Buchs hat Vorrang.';
+  @override
+  String get kitapsen_theme_role_reader_text_desc =>
+      'Lesetext und Symbole der Werkzeugleiste';
+  @override
+  String get kitapsen_theme_role_reader_background_desc =>
+      'Hintergrund der Leseseite und der Werkzeugleiste';
+  @override
+  String get kitapsen_theme_role_selection_desc =>
+      'Hintergrund von markiertem Text';
+  @override
+  String get kitapsen_reading_stats_idle_timeout_hint =>
+      'Lesezeit nicht mehr zählen, wenn so viele Minuten lang weder umgeblättert noch gescrollt wird.';
+  @override
+  String get kitapsen_source_description_epub => 'EPUB- und PDF-Lesen';
+  @override
+  String get kitapsen_stat_range_calendar => 'Lesekalender';
 }
 
 // Path: <root>
@@ -57326,6 +57431,46 @@ class _StringsEs extends _StringsEn {
   @override
   String get kitapsen_report_thanks =>
       'Reported. Thank you for helping keep the community safe.';
+  @override
+  String get kitapsen_delete_statistics_book_desc =>
+      'El tiempo de lectura y los caracteres leídos de este libro se eliminan de las estadísticas en todos los dispositivos';
+  @override
+  String get kitapsen_stat_clear_all_reading_message =>
+      '¿Borrar todo el tiempo de lectura y los recuentos de caracteres? Tus resaltados y notas se conservan. Esta acción no se puede deshacer.';
+  @override
+  String get kitapsen_stat_clear_all_overview_message =>
+      '¿Borrar todas las estadísticas de lectura? Se eliminan el tiempo de lectura y los recuentos de caracteres. Tus resaltados, notas y el historial de actividad se conservan. Esta acción no se puede deshacer.';
+  @override
+  String get kitapsen_stat_delete_message =>
+      '¿Eliminar las estadísticas de tiempo de lectura y caracteres de este elemento? Tus resaltados y notas no se ven afectados.';
+  @override
+  String kitapsen_stat_sessions_clear_all_message({required Object n}) =>
+      '¿Borrar los ${n} registros de sesión? Se eliminan su tiempo, caracteres y páginas. Tus resaltados y notas se conservan. Esta acción no se puede deshacer.';
+  @override
+  String get kitapsen_stat_session_delete_message =>
+      '¿Eliminar el tiempo, los caracteres y las páginas de esta sesión? Tus resaltados y notas no se ven afectados.';
+  @override
+  String get kitapsen_loading_slow_message_mobile =>
+      'El inicio está tardando más de lo habitual: Kitapsen puede estar cargando una biblioteca grande. Espera un momento o toca Reintentar. Tus datos están a salvo y no se perderán.';
+  @override
+  String get kitapsen_settings_content_language_description =>
+      'Idioma de respaldo para los libros que no declaran uno. El ajuste de cada libro tiene prioridad.';
+  @override
+  String get kitapsen_theme_role_reader_text_desc =>
+      'Texto de lectura e iconos de la barra de herramientas';
+  @override
+  String get kitapsen_theme_role_reader_background_desc =>
+      'Fondo de la página de lectura y de la barra de herramientas';
+  @override
+  String get kitapsen_theme_role_selection_desc =>
+      'Fondo del texto seleccionado';
+  @override
+  String get kitapsen_reading_stats_idle_timeout_hint =>
+      'Dejar de contar el tiempo de lectura tras estos minutos sin pasar ni desplazar la página.';
+  @override
+  String get kitapsen_source_description_epub => 'Lectura de EPUB y PDF';
+  @override
+  String get kitapsen_stat_range_calendar => 'Calendario de lectura';
 }
 
 // Path: <root>
@@ -73561,6 +73706,46 @@ class _StringsFr extends _StringsEn {
   @override
   String get kitapsen_report_thanks =>
       'Reported. Thank you for helping keep the community safe.';
+  @override
+  String get kitapsen_delete_statistics_book_desc =>
+      'Le temps de lecture et les caractères lus de ce livre sont retirés des statistiques sur tous les appareils';
+  @override
+  String get kitapsen_stat_clear_all_reading_message =>
+      'Effacer tout le temps de lecture et le nombre de caractères ? Vos surlignages et notes sont conservés. Cette action est irréversible.';
+  @override
+  String get kitapsen_stat_clear_all_overview_message =>
+      'Effacer toutes les statistiques de lecture ? Le temps de lecture et le nombre de caractères sont supprimés. Vos surlignages, notes et l’historique d’activité sont conservés. Cette action est irréversible.';
+  @override
+  String get kitapsen_stat_delete_message =>
+      'Supprimer les statistiques de temps de lecture et de caractères de cet élément ? Vos surlignages et notes ne sont pas concernés.';
+  @override
+  String kitapsen_stat_sessions_clear_all_message({required Object n}) =>
+      'Effacer les ${n} sessions ? Leur temps, leurs caractères et leurs pages sont supprimés. Vos surlignages et notes sont conservés. Cette action est irréversible.';
+  @override
+  String get kitapsen_stat_session_delete_message =>
+      'Supprimer le temps, les caractères et les pages de cette session ? Vos surlignages et notes ne sont pas concernés.';
+  @override
+  String get kitapsen_loading_slow_message_mobile =>
+      'Le démarrage prend plus de temps que d’habitude — Kitapsen charge peut-être une grande bibliothèque. Patientez un instant ou touchez Réessayer. Vos données sont en sécurité et ne seront pas perdues.';
+  @override
+  String get kitapsen_settings_content_language_description =>
+      'Langue de repli pour les livres qui n’en déclarent pas. Le réglage propre à un livre est prioritaire.';
+  @override
+  String get kitapsen_theme_role_reader_text_desc =>
+      'Texte de lecture et icônes de la barre d’outils';
+  @override
+  String get kitapsen_theme_role_reader_background_desc =>
+      'Arrière-plan de la page de lecture et de la barre d’outils';
+  @override
+  String get kitapsen_theme_role_selection_desc =>
+      'Arrière-plan du texte sélectionné';
+  @override
+  String get kitapsen_reading_stats_idle_timeout_hint =>
+      'Arrêter de compter le temps de lecture après ce nombre de minutes sans tourner ni faire défiler de page.';
+  @override
+  String get kitapsen_source_description_epub => 'Lecture EPUB et PDF';
+  @override
+  String get kitapsen_stat_range_calendar => 'Calendrier de lecture';
 }
 
 // Path: <root>
@@ -89454,6 +89639,45 @@ class _StringsId extends _StringsEn {
   @override
   String get kitapsen_report_thanks =>
       'Reported. Thank you for helping keep the community safe.';
+  @override
+  String get kitapsen_delete_statistics_book_desc =>
+      'Waktu baca dan karakter yang dibaca dari buku ini dihapus dari statistik di semua perangkat';
+  @override
+  String get kitapsen_stat_clear_all_reading_message =>
+      'Hapus semua waktu baca dan jumlah karakter? Sorotan dan catatan Anda tetap tersimpan. Tindakan ini tidak dapat dibatalkan.';
+  @override
+  String get kitapsen_stat_clear_all_overview_message =>
+      'Hapus semua statistik membaca? Waktu baca dan jumlah karakter dihapus. Sorotan, catatan, dan linimasa aktivitas Anda tetap tersimpan. Tindakan ini tidak dapat dibatalkan.';
+  @override
+  String get kitapsen_stat_delete_message =>
+      'Hapus statistik waktu baca dan jumlah karakter item ini? Sorotan dan catatan Anda tidak terpengaruh.';
+  @override
+  String kitapsen_stat_sessions_clear_all_message({required Object n}) =>
+      'Hapus semua ${n} catatan sesi? Waktu, karakter, dan halamannya dihapus. Sorotan dan catatan Anda tetap tersimpan. Tindakan ini tidak dapat dibatalkan.';
+  @override
+  String get kitapsen_stat_session_delete_message =>
+      'Hapus waktu, karakter, dan halaman sesi ini? Sorotan dan catatan Anda tidak terpengaruh.';
+  @override
+  String get kitapsen_loading_slow_message_mobile =>
+      'Proses mulai lebih lama dari biasanya — Kitapsen mungkin sedang memuat perpustakaan besar. Tunggu sebentar atau ketuk Coba lagi. Data Anda aman dan tidak akan hilang.';
+  @override
+  String get kitapsen_settings_content_language_description =>
+      'Bahasa cadangan untuk buku yang tidak menyatakan bahasanya. Pengaturan per buku lebih diutamakan.';
+  @override
+  String get kitapsen_theme_role_reader_text_desc =>
+      'Teks bacaan dan ikon bilah alat';
+  @override
+  String get kitapsen_theme_role_reader_background_desc =>
+      'Latar halaman baca dan bilah alat';
+  @override
+  String get kitapsen_theme_role_selection_desc => 'Latar teks yang dipilih';
+  @override
+  String get kitapsen_reading_stats_idle_timeout_hint =>
+      'Berhenti menghitung waktu baca setelah sekian menit tanpa membalik atau menggulir halaman.';
+  @override
+  String get kitapsen_source_description_epub => 'Membaca EPUB dan PDF';
+  @override
+  String get kitapsen_stat_range_calendar => 'Kalender membaca';
 }
 
 // Path: <root>
@@ -105509,6 +105733,46 @@ class _StringsIt extends _StringsEn {
   @override
   String get kitapsen_report_thanks =>
       'Reported. Thank you for helping keep the community safe.';
+  @override
+  String get kitapsen_delete_statistics_book_desc =>
+      'Il tempo di lettura e i caratteri letti di questo libro vengono rimossi dalle statistiche su tutti i dispositivi';
+  @override
+  String get kitapsen_stat_clear_all_reading_message =>
+      'Cancellare tutto il tempo di lettura e il conteggio dei caratteri? Evidenziazioni e note vengono mantenute. L’operazione non può essere annullata.';
+  @override
+  String get kitapsen_stat_clear_all_overview_message =>
+      'Cancellare tutte le statistiche di lettura? Tempo di lettura e conteggio dei caratteri vengono eliminati. Evidenziazioni, note e cronologia delle attività vengono mantenute. L’operazione non può essere annullata.';
+  @override
+  String get kitapsen_stat_delete_message =>
+      'Eliminare le statistiche di tempo di lettura e caratteri di questo elemento? Evidenziazioni e note non vengono toccate.';
+  @override
+  String kitapsen_stat_sessions_clear_all_message({required Object n}) =>
+      'Cancellare tutte le ${n} sessioni? Tempo, caratteri e pagine vengono eliminati. Evidenziazioni e note vengono mantenute. L’operazione non può essere annullata.';
+  @override
+  String get kitapsen_stat_session_delete_message =>
+      'Eliminare tempo, caratteri e pagine di questa sessione? Evidenziazioni e note non vengono toccate.';
+  @override
+  String get kitapsen_loading_slow_message_mobile =>
+      'L’avvio sta richiedendo più tempo del solito: Kitapsen potrebbe caricare una libreria grande. Attendi un momento o tocca Riprova. I tuoi dati sono al sicuro e non andranno persi.';
+  @override
+  String get kitapsen_settings_content_language_description =>
+      'Lingua di riserva per i libri che non ne dichiarano una. L’impostazione del singolo libro ha la precedenza.';
+  @override
+  String get kitapsen_theme_role_reader_text_desc =>
+      'Testo di lettura e icone della barra degli strumenti';
+  @override
+  String get kitapsen_theme_role_reader_background_desc =>
+      'Sfondo della pagina di lettura e della barra degli strumenti';
+  @override
+  String get kitapsen_theme_role_selection_desc =>
+      'Sfondo del testo selezionato';
+  @override
+  String get kitapsen_reading_stats_idle_timeout_hint =>
+      'Smetti di contare il tempo di lettura dopo questi minuti senza girare o scorrere la pagina.';
+  @override
+  String get kitapsen_source_description_epub => 'Lettura EPUB e PDF';
+  @override
+  String get kitapsen_stat_range_calendar => 'Calendario di lettura';
 }
 
 // Path: <root>
@@ -120595,6 +120859,43 @@ class _StringsJa extends _StringsEn {
   @override
   String get kitapsen_report_thanks =>
       'Reported. Thank you for helping keep the community safe.';
+  @override
+  String get kitapsen_delete_statistics_book_desc =>
+      'この本の読書時間と読んだ文字数が、すべての端末の統計から削除されます';
+  @override
+  String get kitapsen_stat_clear_all_reading_message =>
+      'すべての読書時間と文字数を消去しますか？ハイライトとメモは残ります。この操作は元に戻せません。';
+  @override
+  String get kitapsen_stat_clear_all_overview_message =>
+      '読書統計をすべて消去しますか？読書時間と文字数が削除されます。ハイライト、メモ、アクティビティのタイムラインは残ります。この操作は元に戻せません。';
+  @override
+  String get kitapsen_stat_delete_message =>
+      'この項目の読書時間と文字数の統計を削除しますか？ハイライトとメモには影響しません。';
+  @override
+  String kitapsen_stat_sessions_clear_all_message({required Object n}) =>
+      '${n} 件の読書記録をすべて消去しますか？時間・文字数・ページ数が削除されます。ハイライトとメモは残ります。この操作は元に戻せません。';
+  @override
+  String get kitapsen_stat_session_delete_message =>
+      'この読書記録の時間・文字数・ページ数を削除しますか？ハイライトとメモには影響しません。';
+  @override
+  String get kitapsen_loading_slow_message_mobile =>
+      '起動にいつもより時間がかかっています。Kitapsen が大きなライブラリを読み込んでいる可能性があります。しばらくお待ちいただくか、「再試行」をタップしてください。データは安全で、失われることはありません。';
+  @override
+  String get kitapsen_settings_content_language_description =>
+      '言語を宣言していない本に使う予備の言語です。本ごとの設定が優先されます。';
+  @override
+  String get kitapsen_theme_role_reader_text_desc => '本文とツールバーのアイコン';
+  @override
+  String get kitapsen_theme_role_reader_background_desc => '読書ページとツールバーの背景';
+  @override
+  String get kitapsen_theme_role_selection_desc => '選択したテキストの背景';
+  @override
+  String get kitapsen_reading_stats_idle_timeout_hint =>
+      'この分数のあいだページをめくったりスクロールしたりしないと、読書時間の計測を止めます。';
+  @override
+  String get kitapsen_source_description_epub => 'EPUB と PDF の読書';
+  @override
+  String get kitapsen_stat_range_calendar => '読書カレンダー';
 }
 
 // Path: <root>
@@ -135686,6 +135987,43 @@ class _StringsKo extends _StringsEn {
   @override
   String get kitapsen_report_thanks =>
       'Reported. Thank you for helping keep the community safe.';
+  @override
+  String get kitapsen_delete_statistics_book_desc =>
+      '이 책의 읽은 시간과 읽은 글자 수가 모든 기기의 통계에서 삭제됩니다';
+  @override
+  String get kitapsen_stat_clear_all_reading_message =>
+      '모든 읽은 시간과 글자 수를 지울까요? 하이라이트와 메모는 유지됩니다. 이 작업은 되돌릴 수 없습니다.';
+  @override
+  String get kitapsen_stat_clear_all_overview_message =>
+      '모든 독서 통계를 지울까요? 읽은 시간과 글자 수가 삭제됩니다. 하이라이트, 메모, 활동 타임라인은 유지됩니다. 이 작업은 되돌릴 수 없습니다.';
+  @override
+  String get kitapsen_stat_delete_message =>
+      '이 항목의 읽은 시간과 글자 수 통계를 삭제할까요? 하이라이트와 메모에는 영향이 없습니다.';
+  @override
+  String kitapsen_stat_sessions_clear_all_message({required Object n}) =>
+      '${n}개의 세션 기록을 모두 지울까요? 시간, 글자 수, 페이지 수가 삭제됩니다. 하이라이트와 메모는 유지됩니다. 이 작업은 되돌릴 수 없습니다.';
+  @override
+  String get kitapsen_stat_session_delete_message =>
+      '이 세션의 시간, 글자 수, 페이지 수를 삭제할까요? 하이라이트와 메모에는 영향이 없습니다.';
+  @override
+  String get kitapsen_loading_slow_message_mobile =>
+      '시작이 평소보다 오래 걸리고 있습니다. Kitapsen이 큰 서재를 불러오는 중일 수 있습니다. 잠시 기다리거나 다시 시도를 누르세요. 데이터는 안전하며 사라지지 않습니다.';
+  @override
+  String get kitapsen_settings_content_language_description =>
+      '언어를 지정하지 않은 책에 쓰는 대체 언어입니다. 책별 설정이 우선합니다.';
+  @override
+  String get kitapsen_theme_role_reader_text_desc => '본문 텍스트와 도구 모음 아이콘';
+  @override
+  String get kitapsen_theme_role_reader_background_desc => '읽기 페이지와 도구 모음 배경';
+  @override
+  String get kitapsen_theme_role_selection_desc => '선택한 텍스트의 배경';
+  @override
+  String get kitapsen_reading_stats_idle_timeout_hint =>
+      '이 시간(분) 동안 페이지를 넘기거나 스크롤하지 않으면 읽은 시간 집계를 멈춥니다.';
+  @override
+  String get kitapsen_source_description_epub => 'EPUB 및 PDF 읽기';
+  @override
+  String get kitapsen_stat_range_calendar => '독서 달력';
 }
 
 // Path: <root>
@@ -151688,6 +152026,46 @@ class _StringsNl extends _StringsEn {
   @override
   String get kitapsen_report_thanks =>
       'Reported. Thank you for helping keep the community safe.';
+  @override
+  String get kitapsen_delete_statistics_book_desc =>
+      'Leestijd en gelezen tekens van dit boek worden op alle apparaten uit de statistieken verwijderd';
+  @override
+  String get kitapsen_stat_clear_all_reading_message =>
+      'Alle leestijd en tekentellingen wissen? Je markeringen en notities blijven bewaard. Dit kan niet ongedaan worden gemaakt.';
+  @override
+  String get kitapsen_stat_clear_all_overview_message =>
+      'Alle leesstatistieken wissen? Leestijd en tekentellingen worden verwijderd. Je markeringen, notities en activiteitentijdlijn blijven bewaard. Dit kan niet ongedaan worden gemaakt.';
+  @override
+  String get kitapsen_stat_delete_message =>
+      'De leestijd- en tekenstatistieken van dit item verwijderen? Je markeringen en notities blijven ongewijzigd.';
+  @override
+  String kitapsen_stat_sessions_clear_all_message({required Object n}) =>
+      'Alle ${n} sessies wissen? Hun tijd, tekens en pagina’s worden verwijderd. Je markeringen en notities blijven bewaard. Dit kan niet ongedaan worden gemaakt.';
+  @override
+  String get kitapsen_stat_session_delete_message =>
+      'Tijd, tekens en pagina’s van deze sessie verwijderen? Je markeringen en notities blijven ongewijzigd.';
+  @override
+  String get kitapsen_loading_slow_message_mobile =>
+      'Het opstarten duurt langer dan normaal — Kitapsen laadt mogelijk een grote bibliotheek. Wacht even of tik op Opnieuw. Je gegevens zijn veilig en gaan niet verloren.';
+  @override
+  String get kitapsen_settings_content_language_description =>
+      'Reservetaal voor boeken die geen taal opgeven. De instelling van een boek gaat voor.';
+  @override
+  String get kitapsen_theme_role_reader_text_desc =>
+      'Leestekst en pictogrammen van de werkbalk';
+  @override
+  String get kitapsen_theme_role_reader_background_desc =>
+      'Achtergrond van de leespagina en de werkbalk';
+  @override
+  String get kitapsen_theme_role_selection_desc =>
+      'Achtergrond van geselecteerde tekst';
+  @override
+  String get kitapsen_reading_stats_idle_timeout_hint =>
+      'Stop met het tellen van leestijd na zoveel minuten zonder bladeren of scrollen.';
+  @override
+  String get kitapsen_source_description_epub => 'EPUB en PDF lezen';
+  @override
+  String get kitapsen_stat_range_calendar => 'Leeskalender';
 }
 
 // Path: <root>
@@ -167763,6 +168141,45 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get kitapsen_report_thanks =>
       'Reported. Thank you for helping keep the community safe.';
+  @override
+  String get kitapsen_delete_statistics_book_desc =>
+      'O tempo de leitura e os caracteres lidos deste livro são removidos das estatísticas em todos os dispositivos';
+  @override
+  String get kitapsen_stat_clear_all_reading_message =>
+      'Limpar todo o tempo de leitura e as contagens de caracteres? Seus destaques e notas são mantidos. Esta ação não pode ser desfeita.';
+  @override
+  String get kitapsen_stat_clear_all_overview_message =>
+      'Limpar todas as estatísticas de leitura? O tempo de leitura e as contagens de caracteres são apagados. Seus destaques, notas e a linha do tempo de atividades são mantidos. Esta ação não pode ser desfeita.';
+  @override
+  String get kitapsen_stat_delete_message =>
+      'Excluir as estatísticas de tempo de leitura e caracteres deste item? Seus destaques e notas não são afetados.';
+  @override
+  String kitapsen_stat_sessions_clear_all_message({required Object n}) =>
+      'Limpar todos os ${n} registros de sessão? O tempo, os caracteres e as páginas deles são apagados. Seus destaques e notas são mantidos. Esta ação não pode ser desfeita.';
+  @override
+  String get kitapsen_stat_session_delete_message =>
+      'Excluir o tempo, os caracteres e as páginas desta sessão? Seus destaques e notas não são afetados.';
+  @override
+  String get kitapsen_loading_slow_message_mobile =>
+      'A inicialização está demorando mais que o normal — o Kitapsen pode estar carregando uma biblioteca grande. Aguarde um momento ou toque em Tentar novamente. Seus dados estão seguros e não serão perdidos.';
+  @override
+  String get kitapsen_settings_content_language_description =>
+      'Idioma de reserva para livros que não declaram um. A configuração de cada livro tem prioridade.';
+  @override
+  String get kitapsen_theme_role_reader_text_desc =>
+      'Texto de leitura e ícones da barra de ferramentas';
+  @override
+  String get kitapsen_theme_role_reader_background_desc =>
+      'Fundo da página de leitura e da barra de ferramentas';
+  @override
+  String get kitapsen_theme_role_selection_desc => 'Fundo do texto selecionado';
+  @override
+  String get kitapsen_reading_stats_idle_timeout_hint =>
+      'Parar de contar o tempo de leitura após estes minutos sem virar ou rolar a página.';
+  @override
+  String get kitapsen_source_description_epub => 'Leitura de EPUB e PDF';
+  @override
+  String get kitapsen_stat_range_calendar => 'Calendário de leitura';
 }
 
 // Path: <root>
@@ -183782,6 +184199,45 @@ class _StringsRu extends _StringsEn {
   @override
   String get kitapsen_report_thanks =>
       'Reported. Thank you for helping keep the community safe.';
+  @override
+  String get kitapsen_delete_statistics_book_desc =>
+      'Время чтения и прочитанные символы этой книги будут удалены из статистики на всех устройствах';
+  @override
+  String get kitapsen_stat_clear_all_reading_message =>
+      'Очистить всё время чтения и счётчики символов? Ваши выделения и заметки сохранятся. Это действие нельзя отменить.';
+  @override
+  String get kitapsen_stat_clear_all_overview_message =>
+      'Очистить всю статистику чтения? Время чтения и счётчики символов будут удалены. Ваши выделения, заметки и лента активности сохранятся. Это действие нельзя отменить.';
+  @override
+  String get kitapsen_stat_delete_message =>
+      'Удалить статистику времени чтения и символов для этого элемента? Ваши выделения и заметки не затрагиваются.';
+  @override
+  String kitapsen_stat_sessions_clear_all_message({required Object n}) =>
+      'Очистить все записи сеансов (${n})? Их время, символы и страницы будут удалены. Ваши выделения и заметки сохранятся. Это действие нельзя отменить.';
+  @override
+  String get kitapsen_stat_session_delete_message =>
+      'Удалить время, символы и страницы этого сеанса? Ваши выделения и заметки не затрагиваются.';
+  @override
+  String get kitapsen_loading_slow_message_mobile =>
+      'Запуск занимает больше времени, чем обычно — возможно, Kitapsen загружает большую библиотеку. Подождите немного или нажмите «Повторить». Ваши данные в безопасности и не будут потеряны.';
+  @override
+  String get kitapsen_settings_content_language_description =>
+      'Резервный язык для книг, в которых язык не указан. Настройка конкретной книги имеет приоритет.';
+  @override
+  String get kitapsen_theme_role_reader_text_desc =>
+      'Текст для чтения и значки панели инструментов';
+  @override
+  String get kitapsen_theme_role_reader_background_desc =>
+      'Фон страницы чтения и панели инструментов';
+  @override
+  String get kitapsen_theme_role_selection_desc => 'Фон выделенного текста';
+  @override
+  String get kitapsen_reading_stats_idle_timeout_hint =>
+      'Прекращать учёт времени чтения после стольких минут без перелистывания или прокрутки страницы.';
+  @override
+  String get kitapsen_source_description_epub => 'Чтение EPUB и PDF';
+  @override
+  String get kitapsen_stat_range_calendar => 'Календарь чтения';
 }
 
 // Path: <root>
@@ -199478,6 +199934,45 @@ class _StringsTh extends _StringsEn {
   @override
   String get kitapsen_report_thanks =>
       'Reported. Thank you for helping keep the community safe.';
+  @override
+  String get kitapsen_delete_statistics_book_desc =>
+      'เวลาอ่านและจำนวนตัวอักษรที่อ่านของหนังสือเล่มนี้จะถูกลบออกจากสถิติในทุกอุปกรณ์';
+  @override
+  String get kitapsen_stat_clear_all_reading_message =>
+      'ล้างเวลาอ่านและจำนวนตัวอักษรทั้งหมดหรือไม่ ไฮไลต์และโน้ตของคุณจะยังอยู่ การดำเนินการนี้ไม่สามารถย้อนกลับได้';
+  @override
+  String get kitapsen_stat_clear_all_overview_message =>
+      'ล้างสถิติการอ่านทั้งหมดหรือไม่ เวลาอ่านและจำนวนตัวอักษรจะถูกลบ ไฮไลต์ โน้ต และไทม์ไลน์กิจกรรมของคุณจะยังอยู่ การดำเนินการนี้ไม่สามารถย้อนกลับได้';
+  @override
+  String get kitapsen_stat_delete_message =>
+      'ลบสถิติเวลาอ่านและจำนวนตัวอักษรของรายการนี้หรือไม่ ไฮไลต์และโน้ตของคุณจะไม่ได้รับผลกระทบ';
+  @override
+  String kitapsen_stat_sessions_clear_all_message({required Object n}) =>
+      'ล้างบันทึกการอ่านทั้ง ${n} รายการหรือไม่ เวลา จำนวนตัวอักษร และจำนวนหน้าจะถูกลบ ไฮไลต์และโน้ตของคุณจะยังอยู่ การดำเนินการนี้ไม่สามารถย้อนกลับได้';
+  @override
+  String get kitapsen_stat_session_delete_message =>
+      'ลบเวลา จำนวนตัวอักษร และจำนวนหน้าของรอบการอ่านนี้หรือไม่ ไฮไลต์และโน้ตของคุณจะไม่ได้รับผลกระทบ';
+  @override
+  String get kitapsen_loading_slow_message_mobile =>
+      'การเริ่มต้นใช้เวลานานกว่าปกติ — Kitapsen อาจกำลังโหลดคลังหนังสือขนาดใหญ่ โปรดรอสักครู่หรือแตะลองอีกครั้ง ข้อมูลของคุณปลอดภัยและจะไม่สูญหาย';
+  @override
+  String get kitapsen_settings_content_language_description =>
+      'ภาษาสำรองสำหรับหนังสือที่ไม่ได้ระบุภาษา การตั้งค่าของหนังสือแต่ละเล่มมีความสำคัญกว่า';
+  @override
+  String get kitapsen_theme_role_reader_text_desc =>
+      'ข้อความที่อ่านและไอคอนแถบเครื่องมือ';
+  @override
+  String get kitapsen_theme_role_reader_background_desc =>
+      'พื้นหลังหน้าอ่านและแถบเครื่องมือ';
+  @override
+  String get kitapsen_theme_role_selection_desc => 'พื้นหลังของข้อความที่เลือก';
+  @override
+  String get kitapsen_reading_stats_idle_timeout_hint =>
+      'หยุดนับเวลาอ่านเมื่อไม่ได้พลิกหรือเลื่อนหน้าเป็นเวลาเท่านี้นาที';
+  @override
+  String get kitapsen_source_description_epub => 'การอ่าน EPUB และ PDF';
+  @override
+  String get kitapsen_stat_range_calendar => 'ปฏิทินการอ่าน';
 }
 
 // Path: <root>
@@ -215383,6 +215878,45 @@ class _StringsTr extends _StringsEn {
   @override
   String get kitapsen_report_thanks =>
       'Bildirildi. Topluluğu güvenli tutmaya yardımcı olduğunuz için teşekkür ederiz.';
+  @override
+  String get kitapsen_delete_statistics_book_desc =>
+      'Bu kitabın okuma süresi ve okunan karakterler tüm cihazlardaki istatistiklerden kaldırılır';
+  @override
+  String get kitapsen_stat_clear_all_reading_message =>
+      'Tüm okuma süresi ve karakter sayıları temizlensin mi? Vurgularınız ve notlarınız korunur. Bu işlem geri alınamaz.';
+  @override
+  String get kitapsen_stat_clear_all_overview_message =>
+      'Tüm okuma istatistikleri temizlensin mi? Okuma süresi ve karakter sayıları silinir. Vurgularınız, notlarınız ve etkinlik zaman çizelgeniz korunur. Bu işlem geri alınamaz.';
+  @override
+  String get kitapsen_stat_delete_message =>
+      'Bu öğenin okuma süresi ve karakter sayısı istatistikleri silinsin mi? Vurgularınız ve notlarınız etkilenmez.';
+  @override
+  String kitapsen_stat_sessions_clear_all_message({required Object n}) =>
+      '${n} oturum kaydının tümü temizlensin mi? Bunların süre, karakter ve sayfa sayıları silinir. Vurgularınız ve notlarınız korunur. Bu işlem geri alınamaz.';
+  @override
+  String get kitapsen_stat_session_delete_message =>
+      'Bu oturumun süresi, karakter ve sayfa sayısı silinsin mi? Vurgularınız ve notlarınız etkilenmez.';
+  @override
+  String get kitapsen_loading_slow_message_mobile =>
+      'Başlatma normalden uzun sürüyor — Kitapsen büyük bir kütüphane yüklüyor olabilir. Lütfen biraz bekleyin veya yeniden yüklemek için Tekrar Dene\'ye dokunun. Verileriniz güvende ve kaybolmayacak.';
+  @override
+  String get kitapsen_settings_content_language_description =>
+      'Dil beyan etmeyen kitaplar için yedek dil. Kitap başına ayarlar bunu geçersiz kılar.';
+  @override
+  String get kitapsen_theme_role_reader_text_desc =>
+      'Okuyucu metni ve araç çubuğu simgeleri';
+  @override
+  String get kitapsen_theme_role_reader_background_desc =>
+      'Okuyucu sayfası ve araç çubuğu arka planı';
+  @override
+  String get kitapsen_theme_role_selection_desc => 'Seçili metnin arka planı';
+  @override
+  String get kitapsen_reading_stats_idle_timeout_hint =>
+      'Sayfa çevirme veya kaydırma olmadan bu kadar dakika geçince okuma süresini saymayı durdur.';
+  @override
+  String get kitapsen_source_description_epub => 'EPUB ve PDF okuma';
+  @override
+  String get kitapsen_stat_range_calendar => 'Okuma takvimi';
 }
 
 // Path: <root>
@@ -231210,6 +231744,45 @@ class _StringsVi extends _StringsEn {
   @override
   String get kitapsen_report_thanks =>
       'Reported. Thank you for helping keep the community safe.';
+  @override
+  String get kitapsen_delete_statistics_book_desc =>
+      'Thời gian đọc và số ký tự đã đọc của cuốn sách này sẽ bị xóa khỏi thống kê trên mọi thiết bị';
+  @override
+  String get kitapsen_stat_clear_all_reading_message =>
+      'Xóa toàn bộ thời gian đọc và số ký tự? Đánh dấu và ghi chú của bạn vẫn được giữ. Không thể hoàn tác.';
+  @override
+  String get kitapsen_stat_clear_all_overview_message =>
+      'Xóa toàn bộ thống kê đọc? Thời gian đọc và số ký tự sẽ bị xóa. Đánh dấu, ghi chú và dòng thời gian hoạt động của bạn vẫn được giữ. Không thể hoàn tác.';
+  @override
+  String get kitapsen_stat_delete_message =>
+      'Xóa thống kê thời gian đọc và số ký tự của mục này? Đánh dấu và ghi chú của bạn không bị ảnh hưởng.';
+  @override
+  String kitapsen_stat_sessions_clear_all_message({required Object n}) =>
+      'Xóa tất cả ${n} phiên đọc? Thời gian, số ký tự và số trang của chúng sẽ bị xóa. Đánh dấu và ghi chú của bạn vẫn được giữ. Không thể hoàn tác.';
+  @override
+  String get kitapsen_stat_session_delete_message =>
+      'Xóa thời gian, số ký tự và số trang của phiên này? Đánh dấu và ghi chú của bạn không bị ảnh hưởng.';
+  @override
+  String get kitapsen_loading_slow_message_mobile =>
+      'Khởi động lâu hơn bình thường — có thể Kitapsen đang tải một thư viện lớn. Vui lòng chờ một chút hoặc nhấn Thử lại. Dữ liệu của bạn an toàn và sẽ không bị mất.';
+  @override
+  String get kitapsen_settings_content_language_description =>
+      'Ngôn ngữ dự phòng cho sách không khai báo ngôn ngữ. Cài đặt riêng của từng sách được ưu tiên.';
+  @override
+  String get kitapsen_theme_role_reader_text_desc =>
+      'Văn bản đọc và biểu tượng thanh công cụ';
+  @override
+  String get kitapsen_theme_role_reader_background_desc =>
+      'Nền trang đọc và thanh công cụ';
+  @override
+  String get kitapsen_theme_role_selection_desc => 'Nền của văn bản được chọn';
+  @override
+  String get kitapsen_reading_stats_idle_timeout_hint =>
+      'Ngừng tính thời gian đọc sau số phút này mà không lật hoặc cuộn trang.';
+  @override
+  String get kitapsen_source_description_epub => 'Đọc EPUB và PDF';
+  @override
+  String get kitapsen_stat_range_calendar => 'Lịch đọc';
 }
 
 // Path: <root>
@@ -245691,6 +246264,42 @@ class _StringsZhCn extends _StringsEn {
   String get kitapsen_report_submit => '提交举报';
   @override
   String get kitapsen_report_thanks => '已举报。感谢你帮助维护社区安全。';
+  @override
+  String get kitapsen_delete_statistics_book_desc =>
+      '这本书的阅读时长与已读字数将从所有设备的统计中移除';
+  @override
+  String get kitapsen_stat_clear_all_reading_message =>
+      '清空全部阅读时长与字数？你的高亮与笔记会保留。此操作无法撤销。';
+  @override
+  String get kitapsen_stat_clear_all_overview_message =>
+      '清空全部阅读统计？阅读时长与字数会被清除。你的高亮、笔记与活动时间线会保留。此操作无法撤销。';
+  @override
+  String get kitapsen_stat_delete_message => '删除该项的阅读时长与字数统计？你的高亮与笔记不受影响。';
+  @override
+  String kitapsen_stat_sessions_clear_all_message({required Object n}) =>
+      '清空全部 ${n} 条阅读记录？其时长、字数与页数会被清除。你的高亮与笔记会保留。此操作无法撤销。';
+  @override
+  String get kitapsen_stat_session_delete_message =>
+      '删除这次阅读的时长、字数与页数？你的高亮与笔记不受影响。';
+  @override
+  String get kitapsen_loading_slow_message_mobile =>
+      '启动比平时慢——Kitapsen 可能正在载入较大的书库。请稍候，或点「重试」重新载入。你的数据是安全的，不会丢失。';
+  @override
+  String get kitapsen_settings_content_language_description =>
+      '未声明语言的书使用的后备语言。单本书的设置优先于此。';
+  @override
+  String get kitapsen_theme_role_reader_text_desc => '阅读器正文与工具栏图标';
+  @override
+  String get kitapsen_theme_role_reader_background_desc => '阅读器页面与工具栏背景';
+  @override
+  String get kitapsen_theme_role_selection_desc => '选中文字的背景';
+  @override
+  String get kitapsen_reading_stats_idle_timeout_hint =>
+      '超过这么多分钟没有翻页或滚动时，停止计入阅读时长。';
+  @override
+  String get kitapsen_source_description_epub => 'EPUB 与 PDF 阅读';
+  @override
+  String get kitapsen_stat_range_calendar => '阅读日历';
 }
 
 // Path: <root>
@@ -260250,4 +260859,40 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get kitapsen_report_thanks =>
       'Reported. Thank you for helping keep the community safe.';
+  @override
+  String get kitapsen_delete_statistics_book_desc =>
+      '這本書的閱讀時間與已讀字數將從所有裝置的統計中移除';
+  @override
+  String get kitapsen_stat_clear_all_reading_message =>
+      '清除全部閱讀時間與字數？你的螢光標記與筆記會保留。此操作無法復原。';
+  @override
+  String get kitapsen_stat_clear_all_overview_message =>
+      '清除全部閱讀統計？閱讀時間與字數會被清除。你的螢光標記、筆記與活動時間線會保留。此操作無法復原。';
+  @override
+  String get kitapsen_stat_delete_message => '刪除此項目的閱讀時間與字數統計？你的螢光標記與筆記不受影響。';
+  @override
+  String kitapsen_stat_sessions_clear_all_message({required Object n}) =>
+      '清除全部 ${n} 筆閱讀記錄？其時間、字數與頁數會被清除。你的螢光標記與筆記會保留。此操作無法復原。';
+  @override
+  String get kitapsen_stat_session_delete_message =>
+      '刪除這次閱讀的時間、字數與頁數？你的螢光標記與筆記不受影響。';
+  @override
+  String get kitapsen_loading_slow_message_mobile =>
+      '啟動比平時慢——Kitapsen 可能正在載入較大的書庫。請稍候，或點「重試」重新載入。你的資料是安全的，不會遺失。';
+  @override
+  String get kitapsen_settings_content_language_description =>
+      '未聲明語言的書所用的後備語言。個別書本的設定優先。';
+  @override
+  String get kitapsen_theme_role_reader_text_desc => '閱讀器內文與工具列圖示';
+  @override
+  String get kitapsen_theme_role_reader_background_desc => '閱讀器頁面與工具列背景';
+  @override
+  String get kitapsen_theme_role_selection_desc => '選取文字的背景';
+  @override
+  String get kitapsen_reading_stats_idle_timeout_hint =>
+      '超過這麼多分鐘沒有翻頁或捲動時，停止計算閱讀時間。';
+  @override
+  String get kitapsen_source_description_epub => 'EPUB 與 PDF 閱讀';
+  @override
+  String get kitapsen_stat_range_calendar => '閱讀日曆';
 }

@@ -10,6 +10,7 @@ import 'package:fushi/src/platform/platform_services.dart';
 import 'package:fushi_core/fushi_core.dart';
 import 'package:fushi/src/media/sources/reader_fushi_source.dart';
 import 'package:fushi/src/models/app_model.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/profile/profile_repository.dart';
 
 /// Serializes Profile application with temporary draft persistence.
@@ -345,7 +346,8 @@ final fushiDatabaseProvider = Provider<FushiDatabase>((ref) {
 
 final profileRepositoryProvider = Provider<ProfileRepository>((ref) {
   final db = ref.watch(fushiDatabaseProvider);
-  final ankiRepo = ref.watch(ankiRepositoryProvider);
+  // Kitapsen: no Anki, so profiles carry no Anki settings.
+  final ankiRepo = kKitapsenEdition ? null : ref.watch(ankiRepositoryProvider);
   return ProfileRepository(
     db,
     ankiRepo,
@@ -371,22 +373,25 @@ final profileViewModelProvider =
   final ProfileDraftCoordinator profileDraftCoordinator =
       ref.watch(profileDraftCoordinatorProvider);
   Future<void> onApplied() async {
-    final PlatformServices platformServices =
-        ref.read(platformServicesProvider);
-    final AnkiSettings ankiSettings =
-        await ref.read(ankiRepositoryProvider).loadSettings();
-    platformServices.setUseAnkiConnectOnMobile(
-      ankiSettings.useAnkiConnectOnMobile,
-      apiKey: ankiSettings.ankiConnectApiKey,
-    );
-    platformServices.setUseAnkiSyncClient(ankiSettings.useAnkiSyncClient);
-    ref.invalidate(ankiRepositoryProvider);
+    // Kitapsen: no Anki and no dictionaries to re-point at the new profile.
+    if (!kKitapsenEdition) {
+      final PlatformServices platformServices =
+          ref.read(platformServicesProvider);
+      final AnkiSettings ankiSettings =
+          await ref.read(ankiRepositoryProvider).loadSettings();
+      platformServices.setUseAnkiConnectOnMobile(
+        ankiSettings.useAnkiConnectOnMobile,
+        apiKey: ankiSettings.ankiConnectApiKey,
+      );
+      platformServices.setUseAnkiSyncClient(ankiSettings.useAnkiSyncClient);
+      ref.invalidate(ankiRepositoryProvider);
+    }
     final appModel = ref.read(appProvider);
     await appModel.refreshPrefCache();
     // TODO-1077: the profile switch replaced the dictionary_metadata table, so
     // reload the dictionary cache + native engine to pick up the new enable
     // list / order / language visibility for the switched-to profile.
-    await appModel.reloadDictionariesFromDb();
+    if (!kKitapsenEdition) await appModel.reloadDictionariesFromDb();
     await ReaderFushiSource.readerSettings?.refreshFromDb();
   }
 

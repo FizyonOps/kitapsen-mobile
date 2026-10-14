@@ -1,3 +1,4 @@
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:flutter/foundation.dart' show defaultTargetPlatform;
 import 'package:flutter/material.dart';
 
@@ -71,7 +72,11 @@ class LoadingWatchdogView extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             Text(
-              mobile ? t.loading_slow_message_mobile : t.loading_slow_message,
+              mobile
+                  ? (kKitapsenEdition
+                      ? t.kitapsen_loading_slow_message_mobile
+                      : t.loading_slow_message_mobile)
+                  : t.loading_slow_message,
               style: Theme.of(context)
                   .textTheme
                   .bodySmall

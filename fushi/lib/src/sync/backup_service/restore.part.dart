@@ -859,7 +859,9 @@ class BackupRestoreService {
         onBytes: reportBytes,
       );
 
-      if (effectiveHasDictionaries &&
+      // Kitapsen: no dictionaries, so a backup never carries any to reapply.
+      if (!kKitapsenEdition &&
+          effectiveHasDictionaries &&
           dictionaryReapplyPlan != null &&
           dictionaryReapplyDirectory != null) {
         // Backup carries dictionaries → replace this device's resources with

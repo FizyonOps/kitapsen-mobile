@@ -4,14 +4,8 @@ import Flutter
 
 @main
 @objc class AppDelegate: FlutterAppDelegate, FlutterStreamHandler, FlutterImplicitEngineDelegate {
-  private static let ankiMobilePasteboardType = "net.ankimobile.json"
-  /// BUG-2150: how long to wait for the app to actually become active after an
-  /// AnkiMobile x-callback return before giving up and reading anyway.
-  private static let ankiMobilePasteboardActiveTimeout: TimeInterval = 5
   private var initialUrl: String?
   private var urlEventSink: FlutterEventSink?
-  private var ankiMobileMediaBackgroundTask: UIBackgroundTaskIdentifier = .invalid
-  private var challengeBrowser: FushiChallengeBrowser?
   /// 强引用：channel handler 只弱持有它，且它自己是文档选择器的 delegate（UIKit 弱引用）。
   private var directoryImport: FushiDirectoryImport?
 
@@ -46,55 +40,13 @@ import Flutter
   }
 
   private func installChannels(binaryMessenger: FlutterBinaryMessenger) {
-    // 系统自带 OCR（Vision）。Dart 侧与 Android 侧早就在了，这半边一直空着——
-    // 没注册时 Dart 收到 MissingPluginException，isAvailable() 返回 false，引擎
-    // 选项就静默不出现（system_ocr_channel.dart 的注释把这条定为「当前事实」）。
-    FushiSystemOcr.register(binaryMessenger: binaryMessenger)
-    // 系统语音转录（iOS 26 的 SpeechAnalyzer）。老系统上原生侧应答「不支持」，
-    // Dart 侧据此不把这个引擎放进下拉。
-    FushiSpeechTranscriber.register(binaryMessenger: binaryMessenger)
+    // Kitapsen: no system OCR, speech transcription, floating ball (OCR +
+    // lookup), lookup keyboard language, online-source challenge browser or
+    // AnkiMobile bridge. Their Dart callers are compiled out of the edition, so
+    // their native halves are not built either (App Review guideline 2.3.1).
     // 复制图片到剪贴板（视频截图 / 阅读器内联图）。与 macOS 同一份实现，
     // 方法名与入参逐字对齐 Windows 那份 CF_DIB 实现。
     FushiClipboardImage.register(binaryMessenger: binaryMessenger)
-    // 全局悬浮球的 iOS 半边：截本 app 窗口给 OCR + App Intent 查词投递
-    // （docs/specs/2026-09-28-floating-ball.md）。
-    FushiFloatingBall.register(binaryMessenger: binaryMessenger)
-    // 查词输入框的输入法语言。install 必须在任何输入框成为第一响应者之前完成——
-    // `textInputMode` 是在 becomeFirstResponder **之前**被读的。
-    let imeInstalled = LookupImeLanguage.install()
-    let lookupImeChannel = FlutterMethodChannel(
-      name: "app.fushi.reader/lookup_ime",
-      binaryMessenger: binaryMessenger)
-    lookupImeChannel.setMethodCallHandler { (call, result) in
-      switch call.method {
-      case "setLanguage":
-        let tag = call.arguments as? String
-        LookupImeLanguage.desiredLanguage = (tag?.isEmpty ?? true) ? nil : tag
-        result(nil)
-      case "probe":
-        // 探针：分辨「属性压根没被调用」和「被调用了但系统没采纳返回值」——
-        // 这两种失败的修法完全不同（见 LookupImeLanguage 的类注释）。
-        result([
-          "installed": imeInstalled,
-          "desired": LookupImeLanguage.desiredLanguage ?? "",
-          "resolveCount": LookupImeLanguage.resolveCount,
-          "lastResolved": LookupImeLanguage.lastResolved ?? "",
-          "activeInputModes": UITextInputMode.activeInputModes.compactMap {
-            $0.primaryLanguage
-          },
-        ])
-      default:
-        result(FlutterMethodNotImplemented)
-      }
-    }
-
-    challengeBrowser = FushiChallengeBrowser(binaryMessenger: binaryMessenger) {
-      UIApplication.shared.connectedScenes
-        .compactMap { $0 as? UIWindowScene }
-        .filter { $0.activationState == .foregroundActive }
-        .flatMap { $0.windows }
-        .first { $0.isKeyWindow }?.rootViewController
-    }
     // 目录导入（BUG-2786）：iOS 上沙盒外文件夹只能在安全作用域访问窗口内整卷拷进来。
     // 呈现者必须是最顶层的 VC——导入对话框本身就是 Flutter 路由，但若此刻上面还压着
     // 别的原生表单，从 root 直接 present 会被 UIKit 拒掉（静默不弹）。
@@ -117,24 +69,6 @@ import Flutter
       case "getSplashColor":
         // LaunchScreen.storyboard uses a white root view / LaunchBackground.
         result(0xFFFFFFFF)
-      default:
-        result(FlutterMethodNotImplemented)
-      }
-    }
-
-    let ankiMobileChannel = FlutterMethodChannel(
-      name: "app.fushi.reader/ankimobile",
-      binaryMessenger: binaryMessenger)
-    ankiMobileChannel.setMethodCallHandler { [weak self] (call, result) in
-      switch call.method {
-      case "consumeInfoForAddingPasteboard":
-        Self.consumeAnkiMobilePasteboard(result: result)
-      case "beginMediaImportBackgroundTask":
-        self?.beginAnkiMobileMediaBackgroundTask()
-        result(nil)
-      case "endMediaImportBackgroundTask":
-        self?.endAnkiMobileMediaBackgroundTask()
-        result(nil)
       default:
         result(FlutterMethodNotImplemented)
       }
@@ -309,7 +243,6 @@ import Flutter
 
   private static func appShortcutSymbol(_ id: String) -> String {
     switch id {
-    case "lookup": return "magnifyingglass"
     case "books": return "book"
     case "manga": return "photo.on.rectangle"
     case "video": return "film"
@@ -350,109 +283,5 @@ import Flutter
   func onCancel(withArguments arguments: Any?) -> FlutterError? {
     urlEventSink = nil
     return nil
-  }
-
-  /// 读取 AnkiMobile 经系统剪贴板回传的 `infoForAdding` JSON（BUG-2150）。
-  ///
-  /// 前置条件不是「URL 回调到了」，而是「app 真的 active 了」：iOS 只允许**前台活跃**
-  /// 的 app 读别的 app 写进通用剪贴板的内容，iOS 16+ 还要为此弹一次系统「允许粘贴」
-  /// 确认，而这个弹窗只有 active 的 app 能呈现。AnkiMobile 的
-  /// `x-success=fushi://ankiFetch` 把我们拉回前台时，系统的调用顺序是
-  /// `willEnterForeground` → `application(_:open:)` → `didBecomeActive`，也就是说
-  /// URL 回调整个跑在 `.inactive` 阶段。旧实现就在这一刻直接读剪贴板，必然拿到 nil，
-  /// 用户看到的却是「剪贴板上没有 AnkiMobile 配置」——一句与事实无关的错误。
-  ///
-  /// 非 active 时挂一次性 `didBecomeActiveNotification` 观察者，等真正活跃后再读；
-  /// 万一始终等不到（用户又切走了），超时后**不读**、如实报 `notActive`，而不是
-  /// 无限挂起让 Dart 侧的 Future 永不完成。
-  ///
-  /// 超时后不能"尽力读一次"：非 active 下 `data(forPasteboardType:)` 必然返回 nil，
-  /// 而 `contains(pasteboardTypes:)` 仍看得见类型（只查元数据），于是三态判定会落到
-  /// `denied` —— 把「app 还没回到前台」谎报成「iOS 拒绝了粘贴」，用户被指去改一个
-  /// 根本没出问题的权限。这正是 BUG-2150 要消灭的那类误导诊断。
-  private static func consumeAnkiMobilePasteboard(result: @escaping FlutterResult) {
-    if UIApplication.shared.applicationState == .active {
-      result(readAnkiMobilePasteboard())
-      return
-    }
-
-    var observer: NSObjectProtocol? = nil
-    var timeout: DispatchWorkItem? = nil
-    var finished = false
-    // FlutterResult 必须恰好回调一次：两条路径（变 active / 超时）共用这道闸门。
-    // `becameActive` 决定读不读剪贴板——超时那条路径下 app 仍非 active，读出来的
-    // 三态没有意义（必落 denied），只能如实报 notActive。
-    let finish = { (becameActive: Bool) in
-      guard !finished else { return }
-      finished = true
-      timeout?.cancel()
-      if let observer = observer {
-        NotificationCenter.default.removeObserver(observer)
-      }
-      guard becameActive else {
-        result(["status": "notActive"])
-        return
-      }
-      result(readAnkiMobilePasteboard())
-    }
-
-    observer = NotificationCenter.default.addObserver(
-      forName: UIApplication.didBecomeActiveNotification,
-      object: nil,
-      queue: .main
-    ) { _ in finish(true) }
-
-    let work = DispatchWorkItem { finish(false) }
-    timeout = work
-    DispatchQueue.main.asyncAfter(
-      deadline: .now() + ankiMobilePasteboardActiveTimeout,
-      execute: work)
-  }
-
-  /// 三态读取（BUG-2150）。这三种情形用户的下一步动作完全不同，压成一句
-  /// 「剪贴板上没有 AnkiMobile 配置」只会把人带进死路：
-  /// - `ok`：读到 JSON，按官方手册取走后清空剪贴板；
-  /// - `denied`：剪贴板上**确实有** AnkiMobile 写的数据，但系统不让读——用户选了
-  ///   「不允许粘贴」，或此刻根本弹不出确认；
-  /// - `empty`：AnkiMobile 压根没写，通常是用户没在 AnkiMobile 里同意那次请求。
-  ///
-  /// `contains(pasteboardTypes:)` 只查元数据、不访问内容，不会触发粘贴确认弹窗，
-  /// 因此可以拿它把 `denied` 和 `empty` 分开。
-  /// 「类型在但内容为空」归 `empty`：那是我们自己取走后写回的空 Data（重复消费同一次
-  /// 回调时会撞上），不是被拒绝。
-  private static func readAnkiMobilePasteboard() -> [String: Any] {
-    let data = UIPasteboard.general.data(
-      forPasteboardType: ankiMobilePasteboardType)
-    if let data = data, !data.isEmpty,
-      let json = String(data: data, encoding: .utf8), !json.isEmpty
-    {
-      // 官方手册要求取走后清空剪贴板。
-      UIPasteboard.general.setData(
-        Data(),
-        forPasteboardType: ankiMobilePasteboardType)
-      return ["status": "ok", "json": json]
-    }
-    if data != nil {
-      return ["status": "empty"]
-    }
-    let hasType = UIPasteboard.general.contains(
-      pasteboardTypes: [ankiMobilePasteboardType])
-    return ["status": hasType ? "denied" : "empty"]
-  }
-
-  private func beginAnkiMobileMediaBackgroundTask() {
-    endAnkiMobileMediaBackgroundTask()
-    ankiMobileMediaBackgroundTask = UIApplication.shared.beginBackgroundTask(
-      withName: "AnkiMobile media import"
-    ) { [weak self] in
-      self?.endAnkiMobileMediaBackgroundTask()
-    }
-  }
-
-  private func endAnkiMobileMediaBackgroundTask() {
-    guard ankiMobileMediaBackgroundTask != .invalid else { return }
-    let task = ankiMobileMediaBackgroundTask
-    ankiMobileMediaBackgroundTask = .invalid
-    UIApplication.shared.endBackgroundTask(task)
   }
 }

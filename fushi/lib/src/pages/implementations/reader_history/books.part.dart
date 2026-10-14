@@ -647,7 +647,7 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
     }
     if (!mounted) return;
     _refreshSrtBooks();
-    ref.invalidate(fushiBooksProvider(JapaneseLanguage.instance));
+    ref.invalidate(fushiBooksProvider);
     ref.invalidate(bookTagMapProvider);
     ref.invalidate(srtBookTagMapProvider);
     // 解散后合集映射失效，重取（合集行随之消失）。
@@ -1060,7 +1060,7 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
         source: 'ReaderHistory.deleteSrtBookLocalFiles',
       );
       _refreshSrtBooks();
-      ref.invalidate(fushiBooksProvider(JapaneseLanguage.instance));
+      ref.invalidate(fushiBooksProvider);
       _rebuild(() {});
     }
   }
@@ -1149,7 +1149,7 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
       return;
     }
     _refreshSrtBooks();
-    ref.invalidate(fushiBooksProvider(JapaneseLanguage.instance));
+    ref.invalidate(fushiBooksProvider);
     _rebuild(() {});
   }
 
@@ -1237,7 +1237,7 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
     );
     if (outcome == null || !mounted) return;
     _refreshSrtBooks();
-    ref.invalidate(fushiBooksProvider(JapaneseLanguage.instance));
+    ref.invalidate(fushiBooksProvider);
     _rebuild(() {});
   }
 
@@ -1456,7 +1456,7 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
     );
     if (imported == true && mounted) {
       _refreshSrtBooks();
-      ref.invalidate(fushiBooksProvider(JapaneseLanguage.instance));
+      ref.invalidate(fushiBooksProvider);
     }
   }
 
@@ -1473,7 +1473,7 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
     );
     if (imported == true && mounted) {
       _refreshSrtBooks();
-      ref.invalidate(fushiBooksProvider(JapaneseLanguage.instance));
+      ref.invalidate(fushiBooksProvider);
     }
   }
 

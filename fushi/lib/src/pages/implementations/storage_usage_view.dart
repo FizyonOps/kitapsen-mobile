@@ -356,12 +356,28 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
     StorageCategoryId.other: Icons.more_horiz_outlined,
   };
 
+  /// Kitapsen: categories that belong to features the edition does not ship
+  /// (dictionaries, video, shaders, OCR models) are not listed.
+  static bool _categoryInEdition(StorageCategoryId id) {
+    if (!kKitapsenEdition) return true;
+    switch (id) {
+      case StorageCategoryId.dictionaries:
+      case StorageCategoryId.videoDownloads:
+      case StorageCategoryId.subtitles:
+      case StorageCategoryId.shaders:
+      case StorageCategoryId.ocrModels:
+        return false;
+      default:
+        return true;
+    }
+  }
+
   String _categoryTitle(StorageCategoryId id) {
     switch (id) {
       case StorageCategoryId.books:
         return t.storage_category_books;
       case StorageCategoryId.dictionaries:
-        return t.storage_category_dictionaries;
+        return kKitapsenEdition ? '' : t.storage_category_dictionaries;
       case StorageCategoryId.videoDownloads:
         return t.storage_category_video_downloads;
       case StorageCategoryId.covers:
@@ -381,7 +397,7 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
       case StorageCategoryId.database:
         return t.storage_category_database;
       case StorageCategoryId.ocrModels:
-        return t.storage_category_ocr_models;
+        return kKitapsenEdition ? '' : t.storage_category_ocr_models;
       case StorageCategoryId.cache:
         return t.storage_category_cache;
       case StorageCategoryId.other:
@@ -435,7 +451,7 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
           ),
         ),
         for (final StorageCategoryId id in StorageCategoryId.values)
-          ..._buildCategoryRows(id),
+          if (_categoryInEdition(id)) ..._buildCategoryRows(id),
       ],
     );
   }

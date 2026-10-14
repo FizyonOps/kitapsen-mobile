@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io' show Platform;
 
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -27,6 +28,8 @@ bool tryDictionaryPopupGamepadButton(
   FushiShortcutRegistry? registry,
   GamepadButton button,
 ) {
+  // Kitapsen: no dictionary popup.
+  if (kKitapsenEdition) return false;
   final DictionaryPopupGamepadHooks? hooks =
       DictionaryPopupGamepadRegistry.current;
   if (hooks == null) return false;

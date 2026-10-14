@@ -6551,5 +6551,19 @@
   "kitapsen_report_reason": "Reason (optional)",
   "kitapsen_report_reason_hint": "Why is this inappropriate?",
   "kitapsen_report_submit": "Submit Report",
-  "kitapsen_report_thanks": "Reported. Thank you for helping keep the community safe."
+  "kitapsen_report_thanks": "Reported. Thank you for helping keep the community safe.",
+  "kitapsen_delete_statistics_book_desc": "この本の読書時間と読んだ文字数が、すべての端末の統計から削除されます",
+  "kitapsen_stat_clear_all_reading_message": "すべての読書時間と文字数を消去しますか？ハイライトとメモは残ります。この操作は元に戻せません。",
+  "kitapsen_stat_clear_all_overview_message": "読書統計をすべて消去しますか？読書時間と文字数が削除されます。ハイライト、メモ、アクティビティのタイムラインは残ります。この操作は元に戻せません。",
+  "kitapsen_stat_delete_message": "この項目の読書時間と文字数の統計を削除しますか？ハイライトとメモには影響しません。",
+  "kitapsen_stat_sessions_clear_all_message": "$n 件の読書記録をすべて消去しますか？時間・文字数・ページ数が削除されます。ハイライトとメモは残ります。この操作は元に戻せません。",
+  "kitapsen_stat_session_delete_message": "この読書記録の時間・文字数・ページ数を削除しますか？ハイライトとメモには影響しません。",
+  "kitapsen_loading_slow_message_mobile": "起動にいつもより時間がかかっています。Kitapsen が大きなライブラリを読み込んでいる可能性があります。しばらくお待ちいただくか、「再試行」をタップしてください。データは安全で、失われることはありません。",
+  "kitapsen_settings_content_language_description": "言語を宣言していない本に使う予備の言語です。本ごとの設定が優先されます。",
+  "kitapsen_theme_role_reader_text_desc": "本文とツールバーのアイコン",
+  "kitapsen_theme_role_reader_background_desc": "読書ページとツールバーの背景",
+  "kitapsen_theme_role_selection_desc": "選択したテキストの背景",
+  "kitapsen_reading_stats_idle_timeout_hint": "この分数のあいだページをめくったりスクロールしたりしないと、読書時間の計測を止めます。",
+  "kitapsen_source_description_epub": "EPUB と PDF の読書",
+  "kitapsen_stat_range_calendar": "読書カレンダー"
 }

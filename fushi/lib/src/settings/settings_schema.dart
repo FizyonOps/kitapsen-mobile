@@ -285,7 +285,9 @@ SettingsDestination buildReaderQuickSettingsDestination(
   return SettingsDestination(
     id: SettingsDestinationId.readerQuickSettings,
     title: t.reader_settings_section,
-    summary: t.source_description_epub,
+    summary: kKitapsenEdition
+        ? t.kitapsen_source_description_epub
+        : t.source_description_epub,
     icon: Icons.tune_outlined,
     sections: <SettingsSection>[
       sectionFor(ReaderGroup.layout, t.section_layout),

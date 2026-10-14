@@ -1,3 +1,4 @@
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fushi/src/media/video/video_subtitle_style.dart';
@@ -105,7 +106,9 @@ class FontTargetPreview extends StatelessWidget {
                 families: families,
                 sampleText: sampleText,
               ),
-              FontTarget.dictionary => _DictionaryPreview(families: families),
+              FontTarget.dictionary => kKitapsenEdition
+                  ? const SizedBox.shrink()
+                  : _DictionaryPreview(families: families),
               FontTarget.videoSubtitle => _SubtitlePreview(
                 families: families,
                 style: subtitleStyle,

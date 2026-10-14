@@ -219,7 +219,9 @@ SettingsDestination buildAppearanceDestination() {
                   : contentLanguageLabelOf(current);
               return '${t.settings_content_language_title} · $label';
             },
-            subtitle: t.settings_content_language_description,
+            subtitle: kKitapsenEdition
+                ? t.kitapsen_settings_content_language_description
+                : t.settings_content_language_description,
             icon: Icons.translate,
             onTap: (SettingsContext settingsContext) async {
               final String current =
@@ -227,7 +229,9 @@ SettingsDestination buildAppearanceDestination() {
               await showContentLanguagePicker(
                 context: settingsContext.context,
                 title: t.settings_content_language_title,
-                description: t.settings_content_language_description,
+                description: kKitapsenEdition
+                    ? t.kitapsen_settings_content_language_description
+                    : t.settings_content_language_description,
                 current: current.isEmpty ? null : current,
                 autoDetected: '',
                 autoLabel: t.settings_content_language_unset,

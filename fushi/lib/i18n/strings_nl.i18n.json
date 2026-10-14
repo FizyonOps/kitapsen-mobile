@@ -6551,5 +6551,19 @@
   "kitapsen_report_reason": "Reason (optional)",
   "kitapsen_report_reason_hint": "Why is this inappropriate?",
   "kitapsen_report_submit": "Submit Report",
-  "kitapsen_report_thanks": "Reported. Thank you for helping keep the community safe."
+  "kitapsen_report_thanks": "Reported. Thank you for helping keep the community safe.",
+  "kitapsen_delete_statistics_book_desc": "Leestijd en gelezen tekens van dit boek worden op alle apparaten uit de statistieken verwijderd",
+  "kitapsen_stat_clear_all_reading_message": "Alle leestijd en tekentellingen wissen? Je markeringen en notities blijven bewaard. Dit kan niet ongedaan worden gemaakt.",
+  "kitapsen_stat_clear_all_overview_message": "Alle leesstatistieken wissen? Leestijd en tekentellingen worden verwijderd. Je markeringen, notities en activiteitentijdlijn blijven bewaard. Dit kan niet ongedaan worden gemaakt.",
+  "kitapsen_stat_delete_message": "De leestijd- en tekenstatistieken van dit item verwijderen? Je markeringen en notities blijven ongewijzigd.",
+  "kitapsen_stat_sessions_clear_all_message": "Alle $n sessies wissen? Hun tijd, tekens en pagina’s worden verwijderd. Je markeringen en notities blijven bewaard. Dit kan niet ongedaan worden gemaakt.",
+  "kitapsen_stat_session_delete_message": "Tijd, tekens en pagina’s van deze sessie verwijderen? Je markeringen en notities blijven ongewijzigd.",
+  "kitapsen_loading_slow_message_mobile": "Het opstarten duurt langer dan normaal — Kitapsen laadt mogelijk een grote bibliotheek. Wacht even of tik op Opnieuw. Je gegevens zijn veilig en gaan niet verloren.",
+  "kitapsen_settings_content_language_description": "Reservetaal voor boeken die geen taal opgeven. De instelling van een boek gaat voor.",
+  "kitapsen_theme_role_reader_text_desc": "Leestekst en pictogrammen van de werkbalk",
+  "kitapsen_theme_role_reader_background_desc": "Achtergrond van de leespagina en de werkbalk",
+  "kitapsen_theme_role_selection_desc": "Achtergrond van geselecteerde tekst",
+  "kitapsen_reading_stats_idle_timeout_hint": "Stop met het tellen van leestijd na zoveel minuten zonder bladeren of scrollen.",
+  "kitapsen_source_description_epub": "EPUB en PDF lezen",
+  "kitapsen_stat_range_calendar": "Leeskalender"
 }

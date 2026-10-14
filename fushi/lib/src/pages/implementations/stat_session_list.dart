@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:flutter/material.dart';
 import 'package:fushi/src/pages/implementations/stat_delete_confirm_dialog.dart';
 import 'package:fushi/src/pages/implementations/stat_session_edit_dialog.dart';
@@ -340,7 +341,9 @@ class _StatSessionListState extends State<StatSessionList> {
     final bool confirmed = await confirmDeleteStatistics(
       context,
       '${_confirmName(s)}\n${formatStatSessionRange(s.startAt, s.endAt)}',
-      message: t.stat_session_delete_message,
+      message: kKitapsenEdition
+          ? t.kitapsen_stat_session_delete_message
+          : t.stat_session_delete_message,
     );
     if (!confirmed || !mounted) return;
     await widget.onDelete(s);

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,6 +18,8 @@ import 'package:fushi/src/utils/misc/smooth_wheel_scroll.dart';
 
 @pragma('vm:entry-point')
 void popupMain() {
+  // Kitapsen: no popup dictionary; the native side never starts this entry.
+  if (kKitapsenEdition) return;
   runZonedGuarded<Future<void>>(() async {
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);

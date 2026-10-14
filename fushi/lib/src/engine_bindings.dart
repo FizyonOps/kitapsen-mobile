@@ -99,7 +99,10 @@ void installEngineHostBindings() {
   evictImageCacheForFile = _evictImageCacheForFile;
   releaseImageCacheBeforeDelete = _releaseImageCacheBeforeDelete;
   // 词典导入/删除前释放 FFI 引擎的文件映射（BUG-1756）。
-  releaseDictionaryMappings = FushiDicts.releaseAllMappings;
+  // Kitapsen: no dictionaries, so no dictionary engine to release.
+  if (!kKitapsenEdition) {
+    releaseDictionaryMappings = FushiDicts.releaseAllMappings;
+  }
   ffmpegPlatformBackendProvider = _platformFfmpegBackend;
   // 制卡 ffmpeg 的远端输入经本机中继（在线视频源伪装分片，BUG-2642 残留）：
   // 视频页登记，引擎按输入地址来查。
@@ -114,13 +117,16 @@ void installEngineHostBindings() {
   // path_provider 文档根）：纯 Dart 一半住 fushi_audio_core，插件实现由这里写入。
   installPlatformCharsetDetector();
   installAudiobookStoragePlatform();
-  // 漫画 OCR 整卷任务的后台 isolate：插件后端会话工厂 + MethodChannel 引导。
-  ocrSessionFactoryBuilder = buildOrtOcrFactory;
-  ocrIsolateBootstrap = fushiOcrIsolateBootstrap;
-  ocrIsolateBootstrapArg = RootIsolateToken.instance;
-  installMangaPanelDetectorFactory();
-  // Calibration OCR is an offline assist.  Installing the callback does not
-  // download models or create an ONNX session; both happen only when the user
-  // invokes screenshot alignment and the small pack is already present.
-  installGalCalibrationOcrAssist();
+  // Kitapsen: no manga or game text lookup, so no OCR.
+  if (!kKitapsenEdition) {
+    // 漫画 OCR 整卷任务的后台 isolate：插件后端会话工厂 + MethodChannel 引导。
+    ocrSessionFactoryBuilder = buildOrtOcrFactory;
+    ocrIsolateBootstrap = fushiOcrIsolateBootstrap;
+    ocrIsolateBootstrapArg = RootIsolateToken.instance;
+    installMangaPanelDetectorFactory();
+    // Calibration OCR is an offline assist.  Installing the callback does not
+    // download models or create an ONNX session; both happen only when the user
+    // invokes screenshot alignment and the small pack is already present.
+    installGalCalibrationOcrAssist();
+  }
 }

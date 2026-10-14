@@ -6551,5 +6551,19 @@
   "kitapsen_report_reason": "Reason (optional)",
   "kitapsen_report_reason_hint": "Why is this inappropriate?",
   "kitapsen_report_submit": "Submit Report",
-  "kitapsen_report_thanks": "Reported. Thank you for helping keep the community safe."
+  "kitapsen_report_thanks": "Reported. Thank you for helping keep the community safe.",
+  "kitapsen_delete_statistics_book_desc": "Время чтения и прочитанные символы этой книги будут удалены из статистики на всех устройствах",
+  "kitapsen_stat_clear_all_reading_message": "Очистить всё время чтения и счётчики символов? Ваши выделения и заметки сохранятся. Это действие нельзя отменить.",
+  "kitapsen_stat_clear_all_overview_message": "Очистить всю статистику чтения? Время чтения и счётчики символов будут удалены. Ваши выделения, заметки и лента активности сохранятся. Это действие нельзя отменить.",
+  "kitapsen_stat_delete_message": "Удалить статистику времени чтения и символов для этого элемента? Ваши выделения и заметки не затрагиваются.",
+  "kitapsen_stat_sessions_clear_all_message": "Очистить все записи сеансов ($n)? Их время, символы и страницы будут удалены. Ваши выделения и заметки сохранятся. Это действие нельзя отменить.",
+  "kitapsen_stat_session_delete_message": "Удалить время, символы и страницы этого сеанса? Ваши выделения и заметки не затрагиваются.",
+  "kitapsen_loading_slow_message_mobile": "Запуск занимает больше времени, чем обычно — возможно, Kitapsen загружает большую библиотеку. Подождите немного или нажмите «Повторить». Ваши данные в безопасности и не будут потеряны.",
+  "kitapsen_settings_content_language_description": "Резервный язык для книг, в которых язык не указан. Настройка конкретной книги имеет приоритет.",
+  "kitapsen_theme_role_reader_text_desc": "Текст для чтения и значки панели инструментов",
+  "kitapsen_theme_role_reader_background_desc": "Фон страницы чтения и панели инструментов",
+  "kitapsen_theme_role_selection_desc": "Фон выделенного текста",
+  "kitapsen_reading_stats_idle_timeout_hint": "Прекращать учёт времени чтения после стольких минут без перелистывания или прокрутки страницы.",
+  "kitapsen_source_description_epub": "Чтение EPUB и PDF",
+  "kitapsen_stat_range_calendar": "Календарь чтения"
 }

@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart' as p;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:fushi_dictionary/fushi_dictionary.dart';
 import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/media.dart';
 import 'package:fushi/models.dart';
@@ -47,14 +46,20 @@ final _srtBookUidsProvider = StreamProvider<List<String>>((ref) {
       .distinct(listEquals);
 });
 
+/// The shelf's books. Still a family so callers and overrides keep their shape,
+/// but the key is never read: it used to be the dictionary's target language,
+/// which the Kitapsen edition does not have. Read it with [kShelfBooksKey].
 final fushiBooksProvider =
-    FutureProvider.family<List<MediaItem>, Language>((ref, language) {
+    FutureProvider.family<List<MediaItem>, Object>((ref, _) {
   // BUG-793：订阅 EPUB 书集合变化，任意导入路径落库后自动重算书架。
   ref.watch(_epubBookKeysProvider);
   return ReaderFushiSource.instance.getBooksFromDb(
     appModel: ref.watch(appProvider),
   );
 });
+
+/// The one key every caller passes to [fushiBooksProvider].
+const Object kShelfBooksKey = 'shelf';
 
 final srtBooksProvider = FutureProvider<List<SrtBook>>((ref) {
   // BUG-793：订阅有声书集合变化，任意导入路径落库后自动重算。
@@ -203,7 +208,9 @@ class ReaderFushiSource extends ReaderMediaSource {
       : super(
           uniqueKey: kReaderSourcePersistedKey,
           sourceName: t.source_name_bookshelf,
-          description: t.source_description_epub,
+          description: kKitapsenEdition
+              ? t.kitapsen_source_description_epub
+              : t.source_description_epub,
           icon: Icons.auto_stories_outlined,
           implementsSearch: false,
           implementsHistory: false,
@@ -438,7 +445,7 @@ class ReaderFushiSource extends ReaderMediaSource {
     required AppModel appModel,
     required WidgetRef ref,
   }) async {
-    ref.invalidate(fushiBooksProvider(JapaneseLanguage.instance));
+    ref.invalidate(fushiBooksProvider);
     // BUG-777：阅读中位置持续落库刷新 updatedAt，关书回书架时 recency 映射与
     // 书列表同点失效，继续阅读 hero /「最近阅读」排序立即反映本次阅读。
     ref.invalidate(bookLastReadAtProvider);
@@ -522,7 +529,7 @@ class ReaderFushiSource extends ReaderMediaSource {
           ),
         );
         if (imported == true) {
-          ref.invalidate(fushiBooksProvider(JapaneseLanguage.instance));
+          ref.invalidate(fushiBooksProvider);
           ref.invalidate(srtBooksProvider);
         }
       },

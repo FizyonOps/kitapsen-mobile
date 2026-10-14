@@ -6551,5 +6551,19 @@
   "kitapsen_report_reason": "Reason (optional)",
   "kitapsen_report_reason_hint": "Why is this inappropriate?",
   "kitapsen_report_submit": "Submit Report",
-  "kitapsen_report_thanks": "Reported. Thank you for helping keep the community safe."
+  "kitapsen_report_thanks": "Reported. Thank you for helping keep the community safe.",
+  "kitapsen_delete_statistics_book_desc": "Lesezeit und gelesene Zeichen dieses Buchs werden auf allen Geräten aus der Statistik entfernt",
+  "kitapsen_stat_clear_all_reading_message": "Gesamte Lesezeit und alle Zeichenzahlen löschen? Deine Markierungen und Notizen bleiben erhalten. Dies kann nicht rückgängig gemacht werden.",
+  "kitapsen_stat_clear_all_overview_message": "Alle Lesestatistiken löschen? Lesezeit und Zeichenzahlen werden entfernt. Deine Markierungen, Notizen und der Aktivitätsverlauf bleiben erhalten. Dies kann nicht rückgängig gemacht werden.",
+  "kitapsen_stat_delete_message": "Lesezeit- und Zeichenstatistik dieses Eintrags löschen? Deine Markierungen und Notizen sind nicht betroffen.",
+  "kitapsen_stat_sessions_clear_all_message": "Alle $n Sitzungen löschen? Ihre Zeit-, Zeichen- und Seitenzahlen werden entfernt. Deine Markierungen und Notizen bleiben erhalten. Dies kann nicht rückgängig gemacht werden.",
+  "kitapsen_stat_session_delete_message": "Zeit, Zeichen- und Seitenzahl dieser Sitzung löschen? Deine Markierungen und Notizen sind nicht betroffen.",
+  "kitapsen_loading_slow_message_mobile": "Der Start dauert länger als üblich – Kitapsen lädt möglicherweise eine große Bibliothek. Bitte warte einen Moment oder tippe auf „Erneut versuchen“. Deine Daten sind sicher und gehen nicht verloren.",
+  "kitapsen_settings_content_language_description": "Ersatzsprache für Bücher, die keine Sprache angeben. Die Einstellung eines Buchs hat Vorrang.",
+  "kitapsen_theme_role_reader_text_desc": "Lesetext und Symbole der Werkzeugleiste",
+  "kitapsen_theme_role_reader_background_desc": "Hintergrund der Leseseite und der Werkzeugleiste",
+  "kitapsen_theme_role_selection_desc": "Hintergrund von markiertem Text",
+  "kitapsen_reading_stats_idle_timeout_hint": "Lesezeit nicht mehr zählen, wenn so viele Minuten lang weder umgeblättert noch gescrollt wird.",
+  "kitapsen_source_description_epub": "EPUB- und PDF-Lesen",
+  "kitapsen_stat_range_calendar": "Lesekalender"
 }

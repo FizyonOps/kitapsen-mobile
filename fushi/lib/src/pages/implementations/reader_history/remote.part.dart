@@ -643,7 +643,7 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
       ErrorLogService.instance.log(
           'ReaderFushiHistoryPage.downloadRemoteAudiobook', e.cause, stack);
       if (!mounted) return;
-      ref.invalidate(fushiBooksProvider(JapaneseLanguage.instance));
+      ref.invalidate(fushiBooksProvider);
       _refreshSrtBooks();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(t.remote_book_audiobook_download_failed)),
@@ -659,7 +659,7 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
       return;
     }
     if (!mounted) return;
-    ref.invalidate(fushiBooksProvider(JapaneseLanguage.instance));
+    ref.invalidate(fushiBooksProvider);
     _refreshSrtBooks();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(t.remote_book_downloaded)),
@@ -710,7 +710,7 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
       return;
     }
     if (!mounted) return;
-    ref.invalidate(fushiBooksProvider(JapaneseLanguage.instance));
+    ref.invalidate(fushiBooksProvider);
     // 远端去重（notAdopted）只在 _loadRemoteBooks 里算：不重载一次，占位卡会与刚
     // 落地的本地卡并排到切 tab 为止（正是上面注释说要避免的）。TTL 内不打网络。
     _refreshRemoteBooks();
@@ -1135,7 +1135,7 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
       }
     }
     if (!mounted) return;
-    ref.invalidate(fushiBooksProvider(JapaneseLanguage.instance));
+    ref.invalidate(fushiBooksProvider);
     _refreshSrtBooks();
     // 远端候选表（audiobookOnly）只在 _loadRemoteBooks 里算：不重载一次，菜单会
     // 一直留着「从对端下载有声书」到切 tab 为止。TTL 内不打网络。

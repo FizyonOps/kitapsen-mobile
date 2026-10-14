@@ -15,7 +15,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fushi_core/fushi_core.dart'
     show EpubBookRow, MangaOnlineSourceRow;
-import 'package:fushi_dictionary/fushi_dictionary.dart' show JapaneseLanguage;
 import 'package:fushi_engine/media/discovery/discovery_models.dart';
 
 import 'package:fushi/src/ai/ai_media_acquisition_assistant.dart';
@@ -387,7 +386,7 @@ class LnReaderNovelAcquisitionBackend implements MediaAcquisitionBackend {
             context,
             listen: false,
           );
-          container.invalidate(fushiBooksProvider(JapaneseLanguage.instance));
+          container.invalidate(fushiBooksProvider);
           container.invalidate(srtBooksProvider);
         }
         FushiToast.show(

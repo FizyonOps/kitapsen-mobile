@@ -484,8 +484,10 @@ class _HomePageState extends BasePageState<HomePage>
     // ——spec 2026-07-10 §7 后服务由 AppModel 持有 app 级监听，消费按
     // resolveDesktopLookupConsumer 分区（mainTab 仍只归 HomeDictionaryPage），
     // HomePage 根节点依旧不消费查词请求。
-    appModelNoUpdate.homeDictionaryTabRequest
-        .addListener(_onHomeDictionaryTabRequested);
+    if (!kKitapsenEdition) {
+      appModelNoUpdate.homeDictionaryTabRequest
+          .addListener(_onHomeDictionaryTabRequested);
+    }
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (!mounted) return;
@@ -520,8 +522,10 @@ class _HomePageState extends BasePageState<HomePage>
       if (!mounted) return;
 
       if (!tutorialOffered && appModel.isFirstTimeSetup) {
-        appModel.setLastSelectedDictionaryFormat(
-            JapaneseLanguage.instance.standardFormat);
+        if (!kKitapsenEdition) {
+          appModel.setLastSelectedDictionaryFormat(
+              JapaneseLanguage.instance.standardFormat);
+        }
         appModel.setFirstTimeSetupFlag();
         // 全新安装：把新手引导标成「待完成」再进下面的弹出分支。既有安装升级
         // 上来时该键缺省即 true（不弹）；中途杀进程下次启动值仍是 false，会
@@ -779,7 +783,7 @@ class _HomePageState extends BasePageState<HomePage>
   /// HomeDictionaryPage，spec 2026-07-10 §7）」的守卫。已在查词 tab 时无需切换
   /// （页面已挂载并消费）。
   void _onHomeDictionaryTabRequested() {
-    if (!mounted) return;
+    if (kKitapsenEdition || !mounted) return;
     // 「已经在查词 tab 上」只有在 HomePage 真的是栈顶时才等于「已经显示出来了」。
     // 阅读器 / 播放器压在上面时那个 tab 被完全遮住，早退会让本次请求变成彻底的
     // no-op（窗口弹到前台、一点反馈都没有）。被遮住时继续走 [_revealDictionary]，
@@ -837,11 +841,14 @@ class _HomePageState extends BasePageState<HomePage>
     super.didChangeAppLifecycleState(state);
     if (AppLifecycleState.resumed == state) {
       debugPrint('Lifecycle Resumed');
-      appModel.searchDictionary(
-        searchTerm: JapaneseLanguage.instance.helloWorld,
-        searchWithWildcards: false,
-        useCache: false,
-      );
+      // Kitapsen: no dictionaries to keep warm.
+      if (!kKitapsenEdition) {
+        appModel.searchDictionary(
+          searchTerm: JapaneseLanguage.instance.helloWorld,
+          searchWithWildcards: false,
+          useCache: false,
+        );
+      }
       // TODO-900: OS 层失焦（Alt+Tab 切窗）后 Flutter 不保证把 primaryFocus 归还到
       // 首页键事件 Focus，导致切窗回来后页级 / 全局快捷键全死，只能重启 app 才靠
       // autofocus 抢回。对齐视频页 [_reclaimVideoFocusIfOwned] 的 resumed 回收范式。
@@ -1055,7 +1062,8 @@ class _HomePageState extends BasePageState<HomePage>
     DictionaryFocusIntent? focus,
     bool carryingPendingLookup = false,
   }) {
-    if (!mounted) return;
+    // Kitapsen: no dictionary page.
+    if (kKitapsenEdition || !mounted) return;
     if (!carryingPendingLookup &&
         !appModel.moduleVisibility.isEnabled(ModuleId.lookup)) {
       return;
@@ -1110,7 +1118,7 @@ class _HomePageState extends BasePageState<HomePage>
   /// pending 的词填进去，清空会把它擦掉）。
   void _selectTabFromNav(HomeTab tab) {
     _selectTab(tab);
-    if (tab != HomeTab.dictionaries) return;
+    if (kKitapsenEdition || tab != HomeTab.dictionaries) return;
     if (!_activeTabs().contains(HomeTab.dictionaries)) return;
     _dictFocusSignal.value =
         const DictionaryFocusRequest(DictionaryFocusIntent.clearQuery);
@@ -1226,7 +1234,8 @@ class _HomePageState extends BasePageState<HomePage>
       case ShortcutAction.homeTabBooks:
         return _selectTabFromShortcut(HomeTab.books);
       case ShortcutAction.homeTabDict:
-        if (!appModel.moduleVisibility.isEnabled(ModuleId.lookup)) {
+        if (kKitapsenEdition ||
+            !appModel.moduleVisibility.isEnabled(ModuleId.lookup)) {
           return KeyEventResult.ignored;
         }
         _revealDictionary();
@@ -1241,7 +1250,8 @@ class _HomePageState extends BasePageState<HomePage>
         _cycleTab(-1);
         return KeyEventResult.handled;
       case ShortcutAction.homeFocusSearch:
-        if (!appModel.moduleVisibility.isEnabled(ModuleId.lookup)) {
+        if (kKitapsenEdition ||
+            !appModel.moduleVisibility.isEnabled(ModuleId.lookup)) {
           return KeyEventResult.ignored;
         }
         _revealDictionary(focus: DictionaryFocusIntent.keepQuery);

@@ -1,4 +1,4 @@
-import 'package:fushi_dictionary/fushi_dictionary.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -28,7 +28,9 @@ class ReaderPdfSource extends ReaderMediaSource {
       : super(
           uniqueKey: kUniqueKey,
           sourceName: t.source_name_bookshelf,
-          description: t.source_description_epub,
+          description: kKitapsenEdition
+              ? t.kitapsen_source_description_epub
+              : t.source_description_epub,
           icon: Icons.picture_as_pdf_outlined,
           implementsSearch: false,
           implementsHistory: false,
@@ -50,7 +52,7 @@ class ReaderPdfSource extends ReaderMediaSource {
     required WidgetRef ref,
   }) async {
     // 与 EPUB 源同点失效：关书回书架时刷新书列表与「最近阅读」recency（bookKey 同源）。
-    ref.invalidate(fushiBooksProvider(JapaneseLanguage.instance));
+    ref.invalidate(fushiBooksProvider);
     ref.invalidate(bookLastReadAtProvider);
   }
 

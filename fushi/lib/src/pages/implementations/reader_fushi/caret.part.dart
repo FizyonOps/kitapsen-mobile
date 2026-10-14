@@ -779,6 +779,8 @@ extension _ReaderCaret on _ReaderFushiPageState {
   /// or returning from a dismissed popup). The reader's own fushiCaret restores
   /// its remembered position, so this re-shows the ring where the user left it.
   Future<void> _enterCaret() async {
+    // Kitapsen: no lookup cursor.
+    if (kKitapsenEdition) return;
     if (_controller == null || !_readerContentReady || _caretBusy) return;
     _caretBusy = true;
     try {

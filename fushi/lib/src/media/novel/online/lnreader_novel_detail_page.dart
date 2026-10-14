@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fushi_audio/fushi_audio.dart' show Bookmark;
 import 'package:fushi_core/fushi_core.dart' show BookFormat, EpubBookRow;
-import 'package:fushi_dictionary/fushi_dictionary.dart';
 import 'package:fushi_engine/epub/book_title_conflict.dart';
 import 'package:fushi_engine/sync/deletion_propagation.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -165,7 +164,7 @@ class _LnReaderNovelDetailPageState
         _opening = false;
         _shelfBook = shelfBook;
       });
-      ref.invalidate(fushiBooksProvider(JapaneseLanguage.instance));
+      ref.invalidate(fushiBooksProvider);
       ref.invalidate(srtBooksProvider);
       return bookKey;
     } on Object catch (error) {
@@ -224,7 +223,7 @@ class _LnReaderNovelDetailPageState
         return;
       }
       setState(() => _shelfBook = null);
-      ref.invalidate(fushiBooksProvider(JapaneseLanguage.instance));
+      ref.invalidate(fushiBooksProvider);
       ref.invalidate(srtBooksProvider);
     } on Object catch (error, stack) {
       ErrorLogService.instance.log(
@@ -303,7 +302,7 @@ class _LnReaderNovelDetailPageState
     if (!mounted || outcome == null) return;
     switch (outcome) {
       case LnReaderDownloadSucceeded():
-        ref.invalidate(fushiBooksProvider(JapaneseLanguage.instance));
+        ref.invalidate(fushiBooksProvider);
         ref.invalidate(srtBooksProvider);
         FushiToast.show(
           msg: t.novel_download_done(title: novel.name),

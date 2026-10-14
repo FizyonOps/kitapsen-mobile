@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:fushi_core/fushi_core.dart';
-import 'package:fushi_dictionary/fushi_dictionary.dart';
 import 'package:fushi/media.dart';
 import 'package:fushi/src/media/import/quick_import_section.dart';
 import 'package:fushi/src/media/manga/manga_import_dialog.dart';
@@ -46,7 +45,7 @@ class _MangaSourcesPageState extends ConsumerState<MangaSourcesPage> {
       builder: (_) => MangaImportDialog(db: db),
     );
     if (imported == true && mounted) {
-      ref.invalidate(fushiBooksProvider(JapaneseLanguage.instance));
+      ref.invalidate(fushiBooksProvider);
       ref.invalidate(srtBooksProvider);
     }
   }

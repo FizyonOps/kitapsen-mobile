@@ -53,12 +53,10 @@ enum FontTarget {
 /// 其余平台勾上等于写一个永远没人读的偏好键——UI 必须据此隐藏，否则用户会以为
 /// 自己已经设好了。其余用途五平台通用。
 bool isFontTargetAvailableOnPlatform(FontTarget target) => switch (target) {
-      FontTarget.gameLookup => Platform.isWindows,
-      FontTarget.appUi ||
-      FontTarget.body ||
-      FontTarget.dictionary ||
-      FontTarget.videoSubtitle =>
-        true,
+      FontTarget.gameLookup => !kKitapsenEdition && Platform.isWindows,
+      // Kitapsen: no dictionary popup and no video, so only UI and book fonts.
+      FontTarget.dictionary || FontTarget.videoSubtitle => !kKitapsenEdition,
+      FontTarget.appUi || FontTarget.body => true,
     };
 
 /// All reader display/behavior settings, decoupled from the media source.

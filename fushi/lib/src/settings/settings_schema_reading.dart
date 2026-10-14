@@ -895,7 +895,9 @@ SettingsDestination buildReadingDestination() {
           SettingsStepperItem(
             id: 'reading.stats_idle_timeout_minutes',
             title: t.reading_stats_idle_timeout,
-            subtitle: t.reading_stats_idle_timeout_hint,
+            subtitle: kKitapsenEdition
+                ? t.kitapsen_reading_stats_idle_timeout_hint
+                : t.reading_stats_idle_timeout_hint,
             icon: Icons.timer_off_outlined,
             min: PreferencesRepository.readingIdleTimeoutMinutesMin.toDouble(),
             max: PreferencesRepository.readingIdleTimeoutMinutesMax.toDouble(),

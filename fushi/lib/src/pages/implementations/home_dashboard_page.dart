@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:fushi_dictionary/fushi_dictionary.dart';
 import 'dart:async';
 import 'package:fushi_engine/sync/remote_collection_adoption_service.dart';
 import 'package:fushi_engine/sync/collection_book_identity_index.dart';
@@ -629,7 +628,7 @@ class _HomeDashboardPageState
       // 对端进度写回后首页拿不到新值、要重启才生效。表级变更信号（现已含
       // readerPositions）到达时一并失效，让下面的重载 + build 的 ref.watch 读到
       // 新进度。频度由写入端自身的 debounce + 本 400ms 防抖兜住。
-      ref.invalidate(fushiBooksProvider(JapaneseLanguage.instance));
+      ref.invalidate(fushiBooksProvider);
       ref.invalidate(bookLastReadAtProvider);
       unawaited(_loadDashboardData());
     });
@@ -921,7 +920,7 @@ class _HomeDashboardPageState
           results[2] as List<RemoteActivityEvent>;
       if (!mounted) return;
       final List<MediaItem> books =
-          ref.read(fushiBooksProvider(JapaneseLanguage.instance)).valueOrNull ??
+          ref.read(fushiBooksProvider(kShelfBooksKey)).valueOrNull ??
               const <MediaItem>[];
       final Set<String> localBookKeys = <String>{
         for (final MediaItem item in books)
@@ -994,7 +993,7 @@ class _HomeDashboardPageState
     final FushiDesignTokens tokens = FushiDesignTokens.of(context);
     final AppModel appModel = ref.watch(appProvider);
     final List<MediaItem> books =
-        ref.watch(fushiBooksProvider(JapaneseLanguage.instance)).valueOrNull ??
+        ref.watch(fushiBooksProvider(kShelfBooksKey)).valueOrNull ??
             const <MediaItem>[];
     final Map<String, int> lastReadByKey =
         ref.watch(bookLastReadAtProvider).valueOrNull ?? const <String, int>{};
@@ -2355,7 +2354,7 @@ class _HomeDashboardPageState
       }
       if (mediaKind == kActivityMediaBook) {
         final List<MediaItem> books = ref
-                .read(fushiBooksProvider(JapaneseLanguage.instance))
+                .read(fushiBooksProvider(kShelfBooksKey))
                 .valueOrNull ??
             const <MediaItem>[];
         for (final MediaItem item in books) {

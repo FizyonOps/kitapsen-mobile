@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:drift/drift.dart' show Value;
 import 'package:fushi_anki/fushi_anki.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi_core/fushi_core.dart';
 import 'package:fushi_engine/profile/profile_document.dart';
 import 'package:fushi/src/media/media_source.dart';
@@ -27,7 +28,9 @@ class ProfileRepository {
     bool Function(String name)? isDictionaryInstalled,
   }) : _isDictionaryInstalled = isDictionaryInstalled;
   final FushiDatabase _db;
-  final BaseAnkiRepository _ankiRepo;
+  /// Null in the Kitapsen edition, which has no Anki: profiles then carry no
+  /// Anki settings.
+  final BaseAnkiRepository? _ankiRepo;
 
   /// 「这本词典**真的装着**吗」的唯一真值源：磁盘上有没有
   /// `dictionaryResourceDirectory/<name>/`。元数据行的存在性**不是**这个判据——
@@ -90,15 +93,18 @@ class ProfileRepository {
     final entries = <ProfileSettingsCompanion>[];
 
     // Anki settings (SharedPreferences)
-    final ankiSettings = await _ankiRepo.loadSettings();
-    final ankiMap = ProfileKeys.ankiSettingsToMap(ankiSettings);
-    for (final entry in ankiMap.entries) {
-      entries.add(ProfileSettingsCompanion.insert(
-        profileId: profileId,
-        category: ProfileKeys.categoryAnki,
-        key: entry.key,
-        value: entry.value,
-      ));
+    final BaseAnkiRepository? ankiRepo = kKitapsenEdition ? null : _ankiRepo;
+    if (ankiRepo != null) {
+      final ankiSettings = await ankiRepo.loadSettings();
+      final ankiMap = ProfileKeys.ankiSettingsToMap(ankiSettings);
+      for (final entry in ankiMap.entries) {
+        entries.add(ProfileSettingsCompanion.insert(
+          profileId: profileId,
+          category: ProfileKeys.categoryAnki,
+          key: entry.key,
+          value: entry.value,
+        ));
+      }
     }
 
     // ALL Drift prefs (excluding app-state keys)
@@ -266,10 +272,11 @@ class ProfileRepository {
     });
 
     // Anki settings (SharedPreferences)
-    if (ankiMap.isNotEmpty) {
-      final current = await _ankiRepo.loadSettings();
+    final BaseAnkiRepository? ankiRepo = kKitapsenEdition ? null : _ankiRepo;
+    if (ankiRepo != null && ankiMap.isNotEmpty) {
+      final current = await ankiRepo.loadSettings();
       final updated = ProfileKeys.mapToAnkiSettings(ankiMap, current);
-      await _ankiRepo.saveSettings(updated);
+      await ankiRepo.saveSettings(updated);
     }
   }
 

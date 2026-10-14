@@ -758,6 +758,7 @@ extension _ReaderChrome on _ReaderFushiPageState {
   /// 原样生效）。与桌面右键 / 原生 ActionMode 的「导出片段」共用同一后端动作。
   Future<void> _exportAudiobookClipFromSelectionData(
       ReaderSelectionData data) async {
+    if (kKitapsenEdition) return;
     if (data.text.isEmpty) {
       FushiToast.show(
           msg: t.audiobook_export_clip_no_text, severity: ToastSeverity.error);
@@ -3229,6 +3230,8 @@ extension _ReaderChrome on _ReaderFushiPageState {
   /// 最高频的查词面不变色）。中性梯度与编辑页预览 / ColorScheme 用同一个
   /// [deriveSurfaceRolesFrom]，所见即所得。
   void _syncDictionaryTheme() {
+    // Kitapsen: no dictionary popup to theme.
+    if (kKitapsenEdition) return;
     // 决策全在 [resolveDictionaryPopupTheme]（纯函数、可直接断言）：它保证覆盖
     // 主题带上 FushiEinkTheme 扩展，并在墨水屏下跳过纸色派生。这里只负责把
     // AppModel / 阅读器主题的当前取值喂进去。

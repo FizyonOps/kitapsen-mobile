@@ -2,6 +2,7 @@ import 'dart:io' show Platform;
 
 import 'package:fushi_anki/fushi_anki.dart';
 import 'package:fushi_platform/fushi_platform.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 
 import 'package:fushi/src/anki/ankimobile_repository.dart';
 import 'package:fushi/src/anki/sync_client/anki_sync_client_repository.dart';
@@ -95,7 +96,9 @@ class PlatformServices {
     bool? isIOS,
     bool? isAndroid,
     AnkiSyncSession? Function()? ankiSyncSession,
-  })  : _ankiSyncSession = ankiSyncSession ?? (() => sharedAnkiSyncSession),
+  })  : _ankiSyncSession = kKitapsenEdition
+            ? _noSyncSession
+            : ankiSyncSession ?? (() => sharedAnkiSyncSession),
         isWindows = isWindows ?? Platform.isWindows,
         isDesktop = isDesktop ??
             (Platform.isWindows || Platform.isMacOS || Platform.isLinux),
@@ -106,13 +109,16 @@ class PlatformServices {
         _isMobile = isMobile,
         _androidClipboard = androidClipboard,
         assert(
-          !isMobile || createMobileAnkiConnectRepository != null,
+          kKitapsenEdition ||
+              !isMobile ||
+              createMobileAnkiConnectRepository != null,
           'Mobile requires an AnkiConnect repository factory.',
         );
 
   /// Creates the active Anki backend. 移动端保留各自的原生后端（AnkiDroid /
   /// AnkiMobile）作为升级安全的默认值，但可显式改用一台可达的 AnkiConnect。
   BaseAnkiRepository createAnkiRepository() {
+    if (kKitapsenEdition) return _kitapsenHasNoAnki();
     if (_useAnkiSyncClient) {
       return AnkiSyncClientRepository(session: _ankiSyncSession());
     }
@@ -160,6 +166,8 @@ class PlatformServices {
   /// after all services are constructed.
   Future<void> init() async {
     await _androidClipboard?.init();
+    // Kitapsen: no Anki backends to choose between.
+    if (kKitapsenEdition) return;
     final AnkiSettings settings =
         await _createDefaultAnkiRepository().loadSettings();
     setUseAnkiSyncClient(settings.useAnkiSyncClient);
@@ -196,8 +204,10 @@ class PlatformServices {
         clipboard: clipboard,
         permission: AndroidPermissionService(deviceInfo),
         deviceInfo: deviceInfo,
-        createAnkiRepository: AnkiRepository.new,
-        createMobileAnkiConnectRepository: AnkiConnectRepository.new,
+        createAnkiRepository:
+            kKitapsenEdition ? _kitapsenHasNoAnki : AnkiRepository.new,
+        createMobileAnkiConnectRepository:
+            kKitapsenEdition ? null : AnkiConnectRepository.new,
         isMobile: true,
         androidClipboard: clipboard,
       );
@@ -213,8 +223,10 @@ class PlatformServices {
         // AnkiConnect 走纯 HTTP，iOS 上与 Android 一样可用——指向局域网里那台跑着
         // Anki 桌面版的机器即可。接上它，iOS 才第一次拥有 Lapis 样式客制化等
         // 「要改已存在 note type」的能力（AnkiMobile 只有加卡的 URL scheme）。
-        createAnkiRepository: AnkiMobileRepository.new,
-        createMobileAnkiConnectRepository: AnkiConnectRepository.new,
+        createAnkiRepository:
+            kKitapsenEdition ? _kitapsenHasNoAnki : AnkiMobileRepository.new,
+        createMobileAnkiConnectRepository:
+            kKitapsenEdition ? null : AnkiConnectRepository.new,
         isMobile: true,
       );
     }
@@ -228,3 +240,10 @@ class PlatformServices {
     );
   }
 }
+
+/// Kitapsen: there is no Anki backend. Nothing in the edition asks for one;
+/// reaching this is a bug, so it fails loudly instead of returning a fake.
+BaseAnkiRepository _kitapsenHasNoAnki() =>
+    throw UnsupportedError('The Kitapsen edition has no Anki integration.');
+
+AnkiSyncSession? _noSyncSession() => null;

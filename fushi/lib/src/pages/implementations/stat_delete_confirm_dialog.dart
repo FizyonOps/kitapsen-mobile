@@ -1,3 +1,4 @@
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:flutter/material.dart';
 import 'package:fushi/utils.dart';
 
@@ -44,7 +45,7 @@ class StatDeleteConfirmDialog extends StatelessWidget {
           tokens.spacing.card,
         ),
         body: Text(
-          '$itemTitle\n\n${message ?? t.stat_delete_message}',
+          '$itemTitle\n\n${message ?? (kKitapsenEdition ? t.kitapsen_stat_delete_message : t.stat_delete_message)}',
           style: tokens.type.listSubtitle,
         ),
         footer: Wrap(
@@ -178,7 +179,9 @@ class StatClearSessionsConfirmDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) => FushiDestructiveConfirmDialog(
         title: t.stat_sessions_clear_all_title,
-        message: t.stat_sessions_clear_all_message(n: count),
+        message: kKitapsenEdition
+            ? t.kitapsen_stat_sessions_clear_all_message(n: count)
+            : t.stat_sessions_clear_all_message(n: count),
         leadingIcon: Icons.playlist_remove,
         confirmLabel: t.stat_clear_all_confirm,
         checkboxLabel: t.stat_sessions_clear_all_ack(n: count),

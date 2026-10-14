@@ -6551,5 +6551,19 @@
   "kitapsen_report_reason": "Reason (optional)",
   "kitapsen_report_reason_hint": "Why is this inappropriate?",
   "kitapsen_report_submit": "Submit Report",
-  "kitapsen_report_thanks": "Reported. Thank you for helping keep the community safe."
+  "kitapsen_report_thanks": "Reported. Thank you for helping keep the community safe.",
+  "kitapsen_delete_statistics_book_desc": "Thời gian đọc và số ký tự đã đọc của cuốn sách này sẽ bị xóa khỏi thống kê trên mọi thiết bị",
+  "kitapsen_stat_clear_all_reading_message": "Xóa toàn bộ thời gian đọc và số ký tự? Đánh dấu và ghi chú của bạn vẫn được giữ. Không thể hoàn tác.",
+  "kitapsen_stat_clear_all_overview_message": "Xóa toàn bộ thống kê đọc? Thời gian đọc và số ký tự sẽ bị xóa. Đánh dấu, ghi chú và dòng thời gian hoạt động của bạn vẫn được giữ. Không thể hoàn tác.",
+  "kitapsen_stat_delete_message": "Xóa thống kê thời gian đọc và số ký tự của mục này? Đánh dấu và ghi chú của bạn không bị ảnh hưởng.",
+  "kitapsen_stat_sessions_clear_all_message": "Xóa tất cả $n phiên đọc? Thời gian, số ký tự và số trang của chúng sẽ bị xóa. Đánh dấu và ghi chú của bạn vẫn được giữ. Không thể hoàn tác.",
+  "kitapsen_stat_session_delete_message": "Xóa thời gian, số ký tự và số trang của phiên này? Đánh dấu và ghi chú của bạn không bị ảnh hưởng.",
+  "kitapsen_loading_slow_message_mobile": "Khởi động lâu hơn bình thường — có thể Kitapsen đang tải một thư viện lớn. Vui lòng chờ một chút hoặc nhấn Thử lại. Dữ liệu của bạn an toàn và sẽ không bị mất.",
+  "kitapsen_settings_content_language_description": "Ngôn ngữ dự phòng cho sách không khai báo ngôn ngữ. Cài đặt riêng của từng sách được ưu tiên.",
+  "kitapsen_theme_role_reader_text_desc": "Văn bản đọc và biểu tượng thanh công cụ",
+  "kitapsen_theme_role_reader_background_desc": "Nền trang đọc và thanh công cụ",
+  "kitapsen_theme_role_selection_desc": "Nền của văn bản được chọn",
+  "kitapsen_reading_stats_idle_timeout_hint": "Ngừng tính thời gian đọc sau số phút này mà không lật hoặc cuộn trang.",
+  "kitapsen_source_description_epub": "Đọc EPUB và PDF",
+  "kitapsen_stat_range_calendar": "Lịch đọc"
 }

@@ -6551,5 +6551,19 @@
   "kitapsen_report_reason": "原因（可选）",
   "kitapsen_report_reason_hint": "为什么不恰当？",
   "kitapsen_report_submit": "提交举报",
-  "kitapsen_report_thanks": "已举报。感谢你帮助维护社区安全。"
+  "kitapsen_report_thanks": "已举报。感谢你帮助维护社区安全。",
+  "kitapsen_delete_statistics_book_desc": "这本书的阅读时长与已读字数将从所有设备的统计中移除",
+  "kitapsen_stat_clear_all_reading_message": "清空全部阅读时长与字数？你的高亮与笔记会保留。此操作无法撤销。",
+  "kitapsen_stat_clear_all_overview_message": "清空全部阅读统计？阅读时长与字数会被清除。你的高亮、笔记与活动时间线会保留。此操作无法撤销。",
+  "kitapsen_stat_delete_message": "删除该项的阅读时长与字数统计？你的高亮与笔记不受影响。",
+  "kitapsen_stat_sessions_clear_all_message": "清空全部 $n 条阅读记录？其时长、字数与页数会被清除。你的高亮与笔记会保留。此操作无法撤销。",
+  "kitapsen_stat_session_delete_message": "删除这次阅读的时长、字数与页数？你的高亮与笔记不受影响。",
+  "kitapsen_loading_slow_message_mobile": "启动比平时慢——Kitapsen 可能正在载入较大的书库。请稍候，或点「重试」重新载入。你的数据是安全的，不会丢失。",
+  "kitapsen_settings_content_language_description": "未声明语言的书使用的后备语言。单本书的设置优先于此。",
+  "kitapsen_theme_role_reader_text_desc": "阅读器正文与工具栏图标",
+  "kitapsen_theme_role_reader_background_desc": "阅读器页面与工具栏背景",
+  "kitapsen_theme_role_selection_desc": "选中文字的背景",
+  "kitapsen_reading_stats_idle_timeout_hint": "超过这么多分钟没有翻页或滚动时，停止计入阅读时长。",
+  "kitapsen_source_description_epub": "EPUB 与 PDF 阅读",
+  "kitapsen_stat_range_calendar": "阅读日历"
 }

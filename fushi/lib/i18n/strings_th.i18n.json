@@ -6551,5 +6551,19 @@
   "kitapsen_report_reason": "Reason (optional)",
   "kitapsen_report_reason_hint": "Why is this inappropriate?",
   "kitapsen_report_submit": "Submit Report",
-  "kitapsen_report_thanks": "Reported. Thank you for helping keep the community safe."
+  "kitapsen_report_thanks": "Reported. Thank you for helping keep the community safe.",
+  "kitapsen_delete_statistics_book_desc": "เวลาอ่านและจำนวนตัวอักษรที่อ่านของหนังสือเล่มนี้จะถูกลบออกจากสถิติในทุกอุปกรณ์",
+  "kitapsen_stat_clear_all_reading_message": "ล้างเวลาอ่านและจำนวนตัวอักษรทั้งหมดหรือไม่ ไฮไลต์และโน้ตของคุณจะยังอยู่ การดำเนินการนี้ไม่สามารถย้อนกลับได้",
+  "kitapsen_stat_clear_all_overview_message": "ล้างสถิติการอ่านทั้งหมดหรือไม่ เวลาอ่านและจำนวนตัวอักษรจะถูกลบ ไฮไลต์ โน้ต และไทม์ไลน์กิจกรรมของคุณจะยังอยู่ การดำเนินการนี้ไม่สามารถย้อนกลับได้",
+  "kitapsen_stat_delete_message": "ลบสถิติเวลาอ่านและจำนวนตัวอักษรของรายการนี้หรือไม่ ไฮไลต์และโน้ตของคุณจะไม่ได้รับผลกระทบ",
+  "kitapsen_stat_sessions_clear_all_message": "ล้างบันทึกการอ่านทั้ง $n รายการหรือไม่ เวลา จำนวนตัวอักษร และจำนวนหน้าจะถูกลบ ไฮไลต์และโน้ตของคุณจะยังอยู่ การดำเนินการนี้ไม่สามารถย้อนกลับได้",
+  "kitapsen_stat_session_delete_message": "ลบเวลา จำนวนตัวอักษร และจำนวนหน้าของรอบการอ่านนี้หรือไม่ ไฮไลต์และโน้ตของคุณจะไม่ได้รับผลกระทบ",
+  "kitapsen_loading_slow_message_mobile": "การเริ่มต้นใช้เวลานานกว่าปกติ — Kitapsen อาจกำลังโหลดคลังหนังสือขนาดใหญ่ โปรดรอสักครู่หรือแตะลองอีกครั้ง ข้อมูลของคุณปลอดภัยและจะไม่สูญหาย",
+  "kitapsen_settings_content_language_description": "ภาษาสำรองสำหรับหนังสือที่ไม่ได้ระบุภาษา การตั้งค่าของหนังสือแต่ละเล่มมีความสำคัญกว่า",
+  "kitapsen_theme_role_reader_text_desc": "ข้อความที่อ่านและไอคอนแถบเครื่องมือ",
+  "kitapsen_theme_role_reader_background_desc": "พื้นหลังหน้าอ่านและแถบเครื่องมือ",
+  "kitapsen_theme_role_selection_desc": "พื้นหลังของข้อความที่เลือก",
+  "kitapsen_reading_stats_idle_timeout_hint": "หยุดนับเวลาอ่านเมื่อไม่ได้พลิกหรือเลื่อนหน้าเป็นเวลาเท่านี้นาที",
+  "kitapsen_source_description_epub": "การอ่าน EPUB และ PDF",
+  "kitapsen_stat_range_calendar": "ปฏิทินการอ่าน"
 }

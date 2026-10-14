@@ -269,7 +269,8 @@ class _OnboardingWizardPageState extends BasePageState<OnboardingWizardPage>
   /// 变成硬门）。但建成了的话 `_steps` 会因为 Anki 变 ready 而多出一步，所以 await
   /// 之后必须重新取一次序列，不能沿用进函数时那份。
   Future<void> _goNextAsync() async {
-    if (_steps[_stepIndex] == OnboardingStepId.anki) {
+    // Kitapsen: the onboarding has no Anki step.
+    if (!kKitapsenEdition && _steps[_stepIndex] == OnboardingStepId.anki) {
       await promptCreateLapisIfCannotMine(
         context: context,
         viewModel: ref.read(ankiViewModelProvider.notifier),
@@ -328,6 +329,8 @@ class _OnboardingWizardPageState extends BasePageState<OnboardingWizardPage>
   /// 打开独立查词页；[query] 非空时把它当作用户输入立即查一次（练习句子整句进
   /// 源文本条，用户在真实查词面板里点词）。
   void _openStandaloneLookup({String? query}) {
+    // Kitapsen: no lookup page.
+    if (kKitapsenEdition) return;
     unawaited(
       _pushPage(
         (_) => Scaffold(

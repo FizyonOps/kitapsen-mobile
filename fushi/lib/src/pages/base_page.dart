@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fushi/models.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/pages/fushi_page_placeholders.dart';
 
 /// A page template which assumes use of [BasePageState] by which all pages
@@ -28,7 +29,8 @@ abstract class BasePageState<T extends BasePage> extends ConsumerState<T>
   void initState() {
     super.initState();
     _cachedAppModel = ref.read(appProvider);
-    _cachedCreatorModel = ref.read(creatorProvider);
+    // Kitapsen: no card creation, so pages never build the card creator.
+    if (!kKitapsenEdition) _cachedCreatorModel = ref.read(creatorProvider);
   }
 
   /// Access the global model responsible for app-wide state management.

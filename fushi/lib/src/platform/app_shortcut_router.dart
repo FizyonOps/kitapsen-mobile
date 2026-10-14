@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:fushi/src/anki/source_review_navigation.dart';
@@ -77,6 +78,13 @@ Future<void> runAppShortcut(
     openLookup();
     return;
   }
+  // Kitapsen: no Anki card-source navigation queue, and reader pages do not
+  // register with it, so they are popped like any other route.
+  if (kKitapsenEdition) {
+    selectHomeTab(shortcut.homeTab);
+    if (navigator != null) await _popToHomeRoute(navigator);
+    return;
+  }
   final ExternalMediaNavigation mediaNavigation =
       media ?? ExternalMediaNavigation.instance;
   // 与卡片来源回跳（card_source_router）同一条队列：两个外部入口不会同时去收
@@ -116,6 +124,16 @@ Future<void> unwindToHomeRoute(
     } else {
       await navigator.maybePop();
     }
+    if (!navigator.mounted || top.isActive) return;
+  }
+}
+
+/// [unwindToHomeRoute] without the media-page queue (Kitapsen edition).
+Future<void> _popToHomeRoute(NavigatorState navigator) async {
+  while (navigator.mounted && navigator.canPop()) {
+    final Route<dynamic>? top = _topRoute(navigator);
+    if (top == null) return;
+    await navigator.maybePop();
     if (!navigator.mounted || top.isActive) return;
   }
 }

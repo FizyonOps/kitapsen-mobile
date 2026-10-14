@@ -991,7 +991,7 @@ class AppModel with ChangeNotifier {
       ReaderMediaType.instance.refreshTab();
     }
 
-    if (report.localAudioImported > 0) {
+    if (!kKitapsenEdition && report.localAudioImported > 0) {
       DictionaryMediaType.instance.refreshTab();
     }
 
@@ -1263,6 +1263,8 @@ class AppModel with ChangeNotifier {
     floatingLyricContextLines: () => floatingLyricContextLines,
     floatingLyricClickLookup: () => floatingLyricClickLookup,
     onFloatingLyricLookup: (String text, int index, Rect? wordRect) {
+      // Kitapsen: no lookup.
+      if (kKitapsenEdition) return;
       // app 级（无 reader attach）桌面悬浮窗点词：Windows 优先弹 867 app 外全局
       // 查词覆盖窗（TODO-872，主窗最小化/被遮挡也看得见）；覆盖窗不可用才回落
       // 常驻主窗口的 in-app 查词宿主 [FloatingLyricLookupHost]（main.dart 根
@@ -2550,6 +2552,12 @@ class AppModel with ChangeNotifier {
 
   /// Populate maps for languages at startup to optimise performance.
   void populateLanguages() {
+    // Kitapsen: no target language (no lookup or language study).
+    if (kKitapsenEdition) {
+      languages = const <String, Language>{};
+      return;
+    }
+
     /// A list of languages that the app will support at runtime.
     final List<Language> availableLanguages = List<Language>.unmodifiable(
       [
@@ -2607,7 +2615,8 @@ class AppModel with ChangeNotifier {
     final List<MediaType> availableMediaTypes = List<MediaType>.unmodifiable(
       [
         ReaderMediaType.instance,
-        DictionaryMediaType.instance,
+        // Kitapsen: no dictionary.
+        if (!kKitapsenEdition) DictionaryMediaType.instance,
       ],
     );
 
@@ -2635,7 +2644,7 @@ class AppModel with ChangeNotifier {
         // Kitapsen: no manga, so the manga reader is not compiled in.
         if (!kKitapsenEdition) MangaFushiSource.instance,
       ],
-      DictionaryMediaType.instance: [],
+      if (!kKitapsenEdition) DictionaryMediaType.instance: [],
     };
 
     mediaSources = Map<MediaType, Map<String, MediaSource>>.unmodifiable(
@@ -2656,6 +2665,12 @@ class AppModel with ChangeNotifier {
 
   /// Populate maps for dictionary formats at startup to optimise performance.
   void populateDictionaryFormats() {
+    // Kitapsen: no dictionaries, so no import formats.
+    if (kKitapsenEdition) {
+      dictionaryFormats = const <String, DictionaryFormat>{};
+      return;
+    }
+
     /// A list of dictionary formats that the app will support at runtime.
     final List<DictionaryFormat> availableDictionaryFormats =
         List<DictionaryFormat>.unmodifiable(
@@ -2681,6 +2696,11 @@ class AppModel with ChangeNotifier {
 
   /// Populate maps for fields at startup to optimise performance.
   void populateFields() {
+    // Kitapsen: no card creation, so no card fields.
+    if (kKitapsenEdition) {
+      fields = const <String, Field>{};
+      return;
+    }
     fields = Map<String, Field>.unmodifiable(
       Map<String, Field>.fromEntries(
         globalFields.map(
@@ -2692,6 +2712,12 @@ class AppModel with ChangeNotifier {
 
   /// Populate maps for enhancements at startup to optimise performance.
   void populateEnhancements() {
+    // Kitapsen: no card creation, so no field enhancements.
+    if (kKitapsenEdition) {
+      enhancements = const <Field, Map<String, Enhancement>>{};
+      return;
+    }
+
     /// A list of enhancements that the app will support at runtime.
     final Map<Field, List<Enhancement>> availableEnhancements = {
       AudioField.instance: [
@@ -2806,6 +2832,12 @@ class AppModel with ChangeNotifier {
 
   /// Populate maps for actions at startup to optimise performance.
   void populateQuickActions() {
+    // Kitapsen: quick actions live in the lookup popup, which it does not have.
+    if (kKitapsenEdition) {
+      quickActions = const <String, QuickAction>{};
+      return;
+    }
+
     /// A list of actions that the app will support at runtime.
     final List<QuickAction> availableQuickActions = [
       AddToStashAction(),
@@ -2855,7 +2887,8 @@ class AppModel with ChangeNotifier {
       // Windows galgame overlay toolbar: reduced official Google font subset.
       'material-symbols-rounded',
       // 内置 AnkiConnect 插件包（assets/anki/，GPLv3，新手引导一键安装用）。
-      'anki-connect',
+      // Kitapsen does not bundle the add-on, so not its license either.
+      if (!kKitapsenEdition) 'anki-connect',
       // galgame 校准 OCR 的 NFKC 映射表（gal_lookup_ocr_unicode.dart）由
       // Unicode Character Database 生成，Unicode License V3 要求随附许可。
       'unicode-data',
@@ -3005,8 +3038,9 @@ class AppModel with ChangeNotifier {
       /// Prepare all repositories (objects created first, then loaded in
       /// parallel to avoid serial await chains).
       _prefsRepo = PreferencesRepository(_database);
-      final BaseAnkiRepository ankiRepo =
-          platformServices.createAnkiRepository();
+      // Kitapsen: no Anki, so profiles carry no Anki settings.
+      final BaseAnkiRepository? ankiRepo =
+          kKitapsenEdition ? null : platformServices.createAnkiRepository();
       final profileRepo = ProfileRepository(
         _database,
         ankiRepo,
@@ -3014,26 +3048,32 @@ class AppModel with ChangeNotifier {
         // 只在 applyProfile（用户操作）里调，那时 late 的资源目录早已就位。
         isDictionaryInstalled: isDictionaryInstalledOnDisk,
       );
-      dictRepo = DictionaryRepository(_database,
-          onCacheRebuild: _rebuildDictPathsCache,
-          isLowMemory: () => prefsRepo.lowMemoryMode);
-      _dictionaryRepoReady = true;
+      // Kitapsen: no dictionaries, so the dictionary repository is never
+      // built and [isDictionaryRepoReady] stays false.
+      if (!kKitapsenEdition) {
+        dictRepo = DictionaryRepository(_database,
+            onCacheRebuild: _rebuildDictPathsCache,
+            isLowMemory: () => prefsRepo.lowMemoryMode);
+        _dictionaryRepoReady = true;
+      }
       mediaHistoryRepo = MediaHistoryRepository(_database);
 
       debugPrint('[Fushi] init: repositories (parallel)');
       await Future.wait(<Future<void>>[
         prefsRepo.loadFromDb().then((_) => _applyStatDayResetHour()),
         profileRepo.ensureDefaultProfile(),
-        dictRepo.loadFromDb(),
+        if (!kKitapsenEdition) dictRepo.loadFromDb(),
         mediaHistoryRepo.loadFromDb(),
       ]);
       prefsRepo.addListener(notifyListeners);
-      // 封面模式默认是音画同步片段：2026-09-28 被钉成 GIF 的存量安装在这里迁一次。
-      await prefsRepo.settleMiningImageModeInstallDefault();
-      // 偏好一装载就把折叠开关推给 TexthookerService（进程级单例、无 ref）。漏了这一步
-      // 开关就只在「本次会话里手动改过」时才生效，重启后静默退回默认值。
-      TexthookerService.instance.foldProgressiveLines =
-          prefsRepo.galHookFoldProgressiveLines;
+      if (!kKitapsenEdition) {
+        // 封面模式默认是音画同步片段：2026-09-28 被钉成 GIF 的存量安装在这里迁一次。
+        await prefsRepo.settleMiningImageModeInstallDefault();
+        // 偏好一装载就把折叠开关推给 TexthookerService（进程级单例、无 ref）。漏了这一步
+        // 开关就只在「本次会话里手动改过」时才生效，重启后静默退回默认值。
+        TexthookerService.instance.foldProgressiveLines =
+            prefsRepo.galHookFoldProgressiveLines;
+      }
       // 代理是**进程级**网络出口配置，却只存在偏好里；同步层的单例（GoogleDriveAuth 等）
       // 拿不到 AppModel，以前就只能各自裸连——BUG-1348 的谷歌云盘登录超时正是如此。四个
       // 代理读取器的绑定已下沉到 `PreferencesRepository.loadFromDb()`（偏好变得可读的
@@ -3083,9 +3123,12 @@ class AppModel with ChangeNotifier {
         'create-runtime-dirs',
         Future.wait(<Future<void>>[
           thumbnailsDirectory.create(recursive: true),
-          dictionaryImportWorkingDirectory.create(recursive: true),
-          dictionaryResourceDirectory.create(recursive: true).then((_) =>
-              purgePendingDictionaryDeletes(dictionaryResourceDirectory)),
+          // Kitapsen: no dictionaries, so no dictionary directories.
+          if (!kKitapsenEdition)
+            dictionaryImportWorkingDirectory.create(recursive: true),
+          if (!kKitapsenEdition)
+            dictionaryResourceDirectory.create(recursive: true).then((_) =>
+                purgePendingDictionaryDeletes(dictionaryResourceDirectory)),
           refreshSystemPalette(),
           () async {
             _exportDirectory = await prepareExportDirectory();
@@ -3112,7 +3155,11 @@ class AppModel with ChangeNotifier {
       // TODO-1260：内部对每本词典的资源目录做 exists() 探测（数据根派生），同样叠超时。
       ErrorLogService.instance
           .markInitStep('rebuild-dict-paths（词典资源目录 exists + 物化探测）');
-      await _guardInitIo('rebuild-dict-paths', _rebuildDictPathsCacheAsync());
+      // Kitapsen: no dictionary repository, so no dictionary engine to load.
+      if (!kKitapsenEdition) {
+        await _guardInitIo(
+            'rebuild-dict-paths', _rebuildDictPathsCacheAsync());
+      }
 
       _localAudioManager = LocalAudioManager(
         prefsRepo: prefsRepo,
@@ -3129,21 +3176,25 @@ class AppModel with ChangeNotifier {
       LocaleSettings.setLocaleRaw(appLocale.toLanguageTag());
       // 词形变化语法说明的译文表跟界面语言走（BUG-2038）。装的是一张内存查表，
       // 与词典引擎里那份英文 transforms JSON 无关，所以放在引擎初始化之后也没问题。
-      unawaited(applyTransformDescriptionLocale(appLocale.toLanguageTag()));
+      if (!kKitapsenEdition) {
+        unawaited(applyTransformDescriptionLocale(appLocale.toLanguageTag()));
+      }
       populateMediaTypes();
       populateMediaSources();
       populateDictionaryFormats();
       populateEnhancements();
       populateQuickActions();
 
-      _dictImportManager = DictionaryImportManager(
-        dictRepo: dictRepo,
-        resourceDirectory: _dictionaryResourceDirectory,
-        formats: dictionaryFormats,
-      );
+      if (!kKitapsenEdition) {
+        _dictImportManager = DictionaryImportManager(
+          dictRepo: dictRepo,
+          resourceDirectory: _dictionaryResourceDirectory,
+          formats: dictionaryFormats,
+        );
+      }
 
       await Future.wait(<Future<void>>[
-        JapaneseLanguage.instance.initialise(),
+        if (!kKitapsenEdition) JapaneseLanguage.instance.initialise(),
         injectAssetLicenses(),
         _seedBuiltInTags(),
         _prepareLocalAudioForPlayback(),
@@ -3199,14 +3250,18 @@ class AppModel with ChangeNotifier {
       gamepadService.start();
 
       await Future.wait(<Future<void>>[
-        Future.wait(<Future<void>>[
-          for (Field field in globalFields)
-            for (Enhancement enhancement in enhancements[field]!.values)
-              enhancement.initialise(),
-        ]),
-        Future.wait(<Future<void>>[
-          for (QuickAction action in quickActions.values) action.initialise(),
-        ]),
+        // Kitapsen: no card fields or quick actions (both maps are empty).
+        if (!kKitapsenEdition)
+          Future.wait(<Future<void>>[
+            for (Field field in globalFields)
+              for (Enhancement enhancement in enhancements[field]!.values)
+                enhancement.initialise(),
+          ]),
+        if (!kKitapsenEdition)
+          Future.wait(<Future<void>>[
+            for (QuickAction action in quickActions.values)
+              action.initialise(),
+          ]),
         Future.wait(<Future<void>>[
           for (MediaType type in mediaTypes.values)
             for (MediaSource source in mediaSources[type]!.values)
@@ -3230,7 +3285,8 @@ class AppModel with ChangeNotifier {
 
       debugPrint(
           '[Fushi] init: search preload (deferred to after first frame)');
-      unawaited(_warmUpSearchAfterFirstFrame());
+      // Kitapsen: no dictionaries to warm up.
+      if (!kKitapsenEdition) unawaited(_warmUpSearchAfterFirstFrame());
       // 已下架的本机 OCR 模型（约 10 GB 的 CUDA 档）留在磁盘上的目录：设置页与
       // 存储页都没有它的入口了，不清就永远占着空间。幂等、失败只记日志。
       unawaited(deleteRemovedMangaOcrModelDirs());
@@ -3245,13 +3301,16 @@ class AppModel with ChangeNotifier {
       // 刻意**不加模块门**：这只是给 native 悬浮词典窗注册「查词 / 制卡」回调，
       // 是 app 外取词**能力**而不是查词页入口。用户拍板「关 lookup 只关页面入口，
       // 查词能力全留」，注销回调会让已开着的悬浮窗查不出词、按钮静默失败。
-      _setupFloatingDictHandlers();
-      // 把查词输入法语言同步给原生查词界面：Android 的悬浮词典 / 弹窗词典搜索框是
-      // 原生 EditText，读的是这份持久化值。放这里而不是只在设置页写——用户可能从
-      // 备份恢复、或在别的设备改了同步过来，那些路径都不经设置页。
-      unawaited(
-        LookupImeChannel.persistForNativeSurfaces(effectiveLookupImeLanguage),
-      );
+      // Kitapsen: no floating dictionary and no lookup search box.
+      if (!kKitapsenEdition) {
+        _setupFloatingDictHandlers();
+        // 把查词输入法语言同步给原生查词界面：Android 的悬浮词典 / 弹窗词典搜索框是
+        // 原生 EditText，读的是这份持久化值。放这里而不是只在设置页写——用户可能从
+        // 备份恢复、或在别的设备改了同步过来，那些路径都不经设置页。
+        unawaited(
+          LookupImeChannel.persistForNativeSurfaces(effectiveLookupImeLanguage),
+        );
+      }
       // 已迁移只读态（Fushi 迁移 P1-4）：不再自启互联服务——两版并存时端口
       // 固定必冲突（SyncServerPortInUseException 会打到用户脸上）；老版只保
       // 留「重新导出」通道。
@@ -4001,7 +4060,7 @@ class AppModel with ChangeNotifier {
     await _setPref('app_locale', localeTag);
     LocaleSettings.setLocaleRaw(localeTag);
     // 语法说明译文表即时换掉：不重启的桌面端也要跟着变（BUG-2038）。
-    await applyTransformDescriptionLocale(localeTag);
+    if (!kKitapsenEdition) await applyTransformDescriptionLocale(localeTag);
     if (isDesktopPlatform) {
       // 刮削资料语言默认跟随界面语言，而下载导入那条刮削链的配置在建管线时
       // 冻结（BUG-2454）：不重建，桌面端换完界面语言后新下载的作品仍按旧语言
@@ -6787,7 +6846,7 @@ class AppModel with ChangeNotifier {
     await audioCtrl.audioHandler?.stop();
 
     mediaSource.mediaType.refreshTab();
-    DictionaryMediaType.instance.refreshTab();
+    if (!kKitapsenEdition) DictionaryMediaType.instance.refreshTab();
 
     if (_shouldKillMediaOnPop) {
       shutdown();
@@ -7552,8 +7611,10 @@ class AppModel with ChangeNotifier {
     // 也对称撤掉，防止未决防抖 Timer 在 AppModel 销毁后仍去摸 db。
     uninstallCollectionsSyncWatcher();
     // 其余三个 stop 都 null 安全 / 单例安全，未启动也可调，无需 _isInitialised 守卫。
-    unawaited(TexthookerWsClientManager.instance.stop());
-    unawaited(stopYomitanApiServer());
+    if (!kKitapsenEdition) {
+      unawaited(TexthookerWsClientManager.instance.stop());
+      unawaited(stopYomitanApiServer());
+    }
     _animeDownloadService?.stop();
     _animeDownloadSubscriptionService?.stop();
     _videoDownloadPipelineRuntimeWanted = false;
@@ -7592,7 +7653,7 @@ class AppModel with ChangeNotifier {
       themeNotifier.dispose();
       _themeListenerAdded = false;
     }
-    dictionaryDownloadController.dispose();
+    if (!kKitapsenEdition) dictionaryDownloadController.dispose();
     recommendedPackDownloadController.dispose();
     dictionaryEntriesNotifier.dispose();
     dictionarySearchAgainNotifier.dispose();
@@ -7610,7 +7671,8 @@ class AppModel with ChangeNotifier {
     // fields unassigned, and reading them would throw.
     _prefsRepo?.dispose();
     if (_isInitialised) {
-      dictRepo.dispose();
+      // Kitapsen never builds the dictionary repository.
+      if (!kKitapsenEdition) dictRepo.dispose();
       mediaHistoryRepo.dispose();
     }
     _remoteLookupHttpClient?.close();

@@ -2164,7 +2164,8 @@ updateLive: function(patch) {
               _focusOwnership.reclaim(FocusReclaimCause.gesture);
               return;
             }
-            if (!shiftKey && !ReaderFushiSource.instance.highlightOnTap) {
+            if (kKitapsenEdition ||
+                (!shiftKey && !ReaderFushiSource.instance.highlightOnTap)) {
               // Without tap-to-look-up the JS side reports every tap here (text
               // or blank alike), so a tap must do what a tap on blank space
               // does: drop a leftover selection and reveal / hide the floating

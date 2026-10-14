@@ -28,7 +28,6 @@ import 'package:fushi/src/utils/cover_image.dart';
 import 'package:fushi_engine/stats/study_sessions.dart';
 import 'package:fushi/utils.dart';
 import 'package:fushi_core/fushi_core.dart';
-import 'package:fushi_dictionary/fushi_dictionary.dart';
 
 /// 统计中心的 tab（阶段 2：三个独立统计页收进一个入口）。排行榜 2026-09-28 曾是第 5 个
 /// tab，2026-10-01 抽成首页统计中心入口旁的独立页（[LeaderboardPage]）。
@@ -81,7 +80,9 @@ class _StatisticsCenterPageState extends BasePageState<StatisticsCenterPage> {
         ref.watch(profileViewModelProvider).activeProfile?.name;
     return FushiPageScaffold(
       title: t.stat_center_title,
-      subtitle: profileName == null
+      // Kitapsen: one implicit profile with no profile UI, so no scope line
+      // (it would show the internal "Default" name).
+      subtitle: kKitapsenEdition || profileName == null
           ? null
           : t.stat_center_profile_scope(name: profileName),
       actions: <Widget>[
@@ -277,7 +278,7 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
       _bookItemsByKey = <String, MediaItem>{
         for (final MediaItem item
             in ref
-                    .read(fushiBooksProvider(JapaneseLanguage.instance))
+                    .read(fushiBooksProvider(kShelfBooksKey))
                     .valueOrNull ??
                 const <MediaItem>[])
           if (ReaderFushiSource.parseBookKey(item.mediaIdentifier) ??
@@ -372,14 +373,17 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
             extraLines: <StatSummaryLine>[
               if (statBookCphOf(_daily, range.contains) case final String cph)
                 StatSummaryLine(label: t.stat_reading_speed, value: cph),
-              StatSummaryLine(
-                label: t.stat_lookup,
-                value: '${sumStatEventsInRange(_lookupEvents, range)}',
-              ),
-              StatSummaryLine(
-                label: t.stat_mined,
-                value: '${sumStatEventsInRange(_minedEvents, range)}',
-              ),
+              // Kitapsen: no lookup or card creation to count.
+              if (!kKitapsenEdition)
+                StatSummaryLine(
+                  label: t.stat_lookup,
+                  value: '${sumStatEventsInRange(_lookupEvents, range)}',
+                ),
+              if (!kKitapsenEdition)
+                StatSummaryLine(
+                  label: t.stat_mined,
+                  value: '${sumStatEventsInRange(_minedEvents, range)}',
+                ),
             ],
           ),
         ),
@@ -497,7 +501,9 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
   Future<void> _confirmAndClearAll() async {
     final bool confirmed = await confirmClearAllStatistics(
       context,
-      t.stat_clear_all_overview_message,
+      kKitapsenEdition
+          ? t.kitapsen_stat_clear_all_overview_message
+          : t.stat_clear_all_overview_message,
     );
     if (!confirmed || !mounted) return;
     final FushiDatabase db = ref.read(appProvider).database;
@@ -615,9 +621,14 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
         StatSummaryLine(value: formatStatChars(chars)),
         if (cph != null)
           StatSummaryLine(label: t.stat_reading_speed, value: cph),
-        StatSummaryLine(label: t.stat_lookup, value: '${pick(_lookup)}'),
-        StatSummaryLine(label: t.stat_mined, value: '${pick(_mined)}'),
-        StatSummaryLine(label: t.stat_favorited, value: '${pick(_favorited)}'),
+        // Kitapsen: no lookup, card creation or saved words.
+        if (!kKitapsenEdition)
+          StatSummaryLine(label: t.stat_lookup, value: '${pick(_lookup)}'),
+        if (!kKitapsenEdition)
+          StatSummaryLine(label: t.stat_mined, value: '${pick(_mined)}'),
+        if (!kKitapsenEdition)
+          StatSummaryLine(
+              label: t.stat_favorited, value: '${pick(_favorited)}'),
         StatSummaryLine(
           label: t.stat_favorited_sentence,
           value: '${pick(_favoritedSentences)}',
@@ -724,7 +735,7 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
     }
     if (mediaKind == kActivityMediaBook) {
       final List<MediaItem> books =
-          ref.read(fushiBooksProvider(JapaneseLanguage.instance)).valueOrNull ??
+          ref.read(fushiBooksProvider(kShelfBooksKey)).valueOrNull ??
           const <MediaItem>[];
       for (final MediaItem item in books) {
         final String? key =

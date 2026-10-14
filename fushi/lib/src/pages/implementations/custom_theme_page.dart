@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
@@ -322,13 +323,19 @@ class _CustomThemePageState extends BasePageState<CustomThemePage> {
       case _ThemeRole.surface:
         return t.theme_role_surface_desc;
       case _ThemeRole.readerText:
-        return t.theme_role_reader_text_desc;
+        return kKitapsenEdition
+            ? t.kitapsen_theme_role_reader_text_desc
+            : t.theme_role_reader_text_desc;
       case _ThemeRole.readerBackground:
-        return t.theme_role_reader_background_desc;
+        return kKitapsenEdition
+            ? t.kitapsen_theme_role_reader_background_desc
+            : t.theme_role_reader_background_desc;
       case _ThemeRole.link:
         return t.theme_role_link_desc;
       case _ThemeRole.selection:
-        return t.theme_role_selection_desc;
+        return kKitapsenEdition
+            ? t.kitapsen_theme_role_selection_desc
+            : t.theme_role_selection_desc;
       case _ThemeRole.audioHighlight:
         return t.theme_role_audio_highlight_desc;
       case _ThemeRole.secondary:

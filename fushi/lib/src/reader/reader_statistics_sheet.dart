@@ -23,6 +23,7 @@ library;
 
 import 'dart:async';
 
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:flutter/material.dart';
 import 'package:fushi_audio/fushi_audio.dart' show StudySessionTotals;
 import 'package:fushi_core/fushi_core.dart' show LookupMiningCounterRow;
@@ -353,8 +354,11 @@ class _ReaderStatisticsSheetState extends State<ReaderStatisticsSheet> {
                   cells: <String>[
                     formatStatTime(book.todayMs),
                     t.stat_format_chars(n: formatGroupedInt(book.todayChars)),
-                    t.reader_stats_lookups(n: '${book.todayLookups}'),
-                    t.reader_stats_cards(n: '${book.todayCards}'),
+                    // Kitapsen: no lookup or card creation to count.
+                    if (!kKitapsenEdition)
+                      t.reader_stats_lookups(n: '${book.todayLookups}'),
+                    if (!kKitapsenEdition)
+                      t.reader_stats_cards(n: '${book.todayCards}'),
                   ],
                 ),
                 const _Rule(),

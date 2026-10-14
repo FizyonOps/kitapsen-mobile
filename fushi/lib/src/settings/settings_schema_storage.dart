@@ -133,12 +133,16 @@ SettingsDestination buildStorageDestination() {
             ),
         ];
       },
-      dictionaryNamesProvider: () async => <String>[
-        for (final Dictionary d in c.appModel.dictionaries) d.name,
-      ],
+      // Kitapsen: no dictionaries.
+      dictionaryNamesProvider: () async => kKitapsenEdition
+          ? const <String>[]
+          : <String>[
+              for (final Dictionary d in c.appModel.dictionaries) d.name,
+            ],
       // 只翻译明细行的 label；上面那份真名列表照旧驱动目录扫描与删除路由。
-      dictionaryDisplayNamesProvider: () async =>
-          c.appModel.dictionaryDisplayNameOverrides,
+      dictionaryDisplayNamesProvider: () async => kKitapsenEdition
+          ? const <String, String>{}
+          : c.appModel.dictionaryDisplayNameOverrides,
       deleteBook: (String bookKey) async {
         final DeleteBookResult result = await ReaderFushiSource.instance
             .deleteBook(
@@ -191,6 +195,7 @@ SettingsDestination buildStorageDestination() {
         return null;
       },
       deleteDictionary: (String name) async {
+        if (kKitapsenEdition) return null;
         // AppModel.deleteDictionary 内部 catch-all 不上抛（自弹失败 toast），
         // 「无异常」不等于成功——以「删除后该名是否仍在词典表」为准回报
         // （审查 M1）。找不到该名 = 目标状态已达成，按成功处理。

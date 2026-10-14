@@ -6551,5 +6551,19 @@
   "kitapsen_report_reason": "Sebep (isteğe bağlı)",
   "kitapsen_report_reason_hint": "Neden uygunsuz?",
   "kitapsen_report_submit": "Bildirimi Gönder",
-  "kitapsen_report_thanks": "Bildirildi. Topluluğu güvenli tutmaya yardımcı olduğunuz için teşekkür ederiz."
+  "kitapsen_report_thanks": "Bildirildi. Topluluğu güvenli tutmaya yardımcı olduğunuz için teşekkür ederiz.",
+  "kitapsen_delete_statistics_book_desc": "Bu kitabın okuma süresi ve okunan karakterler tüm cihazlardaki istatistiklerden kaldırılır",
+  "kitapsen_stat_clear_all_reading_message": "Tüm okuma süresi ve karakter sayıları temizlensin mi? Vurgularınız ve notlarınız korunur. Bu işlem geri alınamaz.",
+  "kitapsen_stat_clear_all_overview_message": "Tüm okuma istatistikleri temizlensin mi? Okuma süresi ve karakter sayıları silinir. Vurgularınız, notlarınız ve etkinlik zaman çizelgeniz korunur. Bu işlem geri alınamaz.",
+  "kitapsen_stat_delete_message": "Bu öğenin okuma süresi ve karakter sayısı istatistikleri silinsin mi? Vurgularınız ve notlarınız etkilenmez.",
+  "kitapsen_stat_sessions_clear_all_message": "$n oturum kaydının tümü temizlensin mi? Bunların süre, karakter ve sayfa sayıları silinir. Vurgularınız ve notlarınız korunur. Bu işlem geri alınamaz.",
+  "kitapsen_stat_session_delete_message": "Bu oturumun süresi, karakter ve sayfa sayısı silinsin mi? Vurgularınız ve notlarınız etkilenmez.",
+  "kitapsen_loading_slow_message_mobile": "Başlatma normalden uzun sürüyor — Kitapsen büyük bir kütüphane yüklüyor olabilir. Lütfen biraz bekleyin veya yeniden yüklemek için Tekrar Dene'ye dokunun. Verileriniz güvende ve kaybolmayacak.",
+  "kitapsen_settings_content_language_description": "Dil beyan etmeyen kitaplar için yedek dil. Kitap başına ayarlar bunu geçersiz kılar.",
+  "kitapsen_theme_role_reader_text_desc": "Okuyucu metni ve araç çubuğu simgeleri",
+  "kitapsen_theme_role_reader_background_desc": "Okuyucu sayfası ve araç çubuğu arka planı",
+  "kitapsen_theme_role_selection_desc": "Seçili metnin arka planı",
+  "kitapsen_reading_stats_idle_timeout_hint": "Sayfa çevirme veya kaydırma olmadan bu kadar dakika geçince okuma süresini saymayı durdur.",
+  "kitapsen_source_description_epub": "EPUB ve PDF okuma",
+  "kitapsen_stat_range_calendar": "Okuma takvimi"
 }

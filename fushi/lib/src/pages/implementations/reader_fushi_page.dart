@@ -2116,12 +2116,17 @@ class _ReaderFushiPageState extends BaseSourcePageState<ReaderFushiPage>
   // follows the popup stack as the user goes deeper / backs out. While active,
   // A/Enter looks up the word at the cursor, B/Esc backs out a layer, and
   // directional keys / Tab step the cursor. Backed by [_caret].
-  CaretSurface get _caretSurface => _caret.surface;
-  set _caretSurface(CaretSurface value) => _caret.surface = value;
+  //
+  // Kitapsen: no dictionary, so the cursor never exists (always [CaretSurface.none]).
+  CaretSurface get _caretSurface =>
+      kKitapsenEdition ? CaretSurface.none : _caret.surface;
+  set _caretSurface(CaretSurface value) {
+    if (!kKitapsenEdition) _caret.surface = value;
+  }
 
-  bool get _caretActive => _caret.active;
-  bool get _caretOnReader => _caret.onReader;
-  bool get _caretOnLyrics => _caret.onLyrics;
+  bool get _caretActive => !kKitapsenEdition && _caret.active;
+  bool get _caretOnReader => !kKitapsenEdition && _caret.onReader;
+  bool get _caretOnLyrics => !kKitapsenEdition && _caret.onLyrics;
 
   // The WebView char caret and focus-layer hops are part of the experimental
   // keyboard/gamepad focus navigation system. Page-turn and media shortcuts stay
@@ -2134,8 +2139,10 @@ class _ReaderFushiPageState extends BaseSourcePageState<ReaderFushiPage>
   // pagination DOM and make the cursor jump. New directional input is dropped
   // while an op is in flight; the next auto-repeat tick moves instead.
   // Backed by [_caret].
-  bool get _caretBusy => _caret.busy;
-  set _caretBusy(bool value) => _caret.busy = value;
+  bool get _caretBusy => !kKitapsenEdition && _caret.busy;
+  set _caretBusy(bool value) {
+    if (!kKitapsenEdition) _caret.busy = value;
+  }
 
   bool get _showTopProgress =>
       // 桌面端底部状态行取代顶部进度 pill：进度数字挪到右下角，顶部不再有 chrome。
@@ -2385,7 +2392,9 @@ class _ReaderFushiPageState extends BaseSourcePageState<ReaderFushiPage>
   @override
   void initState() {
     super.initState();
-    _sourceReviewSession = SourceReviewScope.read(context);
+    // Kitapsen: no Anki card-source review.
+    _sourceReviewSession =
+        kKitapsenEdition ? null : SourceReviewScope.read(context);
     _sourceReviewWasActive = _sourceReviewActive;
     _suppressPositionPersist = _sourceReviewActive;
     _sourceReviewSession?.addListener(_onSourceReviewChanged);
@@ -3263,8 +3272,9 @@ class _ReaderFushiPageState extends BaseSourcePageState<ReaderFushiPage>
     setState(() {});
   }
 
-  void _resumePopupCaretForHardwareNav() =>
-      _caret.resumePopupCaretForHardwareNav();
+  void _resumePopupCaretForHardwareNav() {
+    if (!kKitapsenEdition) _caret.resumePopupCaretForHardwareNav();
+  }
 
   @override
   void didChangeMetrics() {
@@ -4081,7 +4091,7 @@ $liveConfigJs
   /// sentence 字段（[joinMinedSentences]），音频区间合并（[mergeMiningAudioRanges]，
   /// 跨章/跨音频文件退化为只合文本）。制卡成功或关闭弹窗栈后清空。书籍 + 有声书共用
   /// 同一 reader 页 / currentSentence 链路，区别只在裁句子音频。
-  final MiningSentenceDraft _miningDraft = MiningSentenceDraft();
+  late final MiningSentenceDraft _miningDraft = MiningSentenceDraft();
 
   /// TODO-644 / BUG-357：制卡串行化队列。`onMineFromPopup` / `onUpdateFromPopup` 都把
   /// 自己的 prepare→mine 工作经 [SerialTaskQueue.enqueue] 挂到队列尾，保证同一时刻只跑
@@ -4334,7 +4344,7 @@ $liveConfigJs
     // If the cursor was living in a popup (controller/keyboard flow), the popup
     // it was in is gone — bring it back to the reader at its remembered word.
     // This covers every dismiss path (B/Esc, tap-outside, swipe).
-    if (_caretSurface == CaretSurface.popup) {
+    if (!kKitapsenEdition && _caretSurface == CaretSurface.popup) {
       _caret.popupState = null;
       unawaited(_enterCaret());
     }
@@ -4386,12 +4396,15 @@ $liveConfigJs
   /// remains: keep the cursor on the popup surface, follow it to the new top, and
   /// re-measure its ring.
   @override
-  void onDictionaryStackChanged() => _caret.onDictionaryStackChanged();
+  void onDictionaryStackChanged() {
+    if (!kKitapsenEdition) _caret.onDictionaryStackChanged();
+  }
 
   /// Hand the char-level cursor to the freshly rendered top popup when in cursor
   /// mode. Pure-touch users (surface == none) are unaffected.
   @override
   void onDictionaryPopupRendered(int index) {
+    if (kKitapsenEdition) return;
     _caret.onDictionaryPopupRendered(index);
     // BUG-1071 ②：指针（触摸/鼠标点词）唤出的弹窗此前**没有任何 Flutter 焦点持有者**
     // —— 弹窗是纯原生平台 WebView（无 Flutter FocusNode），点词后 OS 焦点落在原生
@@ -4470,7 +4483,8 @@ $liveConfigJs
 
   /// 宿主腿的门控 + 8px 节流（BUG-2508），barrier 与正文 WebView 两个入口共用一把
   /// 锚，同一位置不会被两处各查一次。
-  final ReaderHostHoverLookupGate _hostHoverGate = ReaderHostHoverLookupGate();
+  late final ReaderHostHoverLookupGate _hostHoverGate =
+      ReaderHostHoverLookupGate();
 
   /// 最后一次落在正文 WebView 盒内的指针位置（WebView 局部 == CSS 视口坐标）。
   /// 由正文 [MouseRegion] 与 dismiss barrier 两个 hover 入口共同维护；指针离开
@@ -4645,6 +4659,7 @@ $liveConfigJs
   /// 查词。[hoverAutoLookup] 由调用方按入口决定，barrier 恒 false。
   /// TODO-851：悬停是 hover 路径，传 fromHover:true，命中空白不触发 onTapEmpty。
   void _hostHoverLookupAt(Offset local, {required bool hoverAutoLookup}) {
+    if (kKitapsenEdition) return;
     if (!_hostHoverGate.shouldLookup(
       local,
       shiftPressed: HardwareKeyboard.instance.isShiftPressed,
@@ -4680,7 +4695,7 @@ $liveConfigJs
   /// 刚出、barrier 接管 hover 引起的 exit（此时指针仍在正文上，位置由
   /// [onDismissBarrierHover] 接力更新）。
   void _handleWebViewHostHoverExit(PointerExitEvent event) {
-    if (isDictionaryShown) return;
+    if (kKitapsenEdition || isDictionaryShown) return;
     _lastWebViewHoverLocal = null;
     _hostHoverGate.reset();
   }

@@ -182,7 +182,8 @@ SystemUiOverlayStyle fushiSystemOverlayStyle(Brightness brightness) {
 
 @pragma('vm:entry-point')
 void popupMain() {
-  popup_entrypoint.popupMain();
+  // Kitapsen: no popup dictionary, so its entry point compiles to nothing.
+  if (!kKitapsenEdition) popup_entrypoint.popupMain();
 }
 
 /// Application execution starts here.
@@ -570,15 +571,19 @@ void main([List<String> args = const <String>[]]) {
     /// [AppModel.isInitialised] will flip to true and notify listeners when
     /// done, causing [FushiReaderApp] to navigate from [LoadingPage] to
     /// [HomePage].
-    await FushiDicts.preloadTransforms();
+    // Kitapsen: no dictionaries, so no deinflection tables to load.
+    if (!kKitapsenEdition) await FushiDicts.preloadTransforms();
 
     final appModel = container.read(appProvider);
     // TODO-2936：浏览器扩展查词命中 yomitan-api server 时应用「浏览器」媒体类型
     // 的 Profile 绑定。必须在 initialise() 之前注入（server 在 initialise 内启动）。
-    appModel.browserLookupProfileApplier = () => container
-        .read(profileViewModelProvider.notifier)
-        .autoApplyBinding(mediaType: ProfileMediaKind.browser);
-    appModel.ankiRepositoryReader = () => container.read(ankiRepositoryProvider);
+    if (!kKitapsenEdition) {
+      appModel.browserLookupProfileApplier = () => container
+          .read(profileViewModelProvider.notifier)
+          .autoApplyBinding(mediaType: ProfileMediaKind.browser);
+      appModel.ankiRepositoryReader =
+          () => container.read(ankiRepositoryProvider);
+    }
     await appModel.initialise();
     // 互联 P2P 隧道（原生库可用才装）：client 选路在直连全失败后经隧道兜底
     // （docs/specs/2026-09-28-interconnect-remote-reach.md §5）。
@@ -591,7 +596,9 @@ void main([List<String> args = const <String>[]]) {
 
     // Windows/iOS 弹窗内联资产（popup.html/js/css ~300KB）异步预读：把 4 次
     // 同步读盘从「第一次查词」路径挪到启动空闲期（内部平台门控，其它平台 no-op）。
-    unawaited(DictionaryPopupWebViewState.preloadInlinePopupAssets());
+    if (!kKitapsenEdition) {
+      unawaited(DictionaryPopupWebViewState.preloadInlinePopupAssets());
+    }
 
     final bool isMobilePlatform = Platform.isAndroid || Platform.isIOS;
     final bool isDesktopPlatform =
@@ -867,8 +874,11 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
     super.initState();
 
     WidgetsBinding.instance.addObserver(this);
-    _pendingMineArrivals =
-        PendingMineRelay.arrivals.listen((_) => _flushPendingMines());
+    // Kitapsen: no card mining, so nothing is ever queued for Anki.
+    if (!kKitapsenEdition) {
+      _pendingMineArrivals =
+          PendingMineRelay.arrivals.listen((_) => _flushPendingMines());
+    }
     // BUG-772：仅 Windows 挂 present-watchdog——runApp 后 30s 仍无一帧 rasterize
     // （firstFrameRasterized==false）判定 raster/present 楔死（快速进出视频的
     // libmpv/ANGLE/WGC churn 污染进程共享 D3D device），落盘取证 + 一次性自动重启。
@@ -979,6 +989,7 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
   /// 回到前台补发待发制卡队列：桌面 / Android 上连续补发；AnkiMobile 只有在用户
   /// 点过「全部发送」的会话里才发下一张（每张卡 `x-success` 跳回都会走到这里）。
   void _flushPendingMines() {
+    if (kKitapsenEdition) return;
     if (!ref.read(appProvider).isInitialised) return;
     // 「Anki 同步客户端」后端：上次没同步成功（离线等）的卡留在它自己的日志里，
     // 回到前台补一次。没登录时 syncNow 在读账号那一步就停，不会拉起 helper。
@@ -1399,6 +1410,8 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
   }
 
   Future<void> _drainCardSourceNavigation() async {
+    // Kitapsen: card source links come from Anki cards, which it never makes.
+    if (kKitapsenEdition) return;
     if (_sourceNavigationRunning) return;
     _sourceNavigationRunning = true;
     try {
@@ -2317,8 +2330,10 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
                           child: Stack(
                             children: <Widget>[
                               child!,
-                              const AppFloatingBallHost(),
-                              const FloatingLyricLookupHost(),
+                              // Kitapsen: no floating ball and no lookup popups.
+                              if (!kKitapsenEdition) const AppFloatingBallHost(),
+                              if (!kKitapsenEdition)
+                                const FloatingLyricLookupHost(),
                             ],
                           ),
                         ),

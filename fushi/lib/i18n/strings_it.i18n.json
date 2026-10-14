@@ -6551,5 +6551,19 @@
   "kitapsen_report_reason": "Reason (optional)",
   "kitapsen_report_reason_hint": "Why is this inappropriate?",
   "kitapsen_report_submit": "Submit Report",
-  "kitapsen_report_thanks": "Reported. Thank you for helping keep the community safe."
+  "kitapsen_report_thanks": "Reported. Thank you for helping keep the community safe.",
+  "kitapsen_delete_statistics_book_desc": "Il tempo di lettura e i caratteri letti di questo libro vengono rimossi dalle statistiche su tutti i dispositivi",
+  "kitapsen_stat_clear_all_reading_message": "Cancellare tutto il tempo di lettura e il conteggio dei caratteri? Evidenziazioni e note vengono mantenute. L’operazione non può essere annullata.",
+  "kitapsen_stat_clear_all_overview_message": "Cancellare tutte le statistiche di lettura? Tempo di lettura e conteggio dei caratteri vengono eliminati. Evidenziazioni, note e cronologia delle attività vengono mantenute. L’operazione non può essere annullata.",
+  "kitapsen_stat_delete_message": "Eliminare le statistiche di tempo di lettura e caratteri di questo elemento? Evidenziazioni e note non vengono toccate.",
+  "kitapsen_stat_sessions_clear_all_message": "Cancellare tutte le $n sessioni? Tempo, caratteri e pagine vengono eliminati. Evidenziazioni e note vengono mantenute. L’operazione non può essere annullata.",
+  "kitapsen_stat_session_delete_message": "Eliminare tempo, caratteri e pagine di questa sessione? Evidenziazioni e note non vengono toccate.",
+  "kitapsen_loading_slow_message_mobile": "L’avvio sta richiedendo più tempo del solito: Kitapsen potrebbe caricare una libreria grande. Attendi un momento o tocca Riprova. I tuoi dati sono al sicuro e non andranno persi.",
+  "kitapsen_settings_content_language_description": "Lingua di riserva per i libri che non ne dichiarano una. L’impostazione del singolo libro ha la precedenza.",
+  "kitapsen_theme_role_reader_text_desc": "Testo di lettura e icone della barra degli strumenti",
+  "kitapsen_theme_role_reader_background_desc": "Sfondo della pagina di lettura e della barra degli strumenti",
+  "kitapsen_theme_role_selection_desc": "Sfondo del testo selezionato",
+  "kitapsen_reading_stats_idle_timeout_hint": "Smetti di contare il tempo di lettura dopo questi minuti senza girare o scorrere la pagina.",
+  "kitapsen_source_description_epub": "Lettura EPUB e PDF",
+  "kitapsen_stat_range_calendar": "Calendario di lettura"
 }

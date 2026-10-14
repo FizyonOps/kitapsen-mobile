@@ -144,7 +144,8 @@ extension _ReaderLookup on _ReaderFushiPageState {
       data.fromHover ? LookupOrigin.hover : LookupOrigin.explicit;
 
   Future<void> _handleTextSelected(ReaderSelectionData data) async {
-    if (data.text.isEmpty) {
+    // Kitapsen: no lookup; a tap never selects a word for one.
+    if (kKitapsenEdition || data.text.isEmpty) {
       return;
     }
     _removeSelectionActionBar();

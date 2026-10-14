@@ -6551,5 +6551,19 @@
   "kitapsen_report_reason": "Reason (optional)",
   "kitapsen_report_reason_hint": "Why is this inappropriate?",
   "kitapsen_report_submit": "Submit Report",
-  "kitapsen_report_thanks": "Reported. Thank you for helping keep the community safe."
+  "kitapsen_report_thanks": "Reported. Thank you for helping keep the community safe.",
+  "kitapsen_delete_statistics_book_desc": "Waktu baca dan karakter yang dibaca dari buku ini dihapus dari statistik di semua perangkat",
+  "kitapsen_stat_clear_all_reading_message": "Hapus semua waktu baca dan jumlah karakter? Sorotan dan catatan Anda tetap tersimpan. Tindakan ini tidak dapat dibatalkan.",
+  "kitapsen_stat_clear_all_overview_message": "Hapus semua statistik membaca? Waktu baca dan jumlah karakter dihapus. Sorotan, catatan, dan linimasa aktivitas Anda tetap tersimpan. Tindakan ini tidak dapat dibatalkan.",
+  "kitapsen_stat_delete_message": "Hapus statistik waktu baca dan jumlah karakter item ini? Sorotan dan catatan Anda tidak terpengaruh.",
+  "kitapsen_stat_sessions_clear_all_message": "Hapus semua $n catatan sesi? Waktu, karakter, dan halamannya dihapus. Sorotan dan catatan Anda tetap tersimpan. Tindakan ini tidak dapat dibatalkan.",
+  "kitapsen_stat_session_delete_message": "Hapus waktu, karakter, dan halaman sesi ini? Sorotan dan catatan Anda tidak terpengaruh.",
+  "kitapsen_loading_slow_message_mobile": "Proses mulai lebih lama dari biasanya — Kitapsen mungkin sedang memuat perpustakaan besar. Tunggu sebentar atau ketuk Coba lagi. Data Anda aman dan tidak akan hilang.",
+  "kitapsen_settings_content_language_description": "Bahasa cadangan untuk buku yang tidak menyatakan bahasanya. Pengaturan per buku lebih diutamakan.",
+  "kitapsen_theme_role_reader_text_desc": "Teks bacaan dan ikon bilah alat",
+  "kitapsen_theme_role_reader_background_desc": "Latar halaman baca dan bilah alat",
+  "kitapsen_theme_role_selection_desc": "Latar teks yang dipilih",
+  "kitapsen_reading_stats_idle_timeout_hint": "Berhenti menghitung waktu baca setelah sekian menit tanpa membalik atau menggulir halaman.",
+  "kitapsen_source_description_epub": "Membaca EPUB dan PDF",
+  "kitapsen_stat_range_calendar": "Kalender membaca"
 }

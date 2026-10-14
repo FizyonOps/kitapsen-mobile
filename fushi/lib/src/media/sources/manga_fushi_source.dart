@@ -1,5 +1,4 @@
 import 'package:fushi/src/models/kitapsen_edition.dart';
-import 'package:fushi_dictionary/fushi_dictionary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -55,7 +54,7 @@ class MangaFushiSource extends ReaderMediaSource {
     required WidgetRef ref,
   }) async {
     // 与 EPUB/PDF 源同点失效：关书回书架时刷新书列表与「最近阅读」recency。
-    ref.invalidate(fushiBooksProvider(JapaneseLanguage.instance));
+    ref.invalidate(fushiBooksProvider);
     ref.invalidate(bookLastReadAtProvider);
   }
 
@@ -123,7 +122,7 @@ class MangaFushiSource extends ReaderMediaSource {
           builder: (_) => MangaImportDialog(db: appModel.database),
         );
         if (imported == true) {
-          ref.invalidate(fushiBooksProvider(JapaneseLanguage.instance));
+          ref.invalidate(fushiBooksProvider);
           ref.invalidate(srtBooksProvider);
         }
       },

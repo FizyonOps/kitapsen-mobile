@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/anki/source_review_navigation.dart';
 import 'package:fushi/src/anki/source_review_session.dart';
 
@@ -115,6 +116,9 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
   void initState() {
     super.initState();
 
+    // Kitapsen: no dictionary popup and no Anki card-source navigation.
+    if (kKitapsenEdition) return;
+
     ExternalMediaNavigation.instance.register(
       this,
       _closeForSourceReturn,
@@ -148,11 +152,13 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
 
   @override
   void dispose() {
-    ExternalMediaNavigation.instance.unregister(this);
-    _visibleRenderFailsafeTimer?.cancel();
-    _closeAutoAiPickClient();
-    // TODO-058：controller 现持有挂起层兜底 Timer，作为其所有者必须 dispose 取消，防泄漏。
-    _popup.dispose();
+    if (!kKitapsenEdition) {
+      ExternalMediaNavigation.instance.unregister(this);
+      _visibleRenderFailsafeTimer?.cancel();
+      _closeAutoAiPickClient();
+      // TODO-058：controller 现持有挂起层兜底 Timer，作为其所有者必须 dispose 取消，防泄漏。
+      _popup.dispose();
+    }
     _isSearchingNotifier.dispose();
     super.dispose();
   }
@@ -163,7 +169,9 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
   /// Allows customisation of opacity of dictionary entries.
   double get dictionaryEntryOpacity => 1;
 
-  final DictionaryPopupController _popup = DictionaryPopupController(
+  /// Created on first use: the Kitapsen edition never touches it, so the
+  /// dictionary popup is not compiled into its build.
+  late final DictionaryPopupController _popup = DictionaryPopupController(
     lowMemory: false,
     onLookupStackDepthChanged: recordLookupStackDepth,
   );
@@ -190,7 +198,8 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
   /// BUG-1757：接线（判轴 + 累积 + 阈值）全部收在 [LookupDismissBarrier] 里，页面
   /// 只提供「过阈了要关哪一层」，不再各自持 tracker + 三个转发方法。横拖走该
   /// widget 内不入手势竞技场的 raw Listener，判轴规则写在可单测的代码里。
-  bool get isDictionaryShown => _hasVisiblePopup(_popup.entries);
+  bool get isDictionaryShown =>
+      !kKitapsenEdition && _hasVisiblePopup(_popup.entries);
 
   @protected
   void onDismissBarrierHover(PointerHoverEvent event) {}
@@ -251,6 +260,7 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
   /// `void Function(String)` 用，既有回调点零改动）。
   @protected
   bool onDictionaryPopupInputToken(String token) {
+    if (kKitapsenEdition) return false;
     final ShortcutScope? scope = dictionaryPopupInputScope;
     if (scope == null) return false;
     final ShortcutAction? action = resolveDictionaryPopupInputToken(
@@ -283,6 +293,7 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
   /// 整本书，而键盘 Esc 只关词典——键鼠语义分叉。认领后 app 根让路，两者一致。
   @protected
   void onDismissBarrierNonPrimaryButton(PointerDownEvent event) {
+    if (kKitapsenEdition) return;
     // 「解析到但没执行」不认领：那等价于键盘侧「明明 ignored 却返回 handled」，会把
     // 同一按钮上 universal / global 的合法绑定白白挡掉。
     dispatchClaimedMouseAction(event, () {
@@ -311,8 +322,8 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
   /// Handles leaving a source page. All sources should
   /// use this and wrap their [build] function with a [PopScope].
   Future<bool> onWillPop() async {
-    final bool isSourceReview =
-        SourceReviewScope.read(context)?.isReview ?? false;
+    final bool isSourceReview = !kKitapsenEdition &&
+        (SourceReviewScope.read(context)?.isReview ?? false);
     final mediaSource = appModel.currentMediaSource;
     final item = widget.item;
     final messenger = ScaffoldMessenger.maybeOf(context);
@@ -397,6 +408,7 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
     bool deferDisplay = false,
     LookupOrigin origin = LookupOrigin.explicit,
   }) async {
+    if (kKitapsenEdition) return 0;
     overrideMaximumTerms ??= appModel.maximumTerms;
 
     final gen = _bumpSearchGeneration();
@@ -824,6 +836,7 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
   }
 
   void showDeferredPopup({Rect? selectionRect}) {
+    if (kKitapsenEdition) return;
     final item = _deferredPopupItem;
     final gen = _deferredGeneration;
     _deferredPopupItem = null;
@@ -855,7 +868,7 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
   /// [generation] 仍是当前查词代次（其间没有更新查词、没清栈）时才动，且委托
   /// [DictionaryPopupController.reanchorEntry] 再校验该条目仍显示 / rect 有变。
   void reanchorTopPopup(Rect rect, int generation) {
-    if (generation != _searchGeneration) return;
+    if (kKitapsenEdition || generation != _searchGeneration) return;
     final DictionaryPopupEntry? item = _lastDeferredShown;
     if (item == null) return;
     _popup.reanchorEntry(item, rect);
@@ -943,7 +956,10 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
     );
   }
 
-  void clearDictionaryResult() => _dismissPopupAt(0);
+  void clearDictionaryResult() {
+    if (kKitapsenEdition) return;
+    _dismissPopupAt(0);
+  }
 
   // 弹窗盒子尺寸随「界面大小」一起放大：阅读器/词典页整树被 FushiAppUiScaleNeutralizer
   // 中和回原生密度（净缩放=1），弹窗盒子若不乘 appUiScale，界面 200% 时它仍是原生小尺寸
@@ -1032,6 +1048,7 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
   }
 
   Widget buildDictionary() {
+    if (kKitapsenEdition) return const SizedBox.shrink();
     return Theme(
       data: appModel.overrideDictionaryTheme ?? theme,
       child: AnimatedBuilder(
@@ -1568,17 +1585,20 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
   /// char-level cursor drives when it lives in the dictionary. Null when no
   /// popup is visible.
   @protected
-  DictionaryPopupWebViewState? get topPopupState =>
-      _lastVisiblePopup(_popup.entries)?.webViewKey.currentState;
+  DictionaryPopupWebViewState? get topPopupState => kKitapsenEdition
+      ? null
+      : _lastVisiblePopup(_popup.entries)?.webViewKey.currentState;
 
   /// Index of the top-most visible popup in the stack, or -1.
   @protected
-  int get topVisiblePopupIndex => _lastVisiblePopupIndex(_popup.entries);
+  int get topVisiblePopupIndex =>
+      kKitapsenEdition ? -1 : _lastVisiblePopupIndex(_popup.entries);
 
   /// Dismiss only the top-most visible popup (one layer), leaving any parent
   /// popup in place — used by the cursor's B/Esc "back one layer".
   @protected
   void dismissTopPopup() {
+    if (kKitapsenEdition) return;
     final int index = _lastVisiblePopupIndex(_popup.entries);
     if (index >= 0) _dismissPopupAt(index);
   }
@@ -1590,6 +1610,7 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
   /// [onDictionaryStackChanged] 让光标跟随回到新顶层（与 B/Esc 逐层退回同钩子）。
   @protected
   void dismissDescendantsOf(int index) {
+    if (kKitapsenEdition) return;
     if (index < 0 || index >= _popup.entries.length - 1) return; // 无后代=no-op
     _popup.truncateTo(index + 1);
     onDictionaryStackChanged();
@@ -1695,6 +1716,7 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
   }
 
   Widget buildDictionaryLoading() {
+    if (kKitapsenEdition) return const SizedBox.shrink();
     return ValueListenableBuilder<bool>(
       valueListenable: _isSearchingNotifier,
       builder: (context, value, child) {
@@ -1929,15 +1951,18 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
   }
 
   DictionarySearchResult? get currentResult =>
-      _lastVisiblePopup(_popup.entries)?.result;
+      kKitapsenEdition ? null : _lastVisiblePopup(_popup.entries)?.result;
 
   /// 顶层（从正文点出来的那一层）查词结果。收藏句时用它的首个词头记下「为哪个词
   /// 收藏的这句」；嵌套层是在释义里再查的词，不代表原文里的那个词。
   DictionarySearchResult? get rootLookupResult =>
-      _popup.entries.isEmpty ? null : _popup.entries.first.result;
+      kKitapsenEdition || _popup.entries.isEmpty
+          ? null
+          : _popup.entries.first.result;
 
   @protected
   void prunePopupStack(int keepCount) {
+    if (kKitapsenEdition) return;
     if (keepCount > 0) {
       final pending = _visibleRenderPendingItem;
       if (pending != null) {
