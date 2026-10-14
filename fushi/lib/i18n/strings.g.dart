@@ -3,7 +3,7 @@
 /// Locales: 17
 /// Strings: 111639 (6567 per locale)
 ///
-/// Built on 2026-10-14 at 10:03 UTC
+/// Built on 2026-10-14 at 13:20 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -10286,7 +10286,7 @@ class _StringsAr extends _StringsEn {
   String get app_ui_scale => 'حجم الواجهة';
   @override
   String get app_ui_scale_hint =>
-      'Scales app text and spacing. Lower it on large screens if controls feel oversized.';
+      'يغيّر حجم الواجهة بالكامل — النصوص والأيقونات وعناصر التحكم معًا — من 30% إلى 300%. زِده إذا بدت الواجهة صغيرة على الشاشات الكبيرة.';
   @override
   String get app_version => 'إصدار التطبيق';
   @override
@@ -10829,7 +10829,7 @@ class _StringsAr extends _StringsEn {
   @override
   String get batch_tag_title => 'إدارة العلامات';
   @override
-  String get book_continue_reading => 'Continue Reading';
+  String get book_continue_reading => 'متابعة القراءة';
   @override
   String get book_convert_blocked_already => 'هذا الكتاب بالفعل بهذه الصيغة.';
   @override
@@ -12624,7 +12624,7 @@ class _StringsAr extends _StringsEn {
   @override
   String get font_target_game_lookup => 'خط نافذة البحث في اللعبة';
   @override
-  String get font_target_video_subtitle => 'Video Subtitle Font';
+  String get font_target_video_subtitle => 'خط ترجمة الفيديو';
   @override
   String get gal_card_lookup_independent_size =>
       'حجم منفصل للبطاقة داخل اللعبة';
@@ -13766,7 +13766,7 @@ class _StringsAr extends _StringsEn {
   @override
   String get handlebar_sentence => 'الجملة';
   @override
-  String get handlebar_sentence_audio => 'Sentence Audio';
+  String get handlebar_sentence_audio => 'صوت الجملة';
   @override
   String get handlebar_video_clip => 'Video Clip (GIF)';
   @override
@@ -15715,17 +15715,17 @@ class _StringsAr extends _StringsEn {
   @override
   String get popup_ctx_adjust_button => 'تعديل السياق';
   @override
-  String get popup_ctx_box_current => 'Current';
+  String get popup_ctx_box_current => 'الجملة الحالية';
   @override
   String get popup_ctx_box_empty => '(لا شيء)';
   @override
-  String get popup_ctx_box_next => 'After';
+  String get popup_ctx_box_next => 'السياق التالي';
   @override
-  String get popup_ctx_box_prev => 'Before';
+  String get popup_ctx_box_prev => 'السياق السابق';
   @override
   String get popup_ctx_cancel => 'إلغاء';
   @override
-  String get popup_ctx_confirm => 'Confirm';
+  String get popup_ctx_confirm => 'تأكيد إنشاء البطاقة';
   @override
   String get popup_ctx_modal_count => 'Selected %d';
   @override
@@ -15735,11 +15735,11 @@ class _StringsAr extends _StringsEn {
   @override
   String get popup_ctx_next_minus => 'Remove after';
   @override
-  String get popup_ctx_next_plus => 'Add after';
+  String get popup_ctx_next_plus => 'إضافة الجملة التالية';
   @override
-  String get popup_ctx_prev_minus => 'Remove before';
+  String get popup_ctx_prev_minus => 'إزالة الجملة السابقة';
   @override
-  String get popup_ctx_prev_plus => 'Add before';
+  String get popup_ctx_prev_plus => 'إضافة الجملة السابقة';
   @override
   String get popup_ctx_preview_audio => 'معاينة الصوت';
   @override
@@ -15960,11 +15960,11 @@ class _StringsAr extends _StringsEn {
   @override
   String get reader_view_mode_label => 'صفحات / تمرير';
   @override
-  String get reader_vn => 'Visual Novel';
+  String get reader_vn => 'رواية مرئية';
   @override
   String get reader_writing_direction => 'اتجاه الكتابة';
   @override
-  String get reading_activity => 'نشاط الدراسة';
+  String get reading_activity => 'نشاط القراءة';
   @override
   String get reading_progress => 'تقدّم القراءة';
   @override
@@ -16299,7 +16299,7 @@ class _StringsAr extends _StringsEn {
   String get shortcut_action_global_context_menu => 'فتح قائمة السياق';
   @override
   String get shortcut_action_global_external_lookup =>
-      'App-external lookup hotkey';
+      'اختصار البحث خارج التطبيق';
   @override
   String get shortcut_action_global_scroll_page_down =>
       'تمرير لأسفل بمقدار شاشة';
@@ -16357,9 +16357,9 @@ class _StringsAr extends _StringsEn {
   @override
   String get shortcut_action_reader_open_gallery => 'فتح معرض الرسوم التوضيحية';
   @override
-  String get shortcut_action_reader_open_menu => 'Open Settings Menu';
+  String get shortcut_action_reader_open_menu => 'فتح قائمة الإعدادات';
   @override
-  String get shortcut_action_reader_open_navigation => 'Open Navigation';
+  String get shortcut_action_reader_open_navigation => 'فتح التنقل';
   @override
   String get shortcut_action_reader_open_statistics => 'فتح إحصاءات القراءة';
   @override
@@ -16380,10 +16380,10 @@ class _StringsAr extends _StringsEn {
       'محاذاة الترجمة السابقة إلى الآن';
   @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
-      'Cycle Secondary Subtitle Obscure';
+      'التبديل بين أوضاع إخفاء الترجمة الثانوية';
   @override
   String get shortcut_action_video_cycle_subtitle_obscure =>
-      'Cycle Subtitle Obscure Mode';
+      'التبديل بين أوضاع إخفاء الترجمة';
   @override
   String get shortcut_action_video_dismiss_dict => 'إغلاق القاموس';
   @override
@@ -16450,7 +16450,7 @@ class _StringsAr extends _StringsEn {
   String get shortcut_action_video_toggle_play_pause => 'تشغيل / إيقاف مؤقت';
   @override
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
-      'Toggle Hide Secondary Subtitle';
+      'إخفاء/إظهار الترجمة الثانوية';
   @override
   String get shortcut_action_video_toggle_shader_compare =>
       'تبديل مقارنة المظلِّل';
@@ -16459,7 +16459,7 @@ class _StringsAr extends _StringsEn {
       'تبديل تمويه الترجمة';
   @override
   String get shortcut_action_video_toggle_subtitle_hide =>
-      'Toggle Hide Subtitles';
+      'إخفاء/إظهار الترجمة';
   @override
   String get shortcut_action_video_toggle_subtitle_list =>
       'تبديل قائمة الترجمة';
@@ -16544,7 +16544,7 @@ class _StringsAr extends _StringsEn {
       'تقبل مشغّلات الفأرة الأزرار الجانبية فقط (رجوع/تقدم). تحتفظ الأزرار الأخرى بمعناها المعتاد في التطبيقات الأخرى، لذا تُرفض هنا.';
   @override
   String get shortcut_scope_global_external_mobile_note =>
-      'Triggered by the system (text selection menu, share, floating ball); the OS does not allow apps to remap this hotkey.';
+      'يُشغِّله النظام (قائمة تحديد النص، المشاركة، الكرة العائمة)؛ ولا يسمح نظام التشغيل للتطبيقات بإعادة تعيين هذا الاختصار.';
   @override
   String get shortcut_scope_home => 'الرئيسية';
   @override
@@ -16737,7 +16737,7 @@ class _StringsAr extends _StringsEn {
   @override
   String get stat_detail_ungrouped => 'غير مجمّع';
   @override
-  String get stat_fastest_day => 'Fastest Day';
+  String get stat_fastest_day => 'أسرع يوم';
   @override
   String get stat_favorited => 'المفضلة';
   @override
@@ -16754,9 +16754,9 @@ class _StringsAr extends _StringsEn {
   @override
   String stat_format_pages({required Object n}) => '${n} صفحة';
   @override
-  String get stat_goal => 'Daily Goal';
+  String get stat_goal => 'الهدف اليومي';
   @override
-  String get stat_goal_daily => 'Daily Goal';
+  String get stat_goal_daily => 'الهدف اليومي';
   @override
   String get stat_goal_presets => 'إعدادات مسبقة';
   @override
@@ -16768,11 +16768,11 @@ class _StringsAr extends _StringsEn {
   String stat_goal_recent_average({required Object n}) =>
       'آخر 7 أيام: ${n} حرف/يوم في المتوسط';
   @override
-  String get stat_goal_set => 'Set Goal';
+  String get stat_goal_set => 'تحديد الهدف';
   @override
   String get stat_goal_unit_chars => 'أحرف';
   @override
-  String get stat_goal_weekly => 'Weekly Goal';
+  String get stat_goal_weekly => 'الهدف الأسبوعي';
   @override
   String get stat_hourly_band_epub => 'كتب نصية';
   @override
@@ -16799,7 +16799,7 @@ class _StringsAr extends _StringsEn {
   @override
   String get stat_no_data => 'لا توجد بيانات قراءة بعد';
   @override
-  String get stat_range_and_trend => 'Range & Trend';
+  String get stat_range_and_trend => 'النطاق والاتجاه';
   @override
   String get stat_recent_active => 'أيام النشاط (7 أيام)';
   @override
@@ -16818,7 +16818,7 @@ class _StringsAr extends _StringsEn {
   @override
   String get stat_sessions_show_all => 'كل الجلسات';
   @override
-  String get stat_slowest_day => 'Slowest Day';
+  String get stat_slowest_day => 'أبطأ يوم';
   @override
   String get stat_sort_by_chars => 'حسب الأحرف';
   @override
@@ -16834,7 +16834,7 @@ class _StringsAr extends _StringsEn {
   @override
   String stat_speed_cph({required Object n}) => '${n} حرف/ساعة';
   @override
-  String get stat_speed_summary => 'Speed Summary';
+  String get stat_speed_summary => 'ملخص السرعة';
   @override
   String get stat_streak => 'السلسلة';
   @override
@@ -16852,11 +16852,11 @@ class _StringsAr extends _StringsEn {
   @override
   String get stat_trend_weekly => 'أسبوعي';
   @override
-  String get stat_typical_day => 'Typical Day';
+  String get stat_typical_day => 'يوم نموذجي';
   @override
   String get stat_vs_prev => 'مقارنة بـ 14 يوماً السابقة';
   @override
-  String get stat_weighted_avg_speed => 'Weighted Avg';
+  String get stat_weighted_avg_speed => 'المتوسط المرجّح';
   @override
   String get stop => 'إيقاف';
   @override
@@ -22434,7 +22434,7 @@ class _StringsAr extends _StringsEn {
   String get game_lookup_samples_continuation_hint =>
       'Set where the second and later lines start relative to the first line. One value applies to all text; 0 keeps the same start.';
   @override
-  String get game_lookup_samples_continuation_label => 'Text continuation';
+  String get game_lookup_samples_continuation_label => 'الإزاحة';
   @override
   String get game_lookup_samples_continuation_title => 'بداية سطر المتابعة';
   @override
@@ -24242,7 +24242,7 @@ class _StringsAr extends _StringsEn {
   @override
   String get video_scrape_ai_declined => 'AI not adopted';
   @override
-  String get video_scrape_ai_failed => 'AI request failed';
+  String get video_scrape_ai_failed => 'فشل طلب الذكاء الاصطناعي';
   @override
   String get video_scrape_ai_searched =>
       'Searched again with titles suggested by AI';
@@ -24302,11 +24302,11 @@ class _StringsAr extends _StringsEn {
   @override
   String get shelf_filter_read_status_finished => 'مكتمل';
   @override
-  String get video_filter_media_type => 'Type';
+  String get video_filter_media_type => 'النوع';
   @override
-  String get video_filter_media_type_video => 'Video';
+  String get video_filter_media_type_video => 'فيديو';
   @override
-  String get video_filter_media_type_audio => 'Audio';
+  String get video_filter_media_type_audio => 'صوت';
   @override
   String get video_filter_extras => 'Main/Extras';
   @override
@@ -24314,7 +24314,7 @@ class _StringsAr extends _StringsEn {
   @override
   String get video_filter_extras_only => 'Extras only';
   @override
-  String get video_filter_source => 'Source';
+  String get video_filter_source => 'المصدر';
   @override
   String get video_filter_series_standalone_empty_hint =>
       'No standalone videos. Videos in collections are on the Series tab, or set the Series filter to All.';
@@ -24357,7 +24357,7 @@ class _StringsAr extends _StringsEn {
   @override
   String get manga_ocr_ai_mode_label => 'AI recognition';
   @override
-  String get manga_ocr_ai_mode_off => 'Off';
+  String get manga_ocr_ai_mode_off => 'إيقاف';
   @override
   String get manga_ocr_ai_mode_low_confidence => 'Only uncertain text';
   @override
@@ -24410,7 +24410,7 @@ class _StringsAr extends _StringsEn {
   String get ocr_system_model_missing =>
       'Google Play services hasn\'t downloaded the text recognition model yet. Download it now (a few MB) to use screen OCR.';
   @override
-  String get ocr_system_model_download => 'Download';
+  String get ocr_system_model_download => 'تنزيل';
   @override
   String get ocr_system_model_downloading =>
       'Downloading through Google Play services… You can close this dialog; the download continues in the background.';
@@ -24434,669 +24434,665 @@ class _StringsAr extends _StringsEn {
   @override
   String get kitapsen_section_title => 'Kitapsen';
   @override
-  String get kitapsen_account_title => 'Kitapsen account';
+  String get kitapsen_account_title => 'حساب Kitapsen';
   @override
   String get kitapsen_account_hint =>
-      'Sign in to read the books in your Kitapsen library. They appear on your bookshelf, and your reading position syncs with your account.';
+      'سجّل الدخول لقراءة الكتب في مكتبتك على Kitapsen. تظهر الكتب على رف كتبك، وتتم مزامنة موضع قراءتك مع حسابك.';
   @override
-  String get kitapsen_account_server_url => 'Server address';
+  String get kitapsen_account_server_url => 'عنوان الخادم';
   @override
-  String get kitapsen_account_username => 'Email or username';
+  String get kitapsen_account_username => 'البريد الإلكتروني أو اسم المستخدم';
   @override
-  String get kitapsen_account_password => 'Password';
+  String get kitapsen_account_password => 'كلمة المرور';
   @override
-  String get kitapsen_account_sign_in => 'Sign in';
+  String get kitapsen_account_sign_in => 'تسجيل الدخول';
   @override
-  String get kitapsen_account_sign_out => 'Sign out';
+  String get kitapsen_account_sign_out => 'تسجيل الخروج';
   @override
   String get kitapsen_account_sign_in_rejected =>
-      'Email or password is incorrect';
+      'البريد الإلكتروني أو كلمة المرور غير صحيحة';
   @override
   String get kitapsen_account_sign_in_failed =>
-      'Could not reach Kitapsen. Check the address and your connection.';
+      'تعذّر الوصول إلى Kitapsen. تحقق من العنوان ومن اتصالك.';
   @override
-  String get kitapsen_account_summary => 'Sign in to read your library';
+  String get kitapsen_account_summary => 'سجّل الدخول لقراءة مكتبتك';
   @override
   String get kitapsen_shelf_signed_out_body =>
-      'Sign in with your Kitapsen account to see your library.';
+      'سجّل الدخول بحساب Kitapsen لعرض مكتبتك.';
   @override
-  String get kitapsen_shelf_sign_in => 'Sign in to Kitapsen';
+  String get kitapsen_shelf_sign_in => 'تسجيل الدخول إلى Kitapsen';
   @override
-  String get kitapsen_onboarding_title => 'Your Kitapsen library';
+  String get kitapsen_onboarding_title => 'مكتبتك على Kitapsen';
   @override
   String get kitapsen_onboarding_body =>
-      'Sign in to see the books in your Kitapsen account on this device. You can skip this and sign in later from Settings.';
+      'سجّل الدخول لعرض الكتب الموجودة في حسابك على Kitapsen على هذا الجهاز. يمكنك تخطي هذه الخطوة وتسجيل الدخول لاحقًا من الإعدادات.';
   @override
   String app_store_update_body({required Object version}) =>
-      'Kitapsen ${version} is available on the App Store.';
+      'يتوفر الإصدار ${version} من Kitapsen على App Store.';
   @override
-  String get app_store_update_open => 'Update';
+  String get app_store_update_open => 'تحديث';
   @override
-  String get app_store_update_later => 'Not now';
+  String get app_store_update_later => 'ليس الآن';
   @override
-  String get kitapsen_about_privacy_policy => 'Privacy policy';
+  String get kitapsen_about_privacy_policy => 'سياسة الخصوصية';
   @override
-  String get kitapsen_about_support => 'Contact support';
+  String get kitapsen_about_support => 'التواصل مع الدعم';
   @override
-  String get kitapsen_about_source_code => 'Source code';
+  String get kitapsen_about_source_code => 'الشيفرة المصدرية';
   @override
   String get kitapsen_about_based_on_fushi =>
-      'Kitapsen is based on Fushi (GPLv3) — source: https://github.com/FizyonOps/kitapsen-mobile';
+      'يعتمد Kitapsen على Fushi (GPLv3) — الشيفرة المصدرية: https://github.com/FizyonOps/kitapsen-mobile';
   @override
-  String get kitapsen_about_licenses => 'Open-source licenses';
+  String get kitapsen_about_licenses => 'تراخيص المصادر المفتوحة';
   @override
-  String get kitapsen_about_section => 'About Kitapsen';
+  String get kitapsen_about_section => 'حول Kitapsen';
   @override
-  String get kitapsen_import_hint => 'Pick an EPUB or PDF file to import.';
+  String get kitapsen_import_hint => 'اختر ملف EPUB أو PDF لاستيراده.';
   @override
   String get kitapsen_sign_out_removes_books =>
-      'Signing out removes your downloaded Kitapsen books from this device.';
+      'يؤدي تسجيل الخروج إلى إزالة كتب Kitapsen التي نزّلتها من هذا الجهاز.';
   @override
-  String get kitapsen_account_or => 'or';
+  String get kitapsen_account_or => 'أو';
   @override
-  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  String get kitapsen_account_continue_with_google =>
+      'المتابعة باستخدام Google';
   @override
-  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  String get kitapsen_account_continue_with_apple => 'المتابعة باستخدام Apple';
   @override
   String get kitapsen_account_social_sign_in_failed =>
-      'Sign-in failed. Please try again.';
+      'تعذّر تسجيل الدخول. حاول مرة أخرى.';
   @override
-  String get kitapsen_account_deleted =>
-      'This Kitapsen account has been deleted.';
+  String get kitapsen_account_deleted => 'تم حذف حساب Kitapsen هذا.';
   @override
-  String get kitapsen_account_delete => 'Delete account';
+  String get kitapsen_account_delete => 'حذف الحساب';
   @override
   String get kitapsen_account_delete_confirm =>
-      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+      'سيُحذف حسابك على Kitapsen ويُسجَّل الخروج من هذا الجهاز. لن تتمكن بعد ذلك من قراءة الكتب في مكتبتك. لا يمكن التراجع عن هذا الإجراء.';
   @override
   String get kitapsen_account_delete_failed =>
-      'The account could not be deleted. Please try again.';
+      'تعذّر حذف الحساب. حاول مرة أخرى.';
   @override
-  String get kitapsen_nav_store => 'Store';
+  String get kitapsen_nav_store => 'المتجر';
   @override
-  String get kitapsen_store_search_hint => 'Search books and authors';
+  String get kitapsen_store_search_hint => 'ابحث عن الكتب والمؤلفين';
   @override
-  String get kitapsen_store_new_arrivals => 'New arrivals';
+  String get kitapsen_store_new_arrivals => 'وصل حديثًا';
   @override
-  String get kitapsen_store_most_read => 'Most read';
+  String get kitapsen_store_most_read => 'الأكثر قراءة';
   @override
-  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  String get kitapsen_store_staff_picks => 'اختيارات المحررين';
   @override
-  String get kitapsen_store_free_books => 'Free books';
+  String get kitapsen_store_free_books => 'كتب مجانية';
   @override
-  String get kitapsen_store_stories => 'Serialized stories';
+  String get kitapsen_store_stories => 'قصص متسلسلة';
   @override
-  String get kitapsen_store_categories => 'Categories';
+  String get kitapsen_store_categories => 'الفئات';
   @override
-  String get kitapsen_store_see_all => 'See all';
+  String get kitapsen_store_see_all => 'عرض الكل';
   @override
-  String get kitapsen_store_no_results => 'No books found';
+  String get kitapsen_store_no_results => 'لم يُعثر على كتب';
   @override
-  String get kitapsen_store_load_failed =>
-      'Couldn\'t load. Check your connection.';
+  String get kitapsen_store_load_failed => 'تعذّر التحميل. تحقق من اتصالك.';
   @override
-  String get kitapsen_store_free_only => 'Free only';
+  String get kitapsen_store_free_only => 'المجانية فقط';
   @override
-  String get kitapsen_sort_relevance => 'Most relevant';
+  String get kitapsen_sort_relevance => 'الأكثر صلة';
   @override
-  String get kitapsen_sort_newest => 'Newest';
+  String get kitapsen_sort_newest => 'الأحدث';
   @override
-  String get kitapsen_sort_most_read => 'Most read';
+  String get kitapsen_sort_most_read => 'الأكثر قراءة';
   @override
-  String get kitapsen_sort_rating => 'Top rated';
+  String get kitapsen_sort_rating => 'الأعلى تقييمًا';
   @override
-  String get kitapsen_sort_title => 'Title A–Z';
+  String get kitapsen_sort_title => 'العنوان (أ–ي)';
   @override
-  String get kitapsen_book_read => 'Read';
+  String get kitapsen_book_read => 'قراءة';
   @override
-  String get kitapsen_book_get_free => 'Get for free';
+  String get kitapsen_book_get_free => 'احصل عليه مجانًا';
   @override
-  String get kitapsen_book_claimed => 'Added to your library';
+  String get kitapsen_book_claimed => 'أُضيف إلى مكتبتك';
   @override
-  String get kitapsen_book_in_library => 'In your library';
+  String get kitapsen_book_in_library => 'في مكتبتك';
   @override
-  String get kitapsen_book_not_in_library => 'Not in your library';
+  String get kitapsen_book_not_in_library => 'ليس في مكتبتك';
   @override
   String get kitapsen_book_sign_in_prompt =>
-      'Sign in to add books to your library and keep a wishlist.';
+      'سجّل الدخول لإضافة الكتب إلى مكتبتك والاحتفاظ بقائمة أمنيات.';
   @override
-  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  String get kitapsen_book_wishlist_add => 'إضافة إلى قائمة الأمنيات';
   @override
-  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  String get kitapsen_book_wishlist_remove => 'إزالة من قائمة الأمنيات';
   @override
-  String get kitapsen_book_downloading => 'Downloading to your library…';
+  String get kitapsen_book_downloading => 'جارٍ التنزيل إلى مكتبتك…';
   @override
-  String get kitapsen_book_about => 'About this book';
+  String get kitapsen_book_about => 'عن هذا الكتاب';
   @override
-  String get kitapsen_book_pages => 'Pages';
+  String get kitapsen_book_pages => 'الصفحات';
   @override
-  String get kitapsen_book_language => 'Language';
+  String get kitapsen_book_language => 'اللغة';
   @override
-  String get kitapsen_book_publisher => 'Publisher';
+  String get kitapsen_book_publisher => 'دار النشر';
   @override
-  String get kitapsen_book_published => 'Published';
+  String get kitapsen_book_published => 'تاريخ النشر';
   @override
-  String get kitapsen_book_action_failed =>
-      'Something went wrong. Please try again.';
+  String get kitapsen_book_action_failed => 'حدث خطأ ما. حاول مرة أخرى.';
   @override
-  String get kitapsen_book_reviews => 'Reviews';
+  String get kitapsen_book_reviews => 'المراجعات';
   @override
-  String get kitapsen_book_no_reviews => 'No reviews yet';
+  String get kitapsen_book_no_reviews => 'لا توجد مراجعات بعد';
   @override
-  String get kitapsen_book_write_review => 'Write a review';
+  String get kitapsen_book_write_review => 'اكتب مراجعة';
   @override
-  String get kitapsen_review_title_hint => 'Title (optional)';
+  String get kitapsen_review_title_hint => 'العنوان (اختياري)';
   @override
-  String get kitapsen_review_content_hint => 'Your review (optional)';
+  String get kitapsen_review_content_hint => 'مراجعتك (اختياري)';
   @override
-  String get kitapsen_review_submit => 'Send';
+  String get kitapsen_review_submit => 'إرسال';
   @override
-  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  String get kitapsen_review_sent => 'شكرًا! تم إرسال مراجعتك.';
   @override
-  String get kitapsen_review_already => 'You have already reviewed this book.';
+  String get kitapsen_review_already => 'لقد كتبت مراجعة لهذا الكتاب من قبل.';
   @override
   String get kitapsen_review_not_allowed =>
-      'Only readers who have this book in their library can review it.';
+      'يمكن فقط للقرّاء الذين لديهم هذا الكتاب في مكتبتهم كتابة مراجعة عنه.';
   @override
-  String get kitapsen_review_more => 'Show more reviews';
+  String get kitapsen_review_more => 'عرض المزيد من المراجعات';
   @override
-  String get kitapsen_review_verified => 'Verified reader';
+  String get kitapsen_review_verified => 'قارئ موثَّق';
   @override
-  String get kitapsen_author_follow => 'Follow';
+  String get kitapsen_author_follow => 'متابعة';
   @override
-  String get kitapsen_author_following => 'Following';
+  String get kitapsen_author_following => 'متابَع';
   @override
-  String get kitapsen_author_followers => 'Followers';
+  String get kitapsen_author_followers => 'المتابِعون';
   @override
-  String get kitapsen_author_books => 'Books';
+  String get kitapsen_author_books => 'الكتب';
   @override
-  String get kitapsen_author_open => 'Author page';
+  String get kitapsen_author_open => 'صفحة المؤلف';
   @override
-  String get kitapsen_wishlist_title => 'Wishlist';
+  String get kitapsen_wishlist_title => 'قائمة الأمنيات';
   @override
-  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  String get kitapsen_wishlist_empty => 'قائمة أمنياتك فارغة';
   @override
-  String get kitapsen_notifications_title => 'Notifications';
+  String get kitapsen_notifications_title => 'الإشعارات';
   @override
-  String get kitapsen_notifications_empty => 'No notifications';
+  String get kitapsen_notifications_empty => 'لا توجد إشعارات';
   @override
-  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  String get kitapsen_notifications_mark_all => 'تعليم الكل كمقروء';
   @override
-  String get kitapsen_story_chapters => 'Chapters';
+  String get kitapsen_story_chapters => 'الفصول';
   @override
-  String get kitapsen_story_no_chapters => 'No chapters yet';
+  String get kitapsen_story_no_chapters => 'لا توجد فصول بعد';
   @override
-  String get kitapsen_story_next => 'Next chapter';
+  String get kitapsen_story_next => 'الفصل التالي';
   @override
-  String get kitapsen_story_previous => 'Previous chapter';
+  String get kitapsen_story_previous => 'الفصل السابق';
   @override
-  String get kitapsen_review_like => 'Like';
+  String get kitapsen_review_like => 'إعجاب';
   @override
-  String get kitapsen_comments_title => 'Comments';
+  String get kitapsen_comments_title => 'التعليقات';
   @override
-  String get kitapsen_comments_empty => 'No comments yet';
+  String get kitapsen_comments_empty => 'لا توجد تعليقات بعد';
   @override
-  String get kitapsen_comment_hint => 'Write a comment';
+  String get kitapsen_comment_hint => 'اكتب تعليقًا';
   @override
-  String get kitapsen_story_vote => 'Vote';
+  String get kitapsen_story_vote => 'تصويت';
   @override
-  String get kitapsen_story_voted => 'Voted';
+  String get kitapsen_story_voted => 'تم التصويت';
   @override
-  String get kitapsen_story_follow => 'Follow story';
+  String get kitapsen_story_follow => 'متابعة القصة';
   @override
-  String get kitapsen_following_title => 'Following';
+  String get kitapsen_following_title => 'مَن أتابعهم';
   @override
-  String get kitapsen_following_authors => 'Authors';
+  String get kitapsen_following_authors => 'المؤلفون';
   @override
-  String get kitapsen_following_stories => 'Stories';
+  String get kitapsen_following_stories => 'القصص';
   @override
-  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  String get kitapsen_following_empty => 'لا تتابع أحدًا بعد';
   @override
-  String get kitapsen_reader_highlight => 'Highlight';
+  String get kitapsen_reader_highlight => 'تمييز';
   @override
-  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  String get kitapsen_annotations_title => 'العلامات المرجعية والملاحظات';
   @override
-  String get kitapsen_bookmark_add => 'Add bookmark';
+  String get kitapsen_bookmark_add => 'إضافة علامة مرجعية';
   @override
-  String get kitapsen_bookmark_added => 'Bookmark added';
+  String get kitapsen_bookmark_added => 'تمت إضافة العلامة المرجعية';
   @override
-  String get kitapsen_note_add => 'Add note';
+  String get kitapsen_note_add => 'إضافة ملاحظة';
   @override
-  String get kitapsen_note_hint => 'Your note';
+  String get kitapsen_note_hint => 'ملاحظتك';
   @override
-  String get kitapsen_note_saved => 'Note saved';
+  String get kitapsen_note_saved => 'تم حفظ الملاحظة';
   @override
-  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  String get kitapsen_annotations_empty =>
+      'لا توجد علامات مرجعية أو ملاحظات بعد';
   @override
-  String get kitapsen_store_badge_free => 'Free';
+  String get kitapsen_store_badge_free => 'مجاني';
   @override
-  String get kitapsen_store_badge_new => 'New';
+  String get kitapsen_store_badge_new => 'جديد';
   @override
-  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  String kitapsen_store_rating_count({required Object n}) => 'المراجعات: ${n}';
   @override
-  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  String get kitapsen_store_hero_title => 'كتابك الرائع التالي هنا.';
   @override
   String get kitapsen_store_hero_body =>
-      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+      'تعرّف على قصص جديدة واكتشف المؤلفين الذين تحبهم. اختر كتابك وابدأ القراءة على هاتفك أو جهازك اللوحي أو حاسوبك.';
   @override
-  String get kitapsen_store_explore_books => 'Explore books';
+  String get kitapsen_store_explore_books => 'استكشف الكتب';
   @override
-  String get kitapsen_store_start_free => 'Start with free books';
+  String get kitapsen_store_start_free => 'ابدأ بالكتب المجانية';
   @override
-  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  String get kitapsen_store_start_free_body => 'اكتشف كتابك الأول.';
   @override
-  String get kitapsen_store_library_always => 'Your library is always with you';
+  String get kitapsen_store_library_always => 'مكتبتك معك دائمًا';
   @override
   String get kitapsen_store_library_always_body =>
-      'Read on your phone, tablet and computer.';
+      'اقرأ على هاتفك وجهازك اللوحي وحاسوبك.';
   @override
-  String get kitapsen_store_meet_authors => 'Meet the authors';
+  String get kitapsen_store_meet_authors => 'تعرّف على المؤلفين';
   @override
-  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  String get kitapsen_store_meet_authors_body => 'تابع الكتّاب الذين تحبهم.';
   @override
-  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  String get kitapsen_store_reading_list => 'كتاب جديد لقائمة قراءتك';
   @override
-  String get kitapsen_store_all_categories => 'All categories';
+  String get kitapsen_store_all_categories => 'كل الفئات';
   @override
-  String get kitapsen_store_discover_title => 'Time to discover';
+  String get kitapsen_store_discover_title => 'حان وقت الاكتشاف';
   @override
   String get kitapsen_store_discover_body =>
-      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+      'قصة، ومنظور جديد، واكتشاف غير متوقع. أضف كتابك التالي إلى قائمة قراءتك.';
   @override
-  String get kitapsen_store_discover_now => 'Discover now';
+  String get kitapsen_store_discover_now => 'اكتشف الآن';
   @override
   String kitapsen_store_results_for({required Object q}) =>
-      'Results for "${q}"';
+      'نتائج البحث عن «${q}»';
   @override
-  String get kitapsen_store_matching_authors => 'Matching authors';
+  String get kitapsen_store_matching_authors => 'مؤلفون مطابقون';
   @override
-  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  String kitapsen_store_author_books_count({required Object n}) =>
+      'الكتب: ${n}';
   @override
   String get kitapsen_store_author_cta =>
-      'Discover the author\'s books and pick your next read.';
+      'اكتشف كتب المؤلف واختر قراءتك التالية.';
   @override
-  String get kitapsen_store_see_author_books => 'See their books';
+  String get kitapsen_store_see_author_books => 'عرض كتب المؤلف';
   @override
-  String get kitapsen_store_authors_books => 'The author\'s books';
+  String get kitapsen_store_authors_books => 'كتب المؤلف';
   @override
-  String get kitapsen_book_read_now => 'Read now';
+  String get kitapsen_book_read_now => 'اقرأ الآن';
   @override
-  String get kitapsen_book_get_free_web => 'Get it free';
+  String get kitapsen_book_get_free_web => 'احصل عليه مجانًا';
   @override
-  String get kitapsen_book_favorites => 'Favorites';
+  String get kitapsen_book_favorites => 'المفضلة';
   @override
-  String get kitapsen_book_description => 'Description';
+  String get kitapsen_book_description => 'الوصف';
   @override
-  String get kitapsen_book_about_author => 'About the author';
+  String get kitapsen_book_about_author => 'عن المؤلف';
   @override
-  String get kitapsen_book_isbn => 'ISBN';
+  String get kitapsen_book_isbn => 'ردمك';
   @override
-  String get kitapsen_book_format => 'Format';
+  String get kitapsen_book_format => 'الصيغة';
   @override
-  String get kitapsen_author_role => 'Author';
+  String get kitapsen_author_role => 'مؤلف';
   @override
-  String get kitapsen_author_notify => 'Notify me of new books';
+  String get kitapsen_author_notify => 'أعلِمني بالكتب الجديدة';
   @override
-  String get kitapsen_author_about => 'About';
+  String get kitapsen_author_about => 'نبذة';
   @override
-  String get kitapsen_review_more_bio => 'Read the full biography';
+  String get kitapsen_review_more_bio => 'اقرأ السيرة الذاتية كاملة';
   @override
-  String get kitapsen_author_like => 'Like';
+  String get kitapsen_author_like => 'إعجاب';
   @override
-  String get kitapsen_author_likes => 'Likes';
+  String get kitapsen_author_likes => 'الإعجابات';
   @override
-  String get kitapsen_register_open => 'No account yet? Create one';
+  String get kitapsen_register_open => 'ليس لديك حساب؟ أنشئ حسابًا';
   @override
-  String get kitapsen_register_name => 'Name (optional)';
+  String get kitapsen_register_name => 'الاسم (اختياري)';
   @override
-  String get kitapsen_register_username => 'Username';
+  String get kitapsen_register_username => 'اسم المستخدم';
   @override
   String get kitapsen_register_username_hint =>
-      '2–20 lowercase letters or digits';
+      'من 2 إلى 20 حرفًا لاتينيًا صغيرًا أو رقمًا';
   @override
-  String get kitapsen_register_email => 'Email';
+  String get kitapsen_register_email => 'البريد الإلكتروني';
   @override
-  String get kitapsen_register_password_hint => 'At least 8 characters';
+  String get kitapsen_register_password_hint => '8 أحرف على الأقل';
   @override
-  String get kitapsen_register_submit => 'Create account';
+  String get kitapsen_register_submit => 'إنشاء حساب';
   @override
-  String get kitapsen_register_have_account =>
-      'Already have an account? Sign in';
+  String get kitapsen_register_have_account => 'لديك حساب بالفعل؟ سجّل الدخول';
   @override
   String get kitapsen_register_username_invalid =>
-      'Use 2–20 lowercase letters or digits.';
+      'استخدم من 2 إلى 20 حرفًا لاتينيًا صغيرًا أو رقمًا.';
   @override
   String get kitapsen_register_name_invalid =>
-      'The name must be 2–30 characters.';
+      'يجب أن يتكون الاسم من 2 إلى 30 حرفًا.';
   @override
-  String get kitapsen_register_email_invalid => 'Enter a valid email address.';
+  String get kitapsen_register_email_invalid =>
+      'أدخل عنوان بريد إلكتروني صالحًا.';
   @override
   String get kitapsen_register_password_short =>
-      'The password must be at least 8 characters.';
+      'يجب أن تتكون كلمة المرور من 8 أحرف على الأقل.';
   @override
-  String get kitapsen_register_failed =>
-      'The account could not be created. Try again.';
+  String get kitapsen_register_failed => 'تعذّر إنشاء الحساب. حاول مرة أخرى.';
   @override
-  String get kitapsen_hub_title => 'My account';
+  String get kitapsen_hub_title => 'حسابي';
   @override
-  String get kitapsen_hub_reading => 'Reading';
+  String get kitapsen_hub_reading => 'القراءة';
   @override
-  String get kitapsen_hub_social => 'Social';
+  String get kitapsen_hub_social => 'المجتمع';
   @override
-  String get kitapsen_hub_discover => 'Discover';
+  String get kitapsen_hub_discover => 'اكتشاف';
   @override
-  String get kitapsen_hub_account => 'Account';
+  String get kitapsen_hub_account => 'الحساب';
   @override
-  String get kitapsen_hub_library => 'My library';
+  String get kitapsen_hub_library => 'مكتبتي';
   @override
-  String get kitapsen_hub_public_profile => 'My public reader profile';
+  String get kitapsen_hub_public_profile => 'ملفي العام كقارئ';
   @override
-  String get kitapsen_hub_sign_in_settings => 'Sign out or delete the account';
+  String get kitapsen_hub_sign_in_settings => 'تسجيل الخروج أو حذف الحساب';
   @override
-  String get kitapsen_common_save => 'Save';
+  String get kitapsen_common_save => 'حفظ';
   @override
-  String get kitapsen_common_saved => 'Saved';
+  String get kitapsen_common_saved => 'تم الحفظ';
   @override
-  String get kitapsen_common_edit => 'Edit';
+  String get kitapsen_common_edit => 'تعديل';
   @override
-  String get kitapsen_profile_title => 'My profile';
+  String get kitapsen_profile_title => 'ملفي الشخصي';
   @override
-  String get kitapsen_profile_name => 'Display name';
+  String get kitapsen_profile_name => 'الاسم المعروض';
   @override
-  String get kitapsen_profile_sharing => 'Share reading activity';
+  String get kitapsen_profile_sharing => 'مشاركة نشاط القراءة';
   @override
   String get kitapsen_profile_sharing_hint =>
-      'Show the books you are reading and have finished on your public profile.';
+      'اعرض الكتب التي تقرؤها والتي أنهيتها في ملفك العام.';
   @override
-  String get kitapsen_settings_title => 'Account settings';
+  String get kitapsen_settings_title => 'إعدادات الحساب';
   @override
-  String get kitapsen_settings_profile => 'Profile information';
+  String get kitapsen_settings_profile => 'معلومات الملف الشخصي';
   @override
-  String get kitapsen_settings_privacy => 'Privacy';
+  String get kitapsen_settings_privacy => 'الخصوصية';
   @override
-  String get kitapsen_settings_private => 'Private profile';
+  String get kitapsen_settings_private => 'ملف شخصي خاص';
   @override
   String get kitapsen_settings_private_hint =>
-      'Only your followers can see your profile, reviews, reading activity and updates.';
+      'لا يرى ملفك الشخصي ومراجعاتك ونشاط قراءتك وتحديثاتك إلا متابِعوك.';
   @override
-  String get kitapsen_settings_notifications => 'Email notifications';
+  String get kitapsen_settings_notifications => 'إشعارات البريد الإلكتروني';
   @override
   String get kitapsen_settings_follower_email =>
-      'Email me when someone follows me';
+      'أرسل لي بريدًا عندما يتابعني أحد';
   @override
   String get kitapsen_settings_comment_email =>
-      'Email me when someone comments on my story';
+      'أرسل لي بريدًا عندما يعلّق أحد على قصتي';
   @override
-  String get kitapsen_settings_sale_email => 'Email me when my book sells';
+  String get kitapsen_settings_sale_email => 'أرسل لي بريدًا عند بيع كتابي';
   @override
-  String get kitapsen_settings_author_emails => 'Author emails';
+  String get kitapsen_settings_author_emails => 'رسائل البريد للمؤلفين';
   @override
-  String get kitapsen_settings_password => 'Change password';
+  String get kitapsen_settings_password => 'تغيير كلمة المرور';
   @override
-  String get kitapsen_settings_current_password => 'Current password';
+  String get kitapsen_settings_current_password => 'كلمة المرور الحالية';
   @override
-  String get kitapsen_settings_new_password => 'New password';
+  String get kitapsen_settings_new_password => 'كلمة المرور الجديدة';
   @override
-  String get kitapsen_settings_repeat_password => 'Repeat the new password';
+  String get kitapsen_settings_repeat_password => 'كرّر كلمة المرور الجديدة';
   @override
-  String get kitapsen_settings_change_password => 'Change password';
+  String get kitapsen_settings_change_password => 'تغيير كلمة المرور';
   @override
   String get kitapsen_settings_passwords_differ =>
-      'The passwords do not match.';
+      'كلمتا المرور غير متطابقتين.';
   @override
-  String get kitapsen_settings_password_changed => 'Password changed.';
+  String get kitapsen_settings_password_changed => 'تم تغيير كلمة المرور.';
   @override
   String get kitapsen_settings_password_failed =>
-      'The password could not be changed. Check the current password.';
+      'تعذّر تغيير كلمة المرور. تحقق من كلمة المرور الحالية.';
   @override
-  String get kitapsen_settings_blocked => 'Blocked users';
+  String get kitapsen_settings_blocked => 'المستخدمون المحظورون';
   @override
-  String get kitapsen_settings_no_blocked => 'You have not blocked anyone.';
+  String get kitapsen_settings_no_blocked => 'لم تحظر أحدًا.';
   @override
-  String get kitapsen_publishers_title => 'Publishers';
+  String get kitapsen_publishers_title => 'دور النشر';
   @override
-  String get kitapsen_publishers_body => 'Browse books by publisher.';
+  String get kitapsen_publishers_body => 'تصفّح الكتب حسب دار النشر.';
   @override
-  String get kitapsen_publisher_role => 'Publisher';
+  String get kitapsen_publisher_role => 'دار نشر';
   @override
   String get kitapsen_publisher_no_books =>
-      'This publisher\'s books will be listed here soon.';
+      'ستُعرض كتب دار النشر هذه هنا قريبًا.';
   @override
-  String get kitapsen_authors_title => 'Authors';
+  String get kitapsen_authors_title => 'المؤلفون';
   @override
-  String get kitapsen_blog_title => 'Blog';
+  String get kitapsen_blog_title => 'المدونة';
   @override
-  String get kitapsen_blog_subtitle =>
-      'News, tips and stories from the Kitapsen community.';
+  String get kitapsen_blog_subtitle => 'أخبار ونصائح وقصص من مجتمع Kitapsen.';
   @override
-  String get kitapsen_blog_empty => 'No blog posts yet.';
+  String get kitapsen_blog_empty => 'لا توجد مقالات في المدونة بعد.';
   @override
-  String get kitapsen_collections_title => 'Collections';
+  String get kitapsen_collections_title => 'المجموعات';
   @override
-  String get kitapsen_collections_new => 'New collection';
+  String get kitapsen_collections_new => 'مجموعة جديدة';
   @override
-  String get kitapsen_collections_name => 'Collection name';
+  String get kitapsen_collections_name => 'اسم المجموعة';
   @override
-  String get kitapsen_collections_description => 'Description (optional)';
+  String get kitapsen_collections_description => 'الوصف (اختياري)';
   @override
   String get kitapsen_collections_empty =>
-      'No collections yet. Create collections to organise your books.';
+      'لا توجد مجموعات بعد. أنشئ مجموعات لتنظيم كتبك.';
   @override
-  String get kitapsen_collections_delete_confirm => 'Delete this collection?';
+  String get kitapsen_collections_delete_confirm => 'حذف هذه المجموعة؟';
   @override
   String get kitapsen_collections_items_empty =>
-      'No books yet. Add books from their page with "Add to collection".';
+      'لا توجد كتب بعد. أضف الكتب من صفحاتها عبر «إضافة إلى مجموعة».';
   @override
-  String get kitapsen_collections_long_press =>
-      'Long-press a book to remove it.';
+  String get kitapsen_collections_long_press => 'اضغط مطولًا على كتاب لإزالته.';
   @override
-  String get kitapsen_collections_remove => 'Remove';
+  String get kitapsen_collections_remove => 'إزالة';
   @override
   String kitapsen_collections_remove_confirm({required Object title}) =>
-      'Remove "${title}" from this collection?';
+      'إزالة «${title}» من هذه المجموعة؟';
   @override
-  String get kitapsen_collections_add => 'Add to collection';
+  String get kitapsen_collections_add => 'إضافة إلى مجموعة';
   @override
-  String get kitapsen_collections_add_title => 'Add to a collection';
+  String get kitapsen_collections_add_title => 'إضافة إلى مجموعة';
   @override
-  String get kitapsen_collections_added => 'Added to the collection';
+  String get kitapsen_collections_added => 'تمت الإضافة إلى المجموعة';
   @override
-  String get kitapsen_notebooks_title => 'Notebooks';
+  String get kitapsen_notebooks_title => 'الدفاتر';
   @override
-  String get kitapsen_notebooks_new => 'New notebook';
+  String get kitapsen_notebooks_new => 'دفتر جديد';
   @override
-  String get kitapsen_notebooks_name => 'Notebook name';
+  String get kitapsen_notebooks_name => 'اسم الدفتر';
   @override
   String get kitapsen_notebooks_empty =>
-      'No notebooks yet. Create notebooks for your reading notes and ideas.';
+      'لا توجد دفاتر بعد. أنشئ دفاتر لملاحظات قراءتك وأفكارك.';
   @override
-  String kitapsen_notebooks_count({required Object n}) => '${n} notes';
+  String kitapsen_notebooks_count({required Object n}) => 'الملاحظات: ${n}';
   @override
-  String get kitapsen_notebooks_delete_confirm => 'Delete this notebook?';
+  String get kitapsen_notebooks_delete_confirm => 'حذف هذا الدفتر؟';
   @override
-  String get kitapsen_notebooks_entries_empty => 'No notes yet.';
+  String get kitapsen_notebooks_entries_empty => 'لا توجد ملاحظات بعد.';
   @override
-  String get kitapsen_notebooks_entry_hint => 'Add a note...';
+  String get kitapsen_notebooks_entry_hint => 'أضف ملاحظة...';
   @override
-  String get kitapsen_notebooks_entry_delete_confirm => 'Delete this note?';
+  String get kitapsen_notebooks_entry_delete_confirm => 'حذف هذه الملاحظة؟';
   @override
-  String get kitapsen_notebooks_add => 'Add note';
+  String get kitapsen_notebooks_add => 'إضافة ملاحظة';
   @override
-  String get kitapsen_goals_title => 'Reading goals';
+  String get kitapsen_goals_title => 'أهداف القراءة';
   @override
-  String get kitapsen_goals_new => 'New goal';
+  String get kitapsen_goals_new => 'هدف جديد';
   @override
-  String get kitapsen_goals_create => 'Create';
+  String get kitapsen_goals_create => 'إنشاء';
   @override
-  String get kitapsen_goals_created => 'Goal created';
+  String get kitapsen_goals_created => 'تم إنشاء الهدف';
   @override
-  String get kitapsen_goals_type => 'Goal type';
+  String get kitapsen_goals_type => 'نوع الهدف';
   @override
-  String get kitapsen_goals_type_books => 'Books';
+  String get kitapsen_goals_type_books => 'الكتب';
   @override
-  String get kitapsen_goals_type_pages => 'Pages';
+  String get kitapsen_goals_type_pages => 'الصفحات';
   @override
-  String get kitapsen_goals_type_days => 'Reading days';
+  String get kitapsen_goals_type_days => 'أيام القراءة';
   @override
-  String get kitapsen_goals_target => 'Target';
+  String get kitapsen_goals_target => 'القيمة المستهدفة';
   @override
-  String get kitapsen_goals_this_month => 'This month';
+  String get kitapsen_goals_this_month => 'هذا الشهر';
   @override
-  String get kitapsen_goals_this_year => 'This year';
+  String get kitapsen_goals_this_year => 'هذا العام';
   @override
   String get kitapsen_goals_empty =>
-      'No reading goals. Set your first goal to keep your motivation up.';
+      'لا توجد أهداف قراءة. حدّد هدفك الأول لتحافظ على حماسك.';
   @override
-  String get kitapsen_goals_delete_confirm => 'Delete this goal?';
+  String get kitapsen_goals_delete_confirm => 'حذف هذا الهدف؟';
   @override
-  String get kitapsen_goals_completed => 'Completed';
+  String get kitapsen_goals_completed => 'مكتمل';
   @override
-  String kitapsen_goals_until({required Object date}) => 'Until ${date}';
+  String kitapsen_goals_until({required Object date}) => 'حتى ${date}';
   @override
-  String kitapsen_goals_unit_books({required Object n}) => '${n} books';
+  String kitapsen_goals_unit_books({required Object n}) => 'الكتب: ${n}';
   @override
-  String kitapsen_goals_unit_pages({required Object n}) => '${n} pages';
+  String kitapsen_goals_unit_pages({required Object n}) => 'الصفحات: ${n}';
   @override
-  String kitapsen_goals_unit_hours({required Object n}) => '${n} hours';
+  String kitapsen_goals_unit_hours({required Object n}) => 'الساعات: ${n}';
   @override
-  String kitapsen_goals_unit_days({required Object n}) => '${n} reading days';
+  String kitapsen_goals_unit_days({required Object n}) => 'أيام القراءة: ${n}';
   @override
-  String get kitapsen_goals_streak => 'Day streak';
+  String get kitapsen_goals_streak => 'سلسلة الأيام';
   @override
-  String get kitapsen_goals_longest_streak => 'Longest streak';
+  String get kitapsen_goals_longest_streak => 'أطول سلسلة';
   @override
-  String get kitapsen_goals_books_read => 'Books read';
+  String get kitapsen_goals_books_read => 'الكتب المقروءة';
   @override
-  String get kitapsen_goals_books_finished => 'Finished';
+  String get kitapsen_goals_books_finished => 'المكتملة';
   @override
-  String get kitapsen_feed_title => 'Social feed';
+  String get kitapsen_feed_title => 'آخر النشاطات';
   @override
-  String get kitapsen_feed_followed => 'Following';
+  String get kitapsen_feed_followed => 'مَن أتابعهم';
   @override
-  String get kitapsen_feed_mine => 'My activity';
+  String get kitapsen_feed_mine => 'نشاطي';
   @override
   String get kitapsen_feed_empty_followed =>
-      'No activity yet. Follow readers to keep up with what they are reading.';
+      'لا يوجد نشاط بعد. تابع القرّاء لتعرف ما يقرؤونه.';
   @override
   String get kitapsen_feed_empty_mine =>
-      'Your reading activity will appear here once you start reading.';
+      'سيظهر نشاط قراءتك هنا عندما تبدأ القراءة.';
   @override
   String kitapsen_feed_started({required Object target}) =>
-      'started reading ${target}';
+      'بدأ قراءة «${target}»';
   @override
   String kitapsen_feed_finished({required Object target}) =>
-      'finished ${target}';
+      'أنهى قراءة «${target}»';
   @override
   String kitapsen_feed_reviewed({required Object target}) =>
-      'reviewed ${target}';
+      'كتب مراجعة عن «${target}»';
   @override
   String kitapsen_feed_followed_user({required Object target}) =>
-      'started following ${target}';
+      'بدأ متابعة ${target}';
   @override
   String kitapsen_feed_followed_author({required Object target}) =>
-      'followed the author ${target}';
+      'تابع المؤلف ${target}';
   @override
-  String kitapsen_feed_shared({required Object target}) => 'shared ${target}';
+  String kitapsen_feed_shared({required Object target}) => 'شارك ${target}';
   @override
-  String kitapsen_feed_percent({required Object n}) => '${n}% read';
+  String kitapsen_feed_percent({required Object n}) => 'تمت قراءة ${n}%';
   @override
-  String get kitapsen_feed_finished_badge => 'Finished';
+  String get kitapsen_feed_finished_badge => 'مكتمل';
   @override
-  String get kitapsen_user_follow => 'Follow';
+  String get kitapsen_user_follow => 'متابعة';
   @override
-  String get kitapsen_user_block => 'Block';
+  String get kitapsen_user_block => 'حظر';
   @override
-  String get kitapsen_user_unblock => 'Unblock';
+  String get kitapsen_user_unblock => 'إلغاء الحظر';
   @override
   String kitapsen_user_block_confirm({required Object username}) =>
-      'Block @${username}? They will no longer see your profile and activity, and any follow between you is removed.';
+      'حظر @${username}؟ لن يرى ملفك الشخصي ونشاطك بعد الآن، وستُزال أي متابعة بينكما.';
   @override
   String kitapsen_user_member_since({required Object date}) =>
-      'Member since ${date}';
+      'عضو منذ ${date}';
   @override
-  String kitapsen_user_followers({required Object n}) => '${n} followers';
+  String kitapsen_user_followers({required Object n}) => 'المتابِعون: ${n}';
   @override
-  String kitapsen_user_following({required Object n}) => '${n} following';
+  String kitapsen_user_following({required Object n}) => 'يتابع: ${n}';
   @override
   String kitapsen_user_finished_count({required Object n}) =>
-      '${n} books finished';
+      'الكتب المقروءة: ${n}';
   @override
-  String get kitapsen_user_tab_reading => 'Reading';
+  String get kitapsen_user_tab_reading => 'القراءة';
   @override
-  String get kitapsen_user_tab_reviews => 'Reviews';
+  String get kitapsen_user_tab_reviews => 'المراجعات';
   @override
-  String get kitapsen_user_tab_activity => 'Activity';
+  String get kitapsen_user_tab_activity => 'النشاط';
   @override
-  String get kitapsen_user_currently_reading => 'Currently reading';
+  String get kitapsen_user_currently_reading => 'يقرأ حاليًا';
   @override
-  String get kitapsen_user_finished => 'Finished';
+  String get kitapsen_user_finished => 'الكتب المكتملة';
   @override
-  String get kitapsen_user_no_reading =>
-      'This reader does not share reading activity.';
+  String get kitapsen_user_no_reading => 'لا يشارك هذا القارئ نشاط قراءته.';
   @override
-  String get kitapsen_user_no_reviews => 'No public reviews yet.';
+  String get kitapsen_user_no_reviews => 'لا توجد مراجعات عامة بعد.';
   @override
-  String get kitapsen_user_no_activity => 'No public activity yet.';
+  String get kitapsen_user_no_activity => 'لا يوجد نشاط عام بعد.';
   @override
   String get kitapsen_user_private =>
-      'This profile is private. Follow this reader to see their reviews, reading activity and profile.';
+      'هذا الملف الشخصي خاص. تابع هذا القارئ لترى مراجعاته ونشاط قراءته وملفه الشخصي.';
   @override
   String get kitapsen_user_blocked_you =>
-      'This reader has blocked you. Their profile and activity are hidden from you.';
+      'حظرك هذا القارئ. ملفه الشخصي ونشاطه مخفيان عنك.';
   @override
-  String get kitapsen_user_followers_title => 'Followers';
+  String get kitapsen_user_followers_title => 'المتابِعون';
   @override
-  String get kitapsen_user_following_title => 'Following';
+  String get kitapsen_user_following_title => 'المتابَعون';
   @override
-  String get kitapsen_user_no_connections => 'Nobody here yet.';
+  String get kitapsen_user_no_connections => 'لا أحد هنا بعد.';
   @override
-  String get kitapsen_clubs_title => 'Book clubs';
+  String get kitapsen_clubs_title => 'نوادي الكتب';
   @override
-  String get kitapsen_clubs_create => 'Create a club';
+  String get kitapsen_clubs_create => 'إنشاء نادٍ';
   @override
-  String get kitapsen_clubs_name => 'Club name';
+  String get kitapsen_clubs_name => 'اسم النادي';
   @override
   String get kitapsen_clubs_empty =>
-      'No book clubs yet. Create or join one to read together.';
+      'لا توجد نوادي كتب بعد. أنشئ ناديًا أو انضم إلى أحدها للقراءة معًا.';
   @override
-  String get kitapsen_clubs_join => 'Join';
+  String get kitapsen_clubs_join => 'انضمام';
   @override
-  String get kitapsen_clubs_leave => 'Leave';
+  String get kitapsen_clubs_leave => 'مغادرة';
   @override
-  String get kitapsen_clubs_owner => 'Owner';
+  String get kitapsen_clubs_owner => 'المالك';
   @override
-  String get kitapsen_clubs_members => 'Members';
+  String get kitapsen_clubs_members => 'الأعضاء';
   @override
-  String kitapsen_clubs_members_count({required Object n}) => '${n} members';
+  String kitapsen_clubs_members_count({required Object n}) => 'الأعضاء: ${n}';
   @override
-  String get kitapsen_clubs_chat => 'Discussion';
+  String get kitapsen_clubs_chat => 'النقاش';
   @override
   String get kitapsen_clubs_join_to_chat =>
-      'Join the club to read and write messages.';
+      'انضم إلى النادي لقراءة الرسائل وكتابتها.';
   @override
-  String get kitapsen_clubs_no_messages => 'No messages yet.';
+  String get kitapsen_clubs_no_messages => 'لا توجد رسائل بعد.';
   @override
-  String get kitapsen_clubs_message_hint => 'Write a message...';
+  String get kitapsen_clubs_message_hint => 'اكتب رسالة...';
   @override
-  String get kitapsen_clubs_send => 'Send';
+  String get kitapsen_clubs_send => 'إرسال';
   @override
   String get kitapsen_register_taken =>
-      'This username or email address already has an account.';
+      'يوجد حساب بالفعل باسم المستخدم أو البريد الإلكتروني هذا.';
   @override
-  String get kitapsen_report => 'Report';
+  String get kitapsen_report => 'إبلاغ';
   @override
-  String get kitapsen_reported => 'Reported';
+  String get kitapsen_reported => 'تم الإبلاغ';
   @override
-  String get kitapsen_report_title => 'Report this content';
+  String get kitapsen_report_title => 'الإبلاغ عن هذا المحتوى';
   @override
-  String get kitapsen_report_reason => 'Reason (optional)';
+  String get kitapsen_report_reason => 'السبب (اختياري)';
   @override
-  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  String get kitapsen_report_reason_hint => 'لماذا يُعدّ هذا غير لائق؟';
   @override
-  String get kitapsen_report_submit => 'Submit Report';
+  String get kitapsen_report_submit => 'إرسال البلاغ';
   @override
   String get kitapsen_report_thanks =>
-      'Reported. Thank you for helping keep the community safe.';
+      'تم الإبلاغ. شكرًا لمساعدتك في الحفاظ على أمان المجتمع.';
   @override
   String get kitapsen_delete_statistics_book_desc =>
       'تُزال مدة قراءة هذا الكتاب والأحرف المقروءة منه من الإحصاءات على جميع الأجهزة';
@@ -26316,7 +26312,7 @@ class _StringsDe extends _StringsEn {
   String get audiobook_transcribe_needs_audio =>
       'Wähle zuerst Audiodateien aus';
   @override
-  String get audiobook_transcribe_pause => 'Pause';
+  String get audiobook_transcribe_pause => 'Pausieren';
   @override
   String get audiobook_transcribe_paused_hint =>
       'Der Fortschritt ist gespeichert. Wähle später dieselben Audiodateien aus, um fortzufahren.';
@@ -26609,7 +26605,7 @@ class _StringsDe extends _StringsEn {
   @override
   String get batch_tag_title => 'Tags verwalten';
   @override
-  String get book_continue_reading => 'Continue Reading';
+  String get book_continue_reading => 'Weiterlesen';
   @override
   String get book_convert_blocked_already =>
       'Dieses Buch ist bereits in diesem Format.';
@@ -26975,7 +26971,7 @@ class _StringsDe extends _StringsEn {
   @override
   String get collection_relation_prequel => 'Prequel';
   @override
-  String get collection_relation_sequel => 'Sequel';
+  String get collection_relation_sequel => 'Fortsetzung';
   @override
   String get collection_relation_side_story => 'Nebengeschichte';
   @override
@@ -28455,7 +28451,7 @@ class _StringsDe extends _StringsEn {
   @override
   String get font_target_game_lookup => 'Schrift für Spiel-Nachschlagefenster';
   @override
-  String get font_target_video_subtitle => 'Video Subtitle Font';
+  String get font_target_video_subtitle => 'Schrift für Videountertitel';
   @override
   String get gal_card_lookup_independent_size =>
       'Eigene Größe für Nachschlagekarte im Spiel';
@@ -29616,7 +29612,7 @@ class _StringsDe extends _StringsEn {
   @override
   String get handlebar_sentence => 'Satz';
   @override
-  String get handlebar_sentence_audio => 'Sentence Audio';
+  String get handlebar_sentence_audio => 'Satz-Audio';
   @override
   String get handlebar_video_clip => 'Video Clip (GIF)';
   @override
@@ -31570,7 +31566,7 @@ class _StringsDe extends _StringsEn {
   @override
   String get paste => 'Einfügen';
   @override
-  String get pause => 'Pause';
+  String get pause => 'Pausieren';
   @override
   String get pause_on_lookup => 'Bei Nachschlagen pausieren';
   @override
@@ -31868,7 +31864,7 @@ class _StringsDe extends _StringsEn {
   @override
   String get reader_writing_direction => 'Schreibrichtung';
   @override
-  String get reading_activity => 'Lernaktivität';
+  String get reading_activity => 'Leseaktivität';
   @override
   String get reading_progress => 'Lesefortschritt';
   @override
@@ -32128,7 +32124,7 @@ class _StringsDe extends _StringsEn {
   String get settings_destination_storage_summary =>
       'Datenspeicherort und Speicherbelegung';
   @override
-  String get settings_destination_sync_backup => 'Sync & Backup';
+  String get settings_destination_sync_backup => 'Synchronisierung & Sicherung';
   @override
   String get settings_destination_system => 'System';
   @override
@@ -32273,9 +32269,9 @@ class _StringsDe extends _StringsEn {
   String get shortcut_action_reader_open_gallery =>
       'Illustrationengalerie öffnen';
   @override
-  String get shortcut_action_reader_open_menu => 'Open Settings Menu';
+  String get shortcut_action_reader_open_menu => 'Einstellungsmenü öffnen';
   @override
-  String get shortcut_action_reader_open_navigation => 'Open Navigation';
+  String get shortcut_action_reader_open_navigation => 'Navigation öffnen';
   @override
   String get shortcut_action_reader_open_statistics => 'Lesestatistik öffnen';
   @override
@@ -32296,10 +32292,10 @@ class _StringsDe extends _StringsEn {
       'Vorherigen Untertitel auf jetzt ausrichten';
   @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
-      'Cycle Secondary Subtitle Obscure';
+      'Verbergmodus des sekundären Untertitels wechseln';
   @override
   String get shortcut_action_video_cycle_subtitle_obscure =>
-      'Cycle Subtitle Obscure Mode';
+      'Verbergmodus der Untertitel wechseln';
   @override
   String get shortcut_action_video_dismiss_dict => 'Wörterbuch schließen';
   @override
@@ -32369,7 +32365,7 @@ class _StringsDe extends _StringsEn {
   String get shortcut_action_video_toggle_play_pause => 'Wiedergabe / Pause';
   @override
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
-      'Toggle Hide Secondary Subtitle';
+      'Sekundären Untertitel ein-/ausblenden';
   @override
   String get shortcut_action_video_toggle_shader_compare =>
       'Shader-Vergleich umschalten';
@@ -32378,7 +32374,7 @@ class _StringsDe extends _StringsEn {
       'Untertitel-Unschärfe umschalten';
   @override
   String get shortcut_action_video_toggle_subtitle_hide =>
-      'Toggle Hide Subtitles';
+      'Untertitel ein-/ausblenden';
   @override
   String get shortcut_action_video_toggle_subtitle_list =>
       'Untertitelliste umschalten';
@@ -32661,7 +32657,7 @@ class _StringsDe extends _StringsEn {
   @override
   String get stat_detail_ungrouped => 'Nicht gruppiert';
   @override
-  String get stat_fastest_day => 'Fastest Day';
+  String get stat_fastest_day => 'Schnellster Tag';
   @override
   String get stat_favorited => 'Favorisiert';
   @override
@@ -32678,9 +32674,9 @@ class _StringsDe extends _StringsEn {
   @override
   String stat_format_pages({required Object n}) => '${n} Seiten';
   @override
-  String get stat_goal => 'Daily Goal';
+  String get stat_goal => 'Tagesziel';
   @override
-  String get stat_goal_daily => 'Daily Goal';
+  String get stat_goal_daily => 'Tagesziel';
   @override
   String get stat_goal_presets => 'Vorlagen';
   @override
@@ -32692,11 +32688,11 @@ class _StringsDe extends _StringsEn {
   String stat_goal_recent_average({required Object n}) =>
       'Letzte 7 Tage: Ø ${n} Zeichen/Tag';
   @override
-  String get stat_goal_set => 'Set Goal';
+  String get stat_goal_set => 'Ziel festlegen';
   @override
   String get stat_goal_unit_chars => 'Zeichen';
   @override
-  String get stat_goal_weekly => 'Weekly Goal';
+  String get stat_goal_weekly => 'Wochenziel';
   @override
   String get stat_hourly_band_epub => 'Textbücher';
   @override
@@ -32723,7 +32719,7 @@ class _StringsDe extends _StringsEn {
   @override
   String get stat_no_data => 'Noch keine Lesedaten';
   @override
-  String get stat_range_and_trend => 'Range & Trend';
+  String get stat_range_and_trend => 'Zeitraum & Trend';
   @override
   String get stat_recent_active => 'Aktive Tage (7T)';
   @override
@@ -32742,7 +32738,7 @@ class _StringsDe extends _StringsEn {
   @override
   String get stat_sessions_show_all => 'Alle Sitzungen';
   @override
-  String get stat_slowest_day => 'Slowest Day';
+  String get stat_slowest_day => 'Langsamster Tag';
   @override
   String get stat_sort_by_chars => 'Nach Zeichen';
   @override
@@ -32758,7 +32754,7 @@ class _StringsDe extends _StringsEn {
   @override
   String stat_speed_cph({required Object n}) => '${n} Zeichen/Std.';
   @override
-  String get stat_speed_summary => 'Speed Summary';
+  String get stat_speed_summary => 'Geschwindigkeitsübersicht';
   @override
   String get stat_streak => 'Serie';
   @override
@@ -32776,11 +32772,11 @@ class _StringsDe extends _StringsEn {
   @override
   String get stat_trend_weekly => 'Wöchentlich';
   @override
-  String get stat_typical_day => 'Typical Day';
+  String get stat_typical_day => 'Typischer Tag';
   @override
   String get stat_vs_prev => 'vs. vorige 14T';
   @override
-  String get stat_weighted_avg_speed => 'Weighted Avg';
+  String get stat_weighted_avg_speed => 'Gewichteter Schnitt';
   @override
   String get stop => 'Stoppen';
   @override
@@ -40379,7 +40375,7 @@ class _StringsDe extends _StringsEn {
   @override
   String get video_scrape_ai_declined => 'AI not adopted';
   @override
-  String get video_scrape_ai_failed => 'AI request failed';
+  String get video_scrape_ai_failed => 'KI-Anfrage fehlgeschlagen';
   @override
   String get video_scrape_ai_searched =>
       'Searched again with titles suggested by AI';
@@ -40439,7 +40435,7 @@ class _StringsDe extends _StringsEn {
   @override
   String get shelf_filter_read_status_finished => 'Gelesen';
   @override
-  String get video_filter_media_type => 'Type';
+  String get video_filter_media_type => 'Typ';
   @override
   String get video_filter_media_type_video => 'Video';
   @override
@@ -40451,7 +40447,7 @@ class _StringsDe extends _StringsEn {
   @override
   String get video_filter_extras_only => 'Extras only';
   @override
-  String get video_filter_source => 'Source';
+  String get video_filter_source => 'Quelle';
   @override
   String get video_filter_series_standalone_empty_hint =>
       'No standalone videos. Videos in collections are on the Series tab, or set the Series filter to All.';
@@ -40494,7 +40490,7 @@ class _StringsDe extends _StringsEn {
   @override
   String get manga_ocr_ai_mode_label => 'AI recognition';
   @override
-  String get manga_ocr_ai_mode_off => 'Off';
+  String get manga_ocr_ai_mode_off => 'Aus';
   @override
   String get manga_ocr_ai_mode_low_confidence => 'Only uncertain text';
   @override
@@ -40547,7 +40543,7 @@ class _StringsDe extends _StringsEn {
   String get ocr_system_model_missing =>
       'Google Play services hasn\'t downloaded the text recognition model yet. Download it now (a few MB) to use screen OCR.';
   @override
-  String get ocr_system_model_download => 'Download';
+  String get ocr_system_model_download => 'Herunterladen';
   @override
   String get ocr_system_model_downloading =>
       'Downloading through Google Play services… You can close this dialog; the download continues in the background.';
@@ -40571,669 +40567,679 @@ class _StringsDe extends _StringsEn {
   @override
   String get kitapsen_section_title => 'Kitapsen';
   @override
-  String get kitapsen_account_title => 'Kitapsen account';
+  String get kitapsen_account_title => 'Kitapsen-Konto';
   @override
   String get kitapsen_account_hint =>
-      'Sign in to read the books in your Kitapsen library. They appear on your bookshelf, and your reading position syncs with your account.';
+      'Melden Sie sich an, um die Bücher in Ihrer Kitapsen-Bibliothek zu lesen. Sie erscheinen in Ihrem Bücherregal, und Ihre Leseposition wird mit Ihrem Konto synchronisiert.';
   @override
-  String get kitapsen_account_server_url => 'Server address';
+  String get kitapsen_account_server_url => 'Serveradresse';
   @override
-  String get kitapsen_account_username => 'Email or username';
+  String get kitapsen_account_username => 'E-Mail oder Benutzername';
   @override
-  String get kitapsen_account_password => 'Password';
+  String get kitapsen_account_password => 'Passwort';
   @override
-  String get kitapsen_account_sign_in => 'Sign in';
+  String get kitapsen_account_sign_in => 'Anmelden';
   @override
-  String get kitapsen_account_sign_out => 'Sign out';
+  String get kitapsen_account_sign_out => 'Abmelden';
   @override
   String get kitapsen_account_sign_in_rejected =>
-      'Email or password is incorrect';
+      'E-Mail oder Passwort ist falsch';
   @override
   String get kitapsen_account_sign_in_failed =>
-      'Could not reach Kitapsen. Check the address and your connection.';
+      'Kitapsen ist nicht erreichbar. Prüfen Sie die Adresse und Ihre Verbindung.';
   @override
-  String get kitapsen_account_summary => 'Sign in to read your library';
+  String get kitapsen_account_summary =>
+      'Melden Sie sich an, um Ihre Bibliothek zu lesen';
   @override
   String get kitapsen_shelf_signed_out_body =>
-      'Sign in with your Kitapsen account to see your library.';
+      'Melden Sie sich mit Ihrem Kitapsen-Konto an, um Ihre Bibliothek zu sehen.';
   @override
-  String get kitapsen_shelf_sign_in => 'Sign in to Kitapsen';
+  String get kitapsen_shelf_sign_in => 'Bei Kitapsen anmelden';
   @override
-  String get kitapsen_onboarding_title => 'Your Kitapsen library';
+  String get kitapsen_onboarding_title => 'Ihre Kitapsen-Bibliothek';
   @override
   String get kitapsen_onboarding_body =>
-      'Sign in to see the books in your Kitapsen account on this device. You can skip this and sign in later from Settings.';
+      'Melden Sie sich an, um die Bücher Ihres Kitapsen-Kontos auf diesem Gerät zu sehen. Sie können diesen Schritt überspringen und sich später in den Einstellungen anmelden.';
   @override
   String app_store_update_body({required Object version}) =>
-      'Kitapsen ${version} is available on the App Store.';
+      'Kitapsen ${version} ist im App Store verfügbar.';
   @override
-  String get app_store_update_open => 'Update';
+  String get app_store_update_open => 'Aktualisieren';
   @override
-  String get app_store_update_later => 'Not now';
+  String get app_store_update_later => 'Nicht jetzt';
   @override
-  String get kitapsen_about_privacy_policy => 'Privacy policy';
+  String get kitapsen_about_privacy_policy => 'Datenschutzerklärung';
   @override
-  String get kitapsen_about_support => 'Contact support';
+  String get kitapsen_about_support => 'Support kontaktieren';
   @override
-  String get kitapsen_about_source_code => 'Source code';
+  String get kitapsen_about_source_code => 'Quellcode';
   @override
   String get kitapsen_about_based_on_fushi =>
-      'Kitapsen is based on Fushi (GPLv3) — source: https://github.com/FizyonOps/kitapsen-mobile';
+      'Kitapsen basiert auf Fushi (GPLv3) — Quellcode: https://github.com/FizyonOps/kitapsen-mobile';
   @override
-  String get kitapsen_about_licenses => 'Open-source licenses';
+  String get kitapsen_about_licenses => 'Open-Source-Lizenzen';
   @override
-  String get kitapsen_about_section => 'About Kitapsen';
+  String get kitapsen_about_section => 'Über Kitapsen';
   @override
-  String get kitapsen_import_hint => 'Pick an EPUB or PDF file to import.';
+  String get kitapsen_import_hint =>
+      'Wählen Sie eine EPUB- oder PDF-Datei zum Importieren.';
   @override
   String get kitapsen_sign_out_removes_books =>
-      'Signing out removes your downloaded Kitapsen books from this device.';
+      'Beim Abmelden werden Ihre heruntergeladenen Kitapsen-Bücher von diesem Gerät entfernt.';
   @override
-  String get kitapsen_account_or => 'or';
+  String get kitapsen_account_or => 'oder';
   @override
-  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  String get kitapsen_account_continue_with_google => 'Weiter mit Google';
   @override
-  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  String get kitapsen_account_continue_with_apple => 'Weiter mit Apple';
   @override
   String get kitapsen_account_social_sign_in_failed =>
-      'Sign-in failed. Please try again.';
+      'Anmeldung fehlgeschlagen. Bitte versuchen Sie es erneut.';
   @override
   String get kitapsen_account_deleted =>
-      'This Kitapsen account has been deleted.';
+      'Dieses Kitapsen-Konto wurde gelöscht.';
   @override
-  String get kitapsen_account_delete => 'Delete account';
+  String get kitapsen_account_delete => 'Konto löschen';
   @override
   String get kitapsen_account_delete_confirm =>
-      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+      'Ihr Kitapsen-Konto wird gelöscht und dieses Gerät abgemeldet. Sie können die Bücher in Ihrer Bibliothek dann nicht mehr lesen. Dies kann nicht rückgängig gemacht werden.';
   @override
   String get kitapsen_account_delete_failed =>
-      'The account could not be deleted. Please try again.';
+      'Das Konto konnte nicht gelöscht werden. Bitte versuchen Sie es erneut.';
   @override
-  String get kitapsen_nav_store => 'Store';
+  String get kitapsen_nav_store => 'Shop';
   @override
-  String get kitapsen_store_search_hint => 'Search books and authors';
+  String get kitapsen_store_search_hint => 'Bücher und Autoren suchen';
   @override
-  String get kitapsen_store_new_arrivals => 'New arrivals';
+  String get kitapsen_store_new_arrivals => 'Neuerscheinungen';
   @override
-  String get kitapsen_store_most_read => 'Most read';
+  String get kitapsen_store_most_read => 'Meistgelesene Bücher';
   @override
-  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  String get kitapsen_store_staff_picks => 'Empfehlungen der Redaktion';
   @override
-  String get kitapsen_store_free_books => 'Free books';
+  String get kitapsen_store_free_books => 'Kostenlose Bücher';
   @override
-  String get kitapsen_store_stories => 'Serialized stories';
+  String get kitapsen_store_stories => 'Fortsetzungsgeschichten';
   @override
-  String get kitapsen_store_categories => 'Categories';
+  String get kitapsen_store_categories => 'Kategorien';
   @override
-  String get kitapsen_store_see_all => 'See all';
+  String get kitapsen_store_see_all => 'Alle anzeigen';
   @override
-  String get kitapsen_store_no_results => 'No books found';
+  String get kitapsen_store_no_results => 'Keine Bücher gefunden';
   @override
   String get kitapsen_store_load_failed =>
-      'Couldn\'t load. Check your connection.';
+      'Laden fehlgeschlagen. Prüfen Sie Ihre Verbindung.';
   @override
-  String get kitapsen_store_free_only => 'Free only';
+  String get kitapsen_store_free_only => 'Nur kostenlose';
   @override
-  String get kitapsen_sort_relevance => 'Most relevant';
+  String get kitapsen_sort_relevance => 'Relevanz';
   @override
-  String get kitapsen_sort_newest => 'Newest';
+  String get kitapsen_sort_newest => 'Neueste';
   @override
-  String get kitapsen_sort_most_read => 'Most read';
+  String get kitapsen_sort_most_read => 'Meistgelesen';
   @override
-  String get kitapsen_sort_rating => 'Top rated';
+  String get kitapsen_sort_rating => 'Beste Bewertung';
   @override
-  String get kitapsen_sort_title => 'Title A–Z';
+  String get kitapsen_sort_title => 'Titel A–Z';
   @override
-  String get kitapsen_book_read => 'Read';
+  String get kitapsen_book_read => 'Lesen';
   @override
-  String get kitapsen_book_get_free => 'Get for free';
+  String get kitapsen_book_get_free => 'Kostenlos erhalten';
   @override
-  String get kitapsen_book_claimed => 'Added to your library';
+  String get kitapsen_book_claimed => 'Zu Ihrer Bibliothek hinzugefügt';
   @override
-  String get kitapsen_book_in_library => 'In your library';
+  String get kitapsen_book_in_library => 'In Ihrer Bibliothek';
   @override
-  String get kitapsen_book_not_in_library => 'Not in your library';
+  String get kitapsen_book_not_in_library => 'Nicht in Ihrer Bibliothek';
   @override
   String get kitapsen_book_sign_in_prompt =>
-      'Sign in to add books to your library and keep a wishlist.';
+      'Melden Sie sich an, um Bücher zu Ihrer Bibliothek hinzuzufügen und eine Wunschliste zu führen.';
   @override
-  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  String get kitapsen_book_wishlist_add => 'Zur Wunschliste hinzufügen';
   @override
-  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  String get kitapsen_book_wishlist_remove => 'Von der Wunschliste entfernen';
   @override
-  String get kitapsen_book_downloading => 'Downloading to your library…';
+  String get kitapsen_book_downloading =>
+      'Wird in Ihre Bibliothek heruntergeladen…';
   @override
-  String get kitapsen_book_about => 'About this book';
+  String get kitapsen_book_about => 'Über dieses Buch';
   @override
-  String get kitapsen_book_pages => 'Pages';
+  String get kitapsen_book_pages => 'Seiten';
   @override
-  String get kitapsen_book_language => 'Language';
+  String get kitapsen_book_language => 'Sprache';
   @override
-  String get kitapsen_book_publisher => 'Publisher';
+  String get kitapsen_book_publisher => 'Verlag';
   @override
-  String get kitapsen_book_published => 'Published';
+  String get kitapsen_book_published => 'Erschienen';
   @override
   String get kitapsen_book_action_failed =>
-      'Something went wrong. Please try again.';
+      'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.';
   @override
-  String get kitapsen_book_reviews => 'Reviews';
+  String get kitapsen_book_reviews => 'Bewertungen';
   @override
-  String get kitapsen_book_no_reviews => 'No reviews yet';
+  String get kitapsen_book_no_reviews => 'Noch keine Bewertungen';
   @override
-  String get kitapsen_book_write_review => 'Write a review';
+  String get kitapsen_book_write_review => 'Bewertung schreiben';
   @override
-  String get kitapsen_review_title_hint => 'Title (optional)';
+  String get kitapsen_review_title_hint => 'Titel (optional)';
   @override
-  String get kitapsen_review_content_hint => 'Your review (optional)';
+  String get kitapsen_review_content_hint => 'Ihre Bewertung (optional)';
   @override
-  String get kitapsen_review_submit => 'Send';
+  String get kitapsen_review_submit => 'Senden';
   @override
-  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  String get kitapsen_review_sent => 'Danke! Ihre Bewertung wurde gesendet.';
   @override
-  String get kitapsen_review_already => 'You have already reviewed this book.';
+  String get kitapsen_review_already =>
+      'Sie haben dieses Buch bereits bewertet.';
   @override
   String get kitapsen_review_not_allowed =>
-      'Only readers who have this book in their library can review it.';
+      'Nur Leser, die dieses Buch in ihrer Bibliothek haben, können es bewerten.';
   @override
-  String get kitapsen_review_more => 'Show more reviews';
+  String get kitapsen_review_more => 'Weitere Bewertungen anzeigen';
   @override
-  String get kitapsen_review_verified => 'Verified reader';
+  String get kitapsen_review_verified => 'Verifizierter Leser';
   @override
-  String get kitapsen_author_follow => 'Follow';
+  String get kitapsen_author_follow => 'Folgen';
   @override
-  String get kitapsen_author_following => 'Following';
+  String get kitapsen_author_following => 'Gefolgt';
   @override
-  String get kitapsen_author_followers => 'Followers';
+  String get kitapsen_author_followers => 'Follower';
   @override
-  String get kitapsen_author_books => 'Books';
+  String get kitapsen_author_books => 'Bücher';
   @override
-  String get kitapsen_author_open => 'Author page';
+  String get kitapsen_author_open => 'Autorenseite';
   @override
-  String get kitapsen_wishlist_title => 'Wishlist';
+  String get kitapsen_wishlist_title => 'Wunschliste';
   @override
-  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  String get kitapsen_wishlist_empty => 'Ihre Wunschliste ist leer';
   @override
-  String get kitapsen_notifications_title => 'Notifications';
+  String get kitapsen_notifications_title => 'Benachrichtigungen';
   @override
-  String get kitapsen_notifications_empty => 'No notifications';
+  String get kitapsen_notifications_empty => 'Keine Benachrichtigungen';
   @override
-  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  String get kitapsen_notifications_mark_all => 'Alle als gelesen markieren';
   @override
-  String get kitapsen_story_chapters => 'Chapters';
+  String get kitapsen_story_chapters => 'Kapitel';
   @override
-  String get kitapsen_story_no_chapters => 'No chapters yet';
+  String get kitapsen_story_no_chapters => 'Noch keine Kapitel';
   @override
-  String get kitapsen_story_next => 'Next chapter';
+  String get kitapsen_story_next => 'Nächstes Kapitel';
   @override
-  String get kitapsen_story_previous => 'Previous chapter';
+  String get kitapsen_story_previous => 'Vorheriges Kapitel';
   @override
-  String get kitapsen_review_like => 'Like';
+  String get kitapsen_review_like => 'Gefällt mir';
   @override
-  String get kitapsen_comments_title => 'Comments';
+  String get kitapsen_comments_title => 'Kommentare';
   @override
-  String get kitapsen_comments_empty => 'No comments yet';
+  String get kitapsen_comments_empty => 'Noch keine Kommentare';
   @override
-  String get kitapsen_comment_hint => 'Write a comment';
+  String get kitapsen_comment_hint => 'Kommentar schreiben';
   @override
-  String get kitapsen_story_vote => 'Vote';
+  String get kitapsen_story_vote => 'Abstimmen';
   @override
-  String get kitapsen_story_voted => 'Voted';
+  String get kitapsen_story_voted => 'Abgestimmt';
   @override
-  String get kitapsen_story_follow => 'Follow story';
+  String get kitapsen_story_follow => 'Geschichte folgen';
   @override
-  String get kitapsen_following_title => 'Following';
+  String get kitapsen_following_title => 'Gefolgt';
   @override
-  String get kitapsen_following_authors => 'Authors';
+  String get kitapsen_following_authors => 'Autoren';
   @override
-  String get kitapsen_following_stories => 'Stories';
+  String get kitapsen_following_stories => 'Geschichten';
   @override
-  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  String get kitapsen_following_empty => 'Sie folgen noch niemandem';
   @override
-  String get kitapsen_reader_highlight => 'Highlight';
+  String get kitapsen_reader_highlight => 'Hervorheben';
   @override
-  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  String get kitapsen_annotations_title => 'Lesezeichen und Notizen';
   @override
-  String get kitapsen_bookmark_add => 'Add bookmark';
+  String get kitapsen_bookmark_add => 'Lesezeichen hinzufügen';
   @override
-  String get kitapsen_bookmark_added => 'Bookmark added';
+  String get kitapsen_bookmark_added => 'Lesezeichen hinzugefügt';
   @override
-  String get kitapsen_note_add => 'Add note';
+  String get kitapsen_note_add => 'Notiz hinzufügen';
   @override
-  String get kitapsen_note_hint => 'Your note';
+  String get kitapsen_note_hint => 'Ihre Notiz';
   @override
-  String get kitapsen_note_saved => 'Note saved';
+  String get kitapsen_note_saved => 'Notiz gespeichert';
   @override
-  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  String get kitapsen_annotations_empty =>
+      'Noch keine Lesezeichen oder Notizen';
   @override
-  String get kitapsen_store_badge_free => 'Free';
+  String get kitapsen_store_badge_free => 'Gratis';
   @override
-  String get kitapsen_store_badge_new => 'New';
+  String get kitapsen_store_badge_new => 'Neu';
   @override
-  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  String kitapsen_store_rating_count({required Object n}) => '${n} Bewertungen';
   @override
-  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  String get kitapsen_store_hero_title =>
+      'Ihr nächstes Lieblingsbuch ist hier.';
   @override
   String get kitapsen_store_hero_body =>
-      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+      'Entdecken Sie neue Geschichten und Ihre Lieblingsautoren. Wählen Sie Ihr Buch und lesen Sie los – auf Smartphone, Tablet oder Computer.';
   @override
-  String get kitapsen_store_explore_books => 'Explore books';
+  String get kitapsen_store_explore_books => 'Bücher entdecken';
   @override
-  String get kitapsen_store_start_free => 'Start with free books';
+  String get kitapsen_store_start_free => 'Mit kostenlosen Büchern starten';
   @override
-  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  String get kitapsen_store_start_free_body => 'Entdecken Sie Ihr erstes Buch.';
   @override
-  String get kitapsen_store_library_always => 'Your library is always with you';
+  String get kitapsen_store_library_always => 'Ihre Bibliothek ist immer dabei';
   @override
   String get kitapsen_store_library_always_body =>
-      'Read on your phone, tablet and computer.';
+      'Lesen Sie auf Smartphone, Tablet und Computer.';
   @override
-  String get kitapsen_store_meet_authors => 'Meet the authors';
+  String get kitapsen_store_meet_authors => 'Lernen Sie die Autoren kennen';
   @override
-  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  String get kitapsen_store_meet_authors_body =>
+      'Folgen Sie Ihren Lieblingsautoren.';
   @override
-  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  String get kitapsen_store_reading_list => 'Ein neues Buch für Ihre Leseliste';
   @override
-  String get kitapsen_store_all_categories => 'All categories';
+  String get kitapsen_store_all_categories => 'Alle Kategorien';
   @override
-  String get kitapsen_store_discover_title => 'Time to discover';
+  String get kitapsen_store_discover_title => 'Zeit zum Entdecken';
   @override
   String get kitapsen_store_discover_body =>
-      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+      'Eine Geschichte, eine neue Sichtweise, eine unerwartete Entdeckung. Setzen Sie Ihr nächstes Buch auf Ihre Leseliste.';
   @override
-  String get kitapsen_store_discover_now => 'Discover now';
+  String get kitapsen_store_discover_now => 'Jetzt entdecken';
   @override
   String kitapsen_store_results_for({required Object q}) =>
-      'Results for "${q}"';
+      'Ergebnisse für „${q}“';
   @override
-  String get kitapsen_store_matching_authors => 'Matching authors';
+  String get kitapsen_store_matching_authors => 'Passende Autoren';
   @override
-  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  String kitapsen_store_author_books_count({required Object n}) =>
+      '${n} Bücher';
   @override
   String get kitapsen_store_author_cta =>
-      'Discover the author\'s books and pick your next read.';
+      'Entdecken Sie die Bücher des Autors und wählen Sie Ihre nächste Lektüre.';
   @override
-  String get kitapsen_store_see_author_books => 'See their books';
+  String get kitapsen_store_see_author_books => 'Bücher ansehen';
   @override
-  String get kitapsen_store_authors_books => 'The author\'s books';
+  String get kitapsen_store_authors_books => 'Bücher des Autors';
   @override
-  String get kitapsen_book_read_now => 'Read now';
+  String get kitapsen_book_read_now => 'Jetzt lesen';
   @override
-  String get kitapsen_book_get_free_web => 'Get it free';
+  String get kitapsen_book_get_free_web => 'Kostenlos holen';
   @override
-  String get kitapsen_book_favorites => 'Favorites';
+  String get kitapsen_book_favorites => 'Favoriten';
   @override
-  String get kitapsen_book_description => 'Description';
+  String get kitapsen_book_description => 'Beschreibung';
   @override
-  String get kitapsen_book_about_author => 'About the author';
+  String get kitapsen_book_about_author => 'Über den Autor';
   @override
   String get kitapsen_book_isbn => 'ISBN';
   @override
   String get kitapsen_book_format => 'Format';
   @override
-  String get kitapsen_author_role => 'Author';
+  String get kitapsen_author_role => 'Autor';
   @override
-  String get kitapsen_author_notify => 'Notify me of new books';
+  String get kitapsen_author_notify => 'Über neue Bücher benachrichtigen';
   @override
-  String get kitapsen_author_about => 'About';
+  String get kitapsen_author_about => 'Info';
   @override
-  String get kitapsen_review_more_bio => 'Read the full biography';
+  String get kitapsen_review_more_bio => 'Vollständige Biografie lesen';
   @override
-  String get kitapsen_author_like => 'Like';
+  String get kitapsen_author_like => 'Gefällt mir';
   @override
   String get kitapsen_author_likes => 'Likes';
   @override
-  String get kitapsen_register_open => 'No account yet? Create one';
+  String get kitapsen_register_open => 'Noch kein Konto? Jetzt erstellen';
   @override
   String get kitapsen_register_name => 'Name (optional)';
   @override
-  String get kitapsen_register_username => 'Username';
+  String get kitapsen_register_username => 'Benutzername';
   @override
   String get kitapsen_register_username_hint =>
-      '2–20 lowercase letters or digits';
+      '2–20 Kleinbuchstaben oder Ziffern';
   @override
-  String get kitapsen_register_email => 'Email';
+  String get kitapsen_register_email => 'E-Mail';
   @override
-  String get kitapsen_register_password_hint => 'At least 8 characters';
+  String get kitapsen_register_password_hint => 'Mindestens 8 Zeichen';
   @override
-  String get kitapsen_register_submit => 'Create account';
+  String get kitapsen_register_submit => 'Konto erstellen';
   @override
-  String get kitapsen_register_have_account =>
-      'Already have an account? Sign in';
+  String get kitapsen_register_have_account => 'Bereits ein Konto? Anmelden';
   @override
   String get kitapsen_register_username_invalid =>
-      'Use 2–20 lowercase letters or digits.';
+      'Verwenden Sie 2–20 Kleinbuchstaben oder Ziffern.';
   @override
   String get kitapsen_register_name_invalid =>
-      'The name must be 2–30 characters.';
+      'Der Name muss 2–30 Zeichen lang sein.';
   @override
-  String get kitapsen_register_email_invalid => 'Enter a valid email address.';
+  String get kitapsen_register_email_invalid =>
+      'Geben Sie eine gültige E-Mail-Adresse ein.';
   @override
   String get kitapsen_register_password_short =>
-      'The password must be at least 8 characters.';
+      'Das Passwort muss mindestens 8 Zeichen lang sein.';
   @override
   String get kitapsen_register_failed =>
-      'The account could not be created. Try again.';
+      'Das Konto konnte nicht erstellt werden. Versuchen Sie es erneut.';
   @override
-  String get kitapsen_hub_title => 'My account';
+  String get kitapsen_hub_title => 'Mein Konto';
   @override
-  String get kitapsen_hub_reading => 'Reading';
+  String get kitapsen_hub_reading => 'Lesen';
   @override
-  String get kitapsen_hub_social => 'Social';
+  String get kitapsen_hub_social => 'Soziales';
   @override
-  String get kitapsen_hub_discover => 'Discover';
+  String get kitapsen_hub_discover => 'Entdecken';
   @override
-  String get kitapsen_hub_account => 'Account';
+  String get kitapsen_hub_account => 'Konto';
   @override
-  String get kitapsen_hub_library => 'My library';
+  String get kitapsen_hub_library => 'Meine Bibliothek';
   @override
-  String get kitapsen_hub_public_profile => 'My public reader profile';
+  String get kitapsen_hub_public_profile => 'Mein öffentliches Leserprofil';
   @override
-  String get kitapsen_hub_sign_in_settings => 'Sign out or delete the account';
+  String get kitapsen_hub_sign_in_settings => 'Abmelden oder Konto löschen';
   @override
-  String get kitapsen_common_save => 'Save';
+  String get kitapsen_common_save => 'Speichern';
   @override
-  String get kitapsen_common_saved => 'Saved';
+  String get kitapsen_common_saved => 'Gespeichert';
   @override
-  String get kitapsen_common_edit => 'Edit';
+  String get kitapsen_common_edit => 'Bearbeiten';
   @override
-  String get kitapsen_profile_title => 'My profile';
+  String get kitapsen_profile_title => 'Mein Profil';
   @override
-  String get kitapsen_profile_name => 'Display name';
+  String get kitapsen_profile_name => 'Anzeigename';
   @override
-  String get kitapsen_profile_sharing => 'Share reading activity';
+  String get kitapsen_profile_sharing => 'Leseaktivität teilen';
   @override
   String get kitapsen_profile_sharing_hint =>
-      'Show the books you are reading and have finished on your public profile.';
+      'Zeigt in Ihrem öffentlichen Profil die Bücher, die Sie gerade lesen oder ausgelesen haben.';
   @override
-  String get kitapsen_settings_title => 'Account settings';
+  String get kitapsen_settings_title => 'Kontoeinstellungen';
   @override
-  String get kitapsen_settings_profile => 'Profile information';
+  String get kitapsen_settings_profile => 'Profilinformationen';
   @override
-  String get kitapsen_settings_privacy => 'Privacy';
+  String get kitapsen_settings_privacy => 'Privatsphäre';
   @override
-  String get kitapsen_settings_private => 'Private profile';
+  String get kitapsen_settings_private => 'Privates Profil';
   @override
   String get kitapsen_settings_private_hint =>
-      'Only your followers can see your profile, reviews, reading activity and updates.';
+      'Nur Ihre Follower können Ihr Profil, Ihre Bewertungen, Ihre Leseaktivität und Ihre Neuigkeiten sehen.';
   @override
-  String get kitapsen_settings_notifications => 'Email notifications';
+  String get kitapsen_settings_notifications => 'E-Mail-Benachrichtigungen';
   @override
   String get kitapsen_settings_follower_email =>
-      'Email me when someone follows me';
+      'E-Mail senden, wenn mir jemand folgt';
   @override
   String get kitapsen_settings_comment_email =>
-      'Email me when someone comments on my story';
+      'E-Mail senden, wenn jemand meine Geschichte kommentiert';
   @override
-  String get kitapsen_settings_sale_email => 'Email me when my book sells';
+  String get kitapsen_settings_sale_email =>
+      'E-Mail senden, wenn mein Buch verkauft wird';
   @override
-  String get kitapsen_settings_author_emails => 'Author emails';
+  String get kitapsen_settings_author_emails => 'Autoren-E-Mails';
   @override
-  String get kitapsen_settings_password => 'Change password';
+  String get kitapsen_settings_password => 'Passwort ändern';
   @override
-  String get kitapsen_settings_current_password => 'Current password';
+  String get kitapsen_settings_current_password => 'Aktuelles Passwort';
   @override
-  String get kitapsen_settings_new_password => 'New password';
+  String get kitapsen_settings_new_password => 'Neues Passwort';
   @override
-  String get kitapsen_settings_repeat_password => 'Repeat the new password';
+  String get kitapsen_settings_repeat_password => 'Neues Passwort wiederholen';
   @override
-  String get kitapsen_settings_change_password => 'Change password';
+  String get kitapsen_settings_change_password => 'Passwort ändern';
   @override
   String get kitapsen_settings_passwords_differ =>
-      'The passwords do not match.';
+      'Die Passwörter stimmen nicht überein.';
   @override
-  String get kitapsen_settings_password_changed => 'Password changed.';
+  String get kitapsen_settings_password_changed => 'Passwort geändert.';
   @override
   String get kitapsen_settings_password_failed =>
-      'The password could not be changed. Check the current password.';
+      'Das Passwort konnte nicht geändert werden. Prüfen Sie das aktuelle Passwort.';
   @override
-  String get kitapsen_settings_blocked => 'Blocked users';
+  String get kitapsen_settings_blocked => 'Blockierte Nutzer';
   @override
-  String get kitapsen_settings_no_blocked => 'You have not blocked anyone.';
+  String get kitapsen_settings_no_blocked => 'Sie haben niemanden blockiert.';
   @override
-  String get kitapsen_publishers_title => 'Publishers';
+  String get kitapsen_publishers_title => 'Verlage';
   @override
-  String get kitapsen_publishers_body => 'Browse books by publisher.';
+  String get kitapsen_publishers_body => 'Bücher nach Verlag entdecken.';
   @override
-  String get kitapsen_publisher_role => 'Publisher';
+  String get kitapsen_publisher_role => 'Verlag';
   @override
   String get kitapsen_publisher_no_books =>
-      'This publisher\'s books will be listed here soon.';
+      'Die Bücher dieses Verlags werden bald hier aufgeführt.';
   @override
-  String get kitapsen_authors_title => 'Authors';
+  String get kitapsen_authors_title => 'Autoren';
   @override
   String get kitapsen_blog_title => 'Blog';
   @override
   String get kitapsen_blog_subtitle =>
-      'News, tips and stories from the Kitapsen community.';
+      'Neuigkeiten, Tipps und Geschichten aus der Kitapsen-Community.';
   @override
-  String get kitapsen_blog_empty => 'No blog posts yet.';
+  String get kitapsen_blog_empty => 'Noch keine Blogbeiträge.';
   @override
-  String get kitapsen_collections_title => 'Collections';
+  String get kitapsen_collections_title => 'Sammlungen';
   @override
-  String get kitapsen_collections_new => 'New collection';
+  String get kitapsen_collections_new => 'Neue Sammlung';
   @override
-  String get kitapsen_collections_name => 'Collection name';
+  String get kitapsen_collections_name => 'Name der Sammlung';
   @override
-  String get kitapsen_collections_description => 'Description (optional)';
+  String get kitapsen_collections_description => 'Beschreibung (optional)';
   @override
   String get kitapsen_collections_empty =>
-      'No collections yet. Create collections to organise your books.';
+      'Noch keine Sammlungen. Erstellen Sie Sammlungen, um Ihre Bücher zu ordnen.';
   @override
-  String get kitapsen_collections_delete_confirm => 'Delete this collection?';
+  String get kitapsen_collections_delete_confirm => 'Diese Sammlung löschen?';
   @override
   String get kitapsen_collections_items_empty =>
-      'No books yet. Add books from their page with "Add to collection".';
+      'Noch keine Bücher. Fügen Sie Bücher auf ihrer Seite über „Zur Sammlung hinzufügen“ hinzu.';
   @override
   String get kitapsen_collections_long_press =>
-      'Long-press a book to remove it.';
+      'Halten Sie ein Buch gedrückt, um es zu entfernen.';
   @override
-  String get kitapsen_collections_remove => 'Remove';
+  String get kitapsen_collections_remove => 'Entfernen';
   @override
   String kitapsen_collections_remove_confirm({required Object title}) =>
-      'Remove "${title}" from this collection?';
+      '„${title}“ aus dieser Sammlung entfernen?';
   @override
-  String get kitapsen_collections_add => 'Add to collection';
+  String get kitapsen_collections_add => 'Zur Sammlung hinzufügen';
   @override
-  String get kitapsen_collections_add_title => 'Add to a collection';
+  String get kitapsen_collections_add_title => 'Zu einer Sammlung hinzufügen';
   @override
-  String get kitapsen_collections_added => 'Added to the collection';
+  String get kitapsen_collections_added => 'Zur Sammlung hinzugefügt';
   @override
-  String get kitapsen_notebooks_title => 'Notebooks';
+  String get kitapsen_notebooks_title => 'Notizbücher';
   @override
-  String get kitapsen_notebooks_new => 'New notebook';
+  String get kitapsen_notebooks_new => 'Neues Notizbuch';
   @override
-  String get kitapsen_notebooks_name => 'Notebook name';
+  String get kitapsen_notebooks_name => 'Name des Notizbuchs';
   @override
   String get kitapsen_notebooks_empty =>
-      'No notebooks yet. Create notebooks for your reading notes and ideas.';
+      'Noch keine Notizbücher. Legen Sie Notizbücher für Ihre Lesenotizen und Ideen an.';
   @override
-  String kitapsen_notebooks_count({required Object n}) => '${n} notes';
+  String kitapsen_notebooks_count({required Object n}) => '${n} Notizen';
   @override
-  String get kitapsen_notebooks_delete_confirm => 'Delete this notebook?';
+  String get kitapsen_notebooks_delete_confirm => 'Dieses Notizbuch löschen?';
   @override
-  String get kitapsen_notebooks_entries_empty => 'No notes yet.';
+  String get kitapsen_notebooks_entries_empty => 'Noch keine Notizen.';
   @override
-  String get kitapsen_notebooks_entry_hint => 'Add a note...';
+  String get kitapsen_notebooks_entry_hint => 'Notiz hinzufügen...';
   @override
-  String get kitapsen_notebooks_entry_delete_confirm => 'Delete this note?';
+  String get kitapsen_notebooks_entry_delete_confirm => 'Diese Notiz löschen?';
   @override
-  String get kitapsen_notebooks_add => 'Add note';
+  String get kitapsen_notebooks_add => 'Notiz hinzufügen';
   @override
-  String get kitapsen_goals_title => 'Reading goals';
+  String get kitapsen_goals_title => 'Leseziele';
   @override
-  String get kitapsen_goals_new => 'New goal';
+  String get kitapsen_goals_new => 'Neues Ziel';
   @override
-  String get kitapsen_goals_create => 'Create';
+  String get kitapsen_goals_create => 'Erstellen';
   @override
-  String get kitapsen_goals_created => 'Goal created';
+  String get kitapsen_goals_created => 'Ziel erstellt';
   @override
-  String get kitapsen_goals_type => 'Goal type';
+  String get kitapsen_goals_type => 'Zieltyp';
   @override
-  String get kitapsen_goals_type_books => 'Books';
+  String get kitapsen_goals_type_books => 'Bücher';
   @override
-  String get kitapsen_goals_type_pages => 'Pages';
+  String get kitapsen_goals_type_pages => 'Seiten';
   @override
-  String get kitapsen_goals_type_days => 'Reading days';
+  String get kitapsen_goals_type_days => 'Lesetage';
   @override
-  String get kitapsen_goals_target => 'Target';
+  String get kitapsen_goals_target => 'Zielwert';
   @override
-  String get kitapsen_goals_this_month => 'This month';
+  String get kitapsen_goals_this_month => 'Diesen Monat';
   @override
-  String get kitapsen_goals_this_year => 'This year';
+  String get kitapsen_goals_this_year => 'Dieses Jahr';
   @override
   String get kitapsen_goals_empty =>
-      'No reading goals. Set your first goal to keep your motivation up.';
+      'Keine Leseziele. Setzen Sie Ihr erstes Ziel, um motiviert zu bleiben.';
   @override
-  String get kitapsen_goals_delete_confirm => 'Delete this goal?';
+  String get kitapsen_goals_delete_confirm => 'Dieses Ziel löschen?';
   @override
-  String get kitapsen_goals_completed => 'Completed';
+  String get kitapsen_goals_completed => 'Abgeschlossen';
   @override
-  String kitapsen_goals_until({required Object date}) => 'Until ${date}';
+  String kitapsen_goals_until({required Object date}) => 'Bis ${date}';
   @override
-  String kitapsen_goals_unit_books({required Object n}) => '${n} books';
+  String kitapsen_goals_unit_books({required Object n}) => '${n} Bücher';
   @override
-  String kitapsen_goals_unit_pages({required Object n}) => '${n} pages';
+  String kitapsen_goals_unit_pages({required Object n}) => '${n} Seiten';
   @override
-  String kitapsen_goals_unit_hours({required Object n}) => '${n} hours';
+  String kitapsen_goals_unit_hours({required Object n}) => '${n} Stunden';
   @override
-  String kitapsen_goals_unit_days({required Object n}) => '${n} reading days';
+  String kitapsen_goals_unit_days({required Object n}) => '${n} Lesetage';
   @override
-  String get kitapsen_goals_streak => 'Day streak';
+  String get kitapsen_goals_streak => 'Tagesserie';
   @override
-  String get kitapsen_goals_longest_streak => 'Longest streak';
+  String get kitapsen_goals_longest_streak => 'Längste Serie';
   @override
-  String get kitapsen_goals_books_read => 'Books read';
+  String get kitapsen_goals_books_read => 'Gelesene Bücher';
   @override
-  String get kitapsen_goals_books_finished => 'Finished';
+  String get kitapsen_goals_books_finished => 'Ausgelesen';
   @override
-  String get kitapsen_feed_title => 'Social feed';
+  String get kitapsen_feed_title => 'Community-Feed';
   @override
-  String get kitapsen_feed_followed => 'Following';
+  String get kitapsen_feed_followed => 'Gefolgt';
   @override
-  String get kitapsen_feed_mine => 'My activity';
+  String get kitapsen_feed_mine => 'Meine Aktivität';
   @override
   String get kitapsen_feed_empty_followed =>
-      'No activity yet. Follow readers to keep up with what they are reading.';
+      'Noch keine Aktivität. Folgen Sie Lesern, um zu sehen, was sie lesen.';
   @override
   String get kitapsen_feed_empty_mine =>
-      'Your reading activity will appear here once you start reading.';
+      'Ihre Leseaktivität erscheint hier, sobald Sie mit dem Lesen beginnen.';
   @override
   String kitapsen_feed_started({required Object target}) =>
-      'started reading ${target}';
+      'liest jetzt ${target}';
   @override
   String kitapsen_feed_finished({required Object target}) =>
-      'finished ${target}';
+      'hat ${target} ausgelesen';
   @override
   String kitapsen_feed_reviewed({required Object target}) =>
-      'reviewed ${target}';
+      'hat ${target} bewertet';
   @override
   String kitapsen_feed_followed_user({required Object target}) =>
-      'started following ${target}';
+      'folgt jetzt ${target}';
   @override
   String kitapsen_feed_followed_author({required Object target}) =>
-      'followed the author ${target}';
+      'folgt jetzt dem Autor ${target}';
   @override
-  String kitapsen_feed_shared({required Object target}) => 'shared ${target}';
+  String kitapsen_feed_shared({required Object target}) =>
+      'hat ${target} geteilt';
   @override
-  String kitapsen_feed_percent({required Object n}) => '${n}% read';
+  String kitapsen_feed_percent({required Object n}) => '${n}% gelesen';
   @override
-  String get kitapsen_feed_finished_badge => 'Finished';
+  String get kitapsen_feed_finished_badge => 'Ausgelesen';
   @override
-  String get kitapsen_user_follow => 'Follow';
+  String get kitapsen_user_follow => 'Folgen';
   @override
-  String get kitapsen_user_block => 'Block';
+  String get kitapsen_user_block => 'Blockieren';
   @override
-  String get kitapsen_user_unblock => 'Unblock';
+  String get kitapsen_user_unblock => 'Blockierung aufheben';
   @override
   String kitapsen_user_block_confirm({required Object username}) =>
-      'Block @${username}? They will no longer see your profile and activity, and any follow between you is removed.';
+      '@${username} blockieren? Die Person kann Ihr Profil und Ihre Aktivitäten dann nicht mehr sehen, und jede Folgebeziehung zwischen Ihnen wird entfernt.';
   @override
   String kitapsen_user_member_since({required Object date}) =>
-      'Member since ${date}';
+      'Mitglied seit ${date}';
   @override
-  String kitapsen_user_followers({required Object n}) => '${n} followers';
+  String kitapsen_user_followers({required Object n}) => '${n} Follower';
   @override
-  String kitapsen_user_following({required Object n}) => '${n} following';
+  String kitapsen_user_following({required Object n}) => '${n} gefolgt';
   @override
   String kitapsen_user_finished_count({required Object n}) =>
-      '${n} books finished';
+      '${n} Bücher ausgelesen';
   @override
-  String get kitapsen_user_tab_reading => 'Reading';
+  String get kitapsen_user_tab_reading => 'Lesen';
   @override
-  String get kitapsen_user_tab_reviews => 'Reviews';
+  String get kitapsen_user_tab_reviews => 'Bewertungen';
   @override
-  String get kitapsen_user_tab_activity => 'Activity';
+  String get kitapsen_user_tab_activity => 'Aktivität';
   @override
-  String get kitapsen_user_currently_reading => 'Currently reading';
+  String get kitapsen_user_currently_reading => 'Liest gerade';
   @override
-  String get kitapsen_user_finished => 'Finished';
+  String get kitapsen_user_finished => 'Ausgelesen';
   @override
   String get kitapsen_user_no_reading =>
-      'This reader does not share reading activity.';
+      'Dieser Leser teilt keine Leseaktivität.';
   @override
-  String get kitapsen_user_no_reviews => 'No public reviews yet.';
+  String get kitapsen_user_no_reviews => 'Noch keine öffentlichen Bewertungen.';
   @override
-  String get kitapsen_user_no_activity => 'No public activity yet.';
+  String get kitapsen_user_no_activity => 'Noch keine öffentliche Aktivität.';
   @override
   String get kitapsen_user_private =>
-      'This profile is private. Follow this reader to see their reviews, reading activity and profile.';
+      'Dieses Profil ist privat. Folgen Sie diesem Leser, um Bewertungen, Leseaktivität und Profil zu sehen.';
   @override
   String get kitapsen_user_blocked_you =>
-      'This reader has blocked you. Their profile and activity are hidden from you.';
+      'Dieser Leser hat Sie blockiert. Profil und Aktivität sind für Sie ausgeblendet.';
   @override
-  String get kitapsen_user_followers_title => 'Followers';
+  String get kitapsen_user_followers_title => 'Follower';
   @override
-  String get kitapsen_user_following_title => 'Following';
+  String get kitapsen_user_following_title => 'Gefolgt';
   @override
-  String get kitapsen_user_no_connections => 'Nobody here yet.';
+  String get kitapsen_user_no_connections => 'Hier ist noch niemand.';
   @override
-  String get kitapsen_clubs_title => 'Book clubs';
+  String get kitapsen_clubs_title => 'Buchclubs';
   @override
-  String get kitapsen_clubs_create => 'Create a club';
+  String get kitapsen_clubs_create => 'Club gründen';
   @override
-  String get kitapsen_clubs_name => 'Club name';
+  String get kitapsen_clubs_name => 'Name des Clubs';
   @override
   String get kitapsen_clubs_empty =>
-      'No book clubs yet. Create or join one to read together.';
+      'Noch keine Buchclubs. Gründen Sie einen oder treten Sie einem bei, um gemeinsam zu lesen.';
   @override
-  String get kitapsen_clubs_join => 'Join';
+  String get kitapsen_clubs_join => 'Beitreten';
   @override
-  String get kitapsen_clubs_leave => 'Leave';
+  String get kitapsen_clubs_leave => 'Verlassen';
   @override
-  String get kitapsen_clubs_owner => 'Owner';
+  String get kitapsen_clubs_owner => 'Inhaber';
   @override
-  String get kitapsen_clubs_members => 'Members';
+  String get kitapsen_clubs_members => 'Mitglieder';
   @override
-  String kitapsen_clubs_members_count({required Object n}) => '${n} members';
+  String kitapsen_clubs_members_count({required Object n}) => '${n} Mitglieder';
   @override
-  String get kitapsen_clubs_chat => 'Discussion';
+  String get kitapsen_clubs_chat => 'Diskussion';
   @override
   String get kitapsen_clubs_join_to_chat =>
-      'Join the club to read and write messages.';
+      'Treten Sie dem Club bei, um Nachrichten zu lesen und zu schreiben.';
   @override
-  String get kitapsen_clubs_no_messages => 'No messages yet.';
+  String get kitapsen_clubs_no_messages => 'Noch keine Nachrichten.';
   @override
-  String get kitapsen_clubs_message_hint => 'Write a message...';
+  String get kitapsen_clubs_message_hint => 'Nachricht schreiben...';
   @override
-  String get kitapsen_clubs_send => 'Send';
+  String get kitapsen_clubs_send => 'Senden';
   @override
   String get kitapsen_register_taken =>
-      'This username or email address already has an account.';
+      'Für diesen Benutzernamen oder diese E-Mail-Adresse gibt es bereits ein Konto.';
   @override
-  String get kitapsen_report => 'Report';
+  String get kitapsen_report => 'Melden';
   @override
-  String get kitapsen_reported => 'Reported';
+  String get kitapsen_reported => 'Gemeldet';
   @override
-  String get kitapsen_report_title => 'Report this content';
+  String get kitapsen_report_title => 'Diesen Inhalt melden';
   @override
-  String get kitapsen_report_reason => 'Reason (optional)';
+  String get kitapsen_report_reason => 'Grund (optional)';
   @override
-  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  String get kitapsen_report_reason_hint => 'Warum ist das unangemessen?';
   @override
-  String get kitapsen_report_submit => 'Submit Report';
+  String get kitapsen_report_submit => 'Meldung senden';
   @override
   String get kitapsen_report_thanks =>
-      'Reported. Thank you for helping keep the community safe.';
+      'Gemeldet. Danke, dass Sie helfen, die Community sicher zu halten.';
   @override
   String get kitapsen_delete_statistics_book_desc =>
       'Lesezeit und gelesene Zeichen dieses Buchs werden auf allen Geräten aus der Statistik entfernt';
@@ -41398,7 +41404,7 @@ class _StringsEs extends _StringsEn {
   @override
   String get anime_download_include_subs => 'Incluir subtítulos';
   @override
-  String get anime_download_kind_auto => 'Auto';
+  String get anime_download_kind_auto => 'Automático';
   @override
   String get anime_download_kind_book => 'Libro';
   @override
@@ -41489,7 +41495,7 @@ class _StringsEs extends _StringsEn {
   String get anime_download_streaming_ready =>
       'En biblioteca · descarga continúa';
   @override
-  String get anime_download_subs_badge => 'Subs';
+  String get anime_download_subs_badge => 'Subtítulos';
   @override
   String get anime_download_subs_deferred =>
       'Los subtítulos se emparejan después de la descarga, desde los archivos reales del pack';
@@ -42752,7 +42758,7 @@ class _StringsEs extends _StringsEn {
   @override
   String get batch_tag_title => 'Gestionar etiquetas';
   @override
-  String get book_continue_reading => 'Continue Reading';
+  String get book_continue_reading => 'Continuar leyendo';
   @override
   String get book_convert_blocked_already =>
       'Este libro ya está en ese formato.';
@@ -44607,7 +44613,7 @@ class _StringsEs extends _StringsEn {
   String get font_target_game_lookup =>
       'Fuente de ventana de búsqueda del juego';
   @override
-  String get font_target_video_subtitle => 'Video Subtitle Font';
+  String get font_target_video_subtitle => 'Fuente de los subtítulos de vídeo';
   @override
   String get gal_card_lookup_independent_size =>
       'Tamaño separado para la tarjeta dentro del juego';
@@ -45136,7 +45142,7 @@ class _StringsEs extends _StringsEn {
   @override
   String get game_japanese_locale => 'Configuración regional japonesa';
   @override
-  String get game_japanese_locale_auto => 'Auto';
+  String get game_japanese_locale_auto => 'Automático';
   @override
   String get game_japanese_locale_evidence_dir_file_name_chinese_patch =>
       'Los nombres de archivo indican un parche chino';
@@ -45656,7 +45662,7 @@ class _StringsEs extends _StringsEn {
   @override
   String get game_upscaling => 'Escalado de ventana del juego';
   @override
-  String get game_upscaling_auto => 'Auto';
+  String get game_upscaling_auto => 'Automático';
   @override
   String get game_upscaling_auto_hint =>
       'Usa Magpie si ya está en ejecución; de lo contrario usa la versión incluida con Kitapsen. No se necesita descarga.';
@@ -45774,7 +45780,7 @@ class _StringsEs extends _StringsEn {
   @override
   String get handlebar_sentence => 'Oración';
   @override
-  String get handlebar_sentence_audio => 'Sentence Audio';
+  String get handlebar_sentence_audio => 'Audio de la oración';
   @override
   String get handlebar_video_clip => 'Video Clip (GIF)';
   @override
@@ -48020,11 +48026,11 @@ class _StringsEs extends _StringsEn {
   @override
   String get reader_view_mode_label => 'Páginas / Desplazamiento';
   @override
-  String get reader_vn => 'Visual Novel';
+  String get reader_vn => 'Novela visual';
   @override
   String get reader_writing_direction => 'Dirección de escritura';
   @override
-  String get reading_activity => 'Actividad de estudio';
+  String get reading_activity => 'Actividad de lectura';
   @override
   String get reading_progress => 'Progreso de lectura';
   @override
@@ -48437,9 +48443,9 @@ class _StringsEs extends _StringsEn {
   String get shortcut_action_reader_open_gallery =>
       'Abrir galería de ilustraciones';
   @override
-  String get shortcut_action_reader_open_menu => 'Open Settings Menu';
+  String get shortcut_action_reader_open_menu => 'Abrir menú de ajustes';
   @override
-  String get shortcut_action_reader_open_navigation => 'Open Navigation';
+  String get shortcut_action_reader_open_navigation => 'Abrir navegación';
   @override
   String get shortcut_action_reader_open_statistics =>
       'Abrir estadísticas de lectura';
@@ -48463,10 +48469,10 @@ class _StringsEs extends _StringsEn {
       'Alinear subtítulo anterior al ahora';
   @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
-      'Cycle Secondary Subtitle Obscure';
+      'Cambiar modo de ocultación del subtítulo secundario';
   @override
   String get shortcut_action_video_cycle_subtitle_obscure =>
-      'Cycle Subtitle Obscure Mode';
+      'Cambiar modo de ocultación de subtítulos';
   @override
   String get shortcut_action_video_dismiss_dict => 'Cerrar diccionario';
   @override
@@ -48536,7 +48542,7 @@ class _StringsEs extends _StringsEn {
   String get shortcut_action_video_toggle_play_pause => 'Reproducir / Pausar';
   @override
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
-      'Toggle Hide Secondary Subtitle';
+      'Mostrar/ocultar subtítulo secundario';
   @override
   String get shortcut_action_video_toggle_shader_compare =>
       'Alternar comparación de shaders';
@@ -48545,7 +48551,7 @@ class _StringsEs extends _StringsEn {
       'Alternar difuminado de subtítulos';
   @override
   String get shortcut_action_video_toggle_subtitle_hide =>
-      'Toggle Hide Subtitles';
+      'Mostrar/ocultar subtítulos';
   @override
   String get shortcut_action_video_toggle_subtitle_list =>
       'Alternar lista de subtítulos';
@@ -48828,7 +48834,7 @@ class _StringsEs extends _StringsEn {
   @override
   String get stat_detail_ungrouped => 'Sin agrupar';
   @override
-  String get stat_fastest_day => 'Fastest Day';
+  String get stat_fastest_day => 'Día más rápido';
   @override
   String get stat_favorited => 'Favoritos';
   @override
@@ -48845,9 +48851,9 @@ class _StringsEs extends _StringsEn {
   @override
   String stat_format_pages({required Object n}) => '${n} páginas';
   @override
-  String get stat_goal => 'Daily Goal';
+  String get stat_goal => 'Meta diaria';
   @override
-  String get stat_goal_daily => 'Daily Goal';
+  String get stat_goal_daily => 'Meta diaria';
   @override
   String get stat_goal_presets => 'Preajustes';
   @override
@@ -48859,11 +48865,11 @@ class _StringsEs extends _StringsEn {
   String stat_goal_recent_average({required Object n}) =>
       'Últimos 7 días: ${n} caracteres/día en promedio';
   @override
-  String get stat_goal_set => 'Set Goal';
+  String get stat_goal_set => 'Establecer meta';
   @override
   String get stat_goal_unit_chars => 'caracteres';
   @override
-  String get stat_goal_weekly => 'Weekly Goal';
+  String get stat_goal_weekly => 'Meta semanal';
   @override
   String get stat_hourly_band_epub => 'Libros de texto';
   @override
@@ -48890,7 +48896,7 @@ class _StringsEs extends _StringsEn {
   @override
   String get stat_no_data => 'Aún no hay datos de lectura';
   @override
-  String get stat_range_and_trend => 'Range & Trend';
+  String get stat_range_and_trend => 'Rango y tendencia';
   @override
   String get stat_recent_active => 'Días activos (7d)';
   @override
@@ -48909,7 +48915,7 @@ class _StringsEs extends _StringsEn {
   @override
   String get stat_sessions_show_all => 'Todas las sesiones';
   @override
-  String get stat_slowest_day => 'Slowest Day';
+  String get stat_slowest_day => 'Día más lento';
   @override
   String get stat_sort_by_chars => 'Por caracteres';
   @override
@@ -48925,7 +48931,7 @@ class _StringsEs extends _StringsEn {
   @override
   String stat_speed_cph({required Object n}) => '${n} caracteres/h';
   @override
-  String get stat_speed_summary => 'Speed Summary';
+  String get stat_speed_summary => 'Resumen de velocidad';
   @override
   String get stat_streak => 'Racha';
   @override
@@ -48943,11 +48949,11 @@ class _StringsEs extends _StringsEn {
   @override
   String get stat_trend_weekly => 'Semanal';
   @override
-  String get stat_typical_day => 'Typical Day';
+  String get stat_typical_day => 'Día típico';
   @override
   String get stat_vs_prev => 'vs 14d ant.';
   @override
-  String get stat_weighted_avg_speed => 'Weighted Avg';
+  String get stat_weighted_avg_speed => 'Media ponderada';
   @override
   String get stop => 'Detener';
   @override
@@ -50701,7 +50707,7 @@ class _StringsEs extends _StringsEn {
   @override
   String get video_quality => 'Calidad';
   @override
-  String get video_quality_auto => 'Auto';
+  String get video_quality_auto => 'Automático';
   @override
   String get video_quality_empty =>
       'No hay calidad intercambiable para este vídeo';
@@ -51891,7 +51897,7 @@ class _StringsEs extends _StringsEn {
   String get video_torznab_categories_hint =>
       'IDs de categoría numéricos separados por coma';
   @override
-  String get video_torznab_endpoint => 'Endpoint';
+  String get video_torznab_endpoint => 'Punto de conexión';
   @override
   String get video_torznab_endpoint_hint =>
       'Se requiere HTTPS excepto para direcciones de loopback.';
@@ -54496,7 +54502,7 @@ class _StringsEs extends _StringsEn {
   @override
   String get game_stream_settings_codec => 'Códec de vídeo';
   @override
-  String get game_stream_settings_codec_auto => 'Auto';
+  String get game_stream_settings_codec_auto => 'Automático';
   @override
   String get game_stream_settings_codec_hint =>
       'Se aplica en la próxima conexión; recurre automáticamente a otro si el dispositivo no puede decodificarlo';
@@ -56576,7 +56582,7 @@ class _StringsEs extends _StringsEn {
   @override
   String get video_scrape_ai_declined => 'AI not adopted';
   @override
-  String get video_scrape_ai_failed => 'AI request failed';
+  String get video_scrape_ai_failed => 'Error en la solicitud a la IA';
   @override
   String get video_scrape_ai_searched =>
       'Searched again with titles suggested by AI';
@@ -56636,9 +56642,9 @@ class _StringsEs extends _StringsEn {
   @override
   String get shelf_filter_read_status_finished => 'Terminado';
   @override
-  String get video_filter_media_type => 'Type';
+  String get video_filter_media_type => 'Tipo';
   @override
-  String get video_filter_media_type_video => 'Video';
+  String get video_filter_media_type_video => 'Vídeo';
   @override
   String get video_filter_media_type_audio => 'Audio';
   @override
@@ -56648,7 +56654,7 @@ class _StringsEs extends _StringsEn {
   @override
   String get video_filter_extras_only => 'Extras only';
   @override
-  String get video_filter_source => 'Source';
+  String get video_filter_source => 'Fuente';
   @override
   String get video_filter_series_standalone_empty_hint =>
       'No standalone videos. Videos in collections are on the Series tab, or set the Series filter to All.';
@@ -56691,7 +56697,7 @@ class _StringsEs extends _StringsEn {
   @override
   String get manga_ocr_ai_mode_label => 'AI recognition';
   @override
-  String get manga_ocr_ai_mode_off => 'Off';
+  String get manga_ocr_ai_mode_off => 'Desactivado';
   @override
   String get manga_ocr_ai_mode_low_confidence => 'Only uncertain text';
   @override
@@ -56744,7 +56750,7 @@ class _StringsEs extends _StringsEn {
   String get ocr_system_model_missing =>
       'Google Play services hasn\'t downloaded the text recognition model yet. Download it now (a few MB) to use screen OCR.';
   @override
-  String get ocr_system_model_download => 'Download';
+  String get ocr_system_model_download => 'Descargar';
   @override
   String get ocr_system_model_downloading =>
       'Downloading through Google Play services… You can close this dialog; the download continues in the background.';
@@ -56768,669 +56774,678 @@ class _StringsEs extends _StringsEn {
   @override
   String get kitapsen_section_title => 'Kitapsen';
   @override
-  String get kitapsen_account_title => 'Kitapsen account';
+  String get kitapsen_account_title => 'Cuenta de Kitapsen';
   @override
   String get kitapsen_account_hint =>
-      'Sign in to read the books in your Kitapsen library. They appear on your bookshelf, and your reading position syncs with your account.';
+      'Inicia sesión para leer los libros de tu biblioteca de Kitapsen. Aparecen en tu estantería y tu posición de lectura se sincroniza con tu cuenta.';
   @override
-  String get kitapsen_account_server_url => 'Server address';
+  String get kitapsen_account_server_url => 'Dirección del servidor';
   @override
-  String get kitapsen_account_username => 'Email or username';
+  String get kitapsen_account_username => 'Correo o nombre de usuario';
   @override
-  String get kitapsen_account_password => 'Password';
+  String get kitapsen_account_password => 'Contraseña';
   @override
-  String get kitapsen_account_sign_in => 'Sign in';
+  String get kitapsen_account_sign_in => 'Iniciar sesión';
   @override
-  String get kitapsen_account_sign_out => 'Sign out';
+  String get kitapsen_account_sign_out => 'Cerrar sesión';
   @override
   String get kitapsen_account_sign_in_rejected =>
-      'Email or password is incorrect';
+      'Correo o contraseña incorrectos';
   @override
   String get kitapsen_account_sign_in_failed =>
-      'Could not reach Kitapsen. Check the address and your connection.';
+      'No se pudo conectar con Kitapsen. Revisa la dirección y tu conexión.';
   @override
-  String get kitapsen_account_summary => 'Sign in to read your library';
+  String get kitapsen_account_summary =>
+      'Inicia sesión para leer tu biblioteca';
   @override
   String get kitapsen_shelf_signed_out_body =>
-      'Sign in with your Kitapsen account to see your library.';
+      'Inicia sesión con tu cuenta de Kitapsen para ver tu biblioteca.';
   @override
-  String get kitapsen_shelf_sign_in => 'Sign in to Kitapsen';
+  String get kitapsen_shelf_sign_in => 'Iniciar sesión en Kitapsen';
   @override
-  String get kitapsen_onboarding_title => 'Your Kitapsen library';
+  String get kitapsen_onboarding_title => 'Tu biblioteca de Kitapsen';
   @override
   String get kitapsen_onboarding_body =>
-      'Sign in to see the books in your Kitapsen account on this device. You can skip this and sign in later from Settings.';
+      'Inicia sesión para ver en este dispositivo los libros de tu cuenta de Kitapsen. Puedes omitir este paso e iniciar sesión más tarde desde Configuración.';
   @override
   String app_store_update_body({required Object version}) =>
-      'Kitapsen ${version} is available on the App Store.';
+      'Kitapsen ${version} ya está disponible en la App Store.';
   @override
-  String get app_store_update_open => 'Update';
+  String get app_store_update_open => 'Actualizar';
   @override
-  String get app_store_update_later => 'Not now';
+  String get app_store_update_later => 'Ahora no';
   @override
-  String get kitapsen_about_privacy_policy => 'Privacy policy';
+  String get kitapsen_about_privacy_policy => 'Política de privacidad';
   @override
-  String get kitapsen_about_support => 'Contact support';
+  String get kitapsen_about_support => 'Contactar con soporte';
   @override
-  String get kitapsen_about_source_code => 'Source code';
+  String get kitapsen_about_source_code => 'Código fuente';
   @override
   String get kitapsen_about_based_on_fushi =>
-      'Kitapsen is based on Fushi (GPLv3) — source: https://github.com/FizyonOps/kitapsen-mobile';
+      'Kitapsen se basa en Fushi (GPLv3) — código fuente: https://github.com/FizyonOps/kitapsen-mobile';
   @override
-  String get kitapsen_about_licenses => 'Open-source licenses';
+  String get kitapsen_about_licenses => 'Licencias de código abierto';
   @override
-  String get kitapsen_about_section => 'About Kitapsen';
+  String get kitapsen_about_section => 'Acerca de Kitapsen';
   @override
-  String get kitapsen_import_hint => 'Pick an EPUB or PDF file to import.';
+  String get kitapsen_import_hint =>
+      'Elige un archivo EPUB o PDF para importar.';
   @override
   String get kitapsen_sign_out_removes_books =>
-      'Signing out removes your downloaded Kitapsen books from this device.';
+      'Al cerrar sesión, los libros de Kitapsen que descargaste se eliminan de este dispositivo.';
   @override
-  String get kitapsen_account_or => 'or';
+  String get kitapsen_account_or => 'o';
   @override
-  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  String get kitapsen_account_continue_with_google => 'Continuar con Google';
   @override
-  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  String get kitapsen_account_continue_with_apple => 'Continuar con Apple';
   @override
   String get kitapsen_account_social_sign_in_failed =>
-      'Sign-in failed. Please try again.';
+      'No se pudo iniciar sesión. Inténtalo de nuevo.';
   @override
   String get kitapsen_account_deleted =>
-      'This Kitapsen account has been deleted.';
+      'Esta cuenta de Kitapsen se ha eliminado.';
   @override
-  String get kitapsen_account_delete => 'Delete account';
+  String get kitapsen_account_delete => 'Eliminar cuenta';
   @override
   String get kitapsen_account_delete_confirm =>
-      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+      'Se eliminará tu cuenta de Kitapsen y se cerrará la sesión en este dispositivo. Ya no podrás leer los libros de tu biblioteca. Esta acción no se puede deshacer.';
   @override
   String get kitapsen_account_delete_failed =>
-      'The account could not be deleted. Please try again.';
+      'No se pudo eliminar la cuenta. Inténtalo de nuevo.';
   @override
-  String get kitapsen_nav_store => 'Store';
+  String get kitapsen_nav_store => 'Tienda';
   @override
-  String get kitapsen_store_search_hint => 'Search books and authors';
+  String get kitapsen_store_search_hint => 'Buscar libros y autores';
   @override
-  String get kitapsen_store_new_arrivals => 'New arrivals';
+  String get kitapsen_store_new_arrivals => 'Novedades';
   @override
-  String get kitapsen_store_most_read => 'Most read';
+  String get kitapsen_store_most_read => 'Los más leídos';
   @override
-  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  String get kitapsen_store_staff_picks => 'Selección del editor';
   @override
-  String get kitapsen_store_free_books => 'Free books';
+  String get kitapsen_store_free_books => 'Libros gratis';
   @override
-  String get kitapsen_store_stories => 'Serialized stories';
+  String get kitapsen_store_stories => 'Historias por entregas';
   @override
-  String get kitapsen_store_categories => 'Categories';
+  String get kitapsen_store_categories => 'Categorías';
   @override
-  String get kitapsen_store_see_all => 'See all';
+  String get kitapsen_store_see_all => 'Ver todo';
   @override
-  String get kitapsen_store_no_results => 'No books found';
+  String get kitapsen_store_no_results => 'No se encontraron libros';
   @override
   String get kitapsen_store_load_failed =>
-      'Couldn\'t load. Check your connection.';
+      'No se pudo cargar. Revisa tu conexión.';
   @override
-  String get kitapsen_store_free_only => 'Free only';
+  String get kitapsen_store_free_only => 'Solo gratis';
   @override
-  String get kitapsen_sort_relevance => 'Most relevant';
+  String get kitapsen_sort_relevance => 'Más relevantes';
   @override
-  String get kitapsen_sort_newest => 'Newest';
+  String get kitapsen_sort_newest => 'Más recientes';
   @override
-  String get kitapsen_sort_most_read => 'Most read';
+  String get kitapsen_sort_most_read => 'Más leídos';
   @override
-  String get kitapsen_sort_rating => 'Top rated';
+  String get kitapsen_sort_rating => 'Mejor valorados';
   @override
-  String get kitapsen_sort_title => 'Title A–Z';
+  String get kitapsen_sort_title => 'Título A–Z';
   @override
-  String get kitapsen_book_read => 'Read';
+  String get kitapsen_book_read => 'Leer';
   @override
-  String get kitapsen_book_get_free => 'Get for free';
+  String get kitapsen_book_get_free => 'Obtener gratis';
   @override
-  String get kitapsen_book_claimed => 'Added to your library';
+  String get kitapsen_book_claimed => 'Añadido a tu biblioteca';
   @override
-  String get kitapsen_book_in_library => 'In your library';
+  String get kitapsen_book_in_library => 'En tu biblioteca';
   @override
-  String get kitapsen_book_not_in_library => 'Not in your library';
+  String get kitapsen_book_not_in_library => 'No está en tu biblioteca';
   @override
   String get kitapsen_book_sign_in_prompt =>
-      'Sign in to add books to your library and keep a wishlist.';
+      'Inicia sesión para añadir libros a tu biblioteca y tener una lista de deseos.';
   @override
-  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  String get kitapsen_book_wishlist_add => 'Añadir a la lista de deseos';
   @override
-  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  String get kitapsen_book_wishlist_remove => 'Quitar de la lista de deseos';
   @override
-  String get kitapsen_book_downloading => 'Downloading to your library…';
+  String get kitapsen_book_downloading => 'Descargando en tu biblioteca…';
   @override
-  String get kitapsen_book_about => 'About this book';
+  String get kitapsen_book_about => 'Acerca de este libro';
   @override
-  String get kitapsen_book_pages => 'Pages';
+  String get kitapsen_book_pages => 'Páginas';
   @override
-  String get kitapsen_book_language => 'Language';
+  String get kitapsen_book_language => 'Idioma';
   @override
-  String get kitapsen_book_publisher => 'Publisher';
+  String get kitapsen_book_publisher => 'Editorial';
   @override
-  String get kitapsen_book_published => 'Published';
+  String get kitapsen_book_published => 'Fecha de publicación';
   @override
   String get kitapsen_book_action_failed =>
-      'Something went wrong. Please try again.';
+      'Algo salió mal. Inténtalo de nuevo.';
   @override
-  String get kitapsen_book_reviews => 'Reviews';
+  String get kitapsen_book_reviews => 'Reseñas';
   @override
-  String get kitapsen_book_no_reviews => 'No reviews yet';
+  String get kitapsen_book_no_reviews => 'Aún no hay reseñas';
   @override
-  String get kitapsen_book_write_review => 'Write a review';
+  String get kitapsen_book_write_review => 'Escribir una reseña';
   @override
-  String get kitapsen_review_title_hint => 'Title (optional)';
+  String get kitapsen_review_title_hint => 'Título (opcional)';
   @override
-  String get kitapsen_review_content_hint => 'Your review (optional)';
+  String get kitapsen_review_content_hint => 'Tu reseña (opcional)';
   @override
-  String get kitapsen_review_submit => 'Send';
+  String get kitapsen_review_submit => 'Enviar';
   @override
-  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  String get kitapsen_review_sent => '¡Gracias! Se envió tu reseña.';
   @override
-  String get kitapsen_review_already => 'You have already reviewed this book.';
+  String get kitapsen_review_already => 'Ya has reseñado este libro.';
   @override
   String get kitapsen_review_not_allowed =>
-      'Only readers who have this book in their library can review it.';
+      'Solo los lectores que tienen este libro en su biblioteca pueden reseñarlo.';
   @override
-  String get kitapsen_review_more => 'Show more reviews';
+  String get kitapsen_review_more => 'Ver más reseñas';
   @override
-  String get kitapsen_review_verified => 'Verified reader';
+  String get kitapsen_review_verified => 'Lector verificado';
   @override
-  String get kitapsen_author_follow => 'Follow';
+  String get kitapsen_author_follow => 'Seguir';
   @override
-  String get kitapsen_author_following => 'Following';
+  String get kitapsen_author_following => 'Siguiendo';
   @override
-  String get kitapsen_author_followers => 'Followers';
+  String get kitapsen_author_followers => 'Seguidores';
   @override
-  String get kitapsen_author_books => 'Books';
+  String get kitapsen_author_books => 'Libros';
   @override
-  String get kitapsen_author_open => 'Author page';
+  String get kitapsen_author_open => 'Página del autor';
   @override
-  String get kitapsen_wishlist_title => 'Wishlist';
+  String get kitapsen_wishlist_title => 'Lista de deseos';
   @override
-  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  String get kitapsen_wishlist_empty => 'Tu lista de deseos está vacía';
   @override
-  String get kitapsen_notifications_title => 'Notifications';
+  String get kitapsen_notifications_title => 'Notificaciones';
   @override
-  String get kitapsen_notifications_empty => 'No notifications';
+  String get kitapsen_notifications_empty => 'No hay notificaciones';
   @override
-  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  String get kitapsen_notifications_mark_all => 'Marcar todo como leído';
   @override
-  String get kitapsen_story_chapters => 'Chapters';
+  String get kitapsen_story_chapters => 'Capítulos';
   @override
-  String get kitapsen_story_no_chapters => 'No chapters yet';
+  String get kitapsen_story_no_chapters => 'Aún no hay capítulos';
   @override
-  String get kitapsen_story_next => 'Next chapter';
+  String get kitapsen_story_next => 'Capítulo siguiente';
   @override
-  String get kitapsen_story_previous => 'Previous chapter';
+  String get kitapsen_story_previous => 'Capítulo anterior';
   @override
-  String get kitapsen_review_like => 'Like';
+  String get kitapsen_review_like => 'Me gusta';
   @override
-  String get kitapsen_comments_title => 'Comments';
+  String get kitapsen_comments_title => 'Comentarios';
   @override
-  String get kitapsen_comments_empty => 'No comments yet';
+  String get kitapsen_comments_empty => 'Aún no hay comentarios';
   @override
-  String get kitapsen_comment_hint => 'Write a comment';
+  String get kitapsen_comment_hint => 'Escribe un comentario';
   @override
-  String get kitapsen_story_vote => 'Vote';
+  String get kitapsen_story_vote => 'Votar';
   @override
-  String get kitapsen_story_voted => 'Voted';
+  String get kitapsen_story_voted => 'Votado';
   @override
-  String get kitapsen_story_follow => 'Follow story';
+  String get kitapsen_story_follow => 'Seguir historia';
   @override
-  String get kitapsen_following_title => 'Following';
+  String get kitapsen_following_title => 'Siguiendo';
   @override
-  String get kitapsen_following_authors => 'Authors';
+  String get kitapsen_following_authors => 'Autores';
   @override
-  String get kitapsen_following_stories => 'Stories';
+  String get kitapsen_following_stories => 'Historias';
   @override
-  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  String get kitapsen_following_empty => 'Aún no sigues a nadie';
   @override
-  String get kitapsen_reader_highlight => 'Highlight';
+  String get kitapsen_reader_highlight => 'Resaltar';
   @override
-  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  String get kitapsen_annotations_title => 'Marcadores y notas';
   @override
-  String get kitapsen_bookmark_add => 'Add bookmark';
+  String get kitapsen_bookmark_add => 'Añadir marcador';
   @override
-  String get kitapsen_bookmark_added => 'Bookmark added';
+  String get kitapsen_bookmark_added => 'Marcador añadido';
   @override
-  String get kitapsen_note_add => 'Add note';
+  String get kitapsen_note_add => 'Añadir nota';
   @override
-  String get kitapsen_note_hint => 'Your note';
+  String get kitapsen_note_hint => 'Tu nota';
   @override
-  String get kitapsen_note_saved => 'Note saved';
+  String get kitapsen_note_saved => 'Nota guardada';
   @override
-  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  String get kitapsen_annotations_empty => 'Aún no hay marcadores ni notas';
   @override
-  String get kitapsen_store_badge_free => 'Free';
+  String get kitapsen_store_badge_free => 'Gratis';
   @override
-  String get kitapsen_store_badge_new => 'New';
+  String get kitapsen_store_badge_new => 'Nuevo';
   @override
-  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  String kitapsen_store_rating_count({required Object n}) => '${n} reseñas';
   @override
-  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  String get kitapsen_store_hero_title => 'Tu próximo gran libro está aquí.';
   @override
   String get kitapsen_store_hero_body =>
-      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+      'Descubre nuevas historias y a los autores que te gustan. Elige tu libro y empieza a leer en tu teléfono, tablet o computadora.';
   @override
-  String get kitapsen_store_explore_books => 'Explore books';
+  String get kitapsen_store_explore_books => 'Explorar libros';
   @override
-  String get kitapsen_store_start_free => 'Start with free books';
+  String get kitapsen_store_start_free => 'Empieza con libros gratis';
   @override
-  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  String get kitapsen_store_start_free_body => 'Descubre tu primer libro.';
   @override
-  String get kitapsen_store_library_always => 'Your library is always with you';
+  String get kitapsen_store_library_always => 'Tu biblioteca siempre contigo';
   @override
   String get kitapsen_store_library_always_body =>
-      'Read on your phone, tablet and computer.';
+      'Lee en tu teléfono, tablet y computadora.';
   @override
-  String get kitapsen_store_meet_authors => 'Meet the authors';
+  String get kitapsen_store_meet_authors => 'Conoce a los autores';
   @override
-  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  String get kitapsen_store_meet_authors_body =>
+      'Sigue a los escritores que te gustan.';
   @override
-  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  String get kitapsen_store_reading_list =>
+      'Un libro nuevo para tu lista de lectura';
   @override
-  String get kitapsen_store_all_categories => 'All categories';
+  String get kitapsen_store_all_categories => 'Todas las categorías';
   @override
-  String get kitapsen_store_discover_title => 'Time to discover';
+  String get kitapsen_store_discover_title => 'Es hora de descubrir';
   @override
   String get kitapsen_store_discover_body =>
-      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+      'Una historia, una nueva perspectiva, un descubrimiento inesperado. Añade tu próximo libro a tu lista de lectura.';
   @override
-  String get kitapsen_store_discover_now => 'Discover now';
+  String get kitapsen_store_discover_now => 'Descubrir ahora';
   @override
   String kitapsen_store_results_for({required Object q}) =>
-      'Results for "${q}"';
+      'Resultados de «${q}»';
   @override
-  String get kitapsen_store_matching_authors => 'Matching authors';
+  String get kitapsen_store_matching_authors => 'Autores coincidentes';
   @override
-  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  String kitapsen_store_author_books_count({required Object n}) =>
+      '${n} libros';
   @override
   String get kitapsen_store_author_cta =>
-      'Discover the author\'s books and pick your next read.';
+      'Descubre los libros del autor y elige tu próxima lectura.';
   @override
-  String get kitapsen_store_see_author_books => 'See their books';
+  String get kitapsen_store_see_author_books => 'Ver sus libros';
   @override
-  String get kitapsen_store_authors_books => 'The author\'s books';
+  String get kitapsen_store_authors_books => 'Libros del autor';
   @override
-  String get kitapsen_book_read_now => 'Read now';
+  String get kitapsen_book_read_now => 'Leer ahora';
   @override
-  String get kitapsen_book_get_free_web => 'Get it free';
+  String get kitapsen_book_get_free_web => 'Consíguelo gratis';
   @override
-  String get kitapsen_book_favorites => 'Favorites';
+  String get kitapsen_book_favorites => 'Favoritos';
   @override
-  String get kitapsen_book_description => 'Description';
+  String get kitapsen_book_description => 'Descripción';
   @override
-  String get kitapsen_book_about_author => 'About the author';
+  String get kitapsen_book_about_author => 'Sobre el autor';
   @override
   String get kitapsen_book_isbn => 'ISBN';
   @override
-  String get kitapsen_book_format => 'Format';
+  String get kitapsen_book_format => 'Formato';
   @override
-  String get kitapsen_author_role => 'Author';
+  String get kitapsen_author_role => 'Autor';
   @override
-  String get kitapsen_author_notify => 'Notify me of new books';
+  String get kitapsen_author_notify => 'Avisarme de nuevos libros';
   @override
-  String get kitapsen_author_about => 'About';
+  String get kitapsen_author_about => 'Acerca de';
   @override
-  String get kitapsen_review_more_bio => 'Read the full biography';
+  String get kitapsen_review_more_bio => 'Leer la biografía completa';
   @override
-  String get kitapsen_author_like => 'Like';
+  String get kitapsen_author_like => 'Me gusta';
   @override
-  String get kitapsen_author_likes => 'Likes';
+  String get kitapsen_author_likes => 'Me gusta';
   @override
-  String get kitapsen_register_open => 'No account yet? Create one';
+  String get kitapsen_register_open => '¿No tienes cuenta? Crea una';
   @override
-  String get kitapsen_register_name => 'Name (optional)';
+  String get kitapsen_register_name => 'Nombre (opcional)';
   @override
-  String get kitapsen_register_username => 'Username';
+  String get kitapsen_register_username => 'Nombre de usuario';
   @override
   String get kitapsen_register_username_hint =>
-      '2–20 lowercase letters or digits';
+      '2–20 letras minúsculas o dígitos';
   @override
-  String get kitapsen_register_email => 'Email';
+  String get kitapsen_register_email => 'Correo electrónico';
   @override
-  String get kitapsen_register_password_hint => 'At least 8 characters';
+  String get kitapsen_register_password_hint => 'Al menos 8 caracteres';
   @override
-  String get kitapsen_register_submit => 'Create account';
+  String get kitapsen_register_submit => 'Crear cuenta';
   @override
   String get kitapsen_register_have_account =>
-      'Already have an account? Sign in';
+      '¿Ya tienes cuenta? Inicia sesión';
   @override
   String get kitapsen_register_username_invalid =>
-      'Use 2–20 lowercase letters or digits.';
+      'Usa 2–20 letras minúsculas o dígitos.';
   @override
   String get kitapsen_register_name_invalid =>
-      'The name must be 2–30 characters.';
+      'El nombre debe tener entre 2 y 30 caracteres.';
   @override
-  String get kitapsen_register_email_invalid => 'Enter a valid email address.';
+  String get kitapsen_register_email_invalid =>
+      'Introduce un correo electrónico válido.';
   @override
   String get kitapsen_register_password_short =>
-      'The password must be at least 8 characters.';
+      'La contraseña debe tener al menos 8 caracteres.';
   @override
   String get kitapsen_register_failed =>
-      'The account could not be created. Try again.';
+      'No se pudo crear la cuenta. Inténtalo de nuevo.';
   @override
-  String get kitapsen_hub_title => 'My account';
+  String get kitapsen_hub_title => 'Mi cuenta';
   @override
-  String get kitapsen_hub_reading => 'Reading';
+  String get kitapsen_hub_reading => 'Lectura';
   @override
   String get kitapsen_hub_social => 'Social';
   @override
-  String get kitapsen_hub_discover => 'Discover';
+  String get kitapsen_hub_discover => 'Descubrir';
   @override
-  String get kitapsen_hub_account => 'Account';
+  String get kitapsen_hub_account => 'Cuenta';
   @override
-  String get kitapsen_hub_library => 'My library';
+  String get kitapsen_hub_library => 'Mi biblioteca';
   @override
-  String get kitapsen_hub_public_profile => 'My public reader profile';
+  String get kitapsen_hub_public_profile => 'Mi perfil público de lector';
   @override
-  String get kitapsen_hub_sign_in_settings => 'Sign out or delete the account';
+  String get kitapsen_hub_sign_in_settings =>
+      'Cerrar sesión o eliminar la cuenta';
   @override
-  String get kitapsen_common_save => 'Save';
+  String get kitapsen_common_save => 'Guardar';
   @override
-  String get kitapsen_common_saved => 'Saved';
+  String get kitapsen_common_saved => 'Guardado';
   @override
-  String get kitapsen_common_edit => 'Edit';
+  String get kitapsen_common_edit => 'Editar';
   @override
-  String get kitapsen_profile_title => 'My profile';
+  String get kitapsen_profile_title => 'Mi perfil';
   @override
-  String get kitapsen_profile_name => 'Display name';
+  String get kitapsen_profile_name => 'Nombre visible';
   @override
-  String get kitapsen_profile_sharing => 'Share reading activity';
+  String get kitapsen_profile_sharing => 'Compartir actividad de lectura';
   @override
   String get kitapsen_profile_sharing_hint =>
-      'Show the books you are reading and have finished on your public profile.';
+      'Muestra en tu perfil público los libros que estás leyendo y los que has terminado.';
   @override
-  String get kitapsen_settings_title => 'Account settings';
+  String get kitapsen_settings_title => 'Configuración de la cuenta';
   @override
-  String get kitapsen_settings_profile => 'Profile information';
+  String get kitapsen_settings_profile => 'Información del perfil';
   @override
-  String get kitapsen_settings_privacy => 'Privacy';
+  String get kitapsen_settings_privacy => 'Privacidad';
   @override
-  String get kitapsen_settings_private => 'Private profile';
+  String get kitapsen_settings_private => 'Perfil privado';
   @override
   String get kitapsen_settings_private_hint =>
-      'Only your followers can see your profile, reviews, reading activity and updates.';
+      'Solo tus seguidores pueden ver tu perfil, tus reseñas, tu actividad de lectura y tus novedades.';
   @override
-  String get kitapsen_settings_notifications => 'Email notifications';
+  String get kitapsen_settings_notifications => 'Notificaciones por correo';
   @override
   String get kitapsen_settings_follower_email =>
-      'Email me when someone follows me';
+      'Enviarme un correo cuando alguien me siga';
   @override
   String get kitapsen_settings_comment_email =>
-      'Email me when someone comments on my story';
+      'Enviarme un correo cuando alguien comente mi historia';
   @override
-  String get kitapsen_settings_sale_email => 'Email me when my book sells';
+  String get kitapsen_settings_sale_email =>
+      'Enviarme un correo cuando se venda mi libro';
   @override
-  String get kitapsen_settings_author_emails => 'Author emails';
+  String get kitapsen_settings_author_emails => 'Correos para autores';
   @override
-  String get kitapsen_settings_password => 'Change password';
+  String get kitapsen_settings_password => 'Cambiar contraseña';
   @override
-  String get kitapsen_settings_current_password => 'Current password';
+  String get kitapsen_settings_current_password => 'Contraseña actual';
   @override
-  String get kitapsen_settings_new_password => 'New password';
+  String get kitapsen_settings_new_password => 'Nueva contraseña';
   @override
-  String get kitapsen_settings_repeat_password => 'Repeat the new password';
+  String get kitapsen_settings_repeat_password => 'Repite la nueva contraseña';
   @override
-  String get kitapsen_settings_change_password => 'Change password';
+  String get kitapsen_settings_change_password => 'Cambiar contraseña';
   @override
   String get kitapsen_settings_passwords_differ =>
-      'The passwords do not match.';
+      'Las contraseñas no coinciden.';
   @override
-  String get kitapsen_settings_password_changed => 'Password changed.';
+  String get kitapsen_settings_password_changed => 'Contraseña cambiada.';
   @override
   String get kitapsen_settings_password_failed =>
-      'The password could not be changed. Check the current password.';
+      'No se pudo cambiar la contraseña. Revisa la contraseña actual.';
   @override
-  String get kitapsen_settings_blocked => 'Blocked users';
+  String get kitapsen_settings_blocked => 'Usuarios bloqueados';
   @override
-  String get kitapsen_settings_no_blocked => 'You have not blocked anyone.';
+  String get kitapsen_settings_no_blocked => 'No has bloqueado a nadie.';
   @override
-  String get kitapsen_publishers_title => 'Publishers';
+  String get kitapsen_publishers_title => 'Editoriales';
   @override
-  String get kitapsen_publishers_body => 'Browse books by publisher.';
+  String get kitapsen_publishers_body => 'Explora libros por editorial.';
   @override
-  String get kitapsen_publisher_role => 'Publisher';
+  String get kitapsen_publisher_role => 'Editorial';
   @override
   String get kitapsen_publisher_no_books =>
-      'This publisher\'s books will be listed here soon.';
+      'Los libros de esta editorial aparecerán aquí pronto.';
   @override
-  String get kitapsen_authors_title => 'Authors';
+  String get kitapsen_authors_title => 'Autores';
   @override
   String get kitapsen_blog_title => 'Blog';
   @override
   String get kitapsen_blog_subtitle =>
-      'News, tips and stories from the Kitapsen community.';
+      'Noticias, consejos e historias de la comunidad de Kitapsen.';
   @override
-  String get kitapsen_blog_empty => 'No blog posts yet.';
+  String get kitapsen_blog_empty => 'Aún no hay entradas en el blog.';
   @override
-  String get kitapsen_collections_title => 'Collections';
+  String get kitapsen_collections_title => 'Colecciones';
   @override
-  String get kitapsen_collections_new => 'New collection';
+  String get kitapsen_collections_new => 'Nueva colección';
   @override
-  String get kitapsen_collections_name => 'Collection name';
+  String get kitapsen_collections_name => 'Nombre de la colección';
   @override
-  String get kitapsen_collections_description => 'Description (optional)';
+  String get kitapsen_collections_description => 'Descripción (opcional)';
   @override
   String get kitapsen_collections_empty =>
-      'No collections yet. Create collections to organise your books.';
+      'Aún no hay colecciones. Crea colecciones para organizar tus libros.';
   @override
-  String get kitapsen_collections_delete_confirm => 'Delete this collection?';
+  String get kitapsen_collections_delete_confirm => '¿Eliminar esta colección?';
   @override
   String get kitapsen_collections_items_empty =>
-      'No books yet. Add books from their page with "Add to collection".';
+      'Aún no hay libros. Añade libros desde su página con «Añadir a la colección».';
   @override
   String get kitapsen_collections_long_press =>
-      'Long-press a book to remove it.';
+      'Mantén pulsado un libro para quitarlo.';
   @override
-  String get kitapsen_collections_remove => 'Remove';
+  String get kitapsen_collections_remove => 'Quitar';
   @override
   String kitapsen_collections_remove_confirm({required Object title}) =>
-      'Remove "${title}" from this collection?';
+      '¿Quitar «${title}» de esta colección?';
   @override
-  String get kitapsen_collections_add => 'Add to collection';
+  String get kitapsen_collections_add => 'Añadir a la colección';
   @override
-  String get kitapsen_collections_add_title => 'Add to a collection';
+  String get kitapsen_collections_add_title => 'Añadir a una colección';
   @override
-  String get kitapsen_collections_added => 'Added to the collection';
+  String get kitapsen_collections_added => 'Añadido a la colección';
   @override
-  String get kitapsen_notebooks_title => 'Notebooks';
+  String get kitapsen_notebooks_title => 'Cuadernos';
   @override
-  String get kitapsen_notebooks_new => 'New notebook';
+  String get kitapsen_notebooks_new => 'Nuevo cuaderno';
   @override
-  String get kitapsen_notebooks_name => 'Notebook name';
+  String get kitapsen_notebooks_name => 'Nombre del cuaderno';
   @override
   String get kitapsen_notebooks_empty =>
-      'No notebooks yet. Create notebooks for your reading notes and ideas.';
+      'Aún no hay cuadernos. Crea cuadernos para tus notas de lectura e ideas.';
   @override
-  String kitapsen_notebooks_count({required Object n}) => '${n} notes';
+  String kitapsen_notebooks_count({required Object n}) => '${n} notas';
   @override
-  String get kitapsen_notebooks_delete_confirm => 'Delete this notebook?';
+  String get kitapsen_notebooks_delete_confirm => '¿Eliminar este cuaderno?';
   @override
-  String get kitapsen_notebooks_entries_empty => 'No notes yet.';
+  String get kitapsen_notebooks_entries_empty => 'Aún no hay notas.';
   @override
-  String get kitapsen_notebooks_entry_hint => 'Add a note...';
+  String get kitapsen_notebooks_entry_hint => 'Añade una nota...';
   @override
-  String get kitapsen_notebooks_entry_delete_confirm => 'Delete this note?';
+  String get kitapsen_notebooks_entry_delete_confirm => '¿Eliminar esta nota?';
   @override
-  String get kitapsen_notebooks_add => 'Add note';
+  String get kitapsen_notebooks_add => 'Añadir nota';
   @override
-  String get kitapsen_goals_title => 'Reading goals';
+  String get kitapsen_goals_title => 'Metas de lectura';
   @override
-  String get kitapsen_goals_new => 'New goal';
+  String get kitapsen_goals_new => 'Nueva meta';
   @override
-  String get kitapsen_goals_create => 'Create';
+  String get kitapsen_goals_create => 'Crear';
   @override
-  String get kitapsen_goals_created => 'Goal created';
+  String get kitapsen_goals_created => 'Meta creada';
   @override
-  String get kitapsen_goals_type => 'Goal type';
+  String get kitapsen_goals_type => 'Tipo de meta';
   @override
-  String get kitapsen_goals_type_books => 'Books';
+  String get kitapsen_goals_type_books => 'Libros';
   @override
-  String get kitapsen_goals_type_pages => 'Pages';
+  String get kitapsen_goals_type_pages => 'Páginas';
   @override
-  String get kitapsen_goals_type_days => 'Reading days';
+  String get kitapsen_goals_type_days => 'Días de lectura';
   @override
-  String get kitapsen_goals_target => 'Target';
+  String get kitapsen_goals_target => 'Objetivo';
   @override
-  String get kitapsen_goals_this_month => 'This month';
+  String get kitapsen_goals_this_month => 'Este mes';
   @override
-  String get kitapsen_goals_this_year => 'This year';
+  String get kitapsen_goals_this_year => 'Este año';
   @override
   String get kitapsen_goals_empty =>
-      'No reading goals. Set your first goal to keep your motivation up.';
+      'No hay metas de lectura. Fija tu primera meta para mantener la motivación.';
   @override
-  String get kitapsen_goals_delete_confirm => 'Delete this goal?';
+  String get kitapsen_goals_delete_confirm => '¿Eliminar esta meta?';
   @override
-  String get kitapsen_goals_completed => 'Completed';
+  String get kitapsen_goals_completed => 'Completada';
   @override
-  String kitapsen_goals_until({required Object date}) => 'Until ${date}';
+  String kitapsen_goals_until({required Object date}) => 'Hasta el ${date}';
   @override
-  String kitapsen_goals_unit_books({required Object n}) => '${n} books';
+  String kitapsen_goals_unit_books({required Object n}) => '${n} libros';
   @override
-  String kitapsen_goals_unit_pages({required Object n}) => '${n} pages';
+  String kitapsen_goals_unit_pages({required Object n}) => '${n} páginas';
   @override
-  String kitapsen_goals_unit_hours({required Object n}) => '${n} hours';
+  String kitapsen_goals_unit_hours({required Object n}) => '${n} horas';
   @override
-  String kitapsen_goals_unit_days({required Object n}) => '${n} reading days';
+  String kitapsen_goals_unit_days({required Object n}) =>
+      '${n} días de lectura';
   @override
-  String get kitapsen_goals_streak => 'Day streak';
+  String get kitapsen_goals_streak => 'Racha diaria';
   @override
-  String get kitapsen_goals_longest_streak => 'Longest streak';
+  String get kitapsen_goals_longest_streak => 'Racha más larga';
   @override
-  String get kitapsen_goals_books_read => 'Books read';
+  String get kitapsen_goals_books_read => 'Libros leídos';
   @override
-  String get kitapsen_goals_books_finished => 'Finished';
+  String get kitapsen_goals_books_finished => 'Terminados';
   @override
-  String get kitapsen_feed_title => 'Social feed';
+  String get kitapsen_feed_title => 'Actividad social';
   @override
-  String get kitapsen_feed_followed => 'Following';
+  String get kitapsen_feed_followed => 'Siguiendo';
   @override
-  String get kitapsen_feed_mine => 'My activity';
+  String get kitapsen_feed_mine => 'Mi actividad';
   @override
   String get kitapsen_feed_empty_followed =>
-      'No activity yet. Follow readers to keep up with what they are reading.';
+      'Aún no hay actividad. Sigue a otros lectores para ver qué están leyendo.';
   @override
   String get kitapsen_feed_empty_mine =>
-      'Your reading activity will appear here once you start reading.';
+      'Tu actividad de lectura aparecerá aquí cuando empieces a leer.';
   @override
   String kitapsen_feed_started({required Object target}) =>
-      'started reading ${target}';
+      'empezó a leer ${target}';
   @override
   String kitapsen_feed_finished({required Object target}) =>
-      'finished ${target}';
+      'terminó de leer ${target}';
   @override
-  String kitapsen_feed_reviewed({required Object target}) =>
-      'reviewed ${target}';
+  String kitapsen_feed_reviewed({required Object target}) => 'reseñó ${target}';
   @override
   String kitapsen_feed_followed_user({required Object target}) =>
-      'started following ${target}';
+      'empezó a seguir a ${target}';
   @override
   String kitapsen_feed_followed_author({required Object target}) =>
-      'followed the author ${target}';
+      'siguió al autor ${target}';
   @override
-  String kitapsen_feed_shared({required Object target}) => 'shared ${target}';
+  String kitapsen_feed_shared({required Object target}) =>
+      'compartió ${target}';
   @override
-  String kitapsen_feed_percent({required Object n}) => '${n}% read';
+  String kitapsen_feed_percent({required Object n}) => '${n}% leído';
   @override
-  String get kitapsen_feed_finished_badge => 'Finished';
+  String get kitapsen_feed_finished_badge => 'Terminado';
   @override
-  String get kitapsen_user_follow => 'Follow';
+  String get kitapsen_user_follow => 'Seguir';
   @override
-  String get kitapsen_user_block => 'Block';
+  String get kitapsen_user_block => 'Bloquear';
   @override
-  String get kitapsen_user_unblock => 'Unblock';
+  String get kitapsen_user_unblock => 'Desbloquear';
   @override
   String kitapsen_user_block_confirm({required Object username}) =>
-      'Block @${username}? They will no longer see your profile and activity, and any follow between you is removed.';
+      '¿Bloquear a @${username}? Ya no verá tu perfil ni tu actividad, y se eliminará cualquier seguimiento entre ambos.';
   @override
   String kitapsen_user_member_since({required Object date}) =>
-      'Member since ${date}';
+      'Miembro desde ${date}';
   @override
-  String kitapsen_user_followers({required Object n}) => '${n} followers';
+  String kitapsen_user_followers({required Object n}) => '${n} seguidores';
   @override
-  String kitapsen_user_following({required Object n}) => '${n} following';
+  String kitapsen_user_following({required Object n}) => '${n} seguidos';
   @override
   String kitapsen_user_finished_count({required Object n}) =>
-      '${n} books finished';
+      '${n} libros terminados';
   @override
-  String get kitapsen_user_tab_reading => 'Reading';
+  String get kitapsen_user_tab_reading => 'Lectura';
   @override
-  String get kitapsen_user_tab_reviews => 'Reviews';
+  String get kitapsen_user_tab_reviews => 'Reseñas';
   @override
-  String get kitapsen_user_tab_activity => 'Activity';
+  String get kitapsen_user_tab_activity => 'Actividad';
   @override
-  String get kitapsen_user_currently_reading => 'Currently reading';
+  String get kitapsen_user_currently_reading => 'Leyendo ahora';
   @override
-  String get kitapsen_user_finished => 'Finished';
+  String get kitapsen_user_finished => 'Terminados';
   @override
   String get kitapsen_user_no_reading =>
-      'This reader does not share reading activity.';
+      'Este lector no comparte su actividad de lectura.';
   @override
-  String get kitapsen_user_no_reviews => 'No public reviews yet.';
+  String get kitapsen_user_no_reviews => 'Aún no hay reseñas públicas.';
   @override
-  String get kitapsen_user_no_activity => 'No public activity yet.';
+  String get kitapsen_user_no_activity => 'Aún no hay actividad pública.';
   @override
   String get kitapsen_user_private =>
-      'This profile is private. Follow this reader to see their reviews, reading activity and profile.';
+      'Este perfil es privado. Sigue a este lector para ver sus reseñas, su actividad de lectura y su perfil.';
   @override
   String get kitapsen_user_blocked_you =>
-      'This reader has blocked you. Their profile and activity are hidden from you.';
+      'Este lector te ha bloqueado. Su perfil y su actividad están ocultos para ti.';
   @override
-  String get kitapsen_user_followers_title => 'Followers';
+  String get kitapsen_user_followers_title => 'Seguidores';
   @override
-  String get kitapsen_user_following_title => 'Following';
+  String get kitapsen_user_following_title => 'Siguiendo';
   @override
-  String get kitapsen_user_no_connections => 'Nobody here yet.';
+  String get kitapsen_user_no_connections => 'Aún no hay nadie aquí.';
   @override
-  String get kitapsen_clubs_title => 'Book clubs';
+  String get kitapsen_clubs_title => 'Clubes de lectura';
   @override
-  String get kitapsen_clubs_create => 'Create a club';
+  String get kitapsen_clubs_create => 'Crear un club';
   @override
-  String get kitapsen_clubs_name => 'Club name';
+  String get kitapsen_clubs_name => 'Nombre del club';
   @override
   String get kitapsen_clubs_empty =>
-      'No book clubs yet. Create or join one to read together.';
+      'Aún no hay clubes de lectura. Crea uno o únete a alguno para leer en compañía.';
   @override
-  String get kitapsen_clubs_join => 'Join';
+  String get kitapsen_clubs_join => 'Unirse';
   @override
-  String get kitapsen_clubs_leave => 'Leave';
+  String get kitapsen_clubs_leave => 'Salir';
   @override
-  String get kitapsen_clubs_owner => 'Owner';
+  String get kitapsen_clubs_owner => 'Propietario';
   @override
-  String get kitapsen_clubs_members => 'Members';
+  String get kitapsen_clubs_members => 'Miembros';
   @override
-  String kitapsen_clubs_members_count({required Object n}) => '${n} members';
+  String kitapsen_clubs_members_count({required Object n}) => '${n} miembros';
   @override
-  String get kitapsen_clubs_chat => 'Discussion';
+  String get kitapsen_clubs_chat => 'Conversación';
   @override
   String get kitapsen_clubs_join_to_chat =>
-      'Join the club to read and write messages.';
+      'Únete al club para leer y escribir mensajes.';
   @override
-  String get kitapsen_clubs_no_messages => 'No messages yet.';
+  String get kitapsen_clubs_no_messages => 'Aún no hay mensajes.';
   @override
-  String get kitapsen_clubs_message_hint => 'Write a message...';
+  String get kitapsen_clubs_message_hint => 'Escribe un mensaje...';
   @override
-  String get kitapsen_clubs_send => 'Send';
+  String get kitapsen_clubs_send => 'Enviar';
   @override
   String get kitapsen_register_taken =>
-      'This username or email address already has an account.';
+      'Ya existe una cuenta con este nombre de usuario o correo electrónico.';
   @override
-  String get kitapsen_report => 'Report';
+  String get kitapsen_report => 'Denunciar';
   @override
-  String get kitapsen_reported => 'Reported';
+  String get kitapsen_reported => 'Denunciado';
   @override
-  String get kitapsen_report_title => 'Report this content';
+  String get kitapsen_report_title => 'Denunciar este contenido';
   @override
-  String get kitapsen_report_reason => 'Reason (optional)';
+  String get kitapsen_report_reason => 'Motivo (opcional)';
   @override
-  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  String get kitapsen_report_reason_hint => '¿Por qué es inapropiado?';
   @override
-  String get kitapsen_report_submit => 'Submit Report';
+  String get kitapsen_report_submit => 'Enviar denuncia';
   @override
   String get kitapsen_report_thanks =>
-      'Reported. Thank you for helping keep the community safe.';
+      'Denunciado. Gracias por ayudar a mantener la comunidad segura.';
   @override
   String get kitapsen_delete_statistics_book_desc =>
       'El tiempo de lectura y los caracteres leídos de este libro se eliminan de las estadísticas en todos los dispositivos';
@@ -58960,7 +58975,7 @@ class _StringsFr extends _StringsEn {
   @override
   String get batch_tag_title => 'Gérer les balises';
   @override
-  String get book_continue_reading => 'Continue Reading';
+  String get book_continue_reading => 'Continuer la lecture';
   @override
   String get book_convert_blocked_already =>
       'Ce livre est déjà dans ce format.';
@@ -60820,7 +60835,7 @@ class _StringsFr extends _StringsEn {
   String get font_target_game_lookup =>
       'Police de la fenêtre de recherche de jeu';
   @override
-  String get font_target_video_subtitle => 'Video Subtitle Font';
+  String get font_target_video_subtitle => 'Police des sous-titres vidéo';
   @override
   String get gal_card_lookup_independent_size =>
       'Taille séparée pour la carte en jeu';
@@ -61985,7 +62000,7 @@ class _StringsFr extends _StringsEn {
   @override
   String get handlebar_sentence => 'Phrase';
   @override
-  String get handlebar_sentence_audio => 'Sentence Audio';
+  String get handlebar_sentence_audio => 'Audio de la phrase';
   @override
   String get handlebar_video_clip => 'Video Clip (GIF)';
   @override
@@ -64246,11 +64261,11 @@ class _StringsFr extends _StringsEn {
   @override
   String get reader_view_mode_label => 'Pages / Défilement';
   @override
-  String get reader_vn => 'Visual Novel';
+  String get reader_vn => 'Visual novel';
   @override
   String get reader_writing_direction => 'Direction d\'écriture';
   @override
-  String get reading_activity => 'Activité d\'étude';
+  String get reading_activity => 'Activité de lecture';
   @override
   String get reading_progress => 'Progression de lecture';
   @override
@@ -64662,9 +64677,10 @@ class _StringsFr extends _StringsEn {
   String get shortcut_action_reader_open_gallery =>
       'Ouvrir la galerie d\'illustrations';
   @override
-  String get shortcut_action_reader_open_menu => 'Open Settings Menu';
+  String get shortcut_action_reader_open_menu =>
+      'Ouvrir le menu des paramètres';
   @override
-  String get shortcut_action_reader_open_navigation => 'Open Navigation';
+  String get shortcut_action_reader_open_navigation => 'Ouvrir la navigation';
   @override
   String get shortcut_action_reader_open_statistics =>
       'Ouvrir les statistiques de lecture';
@@ -64688,10 +64704,10 @@ class _StringsFr extends _StringsEn {
       'Aligner le sous-titre précédent sur maintenant';
   @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
-      'Cycle Secondary Subtitle Obscure';
+      'Changer le mode de masquage du sous-titre secondaire';
   @override
   String get shortcut_action_video_cycle_subtitle_obscure =>
-      'Cycle Subtitle Obscure Mode';
+      'Changer le mode de masquage des sous-titres';
   @override
   String get shortcut_action_video_dismiss_dict => 'Fermer le dictionnaire';
   @override
@@ -64761,7 +64777,7 @@ class _StringsFr extends _StringsEn {
   String get shortcut_action_video_toggle_play_pause => 'Lecture / Pause';
   @override
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
-      'Toggle Hide Secondary Subtitle';
+      'Afficher/masquer le sous-titre secondaire';
   @override
   String get shortcut_action_video_toggle_shader_compare =>
       'Basculer la comparaison de shaders';
@@ -64770,7 +64786,7 @@ class _StringsFr extends _StringsEn {
       'Basculer le flou des sous-titres';
   @override
   String get shortcut_action_video_toggle_subtitle_hide =>
-      'Toggle Hide Subtitles';
+      'Afficher/masquer les sous-titres';
   @override
   String get shortcut_action_video_toggle_subtitle_list =>
       'Afficher/masquer la liste des sous-titres';
@@ -65054,7 +65070,7 @@ class _StringsFr extends _StringsEn {
   @override
   String get stat_detail_ungrouped => 'Non groupé';
   @override
-  String get stat_fastest_day => 'Fastest Day';
+  String get stat_fastest_day => 'Jour le plus rapide';
   @override
   String get stat_favorited => 'Favoris';
   @override
@@ -65071,9 +65087,9 @@ class _StringsFr extends _StringsEn {
   @override
   String stat_format_pages({required Object n}) => '${n} pages';
   @override
-  String get stat_goal => 'Daily Goal';
+  String get stat_goal => 'Objectif quotidien';
   @override
-  String get stat_goal_daily => 'Daily Goal';
+  String get stat_goal_daily => 'Objectif quotidien';
   @override
   String get stat_goal_presets => 'Préréglages';
   @override
@@ -65085,11 +65101,11 @@ class _StringsFr extends _StringsEn {
   String stat_goal_recent_average({required Object n}) =>
       '7 derniers jours : ${n} car./jour en moyenne';
   @override
-  String get stat_goal_set => 'Set Goal';
+  String get stat_goal_set => 'Définir l\'objectif';
   @override
   String get stat_goal_unit_chars => 'car.';
   @override
-  String get stat_goal_weekly => 'Weekly Goal';
+  String get stat_goal_weekly => 'Objectif hebdomadaire';
   @override
   String get stat_hourly_band_epub => 'Romans';
   @override
@@ -65116,7 +65132,7 @@ class _StringsFr extends _StringsEn {
   @override
   String get stat_no_data => 'Aucune donnée de lecture';
   @override
-  String get stat_range_and_trend => 'Range & Trend';
+  String get stat_range_and_trend => 'Plage et tendance';
   @override
   String get stat_recent_active => 'Jours actifs (7j)';
   @override
@@ -65135,7 +65151,7 @@ class _StringsFr extends _StringsEn {
   @override
   String get stat_sessions_show_all => 'Toutes les sessions';
   @override
-  String get stat_slowest_day => 'Slowest Day';
+  String get stat_slowest_day => 'Jour le plus lent';
   @override
   String get stat_sort_by_chars => 'Par caractères';
   @override
@@ -65151,7 +65167,7 @@ class _StringsFr extends _StringsEn {
   @override
   String stat_speed_cph({required Object n}) => '${n} car./h';
   @override
-  String get stat_speed_summary => 'Speed Summary';
+  String get stat_speed_summary => 'Résumé de la vitesse';
   @override
   String get stat_streak => 'Série';
   @override
@@ -65169,11 +65185,11 @@ class _StringsFr extends _StringsEn {
   @override
   String get stat_trend_weekly => 'Semaine';
   @override
-  String get stat_typical_day => 'Typical Day';
+  String get stat_typical_day => 'Jour type';
   @override
   String get stat_vs_prev => 'vs 14j préc.';
   @override
-  String get stat_weighted_avg_speed => 'Weighted Avg';
+  String get stat_weighted_avg_speed => 'Moyenne pondérée';
   @override
   String get stop => 'Arrêter';
   @override
@@ -72851,7 +72867,7 @@ class _StringsFr extends _StringsEn {
   @override
   String get video_scrape_ai_declined => 'AI not adopted';
   @override
-  String get video_scrape_ai_failed => 'AI request failed';
+  String get video_scrape_ai_failed => 'Échec de la requête à l\'IA';
   @override
   String get video_scrape_ai_searched =>
       'Searched again with titles suggested by AI';
@@ -72913,7 +72929,7 @@ class _StringsFr extends _StringsEn {
   @override
   String get video_filter_media_type => 'Type';
   @override
-  String get video_filter_media_type_video => 'Video';
+  String get video_filter_media_type_video => 'Vidéo';
   @override
   String get video_filter_media_type_audio => 'Audio';
   @override
@@ -72966,7 +72982,7 @@ class _StringsFr extends _StringsEn {
   @override
   String get manga_ocr_ai_mode_label => 'AI recognition';
   @override
-  String get manga_ocr_ai_mode_off => 'Off';
+  String get manga_ocr_ai_mode_off => 'Désactivé';
   @override
   String get manga_ocr_ai_mode_low_confidence => 'Only uncertain text';
   @override
@@ -73019,7 +73035,7 @@ class _StringsFr extends _StringsEn {
   String get ocr_system_model_missing =>
       'Google Play services hasn\'t downloaded the text recognition model yet. Download it now (a few MB) to use screen OCR.';
   @override
-  String get ocr_system_model_download => 'Download';
+  String get ocr_system_model_download => 'Télécharger';
   @override
   String get ocr_system_model_downloading =>
       'Downloading through Google Play services… You can close this dialog; the download continues in the background.';
@@ -73043,669 +73059,689 @@ class _StringsFr extends _StringsEn {
   @override
   String get kitapsen_section_title => 'Kitapsen';
   @override
-  String get kitapsen_account_title => 'Kitapsen account';
+  String get kitapsen_account_title => 'Compte Kitapsen';
   @override
   String get kitapsen_account_hint =>
-      'Sign in to read the books in your Kitapsen library. They appear on your bookshelf, and your reading position syncs with your account.';
+      'Connectez-vous pour lire les livres de votre bibliothèque Kitapsen. Ils apparaissent sur votre étagère et votre position de lecture est synchronisée avec votre compte.';
   @override
-  String get kitapsen_account_server_url => 'Server address';
+  String get kitapsen_account_server_url => 'Adresse du serveur';
   @override
-  String get kitapsen_account_username => 'Email or username';
+  String get kitapsen_account_username => 'E-mail ou nom d\'utilisateur';
   @override
-  String get kitapsen_account_password => 'Password';
+  String get kitapsen_account_password => 'Mot de passe';
   @override
-  String get kitapsen_account_sign_in => 'Sign in';
+  String get kitapsen_account_sign_in => 'Se connecter';
   @override
-  String get kitapsen_account_sign_out => 'Sign out';
+  String get kitapsen_account_sign_out => 'Se déconnecter';
   @override
   String get kitapsen_account_sign_in_rejected =>
-      'Email or password is incorrect';
+      'E-mail ou mot de passe incorrect';
   @override
   String get kitapsen_account_sign_in_failed =>
-      'Could not reach Kitapsen. Check the address and your connection.';
+      'Impossible de joindre Kitapsen. Vérifiez l\'adresse et votre connexion.';
   @override
-  String get kitapsen_account_summary => 'Sign in to read your library';
+  String get kitapsen_account_summary =>
+      'Connectez-vous pour lire votre bibliothèque';
   @override
   String get kitapsen_shelf_signed_out_body =>
-      'Sign in with your Kitapsen account to see your library.';
+      'Connectez-vous avec votre compte Kitapsen pour voir votre bibliothèque.';
   @override
-  String get kitapsen_shelf_sign_in => 'Sign in to Kitapsen';
+  String get kitapsen_shelf_sign_in => 'Se connecter à Kitapsen';
   @override
-  String get kitapsen_onboarding_title => 'Your Kitapsen library';
+  String get kitapsen_onboarding_title => 'Votre bibliothèque Kitapsen';
   @override
   String get kitapsen_onboarding_body =>
-      'Sign in to see the books in your Kitapsen account on this device. You can skip this and sign in later from Settings.';
+      'Connectez-vous pour voir les livres de votre compte Kitapsen sur cet appareil. Vous pouvez passer cette étape et vous connecter plus tard depuis les Paramètres.';
   @override
   String app_store_update_body({required Object version}) =>
-      'Kitapsen ${version} is available on the App Store.';
+      'Kitapsen ${version} est disponible sur l\'App Store.';
   @override
-  String get app_store_update_open => 'Update';
+  String get app_store_update_open => 'Mettre à jour';
   @override
-  String get app_store_update_later => 'Not now';
+  String get app_store_update_later => 'Plus tard';
   @override
-  String get kitapsen_about_privacy_policy => 'Privacy policy';
+  String get kitapsen_about_privacy_policy => 'Politique de confidentialité';
   @override
-  String get kitapsen_about_support => 'Contact support';
+  String get kitapsen_about_support => 'Contacter l\'assistance';
   @override
-  String get kitapsen_about_source_code => 'Source code';
+  String get kitapsen_about_source_code => 'Code source';
   @override
   String get kitapsen_about_based_on_fushi =>
-      'Kitapsen is based on Fushi (GPLv3) — source: https://github.com/FizyonOps/kitapsen-mobile';
+      'Kitapsen est basé sur Fushi (GPLv3) — code source : https://github.com/FizyonOps/kitapsen-mobile';
   @override
-  String get kitapsen_about_licenses => 'Open-source licenses';
+  String get kitapsen_about_licenses => 'Licences open source';
   @override
-  String get kitapsen_about_section => 'About Kitapsen';
+  String get kitapsen_about_section => 'À propos de Kitapsen';
   @override
-  String get kitapsen_import_hint => 'Pick an EPUB or PDF file to import.';
+  String get kitapsen_import_hint =>
+      'Choisissez un fichier EPUB ou PDF à importer.';
   @override
   String get kitapsen_sign_out_removes_books =>
-      'Signing out removes your downloaded Kitapsen books from this device.';
+      'La déconnexion supprime de cet appareil les livres Kitapsen que vous avez téléchargés.';
   @override
-  String get kitapsen_account_or => 'or';
+  String get kitapsen_account_or => 'ou';
   @override
-  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  String get kitapsen_account_continue_with_google => 'Continuer avec Google';
   @override
-  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  String get kitapsen_account_continue_with_apple => 'Continuer avec Apple';
   @override
   String get kitapsen_account_social_sign_in_failed =>
-      'Sign-in failed. Please try again.';
+      'Échec de la connexion. Veuillez réessayer.';
   @override
-  String get kitapsen_account_deleted =>
-      'This Kitapsen account has been deleted.';
+  String get kitapsen_account_deleted => 'Ce compte Kitapsen a été supprimé.';
   @override
-  String get kitapsen_account_delete => 'Delete account';
+  String get kitapsen_account_delete => 'Supprimer le compte';
   @override
   String get kitapsen_account_delete_confirm =>
-      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+      'Votre compte Kitapsen sera supprimé et cet appareil sera déconnecté. Vous ne pourrez plus lire les livres de votre bibliothèque. Cette action est irréversible.';
   @override
   String get kitapsen_account_delete_failed =>
-      'The account could not be deleted. Please try again.';
+      'Impossible de supprimer le compte. Veuillez réessayer.';
   @override
-  String get kitapsen_nav_store => 'Store';
+  String get kitapsen_nav_store => 'Boutique';
   @override
-  String get kitapsen_store_search_hint => 'Search books and authors';
+  String get kitapsen_store_search_hint =>
+      'Rechercher des livres et des auteurs';
   @override
-  String get kitapsen_store_new_arrivals => 'New arrivals';
+  String get kitapsen_store_new_arrivals => 'Nouveautés';
   @override
-  String get kitapsen_store_most_read => 'Most read';
+  String get kitapsen_store_most_read => 'Les plus lus';
   @override
-  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  String get kitapsen_store_staff_picks => 'Choix de la rédaction';
   @override
-  String get kitapsen_store_free_books => 'Free books';
+  String get kitapsen_store_free_books => 'Livres gratuits';
   @override
-  String get kitapsen_store_stories => 'Serialized stories';
+  String get kitapsen_store_stories => 'Histoires en épisodes';
   @override
-  String get kitapsen_store_categories => 'Categories';
+  String get kitapsen_store_categories => 'Catégories';
   @override
-  String get kitapsen_store_see_all => 'See all';
+  String get kitapsen_store_see_all => 'Tout voir';
   @override
-  String get kitapsen_store_no_results => 'No books found';
+  String get kitapsen_store_no_results => 'Aucun livre trouvé';
   @override
   String get kitapsen_store_load_failed =>
-      'Couldn\'t load. Check your connection.';
+      'Chargement impossible. Vérifiez votre connexion.';
   @override
-  String get kitapsen_store_free_only => 'Free only';
+  String get kitapsen_store_free_only => 'Gratuits uniquement';
   @override
-  String get kitapsen_sort_relevance => 'Most relevant';
+  String get kitapsen_sort_relevance => 'Les plus pertinents';
   @override
-  String get kitapsen_sort_newest => 'Newest';
+  String get kitapsen_sort_newest => 'Les plus récents';
   @override
-  String get kitapsen_sort_most_read => 'Most read';
+  String get kitapsen_sort_most_read => 'Les plus lus';
   @override
-  String get kitapsen_sort_rating => 'Top rated';
+  String get kitapsen_sort_rating => 'Les mieux notés';
   @override
-  String get kitapsen_sort_title => 'Title A–Z';
+  String get kitapsen_sort_title => 'Titre (A–Z)';
   @override
-  String get kitapsen_book_read => 'Read';
+  String get kitapsen_book_read => 'Lire';
   @override
-  String get kitapsen_book_get_free => 'Get for free';
+  String get kitapsen_book_get_free => 'Obtenir gratuitement';
   @override
-  String get kitapsen_book_claimed => 'Added to your library';
+  String get kitapsen_book_claimed => 'Ajouté à votre bibliothèque';
   @override
-  String get kitapsen_book_in_library => 'In your library';
+  String get kitapsen_book_in_library => 'Dans votre bibliothèque';
   @override
-  String get kitapsen_book_not_in_library => 'Not in your library';
+  String get kitapsen_book_not_in_library => 'Pas dans votre bibliothèque';
   @override
   String get kitapsen_book_sign_in_prompt =>
-      'Sign in to add books to your library and keep a wishlist.';
+      'Connectez-vous pour ajouter des livres à votre bibliothèque et tenir une liste d\'envies.';
   @override
-  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  String get kitapsen_book_wishlist_add => 'Ajouter à la liste d\'envies';
   @override
-  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  String get kitapsen_book_wishlist_remove => 'Retirer de la liste d\'envies';
   @override
-  String get kitapsen_book_downloading => 'Downloading to your library…';
+  String get kitapsen_book_downloading =>
+      'Téléchargement dans votre bibliothèque…';
   @override
-  String get kitapsen_book_about => 'About this book';
+  String get kitapsen_book_about => 'À propos de ce livre';
   @override
-  String get kitapsen_book_pages => 'Pages';
+  String get kitapsen_book_pages => 'Nombre de pages';
   @override
-  String get kitapsen_book_language => 'Language';
+  String get kitapsen_book_language => 'Langue';
   @override
-  String get kitapsen_book_publisher => 'Publisher';
+  String get kitapsen_book_publisher => 'Éditeur';
   @override
-  String get kitapsen_book_published => 'Published';
+  String get kitapsen_book_published => 'Date de publication';
   @override
   String get kitapsen_book_action_failed =>
-      'Something went wrong. Please try again.';
+      'Une erreur s\'est produite. Veuillez réessayer.';
   @override
-  String get kitapsen_book_reviews => 'Reviews';
+  String get kitapsen_book_reviews => 'Avis';
   @override
-  String get kitapsen_book_no_reviews => 'No reviews yet';
+  String get kitapsen_book_no_reviews => 'Aucun avis pour l\'instant';
   @override
-  String get kitapsen_book_write_review => 'Write a review';
+  String get kitapsen_book_write_review => 'Donner un avis';
   @override
-  String get kitapsen_review_title_hint => 'Title (optional)';
+  String get kitapsen_review_title_hint => 'Titre (facultatif)';
   @override
-  String get kitapsen_review_content_hint => 'Your review (optional)';
+  String get kitapsen_review_content_hint => 'Votre avis (facultatif)';
   @override
-  String get kitapsen_review_submit => 'Send';
+  String get kitapsen_review_submit => 'Envoyer';
   @override
-  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  String get kitapsen_review_sent => 'Merci ! Votre avis a été envoyé.';
   @override
-  String get kitapsen_review_already => 'You have already reviewed this book.';
+  String get kitapsen_review_already =>
+      'Vous avez déjà donné votre avis sur ce livre.';
   @override
   String get kitapsen_review_not_allowed =>
-      'Only readers who have this book in their library can review it.';
+      'Seuls les lecteurs qui ont ce livre dans leur bibliothèque peuvent donner leur avis.';
   @override
-  String get kitapsen_review_more => 'Show more reviews';
+  String get kitapsen_review_more => 'Afficher plus d\'avis';
   @override
-  String get kitapsen_review_verified => 'Verified reader';
+  String get kitapsen_review_verified => 'Lecteur vérifié';
   @override
-  String get kitapsen_author_follow => 'Follow';
+  String get kitapsen_author_follow => 'Suivre';
   @override
-  String get kitapsen_author_following => 'Following';
+  String get kitapsen_author_following => 'Suivi';
   @override
-  String get kitapsen_author_followers => 'Followers';
+  String get kitapsen_author_followers => 'Abonnés';
   @override
-  String get kitapsen_author_books => 'Books';
+  String get kitapsen_author_books => 'Livres';
   @override
-  String get kitapsen_author_open => 'Author page';
+  String get kitapsen_author_open => 'Page de l\'auteur';
   @override
-  String get kitapsen_wishlist_title => 'Wishlist';
+  String get kitapsen_wishlist_title => 'Liste d\'envies';
   @override
-  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  String get kitapsen_wishlist_empty => 'Votre liste d\'envies est vide';
   @override
   String get kitapsen_notifications_title => 'Notifications';
   @override
-  String get kitapsen_notifications_empty => 'No notifications';
+  String get kitapsen_notifications_empty => 'Aucune notification';
   @override
-  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  String get kitapsen_notifications_mark_all => 'Tout marquer comme lu';
   @override
-  String get kitapsen_story_chapters => 'Chapters';
+  String get kitapsen_story_chapters => 'Chapitres';
   @override
-  String get kitapsen_story_no_chapters => 'No chapters yet';
+  String get kitapsen_story_no_chapters => 'Aucun chapitre pour l\'instant';
   @override
-  String get kitapsen_story_next => 'Next chapter';
+  String get kitapsen_story_next => 'Chapitre suivant';
   @override
-  String get kitapsen_story_previous => 'Previous chapter';
+  String get kitapsen_story_previous => 'Chapitre précédent';
   @override
-  String get kitapsen_review_like => 'Like';
+  String get kitapsen_review_like => 'J\'aime';
   @override
-  String get kitapsen_comments_title => 'Comments';
+  String get kitapsen_comments_title => 'Commentaires';
   @override
-  String get kitapsen_comments_empty => 'No comments yet';
+  String get kitapsen_comments_empty => 'Aucun commentaire pour l\'instant';
   @override
-  String get kitapsen_comment_hint => 'Write a comment';
+  String get kitapsen_comment_hint => 'Écrire un commentaire';
   @override
-  String get kitapsen_story_vote => 'Vote';
+  String get kitapsen_story_vote => 'Voter';
   @override
-  String get kitapsen_story_voted => 'Voted';
+  String get kitapsen_story_voted => 'Voté';
   @override
-  String get kitapsen_story_follow => 'Follow story';
+  String get kitapsen_story_follow => 'Suivre l\'histoire';
   @override
-  String get kitapsen_following_title => 'Following';
+  String get kitapsen_following_title => 'Abonnements';
   @override
-  String get kitapsen_following_authors => 'Authors';
+  String get kitapsen_following_authors => 'Auteurs';
   @override
-  String get kitapsen_following_stories => 'Stories';
+  String get kitapsen_following_stories => 'Histoires';
   @override
-  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  String get kitapsen_following_empty => 'Vous ne suivez encore personne';
   @override
-  String get kitapsen_reader_highlight => 'Highlight';
+  String get kitapsen_reader_highlight => 'Surligner';
   @override
-  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  String get kitapsen_annotations_title => 'Signets et notes';
   @override
-  String get kitapsen_bookmark_add => 'Add bookmark';
+  String get kitapsen_bookmark_add => 'Ajouter un signet';
   @override
-  String get kitapsen_bookmark_added => 'Bookmark added';
+  String get kitapsen_bookmark_added => 'Signet ajouté';
   @override
-  String get kitapsen_note_add => 'Add note';
+  String get kitapsen_note_add => 'Ajouter une note';
   @override
-  String get kitapsen_note_hint => 'Your note';
+  String get kitapsen_note_hint => 'Votre note';
   @override
-  String get kitapsen_note_saved => 'Note saved';
+  String get kitapsen_note_saved => 'Note enregistrée';
   @override
-  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  String get kitapsen_annotations_empty =>
+      'Aucun signet ni note pour l\'instant';
   @override
-  String get kitapsen_store_badge_free => 'Free';
+  String get kitapsen_store_badge_free => 'Gratuit';
   @override
-  String get kitapsen_store_badge_new => 'New';
+  String get kitapsen_store_badge_new => 'Nouveau';
   @override
-  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  String kitapsen_store_rating_count({required Object n}) => '${n} avis';
   @override
-  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  String get kitapsen_store_hero_title =>
+      'Votre prochaine belle lecture est ici.';
   @override
   String get kitapsen_store_hero_body =>
-      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+      'Découvrez de nouvelles histoires et les auteurs que vous aimez. Choisissez votre livre et commencez à lire sur votre téléphone, votre tablette ou votre ordinateur.';
   @override
-  String get kitapsen_store_explore_books => 'Explore books';
+  String get kitapsen_store_explore_books => 'Explorer les livres';
   @override
-  String get kitapsen_store_start_free => 'Start with free books';
+  String get kitapsen_store_start_free => 'Commencez par les livres gratuits';
   @override
-  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  String get kitapsen_store_start_free_body => 'Découvrez votre premier livre.';
   @override
-  String get kitapsen_store_library_always => 'Your library is always with you';
+  String get kitapsen_store_library_always =>
+      'Votre bibliothèque toujours avec vous';
   @override
   String get kitapsen_store_library_always_body =>
-      'Read on your phone, tablet and computer.';
+      'Lisez sur votre téléphone, votre tablette et votre ordinateur.';
   @override
-  String get kitapsen_store_meet_authors => 'Meet the authors';
+  String get kitapsen_store_meet_authors => 'Rencontrez les auteurs';
   @override
-  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  String get kitapsen_store_meet_authors_body =>
+      'Suivez les écrivains que vous aimez.';
   @override
-  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  String get kitapsen_store_reading_list =>
+      'Un nouveau livre pour votre liste de lecture';
   @override
-  String get kitapsen_store_all_categories => 'All categories';
+  String get kitapsen_store_all_categories => 'Toutes les catégories';
   @override
-  String get kitapsen_store_discover_title => 'Time to discover';
+  String get kitapsen_store_discover_title => 'Le moment de découvrir';
   @override
   String get kitapsen_store_discover_body =>
-      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+      'Une histoire, un nouveau regard, une découverte inattendue. Ajoutez votre prochain livre à votre liste de lecture.';
   @override
-  String get kitapsen_store_discover_now => 'Discover now';
+  String get kitapsen_store_discover_now => 'Découvrir maintenant';
   @override
   String kitapsen_store_results_for({required Object q}) =>
-      'Results for "${q}"';
+      'Résultats pour « ${q} »';
   @override
-  String get kitapsen_store_matching_authors => 'Matching authors';
+  String get kitapsen_store_matching_authors => 'Auteurs correspondants';
   @override
-  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  String kitapsen_store_author_books_count({required Object n}) =>
+      '${n} livres';
   @override
   String get kitapsen_store_author_cta =>
-      'Discover the author\'s books and pick your next read.';
+      'Découvrez les livres de l\'auteur et choisissez votre prochaine lecture.';
   @override
-  String get kitapsen_store_see_author_books => 'See their books';
+  String get kitapsen_store_see_author_books => 'Voir ses livres';
   @override
-  String get kitapsen_store_authors_books => 'The author\'s books';
+  String get kitapsen_store_authors_books => 'Les livres de l\'auteur';
   @override
-  String get kitapsen_book_read_now => 'Read now';
+  String get kitapsen_book_read_now => 'Lire maintenant';
   @override
-  String get kitapsen_book_get_free_web => 'Get it free';
+  String get kitapsen_book_get_free_web => 'L\'obtenir gratuitement';
   @override
-  String get kitapsen_book_favorites => 'Favorites';
+  String get kitapsen_book_favorites => 'Favoris';
   @override
-  String get kitapsen_book_description => 'Description';
+  String get kitapsen_book_description => 'Résumé';
   @override
-  String get kitapsen_book_about_author => 'About the author';
+  String get kitapsen_book_about_author => 'À propos de l\'auteur';
   @override
   String get kitapsen_book_isbn => 'ISBN';
   @override
   String get kitapsen_book_format => 'Format';
   @override
-  String get kitapsen_author_role => 'Author';
+  String get kitapsen_author_role => 'Auteur';
   @override
-  String get kitapsen_author_notify => 'Notify me of new books';
+  String get kitapsen_author_notify => 'M\'avertir des nouveaux livres';
   @override
-  String get kitapsen_author_about => 'About';
+  String get kitapsen_author_about => 'À propos';
   @override
-  String get kitapsen_review_more_bio => 'Read the full biography';
+  String get kitapsen_review_more_bio => 'Lire la biographie complète';
   @override
-  String get kitapsen_author_like => 'Like';
+  String get kitapsen_author_like => 'J\'aime';
   @override
-  String get kitapsen_author_likes => 'Likes';
+  String get kitapsen_author_likes => 'J\'aime';
   @override
-  String get kitapsen_register_open => 'No account yet? Create one';
+  String get kitapsen_register_open => 'Pas encore de compte ? Créez-en un';
   @override
-  String get kitapsen_register_name => 'Name (optional)';
+  String get kitapsen_register_name => 'Nom (facultatif)';
   @override
-  String get kitapsen_register_username => 'Username';
+  String get kitapsen_register_username => 'Nom d\'utilisateur';
   @override
   String get kitapsen_register_username_hint =>
-      '2–20 lowercase letters or digits';
+      '2 à 20 lettres minuscules ou chiffres';
   @override
-  String get kitapsen_register_email => 'Email';
+  String get kitapsen_register_email => 'E-mail';
   @override
-  String get kitapsen_register_password_hint => 'At least 8 characters';
+  String get kitapsen_register_password_hint => 'Au moins 8 caractères';
   @override
-  String get kitapsen_register_submit => 'Create account';
+  String get kitapsen_register_submit => 'Créer un compte';
   @override
   String get kitapsen_register_have_account =>
-      'Already have an account? Sign in';
+      'Vous avez déjà un compte ? Connectez-vous';
   @override
   String get kitapsen_register_username_invalid =>
-      'Use 2–20 lowercase letters or digits.';
+      'Utilisez 2 à 20 lettres minuscules ou chiffres.';
   @override
   String get kitapsen_register_name_invalid =>
-      'The name must be 2–30 characters.';
+      'Le nom doit comporter entre 2 et 30 caractères.';
   @override
-  String get kitapsen_register_email_invalid => 'Enter a valid email address.';
+  String get kitapsen_register_email_invalid =>
+      'Saisissez une adresse e-mail valide.';
   @override
   String get kitapsen_register_password_short =>
-      'The password must be at least 8 characters.';
+      'Le mot de passe doit comporter au moins 8 caractères.';
   @override
   String get kitapsen_register_failed =>
-      'The account could not be created. Try again.';
+      'Impossible de créer le compte. Réessayez.';
   @override
-  String get kitapsen_hub_title => 'My account';
+  String get kitapsen_hub_title => 'Mon compte';
   @override
-  String get kitapsen_hub_reading => 'Reading';
+  String get kitapsen_hub_reading => 'Lecture';
   @override
-  String get kitapsen_hub_social => 'Social';
+  String get kitapsen_hub_social => 'Communauté';
   @override
-  String get kitapsen_hub_discover => 'Discover';
+  String get kitapsen_hub_discover => 'Découvrir';
   @override
-  String get kitapsen_hub_account => 'Account';
+  String get kitapsen_hub_account => 'Compte';
   @override
-  String get kitapsen_hub_library => 'My library';
+  String get kitapsen_hub_library => 'Ma bibliothèque';
   @override
-  String get kitapsen_hub_public_profile => 'My public reader profile';
+  String get kitapsen_hub_public_profile => 'Mon profil public de lecteur';
   @override
-  String get kitapsen_hub_sign_in_settings => 'Sign out or delete the account';
+  String get kitapsen_hub_sign_in_settings =>
+      'Se déconnecter ou supprimer le compte';
   @override
-  String get kitapsen_common_save => 'Save';
+  String get kitapsen_common_save => 'Enregistrer';
   @override
-  String get kitapsen_common_saved => 'Saved';
+  String get kitapsen_common_saved => 'Enregistré';
   @override
-  String get kitapsen_common_edit => 'Edit';
+  String get kitapsen_common_edit => 'Modifier';
   @override
-  String get kitapsen_profile_title => 'My profile';
+  String get kitapsen_profile_title => 'Mon profil';
   @override
-  String get kitapsen_profile_name => 'Display name';
+  String get kitapsen_profile_name => 'Nom affiché';
   @override
-  String get kitapsen_profile_sharing => 'Share reading activity';
+  String get kitapsen_profile_sharing => 'Partager l\'activité de lecture';
   @override
   String get kitapsen_profile_sharing_hint =>
-      'Show the books you are reading and have finished on your public profile.';
+      'Affichez sur votre profil public les livres que vous lisez et ceux que vous avez terminés.';
   @override
-  String get kitapsen_settings_title => 'Account settings';
+  String get kitapsen_settings_title => 'Paramètres du compte';
   @override
-  String get kitapsen_settings_profile => 'Profile information';
+  String get kitapsen_settings_profile => 'Informations du profil';
   @override
-  String get kitapsen_settings_privacy => 'Privacy';
+  String get kitapsen_settings_privacy => 'Confidentialité';
   @override
-  String get kitapsen_settings_private => 'Private profile';
+  String get kitapsen_settings_private => 'Profil privé';
   @override
   String get kitapsen_settings_private_hint =>
-      'Only your followers can see your profile, reviews, reading activity and updates.';
+      'Seuls vos abonnés peuvent voir votre profil, vos avis, votre activité de lecture et vos mises à jour.';
   @override
-  String get kitapsen_settings_notifications => 'Email notifications';
+  String get kitapsen_settings_notifications => 'Notifications par e-mail';
   @override
   String get kitapsen_settings_follower_email =>
-      'Email me when someone follows me';
+      'M\'envoyer un e-mail quand quelqu\'un me suit';
   @override
   String get kitapsen_settings_comment_email =>
-      'Email me when someone comments on my story';
+      'M\'envoyer un e-mail quand quelqu\'un commente mon histoire';
   @override
-  String get kitapsen_settings_sale_email => 'Email me when my book sells';
+  String get kitapsen_settings_sale_email =>
+      'M\'envoyer un e-mail quand mon livre est vendu';
   @override
-  String get kitapsen_settings_author_emails => 'Author emails';
+  String get kitapsen_settings_author_emails => 'E-mails d\'auteur';
   @override
-  String get kitapsen_settings_password => 'Change password';
+  String get kitapsen_settings_password => 'Changer le mot de passe';
   @override
-  String get kitapsen_settings_current_password => 'Current password';
+  String get kitapsen_settings_current_password => 'Mot de passe actuel';
   @override
-  String get kitapsen_settings_new_password => 'New password';
+  String get kitapsen_settings_new_password => 'Nouveau mot de passe';
   @override
-  String get kitapsen_settings_repeat_password => 'Repeat the new password';
+  String get kitapsen_settings_repeat_password =>
+      'Confirmer le nouveau mot de passe';
   @override
-  String get kitapsen_settings_change_password => 'Change password';
+  String get kitapsen_settings_change_password => 'Changer le mot de passe';
   @override
   String get kitapsen_settings_passwords_differ =>
-      'The passwords do not match.';
+      'Les mots de passe ne correspondent pas.';
   @override
-  String get kitapsen_settings_password_changed => 'Password changed.';
+  String get kitapsen_settings_password_changed => 'Mot de passe modifié.';
   @override
   String get kitapsen_settings_password_failed =>
-      'The password could not be changed. Check the current password.';
+      'Impossible de modifier le mot de passe. Vérifiez le mot de passe actuel.';
   @override
-  String get kitapsen_settings_blocked => 'Blocked users';
+  String get kitapsen_settings_blocked => 'Utilisateurs bloqués';
   @override
-  String get kitapsen_settings_no_blocked => 'You have not blocked anyone.';
+  String get kitapsen_settings_no_blocked => 'Vous n\'avez bloqué personne.';
   @override
-  String get kitapsen_publishers_title => 'Publishers';
+  String get kitapsen_publishers_title => 'Éditeurs';
   @override
-  String get kitapsen_publishers_body => 'Browse books by publisher.';
+  String get kitapsen_publishers_body => 'Parcourez les livres par éditeur.';
   @override
-  String get kitapsen_publisher_role => 'Publisher';
+  String get kitapsen_publisher_role => 'Éditeur';
   @override
   String get kitapsen_publisher_no_books =>
-      'This publisher\'s books will be listed here soon.';
+      'Les livres de cet éditeur seront bientôt listés ici.';
   @override
-  String get kitapsen_authors_title => 'Authors';
+  String get kitapsen_authors_title => 'Auteurs';
   @override
   String get kitapsen_blog_title => 'Blog';
   @override
   String get kitapsen_blog_subtitle =>
-      'News, tips and stories from the Kitapsen community.';
+      'Actualités, conseils et histoires de la communauté Kitapsen.';
   @override
-  String get kitapsen_blog_empty => 'No blog posts yet.';
+  String get kitapsen_blog_empty => 'Aucun article pour l\'instant.';
   @override
   String get kitapsen_collections_title => 'Collections';
   @override
-  String get kitapsen_collections_new => 'New collection';
+  String get kitapsen_collections_new => 'Nouvelle collection';
   @override
-  String get kitapsen_collections_name => 'Collection name';
+  String get kitapsen_collections_name => 'Nom de la collection';
   @override
-  String get kitapsen_collections_description => 'Description (optional)';
+  String get kitapsen_collections_description => 'Description (facultative)';
   @override
   String get kitapsen_collections_empty =>
-      'No collections yet. Create collections to organise your books.';
+      'Aucune collection pour l\'instant. Créez des collections pour organiser vos livres.';
   @override
-  String get kitapsen_collections_delete_confirm => 'Delete this collection?';
+  String get kitapsen_collections_delete_confirm =>
+      'Supprimer cette collection ?';
   @override
   String get kitapsen_collections_items_empty =>
-      'No books yet. Add books from their page with "Add to collection".';
+      'Aucun livre pour l\'instant. Ajoutez des livres depuis leur page avec « Ajouter à la collection ».';
   @override
   String get kitapsen_collections_long_press =>
-      'Long-press a book to remove it.';
+      'Appuyez longuement sur un livre pour le retirer.';
   @override
-  String get kitapsen_collections_remove => 'Remove';
+  String get kitapsen_collections_remove => 'Retirer';
   @override
   String kitapsen_collections_remove_confirm({required Object title}) =>
-      'Remove "${title}" from this collection?';
+      'Retirer « ${title} » de cette collection ?';
   @override
-  String get kitapsen_collections_add => 'Add to collection';
+  String get kitapsen_collections_add => 'Ajouter à la collection';
   @override
-  String get kitapsen_collections_add_title => 'Add to a collection';
+  String get kitapsen_collections_add_title => 'Ajouter à une collection';
   @override
-  String get kitapsen_collections_added => 'Added to the collection';
+  String get kitapsen_collections_added => 'Ajouté à la collection';
   @override
-  String get kitapsen_notebooks_title => 'Notebooks';
+  String get kitapsen_notebooks_title => 'Carnets';
   @override
-  String get kitapsen_notebooks_new => 'New notebook';
+  String get kitapsen_notebooks_new => 'Nouveau carnet';
   @override
-  String get kitapsen_notebooks_name => 'Notebook name';
+  String get kitapsen_notebooks_name => 'Nom du carnet';
   @override
   String get kitapsen_notebooks_empty =>
-      'No notebooks yet. Create notebooks for your reading notes and ideas.';
+      'Aucun carnet pour l\'instant. Créez des carnets pour vos notes de lecture et vos idées.';
   @override
   String kitapsen_notebooks_count({required Object n}) => '${n} notes';
   @override
-  String get kitapsen_notebooks_delete_confirm => 'Delete this notebook?';
+  String get kitapsen_notebooks_delete_confirm => 'Supprimer ce carnet ?';
   @override
-  String get kitapsen_notebooks_entries_empty => 'No notes yet.';
+  String get kitapsen_notebooks_entries_empty => 'Aucune note pour l\'instant.';
   @override
-  String get kitapsen_notebooks_entry_hint => 'Add a note...';
+  String get kitapsen_notebooks_entry_hint => 'Ajouter une note...';
   @override
-  String get kitapsen_notebooks_entry_delete_confirm => 'Delete this note?';
+  String get kitapsen_notebooks_entry_delete_confirm =>
+      'Supprimer cette note ?';
   @override
-  String get kitapsen_notebooks_add => 'Add note';
+  String get kitapsen_notebooks_add => 'Ajouter une note';
   @override
-  String get kitapsen_goals_title => 'Reading goals';
+  String get kitapsen_goals_title => 'Objectifs de lecture';
   @override
-  String get kitapsen_goals_new => 'New goal';
+  String get kitapsen_goals_new => 'Nouvel objectif';
   @override
-  String get kitapsen_goals_create => 'Create';
+  String get kitapsen_goals_create => 'Créer';
   @override
-  String get kitapsen_goals_created => 'Goal created';
+  String get kitapsen_goals_created => 'Objectif créé';
   @override
-  String get kitapsen_goals_type => 'Goal type';
+  String get kitapsen_goals_type => 'Type d\'objectif';
   @override
-  String get kitapsen_goals_type_books => 'Books';
+  String get kitapsen_goals_type_books => 'Livres';
   @override
   String get kitapsen_goals_type_pages => 'Pages';
   @override
-  String get kitapsen_goals_type_days => 'Reading days';
+  String get kitapsen_goals_type_days => 'Jours de lecture';
   @override
-  String get kitapsen_goals_target => 'Target';
+  String get kitapsen_goals_target => 'Objectif';
   @override
-  String get kitapsen_goals_this_month => 'This month';
+  String get kitapsen_goals_this_month => 'Ce mois-ci';
   @override
-  String get kitapsen_goals_this_year => 'This year';
+  String get kitapsen_goals_this_year => 'Cette année';
   @override
   String get kitapsen_goals_empty =>
-      'No reading goals. Set your first goal to keep your motivation up.';
+      'Aucun objectif de lecture. Fixez votre premier objectif pour rester motivé.';
   @override
-  String get kitapsen_goals_delete_confirm => 'Delete this goal?';
+  String get kitapsen_goals_delete_confirm => 'Supprimer cet objectif ?';
   @override
-  String get kitapsen_goals_completed => 'Completed';
+  String get kitapsen_goals_completed => 'Atteint';
   @override
-  String kitapsen_goals_until({required Object date}) => 'Until ${date}';
+  String kitapsen_goals_until({required Object date}) => 'Jusqu\'au ${date}';
   @override
-  String kitapsen_goals_unit_books({required Object n}) => '${n} books';
+  String kitapsen_goals_unit_books({required Object n}) => '${n} livres';
   @override
   String kitapsen_goals_unit_pages({required Object n}) => '${n} pages';
   @override
-  String kitapsen_goals_unit_hours({required Object n}) => '${n} hours';
+  String kitapsen_goals_unit_hours({required Object n}) => '${n} heures';
   @override
-  String kitapsen_goals_unit_days({required Object n}) => '${n} reading days';
+  String kitapsen_goals_unit_days({required Object n}) =>
+      '${n} jours de lecture';
   @override
-  String get kitapsen_goals_streak => 'Day streak';
+  String get kitapsen_goals_streak => 'Jours consécutifs';
   @override
-  String get kitapsen_goals_longest_streak => 'Longest streak';
+  String get kitapsen_goals_longest_streak => 'Plus longue série';
   @override
-  String get kitapsen_goals_books_read => 'Books read';
+  String get kitapsen_goals_books_read => 'Livres lus';
   @override
-  String get kitapsen_goals_books_finished => 'Finished';
+  String get kitapsen_goals_books_finished => 'Terminés';
   @override
-  String get kitapsen_feed_title => 'Social feed';
+  String get kitapsen_feed_title => 'Fil d\'actualité';
   @override
-  String get kitapsen_feed_followed => 'Following';
+  String get kitapsen_feed_followed => 'Abonnements';
   @override
-  String get kitapsen_feed_mine => 'My activity';
+  String get kitapsen_feed_mine => 'Mon activité';
   @override
   String get kitapsen_feed_empty_followed =>
-      'No activity yet. Follow readers to keep up with what they are reading.';
+      'Aucune activité pour l\'instant. Suivez des lecteurs pour voir ce qu\'ils lisent.';
   @override
   String get kitapsen_feed_empty_mine =>
-      'Your reading activity will appear here once you start reading.';
+      'Votre activité de lecture apparaîtra ici dès que vous commencerez à lire.';
   @override
   String kitapsen_feed_started({required Object target}) =>
-      'started reading ${target}';
+      'a commencé à lire ${target}';
   @override
   String kitapsen_feed_finished({required Object target}) =>
-      'finished ${target}';
+      'a terminé ${target}';
   @override
   String kitapsen_feed_reviewed({required Object target}) =>
-      'reviewed ${target}';
+      'a donné son avis sur ${target}';
   @override
   String kitapsen_feed_followed_user({required Object target}) =>
-      'started following ${target}';
+      'a commencé à suivre ${target}';
   @override
   String kitapsen_feed_followed_author({required Object target}) =>
-      'followed the author ${target}';
+      'a commencé à suivre l\'auteur ${target}';
   @override
-  String kitapsen_feed_shared({required Object target}) => 'shared ${target}';
+  String kitapsen_feed_shared({required Object target}) =>
+      'a partagé ${target}';
   @override
-  String kitapsen_feed_percent({required Object n}) => '${n}% read';
+  String kitapsen_feed_percent({required Object n}) => 'Lu à ${n} %';
   @override
-  String get kitapsen_feed_finished_badge => 'Finished';
+  String get kitapsen_feed_finished_badge => 'Terminé';
   @override
-  String get kitapsen_user_follow => 'Follow';
+  String get kitapsen_user_follow => 'Suivre';
   @override
-  String get kitapsen_user_block => 'Block';
+  String get kitapsen_user_block => 'Bloquer';
   @override
-  String get kitapsen_user_unblock => 'Unblock';
+  String get kitapsen_user_unblock => 'Débloquer';
   @override
   String kitapsen_user_block_confirm({required Object username}) =>
-      'Block @${username}? They will no longer see your profile and activity, and any follow between you is removed.';
+      'Bloquer @${username} ? Cette personne ne verra plus votre profil ni votre activité, et tout abonnement entre vous sera supprimé.';
   @override
   String kitapsen_user_member_since({required Object date}) =>
-      'Member since ${date}';
+      'Membre depuis le ${date}';
   @override
-  String kitapsen_user_followers({required Object n}) => '${n} followers';
+  String kitapsen_user_followers({required Object n}) => '${n} abonnés';
   @override
-  String kitapsen_user_following({required Object n}) => '${n} following';
+  String kitapsen_user_following({required Object n}) => '${n} abonnements';
   @override
   String kitapsen_user_finished_count({required Object n}) =>
-      '${n} books finished';
+      '${n} livres terminés';
   @override
-  String get kitapsen_user_tab_reading => 'Reading';
+  String get kitapsen_user_tab_reading => 'Lecture';
   @override
-  String get kitapsen_user_tab_reviews => 'Reviews';
+  String get kitapsen_user_tab_reviews => 'Avis';
   @override
-  String get kitapsen_user_tab_activity => 'Activity';
+  String get kitapsen_user_tab_activity => 'Activité';
   @override
-  String get kitapsen_user_currently_reading => 'Currently reading';
+  String get kitapsen_user_currently_reading => 'En cours de lecture';
   @override
-  String get kitapsen_user_finished => 'Finished';
+  String get kitapsen_user_finished => 'Terminés';
   @override
   String get kitapsen_user_no_reading =>
-      'This reader does not share reading activity.';
+      'Ce lecteur ne partage pas son activité de lecture.';
   @override
-  String get kitapsen_user_no_reviews => 'No public reviews yet.';
+  String get kitapsen_user_no_reviews => 'Aucun avis public pour l\'instant.';
   @override
-  String get kitapsen_user_no_activity => 'No public activity yet.';
+  String get kitapsen_user_no_activity =>
+      'Aucune activité publique pour l\'instant.';
   @override
   String get kitapsen_user_private =>
-      'This profile is private. Follow this reader to see their reviews, reading activity and profile.';
+      'Ce profil est privé. Suivez ce lecteur pour voir ses avis, son activité de lecture et son profil.';
   @override
   String get kitapsen_user_blocked_you =>
-      'This reader has blocked you. Their profile and activity are hidden from you.';
+      'Ce lecteur vous a bloqué. Son profil et son activité vous sont masqués.';
   @override
-  String get kitapsen_user_followers_title => 'Followers';
+  String get kitapsen_user_followers_title => 'Abonnés';
   @override
-  String get kitapsen_user_following_title => 'Following';
+  String get kitapsen_user_following_title => 'Abonnements';
   @override
-  String get kitapsen_user_no_connections => 'Nobody here yet.';
+  String get kitapsen_user_no_connections => 'Personne pour l\'instant.';
   @override
-  String get kitapsen_clubs_title => 'Book clubs';
+  String get kitapsen_clubs_title => 'Clubs de lecture';
   @override
-  String get kitapsen_clubs_create => 'Create a club';
+  String get kitapsen_clubs_create => 'Créer un club';
   @override
-  String get kitapsen_clubs_name => 'Club name';
+  String get kitapsen_clubs_name => 'Nom du club';
   @override
   String get kitapsen_clubs_empty =>
-      'No book clubs yet. Create or join one to read together.';
+      'Aucun club de lecture pour l\'instant. Créez-en un ou rejoignez-en un pour lire ensemble.';
   @override
-  String get kitapsen_clubs_join => 'Join';
+  String get kitapsen_clubs_join => 'Rejoindre';
   @override
-  String get kitapsen_clubs_leave => 'Leave';
+  String get kitapsen_clubs_leave => 'Quitter';
   @override
-  String get kitapsen_clubs_owner => 'Owner';
+  String get kitapsen_clubs_owner => 'Propriétaire';
   @override
-  String get kitapsen_clubs_members => 'Members';
+  String get kitapsen_clubs_members => 'Membres';
   @override
-  String kitapsen_clubs_members_count({required Object n}) => '${n} members';
+  String kitapsen_clubs_members_count({required Object n}) => '${n} membres';
   @override
   String get kitapsen_clubs_chat => 'Discussion';
   @override
   String get kitapsen_clubs_join_to_chat =>
-      'Join the club to read and write messages.';
+      'Rejoignez le club pour lire et écrire des messages.';
   @override
-  String get kitapsen_clubs_no_messages => 'No messages yet.';
+  String get kitapsen_clubs_no_messages => 'Aucun message pour l\'instant.';
   @override
-  String get kitapsen_clubs_message_hint => 'Write a message...';
+  String get kitapsen_clubs_message_hint => 'Écrire un message...';
   @override
-  String get kitapsen_clubs_send => 'Send';
+  String get kitapsen_clubs_send => 'Envoyer';
   @override
   String get kitapsen_register_taken =>
-      'This username or email address already has an account.';
+      'Un compte existe déjà avec ce nom d\'utilisateur ou cette adresse e-mail.';
   @override
-  String get kitapsen_report => 'Report';
+  String get kitapsen_report => 'Signaler';
   @override
-  String get kitapsen_reported => 'Reported';
+  String get kitapsen_reported => 'Signalé';
   @override
-  String get kitapsen_report_title => 'Report this content';
+  String get kitapsen_report_title => 'Signaler ce contenu';
   @override
-  String get kitapsen_report_reason => 'Reason (optional)';
+  String get kitapsen_report_reason => 'Motif (facultatif)';
   @override
-  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  String get kitapsen_report_reason_hint =>
+      'Pourquoi ce contenu est-il inapproprié ?';
   @override
-  String get kitapsen_report_submit => 'Submit Report';
+  String get kitapsen_report_submit => 'Envoyer le signalement';
   @override
   String get kitapsen_report_thanks =>
-      'Reported. Thank you for helping keep the community safe.';
+      'Signalé. Merci de nous aider à préserver la sécurité de la communauté.';
   @override
   String get kitapsen_delete_statistics_book_desc =>
       'Le temps de lecture et les caractères lus de ce livre sont retirés des statistiques sur tous les appareils';
@@ -75202,7 +75238,7 @@ class _StringsId extends _StringsEn {
   @override
   String get batch_tag_title => 'Kelola Tag';
   @override
-  String get book_continue_reading => 'Continue Reading';
+  String get book_continue_reading => 'Lanjutkan membaca';
   @override
   String get book_convert_blocked_already =>
       'Buku ini sudah dalam format tersebut.';
@@ -75970,7 +76006,7 @@ class _StringsId extends _StringsEn {
   @override
   String get dialog_edit => 'EDIT';
   @override
-  String get dialog_edit_info => 'Edit Info';
+  String get dialog_edit_info => 'Edit info';
   @override
   String get dialog_exit => 'KELUAR';
   @override
@@ -77016,7 +77052,7 @@ class _StringsId extends _StringsEn {
   @override
   String get font_target_game_lookup => 'Font jendela pencarian game';
   @override
-  String get font_target_video_subtitle => 'Video Subtitle Font';
+  String get font_target_video_subtitle => 'Font Subtitle Video';
   @override
   String get gal_card_lookup_independent_size =>
       'Ukuran terpisah untuk kartu dalam game';
@@ -78168,7 +78204,7 @@ class _StringsId extends _StringsEn {
   @override
   String get handlebar_sentence => 'Kalimat';
   @override
-  String get handlebar_sentence_audio => 'Sentence Audio';
+  String get handlebar_sentence_audio => 'Audio kalimat';
   @override
   String get handlebar_video_clip => 'Video Clip (GIF)';
   @override
@@ -80388,11 +80424,11 @@ class _StringsId extends _StringsEn {
   @override
   String get reader_view_mode_label => 'Halaman / Gulir';
   @override
-  String get reader_vn => 'Visual Novel';
+  String get reader_vn => 'Novel visual';
   @override
   String get reader_writing_direction => 'Arah Penulisan';
   @override
-  String get reading_activity => 'Aktivitas belajar';
+  String get reading_activity => 'Aktivitas membaca';
   @override
   String get reading_progress => 'Progres Membaca';
   @override
@@ -80794,9 +80830,9 @@ class _StringsId extends _StringsEn {
   @override
   String get shortcut_action_reader_open_gallery => 'Buka galeri ilustrasi';
   @override
-  String get shortcut_action_reader_open_menu => 'Open Settings Menu';
+  String get shortcut_action_reader_open_menu => 'Buka menu pengaturan';
   @override
-  String get shortcut_action_reader_open_navigation => 'Open Navigation';
+  String get shortcut_action_reader_open_navigation => 'Buka navigasi';
   @override
   String get shortcut_action_reader_open_statistics => 'Buka statistik membaca';
   @override
@@ -80817,10 +80853,10 @@ class _StringsId extends _StringsEn {
       'Selaraskan subtitle sebelumnya ke sekarang';
   @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
-      'Cycle Secondary Subtitle Obscure';
+      'Ganti mode penyamaran subtitle sekunder';
   @override
   String get shortcut_action_video_cycle_subtitle_obscure =>
-      'Cycle Subtitle Obscure Mode';
+      'Ganti mode penyamaran subtitle';
   @override
   String get shortcut_action_video_dismiss_dict => 'Tutup kamus';
   @override
@@ -80889,7 +80925,7 @@ class _StringsId extends _StringsEn {
   String get shortcut_action_video_toggle_play_pause => 'Putar / Jeda';
   @override
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
-      'Toggle Hide Secondary Subtitle';
+      'Tampilkan/sembunyikan subtitle sekunder';
   @override
   String get shortcut_action_video_toggle_shader_compare =>
       'Alihkan Bandingkan Shader';
@@ -80898,7 +80934,7 @@ class _StringsId extends _StringsEn {
       'Alihkan Buram Subtitle';
   @override
   String get shortcut_action_video_toggle_subtitle_hide =>
-      'Toggle Hide Subtitles';
+      'Tampilkan/sembunyikan subtitle';
   @override
   String get shortcut_action_video_toggle_subtitle_list =>
       'Alihkan Daftar Subtitle';
@@ -81178,7 +81214,7 @@ class _StringsId extends _StringsEn {
   @override
   String get stat_detail_ungrouped => 'Tidak dikelompokkan';
   @override
-  String get stat_fastest_day => 'Fastest Day';
+  String get stat_fastest_day => 'Hari paling cepat';
   @override
   String get stat_favorited => 'Difavoritkan';
   @override
@@ -81195,9 +81231,9 @@ class _StringsId extends _StringsEn {
   @override
   String stat_format_pages({required Object n}) => '${n} halaman';
   @override
-  String get stat_goal => 'Daily Goal';
+  String get stat_goal => 'Target harian';
   @override
-  String get stat_goal_daily => 'Daily Goal';
+  String get stat_goal_daily => 'Target harian';
   @override
   String get stat_goal_presets => 'Preset';
   @override
@@ -81209,11 +81245,11 @@ class _StringsId extends _StringsEn {
   String stat_goal_recent_average({required Object n}) =>
       '7 hari terakhir: ${n} karakter/hari rata-rata';
   @override
-  String get stat_goal_set => 'Set Goal';
+  String get stat_goal_set => 'Atur target';
   @override
   String get stat_goal_unit_chars => 'karakter';
   @override
-  String get stat_goal_weekly => 'Weekly Goal';
+  String get stat_goal_weekly => 'Target mingguan';
   @override
   String get stat_hourly_band_epub => 'Buku teks';
   @override
@@ -81240,7 +81276,7 @@ class _StringsId extends _StringsEn {
   @override
   String get stat_no_data => 'Belum ada data membaca';
   @override
-  String get stat_range_and_trend => 'Range & Trend';
+  String get stat_range_and_trend => 'Rentang & tren';
   @override
   String get stat_recent_active => 'Hari Aktif (7h)';
   @override
@@ -81259,7 +81295,7 @@ class _StringsId extends _StringsEn {
   @override
   String get stat_sessions_show_all => 'Semua sesi';
   @override
-  String get stat_slowest_day => 'Slowest Day';
+  String get stat_slowest_day => 'Hari paling lambat';
   @override
   String get stat_sort_by_chars => 'Per Karakter';
   @override
@@ -81275,7 +81311,7 @@ class _StringsId extends _StringsEn {
   @override
   String stat_speed_cph({required Object n}) => '${n} karakter/jam';
   @override
-  String get stat_speed_summary => 'Speed Summary';
+  String get stat_speed_summary => 'Ringkasan kecepatan';
   @override
   String get stat_streak => 'Beruntun';
   @override
@@ -81293,11 +81329,11 @@ class _StringsId extends _StringsEn {
   @override
   String get stat_trend_weekly => 'Mingguan';
   @override
-  String get stat_typical_day => 'Typical Day';
+  String get stat_typical_day => 'Hari tipikal';
   @override
   String get stat_vs_prev => 'vs 14h sebelumnya';
   @override
-  String get stat_weighted_avg_speed => 'Weighted Avg';
+  String get stat_weighted_avg_speed => 'Rata-rata tertimbang';
   @override
   String get stop => 'Berhenti';
   @override
@@ -88784,7 +88820,7 @@ class _StringsId extends _StringsEn {
   @override
   String get video_scrape_ai_declined => 'AI not adopted';
   @override
-  String get video_scrape_ai_failed => 'AI request failed';
+  String get video_scrape_ai_failed => 'Permintaan AI gagal';
   @override
   String get video_scrape_ai_searched =>
       'Searched again with titles suggested by AI';
@@ -88844,7 +88880,7 @@ class _StringsId extends _StringsEn {
   @override
   String get shelf_filter_read_status_finished => 'Selesai';
   @override
-  String get video_filter_media_type => 'Type';
+  String get video_filter_media_type => 'Jenis';
   @override
   String get video_filter_media_type_video => 'Video';
   @override
@@ -88856,7 +88892,7 @@ class _StringsId extends _StringsEn {
   @override
   String get video_filter_extras_only => 'Extras only';
   @override
-  String get video_filter_source => 'Source';
+  String get video_filter_source => 'Sumber';
   @override
   String get video_filter_series_standalone_empty_hint =>
       'No standalone videos. Videos in collections are on the Series tab, or set the Series filter to All.';
@@ -88899,7 +88935,7 @@ class _StringsId extends _StringsEn {
   @override
   String get manga_ocr_ai_mode_label => 'AI recognition';
   @override
-  String get manga_ocr_ai_mode_off => 'Off';
+  String get manga_ocr_ai_mode_off => 'Nonaktif';
   @override
   String get manga_ocr_ai_mode_low_confidence => 'Only uncertain text';
   @override
@@ -88952,7 +88988,7 @@ class _StringsId extends _StringsEn {
   String get ocr_system_model_missing =>
       'Google Play services hasn\'t downloaded the text recognition model yet. Download it now (a few MB) to use screen OCR.';
   @override
-  String get ocr_system_model_download => 'Download';
+  String get ocr_system_model_download => 'Unduh';
   @override
   String get ocr_system_model_downloading =>
       'Downloading through Google Play services… You can close this dialog; the download continues in the background.';
@@ -88976,669 +89012,671 @@ class _StringsId extends _StringsEn {
   @override
   String get kitapsen_section_title => 'Kitapsen';
   @override
-  String get kitapsen_account_title => 'Kitapsen account';
+  String get kitapsen_account_title => 'Akun Kitapsen';
   @override
   String get kitapsen_account_hint =>
-      'Sign in to read the books in your Kitapsen library. They appear on your bookshelf, and your reading position syncs with your account.';
+      'Masuk untuk membaca buku di perpustakaan Kitapsen Anda. Buku akan muncul di rak buku Anda, dan posisi baca Anda disinkronkan dengan akun Anda.';
   @override
-  String get kitapsen_account_server_url => 'Server address';
+  String get kitapsen_account_server_url => 'Alamat server';
   @override
-  String get kitapsen_account_username => 'Email or username';
+  String get kitapsen_account_username => 'Email atau nama pengguna';
   @override
-  String get kitapsen_account_password => 'Password';
+  String get kitapsen_account_password => 'Kata sandi';
   @override
-  String get kitapsen_account_sign_in => 'Sign in';
+  String get kitapsen_account_sign_in => 'Masuk';
   @override
-  String get kitapsen_account_sign_out => 'Sign out';
+  String get kitapsen_account_sign_out => 'Keluar';
   @override
-  String get kitapsen_account_sign_in_rejected =>
-      'Email or password is incorrect';
+  String get kitapsen_account_sign_in_rejected => 'Email atau kata sandi salah';
   @override
   String get kitapsen_account_sign_in_failed =>
-      'Could not reach Kitapsen. Check the address and your connection.';
+      'Tidak dapat terhubung ke Kitapsen. Periksa alamat dan koneksi Anda.';
   @override
-  String get kitapsen_account_summary => 'Sign in to read your library';
+  String get kitapsen_account_summary =>
+      'Masuk untuk membaca buku di perpustakaan Anda';
   @override
   String get kitapsen_shelf_signed_out_body =>
-      'Sign in with your Kitapsen account to see your library.';
+      'Masuk dengan akun Kitapsen Anda untuk melihat perpustakaan Anda.';
   @override
-  String get kitapsen_shelf_sign_in => 'Sign in to Kitapsen';
+  String get kitapsen_shelf_sign_in => 'Masuk ke Kitapsen';
   @override
-  String get kitapsen_onboarding_title => 'Your Kitapsen library';
+  String get kitapsen_onboarding_title => 'Perpustakaan Kitapsen Anda';
   @override
   String get kitapsen_onboarding_body =>
-      'Sign in to see the books in your Kitapsen account on this device. You can skip this and sign in later from Settings.';
+      'Masuk untuk melihat buku di akun Kitapsen Anda di perangkat ini. Anda bisa melewati langkah ini dan masuk nanti dari Pengaturan.';
   @override
   String app_store_update_body({required Object version}) =>
-      'Kitapsen ${version} is available on the App Store.';
+      'Kitapsen ${version} tersedia di App Store.';
   @override
-  String get app_store_update_open => 'Update';
+  String get app_store_update_open => 'Perbarui';
   @override
-  String get app_store_update_later => 'Not now';
+  String get app_store_update_later => 'Nanti saja';
   @override
-  String get kitapsen_about_privacy_policy => 'Privacy policy';
+  String get kitapsen_about_privacy_policy => 'Kebijakan privasi';
   @override
-  String get kitapsen_about_support => 'Contact support';
+  String get kitapsen_about_support => 'Hubungi dukungan';
   @override
-  String get kitapsen_about_source_code => 'Source code';
+  String get kitapsen_about_source_code => 'Kode sumber';
   @override
   String get kitapsen_about_based_on_fushi =>
-      'Kitapsen is based on Fushi (GPLv3) — source: https://github.com/FizyonOps/kitapsen-mobile';
+      'Kitapsen berbasis Fushi (GPLv3) — kode sumber: https://github.com/FizyonOps/kitapsen-mobile';
   @override
-  String get kitapsen_about_licenses => 'Open-source licenses';
+  String get kitapsen_about_licenses => 'Lisensi sumber terbuka';
   @override
-  String get kitapsen_about_section => 'About Kitapsen';
+  String get kitapsen_about_section => 'Tentang Kitapsen';
   @override
-  String get kitapsen_import_hint => 'Pick an EPUB or PDF file to import.';
+  String get kitapsen_import_hint => 'Pilih file EPUB atau PDF untuk diimpor.';
   @override
   String get kitapsen_sign_out_removes_books =>
-      'Signing out removes your downloaded Kitapsen books from this device.';
+      'Keluar akan menghapus buku Kitapsen yang telah Anda unduh dari perangkat ini.';
   @override
-  String get kitapsen_account_or => 'or';
+  String get kitapsen_account_or => 'atau';
   @override
-  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  String get kitapsen_account_continue_with_google => 'Lanjutkan dengan Google';
   @override
-  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  String get kitapsen_account_continue_with_apple => 'Lanjutkan dengan Apple';
   @override
   String get kitapsen_account_social_sign_in_failed =>
-      'Sign-in failed. Please try again.';
+      'Gagal masuk. Silakan coba lagi.';
   @override
-  String get kitapsen_account_deleted =>
-      'This Kitapsen account has been deleted.';
+  String get kitapsen_account_deleted => 'Akun Kitapsen ini telah dihapus.';
   @override
-  String get kitapsen_account_delete => 'Delete account';
+  String get kitapsen_account_delete => 'Hapus akun';
   @override
   String get kitapsen_account_delete_confirm =>
-      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+      'Akun Kitapsen Anda akan dihapus dan perangkat ini akan dikeluarkan dari akun. Anda tidak akan bisa lagi membaca buku di perpustakaan Anda. Ini tidak bisa dibatalkan.';
   @override
   String get kitapsen_account_delete_failed =>
-      'The account could not be deleted. Please try again.';
+      'Akun tidak dapat dihapus. Silakan coba lagi.';
   @override
-  String get kitapsen_nav_store => 'Store';
+  String get kitapsen_nav_store => 'Toko';
   @override
-  String get kitapsen_store_search_hint => 'Search books and authors';
+  String get kitapsen_store_search_hint => 'Cari buku dan penulis';
   @override
-  String get kitapsen_store_new_arrivals => 'New arrivals';
+  String get kitapsen_store_new_arrivals => 'Terbitan baru';
   @override
-  String get kitapsen_store_most_read => 'Most read';
+  String get kitapsen_store_most_read => 'Paling banyak dibaca';
   @override
-  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  String get kitapsen_store_staff_picks => 'Pilihan editor';
   @override
-  String get kitapsen_store_free_books => 'Free books';
+  String get kitapsen_store_free_books => 'Buku gratis';
   @override
-  String get kitapsen_store_stories => 'Serialized stories';
+  String get kitapsen_store_stories => 'Cerita bersambung';
   @override
-  String get kitapsen_store_categories => 'Categories';
+  String get kitapsen_store_categories => 'Kategori';
   @override
-  String get kitapsen_store_see_all => 'See all';
+  String get kitapsen_store_see_all => 'Lihat semua';
   @override
-  String get kitapsen_store_no_results => 'No books found';
+  String get kitapsen_store_no_results => 'Buku tidak ditemukan';
   @override
   String get kitapsen_store_load_failed =>
-      'Couldn\'t load. Check your connection.';
+      'Gagal memuat. Periksa koneksi Anda.';
   @override
-  String get kitapsen_store_free_only => 'Free only';
+  String get kitapsen_store_free_only => 'Hanya yang gratis';
   @override
-  String get kitapsen_sort_relevance => 'Most relevant';
+  String get kitapsen_sort_relevance => 'Paling relevan';
   @override
-  String get kitapsen_sort_newest => 'Newest';
+  String get kitapsen_sort_newest => 'Terbaru';
   @override
-  String get kitapsen_sort_most_read => 'Most read';
+  String get kitapsen_sort_most_read => 'Paling banyak dibaca';
   @override
-  String get kitapsen_sort_rating => 'Top rated';
+  String get kitapsen_sort_rating => 'Rating tertinggi';
   @override
-  String get kitapsen_sort_title => 'Title A–Z';
+  String get kitapsen_sort_title => 'Judul A–Z';
   @override
-  String get kitapsen_book_read => 'Read';
+  String get kitapsen_book_read => 'Baca';
   @override
-  String get kitapsen_book_get_free => 'Get for free';
+  String get kitapsen_book_get_free => 'Dapatkan gratis';
   @override
-  String get kitapsen_book_claimed => 'Added to your library';
+  String get kitapsen_book_claimed => 'Ditambahkan ke perpustakaan Anda';
   @override
-  String get kitapsen_book_in_library => 'In your library';
+  String get kitapsen_book_in_library => 'Ada di perpustakaan Anda';
   @override
-  String get kitapsen_book_not_in_library => 'Not in your library';
+  String get kitapsen_book_not_in_library => 'Tidak ada di perpustakaan Anda';
   @override
   String get kitapsen_book_sign_in_prompt =>
-      'Sign in to add books to your library and keep a wishlist.';
+      'Masuk untuk menambahkan buku ke perpustakaan dan menyimpan daftar keinginan.';
   @override
-  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  String get kitapsen_book_wishlist_add => 'Tambahkan ke daftar keinginan';
   @override
-  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  String get kitapsen_book_wishlist_remove => 'Hapus dari daftar keinginan';
   @override
-  String get kitapsen_book_downloading => 'Downloading to your library…';
+  String get kitapsen_book_downloading => 'Mengunduh ke perpustakaan Anda…';
   @override
-  String get kitapsen_book_about => 'About this book';
+  String get kitapsen_book_about => 'Tentang buku ini';
   @override
-  String get kitapsen_book_pages => 'Pages';
+  String get kitapsen_book_pages => 'Halaman';
   @override
-  String get kitapsen_book_language => 'Language';
+  String get kitapsen_book_language => 'Bahasa';
   @override
-  String get kitapsen_book_publisher => 'Publisher';
+  String get kitapsen_book_publisher => 'Penerbit';
   @override
-  String get kitapsen_book_published => 'Published';
+  String get kitapsen_book_published => 'Tanggal terbit';
   @override
   String get kitapsen_book_action_failed =>
-      'Something went wrong. Please try again.';
+      'Terjadi kesalahan. Silakan coba lagi.';
   @override
-  String get kitapsen_book_reviews => 'Reviews';
+  String get kitapsen_book_reviews => 'Ulasan';
   @override
-  String get kitapsen_book_no_reviews => 'No reviews yet';
+  String get kitapsen_book_no_reviews => 'Belum ada ulasan';
   @override
-  String get kitapsen_book_write_review => 'Write a review';
+  String get kitapsen_book_write_review => 'Tulis ulasan';
   @override
-  String get kitapsen_review_title_hint => 'Title (optional)';
+  String get kitapsen_review_title_hint => 'Judul (opsional)';
   @override
-  String get kitapsen_review_content_hint => 'Your review (optional)';
+  String get kitapsen_review_content_hint => 'Ulasan Anda (opsional)';
   @override
-  String get kitapsen_review_submit => 'Send';
+  String get kitapsen_review_submit => 'Kirim';
   @override
-  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  String get kitapsen_review_sent => 'Terima kasih! Ulasan Anda telah dikirim.';
   @override
-  String get kitapsen_review_already => 'You have already reviewed this book.';
+  String get kitapsen_review_already => 'Anda sudah mengulas buku ini.';
   @override
   String get kitapsen_review_not_allowed =>
-      'Only readers who have this book in their library can review it.';
+      'Hanya pembaca yang memiliki buku ini di perpustakaannya yang dapat mengulasnya.';
   @override
-  String get kitapsen_review_more => 'Show more reviews';
+  String get kitapsen_review_more => 'Tampilkan ulasan lainnya';
   @override
-  String get kitapsen_review_verified => 'Verified reader';
+  String get kitapsen_review_verified => 'Pembaca terverifikasi';
   @override
-  String get kitapsen_author_follow => 'Follow';
+  String get kitapsen_author_follow => 'Ikuti';
   @override
-  String get kitapsen_author_following => 'Following';
+  String get kitapsen_author_following => 'Mengikuti';
   @override
-  String get kitapsen_author_followers => 'Followers';
+  String get kitapsen_author_followers => 'Pengikut';
   @override
-  String get kitapsen_author_books => 'Books';
+  String get kitapsen_author_books => 'Buku';
   @override
-  String get kitapsen_author_open => 'Author page';
+  String get kitapsen_author_open => 'Halaman penulis';
   @override
-  String get kitapsen_wishlist_title => 'Wishlist';
+  String get kitapsen_wishlist_title => 'Daftar keinginan';
   @override
-  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  String get kitapsen_wishlist_empty => 'Daftar keinginan Anda kosong';
   @override
-  String get kitapsen_notifications_title => 'Notifications';
+  String get kitapsen_notifications_title => 'Notifikasi';
   @override
-  String get kitapsen_notifications_empty => 'No notifications';
+  String get kitapsen_notifications_empty => 'Tidak ada notifikasi';
   @override
-  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  String get kitapsen_notifications_mark_all => 'Tandai semua sudah dibaca';
   @override
-  String get kitapsen_story_chapters => 'Chapters';
+  String get kitapsen_story_chapters => 'Bab';
   @override
-  String get kitapsen_story_no_chapters => 'No chapters yet';
+  String get kitapsen_story_no_chapters => 'Belum ada bab';
   @override
-  String get kitapsen_story_next => 'Next chapter';
+  String get kitapsen_story_next => 'Bab berikutnya';
   @override
-  String get kitapsen_story_previous => 'Previous chapter';
+  String get kitapsen_story_previous => 'Bab sebelumnya';
   @override
-  String get kitapsen_review_like => 'Like';
+  String get kitapsen_review_like => 'Suka';
   @override
-  String get kitapsen_comments_title => 'Comments';
+  String get kitapsen_comments_title => 'Komentar';
   @override
-  String get kitapsen_comments_empty => 'No comments yet';
+  String get kitapsen_comments_empty => 'Belum ada komentar';
   @override
-  String get kitapsen_comment_hint => 'Write a comment';
+  String get kitapsen_comment_hint => 'Tulis komentar';
   @override
-  String get kitapsen_story_vote => 'Vote';
+  String get kitapsen_story_vote => 'Beri suara';
   @override
-  String get kitapsen_story_voted => 'Voted';
+  String get kitapsen_story_voted => 'Sudah memberi suara';
   @override
-  String get kitapsen_story_follow => 'Follow story';
+  String get kitapsen_story_follow => 'Ikuti cerita';
   @override
-  String get kitapsen_following_title => 'Following';
+  String get kitapsen_following_title => 'Mengikuti';
   @override
-  String get kitapsen_following_authors => 'Authors';
+  String get kitapsen_following_authors => 'Penulis';
   @override
-  String get kitapsen_following_stories => 'Stories';
+  String get kitapsen_following_stories => 'Cerita';
   @override
-  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  String get kitapsen_following_empty => 'Anda belum mengikuti siapa pun';
   @override
-  String get kitapsen_reader_highlight => 'Highlight';
+  String get kitapsen_reader_highlight => 'Sorot';
   @override
-  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  String get kitapsen_annotations_title => 'Penanda dan catatan';
   @override
-  String get kitapsen_bookmark_add => 'Add bookmark';
+  String get kitapsen_bookmark_add => 'Tambah penanda';
   @override
-  String get kitapsen_bookmark_added => 'Bookmark added';
+  String get kitapsen_bookmark_added => 'Penanda ditambahkan';
   @override
-  String get kitapsen_note_add => 'Add note';
+  String get kitapsen_note_add => 'Tambah catatan';
   @override
-  String get kitapsen_note_hint => 'Your note';
+  String get kitapsen_note_hint => 'Catatan Anda';
   @override
-  String get kitapsen_note_saved => 'Note saved';
+  String get kitapsen_note_saved => 'Catatan disimpan';
   @override
-  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  String get kitapsen_annotations_empty => 'Belum ada penanda atau catatan';
   @override
-  String get kitapsen_store_badge_free => 'Free';
+  String get kitapsen_store_badge_free => 'Gratis';
   @override
-  String get kitapsen_store_badge_new => 'New';
+  String get kitapsen_store_badge_new => 'Baru';
   @override
-  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  String kitapsen_store_rating_count({required Object n}) => '${n} ulasan';
   @override
-  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  String get kitapsen_store_hero_title =>
+      'Buku bagus Anda berikutnya ada di sini.';
   @override
   String get kitapsen_store_hero_body =>
-      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+      'Temukan cerita baru dan penulis yang Anda sukai. Pilih buku Anda dan mulai membaca di ponsel, tablet, atau komputer.';
   @override
-  String get kitapsen_store_explore_books => 'Explore books';
+  String get kitapsen_store_explore_books => 'Jelajahi buku';
   @override
-  String get kitapsen_store_start_free => 'Start with free books';
+  String get kitapsen_store_start_free => 'Mulai dengan buku gratis';
   @override
-  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  String get kitapsen_store_start_free_body => 'Temukan buku pertama Anda.';
   @override
-  String get kitapsen_store_library_always => 'Your library is always with you';
+  String get kitapsen_store_library_always =>
+      'Perpustakaan Anda selalu bersama Anda';
   @override
   String get kitapsen_store_library_always_body =>
-      'Read on your phone, tablet and computer.';
+      'Baca di ponsel, tablet, dan komputer.';
   @override
-  String get kitapsen_store_meet_authors => 'Meet the authors';
+  String get kitapsen_store_meet_authors => 'Kenali para penulis';
   @override
-  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  String get kitapsen_store_meet_authors_body =>
+      'Ikuti penulis yang Anda sukai.';
   @override
-  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  String get kitapsen_store_reading_list =>
+      'Buku baru untuk daftar bacaan Anda';
   @override
-  String get kitapsen_store_all_categories => 'All categories';
+  String get kitapsen_store_all_categories => 'Semua kategori';
   @override
-  String get kitapsen_store_discover_title => 'Time to discover';
+  String get kitapsen_store_discover_title => 'Saatnya menjelajah';
   @override
   String get kitapsen_store_discover_body =>
-      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+      'Sebuah cerita, sudut pandang baru, penemuan tak terduga. Tambahkan buku berikutnya ke daftar bacaan Anda.';
   @override
-  String get kitapsen_store_discover_now => 'Discover now';
+  String get kitapsen_store_discover_now => 'Jelajahi sekarang';
   @override
   String kitapsen_store_results_for({required Object q}) =>
-      'Results for "${q}"';
+      'Hasil untuk "${q}"';
   @override
-  String get kitapsen_store_matching_authors => 'Matching authors';
+  String get kitapsen_store_matching_authors => 'Penulis yang cocok';
   @override
-  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  String kitapsen_store_author_books_count({required Object n}) => '${n} buku';
   @override
   String get kitapsen_store_author_cta =>
-      'Discover the author\'s books and pick your next read.';
+      'Temukan buku-buku penulis ini dan pilih bacaan Anda berikutnya.';
   @override
-  String get kitapsen_store_see_author_books => 'See their books';
+  String get kitapsen_store_see_author_books => 'Lihat buku-bukunya';
   @override
-  String get kitapsen_store_authors_books => 'The author\'s books';
+  String get kitapsen_store_authors_books => 'Buku-buku penulis';
   @override
-  String get kitapsen_book_read_now => 'Read now';
+  String get kitapsen_book_read_now => 'Baca sekarang';
   @override
-  String get kitapsen_book_get_free_web => 'Get it free';
+  String get kitapsen_book_get_free_web => 'Dapatkan gratis';
   @override
-  String get kitapsen_book_favorites => 'Favorites';
+  String get kitapsen_book_favorites => 'Favorit';
   @override
-  String get kitapsen_book_description => 'Description';
+  String get kitapsen_book_description => 'Deskripsi';
   @override
-  String get kitapsen_book_about_author => 'About the author';
+  String get kitapsen_book_about_author => 'Tentang penulis';
   @override
   String get kitapsen_book_isbn => 'ISBN';
   @override
   String get kitapsen_book_format => 'Format';
   @override
-  String get kitapsen_author_role => 'Author';
+  String get kitapsen_author_role => 'Penulis';
   @override
-  String get kitapsen_author_notify => 'Notify me of new books';
+  String get kitapsen_author_notify => 'Beri tahu saya tentang buku baru';
   @override
-  String get kitapsen_author_about => 'About';
+  String get kitapsen_author_about => 'Tentang';
   @override
-  String get kitapsen_review_more_bio => 'Read the full biography';
+  String get kitapsen_review_more_bio => 'Baca biografi lengkap';
   @override
-  String get kitapsen_author_like => 'Like';
+  String get kitapsen_author_like => 'Suka';
   @override
-  String get kitapsen_author_likes => 'Likes';
+  String get kitapsen_author_likes => 'Suka';
   @override
-  String get kitapsen_register_open => 'No account yet? Create one';
+  String get kitapsen_register_open => 'Belum punya akun? Buat akun';
   @override
-  String get kitapsen_register_name => 'Name (optional)';
+  String get kitapsen_register_name => 'Nama (opsional)';
   @override
-  String get kitapsen_register_username => 'Username';
+  String get kitapsen_register_username => 'Nama pengguna';
   @override
-  String get kitapsen_register_username_hint =>
-      '2–20 lowercase letters or digits';
+  String get kitapsen_register_username_hint => '2–20 huruf kecil atau angka';
   @override
   String get kitapsen_register_email => 'Email';
   @override
-  String get kitapsen_register_password_hint => 'At least 8 characters';
+  String get kitapsen_register_password_hint => 'Minimal 8 karakter';
   @override
-  String get kitapsen_register_submit => 'Create account';
+  String get kitapsen_register_submit => 'Buat akun';
   @override
-  String get kitapsen_register_have_account =>
-      'Already have an account? Sign in';
+  String get kitapsen_register_have_account => 'Sudah punya akun? Masuk';
   @override
   String get kitapsen_register_username_invalid =>
-      'Use 2–20 lowercase letters or digits.';
+      'Gunakan 2–20 huruf kecil atau angka.';
   @override
   String get kitapsen_register_name_invalid =>
-      'The name must be 2–30 characters.';
+      'Nama harus terdiri dari 2–30 karakter.';
   @override
-  String get kitapsen_register_email_invalid => 'Enter a valid email address.';
+  String get kitapsen_register_email_invalid =>
+      'Masukkan alamat email yang valid.';
   @override
   String get kitapsen_register_password_short =>
-      'The password must be at least 8 characters.';
+      'Kata sandi minimal 8 karakter.';
   @override
-  String get kitapsen_register_failed =>
-      'The account could not be created. Try again.';
+  String get kitapsen_register_failed => 'Akun tidak dapat dibuat. Coba lagi.';
   @override
-  String get kitapsen_hub_title => 'My account';
+  String get kitapsen_hub_title => 'Akun saya';
   @override
-  String get kitapsen_hub_reading => 'Reading';
+  String get kitapsen_hub_reading => 'Membaca';
   @override
-  String get kitapsen_hub_social => 'Social';
+  String get kitapsen_hub_social => 'Sosial';
   @override
-  String get kitapsen_hub_discover => 'Discover';
+  String get kitapsen_hub_discover => 'Jelajahi';
   @override
-  String get kitapsen_hub_account => 'Account';
+  String get kitapsen_hub_account => 'Akun';
   @override
-  String get kitapsen_hub_library => 'My library';
+  String get kitapsen_hub_library => 'Perpustakaan saya';
   @override
-  String get kitapsen_hub_public_profile => 'My public reader profile';
+  String get kitapsen_hub_public_profile => 'Profil pembaca publik saya';
   @override
-  String get kitapsen_hub_sign_in_settings => 'Sign out or delete the account';
+  String get kitapsen_hub_sign_in_settings => 'Keluar atau hapus akun';
   @override
-  String get kitapsen_common_save => 'Save';
+  String get kitapsen_common_save => 'Simpan';
   @override
-  String get kitapsen_common_saved => 'Saved';
+  String get kitapsen_common_saved => 'Tersimpan';
   @override
   String get kitapsen_common_edit => 'Edit';
   @override
-  String get kitapsen_profile_title => 'My profile';
+  String get kitapsen_profile_title => 'Profil saya';
   @override
-  String get kitapsen_profile_name => 'Display name';
+  String get kitapsen_profile_name => 'Nama tampilan';
   @override
-  String get kitapsen_profile_sharing => 'Share reading activity';
+  String get kitapsen_profile_sharing => 'Bagikan aktivitas membaca';
   @override
   String get kitapsen_profile_sharing_hint =>
-      'Show the books you are reading and have finished on your public profile.';
+      'Tampilkan buku yang sedang dan sudah selesai Anda baca di profil publik Anda.';
   @override
-  String get kitapsen_settings_title => 'Account settings';
+  String get kitapsen_settings_title => 'Pengaturan akun';
   @override
-  String get kitapsen_settings_profile => 'Profile information';
+  String get kitapsen_settings_profile => 'Informasi profil';
   @override
-  String get kitapsen_settings_privacy => 'Privacy';
+  String get kitapsen_settings_privacy => 'Privasi';
   @override
-  String get kitapsen_settings_private => 'Private profile';
+  String get kitapsen_settings_private => 'Profil privat';
   @override
   String get kitapsen_settings_private_hint =>
-      'Only your followers can see your profile, reviews, reading activity and updates.';
+      'Hanya pengikut Anda yang dapat melihat profil, ulasan, aktivitas membaca, dan pembaruan Anda.';
   @override
-  String get kitapsen_settings_notifications => 'Email notifications';
+  String get kitapsen_settings_notifications => 'Notifikasi email';
   @override
   String get kitapsen_settings_follower_email =>
-      'Email me when someone follows me';
+      'Kirim email saat seseorang mengikuti saya';
   @override
   String get kitapsen_settings_comment_email =>
-      'Email me when someone comments on my story';
+      'Kirim email saat seseorang mengomentari cerita saya';
   @override
-  String get kitapsen_settings_sale_email => 'Email me when my book sells';
+  String get kitapsen_settings_sale_email =>
+      'Kirim email saat buku saya terjual';
   @override
-  String get kitapsen_settings_author_emails => 'Author emails';
+  String get kitapsen_settings_author_emails => 'Email penulis';
   @override
-  String get kitapsen_settings_password => 'Change password';
+  String get kitapsen_settings_password => 'Ubah kata sandi';
   @override
-  String get kitapsen_settings_current_password => 'Current password';
+  String get kitapsen_settings_current_password => 'Kata sandi saat ini';
   @override
-  String get kitapsen_settings_new_password => 'New password';
+  String get kitapsen_settings_new_password => 'Kata sandi baru';
   @override
-  String get kitapsen_settings_repeat_password => 'Repeat the new password';
+  String get kitapsen_settings_repeat_password => 'Ulangi kata sandi baru';
   @override
-  String get kitapsen_settings_change_password => 'Change password';
+  String get kitapsen_settings_change_password => 'Ubah kata sandi';
   @override
-  String get kitapsen_settings_passwords_differ =>
-      'The passwords do not match.';
+  String get kitapsen_settings_passwords_differ => 'Kata sandi tidak cocok.';
   @override
-  String get kitapsen_settings_password_changed => 'Password changed.';
+  String get kitapsen_settings_password_changed => 'Kata sandi telah diubah.';
   @override
   String get kitapsen_settings_password_failed =>
-      'The password could not be changed. Check the current password.';
+      'Kata sandi tidak dapat diubah. Periksa kata sandi saat ini.';
   @override
-  String get kitapsen_settings_blocked => 'Blocked users';
+  String get kitapsen_settings_blocked => 'Pengguna yang diblokir';
   @override
-  String get kitapsen_settings_no_blocked => 'You have not blocked anyone.';
+  String get kitapsen_settings_no_blocked => 'Anda belum memblokir siapa pun.';
   @override
-  String get kitapsen_publishers_title => 'Publishers';
+  String get kitapsen_publishers_title => 'Penerbit';
   @override
-  String get kitapsen_publishers_body => 'Browse books by publisher.';
+  String get kitapsen_publishers_body => 'Jelajahi buku berdasarkan penerbit.';
   @override
-  String get kitapsen_publisher_role => 'Publisher';
+  String get kitapsen_publisher_role => 'Penerbit';
   @override
   String get kitapsen_publisher_no_books =>
-      'This publisher\'s books will be listed here soon.';
+      'Buku dari penerbit ini akan segera tercantum di sini.';
   @override
-  String get kitapsen_authors_title => 'Authors';
+  String get kitapsen_authors_title => 'Penulis';
   @override
   String get kitapsen_blog_title => 'Blog';
   @override
   String get kitapsen_blog_subtitle =>
-      'News, tips and stories from the Kitapsen community.';
+      'Berita, tips, dan cerita dari komunitas Kitapsen.';
   @override
-  String get kitapsen_blog_empty => 'No blog posts yet.';
+  String get kitapsen_blog_empty => 'Belum ada tulisan blog.';
   @override
-  String get kitapsen_collections_title => 'Collections';
+  String get kitapsen_collections_title => 'Koleksi';
   @override
-  String get kitapsen_collections_new => 'New collection';
+  String get kitapsen_collections_new => 'Koleksi baru';
   @override
-  String get kitapsen_collections_name => 'Collection name';
+  String get kitapsen_collections_name => 'Nama koleksi';
   @override
-  String get kitapsen_collections_description => 'Description (optional)';
+  String get kitapsen_collections_description => 'Deskripsi (opsional)';
   @override
   String get kitapsen_collections_empty =>
-      'No collections yet. Create collections to organise your books.';
+      'Belum ada koleksi. Buat koleksi untuk mengatur buku Anda.';
   @override
-  String get kitapsen_collections_delete_confirm => 'Delete this collection?';
+  String get kitapsen_collections_delete_confirm => 'Hapus koleksi ini?';
   @override
   String get kitapsen_collections_items_empty =>
-      'No books yet. Add books from their page with "Add to collection".';
+      'Belum ada buku. Tambahkan buku dari halamannya dengan "Tambahkan ke koleksi".';
   @override
   String get kitapsen_collections_long_press =>
-      'Long-press a book to remove it.';
+      'Tekan lama sebuah buku untuk mengeluarkannya.';
   @override
-  String get kitapsen_collections_remove => 'Remove';
+  String get kitapsen_collections_remove => 'Hapus dari koleksi';
   @override
   String kitapsen_collections_remove_confirm({required Object title}) =>
-      'Remove "${title}" from this collection?';
+      'Hapus "${title}" dari koleksi ini?';
   @override
-  String get kitapsen_collections_add => 'Add to collection';
+  String get kitapsen_collections_add => 'Tambahkan ke koleksi';
   @override
-  String get kitapsen_collections_add_title => 'Add to a collection';
+  String get kitapsen_collections_add_title => 'Tambahkan ke koleksi';
   @override
-  String get kitapsen_collections_added => 'Added to the collection';
+  String get kitapsen_collections_added => 'Ditambahkan ke koleksi';
   @override
-  String get kitapsen_notebooks_title => 'Notebooks';
+  String get kitapsen_notebooks_title => 'Buku catatan';
   @override
-  String get kitapsen_notebooks_new => 'New notebook';
+  String get kitapsen_notebooks_new => 'Buku catatan baru';
   @override
-  String get kitapsen_notebooks_name => 'Notebook name';
+  String get kitapsen_notebooks_name => 'Nama buku catatan';
   @override
   String get kitapsen_notebooks_empty =>
-      'No notebooks yet. Create notebooks for your reading notes and ideas.';
+      'Belum ada buku catatan. Buat buku catatan untuk catatan bacaan dan ide Anda.';
   @override
-  String kitapsen_notebooks_count({required Object n}) => '${n} notes';
+  String kitapsen_notebooks_count({required Object n}) => '${n} catatan';
   @override
-  String get kitapsen_notebooks_delete_confirm => 'Delete this notebook?';
+  String get kitapsen_notebooks_delete_confirm => 'Hapus buku catatan ini?';
   @override
-  String get kitapsen_notebooks_entries_empty => 'No notes yet.';
+  String get kitapsen_notebooks_entries_empty => 'Belum ada catatan.';
   @override
-  String get kitapsen_notebooks_entry_hint => 'Add a note...';
+  String get kitapsen_notebooks_entry_hint => 'Tambahkan catatan...';
   @override
-  String get kitapsen_notebooks_entry_delete_confirm => 'Delete this note?';
+  String get kitapsen_notebooks_entry_delete_confirm => 'Hapus catatan ini?';
   @override
-  String get kitapsen_notebooks_add => 'Add note';
+  String get kitapsen_notebooks_add => 'Tambah catatan';
   @override
-  String get kitapsen_goals_title => 'Reading goals';
+  String get kitapsen_goals_title => 'Target membaca';
   @override
-  String get kitapsen_goals_new => 'New goal';
+  String get kitapsen_goals_new => 'Target baru';
   @override
-  String get kitapsen_goals_create => 'Create';
+  String get kitapsen_goals_create => 'Buat';
   @override
-  String get kitapsen_goals_created => 'Goal created';
+  String get kitapsen_goals_created => 'Target dibuat';
   @override
-  String get kitapsen_goals_type => 'Goal type';
+  String get kitapsen_goals_type => 'Jenis target';
   @override
-  String get kitapsen_goals_type_books => 'Books';
+  String get kitapsen_goals_type_books => 'Buku';
   @override
-  String get kitapsen_goals_type_pages => 'Pages';
+  String get kitapsen_goals_type_pages => 'Halaman';
   @override
-  String get kitapsen_goals_type_days => 'Reading days';
+  String get kitapsen_goals_type_days => 'Hari membaca';
   @override
   String get kitapsen_goals_target => 'Target';
   @override
-  String get kitapsen_goals_this_month => 'This month';
+  String get kitapsen_goals_this_month => 'Bulan ini';
   @override
-  String get kitapsen_goals_this_year => 'This year';
+  String get kitapsen_goals_this_year => 'Tahun ini';
   @override
   String get kitapsen_goals_empty =>
-      'No reading goals. Set your first goal to keep your motivation up.';
+      'Belum ada target membaca. Tetapkan target pertama Anda agar tetap termotivasi.';
   @override
-  String get kitapsen_goals_delete_confirm => 'Delete this goal?';
+  String get kitapsen_goals_delete_confirm => 'Hapus target ini?';
   @override
-  String get kitapsen_goals_completed => 'Completed';
+  String get kitapsen_goals_completed => 'Tercapai';
   @override
-  String kitapsen_goals_until({required Object date}) => 'Until ${date}';
+  String kitapsen_goals_until({required Object date}) => 'Hingga ${date}';
   @override
-  String kitapsen_goals_unit_books({required Object n}) => '${n} books';
+  String kitapsen_goals_unit_books({required Object n}) => '${n} buku';
   @override
-  String kitapsen_goals_unit_pages({required Object n}) => '${n} pages';
+  String kitapsen_goals_unit_pages({required Object n}) => '${n} halaman';
   @override
-  String kitapsen_goals_unit_hours({required Object n}) => '${n} hours';
+  String kitapsen_goals_unit_hours({required Object n}) => '${n} jam';
   @override
-  String kitapsen_goals_unit_days({required Object n}) => '${n} reading days';
+  String kitapsen_goals_unit_days({required Object n}) => '${n} hari membaca';
   @override
-  String get kitapsen_goals_streak => 'Day streak';
+  String get kitapsen_goals_streak => 'Hari beruntun';
   @override
-  String get kitapsen_goals_longest_streak => 'Longest streak';
+  String get kitapsen_goals_longest_streak => 'Beruntun terpanjang';
   @override
-  String get kitapsen_goals_books_read => 'Books read';
+  String get kitapsen_goals_books_read => 'Buku dibaca';
   @override
-  String get kitapsen_goals_books_finished => 'Finished';
+  String get kitapsen_goals_books_finished => 'Selesai';
   @override
-  String get kitapsen_feed_title => 'Social feed';
+  String get kitapsen_feed_title => 'Linimasa sosial';
   @override
-  String get kitapsen_feed_followed => 'Following';
+  String get kitapsen_feed_followed => 'Mengikuti';
   @override
-  String get kitapsen_feed_mine => 'My activity';
+  String get kitapsen_feed_mine => 'Aktivitas saya';
   @override
   String get kitapsen_feed_empty_followed =>
-      'No activity yet. Follow readers to keep up with what they are reading.';
+      'Belum ada aktivitas. Ikuti pembaca lain untuk mengetahui apa yang sedang mereka baca.';
   @override
   String get kitapsen_feed_empty_mine =>
-      'Your reading activity will appear here once you start reading.';
+      'Aktivitas membaca Anda akan muncul di sini setelah Anda mulai membaca.';
   @override
   String kitapsen_feed_started({required Object target}) =>
-      'started reading ${target}';
+      'mulai membaca ${target}';
   @override
   String kitapsen_feed_finished({required Object target}) =>
-      'finished ${target}';
+      'selesai membaca ${target}';
   @override
   String kitapsen_feed_reviewed({required Object target}) =>
-      'reviewed ${target}';
+      'mengulas ${target}';
   @override
   String kitapsen_feed_followed_user({required Object target}) =>
-      'started following ${target}';
+      'mulai mengikuti ${target}';
   @override
   String kitapsen_feed_followed_author({required Object target}) =>
-      'followed the author ${target}';
+      'mengikuti penulis ${target}';
   @override
-  String kitapsen_feed_shared({required Object target}) => 'shared ${target}';
+  String kitapsen_feed_shared({required Object target}) =>
+      'membagikan ${target}';
   @override
-  String kitapsen_feed_percent({required Object n}) => '${n}% read';
+  String kitapsen_feed_percent({required Object n}) => '${n}% dibaca';
   @override
-  String get kitapsen_feed_finished_badge => 'Finished';
+  String get kitapsen_feed_finished_badge => 'Selesai';
   @override
-  String get kitapsen_user_follow => 'Follow';
+  String get kitapsen_user_follow => 'Ikuti';
   @override
-  String get kitapsen_user_block => 'Block';
+  String get kitapsen_user_block => 'Blokir';
   @override
-  String get kitapsen_user_unblock => 'Unblock';
+  String get kitapsen_user_unblock => 'Buka blokir';
   @override
   String kitapsen_user_block_confirm({required Object username}) =>
-      'Block @${username}? They will no longer see your profile and activity, and any follow between you is removed.';
+      'Blokir @${username}? Pengguna ini tidak akan bisa lagi melihat profil dan aktivitas Anda, dan status saling mengikuti di antara Anda berdua akan dihapus.';
   @override
   String kitapsen_user_member_since({required Object date}) =>
-      'Member since ${date}';
+      'Anggota sejak ${date}';
   @override
-  String kitapsen_user_followers({required Object n}) => '${n} followers';
+  String kitapsen_user_followers({required Object n}) => '${n} pengikut';
   @override
-  String kitapsen_user_following({required Object n}) => '${n} following';
+  String kitapsen_user_following({required Object n}) => '${n} mengikuti';
   @override
   String kitapsen_user_finished_count({required Object n}) =>
-      '${n} books finished';
+      '${n} buku selesai dibaca';
   @override
-  String get kitapsen_user_tab_reading => 'Reading';
+  String get kitapsen_user_tab_reading => 'Bacaan';
   @override
-  String get kitapsen_user_tab_reviews => 'Reviews';
+  String get kitapsen_user_tab_reviews => 'Ulasan';
   @override
-  String get kitapsen_user_tab_activity => 'Activity';
+  String get kitapsen_user_tab_activity => 'Aktivitas';
   @override
-  String get kitapsen_user_currently_reading => 'Currently reading';
+  String get kitapsen_user_currently_reading => 'Sedang dibaca';
   @override
-  String get kitapsen_user_finished => 'Finished';
+  String get kitapsen_user_finished => 'Selesai dibaca';
   @override
   String get kitapsen_user_no_reading =>
-      'This reader does not share reading activity.';
+      'Pembaca ini tidak membagikan aktivitas membaca.';
   @override
-  String get kitapsen_user_no_reviews => 'No public reviews yet.';
+  String get kitapsen_user_no_reviews => 'Belum ada ulasan publik.';
   @override
-  String get kitapsen_user_no_activity => 'No public activity yet.';
+  String get kitapsen_user_no_activity => 'Belum ada aktivitas publik.';
   @override
   String get kitapsen_user_private =>
-      'This profile is private. Follow this reader to see their reviews, reading activity and profile.';
+      'Profil ini privat. Ikuti pembaca ini untuk melihat ulasan, aktivitas membaca, dan profilnya.';
   @override
   String get kitapsen_user_blocked_you =>
-      'This reader has blocked you. Their profile and activity are hidden from you.';
+      'Pembaca ini telah memblokir Anda. Profil dan aktivitasnya disembunyikan dari Anda.';
   @override
-  String get kitapsen_user_followers_title => 'Followers';
+  String get kitapsen_user_followers_title => 'Pengikut';
   @override
-  String get kitapsen_user_following_title => 'Following';
+  String get kitapsen_user_following_title => 'Mengikuti';
   @override
-  String get kitapsen_user_no_connections => 'Nobody here yet.';
+  String get kitapsen_user_no_connections => 'Belum ada siapa pun di sini.';
   @override
-  String get kitapsen_clubs_title => 'Book clubs';
+  String get kitapsen_clubs_title => 'Klub buku';
   @override
-  String get kitapsen_clubs_create => 'Create a club';
+  String get kitapsen_clubs_create => 'Buat klub';
   @override
-  String get kitapsen_clubs_name => 'Club name';
+  String get kitapsen_clubs_name => 'Nama klub';
   @override
   String get kitapsen_clubs_empty =>
-      'No book clubs yet. Create or join one to read together.';
+      'Belum ada klub buku. Buat atau gabung ke sebuah klub untuk membaca bersama.';
   @override
-  String get kitapsen_clubs_join => 'Join';
+  String get kitapsen_clubs_join => 'Gabung';
   @override
-  String get kitapsen_clubs_leave => 'Leave';
+  String get kitapsen_clubs_leave => 'Keluar';
   @override
-  String get kitapsen_clubs_owner => 'Owner';
+  String get kitapsen_clubs_owner => 'Pemilik';
   @override
-  String get kitapsen_clubs_members => 'Members';
+  String get kitapsen_clubs_members => 'Anggota';
   @override
-  String kitapsen_clubs_members_count({required Object n}) => '${n} members';
+  String kitapsen_clubs_members_count({required Object n}) => '${n} anggota';
   @override
-  String get kitapsen_clubs_chat => 'Discussion';
+  String get kitapsen_clubs_chat => 'Diskusi';
   @override
   String get kitapsen_clubs_join_to_chat =>
-      'Join the club to read and write messages.';
+      'Gabung ke klub untuk membaca dan menulis pesan.';
   @override
-  String get kitapsen_clubs_no_messages => 'No messages yet.';
+  String get kitapsen_clubs_no_messages => 'Belum ada pesan.';
   @override
-  String get kitapsen_clubs_message_hint => 'Write a message...';
+  String get kitapsen_clubs_message_hint => 'Tulis pesan...';
   @override
-  String get kitapsen_clubs_send => 'Send';
+  String get kitapsen_clubs_send => 'Kirim';
   @override
   String get kitapsen_register_taken =>
-      'This username or email address already has an account.';
+      'Nama pengguna atau alamat email ini sudah memiliki akun.';
   @override
-  String get kitapsen_report => 'Report';
+  String get kitapsen_report => 'Laporkan';
   @override
-  String get kitapsen_reported => 'Reported';
+  String get kitapsen_reported => 'Dilaporkan';
   @override
-  String get kitapsen_report_title => 'Report this content';
+  String get kitapsen_report_title => 'Laporkan konten ini';
   @override
-  String get kitapsen_report_reason => 'Reason (optional)';
+  String get kitapsen_report_reason => 'Alasan (opsional)';
   @override
-  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  String get kitapsen_report_reason_hint => 'Mengapa konten ini tidak pantas?';
   @override
-  String get kitapsen_report_submit => 'Submit Report';
+  String get kitapsen_report_submit => 'Kirim laporan';
   @override
   String get kitapsen_report_thanks =>
-      'Reported. Thank you for helping keep the community safe.';
+      'Dilaporkan. Terima kasih telah membantu menjaga komunitas tetap aman.';
   @override
   String get kitapsen_delete_statistics_book_desc =>
       'Waktu baca dan karakter yang dibaca dari buku ini dihapus dari statistik di semua perangkat';
@@ -89794,7 +89832,7 @@ class _StringsIt extends _StringsEn {
   @override
   String anime_download_episode_count({required Object count}) => 'EP ${count}';
   @override
-  String get anime_download_generic_download => 'Download';
+  String get anime_download_generic_download => 'Scarica';
   @override
   String get anime_download_generic_hint => 'Link magnet';
   @override
@@ -91145,7 +91183,7 @@ class _StringsIt extends _StringsEn {
   @override
   String get batch_tag_title => 'Gestisci tag';
   @override
-  String get book_continue_reading => 'Continue Reading';
+  String get book_continue_reading => 'Continua a leggere';
   @override
   String get book_convert_blocked_already =>
       'Questo libro è già in quel formato.';
@@ -91501,7 +91539,7 @@ class _StringsIt extends _StringsEn {
   String collection_relation_bound({required Object name}) =>
       'Collegato a ${name}';
   @override
-  String get collection_relation_download => 'Download';
+  String get collection_relation_download => 'Scarica';
   @override
   String get collection_relation_movie => 'Film';
   @override
@@ -92984,7 +93022,7 @@ class _StringsIt extends _StringsEn {
   @override
   String get font_target_game_lookup => 'Font finestra ricerca gioco';
   @override
-  String get font_target_video_subtitle => 'Video Subtitle Font';
+  String get font_target_video_subtitle => 'Carattere dei sottotitoli video';
   @override
   String get gal_card_lookup_independent_size =>
       'Dimensione separata per la carta nel gioco';
@@ -93345,7 +93383,7 @@ class _StringsIt extends _StringsEn {
   String get game_helper_bundle_missing =>
       'L\'helper per l\'hook galgame non è incluso in questa build. Aggiorna Kitapsen per ottenerlo.';
   @override
-  String get game_helper_download => 'Download';
+  String get game_helper_download => 'Scarica';
   @override
   String game_helper_download_failed({required Object error}) =>
       'Download del componente motore fallito: ${error}';
@@ -94138,7 +94176,7 @@ class _StringsIt extends _StringsEn {
   @override
   String get handlebar_sentence => 'Frase';
   @override
-  String get handlebar_sentence_audio => 'Sentence Audio';
+  String get handlebar_sentence_audio => 'Audio della frase';
   @override
   String get handlebar_video_clip => 'Video Clip (GIF)';
   @override
@@ -96378,11 +96416,11 @@ class _StringsIt extends _StringsEn {
   @override
   String get reader_view_mode_label => 'Pagine / Scorrimento';
   @override
-  String get reader_vn => 'Visual Novel';
+  String get reader_vn => 'Visual novel';
   @override
   String get reader_writing_direction => 'Direzione di scrittura';
   @override
-  String get reading_activity => 'Attività di studio';
+  String get reading_activity => 'Attività di lettura';
   @override
   String get reading_progress => 'Progresso di lettura';
   @override
@@ -96792,9 +96830,10 @@ class _StringsIt extends _StringsEn {
   String get shortcut_action_reader_open_gallery =>
       'Apri galleria illustrazioni';
   @override
-  String get shortcut_action_reader_open_menu => 'Open Settings Menu';
+  String get shortcut_action_reader_open_menu =>
+      'Apri il menu delle impostazioni';
   @override
-  String get shortcut_action_reader_open_navigation => 'Open Navigation';
+  String get shortcut_action_reader_open_navigation => 'Apri la navigazione';
   @override
   String get shortcut_action_reader_open_statistics =>
       'Apri statistiche di lettura';
@@ -96818,10 +96857,10 @@ class _StringsIt extends _StringsEn {
       'Allinea sottotitolo precedente al momento attuale';
   @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
-      'Cycle Secondary Subtitle Obscure';
+      'Cambia modalità di oscuramento del sottotitolo secondario';
   @override
   String get shortcut_action_video_cycle_subtitle_obscure =>
-      'Cycle Subtitle Obscure Mode';
+      'Cambia modalità di oscuramento dei sottotitoli';
   @override
   String get shortcut_action_video_dismiss_dict => 'Chiudi dizionario';
   @override
@@ -96892,7 +96931,7 @@ class _StringsIt extends _StringsEn {
   String get shortcut_action_video_toggle_play_pause => 'Riproduci / Pausa';
   @override
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
-      'Toggle Hide Secondary Subtitle';
+      'Mostra/nascondi sottotitolo secondario';
   @override
   String get shortcut_action_video_toggle_shader_compare =>
       'Attiva/disattiva confronto shader';
@@ -96901,7 +96940,7 @@ class _StringsIt extends _StringsEn {
       'Attiva/disattiva sfocatura sottotitoli';
   @override
   String get shortcut_action_video_toggle_subtitle_hide =>
-      'Toggle Hide Subtitles';
+      'Mostra/nascondi sottotitoli';
   @override
   String get shortcut_action_video_toggle_subtitle_list =>
       'Attiva/disattiva elenco sottotitoli';
@@ -97182,7 +97221,7 @@ class _StringsIt extends _StringsEn {
   @override
   String get stat_detail_ungrouped => 'Non raggruppato';
   @override
-  String get stat_fastest_day => 'Fastest Day';
+  String get stat_fastest_day => 'Giorno più veloce';
   @override
   String get stat_favorited => 'Preferiti';
   @override
@@ -97199,9 +97238,9 @@ class _StringsIt extends _StringsEn {
   @override
   String stat_format_pages({required Object n}) => '${n} pagine';
   @override
-  String get stat_goal => 'Daily Goal';
+  String get stat_goal => 'Obiettivo giornaliero';
   @override
-  String get stat_goal_daily => 'Daily Goal';
+  String get stat_goal_daily => 'Obiettivo giornaliero';
   @override
   String get stat_goal_presets => 'Predefiniti';
   @override
@@ -97213,11 +97252,11 @@ class _StringsIt extends _StringsEn {
   String stat_goal_recent_average({required Object n}) =>
       'Ultimi 7 giorni: ${n} caratteri/giorno in media';
   @override
-  String get stat_goal_set => 'Set Goal';
+  String get stat_goal_set => 'Imposta obiettivo';
   @override
   String get stat_goal_unit_chars => 'caratteri';
   @override
-  String get stat_goal_weekly => 'Weekly Goal';
+  String get stat_goal_weekly => 'Obiettivo settimanale';
   @override
   String get stat_hourly_band_epub => 'Libri di testo';
   @override
@@ -97244,7 +97283,7 @@ class _StringsIt extends _StringsEn {
   @override
   String get stat_no_data => 'Nessun dato di lettura';
   @override
-  String get stat_range_and_trend => 'Range & Trend';
+  String get stat_range_and_trend => 'Intervallo e tendenza';
   @override
   String get stat_recent_active => 'Giorni attivi (7g)';
   @override
@@ -97263,7 +97302,7 @@ class _StringsIt extends _StringsEn {
   @override
   String get stat_sessions_show_all => 'Tutte le sessioni';
   @override
-  String get stat_slowest_day => 'Slowest Day';
+  String get stat_slowest_day => 'Giorno più lento';
   @override
   String get stat_sort_by_chars => 'Per caratteri';
   @override
@@ -97279,7 +97318,7 @@ class _StringsIt extends _StringsEn {
   @override
   String stat_speed_cph({required Object n}) => '${n} caratteri/ora';
   @override
-  String get stat_speed_summary => 'Speed Summary';
+  String get stat_speed_summary => 'Riepilogo velocità';
   @override
   String get stat_streak => 'Serie';
   @override
@@ -97297,11 +97336,11 @@ class _StringsIt extends _StringsEn {
   @override
   String get stat_trend_weekly => 'Settimanale';
   @override
-  String get stat_typical_day => 'Typical Day';
+  String get stat_typical_day => 'Giorno tipico';
   @override
   String get stat_vs_prev => 'vs 14g precedenti';
   @override
-  String get stat_weighted_avg_speed => 'Weighted Avg';
+  String get stat_weighted_avg_speed => 'Media ponderata';
   @override
   String get stop => 'Ferma';
   @override
@@ -104878,7 +104917,7 @@ class _StringsIt extends _StringsEn {
   @override
   String get video_scrape_ai_declined => 'AI not adopted';
   @override
-  String get video_scrape_ai_failed => 'AI request failed';
+  String get video_scrape_ai_failed => 'Richiesta all\'IA non riuscita';
   @override
   String get video_scrape_ai_searched =>
       'Searched again with titles suggested by AI';
@@ -104938,7 +104977,7 @@ class _StringsIt extends _StringsEn {
   @override
   String get shelf_filter_read_status_finished => 'Finito';
   @override
-  String get video_filter_media_type => 'Type';
+  String get video_filter_media_type => 'Tipo';
   @override
   String get video_filter_media_type_video => 'Video';
   @override
@@ -104950,7 +104989,7 @@ class _StringsIt extends _StringsEn {
   @override
   String get video_filter_extras_only => 'Extras only';
   @override
-  String get video_filter_source => 'Source';
+  String get video_filter_source => 'Fonte';
   @override
   String get video_filter_series_standalone_empty_hint =>
       'No standalone videos. Videos in collections are on the Series tab, or set the Series filter to All.';
@@ -104993,7 +105032,7 @@ class _StringsIt extends _StringsEn {
   @override
   String get manga_ocr_ai_mode_label => 'AI recognition';
   @override
-  String get manga_ocr_ai_mode_off => 'Off';
+  String get manga_ocr_ai_mode_off => 'Disattivato';
   @override
   String get manga_ocr_ai_mode_low_confidence => 'Only uncertain text';
   @override
@@ -105046,7 +105085,7 @@ class _StringsIt extends _StringsEn {
   String get ocr_system_model_missing =>
       'Google Play services hasn\'t downloaded the text recognition model yet. Download it now (a few MB) to use screen OCR.';
   @override
-  String get ocr_system_model_download => 'Download';
+  String get ocr_system_model_download => 'Scarica';
   @override
   String get ocr_system_model_downloading =>
       'Downloading through Google Play services… You can close this dialog; the download continues in the background.';
@@ -105070,669 +105109,677 @@ class _StringsIt extends _StringsEn {
   @override
   String get kitapsen_section_title => 'Kitapsen';
   @override
-  String get kitapsen_account_title => 'Kitapsen account';
+  String get kitapsen_account_title => 'Account Kitapsen';
   @override
   String get kitapsen_account_hint =>
-      'Sign in to read the books in your Kitapsen library. They appear on your bookshelf, and your reading position syncs with your account.';
+      'Accedi per leggere i libri della tua libreria Kitapsen. Compaiono sul tuo scaffale e la posizione di lettura si sincronizza con il tuo account.';
   @override
-  String get kitapsen_account_server_url => 'Server address';
+  String get kitapsen_account_server_url => 'Indirizzo del server';
   @override
-  String get kitapsen_account_username => 'Email or username';
+  String get kitapsen_account_username => 'Email o nome utente';
   @override
   String get kitapsen_account_password => 'Password';
   @override
-  String get kitapsen_account_sign_in => 'Sign in';
+  String get kitapsen_account_sign_in => 'Accedi';
   @override
-  String get kitapsen_account_sign_out => 'Sign out';
+  String get kitapsen_account_sign_out => 'Esci';
   @override
-  String get kitapsen_account_sign_in_rejected =>
-      'Email or password is incorrect';
+  String get kitapsen_account_sign_in_rejected => 'Email o password errati';
   @override
   String get kitapsen_account_sign_in_failed =>
-      'Could not reach Kitapsen. Check the address and your connection.';
+      'Impossibile raggiungere Kitapsen. Controlla l\'indirizzo e la connessione.';
   @override
-  String get kitapsen_account_summary => 'Sign in to read your library';
+  String get kitapsen_account_summary => 'Accedi per leggere la tua libreria';
   @override
   String get kitapsen_shelf_signed_out_body =>
-      'Sign in with your Kitapsen account to see your library.';
+      'Accedi con il tuo account Kitapsen per vedere la tua libreria.';
   @override
-  String get kitapsen_shelf_sign_in => 'Sign in to Kitapsen';
+  String get kitapsen_shelf_sign_in => 'Accedi a Kitapsen';
   @override
-  String get kitapsen_onboarding_title => 'Your Kitapsen library';
+  String get kitapsen_onboarding_title => 'La tua libreria Kitapsen';
   @override
   String get kitapsen_onboarding_body =>
-      'Sign in to see the books in your Kitapsen account on this device. You can skip this and sign in later from Settings.';
+      'Accedi per vedere su questo dispositivo i libri del tuo account Kitapsen. Puoi saltare questo passaggio e accedere più tardi dalle Impostazioni.';
   @override
   String app_store_update_body({required Object version}) =>
-      'Kitapsen ${version} is available on the App Store.';
+      'Kitapsen ${version} è disponibile sull\'App Store.';
   @override
-  String get app_store_update_open => 'Update';
+  String get app_store_update_open => 'Aggiorna';
   @override
-  String get app_store_update_later => 'Not now';
+  String get app_store_update_later => 'Non ora';
   @override
-  String get kitapsen_about_privacy_policy => 'Privacy policy';
+  String get kitapsen_about_privacy_policy => 'Informativa sulla privacy';
   @override
-  String get kitapsen_about_support => 'Contact support';
+  String get kitapsen_about_support => 'Contatta l\'assistenza';
   @override
-  String get kitapsen_about_source_code => 'Source code';
+  String get kitapsen_about_source_code => 'Codice sorgente';
   @override
   String get kitapsen_about_based_on_fushi =>
-      'Kitapsen is based on Fushi (GPLv3) — source: https://github.com/FizyonOps/kitapsen-mobile';
+      'Kitapsen è basato su Fushi (GPLv3) — codice sorgente: https://github.com/FizyonOps/kitapsen-mobile';
   @override
-  String get kitapsen_about_licenses => 'Open-source licenses';
+  String get kitapsen_about_licenses => 'Licenze open source';
   @override
-  String get kitapsen_about_section => 'About Kitapsen';
+  String get kitapsen_about_section => 'Informazioni su Kitapsen';
   @override
-  String get kitapsen_import_hint => 'Pick an EPUB or PDF file to import.';
+  String get kitapsen_import_hint => 'Scegli un file EPUB o PDF da importare.';
   @override
   String get kitapsen_sign_out_removes_books =>
-      'Signing out removes your downloaded Kitapsen books from this device.';
+      'Uscendo, i libri Kitapsen scaricati verranno rimossi da questo dispositivo.';
   @override
-  String get kitapsen_account_or => 'or';
+  String get kitapsen_account_or => 'oppure';
   @override
-  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  String get kitapsen_account_continue_with_google => 'Continua con Google';
   @override
-  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  String get kitapsen_account_continue_with_apple => 'Continua con Apple';
   @override
   String get kitapsen_account_social_sign_in_failed =>
-      'Sign-in failed. Please try again.';
+      'Accesso non riuscito. Riprova.';
   @override
   String get kitapsen_account_deleted =>
-      'This Kitapsen account has been deleted.';
+      'Questo account Kitapsen è stato eliminato.';
   @override
-  String get kitapsen_account_delete => 'Delete account';
+  String get kitapsen_account_delete => 'Elimina account';
   @override
   String get kitapsen_account_delete_confirm =>
-      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+      'Il tuo account Kitapsen verrà eliminato e uscirai da questo dispositivo. Non potrai più leggere i libri della tua libreria. L\'operazione è irreversibile.';
   @override
   String get kitapsen_account_delete_failed =>
-      'The account could not be deleted. Please try again.';
+      'Impossibile eliminare l\'account. Riprova.';
   @override
-  String get kitapsen_nav_store => 'Store';
+  String get kitapsen_nav_store => 'Negozio';
   @override
-  String get kitapsen_store_search_hint => 'Search books and authors';
+  String get kitapsen_store_search_hint => 'Cerca libri e autori';
   @override
-  String get kitapsen_store_new_arrivals => 'New arrivals';
+  String get kitapsen_store_new_arrivals => 'Novità';
   @override
-  String get kitapsen_store_most_read => 'Most read';
+  String get kitapsen_store_most_read => 'I più letti';
   @override
-  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  String get kitapsen_store_staff_picks => 'Scelti dalla redazione';
   @override
-  String get kitapsen_store_free_books => 'Free books';
+  String get kitapsen_store_free_books => 'Libri gratuiti';
   @override
-  String get kitapsen_store_stories => 'Serialized stories';
+  String get kitapsen_store_stories => 'Storie a puntate';
   @override
-  String get kitapsen_store_categories => 'Categories';
+  String get kitapsen_store_categories => 'Categorie';
   @override
-  String get kitapsen_store_see_all => 'See all';
+  String get kitapsen_store_see_all => 'Vedi tutti';
   @override
-  String get kitapsen_store_no_results => 'No books found';
+  String get kitapsen_store_no_results => 'Nessun libro trovato';
   @override
   String get kitapsen_store_load_failed =>
-      'Couldn\'t load. Check your connection.';
+      'Impossibile caricare. Controlla la connessione.';
   @override
-  String get kitapsen_store_free_only => 'Free only';
+  String get kitapsen_store_free_only => 'Solo gratuiti';
   @override
-  String get kitapsen_sort_relevance => 'Most relevant';
+  String get kitapsen_sort_relevance => 'Più pertinenti';
   @override
-  String get kitapsen_sort_newest => 'Newest';
+  String get kitapsen_sort_newest => 'Più recenti';
   @override
-  String get kitapsen_sort_most_read => 'Most read';
+  String get kitapsen_sort_most_read => 'Più letti';
   @override
-  String get kitapsen_sort_rating => 'Top rated';
+  String get kitapsen_sort_rating => 'Più apprezzati';
   @override
-  String get kitapsen_sort_title => 'Title A–Z';
+  String get kitapsen_sort_title => 'Titolo (A–Z)';
   @override
-  String get kitapsen_book_read => 'Read';
+  String get kitapsen_book_read => 'Leggi';
   @override
-  String get kitapsen_book_get_free => 'Get for free';
+  String get kitapsen_book_get_free => 'Ottieni gratis';
   @override
-  String get kitapsen_book_claimed => 'Added to your library';
+  String get kitapsen_book_claimed => 'Aggiunto alla tua libreria';
   @override
-  String get kitapsen_book_in_library => 'In your library';
+  String get kitapsen_book_in_library => 'Nella tua libreria';
   @override
-  String get kitapsen_book_not_in_library => 'Not in your library';
+  String get kitapsen_book_not_in_library => 'Non è nella tua libreria';
   @override
   String get kitapsen_book_sign_in_prompt =>
-      'Sign in to add books to your library and keep a wishlist.';
+      'Accedi per aggiungere libri alla tua libreria e tenere una lista dei desideri.';
   @override
-  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  String get kitapsen_book_wishlist_add => 'Aggiungi alla lista dei desideri';
   @override
-  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  String get kitapsen_book_wishlist_remove =>
+      'Rimuovi dalla lista dei desideri';
   @override
-  String get kitapsen_book_downloading => 'Downloading to your library…';
+  String get kitapsen_book_downloading => 'Download nella tua libreria…';
   @override
-  String get kitapsen_book_about => 'About this book';
+  String get kitapsen_book_about => 'Informazioni sul libro';
   @override
-  String get kitapsen_book_pages => 'Pages';
+  String get kitapsen_book_pages => 'Pagine';
   @override
-  String get kitapsen_book_language => 'Language';
+  String get kitapsen_book_language => 'Lingua';
   @override
-  String get kitapsen_book_publisher => 'Publisher';
+  String get kitapsen_book_publisher => 'Editore';
   @override
-  String get kitapsen_book_published => 'Published';
+  String get kitapsen_book_published => 'Data di pubblicazione';
   @override
   String get kitapsen_book_action_failed =>
-      'Something went wrong. Please try again.';
+      'Si è verificato un problema. Riprova.';
   @override
-  String get kitapsen_book_reviews => 'Reviews';
+  String get kitapsen_book_reviews => 'Recensioni';
   @override
-  String get kitapsen_book_no_reviews => 'No reviews yet';
+  String get kitapsen_book_no_reviews => 'Ancora nessuna recensione';
   @override
-  String get kitapsen_book_write_review => 'Write a review';
+  String get kitapsen_book_write_review => 'Scrivi una recensione';
   @override
-  String get kitapsen_review_title_hint => 'Title (optional)';
+  String get kitapsen_review_title_hint => 'Titolo (facoltativo)';
   @override
-  String get kitapsen_review_content_hint => 'Your review (optional)';
+  String get kitapsen_review_content_hint => 'La tua recensione (facoltativa)';
   @override
-  String get kitapsen_review_submit => 'Send';
+  String get kitapsen_review_submit => 'Invia';
   @override
-  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  String get kitapsen_review_sent =>
+      'Grazie! La tua recensione è stata inviata.';
   @override
-  String get kitapsen_review_already => 'You have already reviewed this book.';
+  String get kitapsen_review_already => 'Hai già recensito questo libro.';
   @override
   String get kitapsen_review_not_allowed =>
-      'Only readers who have this book in their library can review it.';
+      'Solo i lettori che hanno questo libro nella loro libreria possono recensirlo.';
   @override
-  String get kitapsen_review_more => 'Show more reviews';
+  String get kitapsen_review_more => 'Mostra altre recensioni';
   @override
-  String get kitapsen_review_verified => 'Verified reader';
+  String get kitapsen_review_verified => 'Lettore verificato';
   @override
-  String get kitapsen_author_follow => 'Follow';
+  String get kitapsen_author_follow => 'Segui';
   @override
-  String get kitapsen_author_following => 'Following';
+  String get kitapsen_author_following => 'Segui già';
   @override
-  String get kitapsen_author_followers => 'Followers';
+  String get kitapsen_author_followers => 'Follower';
   @override
-  String get kitapsen_author_books => 'Books';
+  String get kitapsen_author_books => 'Libri';
   @override
-  String get kitapsen_author_open => 'Author page';
+  String get kitapsen_author_open => 'Pagina dell\'autore';
   @override
-  String get kitapsen_wishlist_title => 'Wishlist';
+  String get kitapsen_wishlist_title => 'Lista dei desideri';
   @override
-  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  String get kitapsen_wishlist_empty => 'La tua lista dei desideri è vuota';
   @override
-  String get kitapsen_notifications_title => 'Notifications';
+  String get kitapsen_notifications_title => 'Notifiche';
   @override
-  String get kitapsen_notifications_empty => 'No notifications';
+  String get kitapsen_notifications_empty => 'Nessuna notifica';
   @override
-  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  String get kitapsen_notifications_mark_all => 'Segna tutte come lette';
   @override
-  String get kitapsen_story_chapters => 'Chapters';
+  String get kitapsen_story_chapters => 'Capitoli';
   @override
-  String get kitapsen_story_no_chapters => 'No chapters yet';
+  String get kitapsen_story_no_chapters => 'Ancora nessun capitolo';
   @override
-  String get kitapsen_story_next => 'Next chapter';
+  String get kitapsen_story_next => 'Capitolo successivo';
   @override
-  String get kitapsen_story_previous => 'Previous chapter';
+  String get kitapsen_story_previous => 'Capitolo precedente';
   @override
-  String get kitapsen_review_like => 'Like';
+  String get kitapsen_review_like => 'Mi piace';
   @override
-  String get kitapsen_comments_title => 'Comments';
+  String get kitapsen_comments_title => 'Commenti';
   @override
-  String get kitapsen_comments_empty => 'No comments yet';
+  String get kitapsen_comments_empty => 'Ancora nessun commento';
   @override
-  String get kitapsen_comment_hint => 'Write a comment';
+  String get kitapsen_comment_hint => 'Scrivi un commento';
   @override
-  String get kitapsen_story_vote => 'Vote';
+  String get kitapsen_story_vote => 'Vota';
   @override
-  String get kitapsen_story_voted => 'Voted';
+  String get kitapsen_story_voted => 'Votato';
   @override
-  String get kitapsen_story_follow => 'Follow story';
+  String get kitapsen_story_follow => 'Segui la storia';
   @override
-  String get kitapsen_following_title => 'Following';
+  String get kitapsen_following_title => 'Seguiti';
   @override
-  String get kitapsen_following_authors => 'Authors';
+  String get kitapsen_following_authors => 'Autori';
   @override
-  String get kitapsen_following_stories => 'Stories';
+  String get kitapsen_following_stories => 'Storie';
   @override
-  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  String get kitapsen_following_empty => 'Non segui ancora nessuno';
   @override
-  String get kitapsen_reader_highlight => 'Highlight';
+  String get kitapsen_reader_highlight => 'Evidenzia';
   @override
-  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  String get kitapsen_annotations_title => 'Segnalibri e note';
   @override
-  String get kitapsen_bookmark_add => 'Add bookmark';
+  String get kitapsen_bookmark_add => 'Aggiungi segnalibro';
   @override
-  String get kitapsen_bookmark_added => 'Bookmark added';
+  String get kitapsen_bookmark_added => 'Segnalibro aggiunto';
   @override
-  String get kitapsen_note_add => 'Add note';
+  String get kitapsen_note_add => 'Aggiungi nota';
   @override
-  String get kitapsen_note_hint => 'Your note';
+  String get kitapsen_note_hint => 'La tua nota';
   @override
-  String get kitapsen_note_saved => 'Note saved';
+  String get kitapsen_note_saved => 'Nota salvata';
   @override
-  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  String get kitapsen_annotations_empty => 'Ancora nessun segnalibro o nota';
   @override
-  String get kitapsen_store_badge_free => 'Free';
+  String get kitapsen_store_badge_free => 'Gratis';
   @override
-  String get kitapsen_store_badge_new => 'New';
+  String get kitapsen_store_badge_new => 'Nuovo';
   @override
-  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  String kitapsen_store_rating_count({required Object n}) => '${n} recensioni';
   @override
-  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  String get kitapsen_store_hero_title => 'Il tuo prossimo bel libro è qui.';
   @override
   String get kitapsen_store_hero_body =>
-      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+      'Scopri nuove storie e gli autori che ami. Scegli il tuo libro e inizia a leggere su telefono, tablet o computer.';
   @override
-  String get kitapsen_store_explore_books => 'Explore books';
+  String get kitapsen_store_explore_books => 'Esplora i libri';
   @override
-  String get kitapsen_store_start_free => 'Start with free books';
+  String get kitapsen_store_start_free => 'Inizia con i libri gratuiti';
   @override
-  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  String get kitapsen_store_start_free_body => 'Scopri il tuo primo libro.';
   @override
-  String get kitapsen_store_library_always => 'Your library is always with you';
+  String get kitapsen_store_library_always => 'La tua libreria sempre con te';
   @override
   String get kitapsen_store_library_always_body =>
-      'Read on your phone, tablet and computer.';
+      'Leggi su telefono, tablet e computer.';
   @override
-  String get kitapsen_store_meet_authors => 'Meet the authors';
+  String get kitapsen_store_meet_authors => 'Incontra gli autori';
   @override
-  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  String get kitapsen_store_meet_authors_body => 'Segui gli scrittori che ami.';
   @override
-  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  String get kitapsen_store_reading_list =>
+      'Un nuovo libro per la tua lista di lettura';
   @override
-  String get kitapsen_store_all_categories => 'All categories';
+  String get kitapsen_store_all_categories => 'Tutte le categorie';
   @override
-  String get kitapsen_store_discover_title => 'Time to discover';
+  String get kitapsen_store_discover_title => 'È il momento di scoprire';
   @override
   String get kitapsen_store_discover_body =>
-      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+      'Una storia, un nuovo punto di vista, una scoperta inaspettata. Aggiungi il tuo prossimo libro alla lista di lettura.';
   @override
-  String get kitapsen_store_discover_now => 'Discover now';
+  String get kitapsen_store_discover_now => 'Scopri ora';
   @override
   String kitapsen_store_results_for({required Object q}) =>
-      'Results for "${q}"';
+      'Risultati per «${q}»';
   @override
-  String get kitapsen_store_matching_authors => 'Matching authors';
+  String get kitapsen_store_matching_authors => 'Autori corrispondenti';
   @override
-  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  String kitapsen_store_author_books_count({required Object n}) => '${n} libri';
   @override
   String get kitapsen_store_author_cta =>
-      'Discover the author\'s books and pick your next read.';
+      'Scopri i libri dell\'autore e scegli la tua prossima lettura.';
   @override
-  String get kitapsen_store_see_author_books => 'See their books';
+  String get kitapsen_store_see_author_books => 'Vedi i suoi libri';
   @override
-  String get kitapsen_store_authors_books => 'The author\'s books';
+  String get kitapsen_store_authors_books => 'I libri dell\'autore';
   @override
-  String get kitapsen_book_read_now => 'Read now';
+  String get kitapsen_book_read_now => 'Leggi ora';
   @override
-  String get kitapsen_book_get_free_web => 'Get it free';
+  String get kitapsen_book_get_free_web => 'Ottienilo gratis';
   @override
-  String get kitapsen_book_favorites => 'Favorites';
+  String get kitapsen_book_favorites => 'Preferiti';
   @override
-  String get kitapsen_book_description => 'Description';
+  String get kitapsen_book_description => 'Descrizione';
   @override
-  String get kitapsen_book_about_author => 'About the author';
+  String get kitapsen_book_about_author => 'Informazioni sull\'autore';
   @override
   String get kitapsen_book_isbn => 'ISBN';
   @override
-  String get kitapsen_book_format => 'Format';
+  String get kitapsen_book_format => 'Formato';
   @override
-  String get kitapsen_author_role => 'Author';
+  String get kitapsen_author_role => 'Autore';
   @override
-  String get kitapsen_author_notify => 'Notify me of new books';
+  String get kitapsen_author_notify => 'Avvisami dei nuovi libri';
   @override
-  String get kitapsen_author_about => 'About';
+  String get kitapsen_author_about => 'Informazioni';
   @override
-  String get kitapsen_review_more_bio => 'Read the full biography';
+  String get kitapsen_review_more_bio => 'Leggi la biografia completa';
   @override
-  String get kitapsen_author_like => 'Like';
+  String get kitapsen_author_like => 'Mi piace';
   @override
-  String get kitapsen_author_likes => 'Likes';
+  String get kitapsen_author_likes => 'Mi piace';
   @override
-  String get kitapsen_register_open => 'No account yet? Create one';
+  String get kitapsen_register_open => 'Non hai un account? Creane uno';
   @override
-  String get kitapsen_register_name => 'Name (optional)';
+  String get kitapsen_register_name => 'Nome (facoltativo)';
   @override
-  String get kitapsen_register_username => 'Username';
+  String get kitapsen_register_username => 'Nome utente';
   @override
   String get kitapsen_register_username_hint =>
-      '2–20 lowercase letters or digits';
+      'Da 2 a 20 lettere minuscole o cifre';
   @override
   String get kitapsen_register_email => 'Email';
   @override
-  String get kitapsen_register_password_hint => 'At least 8 characters';
+  String get kitapsen_register_password_hint => 'Almeno 8 caratteri';
   @override
-  String get kitapsen_register_submit => 'Create account';
+  String get kitapsen_register_submit => 'Crea account';
   @override
-  String get kitapsen_register_have_account =>
-      'Already have an account? Sign in';
+  String get kitapsen_register_have_account => 'Hai già un account? Accedi';
   @override
   String get kitapsen_register_username_invalid =>
-      'Use 2–20 lowercase letters or digits.';
+      'Usa da 2 a 20 lettere minuscole o cifre.';
   @override
   String get kitapsen_register_name_invalid =>
-      'The name must be 2–30 characters.';
+      'Il nome deve avere da 2 a 30 caratteri.';
   @override
-  String get kitapsen_register_email_invalid => 'Enter a valid email address.';
+  String get kitapsen_register_email_invalid =>
+      'Inserisci un indirizzo email valido.';
   @override
   String get kitapsen_register_password_short =>
-      'The password must be at least 8 characters.';
+      'La password deve avere almeno 8 caratteri.';
   @override
   String get kitapsen_register_failed =>
-      'The account could not be created. Try again.';
+      'Impossibile creare l\'account. Riprova.';
   @override
-  String get kitapsen_hub_title => 'My account';
+  String get kitapsen_hub_title => 'Il mio account';
   @override
-  String get kitapsen_hub_reading => 'Reading';
+  String get kitapsen_hub_reading => 'Lettura';
   @override
-  String get kitapsen_hub_social => 'Social';
+  String get kitapsen_hub_social => 'Comunità';
   @override
-  String get kitapsen_hub_discover => 'Discover';
+  String get kitapsen_hub_discover => 'Scopri';
   @override
   String get kitapsen_hub_account => 'Account';
   @override
-  String get kitapsen_hub_library => 'My library';
+  String get kitapsen_hub_library => 'La mia libreria';
   @override
-  String get kitapsen_hub_public_profile => 'My public reader profile';
+  String get kitapsen_hub_public_profile =>
+      'Il mio profilo pubblico di lettore';
   @override
-  String get kitapsen_hub_sign_in_settings => 'Sign out or delete the account';
+  String get kitapsen_hub_sign_in_settings => 'Esci o elimina l\'account';
   @override
-  String get kitapsen_common_save => 'Save';
+  String get kitapsen_common_save => 'Salva';
   @override
-  String get kitapsen_common_saved => 'Saved';
+  String get kitapsen_common_saved => 'Salvato';
   @override
-  String get kitapsen_common_edit => 'Edit';
+  String get kitapsen_common_edit => 'Modifica';
   @override
-  String get kitapsen_profile_title => 'My profile';
+  String get kitapsen_profile_title => 'Il mio profilo';
   @override
-  String get kitapsen_profile_name => 'Display name';
+  String get kitapsen_profile_name => 'Nome visualizzato';
   @override
-  String get kitapsen_profile_sharing => 'Share reading activity';
+  String get kitapsen_profile_sharing => 'Condividi l\'attività di lettura';
   @override
   String get kitapsen_profile_sharing_hint =>
-      'Show the books you are reading and have finished on your public profile.';
+      'Mostra sul tuo profilo pubblico i libri che stai leggendo e quelli che hai finito.';
   @override
-  String get kitapsen_settings_title => 'Account settings';
+  String get kitapsen_settings_title => 'Impostazioni account';
   @override
-  String get kitapsen_settings_profile => 'Profile information';
+  String get kitapsen_settings_profile => 'Informazioni del profilo';
   @override
   String get kitapsen_settings_privacy => 'Privacy';
   @override
-  String get kitapsen_settings_private => 'Private profile';
+  String get kitapsen_settings_private => 'Profilo privato';
   @override
   String get kitapsen_settings_private_hint =>
-      'Only your followers can see your profile, reviews, reading activity and updates.';
+      'Solo i tuoi follower possono vedere il tuo profilo, le recensioni, l\'attività di lettura e gli aggiornamenti.';
   @override
-  String get kitapsen_settings_notifications => 'Email notifications';
+  String get kitapsen_settings_notifications => 'Notifiche email';
   @override
   String get kitapsen_settings_follower_email =>
-      'Email me when someone follows me';
+      'Inviami un\'email quando qualcuno mi segue';
   @override
   String get kitapsen_settings_comment_email =>
-      'Email me when someone comments on my story';
+      'Inviami un\'email quando qualcuno commenta la mia storia';
   @override
-  String get kitapsen_settings_sale_email => 'Email me when my book sells';
+  String get kitapsen_settings_sale_email =>
+      'Inviami un\'email quando il mio libro viene venduto';
   @override
-  String get kitapsen_settings_author_emails => 'Author emails';
+  String get kitapsen_settings_author_emails => 'Email per autori';
   @override
-  String get kitapsen_settings_password => 'Change password';
+  String get kitapsen_settings_password => 'Cambia password';
   @override
-  String get kitapsen_settings_current_password => 'Current password';
+  String get kitapsen_settings_current_password => 'Password attuale';
   @override
-  String get kitapsen_settings_new_password => 'New password';
+  String get kitapsen_settings_new_password => 'Nuova password';
   @override
-  String get kitapsen_settings_repeat_password => 'Repeat the new password';
+  String get kitapsen_settings_repeat_password => 'Ripeti la nuova password';
   @override
-  String get kitapsen_settings_change_password => 'Change password';
+  String get kitapsen_settings_change_password => 'Cambia password';
   @override
   String get kitapsen_settings_passwords_differ =>
-      'The passwords do not match.';
+      'Le password non corrispondono.';
   @override
-  String get kitapsen_settings_password_changed => 'Password changed.';
+  String get kitapsen_settings_password_changed => 'Password modificata.';
   @override
   String get kitapsen_settings_password_failed =>
-      'The password could not be changed. Check the current password.';
+      'Impossibile cambiare la password. Controlla la password attuale.';
   @override
-  String get kitapsen_settings_blocked => 'Blocked users';
+  String get kitapsen_settings_blocked => 'Utenti bloccati';
   @override
-  String get kitapsen_settings_no_blocked => 'You have not blocked anyone.';
+  String get kitapsen_settings_no_blocked => 'Non hai bloccato nessuno.';
   @override
-  String get kitapsen_publishers_title => 'Publishers';
+  String get kitapsen_publishers_title => 'Editori';
   @override
-  String get kitapsen_publishers_body => 'Browse books by publisher.';
+  String get kitapsen_publishers_body => 'Sfoglia i libri per editore.';
   @override
-  String get kitapsen_publisher_role => 'Publisher';
+  String get kitapsen_publisher_role => 'Editore';
   @override
   String get kitapsen_publisher_no_books =>
-      'This publisher\'s books will be listed here soon.';
+      'I libri di questo editore saranno presto elencati qui.';
   @override
-  String get kitapsen_authors_title => 'Authors';
+  String get kitapsen_authors_title => 'Autori';
   @override
   String get kitapsen_blog_title => 'Blog';
   @override
   String get kitapsen_blog_subtitle =>
-      'News, tips and stories from the Kitapsen community.';
+      'Notizie, consigli e storie dalla comunità di Kitapsen.';
   @override
-  String get kitapsen_blog_empty => 'No blog posts yet.';
+  String get kitapsen_blog_empty => 'Ancora nessun articolo.';
   @override
-  String get kitapsen_collections_title => 'Collections';
+  String get kitapsen_collections_title => 'Raccolte';
   @override
-  String get kitapsen_collections_new => 'New collection';
+  String get kitapsen_collections_new => 'Nuova raccolta';
   @override
-  String get kitapsen_collections_name => 'Collection name';
+  String get kitapsen_collections_name => 'Nome della raccolta';
   @override
-  String get kitapsen_collections_description => 'Description (optional)';
+  String get kitapsen_collections_description => 'Descrizione (facoltativa)';
   @override
   String get kitapsen_collections_empty =>
-      'No collections yet. Create collections to organise your books.';
+      'Ancora nessuna raccolta. Crea delle raccolte per organizzare i tuoi libri.';
   @override
-  String get kitapsen_collections_delete_confirm => 'Delete this collection?';
+  String get kitapsen_collections_delete_confirm =>
+      'Eliminare questa raccolta?';
   @override
   String get kitapsen_collections_items_empty =>
-      'No books yet. Add books from their page with "Add to collection".';
+      'Ancora nessun libro. Aggiungi libri dalla loro pagina con «Aggiungi alla raccolta».';
   @override
   String get kitapsen_collections_long_press =>
-      'Long-press a book to remove it.';
+      'Tieni premuto un libro per rimuoverlo.';
   @override
-  String get kitapsen_collections_remove => 'Remove';
+  String get kitapsen_collections_remove => 'Rimuovi';
   @override
   String kitapsen_collections_remove_confirm({required Object title}) =>
-      'Remove "${title}" from this collection?';
+      'Rimuovere «${title}» da questa raccolta?';
   @override
-  String get kitapsen_collections_add => 'Add to collection';
+  String get kitapsen_collections_add => 'Aggiungi alla raccolta';
   @override
-  String get kitapsen_collections_add_title => 'Add to a collection';
+  String get kitapsen_collections_add_title => 'Aggiungi a una raccolta';
   @override
-  String get kitapsen_collections_added => 'Added to the collection';
+  String get kitapsen_collections_added => 'Aggiunto alla raccolta';
   @override
-  String get kitapsen_notebooks_title => 'Notebooks';
+  String get kitapsen_notebooks_title => 'Quaderni';
   @override
-  String get kitapsen_notebooks_new => 'New notebook';
+  String get kitapsen_notebooks_new => 'Nuovo quaderno';
   @override
-  String get kitapsen_notebooks_name => 'Notebook name';
+  String get kitapsen_notebooks_name => 'Nome del quaderno';
   @override
   String get kitapsen_notebooks_empty =>
-      'No notebooks yet. Create notebooks for your reading notes and ideas.';
+      'Ancora nessun quaderno. Crea dei quaderni per le tue note di lettura e le tue idee.';
   @override
-  String kitapsen_notebooks_count({required Object n}) => '${n} notes';
+  String kitapsen_notebooks_count({required Object n}) => '${n} note';
   @override
-  String get kitapsen_notebooks_delete_confirm => 'Delete this notebook?';
+  String get kitapsen_notebooks_delete_confirm => 'Eliminare questo quaderno?';
   @override
-  String get kitapsen_notebooks_entries_empty => 'No notes yet.';
+  String get kitapsen_notebooks_entries_empty => 'Ancora nessuna nota.';
   @override
-  String get kitapsen_notebooks_entry_hint => 'Add a note...';
+  String get kitapsen_notebooks_entry_hint => 'Aggiungi una nota...';
   @override
-  String get kitapsen_notebooks_entry_delete_confirm => 'Delete this note?';
+  String get kitapsen_notebooks_entry_delete_confirm =>
+      'Eliminare questa nota?';
   @override
-  String get kitapsen_notebooks_add => 'Add note';
+  String get kitapsen_notebooks_add => 'Aggiungi nota';
   @override
-  String get kitapsen_goals_title => 'Reading goals';
+  String get kitapsen_goals_title => 'Obiettivi di lettura';
   @override
-  String get kitapsen_goals_new => 'New goal';
+  String get kitapsen_goals_new => 'Nuovo obiettivo';
   @override
-  String get kitapsen_goals_create => 'Create';
+  String get kitapsen_goals_create => 'Crea';
   @override
-  String get kitapsen_goals_created => 'Goal created';
+  String get kitapsen_goals_created => 'Obiettivo creato';
   @override
-  String get kitapsen_goals_type => 'Goal type';
+  String get kitapsen_goals_type => 'Tipo di obiettivo';
   @override
-  String get kitapsen_goals_type_books => 'Books';
+  String get kitapsen_goals_type_books => 'Libri';
   @override
-  String get kitapsen_goals_type_pages => 'Pages';
+  String get kitapsen_goals_type_pages => 'Pagine';
   @override
-  String get kitapsen_goals_type_days => 'Reading days';
+  String get kitapsen_goals_type_days => 'Giorni di lettura';
   @override
-  String get kitapsen_goals_target => 'Target';
+  String get kitapsen_goals_target => 'Obiettivo';
   @override
-  String get kitapsen_goals_this_month => 'This month';
+  String get kitapsen_goals_this_month => 'Questo mese';
   @override
-  String get kitapsen_goals_this_year => 'This year';
+  String get kitapsen_goals_this_year => 'Quest\'anno';
   @override
   String get kitapsen_goals_empty =>
-      'No reading goals. Set your first goal to keep your motivation up.';
+      'Nessun obiettivo di lettura. Fissa il tuo primo obiettivo per restare motivato.';
   @override
-  String get kitapsen_goals_delete_confirm => 'Delete this goal?';
+  String get kitapsen_goals_delete_confirm => 'Eliminare questo obiettivo?';
   @override
-  String get kitapsen_goals_completed => 'Completed';
+  String get kitapsen_goals_completed => 'Raggiunto';
   @override
-  String kitapsen_goals_until({required Object date}) => 'Until ${date}';
+  String kitapsen_goals_until({required Object date}) => 'Fino al ${date}';
   @override
-  String kitapsen_goals_unit_books({required Object n}) => '${n} books';
+  String kitapsen_goals_unit_books({required Object n}) => '${n} libri';
   @override
-  String kitapsen_goals_unit_pages({required Object n}) => '${n} pages';
+  String kitapsen_goals_unit_pages({required Object n}) => '${n} pagine';
   @override
-  String kitapsen_goals_unit_hours({required Object n}) => '${n} hours';
+  String kitapsen_goals_unit_hours({required Object n}) => '${n} ore';
   @override
-  String kitapsen_goals_unit_days({required Object n}) => '${n} reading days';
+  String kitapsen_goals_unit_days({required Object n}) =>
+      '${n} giorni di lettura';
   @override
-  String get kitapsen_goals_streak => 'Day streak';
+  String get kitapsen_goals_streak => 'Giorni consecutivi';
   @override
-  String get kitapsen_goals_longest_streak => 'Longest streak';
+  String get kitapsen_goals_longest_streak => 'Serie più lunga';
   @override
-  String get kitapsen_goals_books_read => 'Books read';
+  String get kitapsen_goals_books_read => 'Libri letti';
   @override
-  String get kitapsen_goals_books_finished => 'Finished';
+  String get kitapsen_goals_books_finished => 'Finiti';
   @override
-  String get kitapsen_feed_title => 'Social feed';
+  String get kitapsen_feed_title => 'Feed social';
   @override
-  String get kitapsen_feed_followed => 'Following';
+  String get kitapsen_feed_followed => 'Seguiti';
   @override
-  String get kitapsen_feed_mine => 'My activity';
+  String get kitapsen_feed_mine => 'La mia attività';
   @override
   String get kitapsen_feed_empty_followed =>
-      'No activity yet. Follow readers to keep up with what they are reading.';
+      'Ancora nessuna attività. Segui altri lettori per scoprire cosa stanno leggendo.';
   @override
   String get kitapsen_feed_empty_mine =>
-      'Your reading activity will appear here once you start reading.';
+      'La tua attività di lettura apparirà qui quando inizierai a leggere.';
   @override
   String kitapsen_feed_started({required Object target}) =>
-      'started reading ${target}';
+      'ha iniziato a leggere ${target}';
   @override
   String kitapsen_feed_finished({required Object target}) =>
-      'finished ${target}';
+      'ha finito ${target}';
   @override
   String kitapsen_feed_reviewed({required Object target}) =>
-      'reviewed ${target}';
+      'ha recensito ${target}';
   @override
   String kitapsen_feed_followed_user({required Object target}) =>
-      'started following ${target}';
+      'ha iniziato a seguire ${target}';
   @override
   String kitapsen_feed_followed_author({required Object target}) =>
-      'followed the author ${target}';
+      'ha iniziato a seguire l\'autore ${target}';
   @override
-  String kitapsen_feed_shared({required Object target}) => 'shared ${target}';
+  String kitapsen_feed_shared({required Object target}) =>
+      'ha condiviso ${target}';
   @override
-  String kitapsen_feed_percent({required Object n}) => '${n}% read';
+  String kitapsen_feed_percent({required Object n}) => 'Letto al ${n}%';
   @override
-  String get kitapsen_feed_finished_badge => 'Finished';
+  String get kitapsen_feed_finished_badge => 'Finito';
   @override
-  String get kitapsen_user_follow => 'Follow';
+  String get kitapsen_user_follow => 'Segui';
   @override
-  String get kitapsen_user_block => 'Block';
+  String get kitapsen_user_block => 'Blocca';
   @override
-  String get kitapsen_user_unblock => 'Unblock';
+  String get kitapsen_user_unblock => 'Sblocca';
   @override
   String kitapsen_user_block_confirm({required Object username}) =>
-      'Block @${username}? They will no longer see your profile and activity, and any follow between you is removed.';
+      'Bloccare @${username}? Non vedrà più il tuo profilo e la tua attività, e ogni rapporto di follow tra voi verrà rimosso.';
   @override
   String kitapsen_user_member_since({required Object date}) =>
-      'Member since ${date}';
+      'Membro dal ${date}';
   @override
-  String kitapsen_user_followers({required Object n}) => '${n} followers';
+  String kitapsen_user_followers({required Object n}) => '${n} follower';
   @override
-  String kitapsen_user_following({required Object n}) => '${n} following';
+  String kitapsen_user_following({required Object n}) => '${n} seguiti';
   @override
   String kitapsen_user_finished_count({required Object n}) =>
-      '${n} books finished';
+      '${n} libri finiti';
   @override
-  String get kitapsen_user_tab_reading => 'Reading';
+  String get kitapsen_user_tab_reading => 'Lettura';
   @override
-  String get kitapsen_user_tab_reviews => 'Reviews';
+  String get kitapsen_user_tab_reviews => 'Recensioni';
   @override
-  String get kitapsen_user_tab_activity => 'Activity';
+  String get kitapsen_user_tab_activity => 'Attività';
   @override
-  String get kitapsen_user_currently_reading => 'Currently reading';
+  String get kitapsen_user_currently_reading => 'In lettura';
   @override
-  String get kitapsen_user_finished => 'Finished';
+  String get kitapsen_user_finished => 'Finiti';
   @override
   String get kitapsen_user_no_reading =>
-      'This reader does not share reading activity.';
+      'Questo lettore non condivide la sua attività di lettura.';
   @override
-  String get kitapsen_user_no_reviews => 'No public reviews yet.';
+  String get kitapsen_user_no_reviews => 'Ancora nessuna recensione pubblica.';
   @override
-  String get kitapsen_user_no_activity => 'No public activity yet.';
+  String get kitapsen_user_no_activity => 'Ancora nessuna attività pubblica.';
   @override
   String get kitapsen_user_private =>
-      'This profile is private. Follow this reader to see their reviews, reading activity and profile.';
+      'Questo profilo è privato. Segui questo lettore per vedere le sue recensioni, la sua attività di lettura e il suo profilo.';
   @override
   String get kitapsen_user_blocked_you =>
-      'This reader has blocked you. Their profile and activity are hidden from you.';
+      'Questo lettore ti ha bloccato. Il suo profilo e la sua attività sono nascosti per te.';
   @override
-  String get kitapsen_user_followers_title => 'Followers';
+  String get kitapsen_user_followers_title => 'Follower';
   @override
-  String get kitapsen_user_following_title => 'Following';
+  String get kitapsen_user_following_title => 'Seguiti';
   @override
-  String get kitapsen_user_no_connections => 'Nobody here yet.';
+  String get kitapsen_user_no_connections => 'Ancora nessuno qui.';
   @override
-  String get kitapsen_clubs_title => 'Book clubs';
+  String get kitapsen_clubs_title => 'Club del libro';
   @override
-  String get kitapsen_clubs_create => 'Create a club';
+  String get kitapsen_clubs_create => 'Crea un club';
   @override
-  String get kitapsen_clubs_name => 'Club name';
+  String get kitapsen_clubs_name => 'Nome del club';
   @override
   String get kitapsen_clubs_empty =>
-      'No book clubs yet. Create or join one to read together.';
+      'Ancora nessun club del libro. Creane uno o unisciti a uno per leggere insieme.';
   @override
-  String get kitapsen_clubs_join => 'Join';
+  String get kitapsen_clubs_join => 'Unisciti';
   @override
-  String get kitapsen_clubs_leave => 'Leave';
+  String get kitapsen_clubs_leave => 'Abbandona';
   @override
-  String get kitapsen_clubs_owner => 'Owner';
+  String get kitapsen_clubs_owner => 'Proprietario';
   @override
-  String get kitapsen_clubs_members => 'Members';
+  String get kitapsen_clubs_members => 'Membri';
   @override
-  String kitapsen_clubs_members_count({required Object n}) => '${n} members';
+  String kitapsen_clubs_members_count({required Object n}) => '${n} membri';
   @override
-  String get kitapsen_clubs_chat => 'Discussion';
+  String get kitapsen_clubs_chat => 'Discussione';
   @override
   String get kitapsen_clubs_join_to_chat =>
-      'Join the club to read and write messages.';
+      'Unisciti al club per leggere e scrivere messaggi.';
   @override
-  String get kitapsen_clubs_no_messages => 'No messages yet.';
+  String get kitapsen_clubs_no_messages => 'Ancora nessun messaggio.';
   @override
-  String get kitapsen_clubs_message_hint => 'Write a message...';
+  String get kitapsen_clubs_message_hint => 'Scrivi un messaggio...';
   @override
-  String get kitapsen_clubs_send => 'Send';
+  String get kitapsen_clubs_send => 'Invia';
   @override
   String get kitapsen_register_taken =>
-      'This username or email address already has an account.';
+      'Esiste già un account con questo nome utente o indirizzo email.';
   @override
-  String get kitapsen_report => 'Report';
+  String get kitapsen_report => 'Segnala';
   @override
-  String get kitapsen_reported => 'Reported';
+  String get kitapsen_reported => 'Segnalato';
   @override
-  String get kitapsen_report_title => 'Report this content';
+  String get kitapsen_report_title => 'Segnala questo contenuto';
   @override
-  String get kitapsen_report_reason => 'Reason (optional)';
+  String get kitapsen_report_reason => 'Motivo (facoltativo)';
   @override
-  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  String get kitapsen_report_reason_hint => 'Perché è inappropriato?';
   @override
-  String get kitapsen_report_submit => 'Submit Report';
+  String get kitapsen_report_submit => 'Invia segnalazione';
   @override
   String get kitapsen_report_thanks =>
-      'Reported. Thank you for helping keep the community safe.';
+      'Segnalato. Grazie per aiutarci a mantenere sicura la comunità.';
   @override
   String get kitapsen_delete_statistics_book_desc =>
       'Il tempo di lettura e i caratteri letti di questo libro vengono rimossi dalle statistiche su tutti i dispositivi';
@@ -106638,7 +106685,7 @@ class _StringsJa extends _StringsEn {
   String get app_ui_scale => 'UIサイズ';
   @override
   String get app_ui_scale_hint =>
-      'Scales app text and spacing. Lower it on large screens if controls feel oversized.';
+      'テキスト・アイコン・コントロールをまとめて、インターフェース全体を 30% から 300% の範囲で拡大縮小します。大きな画面で UI が小さく見える場合は値を上げてください。';
   @override
   String get app_version => 'アプリのバージョン';
   @override
@@ -107161,7 +107208,7 @@ class _StringsJa extends _StringsEn {
   @override
   String get batch_tag_title => 'タグを一括管理';
   @override
-  String get book_continue_reading => 'Continue Reading';
+  String get book_continue_reading => '続きを読む';
   @override
   String get book_convert_blocked_already => 'この書籍はすでにその形式です。';
   @override
@@ -108883,7 +108930,7 @@ class _StringsJa extends _StringsEn {
   @override
   String get font_target_game_lookup => 'ゲーム検索ウィンドウのフォント';
   @override
-  String get font_target_video_subtitle => 'Video Subtitle Font';
+  String get font_target_video_subtitle => '動画字幕フォント';
   @override
   String get gal_card_lookup_independent_size => 'ゲーム内辞書カードの個別サイズ';
   @override
@@ -109988,7 +110035,7 @@ class _StringsJa extends _StringsEn {
   @override
   String get handlebar_sentence => '例文';
   @override
-  String get handlebar_sentence_audio => 'Sentence Audio';
+  String get handlebar_sentence_audio => '例文音声';
   @override
   String get handlebar_video_clip => 'Video Clip (GIF)';
   @override
@@ -111844,17 +111891,17 @@ class _StringsJa extends _StringsEn {
   @override
   String get popup_ctx_adjust_button => '文脈を調整';
   @override
-  String get popup_ctx_box_current => 'Current';
+  String get popup_ctx_box_current => '現在の文';
   @override
   String get popup_ctx_box_empty => '（なし）';
   @override
-  String get popup_ctx_box_next => 'After';
+  String get popup_ctx_box_next => '後の文脈';
   @override
-  String get popup_ctx_box_prev => 'Before';
+  String get popup_ctx_box_prev => '前の文脈';
   @override
   String get popup_ctx_cancel => 'キャンセル';
   @override
-  String get popup_ctx_confirm => 'Confirm';
+  String get popup_ctx_confirm => 'マイニングを確定';
   @override
   String get popup_ctx_modal_count => 'Selected %d';
   @override
@@ -111864,11 +111911,11 @@ class _StringsJa extends _StringsEn {
   @override
   String get popup_ctx_next_minus => 'Remove after';
   @override
-  String get popup_ctx_next_plus => 'Add after';
+  String get popup_ctx_next_plus => '次の文を追加';
   @override
-  String get popup_ctx_prev_minus => 'Remove before';
+  String get popup_ctx_prev_minus => '前の文を削除';
   @override
-  String get popup_ctx_prev_plus => 'Add before';
+  String get popup_ctx_prev_plus => '前の文を追加';
   @override
   String get popup_ctx_preview_audio => '音声を試聴';
   @override
@@ -112084,11 +112131,11 @@ class _StringsJa extends _StringsEn {
   @override
   String get reader_view_mode_label => 'ページ / スクロール';
   @override
-  String get reader_vn => 'Visual Novel';
+  String get reader_vn => 'ビジュアルノベル';
   @override
   String get reader_writing_direction => '組方向';
   @override
-  String get reading_activity => '学習アクティビティ';
+  String get reading_activity => '読書アクティビティ';
   @override
   String get reading_progress => '読書進捗';
   @override
@@ -112413,8 +112460,7 @@ class _StringsJa extends _StringsEn {
   @override
   String get shortcut_action_global_context_menu => 'コンテキストメニューを開く';
   @override
-  String get shortcut_action_global_external_lookup =>
-      'App-external lookup hotkey';
+  String get shortcut_action_global_external_lookup => 'アプリ外辞書検索ショートカット';
   @override
   String get shortcut_action_global_scroll_page_down => '1画面分下にスクロール';
   @override
@@ -112470,9 +112516,9 @@ class _StringsJa extends _StringsEn {
   @override
   String get shortcut_action_reader_open_gallery => '挿絵ギャラリーを開く';
   @override
-  String get shortcut_action_reader_open_menu => 'Open Settings Menu';
+  String get shortcut_action_reader_open_menu => '設定メニューを開く';
   @override
-  String get shortcut_action_reader_open_navigation => 'Open Navigation';
+  String get shortcut_action_reader_open_navigation => 'ナビゲーションを開く';
   @override
   String get shortcut_action_reader_open_statistics => '読書統計を開く';
   @override
@@ -112491,10 +112537,9 @@ class _StringsJa extends _StringsEn {
   String get shortcut_action_video_align_subtitle_to_prev => '前の字幕を現在位置に合わせる';
   @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
-      'Cycle Secondary Subtitle Obscure';
+      '副字幕隠しモードを順に切り替え';
   @override
-  String get shortcut_action_video_cycle_subtitle_obscure =>
-      'Cycle Subtitle Obscure Mode';
+  String get shortcut_action_video_cycle_subtitle_obscure => '字幕隠しモードを順に切り替え';
   @override
   String get shortcut_action_video_dismiss_dict => '辞書を閉じる';
   @override
@@ -112553,14 +112598,13 @@ class _StringsJa extends _StringsEn {
   String get shortcut_action_video_toggle_play_pause => '再生／一時停止';
   @override
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
-      'Toggle Hide Secondary Subtitle';
+      '副字幕非表示の切り替え';
   @override
   String get shortcut_action_video_toggle_shader_compare => 'シェーダー比較の切り替え';
   @override
   String get shortcut_action_video_toggle_subtitle_blur => '字幕ぼかしの切り替え';
   @override
-  String get shortcut_action_video_toggle_subtitle_hide =>
-      'Toggle Hide Subtitles';
+  String get shortcut_action_video_toggle_subtitle_hide => '字幕非表示の切り替え';
   @override
   String get shortcut_action_video_toggle_subtitle_list => '字幕リストの切り替え';
   @override
@@ -112643,7 +112687,7 @@ class _StringsJa extends _StringsEn {
       'マウスのトリガーはサイドボタン（戻る/進む）のみ使用できます。その他のボタンは他のアプリで本来の役割があるため、ここでは受け付けません。';
   @override
   String get shortcut_scope_global_external_mobile_note =>
-      'Triggered by the system (text selection menu, share, floating ball); the OS does not allow apps to remap this hotkey.';
+      'システムから呼び出されます（テキスト選択メニュー、共有、フローティングボール）。OS の仕様により、このショートカットはアプリ側で変更できません。';
   @override
   String get shortcut_scope_home => 'ホーム';
   @override
@@ -112831,7 +112875,7 @@ class _StringsJa extends _StringsEn {
   @override
   String get stat_detail_ungrouped => 'グループなし';
   @override
-  String get stat_fastest_day => 'Fastest Day';
+  String get stat_fastest_day => '最も速い日';
   @override
   String get stat_favorited => 'お気に入り';
   @override
@@ -112848,9 +112892,9 @@ class _StringsJa extends _StringsEn {
   @override
   String stat_format_pages({required Object n}) => '${n}ページ';
   @override
-  String get stat_goal => 'Daily Goal';
+  String get stat_goal => '1日の目標';
   @override
-  String get stat_goal_daily => 'Daily Goal';
+  String get stat_goal_daily => '1日の目標';
   @override
   String get stat_goal_presets => 'プリセット';
   @override
@@ -112861,11 +112905,11 @@ class _StringsJa extends _StringsEn {
   @override
   String stat_goal_recent_average({required Object n}) => '過去7日間：平均 ${n} 文字/日';
   @override
-  String get stat_goal_set => 'Set Goal';
+  String get stat_goal_set => '目標を設定';
   @override
   String get stat_goal_unit_chars => '文字';
   @override
-  String get stat_goal_weekly => 'Weekly Goal';
+  String get stat_goal_weekly => '1週間の目標';
   @override
   String get stat_hourly_band_epub => 'テキスト書籍';
   @override
@@ -112892,7 +112936,7 @@ class _StringsJa extends _StringsEn {
   @override
   String get stat_no_data => '読書データがまだありません';
   @override
-  String get stat_range_and_trend => 'Range & Trend';
+  String get stat_range_and_trend => '期間と推移';
   @override
   String get stat_recent_active => 'アクティブ日数（7日）';
   @override
@@ -112911,7 +112955,7 @@ class _StringsJa extends _StringsEn {
   @override
   String get stat_sessions_show_all => 'すべてのセッション';
   @override
-  String get stat_slowest_day => 'Slowest Day';
+  String get stat_slowest_day => '最も遅い日';
   @override
   String get stat_sort_by_chars => '文字数順';
   @override
@@ -112927,7 +112971,7 @@ class _StringsJa extends _StringsEn {
   @override
   String stat_speed_cph({required Object n}) => '${n} 文字/時';
   @override
-  String get stat_speed_summary => 'Speed Summary';
+  String get stat_speed_summary => '速度の概要';
   @override
   String get stat_streak => '連続日数';
   @override
@@ -112945,11 +112989,11 @@ class _StringsJa extends _StringsEn {
   @override
   String get stat_trend_weekly => '週';
   @override
-  String get stat_typical_day => 'Typical Day';
+  String get stat_typical_day => '典型的な日';
   @override
   String get stat_vs_prev => '前14日比';
   @override
-  String get stat_weighted_avg_speed => 'Weighted Avg';
+  String get stat_weighted_avg_speed => '加重平均';
   @override
   String get stop => '停止';
   @override
@@ -118268,7 +118312,7 @@ class _StringsJa extends _StringsEn {
   String get game_lookup_samples_continuation_hint =>
       'Set where the second and later lines start relative to the first line. One value applies to all text; 0 keeps the same start.';
   @override
-  String get game_lookup_samples_continuation_label => 'Text continuation';
+  String get game_lookup_samples_continuation_label => 'ずらし幅';
   @override
   String get game_lookup_samples_continuation_title => '継続行の開始位置';
   @override
@@ -120008,7 +120052,7 @@ class _StringsJa extends _StringsEn {
   @override
   String get video_scrape_ai_declined => 'AI not adopted';
   @override
-  String get video_scrape_ai_failed => 'AI request failed';
+  String get video_scrape_ai_failed => 'AI リクエストに失敗';
   @override
   String get video_scrape_ai_searched =>
       'Searched again with titles suggested by AI';
@@ -120068,11 +120112,11 @@ class _StringsJa extends _StringsEn {
   @override
   String get shelf_filter_read_status_finished => '読了';
   @override
-  String get video_filter_media_type => 'Type';
+  String get video_filter_media_type => '種類';
   @override
-  String get video_filter_media_type_video => 'Video';
+  String get video_filter_media_type_video => '動画';
   @override
-  String get video_filter_media_type_audio => 'Audio';
+  String get video_filter_media_type_audio => '音声';
   @override
   String get video_filter_extras => 'Main/Extras';
   @override
@@ -120080,7 +120124,7 @@ class _StringsJa extends _StringsEn {
   @override
   String get video_filter_extras_only => 'Extras only';
   @override
-  String get video_filter_source => 'Source';
+  String get video_filter_source => 'ソース';
   @override
   String get video_filter_series_standalone_empty_hint =>
       'No standalone videos. Videos in collections are on the Series tab, or set the Series filter to All.';
@@ -120196,669 +120240,637 @@ class _StringsJa extends _StringsEn {
   @override
   String get kitapsen_section_title => 'Kitapsen';
   @override
-  String get kitapsen_account_title => 'Kitapsen account';
+  String get kitapsen_account_title => 'Kitapsen アカウント';
   @override
   String get kitapsen_account_hint =>
-      'Sign in to read the books in your Kitapsen library. They appear on your bookshelf, and your reading position syncs with your account.';
+      'ログインすると、Kitapsen ライブラリの本を読めます。本は本棚に表示され、読書位置はアカウントと同期されます。';
   @override
-  String get kitapsen_account_server_url => 'Server address';
+  String get kitapsen_account_server_url => 'サーバーアドレス';
   @override
-  String get kitapsen_account_username => 'Email or username';
+  String get kitapsen_account_username => 'メールアドレスまたはユーザー名';
   @override
-  String get kitapsen_account_password => 'Password';
+  String get kitapsen_account_password => 'パスワード';
   @override
-  String get kitapsen_account_sign_in => 'Sign in';
+  String get kitapsen_account_sign_in => 'ログイン';
   @override
-  String get kitapsen_account_sign_out => 'Sign out';
+  String get kitapsen_account_sign_out => 'ログアウト';
   @override
-  String get kitapsen_account_sign_in_rejected =>
-      'Email or password is incorrect';
+  String get kitapsen_account_sign_in_rejected => 'メールアドレスまたはパスワードが正しくありません';
   @override
   String get kitapsen_account_sign_in_failed =>
-      'Could not reach Kitapsen. Check the address and your connection.';
+      'Kitapsen に接続できませんでした。アドレスと接続を確認してください。';
   @override
-  String get kitapsen_account_summary => 'Sign in to read your library';
+  String get kitapsen_account_summary => 'ログインしてライブラリの本を読む';
   @override
   String get kitapsen_shelf_signed_out_body =>
-      'Sign in with your Kitapsen account to see your library.';
+      'ライブラリを表示するには、Kitapsen アカウントでログインしてください。';
   @override
-  String get kitapsen_shelf_sign_in => 'Sign in to Kitapsen';
+  String get kitapsen_shelf_sign_in => 'Kitapsen にログイン';
   @override
-  String get kitapsen_onboarding_title => 'Your Kitapsen library';
+  String get kitapsen_onboarding_title => 'あなたの Kitapsen ライブラリ';
   @override
   String get kitapsen_onboarding_body =>
-      'Sign in to see the books in your Kitapsen account on this device. You can skip this and sign in later from Settings.';
+      'ログインすると、Kitapsen アカウントの本をこのデバイスで表示できます。このステップはスキップして、後で設定からログインすることもできます。';
   @override
   String app_store_update_body({required Object version}) =>
-      'Kitapsen ${version} is available on the App Store.';
+      'App Store で Kitapsen ${version} を入手できます。';
   @override
-  String get app_store_update_open => 'Update';
+  String get app_store_update_open => 'アップデート';
   @override
-  String get app_store_update_later => 'Not now';
+  String get app_store_update_later => '後で';
   @override
-  String get kitapsen_about_privacy_policy => 'Privacy policy';
+  String get kitapsen_about_privacy_policy => 'プライバシーポリシー';
   @override
-  String get kitapsen_about_support => 'Contact support';
+  String get kitapsen_about_support => 'サポートに問い合わせ';
   @override
-  String get kitapsen_about_source_code => 'Source code';
+  String get kitapsen_about_source_code => 'ソースコード';
   @override
   String get kitapsen_about_based_on_fushi =>
-      'Kitapsen is based on Fushi (GPLv3) — source: https://github.com/FizyonOps/kitapsen-mobile';
+      'Kitapsen は Fushi（GPLv3）をベースにしています — ソースコード: https://github.com/FizyonOps/kitapsen-mobile';
   @override
-  String get kitapsen_about_licenses => 'Open-source licenses';
+  String get kitapsen_about_licenses => 'オープンソースライセンス';
   @override
-  String get kitapsen_about_section => 'About Kitapsen';
+  String get kitapsen_about_section => 'Kitapsen について';
   @override
-  String get kitapsen_import_hint => 'Pick an EPUB or PDF file to import.';
+  String get kitapsen_import_hint => 'インポートする EPUB または PDF ファイルを選択してください。';
   @override
   String get kitapsen_sign_out_removes_books =>
-      'Signing out removes your downloaded Kitapsen books from this device.';
+      'ログアウトすると、ダウンロードした Kitapsen の本がこのデバイスから削除されます。';
   @override
-  String get kitapsen_account_or => 'or';
+  String get kitapsen_account_or => 'または';
   @override
-  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  String get kitapsen_account_continue_with_google => 'Google で続ける';
   @override
-  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  String get kitapsen_account_continue_with_apple => 'Apple で続ける';
   @override
   String get kitapsen_account_social_sign_in_failed =>
-      'Sign-in failed. Please try again.';
+      'ログインに失敗しました。もう一度お試しください。';
   @override
-  String get kitapsen_account_deleted =>
-      'This Kitapsen account has been deleted.';
+  String get kitapsen_account_deleted => 'この Kitapsen アカウントは削除されています。';
   @override
-  String get kitapsen_account_delete => 'Delete account';
+  String get kitapsen_account_delete => 'アカウントを削除';
   @override
   String get kitapsen_account_delete_confirm =>
-      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+      'Kitapsen アカウントが削除され、このデバイスからログアウトされます。ライブラリの本は読めなくなります。この操作は元に戻せません。';
   @override
-  String get kitapsen_account_delete_failed =>
-      'The account could not be deleted. Please try again.';
+  String get kitapsen_account_delete_failed => 'アカウントを削除できませんでした。もう一度お試しください。';
   @override
-  String get kitapsen_nav_store => 'Store';
+  String get kitapsen_nav_store => 'ストア';
   @override
-  String get kitapsen_store_search_hint => 'Search books and authors';
+  String get kitapsen_store_search_hint => '本や著者を検索';
   @override
-  String get kitapsen_store_new_arrivals => 'New arrivals';
+  String get kitapsen_store_new_arrivals => '新着';
   @override
-  String get kitapsen_store_most_read => 'Most read';
+  String get kitapsen_store_most_read => 'よく読まれている本';
   @override
-  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  String get kitapsen_store_staff_picks => '編集部のおすすめ';
   @override
-  String get kitapsen_store_free_books => 'Free books';
+  String get kitapsen_store_free_books => '無料の本';
   @override
-  String get kitapsen_store_stories => 'Serialized stories';
+  String get kitapsen_store_stories => '連載ストーリー';
   @override
-  String get kitapsen_store_categories => 'Categories';
+  String get kitapsen_store_categories => 'カテゴリ';
   @override
-  String get kitapsen_store_see_all => 'See all';
+  String get kitapsen_store_see_all => 'すべて表示';
   @override
-  String get kitapsen_store_no_results => 'No books found';
+  String get kitapsen_store_no_results => '本が見つかりません';
   @override
-  String get kitapsen_store_load_failed =>
-      'Couldn\'t load. Check your connection.';
+  String get kitapsen_store_load_failed => '読み込めませんでした。接続を確認してください。';
   @override
-  String get kitapsen_store_free_only => 'Free only';
+  String get kitapsen_store_free_only => '無料のみ';
   @override
-  String get kitapsen_sort_relevance => 'Most relevant';
+  String get kitapsen_sort_relevance => '関連度順';
   @override
-  String get kitapsen_sort_newest => 'Newest';
+  String get kitapsen_sort_newest => '新しい順';
   @override
-  String get kitapsen_sort_most_read => 'Most read';
+  String get kitapsen_sort_most_read => 'よく読まれている順';
   @override
-  String get kitapsen_sort_rating => 'Top rated';
+  String get kitapsen_sort_rating => '評価の高い順';
   @override
-  String get kitapsen_sort_title => 'Title A–Z';
+  String get kitapsen_sort_title => 'タイトル順（A–Z）';
   @override
-  String get kitapsen_book_read => 'Read';
+  String get kitapsen_book_read => '読む';
   @override
-  String get kitapsen_book_get_free => 'Get for free';
+  String get kitapsen_book_get_free => '無料で入手';
   @override
-  String get kitapsen_book_claimed => 'Added to your library';
+  String get kitapsen_book_claimed => 'ライブラリに追加しました';
   @override
-  String get kitapsen_book_in_library => 'In your library';
+  String get kitapsen_book_in_library => 'ライブラリにあります';
   @override
-  String get kitapsen_book_not_in_library => 'Not in your library';
+  String get kitapsen_book_not_in_library => 'ライブラリにありません';
   @override
   String get kitapsen_book_sign_in_prompt =>
-      'Sign in to add books to your library and keep a wishlist.';
+      'ログインすると、本をライブラリに追加したり、ウィッシュリストを使ったりできます。';
   @override
-  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  String get kitapsen_book_wishlist_add => 'ウィッシュリストに追加';
   @override
-  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  String get kitapsen_book_wishlist_remove => 'ウィッシュリストから削除';
   @override
-  String get kitapsen_book_downloading => 'Downloading to your library…';
+  String get kitapsen_book_downloading => 'ライブラリにダウンロード中…';
   @override
-  String get kitapsen_book_about => 'About this book';
+  String get kitapsen_book_about => 'この本について';
   @override
-  String get kitapsen_book_pages => 'Pages';
+  String get kitapsen_book_pages => 'ページ数';
   @override
-  String get kitapsen_book_language => 'Language';
+  String get kitapsen_book_language => '言語';
   @override
-  String get kitapsen_book_publisher => 'Publisher';
+  String get kitapsen_book_publisher => '出版社';
   @override
-  String get kitapsen_book_published => 'Published';
+  String get kitapsen_book_published => '出版日';
   @override
-  String get kitapsen_book_action_failed =>
-      'Something went wrong. Please try again.';
+  String get kitapsen_book_action_failed => '問題が発生しました。もう一度お試しください。';
   @override
-  String get kitapsen_book_reviews => 'Reviews';
+  String get kitapsen_book_reviews => 'レビュー';
   @override
-  String get kitapsen_book_no_reviews => 'No reviews yet';
+  String get kitapsen_book_no_reviews => 'まだレビューはありません';
   @override
-  String get kitapsen_book_write_review => 'Write a review';
+  String get kitapsen_book_write_review => 'レビューを書く';
   @override
-  String get kitapsen_review_title_hint => 'Title (optional)';
+  String get kitapsen_review_title_hint => 'タイトル（任意）';
   @override
-  String get kitapsen_review_content_hint => 'Your review (optional)';
+  String get kitapsen_review_content_hint => 'レビュー本文（任意）';
   @override
-  String get kitapsen_review_submit => 'Send';
+  String get kitapsen_review_submit => '送信';
   @override
-  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  String get kitapsen_review_sent => 'ありがとうございます！レビューを送信しました。';
   @override
-  String get kitapsen_review_already => 'You have already reviewed this book.';
+  String get kitapsen_review_already => 'この本はすでにレビュー済みです。';
   @override
-  String get kitapsen_review_not_allowed =>
-      'Only readers who have this book in their library can review it.';
+  String get kitapsen_review_not_allowed => 'この本がライブラリにある読者だけがレビューできます。';
   @override
-  String get kitapsen_review_more => 'Show more reviews';
+  String get kitapsen_review_more => 'レビューをもっと見る';
   @override
-  String get kitapsen_review_verified => 'Verified reader';
+  String get kitapsen_review_verified => '認証済みの読者';
   @override
-  String get kitapsen_author_follow => 'Follow';
+  String get kitapsen_author_follow => 'フォロー';
   @override
-  String get kitapsen_author_following => 'Following';
+  String get kitapsen_author_following => 'フォロー中';
   @override
-  String get kitapsen_author_followers => 'Followers';
+  String get kitapsen_author_followers => 'フォロワー';
   @override
-  String get kitapsen_author_books => 'Books';
+  String get kitapsen_author_books => '書籍';
   @override
-  String get kitapsen_author_open => 'Author page';
+  String get kitapsen_author_open => '著者ページ';
   @override
-  String get kitapsen_wishlist_title => 'Wishlist';
+  String get kitapsen_wishlist_title => 'ウィッシュリスト';
   @override
-  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  String get kitapsen_wishlist_empty => 'ウィッシュリストは空です';
   @override
-  String get kitapsen_notifications_title => 'Notifications';
+  String get kitapsen_notifications_title => '通知';
   @override
-  String get kitapsen_notifications_empty => 'No notifications';
+  String get kitapsen_notifications_empty => '通知はありません';
   @override
-  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  String get kitapsen_notifications_mark_all => 'すべて既読にする';
   @override
-  String get kitapsen_story_chapters => 'Chapters';
+  String get kitapsen_story_chapters => 'チャプター';
   @override
-  String get kitapsen_story_no_chapters => 'No chapters yet';
+  String get kitapsen_story_no_chapters => 'まだチャプターはありません';
   @override
-  String get kitapsen_story_next => 'Next chapter';
+  String get kitapsen_story_next => '次のチャプター';
   @override
-  String get kitapsen_story_previous => 'Previous chapter';
+  String get kitapsen_story_previous => '前のチャプター';
   @override
-  String get kitapsen_review_like => 'Like';
+  String get kitapsen_review_like => 'いいね';
   @override
-  String get kitapsen_comments_title => 'Comments';
+  String get kitapsen_comments_title => 'コメント';
   @override
-  String get kitapsen_comments_empty => 'No comments yet';
+  String get kitapsen_comments_empty => 'まだコメントはありません';
   @override
-  String get kitapsen_comment_hint => 'Write a comment';
+  String get kitapsen_comment_hint => 'コメントを書く';
   @override
-  String get kitapsen_story_vote => 'Vote';
+  String get kitapsen_story_vote => '投票';
   @override
-  String get kitapsen_story_voted => 'Voted';
+  String get kitapsen_story_voted => '投票済み';
   @override
-  String get kitapsen_story_follow => 'Follow story';
+  String get kitapsen_story_follow => 'ストーリーをフォロー';
   @override
-  String get kitapsen_following_title => 'Following';
+  String get kitapsen_following_title => 'フォロー中';
   @override
-  String get kitapsen_following_authors => 'Authors';
+  String get kitapsen_following_authors => '著者';
   @override
-  String get kitapsen_following_stories => 'Stories';
+  String get kitapsen_following_stories => 'ストーリー';
   @override
-  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  String get kitapsen_following_empty => 'まだ誰もフォローしていません';
   @override
-  String get kitapsen_reader_highlight => 'Highlight';
+  String get kitapsen_reader_highlight => 'ハイライト';
   @override
-  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  String get kitapsen_annotations_title => 'ブックマークとメモ';
   @override
-  String get kitapsen_bookmark_add => 'Add bookmark';
+  String get kitapsen_bookmark_add => 'ブックマークを追加';
   @override
-  String get kitapsen_bookmark_added => 'Bookmark added';
+  String get kitapsen_bookmark_added => 'ブックマークを追加しました';
   @override
-  String get kitapsen_note_add => 'Add note';
+  String get kitapsen_note_add => 'メモを追加';
   @override
-  String get kitapsen_note_hint => 'Your note';
+  String get kitapsen_note_hint => 'メモを入力';
   @override
-  String get kitapsen_note_saved => 'Note saved';
+  String get kitapsen_note_saved => 'メモを保存しました';
   @override
-  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  String get kitapsen_annotations_empty => 'ブックマークやメモはまだありません';
   @override
-  String get kitapsen_store_badge_free => 'Free';
+  String get kitapsen_store_badge_free => '無料';
   @override
-  String get kitapsen_store_badge_new => 'New';
+  String get kitapsen_store_badge_new => '新着';
   @override
-  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  String kitapsen_store_rating_count({required Object n}) => '${n} 件のレビュー';
   @override
-  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  String get kitapsen_store_hero_title => '次に読む素敵な本が、ここに。';
   @override
   String get kitapsen_store_hero_body =>
-      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+      '新しいストーリーや大好きな著者に出会いましょう。本を選んで、スマートフォン、タブレット、パソコンで読み始めましょう。';
   @override
-  String get kitapsen_store_explore_books => 'Explore books';
+  String get kitapsen_store_explore_books => '本を探す';
   @override
-  String get kitapsen_store_start_free => 'Start with free books';
+  String get kitapsen_store_start_free => '無料の本から始めましょう';
   @override
-  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  String get kitapsen_store_start_free_body => '最初の一冊を見つけましょう。';
   @override
-  String get kitapsen_store_library_always => 'Your library is always with you';
+  String get kitapsen_store_library_always => 'ライブラリはいつもあなたのそばに';
   @override
-  String get kitapsen_store_library_always_body =>
-      'Read on your phone, tablet and computer.';
+  String get kitapsen_store_library_always_body => 'スマートフォン、タブレット、パソコンで読めます。';
   @override
-  String get kitapsen_store_meet_authors => 'Meet the authors';
+  String get kitapsen_store_meet_authors => '著者に出会う';
   @override
-  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  String get kitapsen_store_meet_authors_body => '好きな著者をフォローしましょう。';
   @override
-  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  String get kitapsen_store_reading_list => '読書リストに新しい一冊を';
   @override
-  String get kitapsen_store_all_categories => 'All categories';
+  String get kitapsen_store_all_categories => 'すべてのカテゴリ';
   @override
-  String get kitapsen_store_discover_title => 'Time to discover';
+  String get kitapsen_store_discover_title => '新しい発見の時間';
   @override
   String get kitapsen_store_discover_body =>
-      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+      'ひとつの物語、新しい視点、思いがけない発見。次の一冊を読書リストに加えましょう。';
   @override
-  String get kitapsen_store_discover_now => 'Discover now';
+  String get kitapsen_store_discover_now => '今すぐ探す';
   @override
-  String kitapsen_store_results_for({required Object q}) =>
-      'Results for "${q}"';
+  String kitapsen_store_results_for({required Object q}) => '「${q}」の検索結果';
   @override
-  String get kitapsen_store_matching_authors => 'Matching authors';
+  String get kitapsen_store_matching_authors => '一致する著者';
   @override
-  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  String kitapsen_store_author_books_count({required Object n}) => '${n} 冊';
   @override
-  String get kitapsen_store_author_cta =>
-      'Discover the author\'s books and pick your next read.';
+  String get kitapsen_store_author_cta => '著者の本を見て、次に読む一冊を選びましょう。';
   @override
-  String get kitapsen_store_see_author_books => 'See their books';
+  String get kitapsen_store_see_author_books => '作品を見る';
   @override
-  String get kitapsen_store_authors_books => 'The author\'s books';
+  String get kitapsen_store_authors_books => 'この著者の本';
   @override
-  String get kitapsen_book_read_now => 'Read now';
+  String get kitapsen_book_read_now => '今すぐ読む';
   @override
-  String get kitapsen_book_get_free_web => 'Get it free';
+  String get kitapsen_book_get_free_web => '無料で入手';
   @override
-  String get kitapsen_book_favorites => 'Favorites';
+  String get kitapsen_book_favorites => 'お気に入り';
   @override
-  String get kitapsen_book_description => 'Description';
+  String get kitapsen_book_description => '内容紹介';
   @override
-  String get kitapsen_book_about_author => 'About the author';
+  String get kitapsen_book_about_author => '著者について';
   @override
   String get kitapsen_book_isbn => 'ISBN';
   @override
-  String get kitapsen_book_format => 'Format';
+  String get kitapsen_book_format => '形式';
   @override
-  String get kitapsen_author_role => 'Author';
+  String get kitapsen_author_role => '著者';
   @override
-  String get kitapsen_author_notify => 'Notify me of new books';
+  String get kitapsen_author_notify => '新刊を通知';
   @override
-  String get kitapsen_author_about => 'About';
+  String get kitapsen_author_about => '紹介';
   @override
-  String get kitapsen_review_more_bio => 'Read the full biography';
+  String get kitapsen_review_more_bio => '略歴をすべて読む';
   @override
-  String get kitapsen_author_like => 'Like';
+  String get kitapsen_author_like => 'いいね';
   @override
-  String get kitapsen_author_likes => 'Likes';
+  String get kitapsen_author_likes => 'いいね数';
   @override
-  String get kitapsen_register_open => 'No account yet? Create one';
+  String get kitapsen_register_open => 'アカウントをお持ちでないですか？新規作成';
   @override
-  String get kitapsen_register_name => 'Name (optional)';
+  String get kitapsen_register_name => '名前（任意）';
   @override
-  String get kitapsen_register_username => 'Username';
+  String get kitapsen_register_username => 'ユーザー名';
   @override
-  String get kitapsen_register_username_hint =>
-      '2–20 lowercase letters or digits';
+  String get kitapsen_register_username_hint => '英小文字または数字 2–20 文字';
   @override
-  String get kitapsen_register_email => 'Email';
+  String get kitapsen_register_email => 'メールアドレス';
   @override
-  String get kitapsen_register_password_hint => 'At least 8 characters';
+  String get kitapsen_register_password_hint => '8 文字以上';
   @override
-  String get kitapsen_register_submit => 'Create account';
+  String get kitapsen_register_submit => 'アカウントを作成';
   @override
-  String get kitapsen_register_have_account =>
-      'Already have an account? Sign in';
+  String get kitapsen_register_have_account => 'アカウントをお持ちですか？ログイン';
   @override
   String get kitapsen_register_username_invalid =>
-      'Use 2–20 lowercase letters or digits.';
+      '英小文字または数字 2–20 文字で入力してください。';
   @override
-  String get kitapsen_register_name_invalid =>
-      'The name must be 2–30 characters.';
+  String get kitapsen_register_name_invalid => '名前は 2–30 文字で入力してください。';
   @override
-  String get kitapsen_register_email_invalid => 'Enter a valid email address.';
+  String get kitapsen_register_email_invalid => '有効なメールアドレスを入力してください。';
   @override
-  String get kitapsen_register_password_short =>
-      'The password must be at least 8 characters.';
+  String get kitapsen_register_password_short => 'パスワードは 8 文字以上にしてください。';
   @override
-  String get kitapsen_register_failed =>
-      'The account could not be created. Try again.';
+  String get kitapsen_register_failed => 'アカウントを作成できませんでした。もう一度お試しください。';
   @override
-  String get kitapsen_hub_title => 'My account';
+  String get kitapsen_hub_title => 'マイアカウント';
   @override
-  String get kitapsen_hub_reading => 'Reading';
+  String get kitapsen_hub_reading => '読書';
   @override
-  String get kitapsen_hub_social => 'Social';
+  String get kitapsen_hub_social => 'ソーシャル';
   @override
-  String get kitapsen_hub_discover => 'Discover';
+  String get kitapsen_hub_discover => '見つける';
   @override
-  String get kitapsen_hub_account => 'Account';
+  String get kitapsen_hub_account => 'アカウント';
   @override
-  String get kitapsen_hub_library => 'My library';
+  String get kitapsen_hub_library => 'マイライブラリ';
   @override
-  String get kitapsen_hub_public_profile => 'My public reader profile';
+  String get kitapsen_hub_public_profile => '自分の公開読者プロフィール';
   @override
-  String get kitapsen_hub_sign_in_settings => 'Sign out or delete the account';
+  String get kitapsen_hub_sign_in_settings => 'ログアウト・アカウント削除';
   @override
-  String get kitapsen_common_save => 'Save';
+  String get kitapsen_common_save => '保存';
   @override
-  String get kitapsen_common_saved => 'Saved';
+  String get kitapsen_common_saved => '保存しました';
   @override
-  String get kitapsen_common_edit => 'Edit';
+  String get kitapsen_common_edit => '編集';
   @override
-  String get kitapsen_profile_title => 'My profile';
+  String get kitapsen_profile_title => 'マイプロフィール';
   @override
-  String get kitapsen_profile_name => 'Display name';
+  String get kitapsen_profile_name => '表示名';
   @override
-  String get kitapsen_profile_sharing => 'Share reading activity';
+  String get kitapsen_profile_sharing => '読書アクティビティを共有';
   @override
-  String get kitapsen_profile_sharing_hint =>
-      'Show the books you are reading and have finished on your public profile.';
+  String get kitapsen_profile_sharing_hint => '読んでいる本と読み終えた本を公開プロフィールに表示します。';
   @override
-  String get kitapsen_settings_title => 'Account settings';
+  String get kitapsen_settings_title => 'アカウント設定';
   @override
-  String get kitapsen_settings_profile => 'Profile information';
+  String get kitapsen_settings_profile => 'プロフィール情報';
   @override
-  String get kitapsen_settings_privacy => 'Privacy';
+  String get kitapsen_settings_privacy => 'プライバシー';
   @override
-  String get kitapsen_settings_private => 'Private profile';
+  String get kitapsen_settings_private => '非公開プロフィール';
   @override
   String get kitapsen_settings_private_hint =>
-      'Only your followers can see your profile, reviews, reading activity and updates.';
+      'プロフィール、レビュー、読書アクティビティ、更新はフォロワーだけが見られます。';
   @override
-  String get kitapsen_settings_notifications => 'Email notifications';
+  String get kitapsen_settings_notifications => 'メール通知';
   @override
-  String get kitapsen_settings_follower_email =>
-      'Email me when someone follows me';
+  String get kitapsen_settings_follower_email => 'フォローされたらメールで通知';
   @override
-  String get kitapsen_settings_comment_email =>
-      'Email me when someone comments on my story';
+  String get kitapsen_settings_comment_email => 'ストーリーにコメントがついたらメールで通知';
   @override
-  String get kitapsen_settings_sale_email => 'Email me when my book sells';
+  String get kitapsen_settings_sale_email => '本が売れたらメールで通知';
   @override
-  String get kitapsen_settings_author_emails => 'Author emails';
+  String get kitapsen_settings_author_emails => '著者向けメール';
   @override
-  String get kitapsen_settings_password => 'Change password';
+  String get kitapsen_settings_password => 'パスワードを変更';
   @override
-  String get kitapsen_settings_current_password => 'Current password';
+  String get kitapsen_settings_current_password => '現在のパスワード';
   @override
-  String get kitapsen_settings_new_password => 'New password';
+  String get kitapsen_settings_new_password => '新しいパスワード';
   @override
-  String get kitapsen_settings_repeat_password => 'Repeat the new password';
+  String get kitapsen_settings_repeat_password => '新しいパスワード（確認）';
   @override
-  String get kitapsen_settings_change_password => 'Change password';
+  String get kitapsen_settings_change_password => 'パスワードを変更';
   @override
-  String get kitapsen_settings_passwords_differ =>
-      'The passwords do not match.';
+  String get kitapsen_settings_passwords_differ => 'パスワードが一致しません。';
   @override
-  String get kitapsen_settings_password_changed => 'Password changed.';
+  String get kitapsen_settings_password_changed => 'パスワードを変更しました。';
   @override
   String get kitapsen_settings_password_failed =>
-      'The password could not be changed. Check the current password.';
+      'パスワードを変更できませんでした。現在のパスワードを確認してください。';
   @override
-  String get kitapsen_settings_blocked => 'Blocked users';
+  String get kitapsen_settings_blocked => 'ブロックしたユーザー';
   @override
-  String get kitapsen_settings_no_blocked => 'You have not blocked anyone.';
+  String get kitapsen_settings_no_blocked => 'ブロックしているユーザーはいません。';
   @override
-  String get kitapsen_publishers_title => 'Publishers';
+  String get kitapsen_publishers_title => '出版社';
   @override
-  String get kitapsen_publishers_body => 'Browse books by publisher.';
+  String get kitapsen_publishers_body => '出版社ごとに本を探せます。';
   @override
-  String get kitapsen_publisher_role => 'Publisher';
+  String get kitapsen_publisher_role => '出版社';
   @override
-  String get kitapsen_publisher_no_books =>
-      'This publisher\'s books will be listed here soon.';
+  String get kitapsen_publisher_no_books => 'この出版社の本は近日中にここに掲載されます。';
   @override
-  String get kitapsen_authors_title => 'Authors';
+  String get kitapsen_authors_title => '著者';
   @override
-  String get kitapsen_blog_title => 'Blog';
+  String get kitapsen_blog_title => 'ブログ';
   @override
-  String get kitapsen_blog_subtitle =>
-      'News, tips and stories from the Kitapsen community.';
+  String get kitapsen_blog_subtitle => 'Kitapsen コミュニティからのニュース、ヒント、ストーリー。';
   @override
-  String get kitapsen_blog_empty => 'No blog posts yet.';
+  String get kitapsen_blog_empty => 'まだブログ記事はありません。';
   @override
-  String get kitapsen_collections_title => 'Collections';
+  String get kitapsen_collections_title => 'コレクション';
   @override
-  String get kitapsen_collections_new => 'New collection';
+  String get kitapsen_collections_new => '新しいコレクション';
   @override
-  String get kitapsen_collections_name => 'Collection name';
+  String get kitapsen_collections_name => 'コレクション名';
   @override
-  String get kitapsen_collections_description => 'Description (optional)';
+  String get kitapsen_collections_description => '説明（任意）';
   @override
   String get kitapsen_collections_empty =>
-      'No collections yet. Create collections to organise your books.';
+      'コレクションはまだありません。コレクションを作成して本を整理しましょう。';
   @override
-  String get kitapsen_collections_delete_confirm => 'Delete this collection?';
+  String get kitapsen_collections_delete_confirm => 'このコレクションを削除しますか？';
   @override
   String get kitapsen_collections_items_empty =>
-      'No books yet. Add books from their page with "Add to collection".';
+      'まだ本がありません。本のページの「コレクションに追加」から追加してください。';
   @override
-  String get kitapsen_collections_long_press =>
-      'Long-press a book to remove it.';
+  String get kitapsen_collections_long_press => '本を長押しすると削除できます。';
   @override
-  String get kitapsen_collections_remove => 'Remove';
+  String get kitapsen_collections_remove => '削除';
   @override
   String kitapsen_collections_remove_confirm({required Object title}) =>
-      'Remove "${title}" from this collection?';
+      '「${title}」をこのコレクションから削除しますか？';
   @override
-  String get kitapsen_collections_add => 'Add to collection';
+  String get kitapsen_collections_add => 'コレクションに追加';
   @override
-  String get kitapsen_collections_add_title => 'Add to a collection';
+  String get kitapsen_collections_add_title => 'コレクションに追加';
   @override
-  String get kitapsen_collections_added => 'Added to the collection';
+  String get kitapsen_collections_added => 'コレクションに追加しました';
   @override
-  String get kitapsen_notebooks_title => 'Notebooks';
+  String get kitapsen_notebooks_title => 'ノート';
   @override
-  String get kitapsen_notebooks_new => 'New notebook';
+  String get kitapsen_notebooks_new => '新しいノート';
   @override
-  String get kitapsen_notebooks_name => 'Notebook name';
+  String get kitapsen_notebooks_name => 'ノート名';
   @override
-  String get kitapsen_notebooks_empty =>
-      'No notebooks yet. Create notebooks for your reading notes and ideas.';
+  String get kitapsen_notebooks_empty => 'ノートはまだありません。読書メモやアイデア用のノートを作成しましょう。';
   @override
-  String kitapsen_notebooks_count({required Object n}) => '${n} notes';
+  String kitapsen_notebooks_count({required Object n}) => '${n} 件のメモ';
   @override
-  String get kitapsen_notebooks_delete_confirm => 'Delete this notebook?';
+  String get kitapsen_notebooks_delete_confirm => 'このノートを削除しますか？';
   @override
-  String get kitapsen_notebooks_entries_empty => 'No notes yet.';
+  String get kitapsen_notebooks_entries_empty => 'まだメモはありません。';
   @override
-  String get kitapsen_notebooks_entry_hint => 'Add a note...';
+  String get kitapsen_notebooks_entry_hint => 'メモを追加…';
   @override
-  String get kitapsen_notebooks_entry_delete_confirm => 'Delete this note?';
+  String get kitapsen_notebooks_entry_delete_confirm => 'このメモを削除しますか？';
   @override
-  String get kitapsen_notebooks_add => 'Add note';
+  String get kitapsen_notebooks_add => 'メモを追加';
   @override
-  String get kitapsen_goals_title => 'Reading goals';
+  String get kitapsen_goals_title => '読書目標';
   @override
-  String get kitapsen_goals_new => 'New goal';
+  String get kitapsen_goals_new => '新しい目標';
   @override
-  String get kitapsen_goals_create => 'Create';
+  String get kitapsen_goals_create => '作成';
   @override
-  String get kitapsen_goals_created => 'Goal created';
+  String get kitapsen_goals_created => '目標を作成しました';
   @override
-  String get kitapsen_goals_type => 'Goal type';
+  String get kitapsen_goals_type => '目標の種類';
   @override
-  String get kitapsen_goals_type_books => 'Books';
+  String get kitapsen_goals_type_books => '冊数';
   @override
-  String get kitapsen_goals_type_pages => 'Pages';
+  String get kitapsen_goals_type_pages => 'ページ数';
   @override
-  String get kitapsen_goals_type_days => 'Reading days';
+  String get kitapsen_goals_type_days => '読書日数';
   @override
-  String get kitapsen_goals_target => 'Target';
+  String get kitapsen_goals_target => '目標値';
   @override
-  String get kitapsen_goals_this_month => 'This month';
+  String get kitapsen_goals_this_month => '今月';
   @override
-  String get kitapsen_goals_this_year => 'This year';
+  String get kitapsen_goals_this_year => '今年';
   @override
-  String get kitapsen_goals_empty =>
-      'No reading goals. Set your first goal to keep your motivation up.';
+  String get kitapsen_goals_empty => '読書目標はありません。最初の目標を設定して、モチベーションを保ちましょう。';
   @override
-  String get kitapsen_goals_delete_confirm => 'Delete this goal?';
+  String get kitapsen_goals_delete_confirm => 'この目標を削除しますか？';
   @override
-  String get kitapsen_goals_completed => 'Completed';
+  String get kitapsen_goals_completed => '達成';
   @override
-  String kitapsen_goals_until({required Object date}) => 'Until ${date}';
+  String kitapsen_goals_until({required Object date}) => '${date}まで';
   @override
-  String kitapsen_goals_unit_books({required Object n}) => '${n} books';
+  String kitapsen_goals_unit_books({required Object n}) => '${n} 冊';
   @override
-  String kitapsen_goals_unit_pages({required Object n}) => '${n} pages';
+  String kitapsen_goals_unit_pages({required Object n}) => '${n} ページ';
   @override
-  String kitapsen_goals_unit_hours({required Object n}) => '${n} hours';
+  String kitapsen_goals_unit_hours({required Object n}) => '${n} 時間';
   @override
-  String kitapsen_goals_unit_days({required Object n}) => '${n} reading days';
+  String kitapsen_goals_unit_days({required Object n}) => '読書 ${n} 日';
   @override
-  String get kitapsen_goals_streak => 'Day streak';
+  String get kitapsen_goals_streak => '連続日数';
   @override
-  String get kitapsen_goals_longest_streak => 'Longest streak';
+  String get kitapsen_goals_longest_streak => '最長連続日数';
   @override
-  String get kitapsen_goals_books_read => 'Books read';
+  String get kitapsen_goals_books_read => '読んだ本';
   @override
-  String get kitapsen_goals_books_finished => 'Finished';
+  String get kitapsen_goals_books_finished => '読了';
   @override
-  String get kitapsen_feed_title => 'Social feed';
+  String get kitapsen_feed_title => 'ソーシャルフィード';
   @override
-  String get kitapsen_feed_followed => 'Following';
+  String get kitapsen_feed_followed => 'フォロー中';
   @override
-  String get kitapsen_feed_mine => 'My activity';
+  String get kitapsen_feed_mine => '自分のアクティビティ';
   @override
   String get kitapsen_feed_empty_followed =>
-      'No activity yet. Follow readers to keep up with what they are reading.';
+      'まだアクティビティはありません。読者をフォローして、何を読んでいるかチェックしましょう。';
   @override
-  String get kitapsen_feed_empty_mine =>
-      'Your reading activity will appear here once you start reading.';
+  String get kitapsen_feed_empty_mine => '読み始めると、読書アクティビティがここに表示されます。';
   @override
-  String kitapsen_feed_started({required Object target}) =>
-      'started reading ${target}';
+  String kitapsen_feed_started({required Object target}) => '${target}を読み始めました';
   @override
   String kitapsen_feed_finished({required Object target}) =>
-      'finished ${target}';
+      '${target}を読み終えました';
   @override
   String kitapsen_feed_reviewed({required Object target}) =>
-      'reviewed ${target}';
+      '${target}をレビューしました';
   @override
   String kitapsen_feed_followed_user({required Object target}) =>
-      'started following ${target}';
+      '${target}をフォローしました';
   @override
   String kitapsen_feed_followed_author({required Object target}) =>
-      'followed the author ${target}';
+      '著者 ${target}をフォローしました';
   @override
-  String kitapsen_feed_shared({required Object target}) => 'shared ${target}';
+  String kitapsen_feed_shared({required Object target}) => '${target}を共有しました';
   @override
-  String kitapsen_feed_percent({required Object n}) => '${n}% read';
+  String kitapsen_feed_percent({required Object n}) => '${n}% 読了';
   @override
-  String get kitapsen_feed_finished_badge => 'Finished';
+  String get kitapsen_feed_finished_badge => '読了';
   @override
-  String get kitapsen_user_follow => 'Follow';
+  String get kitapsen_user_follow => 'フォロー';
   @override
-  String get kitapsen_user_block => 'Block';
+  String get kitapsen_user_block => 'ブロック';
   @override
-  String get kitapsen_user_unblock => 'Unblock';
+  String get kitapsen_user_unblock => 'ブロック解除';
   @override
   String kitapsen_user_block_confirm({required Object username}) =>
-      'Block @${username}? They will no longer see your profile and activity, and any follow between you is removed.';
+      '@${username}をブロックしますか？相手はあなたのプロフィールとアクティビティを見られなくなり、お互いのフォローも解除されます。';
   @override
-  String kitapsen_user_member_since({required Object date}) =>
-      'Member since ${date}';
+  String kitapsen_user_member_since({required Object date}) => '${date}に参加';
   @override
-  String kitapsen_user_followers({required Object n}) => '${n} followers';
+  String kitapsen_user_followers({required Object n}) => 'フォロワー ${n} 人';
   @override
-  String kitapsen_user_following({required Object n}) => '${n} following';
+  String kitapsen_user_following({required Object n}) => 'フォロー中 ${n} 人';
   @override
-  String kitapsen_user_finished_count({required Object n}) =>
-      '${n} books finished';
+  String kitapsen_user_finished_count({required Object n}) => '${n} 冊読了';
   @override
-  String get kitapsen_user_tab_reading => 'Reading';
+  String get kitapsen_user_tab_reading => '読書';
   @override
-  String get kitapsen_user_tab_reviews => 'Reviews';
+  String get kitapsen_user_tab_reviews => 'レビュー';
   @override
-  String get kitapsen_user_tab_activity => 'Activity';
+  String get kitapsen_user_tab_activity => 'アクティビティ';
   @override
-  String get kitapsen_user_currently_reading => 'Currently reading';
+  String get kitapsen_user_currently_reading => '読書中';
   @override
-  String get kitapsen_user_finished => 'Finished';
+  String get kitapsen_user_finished => '読了';
   @override
-  String get kitapsen_user_no_reading =>
-      'This reader does not share reading activity.';
+  String get kitapsen_user_no_reading => 'この読者は読書アクティビティを共有していません。';
   @override
-  String get kitapsen_user_no_reviews => 'No public reviews yet.';
+  String get kitapsen_user_no_reviews => '公開レビューはまだありません。';
   @override
-  String get kitapsen_user_no_activity => 'No public activity yet.';
+  String get kitapsen_user_no_activity => '公開アクティビティはまだありません。';
   @override
   String get kitapsen_user_private =>
-      'This profile is private. Follow this reader to see their reviews, reading activity and profile.';
+      'このプロフィールは非公開です。この読者をフォローすると、レビュー、読書アクティビティ、プロフィールを見られます。';
   @override
   String get kitapsen_user_blocked_you =>
-      'This reader has blocked you. Their profile and activity are hidden from you.';
+      'この読者にブロックされています。プロフィールとアクティビティは表示されません。';
   @override
-  String get kitapsen_user_followers_title => 'Followers';
+  String get kitapsen_user_followers_title => 'フォロワー';
   @override
-  String get kitapsen_user_following_title => 'Following';
+  String get kitapsen_user_following_title => 'フォロー中';
   @override
-  String get kitapsen_user_no_connections => 'Nobody here yet.';
+  String get kitapsen_user_no_connections => 'まだ誰もいません。';
   @override
-  String get kitapsen_clubs_title => 'Book clubs';
+  String get kitapsen_clubs_title => '読書クラブ';
   @override
-  String get kitapsen_clubs_create => 'Create a club';
+  String get kitapsen_clubs_create => 'クラブを作成';
   @override
-  String get kitapsen_clubs_name => 'Club name';
+  String get kitapsen_clubs_name => 'クラブ名';
   @override
-  String get kitapsen_clubs_empty =>
-      'No book clubs yet. Create or join one to read together.';
+  String get kitapsen_clubs_empty => '読書クラブはまだありません。クラブを作成するか参加して、一緒に読みましょう。';
   @override
-  String get kitapsen_clubs_join => 'Join';
+  String get kitapsen_clubs_join => '参加';
   @override
-  String get kitapsen_clubs_leave => 'Leave';
+  String get kitapsen_clubs_leave => '退会';
   @override
-  String get kitapsen_clubs_owner => 'Owner';
+  String get kitapsen_clubs_owner => 'オーナー';
   @override
-  String get kitapsen_clubs_members => 'Members';
+  String get kitapsen_clubs_members => 'メンバー';
   @override
-  String kitapsen_clubs_members_count({required Object n}) => '${n} members';
+  String kitapsen_clubs_members_count({required Object n}) => 'メンバー ${n} 人';
   @override
-  String get kitapsen_clubs_chat => 'Discussion';
+  String get kitapsen_clubs_chat => 'ディスカッション';
   @override
-  String get kitapsen_clubs_join_to_chat =>
-      'Join the club to read and write messages.';
+  String get kitapsen_clubs_join_to_chat => 'メッセージを読んだり書いたりするには、クラブに参加してください。';
   @override
-  String get kitapsen_clubs_no_messages => 'No messages yet.';
+  String get kitapsen_clubs_no_messages => 'まだメッセージはありません。';
   @override
-  String get kitapsen_clubs_message_hint => 'Write a message...';
+  String get kitapsen_clubs_message_hint => 'メッセージを入力…';
   @override
-  String get kitapsen_clubs_send => 'Send';
+  String get kitapsen_clubs_send => '送信';
   @override
-  String get kitapsen_register_taken =>
-      'This username or email address already has an account.';
+  String get kitapsen_register_taken => 'このユーザー名またはメールアドレスは、すでにアカウントに登録されています。';
   @override
-  String get kitapsen_report => 'Report';
+  String get kitapsen_report => '報告';
   @override
-  String get kitapsen_reported => 'Reported';
+  String get kitapsen_reported => '報告済み';
   @override
-  String get kitapsen_report_title => 'Report this content';
+  String get kitapsen_report_title => 'このコンテンツを報告';
   @override
-  String get kitapsen_report_reason => 'Reason (optional)';
+  String get kitapsen_report_reason => '理由（任意）';
   @override
-  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  String get kitapsen_report_reason_hint => '不適切な理由は何ですか？';
   @override
-  String get kitapsen_report_submit => 'Submit Report';
+  String get kitapsen_report_submit => '報告を送信';
   @override
-  String get kitapsen_report_thanks =>
-      'Reported. Thank you for helping keep the community safe.';
+  String get kitapsen_report_thanks => '報告しました。コミュニティの安全を守るためのご協力ありがとうございます。';
   @override
   String get kitapsen_delete_statistics_book_desc =>
       'この本の読書時間と読んだ文字数が、すべての端末の統計から削除されます';
@@ -121757,7 +121769,7 @@ class _StringsKo extends _StringsEn {
   String get app_ui_scale => 'UI 크기';
   @override
   String get app_ui_scale_hint =>
-      'Scales app text and spacing. Lower it on large screens if controls feel oversized.';
+      '텍스트, 아이콘, 컨트롤을 함께 묶어 전체 인터페이스를 30%에서 300%까지 확대·축소합니다. 큰 화면에서 UI가 작아 보이면 값을 높이세요.';
   @override
   String get app_version => '앱 버전';
   @override
@@ -122278,7 +122290,7 @@ class _StringsKo extends _StringsEn {
   @override
   String get batch_tag_title => '태그 관리';
   @override
-  String get book_continue_reading => 'Continue Reading';
+  String get book_continue_reading => '이어서 읽기';
   @override
   String get book_convert_blocked_already => '이 도서는 이미 해당 형식입니다.';
   @override
@@ -124001,7 +124013,7 @@ class _StringsKo extends _StringsEn {
   @override
   String get font_target_game_lookup => '게임 검색 창 글꼴';
   @override
-  String get font_target_video_subtitle => 'Video Subtitle Font';
+  String get font_target_video_subtitle => '동영상 자막 글꼴';
   @override
   String get gal_card_lookup_independent_size => '인게임 사전 카드 별도 크기';
   @override
@@ -125101,7 +125113,7 @@ class _StringsKo extends _StringsEn {
   @override
   String get handlebar_sentence => '예문';
   @override
-  String get handlebar_sentence_audio => 'Sentence Audio';
+  String get handlebar_sentence_audio => '예문 오디오';
   @override
   String get handlebar_video_clip => 'Video Clip (GIF)';
   @override
@@ -126965,17 +126977,17 @@ class _StringsKo extends _StringsEn {
   @override
   String get popup_ctx_adjust_button => '문맥 조정';
   @override
-  String get popup_ctx_box_current => 'Current';
+  String get popup_ctx_box_current => '현재 문장';
   @override
   String get popup_ctx_box_empty => '(없음)';
   @override
-  String get popup_ctx_box_next => 'After';
+  String get popup_ctx_box_next => '다음 문맥';
   @override
-  String get popup_ctx_box_prev => 'Before';
+  String get popup_ctx_box_prev => '이전 문맥';
   @override
   String get popup_ctx_cancel => '취소';
   @override
-  String get popup_ctx_confirm => 'Confirm';
+  String get popup_ctx_confirm => '마이닝 확인';
   @override
   String get popup_ctx_modal_count => 'Selected %d';
   @override
@@ -126985,11 +126997,11 @@ class _StringsKo extends _StringsEn {
   @override
   String get popup_ctx_next_minus => 'Remove after';
   @override
-  String get popup_ctx_next_plus => 'Add after';
+  String get popup_ctx_next_plus => '다음 문장 추가';
   @override
-  String get popup_ctx_prev_minus => 'Remove before';
+  String get popup_ctx_prev_minus => '이전 문장 제거';
   @override
-  String get popup_ctx_prev_plus => 'Add before';
+  String get popup_ctx_prev_plus => '이전 문장 추가';
   @override
   String get popup_ctx_preview_audio => '오디오 미리 듣기';
   @override
@@ -127207,11 +127219,11 @@ class _StringsKo extends _StringsEn {
   @override
   String get reader_view_mode_label => '페이지 / 스크롤';
   @override
-  String get reader_vn => 'Visual Novel';
+  String get reader_vn => '비주얼 노벨';
   @override
   String get reader_writing_direction => '글쓰기 방향';
   @override
-  String get reading_activity => '학습 활동';
+  String get reading_activity => '독서 활동';
   @override
   String get reading_progress => '읽기 진행률';
   @override
@@ -127533,8 +127545,7 @@ class _StringsKo extends _StringsEn {
   @override
   String get shortcut_action_global_context_menu => '컨텍스트 메뉴 열기';
   @override
-  String get shortcut_action_global_external_lookup =>
-      'App-external lookup hotkey';
+  String get shortcut_action_global_external_lookup => '앱 외부 단어 찾기 단축키';
   @override
   String get shortcut_action_global_scroll_page_down => '한 화면 아래로 스크롤';
   @override
@@ -127590,9 +127601,9 @@ class _StringsKo extends _StringsEn {
   @override
   String get shortcut_action_reader_open_gallery => '삽화 갤러리 열기';
   @override
-  String get shortcut_action_reader_open_menu => 'Open Settings Menu';
+  String get shortcut_action_reader_open_menu => '설정 메뉴 열기';
   @override
-  String get shortcut_action_reader_open_navigation => 'Open Navigation';
+  String get shortcut_action_reader_open_navigation => '탐색 열기';
   @override
   String get shortcut_action_reader_open_statistics => '읽기 통계 열기';
   @override
@@ -127613,10 +127624,9 @@ class _StringsKo extends _StringsEn {
       '이전 자막을 현재 시점에 맞추기';
   @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
-      'Cycle Secondary Subtitle Obscure';
+      '보조 자막 가리기 모드 순환';
   @override
-  String get shortcut_action_video_cycle_subtitle_obscure =>
-      'Cycle Subtitle Obscure Mode';
+  String get shortcut_action_video_cycle_subtitle_obscure => '자막 가리기 모드 순환';
   @override
   String get shortcut_action_video_dismiss_dict => '사전 닫기';
   @override
@@ -127675,14 +127685,13 @@ class _StringsKo extends _StringsEn {
   String get shortcut_action_video_toggle_play_pause => '재생 / 일시정지';
   @override
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
-      'Toggle Hide Secondary Subtitle';
+      '보조 자막 숨기기 전환';
   @override
   String get shortcut_action_video_toggle_shader_compare => '셰이더 비교 전환';
   @override
   String get shortcut_action_video_toggle_subtitle_blur => '자막 흐리게 전환';
   @override
-  String get shortcut_action_video_toggle_subtitle_hide =>
-      'Toggle Hide Subtitles';
+  String get shortcut_action_video_toggle_subtitle_hide => '자막 숨기기 전환';
   @override
   String get shortcut_action_video_toggle_subtitle_list => '자막 목록 전환';
   @override
@@ -127764,7 +127773,7 @@ class _StringsKo extends _StringsEn {
       '마우스 트리거는 사이드 버튼(뒤로/앞으로)만 지원합니다. 다른 버튼은 다른 앱에서 원래 기능을 유지해야 하므로 여기서는 허용되지 않습니다.';
   @override
   String get shortcut_scope_global_external_mobile_note =>
-      'Triggered by the system (text selection menu, share, floating ball); the OS does not allow apps to remap this hotkey.';
+      '시스템에서 실행됩니다(텍스트 선택 메뉴, 공유, 플로팅 볼). OS에서 앱이 이 단축키를 변경하도록 허용하지 않습니다.';
   @override
   String get shortcut_scope_home => '홈';
   @override
@@ -127950,7 +127959,7 @@ class _StringsKo extends _StringsEn {
   @override
   String get stat_detail_ungrouped => '그룹 없음';
   @override
-  String get stat_fastest_day => 'Fastest Day';
+  String get stat_fastest_day => '가장 빠른 날';
   @override
   String get stat_favorited => '즐겨찾기';
   @override
@@ -127967,9 +127976,9 @@ class _StringsKo extends _StringsEn {
   @override
   String stat_format_pages({required Object n}) => '${n}페이지';
   @override
-  String get stat_goal => 'Daily Goal';
+  String get stat_goal => '일일 목표';
   @override
-  String get stat_goal_daily => 'Daily Goal';
+  String get stat_goal_daily => '일일 목표';
   @override
   String get stat_goal_presets => '프리셋';
   @override
@@ -127980,11 +127989,11 @@ class _StringsKo extends _StringsEn {
   @override
   String stat_goal_recent_average({required Object n}) => '최근 7일: 평균 ${n} 글자/일';
   @override
-  String get stat_goal_set => 'Set Goal';
+  String get stat_goal_set => '목표 설정';
   @override
   String get stat_goal_unit_chars => '글자';
   @override
-  String get stat_goal_weekly => 'Weekly Goal';
+  String get stat_goal_weekly => '주간 목표';
   @override
   String get stat_hourly_band_epub => '텍스트 도서';
   @override
@@ -128011,7 +128020,7 @@ class _StringsKo extends _StringsEn {
   @override
   String get stat_no_data => '독서 데이터가 아직 없습니다';
   @override
-  String get stat_range_and_trend => 'Range & Trend';
+  String get stat_range_and_trend => '기간 및 추세';
   @override
   String get stat_recent_active => '활동일 (7일)';
   @override
@@ -128030,7 +128039,7 @@ class _StringsKo extends _StringsEn {
   @override
   String get stat_sessions_show_all => '모든 세션';
   @override
-  String get stat_slowest_day => 'Slowest Day';
+  String get stat_slowest_day => '가장 느린 날';
   @override
   String get stat_sort_by_chars => '글자 수순';
   @override
@@ -128046,7 +128055,7 @@ class _StringsKo extends _StringsEn {
   @override
   String stat_speed_cph({required Object n}) => '${n} 자/시간';
   @override
-  String get stat_speed_summary => 'Speed Summary';
+  String get stat_speed_summary => '속도 요약';
   @override
   String get stat_streak => '연속 기록';
   @override
@@ -128064,11 +128073,11 @@ class _StringsKo extends _StringsEn {
   @override
   String get stat_trend_weekly => '주간';
   @override
-  String get stat_typical_day => 'Typical Day';
+  String get stat_typical_day => '일반적인 날';
   @override
   String get stat_vs_prev => '이전 14일 대비';
   @override
-  String get stat_weighted_avg_speed => 'Weighted Avg';
+  String get stat_weighted_avg_speed => '가중 평균';
   @override
   String get stop => '정지';
   @override
@@ -133388,7 +133397,7 @@ class _StringsKo extends _StringsEn {
   String get game_lookup_samples_continuation_hint =>
       'Set where the second and later lines start relative to the first line. One value applies to all text; 0 keeps the same start.';
   @override
-  String get game_lookup_samples_continuation_label => 'Text continuation';
+  String get game_lookup_samples_continuation_label => '오프셋';
   @override
   String get game_lookup_samples_continuation_title => '이어지는 줄의 시작';
   @override
@@ -135132,7 +135141,7 @@ class _StringsKo extends _StringsEn {
   @override
   String get video_scrape_ai_declined => 'AI not adopted';
   @override
-  String get video_scrape_ai_failed => 'AI request failed';
+  String get video_scrape_ai_failed => 'AI 요청 실패';
   @override
   String get video_scrape_ai_searched =>
       'Searched again with titles suggested by AI';
@@ -135192,11 +135201,11 @@ class _StringsKo extends _StringsEn {
   @override
   String get shelf_filter_read_status_finished => '다 읽음';
   @override
-  String get video_filter_media_type => 'Type';
+  String get video_filter_media_type => '유형';
   @override
-  String get video_filter_media_type_video => 'Video';
+  String get video_filter_media_type_video => '동영상';
   @override
-  String get video_filter_media_type_audio => 'Audio';
+  String get video_filter_media_type_audio => '오디오';
   @override
   String get video_filter_extras => 'Main/Extras';
   @override
@@ -135204,7 +135213,7 @@ class _StringsKo extends _StringsEn {
   @override
   String get video_filter_extras_only => 'Extras only';
   @override
-  String get video_filter_source => 'Source';
+  String get video_filter_source => '소스';
   @override
   String get video_filter_series_standalone_empty_hint =>
       'No standalone videos. Videos in collections are on the Series tab, or set the Series filter to All.';
@@ -135247,7 +135256,7 @@ class _StringsKo extends _StringsEn {
   @override
   String get manga_ocr_ai_mode_label => 'AI recognition';
   @override
-  String get manga_ocr_ai_mode_off => 'Off';
+  String get manga_ocr_ai_mode_off => '끄기';
   @override
   String get manga_ocr_ai_mode_low_confidence => 'Only uncertain text';
   @override
@@ -135300,7 +135309,7 @@ class _StringsKo extends _StringsEn {
   String get ocr_system_model_missing =>
       'Google Play services hasn\'t downloaded the text recognition model yet. Download it now (a few MB) to use screen OCR.';
   @override
-  String get ocr_system_model_download => 'Download';
+  String get ocr_system_model_download => '다운로드';
   @override
   String get ocr_system_model_downloading =>
       'Downloading through Google Play services… You can close this dialog; the download continues in the background.';
@@ -135324,669 +135333,638 @@ class _StringsKo extends _StringsEn {
   @override
   String get kitapsen_section_title => 'Kitapsen';
   @override
-  String get kitapsen_account_title => 'Kitapsen account';
+  String get kitapsen_account_title => 'Kitapsen 계정';
   @override
   String get kitapsen_account_hint =>
-      'Sign in to read the books in your Kitapsen library. They appear on your bookshelf, and your reading position syncs with your account.';
+      '로그인하면 Kitapsen 라이브러리의 책을 읽을 수 있습니다. 책은 서재에 표시되고, 읽기 위치는 계정과 동기화됩니다.';
   @override
-  String get kitapsen_account_server_url => 'Server address';
+  String get kitapsen_account_server_url => '서버 주소';
   @override
-  String get kitapsen_account_username => 'Email or username';
+  String get kitapsen_account_username => '이메일 또는 사용자 이름';
   @override
-  String get kitapsen_account_password => 'Password';
+  String get kitapsen_account_password => '비밀번호';
   @override
-  String get kitapsen_account_sign_in => 'Sign in';
+  String get kitapsen_account_sign_in => '로그인';
   @override
-  String get kitapsen_account_sign_out => 'Sign out';
+  String get kitapsen_account_sign_out => '로그아웃';
   @override
-  String get kitapsen_account_sign_in_rejected =>
-      'Email or password is incorrect';
+  String get kitapsen_account_sign_in_rejected => '이메일 또는 비밀번호가 올바르지 않습니다';
   @override
   String get kitapsen_account_sign_in_failed =>
-      'Could not reach Kitapsen. Check the address and your connection.';
+      'Kitapsen에 연결할 수 없습니다. 주소와 네트워크 연결을 확인하세요.';
   @override
-  String get kitapsen_account_summary => 'Sign in to read your library';
+  String get kitapsen_account_summary => '로그인하고 라이브러리의 책 읽기';
   @override
   String get kitapsen_shelf_signed_out_body =>
-      'Sign in with your Kitapsen account to see your library.';
+      '라이브러리를 보려면 Kitapsen 계정으로 로그인하세요.';
   @override
-  String get kitapsen_shelf_sign_in => 'Sign in to Kitapsen';
+  String get kitapsen_shelf_sign_in => 'Kitapsen에 로그인';
   @override
-  String get kitapsen_onboarding_title => 'Your Kitapsen library';
+  String get kitapsen_onboarding_title => '내 Kitapsen 라이브러리';
   @override
   String get kitapsen_onboarding_body =>
-      'Sign in to see the books in your Kitapsen account on this device. You can skip this and sign in later from Settings.';
+      '로그인하면 Kitapsen 계정의 책을 이 기기에서 볼 수 있습니다. 이 단계를 건너뛰고 나중에 설정에서 로그인할 수도 있습니다.';
   @override
   String app_store_update_body({required Object version}) =>
-      'Kitapsen ${version} is available on the App Store.';
+      'App Store에 Kitapsen ${version} 버전이 출시되었습니다.';
   @override
-  String get app_store_update_open => 'Update';
+  String get app_store_update_open => '업데이트';
   @override
-  String get app_store_update_later => 'Not now';
+  String get app_store_update_later => '나중에';
   @override
-  String get kitapsen_about_privacy_policy => 'Privacy policy';
+  String get kitapsen_about_privacy_policy => '개인정보 처리방침';
   @override
-  String get kitapsen_about_support => 'Contact support';
+  String get kitapsen_about_support => '고객 지원 문의';
   @override
-  String get kitapsen_about_source_code => 'Source code';
+  String get kitapsen_about_source_code => '소스 코드';
   @override
   String get kitapsen_about_based_on_fushi =>
-      'Kitapsen is based on Fushi (GPLv3) — source: https://github.com/FizyonOps/kitapsen-mobile';
+      'Kitapsen은 Fushi(GPLv3)를 기반으로 합니다 — 소스 코드: https://github.com/FizyonOps/kitapsen-mobile';
   @override
-  String get kitapsen_about_licenses => 'Open-source licenses';
+  String get kitapsen_about_licenses => '오픈 소스 라이선스';
   @override
-  String get kitapsen_about_section => 'About Kitapsen';
+  String get kitapsen_about_section => 'Kitapsen 정보';
   @override
-  String get kitapsen_import_hint => 'Pick an EPUB or PDF file to import.';
+  String get kitapsen_import_hint => '가져올 EPUB 또는 PDF 파일을 선택하세요.';
   @override
   String get kitapsen_sign_out_removes_books =>
-      'Signing out removes your downloaded Kitapsen books from this device.';
+      '로그아웃하면 다운로드한 Kitapsen 책이 이 기기에서 삭제됩니다.';
   @override
-  String get kitapsen_account_or => 'or';
+  String get kitapsen_account_or => '또는';
   @override
-  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  String get kitapsen_account_continue_with_google => 'Google로 계속하기';
   @override
-  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  String get kitapsen_account_continue_with_apple => 'Apple로 계속하기';
   @override
-  String get kitapsen_account_social_sign_in_failed =>
-      'Sign-in failed. Please try again.';
+  String get kitapsen_account_social_sign_in_failed => '로그인하지 못했습니다. 다시 시도하세요.';
   @override
-  String get kitapsen_account_deleted =>
-      'This Kitapsen account has been deleted.';
+  String get kitapsen_account_deleted => '이 Kitapsen 계정은 삭제되었습니다.';
   @override
-  String get kitapsen_account_delete => 'Delete account';
+  String get kitapsen_account_delete => '계정 삭제';
   @override
   String get kitapsen_account_delete_confirm =>
-      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+      'Kitapsen 계정이 삭제되고 이 기기에서 로그아웃됩니다. 더 이상 라이브러리의 책을 읽을 수 없습니다. 이 작업은 되돌릴 수 없습니다.';
   @override
-  String get kitapsen_account_delete_failed =>
-      'The account could not be deleted. Please try again.';
+  String get kitapsen_account_delete_failed => '계정을 삭제하지 못했습니다. 다시 시도하세요.';
   @override
-  String get kitapsen_nav_store => 'Store';
+  String get kitapsen_nav_store => '스토어';
   @override
-  String get kitapsen_store_search_hint => 'Search books and authors';
+  String get kitapsen_store_search_hint => '책 또는 작가 검색';
   @override
-  String get kitapsen_store_new_arrivals => 'New arrivals';
+  String get kitapsen_store_new_arrivals => '신간';
   @override
-  String get kitapsen_store_most_read => 'Most read';
+  String get kitapsen_store_most_read => '많이 읽은 책';
   @override
-  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  String get kitapsen_store_staff_picks => '에디터 추천';
   @override
-  String get kitapsen_store_free_books => 'Free books';
+  String get kitapsen_store_free_books => '무료 책';
   @override
-  String get kitapsen_store_stories => 'Serialized stories';
+  String get kitapsen_store_stories => '연재 스토리';
   @override
-  String get kitapsen_store_categories => 'Categories';
+  String get kitapsen_store_categories => '카테고리';
   @override
-  String get kitapsen_store_see_all => 'See all';
+  String get kitapsen_store_see_all => '모두 보기';
   @override
-  String get kitapsen_store_no_results => 'No books found';
+  String get kitapsen_store_no_results => '책을 찾을 수 없습니다';
   @override
-  String get kitapsen_store_load_failed =>
-      'Couldn\'t load. Check your connection.';
+  String get kitapsen_store_load_failed => '불러오지 못했습니다. 연결을 확인하세요.';
   @override
-  String get kitapsen_store_free_only => 'Free only';
+  String get kitapsen_store_free_only => '무료만';
   @override
-  String get kitapsen_sort_relevance => 'Most relevant';
+  String get kitapsen_sort_relevance => '관련도순';
   @override
-  String get kitapsen_sort_newest => 'Newest';
+  String get kitapsen_sort_newest => '최신순';
   @override
-  String get kitapsen_sort_most_read => 'Most read';
+  String get kitapsen_sort_most_read => '많이 읽은 순';
   @override
-  String get kitapsen_sort_rating => 'Top rated';
+  String get kitapsen_sort_rating => '평점 높은 순';
   @override
-  String get kitapsen_sort_title => 'Title A–Z';
+  String get kitapsen_sort_title => '제목순 (A–Z)';
   @override
-  String get kitapsen_book_read => 'Read';
+  String get kitapsen_book_read => '읽기';
   @override
-  String get kitapsen_book_get_free => 'Get for free';
+  String get kitapsen_book_get_free => '무료로 받기';
   @override
-  String get kitapsen_book_claimed => 'Added to your library';
+  String get kitapsen_book_claimed => '라이브러리에 추가되었습니다';
   @override
-  String get kitapsen_book_in_library => 'In your library';
+  String get kitapsen_book_in_library => '라이브러리에 있음';
   @override
-  String get kitapsen_book_not_in_library => 'Not in your library';
+  String get kitapsen_book_not_in_library => '라이브러리에 없음';
   @override
   String get kitapsen_book_sign_in_prompt =>
-      'Sign in to add books to your library and keep a wishlist.';
+      '로그인하면 책을 라이브러리에 추가하고 위시리스트를 사용할 수 있습니다.';
   @override
-  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  String get kitapsen_book_wishlist_add => '위시리스트에 추가';
   @override
-  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  String get kitapsen_book_wishlist_remove => '위시리스트에서 삭제';
   @override
-  String get kitapsen_book_downloading => 'Downloading to your library…';
+  String get kitapsen_book_downloading => '라이브러리에 다운로드 중…';
   @override
-  String get kitapsen_book_about => 'About this book';
+  String get kitapsen_book_about => '이 책 소개';
   @override
-  String get kitapsen_book_pages => 'Pages';
+  String get kitapsen_book_pages => '페이지 수';
   @override
-  String get kitapsen_book_language => 'Language';
+  String get kitapsen_book_language => '언어';
   @override
-  String get kitapsen_book_publisher => 'Publisher';
+  String get kitapsen_book_publisher => '출판사';
   @override
-  String get kitapsen_book_published => 'Published';
+  String get kitapsen_book_published => '출판일';
   @override
-  String get kitapsen_book_action_failed =>
-      'Something went wrong. Please try again.';
+  String get kitapsen_book_action_failed => '문제가 발생했습니다. 다시 시도하세요.';
   @override
-  String get kitapsen_book_reviews => 'Reviews';
+  String get kitapsen_book_reviews => '리뷰';
   @override
-  String get kitapsen_book_no_reviews => 'No reviews yet';
+  String get kitapsen_book_no_reviews => '아직 리뷰가 없습니다';
   @override
-  String get kitapsen_book_write_review => 'Write a review';
+  String get kitapsen_book_write_review => '리뷰 쓰기';
   @override
-  String get kitapsen_review_title_hint => 'Title (optional)';
+  String get kitapsen_review_title_hint => '제목 (선택 사항)';
   @override
-  String get kitapsen_review_content_hint => 'Your review (optional)';
+  String get kitapsen_review_content_hint => '리뷰 내용 (선택 사항)';
   @override
-  String get kitapsen_review_submit => 'Send';
+  String get kitapsen_review_submit => '보내기';
   @override
-  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  String get kitapsen_review_sent => '감사합니다! 리뷰가 전송되었습니다.';
   @override
-  String get kitapsen_review_already => 'You have already reviewed this book.';
+  String get kitapsen_review_already => '이미 이 책에 리뷰를 남겼습니다.';
   @override
-  String get kitapsen_review_not_allowed =>
-      'Only readers who have this book in their library can review it.';
+  String get kitapsen_review_not_allowed => '이 책이 라이브러리에 있는 독자만 리뷰를 남길 수 있습니다.';
   @override
-  String get kitapsen_review_more => 'Show more reviews';
+  String get kitapsen_review_more => '리뷰 더 보기';
   @override
-  String get kitapsen_review_verified => 'Verified reader';
+  String get kitapsen_review_verified => '인증된 독자';
   @override
-  String get kitapsen_author_follow => 'Follow';
+  String get kitapsen_author_follow => '팔로우';
   @override
-  String get kitapsen_author_following => 'Following';
+  String get kitapsen_author_following => '팔로잉';
   @override
-  String get kitapsen_author_followers => 'Followers';
+  String get kitapsen_author_followers => '팔로워';
   @override
-  String get kitapsen_author_books => 'Books';
+  String get kitapsen_author_books => '책';
   @override
-  String get kitapsen_author_open => 'Author page';
+  String get kitapsen_author_open => '작가 페이지';
   @override
-  String get kitapsen_wishlist_title => 'Wishlist';
+  String get kitapsen_wishlist_title => '위시리스트';
   @override
-  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  String get kitapsen_wishlist_empty => '위시리스트가 비어 있습니다';
   @override
-  String get kitapsen_notifications_title => 'Notifications';
+  String get kitapsen_notifications_title => '알림';
   @override
-  String get kitapsen_notifications_empty => 'No notifications';
+  String get kitapsen_notifications_empty => '알림이 없습니다';
   @override
-  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  String get kitapsen_notifications_mark_all => '모두 읽음으로 표시';
   @override
-  String get kitapsen_story_chapters => 'Chapters';
+  String get kitapsen_story_chapters => '챕터';
   @override
-  String get kitapsen_story_no_chapters => 'No chapters yet';
+  String get kitapsen_story_no_chapters => '아직 챕터가 없습니다';
   @override
-  String get kitapsen_story_next => 'Next chapter';
+  String get kitapsen_story_next => '다음 챕터';
   @override
-  String get kitapsen_story_previous => 'Previous chapter';
+  String get kitapsen_story_previous => '이전 챕터';
   @override
-  String get kitapsen_review_like => 'Like';
+  String get kitapsen_review_like => '좋아요';
   @override
-  String get kitapsen_comments_title => 'Comments';
+  String get kitapsen_comments_title => '댓글';
   @override
-  String get kitapsen_comments_empty => 'No comments yet';
+  String get kitapsen_comments_empty => '아직 댓글이 없습니다';
   @override
-  String get kitapsen_comment_hint => 'Write a comment';
+  String get kitapsen_comment_hint => '댓글 쓰기';
   @override
-  String get kitapsen_story_vote => 'Vote';
+  String get kitapsen_story_vote => '투표';
   @override
-  String get kitapsen_story_voted => 'Voted';
+  String get kitapsen_story_voted => '투표 완료';
   @override
-  String get kitapsen_story_follow => 'Follow story';
+  String get kitapsen_story_follow => '스토리 팔로우';
   @override
-  String get kitapsen_following_title => 'Following';
+  String get kitapsen_following_title => '팔로잉';
   @override
-  String get kitapsen_following_authors => 'Authors';
+  String get kitapsen_following_authors => '작가';
   @override
-  String get kitapsen_following_stories => 'Stories';
+  String get kitapsen_following_stories => '스토리';
   @override
-  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  String get kitapsen_following_empty => '아직 아무도 팔로우하지 않았습니다';
   @override
-  String get kitapsen_reader_highlight => 'Highlight';
+  String get kitapsen_reader_highlight => '하이라이트';
   @override
-  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  String get kitapsen_annotations_title => '북마크 및 메모';
   @override
-  String get kitapsen_bookmark_add => 'Add bookmark';
+  String get kitapsen_bookmark_add => '북마크 추가';
   @override
-  String get kitapsen_bookmark_added => 'Bookmark added';
+  String get kitapsen_bookmark_added => '북마크를 추가했습니다';
   @override
-  String get kitapsen_note_add => 'Add note';
+  String get kitapsen_note_add => '메모 추가';
   @override
-  String get kitapsen_note_hint => 'Your note';
+  String get kitapsen_note_hint => '메모 입력';
   @override
-  String get kitapsen_note_saved => 'Note saved';
+  String get kitapsen_note_saved => '메모를 저장했습니다';
   @override
-  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  String get kitapsen_annotations_empty => '아직 북마크나 메모가 없습니다';
   @override
-  String get kitapsen_store_badge_free => 'Free';
+  String get kitapsen_store_badge_free => '무료';
   @override
-  String get kitapsen_store_badge_new => 'New';
+  String get kitapsen_store_badge_new => '신간';
   @override
-  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  String kitapsen_store_rating_count({required Object n}) => '리뷰 ${n}개';
   @override
-  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  String get kitapsen_store_hero_title => '다음에 읽을 좋은 책이 여기 있습니다.';
   @override
   String get kitapsen_store_hero_body =>
-      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+      '새로운 이야기와 좋아하는 작가를 만나 보세요. 책을 골라 휴대폰, 태블릿 또는 컴퓨터에서 읽기 시작하세요.';
   @override
-  String get kitapsen_store_explore_books => 'Explore books';
+  String get kitapsen_store_explore_books => '책 둘러보기';
   @override
-  String get kitapsen_store_start_free => 'Start with free books';
+  String get kitapsen_store_start_free => '무료 책으로 시작하기';
   @override
-  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  String get kitapsen_store_start_free_body => '첫 번째 책을 찾아보세요.';
   @override
-  String get kitapsen_store_library_always => 'Your library is always with you';
+  String get kitapsen_store_library_always => '라이브러리는 언제나 당신과 함께';
   @override
-  String get kitapsen_store_library_always_body =>
-      'Read on your phone, tablet and computer.';
+  String get kitapsen_store_library_always_body => '휴대폰, 태블릿, 컴퓨터에서 읽으세요.';
   @override
-  String get kitapsen_store_meet_authors => 'Meet the authors';
+  String get kitapsen_store_meet_authors => '작가를 만나 보세요';
   @override
-  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  String get kitapsen_store_meet_authors_body => '좋아하는 작가를 팔로우하세요.';
   @override
-  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  String get kitapsen_store_reading_list => '읽기 목록에 새 책 한 권';
   @override
-  String get kitapsen_store_all_categories => 'All categories';
+  String get kitapsen_store_all_categories => '전체 카테고리';
   @override
-  String get kitapsen_store_discover_title => 'Time to discover';
+  String get kitapsen_store_discover_title => '새로운 발견의 시간';
   @override
   String get kitapsen_store_discover_body =>
-      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+      '하나의 이야기, 새로운 시각, 뜻밖의 발견. 다음에 읽을 책을 읽기 목록에 추가하세요.';
   @override
-  String get kitapsen_store_discover_now => 'Discover now';
+  String get kitapsen_store_discover_now => '지금 둘러보기';
   @override
-  String kitapsen_store_results_for({required Object q}) =>
-      'Results for "${q}"';
+  String kitapsen_store_results_for({required Object q}) => '\'${q}\' 검색 결과';
   @override
-  String get kitapsen_store_matching_authors => 'Matching authors';
+  String get kitapsen_store_matching_authors => '일치하는 작가';
   @override
-  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  String kitapsen_store_author_books_count({required Object n}) => '${n}권';
   @override
-  String get kitapsen_store_author_cta =>
-      'Discover the author\'s books and pick your next read.';
+  String get kitapsen_store_author_cta => '작가의 책을 살펴보고 다음에 읽을 책을 골라 보세요.';
   @override
-  String get kitapsen_store_see_author_books => 'See their books';
+  String get kitapsen_store_see_author_books => '작품 보기';
   @override
-  String get kitapsen_store_authors_books => 'The author\'s books';
+  String get kitapsen_store_authors_books => '이 작가의 책';
   @override
-  String get kitapsen_book_read_now => 'Read now';
+  String get kitapsen_book_read_now => '지금 읽기';
   @override
-  String get kitapsen_book_get_free_web => 'Get it free';
+  String get kitapsen_book_get_free_web => '무료로 받기';
   @override
-  String get kitapsen_book_favorites => 'Favorites';
+  String get kitapsen_book_favorites => '즐겨찾기';
   @override
-  String get kitapsen_book_description => 'Description';
+  String get kitapsen_book_description => '책 소개';
   @override
-  String get kitapsen_book_about_author => 'About the author';
+  String get kitapsen_book_about_author => '작가 소개';
   @override
   String get kitapsen_book_isbn => 'ISBN';
   @override
-  String get kitapsen_book_format => 'Format';
+  String get kitapsen_book_format => '형식';
   @override
-  String get kitapsen_author_role => 'Author';
+  String get kitapsen_author_role => '작가';
   @override
-  String get kitapsen_author_notify => 'Notify me of new books';
+  String get kitapsen_author_notify => '신간 알림 받기';
   @override
-  String get kitapsen_author_about => 'About';
+  String get kitapsen_author_about => '소개';
   @override
-  String get kitapsen_review_more_bio => 'Read the full biography';
+  String get kitapsen_review_more_bio => '약력 전체 보기';
   @override
-  String get kitapsen_author_like => 'Like';
+  String get kitapsen_author_like => '좋아요';
   @override
-  String get kitapsen_author_likes => 'Likes';
+  String get kitapsen_author_likes => '좋아요 수';
   @override
-  String get kitapsen_register_open => 'No account yet? Create one';
+  String get kitapsen_register_open => '계정이 없으신가요? 계정 만들기';
   @override
-  String get kitapsen_register_name => 'Name (optional)';
+  String get kitapsen_register_name => '이름 (선택 사항)';
   @override
-  String get kitapsen_register_username => 'Username';
+  String get kitapsen_register_username => '사용자 이름';
   @override
-  String get kitapsen_register_username_hint =>
-      '2–20 lowercase letters or digits';
+  String get kitapsen_register_username_hint => '영문 소문자 또는 숫자 2–20자';
   @override
-  String get kitapsen_register_email => 'Email';
+  String get kitapsen_register_email => '이메일';
   @override
-  String get kitapsen_register_password_hint => 'At least 8 characters';
+  String get kitapsen_register_password_hint => '8자 이상';
   @override
-  String get kitapsen_register_submit => 'Create account';
+  String get kitapsen_register_submit => '계정 만들기';
   @override
-  String get kitapsen_register_have_account =>
-      'Already have an account? Sign in';
+  String get kitapsen_register_have_account => '이미 계정이 있으신가요? 로그인';
   @override
-  String get kitapsen_register_username_invalid =>
-      'Use 2–20 lowercase letters or digits.';
+  String get kitapsen_register_username_invalid => '영문 소문자 또는 숫자 2–20자를 사용하세요.';
   @override
-  String get kitapsen_register_name_invalid =>
-      'The name must be 2–30 characters.';
+  String get kitapsen_register_name_invalid => '이름은 2–30자여야 합니다.';
   @override
-  String get kitapsen_register_email_invalid => 'Enter a valid email address.';
+  String get kitapsen_register_email_invalid => '올바른 이메일 주소를 입력하세요.';
   @override
-  String get kitapsen_register_password_short =>
-      'The password must be at least 8 characters.';
+  String get kitapsen_register_password_short => '비밀번호는 8자 이상이어야 합니다.';
   @override
-  String get kitapsen_register_failed =>
-      'The account could not be created. Try again.';
+  String get kitapsen_register_failed => '계정을 만들지 못했습니다. 다시 시도하세요.';
   @override
-  String get kitapsen_hub_title => 'My account';
+  String get kitapsen_hub_title => '내 계정';
   @override
-  String get kitapsen_hub_reading => 'Reading';
+  String get kitapsen_hub_reading => '독서';
   @override
-  String get kitapsen_hub_social => 'Social';
+  String get kitapsen_hub_social => '소셜';
   @override
-  String get kitapsen_hub_discover => 'Discover';
+  String get kitapsen_hub_discover => '둘러보기';
   @override
-  String get kitapsen_hub_account => 'Account';
+  String get kitapsen_hub_account => '계정';
   @override
-  String get kitapsen_hub_library => 'My library';
+  String get kitapsen_hub_library => '내 라이브러리';
   @override
-  String get kitapsen_hub_public_profile => 'My public reader profile';
+  String get kitapsen_hub_public_profile => '내 공개 독자 프로필';
   @override
-  String get kitapsen_hub_sign_in_settings => 'Sign out or delete the account';
+  String get kitapsen_hub_sign_in_settings => '로그아웃 또는 계정 삭제';
   @override
-  String get kitapsen_common_save => 'Save';
+  String get kitapsen_common_save => '저장';
   @override
-  String get kitapsen_common_saved => 'Saved';
+  String get kitapsen_common_saved => '저장되었습니다';
   @override
-  String get kitapsen_common_edit => 'Edit';
+  String get kitapsen_common_edit => '편집';
   @override
-  String get kitapsen_profile_title => 'My profile';
+  String get kitapsen_profile_title => '내 프로필';
   @override
-  String get kitapsen_profile_name => 'Display name';
+  String get kitapsen_profile_name => '표시 이름';
   @override
-  String get kitapsen_profile_sharing => 'Share reading activity';
+  String get kitapsen_profile_sharing => '독서 활동 공유';
   @override
-  String get kitapsen_profile_sharing_hint =>
-      'Show the books you are reading and have finished on your public profile.';
+  String get kitapsen_profile_sharing_hint => '읽고 있는 책과 다 읽은 책을 공개 프로필에 표시합니다.';
   @override
-  String get kitapsen_settings_title => 'Account settings';
+  String get kitapsen_settings_title => '계정 설정';
   @override
-  String get kitapsen_settings_profile => 'Profile information';
+  String get kitapsen_settings_profile => '프로필 정보';
   @override
-  String get kitapsen_settings_privacy => 'Privacy';
+  String get kitapsen_settings_privacy => '개인정보 보호';
   @override
-  String get kitapsen_settings_private => 'Private profile';
+  String get kitapsen_settings_private => '비공개 프로필';
   @override
   String get kitapsen_settings_private_hint =>
-      'Only your followers can see your profile, reviews, reading activity and updates.';
+      '프로필, 리뷰, 독서 활동, 업데이트는 팔로워만 볼 수 있습니다.';
   @override
-  String get kitapsen_settings_notifications => 'Email notifications';
+  String get kitapsen_settings_notifications => '이메일 알림';
   @override
-  String get kitapsen_settings_follower_email =>
-      'Email me when someone follows me';
+  String get kitapsen_settings_follower_email => '누군가 나를 팔로우하면 이메일 받기';
   @override
-  String get kitapsen_settings_comment_email =>
-      'Email me when someone comments on my story';
+  String get kitapsen_settings_comment_email => '내 스토리에 댓글이 달리면 이메일 받기';
   @override
-  String get kitapsen_settings_sale_email => 'Email me when my book sells';
+  String get kitapsen_settings_sale_email => '내 책이 판매되면 이메일 받기';
   @override
-  String get kitapsen_settings_author_emails => 'Author emails';
+  String get kitapsen_settings_author_emails => '작가 이메일';
   @override
-  String get kitapsen_settings_password => 'Change password';
+  String get kitapsen_settings_password => '비밀번호 변경';
   @override
-  String get kitapsen_settings_current_password => 'Current password';
+  String get kitapsen_settings_current_password => '현재 비밀번호';
   @override
-  String get kitapsen_settings_new_password => 'New password';
+  String get kitapsen_settings_new_password => '새 비밀번호';
   @override
-  String get kitapsen_settings_repeat_password => 'Repeat the new password';
+  String get kitapsen_settings_repeat_password => '새 비밀번호 확인';
   @override
-  String get kitapsen_settings_change_password => 'Change password';
+  String get kitapsen_settings_change_password => '비밀번호 변경';
   @override
-  String get kitapsen_settings_passwords_differ =>
-      'The passwords do not match.';
+  String get kitapsen_settings_passwords_differ => '비밀번호가 일치하지 않습니다.';
   @override
-  String get kitapsen_settings_password_changed => 'Password changed.';
+  String get kitapsen_settings_password_changed => '비밀번호가 변경되었습니다.';
   @override
   String get kitapsen_settings_password_failed =>
-      'The password could not be changed. Check the current password.';
+      '비밀번호를 변경하지 못했습니다. 현재 비밀번호를 확인하세요.';
   @override
-  String get kitapsen_settings_blocked => 'Blocked users';
+  String get kitapsen_settings_blocked => '차단한 사용자';
   @override
-  String get kitapsen_settings_no_blocked => 'You have not blocked anyone.';
+  String get kitapsen_settings_no_blocked => '차단한 사용자가 없습니다.';
   @override
-  String get kitapsen_publishers_title => 'Publishers';
+  String get kitapsen_publishers_title => '출판사';
   @override
-  String get kitapsen_publishers_body => 'Browse books by publisher.';
+  String get kitapsen_publishers_body => '출판사별로 책을 둘러보세요.';
   @override
-  String get kitapsen_publisher_role => 'Publisher';
+  String get kitapsen_publisher_role => '출판사';
   @override
-  String get kitapsen_publisher_no_books =>
-      'This publisher\'s books will be listed here soon.';
+  String get kitapsen_publisher_no_books => '이 출판사의 책이 곧 여기에 표시됩니다.';
   @override
-  String get kitapsen_authors_title => 'Authors';
+  String get kitapsen_authors_title => '작가';
   @override
-  String get kitapsen_blog_title => 'Blog';
+  String get kitapsen_blog_title => '블로그';
   @override
-  String get kitapsen_blog_subtitle =>
-      'News, tips and stories from the Kitapsen community.';
+  String get kitapsen_blog_subtitle => 'Kitapsen 커뮤니티의 소식, 팁, 이야기.';
   @override
-  String get kitapsen_blog_empty => 'No blog posts yet.';
+  String get kitapsen_blog_empty => '아직 블로그 글이 없습니다.';
   @override
-  String get kitapsen_collections_title => 'Collections';
+  String get kitapsen_collections_title => '컬렉션';
   @override
-  String get kitapsen_collections_new => 'New collection';
+  String get kitapsen_collections_new => '새 컬렉션';
   @override
-  String get kitapsen_collections_name => 'Collection name';
+  String get kitapsen_collections_name => '컬렉션 이름';
   @override
-  String get kitapsen_collections_description => 'Description (optional)';
+  String get kitapsen_collections_description => '설명 (선택 사항)';
   @override
-  String get kitapsen_collections_empty =>
-      'No collections yet. Create collections to organise your books.';
+  String get kitapsen_collections_empty => '아직 컬렉션이 없습니다. 컬렉션을 만들어 책을 정리하세요.';
   @override
-  String get kitapsen_collections_delete_confirm => 'Delete this collection?';
+  String get kitapsen_collections_delete_confirm => '이 컬렉션을 삭제할까요?';
   @override
   String get kitapsen_collections_items_empty =>
-      'No books yet. Add books from their page with "Add to collection".';
+      '아직 책이 없습니다. 책 페이지에서 \'컬렉션에 추가\'로 책을 추가하세요.';
   @override
-  String get kitapsen_collections_long_press =>
-      'Long-press a book to remove it.';
+  String get kitapsen_collections_long_press => '책을 길게 누르면 제거할 수 있습니다.';
   @override
-  String get kitapsen_collections_remove => 'Remove';
+  String get kitapsen_collections_remove => '제거';
   @override
   String kitapsen_collections_remove_confirm({required Object title}) =>
-      'Remove "${title}" from this collection?';
+      '\'${title}\'을(를) 이 컬렉션에서 제거할까요?';
   @override
-  String get kitapsen_collections_add => 'Add to collection';
+  String get kitapsen_collections_add => '컬렉션에 추가';
   @override
-  String get kitapsen_collections_add_title => 'Add to a collection';
+  String get kitapsen_collections_add_title => '컬렉션에 추가';
   @override
-  String get kitapsen_collections_added => 'Added to the collection';
+  String get kitapsen_collections_added => '컬렉션에 추가되었습니다';
   @override
-  String get kitapsen_notebooks_title => 'Notebooks';
+  String get kitapsen_notebooks_title => '노트';
   @override
-  String get kitapsen_notebooks_new => 'New notebook';
+  String get kitapsen_notebooks_new => '새 노트';
   @override
-  String get kitapsen_notebooks_name => 'Notebook name';
+  String get kitapsen_notebooks_name => '노트 이름';
   @override
   String get kitapsen_notebooks_empty =>
-      'No notebooks yet. Create notebooks for your reading notes and ideas.';
+      '아직 노트가 없습니다. 독서 메모와 아이디어를 위한 노트를 만드세요.';
   @override
-  String kitapsen_notebooks_count({required Object n}) => '${n} notes';
+  String kitapsen_notebooks_count({required Object n}) => '메모 ${n}개';
   @override
-  String get kitapsen_notebooks_delete_confirm => 'Delete this notebook?';
+  String get kitapsen_notebooks_delete_confirm => '이 노트를 삭제할까요?';
   @override
-  String get kitapsen_notebooks_entries_empty => 'No notes yet.';
+  String get kitapsen_notebooks_entries_empty => '아직 메모가 없습니다.';
   @override
-  String get kitapsen_notebooks_entry_hint => 'Add a note...';
+  String get kitapsen_notebooks_entry_hint => '메모 추가…';
   @override
-  String get kitapsen_notebooks_entry_delete_confirm => 'Delete this note?';
+  String get kitapsen_notebooks_entry_delete_confirm => '이 메모를 삭제할까요?';
   @override
-  String get kitapsen_notebooks_add => 'Add note';
+  String get kitapsen_notebooks_add => '메모 추가';
   @override
-  String get kitapsen_goals_title => 'Reading goals';
+  String get kitapsen_goals_title => '독서 목표';
   @override
-  String get kitapsen_goals_new => 'New goal';
+  String get kitapsen_goals_new => '새 목표';
   @override
-  String get kitapsen_goals_create => 'Create';
+  String get kitapsen_goals_create => '만들기';
   @override
-  String get kitapsen_goals_created => 'Goal created';
+  String get kitapsen_goals_created => '목표를 만들었습니다';
   @override
-  String get kitapsen_goals_type => 'Goal type';
+  String get kitapsen_goals_type => '목표 유형';
   @override
-  String get kitapsen_goals_type_books => 'Books';
+  String get kitapsen_goals_type_books => '권수';
   @override
-  String get kitapsen_goals_type_pages => 'Pages';
+  String get kitapsen_goals_type_pages => '페이지 수';
   @override
-  String get kitapsen_goals_type_days => 'Reading days';
+  String get kitapsen_goals_type_days => '독서 일수';
   @override
-  String get kitapsen_goals_target => 'Target';
+  String get kitapsen_goals_target => '목표치';
   @override
-  String get kitapsen_goals_this_month => 'This month';
+  String get kitapsen_goals_this_month => '이번 달';
   @override
-  String get kitapsen_goals_this_year => 'This year';
+  String get kitapsen_goals_this_year => '올해';
   @override
-  String get kitapsen_goals_empty =>
-      'No reading goals. Set your first goal to keep your motivation up.';
+  String get kitapsen_goals_empty => '독서 목표가 없습니다. 첫 목표를 설정해 동기를 유지하세요.';
   @override
-  String get kitapsen_goals_delete_confirm => 'Delete this goal?';
+  String get kitapsen_goals_delete_confirm => '이 목표를 삭제할까요?';
   @override
-  String get kitapsen_goals_completed => 'Completed';
+  String get kitapsen_goals_completed => '달성';
   @override
-  String kitapsen_goals_until({required Object date}) => 'Until ${date}';
+  String kitapsen_goals_until({required Object date}) => '${date}까지';
   @override
-  String kitapsen_goals_unit_books({required Object n}) => '${n} books';
+  String kitapsen_goals_unit_books({required Object n}) => '${n}권';
   @override
-  String kitapsen_goals_unit_pages({required Object n}) => '${n} pages';
+  String kitapsen_goals_unit_pages({required Object n}) => '${n}페이지';
   @override
-  String kitapsen_goals_unit_hours({required Object n}) => '${n} hours';
+  String kitapsen_goals_unit_hours({required Object n}) => '${n}시간';
   @override
-  String kitapsen_goals_unit_days({required Object n}) => '${n} reading days';
+  String kitapsen_goals_unit_days({required Object n}) => '독서 ${n}일';
   @override
-  String get kitapsen_goals_streak => 'Day streak';
+  String get kitapsen_goals_streak => '연속 일수';
   @override
-  String get kitapsen_goals_longest_streak => 'Longest streak';
+  String get kitapsen_goals_longest_streak => '최장 연속 기록';
   @override
-  String get kitapsen_goals_books_read => 'Books read';
+  String get kitapsen_goals_books_read => '읽은 책';
   @override
-  String get kitapsen_goals_books_finished => 'Finished';
+  String get kitapsen_goals_books_finished => '완독';
   @override
-  String get kitapsen_feed_title => 'Social feed';
+  String get kitapsen_feed_title => '소셜 피드';
   @override
-  String get kitapsen_feed_followed => 'Following';
+  String get kitapsen_feed_followed => '팔로잉';
   @override
-  String get kitapsen_feed_mine => 'My activity';
+  String get kitapsen_feed_mine => '내 활동';
   @override
   String get kitapsen_feed_empty_followed =>
-      'No activity yet. Follow readers to keep up with what they are reading.';
+      '아직 활동이 없습니다. 독자를 팔로우하고 무엇을 읽는지 확인하세요.';
   @override
-  String get kitapsen_feed_empty_mine =>
-      'Your reading activity will appear here once you start reading.';
+  String get kitapsen_feed_empty_mine => '읽기 시작하면 독서 활동이 여기에 표시됩니다.';
   @override
   String kitapsen_feed_started({required Object target}) =>
-      'started reading ${target}';
+      '${target}을(를) 읽기 시작했습니다';
   @override
   String kitapsen_feed_finished({required Object target}) =>
-      'finished ${target}';
+      '${target}을(를) 다 읽었습니다';
   @override
   String kitapsen_feed_reviewed({required Object target}) =>
-      'reviewed ${target}';
+      '${target}에 리뷰를 남겼습니다';
   @override
   String kitapsen_feed_followed_user({required Object target}) =>
-      'started following ${target}';
+      '${target} 님을 팔로우했습니다';
   @override
   String kitapsen_feed_followed_author({required Object target}) =>
-      'followed the author ${target}';
+      '작가 ${target} 님을 팔로우했습니다';
   @override
-  String kitapsen_feed_shared({required Object target}) => 'shared ${target}';
+  String kitapsen_feed_shared({required Object target}) =>
+      '${target}을(를) 공유했습니다';
   @override
-  String kitapsen_feed_percent({required Object n}) => '${n}% read';
+  String kitapsen_feed_percent({required Object n}) => '${n}% 읽음';
   @override
-  String get kitapsen_feed_finished_badge => 'Finished';
+  String get kitapsen_feed_finished_badge => '완독';
   @override
-  String get kitapsen_user_follow => 'Follow';
+  String get kitapsen_user_follow => '팔로우';
   @override
-  String get kitapsen_user_block => 'Block';
+  String get kitapsen_user_block => '차단';
   @override
-  String get kitapsen_user_unblock => 'Unblock';
+  String get kitapsen_user_unblock => '차단 해제';
   @override
   String kitapsen_user_block_confirm({required Object username}) =>
-      'Block @${username}? They will no longer see your profile and activity, and any follow between you is removed.';
+      '@${username} 님을 차단할까요? 상대방은 더 이상 내 프로필과 활동을 볼 수 없으며, 서로 간의 팔로우도 해제됩니다.';
   @override
-  String kitapsen_user_member_since({required Object date}) =>
-      'Member since ${date}';
+  String kitapsen_user_member_since({required Object date}) => '${date} 가입';
   @override
-  String kitapsen_user_followers({required Object n}) => '${n} followers';
+  String kitapsen_user_followers({required Object n}) => '팔로워 ${n}명';
   @override
-  String kitapsen_user_following({required Object n}) => '${n} following';
+  String kitapsen_user_following({required Object n}) => '팔로잉 ${n}명';
   @override
-  String kitapsen_user_finished_count({required Object n}) =>
-      '${n} books finished';
+  String kitapsen_user_finished_count({required Object n}) => '${n}권 완독';
   @override
-  String get kitapsen_user_tab_reading => 'Reading';
+  String get kitapsen_user_tab_reading => '독서';
   @override
-  String get kitapsen_user_tab_reviews => 'Reviews';
+  String get kitapsen_user_tab_reviews => '리뷰';
   @override
-  String get kitapsen_user_tab_activity => 'Activity';
+  String get kitapsen_user_tab_activity => '활동';
   @override
-  String get kitapsen_user_currently_reading => 'Currently reading';
+  String get kitapsen_user_currently_reading => '읽는 중';
   @override
-  String get kitapsen_user_finished => 'Finished';
+  String get kitapsen_user_finished => '완독';
   @override
-  String get kitapsen_user_no_reading =>
-      'This reader does not share reading activity.';
+  String get kitapsen_user_no_reading => '이 독자는 독서 활동을 공유하지 않습니다.';
   @override
-  String get kitapsen_user_no_reviews => 'No public reviews yet.';
+  String get kitapsen_user_no_reviews => '아직 공개 리뷰가 없습니다.';
   @override
-  String get kitapsen_user_no_activity => 'No public activity yet.';
+  String get kitapsen_user_no_activity => '아직 공개 활동이 없습니다.';
   @override
   String get kitapsen_user_private =>
-      'This profile is private. Follow this reader to see their reviews, reading activity and profile.';
+      '비공개 프로필입니다. 이 독자를 팔로우하면 리뷰, 독서 활동, 프로필을 볼 수 있습니다.';
   @override
   String get kitapsen_user_blocked_you =>
-      'This reader has blocked you. Their profile and activity are hidden from you.';
+      '이 독자가 회원님을 차단했습니다. 프로필과 활동이 표시되지 않습니다.';
   @override
-  String get kitapsen_user_followers_title => 'Followers';
+  String get kitapsen_user_followers_title => '팔로워';
   @override
-  String get kitapsen_user_following_title => 'Following';
+  String get kitapsen_user_following_title => '팔로잉';
   @override
-  String get kitapsen_user_no_connections => 'Nobody here yet.';
+  String get kitapsen_user_no_connections => '아직 아무도 없습니다.';
   @override
-  String get kitapsen_clubs_title => 'Book clubs';
+  String get kitapsen_clubs_title => '북클럽';
   @override
-  String get kitapsen_clubs_create => 'Create a club';
+  String get kitapsen_clubs_create => '클럽 만들기';
   @override
-  String get kitapsen_clubs_name => 'Club name';
+  String get kitapsen_clubs_name => '클럽 이름';
   @override
-  String get kitapsen_clubs_empty =>
-      'No book clubs yet. Create or join one to read together.';
+  String get kitapsen_clubs_empty => '아직 북클럽이 없습니다. 북클럽을 만들거나 가입해 함께 읽어 보세요.';
   @override
-  String get kitapsen_clubs_join => 'Join';
+  String get kitapsen_clubs_join => '가입';
   @override
-  String get kitapsen_clubs_leave => 'Leave';
+  String get kitapsen_clubs_leave => '나가기';
   @override
-  String get kitapsen_clubs_owner => 'Owner';
+  String get kitapsen_clubs_owner => '운영자';
   @override
-  String get kitapsen_clubs_members => 'Members';
+  String get kitapsen_clubs_members => '멤버';
   @override
-  String kitapsen_clubs_members_count({required Object n}) => '${n} members';
+  String kitapsen_clubs_members_count({required Object n}) => '멤버 ${n}명';
   @override
-  String get kitapsen_clubs_chat => 'Discussion';
+  String get kitapsen_clubs_chat => '토론';
   @override
-  String get kitapsen_clubs_join_to_chat =>
-      'Join the club to read and write messages.';
+  String get kitapsen_clubs_join_to_chat => '메시지를 읽고 쓰려면 클럽에 가입하세요.';
   @override
-  String get kitapsen_clubs_no_messages => 'No messages yet.';
+  String get kitapsen_clubs_no_messages => '아직 메시지가 없습니다.';
   @override
-  String get kitapsen_clubs_message_hint => 'Write a message...';
+  String get kitapsen_clubs_message_hint => '메시지 입력…';
   @override
-  String get kitapsen_clubs_send => 'Send';
+  String get kitapsen_clubs_send => '보내기';
   @override
-  String get kitapsen_register_taken =>
-      'This username or email address already has an account.';
+  String get kitapsen_register_taken => '이 사용자 이름 또는 이메일 주소로 이미 가입된 계정이 있습니다.';
   @override
-  String get kitapsen_report => 'Report';
+  String get kitapsen_report => '신고';
   @override
-  String get kitapsen_reported => 'Reported';
+  String get kitapsen_reported => '신고됨';
   @override
-  String get kitapsen_report_title => 'Report this content';
+  String get kitapsen_report_title => '이 콘텐츠 신고';
   @override
-  String get kitapsen_report_reason => 'Reason (optional)';
+  String get kitapsen_report_reason => '사유 (선택 사항)';
   @override
-  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  String get kitapsen_report_reason_hint => '부적절한 이유는 무엇인가요?';
   @override
-  String get kitapsen_report_submit => 'Submit Report';
+  String get kitapsen_report_submit => '신고 제출';
   @override
   String get kitapsen_report_thanks =>
-      'Reported. Thank you for helping keep the community safe.';
+      '신고되었습니다. 커뮤니티를 안전하게 지키는 데 도움을 주셔서 감사합니다.';
   @override
   String get kitapsen_delete_statistics_book_desc =>
       '이 책의 읽은 시간과 읽은 글자 수가 모든 기기의 통계에서 삭제됩니다';
@@ -136125,7 +136103,7 @@ class _StringsNl extends _StringsEn {
   @override
   String get anime_download_back => 'Terug';
   @override
-  String get anime_download_batch => 'Batch';
+  String get anime_download_batch => 'Bundel';
   @override
   String get anime_download_category_all => 'Alles';
   @override
@@ -136133,7 +136111,7 @@ class _StringsNl extends _StringsEn {
   @override
   String get anime_download_category_non_english => 'Niet-Engels';
   @override
-  String get anime_download_category_raw => 'Raw';
+  String get anime_download_category_raw => 'Onvertaald';
   @override
   String get anime_download_delete => 'Verwijderen';
   @override
@@ -136241,7 +136219,7 @@ class _StringsNl extends _StringsEn {
   String get anime_download_streaming_ready =>
       'In bibliotheek · download gaat door';
   @override
-  String get anime_download_subs_badge => 'Subs';
+  String get anime_download_subs_badge => 'Ondertitels';
   @override
   String get anime_download_subs_deferred =>
       'Ondertitels worden na het downloaden gekoppeld, aan de hand van de daadwerkelijke bestanden';
@@ -137487,7 +137465,7 @@ class _StringsNl extends _StringsEn {
   @override
   String get batch_tag_title => 'Tags beheren';
   @override
-  String get book_continue_reading => 'Continue Reading';
+  String get book_continue_reading => 'Verder lezen';
   @override
   String get book_convert_blocked_already => 'Dit boek is al in dat formaat.';
   @override
@@ -139317,7 +139295,7 @@ class _StringsNl extends _StringsEn {
   @override
   String get font_target_game_lookup => 'Spelzoekervenster lettertype';
   @override
-  String get font_target_video_subtitle => 'Video Subtitle Font';
+  String get font_target_video_subtitle => 'Lettertype video-ondertitels';
   @override
   String get gal_card_lookup_independent_size =>
       'Aparte grootte voor in-game zoekkaart';
@@ -140468,7 +140446,7 @@ class _StringsNl extends _StringsEn {
   @override
   String get handlebar_sentence => 'Zin';
   @override
-  String get handlebar_sentence_audio => 'Sentence Audio';
+  String get handlebar_sentence_audio => 'Zinsaudio';
   @override
   String get handlebar_video_clip => 'Video Clip (GIF)';
   @override
@@ -142704,7 +142682,7 @@ class _StringsNl extends _StringsEn {
   @override
   String get reader_writing_direction => 'Schrijfrichting';
   @override
-  String get reading_activity => 'Studieactiviteit';
+  String get reading_activity => 'Leesactiviteit';
   @override
   String get reading_progress => 'Leesvoortgang';
   @override
@@ -142798,7 +142776,7 @@ class _StringsNl extends _StringsEn {
   @override
   String get reset => 'Herstellen';
   @override
-  String get resource_version_batch => 'Batch';
+  String get resource_version_batch => 'Bundel';
   @override
   String resource_version_episode_count({required Object n}) =>
       '${n} afleveringen';
@@ -143108,9 +143086,9 @@ class _StringsNl extends _StringsEn {
   @override
   String get shortcut_action_reader_open_gallery => 'Illustratiegalerij openen';
   @override
-  String get shortcut_action_reader_open_menu => 'Open Settings Menu';
+  String get shortcut_action_reader_open_menu => 'Instellingenmenu openen';
   @override
-  String get shortcut_action_reader_open_navigation => 'Open Navigation';
+  String get shortcut_action_reader_open_navigation => 'Navigatie openen';
   @override
   String get shortcut_action_reader_open_statistics =>
       'Leesstatistieken openen';
@@ -143132,10 +143110,10 @@ class _StringsNl extends _StringsEn {
       'Vorige ondertitel uitlijnen op nu';
   @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
-      'Cycle Secondary Subtitle Obscure';
+      'Verbergmodus secundaire ondertitel wisselen';
   @override
   String get shortcut_action_video_cycle_subtitle_obscure =>
-      'Cycle Subtitle Obscure Mode';
+      'Verbergmodus ondertitels wisselen';
   @override
   String get shortcut_action_video_dismiss_dict => 'Woordenboek sluiten';
   @override
@@ -143205,7 +143183,7 @@ class _StringsNl extends _StringsEn {
   String get shortcut_action_video_toggle_play_pause => 'Afspelen / Pauzeren';
   @override
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
-      'Toggle Hide Secondary Subtitle';
+      'Secundaire ondertitel tonen/verbergen';
   @override
   String get shortcut_action_video_toggle_shader_compare =>
       'Shadervergelijking in-/uitschakelen';
@@ -143214,7 +143192,7 @@ class _StringsNl extends _StringsEn {
       'Ondertitelvervaging in-/uitschakelen';
   @override
   String get shortcut_action_video_toggle_subtitle_hide =>
-      'Toggle Hide Subtitles';
+      'Ondertitels tonen/verbergen';
   @override
   String get shortcut_action_video_toggle_subtitle_list =>
       'Ondertitellijst in-/uitschakelen';
@@ -143496,7 +143474,7 @@ class _StringsNl extends _StringsEn {
   @override
   String get stat_detail_ungrouped => 'Niet gegroepeerd';
   @override
-  String get stat_fastest_day => 'Fastest Day';
+  String get stat_fastest_day => 'Snelste dag';
   @override
   String get stat_favorited => 'Favorieten';
   @override
@@ -143513,9 +143491,9 @@ class _StringsNl extends _StringsEn {
   @override
   String stat_format_pages({required Object n}) => '${n} pagina\'s';
   @override
-  String get stat_goal => 'Daily Goal';
+  String get stat_goal => 'Dagdoel';
   @override
-  String get stat_goal_daily => 'Daily Goal';
+  String get stat_goal_daily => 'Dagdoel';
   @override
   String get stat_goal_presets => 'Voorinstellingen';
   @override
@@ -143527,11 +143505,11 @@ class _StringsNl extends _StringsEn {
   String stat_goal_recent_average({required Object n}) =>
       'Afgelopen 7 dagen: ${n} tekens/dag gemiddeld';
   @override
-  String get stat_goal_set => 'Set Goal';
+  String get stat_goal_set => 'Doel instellen';
   @override
   String get stat_goal_unit_chars => 'tekens';
   @override
-  String get stat_goal_weekly => 'Weekly Goal';
+  String get stat_goal_weekly => 'Weekdoel';
   @override
   String get stat_hourly_band_epub => 'Tekstboeken';
   @override
@@ -143558,7 +143536,7 @@ class _StringsNl extends _StringsEn {
   @override
   String get stat_no_data => 'Nog geen leesgegevens';
   @override
-  String get stat_range_and_trend => 'Range & Trend';
+  String get stat_range_and_trend => 'Bereik & trend';
   @override
   String get stat_recent_active => 'Actieve dagen (7d)';
   @override
@@ -143577,7 +143555,7 @@ class _StringsNl extends _StringsEn {
   @override
   String get stat_sessions_show_all => 'Alle sessies';
   @override
-  String get stat_slowest_day => 'Slowest Day';
+  String get stat_slowest_day => 'Traagste dag';
   @override
   String get stat_sort_by_chars => 'Op tekens';
   @override
@@ -143593,7 +143571,7 @@ class _StringsNl extends _StringsEn {
   @override
   String stat_speed_cph({required Object n}) => '${n} tekens/uur';
   @override
-  String get stat_speed_summary => 'Speed Summary';
+  String get stat_speed_summary => 'Snelheidsoverzicht';
   @override
   String get stat_streak => 'Reeks';
   @override
@@ -143611,11 +143589,11 @@ class _StringsNl extends _StringsEn {
   @override
   String get stat_trend_weekly => 'Wekelijks';
   @override
-  String get stat_typical_day => 'Typical Day';
+  String get stat_typical_day => 'Typische dag';
   @override
   String get stat_vs_prev => 'vs vorige 14d';
   @override
-  String get stat_weighted_avg_speed => 'Weighted Avg';
+  String get stat_weighted_avg_speed => 'Gewogen gem.';
   @override
   String get stop => 'Stoppen';
   @override
@@ -147447,7 +147425,7 @@ class _StringsNl extends _StringsEn {
   String get remote_manga_added_to_shelf =>
       'Toegevoegd aan de mangaplank; hoofdstukken worden van de peer gedownload';
   @override
-  String get backup_category_games => 'Games';
+  String get backup_category_games => 'Spellen';
   @override
   String get backup_category_games_desc =>
       'Spelbibliotheek, metadatabronnen en omslagen';
@@ -147623,7 +147601,7 @@ class _StringsNl extends _StringsEn {
   @override
   String get reader_stats_title => 'Boekstatistieken';
   @override
-  String get reader_stats_clock_running => 'Timing';
+  String get reader_stats_clock_running => 'Timer loopt';
   @override
   String get reader_stats_clock_paused => 'Gepauzeerd';
   @override
@@ -149005,7 +148983,8 @@ class _StringsNl extends _StringsEn {
   @override
   String get game_stream_host_connecting => 'Verbinden…';
   @override
-  String game_stream_host_online({required Object n}) => 'Online · ${n} games';
+  String game_stream_host_online({required Object n}) =>
+      'Online · ${n} spellen';
   @override
   String get game_stream_host_outdated =>
       'Deze host draait een oudere Kitapsen zonder spelbibliotheek. Werk Kitapsen bij op Windows.';
@@ -150436,7 +150415,7 @@ class _StringsNl extends _StringsEn {
   @override
   String get leaderboard_kind_video => 'Video\'s';
   @override
-  String get leaderboard_kind_game => 'Games';
+  String get leaderboard_kind_game => 'Spellen';
   @override
   String get leaderboard_metric_chars => 'Tekens';
   @override
@@ -151171,7 +151150,7 @@ class _StringsNl extends _StringsEn {
   @override
   String get video_scrape_ai_declined => 'AI not adopted';
   @override
-  String get video_scrape_ai_failed => 'AI request failed';
+  String get video_scrape_ai_failed => 'AI-verzoek mislukt';
   @override
   String get video_scrape_ai_searched =>
       'Searched again with titles suggested by AI';
@@ -151243,7 +151222,7 @@ class _StringsNl extends _StringsEn {
   @override
   String get video_filter_extras_only => 'Extras only';
   @override
-  String get video_filter_source => 'Source';
+  String get video_filter_source => 'Bron';
   @override
   String get video_filter_series_standalone_empty_hint =>
       'No standalone videos. Videos in collections are on the Series tab, or set the Series filter to All.';
@@ -151286,7 +151265,7 @@ class _StringsNl extends _StringsEn {
   @override
   String get manga_ocr_ai_mode_label => 'AI recognition';
   @override
-  String get manga_ocr_ai_mode_off => 'Off';
+  String get manga_ocr_ai_mode_off => 'Uit';
   @override
   String get manga_ocr_ai_mode_low_confidence => 'Only uncertain text';
   @override
@@ -151339,7 +151318,7 @@ class _StringsNl extends _StringsEn {
   String get ocr_system_model_missing =>
       'Google Play services hasn\'t downloaded the text recognition model yet. Download it now (a few MB) to use screen OCR.';
   @override
-  String get ocr_system_model_download => 'Download';
+  String get ocr_system_model_download => 'Downloaden';
   @override
   String get ocr_system_model_downloading =>
       'Downloading through Google Play services… You can close this dialog; the download continues in the background.';
@@ -151363,669 +151342,681 @@ class _StringsNl extends _StringsEn {
   @override
   String get kitapsen_section_title => 'Kitapsen';
   @override
-  String get kitapsen_account_title => 'Kitapsen account';
+  String get kitapsen_account_title => 'Kitapsen-account';
   @override
   String get kitapsen_account_hint =>
-      'Sign in to read the books in your Kitapsen library. They appear on your bookshelf, and your reading position syncs with your account.';
+      'Log in om de boeken in je Kitapsen-bibliotheek te lezen. Ze verschijnen op je boekenplank en je leespositie wordt gesynchroniseerd met je account.';
   @override
-  String get kitapsen_account_server_url => 'Server address';
+  String get kitapsen_account_server_url => 'Serveradres';
   @override
-  String get kitapsen_account_username => 'Email or username';
+  String get kitapsen_account_username => 'E-mail of gebruikersnaam';
   @override
-  String get kitapsen_account_password => 'Password';
+  String get kitapsen_account_password => 'Wachtwoord';
   @override
-  String get kitapsen_account_sign_in => 'Sign in';
+  String get kitapsen_account_sign_in => 'Inloggen';
   @override
-  String get kitapsen_account_sign_out => 'Sign out';
+  String get kitapsen_account_sign_out => 'Uitloggen';
   @override
   String get kitapsen_account_sign_in_rejected =>
-      'Email or password is incorrect';
+      'E-mail of wachtwoord is onjuist';
   @override
   String get kitapsen_account_sign_in_failed =>
-      'Could not reach Kitapsen. Check the address and your connection.';
+      'Kan Kitapsen niet bereiken. Controleer het adres en je verbinding.';
   @override
-  String get kitapsen_account_summary => 'Sign in to read your library';
+  String get kitapsen_account_summary => 'Log in om je bibliotheek te lezen';
   @override
   String get kitapsen_shelf_signed_out_body =>
-      'Sign in with your Kitapsen account to see your library.';
+      'Log in met je Kitapsen-account om je bibliotheek te zien.';
   @override
-  String get kitapsen_shelf_sign_in => 'Sign in to Kitapsen';
+  String get kitapsen_shelf_sign_in => 'Inloggen bij Kitapsen';
   @override
-  String get kitapsen_onboarding_title => 'Your Kitapsen library';
+  String get kitapsen_onboarding_title => 'Je Kitapsen-bibliotheek';
   @override
   String get kitapsen_onboarding_body =>
-      'Sign in to see the books in your Kitapsen account on this device. You can skip this and sign in later from Settings.';
+      'Log in om de boeken van je Kitapsen-account op dit apparaat te zien. Je kunt dit overslaan en later inloggen via Instellingen.';
   @override
   String app_store_update_body({required Object version}) =>
-      'Kitapsen ${version} is available on the App Store.';
+      'Kitapsen ${version} is beschikbaar in de App Store.';
   @override
-  String get app_store_update_open => 'Update';
+  String get app_store_update_open => 'Bijwerken';
   @override
-  String get app_store_update_later => 'Not now';
+  String get app_store_update_later => 'Niet nu';
   @override
-  String get kitapsen_about_privacy_policy => 'Privacy policy';
+  String get kitapsen_about_privacy_policy => 'Privacybeleid';
   @override
-  String get kitapsen_about_support => 'Contact support';
+  String get kitapsen_about_support => 'Contact opnemen met support';
   @override
-  String get kitapsen_about_source_code => 'Source code';
+  String get kitapsen_about_source_code => 'Broncode';
   @override
   String get kitapsen_about_based_on_fushi =>
-      'Kitapsen is based on Fushi (GPLv3) — source: https://github.com/FizyonOps/kitapsen-mobile';
+      'Kitapsen is gebaseerd op Fushi (GPLv3) — broncode: https://github.com/FizyonOps/kitapsen-mobile';
   @override
-  String get kitapsen_about_licenses => 'Open-source licenses';
+  String get kitapsen_about_licenses => 'Opensourcelicenties';
   @override
-  String get kitapsen_about_section => 'About Kitapsen';
+  String get kitapsen_about_section => 'Over Kitapsen';
   @override
-  String get kitapsen_import_hint => 'Pick an EPUB or PDF file to import.';
+  String get kitapsen_import_hint =>
+      'Kies een EPUB- of PDF-bestand om te importeren.';
   @override
   String get kitapsen_sign_out_removes_books =>
-      'Signing out removes your downloaded Kitapsen books from this device.';
+      'Bij het uitloggen worden je gedownloade Kitapsen-boeken van dit apparaat verwijderd.';
   @override
-  String get kitapsen_account_or => 'or';
+  String get kitapsen_account_or => 'of';
   @override
-  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  String get kitapsen_account_continue_with_google => 'Doorgaan met Google';
   @override
-  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  String get kitapsen_account_continue_with_apple => 'Doorgaan met Apple';
   @override
   String get kitapsen_account_social_sign_in_failed =>
-      'Sign-in failed. Please try again.';
+      'Inloggen mislukt. Probeer het opnieuw.';
   @override
-  String get kitapsen_account_deleted =>
-      'This Kitapsen account has been deleted.';
+  String get kitapsen_account_deleted => 'Dit Kitapsen-account is verwijderd.';
   @override
-  String get kitapsen_account_delete => 'Delete account';
+  String get kitapsen_account_delete => 'Account verwijderen';
   @override
   String get kitapsen_account_delete_confirm =>
-      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+      'Je Kitapsen-account wordt verwijderd en dit apparaat wordt uitgelogd. Je kunt de boeken in je bibliotheek dan niet meer lezen. Dit kan niet ongedaan worden gemaakt.';
   @override
   String get kitapsen_account_delete_failed =>
-      'The account could not be deleted. Please try again.';
+      'Het account kon niet worden verwijderd. Probeer het opnieuw.';
   @override
-  String get kitapsen_nav_store => 'Store';
+  String get kitapsen_nav_store => 'Winkel';
   @override
-  String get kitapsen_store_search_hint => 'Search books and authors';
+  String get kitapsen_store_search_hint => 'Zoek boeken en auteurs';
   @override
-  String get kitapsen_store_new_arrivals => 'New arrivals';
+  String get kitapsen_store_new_arrivals => 'Nieuw verschenen';
   @override
-  String get kitapsen_store_most_read => 'Most read';
+  String get kitapsen_store_most_read => 'Meest gelezen boeken';
   @override
-  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  String get kitapsen_store_staff_picks => 'Keuze van de redactie';
   @override
-  String get kitapsen_store_free_books => 'Free books';
+  String get kitapsen_store_free_books => 'Gratis boeken';
   @override
-  String get kitapsen_store_stories => 'Serialized stories';
+  String get kitapsen_store_stories => 'Vervolgverhalen';
   @override
-  String get kitapsen_store_categories => 'Categories';
+  String get kitapsen_store_categories => 'Categorieën';
   @override
-  String get kitapsen_store_see_all => 'See all';
+  String get kitapsen_store_see_all => 'Alles bekijken';
   @override
-  String get kitapsen_store_no_results => 'No books found';
+  String get kitapsen_store_no_results => 'Geen boeken gevonden';
   @override
   String get kitapsen_store_load_failed =>
-      'Couldn\'t load. Check your connection.';
+      'Laden mislukt. Controleer je verbinding.';
   @override
-  String get kitapsen_store_free_only => 'Free only';
+  String get kitapsen_store_free_only => 'Alleen gratis';
   @override
-  String get kitapsen_sort_relevance => 'Most relevant';
+  String get kitapsen_sort_relevance => 'Meest relevant';
   @override
-  String get kitapsen_sort_newest => 'Newest';
+  String get kitapsen_sort_newest => 'Nieuwste';
   @override
-  String get kitapsen_sort_most_read => 'Most read';
+  String get kitapsen_sort_most_read => 'Meest gelezen';
   @override
-  String get kitapsen_sort_rating => 'Top rated';
+  String get kitapsen_sort_rating => 'Best beoordeeld';
   @override
-  String get kitapsen_sort_title => 'Title A–Z';
+  String get kitapsen_sort_title => 'Titel A–Z';
   @override
-  String get kitapsen_book_read => 'Read';
+  String get kitapsen_book_read => 'Lezen';
   @override
-  String get kitapsen_book_get_free => 'Get for free';
+  String get kitapsen_book_get_free => 'Gratis ophalen';
   @override
-  String get kitapsen_book_claimed => 'Added to your library';
+  String get kitapsen_book_claimed => 'Toegevoegd aan je bibliotheek';
   @override
-  String get kitapsen_book_in_library => 'In your library';
+  String get kitapsen_book_in_library => 'In je bibliotheek';
   @override
-  String get kitapsen_book_not_in_library => 'Not in your library';
+  String get kitapsen_book_not_in_library => 'Niet in je bibliotheek';
   @override
   String get kitapsen_book_sign_in_prompt =>
-      'Sign in to add books to your library and keep a wishlist.';
+      'Log in om boeken aan je bibliotheek toe te voegen en een verlanglijst bij te houden.';
   @override
-  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  String get kitapsen_book_wishlist_add => 'Aan verlanglijst toevoegen';
   @override
-  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  String get kitapsen_book_wishlist_remove => 'Van verlanglijst verwijderen';
   @override
-  String get kitapsen_book_downloading => 'Downloading to your library…';
+  String get kitapsen_book_downloading => 'Downloaden naar je bibliotheek…';
   @override
-  String get kitapsen_book_about => 'About this book';
+  String get kitapsen_book_about => 'Over dit boek';
   @override
-  String get kitapsen_book_pages => 'Pages';
+  String get kitapsen_book_pages => 'Pagina\'s';
   @override
-  String get kitapsen_book_language => 'Language';
+  String get kitapsen_book_language => 'Taal';
   @override
-  String get kitapsen_book_publisher => 'Publisher';
+  String get kitapsen_book_publisher => 'Uitgever';
   @override
-  String get kitapsen_book_published => 'Published';
+  String get kitapsen_book_published => 'Verschenen';
   @override
   String get kitapsen_book_action_failed =>
-      'Something went wrong. Please try again.';
+      'Er ging iets mis. Probeer het opnieuw.';
   @override
-  String get kitapsen_book_reviews => 'Reviews';
+  String get kitapsen_book_reviews => 'Beoordelingen';
   @override
-  String get kitapsen_book_no_reviews => 'No reviews yet';
+  String get kitapsen_book_no_reviews => 'Nog geen beoordelingen';
   @override
-  String get kitapsen_book_write_review => 'Write a review';
+  String get kitapsen_book_write_review => 'Beoordeling schrijven';
   @override
-  String get kitapsen_review_title_hint => 'Title (optional)';
+  String get kitapsen_review_title_hint => 'Titel (optioneel)';
   @override
-  String get kitapsen_review_content_hint => 'Your review (optional)';
+  String get kitapsen_review_content_hint => 'Je beoordeling (optioneel)';
   @override
-  String get kitapsen_review_submit => 'Send';
+  String get kitapsen_review_submit => 'Versturen';
   @override
-  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  String get kitapsen_review_sent => 'Bedankt! Je beoordeling is verstuurd.';
   @override
-  String get kitapsen_review_already => 'You have already reviewed this book.';
+  String get kitapsen_review_already => 'Je hebt dit boek al beoordeeld.';
   @override
   String get kitapsen_review_not_allowed =>
-      'Only readers who have this book in their library can review it.';
+      'Alleen lezers die dit boek in hun bibliotheek hebben, kunnen het beoordelen.';
   @override
-  String get kitapsen_review_more => 'Show more reviews';
+  String get kitapsen_review_more => 'Meer beoordelingen tonen';
   @override
-  String get kitapsen_review_verified => 'Verified reader';
+  String get kitapsen_review_verified => 'Geverifieerde lezer';
   @override
-  String get kitapsen_author_follow => 'Follow';
+  String get kitapsen_author_follow => 'Volgen';
   @override
-  String get kitapsen_author_following => 'Following';
+  String get kitapsen_author_following => 'Volgend';
   @override
-  String get kitapsen_author_followers => 'Followers';
+  String get kitapsen_author_followers => 'Volgers';
   @override
-  String get kitapsen_author_books => 'Books';
+  String get kitapsen_author_books => 'Boeken';
   @override
-  String get kitapsen_author_open => 'Author page';
+  String get kitapsen_author_open => 'Auteurspagina';
   @override
-  String get kitapsen_wishlist_title => 'Wishlist';
+  String get kitapsen_wishlist_title => 'Verlanglijst';
   @override
-  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  String get kitapsen_wishlist_empty => 'Je verlanglijst is leeg';
   @override
-  String get kitapsen_notifications_title => 'Notifications';
+  String get kitapsen_notifications_title => 'Meldingen';
   @override
-  String get kitapsen_notifications_empty => 'No notifications';
+  String get kitapsen_notifications_empty => 'Geen meldingen';
   @override
-  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  String get kitapsen_notifications_mark_all => 'Alles als gelezen markeren';
   @override
-  String get kitapsen_story_chapters => 'Chapters';
+  String get kitapsen_story_chapters => 'Hoofdstukken';
   @override
-  String get kitapsen_story_no_chapters => 'No chapters yet';
+  String get kitapsen_story_no_chapters => 'Nog geen hoofdstukken';
   @override
-  String get kitapsen_story_next => 'Next chapter';
+  String get kitapsen_story_next => 'Volgend hoofdstuk';
   @override
-  String get kitapsen_story_previous => 'Previous chapter';
+  String get kitapsen_story_previous => 'Vorig hoofdstuk';
   @override
-  String get kitapsen_review_like => 'Like';
+  String get kitapsen_review_like => 'Vind ik leuk';
   @override
-  String get kitapsen_comments_title => 'Comments';
+  String get kitapsen_comments_title => 'Reacties';
   @override
-  String get kitapsen_comments_empty => 'No comments yet';
+  String get kitapsen_comments_empty => 'Nog geen reacties';
   @override
-  String get kitapsen_comment_hint => 'Write a comment';
+  String get kitapsen_comment_hint => 'Schrijf een reactie';
   @override
-  String get kitapsen_story_vote => 'Vote';
+  String get kitapsen_story_vote => 'Stemmen';
   @override
-  String get kitapsen_story_voted => 'Voted';
+  String get kitapsen_story_voted => 'Gestemd';
   @override
-  String get kitapsen_story_follow => 'Follow story';
+  String get kitapsen_story_follow => 'Verhaal volgen';
   @override
-  String get kitapsen_following_title => 'Following';
+  String get kitapsen_following_title => 'Volgend';
   @override
-  String get kitapsen_following_authors => 'Authors';
+  String get kitapsen_following_authors => 'Auteurs';
   @override
-  String get kitapsen_following_stories => 'Stories';
+  String get kitapsen_following_stories => 'Verhalen';
   @override
-  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  String get kitapsen_following_empty => 'Je volgt nog niemand';
   @override
-  String get kitapsen_reader_highlight => 'Highlight';
+  String get kitapsen_reader_highlight => 'Markeren';
   @override
-  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  String get kitapsen_annotations_title => 'Bladwijzers en notities';
   @override
-  String get kitapsen_bookmark_add => 'Add bookmark';
+  String get kitapsen_bookmark_add => 'Bladwijzer toevoegen';
   @override
-  String get kitapsen_bookmark_added => 'Bookmark added';
+  String get kitapsen_bookmark_added => 'Bladwijzer toegevoegd';
   @override
-  String get kitapsen_note_add => 'Add note';
+  String get kitapsen_note_add => 'Notitie toevoegen';
   @override
-  String get kitapsen_note_hint => 'Your note';
+  String get kitapsen_note_hint => 'Je notitie';
   @override
-  String get kitapsen_note_saved => 'Note saved';
+  String get kitapsen_note_saved => 'Notitie opgeslagen';
   @override
-  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  String get kitapsen_annotations_empty => 'Nog geen bladwijzers of notities';
   @override
-  String get kitapsen_store_badge_free => 'Free';
+  String get kitapsen_store_badge_free => 'Gratis';
   @override
-  String get kitapsen_store_badge_new => 'New';
+  String get kitapsen_store_badge_new => 'Nieuw';
   @override
-  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  String kitapsen_store_rating_count({required Object n}) =>
+      '${n} beoordelingen';
   @override
-  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  String get kitapsen_store_hero_title =>
+      'Je volgende favoriete boek vind je hier.';
   @override
   String get kitapsen_store_hero_body =>
-      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+      'Ontdek nieuwe verhalen en de auteurs van wie je houdt. Kies je boek en begin met lezen op je telefoon, tablet of computer.';
   @override
-  String get kitapsen_store_explore_books => 'Explore books';
+  String get kitapsen_store_explore_books => 'Boeken ontdekken';
   @override
-  String get kitapsen_store_start_free => 'Start with free books';
+  String get kitapsen_store_start_free => 'Begin met gratis boeken';
   @override
-  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  String get kitapsen_store_start_free_body => 'Ontdek je eerste boek.';
   @override
-  String get kitapsen_store_library_always => 'Your library is always with you';
+  String get kitapsen_store_library_always =>
+      'Je bibliotheek altijd bij de hand';
   @override
   String get kitapsen_store_library_always_body =>
-      'Read on your phone, tablet and computer.';
+      'Lees op je telefoon, tablet en computer.';
   @override
-  String get kitapsen_store_meet_authors => 'Meet the authors';
+  String get kitapsen_store_meet_authors => 'Maak kennis met de auteurs';
   @override
-  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  String get kitapsen_store_meet_authors_body =>
+      'Volg de schrijvers van wie je houdt.';
   @override
-  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  String get kitapsen_store_reading_list => 'Een nieuw boek voor je leeslijst';
   @override
-  String get kitapsen_store_all_categories => 'All categories';
+  String get kitapsen_store_all_categories => 'Alle categorieën';
   @override
-  String get kitapsen_store_discover_title => 'Time to discover';
+  String get kitapsen_store_discover_title => 'Tijd om te ontdekken';
   @override
   String get kitapsen_store_discover_body =>
-      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+      'Een verhaal, een nieuw perspectief, een onverwachte ontdekking. Zet je volgende boek op je leeslijst.';
   @override
-  String get kitapsen_store_discover_now => 'Discover now';
+  String get kitapsen_store_discover_now => 'Nu ontdekken';
   @override
   String kitapsen_store_results_for({required Object q}) =>
-      'Results for "${q}"';
+      'Resultaten voor "${q}"';
   @override
-  String get kitapsen_store_matching_authors => 'Matching authors';
+  String get kitapsen_store_matching_authors => 'Gevonden auteurs';
   @override
-  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  String kitapsen_store_author_books_count({required Object n}) =>
+      '${n} boeken';
   @override
   String get kitapsen_store_author_cta =>
-      'Discover the author\'s books and pick your next read.';
+      'Ontdek de boeken van deze auteur en kies wat je hierna leest.';
   @override
-  String get kitapsen_store_see_author_books => 'See their books';
+  String get kitapsen_store_see_author_books => 'Bekijk de boeken';
   @override
-  String get kitapsen_store_authors_books => 'The author\'s books';
+  String get kitapsen_store_authors_books => 'Boeken van de auteur';
   @override
-  String get kitapsen_book_read_now => 'Read now';
+  String get kitapsen_book_read_now => 'Nu lezen';
   @override
-  String get kitapsen_book_get_free_web => 'Get it free';
+  String get kitapsen_book_get_free_web => 'Gratis verkrijgen';
   @override
-  String get kitapsen_book_favorites => 'Favorites';
+  String get kitapsen_book_favorites => 'Favorieten';
   @override
-  String get kitapsen_book_description => 'Description';
+  String get kitapsen_book_description => 'Beschrijving';
   @override
-  String get kitapsen_book_about_author => 'About the author';
+  String get kitapsen_book_about_author => 'Over de auteur';
   @override
   String get kitapsen_book_isbn => 'ISBN';
   @override
-  String get kitapsen_book_format => 'Format';
+  String get kitapsen_book_format => 'Formaat';
   @override
-  String get kitapsen_author_role => 'Author';
+  String get kitapsen_author_role => 'Auteur';
   @override
-  String get kitapsen_author_notify => 'Notify me of new books';
+  String get kitapsen_author_notify => 'Melding bij nieuwe boeken';
   @override
-  String get kitapsen_author_about => 'About';
+  String get kitapsen_author_about => 'Over';
   @override
-  String get kitapsen_review_more_bio => 'Read the full biography';
+  String get kitapsen_review_more_bio => 'Volledige biografie lezen';
   @override
-  String get kitapsen_author_like => 'Like';
+  String get kitapsen_author_like => 'Vind ik leuk';
   @override
-  String get kitapsen_author_likes => 'Likes';
+  String get kitapsen_author_likes => 'Vind-ik-leuks';
   @override
-  String get kitapsen_register_open => 'No account yet? Create one';
+  String get kitapsen_register_open => 'Nog geen account? Maak er een aan';
   @override
-  String get kitapsen_register_name => 'Name (optional)';
+  String get kitapsen_register_name => 'Naam (optioneel)';
   @override
-  String get kitapsen_register_username => 'Username';
+  String get kitapsen_register_username => 'Gebruikersnaam';
   @override
   String get kitapsen_register_username_hint =>
-      '2–20 lowercase letters or digits';
+      '2–20 kleine letters of cijfers';
   @override
-  String get kitapsen_register_email => 'Email';
+  String get kitapsen_register_email => 'E-mail';
   @override
-  String get kitapsen_register_password_hint => 'At least 8 characters';
+  String get kitapsen_register_password_hint => 'Minstens 8 tekens';
   @override
-  String get kitapsen_register_submit => 'Create account';
+  String get kitapsen_register_submit => 'Account aanmaken';
   @override
-  String get kitapsen_register_have_account =>
-      'Already have an account? Sign in';
+  String get kitapsen_register_have_account => 'Heb je al een account? Log in';
   @override
   String get kitapsen_register_username_invalid =>
-      'Use 2–20 lowercase letters or digits.';
+      'Gebruik 2–20 kleine letters of cijfers.';
   @override
   String get kitapsen_register_name_invalid =>
-      'The name must be 2–30 characters.';
+      'De naam moet 2–30 tekens lang zijn.';
   @override
-  String get kitapsen_register_email_invalid => 'Enter a valid email address.';
+  String get kitapsen_register_email_invalid =>
+      'Voer een geldig e-mailadres in.';
   @override
   String get kitapsen_register_password_short =>
-      'The password must be at least 8 characters.';
+      'Het wachtwoord moet minstens 8 tekens lang zijn.';
   @override
   String get kitapsen_register_failed =>
-      'The account could not be created. Try again.';
+      'Het account kon niet worden aangemaakt. Probeer het opnieuw.';
   @override
-  String get kitapsen_hub_title => 'My account';
+  String get kitapsen_hub_title => 'Mijn account';
   @override
-  String get kitapsen_hub_reading => 'Reading';
+  String get kitapsen_hub_reading => 'Lezen';
   @override
-  String get kitapsen_hub_social => 'Social';
+  String get kitapsen_hub_social => 'Sociaal';
   @override
-  String get kitapsen_hub_discover => 'Discover';
+  String get kitapsen_hub_discover => 'Ontdekken';
   @override
   String get kitapsen_hub_account => 'Account';
   @override
-  String get kitapsen_hub_library => 'My library';
+  String get kitapsen_hub_library => 'Mijn bibliotheek';
   @override
-  String get kitapsen_hub_public_profile => 'My public reader profile';
+  String get kitapsen_hub_public_profile => 'Mijn openbare lezersprofiel';
   @override
-  String get kitapsen_hub_sign_in_settings => 'Sign out or delete the account';
+  String get kitapsen_hub_sign_in_settings =>
+      'Uitloggen of account verwijderen';
   @override
-  String get kitapsen_common_save => 'Save';
+  String get kitapsen_common_save => 'Opslaan';
   @override
-  String get kitapsen_common_saved => 'Saved';
+  String get kitapsen_common_saved => 'Opgeslagen';
   @override
-  String get kitapsen_common_edit => 'Edit';
+  String get kitapsen_common_edit => 'Bewerken';
   @override
-  String get kitapsen_profile_title => 'My profile';
+  String get kitapsen_profile_title => 'Mijn profiel';
   @override
-  String get kitapsen_profile_name => 'Display name';
+  String get kitapsen_profile_name => 'Weergavenaam';
   @override
-  String get kitapsen_profile_sharing => 'Share reading activity';
+  String get kitapsen_profile_sharing => 'Leesactiviteit delen';
   @override
   String get kitapsen_profile_sharing_hint =>
-      'Show the books you are reading and have finished on your public profile.';
+      'Toon op je openbare profiel de boeken die je aan het lezen bent en die je hebt uitgelezen.';
   @override
-  String get kitapsen_settings_title => 'Account settings';
+  String get kitapsen_settings_title => 'Accountinstellingen';
   @override
-  String get kitapsen_settings_profile => 'Profile information';
+  String get kitapsen_settings_profile => 'Profielgegevens';
   @override
   String get kitapsen_settings_privacy => 'Privacy';
   @override
-  String get kitapsen_settings_private => 'Private profile';
+  String get kitapsen_settings_private => 'Privéprofiel';
   @override
   String get kitapsen_settings_private_hint =>
-      'Only your followers can see your profile, reviews, reading activity and updates.';
+      'Alleen je volgers kunnen je profiel, beoordelingen, leesactiviteit en updates zien.';
   @override
-  String get kitapsen_settings_notifications => 'Email notifications';
+  String get kitapsen_settings_notifications => 'E-mailmeldingen';
   @override
   String get kitapsen_settings_follower_email =>
-      'Email me when someone follows me';
+      'E-mail me als iemand me volgt';
   @override
   String get kitapsen_settings_comment_email =>
-      'Email me when someone comments on my story';
+      'E-mail me als iemand op mijn verhaal reageert';
   @override
-  String get kitapsen_settings_sale_email => 'Email me when my book sells';
+  String get kitapsen_settings_sale_email =>
+      'E-mail me als mijn boek wordt verkocht';
   @override
-  String get kitapsen_settings_author_emails => 'Author emails';
+  String get kitapsen_settings_author_emails => 'E-mails voor auteurs';
   @override
-  String get kitapsen_settings_password => 'Change password';
+  String get kitapsen_settings_password => 'Wachtwoord wijzigen';
   @override
-  String get kitapsen_settings_current_password => 'Current password';
+  String get kitapsen_settings_current_password => 'Huidig wachtwoord';
   @override
-  String get kitapsen_settings_new_password => 'New password';
+  String get kitapsen_settings_new_password => 'Nieuw wachtwoord';
   @override
-  String get kitapsen_settings_repeat_password => 'Repeat the new password';
+  String get kitapsen_settings_repeat_password =>
+      'Herhaal het nieuwe wachtwoord';
   @override
-  String get kitapsen_settings_change_password => 'Change password';
+  String get kitapsen_settings_change_password => 'Wachtwoord wijzigen';
   @override
   String get kitapsen_settings_passwords_differ =>
-      'The passwords do not match.';
+      'De wachtwoorden komen niet overeen.';
   @override
-  String get kitapsen_settings_password_changed => 'Password changed.';
+  String get kitapsen_settings_password_changed => 'Wachtwoord gewijzigd.';
   @override
   String get kitapsen_settings_password_failed =>
-      'The password could not be changed. Check the current password.';
+      'Het wachtwoord kon niet worden gewijzigd. Controleer het huidige wachtwoord.';
   @override
-  String get kitapsen_settings_blocked => 'Blocked users';
+  String get kitapsen_settings_blocked => 'Geblokkeerde gebruikers';
   @override
-  String get kitapsen_settings_no_blocked => 'You have not blocked anyone.';
+  String get kitapsen_settings_no_blocked => 'Je hebt niemand geblokkeerd.';
   @override
-  String get kitapsen_publishers_title => 'Publishers';
+  String get kitapsen_publishers_title => 'Uitgevers';
   @override
-  String get kitapsen_publishers_body => 'Browse books by publisher.';
+  String get kitapsen_publishers_body => 'Bekijk boeken per uitgever.';
   @override
-  String get kitapsen_publisher_role => 'Publisher';
+  String get kitapsen_publisher_role => 'Uitgever';
   @override
   String get kitapsen_publisher_no_books =>
-      'This publisher\'s books will be listed here soon.';
+      'De boeken van deze uitgever worden hier binnenkort vermeld.';
   @override
-  String get kitapsen_authors_title => 'Authors';
+  String get kitapsen_authors_title => 'Auteurs';
   @override
   String get kitapsen_blog_title => 'Blog';
   @override
   String get kitapsen_blog_subtitle =>
-      'News, tips and stories from the Kitapsen community.';
+      'Nieuws, tips en verhalen uit de Kitapsen-community.';
   @override
-  String get kitapsen_blog_empty => 'No blog posts yet.';
+  String get kitapsen_blog_empty => 'Nog geen blogberichten.';
   @override
-  String get kitapsen_collections_title => 'Collections';
+  String get kitapsen_collections_title => 'Collecties';
   @override
-  String get kitapsen_collections_new => 'New collection';
+  String get kitapsen_collections_new => 'Nieuwe collectie';
   @override
-  String get kitapsen_collections_name => 'Collection name';
+  String get kitapsen_collections_name => 'Naam van de collectie';
   @override
-  String get kitapsen_collections_description => 'Description (optional)';
+  String get kitapsen_collections_description => 'Beschrijving (optioneel)';
   @override
   String get kitapsen_collections_empty =>
-      'No collections yet. Create collections to organise your books.';
+      'Nog geen collecties. Maak collecties aan om je boeken te ordenen.';
   @override
-  String get kitapsen_collections_delete_confirm => 'Delete this collection?';
+  String get kitapsen_collections_delete_confirm =>
+      'Deze collectie verwijderen?';
   @override
   String get kitapsen_collections_items_empty =>
-      'No books yet. Add books from their page with "Add to collection".';
+      'Nog geen boeken. Voeg boeken toe vanaf hun pagina met "Aan collectie toevoegen".';
   @override
   String get kitapsen_collections_long_press =>
-      'Long-press a book to remove it.';
+      'Houd een boek ingedrukt om het te verwijderen.';
   @override
-  String get kitapsen_collections_remove => 'Remove';
+  String get kitapsen_collections_remove => 'Verwijderen';
   @override
   String kitapsen_collections_remove_confirm({required Object title}) =>
-      'Remove "${title}" from this collection?';
+      '"${title}" uit deze collectie verwijderen?';
   @override
-  String get kitapsen_collections_add => 'Add to collection';
+  String get kitapsen_collections_add => 'Aan collectie toevoegen';
   @override
-  String get kitapsen_collections_add_title => 'Add to a collection';
+  String get kitapsen_collections_add_title => 'Aan een collectie toevoegen';
   @override
-  String get kitapsen_collections_added => 'Added to the collection';
+  String get kitapsen_collections_added => 'Toegevoegd aan de collectie';
   @override
-  String get kitapsen_notebooks_title => 'Notebooks';
+  String get kitapsen_notebooks_title => 'Notitieboeken';
   @override
-  String get kitapsen_notebooks_new => 'New notebook';
+  String get kitapsen_notebooks_new => 'Nieuw notitieboek';
   @override
-  String get kitapsen_notebooks_name => 'Notebook name';
+  String get kitapsen_notebooks_name => 'Naam van het notitieboek';
   @override
   String get kitapsen_notebooks_empty =>
-      'No notebooks yet. Create notebooks for your reading notes and ideas.';
+      'Nog geen notitieboeken. Maak notitieboeken aan voor je leesnotities en ideeën.';
   @override
-  String kitapsen_notebooks_count({required Object n}) => '${n} notes';
+  String kitapsen_notebooks_count({required Object n}) => '${n} notities';
   @override
-  String get kitapsen_notebooks_delete_confirm => 'Delete this notebook?';
+  String get kitapsen_notebooks_delete_confirm =>
+      'Dit notitieboek verwijderen?';
   @override
-  String get kitapsen_notebooks_entries_empty => 'No notes yet.';
+  String get kitapsen_notebooks_entries_empty => 'Nog geen notities.';
   @override
-  String get kitapsen_notebooks_entry_hint => 'Add a note...';
+  String get kitapsen_notebooks_entry_hint => 'Voeg een notitie toe...';
   @override
-  String get kitapsen_notebooks_entry_delete_confirm => 'Delete this note?';
+  String get kitapsen_notebooks_entry_delete_confirm =>
+      'Deze notitie verwijderen?';
   @override
-  String get kitapsen_notebooks_add => 'Add note';
+  String get kitapsen_notebooks_add => 'Notitie toevoegen';
   @override
-  String get kitapsen_goals_title => 'Reading goals';
+  String get kitapsen_goals_title => 'Leesdoelen';
   @override
-  String get kitapsen_goals_new => 'New goal';
+  String get kitapsen_goals_new => 'Nieuw doel';
   @override
-  String get kitapsen_goals_create => 'Create';
+  String get kitapsen_goals_create => 'Aanmaken';
   @override
-  String get kitapsen_goals_created => 'Goal created';
+  String get kitapsen_goals_created => 'Doel aangemaakt';
   @override
-  String get kitapsen_goals_type => 'Goal type';
+  String get kitapsen_goals_type => 'Soort doel';
   @override
-  String get kitapsen_goals_type_books => 'Books';
+  String get kitapsen_goals_type_books => 'Boeken';
   @override
-  String get kitapsen_goals_type_pages => 'Pages';
+  String get kitapsen_goals_type_pages => 'Pagina\'s';
   @override
-  String get kitapsen_goals_type_days => 'Reading days';
+  String get kitapsen_goals_type_days => 'Leesdagen';
   @override
-  String get kitapsen_goals_target => 'Target';
+  String get kitapsen_goals_target => 'Streefwaarde';
   @override
-  String get kitapsen_goals_this_month => 'This month';
+  String get kitapsen_goals_this_month => 'Deze maand';
   @override
-  String get kitapsen_goals_this_year => 'This year';
+  String get kitapsen_goals_this_year => 'Dit jaar';
   @override
   String get kitapsen_goals_empty =>
-      'No reading goals. Set your first goal to keep your motivation up.';
+      'Geen leesdoelen. Stel je eerste doel in om gemotiveerd te blijven.';
   @override
-  String get kitapsen_goals_delete_confirm => 'Delete this goal?';
+  String get kitapsen_goals_delete_confirm => 'Dit doel verwijderen?';
   @override
-  String get kitapsen_goals_completed => 'Completed';
+  String get kitapsen_goals_completed => 'Voltooid';
   @override
-  String kitapsen_goals_until({required Object date}) => 'Until ${date}';
+  String kitapsen_goals_until({required Object date}) => 'Tot ${date}';
   @override
-  String kitapsen_goals_unit_books({required Object n}) => '${n} books';
+  String kitapsen_goals_unit_books({required Object n}) => '${n} boeken';
   @override
-  String kitapsen_goals_unit_pages({required Object n}) => '${n} pages';
+  String kitapsen_goals_unit_pages({required Object n}) => '${n} pagina\'s';
   @override
-  String kitapsen_goals_unit_hours({required Object n}) => '${n} hours';
+  String kitapsen_goals_unit_hours({required Object n}) => '${n} uur';
   @override
-  String kitapsen_goals_unit_days({required Object n}) => '${n} reading days';
+  String kitapsen_goals_unit_days({required Object n}) => '${n} leesdagen';
   @override
-  String get kitapsen_goals_streak => 'Day streak';
+  String get kitapsen_goals_streak => 'Dagenreeks';
   @override
-  String get kitapsen_goals_longest_streak => 'Longest streak';
+  String get kitapsen_goals_longest_streak => 'Langste reeks';
   @override
-  String get kitapsen_goals_books_read => 'Books read';
+  String get kitapsen_goals_books_read => 'Gelezen boeken';
   @override
-  String get kitapsen_goals_books_finished => 'Finished';
+  String get kitapsen_goals_books_finished => 'Uitgelezen';
   @override
-  String get kitapsen_feed_title => 'Social feed';
+  String get kitapsen_feed_title => 'Sociale feed';
   @override
-  String get kitapsen_feed_followed => 'Following';
+  String get kitapsen_feed_followed => 'Volgend';
   @override
-  String get kitapsen_feed_mine => 'My activity';
+  String get kitapsen_feed_mine => 'Mijn activiteit';
   @override
   String get kitapsen_feed_empty_followed =>
-      'No activity yet. Follow readers to keep up with what they are reading.';
+      'Nog geen activiteit. Volg lezers om bij te houden wat ze lezen.';
   @override
   String get kitapsen_feed_empty_mine =>
-      'Your reading activity will appear here once you start reading.';
+      'Je leesactiviteit verschijnt hier zodra je begint met lezen.';
   @override
   String kitapsen_feed_started({required Object target}) =>
-      'started reading ${target}';
+      'is begonnen aan ${target}';
   @override
   String kitapsen_feed_finished({required Object target}) =>
-      'finished ${target}';
+      'heeft ${target} uitgelezen';
   @override
   String kitapsen_feed_reviewed({required Object target}) =>
-      'reviewed ${target}';
+      'heeft ${target} beoordeeld';
   @override
   String kitapsen_feed_followed_user({required Object target}) =>
-      'started following ${target}';
+      'volgt nu ${target}';
   @override
   String kitapsen_feed_followed_author({required Object target}) =>
-      'followed the author ${target}';
+      'volgt nu auteur ${target}';
   @override
-  String kitapsen_feed_shared({required Object target}) => 'shared ${target}';
+  String kitapsen_feed_shared({required Object target}) =>
+      'heeft ${target} gedeeld';
   @override
-  String kitapsen_feed_percent({required Object n}) => '${n}% read';
+  String kitapsen_feed_percent({required Object n}) => '${n}% gelezen';
   @override
-  String get kitapsen_feed_finished_badge => 'Finished';
+  String get kitapsen_feed_finished_badge => 'Uitgelezen';
   @override
-  String get kitapsen_user_follow => 'Follow';
+  String get kitapsen_user_follow => 'Volgen';
   @override
-  String get kitapsen_user_block => 'Block';
+  String get kitapsen_user_block => 'Blokkeren';
   @override
-  String get kitapsen_user_unblock => 'Unblock';
+  String get kitapsen_user_unblock => 'Deblokkeren';
   @override
   String kitapsen_user_block_confirm({required Object username}) =>
-      'Block @${username}? They will no longer see your profile and activity, and any follow between you is removed.';
+      '@${username} blokkeren? Deze persoon kan je profiel en activiteit dan niet meer zien, en een eventuele volgrelatie tussen jullie wordt verwijderd.';
   @override
   String kitapsen_user_member_since({required Object date}) =>
-      'Member since ${date}';
+      'Lid sinds ${date}';
   @override
-  String kitapsen_user_followers({required Object n}) => '${n} followers';
+  String kitapsen_user_followers({required Object n}) => '${n} volgers';
   @override
-  String kitapsen_user_following({required Object n}) => '${n} following';
+  String kitapsen_user_following({required Object n}) => '${n} volgend';
   @override
   String kitapsen_user_finished_count({required Object n}) =>
-      '${n} books finished';
+      '${n} boeken uitgelezen';
   @override
-  String get kitapsen_user_tab_reading => 'Reading';
+  String get kitapsen_user_tab_reading => 'Lezen';
   @override
-  String get kitapsen_user_tab_reviews => 'Reviews';
+  String get kitapsen_user_tab_reviews => 'Beoordelingen';
   @override
-  String get kitapsen_user_tab_activity => 'Activity';
+  String get kitapsen_user_tab_activity => 'Activiteit';
   @override
-  String get kitapsen_user_currently_reading => 'Currently reading';
+  String get kitapsen_user_currently_reading => 'Leest nu';
   @override
-  String get kitapsen_user_finished => 'Finished';
+  String get kitapsen_user_finished => 'Uitgelezen';
   @override
   String get kitapsen_user_no_reading =>
-      'This reader does not share reading activity.';
+      'Deze lezer deelt geen leesactiviteit.';
   @override
-  String get kitapsen_user_no_reviews => 'No public reviews yet.';
+  String get kitapsen_user_no_reviews => 'Nog geen openbare beoordelingen.';
   @override
-  String get kitapsen_user_no_activity => 'No public activity yet.';
+  String get kitapsen_user_no_activity => 'Nog geen openbare activiteit.';
   @override
   String get kitapsen_user_private =>
-      'This profile is private. Follow this reader to see their reviews, reading activity and profile.';
+      'Dit profiel is privé. Volg deze lezer om de beoordelingen, leesactiviteit en het profiel te zien.';
   @override
   String get kitapsen_user_blocked_you =>
-      'This reader has blocked you. Their profile and activity are hidden from you.';
+      'Deze lezer heeft je geblokkeerd. Het profiel en de activiteit zijn voor jou verborgen.';
   @override
-  String get kitapsen_user_followers_title => 'Followers';
+  String get kitapsen_user_followers_title => 'Volgers';
   @override
-  String get kitapsen_user_following_title => 'Following';
+  String get kitapsen_user_following_title => 'Volgend';
   @override
-  String get kitapsen_user_no_connections => 'Nobody here yet.';
+  String get kitapsen_user_no_connections => 'Hier is nog niemand.';
   @override
-  String get kitapsen_clubs_title => 'Book clubs';
+  String get kitapsen_clubs_title => 'Leesclubs';
   @override
-  String get kitapsen_clubs_create => 'Create a club';
+  String get kitapsen_clubs_create => 'Club aanmaken';
   @override
-  String get kitapsen_clubs_name => 'Club name';
+  String get kitapsen_clubs_name => 'Clubnaam';
   @override
   String get kitapsen_clubs_empty =>
-      'No book clubs yet. Create or join one to read together.';
+      'Nog geen leesclubs. Maak er een aan of word lid om samen te lezen.';
   @override
-  String get kitapsen_clubs_join => 'Join';
+  String get kitapsen_clubs_join => 'Lid worden';
   @override
-  String get kitapsen_clubs_leave => 'Leave';
+  String get kitapsen_clubs_leave => 'Verlaten';
   @override
-  String get kitapsen_clubs_owner => 'Owner';
+  String get kitapsen_clubs_owner => 'Eigenaar';
   @override
-  String get kitapsen_clubs_members => 'Members';
+  String get kitapsen_clubs_members => 'Leden';
   @override
-  String kitapsen_clubs_members_count({required Object n}) => '${n} members';
+  String kitapsen_clubs_members_count({required Object n}) => '${n} leden';
   @override
-  String get kitapsen_clubs_chat => 'Discussion';
+  String get kitapsen_clubs_chat => 'Discussie';
   @override
   String get kitapsen_clubs_join_to_chat =>
-      'Join the club to read and write messages.';
+      'Word lid van de club om berichten te lezen en te schrijven.';
   @override
-  String get kitapsen_clubs_no_messages => 'No messages yet.';
+  String get kitapsen_clubs_no_messages => 'Nog geen berichten.';
   @override
-  String get kitapsen_clubs_message_hint => 'Write a message...';
+  String get kitapsen_clubs_message_hint => 'Schrijf een bericht...';
   @override
-  String get kitapsen_clubs_send => 'Send';
+  String get kitapsen_clubs_send => 'Versturen';
   @override
   String get kitapsen_register_taken =>
-      'This username or email address already has an account.';
+      'Er bestaat al een account met deze gebruikersnaam of dit e-mailadres.';
   @override
-  String get kitapsen_report => 'Report';
+  String get kitapsen_report => 'Melden';
   @override
-  String get kitapsen_reported => 'Reported';
+  String get kitapsen_reported => 'Gemeld';
   @override
-  String get kitapsen_report_title => 'Report this content';
+  String get kitapsen_report_title => 'Deze inhoud melden';
   @override
-  String get kitapsen_report_reason => 'Reason (optional)';
+  String get kitapsen_report_reason => 'Reden (optioneel)';
   @override
-  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  String get kitapsen_report_reason_hint => 'Waarom is dit ongepast?';
   @override
-  String get kitapsen_report_submit => 'Submit Report';
+  String get kitapsen_report_submit => 'Melding versturen';
   @override
   String get kitapsen_report_thanks =>
-      'Reported. Thank you for helping keep the community safe.';
+      'Gemeld. Bedankt dat je helpt de community veilig te houden.';
   @override
   String get kitapsen_delete_statistics_book_desc =>
       'Leestijd en gelezen tekens van dit boek worden op alle apparaten uit de statistieken verwijderd';
@@ -152181,7 +152172,7 @@ class _StringsPtBr extends _StringsEn {
   @override
   String anime_download_episode_count({required Object count}) => 'EP ${count}';
   @override
-  String get anime_download_generic_download => 'Download';
+  String get anime_download_generic_download => 'Baixar';
   @override
   String get anime_download_generic_hint => 'Link magnet';
   @override
@@ -153539,7 +153530,7 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get batch_tag_title => 'Gerenciar tags';
   @override
-  String get book_continue_reading => 'Continue Reading';
+  String get book_continue_reading => 'Continuar lendo';
   @override
   String get book_convert_blocked_already =>
       'Este livro já está nesse formato.';
@@ -154614,7 +154605,7 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get discovery_game_type_all => 'Todos';
   @override
-  String get discovery_game_type_mobile => 'Mobile';
+  String get discovery_game_type_mobile => 'Celular';
   @override
   String get discovery_game_type_raw => 'Sem tradução';
   @override
@@ -155376,7 +155367,7 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get font_target_game_lookup => 'Fonte da janela de consulta do jogo';
   @override
-  String get font_target_video_subtitle => 'Video Subtitle Font';
+  String get font_target_video_subtitle => 'Fonte das legendas de vídeo';
   @override
   String get gal_card_lookup_independent_size =>
       'Tamanho separado para o cartão no jogo';
@@ -156535,7 +156526,7 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get handlebar_sentence => 'Frase';
   @override
-  String get handlebar_sentence_audio => 'Sentence Audio';
+  String get handlebar_sentence_audio => 'Áudio da frase';
   @override
   String get handlebar_video_clip => 'Video Clip (GIF)';
   @override
@@ -158774,11 +158765,11 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get reader_view_mode_label => 'Páginas / Rolagem';
   @override
-  String get reader_vn => 'Visual Novel';
+  String get reader_vn => 'Visual novel';
   @override
   String get reader_writing_direction => 'Direção da Escrita';
   @override
-  String get reading_activity => 'Atividade de estudo';
+  String get reading_activity => 'Atividade de leitura';
   @override
   String get reading_progress => 'Progresso da Leitura';
   @override
@@ -159184,9 +159175,9 @@ class _StringsPtBr extends _StringsEn {
   String get shortcut_action_reader_open_gallery =>
       'Abrir galeria de ilustrações';
   @override
-  String get shortcut_action_reader_open_menu => 'Open Settings Menu';
+  String get shortcut_action_reader_open_menu => 'Abrir menu de configurações';
   @override
-  String get shortcut_action_reader_open_navigation => 'Open Navigation';
+  String get shortcut_action_reader_open_navigation => 'Abrir navegação';
   @override
   String get shortcut_action_reader_open_statistics =>
       'Abrir estatísticas de leitura';
@@ -159208,10 +159199,10 @@ class _StringsPtBr extends _StringsEn {
       'Alinhar legenda anterior ao momento atual';
   @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
-      'Cycle Secondary Subtitle Obscure';
+      'Trocar modo de ocultação da legenda secundária';
   @override
   String get shortcut_action_video_cycle_subtitle_obscure =>
-      'Cycle Subtitle Obscure Mode';
+      'Trocar modo de ocultação das legendas';
   @override
   String get shortcut_action_video_dismiss_dict => 'Fechar dicionário';
   @override
@@ -159280,7 +159271,7 @@ class _StringsPtBr extends _StringsEn {
   String get shortcut_action_video_toggle_play_pause => 'Reproduzir / Pausar';
   @override
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
-      'Toggle Hide Secondary Subtitle';
+      'Mostrar/ocultar legenda secundária';
   @override
   String get shortcut_action_video_toggle_shader_compare =>
       'Alternar comparação de shaders';
@@ -159289,7 +159280,7 @@ class _StringsPtBr extends _StringsEn {
       'Alternar desfoque da legenda';
   @override
   String get shortcut_action_video_toggle_subtitle_hide =>
-      'Toggle Hide Subtitles';
+      'Mostrar/ocultar legendas';
   @override
   String get shortcut_action_video_toggle_subtitle_list =>
       'Alternar lista de legendas';
@@ -159571,7 +159562,7 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get stat_detail_ungrouped => 'Sem grupo';
   @override
-  String get stat_fastest_day => 'Fastest Day';
+  String get stat_fastest_day => 'Dia mais rápido';
   @override
   String get stat_favorited => 'Favoritados';
   @override
@@ -159588,9 +159579,9 @@ class _StringsPtBr extends _StringsEn {
   @override
   String stat_format_pages({required Object n}) => '${n} páginas';
   @override
-  String get stat_goal => 'Daily Goal';
+  String get stat_goal => 'Meta diária';
   @override
-  String get stat_goal_daily => 'Daily Goal';
+  String get stat_goal_daily => 'Meta diária';
   @override
   String get stat_goal_presets => 'Predefinições';
   @override
@@ -159602,11 +159593,11 @@ class _StringsPtBr extends _StringsEn {
   String stat_goal_recent_average({required Object n}) =>
       'Últimos 7 dias: ${n} caracteres/dia em média';
   @override
-  String get stat_goal_set => 'Set Goal';
+  String get stat_goal_set => 'Definir meta';
   @override
   String get stat_goal_unit_chars => 'caracteres';
   @override
-  String get stat_goal_weekly => 'Weekly Goal';
+  String get stat_goal_weekly => 'Meta semanal';
   @override
   String get stat_hourly_band_epub => 'Livros de texto';
   @override
@@ -159633,7 +159624,7 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get stat_no_data => 'Nenhum dado de leitura ainda';
   @override
-  String get stat_range_and_trend => 'Range & Trend';
+  String get stat_range_and_trend => 'Intervalo e tendência';
   @override
   String get stat_recent_active => 'Dias ativos (7d)';
   @override
@@ -159652,7 +159643,7 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get stat_sessions_show_all => 'Todas as sessões';
   @override
-  String get stat_slowest_day => 'Slowest Day';
+  String get stat_slowest_day => 'Dia mais lento';
   @override
   String get stat_sort_by_chars => 'Por caracteres';
   @override
@@ -159668,7 +159659,7 @@ class _StringsPtBr extends _StringsEn {
   @override
   String stat_speed_cph({required Object n}) => '${n} caracteres/h';
   @override
-  String get stat_speed_summary => 'Speed Summary';
+  String get stat_speed_summary => 'Resumo de velocidade';
   @override
   String get stat_streak => 'Sequência';
   @override
@@ -159686,11 +159677,11 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get stat_trend_weekly => 'Semanal';
   @override
-  String get stat_typical_day => 'Typical Day';
+  String get stat_typical_day => 'Dia típico';
   @override
   String get stat_vs_prev => 'vs 14d anteriores';
   @override
-  String get stat_weighted_avg_speed => 'Weighted Avg';
+  String get stat_weighted_avg_speed => 'Média ponderada';
   @override
   String get stop => 'Parar';
   @override
@@ -161704,7 +161695,7 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get video_setting_mpv_deinterlace => 'Desentrelaçamento';
   @override
-  String get video_setting_mpv_dither => 'Dithering';
+  String get video_setting_mpv_dither => 'Pontilhamento';
   @override
   String get video_setting_mpv_gamma => 'Gama';
   @override
@@ -167286,7 +167277,7 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get video_scrape_ai_declined => 'AI not adopted';
   @override
-  String get video_scrape_ai_failed => 'AI request failed';
+  String get video_scrape_ai_failed => 'Falha na solicitação à IA';
   @override
   String get video_scrape_ai_searched =>
       'Searched again with titles suggested by AI';
@@ -167346,11 +167337,11 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get shelf_filter_read_status_finished => 'Concluído';
   @override
-  String get video_filter_media_type => 'Type';
+  String get video_filter_media_type => 'Tipo';
   @override
-  String get video_filter_media_type_video => 'Video';
+  String get video_filter_media_type_video => 'Vídeo';
   @override
-  String get video_filter_media_type_audio => 'Audio';
+  String get video_filter_media_type_audio => 'Áudio';
   @override
   String get video_filter_extras => 'Main/Extras';
   @override
@@ -167358,7 +167349,7 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get video_filter_extras_only => 'Extras only';
   @override
-  String get video_filter_source => 'Source';
+  String get video_filter_source => 'Fonte';
   @override
   String get video_filter_series_standalone_empty_hint =>
       'No standalone videos. Videos in collections are on the Series tab, or set the Series filter to All.';
@@ -167401,7 +167392,7 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get manga_ocr_ai_mode_label => 'AI recognition';
   @override
-  String get manga_ocr_ai_mode_off => 'Off';
+  String get manga_ocr_ai_mode_off => 'Desativado';
   @override
   String get manga_ocr_ai_mode_low_confidence => 'Only uncertain text';
   @override
@@ -167454,7 +167445,7 @@ class _StringsPtBr extends _StringsEn {
   String get ocr_system_model_missing =>
       'Google Play services hasn\'t downloaded the text recognition model yet. Download it now (a few MB) to use screen OCR.';
   @override
-  String get ocr_system_model_download => 'Download';
+  String get ocr_system_model_download => 'Baixar';
   @override
   String get ocr_system_model_downloading =>
       'Downloading through Google Play services… You can close this dialog; the download continues in the background.';
@@ -167478,669 +167469,672 @@ class _StringsPtBr extends _StringsEn {
   @override
   String get kitapsen_section_title => 'Kitapsen';
   @override
-  String get kitapsen_account_title => 'Kitapsen account';
+  String get kitapsen_account_title => 'Conta Kitapsen';
   @override
   String get kitapsen_account_hint =>
-      'Sign in to read the books in your Kitapsen library. They appear on your bookshelf, and your reading position syncs with your account.';
+      'Entre para ler os livros da sua biblioteca Kitapsen. Eles aparecem na sua estante, e sua posição de leitura é sincronizada com a sua conta.';
   @override
-  String get kitapsen_account_server_url => 'Server address';
+  String get kitapsen_account_server_url => 'Endereço do servidor';
   @override
-  String get kitapsen_account_username => 'Email or username';
+  String get kitapsen_account_username => 'E-mail ou nome de usuário';
   @override
-  String get kitapsen_account_password => 'Password';
+  String get kitapsen_account_password => 'Senha';
   @override
-  String get kitapsen_account_sign_in => 'Sign in';
+  String get kitapsen_account_sign_in => 'Entrar';
   @override
-  String get kitapsen_account_sign_out => 'Sign out';
+  String get kitapsen_account_sign_out => 'Sair';
   @override
-  String get kitapsen_account_sign_in_rejected =>
-      'Email or password is incorrect';
+  String get kitapsen_account_sign_in_rejected => 'E-mail ou senha incorretos';
   @override
   String get kitapsen_account_sign_in_failed =>
-      'Could not reach Kitapsen. Check the address and your connection.';
+      'Não foi possível acessar o Kitapsen. Verifique o endereço e sua conexão.';
   @override
-  String get kitapsen_account_summary => 'Sign in to read your library';
+  String get kitapsen_account_summary => 'Entre para ler sua biblioteca';
   @override
   String get kitapsen_shelf_signed_out_body =>
-      'Sign in with your Kitapsen account to see your library.';
+      'Entre com sua conta Kitapsen para ver sua biblioteca.';
   @override
-  String get kitapsen_shelf_sign_in => 'Sign in to Kitapsen';
+  String get kitapsen_shelf_sign_in => 'Entrar no Kitapsen';
   @override
-  String get kitapsen_onboarding_title => 'Your Kitapsen library';
+  String get kitapsen_onboarding_title => 'Sua biblioteca Kitapsen';
   @override
   String get kitapsen_onboarding_body =>
-      'Sign in to see the books in your Kitapsen account on this device. You can skip this and sign in later from Settings.';
+      'Entre para ver neste dispositivo os livros da sua conta Kitapsen. Você pode pular esta etapa e entrar depois pelas Configurações.';
   @override
   String app_store_update_body({required Object version}) =>
-      'Kitapsen ${version} is available on the App Store.';
+      'Kitapsen ${version} já está disponível na App Store.';
   @override
-  String get app_store_update_open => 'Update';
+  String get app_store_update_open => 'Atualizar';
   @override
-  String get app_store_update_later => 'Not now';
+  String get app_store_update_later => 'Agora não';
   @override
-  String get kitapsen_about_privacy_policy => 'Privacy policy';
+  String get kitapsen_about_privacy_policy => 'Política de privacidade';
   @override
-  String get kitapsen_about_support => 'Contact support';
+  String get kitapsen_about_support => 'Falar com o suporte';
   @override
-  String get kitapsen_about_source_code => 'Source code';
+  String get kitapsen_about_source_code => 'Código-fonte';
   @override
   String get kitapsen_about_based_on_fushi =>
-      'Kitapsen is based on Fushi (GPLv3) — source: https://github.com/FizyonOps/kitapsen-mobile';
+      'O Kitapsen é baseado no Fushi (GPLv3) — código-fonte: https://github.com/FizyonOps/kitapsen-mobile';
   @override
-  String get kitapsen_about_licenses => 'Open-source licenses';
+  String get kitapsen_about_licenses => 'Licenças de código aberto';
   @override
-  String get kitapsen_about_section => 'About Kitapsen';
+  String get kitapsen_about_section => 'Sobre o Kitapsen';
   @override
-  String get kitapsen_import_hint => 'Pick an EPUB or PDF file to import.';
+  String get kitapsen_import_hint =>
+      'Escolha um arquivo EPUB ou PDF para importar.';
   @override
   String get kitapsen_sign_out_removes_books =>
-      'Signing out removes your downloaded Kitapsen books from this device.';
+      'Ao sair, os livros do Kitapsen que você baixou são removidos deste dispositivo.';
   @override
-  String get kitapsen_account_or => 'or';
+  String get kitapsen_account_or => 'ou';
   @override
-  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  String get kitapsen_account_continue_with_google => 'Continuar com o Google';
   @override
-  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  String get kitapsen_account_continue_with_apple => 'Continuar com a Apple';
   @override
   String get kitapsen_account_social_sign_in_failed =>
-      'Sign-in failed. Please try again.';
+      'Não foi possível entrar. Tente novamente.';
   @override
-  String get kitapsen_account_deleted =>
-      'This Kitapsen account has been deleted.';
+  String get kitapsen_account_deleted => 'Esta conta Kitapsen foi excluída.';
   @override
-  String get kitapsen_account_delete => 'Delete account';
+  String get kitapsen_account_delete => 'Excluir conta';
   @override
   String get kitapsen_account_delete_confirm =>
-      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+      'Sua conta Kitapsen será excluída e este dispositivo será desconectado. Você não poderá mais ler os livros da sua biblioteca. Esta ação não pode ser desfeita.';
   @override
   String get kitapsen_account_delete_failed =>
-      'The account could not be deleted. Please try again.';
+      'Não foi possível excluir a conta. Tente novamente.';
   @override
-  String get kitapsen_nav_store => 'Store';
+  String get kitapsen_nav_store => 'Loja';
   @override
-  String get kitapsen_store_search_hint => 'Search books and authors';
+  String get kitapsen_store_search_hint => 'Buscar livros e autores';
   @override
-  String get kitapsen_store_new_arrivals => 'New arrivals';
+  String get kitapsen_store_new_arrivals => 'Novidades';
   @override
-  String get kitapsen_store_most_read => 'Most read';
+  String get kitapsen_store_most_read => 'Mais lidos';
   @override
-  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  String get kitapsen_store_staff_picks => 'Escolhas do editor';
   @override
-  String get kitapsen_store_free_books => 'Free books';
+  String get kitapsen_store_free_books => 'Livros grátis';
   @override
-  String get kitapsen_store_stories => 'Serialized stories';
+  String get kitapsen_store_stories => 'Histórias em capítulos';
   @override
-  String get kitapsen_store_categories => 'Categories';
+  String get kitapsen_store_categories => 'Categorias';
   @override
-  String get kitapsen_store_see_all => 'See all';
+  String get kitapsen_store_see_all => 'Ver tudo';
   @override
-  String get kitapsen_store_no_results => 'No books found';
+  String get kitapsen_store_no_results => 'Nenhum livro encontrado';
   @override
   String get kitapsen_store_load_failed =>
-      'Couldn\'t load. Check your connection.';
+      'Não foi possível carregar. Verifique sua conexão.';
   @override
-  String get kitapsen_store_free_only => 'Free only';
+  String get kitapsen_store_free_only => 'Apenas grátis';
   @override
-  String get kitapsen_sort_relevance => 'Most relevant';
+  String get kitapsen_sort_relevance => 'Mais relevantes';
   @override
-  String get kitapsen_sort_newest => 'Newest';
+  String get kitapsen_sort_newest => 'Mais recentes';
   @override
-  String get kitapsen_sort_most_read => 'Most read';
+  String get kitapsen_sort_most_read => 'Mais lidos';
   @override
-  String get kitapsen_sort_rating => 'Top rated';
+  String get kitapsen_sort_rating => 'Mais bem avaliados';
   @override
-  String get kitapsen_sort_title => 'Title A–Z';
+  String get kitapsen_sort_title => 'Título A–Z';
   @override
-  String get kitapsen_book_read => 'Read';
+  String get kitapsen_book_read => 'Ler';
   @override
-  String get kitapsen_book_get_free => 'Get for free';
+  String get kitapsen_book_get_free => 'Obter grátis';
   @override
-  String get kitapsen_book_claimed => 'Added to your library';
+  String get kitapsen_book_claimed => 'Adicionado à sua biblioteca';
   @override
-  String get kitapsen_book_in_library => 'In your library';
+  String get kitapsen_book_in_library => 'Na sua biblioteca';
   @override
-  String get kitapsen_book_not_in_library => 'Not in your library';
+  String get kitapsen_book_not_in_library => 'Não está na sua biblioteca';
   @override
   String get kitapsen_book_sign_in_prompt =>
-      'Sign in to add books to your library and keep a wishlist.';
+      'Entre para adicionar livros à sua biblioteca e manter uma lista de desejos.';
   @override
-  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  String get kitapsen_book_wishlist_add => 'Adicionar à lista de desejos';
   @override
-  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  String get kitapsen_book_wishlist_remove => 'Remover da lista de desejos';
   @override
-  String get kitapsen_book_downloading => 'Downloading to your library…';
+  String get kitapsen_book_downloading => 'Baixando para sua biblioteca…';
   @override
-  String get kitapsen_book_about => 'About this book';
+  String get kitapsen_book_about => 'Sobre este livro';
   @override
-  String get kitapsen_book_pages => 'Pages';
+  String get kitapsen_book_pages => 'Páginas';
   @override
-  String get kitapsen_book_language => 'Language';
+  String get kitapsen_book_language => 'Idioma';
   @override
-  String get kitapsen_book_publisher => 'Publisher';
+  String get kitapsen_book_publisher => 'Editora';
   @override
-  String get kitapsen_book_published => 'Published';
+  String get kitapsen_book_published => 'Data de publicação';
   @override
-  String get kitapsen_book_action_failed =>
-      'Something went wrong. Please try again.';
+  String get kitapsen_book_action_failed => 'Algo deu errado. Tente novamente.';
   @override
-  String get kitapsen_book_reviews => 'Reviews';
+  String get kitapsen_book_reviews => 'Avaliações';
   @override
-  String get kitapsen_book_no_reviews => 'No reviews yet';
+  String get kitapsen_book_no_reviews => 'Ainda não há avaliações';
   @override
-  String get kitapsen_book_write_review => 'Write a review';
+  String get kitapsen_book_write_review => 'Escrever avaliação';
   @override
-  String get kitapsen_review_title_hint => 'Title (optional)';
+  String get kitapsen_review_title_hint => 'Título (opcional)';
   @override
-  String get kitapsen_review_content_hint => 'Your review (optional)';
+  String get kitapsen_review_content_hint => 'Sua avaliação (opcional)';
   @override
-  String get kitapsen_review_submit => 'Send';
+  String get kitapsen_review_submit => 'Enviar';
   @override
-  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  String get kitapsen_review_sent => 'Obrigado! Sua avaliação foi enviada.';
   @override
-  String get kitapsen_review_already => 'You have already reviewed this book.';
+  String get kitapsen_review_already => 'Você já avaliou este livro.';
   @override
   String get kitapsen_review_not_allowed =>
-      'Only readers who have this book in their library can review it.';
+      'Só leitores que têm este livro na biblioteca podem avaliá-lo.';
   @override
-  String get kitapsen_review_more => 'Show more reviews';
+  String get kitapsen_review_more => 'Ver mais avaliações';
   @override
-  String get kitapsen_review_verified => 'Verified reader';
+  String get kitapsen_review_verified => 'Leitor verificado';
   @override
-  String get kitapsen_author_follow => 'Follow';
+  String get kitapsen_author_follow => 'Seguir';
   @override
-  String get kitapsen_author_following => 'Following';
+  String get kitapsen_author_following => 'Seguindo';
   @override
-  String get kitapsen_author_followers => 'Followers';
+  String get kitapsen_author_followers => 'Seguidores';
   @override
-  String get kitapsen_author_books => 'Books';
+  String get kitapsen_author_books => 'Livros';
   @override
-  String get kitapsen_author_open => 'Author page';
+  String get kitapsen_author_open => 'Página do autor';
   @override
-  String get kitapsen_wishlist_title => 'Wishlist';
+  String get kitapsen_wishlist_title => 'Lista de desejos';
   @override
-  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  String get kitapsen_wishlist_empty => 'Sua lista de desejos está vazia';
   @override
-  String get kitapsen_notifications_title => 'Notifications';
+  String get kitapsen_notifications_title => 'Notificações';
   @override
-  String get kitapsen_notifications_empty => 'No notifications';
+  String get kitapsen_notifications_empty => 'Nenhuma notificação';
   @override
-  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  String get kitapsen_notifications_mark_all => 'Marcar tudo como lido';
   @override
-  String get kitapsen_story_chapters => 'Chapters';
+  String get kitapsen_story_chapters => 'Capítulos';
   @override
-  String get kitapsen_story_no_chapters => 'No chapters yet';
+  String get kitapsen_story_no_chapters => 'Ainda não há capítulos';
   @override
-  String get kitapsen_story_next => 'Next chapter';
+  String get kitapsen_story_next => 'Próximo capítulo';
   @override
-  String get kitapsen_story_previous => 'Previous chapter';
+  String get kitapsen_story_previous => 'Capítulo anterior';
   @override
-  String get kitapsen_review_like => 'Like';
+  String get kitapsen_review_like => 'Curtir';
   @override
-  String get kitapsen_comments_title => 'Comments';
+  String get kitapsen_comments_title => 'Comentários';
   @override
-  String get kitapsen_comments_empty => 'No comments yet';
+  String get kitapsen_comments_empty => 'Ainda não há comentários';
   @override
-  String get kitapsen_comment_hint => 'Write a comment';
+  String get kitapsen_comment_hint => 'Escreva um comentário';
   @override
-  String get kitapsen_story_vote => 'Vote';
+  String get kitapsen_story_vote => 'Votar';
   @override
-  String get kitapsen_story_voted => 'Voted';
+  String get kitapsen_story_voted => 'Votado';
   @override
-  String get kitapsen_story_follow => 'Follow story';
+  String get kitapsen_story_follow => 'Seguir história';
   @override
-  String get kitapsen_following_title => 'Following';
+  String get kitapsen_following_title => 'Seguindo';
   @override
-  String get kitapsen_following_authors => 'Authors';
+  String get kitapsen_following_authors => 'Autores';
   @override
-  String get kitapsen_following_stories => 'Stories';
+  String get kitapsen_following_stories => 'Histórias';
   @override
-  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  String get kitapsen_following_empty => 'Você ainda não segue ninguém';
   @override
-  String get kitapsen_reader_highlight => 'Highlight';
+  String get kitapsen_reader_highlight => 'Destacar';
   @override
-  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  String get kitapsen_annotations_title => 'Marcadores e notas';
   @override
-  String get kitapsen_bookmark_add => 'Add bookmark';
+  String get kitapsen_bookmark_add => 'Adicionar marcador';
   @override
-  String get kitapsen_bookmark_added => 'Bookmark added';
+  String get kitapsen_bookmark_added => 'Marcador adicionado';
   @override
-  String get kitapsen_note_add => 'Add note';
+  String get kitapsen_note_add => 'Adicionar nota';
   @override
-  String get kitapsen_note_hint => 'Your note';
+  String get kitapsen_note_hint => 'Sua nota';
   @override
-  String get kitapsen_note_saved => 'Note saved';
+  String get kitapsen_note_saved => 'Nota salva';
   @override
-  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  String get kitapsen_annotations_empty => 'Ainda não há marcadores nem notas';
   @override
-  String get kitapsen_store_badge_free => 'Free';
+  String get kitapsen_store_badge_free => 'Grátis';
   @override
-  String get kitapsen_store_badge_new => 'New';
+  String get kitapsen_store_badge_new => 'Novo';
   @override
-  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  String kitapsen_store_rating_count({required Object n}) => '${n} avaliações';
   @override
-  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  String get kitapsen_store_hero_title => 'Seu próximo grande livro está aqui.';
   @override
   String get kitapsen_store_hero_body =>
-      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+      'Descubra novas histórias e os autores que você ama. Escolha seu livro e comece a ler no celular, tablet ou computador.';
   @override
-  String get kitapsen_store_explore_books => 'Explore books';
+  String get kitapsen_store_explore_books => 'Explorar livros';
   @override
-  String get kitapsen_store_start_free => 'Start with free books';
+  String get kitapsen_store_start_free => 'Comece com livros grátis';
   @override
-  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  String get kitapsen_store_start_free_body => 'Descubra seu primeiro livro.';
   @override
-  String get kitapsen_store_library_always => 'Your library is always with you';
+  String get kitapsen_store_library_always => 'Sua biblioteca sempre com você';
   @override
   String get kitapsen_store_library_always_body =>
-      'Read on your phone, tablet and computer.';
+      'Leia no celular, tablet e computador.';
   @override
-  String get kitapsen_store_meet_authors => 'Meet the authors';
+  String get kitapsen_store_meet_authors => 'Conheça os autores';
   @override
-  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  String get kitapsen_store_meet_authors_body =>
+      'Siga os escritores que você ama.';
   @override
-  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  String get kitapsen_store_reading_list =>
+      'Um novo livro para sua lista de leitura';
   @override
-  String get kitapsen_store_all_categories => 'All categories';
+  String get kitapsen_store_all_categories => 'Todas as categorias';
   @override
-  String get kitapsen_store_discover_title => 'Time to discover';
+  String get kitapsen_store_discover_title => 'Hora de descobrir';
   @override
   String get kitapsen_store_discover_body =>
-      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+      'Uma história, uma nova perspectiva, uma descoberta inesperada. Adicione seu próximo livro à sua lista de leitura.';
   @override
-  String get kitapsen_store_discover_now => 'Discover now';
+  String get kitapsen_store_discover_now => 'Descobrir agora';
   @override
   String kitapsen_store_results_for({required Object q}) =>
-      'Results for "${q}"';
+      'Resultados para “${q}”';
   @override
-  String get kitapsen_store_matching_authors => 'Matching authors';
+  String get kitapsen_store_matching_authors => 'Autores correspondentes';
   @override
-  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  String kitapsen_store_author_books_count({required Object n}) =>
+      '${n} livros';
   @override
   String get kitapsen_store_author_cta =>
-      'Discover the author\'s books and pick your next read.';
+      'Descubra os livros do autor e escolha sua próxima leitura.';
   @override
-  String get kitapsen_store_see_author_books => 'See their books';
+  String get kitapsen_store_see_author_books => 'Ver os livros';
   @override
-  String get kitapsen_store_authors_books => 'The author\'s books';
+  String get kitapsen_store_authors_books => 'Livros do autor';
   @override
-  String get kitapsen_book_read_now => 'Read now';
+  String get kitapsen_book_read_now => 'Ler agora';
   @override
-  String get kitapsen_book_get_free_web => 'Get it free';
+  String get kitapsen_book_get_free_web => 'Obtenha grátis';
   @override
-  String get kitapsen_book_favorites => 'Favorites';
+  String get kitapsen_book_favorites => 'Favoritos';
   @override
-  String get kitapsen_book_description => 'Description';
+  String get kitapsen_book_description => 'Descrição';
   @override
-  String get kitapsen_book_about_author => 'About the author';
+  String get kitapsen_book_about_author => 'Sobre o autor';
   @override
   String get kitapsen_book_isbn => 'ISBN';
   @override
-  String get kitapsen_book_format => 'Format';
+  String get kitapsen_book_format => 'Formato';
   @override
-  String get kitapsen_author_role => 'Author';
+  String get kitapsen_author_role => 'Autor';
   @override
-  String get kitapsen_author_notify => 'Notify me of new books';
+  String get kitapsen_author_notify => 'Avise-me sobre novos livros';
   @override
-  String get kitapsen_author_about => 'About';
+  String get kitapsen_author_about => 'Sobre';
   @override
-  String get kitapsen_review_more_bio => 'Read the full biography';
+  String get kitapsen_review_more_bio => 'Ler a biografia completa';
   @override
-  String get kitapsen_author_like => 'Like';
+  String get kitapsen_author_like => 'Curtir';
   @override
-  String get kitapsen_author_likes => 'Likes';
+  String get kitapsen_author_likes => 'Curtidas';
   @override
-  String get kitapsen_register_open => 'No account yet? Create one';
+  String get kitapsen_register_open => 'Ainda não tem conta? Crie uma';
   @override
-  String get kitapsen_register_name => 'Name (optional)';
+  String get kitapsen_register_name => 'Nome (opcional)';
   @override
-  String get kitapsen_register_username => 'Username';
+  String get kitapsen_register_username => 'Nome de usuário';
   @override
   String get kitapsen_register_username_hint =>
-      '2–20 lowercase letters or digits';
+      '2–20 letras minúsculas ou números';
   @override
-  String get kitapsen_register_email => 'Email';
+  String get kitapsen_register_email => 'E-mail';
   @override
-  String get kitapsen_register_password_hint => 'At least 8 characters';
+  String get kitapsen_register_password_hint => 'Pelo menos 8 caracteres';
   @override
-  String get kitapsen_register_submit => 'Create account';
+  String get kitapsen_register_submit => 'Criar conta';
   @override
-  String get kitapsen_register_have_account =>
-      'Already have an account? Sign in';
+  String get kitapsen_register_have_account => 'Já tem uma conta? Entre';
   @override
   String get kitapsen_register_username_invalid =>
-      'Use 2–20 lowercase letters or digits.';
+      'Use 2–20 letras minúsculas ou números.';
   @override
   String get kitapsen_register_name_invalid =>
-      'The name must be 2–30 characters.';
+      'O nome deve ter de 2 a 30 caracteres.';
   @override
-  String get kitapsen_register_email_invalid => 'Enter a valid email address.';
+  String get kitapsen_register_email_invalid =>
+      'Informe um endereço de e-mail válido.';
   @override
   String get kitapsen_register_password_short =>
-      'The password must be at least 8 characters.';
+      'A senha deve ter pelo menos 8 caracteres.';
   @override
   String get kitapsen_register_failed =>
-      'The account could not be created. Try again.';
+      'Não foi possível criar a conta. Tente novamente.';
   @override
-  String get kitapsen_hub_title => 'My account';
+  String get kitapsen_hub_title => 'Minha conta';
   @override
-  String get kitapsen_hub_reading => 'Reading';
+  String get kitapsen_hub_reading => 'Leitura';
   @override
   String get kitapsen_hub_social => 'Social';
   @override
-  String get kitapsen_hub_discover => 'Discover';
+  String get kitapsen_hub_discover => 'Descobrir';
   @override
-  String get kitapsen_hub_account => 'Account';
+  String get kitapsen_hub_account => 'Conta';
   @override
-  String get kitapsen_hub_library => 'My library';
+  String get kitapsen_hub_library => 'Minha biblioteca';
   @override
-  String get kitapsen_hub_public_profile => 'My public reader profile';
+  String get kitapsen_hub_public_profile => 'Meu perfil público de leitor';
   @override
-  String get kitapsen_hub_sign_in_settings => 'Sign out or delete the account';
+  String get kitapsen_hub_sign_in_settings => 'Sair ou excluir a conta';
   @override
-  String get kitapsen_common_save => 'Save';
+  String get kitapsen_common_save => 'Salvar';
   @override
-  String get kitapsen_common_saved => 'Saved';
+  String get kitapsen_common_saved => 'Salvo';
   @override
-  String get kitapsen_common_edit => 'Edit';
+  String get kitapsen_common_edit => 'Editar';
   @override
-  String get kitapsen_profile_title => 'My profile';
+  String get kitapsen_profile_title => 'Meu perfil';
   @override
-  String get kitapsen_profile_name => 'Display name';
+  String get kitapsen_profile_name => 'Nome de exibição';
   @override
-  String get kitapsen_profile_sharing => 'Share reading activity';
+  String get kitapsen_profile_sharing => 'Compartilhar atividade de leitura';
   @override
   String get kitapsen_profile_sharing_hint =>
-      'Show the books you are reading and have finished on your public profile.';
+      'Mostre no seu perfil público os livros que você está lendo e os que já terminou.';
   @override
-  String get kitapsen_settings_title => 'Account settings';
+  String get kitapsen_settings_title => 'Configurações da conta';
   @override
-  String get kitapsen_settings_profile => 'Profile information';
+  String get kitapsen_settings_profile => 'Informações do perfil';
   @override
-  String get kitapsen_settings_privacy => 'Privacy';
+  String get kitapsen_settings_privacy => 'Privacidade';
   @override
-  String get kitapsen_settings_private => 'Private profile';
+  String get kitapsen_settings_private => 'Perfil privado';
   @override
   String get kitapsen_settings_private_hint =>
-      'Only your followers can see your profile, reviews, reading activity and updates.';
+      'Só seus seguidores podem ver seu perfil, suas avaliações, sua atividade de leitura e suas atualizações.';
   @override
-  String get kitapsen_settings_notifications => 'Email notifications';
+  String get kitapsen_settings_notifications => 'Notificações por e-mail';
   @override
   String get kitapsen_settings_follower_email =>
-      'Email me when someone follows me';
+      'Enviar e-mail quando alguém me seguir';
   @override
   String get kitapsen_settings_comment_email =>
-      'Email me when someone comments on my story';
+      'Enviar e-mail quando alguém comentar na minha história';
   @override
-  String get kitapsen_settings_sale_email => 'Email me when my book sells';
+  String get kitapsen_settings_sale_email =>
+      'Enviar e-mail quando meu livro for vendido';
   @override
-  String get kitapsen_settings_author_emails => 'Author emails';
+  String get kitapsen_settings_author_emails => 'E-mails para autores';
   @override
-  String get kitapsen_settings_password => 'Change password';
+  String get kitapsen_settings_password => 'Alterar senha';
   @override
-  String get kitapsen_settings_current_password => 'Current password';
+  String get kitapsen_settings_current_password => 'Senha atual';
   @override
-  String get kitapsen_settings_new_password => 'New password';
+  String get kitapsen_settings_new_password => 'Nova senha';
   @override
-  String get kitapsen_settings_repeat_password => 'Repeat the new password';
+  String get kitapsen_settings_repeat_password => 'Repita a nova senha';
   @override
-  String get kitapsen_settings_change_password => 'Change password';
+  String get kitapsen_settings_change_password => 'Alterar senha';
   @override
-  String get kitapsen_settings_passwords_differ =>
-      'The passwords do not match.';
+  String get kitapsen_settings_passwords_differ => 'As senhas não coincidem.';
   @override
-  String get kitapsen_settings_password_changed => 'Password changed.';
+  String get kitapsen_settings_password_changed => 'Senha alterada.';
   @override
   String get kitapsen_settings_password_failed =>
-      'The password could not be changed. Check the current password.';
+      'Não foi possível alterar a senha. Verifique a senha atual.';
   @override
-  String get kitapsen_settings_blocked => 'Blocked users';
+  String get kitapsen_settings_blocked => 'Usuários bloqueados';
   @override
-  String get kitapsen_settings_no_blocked => 'You have not blocked anyone.';
+  String get kitapsen_settings_no_blocked => 'Você não bloqueou ninguém.';
   @override
-  String get kitapsen_publishers_title => 'Publishers';
+  String get kitapsen_publishers_title => 'Editoras';
   @override
-  String get kitapsen_publishers_body => 'Browse books by publisher.';
+  String get kitapsen_publishers_body => 'Explore livros por editora.';
   @override
-  String get kitapsen_publisher_role => 'Publisher';
+  String get kitapsen_publisher_role => 'Editora';
   @override
   String get kitapsen_publisher_no_books =>
-      'This publisher\'s books will be listed here soon.';
+      'Os livros desta editora aparecerão aqui em breve.';
   @override
-  String get kitapsen_authors_title => 'Authors';
+  String get kitapsen_authors_title => 'Autores';
   @override
   String get kitapsen_blog_title => 'Blog';
   @override
   String get kitapsen_blog_subtitle =>
-      'News, tips and stories from the Kitapsen community.';
+      'Notícias, dicas e histórias da comunidade Kitapsen.';
   @override
-  String get kitapsen_blog_empty => 'No blog posts yet.';
+  String get kitapsen_blog_empty => 'Ainda não há posts no blog.';
   @override
-  String get kitapsen_collections_title => 'Collections';
+  String get kitapsen_collections_title => 'Coleções';
   @override
-  String get kitapsen_collections_new => 'New collection';
+  String get kitapsen_collections_new => 'Nova coleção';
   @override
-  String get kitapsen_collections_name => 'Collection name';
+  String get kitapsen_collections_name => 'Nome da coleção';
   @override
-  String get kitapsen_collections_description => 'Description (optional)';
+  String get kitapsen_collections_description => 'Descrição (opcional)';
   @override
   String get kitapsen_collections_empty =>
-      'No collections yet. Create collections to organise your books.';
+      'Ainda não há coleções. Crie coleções para organizar seus livros.';
   @override
-  String get kitapsen_collections_delete_confirm => 'Delete this collection?';
+  String get kitapsen_collections_delete_confirm => 'Excluir esta coleção?';
   @override
   String get kitapsen_collections_items_empty =>
-      'No books yet. Add books from their page with "Add to collection".';
+      'Ainda não há livros. Adicione livros pela página de cada um com “Adicionar à coleção”.';
   @override
   String get kitapsen_collections_long_press =>
-      'Long-press a book to remove it.';
+      'Toque e segure um livro para removê-lo.';
   @override
-  String get kitapsen_collections_remove => 'Remove';
+  String get kitapsen_collections_remove => 'Remover';
   @override
   String kitapsen_collections_remove_confirm({required Object title}) =>
-      'Remove "${title}" from this collection?';
+      'Remover “${title}” desta coleção?';
   @override
-  String get kitapsen_collections_add => 'Add to collection';
+  String get kitapsen_collections_add => 'Adicionar à coleção';
   @override
-  String get kitapsen_collections_add_title => 'Add to a collection';
+  String get kitapsen_collections_add_title => 'Adicionar a uma coleção';
   @override
-  String get kitapsen_collections_added => 'Added to the collection';
+  String get kitapsen_collections_added => 'Adicionado à coleção';
   @override
-  String get kitapsen_notebooks_title => 'Notebooks';
+  String get kitapsen_notebooks_title => 'Cadernos';
   @override
-  String get kitapsen_notebooks_new => 'New notebook';
+  String get kitapsen_notebooks_new => 'Novo caderno';
   @override
-  String get kitapsen_notebooks_name => 'Notebook name';
+  String get kitapsen_notebooks_name => 'Nome do caderno';
   @override
   String get kitapsen_notebooks_empty =>
-      'No notebooks yet. Create notebooks for your reading notes and ideas.';
+      'Ainda não há cadernos. Crie cadernos para suas notas de leitura e ideias.';
   @override
-  String kitapsen_notebooks_count({required Object n}) => '${n} notes';
+  String kitapsen_notebooks_count({required Object n}) => '${n} notas';
   @override
-  String get kitapsen_notebooks_delete_confirm => 'Delete this notebook?';
+  String get kitapsen_notebooks_delete_confirm => 'Excluir este caderno?';
   @override
-  String get kitapsen_notebooks_entries_empty => 'No notes yet.';
+  String get kitapsen_notebooks_entries_empty => 'Ainda não há notas.';
   @override
-  String get kitapsen_notebooks_entry_hint => 'Add a note...';
+  String get kitapsen_notebooks_entry_hint => 'Adicione uma nota...';
   @override
-  String get kitapsen_notebooks_entry_delete_confirm => 'Delete this note?';
+  String get kitapsen_notebooks_entry_delete_confirm => 'Excluir esta nota?';
   @override
-  String get kitapsen_notebooks_add => 'Add note';
+  String get kitapsen_notebooks_add => 'Adicionar nota';
   @override
-  String get kitapsen_goals_title => 'Reading goals';
+  String get kitapsen_goals_title => 'Metas de leitura';
   @override
-  String get kitapsen_goals_new => 'New goal';
+  String get kitapsen_goals_new => 'Nova meta';
   @override
-  String get kitapsen_goals_create => 'Create';
+  String get kitapsen_goals_create => 'Criar';
   @override
-  String get kitapsen_goals_created => 'Goal created';
+  String get kitapsen_goals_created => 'Meta criada';
   @override
-  String get kitapsen_goals_type => 'Goal type';
+  String get kitapsen_goals_type => 'Tipo de meta';
   @override
-  String get kitapsen_goals_type_books => 'Books';
+  String get kitapsen_goals_type_books => 'Livros';
   @override
-  String get kitapsen_goals_type_pages => 'Pages';
+  String get kitapsen_goals_type_pages => 'Páginas';
   @override
-  String get kitapsen_goals_type_days => 'Reading days';
+  String get kitapsen_goals_type_days => 'Dias de leitura';
   @override
-  String get kitapsen_goals_target => 'Target';
+  String get kitapsen_goals_target => 'Objetivo';
   @override
-  String get kitapsen_goals_this_month => 'This month';
+  String get kitapsen_goals_this_month => 'Este mês';
   @override
-  String get kitapsen_goals_this_year => 'This year';
+  String get kitapsen_goals_this_year => 'Este ano';
   @override
   String get kitapsen_goals_empty =>
-      'No reading goals. Set your first goal to keep your motivation up.';
+      'Nenhuma meta de leitura. Defina sua primeira meta para manter a motivação.';
   @override
-  String get kitapsen_goals_delete_confirm => 'Delete this goal?';
+  String get kitapsen_goals_delete_confirm => 'Excluir esta meta?';
   @override
-  String get kitapsen_goals_completed => 'Completed';
+  String get kitapsen_goals_completed => 'Concluída';
   @override
-  String kitapsen_goals_until({required Object date}) => 'Until ${date}';
+  String kitapsen_goals_until({required Object date}) => 'Até ${date}';
   @override
-  String kitapsen_goals_unit_books({required Object n}) => '${n} books';
+  String kitapsen_goals_unit_books({required Object n}) => '${n} livros';
   @override
-  String kitapsen_goals_unit_pages({required Object n}) => '${n} pages';
+  String kitapsen_goals_unit_pages({required Object n}) => '${n} páginas';
   @override
-  String kitapsen_goals_unit_hours({required Object n}) => '${n} hours';
+  String kitapsen_goals_unit_hours({required Object n}) => '${n} horas';
   @override
-  String kitapsen_goals_unit_days({required Object n}) => '${n} reading days';
+  String kitapsen_goals_unit_days({required Object n}) =>
+      '${n} dias de leitura';
   @override
-  String get kitapsen_goals_streak => 'Day streak';
+  String get kitapsen_goals_streak => 'Sequência de dias';
   @override
-  String get kitapsen_goals_longest_streak => 'Longest streak';
+  String get kitapsen_goals_longest_streak => 'Maior sequência';
   @override
-  String get kitapsen_goals_books_read => 'Books read';
+  String get kitapsen_goals_books_read => 'Livros lidos';
   @override
-  String get kitapsen_goals_books_finished => 'Finished';
+  String get kitapsen_goals_books_finished => 'Concluídos';
   @override
-  String get kitapsen_feed_title => 'Social feed';
+  String get kitapsen_feed_title => 'Feed social';
   @override
-  String get kitapsen_feed_followed => 'Following';
+  String get kitapsen_feed_followed => 'Seguindo';
   @override
-  String get kitapsen_feed_mine => 'My activity';
+  String get kitapsen_feed_mine => 'Minha atividade';
   @override
   String get kitapsen_feed_empty_followed =>
-      'No activity yet. Follow readers to keep up with what they are reading.';
+      'Ainda não há atividade. Siga leitores para acompanhar o que eles estão lendo.';
   @override
   String get kitapsen_feed_empty_mine =>
-      'Your reading activity will appear here once you start reading.';
+      'Sua atividade de leitura aparecerá aqui quando você começar a ler.';
   @override
   String kitapsen_feed_started({required Object target}) =>
-      'started reading ${target}';
+      'começou a ler ${target}';
   @override
   String kitapsen_feed_finished({required Object target}) =>
-      'finished ${target}';
+      'terminou de ler ${target}';
   @override
   String kitapsen_feed_reviewed({required Object target}) =>
-      'reviewed ${target}';
+      'avaliou ${target}';
   @override
   String kitapsen_feed_followed_user({required Object target}) =>
-      'started following ${target}';
+      'começou a seguir ${target}';
   @override
   String kitapsen_feed_followed_author({required Object target}) =>
-      'followed the author ${target}';
+      'seguiu o autor ${target}';
   @override
-  String kitapsen_feed_shared({required Object target}) => 'shared ${target}';
+  String kitapsen_feed_shared({required Object target}) =>
+      'compartilhou ${target}';
   @override
-  String kitapsen_feed_percent({required Object n}) => '${n}% read';
+  String kitapsen_feed_percent({required Object n}) => '${n}% lido';
   @override
-  String get kitapsen_feed_finished_badge => 'Finished';
+  String get kitapsen_feed_finished_badge => 'Concluído';
   @override
-  String get kitapsen_user_follow => 'Follow';
+  String get kitapsen_user_follow => 'Seguir';
   @override
-  String get kitapsen_user_block => 'Block';
+  String get kitapsen_user_block => 'Bloquear';
   @override
-  String get kitapsen_user_unblock => 'Unblock';
+  String get kitapsen_user_unblock => 'Desbloquear';
   @override
   String kitapsen_user_block_confirm({required Object username}) =>
-      'Block @${username}? They will no longer see your profile and activity, and any follow between you is removed.';
+      'Bloquear @${username}? Essa pessoa não verá mais seu perfil nem sua atividade, e vocês deixarão de se seguir.';
   @override
   String kitapsen_user_member_since({required Object date}) =>
-      'Member since ${date}';
+      'Membro desde ${date}';
   @override
-  String kitapsen_user_followers({required Object n}) => '${n} followers';
+  String kitapsen_user_followers({required Object n}) => '${n} seguidores';
   @override
-  String kitapsen_user_following({required Object n}) => '${n} following';
+  String kitapsen_user_following({required Object n}) => '${n} seguindo';
   @override
   String kitapsen_user_finished_count({required Object n}) =>
-      '${n} books finished';
+      '${n} livros concluídos';
   @override
-  String get kitapsen_user_tab_reading => 'Reading';
+  String get kitapsen_user_tab_reading => 'Leitura';
   @override
-  String get kitapsen_user_tab_reviews => 'Reviews';
+  String get kitapsen_user_tab_reviews => 'Avaliações';
   @override
-  String get kitapsen_user_tab_activity => 'Activity';
+  String get kitapsen_user_tab_activity => 'Atividade';
   @override
-  String get kitapsen_user_currently_reading => 'Currently reading';
+  String get kitapsen_user_currently_reading => 'Lendo agora';
   @override
-  String get kitapsen_user_finished => 'Finished';
+  String get kitapsen_user_finished => 'Concluídos';
   @override
   String get kitapsen_user_no_reading =>
-      'This reader does not share reading activity.';
+      'Este leitor não compartilha a atividade de leitura.';
   @override
-  String get kitapsen_user_no_reviews => 'No public reviews yet.';
+  String get kitapsen_user_no_reviews => 'Ainda não há avaliações públicas.';
   @override
-  String get kitapsen_user_no_activity => 'No public activity yet.';
+  String get kitapsen_user_no_activity => 'Ainda não há atividade pública.';
   @override
   String get kitapsen_user_private =>
-      'This profile is private. Follow this reader to see their reviews, reading activity and profile.';
+      'Este perfil é privado. Siga este leitor para ver as avaliações, a atividade de leitura e o perfil dele.';
   @override
   String get kitapsen_user_blocked_you =>
-      'This reader has blocked you. Their profile and activity are hidden from you.';
+      'Este leitor bloqueou você. O perfil e a atividade dele estão ocultos para você.';
   @override
-  String get kitapsen_user_followers_title => 'Followers';
+  String get kitapsen_user_followers_title => 'Seguidores';
   @override
-  String get kitapsen_user_following_title => 'Following';
+  String get kitapsen_user_following_title => 'Seguindo';
   @override
-  String get kitapsen_user_no_connections => 'Nobody here yet.';
+  String get kitapsen_user_no_connections => 'Ninguém aqui ainda.';
   @override
-  String get kitapsen_clubs_title => 'Book clubs';
+  String get kitapsen_clubs_title => 'Clubes do livro';
   @override
-  String get kitapsen_clubs_create => 'Create a club';
+  String get kitapsen_clubs_create => 'Criar um clube';
   @override
-  String get kitapsen_clubs_name => 'Club name';
+  String get kitapsen_clubs_name => 'Nome do clube';
   @override
   String get kitapsen_clubs_empty =>
-      'No book clubs yet. Create or join one to read together.';
+      'Ainda não há clubes do livro. Crie um ou participe de algum para ler em grupo.';
   @override
-  String get kitapsen_clubs_join => 'Join';
+  String get kitapsen_clubs_join => 'Participar';
   @override
-  String get kitapsen_clubs_leave => 'Leave';
+  String get kitapsen_clubs_leave => 'Sair';
   @override
-  String get kitapsen_clubs_owner => 'Owner';
+  String get kitapsen_clubs_owner => 'Dono';
   @override
-  String get kitapsen_clubs_members => 'Members';
+  String get kitapsen_clubs_members => 'Membros';
   @override
-  String kitapsen_clubs_members_count({required Object n}) => '${n} members';
+  String kitapsen_clubs_members_count({required Object n}) => '${n} membros';
   @override
-  String get kitapsen_clubs_chat => 'Discussion';
+  String get kitapsen_clubs_chat => 'Conversa';
   @override
   String get kitapsen_clubs_join_to_chat =>
-      'Join the club to read and write messages.';
+      'Participe do clube para ler e escrever mensagens.';
   @override
-  String get kitapsen_clubs_no_messages => 'No messages yet.';
+  String get kitapsen_clubs_no_messages => 'Ainda não há mensagens.';
   @override
-  String get kitapsen_clubs_message_hint => 'Write a message...';
+  String get kitapsen_clubs_message_hint => 'Escreva uma mensagem...';
   @override
-  String get kitapsen_clubs_send => 'Send';
+  String get kitapsen_clubs_send => 'Enviar';
   @override
   String get kitapsen_register_taken =>
-      'This username or email address already has an account.';
+      'Já existe uma conta com este nome de usuário ou e-mail.';
   @override
-  String get kitapsen_report => 'Report';
+  String get kitapsen_report => 'Denunciar';
   @override
-  String get kitapsen_reported => 'Reported';
+  String get kitapsen_reported => 'Denunciado';
   @override
-  String get kitapsen_report_title => 'Report this content';
+  String get kitapsen_report_title => 'Denunciar este conteúdo';
   @override
-  String get kitapsen_report_reason => 'Reason (optional)';
+  String get kitapsen_report_reason => 'Motivo (opcional)';
   @override
-  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  String get kitapsen_report_reason_hint => 'Por que isso é inadequado?';
   @override
-  String get kitapsen_report_submit => 'Submit Report';
+  String get kitapsen_report_submit => 'Enviar denúncia';
   @override
   String get kitapsen_report_thanks =>
-      'Reported. Thank you for helping keep the community safe.';
+      'Denunciado. Obrigado por ajudar a manter a comunidade segura.';
   @override
   String get kitapsen_delete_statistics_book_desc =>
       'O tempo de leitura e os caracteres lidos deste livro são removidos das estatísticas em todos os dispositivos';
@@ -169089,7 +169083,7 @@ class _StringsRu extends _StringsEn {
   String get app_ui_scale => 'Размер интерфейса';
   @override
   String get app_ui_scale_hint =>
-      'Scales app text and spacing. Lower it on large screens if controls feel oversized.';
+      'Масштабирует весь интерфейс — текст, значки и элементы управления вместе — от 30% до 300%. Увеличьте, если на больших экранах интерфейс выглядит мелким.';
   @override
   String get app_version => 'Версия приложения';
   @override
@@ -169639,7 +169633,7 @@ class _StringsRu extends _StringsEn {
   @override
   String get batch_tag_title => 'Управление тегами';
   @override
-  String get book_continue_reading => 'Continue Reading';
+  String get book_continue_reading => 'Продолжить чтение';
   @override
   String get book_convert_blocked_already => 'Эта книга уже в этом формате.';
   @override
@@ -171467,7 +171461,7 @@ class _StringsRu extends _StringsEn {
   @override
   String get font_target_game_lookup => 'Шрифт окна поиска в игре';
   @override
-  String get font_target_video_subtitle => 'Video Subtitle Font';
+  String get font_target_video_subtitle => 'Шрифт субтитров видео';
   @override
   String get gal_card_lookup_independent_size =>
       'Отдельный размер для карточки в игре';
@@ -172625,7 +172619,7 @@ class _StringsRu extends _StringsEn {
   @override
   String get handlebar_sentence => 'Предложение';
   @override
-  String get handlebar_sentence_audio => 'Sentence Audio';
+  String get handlebar_sentence_audio => 'Аудио предложения';
   @override
   String get handlebar_video_clip => 'Video Clip (GIF)';
   @override
@@ -174620,17 +174614,17 @@ class _StringsRu extends _StringsEn {
   @override
   String get popup_ctx_adjust_button => 'Изменить контекст';
   @override
-  String get popup_ctx_box_current => 'Current';
+  String get popup_ctx_box_current => 'Текущее предложение';
   @override
   String get popup_ctx_box_empty => '(нет)';
   @override
-  String get popup_ctx_box_next => 'After';
+  String get popup_ctx_box_next => 'Следующий контекст';
   @override
-  String get popup_ctx_box_prev => 'Before';
+  String get popup_ctx_box_prev => 'Предыдущий контекст';
   @override
   String get popup_ctx_cancel => 'Отмена';
   @override
-  String get popup_ctx_confirm => 'Confirm';
+  String get popup_ctx_confirm => 'Подтвердить создание карточки';
   @override
   String get popup_ctx_modal_count => 'Selected %d';
   @override
@@ -174640,11 +174634,11 @@ class _StringsRu extends _StringsEn {
   @override
   String get popup_ctx_next_minus => 'Remove after';
   @override
-  String get popup_ctx_next_plus => 'Add after';
+  String get popup_ctx_next_plus => 'Добавить следующее';
   @override
-  String get popup_ctx_prev_minus => 'Remove before';
+  String get popup_ctx_prev_minus => 'Убрать предыдущее';
   @override
-  String get popup_ctx_prev_plus => 'Add before';
+  String get popup_ctx_prev_plus => 'Добавить предыдущее';
   @override
   String get popup_ctx_preview_audio => 'Прослушать аудио';
   @override
@@ -174866,11 +174860,11 @@ class _StringsRu extends _StringsEn {
   @override
   String get reader_view_mode_label => 'Страницы / Прокрутка';
   @override
-  String get reader_vn => 'Visual Novel';
+  String get reader_vn => 'Визуальная новелла';
   @override
   String get reader_writing_direction => 'Направление письма';
   @override
-  String get reading_activity => 'Учебная активность';
+  String get reading_activity => 'Читательская активность';
   @override
   String get reading_progress => 'Прогресс чтения';
   @override
@@ -175215,7 +175209,7 @@ class _StringsRu extends _StringsEn {
   String get shortcut_action_global_context_menu => 'Открыть контекстное меню';
   @override
   String get shortcut_action_global_external_lookup =>
-      'App-external lookup hotkey';
+      'Сочетание клавиш для поиска вне приложения';
   @override
   String get shortcut_action_global_scroll_page_down =>
       'Прокрутить вниз на экран';
@@ -175280,9 +175274,9 @@ class _StringsRu extends _StringsEn {
   String get shortcut_action_reader_open_gallery =>
       'Открыть галерею иллюстраций';
   @override
-  String get shortcut_action_reader_open_menu => 'Open Settings Menu';
+  String get shortcut_action_reader_open_menu => 'Открыть меню настроек';
   @override
-  String get shortcut_action_reader_open_navigation => 'Open Navigation';
+  String get shortcut_action_reader_open_navigation => 'Открыть навигацию';
   @override
   String get shortcut_action_reader_open_statistics =>
       'Открыть статистику чтения';
@@ -175305,10 +175299,10 @@ class _StringsRu extends _StringsEn {
       'Совместить предыдущий субтитр с текущим моментом';
   @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
-      'Cycle Secondary Subtitle Obscure';
+      'Переключить режим скрытия вторичных субтитров';
   @override
   String get shortcut_action_video_cycle_subtitle_obscure =>
-      'Cycle Subtitle Obscure Mode';
+      'Переключить режим скрытия субтитров';
   @override
   String get shortcut_action_video_dismiss_dict => 'Закрыть словарь';
   @override
@@ -175378,7 +175372,7 @@ class _StringsRu extends _StringsEn {
       'Воспроизведение / Пауза';
   @override
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
-      'Toggle Hide Secondary Subtitle';
+      'Скрыть/показать вторичные субтитры';
   @override
   String get shortcut_action_video_toggle_shader_compare =>
       'Сравнение шейдеров';
@@ -175386,7 +175380,7 @@ class _StringsRu extends _StringsEn {
   String get shortcut_action_video_toggle_subtitle_blur => 'Размытие субтитров';
   @override
   String get shortcut_action_video_toggle_subtitle_hide =>
-      'Toggle Hide Subtitles';
+      'Скрыть/показать субтитры';
   @override
   String get shortcut_action_video_toggle_subtitle_list => 'Список субтитров';
   @override
@@ -175471,7 +175465,7 @@ class _StringsRu extends _StringsEn {
       'Для мыши принимаются только боковые кнопки (назад/вперёд). Остальные кнопки сохраняют обычное значение в других приложениях, поэтому здесь отклоняются.';
   @override
   String get shortcut_scope_global_external_mobile_note =>
-      'Triggered by the system (text selection menu, share, floating ball); the OS does not allow apps to remap this hotkey.';
+      'Вызывается системой (меню выделения текста, «Поделиться», плавающая кнопка); ОС не позволяет приложениям переназначать это сочетание.';
   @override
   String get shortcut_scope_home => 'Главная';
   @override
@@ -175666,7 +175660,7 @@ class _StringsRu extends _StringsEn {
   @override
   String get stat_detail_ungrouped => 'Без группы';
   @override
-  String get stat_fastest_day => 'Fastest Day';
+  String get stat_fastest_day => 'Самый быстрый день';
   @override
   String get stat_favorited => 'В избранном';
   @override
@@ -175683,9 +175677,9 @@ class _StringsRu extends _StringsEn {
   @override
   String stat_format_pages({required Object n}) => '${n} стр.';
   @override
-  String get stat_goal => 'Daily Goal';
+  String get stat_goal => 'Дневная цель';
   @override
-  String get stat_goal_daily => 'Daily Goal';
+  String get stat_goal_daily => 'Дневная цель';
   @override
   String get stat_goal_presets => 'Предустановки';
   @override
@@ -175697,11 +175691,11 @@ class _StringsRu extends _StringsEn {
   String stat_goal_recent_average({required Object n}) =>
       'Последние 7 дней: ${n} символов/день в среднем';
   @override
-  String get stat_goal_set => 'Set Goal';
+  String get stat_goal_set => 'Задать цель';
   @override
   String get stat_goal_unit_chars => 'символов';
   @override
-  String get stat_goal_weekly => 'Weekly Goal';
+  String get stat_goal_weekly => 'Недельная цель';
   @override
   String get stat_hourly_band_epub => 'Текстовые книги';
   @override
@@ -175728,7 +175722,7 @@ class _StringsRu extends _StringsEn {
   @override
   String get stat_no_data => 'Данных о чтении пока нет';
   @override
-  String get stat_range_and_trend => 'Range & Trend';
+  String get stat_range_and_trend => 'Диапазон и тренд';
   @override
   String get stat_recent_active => 'Активные дни (7д)';
   @override
@@ -175747,7 +175741,7 @@ class _StringsRu extends _StringsEn {
   @override
   String get stat_sessions_show_all => 'Все сессии';
   @override
-  String get stat_slowest_day => 'Slowest Day';
+  String get stat_slowest_day => 'Самый медленный день';
   @override
   String get stat_sort_by_chars => 'По знакам';
   @override
@@ -175763,7 +175757,7 @@ class _StringsRu extends _StringsEn {
   @override
   String stat_speed_cph({required Object n}) => '${n} знаков/ч';
   @override
-  String get stat_speed_summary => 'Speed Summary';
+  String get stat_speed_summary => 'Сводка по скорости';
   @override
   String get stat_streak => 'Серия дней';
   @override
@@ -175781,11 +175775,11 @@ class _StringsRu extends _StringsEn {
   @override
   String get stat_trend_weekly => 'По неделям';
   @override
-  String get stat_typical_day => 'Typical Day';
+  String get stat_typical_day => 'Типичный день';
   @override
   String get stat_vs_prev => 'к пред. 14д';
   @override
-  String get stat_weighted_avg_speed => 'Weighted Avg';
+  String get stat_weighted_avg_speed => 'Взвешенное среднее';
   @override
   String get stop => 'Стоп';
   @override
@@ -181489,7 +181483,7 @@ class _StringsRu extends _StringsEn {
   String get game_lookup_samples_continuation_hint =>
       'Set where the second and later lines start relative to the first line. One value applies to all text; 0 keeps the same start.';
   @override
-  String get game_lookup_samples_continuation_label => 'Text continuation';
+  String get game_lookup_samples_continuation_label => 'Сдвиг';
   @override
   String get game_lookup_samples_continuation_title =>
       'Начало строки-продолжения';
@@ -183344,7 +183338,7 @@ class _StringsRu extends _StringsEn {
   @override
   String get video_scrape_ai_declined => 'AI not adopted';
   @override
-  String get video_scrape_ai_failed => 'AI request failed';
+  String get video_scrape_ai_failed => 'Ошибка запроса к ИИ';
   @override
   String get video_scrape_ai_searched =>
       'Searched again with titles suggested by AI';
@@ -183404,11 +183398,11 @@ class _StringsRu extends _StringsEn {
   @override
   String get shelf_filter_read_status_finished => 'Прочитано';
   @override
-  String get video_filter_media_type => 'Type';
+  String get video_filter_media_type => 'Тип';
   @override
-  String get video_filter_media_type_video => 'Video';
+  String get video_filter_media_type_video => 'Видео';
   @override
-  String get video_filter_media_type_audio => 'Audio';
+  String get video_filter_media_type_audio => 'Аудио';
   @override
   String get video_filter_extras => 'Main/Extras';
   @override
@@ -183416,7 +183410,7 @@ class _StringsRu extends _StringsEn {
   @override
   String get video_filter_extras_only => 'Extras only';
   @override
-  String get video_filter_source => 'Source';
+  String get video_filter_source => 'Источник';
   @override
   String get video_filter_series_standalone_empty_hint =>
       'No standalone videos. Videos in collections are on the Series tab, or set the Series filter to All.';
@@ -183459,7 +183453,7 @@ class _StringsRu extends _StringsEn {
   @override
   String get manga_ocr_ai_mode_label => 'AI recognition';
   @override
-  String get manga_ocr_ai_mode_off => 'Off';
+  String get manga_ocr_ai_mode_off => 'Выкл.';
   @override
   String get manga_ocr_ai_mode_low_confidence => 'Only uncertain text';
   @override
@@ -183512,7 +183506,7 @@ class _StringsRu extends _StringsEn {
   String get ocr_system_model_missing =>
       'Google Play services hasn\'t downloaded the text recognition model yet. Download it now (a few MB) to use screen OCR.';
   @override
-  String get ocr_system_model_download => 'Download';
+  String get ocr_system_model_download => 'Скачать';
   @override
   String get ocr_system_model_downloading =>
       'Downloading through Google Play services… You can close this dialog; the download continues in the background.';
@@ -183536,669 +183530,676 @@ class _StringsRu extends _StringsEn {
   @override
   String get kitapsen_section_title => 'Kitapsen';
   @override
-  String get kitapsen_account_title => 'Kitapsen account';
+  String get kitapsen_account_title => 'Аккаунт Kitapsen';
   @override
   String get kitapsen_account_hint =>
-      'Sign in to read the books in your Kitapsen library. They appear on your bookshelf, and your reading position syncs with your account.';
+      'Войдите, чтобы читать книги из своей библиотеки Kitapsen. Они появятся на вашей книжной полке, а позиция чтения будет синхронизироваться с аккаунтом.';
   @override
-  String get kitapsen_account_server_url => 'Server address';
+  String get kitapsen_account_server_url => 'Адрес сервера';
   @override
-  String get kitapsen_account_username => 'Email or username';
+  String get kitapsen_account_username => 'Эл. почта или имя пользователя';
   @override
-  String get kitapsen_account_password => 'Password';
+  String get kitapsen_account_password => 'Пароль';
   @override
-  String get kitapsen_account_sign_in => 'Sign in';
+  String get kitapsen_account_sign_in => 'Войти';
   @override
-  String get kitapsen_account_sign_out => 'Sign out';
+  String get kitapsen_account_sign_out => 'Выйти';
   @override
   String get kitapsen_account_sign_in_rejected =>
-      'Email or password is incorrect';
+      'Неверная эл. почта или пароль';
   @override
   String get kitapsen_account_sign_in_failed =>
-      'Could not reach Kitapsen. Check the address and your connection.';
+      'Не удалось подключиться к Kitapsen. Проверьте адрес и подключение к сети.';
   @override
-  String get kitapsen_account_summary => 'Sign in to read your library';
+  String get kitapsen_account_summary =>
+      'Войдите, чтобы читать книги из своей библиотеки';
   @override
   String get kitapsen_shelf_signed_out_body =>
-      'Sign in with your Kitapsen account to see your library.';
+      'Войдите в аккаунт Kitapsen, чтобы увидеть свою библиотеку.';
   @override
-  String get kitapsen_shelf_sign_in => 'Sign in to Kitapsen';
+  String get kitapsen_shelf_sign_in => 'Войти в Kitapsen';
   @override
-  String get kitapsen_onboarding_title => 'Your Kitapsen library';
+  String get kitapsen_onboarding_title => 'Ваша библиотека Kitapsen';
   @override
   String get kitapsen_onboarding_body =>
-      'Sign in to see the books in your Kitapsen account on this device. You can skip this and sign in later from Settings.';
+      'Войдите, чтобы видеть книги из аккаунта Kitapsen на этом устройстве. Этот шаг можно пропустить и войти позже в настройках.';
   @override
   String app_store_update_body({required Object version}) =>
-      'Kitapsen ${version} is available on the App Store.';
+      'В App Store доступна версия Kitapsen ${version}.';
   @override
-  String get app_store_update_open => 'Update';
+  String get app_store_update_open => 'Обновить';
   @override
-  String get app_store_update_later => 'Not now';
+  String get app_store_update_later => 'Не сейчас';
   @override
-  String get kitapsen_about_privacy_policy => 'Privacy policy';
+  String get kitapsen_about_privacy_policy => 'Политика конфиденциальности';
   @override
-  String get kitapsen_about_support => 'Contact support';
+  String get kitapsen_about_support => 'Связаться с поддержкой';
   @override
-  String get kitapsen_about_source_code => 'Source code';
+  String get kitapsen_about_source_code => 'Исходный код';
   @override
   String get kitapsen_about_based_on_fushi =>
-      'Kitapsen is based on Fushi (GPLv3) — source: https://github.com/FizyonOps/kitapsen-mobile';
+      'Kitapsen основан на Fushi (GPLv3) — исходный код: https://github.com/FizyonOps/kitapsen-mobile';
   @override
-  String get kitapsen_about_licenses => 'Open-source licenses';
+  String get kitapsen_about_licenses => 'Лицензии открытого ПО';
   @override
-  String get kitapsen_about_section => 'About Kitapsen';
+  String get kitapsen_about_section => 'О Kitapsen';
   @override
-  String get kitapsen_import_hint => 'Pick an EPUB or PDF file to import.';
+  String get kitapsen_import_hint => 'Выберите файл EPUB или PDF для импорта.';
   @override
   String get kitapsen_sign_out_removes_books =>
-      'Signing out removes your downloaded Kitapsen books from this device.';
+      'При выходе скачанные книги Kitapsen будут удалены с этого устройства.';
   @override
-  String get kitapsen_account_or => 'or';
+  String get kitapsen_account_or => 'или';
   @override
-  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  String get kitapsen_account_continue_with_google => 'Продолжить с Google';
   @override
-  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  String get kitapsen_account_continue_with_apple => 'Продолжить с Apple';
   @override
   String get kitapsen_account_social_sign_in_failed =>
-      'Sign-in failed. Please try again.';
+      'Не удалось войти. Попробуйте ещё раз.';
   @override
-  String get kitapsen_account_deleted =>
-      'This Kitapsen account has been deleted.';
+  String get kitapsen_account_deleted => 'Этот аккаунт Kitapsen удалён.';
   @override
-  String get kitapsen_account_delete => 'Delete account';
+  String get kitapsen_account_delete => 'Удалить аккаунт';
   @override
   String get kitapsen_account_delete_confirm =>
-      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+      'Ваш аккаунт Kitapsen будет удалён, а на этом устройстве будет выполнен выход. Вы больше не сможете читать книги из своей библиотеки. Это действие нельзя отменить.';
   @override
   String get kitapsen_account_delete_failed =>
-      'The account could not be deleted. Please try again.';
+      'Не удалось удалить аккаунт. Попробуйте ещё раз.';
   @override
-  String get kitapsen_nav_store => 'Store';
+  String get kitapsen_nav_store => 'Магазин';
   @override
-  String get kitapsen_store_search_hint => 'Search books and authors';
+  String get kitapsen_store_search_hint => 'Поиск книг и авторов';
   @override
-  String get kitapsen_store_new_arrivals => 'New arrivals';
+  String get kitapsen_store_new_arrivals => 'Новинки';
   @override
-  String get kitapsen_store_most_read => 'Most read';
+  String get kitapsen_store_most_read => 'Самые читаемые';
   @override
-  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  String get kitapsen_store_staff_picks => 'Выбор редакции';
   @override
-  String get kitapsen_store_free_books => 'Free books';
+  String get kitapsen_store_free_books => 'Бесплатные книги';
   @override
-  String get kitapsen_store_stories => 'Serialized stories';
+  String get kitapsen_store_stories => 'Истории с продолжением';
   @override
-  String get kitapsen_store_categories => 'Categories';
+  String get kitapsen_store_categories => 'Категории';
   @override
-  String get kitapsen_store_see_all => 'See all';
+  String get kitapsen_store_see_all => 'Все';
   @override
-  String get kitapsen_store_no_results => 'No books found';
+  String get kitapsen_store_no_results => 'Книги не найдены';
   @override
   String get kitapsen_store_load_failed =>
-      'Couldn\'t load. Check your connection.';
+      'Не удалось загрузить. Проверьте подключение.';
   @override
-  String get kitapsen_store_free_only => 'Free only';
+  String get kitapsen_store_free_only => 'Только бесплатные';
   @override
-  String get kitapsen_sort_relevance => 'Most relevant';
+  String get kitapsen_sort_relevance => 'По релевантности';
   @override
-  String get kitapsen_sort_newest => 'Newest';
+  String get kitapsen_sort_newest => 'Сначала новые';
   @override
-  String get kitapsen_sort_most_read => 'Most read';
+  String get kitapsen_sort_most_read => 'Самые читаемые';
   @override
-  String get kitapsen_sort_rating => 'Top rated';
+  String get kitapsen_sort_rating => 'По рейтингу';
   @override
-  String get kitapsen_sort_title => 'Title A–Z';
+  String get kitapsen_sort_title => 'По названию (А–Я)';
   @override
-  String get kitapsen_book_read => 'Read';
+  String get kitapsen_book_read => 'Читать';
   @override
-  String get kitapsen_book_get_free => 'Get for free';
+  String get kitapsen_book_get_free => 'Получить бесплатно';
   @override
-  String get kitapsen_book_claimed => 'Added to your library';
+  String get kitapsen_book_claimed => 'Добавлено в вашу библиотеку';
   @override
-  String get kitapsen_book_in_library => 'In your library';
+  String get kitapsen_book_in_library => 'В вашей библиотеке';
   @override
-  String get kitapsen_book_not_in_library => 'Not in your library';
+  String get kitapsen_book_not_in_library => 'Нет в вашей библиотеке';
   @override
   String get kitapsen_book_sign_in_prompt =>
-      'Sign in to add books to your library and keep a wishlist.';
+      'Войдите, чтобы добавлять книги в библиотеку и вести список желаний.';
   @override
-  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  String get kitapsen_book_wishlist_add => 'Добавить в список желаний';
   @override
-  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  String get kitapsen_book_wishlist_remove => 'Удалить из списка желаний';
   @override
-  String get kitapsen_book_downloading => 'Downloading to your library…';
+  String get kitapsen_book_downloading => 'Загрузка в вашу библиотеку…';
   @override
-  String get kitapsen_book_about => 'About this book';
+  String get kitapsen_book_about => 'О книге';
   @override
-  String get kitapsen_book_pages => 'Pages';
+  String get kitapsen_book_pages => 'Страниц';
   @override
-  String get kitapsen_book_language => 'Language';
+  String get kitapsen_book_language => 'Язык';
   @override
-  String get kitapsen_book_publisher => 'Publisher';
+  String get kitapsen_book_publisher => 'Издательство';
   @override
-  String get kitapsen_book_published => 'Published';
+  String get kitapsen_book_published => 'Дата издания';
   @override
   String get kitapsen_book_action_failed =>
-      'Something went wrong. Please try again.';
+      'Что-то пошло не так. Попробуйте ещё раз.';
   @override
-  String get kitapsen_book_reviews => 'Reviews';
+  String get kitapsen_book_reviews => 'Отзывы';
   @override
-  String get kitapsen_book_no_reviews => 'No reviews yet';
+  String get kitapsen_book_no_reviews => 'Отзывов пока нет';
   @override
-  String get kitapsen_book_write_review => 'Write a review';
+  String get kitapsen_book_write_review => 'Написать отзыв';
   @override
-  String get kitapsen_review_title_hint => 'Title (optional)';
+  String get kitapsen_review_title_hint => 'Заголовок (необязательно)';
   @override
-  String get kitapsen_review_content_hint => 'Your review (optional)';
+  String get kitapsen_review_content_hint => 'Ваш отзыв (необязательно)';
   @override
-  String get kitapsen_review_submit => 'Send';
+  String get kitapsen_review_submit => 'Отправить';
   @override
-  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  String get kitapsen_review_sent => 'Спасибо! Ваш отзыв отправлен.';
   @override
-  String get kitapsen_review_already => 'You have already reviewed this book.';
+  String get kitapsen_review_already => 'Вы уже оставили отзыв об этой книге.';
   @override
   String get kitapsen_review_not_allowed =>
-      'Only readers who have this book in their library can review it.';
+      'Оставлять отзывы могут только читатели, у которых эта книга есть в библиотеке.';
   @override
-  String get kitapsen_review_more => 'Show more reviews';
+  String get kitapsen_review_more => 'Показать ещё отзывы';
   @override
-  String get kitapsen_review_verified => 'Verified reader';
+  String get kitapsen_review_verified => 'Подтверждённый читатель';
   @override
-  String get kitapsen_author_follow => 'Follow';
+  String get kitapsen_author_follow => 'Подписаться';
   @override
-  String get kitapsen_author_following => 'Following';
+  String get kitapsen_author_following => 'Вы подписаны';
   @override
-  String get kitapsen_author_followers => 'Followers';
+  String get kitapsen_author_followers => 'Подписчики';
   @override
-  String get kitapsen_author_books => 'Books';
+  String get kitapsen_author_books => 'Книги';
   @override
-  String get kitapsen_author_open => 'Author page';
+  String get kitapsen_author_open => 'Страница автора';
   @override
-  String get kitapsen_wishlist_title => 'Wishlist';
+  String get kitapsen_wishlist_title => 'Список желаний';
   @override
-  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  String get kitapsen_wishlist_empty => 'Ваш список желаний пуст';
   @override
-  String get kitapsen_notifications_title => 'Notifications';
+  String get kitapsen_notifications_title => 'Уведомления';
   @override
-  String get kitapsen_notifications_empty => 'No notifications';
+  String get kitapsen_notifications_empty => 'Нет уведомлений';
   @override
-  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  String get kitapsen_notifications_mark_all => 'Отметить все как прочитанные';
   @override
-  String get kitapsen_story_chapters => 'Chapters';
+  String get kitapsen_story_chapters => 'Главы';
   @override
-  String get kitapsen_story_no_chapters => 'No chapters yet';
+  String get kitapsen_story_no_chapters => 'Глав пока нет';
   @override
-  String get kitapsen_story_next => 'Next chapter';
+  String get kitapsen_story_next => 'Следующая глава';
   @override
-  String get kitapsen_story_previous => 'Previous chapter';
+  String get kitapsen_story_previous => 'Предыдущая глава';
   @override
-  String get kitapsen_review_like => 'Like';
+  String get kitapsen_review_like => 'Нравится';
   @override
-  String get kitapsen_comments_title => 'Comments';
+  String get kitapsen_comments_title => 'Комментарии';
   @override
-  String get kitapsen_comments_empty => 'No comments yet';
+  String get kitapsen_comments_empty => 'Комментариев пока нет';
   @override
-  String get kitapsen_comment_hint => 'Write a comment';
+  String get kitapsen_comment_hint => 'Напишите комментарий';
   @override
-  String get kitapsen_story_vote => 'Vote';
+  String get kitapsen_story_vote => 'Голосовать';
   @override
-  String get kitapsen_story_voted => 'Voted';
+  String get kitapsen_story_voted => 'Вы проголосовали';
   @override
-  String get kitapsen_story_follow => 'Follow story';
+  String get kitapsen_story_follow => 'Подписаться на историю';
   @override
-  String get kitapsen_following_title => 'Following';
+  String get kitapsen_following_title => 'Подписки';
   @override
-  String get kitapsen_following_authors => 'Authors';
+  String get kitapsen_following_authors => 'Авторы';
   @override
-  String get kitapsen_following_stories => 'Stories';
+  String get kitapsen_following_stories => 'Истории';
   @override
-  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  String get kitapsen_following_empty => 'Вы пока ни на кого не подписаны';
   @override
-  String get kitapsen_reader_highlight => 'Highlight';
+  String get kitapsen_reader_highlight => 'Выделить';
   @override
-  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  String get kitapsen_annotations_title => 'Закладки и заметки';
   @override
-  String get kitapsen_bookmark_add => 'Add bookmark';
+  String get kitapsen_bookmark_add => 'Добавить закладку';
   @override
-  String get kitapsen_bookmark_added => 'Bookmark added';
+  String get kitapsen_bookmark_added => 'Закладка добавлена';
   @override
-  String get kitapsen_note_add => 'Add note';
+  String get kitapsen_note_add => 'Добавить заметку';
   @override
-  String get kitapsen_note_hint => 'Your note';
+  String get kitapsen_note_hint => 'Ваша заметка';
   @override
-  String get kitapsen_note_saved => 'Note saved';
+  String get kitapsen_note_saved => 'Заметка сохранена';
   @override
-  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  String get kitapsen_annotations_empty => 'Закладок и заметок пока нет';
   @override
-  String get kitapsen_store_badge_free => 'Free';
+  String get kitapsen_store_badge_free => 'Бесплатно';
   @override
-  String get kitapsen_store_badge_new => 'New';
+  String get kitapsen_store_badge_new => 'Новинка';
   @override
-  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  String kitapsen_store_rating_count({required Object n}) => 'Отзывы: ${n}';
   @override
-  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  String get kitapsen_store_hero_title =>
+      'Ваша следующая любимая книга уже здесь.';
   @override
   String get kitapsen_store_hero_body =>
-      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+      'Открывайте новые истории и любимых авторов. Выберите книгу и начните читать на телефоне, планшете или компьютере.';
   @override
-  String get kitapsen_store_explore_books => 'Explore books';
+  String get kitapsen_store_explore_books => 'Смотреть книги';
   @override
-  String get kitapsen_store_start_free => 'Start with free books';
+  String get kitapsen_store_start_free => 'Начните с бесплатных книг';
   @override
-  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  String get kitapsen_store_start_free_body =>
+      'Откройте для себя первую книгу.';
   @override
-  String get kitapsen_store_library_always => 'Your library is always with you';
+  String get kitapsen_store_library_always => 'Ваша библиотека всегда с вами';
   @override
   String get kitapsen_store_library_always_body =>
-      'Read on your phone, tablet and computer.';
+      'Читайте на телефоне, планшете и компьютере.';
   @override
-  String get kitapsen_store_meet_authors => 'Meet the authors';
+  String get kitapsen_store_meet_authors => 'Знакомьтесь с авторами';
   @override
-  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  String get kitapsen_store_meet_authors_body =>
+      'Подписывайтесь на любимых писателей.';
   @override
-  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  String get kitapsen_store_reading_list =>
+      'Новая книга для вашего списка чтения';
   @override
-  String get kitapsen_store_all_categories => 'All categories';
+  String get kitapsen_store_all_categories => 'Все категории';
   @override
-  String get kitapsen_store_discover_title => 'Time to discover';
+  String get kitapsen_store_discover_title => 'Время открытий';
   @override
   String get kitapsen_store_discover_body =>
-      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+      'Новая история, свежий взгляд, неожиданное открытие. Добавьте следующую книгу в свой список чтения.';
   @override
-  String get kitapsen_store_discover_now => 'Discover now';
+  String get kitapsen_store_discover_now => 'Найти книгу';
   @override
   String kitapsen_store_results_for({required Object q}) =>
-      'Results for "${q}"';
+      'Результаты по запросу «${q}»';
   @override
-  String get kitapsen_store_matching_authors => 'Matching authors';
+  String get kitapsen_store_matching_authors => 'Найденные авторы';
   @override
-  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  String kitapsen_store_author_books_count({required Object n}) =>
+      'Книги: ${n}';
   @override
   String get kitapsen_store_author_cta =>
-      'Discover the author\'s books and pick your next read.';
+      'Откройте для себя книги автора и выберите, что читать дальше.';
   @override
-  String get kitapsen_store_see_author_books => 'See their books';
+  String get kitapsen_store_see_author_books => 'Посмотреть книги автора';
   @override
-  String get kitapsen_store_authors_books => 'The author\'s books';
+  String get kitapsen_store_authors_books => 'Книги автора';
   @override
-  String get kitapsen_book_read_now => 'Read now';
+  String get kitapsen_book_read_now => 'Читать сейчас';
   @override
-  String get kitapsen_book_get_free_web => 'Get it free';
+  String get kitapsen_book_get_free_web => 'Получить бесплатно';
   @override
-  String get kitapsen_book_favorites => 'Favorites';
+  String get kitapsen_book_favorites => 'Избранное';
   @override
-  String get kitapsen_book_description => 'Description';
+  String get kitapsen_book_description => 'Описание';
   @override
-  String get kitapsen_book_about_author => 'About the author';
+  String get kitapsen_book_about_author => 'Об авторе';
   @override
   String get kitapsen_book_isbn => 'ISBN';
   @override
-  String get kitapsen_book_format => 'Format';
+  String get kitapsen_book_format => 'Формат';
   @override
-  String get kitapsen_author_role => 'Author';
+  String get kitapsen_author_role => 'Автор';
   @override
-  String get kitapsen_author_notify => 'Notify me of new books';
+  String get kitapsen_author_notify => 'Сообщать о новых книгах';
   @override
-  String get kitapsen_author_about => 'About';
+  String get kitapsen_author_about => 'Об авторе';
   @override
-  String get kitapsen_review_more_bio => 'Read the full biography';
+  String get kitapsen_review_more_bio => 'Читать биографию полностью';
   @override
-  String get kitapsen_author_like => 'Like';
+  String get kitapsen_author_like => 'Нравится';
   @override
-  String get kitapsen_author_likes => 'Likes';
+  String get kitapsen_author_likes => 'Лайки';
   @override
-  String get kitapsen_register_open => 'No account yet? Create one';
+  String get kitapsen_register_open => 'Нет аккаунта? Создайте его';
   @override
-  String get kitapsen_register_name => 'Name (optional)';
+  String get kitapsen_register_name => 'Имя (необязательно)';
   @override
-  String get kitapsen_register_username => 'Username';
+  String get kitapsen_register_username => 'Имя пользователя';
   @override
   String get kitapsen_register_username_hint =>
-      '2–20 lowercase letters or digits';
+      '2–20 строчных латинских букв или цифр';
   @override
-  String get kitapsen_register_email => 'Email';
+  String get kitapsen_register_email => 'Эл. почта';
   @override
-  String get kitapsen_register_password_hint => 'At least 8 characters';
+  String get kitapsen_register_password_hint => 'Не менее 8 символов';
   @override
-  String get kitapsen_register_submit => 'Create account';
+  String get kitapsen_register_submit => 'Создать аккаунт';
   @override
-  String get kitapsen_register_have_account =>
-      'Already have an account? Sign in';
+  String get kitapsen_register_have_account => 'Уже есть аккаунт? Войдите';
   @override
   String get kitapsen_register_username_invalid =>
-      'Use 2–20 lowercase letters or digits.';
+      'Используйте 2–20 строчных латинских букв или цифр.';
   @override
   String get kitapsen_register_name_invalid =>
-      'The name must be 2–30 characters.';
+      'Имя должно содержать от 2 до 30 символов.';
   @override
-  String get kitapsen_register_email_invalid => 'Enter a valid email address.';
+  String get kitapsen_register_email_invalid =>
+      'Введите корректный адрес эл. почты.';
   @override
   String get kitapsen_register_password_short =>
-      'The password must be at least 8 characters.';
+      'Пароль должен содержать не менее 8 символов.';
   @override
   String get kitapsen_register_failed =>
-      'The account could not be created. Try again.';
+      'Не удалось создать аккаунт. Попробуйте ещё раз.';
   @override
-  String get kitapsen_hub_title => 'My account';
+  String get kitapsen_hub_title => 'Мой аккаунт';
   @override
-  String get kitapsen_hub_reading => 'Reading';
+  String get kitapsen_hub_reading => 'Чтение';
   @override
-  String get kitapsen_hub_social => 'Social';
+  String get kitapsen_hub_social => 'Сообщество';
   @override
-  String get kitapsen_hub_discover => 'Discover';
+  String get kitapsen_hub_discover => 'Обзор';
   @override
-  String get kitapsen_hub_account => 'Account';
+  String get kitapsen_hub_account => 'Аккаунт';
   @override
-  String get kitapsen_hub_library => 'My library';
+  String get kitapsen_hub_library => 'Моя библиотека';
   @override
-  String get kitapsen_hub_public_profile => 'My public reader profile';
+  String get kitapsen_hub_public_profile => 'Мой публичный профиль читателя';
   @override
-  String get kitapsen_hub_sign_in_settings => 'Sign out or delete the account';
+  String get kitapsen_hub_sign_in_settings => 'Выйти или удалить аккаунт';
   @override
-  String get kitapsen_common_save => 'Save';
+  String get kitapsen_common_save => 'Сохранить';
   @override
-  String get kitapsen_common_saved => 'Saved';
+  String get kitapsen_common_saved => 'Сохранено';
   @override
-  String get kitapsen_common_edit => 'Edit';
+  String get kitapsen_common_edit => 'Изменить';
   @override
-  String get kitapsen_profile_title => 'My profile';
+  String get kitapsen_profile_title => 'Мой профиль';
   @override
-  String get kitapsen_profile_name => 'Display name';
+  String get kitapsen_profile_name => 'Отображаемое имя';
   @override
-  String get kitapsen_profile_sharing => 'Share reading activity';
+  String get kitapsen_profile_sharing => 'Делиться активностью чтения';
   @override
   String get kitapsen_profile_sharing_hint =>
-      'Show the books you are reading and have finished on your public profile.';
+      'Показывать в публичном профиле книги, которые вы читаете и уже прочитали.';
   @override
-  String get kitapsen_settings_title => 'Account settings';
+  String get kitapsen_settings_title => 'Настройки аккаунта';
   @override
-  String get kitapsen_settings_profile => 'Profile information';
+  String get kitapsen_settings_profile => 'Данные профиля';
   @override
-  String get kitapsen_settings_privacy => 'Privacy';
+  String get kitapsen_settings_privacy => 'Конфиденциальность';
   @override
-  String get kitapsen_settings_private => 'Private profile';
+  String get kitapsen_settings_private => 'Закрытый профиль';
   @override
   String get kitapsen_settings_private_hint =>
-      'Only your followers can see your profile, reviews, reading activity and updates.';
+      'Ваш профиль, отзывы, активность чтения и обновления видны только подписчикам.';
   @override
-  String get kitapsen_settings_notifications => 'Email notifications';
+  String get kitapsen_settings_notifications => 'Уведомления по эл. почте';
   @override
   String get kitapsen_settings_follower_email =>
-      'Email me when someone follows me';
+      'Присылать письмо, когда на меня подписываются';
   @override
   String get kitapsen_settings_comment_email =>
-      'Email me when someone comments on my story';
+      'Присылать письмо, когда мою историю комментируют';
   @override
-  String get kitapsen_settings_sale_email => 'Email me when my book sells';
+  String get kitapsen_settings_sale_email =>
+      'Присылать письмо, когда мою книгу покупают';
   @override
-  String get kitapsen_settings_author_emails => 'Author emails';
+  String get kitapsen_settings_author_emails => 'Письма для авторов';
   @override
-  String get kitapsen_settings_password => 'Change password';
+  String get kitapsen_settings_password => 'Смена пароля';
   @override
-  String get kitapsen_settings_current_password => 'Current password';
+  String get kitapsen_settings_current_password => 'Текущий пароль';
   @override
-  String get kitapsen_settings_new_password => 'New password';
+  String get kitapsen_settings_new_password => 'Новый пароль';
   @override
-  String get kitapsen_settings_repeat_password => 'Repeat the new password';
+  String get kitapsen_settings_repeat_password => 'Повторите новый пароль';
   @override
-  String get kitapsen_settings_change_password => 'Change password';
+  String get kitapsen_settings_change_password => 'Сменить пароль';
   @override
-  String get kitapsen_settings_passwords_differ =>
-      'The passwords do not match.';
+  String get kitapsen_settings_passwords_differ => 'Пароли не совпадают.';
   @override
-  String get kitapsen_settings_password_changed => 'Password changed.';
+  String get kitapsen_settings_password_changed => 'Пароль изменён.';
   @override
   String get kitapsen_settings_password_failed =>
-      'The password could not be changed. Check the current password.';
+      'Не удалось сменить пароль. Проверьте текущий пароль.';
   @override
-  String get kitapsen_settings_blocked => 'Blocked users';
+  String get kitapsen_settings_blocked => 'Заблокированные пользователи';
   @override
-  String get kitapsen_settings_no_blocked => 'You have not blocked anyone.';
+  String get kitapsen_settings_no_blocked => 'Вы никого не заблокировали.';
   @override
-  String get kitapsen_publishers_title => 'Publishers';
+  String get kitapsen_publishers_title => 'Издательства';
   @override
-  String get kitapsen_publishers_body => 'Browse books by publisher.';
+  String get kitapsen_publishers_body =>
+      'Просматривайте книги по издательствам.';
   @override
-  String get kitapsen_publisher_role => 'Publisher';
+  String get kitapsen_publisher_role => 'Издательство';
   @override
   String get kitapsen_publisher_no_books =>
-      'This publisher\'s books will be listed here soon.';
+      'Книги этого издательства скоро появятся здесь.';
   @override
-  String get kitapsen_authors_title => 'Authors';
+  String get kitapsen_authors_title => 'Авторы';
   @override
-  String get kitapsen_blog_title => 'Blog';
+  String get kitapsen_blog_title => 'Блог';
   @override
   String get kitapsen_blog_subtitle =>
-      'News, tips and stories from the Kitapsen community.';
+      'Новости, советы и истории от сообщества Kitapsen.';
   @override
-  String get kitapsen_blog_empty => 'No blog posts yet.';
+  String get kitapsen_blog_empty => 'Записей в блоге пока нет.';
   @override
-  String get kitapsen_collections_title => 'Collections';
+  String get kitapsen_collections_title => 'Коллекции';
   @override
-  String get kitapsen_collections_new => 'New collection';
+  String get kitapsen_collections_new => 'Новая коллекция';
   @override
-  String get kitapsen_collections_name => 'Collection name';
+  String get kitapsen_collections_name => 'Название коллекции';
   @override
-  String get kitapsen_collections_description => 'Description (optional)';
+  String get kitapsen_collections_description => 'Описание (необязательно)';
   @override
   String get kitapsen_collections_empty =>
-      'No collections yet. Create collections to organise your books.';
+      'Коллекций пока нет. Создавайте коллекции, чтобы упорядочить свои книги.';
   @override
-  String get kitapsen_collections_delete_confirm => 'Delete this collection?';
+  String get kitapsen_collections_delete_confirm => 'Удалить эту коллекцию?';
   @override
   String get kitapsen_collections_items_empty =>
-      'No books yet. Add books from their page with "Add to collection".';
+      'Книг пока нет. Добавляйте книги с их страницы кнопкой «Добавить в коллекцию».';
   @override
   String get kitapsen_collections_long_press =>
-      'Long-press a book to remove it.';
+      'Нажмите и удерживайте книгу, чтобы убрать её.';
   @override
-  String get kitapsen_collections_remove => 'Remove';
+  String get kitapsen_collections_remove => 'Убрать';
   @override
   String kitapsen_collections_remove_confirm({required Object title}) =>
-      'Remove "${title}" from this collection?';
+      'Убрать «${title}» из этой коллекции?';
   @override
-  String get kitapsen_collections_add => 'Add to collection';
+  String get kitapsen_collections_add => 'Добавить в коллекцию';
   @override
-  String get kitapsen_collections_add_title => 'Add to a collection';
+  String get kitapsen_collections_add_title => 'Добавить в коллекцию';
   @override
-  String get kitapsen_collections_added => 'Added to the collection';
+  String get kitapsen_collections_added => 'Добавлено в коллекцию';
   @override
-  String get kitapsen_notebooks_title => 'Notebooks';
+  String get kitapsen_notebooks_title => 'Блокноты';
   @override
-  String get kitapsen_notebooks_new => 'New notebook';
+  String get kitapsen_notebooks_new => 'Новый блокнот';
   @override
-  String get kitapsen_notebooks_name => 'Notebook name';
+  String get kitapsen_notebooks_name => 'Название блокнота';
   @override
   String get kitapsen_notebooks_empty =>
-      'No notebooks yet. Create notebooks for your reading notes and ideas.';
+      'Блокнотов пока нет. Создавайте блокноты для заметок и мыслей о прочитанном.';
   @override
-  String kitapsen_notebooks_count({required Object n}) => '${n} notes';
+  String kitapsen_notebooks_count({required Object n}) => 'Заметки: ${n}';
   @override
-  String get kitapsen_notebooks_delete_confirm => 'Delete this notebook?';
+  String get kitapsen_notebooks_delete_confirm => 'Удалить этот блокнот?';
   @override
-  String get kitapsen_notebooks_entries_empty => 'No notes yet.';
+  String get kitapsen_notebooks_entries_empty => 'Заметок пока нет.';
   @override
-  String get kitapsen_notebooks_entry_hint => 'Add a note...';
+  String get kitapsen_notebooks_entry_hint => 'Добавьте заметку...';
   @override
-  String get kitapsen_notebooks_entry_delete_confirm => 'Delete this note?';
+  String get kitapsen_notebooks_entry_delete_confirm => 'Удалить эту заметку?';
   @override
-  String get kitapsen_notebooks_add => 'Add note';
+  String get kitapsen_notebooks_add => 'Добавить заметку';
   @override
-  String get kitapsen_goals_title => 'Reading goals';
+  String get kitapsen_goals_title => 'Цели чтения';
   @override
-  String get kitapsen_goals_new => 'New goal';
+  String get kitapsen_goals_new => 'Новая цель';
   @override
-  String get kitapsen_goals_create => 'Create';
+  String get kitapsen_goals_create => 'Создать';
   @override
-  String get kitapsen_goals_created => 'Goal created';
+  String get kitapsen_goals_created => 'Цель создана';
   @override
-  String get kitapsen_goals_type => 'Goal type';
+  String get kitapsen_goals_type => 'Тип цели';
   @override
-  String get kitapsen_goals_type_books => 'Books';
+  String get kitapsen_goals_type_books => 'Книги';
   @override
-  String get kitapsen_goals_type_pages => 'Pages';
+  String get kitapsen_goals_type_pages => 'Страницы';
   @override
-  String get kitapsen_goals_type_days => 'Reading days';
+  String get kitapsen_goals_type_days => 'Дни чтения';
   @override
-  String get kitapsen_goals_target => 'Target';
+  String get kitapsen_goals_target => 'Целевое значение';
   @override
-  String get kitapsen_goals_this_month => 'This month';
+  String get kitapsen_goals_this_month => 'В этом месяце';
   @override
-  String get kitapsen_goals_this_year => 'This year';
+  String get kitapsen_goals_this_year => 'В этом году';
   @override
   String get kitapsen_goals_empty =>
-      'No reading goals. Set your first goal to keep your motivation up.';
+      'Целей чтения нет. Поставьте первую цель, чтобы поддерживать мотивацию.';
   @override
-  String get kitapsen_goals_delete_confirm => 'Delete this goal?';
+  String get kitapsen_goals_delete_confirm => 'Удалить эту цель?';
   @override
-  String get kitapsen_goals_completed => 'Completed';
+  String get kitapsen_goals_completed => 'Выполнено';
   @override
-  String kitapsen_goals_until({required Object date}) => 'Until ${date}';
+  String kitapsen_goals_until({required Object date}) => 'До ${date}';
   @override
-  String kitapsen_goals_unit_books({required Object n}) => '${n} books';
+  String kitapsen_goals_unit_books({required Object n}) => 'Книги: ${n}';
   @override
-  String kitapsen_goals_unit_pages({required Object n}) => '${n} pages';
+  String kitapsen_goals_unit_pages({required Object n}) => 'Страницы: ${n}';
   @override
-  String kitapsen_goals_unit_hours({required Object n}) => '${n} hours';
+  String kitapsen_goals_unit_hours({required Object n}) => 'Часы: ${n}';
   @override
-  String kitapsen_goals_unit_days({required Object n}) => '${n} reading days';
+  String kitapsen_goals_unit_days({required Object n}) => 'Дни чтения: ${n}';
   @override
-  String get kitapsen_goals_streak => 'Day streak';
+  String get kitapsen_goals_streak => 'Серия дней';
   @override
-  String get kitapsen_goals_longest_streak => 'Longest streak';
+  String get kitapsen_goals_longest_streak => 'Самая длинная серия';
   @override
-  String get kitapsen_goals_books_read => 'Books read';
+  String get kitapsen_goals_books_read => 'Прочитано книг';
   @override
-  String get kitapsen_goals_books_finished => 'Finished';
+  String get kitapsen_goals_books_finished => 'Дочитано';
   @override
-  String get kitapsen_feed_title => 'Social feed';
+  String get kitapsen_feed_title => 'Лента';
   @override
-  String get kitapsen_feed_followed => 'Following';
+  String get kitapsen_feed_followed => 'Подписки';
   @override
-  String get kitapsen_feed_mine => 'My activity';
+  String get kitapsen_feed_mine => 'Моя активность';
   @override
   String get kitapsen_feed_empty_followed =>
-      'No activity yet. Follow readers to keep up with what they are reading.';
+      'Активности пока нет. Подпишитесь на читателей, чтобы следить за тем, что они читают.';
   @override
   String get kitapsen_feed_empty_mine =>
-      'Your reading activity will appear here once you start reading.';
+      'Ваша активность появится здесь, когда вы начнёте читать.';
   @override
   String kitapsen_feed_started({required Object target}) =>
-      'started reading ${target}';
+      'начал(а) читать «${target}»';
   @override
   String kitapsen_feed_finished({required Object target}) =>
-      'finished ${target}';
+      'дочитал(а) «${target}»';
   @override
   String kitapsen_feed_reviewed({required Object target}) =>
-      'reviewed ${target}';
+      'оставил(а) отзыв о книге «${target}»';
   @override
   String kitapsen_feed_followed_user({required Object target}) =>
-      'started following ${target}';
+      'подписался(ась) на ${target}';
   @override
   String kitapsen_feed_followed_author({required Object target}) =>
-      'followed the author ${target}';
+      'подписался(ась) на автора ${target}';
   @override
-  String kitapsen_feed_shared({required Object target}) => 'shared ${target}';
+  String kitapsen_feed_shared({required Object target}) =>
+      'поделился(ась): ${target}';
   @override
-  String kitapsen_feed_percent({required Object n}) => '${n}% read';
+  String kitapsen_feed_percent({required Object n}) => 'Прочитано ${n}%';
   @override
-  String get kitapsen_feed_finished_badge => 'Finished';
+  String get kitapsen_feed_finished_badge => 'Дочитано';
   @override
-  String get kitapsen_user_follow => 'Follow';
+  String get kitapsen_user_follow => 'Подписаться';
   @override
-  String get kitapsen_user_block => 'Block';
+  String get kitapsen_user_block => 'Заблокировать';
   @override
-  String get kitapsen_user_unblock => 'Unblock';
+  String get kitapsen_user_unblock => 'Разблокировать';
   @override
   String kitapsen_user_block_confirm({required Object username}) =>
-      'Block @${username}? They will no longer see your profile and activity, and any follow between you is removed.';
+      'Заблокировать @${username}? Этот пользователь больше не увидит ваш профиль и активность, а подписки между вами будут удалены.';
   @override
   String kitapsen_user_member_since({required Object date}) =>
-      'Member since ${date}';
+      'Участник с ${date}';
   @override
-  String kitapsen_user_followers({required Object n}) => '${n} followers';
+  String kitapsen_user_followers({required Object n}) => 'Подписчики: ${n}';
   @override
-  String kitapsen_user_following({required Object n}) => '${n} following';
+  String kitapsen_user_following({required Object n}) => 'Подписки: ${n}';
   @override
   String kitapsen_user_finished_count({required Object n}) =>
-      '${n} books finished';
+      'Прочитано книг: ${n}';
   @override
-  String get kitapsen_user_tab_reading => 'Reading';
+  String get kitapsen_user_tab_reading => 'Чтение';
   @override
-  String get kitapsen_user_tab_reviews => 'Reviews';
+  String get kitapsen_user_tab_reviews => 'Отзывы';
   @override
-  String get kitapsen_user_tab_activity => 'Activity';
+  String get kitapsen_user_tab_activity => 'Активность';
   @override
-  String get kitapsen_user_currently_reading => 'Currently reading';
+  String get kitapsen_user_currently_reading => 'Сейчас читает';
   @override
-  String get kitapsen_user_finished => 'Finished';
+  String get kitapsen_user_finished => 'Прочитанные';
   @override
   String get kitapsen_user_no_reading =>
-      'This reader does not share reading activity.';
+      'Этот читатель не делится активностью чтения.';
   @override
-  String get kitapsen_user_no_reviews => 'No public reviews yet.';
+  String get kitapsen_user_no_reviews => 'Публичных отзывов пока нет.';
   @override
-  String get kitapsen_user_no_activity => 'No public activity yet.';
+  String get kitapsen_user_no_activity => 'Публичной активности пока нет.';
   @override
   String get kitapsen_user_private =>
-      'This profile is private. Follow this reader to see their reviews, reading activity and profile.';
+      'Это закрытый профиль. Подпишитесь на этого читателя, чтобы видеть его отзывы, активность чтения и профиль.';
   @override
   String get kitapsen_user_blocked_you =>
-      'This reader has blocked you. Their profile and activity are hidden from you.';
+      'Этот читатель заблокировал вас. Его профиль и активность скрыты от вас.';
   @override
-  String get kitapsen_user_followers_title => 'Followers';
+  String get kitapsen_user_followers_title => 'Подписчики';
   @override
-  String get kitapsen_user_following_title => 'Following';
+  String get kitapsen_user_following_title => 'Подписки';
   @override
-  String get kitapsen_user_no_connections => 'Nobody here yet.';
+  String get kitapsen_user_no_connections => 'Здесь пока никого нет.';
   @override
-  String get kitapsen_clubs_title => 'Book clubs';
+  String get kitapsen_clubs_title => 'Книжные клубы';
   @override
-  String get kitapsen_clubs_create => 'Create a club';
+  String get kitapsen_clubs_create => 'Создать клуб';
   @override
-  String get kitapsen_clubs_name => 'Club name';
+  String get kitapsen_clubs_name => 'Название клуба';
   @override
   String get kitapsen_clubs_empty =>
-      'No book clubs yet. Create or join one to read together.';
+      'Книжных клубов пока нет. Создайте клуб или вступите в существующий, чтобы читать вместе.';
   @override
-  String get kitapsen_clubs_join => 'Join';
+  String get kitapsen_clubs_join => 'Вступить';
   @override
-  String get kitapsen_clubs_leave => 'Leave';
+  String get kitapsen_clubs_leave => 'Покинуть';
   @override
-  String get kitapsen_clubs_owner => 'Owner';
+  String get kitapsen_clubs_owner => 'Владелец';
   @override
-  String get kitapsen_clubs_members => 'Members';
+  String get kitapsen_clubs_members => 'Участники';
   @override
-  String kitapsen_clubs_members_count({required Object n}) => '${n} members';
+  String kitapsen_clubs_members_count({required Object n}) => 'Участники: ${n}';
   @override
-  String get kitapsen_clubs_chat => 'Discussion';
+  String get kitapsen_clubs_chat => 'Обсуждение';
   @override
   String get kitapsen_clubs_join_to_chat =>
-      'Join the club to read and write messages.';
+      'Вступите в клуб, чтобы читать и писать сообщения.';
   @override
-  String get kitapsen_clubs_no_messages => 'No messages yet.';
+  String get kitapsen_clubs_no_messages => 'Сообщений пока нет.';
   @override
-  String get kitapsen_clubs_message_hint => 'Write a message...';
+  String get kitapsen_clubs_message_hint => 'Напишите сообщение...';
   @override
-  String get kitapsen_clubs_send => 'Send';
+  String get kitapsen_clubs_send => 'Отправить';
   @override
   String get kitapsen_register_taken =>
-      'This username or email address already has an account.';
+      'Аккаунт с таким именем пользователя или адресом эл. почты уже существует.';
   @override
-  String get kitapsen_report => 'Report';
+  String get kitapsen_report => 'Пожаловаться';
   @override
-  String get kitapsen_reported => 'Reported';
+  String get kitapsen_reported => 'Жалоба отправлена';
   @override
-  String get kitapsen_report_title => 'Report this content';
+  String get kitapsen_report_title => 'Пожаловаться на содержимое';
   @override
-  String get kitapsen_report_reason => 'Reason (optional)';
+  String get kitapsen_report_reason => 'Причина (необязательно)';
   @override
-  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  String get kitapsen_report_reason_hint => 'Почему это неприемлемо?';
   @override
-  String get kitapsen_report_submit => 'Submit Report';
+  String get kitapsen_report_submit => 'Отправить жалобу';
   @override
   String get kitapsen_report_thanks =>
-      'Reported. Thank you for helping keep the community safe.';
+      'Жалоба отправлена. Спасибо, что помогаете сохранять сообщество безопасным.';
   @override
   String get kitapsen_delete_statistics_book_desc =>
       'Время чтения и прочитанные символы этой книги будут удалены из статистики на всех устройствах';
@@ -185127,7 +185128,7 @@ class _StringsTh extends _StringsEn {
   String get app_ui_scale => 'ขนาด UI';
   @override
   String get app_ui_scale_hint =>
-      'Scales app text and spacing. Lower it on large screens if controls feel oversized.';
+      'ปรับขนาดอินเทอร์เฟซทั้งหมด ทั้งข้อความ ไอคอน และตัวควบคุมไปพร้อมกัน ตั้งแต่ 30% ถึง 300% เพิ่มค่านี้หาก UI ดูเล็กเกินไปบนหน้าจอขนาดใหญ่';
   @override
   String get app_version => 'เวอร์ชันแอป';
   @override
@@ -185668,7 +185669,7 @@ class _StringsTh extends _StringsEn {
   @override
   String get batch_tag_title => 'จัดการแท็ก';
   @override
-  String get book_continue_reading => 'Continue Reading';
+  String get book_continue_reading => 'อ่านต่อ';
   @override
   String get book_convert_blocked_already => 'หนังสือนี้อยู่ในรูปแบบนั้นแล้ว';
   @override
@@ -187463,7 +187464,7 @@ class _StringsTh extends _StringsEn {
   @override
   String get font_target_game_lookup => 'ฟอนต์หน้าต่างค้นหาเกม';
   @override
-  String get font_target_video_subtitle => 'Video Subtitle Font';
+  String get font_target_video_subtitle => 'ฟอนต์คำบรรยายวิดีโอ';
   @override
   String get gal_card_lookup_independent_size => 'ขนาดแยกสำหรับการ์ดในเกม';
   @override
@@ -188600,7 +188601,7 @@ class _StringsTh extends _StringsEn {
   @override
   String get handlebar_sentence => 'ประโยค';
   @override
-  String get handlebar_sentence_audio => 'Sentence Audio';
+  String get handlebar_sentence_audio => 'เสียงประโยค';
   @override
   String get handlebar_video_clip => 'Video Clip (GIF)';
   @override
@@ -190551,17 +190552,17 @@ class _StringsTh extends _StringsEn {
   @override
   String get popup_ctx_adjust_button => 'ปรับบริบท';
   @override
-  String get popup_ctx_box_current => 'Current';
+  String get popup_ctx_box_current => 'ประโยคปัจจุบัน';
   @override
   String get popup_ctx_box_empty => '(ไม่มี)';
   @override
-  String get popup_ctx_box_next => 'After';
+  String get popup_ctx_box_next => 'บริบทถัดไป';
   @override
-  String get popup_ctx_box_prev => 'Before';
+  String get popup_ctx_box_prev => 'บริบทก่อนหน้า';
   @override
   String get popup_ctx_cancel => 'ยกเลิก';
   @override
-  String get popup_ctx_confirm => 'Confirm';
+  String get popup_ctx_confirm => 'ยืนยันการสร้างการ์ด';
   @override
   String get popup_ctx_modal_count => 'Selected %d';
   @override
@@ -190571,11 +190572,11 @@ class _StringsTh extends _StringsEn {
   @override
   String get popup_ctx_next_minus => 'Remove after';
   @override
-  String get popup_ctx_next_plus => 'Add after';
+  String get popup_ctx_next_plus => 'เพิ่มประโยคถัดไป';
   @override
-  String get popup_ctx_prev_minus => 'Remove before';
+  String get popup_ctx_prev_minus => 'เอาประโยคก่อนหน้าออก';
   @override
-  String get popup_ctx_prev_plus => 'Add before';
+  String get popup_ctx_prev_plus => 'เพิ่มประโยคก่อนหน้า';
   @override
   String get popup_ctx_preview_audio => 'ฟังเสียงตัวอย่าง';
   @override
@@ -190796,11 +190797,11 @@ class _StringsTh extends _StringsEn {
   @override
   String get reader_view_mode_label => 'หน้า / เลื่อน';
   @override
-  String get reader_vn => 'Visual Novel';
+  String get reader_vn => 'นิยายภาพ';
   @override
   String get reader_writing_direction => 'ทิศทางการเขียน';
   @override
-  String get reading_activity => 'กิจกรรมการเรียน';
+  String get reading_activity => 'กิจกรรมการอ่าน';
   @override
   String get reading_progress => 'ความคืบหน้าการอ่าน';
   @override
@@ -191136,8 +191137,7 @@ class _StringsTh extends _StringsEn {
   @override
   String get shortcut_action_global_context_menu => 'เปิดเมนูบริบท';
   @override
-  String get shortcut_action_global_external_lookup =>
-      'App-external lookup hotkey';
+  String get shortcut_action_global_external_lookup => 'ปุ่มลัดค้นหานอกแอป';
   @override
   String get shortcut_action_global_scroll_page_down => 'เลื่อนลงหนึ่งหน้าจอ';
   @override
@@ -191195,9 +191195,9 @@ class _StringsTh extends _StringsEn {
   @override
   String get shortcut_action_reader_open_gallery => 'เปิดแกลเลอรีภาพประกอบ';
   @override
-  String get shortcut_action_reader_open_menu => 'Open Settings Menu';
+  String get shortcut_action_reader_open_menu => 'เปิดเมนูการตั้งค่า';
   @override
-  String get shortcut_action_reader_open_navigation => 'Open Navigation';
+  String get shortcut_action_reader_open_navigation => 'เปิดการนำทาง';
   @override
   String get shortcut_action_reader_open_statistics => 'เปิดสถิติการอ่าน';
   @override
@@ -191218,10 +191218,10 @@ class _StringsTh extends _StringsEn {
       'จัดคำบรรยายก่อนหน้าให้ตรงกับตอนนี้';
   @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
-      'Cycle Secondary Subtitle Obscure';
+      'สลับโหมดซ่อนคำบรรยายรอง';
   @override
   String get shortcut_action_video_cycle_subtitle_obscure =>
-      'Cycle Subtitle Obscure Mode';
+      'สลับโหมดซ่อนคำบรรยาย';
   @override
   String get shortcut_action_video_dismiss_dict => 'ปิดพจนานุกรม';
   @override
@@ -191290,7 +191290,7 @@ class _StringsTh extends _StringsEn {
   String get shortcut_action_video_toggle_play_pause => 'เล่น / หยุดชั่วคราว';
   @override
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
-      'Toggle Hide Secondary Subtitle';
+      'ซ่อน/แสดงคำบรรยายรอง';
   @override
   String get shortcut_action_video_toggle_shader_compare =>
       'สลับเปรียบเทียบเชเดอร์';
@@ -191298,8 +191298,7 @@ class _StringsTh extends _StringsEn {
   String get shortcut_action_video_toggle_subtitle_blur =>
       'สลับการเบลอคำบรรยาย';
   @override
-  String get shortcut_action_video_toggle_subtitle_hide =>
-      'Toggle Hide Subtitles';
+  String get shortcut_action_video_toggle_subtitle_hide => 'ซ่อน/แสดงคำบรรยาย';
   @override
   String get shortcut_action_video_toggle_subtitle_list => 'สลับรายการคำบรรยาย';
   @override
@@ -191383,7 +191382,7 @@ class _StringsTh extends _StringsEn {
       'ทริกเกอร์ของเมาส์รับเฉพาะปุ่มข้าง (ย้อนกลับ/ไปข้างหน้า) ปุ่มอื่นยังมีความหมายตามปกติในแอปอื่น จึงไม่รับที่นี่';
   @override
   String get shortcut_scope_global_external_mobile_note =>
-      'Triggered by the system (text selection menu, share, floating ball); the OS does not allow apps to remap this hotkey.';
+      'ระบบเป็นผู้เรียกใช้ (เมนูเลือกข้อความ แชร์ ปุ่มลอย) ระบบปฏิบัติการไม่อนุญาตให้แอปกำหนดปุ่มลัดนี้ใหม่';
   @override
   String get shortcut_scope_home => 'หน้าหลัก';
   @override
@@ -191575,7 +191574,7 @@ class _StringsTh extends _StringsEn {
   @override
   String get stat_detail_ungrouped => 'ไม่ได้จัดกลุ่ม';
   @override
-  String get stat_fastest_day => 'Fastest Day';
+  String get stat_fastest_day => 'วันที่อ่านเร็วที่สุด';
   @override
   String get stat_favorited => 'รายการโปรด';
   @override
@@ -191592,9 +191591,9 @@ class _StringsTh extends _StringsEn {
   @override
   String stat_format_pages({required Object n}) => '${n} หน้า';
   @override
-  String get stat_goal => 'Daily Goal';
+  String get stat_goal => 'เป้าหมายรายวัน';
   @override
-  String get stat_goal_daily => 'Daily Goal';
+  String get stat_goal_daily => 'เป้าหมายรายวัน';
   @override
   String get stat_goal_presets => 'ค่าที่ตั้งไว้';
   @override
@@ -191606,11 +191605,11 @@ class _StringsTh extends _StringsEn {
   String stat_goal_recent_average({required Object n}) =>
       '7 วันที่ผ่านมา: เฉลี่ย ${n} ตัวอักษร/วัน';
   @override
-  String get stat_goal_set => 'Set Goal';
+  String get stat_goal_set => 'ตั้งเป้าหมาย';
   @override
   String get stat_goal_unit_chars => 'ตัวอักษร';
   @override
-  String get stat_goal_weekly => 'Weekly Goal';
+  String get stat_goal_weekly => 'เป้าหมายรายสัปดาห์';
   @override
   String get stat_hourly_band_epub => 'หนังสือข้อความ';
   @override
@@ -191637,7 +191636,7 @@ class _StringsTh extends _StringsEn {
   @override
   String get stat_no_data => 'ยังไม่มีข้อมูลการอ่าน';
   @override
-  String get stat_range_and_trend => 'Range & Trend';
+  String get stat_range_and_trend => 'ช่วงและแนวโน้ม';
   @override
   String get stat_recent_active => 'วันที่ใช้งาน (7 วัน)';
   @override
@@ -191656,7 +191655,7 @@ class _StringsTh extends _StringsEn {
   @override
   String get stat_sessions_show_all => 'เซสชันทั้งหมด';
   @override
-  String get stat_slowest_day => 'Slowest Day';
+  String get stat_slowest_day => 'วันที่อ่านช้าที่สุด';
   @override
   String get stat_sort_by_chars => 'ตามจำนวนตัวอักษร';
   @override
@@ -191672,7 +191671,7 @@ class _StringsTh extends _StringsEn {
   @override
   String stat_speed_cph({required Object n}) => '${n} ตัวอักษร/ชม.';
   @override
-  String get stat_speed_summary => 'Speed Summary';
+  String get stat_speed_summary => 'สรุปความเร็ว';
   @override
   String get stat_streak => 'ต่อเนื่อง';
   @override
@@ -191690,11 +191689,11 @@ class _StringsTh extends _StringsEn {
   @override
   String get stat_trend_weekly => 'รายสัปดาห์';
   @override
-  String get stat_typical_day => 'Typical Day';
+  String get stat_typical_day => 'วันปกติ';
   @override
   String get stat_vs_prev => 'เทียบกับ 14 วันก่อน';
   @override
-  String get stat_weighted_avg_speed => 'Weighted Avg';
+  String get stat_weighted_avg_speed => 'ค่าเฉลี่ยถ่วงน้ำหนัก';
   @override
   String get stop => 'หยุด';
   @override
@@ -197271,7 +197270,7 @@ class _StringsTh extends _StringsEn {
   String get game_lookup_samples_continuation_hint =>
       'Set where the second and later lines start relative to the first line. One value applies to all text; 0 keeps the same start.';
   @override
-  String get game_lookup_samples_continuation_label => 'Text continuation';
+  String get game_lookup_samples_continuation_label => 'ระยะเลื่อน';
   @override
   String get game_lookup_samples_continuation_title =>
       'จุดเริ่มต้นของบรรทัดต่อเนื่อง';
@@ -199079,7 +199078,7 @@ class _StringsTh extends _StringsEn {
   @override
   String get video_scrape_ai_declined => 'AI not adopted';
   @override
-  String get video_scrape_ai_failed => 'AI request failed';
+  String get video_scrape_ai_failed => 'คำขอ AI ล้มเหลว';
   @override
   String get video_scrape_ai_searched =>
       'Searched again with titles suggested by AI';
@@ -199139,11 +199138,11 @@ class _StringsTh extends _StringsEn {
   @override
   String get shelf_filter_read_status_finished => 'อ่านจบแล้ว';
   @override
-  String get video_filter_media_type => 'Type';
+  String get video_filter_media_type => 'ประเภท';
   @override
-  String get video_filter_media_type_video => 'Video';
+  String get video_filter_media_type_video => 'วิดีโอ';
   @override
-  String get video_filter_media_type_audio => 'Audio';
+  String get video_filter_media_type_audio => 'เสียง';
   @override
   String get video_filter_extras => 'Main/Extras';
   @override
@@ -199151,7 +199150,7 @@ class _StringsTh extends _StringsEn {
   @override
   String get video_filter_extras_only => 'Extras only';
   @override
-  String get video_filter_source => 'Source';
+  String get video_filter_source => 'แหล่งที่มา';
   @override
   String get video_filter_series_standalone_empty_hint =>
       'No standalone videos. Videos in collections are on the Series tab, or set the Series filter to All.';
@@ -199194,7 +199193,7 @@ class _StringsTh extends _StringsEn {
   @override
   String get manga_ocr_ai_mode_label => 'AI recognition';
   @override
-  String get manga_ocr_ai_mode_off => 'Off';
+  String get manga_ocr_ai_mode_off => 'ปิด';
   @override
   String get manga_ocr_ai_mode_low_confidence => 'Only uncertain text';
   @override
@@ -199247,7 +199246,7 @@ class _StringsTh extends _StringsEn {
   String get ocr_system_model_missing =>
       'Google Play services hasn\'t downloaded the text recognition model yet. Download it now (a few MB) to use screen OCR.';
   @override
-  String get ocr_system_model_download => 'Download';
+  String get ocr_system_model_download => 'ดาวน์โหลด';
   @override
   String get ocr_system_model_downloading =>
       'Downloading through Google Play services… You can close this dialog; the download continues in the background.';
@@ -199271,669 +199270,662 @@ class _StringsTh extends _StringsEn {
   @override
   String get kitapsen_section_title => 'Kitapsen';
   @override
-  String get kitapsen_account_title => 'Kitapsen account';
+  String get kitapsen_account_title => 'บัญชี Kitapsen';
   @override
   String get kitapsen_account_hint =>
-      'Sign in to read the books in your Kitapsen library. They appear on your bookshelf, and your reading position syncs with your account.';
+      'เข้าสู่ระบบเพื่ออ่านหนังสือในคลังหนังสือ Kitapsen ของคุณ หนังสือจะแสดงบนชั้นหนังสือ และตำแหน่งการอ่านจะซิงค์กับบัญชีของคุณ';
   @override
-  String get kitapsen_account_server_url => 'Server address';
+  String get kitapsen_account_server_url => 'ที่อยู่เซิร์ฟเวอร์';
   @override
-  String get kitapsen_account_username => 'Email or username';
+  String get kitapsen_account_username => 'อีเมลหรือชื่อผู้ใช้';
   @override
-  String get kitapsen_account_password => 'Password';
+  String get kitapsen_account_password => 'รหัสผ่าน';
   @override
-  String get kitapsen_account_sign_in => 'Sign in';
+  String get kitapsen_account_sign_in => 'เข้าสู่ระบบ';
   @override
-  String get kitapsen_account_sign_out => 'Sign out';
+  String get kitapsen_account_sign_out => 'ออกจากระบบ';
   @override
-  String get kitapsen_account_sign_in_rejected =>
-      'Email or password is incorrect';
+  String get kitapsen_account_sign_in_rejected => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง';
   @override
   String get kitapsen_account_sign_in_failed =>
-      'Could not reach Kitapsen. Check the address and your connection.';
+      'เชื่อมต่อ Kitapsen ไม่ได้ ตรวจสอบที่อยู่และการเชื่อมต่อของคุณ';
   @override
-  String get kitapsen_account_summary => 'Sign in to read your library';
+  String get kitapsen_account_summary =>
+      'เข้าสู่ระบบเพื่ออ่านคลังหนังสือของคุณ';
   @override
   String get kitapsen_shelf_signed_out_body =>
-      'Sign in with your Kitapsen account to see your library.';
+      'เข้าสู่ระบบด้วยบัญชี Kitapsen เพื่อดูคลังหนังสือของคุณ';
   @override
-  String get kitapsen_shelf_sign_in => 'Sign in to Kitapsen';
+  String get kitapsen_shelf_sign_in => 'เข้าสู่ระบบ Kitapsen';
   @override
-  String get kitapsen_onboarding_title => 'Your Kitapsen library';
+  String get kitapsen_onboarding_title => 'คลังหนังสือ Kitapsen ของคุณ';
   @override
   String get kitapsen_onboarding_body =>
-      'Sign in to see the books in your Kitapsen account on this device. You can skip this and sign in later from Settings.';
+      'เข้าสู่ระบบเพื่อดูหนังสือในบัญชี Kitapsen ของคุณบนอุปกรณ์นี้ คุณข้ามขั้นตอนนี้แล้วเข้าสู่ระบบภายหลังจากการตั้งค่าได้';
   @override
   String app_store_update_body({required Object version}) =>
-      'Kitapsen ${version} is available on the App Store.';
+      'Kitapsen เวอร์ชัน ${version} พร้อมให้ใช้งานแล้วใน App Store';
   @override
-  String get app_store_update_open => 'Update';
+  String get app_store_update_open => 'อัปเดต';
   @override
-  String get app_store_update_later => 'Not now';
+  String get app_store_update_later => 'ไว้ทีหลัง';
   @override
-  String get kitapsen_about_privacy_policy => 'Privacy policy';
+  String get kitapsen_about_privacy_policy => 'นโยบายความเป็นส่วนตัว';
   @override
-  String get kitapsen_about_support => 'Contact support';
+  String get kitapsen_about_support => 'ติดต่อฝ่ายสนับสนุน';
   @override
-  String get kitapsen_about_source_code => 'Source code';
+  String get kitapsen_about_source_code => 'ซอร์สโค้ด';
   @override
   String get kitapsen_about_based_on_fushi =>
-      'Kitapsen is based on Fushi (GPLv3) — source: https://github.com/FizyonOps/kitapsen-mobile';
+      'Kitapsen พัฒนาต่อยอดจาก Fushi (GPLv3) — ซอร์สโค้ด: https://github.com/FizyonOps/kitapsen-mobile';
   @override
-  String get kitapsen_about_licenses => 'Open-source licenses';
+  String get kitapsen_about_licenses => 'ใบอนุญาตโอเพนซอร์ส';
   @override
-  String get kitapsen_about_section => 'About Kitapsen';
+  String get kitapsen_about_section => 'เกี่ยวกับ Kitapsen';
   @override
-  String get kitapsen_import_hint => 'Pick an EPUB or PDF file to import.';
+  String get kitapsen_import_hint => 'เลือกไฟล์ EPUB หรือ PDF ที่จะนำเข้า';
   @override
   String get kitapsen_sign_out_removes_books =>
-      'Signing out removes your downloaded Kitapsen books from this device.';
+      'การออกจากระบบจะลบหนังสือ Kitapsen ที่ดาวน์โหลดไว้ออกจากอุปกรณ์นี้';
   @override
-  String get kitapsen_account_or => 'or';
+  String get kitapsen_account_or => 'หรือ';
   @override
-  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  String get kitapsen_account_continue_with_google => 'ดำเนินการต่อด้วย Google';
   @override
-  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  String get kitapsen_account_continue_with_apple => 'ดำเนินการต่อด้วย Apple';
   @override
   String get kitapsen_account_social_sign_in_failed =>
-      'Sign-in failed. Please try again.';
+      'เข้าสู่ระบบไม่สำเร็จ โปรดลองอีกครั้ง';
   @override
-  String get kitapsen_account_deleted =>
-      'This Kitapsen account has been deleted.';
+  String get kitapsen_account_deleted => 'บัญชี Kitapsen นี้ถูกลบแล้ว';
   @override
-  String get kitapsen_account_delete => 'Delete account';
+  String get kitapsen_account_delete => 'ลบบัญชี';
   @override
   String get kitapsen_account_delete_confirm =>
-      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+      'บัญชี Kitapsen ของคุณจะถูกลบและอุปกรณ์นี้จะออกจากระบบ คุณจะไม่สามารถอ่านหนังสือในคลังหนังสือได้อีก การดำเนินการนี้ไม่สามารถย้อนกลับได้';
   @override
   String get kitapsen_account_delete_failed =>
-      'The account could not be deleted. Please try again.';
+      'ลบบัญชีไม่สำเร็จ โปรดลองอีกครั้ง';
   @override
-  String get kitapsen_nav_store => 'Store';
+  String get kitapsen_nav_store => 'ร้านหนังสือ';
   @override
-  String get kitapsen_store_search_hint => 'Search books and authors';
+  String get kitapsen_store_search_hint => 'ค้นหาหนังสือและผู้เขียน';
   @override
-  String get kitapsen_store_new_arrivals => 'New arrivals';
+  String get kitapsen_store_new_arrivals => 'มาใหม่';
   @override
-  String get kitapsen_store_most_read => 'Most read';
+  String get kitapsen_store_most_read => 'ยอดนิยม';
   @override
-  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  String get kitapsen_store_staff_picks => 'บรรณาธิการแนะนำ';
   @override
-  String get kitapsen_store_free_books => 'Free books';
+  String get kitapsen_store_free_books => 'หนังสือฟรี';
   @override
-  String get kitapsen_store_stories => 'Serialized stories';
+  String get kitapsen_store_stories => 'เรื่องรายตอน';
   @override
-  String get kitapsen_store_categories => 'Categories';
+  String get kitapsen_store_categories => 'หมวดหมู่';
   @override
-  String get kitapsen_store_see_all => 'See all';
+  String get kitapsen_store_see_all => 'ดูทั้งหมด';
   @override
-  String get kitapsen_store_no_results => 'No books found';
+  String get kitapsen_store_no_results => 'ไม่พบหนังสือ';
   @override
   String get kitapsen_store_load_failed =>
-      'Couldn\'t load. Check your connection.';
+      'โหลดไม่สำเร็จ ตรวจสอบการเชื่อมต่อของคุณ';
   @override
-  String get kitapsen_store_free_only => 'Free only';
+  String get kitapsen_store_free_only => 'เฉพาะหนังสือฟรี';
   @override
-  String get kitapsen_sort_relevance => 'Most relevant';
+  String get kitapsen_sort_relevance => 'เกี่ยวข้องที่สุด';
   @override
-  String get kitapsen_sort_newest => 'Newest';
+  String get kitapsen_sort_newest => 'ใหม่ล่าสุด';
   @override
-  String get kitapsen_sort_most_read => 'Most read';
+  String get kitapsen_sort_most_read => 'อ่านมากที่สุด';
   @override
-  String get kitapsen_sort_rating => 'Top rated';
+  String get kitapsen_sort_rating => 'คะแนนสูงสุด';
   @override
-  String get kitapsen_sort_title => 'Title A–Z';
+  String get kitapsen_sort_title => 'ชื่อเรื่อง A–Z';
   @override
-  String get kitapsen_book_read => 'Read';
+  String get kitapsen_book_read => 'อ่าน';
   @override
-  String get kitapsen_book_get_free => 'Get for free';
+  String get kitapsen_book_get_free => 'รับฟรี';
   @override
-  String get kitapsen_book_claimed => 'Added to your library';
+  String get kitapsen_book_claimed => 'เพิ่มลงในคลังหนังสือแล้ว';
   @override
-  String get kitapsen_book_in_library => 'In your library';
+  String get kitapsen_book_in_library => 'อยู่ในคลังหนังสือแล้ว';
   @override
-  String get kitapsen_book_not_in_library => 'Not in your library';
+  String get kitapsen_book_not_in_library => 'ไม่ได้อยู่ในคลังหนังสือ';
   @override
   String get kitapsen_book_sign_in_prompt =>
-      'Sign in to add books to your library and keep a wishlist.';
+      'เข้าสู่ระบบเพื่อเพิ่มหนังสือลงในคลังและใช้รายการที่อยากอ่าน';
   @override
-  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  String get kitapsen_book_wishlist_add => 'เพิ่มในรายการที่อยากอ่าน';
   @override
-  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  String get kitapsen_book_wishlist_remove => 'นำออกจากรายการที่อยากอ่าน';
   @override
-  String get kitapsen_book_downloading => 'Downloading to your library…';
+  String get kitapsen_book_downloading => 'กำลังดาวน์โหลดไปยังคลังหนังสือ…';
   @override
-  String get kitapsen_book_about => 'About this book';
+  String get kitapsen_book_about => 'เกี่ยวกับหนังสือเล่มนี้';
   @override
-  String get kitapsen_book_pages => 'Pages';
+  String get kitapsen_book_pages => 'จำนวนหน้า';
   @override
-  String get kitapsen_book_language => 'Language';
+  String get kitapsen_book_language => 'ภาษา';
   @override
-  String get kitapsen_book_publisher => 'Publisher';
+  String get kitapsen_book_publisher => 'สำนักพิมพ์';
   @override
-  String get kitapsen_book_published => 'Published';
+  String get kitapsen_book_published => 'วันที่จัดพิมพ์';
   @override
-  String get kitapsen_book_action_failed =>
-      'Something went wrong. Please try again.';
+  String get kitapsen_book_action_failed => 'เกิดข้อผิดพลาด โปรดลองอีกครั้ง';
   @override
-  String get kitapsen_book_reviews => 'Reviews';
+  String get kitapsen_book_reviews => 'รีวิว';
   @override
-  String get kitapsen_book_no_reviews => 'No reviews yet';
+  String get kitapsen_book_no_reviews => 'ยังไม่มีรีวิว';
   @override
-  String get kitapsen_book_write_review => 'Write a review';
+  String get kitapsen_book_write_review => 'เขียนรีวิว';
   @override
-  String get kitapsen_review_title_hint => 'Title (optional)';
+  String get kitapsen_review_title_hint => 'หัวข้อ (ไม่บังคับ)';
   @override
-  String get kitapsen_review_content_hint => 'Your review (optional)';
+  String get kitapsen_review_content_hint => 'รีวิวของคุณ (ไม่บังคับ)';
   @override
-  String get kitapsen_review_submit => 'Send';
+  String get kitapsen_review_submit => 'ส่ง';
   @override
-  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  String get kitapsen_review_sent => 'ขอบคุณ! ส่งรีวิวของคุณแล้ว';
   @override
-  String get kitapsen_review_already => 'You have already reviewed this book.';
+  String get kitapsen_review_already => 'คุณรีวิวหนังสือเล่มนี้ไปแล้ว';
   @override
   String get kitapsen_review_not_allowed =>
-      'Only readers who have this book in their library can review it.';
+      'เฉพาะผู้อ่านที่มีหนังสือเล่มนี้ในคลังเท่านั้นที่รีวิวได้';
   @override
-  String get kitapsen_review_more => 'Show more reviews';
+  String get kitapsen_review_more => 'แสดงรีวิวเพิ่มเติม';
   @override
-  String get kitapsen_review_verified => 'Verified reader';
+  String get kitapsen_review_verified => 'ผู้อ่านที่ยืนยันแล้ว';
   @override
-  String get kitapsen_author_follow => 'Follow';
+  String get kitapsen_author_follow => 'ติดตาม';
   @override
-  String get kitapsen_author_following => 'Following';
+  String get kitapsen_author_following => 'กำลังติดตาม';
   @override
-  String get kitapsen_author_followers => 'Followers';
+  String get kitapsen_author_followers => 'ผู้ติดตาม';
   @override
-  String get kitapsen_author_books => 'Books';
+  String get kitapsen_author_books => 'หนังสือ';
   @override
-  String get kitapsen_author_open => 'Author page';
+  String get kitapsen_author_open => 'หน้าผู้เขียน';
   @override
-  String get kitapsen_wishlist_title => 'Wishlist';
+  String get kitapsen_wishlist_title => 'รายการที่อยากอ่าน';
   @override
-  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  String get kitapsen_wishlist_empty => 'รายการที่อยากอ่านของคุณว่างอยู่';
   @override
-  String get kitapsen_notifications_title => 'Notifications';
+  String get kitapsen_notifications_title => 'การแจ้งเตือน';
   @override
-  String get kitapsen_notifications_empty => 'No notifications';
+  String get kitapsen_notifications_empty => 'ไม่มีการแจ้งเตือน';
   @override
-  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  String get kitapsen_notifications_mark_all =>
+      'ทำเครื่องหมายว่าอ่านแล้วทั้งหมด';
   @override
-  String get kitapsen_story_chapters => 'Chapters';
+  String get kitapsen_story_chapters => 'ตอน';
   @override
-  String get kitapsen_story_no_chapters => 'No chapters yet';
+  String get kitapsen_story_no_chapters => 'ยังไม่มีตอน';
   @override
-  String get kitapsen_story_next => 'Next chapter';
+  String get kitapsen_story_next => 'ตอนถัดไป';
   @override
-  String get kitapsen_story_previous => 'Previous chapter';
+  String get kitapsen_story_previous => 'ตอนก่อนหน้า';
   @override
-  String get kitapsen_review_like => 'Like';
+  String get kitapsen_review_like => 'ถูกใจ';
   @override
-  String get kitapsen_comments_title => 'Comments';
+  String get kitapsen_comments_title => 'ความคิดเห็น';
   @override
-  String get kitapsen_comments_empty => 'No comments yet';
+  String get kitapsen_comments_empty => 'ยังไม่มีความคิดเห็น';
   @override
-  String get kitapsen_comment_hint => 'Write a comment';
+  String get kitapsen_comment_hint => 'เขียนความคิดเห็น';
   @override
-  String get kitapsen_story_vote => 'Vote';
+  String get kitapsen_story_vote => 'โหวต';
   @override
-  String get kitapsen_story_voted => 'Voted';
+  String get kitapsen_story_voted => 'โหวตแล้ว';
   @override
-  String get kitapsen_story_follow => 'Follow story';
+  String get kitapsen_story_follow => 'ติดตามเรื่องนี้';
   @override
-  String get kitapsen_following_title => 'Following';
+  String get kitapsen_following_title => 'ที่ฉันติดตาม';
   @override
-  String get kitapsen_following_authors => 'Authors';
+  String get kitapsen_following_authors => 'ผู้เขียน';
   @override
-  String get kitapsen_following_stories => 'Stories';
+  String get kitapsen_following_stories => 'เรื่อง';
   @override
-  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  String get kitapsen_following_empty => 'คุณยังไม่ได้ติดตามใคร';
   @override
-  String get kitapsen_reader_highlight => 'Highlight';
+  String get kitapsen_reader_highlight => 'ไฮไลต์';
   @override
-  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  String get kitapsen_annotations_title => 'บุ๊กมาร์กและโน้ต';
   @override
-  String get kitapsen_bookmark_add => 'Add bookmark';
+  String get kitapsen_bookmark_add => 'เพิ่มบุ๊กมาร์ก';
   @override
-  String get kitapsen_bookmark_added => 'Bookmark added';
+  String get kitapsen_bookmark_added => 'เพิ่มบุ๊กมาร์กแล้ว';
   @override
-  String get kitapsen_note_add => 'Add note';
+  String get kitapsen_note_add => 'เพิ่มโน้ต';
   @override
-  String get kitapsen_note_hint => 'Your note';
+  String get kitapsen_note_hint => 'โน้ตของคุณ';
   @override
-  String get kitapsen_note_saved => 'Note saved';
+  String get kitapsen_note_saved => 'บันทึกโน้ตแล้ว';
   @override
-  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  String get kitapsen_annotations_empty => 'ยังไม่มีบุ๊กมาร์กหรือโน้ต';
   @override
-  String get kitapsen_store_badge_free => 'Free';
+  String get kitapsen_store_badge_free => 'ฟรี';
   @override
-  String get kitapsen_store_badge_new => 'New';
+  String get kitapsen_store_badge_new => 'ใหม่';
   @override
-  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  String kitapsen_store_rating_count({required Object n}) => '${n} รีวิว';
   @override
-  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  String get kitapsen_store_hero_title => 'หนังสือดีเล่มต่อไปของคุณอยู่ที่นี่';
   @override
   String get kitapsen_store_hero_body =>
-      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+      'ค้นพบเรื่องราวใหม่ๆ และนักเขียนที่คุณชื่นชอบ เลือกหนังสือแล้วเริ่มอ่านบนโทรศัพท์ แท็บเล็ต หรือคอมพิวเตอร์ของคุณ';
   @override
-  String get kitapsen_store_explore_books => 'Explore books';
+  String get kitapsen_store_explore_books => 'สำรวจหนังสือ';
   @override
-  String get kitapsen_store_start_free => 'Start with free books';
+  String get kitapsen_store_start_free => 'เริ่มต้นด้วยหนังสือฟรี';
   @override
-  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  String get kitapsen_store_start_free_body => 'ค้นพบหนังสือเล่มแรกของคุณ';
   @override
-  String get kitapsen_store_library_always => 'Your library is always with you';
+  String get kitapsen_store_library_always => 'คลังหนังสืออยู่กับคุณเสมอ';
   @override
   String get kitapsen_store_library_always_body =>
-      'Read on your phone, tablet and computer.';
+      'อ่านบนโทรศัพท์ แท็บเล็ต และคอมพิวเตอร์';
   @override
-  String get kitapsen_store_meet_authors => 'Meet the authors';
+  String get kitapsen_store_meet_authors => 'รู้จักนักเขียน';
   @override
-  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  String get kitapsen_store_meet_authors_body => 'ติดตามนักเขียนที่คุณชื่นชอบ';
   @override
-  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  String get kitapsen_store_reading_list =>
+      'หนังสือเล่มใหม่สำหรับรายการอ่านของคุณ';
   @override
-  String get kitapsen_store_all_categories => 'All categories';
+  String get kitapsen_store_all_categories => 'หมวดหมู่ทั้งหมด';
   @override
-  String get kitapsen_store_discover_title => 'Time to discover';
+  String get kitapsen_store_discover_title => 'ได้เวลาค้นพบสิ่งใหม่';
   @override
   String get kitapsen_store_discover_body =>
-      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+      'เรื่องราวหนึ่งเรื่อง มุมมองใหม่ การค้นพบที่ไม่คาดคิด เพิ่มหนังสือเล่มต่อไปลงในรายการอ่านของคุณ';
   @override
-  String get kitapsen_store_discover_now => 'Discover now';
+  String get kitapsen_store_discover_now => 'ค้นพบเลย';
   @override
   String kitapsen_store_results_for({required Object q}) =>
-      'Results for "${q}"';
+      'ผลการค้นหาสำหรับ "${q}"';
   @override
-  String get kitapsen_store_matching_authors => 'Matching authors';
+  String get kitapsen_store_matching_authors => 'ผู้เขียนที่ตรงกัน';
   @override
-  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  String kitapsen_store_author_books_count({required Object n}) => '${n} เล่ม';
   @override
   String get kitapsen_store_author_cta =>
-      'Discover the author\'s books and pick your next read.';
+      'ค้นพบหนังสือของผู้เขียนและเลือกเล่มต่อไปที่จะอ่าน';
   @override
-  String get kitapsen_store_see_author_books => 'See their books';
+  String get kitapsen_store_see_author_books => 'ดูผลงาน';
   @override
-  String get kitapsen_store_authors_books => 'The author\'s books';
+  String get kitapsen_store_authors_books => 'หนังสือของผู้เขียน';
   @override
-  String get kitapsen_book_read_now => 'Read now';
+  String get kitapsen_book_read_now => 'อ่านเลย';
   @override
-  String get kitapsen_book_get_free_web => 'Get it free';
+  String get kitapsen_book_get_free_web => 'รับฟรี';
   @override
-  String get kitapsen_book_favorites => 'Favorites';
+  String get kitapsen_book_favorites => 'รายการโปรด';
   @override
-  String get kitapsen_book_description => 'Description';
+  String get kitapsen_book_description => 'คำอธิบาย';
   @override
-  String get kitapsen_book_about_author => 'About the author';
+  String get kitapsen_book_about_author => 'เกี่ยวกับผู้เขียน';
   @override
   String get kitapsen_book_isbn => 'ISBN';
   @override
-  String get kitapsen_book_format => 'Format';
+  String get kitapsen_book_format => 'รูปแบบ';
   @override
-  String get kitapsen_author_role => 'Author';
+  String get kitapsen_author_role => 'ผู้เขียน';
   @override
-  String get kitapsen_author_notify => 'Notify me of new books';
+  String get kitapsen_author_notify => 'แจ้งเตือนเมื่อมีหนังสือใหม่';
   @override
-  String get kitapsen_author_about => 'About';
+  String get kitapsen_author_about => 'เกี่ยวกับ';
   @override
-  String get kitapsen_review_more_bio => 'Read the full biography';
+  String get kitapsen_review_more_bio => 'อ่านประวัติฉบับเต็ม';
   @override
-  String get kitapsen_author_like => 'Like';
+  String get kitapsen_author_like => 'ถูกใจ';
   @override
-  String get kitapsen_author_likes => 'Likes';
+  String get kitapsen_author_likes => 'ยอดถูกใจ';
   @override
-  String get kitapsen_register_open => 'No account yet? Create one';
+  String get kitapsen_register_open => 'ยังไม่มีบัญชี? สร้างบัญชี';
   @override
-  String get kitapsen_register_name => 'Name (optional)';
+  String get kitapsen_register_name => 'ชื่อ (ไม่บังคับ)';
   @override
-  String get kitapsen_register_username => 'Username';
+  String get kitapsen_register_username => 'ชื่อผู้ใช้';
   @override
   String get kitapsen_register_username_hint =>
-      '2–20 lowercase letters or digits';
+      'ตัวพิมพ์เล็กหรือตัวเลข 2–20 ตัว';
   @override
-  String get kitapsen_register_email => 'Email';
+  String get kitapsen_register_email => 'อีเมล';
   @override
-  String get kitapsen_register_password_hint => 'At least 8 characters';
+  String get kitapsen_register_password_hint => 'อย่างน้อย 8 ตัวอักษร';
   @override
-  String get kitapsen_register_submit => 'Create account';
+  String get kitapsen_register_submit => 'สร้างบัญชี';
   @override
-  String get kitapsen_register_have_account =>
-      'Already have an account? Sign in';
+  String get kitapsen_register_have_account => 'มีบัญชีอยู่แล้ว? เข้าสู่ระบบ';
   @override
   String get kitapsen_register_username_invalid =>
-      'Use 2–20 lowercase letters or digits.';
+      'ใช้ตัวพิมพ์เล็กหรือตัวเลข 2–20 ตัว';
   @override
-  String get kitapsen_register_name_invalid =>
-      'The name must be 2–30 characters.';
+  String get kitapsen_register_name_invalid => 'ชื่อต้องมี 2–30 ตัวอักษร';
   @override
-  String get kitapsen_register_email_invalid => 'Enter a valid email address.';
+  String get kitapsen_register_email_invalid => 'ป้อนที่อยู่อีเมลที่ถูกต้อง';
   @override
   String get kitapsen_register_password_short =>
-      'The password must be at least 8 characters.';
+      'รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร';
   @override
-  String get kitapsen_register_failed =>
-      'The account could not be created. Try again.';
+  String get kitapsen_register_failed => 'สร้างบัญชีไม่สำเร็จ ลองอีกครั้ง';
   @override
-  String get kitapsen_hub_title => 'My account';
+  String get kitapsen_hub_title => 'บัญชีของฉัน';
   @override
-  String get kitapsen_hub_reading => 'Reading';
+  String get kitapsen_hub_reading => 'การอ่าน';
   @override
-  String get kitapsen_hub_social => 'Social';
+  String get kitapsen_hub_social => 'โซเชียล';
   @override
-  String get kitapsen_hub_discover => 'Discover';
+  String get kitapsen_hub_discover => 'ค้นพบ';
   @override
-  String get kitapsen_hub_account => 'Account';
+  String get kitapsen_hub_account => 'บัญชี';
   @override
-  String get kitapsen_hub_library => 'My library';
+  String get kitapsen_hub_library => 'คลังหนังสือของฉัน';
   @override
-  String get kitapsen_hub_public_profile => 'My public reader profile';
+  String get kitapsen_hub_public_profile => 'โปรไฟล์นักอ่านสาธารณะของฉัน';
   @override
-  String get kitapsen_hub_sign_in_settings => 'Sign out or delete the account';
+  String get kitapsen_hub_sign_in_settings => 'ออกจากระบบหรือลบบัญชี';
   @override
-  String get kitapsen_common_save => 'Save';
+  String get kitapsen_common_save => 'บันทึก';
   @override
-  String get kitapsen_common_saved => 'Saved';
+  String get kitapsen_common_saved => 'บันทึกแล้ว';
   @override
-  String get kitapsen_common_edit => 'Edit';
+  String get kitapsen_common_edit => 'แก้ไข';
   @override
-  String get kitapsen_profile_title => 'My profile';
+  String get kitapsen_profile_title => 'โปรไฟล์ของฉัน';
   @override
-  String get kitapsen_profile_name => 'Display name';
+  String get kitapsen_profile_name => 'ชื่อที่แสดง';
   @override
-  String get kitapsen_profile_sharing => 'Share reading activity';
+  String get kitapsen_profile_sharing => 'แชร์กิจกรรมการอ่าน';
   @override
   String get kitapsen_profile_sharing_hint =>
-      'Show the books you are reading and have finished on your public profile.';
+      'แสดงหนังสือที่คุณกำลังอ่านและอ่านจบแล้วบนโปรไฟล์สาธารณะ';
   @override
-  String get kitapsen_settings_title => 'Account settings';
+  String get kitapsen_settings_title => 'การตั้งค่าบัญชี';
   @override
-  String get kitapsen_settings_profile => 'Profile information';
+  String get kitapsen_settings_profile => 'ข้อมูลโปรไฟล์';
   @override
-  String get kitapsen_settings_privacy => 'Privacy';
+  String get kitapsen_settings_privacy => 'ความเป็นส่วนตัว';
   @override
-  String get kitapsen_settings_private => 'Private profile';
+  String get kitapsen_settings_private => 'โปรไฟล์ส่วนตัว';
   @override
   String get kitapsen_settings_private_hint =>
-      'Only your followers can see your profile, reviews, reading activity and updates.';
+      'เฉพาะผู้ติดตามของคุณเท่านั้นที่เห็นโปรไฟล์ รีวิว กิจกรรมการอ่าน และอัปเดตของคุณ';
   @override
-  String get kitapsen_settings_notifications => 'Email notifications';
+  String get kitapsen_settings_notifications => 'การแจ้งเตือนทางอีเมล';
   @override
   String get kitapsen_settings_follower_email =>
-      'Email me when someone follows me';
+      'ส่งอีเมลถึงฉันเมื่อมีคนติดตามฉัน';
   @override
   String get kitapsen_settings_comment_email =>
-      'Email me when someone comments on my story';
+      'ส่งอีเมลถึงฉันเมื่อมีคนแสดงความคิดเห็นในเรื่องของฉัน';
   @override
-  String get kitapsen_settings_sale_email => 'Email me when my book sells';
+  String get kitapsen_settings_sale_email =>
+      'ส่งอีเมลถึงฉันเมื่อหนังสือของฉันขายได้';
   @override
-  String get kitapsen_settings_author_emails => 'Author emails';
+  String get kitapsen_settings_author_emails => 'อีเมลสำหรับผู้เขียน';
   @override
-  String get kitapsen_settings_password => 'Change password';
+  String get kitapsen_settings_password => 'เปลี่ยนรหัสผ่าน';
   @override
-  String get kitapsen_settings_current_password => 'Current password';
+  String get kitapsen_settings_current_password => 'รหัสผ่านปัจจุบัน';
   @override
-  String get kitapsen_settings_new_password => 'New password';
+  String get kitapsen_settings_new_password => 'รหัสผ่านใหม่';
   @override
-  String get kitapsen_settings_repeat_password => 'Repeat the new password';
+  String get kitapsen_settings_repeat_password => 'ป้อนรหัสผ่านใหม่อีกครั้ง';
   @override
-  String get kitapsen_settings_change_password => 'Change password';
+  String get kitapsen_settings_change_password => 'เปลี่ยนรหัสผ่าน';
   @override
-  String get kitapsen_settings_passwords_differ =>
-      'The passwords do not match.';
+  String get kitapsen_settings_passwords_differ => 'รหัสผ่านไม่ตรงกัน';
   @override
-  String get kitapsen_settings_password_changed => 'Password changed.';
+  String get kitapsen_settings_password_changed => 'เปลี่ยนรหัสผ่านแล้ว';
   @override
   String get kitapsen_settings_password_failed =>
-      'The password could not be changed. Check the current password.';
+      'เปลี่ยนรหัสผ่านไม่สำเร็จ ตรวจสอบรหัสผ่านปัจจุบัน';
   @override
-  String get kitapsen_settings_blocked => 'Blocked users';
+  String get kitapsen_settings_blocked => 'ผู้ใช้ที่บล็อก';
   @override
-  String get kitapsen_settings_no_blocked => 'You have not blocked anyone.';
+  String get kitapsen_settings_no_blocked => 'คุณยังไม่ได้บล็อกใคร';
   @override
-  String get kitapsen_publishers_title => 'Publishers';
+  String get kitapsen_publishers_title => 'สำนักพิมพ์';
   @override
-  String get kitapsen_publishers_body => 'Browse books by publisher.';
+  String get kitapsen_publishers_body => 'เลือกดูหนังสือตามสำนักพิมพ์';
   @override
-  String get kitapsen_publisher_role => 'Publisher';
+  String get kitapsen_publisher_role => 'สำนักพิมพ์';
   @override
   String get kitapsen_publisher_no_books =>
-      'This publisher\'s books will be listed here soon.';
+      'หนังสือของสำนักพิมพ์นี้จะแสดงที่นี่เร็วๆ นี้';
   @override
-  String get kitapsen_authors_title => 'Authors';
+  String get kitapsen_authors_title => 'ผู้เขียน';
   @override
-  String get kitapsen_blog_title => 'Blog';
+  String get kitapsen_blog_title => 'บล็อก';
   @override
   String get kitapsen_blog_subtitle =>
-      'News, tips and stories from the Kitapsen community.';
+      'ข่าวสาร เคล็ดลับ และเรื่องราวจากชุมชน Kitapsen';
   @override
-  String get kitapsen_blog_empty => 'No blog posts yet.';
+  String get kitapsen_blog_empty => 'ยังไม่มีบทความในบล็อก';
   @override
-  String get kitapsen_collections_title => 'Collections';
+  String get kitapsen_collections_title => 'คอลเลกชัน';
   @override
-  String get kitapsen_collections_new => 'New collection';
+  String get kitapsen_collections_new => 'คอลเลกชันใหม่';
   @override
-  String get kitapsen_collections_name => 'Collection name';
+  String get kitapsen_collections_name => 'ชื่อคอลเลกชัน';
   @override
-  String get kitapsen_collections_description => 'Description (optional)';
+  String get kitapsen_collections_description => 'คำอธิบาย (ไม่บังคับ)';
   @override
   String get kitapsen_collections_empty =>
-      'No collections yet. Create collections to organise your books.';
+      'ยังไม่มีคอลเลกชัน สร้างคอลเลกชันเพื่อจัดระเบียบหนังสือของคุณ';
   @override
-  String get kitapsen_collections_delete_confirm => 'Delete this collection?';
+  String get kitapsen_collections_delete_confirm => 'ลบคอลเลกชันนี้หรือไม่';
   @override
   String get kitapsen_collections_items_empty =>
-      'No books yet. Add books from their page with "Add to collection".';
+      'ยังไม่มีหนังสือ เพิ่มหนังสือได้จากหน้าหนังสือด้วยปุ่ม "เพิ่มในคอลเลกชัน"';
   @override
-  String get kitapsen_collections_long_press =>
-      'Long-press a book to remove it.';
+  String get kitapsen_collections_long_press => 'กดค้างที่หนังสือเพื่อนำออก';
   @override
-  String get kitapsen_collections_remove => 'Remove';
+  String get kitapsen_collections_remove => 'นำออก';
   @override
   String kitapsen_collections_remove_confirm({required Object title}) =>
-      'Remove "${title}" from this collection?';
+      'นำ "${title}" ออกจากคอลเลกชันนี้หรือไม่';
   @override
-  String get kitapsen_collections_add => 'Add to collection';
+  String get kitapsen_collections_add => 'เพิ่มในคอลเลกชัน';
   @override
-  String get kitapsen_collections_add_title => 'Add to a collection';
+  String get kitapsen_collections_add_title => 'เพิ่มลงในคอลเลกชัน';
   @override
-  String get kitapsen_collections_added => 'Added to the collection';
+  String get kitapsen_collections_added => 'เพิ่มลงในคอลเลกชันแล้ว';
   @override
-  String get kitapsen_notebooks_title => 'Notebooks';
+  String get kitapsen_notebooks_title => 'สมุดโน้ต';
   @override
-  String get kitapsen_notebooks_new => 'New notebook';
+  String get kitapsen_notebooks_new => 'สมุดโน้ตใหม่';
   @override
-  String get kitapsen_notebooks_name => 'Notebook name';
+  String get kitapsen_notebooks_name => 'ชื่อสมุดโน้ต';
   @override
   String get kitapsen_notebooks_empty =>
-      'No notebooks yet. Create notebooks for your reading notes and ideas.';
+      'ยังไม่มีสมุดโน้ต สร้างสมุดโน้ตไว้จดโน้ตการอ่านและไอเดียของคุณ';
   @override
-  String kitapsen_notebooks_count({required Object n}) => '${n} notes';
+  String kitapsen_notebooks_count({required Object n}) => '${n} โน้ต';
   @override
-  String get kitapsen_notebooks_delete_confirm => 'Delete this notebook?';
+  String get kitapsen_notebooks_delete_confirm => 'ลบสมุดโน้ตนี้หรือไม่';
   @override
-  String get kitapsen_notebooks_entries_empty => 'No notes yet.';
+  String get kitapsen_notebooks_entries_empty => 'ยังไม่มีโน้ต';
   @override
-  String get kitapsen_notebooks_entry_hint => 'Add a note...';
+  String get kitapsen_notebooks_entry_hint => 'เพิ่มโน้ต...';
   @override
-  String get kitapsen_notebooks_entry_delete_confirm => 'Delete this note?';
+  String get kitapsen_notebooks_entry_delete_confirm => 'ลบโน้ตนี้หรือไม่';
   @override
-  String get kitapsen_notebooks_add => 'Add note';
+  String get kitapsen_notebooks_add => 'เพิ่มโน้ต';
   @override
-  String get kitapsen_goals_title => 'Reading goals';
+  String get kitapsen_goals_title => 'เป้าหมายการอ่าน';
   @override
-  String get kitapsen_goals_new => 'New goal';
+  String get kitapsen_goals_new => 'เป้าหมายใหม่';
   @override
-  String get kitapsen_goals_create => 'Create';
+  String get kitapsen_goals_create => 'สร้าง';
   @override
-  String get kitapsen_goals_created => 'Goal created';
+  String get kitapsen_goals_created => 'สร้างเป้าหมายแล้ว';
   @override
-  String get kitapsen_goals_type => 'Goal type';
+  String get kitapsen_goals_type => 'ประเภทเป้าหมาย';
   @override
-  String get kitapsen_goals_type_books => 'Books';
+  String get kitapsen_goals_type_books => 'หนังสือ';
   @override
-  String get kitapsen_goals_type_pages => 'Pages';
+  String get kitapsen_goals_type_pages => 'หน้า';
   @override
-  String get kitapsen_goals_type_days => 'Reading days';
+  String get kitapsen_goals_type_days => 'วันที่อ่าน';
   @override
-  String get kitapsen_goals_target => 'Target';
+  String get kitapsen_goals_target => 'เป้าหมาย';
   @override
-  String get kitapsen_goals_this_month => 'This month';
+  String get kitapsen_goals_this_month => 'เดือนนี้';
   @override
-  String get kitapsen_goals_this_year => 'This year';
+  String get kitapsen_goals_this_year => 'ปีนี้';
   @override
   String get kitapsen_goals_empty =>
-      'No reading goals. Set your first goal to keep your motivation up.';
+      'ยังไม่มีเป้าหมายการอ่าน ตั้งเป้าหมายแรกเพื่อรักษาแรงจูงใจของคุณ';
   @override
-  String get kitapsen_goals_delete_confirm => 'Delete this goal?';
+  String get kitapsen_goals_delete_confirm => 'ลบเป้าหมายนี้หรือไม่';
   @override
-  String get kitapsen_goals_completed => 'Completed';
+  String get kitapsen_goals_completed => 'สำเร็จแล้ว';
   @override
-  String kitapsen_goals_until({required Object date}) => 'Until ${date}';
+  String kitapsen_goals_until({required Object date}) => 'จนถึง ${date}';
   @override
-  String kitapsen_goals_unit_books({required Object n}) => '${n} books';
+  String kitapsen_goals_unit_books({required Object n}) => '${n} เล่ม';
   @override
-  String kitapsen_goals_unit_pages({required Object n}) => '${n} pages';
+  String kitapsen_goals_unit_pages({required Object n}) => '${n} หน้า';
   @override
-  String kitapsen_goals_unit_hours({required Object n}) => '${n} hours';
+  String kitapsen_goals_unit_hours({required Object n}) => '${n} ชั่วโมง';
   @override
-  String kitapsen_goals_unit_days({required Object n}) => '${n} reading days';
+  String kitapsen_goals_unit_days({required Object n}) => 'อ่าน ${n} วัน';
   @override
-  String get kitapsen_goals_streak => 'Day streak';
+  String get kitapsen_goals_streak => 'วันติดต่อกัน';
   @override
-  String get kitapsen_goals_longest_streak => 'Longest streak';
+  String get kitapsen_goals_longest_streak => 'ติดต่อกันนานที่สุด';
   @override
-  String get kitapsen_goals_books_read => 'Books read';
+  String get kitapsen_goals_books_read => 'หนังสือที่อ่าน';
   @override
-  String get kitapsen_goals_books_finished => 'Finished';
+  String get kitapsen_goals_books_finished => 'อ่านจบแล้ว';
   @override
-  String get kitapsen_feed_title => 'Social feed';
+  String get kitapsen_feed_title => 'ฟีดโซเชียล';
   @override
-  String get kitapsen_feed_followed => 'Following';
+  String get kitapsen_feed_followed => 'กำลังติดตาม';
   @override
-  String get kitapsen_feed_mine => 'My activity';
+  String get kitapsen_feed_mine => 'กิจกรรมของฉัน';
   @override
   String get kitapsen_feed_empty_followed =>
-      'No activity yet. Follow readers to keep up with what they are reading.';
+      'ยังไม่มีกิจกรรม ติดตามผู้อ่านคนอื่นเพื่อดูว่าพวกเขากำลังอ่านอะไร';
   @override
   String get kitapsen_feed_empty_mine =>
-      'Your reading activity will appear here once you start reading.';
+      'กิจกรรมการอ่านของคุณจะแสดงที่นี่เมื่อคุณเริ่มอ่าน';
   @override
   String kitapsen_feed_started({required Object target}) =>
-      'started reading ${target}';
+      'เริ่มอ่าน ${target}';
   @override
   String kitapsen_feed_finished({required Object target}) =>
-      'finished ${target}';
+      'อ่าน ${target} จบแล้ว';
   @override
-  String kitapsen_feed_reviewed({required Object target}) =>
-      'reviewed ${target}';
+  String kitapsen_feed_reviewed({required Object target}) => 'รีวิว ${target}';
   @override
   String kitapsen_feed_followed_user({required Object target}) =>
-      'started following ${target}';
+      'เริ่มติดตาม ${target}';
   @override
   String kitapsen_feed_followed_author({required Object target}) =>
-      'followed the author ${target}';
+      'ติดตามผู้เขียน ${target}';
   @override
-  String kitapsen_feed_shared({required Object target}) => 'shared ${target}';
+  String kitapsen_feed_shared({required Object target}) => 'แชร์ ${target}';
   @override
-  String kitapsen_feed_percent({required Object n}) => '${n}% read';
+  String kitapsen_feed_percent({required Object n}) => 'อ่านแล้ว ${n}%';
   @override
-  String get kitapsen_feed_finished_badge => 'Finished';
+  String get kitapsen_feed_finished_badge => 'อ่านจบแล้ว';
   @override
-  String get kitapsen_user_follow => 'Follow';
+  String get kitapsen_user_follow => 'ติดตาม';
   @override
-  String get kitapsen_user_block => 'Block';
+  String get kitapsen_user_block => 'บล็อก';
   @override
-  String get kitapsen_user_unblock => 'Unblock';
+  String get kitapsen_user_unblock => 'เลิกบล็อก';
   @override
   String kitapsen_user_block_confirm({required Object username}) =>
-      'Block @${username}? They will no longer see your profile and activity, and any follow between you is removed.';
+      'บล็อก @${username} หรือไม่ ผู้ใช้นี้จะไม่เห็นโปรไฟล์และกิจกรรมของคุณอีก และการติดตามระหว่างคุณทั้งสองจะถูกยกเลิก';
   @override
   String kitapsen_user_member_since({required Object date}) =>
-      'Member since ${date}';
+      'เป็นสมาชิกตั้งแต่ ${date}';
   @override
-  String kitapsen_user_followers({required Object n}) => '${n} followers';
+  String kitapsen_user_followers({required Object n}) => 'ผู้ติดตาม ${n} คน';
   @override
-  String kitapsen_user_following({required Object n}) => '${n} following';
+  String kitapsen_user_following({required Object n}) => 'กำลังติดตาม ${n} คน';
   @override
   String kitapsen_user_finished_count({required Object n}) =>
-      '${n} books finished';
+      'อ่านจบ ${n} เล่ม';
   @override
-  String get kitapsen_user_tab_reading => 'Reading';
+  String get kitapsen_user_tab_reading => 'การอ่าน';
   @override
-  String get kitapsen_user_tab_reviews => 'Reviews';
+  String get kitapsen_user_tab_reviews => 'รีวิว';
   @override
-  String get kitapsen_user_tab_activity => 'Activity';
+  String get kitapsen_user_tab_activity => 'กิจกรรม';
   @override
-  String get kitapsen_user_currently_reading => 'Currently reading';
+  String get kitapsen_user_currently_reading => 'กำลังอ่าน';
   @override
-  String get kitapsen_user_finished => 'Finished';
+  String get kitapsen_user_finished => 'อ่านจบแล้ว';
   @override
-  String get kitapsen_user_no_reading =>
-      'This reader does not share reading activity.';
+  String get kitapsen_user_no_reading => 'ผู้อ่านคนนี้ไม่ได้แชร์กิจกรรมการอ่าน';
   @override
-  String get kitapsen_user_no_reviews => 'No public reviews yet.';
+  String get kitapsen_user_no_reviews => 'ยังไม่มีรีวิวสาธารณะ';
   @override
-  String get kitapsen_user_no_activity => 'No public activity yet.';
+  String get kitapsen_user_no_activity => 'ยังไม่มีกิจกรรมสาธารณะ';
   @override
   String get kitapsen_user_private =>
-      'This profile is private. Follow this reader to see their reviews, reading activity and profile.';
+      'โปรไฟล์นี้เป็นแบบส่วนตัว ติดตามผู้อ่านคนนี้เพื่อดูรีวิว กิจกรรมการอ่าน และโปรไฟล์';
   @override
   String get kitapsen_user_blocked_you =>
-      'This reader has blocked you. Their profile and activity are hidden from you.';
+      'ผู้อ่านคนนี้บล็อกคุณแล้ว คุณจะไม่เห็นโปรไฟล์และกิจกรรมของผู้อ่านคนนี้';
   @override
-  String get kitapsen_user_followers_title => 'Followers';
+  String get kitapsen_user_followers_title => 'ผู้ติดตาม';
   @override
-  String get kitapsen_user_following_title => 'Following';
+  String get kitapsen_user_following_title => 'กำลังติดตาม';
   @override
-  String get kitapsen_user_no_connections => 'Nobody here yet.';
+  String get kitapsen_user_no_connections => 'ยังไม่มีใครที่นี่';
   @override
-  String get kitapsen_clubs_title => 'Book clubs';
+  String get kitapsen_clubs_title => 'ชมรมหนังสือ';
   @override
-  String get kitapsen_clubs_create => 'Create a club';
+  String get kitapsen_clubs_create => 'สร้างชมรม';
   @override
-  String get kitapsen_clubs_name => 'Club name';
+  String get kitapsen_clubs_name => 'ชื่อชมรม';
   @override
   String get kitapsen_clubs_empty =>
-      'No book clubs yet. Create or join one to read together.';
+      'ยังไม่มีชมรมหนังสือ สร้างหรือเข้าร่วมชมรมเพื่ออ่านด้วยกัน';
   @override
-  String get kitapsen_clubs_join => 'Join';
+  String get kitapsen_clubs_join => 'เข้าร่วม';
   @override
-  String get kitapsen_clubs_leave => 'Leave';
+  String get kitapsen_clubs_leave => 'ออกจากชมรม';
   @override
-  String get kitapsen_clubs_owner => 'Owner';
+  String get kitapsen_clubs_owner => 'เจ้าของ';
   @override
-  String get kitapsen_clubs_members => 'Members';
+  String get kitapsen_clubs_members => 'สมาชิก';
   @override
-  String kitapsen_clubs_members_count({required Object n}) => '${n} members';
+  String kitapsen_clubs_members_count({required Object n}) => 'สมาชิก ${n} คน';
   @override
-  String get kitapsen_clubs_chat => 'Discussion';
+  String get kitapsen_clubs_chat => 'การสนทนา';
   @override
   String get kitapsen_clubs_join_to_chat =>
-      'Join the club to read and write messages.';
+      'เข้าร่วมชมรมเพื่ออ่านและเขียนข้อความ';
   @override
-  String get kitapsen_clubs_no_messages => 'No messages yet.';
+  String get kitapsen_clubs_no_messages => 'ยังไม่มีข้อความ';
   @override
-  String get kitapsen_clubs_message_hint => 'Write a message...';
+  String get kitapsen_clubs_message_hint => 'เขียนข้อความ...';
   @override
-  String get kitapsen_clubs_send => 'Send';
+  String get kitapsen_clubs_send => 'ส่ง';
   @override
-  String get kitapsen_register_taken =>
-      'This username or email address already has an account.';
+  String get kitapsen_register_taken => 'ชื่อผู้ใช้หรืออีเมลนี้มีบัญชีอยู่แล้ว';
   @override
-  String get kitapsen_report => 'Report';
+  String get kitapsen_report => 'รายงาน';
   @override
-  String get kitapsen_reported => 'Reported';
+  String get kitapsen_reported => 'รายงานแล้ว';
   @override
-  String get kitapsen_report_title => 'Report this content';
+  String get kitapsen_report_title => 'รายงานเนื้อหานี้';
   @override
-  String get kitapsen_report_reason => 'Reason (optional)';
+  String get kitapsen_report_reason => 'เหตุผล (ไม่บังคับ)';
   @override
-  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  String get kitapsen_report_reason_hint => 'เนื้อหานี้ไม่เหมาะสมอย่างไร';
   @override
-  String get kitapsen_report_submit => 'Submit Report';
+  String get kitapsen_report_submit => 'ส่งรายงาน';
   @override
   String get kitapsen_report_thanks =>
-      'Reported. Thank you for helping keep the community safe.';
+      'รายงานแล้ว ขอบคุณที่ช่วยให้ชุมชนปลอดภัย';
   @override
   String get kitapsen_delete_statistics_book_desc =>
       'เวลาอ่านและจำนวนตัวอักษรที่อ่านของหนังสือเล่มนี้จะถูกลบออกจากสถิติในทุกอุปกรณ์';
@@ -217364,7 +217356,7 @@ class _StringsVi extends _StringsEn {
   @override
   String get batch_tag_title => 'Quản lý thẻ';
   @override
-  String get book_continue_reading => 'Continue Reading';
+  String get book_continue_reading => 'Tiếp tục đọc';
   @override
   String get book_convert_blocked_already => 'Sách này đã ở định dạng đó rồi.';
   @override
@@ -219179,7 +219171,7 @@ class _StringsVi extends _StringsEn {
   @override
   String get font_target_game_lookup => 'Phông chữ cửa sổ tra cứu trò chơi';
   @override
-  String get font_target_video_subtitle => 'Video Subtitle Font';
+  String get font_target_video_subtitle => 'Phông phụ đề video';
   @override
   String get gal_card_lookup_independent_size =>
       'Kích thước riêng cho thẻ trong trò chơi';
@@ -220334,7 +220326,7 @@ class _StringsVi extends _StringsEn {
   @override
   String get handlebar_sentence => 'Câu';
   @override
-  String get handlebar_sentence_audio => 'Sentence Audio';
+  String get handlebar_sentence_audio => 'Âm thanh câu';
   @override
   String get handlebar_video_clip => 'Video Clip (GIF)';
   @override
@@ -222540,7 +222532,7 @@ class _StringsVi extends _StringsEn {
   @override
   String get reader_writing_direction => 'Hướng viết';
   @override
-  String get reading_activity => 'Hoạt động học tập';
+  String get reading_activity => 'Hoạt động đọc';
   @override
   String get reading_progress => 'Tiến độ đọc';
   @override
@@ -222941,9 +222933,9 @@ class _StringsVi extends _StringsEn {
   @override
   String get shortcut_action_reader_open_gallery => 'Mở thư viện minh họa';
   @override
-  String get shortcut_action_reader_open_menu => 'Open Settings Menu';
+  String get shortcut_action_reader_open_menu => 'Mở menu cài đặt';
   @override
-  String get shortcut_action_reader_open_navigation => 'Open Navigation';
+  String get shortcut_action_reader_open_navigation => 'Mở điều hướng';
   @override
   String get shortcut_action_reader_open_statistics => 'Mở thống kê đọc';
   @override
@@ -222964,10 +222956,10 @@ class _StringsVi extends _StringsEn {
       'Căn phụ đề trước đó về thời điểm hiện tại';
   @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
-      'Cycle Secondary Subtitle Obscure';
+      'Chuyển chế độ che phụ đề phụ';
   @override
   String get shortcut_action_video_cycle_subtitle_obscure =>
-      'Cycle Subtitle Obscure Mode';
+      'Chuyển chế độ che phụ đề';
   @override
   String get shortcut_action_video_dismiss_dict => 'Đóng từ điển';
   @override
@@ -223034,7 +223026,7 @@ class _StringsVi extends _StringsEn {
   String get shortcut_action_video_toggle_play_pause => 'Phát / Tạm dừng';
   @override
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
-      'Toggle Hide Secondary Subtitle';
+      'Bật/tắt ẩn phụ đề phụ';
   @override
   String get shortcut_action_video_toggle_shader_compare =>
       'Bật/tắt so sánh shader';
@@ -223042,8 +223034,7 @@ class _StringsVi extends _StringsEn {
   String get shortcut_action_video_toggle_subtitle_blur =>
       'Bật/tắt làm mờ phụ đề';
   @override
-  String get shortcut_action_video_toggle_subtitle_hide =>
-      'Toggle Hide Subtitles';
+  String get shortcut_action_video_toggle_subtitle_hide => 'Bật/tắt ẩn phụ đề';
   @override
   String get shortcut_action_video_toggle_subtitle_list =>
       'Bật/tắt danh sách phụ đề';
@@ -223322,7 +223313,7 @@ class _StringsVi extends _StringsEn {
   @override
   String get stat_detail_ungrouped => 'Chưa phân nhóm';
   @override
-  String get stat_fastest_day => 'Fastest Day';
+  String get stat_fastest_day => 'Ngày nhanh nhất';
   @override
   String get stat_favorited => 'Đã yêu thích';
   @override
@@ -223339,9 +223330,9 @@ class _StringsVi extends _StringsEn {
   @override
   String stat_format_pages({required Object n}) => '${n} trang';
   @override
-  String get stat_goal => 'Daily Goal';
+  String get stat_goal => 'Mục tiêu hàng ngày';
   @override
-  String get stat_goal_daily => 'Daily Goal';
+  String get stat_goal_daily => 'Mục tiêu hàng ngày';
   @override
   String get stat_goal_presets => 'Mẫu sẵn';
   @override
@@ -223353,11 +223344,11 @@ class _StringsVi extends _StringsEn {
   String stat_goal_recent_average({required Object n}) =>
       '7 ngày qua: trung bình ${n} ký tự/ngày';
   @override
-  String get stat_goal_set => 'Set Goal';
+  String get stat_goal_set => 'Đặt mục tiêu';
   @override
   String get stat_goal_unit_chars => 'ký tự';
   @override
-  String get stat_goal_weekly => 'Weekly Goal';
+  String get stat_goal_weekly => 'Mục tiêu hàng tuần';
   @override
   String get stat_hourly_band_epub => 'Sách văn bản';
   @override
@@ -223384,7 +223375,7 @@ class _StringsVi extends _StringsEn {
   @override
   String get stat_no_data => 'Chưa có dữ liệu đọc';
   @override
-  String get stat_range_and_trend => 'Range & Trend';
+  String get stat_range_and_trend => 'Phạm vi & xu hướng';
   @override
   String get stat_recent_active => 'Ngày hoạt động (7n)';
   @override
@@ -223403,7 +223394,7 @@ class _StringsVi extends _StringsEn {
   @override
   String get stat_sessions_show_all => 'Tất cả phiên';
   @override
-  String get stat_slowest_day => 'Slowest Day';
+  String get stat_slowest_day => 'Ngày chậm nhất';
   @override
   String get stat_sort_by_chars => 'Theo số ký tự';
   @override
@@ -223419,7 +223410,7 @@ class _StringsVi extends _StringsEn {
   @override
   String stat_speed_cph({required Object n}) => '${n} ký tự/giờ';
   @override
-  String get stat_speed_summary => 'Speed Summary';
+  String get stat_speed_summary => 'Tóm tắt tốc độ';
   @override
   String get stat_streak => 'Chuỗi ngày';
   @override
@@ -223437,11 +223428,11 @@ class _StringsVi extends _StringsEn {
   @override
   String get stat_trend_weekly => 'Tuần';
   @override
-  String get stat_typical_day => 'Typical Day';
+  String get stat_typical_day => 'Ngày điển hình';
   @override
   String get stat_vs_prev => 'so với 14n trước';
   @override
-  String get stat_weighted_avg_speed => 'Weighted Avg';
+  String get stat_weighted_avg_speed => 'TB có trọng số';
   @override
   String get stop => 'Dừng';
   @override
@@ -230889,7 +230880,7 @@ class _StringsVi extends _StringsEn {
   @override
   String get video_scrape_ai_declined => 'AI not adopted';
   @override
-  String get video_scrape_ai_failed => 'AI request failed';
+  String get video_scrape_ai_failed => 'Yêu cầu AI thất bại';
   @override
   String get video_scrape_ai_searched =>
       'Searched again with titles suggested by AI';
@@ -230949,11 +230940,11 @@ class _StringsVi extends _StringsEn {
   @override
   String get shelf_filter_read_status_finished => 'Đã đọc xong';
   @override
-  String get video_filter_media_type => 'Type';
+  String get video_filter_media_type => 'Loại';
   @override
   String get video_filter_media_type_video => 'Video';
   @override
-  String get video_filter_media_type_audio => 'Audio';
+  String get video_filter_media_type_audio => 'Âm thanh';
   @override
   String get video_filter_extras => 'Main/Extras';
   @override
@@ -230961,7 +230952,7 @@ class _StringsVi extends _StringsEn {
   @override
   String get video_filter_extras_only => 'Extras only';
   @override
-  String get video_filter_source => 'Source';
+  String get video_filter_source => 'Nguồn';
   @override
   String get video_filter_series_standalone_empty_hint =>
       'No standalone videos. Videos in collections are on the Series tab, or set the Series filter to All.';
@@ -231004,7 +230995,7 @@ class _StringsVi extends _StringsEn {
   @override
   String get manga_ocr_ai_mode_label => 'AI recognition';
   @override
-  String get manga_ocr_ai_mode_off => 'Off';
+  String get manga_ocr_ai_mode_off => 'Tắt';
   @override
   String get manga_ocr_ai_mode_low_confidence => 'Only uncertain text';
   @override
@@ -231057,7 +231048,7 @@ class _StringsVi extends _StringsEn {
   String get ocr_system_model_missing =>
       'Google Play services hasn\'t downloaded the text recognition model yet. Download it now (a few MB) to use screen OCR.';
   @override
-  String get ocr_system_model_download => 'Download';
+  String get ocr_system_model_download => 'Tải xuống';
   @override
   String get ocr_system_model_downloading =>
       'Downloading through Google Play services… You can close this dialog; the download continues in the background.';
@@ -231081,669 +231072,673 @@ class _StringsVi extends _StringsEn {
   @override
   String get kitapsen_section_title => 'Kitapsen';
   @override
-  String get kitapsen_account_title => 'Kitapsen account';
+  String get kitapsen_account_title => 'Tài khoản Kitapsen';
   @override
   String get kitapsen_account_hint =>
-      'Sign in to read the books in your Kitapsen library. They appear on your bookshelf, and your reading position syncs with your account.';
+      'Đăng nhập để đọc sách trong thư viện Kitapsen của bạn. Sách sẽ xuất hiện trên kệ sách và vị trí đọc được đồng bộ với tài khoản của bạn.';
   @override
-  String get kitapsen_account_server_url => 'Server address';
+  String get kitapsen_account_server_url => 'Địa chỉ máy chủ';
   @override
-  String get kitapsen_account_username => 'Email or username';
+  String get kitapsen_account_username => 'Email hoặc tên người dùng';
   @override
-  String get kitapsen_account_password => 'Password';
+  String get kitapsen_account_password => 'Mật khẩu';
   @override
-  String get kitapsen_account_sign_in => 'Sign in';
+  String get kitapsen_account_sign_in => 'Đăng nhập';
   @override
-  String get kitapsen_account_sign_out => 'Sign out';
+  String get kitapsen_account_sign_out => 'Đăng xuất';
   @override
   String get kitapsen_account_sign_in_rejected =>
-      'Email or password is incorrect';
+      'Email hoặc mật khẩu không đúng';
   @override
   String get kitapsen_account_sign_in_failed =>
-      'Could not reach Kitapsen. Check the address and your connection.';
+      'Không thể kết nối với Kitapsen. Hãy kiểm tra địa chỉ và kết nối mạng.';
   @override
-  String get kitapsen_account_summary => 'Sign in to read your library';
+  String get kitapsen_account_summary => 'Đăng nhập để đọc sách trong thư viện';
   @override
   String get kitapsen_shelf_signed_out_body =>
-      'Sign in with your Kitapsen account to see your library.';
+      'Đăng nhập bằng tài khoản Kitapsen để xem thư viện của bạn.';
   @override
-  String get kitapsen_shelf_sign_in => 'Sign in to Kitapsen';
+  String get kitapsen_shelf_sign_in => 'Đăng nhập Kitapsen';
   @override
-  String get kitapsen_onboarding_title => 'Your Kitapsen library';
+  String get kitapsen_onboarding_title => 'Thư viện Kitapsen của bạn';
   @override
   String get kitapsen_onboarding_body =>
-      'Sign in to see the books in your Kitapsen account on this device. You can skip this and sign in later from Settings.';
+      'Đăng nhập để xem sách trong tài khoản Kitapsen của bạn trên thiết bị này. Bạn có thể bỏ qua bước này và đăng nhập sau trong Cài đặt.';
   @override
   String app_store_update_body({required Object version}) =>
-      'Kitapsen ${version} is available on the App Store.';
+      'Kitapsen ${version} đã có trên App Store.';
   @override
-  String get app_store_update_open => 'Update';
+  String get app_store_update_open => 'Cập nhật';
   @override
-  String get app_store_update_later => 'Not now';
+  String get app_store_update_later => 'Để sau';
   @override
-  String get kitapsen_about_privacy_policy => 'Privacy policy';
+  String get kitapsen_about_privacy_policy => 'Chính sách quyền riêng tư';
   @override
-  String get kitapsen_about_support => 'Contact support';
+  String get kitapsen_about_support => 'Liên hệ hỗ trợ';
   @override
-  String get kitapsen_about_source_code => 'Source code';
+  String get kitapsen_about_source_code => 'Mã nguồn';
   @override
   String get kitapsen_about_based_on_fushi =>
-      'Kitapsen is based on Fushi (GPLv3) — source: https://github.com/FizyonOps/kitapsen-mobile';
+      'Kitapsen dựa trên Fushi (GPLv3) — mã nguồn: https://github.com/FizyonOps/kitapsen-mobile';
   @override
-  String get kitapsen_about_licenses => 'Open-source licenses';
+  String get kitapsen_about_licenses => 'Giấy phép mã nguồn mở';
   @override
-  String get kitapsen_about_section => 'About Kitapsen';
+  String get kitapsen_about_section => 'Về Kitapsen';
   @override
-  String get kitapsen_import_hint => 'Pick an EPUB or PDF file to import.';
+  String get kitapsen_import_hint => 'Chọn tệp EPUB hoặc PDF để nhập.';
   @override
   String get kitapsen_sign_out_removes_books =>
-      'Signing out removes your downloaded Kitapsen books from this device.';
+      'Khi đăng xuất, các sách Kitapsen bạn đã tải xuống sẽ bị xóa khỏi thiết bị này.';
   @override
-  String get kitapsen_account_or => 'or';
+  String get kitapsen_account_or => 'hoặc';
   @override
-  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  String get kitapsen_account_continue_with_google => 'Tiếp tục với Google';
   @override
-  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  String get kitapsen_account_continue_with_apple => 'Tiếp tục với Apple';
   @override
   String get kitapsen_account_social_sign_in_failed =>
-      'Sign-in failed. Please try again.';
+      'Đăng nhập thất bại. Vui lòng thử lại.';
   @override
-  String get kitapsen_account_deleted =>
-      'This Kitapsen account has been deleted.';
+  String get kitapsen_account_deleted => 'Tài khoản Kitapsen này đã bị xóa.';
   @override
-  String get kitapsen_account_delete => 'Delete account';
+  String get kitapsen_account_delete => 'Xóa tài khoản';
   @override
   String get kitapsen_account_delete_confirm =>
-      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+      'Tài khoản Kitapsen của bạn sẽ bị xóa và thiết bị này sẽ được đăng xuất. Bạn sẽ không thể đọc sách trong thư viện nữa. Không thể hoàn tác thao tác này.';
   @override
   String get kitapsen_account_delete_failed =>
-      'The account could not be deleted. Please try again.';
+      'Không thể xóa tài khoản. Vui lòng thử lại.';
   @override
-  String get kitapsen_nav_store => 'Store';
+  String get kitapsen_nav_store => 'Cửa hàng';
   @override
-  String get kitapsen_store_search_hint => 'Search books and authors';
+  String get kitapsen_store_search_hint => 'Tìm sách và tác giả';
   @override
-  String get kitapsen_store_new_arrivals => 'New arrivals';
+  String get kitapsen_store_new_arrivals => 'Sách mới';
   @override
-  String get kitapsen_store_most_read => 'Most read';
+  String get kitapsen_store_most_read => 'Đọc nhiều nhất';
   @override
-  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  String get kitapsen_store_staff_picks => 'Biên tập viên chọn';
   @override
-  String get kitapsen_store_free_books => 'Free books';
+  String get kitapsen_store_free_books => 'Sách miễn phí';
   @override
-  String get kitapsen_store_stories => 'Serialized stories';
+  String get kitapsen_store_stories => 'Truyện dài kỳ';
   @override
-  String get kitapsen_store_categories => 'Categories';
+  String get kitapsen_store_categories => 'Danh mục';
   @override
-  String get kitapsen_store_see_all => 'See all';
+  String get kitapsen_store_see_all => 'Xem tất cả';
   @override
-  String get kitapsen_store_no_results => 'No books found';
+  String get kitapsen_store_no_results => 'Không tìm thấy sách';
   @override
   String get kitapsen_store_load_failed =>
-      'Couldn\'t load. Check your connection.';
+      'Không tải được. Hãy kiểm tra kết nối mạng.';
   @override
-  String get kitapsen_store_free_only => 'Free only';
+  String get kitapsen_store_free_only => 'Chỉ sách miễn phí';
   @override
-  String get kitapsen_sort_relevance => 'Most relevant';
+  String get kitapsen_sort_relevance => 'Liên quan nhất';
   @override
-  String get kitapsen_sort_newest => 'Newest';
+  String get kitapsen_sort_newest => 'Mới nhất';
   @override
-  String get kitapsen_sort_most_read => 'Most read';
+  String get kitapsen_sort_most_read => 'Đọc nhiều nhất';
   @override
-  String get kitapsen_sort_rating => 'Top rated';
+  String get kitapsen_sort_rating => 'Đánh giá cao nhất';
   @override
-  String get kitapsen_sort_title => 'Title A–Z';
+  String get kitapsen_sort_title => 'Tên sách A–Z';
   @override
-  String get kitapsen_book_read => 'Read';
+  String get kitapsen_book_read => 'Đọc';
   @override
-  String get kitapsen_book_get_free => 'Get for free';
+  String get kitapsen_book_get_free => 'Nhận miễn phí';
   @override
-  String get kitapsen_book_claimed => 'Added to your library';
+  String get kitapsen_book_claimed => 'Đã thêm vào thư viện của bạn';
   @override
-  String get kitapsen_book_in_library => 'In your library';
+  String get kitapsen_book_in_library => 'Có trong thư viện của bạn';
   @override
-  String get kitapsen_book_not_in_library => 'Not in your library';
+  String get kitapsen_book_not_in_library => 'Chưa có trong thư viện của bạn';
   @override
   String get kitapsen_book_sign_in_prompt =>
-      'Sign in to add books to your library and keep a wishlist.';
+      'Đăng nhập để thêm sách vào thư viện và lưu danh sách mong muốn.';
   @override
-  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  String get kitapsen_book_wishlist_add => 'Thêm vào danh sách mong muốn';
   @override
-  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  String get kitapsen_book_wishlist_remove => 'Xóa khỏi danh sách mong muốn';
   @override
-  String get kitapsen_book_downloading => 'Downloading to your library…';
+  String get kitapsen_book_downloading => 'Đang tải xuống thư viện của bạn…';
   @override
-  String get kitapsen_book_about => 'About this book';
+  String get kitapsen_book_about => 'Về cuốn sách này';
   @override
-  String get kitapsen_book_pages => 'Pages';
+  String get kitapsen_book_pages => 'Số trang';
   @override
-  String get kitapsen_book_language => 'Language';
+  String get kitapsen_book_language => 'Ngôn ngữ';
   @override
-  String get kitapsen_book_publisher => 'Publisher';
+  String get kitapsen_book_publisher => 'Nhà xuất bản';
   @override
-  String get kitapsen_book_published => 'Published';
+  String get kitapsen_book_published => 'Ngày xuất bản';
   @override
-  String get kitapsen_book_action_failed =>
-      'Something went wrong. Please try again.';
+  String get kitapsen_book_action_failed => 'Đã xảy ra lỗi. Vui lòng thử lại.';
   @override
-  String get kitapsen_book_reviews => 'Reviews';
+  String get kitapsen_book_reviews => 'Đánh giá';
   @override
-  String get kitapsen_book_no_reviews => 'No reviews yet';
+  String get kitapsen_book_no_reviews => 'Chưa có đánh giá';
   @override
-  String get kitapsen_book_write_review => 'Write a review';
+  String get kitapsen_book_write_review => 'Viết đánh giá';
   @override
-  String get kitapsen_review_title_hint => 'Title (optional)';
+  String get kitapsen_review_title_hint => 'Tiêu đề (tùy chọn)';
   @override
-  String get kitapsen_review_content_hint => 'Your review (optional)';
+  String get kitapsen_review_content_hint => 'Đánh giá của bạn (tùy chọn)';
   @override
-  String get kitapsen_review_submit => 'Send';
+  String get kitapsen_review_submit => 'Gửi';
   @override
-  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  String get kitapsen_review_sent =>
+      'Cảm ơn bạn! Đánh giá của bạn đã được gửi.';
   @override
-  String get kitapsen_review_already => 'You have already reviewed this book.';
+  String get kitapsen_review_already => 'Bạn đã đánh giá cuốn sách này rồi.';
   @override
   String get kitapsen_review_not_allowed =>
-      'Only readers who have this book in their library can review it.';
+      'Chỉ những độc giả có cuốn sách này trong thư viện mới có thể đánh giá.';
   @override
-  String get kitapsen_review_more => 'Show more reviews';
+  String get kitapsen_review_more => 'Xem thêm đánh giá';
   @override
-  String get kitapsen_review_verified => 'Verified reader';
+  String get kitapsen_review_verified => 'Độc giả đã xác minh';
   @override
-  String get kitapsen_author_follow => 'Follow';
+  String get kitapsen_author_follow => 'Theo dõi';
   @override
-  String get kitapsen_author_following => 'Following';
+  String get kitapsen_author_following => 'Đang theo dõi';
   @override
-  String get kitapsen_author_followers => 'Followers';
+  String get kitapsen_author_followers => 'Người theo dõi';
   @override
-  String get kitapsen_author_books => 'Books';
+  String get kitapsen_author_books => 'Sách';
   @override
-  String get kitapsen_author_open => 'Author page';
+  String get kitapsen_author_open => 'Trang tác giả';
   @override
-  String get kitapsen_wishlist_title => 'Wishlist';
+  String get kitapsen_wishlist_title => 'Danh sách mong muốn';
   @override
-  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  String get kitapsen_wishlist_empty =>
+      'Danh sách mong muốn của bạn đang trống';
   @override
-  String get kitapsen_notifications_title => 'Notifications';
+  String get kitapsen_notifications_title => 'Thông báo';
   @override
-  String get kitapsen_notifications_empty => 'No notifications';
+  String get kitapsen_notifications_empty => 'Không có thông báo';
   @override
-  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  String get kitapsen_notifications_mark_all => 'Đánh dấu tất cả là đã đọc';
   @override
-  String get kitapsen_story_chapters => 'Chapters';
+  String get kitapsen_story_chapters => 'Chương';
   @override
-  String get kitapsen_story_no_chapters => 'No chapters yet';
+  String get kitapsen_story_no_chapters => 'Chưa có chương nào';
   @override
-  String get kitapsen_story_next => 'Next chapter';
+  String get kitapsen_story_next => 'Chương sau';
   @override
-  String get kitapsen_story_previous => 'Previous chapter';
+  String get kitapsen_story_previous => 'Chương trước';
   @override
-  String get kitapsen_review_like => 'Like';
+  String get kitapsen_review_like => 'Thích';
   @override
-  String get kitapsen_comments_title => 'Comments';
+  String get kitapsen_comments_title => 'Bình luận';
   @override
-  String get kitapsen_comments_empty => 'No comments yet';
+  String get kitapsen_comments_empty => 'Chưa có bình luận';
   @override
-  String get kitapsen_comment_hint => 'Write a comment';
+  String get kitapsen_comment_hint => 'Viết bình luận';
   @override
-  String get kitapsen_story_vote => 'Vote';
+  String get kitapsen_story_vote => 'Bình chọn';
   @override
-  String get kitapsen_story_voted => 'Voted';
+  String get kitapsen_story_voted => 'Đã bình chọn';
   @override
-  String get kitapsen_story_follow => 'Follow story';
+  String get kitapsen_story_follow => 'Theo dõi truyện';
   @override
-  String get kitapsen_following_title => 'Following';
+  String get kitapsen_following_title => 'Đang theo dõi';
   @override
-  String get kitapsen_following_authors => 'Authors';
+  String get kitapsen_following_authors => 'Tác giả';
   @override
-  String get kitapsen_following_stories => 'Stories';
+  String get kitapsen_following_stories => 'Truyện';
   @override
-  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  String get kitapsen_following_empty => 'Bạn chưa theo dõi ai';
   @override
-  String get kitapsen_reader_highlight => 'Highlight';
+  String get kitapsen_reader_highlight => 'Tô sáng';
   @override
-  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  String get kitapsen_annotations_title => 'Đánh dấu và ghi chú';
   @override
-  String get kitapsen_bookmark_add => 'Add bookmark';
+  String get kitapsen_bookmark_add => 'Thêm đánh dấu';
   @override
-  String get kitapsen_bookmark_added => 'Bookmark added';
+  String get kitapsen_bookmark_added => 'Đã thêm đánh dấu';
   @override
-  String get kitapsen_note_add => 'Add note';
+  String get kitapsen_note_add => 'Thêm ghi chú';
   @override
-  String get kitapsen_note_hint => 'Your note';
+  String get kitapsen_note_hint => 'Ghi chú của bạn';
   @override
-  String get kitapsen_note_saved => 'Note saved';
+  String get kitapsen_note_saved => 'Đã lưu ghi chú';
   @override
-  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  String get kitapsen_annotations_empty => 'Chưa có đánh dấu hoặc ghi chú';
   @override
-  String get kitapsen_store_badge_free => 'Free';
+  String get kitapsen_store_badge_free => 'Miễn phí';
   @override
-  String get kitapsen_store_badge_new => 'New';
+  String get kitapsen_store_badge_new => 'Mới';
   @override
-  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  String kitapsen_store_rating_count({required Object n}) => '${n} đánh giá';
   @override
-  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  String get kitapsen_store_hero_title =>
+      'Cuốn sách hay tiếp theo của bạn đang ở đây.';
   @override
   String get kitapsen_store_hero_body =>
-      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+      'Khám phá những câu chuyện mới và các tác giả bạn yêu thích. Chọn sách và bắt đầu đọc trên điện thoại, máy tính bảng hoặc máy tính.';
   @override
-  String get kitapsen_store_explore_books => 'Explore books';
+  String get kitapsen_store_explore_books => 'Khám phá sách';
   @override
-  String get kitapsen_store_start_free => 'Start with free books';
+  String get kitapsen_store_start_free => 'Bắt đầu với sách miễn phí';
   @override
-  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  String get kitapsen_store_start_free_body =>
+      'Khám phá cuốn sách đầu tiên của bạn.';
   @override
-  String get kitapsen_store_library_always => 'Your library is always with you';
+  String get kitapsen_store_library_always => 'Thư viện luôn bên bạn';
   @override
   String get kitapsen_store_library_always_body =>
-      'Read on your phone, tablet and computer.';
+      'Đọc trên điện thoại, máy tính bảng và máy tính.';
   @override
-  String get kitapsen_store_meet_authors => 'Meet the authors';
+  String get kitapsen_store_meet_authors => 'Gặp gỡ các tác giả';
   @override
-  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  String get kitapsen_store_meet_authors_body =>
+      'Theo dõi những tác giả bạn yêu thích.';
   @override
-  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  String get kitapsen_store_reading_list =>
+      'Một cuốn sách mới cho danh sách đọc của bạn';
   @override
-  String get kitapsen_store_all_categories => 'All categories';
+  String get kitapsen_store_all_categories => 'Tất cả danh mục';
   @override
-  String get kitapsen_store_discover_title => 'Time to discover';
+  String get kitapsen_store_discover_title => 'Đã đến lúc khám phá';
   @override
   String get kitapsen_store_discover_body =>
-      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+      'Một câu chuyện, một góc nhìn mới, một khám phá bất ngờ. Hãy thêm cuốn sách tiếp theo vào danh sách đọc của bạn.';
   @override
-  String get kitapsen_store_discover_now => 'Discover now';
+  String get kitapsen_store_discover_now => 'Khám phá ngay';
   @override
   String kitapsen_store_results_for({required Object q}) =>
-      'Results for "${q}"';
+      'Kết quả cho "${q}"';
   @override
-  String get kitapsen_store_matching_authors => 'Matching authors';
+  String get kitapsen_store_matching_authors => 'Tác giả phù hợp';
   @override
-  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  String kitapsen_store_author_books_count({required Object n}) =>
+      '${n} cuốn sách';
   @override
   String get kitapsen_store_author_cta =>
-      'Discover the author\'s books and pick your next read.';
+      'Khám phá sách của tác giả và chọn cuốn tiếp theo để đọc.';
   @override
-  String get kitapsen_store_see_author_books => 'See their books';
+  String get kitapsen_store_see_author_books => 'Xem sách của tác giả';
   @override
-  String get kitapsen_store_authors_books => 'The author\'s books';
+  String get kitapsen_store_authors_books => 'Sách của tác giả';
   @override
-  String get kitapsen_book_read_now => 'Read now';
+  String get kitapsen_book_read_now => 'Đọc ngay';
   @override
-  String get kitapsen_book_get_free_web => 'Get it free';
+  String get kitapsen_book_get_free_web => 'Nhận miễn phí';
   @override
-  String get kitapsen_book_favorites => 'Favorites';
+  String get kitapsen_book_favorites => 'Yêu thích';
   @override
-  String get kitapsen_book_description => 'Description';
+  String get kitapsen_book_description => 'Mô tả';
   @override
-  String get kitapsen_book_about_author => 'About the author';
+  String get kitapsen_book_about_author => 'Về tác giả';
   @override
   String get kitapsen_book_isbn => 'ISBN';
   @override
-  String get kitapsen_book_format => 'Format';
+  String get kitapsen_book_format => 'Định dạng';
   @override
-  String get kitapsen_author_role => 'Author';
+  String get kitapsen_author_role => 'Tác giả';
   @override
-  String get kitapsen_author_notify => 'Notify me of new books';
+  String get kitapsen_author_notify => 'Thông báo cho tôi khi có sách mới';
   @override
-  String get kitapsen_author_about => 'About';
+  String get kitapsen_author_about => 'Giới thiệu';
   @override
-  String get kitapsen_review_more_bio => 'Read the full biography';
+  String get kitapsen_review_more_bio => 'Đọc toàn bộ tiểu sử';
   @override
-  String get kitapsen_author_like => 'Like';
+  String get kitapsen_author_like => 'Thích';
   @override
-  String get kitapsen_author_likes => 'Likes';
+  String get kitapsen_author_likes => 'Lượt thích';
   @override
-  String get kitapsen_register_open => 'No account yet? Create one';
+  String get kitapsen_register_open => 'Chưa có tài khoản? Tạo tài khoản';
   @override
-  String get kitapsen_register_name => 'Name (optional)';
+  String get kitapsen_register_name => 'Tên (tùy chọn)';
   @override
-  String get kitapsen_register_username => 'Username';
+  String get kitapsen_register_username => 'Tên người dùng';
   @override
-  String get kitapsen_register_username_hint =>
-      '2–20 lowercase letters or digits';
+  String get kitapsen_register_username_hint => '2–20 chữ thường hoặc chữ số';
   @override
   String get kitapsen_register_email => 'Email';
   @override
-  String get kitapsen_register_password_hint => 'At least 8 characters';
+  String get kitapsen_register_password_hint => 'Ít nhất 8 ký tự';
   @override
-  String get kitapsen_register_submit => 'Create account';
+  String get kitapsen_register_submit => 'Tạo tài khoản';
   @override
-  String get kitapsen_register_have_account =>
-      'Already have an account? Sign in';
+  String get kitapsen_register_have_account => 'Đã có tài khoản? Đăng nhập';
   @override
   String get kitapsen_register_username_invalid =>
-      'Use 2–20 lowercase letters or digits.';
+      'Dùng 2–20 chữ thường hoặc chữ số.';
   @override
-  String get kitapsen_register_name_invalid =>
-      'The name must be 2–30 characters.';
+  String get kitapsen_register_name_invalid => 'Tên phải dài từ 2–30 ký tự.';
   @override
-  String get kitapsen_register_email_invalid => 'Enter a valid email address.';
+  String get kitapsen_register_email_invalid => 'Nhập địa chỉ email hợp lệ.';
   @override
   String get kitapsen_register_password_short =>
-      'The password must be at least 8 characters.';
+      'Mật khẩu phải có ít nhất 8 ký tự.';
   @override
   String get kitapsen_register_failed =>
-      'The account could not be created. Try again.';
+      'Không thể tạo tài khoản. Hãy thử lại.';
   @override
-  String get kitapsen_hub_title => 'My account';
+  String get kitapsen_hub_title => 'Tài khoản của tôi';
   @override
-  String get kitapsen_hub_reading => 'Reading';
+  String get kitapsen_hub_reading => 'Đọc sách';
   @override
-  String get kitapsen_hub_social => 'Social';
+  String get kitapsen_hub_social => 'Cộng đồng';
   @override
-  String get kitapsen_hub_discover => 'Discover';
+  String get kitapsen_hub_discover => 'Khám phá';
   @override
-  String get kitapsen_hub_account => 'Account';
+  String get kitapsen_hub_account => 'Tài khoản';
   @override
-  String get kitapsen_hub_library => 'My library';
+  String get kitapsen_hub_library => 'Thư viện của tôi';
   @override
-  String get kitapsen_hub_public_profile => 'My public reader profile';
+  String get kitapsen_hub_public_profile => 'Hồ sơ độc giả công khai của tôi';
   @override
-  String get kitapsen_hub_sign_in_settings => 'Sign out or delete the account';
+  String get kitapsen_hub_sign_in_settings => 'Đăng xuất hoặc xóa tài khoản';
   @override
-  String get kitapsen_common_save => 'Save';
+  String get kitapsen_common_save => 'Lưu';
   @override
-  String get kitapsen_common_saved => 'Saved';
+  String get kitapsen_common_saved => 'Đã lưu';
   @override
-  String get kitapsen_common_edit => 'Edit';
+  String get kitapsen_common_edit => 'Sửa';
   @override
-  String get kitapsen_profile_title => 'My profile';
+  String get kitapsen_profile_title => 'Hồ sơ của tôi';
   @override
-  String get kitapsen_profile_name => 'Display name';
+  String get kitapsen_profile_name => 'Tên hiển thị';
   @override
-  String get kitapsen_profile_sharing => 'Share reading activity';
+  String get kitapsen_profile_sharing => 'Chia sẻ hoạt động đọc';
   @override
   String get kitapsen_profile_sharing_hint =>
-      'Show the books you are reading and have finished on your public profile.';
+      'Hiển thị những cuốn sách bạn đang đọc và đã đọc xong trên hồ sơ công khai.';
   @override
-  String get kitapsen_settings_title => 'Account settings';
+  String get kitapsen_settings_title => 'Cài đặt tài khoản';
   @override
-  String get kitapsen_settings_profile => 'Profile information';
+  String get kitapsen_settings_profile => 'Thông tin hồ sơ';
   @override
-  String get kitapsen_settings_privacy => 'Privacy';
+  String get kitapsen_settings_privacy => 'Quyền riêng tư';
   @override
-  String get kitapsen_settings_private => 'Private profile';
+  String get kitapsen_settings_private => 'Hồ sơ riêng tư';
   @override
   String get kitapsen_settings_private_hint =>
-      'Only your followers can see your profile, reviews, reading activity and updates.';
+      'Chỉ người theo dõi bạn mới có thể xem hồ sơ, đánh giá, hoạt động đọc và cập nhật của bạn.';
   @override
-  String get kitapsen_settings_notifications => 'Email notifications';
+  String get kitapsen_settings_notifications => 'Thông báo qua email';
   @override
   String get kitapsen_settings_follower_email =>
-      'Email me when someone follows me';
+      'Gửi email cho tôi khi có người theo dõi tôi';
   @override
   String get kitapsen_settings_comment_email =>
-      'Email me when someone comments on my story';
+      'Gửi email cho tôi khi có người bình luận về truyện của tôi';
   @override
-  String get kitapsen_settings_sale_email => 'Email me when my book sells';
+  String get kitapsen_settings_sale_email =>
+      'Gửi email cho tôi khi sách của tôi được bán';
   @override
-  String get kitapsen_settings_author_emails => 'Author emails';
+  String get kitapsen_settings_author_emails => 'Email dành cho tác giả';
   @override
-  String get kitapsen_settings_password => 'Change password';
+  String get kitapsen_settings_password => 'Đổi mật khẩu';
   @override
-  String get kitapsen_settings_current_password => 'Current password';
+  String get kitapsen_settings_current_password => 'Mật khẩu hiện tại';
   @override
-  String get kitapsen_settings_new_password => 'New password';
+  String get kitapsen_settings_new_password => 'Mật khẩu mới';
   @override
-  String get kitapsen_settings_repeat_password => 'Repeat the new password';
+  String get kitapsen_settings_repeat_password => 'Nhập lại mật khẩu mới';
   @override
-  String get kitapsen_settings_change_password => 'Change password';
+  String get kitapsen_settings_change_password => 'Đổi mật khẩu';
   @override
-  String get kitapsen_settings_passwords_differ =>
-      'The passwords do not match.';
+  String get kitapsen_settings_passwords_differ => 'Mật khẩu không khớp.';
   @override
-  String get kitapsen_settings_password_changed => 'Password changed.';
+  String get kitapsen_settings_password_changed => 'Đã đổi mật khẩu.';
   @override
   String get kitapsen_settings_password_failed =>
-      'The password could not be changed. Check the current password.';
+      'Không thể đổi mật khẩu. Hãy kiểm tra mật khẩu hiện tại.';
   @override
-  String get kitapsen_settings_blocked => 'Blocked users';
+  String get kitapsen_settings_blocked => 'Người dùng đã chặn';
   @override
-  String get kitapsen_settings_no_blocked => 'You have not blocked anyone.';
+  String get kitapsen_settings_no_blocked => 'Bạn chưa chặn ai.';
   @override
-  String get kitapsen_publishers_title => 'Publishers';
+  String get kitapsen_publishers_title => 'Nhà xuất bản';
   @override
-  String get kitapsen_publishers_body => 'Browse books by publisher.';
+  String get kitapsen_publishers_body => 'Duyệt sách theo nhà xuất bản.';
   @override
-  String get kitapsen_publisher_role => 'Publisher';
+  String get kitapsen_publisher_role => 'Nhà xuất bản';
   @override
   String get kitapsen_publisher_no_books =>
-      'This publisher\'s books will be listed here soon.';
+      'Sách của nhà xuất bản này sẽ sớm được liệt kê tại đây.';
   @override
-  String get kitapsen_authors_title => 'Authors';
+  String get kitapsen_authors_title => 'Tác giả';
   @override
   String get kitapsen_blog_title => 'Blog';
   @override
   String get kitapsen_blog_subtitle =>
-      'News, tips and stories from the Kitapsen community.';
+      'Tin tức, mẹo hay và câu chuyện từ cộng đồng Kitapsen.';
   @override
-  String get kitapsen_blog_empty => 'No blog posts yet.';
+  String get kitapsen_blog_empty => 'Chưa có bài viết nào.';
   @override
-  String get kitapsen_collections_title => 'Collections';
+  String get kitapsen_collections_title => 'Bộ sưu tập';
   @override
-  String get kitapsen_collections_new => 'New collection';
+  String get kitapsen_collections_new => 'Bộ sưu tập mới';
   @override
-  String get kitapsen_collections_name => 'Collection name';
+  String get kitapsen_collections_name => 'Tên bộ sưu tập';
   @override
-  String get kitapsen_collections_description => 'Description (optional)';
+  String get kitapsen_collections_description => 'Mô tả (tùy chọn)';
   @override
   String get kitapsen_collections_empty =>
-      'No collections yet. Create collections to organise your books.';
+      'Chưa có bộ sưu tập nào. Hãy tạo bộ sưu tập để sắp xếp sách của bạn.';
   @override
-  String get kitapsen_collections_delete_confirm => 'Delete this collection?';
+  String get kitapsen_collections_delete_confirm => 'Xóa bộ sưu tập này?';
   @override
   String get kitapsen_collections_items_empty =>
-      'No books yet. Add books from their page with "Add to collection".';
+      'Chưa có sách. Thêm sách từ trang của sách bằng nút "Thêm vào bộ sưu tập".';
   @override
   String get kitapsen_collections_long_press =>
-      'Long-press a book to remove it.';
+      'Nhấn giữ một cuốn sách để xóa khỏi bộ sưu tập.';
   @override
-  String get kitapsen_collections_remove => 'Remove';
+  String get kitapsen_collections_remove => 'Xóa khỏi bộ sưu tập';
   @override
   String kitapsen_collections_remove_confirm({required Object title}) =>
-      'Remove "${title}" from this collection?';
+      'Xóa "${title}" khỏi bộ sưu tập này?';
   @override
-  String get kitapsen_collections_add => 'Add to collection';
+  String get kitapsen_collections_add => 'Thêm vào bộ sưu tập';
   @override
-  String get kitapsen_collections_add_title => 'Add to a collection';
+  String get kitapsen_collections_add_title => 'Thêm vào bộ sưu tập';
   @override
-  String get kitapsen_collections_added => 'Added to the collection';
+  String get kitapsen_collections_added => 'Đã thêm vào bộ sưu tập';
   @override
-  String get kitapsen_notebooks_title => 'Notebooks';
+  String get kitapsen_notebooks_title => 'Sổ ghi chép';
   @override
-  String get kitapsen_notebooks_new => 'New notebook';
+  String get kitapsen_notebooks_new => 'Sổ ghi chép mới';
   @override
-  String get kitapsen_notebooks_name => 'Notebook name';
+  String get kitapsen_notebooks_name => 'Tên sổ ghi chép';
   @override
   String get kitapsen_notebooks_empty =>
-      'No notebooks yet. Create notebooks for your reading notes and ideas.';
+      'Chưa có sổ ghi chép nào. Hãy tạo sổ để lưu ghi chú đọc sách và ý tưởng của bạn.';
   @override
-  String kitapsen_notebooks_count({required Object n}) => '${n} notes';
+  String kitapsen_notebooks_count({required Object n}) => '${n} ghi chú';
   @override
-  String get kitapsen_notebooks_delete_confirm => 'Delete this notebook?';
+  String get kitapsen_notebooks_delete_confirm => 'Xóa sổ ghi chép này?';
   @override
-  String get kitapsen_notebooks_entries_empty => 'No notes yet.';
+  String get kitapsen_notebooks_entries_empty => 'Chưa có ghi chú.';
   @override
-  String get kitapsen_notebooks_entry_hint => 'Add a note...';
+  String get kitapsen_notebooks_entry_hint => 'Thêm ghi chú...';
   @override
-  String get kitapsen_notebooks_entry_delete_confirm => 'Delete this note?';
+  String get kitapsen_notebooks_entry_delete_confirm => 'Xóa ghi chú này?';
   @override
-  String get kitapsen_notebooks_add => 'Add note';
+  String get kitapsen_notebooks_add => 'Thêm ghi chú';
   @override
-  String get kitapsen_goals_title => 'Reading goals';
+  String get kitapsen_goals_title => 'Mục tiêu đọc sách';
   @override
-  String get kitapsen_goals_new => 'New goal';
+  String get kitapsen_goals_new => 'Mục tiêu mới';
   @override
-  String get kitapsen_goals_create => 'Create';
+  String get kitapsen_goals_create => 'Tạo';
   @override
-  String get kitapsen_goals_created => 'Goal created';
+  String get kitapsen_goals_created => 'Đã tạo mục tiêu';
   @override
-  String get kitapsen_goals_type => 'Goal type';
+  String get kitapsen_goals_type => 'Loại mục tiêu';
   @override
-  String get kitapsen_goals_type_books => 'Books';
+  String get kitapsen_goals_type_books => 'Sách';
   @override
-  String get kitapsen_goals_type_pages => 'Pages';
+  String get kitapsen_goals_type_pages => 'Trang';
   @override
-  String get kitapsen_goals_type_days => 'Reading days';
+  String get kitapsen_goals_type_days => 'Ngày đọc';
   @override
-  String get kitapsen_goals_target => 'Target';
+  String get kitapsen_goals_target => 'Chỉ tiêu';
   @override
-  String get kitapsen_goals_this_month => 'This month';
+  String get kitapsen_goals_this_month => 'Tháng này';
   @override
-  String get kitapsen_goals_this_year => 'This year';
+  String get kitapsen_goals_this_year => 'Năm nay';
   @override
   String get kitapsen_goals_empty =>
-      'No reading goals. Set your first goal to keep your motivation up.';
+      'Chưa có mục tiêu đọc sách. Hãy đặt mục tiêu đầu tiên để duy trì động lực.';
   @override
-  String get kitapsen_goals_delete_confirm => 'Delete this goal?';
+  String get kitapsen_goals_delete_confirm => 'Xóa mục tiêu này?';
   @override
-  String get kitapsen_goals_completed => 'Completed';
+  String get kitapsen_goals_completed => 'Đã hoàn thành';
   @override
-  String kitapsen_goals_until({required Object date}) => 'Until ${date}';
+  String kitapsen_goals_until({required Object date}) => 'Đến ${date}';
   @override
-  String kitapsen_goals_unit_books({required Object n}) => '${n} books';
+  String kitapsen_goals_unit_books({required Object n}) => '${n} cuốn sách';
   @override
-  String kitapsen_goals_unit_pages({required Object n}) => '${n} pages';
+  String kitapsen_goals_unit_pages({required Object n}) => '${n} trang';
   @override
-  String kitapsen_goals_unit_hours({required Object n}) => '${n} hours';
+  String kitapsen_goals_unit_hours({required Object n}) => '${n} giờ';
   @override
-  String kitapsen_goals_unit_days({required Object n}) => '${n} reading days';
+  String kitapsen_goals_unit_days({required Object n}) => '${n} ngày đọc';
   @override
-  String get kitapsen_goals_streak => 'Day streak';
+  String get kitapsen_goals_streak => 'Chuỗi ngày';
   @override
-  String get kitapsen_goals_longest_streak => 'Longest streak';
+  String get kitapsen_goals_longest_streak => 'Chuỗi dài nhất';
   @override
-  String get kitapsen_goals_books_read => 'Books read';
+  String get kitapsen_goals_books_read => 'Sách đã đọc';
   @override
-  String get kitapsen_goals_books_finished => 'Finished';
+  String get kitapsen_goals_books_finished => 'Đã đọc xong';
   @override
-  String get kitapsen_feed_title => 'Social feed';
+  String get kitapsen_feed_title => 'Bảng tin cộng đồng';
   @override
-  String get kitapsen_feed_followed => 'Following';
+  String get kitapsen_feed_followed => 'Đang theo dõi';
   @override
-  String get kitapsen_feed_mine => 'My activity';
+  String get kitapsen_feed_mine => 'Hoạt động của tôi';
   @override
   String get kitapsen_feed_empty_followed =>
-      'No activity yet. Follow readers to keep up with what they are reading.';
+      'Chưa có hoạt động nào. Hãy theo dõi các độc giả khác để biết họ đang đọc gì.';
   @override
   String get kitapsen_feed_empty_mine =>
-      'Your reading activity will appear here once you start reading.';
+      'Hoạt động đọc của bạn sẽ xuất hiện tại đây khi bạn bắt đầu đọc.';
   @override
   String kitapsen_feed_started({required Object target}) =>
-      'started reading ${target}';
+      'đã bắt đầu đọc ${target}';
   @override
   String kitapsen_feed_finished({required Object target}) =>
-      'finished ${target}';
+      'đã đọc xong ${target}';
   @override
   String kitapsen_feed_reviewed({required Object target}) =>
-      'reviewed ${target}';
+      'đã đánh giá ${target}';
   @override
   String kitapsen_feed_followed_user({required Object target}) =>
-      'started following ${target}';
+      'đã bắt đầu theo dõi ${target}';
   @override
   String kitapsen_feed_followed_author({required Object target}) =>
-      'followed the author ${target}';
+      'đã theo dõi tác giả ${target}';
   @override
-  String kitapsen_feed_shared({required Object target}) => 'shared ${target}';
+  String kitapsen_feed_shared({required Object target}) =>
+      'đã chia sẻ ${target}';
   @override
-  String kitapsen_feed_percent({required Object n}) => '${n}% read';
+  String kitapsen_feed_percent({required Object n}) => 'Đã đọc ${n}%';
   @override
-  String get kitapsen_feed_finished_badge => 'Finished';
+  String get kitapsen_feed_finished_badge => 'Đã đọc xong';
   @override
-  String get kitapsen_user_follow => 'Follow';
+  String get kitapsen_user_follow => 'Theo dõi';
   @override
-  String get kitapsen_user_block => 'Block';
+  String get kitapsen_user_block => 'Chặn';
   @override
-  String get kitapsen_user_unblock => 'Unblock';
+  String get kitapsen_user_unblock => 'Bỏ chặn';
   @override
   String kitapsen_user_block_confirm({required Object username}) =>
-      'Block @${username}? They will no longer see your profile and activity, and any follow between you is removed.';
+      'Chặn @${username}? Người này sẽ không còn thấy hồ sơ và hoạt động của bạn, và mọi quan hệ theo dõi giữa hai bạn sẽ bị xóa.';
   @override
   String kitapsen_user_member_since({required Object date}) =>
-      'Member since ${date}';
+      'Thành viên từ ${date}';
   @override
-  String kitapsen_user_followers({required Object n}) => '${n} followers';
+  String kitapsen_user_followers({required Object n}) => '${n} người theo dõi';
   @override
-  String kitapsen_user_following({required Object n}) => '${n} following';
+  String kitapsen_user_following({required Object n}) => '${n} đang theo dõi';
   @override
   String kitapsen_user_finished_count({required Object n}) =>
-      '${n} books finished';
+      'Đã đọc xong ${n} cuốn sách';
   @override
-  String get kitapsen_user_tab_reading => 'Reading';
+  String get kitapsen_user_tab_reading => 'Đọc sách';
   @override
-  String get kitapsen_user_tab_reviews => 'Reviews';
+  String get kitapsen_user_tab_reviews => 'Đánh giá';
   @override
-  String get kitapsen_user_tab_activity => 'Activity';
+  String get kitapsen_user_tab_activity => 'Hoạt động';
   @override
-  String get kitapsen_user_currently_reading => 'Currently reading';
+  String get kitapsen_user_currently_reading => 'Đang đọc';
   @override
-  String get kitapsen_user_finished => 'Finished';
+  String get kitapsen_user_finished => 'Đã đọc xong';
   @override
   String get kitapsen_user_no_reading =>
-      'This reader does not share reading activity.';
+      'Độc giả này không chia sẻ hoạt động đọc.';
   @override
-  String get kitapsen_user_no_reviews => 'No public reviews yet.';
+  String get kitapsen_user_no_reviews => 'Chưa có đánh giá công khai.';
   @override
-  String get kitapsen_user_no_activity => 'No public activity yet.';
+  String get kitapsen_user_no_activity => 'Chưa có hoạt động công khai.';
   @override
   String get kitapsen_user_private =>
-      'This profile is private. Follow this reader to see their reviews, reading activity and profile.';
+      'Hồ sơ này ở chế độ riêng tư. Hãy theo dõi độc giả này để xem đánh giá, hoạt động đọc và hồ sơ của họ.';
   @override
   String get kitapsen_user_blocked_you =>
-      'This reader has blocked you. Their profile and activity are hidden from you.';
+      'Độc giả này đã chặn bạn. Hồ sơ và hoạt động của họ bị ẩn đối với bạn.';
   @override
-  String get kitapsen_user_followers_title => 'Followers';
+  String get kitapsen_user_followers_title => 'Người theo dõi';
   @override
-  String get kitapsen_user_following_title => 'Following';
+  String get kitapsen_user_following_title => 'Đang theo dõi';
   @override
-  String get kitapsen_user_no_connections => 'Nobody here yet.';
+  String get kitapsen_user_no_connections => 'Chưa có ai ở đây.';
   @override
-  String get kitapsen_clubs_title => 'Book clubs';
+  String get kitapsen_clubs_title => 'Câu lạc bộ sách';
   @override
-  String get kitapsen_clubs_create => 'Create a club';
+  String get kitapsen_clubs_create => 'Tạo câu lạc bộ';
   @override
-  String get kitapsen_clubs_name => 'Club name';
+  String get kitapsen_clubs_name => 'Tên câu lạc bộ';
   @override
   String get kitapsen_clubs_empty =>
-      'No book clubs yet. Create or join one to read together.';
+      'Chưa có câu lạc bộ sách nào. Hãy tạo hoặc tham gia một câu lạc bộ để cùng đọc.';
   @override
-  String get kitapsen_clubs_join => 'Join';
+  String get kitapsen_clubs_join => 'Tham gia';
   @override
-  String get kitapsen_clubs_leave => 'Leave';
+  String get kitapsen_clubs_leave => 'Rời khỏi';
   @override
-  String get kitapsen_clubs_owner => 'Owner';
+  String get kitapsen_clubs_owner => 'Chủ sở hữu';
   @override
-  String get kitapsen_clubs_members => 'Members';
+  String get kitapsen_clubs_members => 'Thành viên';
   @override
-  String kitapsen_clubs_members_count({required Object n}) => '${n} members';
+  String kitapsen_clubs_members_count({required Object n}) => '${n} thành viên';
   @override
-  String get kitapsen_clubs_chat => 'Discussion';
+  String get kitapsen_clubs_chat => 'Thảo luận';
   @override
   String get kitapsen_clubs_join_to_chat =>
-      'Join the club to read and write messages.';
+      'Tham gia câu lạc bộ để đọc và viết tin nhắn.';
   @override
-  String get kitapsen_clubs_no_messages => 'No messages yet.';
+  String get kitapsen_clubs_no_messages => 'Chưa có tin nhắn.';
   @override
-  String get kitapsen_clubs_message_hint => 'Write a message...';
+  String get kitapsen_clubs_message_hint => 'Viết tin nhắn...';
   @override
-  String get kitapsen_clubs_send => 'Send';
+  String get kitapsen_clubs_send => 'Gửi';
   @override
   String get kitapsen_register_taken =>
-      'This username or email address already has an account.';
+      'Tên người dùng hoặc địa chỉ email này đã có tài khoản.';
   @override
-  String get kitapsen_report => 'Report';
+  String get kitapsen_report => 'Báo cáo';
   @override
-  String get kitapsen_reported => 'Reported';
+  String get kitapsen_reported => 'Đã báo cáo';
   @override
-  String get kitapsen_report_title => 'Report this content';
+  String get kitapsen_report_title => 'Báo cáo nội dung này';
   @override
-  String get kitapsen_report_reason => 'Reason (optional)';
+  String get kitapsen_report_reason => 'Lý do (tùy chọn)';
   @override
-  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  String get kitapsen_report_reason_hint =>
+      'Vì sao nội dung này không phù hợp?';
   @override
-  String get kitapsen_report_submit => 'Submit Report';
+  String get kitapsen_report_submit => 'Gửi báo cáo';
   @override
   String get kitapsen_report_thanks =>
-      'Reported. Thank you for helping keep the community safe.';
+      'Đã báo cáo. Cảm ơn bạn đã giúp giữ an toàn cho cộng đồng.';
   @override
   String get kitapsen_delete_statistics_book_desc =>
       'Thời gian đọc và số ký tự đã đọc của cuốn sách này sẽ bị xóa khỏi thống kê trên mọi thiết bị';
@@ -237866,7 +237861,7 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get reader_writing_direction => '排版方向';
   @override
-  String get reading_activity => '学习活动';
+  String get reading_activity => '阅读活动';
   @override
   String get reading_progress => '阅读进度';
   @override
@@ -247130,7 +247125,7 @@ class _StringsZhHk extends _StringsEn {
   String get app_ui_scale => '介面大小';
   @override
   String get app_ui_scale_hint =>
-      'Scales app text and spacing. Lower it on large screens if controls feel oversized.';
+      '整體縮放應用程式介面（文字、圖示和控件一同放大或縮小），範圍為 30% 至 300%。如果大螢幕上介面顯得太小，可調高此數值。';
   @override
   String get app_version => 'App 版本';
   @override
@@ -247631,7 +247626,7 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get batch_tag_title => '批量管理標籤';
   @override
-  String get book_continue_reading => 'Continue Reading';
+  String get book_continue_reading => '繼續閱讀';
   @override
   String get book_convert_blocked_already => '這本書已經是該格式了。';
   @override
@@ -250368,7 +250363,7 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get handlebar_sentence => '例句';
   @override
-  String get handlebar_sentence_audio => 'Sentence Audio';
+  String get handlebar_sentence_audio => '例句音訊';
   @override
   String get handlebar_video_clip => 'Video Clip (GIF)';
   @override
@@ -252154,17 +252149,17 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get popup_ctx_adjust_button => '調整上下文';
   @override
-  String get popup_ctx_box_current => 'Current';
+  String get popup_ctx_box_current => '目前句子';
   @override
   String get popup_ctx_box_empty => '（無）';
   @override
-  String get popup_ctx_box_next => 'After';
+  String get popup_ctx_box_next => '後文';
   @override
-  String get popup_ctx_box_prev => 'Before';
+  String get popup_ctx_box_prev => '前文';
   @override
   String get popup_ctx_cancel => '取消';
   @override
-  String get popup_ctx_confirm => 'Confirm';
+  String get popup_ctx_confirm => '確認製卡';
   @override
   String get popup_ctx_modal_count => 'Selected %d';
   @override
@@ -252174,11 +252169,11 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get popup_ctx_next_minus => 'Remove after';
   @override
-  String get popup_ctx_next_plus => 'Add after';
+  String get popup_ctx_next_plus => '加入下一句';
   @override
-  String get popup_ctx_prev_minus => 'Remove before';
+  String get popup_ctx_prev_minus => '移除上一句';
   @override
-  String get popup_ctx_prev_plus => 'Add before';
+  String get popup_ctx_prev_plus => '加入上一句';
   @override
   String get popup_ctx_preview_audio => '試聽';
   @override
@@ -252389,11 +252384,11 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get reader_view_mode_label => '翻頁 / 捲動';
   @override
-  String get reader_vn => 'Visual Novel';
+  String get reader_vn => '視覺小説';
   @override
   String get reader_writing_direction => '排版方向';
   @override
-  String get reading_activity => '學習活動';
+  String get reading_activity => '閱讀活動';
   @override
   String get reading_progress => '閱讀進度';
   @override
@@ -252766,9 +252761,9 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get shortcut_action_reader_open_gallery => '開啟插圖畫廊';
   @override
-  String get shortcut_action_reader_open_menu => 'Open Settings Menu';
+  String get shortcut_action_reader_open_menu => '開啟設定選單';
   @override
-  String get shortcut_action_reader_open_navigation => 'Open Navigation';
+  String get shortcut_action_reader_open_navigation => '開啟導覽';
   @override
   String get shortcut_action_reader_open_statistics => '開啟閱讀統計';
   @override
@@ -252787,10 +252782,9 @@ class _StringsZhHk extends _StringsEn {
   String get shortcut_action_video_align_subtitle_to_prev => '上一句字幕對齊到當前時間';
   @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
-      'Cycle Secondary Subtitle Obscure';
+      '循環切換副字幕遮蔽模式';
   @override
-  String get shortcut_action_video_cycle_subtitle_obscure =>
-      'Cycle Subtitle Obscure Mode';
+  String get shortcut_action_video_cycle_subtitle_obscure => '循環切換字幕遮蔽模式';
   @override
   String get shortcut_action_video_dismiss_dict => '關閉詞典';
   @override
@@ -252848,15 +252842,13 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get shortcut_action_video_toggle_play_pause => '播放／暫停';
   @override
-  String get shortcut_action_video_toggle_secondary_subtitle_hide =>
-      'Toggle Hide Secondary Subtitle';
+  String get shortcut_action_video_toggle_secondary_subtitle_hide => '切換隱藏副字幕';
   @override
   String get shortcut_action_video_toggle_shader_compare => '切換着色器對比';
   @override
   String get shortcut_action_video_toggle_subtitle_blur => '切換字幕模糊';
   @override
-  String get shortcut_action_video_toggle_subtitle_hide =>
-      'Toggle Hide Subtitles';
+  String get shortcut_action_video_toggle_subtitle_hide => '切換隱藏字幕';
   @override
   String get shortcut_action_video_toggle_subtitle_list => '切換字幕清單';
   @override
@@ -253119,7 +253111,7 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get stat_detail_ungrouped => '未分組';
   @override
-  String get stat_fastest_day => 'Fastest Day';
+  String get stat_fastest_day => '最快一天';
   @override
   String get stat_favorited => '收藏';
   @override
@@ -253136,9 +253128,9 @@ class _StringsZhHk extends _StringsEn {
   @override
   String stat_format_pages({required Object n}) => '${n} 頁';
   @override
-  String get stat_goal => 'Daily Goal';
+  String get stat_goal => '每日目標';
   @override
-  String get stat_goal_daily => 'Daily Goal';
+  String get stat_goal_daily => '每日目標';
   @override
   String get stat_goal_presets => '快捷預設';
   @override
@@ -253149,11 +253141,11 @@ class _StringsZhHk extends _StringsEn {
   @override
   String stat_goal_recent_average({required Object n}) => '近 7 日日均 ${n} 字';
   @override
-  String get stat_goal_set => 'Set Goal';
+  String get stat_goal_set => '設定目標';
   @override
   String get stat_goal_unit_chars => '字';
   @override
-  String get stat_goal_weekly => 'Weekly Goal';
+  String get stat_goal_weekly => '每週目標';
   @override
   String get stat_hourly_band_epub => '文字書';
   @override
@@ -253180,7 +253172,7 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get stat_no_data => '暫無閱讀資料';
   @override
-  String get stat_range_and_trend => 'Range & Trend';
+  String get stat_range_and_trend => '範圍與趨勢';
   @override
   String get stat_recent_active => '近 7 日活躍';
   @override
@@ -253198,7 +253190,7 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get stat_sessions_show_all => '全部會話';
   @override
-  String get stat_slowest_day => 'Slowest Day';
+  String get stat_slowest_day => '最慢一天';
   @override
   String get stat_sort_by_chars => '按字數';
   @override
@@ -253214,7 +253206,7 @@ class _StringsZhHk extends _StringsEn {
   @override
   String stat_speed_cph({required Object n}) => '${n} 字／小時';
   @override
-  String get stat_speed_summary => 'Speed Summary';
+  String get stat_speed_summary => '速度摘要';
   @override
   String get stat_streak => '連續天數';
   @override
@@ -253232,11 +253224,11 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get stat_trend_weekly => '週';
   @override
-  String get stat_typical_day => 'Typical Day';
+  String get stat_typical_day => '典型一天';
   @override
   String get stat_vs_prev => '較前 14 天';
   @override
-  String get stat_weighted_avg_speed => 'Weighted Avg';
+  String get stat_weighted_avg_speed => '加權均速';
   @override
   String get stop => '停止';
   @override
@@ -260009,7 +260001,7 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get video_scrape_ai_declined => 'AI not adopted';
   @override
-  String get video_scrape_ai_failed => 'AI request failed';
+  String get video_scrape_ai_failed => 'AI 請求失敗';
   @override
   String get video_scrape_ai_searched =>
       'Searched again with titles suggested by AI';
@@ -260069,11 +260061,11 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get shelf_filter_read_status_finished => '讀完';
   @override
-  String get video_filter_media_type => 'Type';
+  String get video_filter_media_type => '類型';
   @override
-  String get video_filter_media_type_video => 'Video';
+  String get video_filter_media_type_video => '影片';
   @override
-  String get video_filter_media_type_audio => 'Audio';
+  String get video_filter_media_type_audio => '音訊';
   @override
   String get video_filter_extras => 'Main/Extras';
   @override
@@ -260081,7 +260073,7 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get video_filter_extras_only => 'Extras only';
   @override
-  String get video_filter_source => 'Source';
+  String get video_filter_source => '來源';
   @override
   String get video_filter_series_standalone_empty_hint =>
       'No standalone videos. Videos in collections are on the Series tab, or set the Series filter to All.';
@@ -260196,669 +260188,622 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get kitapsen_section_title => 'Kitapsen';
   @override
-  String get kitapsen_account_title => 'Kitapsen account';
+  String get kitapsen_account_title => 'Kitapsen 帳戶';
   @override
   String get kitapsen_account_hint =>
-      'Sign in to read the books in your Kitapsen library. They appear on your bookshelf, and your reading position syncs with your account.';
+      '登入後，你 Kitapsen 書庫中的書會出現在書架上，閱讀進度亦會與帳戶同步。';
   @override
-  String get kitapsen_account_server_url => 'Server address';
+  String get kitapsen_account_server_url => '伺服器地址';
   @override
-  String get kitapsen_account_username => 'Email or username';
+  String get kitapsen_account_username => '電郵或用戶名稱';
   @override
-  String get kitapsen_account_password => 'Password';
+  String get kitapsen_account_password => '密碼';
   @override
-  String get kitapsen_account_sign_in => 'Sign in';
+  String get kitapsen_account_sign_in => '登入';
   @override
-  String get kitapsen_account_sign_out => 'Sign out';
+  String get kitapsen_account_sign_out => '登出';
   @override
-  String get kitapsen_account_sign_in_rejected =>
-      'Email or password is incorrect';
+  String get kitapsen_account_sign_in_rejected => '電郵或密碼不正確';
   @override
-  String get kitapsen_account_sign_in_failed =>
-      'Could not reach Kitapsen. Check the address and your connection.';
+  String get kitapsen_account_sign_in_failed => '無法連接 Kitapsen，請檢查地址和網絡連線。';
   @override
-  String get kitapsen_account_summary => 'Sign in to read your library';
+  String get kitapsen_account_summary => '登入以閱讀你的書庫';
   @override
-  String get kitapsen_shelf_signed_out_body =>
-      'Sign in with your Kitapsen account to see your library.';
+  String get kitapsen_shelf_signed_out_body => '使用你的 Kitapsen 帳戶登入，即可查看你的書庫。';
   @override
-  String get kitapsen_shelf_sign_in => 'Sign in to Kitapsen';
+  String get kitapsen_shelf_sign_in => '登入 Kitapsen';
   @override
-  String get kitapsen_onboarding_title => 'Your Kitapsen library';
+  String get kitapsen_onboarding_title => '你的 Kitapsen 書庫';
   @override
   String get kitapsen_onboarding_body =>
-      'Sign in to see the books in your Kitapsen account on this device. You can skip this and sign in later from Settings.';
+      '登入後即可在此裝置上看到你 Kitapsen 帳戶中的書。你亦可以略過此步驟，稍後在設定中登入。';
   @override
   String app_store_update_body({required Object version}) =>
-      'Kitapsen ${version} is available on the App Store.';
+      'App Store 已推出 Kitapsen ${version}。';
   @override
-  String get app_store_update_open => 'Update';
+  String get app_store_update_open => '更新';
   @override
-  String get app_store_update_later => 'Not now';
+  String get app_store_update_later => '稍後再說';
   @override
-  String get kitapsen_about_privacy_policy => 'Privacy policy';
+  String get kitapsen_about_privacy_policy => '私隱政策';
   @override
-  String get kitapsen_about_support => 'Contact support';
+  String get kitapsen_about_support => '聯絡支援';
   @override
-  String get kitapsen_about_source_code => 'Source code';
+  String get kitapsen_about_source_code => '原始碼';
   @override
   String get kitapsen_about_based_on_fushi =>
-      'Kitapsen is based on Fushi (GPLv3) — source: https://github.com/FizyonOps/kitapsen-mobile';
+      'Kitapsen 基於 Fushi（GPLv3）開發——原始碼：https://github.com/FizyonOps/kitapsen-mobile';
   @override
-  String get kitapsen_about_licenses => 'Open-source licenses';
+  String get kitapsen_about_licenses => '開源授權';
   @override
-  String get kitapsen_about_section => 'About Kitapsen';
+  String get kitapsen_about_section => '關於 Kitapsen';
   @override
-  String get kitapsen_import_hint => 'Pick an EPUB or PDF file to import.';
+  String get kitapsen_import_hint => '選擇要匯入的 EPUB 或 PDF 檔案。';
   @override
-  String get kitapsen_sign_out_removes_books =>
-      'Signing out removes your downloaded Kitapsen books from this device.';
+  String get kitapsen_sign_out_removes_books => '登出後，已下載的 Kitapsen 書籍會從此裝置移除。';
   @override
-  String get kitapsen_account_or => 'or';
+  String get kitapsen_account_or => '或';
   @override
-  String get kitapsen_account_continue_with_google => 'Continue with Google';
+  String get kitapsen_account_continue_with_google => '使用 Google 繼續';
   @override
-  String get kitapsen_account_continue_with_apple => 'Continue with Apple';
+  String get kitapsen_account_continue_with_apple => '透過 Apple 繼續';
   @override
-  String get kitapsen_account_social_sign_in_failed =>
-      'Sign-in failed. Please try again.';
+  String get kitapsen_account_social_sign_in_failed => '登入失敗，請再試一次。';
   @override
-  String get kitapsen_account_deleted =>
-      'This Kitapsen account has been deleted.';
+  String get kitapsen_account_deleted => '此 Kitapsen 帳戶已被刪除。';
   @override
-  String get kitapsen_account_delete => 'Delete account';
+  String get kitapsen_account_delete => '刪除帳戶';
   @override
   String get kitapsen_account_delete_confirm =>
-      'Your Kitapsen account will be deleted and this device signed out. You will no longer be able to read the books in your library. This cannot be undone.';
+      '你的 Kitapsen 帳戶將被刪除，此裝置亦會登出。你將無法再閱讀書庫中的書。此操作無法復原。';
   @override
-  String get kitapsen_account_delete_failed =>
-      'The account could not be deleted. Please try again.';
+  String get kitapsen_account_delete_failed => '無法刪除帳戶，請再試一次。';
   @override
-  String get kitapsen_nav_store => 'Store';
+  String get kitapsen_nav_store => '書店';
   @override
-  String get kitapsen_store_search_hint => 'Search books and authors';
+  String get kitapsen_store_search_hint => '搜尋書籍和作者';
   @override
-  String get kitapsen_store_new_arrivals => 'New arrivals';
+  String get kitapsen_store_new_arrivals => '新書上架';
   @override
-  String get kitapsen_store_most_read => 'Most read';
+  String get kitapsen_store_most_read => '熱門';
   @override
-  String get kitapsen_store_staff_picks => 'Editors\' picks';
+  String get kitapsen_store_staff_picks => '編輯推介';
   @override
-  String get kitapsen_store_free_books => 'Free books';
+  String get kitapsen_store_free_books => '免費書籍';
   @override
-  String get kitapsen_store_stories => 'Serialized stories';
+  String get kitapsen_store_stories => '連載故事';
   @override
-  String get kitapsen_store_categories => 'Categories';
+  String get kitapsen_store_categories => '分類';
   @override
-  String get kitapsen_store_see_all => 'See all';
+  String get kitapsen_store_see_all => '全部';
   @override
-  String get kitapsen_store_no_results => 'No books found';
+  String get kitapsen_store_no_results => '找不到書籍';
   @override
-  String get kitapsen_store_load_failed =>
-      'Couldn\'t load. Check your connection.';
+  String get kitapsen_store_load_failed => '載入失敗，請檢查網絡連線。';
   @override
-  String get kitapsen_store_free_only => 'Free only';
+  String get kitapsen_store_free_only => '只限免費';
   @override
-  String get kitapsen_sort_relevance => 'Most relevant';
+  String get kitapsen_sort_relevance => '最相關';
   @override
-  String get kitapsen_sort_newest => 'Newest';
+  String get kitapsen_sort_newest => '最新';
   @override
-  String get kitapsen_sort_most_read => 'Most read';
+  String get kitapsen_sort_most_read => '最熱門';
   @override
-  String get kitapsen_sort_rating => 'Top rated';
+  String get kitapsen_sort_rating => '評分最高';
   @override
-  String get kitapsen_sort_title => 'Title A–Z';
+  String get kitapsen_sort_title => '書名 A–Z';
   @override
-  String get kitapsen_book_read => 'Read';
+  String get kitapsen_book_read => '閱讀';
   @override
-  String get kitapsen_book_get_free => 'Get for free';
+  String get kitapsen_book_get_free => '免費取得';
   @override
-  String get kitapsen_book_claimed => 'Added to your library';
+  String get kitapsen_book_claimed => '已加入書庫';
   @override
-  String get kitapsen_book_in_library => 'In your library';
+  String get kitapsen_book_in_library => '已在書庫中';
   @override
-  String get kitapsen_book_not_in_library => 'Not in your library';
+  String get kitapsen_book_not_in_library => '不在書庫中';
   @override
-  String get kitapsen_book_sign_in_prompt =>
-      'Sign in to add books to your library and keep a wishlist.';
+  String get kitapsen_book_sign_in_prompt => '登入後即可將書加入書庫並使用願望清單。';
   @override
-  String get kitapsen_book_wishlist_add => 'Add to wishlist';
+  String get kitapsen_book_wishlist_add => '加入願望清單';
   @override
-  String get kitapsen_book_wishlist_remove => 'Remove from wishlist';
+  String get kitapsen_book_wishlist_remove => '從願望清單移除';
   @override
-  String get kitapsen_book_downloading => 'Downloading to your library…';
+  String get kitapsen_book_downloading => '正在下載到書庫…';
   @override
-  String get kitapsen_book_about => 'About this book';
+  String get kitapsen_book_about => '關於本書';
   @override
-  String get kitapsen_book_pages => 'Pages';
+  String get kitapsen_book_pages => '頁數';
   @override
-  String get kitapsen_book_language => 'Language';
+  String get kitapsen_book_language => '語言';
   @override
-  String get kitapsen_book_publisher => 'Publisher';
+  String get kitapsen_book_publisher => '出版社';
   @override
-  String get kitapsen_book_published => 'Published';
+  String get kitapsen_book_published => '出版日期';
   @override
-  String get kitapsen_book_action_failed =>
-      'Something went wrong. Please try again.';
+  String get kitapsen_book_action_failed => '發生錯誤，請再試一次。';
   @override
-  String get kitapsen_book_reviews => 'Reviews';
+  String get kitapsen_book_reviews => '評價';
   @override
-  String get kitapsen_book_no_reviews => 'No reviews yet';
+  String get kitapsen_book_no_reviews => '暫無評價';
   @override
-  String get kitapsen_book_write_review => 'Write a review';
+  String get kitapsen_book_write_review => '撰寫評價';
   @override
-  String get kitapsen_review_title_hint => 'Title (optional)';
+  String get kitapsen_review_title_hint => '標題（可選）';
   @override
-  String get kitapsen_review_content_hint => 'Your review (optional)';
+  String get kitapsen_review_content_hint => '你的評價（可選）';
   @override
-  String get kitapsen_review_submit => 'Send';
+  String get kitapsen_review_submit => '傳送';
   @override
-  String get kitapsen_review_sent => 'Thanks! Your review was sent.';
+  String get kitapsen_review_sent => '謝謝！你的評價已傳送。';
   @override
-  String get kitapsen_review_already => 'You have already reviewed this book.';
+  String get kitapsen_review_already => '你已評價過這本書。';
   @override
-  String get kitapsen_review_not_allowed =>
-      'Only readers who have this book in their library can review it.';
+  String get kitapsen_review_not_allowed => '只有書庫中有這本書的讀者才能評價。';
   @override
-  String get kitapsen_review_more => 'Show more reviews';
+  String get kitapsen_review_more => '顯示更多評價';
   @override
-  String get kitapsen_review_verified => 'Verified reader';
+  String get kitapsen_review_verified => '已驗證讀者';
   @override
-  String get kitapsen_author_follow => 'Follow';
+  String get kitapsen_author_follow => '追蹤';
   @override
-  String get kitapsen_author_following => 'Following';
+  String get kitapsen_author_following => '追蹤中';
   @override
-  String get kitapsen_author_followers => 'Followers';
+  String get kitapsen_author_followers => '追蹤者';
   @override
-  String get kitapsen_author_books => 'Books';
+  String get kitapsen_author_books => '書籍';
   @override
-  String get kitapsen_author_open => 'Author page';
+  String get kitapsen_author_open => '作者頁面';
   @override
-  String get kitapsen_wishlist_title => 'Wishlist';
+  String get kitapsen_wishlist_title => '願望清單';
   @override
-  String get kitapsen_wishlist_empty => 'Your wishlist is empty';
+  String get kitapsen_wishlist_empty => '願望清單是空的';
   @override
-  String get kitapsen_notifications_title => 'Notifications';
+  String get kitapsen_notifications_title => '通知';
   @override
-  String get kitapsen_notifications_empty => 'No notifications';
+  String get kitapsen_notifications_empty => '沒有通知';
   @override
-  String get kitapsen_notifications_mark_all => 'Mark all as read';
+  String get kitapsen_notifications_mark_all => '全部標為已讀';
   @override
-  String get kitapsen_story_chapters => 'Chapters';
+  String get kitapsen_story_chapters => '章節';
   @override
-  String get kitapsen_story_no_chapters => 'No chapters yet';
+  String get kitapsen_story_no_chapters => '暫無章節';
   @override
-  String get kitapsen_story_next => 'Next chapter';
+  String get kitapsen_story_next => '下一章';
   @override
-  String get kitapsen_story_previous => 'Previous chapter';
+  String get kitapsen_story_previous => '上一章';
   @override
-  String get kitapsen_review_like => 'Like';
+  String get kitapsen_review_like => '讚好';
   @override
-  String get kitapsen_comments_title => 'Comments';
+  String get kitapsen_comments_title => '留言';
   @override
-  String get kitapsen_comments_empty => 'No comments yet';
+  String get kitapsen_comments_empty => '暫無留言';
   @override
-  String get kitapsen_comment_hint => 'Write a comment';
+  String get kitapsen_comment_hint => '撰寫留言';
   @override
-  String get kitapsen_story_vote => 'Vote';
+  String get kitapsen_story_vote => '投票';
   @override
-  String get kitapsen_story_voted => 'Voted';
+  String get kitapsen_story_voted => '已投票';
   @override
-  String get kitapsen_story_follow => 'Follow story';
+  String get kitapsen_story_follow => '追蹤故事';
   @override
-  String get kitapsen_following_title => 'Following';
+  String get kitapsen_following_title => '我的追蹤';
   @override
-  String get kitapsen_following_authors => 'Authors';
+  String get kitapsen_following_authors => '作者';
   @override
-  String get kitapsen_following_stories => 'Stories';
+  String get kitapsen_following_stories => '故事';
   @override
-  String get kitapsen_following_empty => 'You don\'t follow anyone yet';
+  String get kitapsen_following_empty => '你還沒有追蹤任何人';
   @override
-  String get kitapsen_reader_highlight => 'Highlight';
+  String get kitapsen_reader_highlight => '螢光標記';
   @override
-  String get kitapsen_annotations_title => 'Bookmarks and notes';
+  String get kitapsen_annotations_title => '書籤和筆記';
   @override
-  String get kitapsen_bookmark_add => 'Add bookmark';
+  String get kitapsen_bookmark_add => '加入書籤';
   @override
-  String get kitapsen_bookmark_added => 'Bookmark added';
+  String get kitapsen_bookmark_added => '已加入書籤';
   @override
-  String get kitapsen_note_add => 'Add note';
+  String get kitapsen_note_add => '新增筆記';
   @override
-  String get kitapsen_note_hint => 'Your note';
+  String get kitapsen_note_hint => '你的筆記';
   @override
-  String get kitapsen_note_saved => 'Note saved';
+  String get kitapsen_note_saved => '筆記已儲存';
   @override
-  String get kitapsen_annotations_empty => 'No bookmarks or notes yet';
+  String get kitapsen_annotations_empty => '暫無書籤或筆記';
   @override
-  String get kitapsen_store_badge_free => 'Free';
+  String get kitapsen_store_badge_free => '免費';
   @override
-  String get kitapsen_store_badge_new => 'New';
+  String get kitapsen_store_badge_new => '新書';
   @override
-  String kitapsen_store_rating_count({required Object n}) => '${n} reviews';
+  String kitapsen_store_rating_count({required Object n}) => '${n} 則評價';
   @override
-  String get kitapsen_store_hero_title => 'Your next great book is here.';
+  String get kitapsen_store_hero_title => '你的下一本好書就在這裡。';
   @override
   String get kitapsen_store_hero_body =>
-      'Discover new stories and the authors you love. Pick your book and start reading on your phone, tablet or computer.';
+      '發掘新故事和你喜愛的作者。選好你的書，就可以在手機、平板電腦或電腦上開始閱讀。';
   @override
-  String get kitapsen_store_explore_books => 'Explore books';
+  String get kitapsen_store_explore_books => '瀏覽書籍';
   @override
-  String get kitapsen_store_start_free => 'Start with free books';
+  String get kitapsen_store_start_free => '從免費書籍開始';
   @override
-  String get kitapsen_store_start_free_body => 'Discover your first book.';
+  String get kitapsen_store_start_free_body => '發掘你的第一本書。';
   @override
-  String get kitapsen_store_library_always => 'Your library is always with you';
+  String get kitapsen_store_library_always => '你的書庫隨身相伴';
   @override
-  String get kitapsen_store_library_always_body =>
-      'Read on your phone, tablet and computer.';
+  String get kitapsen_store_library_always_body => '在手機、平板電腦和電腦上閱讀。';
   @override
-  String get kitapsen_store_meet_authors => 'Meet the authors';
+  String get kitapsen_store_meet_authors => '認識作者';
   @override
-  String get kitapsen_store_meet_authors_body => 'Follow the writers you love.';
+  String get kitapsen_store_meet_authors_body => '追蹤你喜愛的作家。';
   @override
-  String get kitapsen_store_reading_list => 'A new book for your reading list';
+  String get kitapsen_store_reading_list => '為你的閱讀清單添一本新書';
   @override
-  String get kitapsen_store_all_categories => 'All categories';
+  String get kitapsen_store_all_categories => '所有分類';
   @override
-  String get kitapsen_store_discover_title => 'Time to discover';
+  String get kitapsen_store_discover_title => '是時候去發掘了';
   @override
   String get kitapsen_store_discover_body =>
-      'A story, a new perspective, an unexpected discovery. Add your next book to your reading list.';
+      '一個故事、一個新視角、一次意外的發現。把下一本書加入你的閱讀清單。';
   @override
-  String get kitapsen_store_discover_now => 'Discover now';
+  String get kitapsen_store_discover_now => '立即探索';
   @override
-  String kitapsen_store_results_for({required Object q}) =>
-      'Results for "${q}"';
+  String kitapsen_store_results_for({required Object q}) => '「${q}」的搜尋結果';
   @override
-  String get kitapsen_store_matching_authors => 'Matching authors';
+  String get kitapsen_store_matching_authors => '相符的作者';
   @override
-  String kitapsen_store_author_books_count({required Object n}) => '${n} books';
+  String kitapsen_store_author_books_count({required Object n}) => '${n} 本書';
   @override
-  String get kitapsen_store_author_cta =>
-      'Discover the author\'s books and pick your next read.';
+  String get kitapsen_store_author_cta => '瀏覽作者的書，挑選下一本讀物。';
   @override
-  String get kitapsen_store_see_author_books => 'See their books';
+  String get kitapsen_store_see_author_books => '查看作品';
   @override
-  String get kitapsen_store_authors_books => 'The author\'s books';
+  String get kitapsen_store_authors_books => '作者的書';
   @override
-  String get kitapsen_book_read_now => 'Read now';
+  String get kitapsen_book_read_now => '立即閱讀';
   @override
-  String get kitapsen_book_get_free_web => 'Get it free';
+  String get kitapsen_book_get_free_web => '免費取得';
   @override
-  String get kitapsen_book_favorites => 'Favorites';
+  String get kitapsen_book_favorites => '我的最愛';
   @override
-  String get kitapsen_book_description => 'Description';
+  String get kitapsen_book_description => '簡介';
   @override
-  String get kitapsen_book_about_author => 'About the author';
+  String get kitapsen_book_about_author => '關於作者';
   @override
   String get kitapsen_book_isbn => 'ISBN';
   @override
-  String get kitapsen_book_format => 'Format';
+  String get kitapsen_book_format => '格式';
   @override
-  String get kitapsen_author_role => 'Author';
+  String get kitapsen_author_role => '作者';
   @override
-  String get kitapsen_author_notify => 'Notify me of new books';
+  String get kitapsen_author_notify => '新書上架時通知我';
   @override
-  String get kitapsen_author_about => 'About';
+  String get kitapsen_author_about => '簡介';
   @override
-  String get kitapsen_review_more_bio => 'Read the full biography';
+  String get kitapsen_review_more_bio => '閱讀完整簡介';
   @override
-  String get kitapsen_author_like => 'Like';
+  String get kitapsen_author_like => '讚好';
   @override
-  String get kitapsen_author_likes => 'Likes';
+  String get kitapsen_author_likes => '讚好數';
   @override
-  String get kitapsen_register_open => 'No account yet? Create one';
+  String get kitapsen_register_open => '還沒有帳戶？立即建立';
   @override
-  String get kitapsen_register_name => 'Name (optional)';
+  String get kitapsen_register_name => '姓名（可選）';
   @override
-  String get kitapsen_register_username => 'Username';
+  String get kitapsen_register_username => '用戶名稱';
   @override
-  String get kitapsen_register_username_hint =>
-      '2–20 lowercase letters or digits';
+  String get kitapsen_register_username_hint => '2–20 個小寫字母或數字';
   @override
-  String get kitapsen_register_email => 'Email';
+  String get kitapsen_register_email => '電郵';
   @override
-  String get kitapsen_register_password_hint => 'At least 8 characters';
+  String get kitapsen_register_password_hint => '最少 8 個字元';
   @override
-  String get kitapsen_register_submit => 'Create account';
+  String get kitapsen_register_submit => '建立帳戶';
   @override
-  String get kitapsen_register_have_account =>
-      'Already have an account? Sign in';
+  String get kitapsen_register_have_account => '已有帳戶？登入';
   @override
-  String get kitapsen_register_username_invalid =>
-      'Use 2–20 lowercase letters or digits.';
+  String get kitapsen_register_username_invalid => '請使用 2–20 個小寫字母或數字。';
   @override
-  String get kitapsen_register_name_invalid =>
-      'The name must be 2–30 characters.';
+  String get kitapsen_register_name_invalid => '姓名須為 2–30 個字元。';
   @override
-  String get kitapsen_register_email_invalid => 'Enter a valid email address.';
+  String get kitapsen_register_email_invalid => '請輸入有效的電郵地址。';
   @override
-  String get kitapsen_register_password_short =>
-      'The password must be at least 8 characters.';
+  String get kitapsen_register_password_short => '密碼最少需要 8 個字元。';
   @override
-  String get kitapsen_register_failed =>
-      'The account could not be created. Try again.';
+  String get kitapsen_register_failed => '無法建立帳戶，請再試一次。';
   @override
-  String get kitapsen_hub_title => 'My account';
+  String get kitapsen_hub_title => '我的帳戶';
   @override
-  String get kitapsen_hub_reading => 'Reading';
+  String get kitapsen_hub_reading => '閱讀';
   @override
-  String get kitapsen_hub_social => 'Social';
+  String get kitapsen_hub_social => '社交';
   @override
-  String get kitapsen_hub_discover => 'Discover';
+  String get kitapsen_hub_discover => '探索';
   @override
-  String get kitapsen_hub_account => 'Account';
+  String get kitapsen_hub_account => '帳戶';
   @override
-  String get kitapsen_hub_library => 'My library';
+  String get kitapsen_hub_library => '我的書庫';
   @override
-  String get kitapsen_hub_public_profile => 'My public reader profile';
+  String get kitapsen_hub_public_profile => '我的公開讀者主頁';
   @override
-  String get kitapsen_hub_sign_in_settings => 'Sign out or delete the account';
+  String get kitapsen_hub_sign_in_settings => '登出或刪除帳戶';
   @override
-  String get kitapsen_common_save => 'Save';
+  String get kitapsen_common_save => '儲存';
   @override
-  String get kitapsen_common_saved => 'Saved';
+  String get kitapsen_common_saved => '已儲存';
   @override
-  String get kitapsen_common_edit => 'Edit';
+  String get kitapsen_common_edit => '編輯';
   @override
-  String get kitapsen_profile_title => 'My profile';
+  String get kitapsen_profile_title => '我的個人資料';
   @override
-  String get kitapsen_profile_name => 'Display name';
+  String get kitapsen_profile_name => '顯示名稱';
   @override
-  String get kitapsen_profile_sharing => 'Share reading activity';
+  String get kitapsen_profile_sharing => '分享閱讀動態';
   @override
-  String get kitapsen_profile_sharing_hint =>
-      'Show the books you are reading and have finished on your public profile.';
+  String get kitapsen_profile_sharing_hint => '在公開主頁上顯示你正在閱讀和已讀完的書。';
   @override
-  String get kitapsen_settings_title => 'Account settings';
+  String get kitapsen_settings_title => '帳戶設定';
   @override
-  String get kitapsen_settings_profile => 'Profile information';
+  String get kitapsen_settings_profile => '個人資料';
   @override
-  String get kitapsen_settings_privacy => 'Privacy';
+  String get kitapsen_settings_privacy => '私隱';
   @override
-  String get kitapsen_settings_private => 'Private profile';
+  String get kitapsen_settings_private => '私人主頁';
   @override
-  String get kitapsen_settings_private_hint =>
-      'Only your followers can see your profile, reviews, reading activity and updates.';
+  String get kitapsen_settings_private_hint => '只有你的追蹤者能看到你的主頁、書評、閱讀動態和更新。';
   @override
-  String get kitapsen_settings_notifications => 'Email notifications';
+  String get kitapsen_settings_notifications => '電郵通知';
   @override
-  String get kitapsen_settings_follower_email =>
-      'Email me when someone follows me';
+  String get kitapsen_settings_follower_email => '有人追蹤我時以電郵通知我';
   @override
-  String get kitapsen_settings_comment_email =>
-      'Email me when someone comments on my story';
+  String get kitapsen_settings_comment_email => '有人在我的故事留言時以電郵通知我';
   @override
-  String get kitapsen_settings_sale_email => 'Email me when my book sells';
+  String get kitapsen_settings_sale_email => '我的書售出時以電郵通知我';
   @override
-  String get kitapsen_settings_author_emails => 'Author emails';
+  String get kitapsen_settings_author_emails => '作者電郵';
   @override
-  String get kitapsen_settings_password => 'Change password';
+  String get kitapsen_settings_password => '更改密碼';
   @override
-  String get kitapsen_settings_current_password => 'Current password';
+  String get kitapsen_settings_current_password => '目前密碼';
   @override
-  String get kitapsen_settings_new_password => 'New password';
+  String get kitapsen_settings_new_password => '新密碼';
   @override
-  String get kitapsen_settings_repeat_password => 'Repeat the new password';
+  String get kitapsen_settings_repeat_password => '再次輸入新密碼';
   @override
-  String get kitapsen_settings_change_password => 'Change password';
+  String get kitapsen_settings_change_password => '更改密碼';
   @override
-  String get kitapsen_settings_passwords_differ =>
-      'The passwords do not match.';
+  String get kitapsen_settings_passwords_differ => '兩次輸入的密碼不一致。';
   @override
-  String get kitapsen_settings_password_changed => 'Password changed.';
+  String get kitapsen_settings_password_changed => '密碼已更改。';
   @override
-  String get kitapsen_settings_password_failed =>
-      'The password could not be changed. Check the current password.';
+  String get kitapsen_settings_password_failed => '無法更改密碼，請檢查目前密碼。';
   @override
-  String get kitapsen_settings_blocked => 'Blocked users';
+  String get kitapsen_settings_blocked => '已封鎖的用戶';
   @override
-  String get kitapsen_settings_no_blocked => 'You have not blocked anyone.';
+  String get kitapsen_settings_no_blocked => '你還沒有封鎖任何人。';
   @override
-  String get kitapsen_publishers_title => 'Publishers';
+  String get kitapsen_publishers_title => '出版社';
   @override
-  String get kitapsen_publishers_body => 'Browse books by publisher.';
+  String get kitapsen_publishers_body => '按出版社瀏覽書籍。';
   @override
-  String get kitapsen_publisher_role => 'Publisher';
+  String get kitapsen_publisher_role => '出版社';
   @override
-  String get kitapsen_publisher_no_books =>
-      'This publisher\'s books will be listed here soon.';
+  String get kitapsen_publisher_no_books => '此出版社的書籍即將在這裡列出。';
   @override
-  String get kitapsen_authors_title => 'Authors';
+  String get kitapsen_authors_title => '作者';
   @override
-  String get kitapsen_blog_title => 'Blog';
+  String get kitapsen_blog_title => '網誌';
   @override
-  String get kitapsen_blog_subtitle =>
-      'News, tips and stories from the Kitapsen community.';
+  String get kitapsen_blog_subtitle => '來自 Kitapsen 社群的新聞、貼士和故事。';
   @override
-  String get kitapsen_blog_empty => 'No blog posts yet.';
+  String get kitapsen_blog_empty => '還沒有網誌文章。';
   @override
-  String get kitapsen_collections_title => 'Collections';
+  String get kitapsen_collections_title => '收藏集';
   @override
-  String get kitapsen_collections_new => 'New collection';
+  String get kitapsen_collections_new => '新增收藏集';
   @override
-  String get kitapsen_collections_name => 'Collection name';
+  String get kitapsen_collections_name => '收藏集名稱';
   @override
-  String get kitapsen_collections_description => 'Description (optional)';
+  String get kitapsen_collections_description => '描述（可選）';
   @override
-  String get kitapsen_collections_empty =>
-      'No collections yet. Create collections to organise your books.';
+  String get kitapsen_collections_empty => '還沒有收藏集。建立收藏集來整理你的書。';
   @override
-  String get kitapsen_collections_delete_confirm => 'Delete this collection?';
+  String get kitapsen_collections_delete_confirm => '刪除此收藏集？';
   @override
-  String get kitapsen_collections_items_empty =>
-      'No books yet. Add books from their page with "Add to collection".';
+  String get kitapsen_collections_items_empty => '還沒有書。在書籍頁面點按「加入收藏集」即可加入。';
   @override
-  String get kitapsen_collections_long_press =>
-      'Long-press a book to remove it.';
+  String get kitapsen_collections_long_press => '長按書本即可移除。';
   @override
-  String get kitapsen_collections_remove => 'Remove';
+  String get kitapsen_collections_remove => '移除';
   @override
   String kitapsen_collections_remove_confirm({required Object title}) =>
-      'Remove "${title}" from this collection?';
+      '從此收藏集移除「${title}」？';
   @override
-  String get kitapsen_collections_add => 'Add to collection';
+  String get kitapsen_collections_add => '加入收藏集';
   @override
-  String get kitapsen_collections_add_title => 'Add to a collection';
+  String get kitapsen_collections_add_title => '加入到收藏集';
   @override
-  String get kitapsen_collections_added => 'Added to the collection';
+  String get kitapsen_collections_added => '已加入收藏集';
   @override
-  String get kitapsen_notebooks_title => 'Notebooks';
+  String get kitapsen_notebooks_title => '筆記本';
   @override
-  String get kitapsen_notebooks_new => 'New notebook';
+  String get kitapsen_notebooks_new => '新增筆記本';
   @override
-  String get kitapsen_notebooks_name => 'Notebook name';
+  String get kitapsen_notebooks_name => '筆記本名稱';
   @override
-  String get kitapsen_notebooks_empty =>
-      'No notebooks yet. Create notebooks for your reading notes and ideas.';
+  String get kitapsen_notebooks_empty => '還沒有筆記本。建立筆記本，記下閱讀筆記和想法。';
   @override
-  String kitapsen_notebooks_count({required Object n}) => '${n} notes';
+  String kitapsen_notebooks_count({required Object n}) => '${n} 則筆記';
   @override
-  String get kitapsen_notebooks_delete_confirm => 'Delete this notebook?';
+  String get kitapsen_notebooks_delete_confirm => '刪除此筆記本？';
   @override
-  String get kitapsen_notebooks_entries_empty => 'No notes yet.';
+  String get kitapsen_notebooks_entries_empty => '還沒有筆記。';
   @override
-  String get kitapsen_notebooks_entry_hint => 'Add a note...';
+  String get kitapsen_notebooks_entry_hint => '新增筆記…';
   @override
-  String get kitapsen_notebooks_entry_delete_confirm => 'Delete this note?';
+  String get kitapsen_notebooks_entry_delete_confirm => '刪除此筆記？';
   @override
-  String get kitapsen_notebooks_add => 'Add note';
+  String get kitapsen_notebooks_add => '新增筆記';
   @override
-  String get kitapsen_goals_title => 'Reading goals';
+  String get kitapsen_goals_title => '閱讀目標';
   @override
-  String get kitapsen_goals_new => 'New goal';
+  String get kitapsen_goals_new => '新目標';
   @override
-  String get kitapsen_goals_create => 'Create';
+  String get kitapsen_goals_create => '建立';
   @override
-  String get kitapsen_goals_created => 'Goal created';
+  String get kitapsen_goals_created => '目標已建立';
   @override
-  String get kitapsen_goals_type => 'Goal type';
+  String get kitapsen_goals_type => '目標類型';
   @override
-  String get kitapsen_goals_type_books => 'Books';
+  String get kitapsen_goals_type_books => '書籍';
   @override
-  String get kitapsen_goals_type_pages => 'Pages';
+  String get kitapsen_goals_type_pages => '頁數';
   @override
-  String get kitapsen_goals_type_days => 'Reading days';
+  String get kitapsen_goals_type_days => '閱讀日數';
   @override
-  String get kitapsen_goals_target => 'Target';
+  String get kitapsen_goals_target => '目標';
   @override
-  String get kitapsen_goals_this_month => 'This month';
+  String get kitapsen_goals_this_month => '本月';
   @override
-  String get kitapsen_goals_this_year => 'This year';
+  String get kitapsen_goals_this_year => '今年';
   @override
-  String get kitapsen_goals_empty =>
-      'No reading goals. Set your first goal to keep your motivation up.';
+  String get kitapsen_goals_empty => '還沒有閱讀目標。設定第一個目標，保持閱讀動力。';
   @override
-  String get kitapsen_goals_delete_confirm => 'Delete this goal?';
+  String get kitapsen_goals_delete_confirm => '刪除此目標？';
   @override
-  String get kitapsen_goals_completed => 'Completed';
+  String get kitapsen_goals_completed => '已完成';
   @override
-  String kitapsen_goals_until({required Object date}) => 'Until ${date}';
+  String kitapsen_goals_until({required Object date}) => '截至 ${date}';
   @override
-  String kitapsen_goals_unit_books({required Object n}) => '${n} books';
+  String kitapsen_goals_unit_books({required Object n}) => '${n} 本書';
   @override
-  String kitapsen_goals_unit_pages({required Object n}) => '${n} pages';
+  String kitapsen_goals_unit_pages({required Object n}) => '${n} 頁';
   @override
-  String kitapsen_goals_unit_hours({required Object n}) => '${n} hours';
+  String kitapsen_goals_unit_hours({required Object n}) => '${n} 小時';
   @override
-  String kitapsen_goals_unit_days({required Object n}) => '${n} reading days';
+  String kitapsen_goals_unit_days({required Object n}) => '${n} 個閱讀日';
   @override
-  String get kitapsen_goals_streak => 'Day streak';
+  String get kitapsen_goals_streak => '連續日數';
   @override
-  String get kitapsen_goals_longest_streak => 'Longest streak';
+  String get kitapsen_goals_longest_streak => '最長連續日數';
   @override
-  String get kitapsen_goals_books_read => 'Books read';
+  String get kitapsen_goals_books_read => '已讀書籍';
   @override
-  String get kitapsen_goals_books_finished => 'Finished';
+  String get kitapsen_goals_books_finished => '已讀完';
   @override
-  String get kitapsen_feed_title => 'Social feed';
+  String get kitapsen_feed_title => '動態';
   @override
-  String get kitapsen_feed_followed => 'Following';
+  String get kitapsen_feed_followed => '追蹤中';
   @override
-  String get kitapsen_feed_mine => 'My activity';
+  String get kitapsen_feed_mine => '我的動態';
   @override
-  String get kitapsen_feed_empty_followed =>
-      'No activity yet. Follow readers to keep up with what they are reading.';
+  String get kitapsen_feed_empty_followed => '還沒有動態。追蹤其他讀者，看看他們在讀甚麼。';
   @override
-  String get kitapsen_feed_empty_mine =>
-      'Your reading activity will appear here once you start reading.';
+  String get kitapsen_feed_empty_mine => '開始閱讀後，你的閱讀動態就會在這裡顯示。';
   @override
-  String kitapsen_feed_started({required Object target}) =>
-      'started reading ${target}';
+  String kitapsen_feed_started({required Object target}) => '開始閱讀 ${target}';
   @override
-  String kitapsen_feed_finished({required Object target}) =>
-      'finished ${target}';
+  String kitapsen_feed_finished({required Object target}) => '讀完了 ${target}';
   @override
-  String kitapsen_feed_reviewed({required Object target}) =>
-      'reviewed ${target}';
+  String kitapsen_feed_reviewed({required Object target}) => '評價了 ${target}';
   @override
   String kitapsen_feed_followed_user({required Object target}) =>
-      'started following ${target}';
+      '開始追蹤 ${target}';
   @override
   String kitapsen_feed_followed_author({required Object target}) =>
-      'followed the author ${target}';
+      '追蹤了作者 ${target}';
   @override
-  String kitapsen_feed_shared({required Object target}) => 'shared ${target}';
+  String kitapsen_feed_shared({required Object target}) => '分享了 ${target}';
   @override
-  String kitapsen_feed_percent({required Object n}) => '${n}% read';
+  String kitapsen_feed_percent({required Object n}) => '已讀 ${n}%';
   @override
-  String get kitapsen_feed_finished_badge => 'Finished';
+  String get kitapsen_feed_finished_badge => '已讀完';
   @override
-  String get kitapsen_user_follow => 'Follow';
+  String get kitapsen_user_follow => '追蹤';
   @override
-  String get kitapsen_user_block => 'Block';
+  String get kitapsen_user_block => '封鎖';
   @override
-  String get kitapsen_user_unblock => 'Unblock';
+  String get kitapsen_user_unblock => '解除封鎖';
   @override
   String kitapsen_user_block_confirm({required Object username}) =>
-      'Block @${username}? They will no longer see your profile and activity, and any follow between you is removed.';
+      '封鎖 @${username}？對方將無法再看到你的主頁和動態，你們之間的追蹤關係亦會被移除。';
   @override
-  String kitapsen_user_member_since({required Object date}) =>
-      'Member since ${date}';
+  String kitapsen_user_member_since({required Object date}) => '${date} 加入';
   @override
-  String kitapsen_user_followers({required Object n}) => '${n} followers';
+  String kitapsen_user_followers({required Object n}) => '${n} 位追蹤者';
   @override
-  String kitapsen_user_following({required Object n}) => '${n} following';
+  String kitapsen_user_following({required Object n}) => '追蹤 ${n} 人';
   @override
-  String kitapsen_user_finished_count({required Object n}) =>
-      '${n} books finished';
+  String kitapsen_user_finished_count({required Object n}) => '讀完 ${n} 本書';
   @override
-  String get kitapsen_user_tab_reading => 'Reading';
+  String get kitapsen_user_tab_reading => '閱讀';
   @override
-  String get kitapsen_user_tab_reviews => 'Reviews';
+  String get kitapsen_user_tab_reviews => '書評';
   @override
-  String get kitapsen_user_tab_activity => 'Activity';
+  String get kitapsen_user_tab_activity => '動態';
   @override
-  String get kitapsen_user_currently_reading => 'Currently reading';
+  String get kitapsen_user_currently_reading => '正在閱讀';
   @override
-  String get kitapsen_user_finished => 'Finished';
+  String get kitapsen_user_finished => '已讀完';
   @override
-  String get kitapsen_user_no_reading =>
-      'This reader does not share reading activity.';
+  String get kitapsen_user_no_reading => '這位讀者沒有分享閱讀動態。';
   @override
-  String get kitapsen_user_no_reviews => 'No public reviews yet.';
+  String get kitapsen_user_no_reviews => '還沒有公開書評。';
   @override
-  String get kitapsen_user_no_activity => 'No public activity yet.';
+  String get kitapsen_user_no_activity => '還沒有公開動態。';
   @override
-  String get kitapsen_user_private =>
-      'This profile is private. Follow this reader to see their reviews, reading activity and profile.';
+  String get kitapsen_user_private => '這是私人主頁。追蹤這位讀者即可查看其書評、閱讀動態和主頁。';
   @override
-  String get kitapsen_user_blocked_you =>
-      'This reader has blocked you. Their profile and activity are hidden from you.';
+  String get kitapsen_user_blocked_you => '這位讀者已封鎖你，你無法查看其主頁和動態。';
   @override
-  String get kitapsen_user_followers_title => 'Followers';
+  String get kitapsen_user_followers_title => '追蹤者';
   @override
-  String get kitapsen_user_following_title => 'Following';
+  String get kitapsen_user_following_title => '追蹤中';
   @override
-  String get kitapsen_user_no_connections => 'Nobody here yet.';
+  String get kitapsen_user_no_connections => '這裡還沒有人。';
   @override
-  String get kitapsen_clubs_title => 'Book clubs';
+  String get kitapsen_clubs_title => '讀書會';
   @override
-  String get kitapsen_clubs_create => 'Create a club';
+  String get kitapsen_clubs_create => '建立讀書會';
   @override
-  String get kitapsen_clubs_name => 'Club name';
+  String get kitapsen_clubs_name => '讀書會名稱';
   @override
-  String get kitapsen_clubs_empty =>
-      'No book clubs yet. Create or join one to read together.';
+  String get kitapsen_clubs_empty => '還沒有讀書會。建立或加入一個，一起閱讀。';
   @override
-  String get kitapsen_clubs_join => 'Join';
+  String get kitapsen_clubs_join => '加入';
   @override
-  String get kitapsen_clubs_leave => 'Leave';
+  String get kitapsen_clubs_leave => '退出';
   @override
-  String get kitapsen_clubs_owner => 'Owner';
+  String get kitapsen_clubs_owner => '建立者';
   @override
-  String get kitapsen_clubs_members => 'Members';
+  String get kitapsen_clubs_members => '成員';
   @override
-  String kitapsen_clubs_members_count({required Object n}) => '${n} members';
+  String kitapsen_clubs_members_count({required Object n}) => '${n} 位成員';
   @override
-  String get kitapsen_clubs_chat => 'Discussion';
+  String get kitapsen_clubs_chat => '討論';
   @override
-  String get kitapsen_clubs_join_to_chat =>
-      'Join the club to read and write messages.';
+  String get kitapsen_clubs_join_to_chat => '加入讀書會即可查看和傳送訊息。';
   @override
-  String get kitapsen_clubs_no_messages => 'No messages yet.';
+  String get kitapsen_clubs_no_messages => '還沒有訊息。';
   @override
-  String get kitapsen_clubs_message_hint => 'Write a message...';
+  String get kitapsen_clubs_message_hint => '輸入訊息…';
   @override
-  String get kitapsen_clubs_send => 'Send';
+  String get kitapsen_clubs_send => '傳送';
   @override
-  String get kitapsen_register_taken =>
-      'This username or email address already has an account.';
+  String get kitapsen_register_taken => '此用戶名稱或電郵地址已註冊帳戶。';
   @override
-  String get kitapsen_report => 'Report';
+  String get kitapsen_report => '舉報';
   @override
-  String get kitapsen_reported => 'Reported';
+  String get kitapsen_reported => '已舉報';
   @override
-  String get kitapsen_report_title => 'Report this content';
+  String get kitapsen_report_title => '舉報此內容';
   @override
-  String get kitapsen_report_reason => 'Reason (optional)';
+  String get kitapsen_report_reason => '原因（可選）';
   @override
-  String get kitapsen_report_reason_hint => 'Why is this inappropriate?';
+  String get kitapsen_report_reason_hint => '此內容為何不恰當？';
   @override
-  String get kitapsen_report_submit => 'Submit Report';
+  String get kitapsen_report_submit => '提交舉報';
   @override
-  String get kitapsen_report_thanks =>
-      'Reported. Thank you for helping keep the community safe.';
+  String get kitapsen_report_thanks => '已舉報。感謝你協助維護社群安全。';
   @override
   String get kitapsen_delete_statistics_book_desc =>
       '這本書的閱讀時間與已讀字數將從所有裝置的統計中移除';
