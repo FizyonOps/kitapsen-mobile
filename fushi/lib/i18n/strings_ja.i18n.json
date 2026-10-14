@@ -6565,5 +6565,8 @@
   "kitapsen_theme_role_selection_desc": "選択したテキストの背景",
   "kitapsen_reading_stats_idle_timeout_hint": "この分数のあいだページをめくったりスクロールしたりしないと、読書時間の計測を止めます。",
   "kitapsen_source_description_epub": "EPUB と PDF の読書",
-  "kitapsen_stat_range_calendar": "読書カレンダー"
+  "kitapsen_stat_range_calendar": "読書カレンダー",
+  "kitapsen_book_read_sample": "サンプルを読む",
+  "kitapsen_sample_notice": "サンプル：本の最初の${percent}%です。",
+  "kitapsen_sample_unavailable": "この本にはサンプルがありません。"
 }

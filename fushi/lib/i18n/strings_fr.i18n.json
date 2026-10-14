@@ -6565,5 +6565,8 @@
   "kitapsen_theme_role_selection_desc": "Arrière-plan du texte sélectionné",
   "kitapsen_reading_stats_idle_timeout_hint": "Arrêter de compter le temps de lecture après ce nombre de minutes sans tourner ni faire défiler de page.",
   "kitapsen_source_description_epub": "Lecture EPUB et PDF",
-  "kitapsen_stat_range_calendar": "Calendrier de lecture"
+  "kitapsen_stat_range_calendar": "Calendrier de lecture",
+  "kitapsen_book_read_sample": "Lire un extrait",
+  "kitapsen_sample_notice": "Extrait : les premiers ${percent} % du livre.",
+  "kitapsen_sample_unavailable": "Ce livre n’a pas d’extrait."
 }

@@ -130,6 +130,7 @@ class StoreBookDetail {
     this.categories = const <({String name, String slug})>[],
     this.isFree = false,
     this.isSerialized = false,
+    this.previewPercentage = 0,
     this.isbn,
     this.format,
     this.authorBio,
@@ -158,6 +159,9 @@ class StoreBookDetail {
   final List<({String name, String slug})> categories;
   final bool isFree;
   final bool isSerialized;
+
+  /// How much of the book its reading sample holds (0 = no sample).
+  final int previewPercentage;
 }
 
 class StoreReview {
@@ -575,6 +579,7 @@ class KitapsenStore {
       ],
       isFree: isFree,
       isSerialized: decoded['is_serialized'] == true,
+      previewPercentage: _int(decoded['preview_percentage']) ?? 0,
       isbn: _text(decoded['isbn']),
       format: _text(decoded['format']),
       authorBio: _text(decoded['author_bio']),

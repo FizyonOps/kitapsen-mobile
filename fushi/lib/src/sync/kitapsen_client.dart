@@ -664,10 +664,34 @@ class KitapsenClient implements RemoteBookClient, RemoteCoverFetcher {
     if (bookId == null) {
       throw SyncBackendError('Not a Kitapsen book: $downloadId');
     }
+    await _downloadContent(
+      bookId,
+      const <String, String>{'format': 'epub'},
+      destination,
+      onProgress: onProgress,
+    );
+  }
+
+  /// Downloads the reading sample of store book [bookId] to [destination]:
+  /// the cut the website's preview shows (`book.preview_percentage`), EPUB or
+  /// PDF like the full book. A book without a sample answers 403, thrown as
+  /// a [SyncAuthError] of kind [SyncAuthFailureKind.forbidden].
+  Future<void> getSample(int bookId, File destination) => _downloadContent(
+    bookId,
+    const <String, String>{'format': 'epub', 'preview': 'true'},
+    destination,
+  );
+
+  Future<void> _downloadContent(
+    int bookId,
+    Map<String, String> query,
+    File destination, {
+    void Function(double progress)? onProgress,
+  }) async {
     final HttpClientResponse response = await _send(
       'GET',
       '/books/$bookId/content',
-      query: const <String, String>{'format': 'epub'},
+      query: query,
     );
     if (response.statusCode != HttpStatus.ok) {
       _checkStatus(response.statusCode, await utf8.decodeStream(response));

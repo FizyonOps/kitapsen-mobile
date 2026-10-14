@@ -6565,5 +6565,8 @@
   "kitapsen_theme_role_selection_desc": "Background of selected text",
   "kitapsen_reading_stats_idle_timeout_hint": "Stop counting reading time after this many minutes without turning or scrolling a page.",
   "kitapsen_source_description_epub": "EPUB and PDF reading",
-  "kitapsen_stat_range_calendar": "Reading calendar"
+  "kitapsen_stat_range_calendar": "Reading calendar",
+  "kitapsen_book_read_sample": "Read sample",
+  "kitapsen_sample_notice": "Sample: the first ${percent}% of the book.",
+  "kitapsen_sample_unavailable": "This book has no sample."
 }

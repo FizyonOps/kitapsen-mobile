@@ -6565,5 +6565,8 @@
   "kitapsen_theme_role_selection_desc": "Seçili metnin arka planı",
   "kitapsen_reading_stats_idle_timeout_hint": "Sayfa çevirme veya kaydırma olmadan bu kadar dakika geçince okuma süresini saymayı durdur.",
   "kitapsen_source_description_epub": "EPUB ve PDF okuma",
-  "kitapsen_stat_range_calendar": "Okuma takvimi"
+  "kitapsen_stat_range_calendar": "Okuma takvimi",
+  "kitapsen_book_read_sample": "Örneği oku",
+  "kitapsen_sample_notice": "Örnek: kitabın ilk %${percent} kadarı.",
+  "kitapsen_sample_unavailable": "Bu kitabın örneği yok."
 }

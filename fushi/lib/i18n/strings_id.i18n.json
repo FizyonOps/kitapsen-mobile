@@ -6565,5 +6565,8 @@
   "kitapsen_theme_role_selection_desc": "Latar teks yang dipilih",
   "kitapsen_reading_stats_idle_timeout_hint": "Berhenti menghitung waktu baca setelah sekian menit tanpa membalik atau menggulir halaman.",
   "kitapsen_source_description_epub": "Membaca EPUB dan PDF",
-  "kitapsen_stat_range_calendar": "Kalender membaca"
+  "kitapsen_stat_range_calendar": "Kalender membaca",
+  "kitapsen_book_read_sample": "Baca sampel",
+  "kitapsen_sample_notice": "Sampel: ${percent}% pertama buku ini.",
+  "kitapsen_sample_unavailable": "Buku ini tidak memiliki sampel."
 }

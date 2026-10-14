@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:ui'
     show AppExitResponse, PlatformDispatcher;
 import 'package:fushi/src/models/kitapsen_edition.dart';
+import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_sample.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fushi/src/asr_host/asr_host.dart';
@@ -585,6 +586,8 @@ void main([List<String> args = const <String>[]]) {
           () => container.read(ankiRepositoryProvider);
     }
     await appModel.initialise();
+    // Kitapsen: a reading sample the app was killed on is still on the shelf.
+    if (kKitapsenEdition) unawaited(removeKitapsenSample(appModel.database));
     // 互联 P2P 隧道（原生库可用才装）：client 选路在直连全失败后经隧道兜底
     // （docs/specs/2026-09-28-interconnect-remote-reach.md §5）。
     installInterconnectP2pClient(SyncRepository(appModel.database));

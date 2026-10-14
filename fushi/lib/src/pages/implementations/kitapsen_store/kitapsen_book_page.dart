@@ -2,7 +2,8 @@
 /// chapters of a serialized story, and reviews.
 ///
 /// No price and no purchase path (store policy, see [kKitapsenEdition]): a
-/// paid book that is not in the library only offers the wishlist.
+/// paid book that is not in the library offers its reading sample and the
+/// wishlist.
 library;
 
 import 'dart:async';
@@ -23,12 +24,13 @@ import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_collecti
 import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_directory_pages.dart';
 import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_chapter_page.dart';
 import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_comments_page.dart';
+import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_sample.dart';
 import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_store_widgets.dart';
 import 'package:fushi/src/sync/kitapsen_store.dart';
 import 'package:fushi/src/sync/remote_library_cache.dart';
 import 'package:fushi/src/sync/remote_library_source.dart';
 import 'package:fushi/src/sync/sync_backend.dart'
-    show SyncAuthError, SyncBackendError;
+    show SyncAuthError, SyncAuthFailureKind, SyncBackendError;
 import 'package:fushi/utils.dart';
 
 class _BookState {
@@ -196,6 +198,24 @@ class _KitapsenBookPageState extends ConsumerState<KitapsenBookPage> {
     homeShellTabNotifier.value = HomeTab.books;
     _toast(t.kitapsen_book_downloading);
   }
+
+  /// Reads the sample of a paid book that is not in the library; it is
+  /// removed from the device again when the reader closes.
+  Future<void> _readSample(_BookState s) => _run(() async {
+    _toast(t.kitapsen_sample_notice(percent: s.detail.previewPercentage));
+    try {
+      await readKitapsenSample(
+        ref: ref,
+        client: s.store.client!,
+        bookId: widget.bookId,
+        title: s.detail.book.title,
+      );
+    } on SyncAuthError catch (e) {
+      // 403: the book has no file to cut a sample from.
+      if (e.kind != SyncAuthFailureKind.forbidden) rethrow;
+      _toast(t.kitapsen_sample_unavailable);
+    }
+  });
 
   Future<void> _toggleWishlist(_BookState s) => _run(() async {
     await s.store.setWishlisted(widget.bookId, !s.wishlisted);
@@ -567,6 +587,17 @@ class _KitapsenBookPageState extends ConsumerState<KitapsenBookPage> {
                     : () => s.owned ? _read(s) : _claimAndRead(s),
                 icon: const Icon(Icons.menu_book_outlined, size: 18),
                 label: Text(t.kitapsen_book_read_now),
+              ),
+            if (!d.isSerialized &&
+                !s.owned &&
+                !d.isFree &&
+                d.previewPercentage > 0)
+              FilledButton.icon(
+                key: const ValueKey<String>('kitapsen-book-sample'),
+                style: readStyle,
+                onPressed: _busy ? null : () => _readSample(s),
+                icon: const Icon(Icons.chrome_reader_mode_outlined, size: 18),
+                label: Text(t.kitapsen_book_read_sample),
               ),
             if (!d.isSerialized && !s.owned && d.isFree)
               OutlinedButton.icon(

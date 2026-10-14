@@ -6565,5 +6565,8 @@
   "kitapsen_theme_role_selection_desc": "Hintergrund von markiertem Text",
   "kitapsen_reading_stats_idle_timeout_hint": "Lesezeit nicht mehr zählen, wenn so viele Minuten lang weder umgeblättert noch gescrollt wird.",
   "kitapsen_source_description_epub": "EPUB- und PDF-Lesen",
-  "kitapsen_stat_range_calendar": "Lesekalender"
+  "kitapsen_stat_range_calendar": "Lesekalender",
+  "kitapsen_book_read_sample": "Leseprobe",
+  "kitapsen_sample_notice": "Leseprobe: die ersten ${percent} % des Buches.",
+  "kitapsen_sample_unavailable": "Für dieses Buch gibt es keine Leseprobe."
 }

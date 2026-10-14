@@ -6565,5 +6565,8 @@
   "kitapsen_theme_role_selection_desc": "Achtergrond van geselecteerde tekst",
   "kitapsen_reading_stats_idle_timeout_hint": "Stop met het tellen van leestijd na zoveel minuten zonder bladeren of scrollen.",
   "kitapsen_source_description_epub": "EPUB en PDF lezen",
-  "kitapsen_stat_range_calendar": "Leeskalender"
+  "kitapsen_stat_range_calendar": "Leeskalender",
+  "kitapsen_book_read_sample": "Fragment lezen",
+  "kitapsen_sample_notice": "Fragment: de eerste ${percent}% van het boek.",
+  "kitapsen_sample_unavailable": "Dit boek heeft geen fragment."
 }

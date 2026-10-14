@@ -6565,5 +6565,8 @@
   "kitapsen_theme_role_selection_desc": "選取文字的背景",
   "kitapsen_reading_stats_idle_timeout_hint": "超過這麼多分鐘沒有翻頁或捲動時，停止計算閱讀時間。",
   "kitapsen_source_description_epub": "EPUB 與 PDF 閱讀",
-  "kitapsen_stat_range_calendar": "閱讀日曆"
+  "kitapsen_stat_range_calendar": "閱讀日曆",
+  "kitapsen_book_read_sample": "閱讀樣章",
+  "kitapsen_sample_notice": "樣章：本書的前 ${percent}%。",
+  "kitapsen_sample_unavailable": "本書沒有樣章。"
 }

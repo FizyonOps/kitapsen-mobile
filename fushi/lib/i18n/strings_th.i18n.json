@@ -6565,5 +6565,8 @@
   "kitapsen_theme_role_selection_desc": "พื้นหลังของข้อความที่เลือก",
   "kitapsen_reading_stats_idle_timeout_hint": "หยุดนับเวลาอ่านเมื่อไม่ได้พลิกหรือเลื่อนหน้าเป็นเวลาเท่านี้นาที",
   "kitapsen_source_description_epub": "การอ่าน EPUB และ PDF",
-  "kitapsen_stat_range_calendar": "ปฏิทินการอ่าน"
+  "kitapsen_stat_range_calendar": "ปฏิทินการอ่าน",
+  "kitapsen_book_read_sample": "อ่านตัวอย่าง",
+  "kitapsen_sample_notice": "ตัวอย่าง: ${percent}% แรกของหนังสือ",
+  "kitapsen_sample_unavailable": "หนังสือเล่มนี้ไม่มีตัวอย่าง"
 }

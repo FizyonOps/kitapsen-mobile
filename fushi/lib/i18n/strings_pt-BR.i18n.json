@@ -6565,5 +6565,8 @@
   "kitapsen_theme_role_selection_desc": "Fundo do texto selecionado",
   "kitapsen_reading_stats_idle_timeout_hint": "Parar de contar o tempo de leitura após estes minutos sem virar ou rolar a página.",
   "kitapsen_source_description_epub": "Leitura de EPUB e PDF",
-  "kitapsen_stat_range_calendar": "Calendário de leitura"
+  "kitapsen_stat_range_calendar": "Calendário de leitura",
+  "kitapsen_book_read_sample": "Ler amostra",
+  "kitapsen_sample_notice": "Amostra: os primeiros ${percent}% do livro.",
+  "kitapsen_sample_unavailable": "Este livro não tem amostra."
 }

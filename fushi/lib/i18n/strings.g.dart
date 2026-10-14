@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 111639 (6567 per locale)
+/// Strings: 111690 (6570 per locale)
 ///
-/// Built on 2026-10-14 at 13:20 UTC
+/// Built on 2026-10-14 at 18:44 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -9391,6 +9391,10 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
       'Stop counting reading time after this many minutes without turning or scrolling a page.';
   String get kitapsen_source_description_epub => 'EPUB and PDF reading';
   String get kitapsen_stat_range_calendar => 'Reading calendar';
+  String get kitapsen_book_read_sample => 'Read sample';
+  String kitapsen_sample_notice({required Object percent}) =>
+      'Sample: the first ${percent}% of the book.';
+  String get kitapsen_sample_unavailable => 'This book has no sample.';
 }
 
 // Path: <root>
@@ -25132,6 +25136,13 @@ class _StringsAr extends _StringsEn {
   String get kitapsen_source_description_epub => 'قراءة EPUB وPDF';
   @override
   String get kitapsen_stat_range_calendar => 'تقويم القراءة';
+  @override
+  String get kitapsen_book_read_sample => 'اقرأ عينة';
+  @override
+  String kitapsen_sample_notice({required Object percent}) =>
+      'عينة: أول ${percent}% من الكتاب.';
+  @override
+  String get kitapsen_sample_unavailable => 'لا تتوفر عينة لهذا الكتاب.';
 }
 
 // Path: <root>
@@ -41280,6 +41291,14 @@ class _StringsDe extends _StringsEn {
   String get kitapsen_source_description_epub => 'EPUB- und PDF-Lesen';
   @override
   String get kitapsen_stat_range_calendar => 'Lesekalender';
+  @override
+  String get kitapsen_book_read_sample => 'Leseprobe';
+  @override
+  String kitapsen_sample_notice({required Object percent}) =>
+      'Leseprobe: die ersten ${percent} % des Buches.';
+  @override
+  String get kitapsen_sample_unavailable =>
+      'Für dieses Buch gibt es keine Leseprobe.';
 }
 
 // Path: <root>
@@ -57486,6 +57505,13 @@ class _StringsEs extends _StringsEn {
   String get kitapsen_source_description_epub => 'Lectura de EPUB y PDF';
   @override
   String get kitapsen_stat_range_calendar => 'Calendario de lectura';
+  @override
+  String get kitapsen_book_read_sample => 'Leer muestra';
+  @override
+  String kitapsen_sample_notice({required Object percent}) =>
+      'Muestra: el primer ${percent} % del libro.';
+  @override
+  String get kitapsen_sample_unavailable => 'Este libro no tiene muestra.';
 }
 
 // Path: <root>
@@ -73782,6 +73808,13 @@ class _StringsFr extends _StringsEn {
   String get kitapsen_source_description_epub => 'Lecture EPUB et PDF';
   @override
   String get kitapsen_stat_range_calendar => 'Calendrier de lecture';
+  @override
+  String get kitapsen_book_read_sample => 'Lire un extrait';
+  @override
+  String kitapsen_sample_notice({required Object percent}) =>
+      'Extrait : les premiers ${percent} % du livre.';
+  @override
+  String get kitapsen_sample_unavailable => 'Ce livre n’a pas d’extrait.';
 }
 
 // Path: <root>
@@ -89716,6 +89749,13 @@ class _StringsId extends _StringsEn {
   String get kitapsen_source_description_epub => 'Membaca EPUB dan PDF';
   @override
   String get kitapsen_stat_range_calendar => 'Kalender membaca';
+  @override
+  String get kitapsen_book_read_sample => 'Baca sampel';
+  @override
+  String kitapsen_sample_notice({required Object percent}) =>
+      'Sampel: ${percent}% pertama buku ini.';
+  @override
+  String get kitapsen_sample_unavailable => 'Buku ini tidak memiliki sampel.';
 }
 
 // Path: <root>
@@ -105820,6 +105860,13 @@ class _StringsIt extends _StringsEn {
   String get kitapsen_source_description_epub => 'Lettura EPUB e PDF';
   @override
   String get kitapsen_stat_range_calendar => 'Calendario di lettura';
+  @override
+  String get kitapsen_book_read_sample => 'Leggi un estratto';
+  @override
+  String kitapsen_sample_notice({required Object percent}) =>
+      'Estratto: il primo ${percent}% del libro.';
+  @override
+  String get kitapsen_sample_unavailable => 'Questo libro non ha un estratto.';
 }
 
 // Path: <root>
@@ -120908,6 +120955,13 @@ class _StringsJa extends _StringsEn {
   String get kitapsen_source_description_epub => 'EPUB と PDF の読書';
   @override
   String get kitapsen_stat_range_calendar => '読書カレンダー';
+  @override
+  String get kitapsen_book_read_sample => 'サンプルを読む';
+  @override
+  String kitapsen_sample_notice({required Object percent}) =>
+      'サンプル：本の最初の${percent}%です。';
+  @override
+  String get kitapsen_sample_unavailable => 'この本にはサンプルがありません。';
 }
 
 // Path: <root>
@@ -136002,6 +136056,13 @@ class _StringsKo extends _StringsEn {
   String get kitapsen_source_description_epub => 'EPUB 및 PDF 읽기';
   @override
   String get kitapsen_stat_range_calendar => '독서 달력';
+  @override
+  String get kitapsen_book_read_sample => '샘플 읽기';
+  @override
+  String kitapsen_sample_notice({required Object percent}) =>
+      '샘플: 책의 처음 ${percent}%입니다.';
+  @override
+  String get kitapsen_sample_unavailable => '이 책에는 샘플이 없습니다.';
 }
 
 // Path: <root>
@@ -152057,6 +152118,13 @@ class _StringsNl extends _StringsEn {
   String get kitapsen_source_description_epub => 'EPUB en PDF lezen';
   @override
   String get kitapsen_stat_range_calendar => 'Leeskalender';
+  @override
+  String get kitapsen_book_read_sample => 'Fragment lezen';
+  @override
+  String kitapsen_sample_notice({required Object percent}) =>
+      'Fragment: de eerste ${percent}% van het boek.';
+  @override
+  String get kitapsen_sample_unavailable => 'Dit boek heeft geen fragment.';
 }
 
 // Path: <root>
@@ -168174,6 +168242,13 @@ class _StringsPtBr extends _StringsEn {
   String get kitapsen_source_description_epub => 'Leitura de EPUB e PDF';
   @override
   String get kitapsen_stat_range_calendar => 'Calendário de leitura';
+  @override
+  String get kitapsen_book_read_sample => 'Ler amostra';
+  @override
+  String kitapsen_sample_notice({required Object percent}) =>
+      'Amostra: os primeiros ${percent}% do livro.';
+  @override
+  String get kitapsen_sample_unavailable => 'Este livro não tem amostra.';
 }
 
 // Path: <root>
@@ -184239,6 +184314,13 @@ class _StringsRu extends _StringsEn {
   String get kitapsen_source_description_epub => 'Чтение EPUB и PDF';
   @override
   String get kitapsen_stat_range_calendar => 'Календарь чтения';
+  @override
+  String get kitapsen_book_read_sample => 'Читать отрывок';
+  @override
+  String kitapsen_sample_notice({required Object percent}) =>
+      'Отрывок: первые ${percent}% книги.';
+  @override
+  String get kitapsen_sample_unavailable => 'У этой книги нет отрывка.';
 }
 
 // Path: <root>
@@ -199965,6 +200047,13 @@ class _StringsTh extends _StringsEn {
   String get kitapsen_source_description_epub => 'การอ่าน EPUB และ PDF';
   @override
   String get kitapsen_stat_range_calendar => 'ปฏิทินการอ่าน';
+  @override
+  String get kitapsen_book_read_sample => 'อ่านตัวอย่าง';
+  @override
+  String kitapsen_sample_notice({required Object percent}) =>
+      'ตัวอย่าง: ${percent}% แรกของหนังสือ';
+  @override
+  String get kitapsen_sample_unavailable => 'หนังสือเล่มนี้ไม่มีตัวอย่าง';
 }
 
 // Path: <root>
@@ -215909,6 +215998,13 @@ class _StringsTr extends _StringsEn {
   String get kitapsen_source_description_epub => 'EPUB ve PDF okuma';
   @override
   String get kitapsen_stat_range_calendar => 'Okuma takvimi';
+  @override
+  String get kitapsen_book_read_sample => 'Örneği oku';
+  @override
+  String kitapsen_sample_notice({required Object percent}) =>
+      'Örnek: kitabın ilk %${percent} kadarı.';
+  @override
+  String get kitapsen_sample_unavailable => 'Bu kitabın örneği yok.';
 }
 
 // Path: <root>
@@ -231778,6 +231874,13 @@ class _StringsVi extends _StringsEn {
   String get kitapsen_source_description_epub => 'Đọc EPUB và PDF';
   @override
   String get kitapsen_stat_range_calendar => 'Lịch đọc';
+  @override
+  String get kitapsen_book_read_sample => 'Đọc thử';
+  @override
+  String kitapsen_sample_notice({required Object percent}) =>
+      'Bản đọc thử: ${percent}% đầu tiên của sách.';
+  @override
+  String get kitapsen_sample_unavailable => 'Sách này không có bản đọc thử.';
 }
 
 // Path: <root>
@@ -246295,6 +246398,13 @@ class _StringsZhCn extends _StringsEn {
   String get kitapsen_source_description_epub => 'EPUB 与 PDF 阅读';
   @override
   String get kitapsen_stat_range_calendar => '阅读日历';
+  @override
+  String get kitapsen_book_read_sample => '阅读样章';
+  @override
+  String kitapsen_sample_notice({required Object percent}) =>
+      '样章：本书的前 ${percent}%。';
+  @override
+  String get kitapsen_sample_unavailable => '本书没有样章。';
 }
 
 // Path: <root>
@@ -260840,4 +260950,11 @@ class _StringsZhHk extends _StringsEn {
   String get kitapsen_source_description_epub => 'EPUB 與 PDF 閱讀';
   @override
   String get kitapsen_stat_range_calendar => '閱讀日曆';
+  @override
+  String get kitapsen_book_read_sample => '閱讀樣章';
+  @override
+  String kitapsen_sample_notice({required Object percent}) =>
+      '樣章：本書的前 ${percent}%。';
+  @override
+  String get kitapsen_sample_unavailable => '本書沒有樣章。';
 }

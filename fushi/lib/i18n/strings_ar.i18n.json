@@ -6565,5 +6565,8 @@
   "kitapsen_theme_role_selection_desc": "خلفية النص المحدد",
   "kitapsen_reading_stats_idle_timeout_hint": "التوقف عن احتساب وقت القراءة بعد هذا العدد من الدقائق دون تقليب الصفحة أو تمريرها.",
   "kitapsen_source_description_epub": "قراءة EPUB وPDF",
-  "kitapsen_stat_range_calendar": "تقويم القراءة"
+  "kitapsen_stat_range_calendar": "تقويم القراءة",
+  "kitapsen_book_read_sample": "اقرأ عينة",
+  "kitapsen_sample_notice": "عينة: أول ${percent}% من الكتاب.",
+  "kitapsen_sample_unavailable": "لا تتوفر عينة لهذا الكتاب."
 }
