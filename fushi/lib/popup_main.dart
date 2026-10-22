@@ -19,31 +19,7 @@ import 'package:fushi/src/utils/misc/smooth_wheel_scroll.dart';
 @pragma('vm:entry-point')
 void popupMain() {
   // Kitapsen: no popup dictionary; the native side never starts this entry.
-  if (kKitapsenEdition) return;
-  runZonedGuarded<Future<void>>(() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-
-    final platformServices = PlatformServices.forCurrentPlatform();
-    final container = ProviderContainer(
-      overrides: [
-        platformServicesProvider.overrideWithValue(platformServices),
-      ],
-    );
-
-    runApp(
-      UncontrolledProviderScope(
-        container: container,
-        child: const PopupDictApp(),
-      ),
-    );
-
-    await FushiDicts.preloadTransforms();
-    final appModel = container.read(appProvider);
-    unawaited(appModel.initialiseForDictionaryPopup());
-  }, (exception, stack) {
-    debugPrint('[Fushi-popup] uncaught: $exception\n$stack');
-  });
+  return;
 }
 
 class PopupDictApp extends ConsumerStatefulWidget {

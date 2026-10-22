@@ -219,9 +219,7 @@ SettingsDestination buildAppearanceDestination() {
                   : contentLanguageLabelOf(current);
               return '${t.settings_content_language_title} · $label';
             },
-            subtitle: kKitapsenEdition
-                ? t.kitapsen_settings_content_language_description
-                : t.settings_content_language_description,
+            subtitle: t.kitapsen_settings_content_language_description,
             icon: Icons.translate,
             onTap: (SettingsContext settingsContext) async {
               final String current =
@@ -229,9 +227,7 @@ SettingsDestination buildAppearanceDestination() {
               await showContentLanguagePicker(
                 context: settingsContext.context,
                 title: t.settings_content_language_title,
-                description: kKitapsenEdition
-                    ? t.kitapsen_settings_content_language_description
-                    : t.settings_content_language_description,
+                description: t.kitapsen_settings_content_language_description,
                 current: current.isEmpty ? null : current,
                 autoDetected: '',
                 autoLabel: t.settings_content_language_unset,
@@ -246,53 +242,11 @@ SettingsDestination buildAppearanceDestination() {
           ),
         ],
       ),
-      // 「功能模块」：11 个模块的总开关，值域与顺序都是 [ModuleId]。
-      //
-      // **本区管的不再只是底栏**。这些开关原来只喂 `homeActiveTabs()`（底栏/侧栏
-      // tab 列表），于是「关掉视频」之后设置页仍列着「视频」「在线服务」，首页活动
-      // 筛选条仍有「观看」，视频后台照跑——用户看到的是「只有底栏变干净了」。现在
-      // 一个开关关掉该模块的**全部入口**：底栏/侧栏 tab、首页 dashboard 的条目与
-      // 筛选、设置一级分类（连带设置搜索索引）、跨页跳转、该域快捷键、外部打开，
-      // 以及它专属后台的下次自启。
-      //
-      // 两条刻意的例外：
-      // - 首页/设置**恒在**，是全部模块关光后的安全回退面，没有 ModuleId。
-      // - 关掉「查词」只关**页面入口**，查词**能力全留**（阅读器划词弹窗、设置 →
-      //   查词 分类里的词典导入管理与音频来源）——用户拍板：纯阅读器仍要能查词。
-      //
-      // 分区住外观而不是系统：它与同分类的「反转导航栏」同域（此前在 系统 ›
-      // 功能模块）。item id 保留 `system.` 历史前缀不动，理由见 [_moduleItemId]。
-      if (!kKitapsenEdition)
-        SettingsSection(
-          id: 'appearance.section.modules',
-          presentation: SettingsSectionPresentation.alwaysExpanded,
-          title: t.settings_section_modules,
-          // Kitapsen ships the book module only; a lone "Books" switch would just
-          // let the user hide the whole app.
-          // 遍历 ModuleId.values 生成，不再逐个手写：加模块只加一个 enum 值，
-          // 枚举顺序就是这里的展示顺序（库页 → 工具页 → 横切能力 → 设备数据）。
-          // 平台上不存在的模块由 _moduleSwitch 自己的 visible 判掉。
-          items: <SettingsItem>[
-            for (final ModuleId module in ModuleId.values)
-              _moduleSwitch(module),
-          ],
-        ),
       SettingsSection(
         id: 'appearance.section.navigation',
         presentation: SettingsSectionPresentation.alwaysExpanded,
         title: t.settings_section_app_shell,
         items: <SettingsItem>[
-          if (!kKitapsenEdition)
-            SettingsNavigationItem(
-              id: 'appearance.app_icon',
-              title: t.app_icon_label,
-              icon: Icons.widgets_outlined,
-              // Kitapsen has a single launcher icon, so there is nothing to pick.
-              visible: (_) =>
-                  !kKitapsenEdition &&
-                  (Platform.isAndroid || Platform.isWindows),
-              builder: (_) => const MiscellaneousSettingsPage(),
-            ),
           SettingsSwitchItem(
             id: 'appearance.reverse_navigation_bar',
             title: t.reverse_navigation_bar,

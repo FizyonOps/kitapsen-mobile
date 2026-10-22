@@ -51,58 +51,5 @@ Future<void> openUpdateFeedEntry(
   UpdateFeedEntryRow entry,
 ) async {
   // Kitapsen: no update feeds; keeps the manga / video pages out of the build.
-  if (kKitapsenEdition) return;
-  final UpdateFeedKind? kind = UpdateFeedKind.fromDbValue(entry.kind);
-  if (kind == null) return;
-  final Map<String, Object?> detail = decodeUpdateFeedDetail(entry.detailJson);
-  switch (kind) {
-    case UpdateFeedKind.mangaChapter:
-      final String? bookKey = detail['bookKey'] as String?;
-      if (bookKey == null || !context.mounted) return;
-      await Navigator.of(context).push(
-        adaptivePageRoute<void>(
-          context: context,
-          builder: (_) =>
-              MangaSeriesPage(target: ShelfMangaSeriesTarget(bookKey)),
-        ),
-      );
-    case UpdateFeedKind.mangaExtension:
-      if (!context.mounted) return;
-      await Navigator.of(context).push(
-        adaptivePageRoute<void>(
-          context: context,
-          builder: (_) => const MihonExtensionsPage(),
-        ),
-      );
-    case UpdateFeedKind.appRelease:
-      // app 新版本走应用内更新：检查 → 「发现新版本」对话框 → 下载 + 安装。
-      // detailJson 里的 releaseUrl 只是投递时的元数据，**不是**落点——把用户丢
-      // 到浏览器手动下载，等于绕过 UpdateChecker 已有的整条安装链路。
-      if (!context.mounted) return;
-      final AppModel appModel = ProviderScope.containerOf(
-        context,
-        listen: false,
-      ).read(appProvider);
-      await checkAppUpdateNow(context, appModel);
-    case UpdateFeedKind.videoEpisode:
-      final String? bookUid = detail['bookUid'] as String?;
-      final int? collectionId = detail['collectionId'] as int?;
-      if (bookUid == null || !context.mounted) return;
-      final FushiDatabase database = ProviderScope.containerOf(
-        context,
-        listen: false,
-      ).read(appProvider).database;
-      final VideoBookRepository repo = VideoBookRepository(database);
-      // 那集可能已被用户删掉：不进播放页对着空路径报错，留在列表里。
-      if (await repo.getByBookUid(bookUid) == null || !context.mounted) return;
-      await Navigator.of(context).push(
-        MaterialPageRoute<void>(
-          builder: (_) => VideoFushiPage.neutralized(
-            bookUid: bookUid,
-            repo: repo,
-            playlistCollectionId: collectionId,
-          ),
-        ),
-      );
-  }
+  return;
 }

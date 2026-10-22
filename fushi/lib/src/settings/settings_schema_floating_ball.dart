@@ -23,7 +23,7 @@ SettingsDestination buildFloatingBallDestination() {
   return SettingsDestination(
     id: SettingsDestinationId.floatingBall,
     // Kitapsen has no floating ball.
-    visible: (_) => !kKitapsenEdition,
+    visible: (_) => false,
     title: t.settings_destination_floating_ball,
     summary: t.floating_ball_summary,
     icon: Icons.blur_circular_outlined,
@@ -169,13 +169,9 @@ bool _scopeVisible(SettingsContext c, FloatingBallScope scope) {
     FloatingBallScope.system =>
       _systemBallSupported && prefs.floatingBallSystem,
     FloatingBallScope.manga =>
-      prefs.floatingBallInApp &&
-          !kKitapsenEdition &&
-          c.appModel.moduleVisibility.isEnabled(ModuleId.manga),
+      false,
     FloatingBallScope.video =>
-      prefs.floatingBallInApp &&
-          !kKitapsenEdition &&
-          c.appModel.moduleVisibility.isEnabled(ModuleId.video),
+      false,
     FloatingBallScope.reader =>
       prefs.floatingBallInApp &&
           c.appModel.moduleVisibility.isEnabled(ModuleId.books),
@@ -197,8 +193,7 @@ bool _buttonAvailable(SettingsContext c, FloatingBallScope scope, String id) {
         isIOS: Platform.isIOS,
         isDesktop: isDesktopSystemBallPlatform,
         lookupModuleEnabled:
-            !kKitapsenEdition &&
-            c.appModel.moduleVisibility.isEnabled(ModuleId.lookup),
+            false,
       );
 }
 

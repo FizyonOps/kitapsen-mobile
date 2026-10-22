@@ -80,21 +80,9 @@ Future<void> runAppShortcut(
   }
   // Kitapsen: no Anki card-source navigation queue, and reader pages do not
   // register with it, so they are popped like any other route.
-  if (kKitapsenEdition) {
-    selectHomeTab(shortcut.homeTab);
-    if (navigator != null) await _popToHomeRoute(navigator);
-    return;
-  }
-  final ExternalMediaNavigation mediaNavigation =
-      media ?? ExternalMediaNavigation.instance;
-  // 与卡片来源回跳（card_source_router）同一条队列：两个外部入口不会同时去收
-  // 同一个媒体页。切 tab 也排在队列里：前一个外部导航还没收完时先切 tab，页面
-  // 却迟迟不退，用户看到的是 tab 变了、画面没变。
-  await mediaNavigation.navigate(() async {
-    selectHomeTab(shortcut.homeTab);
-    if (navigator == null) return;
-    await unwindToHomeRoute(navigator, media: mediaNavigation);
-  });
+  selectHomeTab(shortcut.homeTab);
+  if (navigator != null) await _popToHomeRoute(navigator);
+  return;
 }
 
 /// 逐层退回首页根路由。

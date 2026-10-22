@@ -166,7 +166,7 @@ SettingsDestination buildLookupDestination() {
   return SettingsDestination(
     id: SettingsDestinationId.lookup,
     // Kitapsen is a plain e-book reader: no dictionaries, no lookup popup.
-    visible: (_) => !kKitapsenEdition,
+    visible: (_) => false,
     title: t.settings_destination_lookup,
     summary: t.dictionary_settings,
     icon: Icons.manage_search_outlined,

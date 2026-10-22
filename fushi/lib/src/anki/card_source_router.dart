@@ -47,11 +47,7 @@ Future<void> openCardSource({
 }) =>
     // Kitapsen: no cards, so card sources (video / manga pages) are compiled
     // out: [_openCardSource] is never referenced, closures included.
-    kKitapsenEdition
-        ? Future<void>.value()
-        : ExternalMediaNavigation.instance.navigate(
-            () => _openCardSource(ref: ref, link: link),
-          );
+    Future<void>.value();
 
 Future<void> _openCardSource({
   required WidgetRef ref,

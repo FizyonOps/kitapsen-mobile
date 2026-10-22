@@ -41,35 +41,6 @@ SettingsDestination buildStorageDestination() {
     summary: t.settings_destination_storage_summary,
     icon: Icons.sd_storage_outlined,
     sections: <SettingsSection>[
-      // Desktop-only data-folder relocation; Kitapsen ships on phones only.
-      if (!kKitapsenEdition) buildDataStorageLocationSection(),
-      if (!kKitapsenEdition)
-      SettingsSection(
-        id: 'storage.section.models_components',
-        title: t.storage_models_components,
-        // Speech-to-text and manga OCR models do not exist in Kitapsen.
-        visible: (_) =>
-            !kKitapsenEdition && (isAsrSupported || _isMangaOcrLocalSupported),
-        items: <SettingsItem>[
-          SettingsNavigationItem(
-            // Preserve the existing search anchor while changing its owner.
-            id: 'listening.asr_models',
-            title: t.asr_models_section,
-            subtitle: t.asr_models_section_summary,
-            icon: Icons.record_voice_over_outlined,
-            visible: (_) => isAsrSupported,
-            child: _buildAsrModelsDestination,
-          ),
-          SettingsNavigationItem(
-            id: 'storage.ocr_models',
-            title: t.manga_ocr_local_model,
-            subtitle: t.storage_ocr_models_hint,
-            icon: Icons.document_scanner_outlined,
-            visible: (_) => _isMangaOcrLocalSupported,
-            child: _buildMangaOcrModelsDestination,
-          ),
-        ],
-      ),
     ],
     body: (SettingsContext c) => StorageUsageView(
       service: StorageUsageService(),
@@ -135,15 +106,9 @@ SettingsDestination buildStorageDestination() {
         ];
       },
       // Kitapsen: no dictionaries.
-      dictionaryNamesProvider: () async => kKitapsenEdition
-          ? const <String>[]
-          : <String>[
-              for (final Dictionary d in c.appModel.dictionaries) d.name,
-            ],
+      dictionaryNamesProvider: () async => const <String>[],
       // 只翻译明细行的 label；上面那份真名列表照旧驱动目录扫描与删除路由。
-      dictionaryDisplayNamesProvider: () async => kKitapsenEdition
-          ? const <String, String>{}
-          : c.appModel.dictionaryDisplayNameOverrides,
+      dictionaryDisplayNamesProvider: () async => const <String, String>{},
       deleteBook: (String bookKey) async {
         final DeleteBookResult result = await ReaderFushiSource.instance
             .deleteBook(
@@ -165,10 +130,6 @@ SettingsDestination buildStorageDestination() {
       // 必然落空；它的删除原语是 SrtBookRepository.delete（连带持久目录 + cue）。
       // 与 deleteDictionary 同纪律：行本来就不在 = 目标状态已达成，按成功处理。
       deleteSrtBook: (String uid) async {
-        // Kitapsen has no subtitle books.
-        if (!kKitapsenEdition) {
-          await SrtBookRepository(c.appModel.database).delete(uid);
-        }
         c.ref.invalidate(fushiBooksProvider);
         c.ref.invalidate(srtBookTagMapProvider);
         return null;
@@ -199,19 +160,6 @@ SettingsDestination buildStorageDestination() {
         return null;
       },
       deleteDictionary: (String name) async {
-        if (kKitapsenEdition) return null;
-        // AppModel.deleteDictionary 内部 catch-all 不上抛（自弹失败 toast），
-        // 「无异常」不等于成功——以「删除后该名是否仍在词典表」为准回报
-        // （审查 M1）。找不到该名 = 目标状态已达成，按成功处理。
-        for (final Dictionary d in c.appModel.dictionaries) {
-          if (d.name == name) {
-            await c.appModel.deleteDictionary(d);
-            final bool stillPresent = c.appModel.dictionaries.any(
-              (Dictionary x) => x.name == name,
-            );
-            return stillPresent ? t.storage_dictionary_delete_incomplete : null;
-          }
-        }
         return null;
       },
     ),

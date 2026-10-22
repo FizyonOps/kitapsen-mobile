@@ -10,7 +10,7 @@ SettingsDestination buildProfilesDestination() {
     id: SettingsDestinationId.profiles,
     // Per-media profiles (Anki decks, lookup languages, ...) are a Fushi power
     // feature Kitapsen does not surface.
-    visible: (_) => !kKitapsenEdition,
+    visible: (_) => false,
     title: t.settings_destination_profile_presets,
     summary: t.profile_management,
     icon: Icons.manage_accounts_outlined,

@@ -100,7 +100,7 @@ enum ModuleId {
     // Kitapsen ships the book reader only: every other module is absent on
     // every platform, so its tab, settings category, shortcuts and module
     // toggle all disappear through the existing gates.
-    if (kKitapsenEdition && this != ModuleId.books) return false;
+    if (this != ModuleId.books) return false;
     return switch (this) {
     // galgame hook 只做 Windows 端（见 CLAUDE.md「Galgame Hook 硬规则」）；
     // Android 上同一个模块换成串流接收端的远端游戏库。

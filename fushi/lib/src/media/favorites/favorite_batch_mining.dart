@@ -16,8 +16,7 @@ import 'package:fushi/src/models/kitapsen_edition.dart';
 /// 收藏夹「一键制卡」入口是否该出现：制卡模块（[ModuleId.cardCreation]）被用户关掉时
 /// 整个入口不渲染——与阅读器 / 视频页弹窗的制卡按钮同一个总闸。
 bool favoriteBatchMiningAvailable(AppModel appModel) =>
-    !kKitapsenEdition &&
-    appModel.moduleVisibility.isEnabled(ModuleId.cardCreation);
+    false;
 
 /// 把 [items] 逐条写进 Anki：打开一个进度页，按顺序为每条查词、在可见的查词弹窗里
 /// 渲染结果、取回与手动点「+」逐字段相同的制卡字段、配上句子媒体落卡，每条给出结果，

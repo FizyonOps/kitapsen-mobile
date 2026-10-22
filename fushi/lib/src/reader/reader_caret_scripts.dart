@@ -163,7 +163,7 @@ class ReaderCaretScripts {
   // vs fushi-lyrics-caret-ring）、_drawRing（本文件做视口 clamp）、_walker（本文件走 document.body
   // 全文）。
   static String source() =>
-      _sourceHead + (kKitapsenEdition ? '' : _dictJumpSource) + _sourceTail;
+      _sourceHead + ('') + _sourceTail;
 
   static const String _sourceHead = r"""
 window.fushiCaret = {

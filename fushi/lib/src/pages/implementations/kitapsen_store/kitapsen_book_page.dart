@@ -1,7 +1,7 @@
 /// A store book: details, the library action (read / get for free), wishlist,
 /// chapters of a serialized story, and reviews.
 ///
-/// No price and no purchase path (store policy, see [kKitapsenEdition]): a
+/// No price and no purchase path (store policy, see [true]): a
 /// paid book that is not in the library offers its reading sample and the
 /// wishlist.
 library;

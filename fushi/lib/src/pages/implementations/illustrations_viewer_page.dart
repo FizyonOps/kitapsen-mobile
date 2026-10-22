@@ -186,19 +186,11 @@ class _IllustrationsViewerPageState extends State<IllustrationsViewerPage> {
       illustrationZoomRoute(
         context,
         (BuildContext routeContext) => ContextMenuTrigger(
-          onInvoke: isWindowsPlatform && !kKitapsenEdition
-              ? (Offset position) => unawaited(showImageCopyContextMenu(
-                    routeContext,
-                    position,
-                    onCopy: () => copyImageFileToClipboard(file),
-                  ))
-              : null,
+          onInvoke: null,
           child: IllustrationZoomViewer(
             file: file,
             diagnosticTag: 'IllustrationsViewer.zoom',
-            onLongPress: kKitapsenEdition || isWindowsPlatform
-                ? null
-                : () => unawaited(shareImageFile(file)),
+            onLongPress: null,
           ),
         ),
       ),

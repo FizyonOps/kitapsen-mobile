@@ -898,16 +898,6 @@ class AppModel with ChangeNotifier {
               scope: DeleteScope.keepLocalOnly,
             );
           case SyncTombstoneKind.video:
-            // Kitapsen: no video library; the video repository stays out.
-            if (!kKitapsenEdition) {
-              final bool deleted = await VideoBookRepository(database)
-                  .deleteVideoBookAndReclaimAssets(
-                c.itemKey,
-                scope: DeleteScope.keepLocalOnly,
-                compactDatabase: false,
-              );
-              deletedVideoBook = deletedVideoBook || deleted;
-            }
           case SyncTombstoneKind.audiobook:
             await AudiobookRepository(database)
                 .deleteAudiobook(c.itemKey, propagateDeletion: false);
@@ -944,9 +934,6 @@ class AppModel with ChangeNotifier {
       } catch (e) {
         debugPrint('[sync] apply deletion ${c.mediaType}/${c.itemKey}: $e');
       }
-    }
-    if (!kKitapsenEdition && deletedVideoBook) {
-      await VideoBookRepository(database).compactAfterVideoDeleteBestEffort();
     }
     // 删完刷新受影响的本地库缓存/书架（书 + 视频 + 有声书都可能变）。
     ReaderMediaType.instance.refreshTab();
@@ -991,9 +978,6 @@ class AppModel with ChangeNotifier {
       ReaderMediaType.instance.refreshTab();
     }
 
-    if (!kKitapsenEdition && report.localAudioImported > 0) {
-      DictionaryMediaType.instance.refreshTab();
-    }
 
     notifyListeners();
   }
@@ -1048,9 +1032,7 @@ class AppModel with ChangeNotifier {
                 appName: 'Kitapsen',
                 groupTitle: t.updates_notification_header,
                 // Kitapsen: no update feeds; keeps the updates center out.
-                onResponse: kKitapsenEdition
-                    ? (UpdateNotificationResponse _) async {}
-                    : _onUpdateNotificationResponse,
+                onResponse: (UpdateNotificationResponse _) async {},
               )
             : const NoopUpdateNotifier(),
         notificationText: localizedUpdateNotificationText,
@@ -1264,23 +1246,7 @@ class AppModel with ChangeNotifier {
     floatingLyricClickLookup: () => floatingLyricClickLookup,
     onFloatingLyricLookup: (String text, int index, Rect? wordRect) {
       // Kitapsen: no lookup.
-      if (kKitapsenEdition) return;
-      // app 级（无 reader attach）桌面悬浮窗点词：Windows 优先弹 867 app 外全局
-      // 查词覆盖窗（TODO-872，主窗最小化/被遮挡也看得见）；覆盖窗不可用才回落
-      // 常驻主窗口的 in-app 查词宿主 [FloatingLyricLookupHost]（main.dart 根
-      // builder 挂载），不依赖进任何书（TODO-354 ①）。reader attach 时会换成
-      // reader 的点词处理器。
-      unawaited(() async {
-        if (await tryFloatingLyricGlobalLookup(
-          appModel: this,
-          text: text,
-          index: index,
-          wordRect: wordRect,
-        )) {
-          return;
-        }
-        FloatingLyricLookupNotifier.instance.requestLookup(text, index);
-      }());
+      return;
     },
     controlStreams: AudioControlStreams(
       playStream: audioCtrl.playStream,
@@ -2553,25 +2519,8 @@ class AppModel with ChangeNotifier {
   /// Populate maps for languages at startup to optimise performance.
   void populateLanguages() {
     // Kitapsen: no target language (no lookup or language study).
-    if (kKitapsenEdition) {
-      languages = const <String, Language>{};
-      return;
-    }
-
-    /// A list of languages that the app will support at runtime.
-    final List<Language> availableLanguages = List<Language>.unmodifiable(
-      [
-        JapaneseLanguage.instance,
-      ],
-    );
-
-    languages = Map<String, Language>.unmodifiable(
-      Map<String, Language>.fromEntries(
-        availableLanguages.map(
-          (language) => MapEntry(language.locale.toLanguageTag(), language),
-        ),
-      ),
-    );
+    languages = const <String, Language>{};
+    return;
   }
 
   /// Populate maps for locales at startup to optimise performance.
@@ -2615,8 +2564,6 @@ class AppModel with ChangeNotifier {
     final List<MediaType> availableMediaTypes = List<MediaType>.unmodifiable(
       [
         ReaderMediaType.instance,
-        // Kitapsen: no dictionary.
-        if (!kKitapsenEdition) DictionaryMediaType.instance,
       ],
     );
 
@@ -2639,12 +2586,7 @@ class AppModel with ChangeNotifier {
         // 仅在打开时经 mediaSourceIdentifier='reader_pdf' 路由到本源、进 ReaderPdfPage。
         // 通用 init 循环与 refreshPrefCache 按 mediaSources 遍历，自动接管本源初始化。
         ReaderPdfSource.instance,
-        // 漫画 OCR P1：第三个 reader 源。format=='manga' 的行在打开时经
-        // mediaSourceIdentifier='reader_manga' 路由到本源、进 MangaFushiPage。
-        // Kitapsen: no manga, so the manga reader is not compiled in.
-        if (!kKitapsenEdition) MangaFushiSource.instance,
       ],
-      if (!kKitapsenEdition) DictionaryMediaType.instance: [],
     };
 
     mediaSources = Map<MediaType, Map<String, MediaSource>>.unmodifiable(
@@ -2666,193 +2608,29 @@ class AppModel with ChangeNotifier {
   /// Populate maps for dictionary formats at startup to optimise performance.
   void populateDictionaryFormats() {
     // Kitapsen: no dictionaries, so no import formats.
-    if (kKitapsenEdition) {
-      dictionaryFormats = const <String, DictionaryFormat>{};
-      return;
-    }
-
-    /// A list of dictionary formats that the app will support at runtime.
-    final List<DictionaryFormat> availableDictionaryFormats =
-        List<DictionaryFormat>.unmodifiable(
-      [
-        YomichanFormat.instance,
-        MigakuFormat.instance,
-        AbbyyLingvoFormat.instance,
-        MdictFormat.instance,
-      ],
-    );
-
-    dictionaryFormats = Map<String, DictionaryFormat>.unmodifiable(
-      Map<String, DictionaryFormat>.fromEntries(
-        availableDictionaryFormats.map(
-          (dictionaryFormat) => MapEntry(
-            dictionaryFormat.uniqueKey,
-            dictionaryFormat,
-          ),
-        ),
-      ),
-    );
+    dictionaryFormats = const <String, DictionaryFormat>{};
+    return;
   }
 
   /// Populate maps for fields at startup to optimise performance.
   void populateFields() {
     // Kitapsen: no card creation, so no card fields.
-    if (kKitapsenEdition) {
-      fields = const <String, Field>{};
-      return;
-    }
-    fields = Map<String, Field>.unmodifiable(
-      Map<String, Field>.fromEntries(
-        globalFields.map(
-          (field) => MapEntry(field.uniqueKey, field),
-        ),
-      ),
-    );
+    fields = const <String, Field>{};
+    return;
   }
 
   /// Populate maps for enhancements at startup to optimise performance.
   void populateEnhancements() {
     // Kitapsen: no card creation, so no field enhancements.
-    if (kKitapsenEdition) {
-      enhancements = const <Field, Map<String, Enhancement>>{};
-      return;
-    }
-
-    /// A list of enhancements that the app will support at runtime.
-    final Map<Field, List<Enhancement>> availableEnhancements = {
-      AudioField.instance: [
-        ClearFieldEnhancement(field: AudioField.instance),
-        LocalAudioEnhancement(field: AudioField.instance),
-        PickAudioEnhancement(field: AudioField.instance),
-        if (AudioRecorderEnhancement.isAvailable)
-          AudioRecorderEnhancement(field: AudioField.instance),
-      ],
-      AudioSentenceField.instance: [
-        ClearFieldEnhancement(field: AudioSentenceField.instance),
-        PickAudioEnhancement(field: AudioSentenceField.instance),
-        if (AudioRecorderEnhancement.isAvailable)
-          AudioRecorderEnhancement(field: AudioSentenceField.instance),
-      ],
-      NotesField.instance: [
-        ClearFieldEnhancement(field: NotesField.instance),
-        OpenStashEnhancement(field: NotesField.instance),
-        PopFromStashEnhancement(field: NotesField.instance),
-        TextSegmentationEnhancement(field: NotesField.instance),
-      ],
-      ImageField.instance: [
-        ClearFieldEnhancement(field: ImageField.instance),
-        CropImageEnhancement(),
-        PickImageEnhancement(),
-        if (CameraEnhancement.isAvailable) CameraEnhancement(),
-      ],
-      MeaningField.instance: [
-        ClearFieldEnhancement(field: MeaningField.instance),
-        SentencePickerEnhancement(field: MeaningField.instance),
-        TextSegmentationEnhancement(field: MeaningField.instance),
-      ],
-      ReadingField.instance: [
-        ClearFieldEnhancement(field: ReadingField.instance),
-      ],
-      SentenceField.instance: [
-        ClearFieldEnhancement(field: SentenceField.instance),
-        TextSegmentationEnhancement(field: SentenceField.instance),
-        SentencePickerEnhancement(field: SentenceField.instance),
-        OpenStashEnhancement(field: SentenceField.instance),
-        PopFromStashEnhancement(field: SentenceField.instance),
-      ],
-      CueSentenceField.instance: [
-        ClearFieldEnhancement(field: CueSentenceField.instance),
-        TextSegmentationEnhancement(field: CueSentenceField.instance),
-      ],
-      TermField.instance: [
-        ClearFieldEnhancement(field: TermField.instance),
-        SearchDictionaryEnhancement(),
-        OpenStashEnhancement(field: TermField.instance),
-        PopFromStashEnhancement(field: TermField.instance),
-      ],
-      ContextField.instance: [
-        ClearFieldEnhancement(field: ContextField.instance),
-        OpenStashEnhancement(field: ContextField.instance),
-        PopFromStashEnhancement(field: ContextField.instance),
-      ],
-      PitchAccentField.instance: [
-        ClearFieldEnhancement(field: PitchAccentField.instance),
-      ],
-      FuriganaField.instance: [
-        ClearFieldEnhancement(field: FuriganaField.instance),
-      ],
-      FrequencyField.instance: [
-        ClearFieldEnhancement(field: FrequencyField.instance),
-      ],
-      CollapsedMeaningField.instance: [
-        ClearFieldEnhancement(field: CollapsedMeaningField.instance),
-        SentencePickerEnhancement(field: CollapsedMeaningField.instance),
-        TextSegmentationEnhancement(field: CollapsedMeaningField.instance),
-      ],
-      ExpandedMeaningField.instance: [
-        ClearFieldEnhancement(field: ExpandedMeaningField.instance),
-        SentencePickerEnhancement(field: ExpandedMeaningField.instance),
-        TextSegmentationEnhancement(field: ExpandedMeaningField.instance),
-      ],
-      HiddenMeaningField.instance: [
-        ClearFieldEnhancement(field: HiddenMeaningField.instance),
-        SentencePickerEnhancement(field: HiddenMeaningField.instance),
-        TextSegmentationEnhancement(field: HiddenMeaningField.instance),
-      ],
-      TagsField.instance: [
-        ClearFieldEnhancement(field: TagsField.instance),
-        SaveTagsEnhancement(),
-      ],
-      ClozeBeforeField.instance: [
-        ClearFieldEnhancement(field: ClozeBeforeField.instance),
-      ],
-      ClozeAfterField.instance: [
-        ClearFieldEnhancement(field: ClozeAfterField.instance),
-      ],
-      ClozeInsideField.instance: [
-        ClearFieldEnhancement(field: ClozeInsideField.instance),
-      ],
-    };
-
-    enhancements = Map<Field, Map<String, Enhancement>>.unmodifiable(
-      availableEnhancements.map(
-        (field, enhancements) => MapEntry(
-          field,
-          Map<String, Enhancement>.unmodifiable(
-            Map<String, Enhancement>.fromEntries(
-              enhancements.map(
-                (enhancement) => MapEntry(enhancement.uniqueKey, enhancement),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
+    enhancements = const <Field, Map<String, Enhancement>>{};
+    return;
   }
 
   /// Populate maps for actions at startup to optimise performance.
   void populateQuickActions() {
     // Kitapsen: quick actions live in the lookup popup, which it does not have.
-    if (kKitapsenEdition) {
-      quickActions = const <String, QuickAction>{};
-      return;
-    }
-
-    /// A list of actions that the app will support at runtime.
-    final List<QuickAction> availableQuickActions = [
-      AddToStashAction(),
-      CopyToClipboardAction(),
-      ShareAction(),
-      PlayAudioAction(),
-    ];
-
-    quickActions = Map<String, QuickAction>.unmodifiable(
-      Map<String, QuickAction>.fromEntries(
-        availableQuickActions.map(
-          (quickAction) => MapEntry(quickAction.uniqueKey, quickAction),
-        ),
-      ),
-    );
+    quickActions = const <String, QuickAction>{};
+    return;
   }
 
   /// Return the export directory under the internal app directory. This also
@@ -2886,9 +2664,6 @@ class AppModel with ChangeNotifier {
       'dejavu-fonts',
       // Windows galgame overlay toolbar: reduced official Google font subset.
       'material-symbols-rounded',
-      // 内置 AnkiConnect 插件包（assets/anki/，GPLv3，新手引导一键安装用）。
-      // Kitapsen does not bundle the add-on, so not its license either.
-      if (!kKitapsenEdition) 'anki-connect',
       // galgame 校准 OCR 的 NFKC 映射表（gal_lookup_ocr_unicode.dart）由
       // Unicode Character Database 生成，Unicode License V3 要求随附许可。
       'unicode-data',
@@ -2928,9 +2703,6 @@ class AppModel with ChangeNotifier {
   /// the application. [AppModel] is initialised in the main function before
   /// [runApp] is executed.
   Future<void> _prepareRuntimeDirectories() async {
-    // Windows 安装向导里选的「数据存储位置」经一次性引导文件送达，必须在 resolve
-    // 读 data_root pref 之前消费（全新安装才生效，见该函数契约）。
-    if (!kKitapsenEdition) await consumeInstallerDataRootBootstrap();
     // TODO-935 E0：三个数据根经唯一入口 [AppPaths] 解析（内部已honor测试分支
     // [fushiTestDirectory]，故行为与旧的 test/production 双分支逐字节等价）。
     _appPaths = await AppPaths.resolve();
@@ -2997,19 +2769,6 @@ class AppModel with ChangeNotifier {
       _database = FushiDatabase(_databaseDirectory.path);
       _databaseOpened = true;
 
-      // Sync-pref maintenance, before any repository loads them or sync runs:
-      // 1) recover device-local sync config if a previous backup import crashed
-      //    after overwriting the DB but before re-applying the preserved keys;
-      // 2) fold the deprecated "SMB"(WebDAV-gateway) config into WebDAV;
-      // 3) migrate the mutually-exclusive `backendType==fushiServer` interconnect
-      //    selection to the independent interconnect toggle (interconnect and a
-      //    cloud backup backend can now coexist).
-      // Kitapsen: no backup import or cloud sync backends, so nothing to recover.
-      if (!kKitapsenEdition) {
-        await BackupRestoreService.recoverPendingRestore(
-          _databaseDirectory.path,
-        );
-      }
 
       // 沙箱重定位自愈：数据根被**平台**挪走后，把库里的绝对路径重基过去。
       //
@@ -3045,7 +2804,7 @@ class AppModel with ChangeNotifier {
       _prefsRepo = PreferencesRepository(_database);
       // Kitapsen: no Anki, so profiles carry no Anki settings.
       final BaseAnkiRepository? ankiRepo =
-          kKitapsenEdition ? null : platformServices.createAnkiRepository();
+          null;
       final profileRepo = ProfileRepository(
         _database,
         ankiRepo,
@@ -3053,58 +2812,18 @@ class AppModel with ChangeNotifier {
         // 只在 applyProfile（用户操作）里调，那时 late 的资源目录早已就位。
         isDictionaryInstalled: isDictionaryInstalledOnDisk,
       );
-      // Kitapsen: no dictionaries, so the dictionary repository is never
-      // built and [isDictionaryRepoReady] stays false.
-      if (!kKitapsenEdition) {
-        dictRepo = DictionaryRepository(_database,
-            onCacheRebuild: _rebuildDictPathsCache,
-            isLowMemory: () => prefsRepo.lowMemoryMode);
-        _dictionaryRepoReady = true;
-      }
       mediaHistoryRepo = MediaHistoryRepository(_database);
 
       debugPrint('[Fushi] init: repositories (parallel)');
       await Future.wait(<Future<void>>[
         prefsRepo.loadFromDb().then((_) => _applyStatDayResetHour()),
         profileRepo.ensureDefaultProfile(),
-        if (!kKitapsenEdition) dictRepo.loadFromDb(),
         mediaHistoryRepo.loadFromDb(),
       ]);
       prefsRepo.addListener(notifyListeners);
-      if (!kKitapsenEdition) {
-        // 封面模式默认是音画同步片段：2026-09-28 被钉成 GIF 的存量安装在这里迁一次。
-        await prefsRepo.settleMiningImageModeInstallDefault();
-        // 偏好一装载就把折叠开关推给 TexthookerService（进程级单例、无 ref）。漏了这一步
-        // 开关就只在「本次会话里手动改过」时才生效，重启后静默退回默认值。
-        TexthookerService.instance.foldProgressiveLines =
-            prefsRepo.galHookFoldProgressiveLines;
-      }
-      // 代理是**进程级**网络出口配置，却只存在偏好里；同步层的单例（GoogleDriveAuth 等）
-      // 拿不到 AppModel，以前就只能各自裸连——BUG-1348 的谷歌云盘登录超时正是如此。四个
-      // 代理读取器的绑定已下沉到 `PreferencesRepository.loadFromDb()`（偏好变得可读的
-      // 那一刻），这样弹窗词典等**其它**入口不必各自记得补一行——漏一处就是一整个进程
-      // 拿不到用户选的模式/凭据。这里只留更新专用的那个。
-      // Kitapsen: store updates only (no GitHub / mirror download sources).
-      if (!kKitapsenEdition) {
-        appUpdateDownloadSourceReader = () => prefsRepo.updateDownloadSource;
-      }
       // 主入口与精简词典入口共用装配，并等系统代理就绪后再启动网络服务。
       await installAppNetworkBindings();
-      if (!kKitapsenEdition) _applyEmbeddedTorrentProxy();
       _applyMemoryPolicy();
-      // BUG-1647：lazy getter 可能已提前建过实例；替换前先取消其重试定时器，
-      // 否则旧定时器会拿着旧 repository 继续同步。
-      if (!kKitapsenEdition) {
-        _mediaTrackingService?.dispose();
-        _mediaTrackingService = MediaTrackingService(
-          repository: MediaTrackingRepository(_database),
-          preferences: prefsRepo,
-          userAgent: _mediaTrackingUserAgent,
-        );
-        if (kMediaTrackingEnabled) {
-          unawaited(mediaTrackingService.syncNow());
-        }
-      }
 
       final Map<String, String> prefsSnapshot = prefsRepo.prefsSnapshot;
 
@@ -3133,12 +2852,6 @@ class AppModel with ChangeNotifier {
         'create-runtime-dirs',
         Future.wait(<Future<void>>[
           thumbnailsDirectory.create(recursive: true),
-          // Kitapsen: no dictionaries, so no dictionary directories.
-          if (!kKitapsenEdition)
-            dictionaryImportWorkingDirectory.create(recursive: true),
-          if (!kKitapsenEdition)
-            dictionaryResourceDirectory.create(recursive: true).then((_) =>
-                purgePendingDictionaryDeletes(dictionaryResourceDirectory)),
           refreshSystemPalette(),
           () async {
             _exportDirectory = await prepareExportDirectory();
@@ -3165,19 +2878,7 @@ class AppModel with ChangeNotifier {
       // TODO-1260：内部对每本词典的资源目录做 exists() 探测（数据根派生），同样叠超时。
       ErrorLogService.instance
           .markInitStep('rebuild-dict-paths（词典资源目录 exists + 物化探测）');
-      // Kitapsen: no dictionary repository, so no dictionary engine to load.
-      if (!kKitapsenEdition) {
-        await _guardInitIo(
-            'rebuild-dict-paths', _rebuildDictPathsCacheAsync());
-      }
 
-      // Kitapsen: no dictionary audio, so no local audio databases.
-      if (!kKitapsenEdition) {
-        _localAudioManager = LocalAudioManager(
-          prefsRepo: prefsRepo,
-          databaseDirectory: _databaseDirectory,
-        );
-      }
       _fileExportManager = FileExportManager(
         exportDirectory: _exportDirectory,
         alternateExportDirectory: _alternateExportDirectory,
@@ -3187,30 +2888,16 @@ class AppModel with ChangeNotifier {
       populateLanguages();
       populateLocales();
       LocaleSettings.setLocaleRaw(appLocale.toLanguageTag());
-      // 词形变化语法说明的译文表跟界面语言走（BUG-2038）。装的是一张内存查表，
-      // 与词典引擎里那份英文 transforms JSON 无关，所以放在引擎初始化之后也没问题。
-      if (!kKitapsenEdition) {
-        unawaited(applyTransformDescriptionLocale(appLocale.toLanguageTag()));
-      }
       populateMediaTypes();
       populateMediaSources();
       populateDictionaryFormats();
       populateEnhancements();
       populateQuickActions();
 
-      if (!kKitapsenEdition) {
-        _dictImportManager = DictionaryImportManager(
-          dictRepo: dictRepo,
-          resourceDirectory: _dictionaryResourceDirectory,
-          formats: dictionaryFormats,
-        );
-      }
 
       await Future.wait(<Future<void>>[
-        if (!kKitapsenEdition) JapaneseLanguage.instance.initialise(),
         injectAssetLicenses(),
         _seedBuiltInTags(),
-        if (!kKitapsenEdition) _prepareLocalAudioForPlayback(),
       ]);
 
       debugPrint(
@@ -3263,18 +2950,6 @@ class AppModel with ChangeNotifier {
       gamepadService.start();
 
       await Future.wait(<Future<void>>[
-        // Kitapsen: no card fields or quick actions (both maps are empty).
-        if (!kKitapsenEdition)
-          Future.wait(<Future<void>>[
-            for (Field field in globalFields)
-              for (Enhancement enhancement in enhancements[field]!.values)
-                enhancement.initialise(),
-          ]),
-        if (!kKitapsenEdition)
-          Future.wait(<Future<void>>[
-            for (QuickAction action in quickActions.values)
-              action.initialise(),
-          ]),
         Future.wait(<Future<void>>[
           for (MediaType type in mediaTypes.values)
             for (MediaSource source in mediaSources[type]!.values)
@@ -3298,11 +2973,6 @@ class AppModel with ChangeNotifier {
 
       debugPrint(
           '[Fushi] init: search preload (deferred to after first frame)');
-      // Kitapsen: no dictionaries to warm up.
-      if (!kKitapsenEdition) unawaited(_warmUpSearchAfterFirstFrame());
-      // 已下架的本机 OCR 模型（约 10 GB 的 CUDA 档）留在磁盘上的目录：设置页与
-      // 存储页都没有它的入口了，不清就永远占着空间。幂等、失败只记日志。
-      if (!kKitapsenEdition) unawaited(deleteRemovedMangaOcrModelDirs());
 
       debugPrint('[Fushi] init: DONE');
       // TODO-1260：启动正常跑完，清掉启动步进面包屑（否则下次启动会误报上次 hang）。
@@ -3311,19 +2981,6 @@ class AppModel with ChangeNotifier {
       // TODO-855: prime the prefs-version watermark from the freshly loaded
       // cache (keeps refreshPrefCacheIfChanged consistent if ever reused here).
       _lastSeenPrefsVersion = prefsRepo.prefsVersion;
-      // 刻意**不加模块门**：这只是给 native 悬浮词典窗注册「查词 / 制卡」回调，
-      // 是 app 外取词**能力**而不是查词页入口。用户拍板「关 lookup 只关页面入口，
-      // 查词能力全留」，注销回调会让已开着的悬浮窗查不出词、按钮静默失败。
-      // Kitapsen: no floating dictionary and no lookup search box.
-      if (!kKitapsenEdition) {
-        _setupFloatingDictHandlers();
-        // 把查词输入法语言同步给原生查词界面：Android 的悬浮词典 / 弹窗词典搜索框是
-        // 原生 EditText，读的是这份持久化值。放这里而不是只在设置页写——用户可能从
-        // 备份恢复、或在别的设备改了同步过来，那些路径都不经设置页。
-        unawaited(
-          LookupImeChannel.persistForNativeSurfaces(effectiveLookupImeLanguage),
-        );
-      }
       // 已迁移只读态（Fushi 迁移 P1-4）：不再自启互联服务——两版并存时端口
       // 固定必冲突（SyncServerPortInUseException 会打到用户脸上）；老版只保
       // 留「重新导出」通道。
@@ -3339,128 +2996,6 @@ class AppModel with ChangeNotifier {
       // 刻意**只判启动、不 stop**：用户在会话中途关模块时不切断进行中的任务
       // （正在跑的同步/下载/做种照常跑完），下次启动才不再拉起。
       final ModuleVisibility modules = moduleVisibility;
-      // Start the LAN sync server now if hosting is enabled, so it runs app-wide
-      // for the whole session instead of only while the sync settings page is on
-      // screen (BUG-085). Fire-and-forget: a bind failure self-disables + is
-      // logged and must never break app init.
-      // 模块门（sync）：这两条都是「同步与备份 + 互联」专属后台——服务器要绑端口
-      // 起发现广播，监听器要挂 DB 订阅并按写入推同步。关掉 sync 模块后不再自启，
-      // 代价是本机不再作为互联 host 被别的设备发现/连接，合集增删也不再自动推送。
-      // Kitapsen: no LAN host / interconnect, so none of it is compiled in.
-      if (!kKitapsenEdition && modules.isEnabled(ModuleId.sync)) {
-        if (!kKitapsenEdition && modules.isEnabled(ModuleId.games)) {
-          _configureGameStreamLibrary();
-        }
-        unawaited(
-          syncServerController
-              .startIfEnabled()
-              .then((FushiServerStartOutcome outcome) {
-                if (outcome is FushiServerPortInUse) {
-                  ErrorLogService.instance.log(
-                    'AppModel.startSyncServer',
-                    'port ${outcome.port} in use',
-                    StackTrace.current,
-                  );
-                } else if (outcome is FushiServerStartError) {
-                  ErrorLogService.instance.log(
-                    'AppModel.startSyncServer',
-                    outcome.message,
-                    StackTrace.current,
-                  );
-                }
-              })
-              .catchError((Object e, StackTrace s) {
-                ErrorLogService.instance.log('AppModel.startSyncServer', e, s);
-              }),
-        );
-        // 合集变更 → 防抖轻量同步（根修「合集经常没同步」：合集维度原本只搭载在
-        // 低频全量 sweep 上，增删合集后长时间不推送）。任何合集表写入都会在防抖
-        // 后跑一轮只含合集维度的双通道同步，见 installCollectionsSyncWatcher 文档。
-        installCollectionsSyncWatcher(db: database);
-      }
-      // 刻意**不加模块门**：它是「让任意 yomitan-api 客户端查 Fushi 词典」的查词
-      // 能力（端口 19633），开关落在恒在的「设置 → 查词」分类里，且移动端同样可用
-      // （browserExtension 模块仅桌面存在）。挂 browserExtension 门会一次犯两个错：
-      // 移动端直接失去该服务，桌面端则开关显示「开」而服务不跑。
-      // Kitapsen: no dictionaries, so no local lookup servers either.
-      if (!kKitapsenEdition && yomitanApiServerEnabled) {
-        // fail-open：自启动失败绝不阻塞 init、不改开关语义，但必须留痕（BUG-911），
-        // 与邻居 startSyncServer / refreshBrowserExtensionCopy 一致记日志，避免静默吞异常。
-        unawaited(startYomitanApiServer().catchError((Object e, StackTrace s) {
-          ErrorLogService.instance
-              .log('AppModel.startYomitanApiServer.autostart', e, s);
-        }));
-      }
-      // BUG-726：桌面端启动时把 <appSupport> 下已解压的浏览器扩展副本刷新到当前内置版本
-      // （只在用户装过扩展、指纹不一致时重解压；没装过不落盘）。此前该副本只在手动跑
-      // 「安装扩展」助手时写入 → app 升级后磁盘副本永远停在安装当天的旧版，扩展弹窗与
-      // app 内弹窗漂移（BUG-621/688 修了也到不了用户浏览器）。fire-and-forget 不阻塞 init。
-      // 模块门（browserExtension）：这份磁盘副本只服务「浏览器扩展」管理页的安装
-      // 助手，模块关掉后那个页面本身也不存在。关掉后不再刷新副本，也不再算内置指纹
-      // （查词响应里的 `extensionBuild` 字段随之省略——扩展模块已关，没有消费者）。
-      // 平台判据走 modules（browserExtension 仅桌面），与函数内既有的桌面早退同向。
-      if (!kKitapsenEdition && modules.isEnabled(ModuleId.browserExtension)) {
-        unawaited(
-            refreshBrowserExtensionCopy().catchError((Object e, StackTrace s) {
-          ErrorLogService.instance
-              .log('AppModel.refreshBrowserExtensionCopy', e, s);
-        }));
-      }
-      // 刻意**不加模块门**：texthooker 是「连 Textractor / mpv / agent，把收到的
-      // 文本拿去查词」的查词能力（不只 galgame），开关同样落在恒在的「设置 → 查词」
-      // 分类里，且那个开关自己就直接 start/stop 本管理器——只在启动侧加门会让
-      // 「开关是开的但重启后不连」，两处判据当场漂开。
-      if (!kKitapsenEdition && texthookerEnabled) {
-        TexthookerWsClientManager.instance.start(texthookerUrls);
-      }
-      // TODO-861③：启动 check-due 词典自动更新（前台、静默、不弹错）。fire-and-forget，
-      // 失败自吞 + 记日志，绝不阻塞 / 中断 app init（守卫见 maybeAutoUpdateDictionaries）。
-      if (!kKitapsenEdition) {
-        unawaited(
-            maybeAutoUpdateDictionaries().catchError((Object e, StackTrace s) {
-          ErrorLogService.instance
-              .log('AppModel.maybeAutoUpdateDictionaries', e, s);
-        }));
-      }
-      // 番剧下载：启动 qb 完成监听 + 自动入库（fire-and-forget；未配置 qb 时每
-      // tick 直接返回，无网络开销，绝不阻塞/中断 init）。
-      // 模块门（downloads）：番剧下载完成监听是「下载中心」专属后台（计划仓储 +
-      // 完成轮询 + 自动入库）。关掉 downloads 后不再自启，代价是已推给 qb / 内置引擎
-      // 的种子下完后不会被自动识别入库（种子本身照常下完，重开模块后下一 tick 补上）。
-      //
-      // 门只加在调用点：[startAnimeDownloadService] 函数体内部顺序敏感（懒建 session、
-      // resume 剪枝哨兵），守卫测试按源码顺序扫它，绝不能把判断插进函数中段。
-      if (!kKitapsenEdition && modules.isEnabled(ModuleId.browse)) {
-        unawaited(
-            startAnimeDownloadService().catchError((Object e, StackTrace s) {
-          ErrorLogService.instance
-              .log('AppModel.startAnimeDownloadService', e, s);
-        }));
-      }
-      // 推荐包（9.5 GB zip）的包目录进场收尾：删掉「已导入」的残包、搬改名前的旧
-      // 半截文件，再把下载阶段对齐磁盘。
-      //
-      // BUG-2109：收尾必须挂在**启动必经路径**上，不能挂新手引导页 ——
-      // 推荐包本身是一份含 settings 类目的备份，导入时 `preferences` 表被整层
-      // 替换，`onboarding_completed` 随之变成 true，导入后的那次重启根本不会再
-      // 打开引导页，9.5 GB 就永久留在盘上。
-      //
-      // BUG-2109：但它**不能**挂进 `_guardInitIo` 那批启动关键 IO：那层是 12s
-      // 硬超时，同批其它任务全是毫秒级 mkdir，而删 9.5 GB（外置卡 / FAT32 /
-      // 网络盘）超 12s 完全可能 —— 清个残包把启动干成错误屏。它不是启动关键
-      // IO，放到这里 fire-and-forget。
-      //
-      // BUG-2109：同时这也是 `stage` 在新进程里唯一的对盘点。不跑它，stage 永远
-      // 停在 idle，设置 → 系统里那行（判据是 `isActive`）就不渲染：下完没导入就
-      // 关 app 的用户，重开后磁盘上躺着的 9.5 GB 既看不见也导不了。
-      if (!kKitapsenEdition) {
-        unawaited(recommendedPackDownloadController
-          .prepareDiskState()
-          .catchError((Object e, StackTrace s) {
-        ErrorLogService.instance
-            .log('AppModel.recommendedPackPrepareDiskState', e, s);
-      }));
-      }
       notifyListeners();
     } on DataRootUnavailableException catch (e, stack) {
       // BUG-815: a custom data root IS configured but is currently unreachable
@@ -4077,8 +3612,6 @@ class AppModel with ChangeNotifier {
   Future<void> setAppLocale(String localeTag) async {
     await _setPref('app_locale', localeTag);
     LocaleSettings.setLocaleRaw(localeTag);
-    // 语法说明译文表即时换掉：不重启的桌面端也要跟着变（BUG-2038）。
-    if (!kKitapsenEdition) await applyTransformDescriptionLocale(localeTag);
     if (isDesktopPlatform) {
       // 刮削资料语言默认跟随界面语言，而下载导入那条刮削链的配置在建管线时
       // 冻结（BUG-2454）：不重建，桌面端换完界面语言后新下载的作品仍按旧语言
@@ -4536,8 +4069,6 @@ class AppModel with ChangeNotifier {
     host.applyAntiLeechConfig(effective);
     // 上传/做种策略（默认关上传；开启后做种时长/分享率上限），即时生效。
     host.setUploadPolicy(effective);
-    // P2P 代理（默认直连；用户在系统设置里单独开启才跟全局代理）。
-    if (!kKitapsenEdition) _applyEmbeddedTorrentProxy();
   }
 
   /// 番剧下载：计划存储（选种对话框写计划/暂存字幕，与完成监听服务共用同一实例）。
@@ -4680,21 +4211,9 @@ class AppModel with ChangeNotifier {
     final MihonRuntime? existing = _mihonRuntime;
     if (existing != null) return existing;
     // Kitapsen has no online manga / video sources (no Mihon host).
-    if (kKitapsenEdition || !MihonRuntimeFactory.isSupported) {
-      throw UnsupportedError(
-        'Mihon extensions are unavailable on this platform',
-      );
-    }
-    final MihonRuntime runtime = MihonRuntimeFactory.create(
-      Directory(path.join(databaseDirectory.path, 'mihon')),
+    throw UnsupportedError(
+      'Mihon extensions are unavailable on this platform',
     );
-    _mihonRuntime = runtime;
-    if (Platform.isWindows || Platform.isMacOS) {
-      _mihonRuntimeExitShutdown = ExitFlushRegistry.instance.register(
-        _shutdownMihonRuntime,
-      );
-    }
-    return runtime;
   }
 
   Future<void> _shutdownMihonRuntime() =>
@@ -5222,20 +4741,7 @@ class AppModel with ChangeNotifier {
   Future<VideoDownloadBackendIdentity> _currentVideoDownloadBackendIdentity(
     QbConnectionConfig config,
   ) async {
-    if (kKitapsenEdition) {
-      throw UnsupportedError('video downloads are not part of Kitapsen');
-    }
-    final String resolved =
-        config.resolveBackend(embeddedSupported: _supportsEmbeddedTorrent());
-    final String installationId =
-        await prefsRepo.ensureVideoDownloadEmbeddedInstallationId();
-    return buildVideoDownloadBackendIdentity(
-      config: config,
-      resolvedBackend: resolved,
-      embeddedInstallationId: installationId,
-      embeddedAvailable: resolved != QbConnectionConfig.backendEmbedded ||
-          isEmbeddedTorrentReady,
-    );
+    throw UnsupportedError('video downloads are not part of Kitapsen');
   }
 
   /// 当前新任务的落点：后端实例身份 + 此刻设置里的投放分类。UI 只保存此快照，
@@ -5249,15 +4755,7 @@ class AppModel with ChangeNotifier {
   Future<VideoDownloadBackendTarget> currentVideoDownloadBackendTarget() async {
     // Kitapsen: no video downloads, so no download backend (qBittorrent /
     // built-in torrent) code is compiled in.
-    if (kKitapsenEdition) {
-      throw UnsupportedError('video downloads are not part of Kitapsen');
-    }
-    final QbConnectionConfig config =
-        effectiveTorrentConfig(prefsRepo.qbConnectionConfig);
-    return VideoDownloadBackendTarget(
-      identity: await _currentVideoDownloadBackendIdentity(config),
-      category: config.category,
-    );
+    throw UnsupportedError('video downloads are not part of Kitapsen');
   }
 
   /// 就绪的下载后端名（`embedded` / `qbittorrent`），null = 本机没配好。
@@ -5269,15 +4767,7 @@ class AppModel with ChangeNotifier {
   /// `127.0.0.1:8080`；两套判据一松一严时「非空」会放行 → 落库 → 身份解析抛
   /// ArgumentError → 调用方当「未配置」再弹一次配置引导，用户出不去。
   String? get readyVideoDownloadBackend {
-    if (kKitapsenEdition) return null;
-    final QbConnectionConfig config = effectiveTorrentConfig(qbConnectionConfig);
-    if (isEmbeddedTorrentReady &&
-        config.backend != QbConnectionConfig.backendQbittorrent) {
-      return QbConnectionConfig.backendEmbedded;
-    }
-    return normalizeQbBackendAddress(config.baseUrl).isNotEmpty
-        ? QbConnectionConfig.backendQbittorrent
-        : null;
+    return null;
   }
 
   /// 互联 host 的代下载 / 订阅面（设计 §3.3）：对端交来的任务投进本机管线。
@@ -6668,20 +6158,7 @@ class AppModel with ChangeNotifier {
   Future<void> requestExternalStoragePermissions() async {
     // Kitapsen declares no storage permissions: file imports go through the
     // system picker (SAF / Files), which needs none, so never ask.
-    if (kKitapsenEdition) return;
-    if (await platformServices.permission.hasExternalStoragePermission()) {
-      return;
-    }
-    if (isFirstTimeSetup) {
-      FushiToast.show(
-        msg: t.storage_permissions,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        severity: ToastSeverity.info,
-      );
-    }
-
-    await platformServices.permission.requestExternalStoragePermission();
+    return;
   }
 
   // ── Anki integration (delegated to AnkiIntegration) ─────────────────
@@ -6756,15 +6233,6 @@ class AppModel with ChangeNotifier {
 
     mediaSource.clearCurrentSentence();
     mediaSource.clearExtraData();
-    // TODO-perf（开媒体反馈）：audio_service 冷启是平台通道重活（冷路径可达数百
-    // ms），此前串行挡在 Navigator.push 之前——点下卡片后到路由动画开始前屏幕零
-    // 反馈的那段就在这里。改为起跑不阻塞导航：AudioController.initialiseHandler
-    // 记忆化在飞 future（并发安全），真正需要 handler 的消费端（reader 的
-    // _resolveAudioSlot、书架后台听书 startBackgroundListening）await 同一份，
-    // 「会话挂通知前 handler 必就绪」的时序契约不变。方法自带兜底构造、永不抛，
-    // unawaited 安全。
-    // Kitapsen has no audiobooks, so no audio_service handler.
-    if (!kKitapsenEdition) unawaited(initialiseAudioHandler());
 
     _currentMediaSource = mediaSource;
     if (item != null) {
@@ -6832,8 +6300,6 @@ class AppModel with ChangeNotifier {
     required MediaSource mediaSource,
     MediaItem? item,
   }) async {
-    // Kitapsen has no audio handler (no audiobooks).
-    if (!kKitapsenEdition) audioCtrl.audioHandler?.mediaItem.add(null);
 
     mediaSource.setShouldGenerateImage(value: true);
     mediaSource.setShouldGenerateAudio(value: true);
@@ -6864,10 +6330,8 @@ class AppModel with ChangeNotifier {
       ref: ref,
     );
 
-    if (!kKitapsenEdition) await audioCtrl.audioHandler?.stop();
 
     mediaSource.mediaType.refreshTab();
-    if (!kKitapsenEdition) DictionaryMediaType.instance.refreshTab();
 
     if (_shouldKillMediaOnPop) {
       shutdown();
@@ -7612,73 +7076,15 @@ class AppModel with ChangeNotifier {
 
   @override
   void dispose() {
-    // BUG-913：对称释放 initialise() 起的 4 个 app-wide 常驻子系统。dispose 是同步的、
-    // 这些 stop 多为 Future → fire-and-forget（unawaited）；先停常驻服务，再走现有
-    // notifier/repo dispose，最后 super.dispose()。
-    // Kitapsen: the LAN sync server is never started, so it is not compiled in.
-    if (!kKitapsenEdition && _isInitialised) {
-      // syncServerController 是 late final 带初始化器（读即构造）：仅在已 init（即已被
-      // startIfEnabled 构造）时读它，避免「从未 init 却只为销毁而构造」。它既是常驻
-      // 服务又是 ChangeNotifier，故 stop() 后还需 dispose()。
-      // BUG-1573：dispose() 现在**自己**拆掉广播 / server / LAN 发现浏览器，并在
-      // `_disposed` 后把 notifyListeners 变成 no-op —— 原来这两行的顺序（同步的
-      // dispose 之后 stop 才恢复执行）必然让 stop 尾部的 notify 撞
-      // 「dispose 后不得 notify」断言。stop 现在对并发调用幂等，这一行保留只是让
-      // 关停在 dispose 之前就开始。
-      unawaited(syncServerController.stop());
-      syncServerController.dispose();
-    }
     // BUG-1569②：合集观察者是模块级全局（幂等，未装载时 no-op），dispose 路径
     // 也对称撤掉，防止未决防抖 Timer 在 AppModel 销毁后仍去摸 db。
     uninstallCollectionsSyncWatcher();
-    // 其余三个 stop 都 null 安全 / 单例安全，未启动也可调，无需 _isInitialised 守卫。
-    if (!kKitapsenEdition) {
-      unawaited(TexthookerWsClientManager.instance.stop());
-      unawaited(stopYomitanApiServer());
-    }
-    // Kitapsen never starts downloads, online sources or the Mihon host.
-    if (!kKitapsenEdition) {
-      _animeDownloadService?.stop();
-      _animeDownloadSubscriptionService?.stop();
-      _videoDownloadPipelineRuntimeWanted = false;
-      unawaited(_disposeVideoDownloadPipelineRuntime());
-      // 扩展查字幕桥那套 registry 不属于下载管线（管线关着时它才存在），得单独收。
-      _disposeBrowserSubtitleRegistry();
-      _mangaDownloadService?.dispose();
-      _mangaDownloadService = null;
-      // 服务持有 FushiDatabase 引用，db 关闭/重开时必须一并销毁，否则新库开出来后
-      // 旧实例还拿着已关闭的连接，探测队列一落库就抛。
-      _videoSpecsService?.dispose();
-      _videoSpecsService = null;
-      _videoSpecsServiceDb = null;
-      _discoveryDownloadKeepAlive?.dispose();
-      _discoveryDownloadKeepAlive = null;
-      _discoveryDownloadQueue?.dispose();
-      _discoveryDownloadQueue = null;
-      _mediaDiscoveryService?.close();
-      _mediaDiscoveryService = null;
-      _mihonManager?.dispose();
-      _mihonManager = null;
-      _animeMihonManager?.dispose();
-      _animeMihonManager = null;
-      _lnReaderManager?.dispose();
-      _lnReaderManager = null;
-      final ExitFlushCallback? mihonExitShutdown = _mihonRuntimeExitShutdown;
-      _mihonRuntimeExitShutdown = null;
-      if (mihonExitShutdown != null) {
-        ExitFlushRegistry.instance.unregister(mihonExitShutdown);
-      }
-      unawaited(_shutdownMihonRuntime());
-      _mihonRuntime = null;
-    }
     _prefsRepo?.removeListener(notifyListeners);
     if (_themeListenerAdded) {
       themeNotifier.removeListener(notifyListeners);
       themeNotifier.dispose();
       _themeListenerAdded = false;
     }
-    if (!kKitapsenEdition) dictionaryDownloadController.dispose();
-    if (!kKitapsenEdition) recommendedPackDownloadController.dispose();
     dictionaryEntriesNotifier.dispose();
     dictionarySearchAgainNotifier.dispose();
     dictionaryMenuNotifier.dispose();
@@ -7686,33 +7092,16 @@ class AppModel with ChangeNotifier {
     databaseCloseNotifier.dispose();
     homeDictionaryTabRequest.dispose();
     mediaOpenNotifier.dispose();
-    // session 的控制流订阅引用 audioCtrl 的 stream，须在 audioCtrl.dispose 前拆。
-    // Kitapsen never creates the audio session or controller.
-    if (!kKitapsenEdition) {
-      audiobookSession.dispose();
-      audioCtrl.dispose();
-    }
     gamepadService.dispose();
     // Dispose the extracted repository notifiers (all ChangeNotifiers). Only
     // when fully initialised — a failed/partial init leaves these `late`
     // fields unassigned, and reading them would throw.
     _prefsRepo?.dispose();
     if (_isInitialised) {
-      // Kitapsen never builds the dictionary repository.
-      if (!kKitapsenEdition) dictRepo.dispose();
       mediaHistoryRepo.dispose();
     }
     _remoteLookupHttpClient?.close();
     _remoteLookupHttpClient = null;
-    if (!kKitapsenEdition) _animeDownloadService?.stop();
-    // TODO-1961-a：退出前强制存一次 resume（下次启动据此续传/继续做种）。
-    // 用最近一次 tick 缓存的计划 id 集合剪枝 —— dispose 是同步的，不能在这里
-    // await 一次 `store.loadAll()`；缓存最多落后一个 tick（20s），代价只是某个
-    // 刚删掉的计划多留一轮 resume 文件，下次启动的剪枝会立刻清掉它。
-    if (!kKitapsenEdition) {
-      _embeddedTorrentHost?.dispose(keepIds: _animeDownloadPlanIds);
-      _embeddedTorrentHost = null;
-    }
     super.dispose();
   }
 
@@ -8852,15 +8241,11 @@ class AppModel with ChangeNotifier {
   String get updateCustomProxy => prefsRepo.updateCustomProxy;
   Future<void> setUpdateCustomProxy(String value) async {
     await prefsRepo.setUpdateCustomProxy(value);
-    // HttpClient 侧的 findProxy 请求时现读，不用通知；libtorrent 是把值
-    // 固化进 session 的，改了就得重新下发。
-    if (!kKitapsenEdition) _applyEmbeddedTorrentProxy();
   }
 
   String get networkProxyMode => prefsRepo.networkProxyMode;
   Future<void> setNetworkProxyMode(String value) async {
     await prefsRepo.setNetworkProxyMode(value);
-    if (!kKitapsenEdition) _applyEmbeddedTorrentProxy();
   }
 
   String get networkProxyUsername => prefsRepo.networkProxyUsername;
@@ -8881,7 +8266,6 @@ class AppModel with ChangeNotifier {
   String get p2pProxyMode => prefsRepo.p2pProxyMode;
   Future<void> setP2pProxyMode(String mode) async {
     await prefsRepo.setP2pProxyMode(mode);
-    if (!kKitapsenEdition) _applyEmbeddedTorrentProxy();
   }
 
   /// 把「P2P 该不该走代理、走哪个、哪一档」下发给内置引擎（宿主不存在则
@@ -9074,16 +8458,7 @@ class AppModel with ChangeNotifier {
     // 缓存的预算由 [DictionaryRepository] 按同一个 isLowMemory 闭包决定，热槽与停驻
     // realm 则由 [DictionaryPopupController] 按同一个标志决定。
     // Kitapsen has no video diagnostics log.
-    if (kKitapsenEdition) return;
-    final String slots = lowMemoryMode ? 'disabled' : 'enabled';
-    videoDiag(
-      VideoDiagCategory.memory,
-      VideoDiagLevel.info,
-      'policy low-memory=$lowMemoryMode '
-      'imageCache=${imageCache.maximumSize}/'
-      '${imageCache.maximumSizeBytes >> 20}MB '
-      'warm-slot=$slots parked-realms=$slots',
-    );
+    return;
   }
 }
 

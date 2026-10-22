@@ -96,9 +96,7 @@ class PlatformServices {
     bool? isIOS,
     bool? isAndroid,
     AnkiSyncSession? Function()? ankiSyncSession,
-  })  : _ankiSyncSession = kKitapsenEdition
-            ? _noSyncSession
-            : ankiSyncSession ?? (() => sharedAnkiSyncSession),
+  })  : _ankiSyncSession = _noSyncSession,
         isWindows = isWindows ?? Platform.isWindows,
         isDesktop = isDesktop ??
             (Platform.isWindows || Platform.isMacOS || Platform.isLinux),
@@ -109,23 +107,14 @@ class PlatformServices {
         _isMobile = isMobile,
         _androidClipboard = androidClipboard,
         assert(
-          kKitapsenEdition ||
-              !isMobile ||
-              createMobileAnkiConnectRepository != null,
+          true,
           'Mobile requires an AnkiConnect repository factory.',
         );
 
   /// Creates the active Anki backend. 移动端保留各自的原生后端（AnkiDroid /
   /// AnkiMobile）作为升级安全的默认值，但可显式改用一台可达的 AnkiConnect。
   BaseAnkiRepository createAnkiRepository() {
-    if (kKitapsenEdition) return _kitapsenHasNoAnki();
-    if (_useAnkiSyncClient) {
-      return AnkiSyncClientRepository(session: _ankiSyncSession());
-    }
-    if (_isMobile && _useAnkiConnectOnMobile) {
-      return _createMobileAnkiConnectRepository!();
-    }
-    return _createDefaultAnkiRepository();
+    return _kitapsenHasNoAnki();
   }
 
   bool get useAnkiConnectOnMobile => _isMobile && _useAnkiConnectOnMobile;
@@ -167,29 +156,7 @@ class PlatformServices {
   Future<void> init() async {
     await _androidClipboard?.init();
     // Kitapsen: no Anki backends to choose between.
-    if (kKitapsenEdition) return;
-    final AnkiSettings settings =
-        await _createDefaultAnkiRepository().loadSettings();
-    setUseAnkiSyncClient(settings.useAnkiSyncClient);
-    if (_isMobile) {
-      setUseAnkiConnectOnMobile(
-        settings.useAnkiConnectOnMobile,
-        apiKey: settings.ankiConnectApiKey,
-      );
-      // 存量坏状态修复：开关记着 true 但 key 空（BUG-1608 之前的版本允许出现这种
-      // 组合）。把存储对齐到运行时事实——运行时已经回落原生后端了，存储再声称
-      // 「开着」只会让设置页显示一个不生效的开关。
-      //
-      // 这条**只**为老数据兜底：BUG-1608 之后，清空 key 的那一刻设置页就会立即
-      // 关掉开关并明确告知用户，正常路径不再产生这种组合，所以这里静默改写不会
-      // 再在用户眼皮底下发生。
-      if (settings.useAnkiConnectOnMobile && !_useAnkiConnectOnMobile) {
-        await _createDefaultAnkiRepository().updateSettings(
-          (AnkiSettings current) =>
-              current.copyWith(useAnkiConnectOnMobile: false),
-        );
-      }
-    }
+    return;
   }
 
   /// Constructs the correct service bundle for the current platform.
@@ -205,9 +172,9 @@ class PlatformServices {
         permission: AndroidPermissionService(deviceInfo),
         deviceInfo: deviceInfo,
         createAnkiRepository:
-            kKitapsenEdition ? _kitapsenHasNoAnki : AnkiRepository.new,
+            _kitapsenHasNoAnki,
         createMobileAnkiConnectRepository:
-            kKitapsenEdition ? null : AnkiConnectRepository.new,
+            null,
         isMobile: true,
         androidClipboard: clipboard,
       );
@@ -224,9 +191,9 @@ class PlatformServices {
         // Anki 桌面版的机器即可。接上它，iOS 才第一次拥有 Lapis 样式客制化等
         // 「要改已存在 note type」的能力（AnkiMobile 只有加卡的 URL scheme）。
         createAnkiRepository:
-            kKitapsenEdition ? _kitapsenHasNoAnki : AnkiMobileRepository.new,
+            _kitapsenHasNoAnki,
         createMobileAnkiConnectRepository:
-            kKitapsenEdition ? null : AnkiConnectRepository.new,
+            null,
         isMobile: true,
       );
     }

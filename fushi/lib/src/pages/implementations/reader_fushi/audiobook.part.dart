@@ -245,64 +245,13 @@ extension _ReaderAudiobook on _ReaderFushiPageState {
     // 起/接管 [AudiobookSession]（媒体通知 + 后台播放）的地方，在这里早退即满足
     // 「模块专属后台下次启动不再拉起」——已在跑的会话不受影响（本函数只在开书 /
     // 换源时调用，不碰 session 已有的播放）。
-    if (kKitapsenEdition ||
-        !(!kKitapsenEdition &&
-            _moduleVisibility.isEnabled(ModuleId.listening))) {
-      // 歌词模式靠有声书 cue 活着；没有控制器就把它复位，与函数末尾那条
-      // 「_audiobookController == null → 关歌词」是同一条不变式。
-      if (_lyricsMode) {
-        _lyricsMode = false;
-        await ReaderFushiSource.instance.setLyricsMode(false);
-      }
-      return;
-    }
-    // TODO-perf（开媒体反馈）：openMedia 已改为不阻塞等 audio_service 冷启，这里
-    // 是 handler 的真正消费点（session attach/start 挂媒体通知与控制流）——await
-    // 同一份记忆化 future 补齐时序契约；已就绪时立即返回，零额外开销。
-    await appModel.initialiseAudioHandler();
-    final AudiobookSession session = appModel.audiobookSession;
-    final AudiobookPlayerController? old = _audiobookController;
-    if (old != null) {
-      // 旧引用是 session 控制器：先 detach（不 dispose）。reader 字段清掉等下面重接。
-      session.detachReader(this);
-      _audiobookController = null;
-      _syncChromePlaybackListener();
-      _audiobookBookKey = null;
-      _srtBookUid = null;
-      _srtCueChapterMap = null;
-      _srtChapterRanges = null;
-      // 缓存生命周期 = 音频槽绑定：detach 即失效，重接后由
-      // _primeAudioCuesForCurrentBook 重灌（_prepareSasayakiCuesJson 复用它，
-      // 不再每章重查全书 cue）。
-      _cachedAllCues = null;
-      _cachedSentenceAudio = false;
-    }
-    if (forceReload && session.isActive) {
-      // 导入了新音频：必须重 load，stop 旧会话让 session.start 走全新加载分支。
-      await session.stop();
-    }
-
-    final FushiDatabase db = appModel.database;
-    final String bookKey = widget.bookKey;
-
-    final AudiobookSessionLauncher launcher = AudiobookSessionLauncher(db);
-    final AudiobookSessionStartRequest? req = await launcher.resolve(bookKey);
-    if (req != null) {
-      // 若进程级会话已持有本书控制器（退书后台听书后重进 / 同书重开），直接复用
-      // （session.book.bookKey 对 EPUB 是 bookKey、对 SRT 是 uid，与 req.info.bookKey 同源）。
-      if (session.isActive && session.book?.bookKey == req.info.bookKey) {
-        await _attachExistingSession(session);
-      } else {
-        await _startAndAttachSession(session, req);
-      }
-    }
-
-    await _primeAudioCuesForCurrentBook();
-
-    if (_audiobookController == null && _lyricsMode) {
+    // 歌词模式靠有声书 cue 活着；没有控制器就把它复位，与函数末尾那条
+    // 「_audiobookController == null → 关歌词」是同一条不变式。
+    if (_lyricsMode) {
       _lyricsMode = false;
       await ReaderFushiSource.instance.setLyricsMode(false);
     }
+    return;
   }
 
   /// 复用 session 已持有的控制器：装 reader WebView 侧回调 + 监听 cue（经 session 转发）。
@@ -454,52 +403,7 @@ extension _ReaderAudiobook on _ReaderFushiPageState {
 
   Future<void> _primeAudioCuesForCurrentBook() async {
     // Kitapsen: no audiobooks or subtitle books.
-    if (kKitapsenEdition) return;
-    final AudiobookPlayerController? controller = _audiobookController;
-    if (controller == null) return;
-
-    if (_srtBookUid != null) {
-      final SrtBookRepository repo = SrtBookRepository(appModel.database);
-      final List<AudioCue> cues = await repo.cuesFor(_srtBookUid!);
-      controller.setChapterCues(cues);
-      controller.setAllBookCues(cues);
-      _cachedAllCues = cues;
-      // BUG-395：SRT 书可被 matcher 匹配进真 EPUB（cue 为 sasayaki://），此处不能
-      // 硬编码 false——与 _prepareSasayakiCuesJson 的判据保持一致，按 cue 内容计算。
-      _cachedSentenceAudio = cues.any(
-        (c) => SubtitleRematchCodec.tryDecode(c.textFragmentId) != null,
-      );
-      final (Map<int, int> m, List<(int, int)> r) = _buildSrtChapterMap(cues);
-      _srtCueChapterMap = m;
-      _srtChapterRanges = r;
-      return;
-    }
-
-    final String? bookKey = _audiobookBookKey;
-    if (bookKey == null || _book == null) return;
-
-    final AudiobookRepository repo = AudiobookRepository(appModel.database);
-    final List<AudioCue> allCues = await repo.cuesForBook(bookKey);
-    controller.setAllBookCues(allCues);
-    _cachedAllCues = allCues;
-    _cachedSentenceAudio = allCues.any(
-      (c) => SubtitleRematchCodec.tryDecode(c.textFragmentId) != null,
-    );
-
-    // SRT 格式导入的 Audiobook 在 matcher 全部失败时，cue 的
-    // chapterHref 仍为 'srt://default'，按 EPUB 章节 href 查不到。
-    // 与 SrtBook 路径对齐，直接用全部 cue。
-    if (_cachedSentenceAudio || audiobookCuesUseWholeBookForChapter(allCues)) {
-      controller.setChapterCues(allCues);
-      return;
-    }
-
-    final String chapterHref = _book!.chapters[_currentChapter].href;
-    final List<AudioCue> chapterCues = await repo.cuesForChapter(
-      bookKey: bookKey,
-      chapterHref: chapterHref,
-    );
-    controller.setChapterCues(chapterCues);
+    return;
   }
 
   (Map<int, int>, List<(int, int)>) _buildSrtChapterMap(List<AudioCue> cues) {
@@ -2154,37 +2058,7 @@ extension _ReaderAudiobook on _ReaderFushiPageState {
     // 兜底早退：四个入口（底栏耳机键 / 快速设置面板 / 桌面顶栏 / 快捷键 B）在
     // 「听书」关闭时都已不渲染，这里只挡住将来新接的调用方，不是用户可达路径，
     // 故无需提示。
-    if (kKitapsenEdition ||
-        !(!kKitapsenEdition &&
-            _moduleVisibility.isEnabled(ModuleId.listening))) {
-      return;
-    }
-    if (_srtBookUid != null) {
-      await _openSrtBookReimport();
-      return;
-    }
-    final AudiobookRepository repo = AudiobookRepository(appModel.database);
-
-    // BUG-2208：导入对话框压着正文期间停表。
-    await _withStudyClockPaused(
-      () => showAppDialog<void>(
-        context: context,
-        builder: (ctx) => AudiobookImportDialog(
-          bookKey: widget.bookKey,
-          repo: repo,
-          extractDir: _extractDir,
-        ),
-      ),
-    );
-
-    try {
-      // 导入了新音频：强制重 load（停旧会话再起新），否则同书会复用旧控制器不换源。
-      await _resolveAudioSlot(forceReload: true);
-    } catch (e, stack) {
-      ErrorLogService.instance.log('ReaderFushi.openAudioImport', e, stack);
-      debugPrint('[ReaderFushi] resolveAudioSlot after import failed: $e');
-    }
-    if (mounted) _rebuild(() {});
+    return;
   }
 
   /// 阅读器内「重新导入」字幕书：音频与字幕两半在同一个对话框里换
@@ -2193,55 +2067,7 @@ extension _ReaderAudiobook on _ReaderFushiPageState {
   /// 旧实现只能换音频（`ReaderSrtAudioPickerDialog`），字幕书的字幕在首次导入后
   /// 无处可换——用户报的「有声书没办法重新导入 / 导不了字幕文件」即此。
   Future<void> _openSrtBookReimport() async {
-    if (kKitapsenEdition) return;
-    final SrtBookRepository repo = SrtBookRepository(appModel.database);
-    final SrtBook? book = await repo.findByUid(_srtBookUid!);
-    if (book == null || !mounted) return;
-
-    final SrtBookReimportOutcome? outcome = await _withStudyClockPaused(
-      () => showAppDialog<SrtBookReimportOutcome>(
-        context: context,
-        builder: (_) => SrtBookReimportDialog(
-          book: book,
-          db: appModel.database,
-          repo: repo,
-        ),
-      ),
-    );
-
-    if (outcome == null || !mounted) return;
-
-    // 正文被重建 = 本页持有的解析树（_book / 章节 / WebView 里那份 HTML）整体作废。
-    // 就地热换正文要重跑开书全流程（解析 -> 分页 -> 恢复位置），而恢复锚点本身也
-    // 已经失效；退回书架让用户重开是唯一不会读到半新半旧内容的做法。
-    if (outcome.bodyRebuilt) {
-      FushiToast.show(
-        msg: t.srt_book_reimport_body_rebuilt,
-        severity: ToastSeverity.info,
-      );
-      Navigator.of(context).maybePop();
-      return;
-    }
-
-    try {
-      // 换了音频：强制重 load（停旧会话再起新），否则同书会复用旧控制器不换源。
-      await _resolveAudioSlot(forceReload: true);
-      // 换了字幕但没重建正文（无配对 EPUB 的孤儿字幕书）：cue 已整组换过，
-      // 控制器里那份是旧的，必须重灌。
-      if (outcome.subtitleReplaced) {
-        await _primeAudioCuesForCurrentBook();
-      }
-      if (mounted) _rebuild(() {});
-    } catch (e, stack) {
-      ErrorLogService.instance.log('ReaderFushi.srtBookReimport', e, stack);
-      debugPrint('[ReaderFushi] srtBookReimport failed: $e');
-      if (mounted) {
-        FushiToast.show(
-          msg: t.audiobook_load_error,
-          severity: ToastSeverity.error,
-        );
-      }
-    }
+    return;
   }
 }
 

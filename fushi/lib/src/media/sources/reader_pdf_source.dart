@@ -28,9 +28,7 @@ class ReaderPdfSource extends ReaderMediaSource {
       : super(
           uniqueKey: kUniqueKey,
           sourceName: t.source_name_bookshelf,
-          description: kKitapsenEdition
-              ? t.kitapsen_source_description_epub
-              : t.source_description_epub,
+          description: t.kitapsen_source_description_epub,
           icon: Icons.picture_as_pdf_outlined,
           implementsSearch: false,
           implementsHistory: false,

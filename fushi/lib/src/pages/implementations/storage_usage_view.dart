@@ -40,9 +40,9 @@ class StorageUsageView extends ConsumerStatefulWidget {
     required this.deleteFiles,
     // Kitapsen: no video shaders; keeps the shader downloader out of the build.
     this.anime4kBytesProvider =
-        kKitapsenEdition ? _noAnime4kBytes : anime4kInstalledBytes,
+        _noAnime4kBytes,
     this.anime4kDelete =
-        kKitapsenEdition ? _noAnime4kFiles : deleteAnime4kShaderFiles,
+        _noAnime4kFiles,
     super.key,
   });
 
@@ -360,7 +360,6 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
   /// (dictionaries, video, shaders, OCR models, the in-app browser / web
   /// archive, card media exports, backup archives) are not listed.
   static bool _categoryInEdition(StorageCategoryId id) {
-    if (!kKitapsenEdition) return true;
     switch (id) {
       case StorageCategoryId.dictionaries:
       case StorageCategoryId.videoDownloads:
@@ -379,11 +378,9 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
   String _categoryTitle(StorageCategoryId id) {
     switch (id) {
       case StorageCategoryId.books:
-        return kKitapsenEdition
-            ? t.kitapsen_storage_category_books
-            : t.storage_category_books;
+        return t.kitapsen_storage_category_books;
       case StorageCategoryId.dictionaries:
-        return kKitapsenEdition ? '' : t.storage_category_dictionaries;
+        return '';
       case StorageCategoryId.videoDownloads:
         return t.storage_category_video_downloads;
       case StorageCategoryId.covers:
@@ -403,7 +400,7 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
       case StorageCategoryId.database:
         return t.storage_category_database;
       case StorageCategoryId.ocrModels:
-        return kKitapsenEdition ? '' : t.storage_category_ocr_models;
+        return '';
       case StorageCategoryId.cache:
         return t.storage_category_cache;
       case StorageCategoryId.other:
@@ -480,21 +477,6 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            if (!kKitapsenEdition && showAnime4kDelete)
-              _anime4kBusy
-                  ? const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8),
-                      child: SizedBox(
-                        width: 16,
-                        height: 16,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      ),
-                    )
-                  : IconButton(
-                      tooltip: t.storage_shaders_delete_anime4k,
-                      icon: const Icon(Icons.auto_fix_off_outlined, size: 18),
-                      onPressed: _anime4kDeleteAction,
-                    ),
             Text(usage == null ? '…' : formatStorageBytes(usage.bytes)),
             if (expandable) ...<Widget>[
               const SizedBox(width: 4),

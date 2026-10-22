@@ -341,9 +341,7 @@ class _StatSessionListState extends State<StatSessionList> {
     final bool confirmed = await confirmDeleteStatistics(
       context,
       '${_confirmName(s)}\n${formatStatSessionRange(s.startAt, s.endAt)}',
-      message: kKitapsenEdition
-          ? t.kitapsen_stat_session_delete_message
-          : t.stat_session_delete_message,
+      message: t.kitapsen_stat_session_delete_message,
     );
     if (!confirmed || !mounted) return;
     await widget.onDelete(s);

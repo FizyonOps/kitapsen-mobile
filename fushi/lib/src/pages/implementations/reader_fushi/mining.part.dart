@@ -523,126 +523,17 @@ extension _ReaderMining on _ReaderFushiPageState {
 
   Future<String?> _prepareSentenceAudioCuesJson() async {
     // Kitapsen: no audiobooks, so no sentence-audio highlight cues.
-    if (kKitapsenEdition) return null;
-    // BUG-395：逐句高亮策略判据归一到「cue 是否 sasayaki 编码」（与 playback 端
-    // SasayakiMatchCodec.tryDecode 同一判据），不再用 _srtBookUid（音频格式=srt）
-    // 当代理。旧代码在 _srtBookUid!=null 时**无条件 return null**：但「普通 EPUB +
-    // SRT 音频」被 matcher 匹配进真 EPUB 后 cue 是 sasayaki://，playback 走 sasayaki
-    // 高亮却取不到 range（setup 早退 → applySasayakiCues 永不调用 → cueRangesMap
-    // 恒空）→ 每次 highlightSasayakiCue 都 RETURN_NULL_no_segments，正文无任何跟随
-    // 高亮（章节级跟随仍正常，因其走 cue 解码的 sectionIndex，不依赖 DOM range）。
-    // SRT 与普通有声书两源在 _loadHighlightCues 之后判据完全一致。
-    //
-    // 性能（首帧路径）：全书 cue 在 _resolveAudioSlot → _primeAudioCuesForCurrentBook
-    // 已查过并缓存进 _cachedAllCues；本方法此前每次章节加载都先清缓存再重查一遍
-    // 全书 cue（纯重复 DB 往返，串行挡在引擎注入之前），且清缓存后若加载失败会让
-    // _injectAudiobookBridge 静默拿到 null 跳过 cue 装载。缓存生命周期 = 音频槽绑定
-    // （_resolveAudioSlot 的 detach 块清、prime 重灌），这里直接复用，仅缓存缺失时
-    // 兜底加载。
-    List<AudioCue>? allCues = _cachedAllCues;
-    if (allCues == null) {
-      allCues = await _loadHighlightCues();
-      if (allCues == null) {
-        debugPrint('[sentence-audio-hl] prepareCues path=NONE '
-            '(srtUid=null, audiobookKey=null) -> return null');
-        return null;
-      }
-      _cachedAllCues = allCues;
-      _cachedSentenceAudio = allCues.any(
-        (c) => SubtitleRematchCodec.tryDecode(c.textFragmentId) != null,
-      );
-    }
-
-    final String pathTag = _srtBookUid != null ? 'SRT' : 'AUDIOBOOK';
-    if (!_cachedSentenceAudio) {
-      // 真正非 sasayaki 的书：纯 [data-cue-id] 字幕（合成书走 __fushiHighlight 选择器）
-      // 或 matcher 全失败（无锚点）。逐句高亮不走 sasayaki range，保持早退。
-      debugPrint('[sentence-audio-hl] prepareCues path=$pathTag '
-          'srtUid=$_srtBookUid audiobookKey=$_audiobookBookKey '
-          'allCues=${allCues.length} cachedSentenceAudio=false '
-          '-> SKIPPED (no sentenceAudioHighlight cues)');
-      return null;
-    }
-
-    // BUG-405：复用 AudiobookBridge.buildSasayakiPayload，与 playback 桥接路径共用
-    // 同一份必含 cue 原文 text 的 payload 契约 —— JS collectSasayakiCueRanges 靠
-    // cue.text 在实时 DOM 就近重定位高亮（BUG-060/300），缺 text 会落空。
-    final List<Map<String, dynamic>> payload =
-        AudiobookBridge.buildSentenceAudioPayload(allCues, _currentChapter);
-    // BUG-366/TODO-630 诊断：sasayaki 书最终送进 WebView 的 payload 条数。
-    // payloadLen=0 表示当前章无命中 cue（applySasayakiCues 不会被调用）。
-    debugPrint('[sentence-audio-hl] prepareCues path=$pathTag-SENTENCE-AUDIO '
-        'srtUid=$_srtBookUid chapter=$_currentChapter '
-        'allCues=${allCues.length} payloadLen=${payload.length}');
-    if (payload.isEmpty) return null;
-    return jsonEncode(payload);
+    return null;
   }
 
   /// reader 逐句高亮的全书 cue 来源。SRT 字幕书走 [SrtBookRepository]、普通有声书走
   /// [AudiobookRepository]；两源加载后 sasayaki 判据完全一致（BUG-395），setup 不再
   /// 按书源分叉出不同的高亮策略。返回 null = 本书无任何音频 cue 源。
   Future<List<AudioCue>?> _loadHighlightCues() async {
-    if (kKitapsenEdition) return null;
-    if (_srtBookUid != null) {
-      return SrtBookRepository(appModel.database).cuesFor(_srtBookUid!);
-    }
-    if (_audiobookBookKey != null) {
-      return AudiobookRepository(appModel.database)
-          .cuesForBook(_audiobookBookKey!);
-    }
     return null;
   }
 
   Future<void> _injectAudiobookBridge() async {
-    if (kKitapsenEdition ||
-        _controller == null ||
-        _audiobookController == null) {
-      return;
-    }
-
-    await AudiobookBridge.inject(_controller!,
-        primaryColor: _themeSentenceAudioHighlightColor());
-
-    final List<AudioCue>? allCues = _cachedAllCues;
-    if (allCues == null) return;
-
-    if (_srtBookUid != null) {
-      _audiobookController!.setChapterCues(allCues);
-      _audiobookController!.setAllBookCues(allCues);
-      if (_srtCueChapterMap == null) {
-        final (Map<int, int> m, List<(int, int)> r) =
-            _buildSrtChapterMap(allCues);
-        _srtCueChapterMap = m;
-        _srtChapterRanges = r;
-      }
-    } else if (_audiobookBookKey != null) {
-      if (_cachedSentenceAudio ||
-          audiobookCuesUseWholeBookForChapter(allCues)) {
-        _audiobookController!.setChapterCues(allCues);
-        _audiobookController!.setAllBookCues(allCues);
-      } else {
-        final String chapterHref = _book!.chapters[_currentChapter].href;
-        final AudiobookRepository repo = AudiobookRepository(appModel.database);
-        final List<AudioCue> cues = await repo.cuesForChapter(
-          bookKey: _audiobookBookKey!,
-          chapterHref: chapterHref,
-        );
-        _audiobookController!.setChapterCues(cues);
-        _audiobookController!.setAllBookCues(allCues);
-        if (cues.isEmpty) {
-          await AudiobookBridge.annotate(
-            _controller!,
-            chapterHref: chapterHref,
-          );
-        }
-      }
-    }
-    _onCueChanged();
-
-    if (_lyricsMode && _audiobookController != null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (mounted) _loadLyricsPage();
-      });
-    }
+    return;
   }
 }

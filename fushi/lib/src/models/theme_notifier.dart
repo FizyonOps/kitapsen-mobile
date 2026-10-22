@@ -1292,7 +1292,7 @@ class ThemeNotifier extends ChangeNotifier {
     if (einkMode) {
       return buildEinkColorScheme(brightness);
     }
-    if (appThemeKey == 'system-theme' && kKitapsenEdition) {
+    if (appThemeKey == 'system-theme') {
       // Kitapsen: the default theme is the website's — brand crimson on
       // neutral gray surfaces — rather than the phone's wallpaper colors.
       return applyFushiSurfaceLadder(buildFushiColorScheme(

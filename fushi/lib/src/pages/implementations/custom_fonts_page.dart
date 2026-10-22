@@ -473,12 +473,6 @@ Future<void> persistCustomFontState({
   }
   await settings.refreshFromDb();
   await appModel.refreshAppFont();
-  // 平台门在**取单例之前**：GalHookTextOverlayController.instance 会把整套 galgame
-  // 单例图（含 GalIngameLookupController 与它挂上去、永不释放的监听器）建起来。
-  // 非 Windows 用户只是存了一次字体，不该因此拉起一整个 Windows 专属子系统。
-  if (!kKitapsenEdition && GalHookTextOverlayController.isSupported) {
-    await GalHookTextOverlayController.instance.applyFontFromSettings();
-  }
   ReaderFushiSource.onSettingsChangedLive?.call();
 }
 

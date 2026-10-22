@@ -175,17 +175,7 @@ class _OnboardingWizardPageState extends BasePageState<OnboardingWizardPage>
     );
   }
 
-  List<OnboardingStepId> get _steps => kKitapsenEdition
-      ? kKitapsenOnboardingSteps
-      : widget.tutorialOnly
-      ? onboardingTutorialStepSequence(
-          globalLookupAvailable: _globalLookupAvailable)
-      : onboardingStepSequence(
-          selected: _selected,
-          browserExtensionAvailable: _browserExtensionAvailable,
-          globalLookupAvailable: _globalLookupAvailable,
-          ankiReady: _ankiReadyForFirstCard,
-        );
+  List<OnboardingStepId> get _steps => kKitapsenOnboardingSteps;
 
   /// 本平台上这个模块**是否存在**（与用户意愿无关）。平台判据只认
   /// [ModuleId.availableOn] 这一处，向导不再自己写 `Platform.isWindows`。
@@ -209,9 +199,6 @@ class _OnboardingWizardPageState extends BasePageState<OnboardingWizardPage>
         _selected.add(onboardingFeatureOfModule(module));
       }
     }
-    // 包目录进场收尾（删已导入的残包、搬旧命名的半截文件、按磁盘对齐阶段）。
-    // 下载正在跑时 controller 整体跳过——那些都是在动同一批文件。
-    if (!kKitapsenEdition) unawaited(_packController.prepareDiskState());
   }
 
   // dispose 里**没有**取消下载：BUG-2097 的根因就是这里曾经有一句
@@ -231,12 +218,6 @@ class _OnboardingWizardPageState extends BasePageState<OnboardingWizardPage>
     try {
       // 先等模块勾选落盘再 pop，理由见 [_moduleSelectionWrite]。
       await _moduleSelectionWrite;
-      if (!kKitapsenEdition &&
-          _tutorialProgress.shouldMarkCompleted(
-              steps: _steps, finished: finished)) {
-        await RecommendedPackTutorialState(appModelNoUpdate.appDirectory)
-            .markCompleted();
-      }
       if (!widget.tutorialOnly) {
         await appModelNoUpdate.setOnboardingCompleted(value: true);
       }
@@ -270,14 +251,6 @@ class _OnboardingWizardPageState extends BasePageState<OnboardingWizardPage>
   /// 变成硬门）。但建成了的话 `_steps` 会因为 Anki 变 ready 而多出一步，所以 await
   /// 之后必须重新取一次序列，不能沿用进函数时那份。
   Future<void> _goNextAsync() async {
-    // Kitapsen: the onboarding has no Anki step.
-    if (!kKitapsenEdition && _steps[_stepIndex] == OnboardingStepId.anki) {
-      await promptCreateLapisIfCannotMine(
-        context: context,
-        viewModel: ref.read(ankiViewModelProvider.notifier),
-      );
-      if (!mounted) return;
-    }
     final List<OnboardingStepId> steps = _steps;
     if (steps[_stepIndex] == OnboardingStepId.features) {
       // 不阻塞翻页（写 11 个 pref 要走 DB），但把 future 留给 [_complete] 等。
@@ -331,19 +304,7 @@ class _OnboardingWizardPageState extends BasePageState<OnboardingWizardPage>
   /// 源文本条，用户在真实查词面板里点词）。
   void _openStandaloneLookup({String? query}) {
     // Kitapsen: no lookup page.
-    if (kKitapsenEdition) return;
-    unawaited(
-      _pushPage(
-        (_) => Scaffold(
-          body: SafeArea(
-            child: HomeDictionaryPage(
-              showBackButton: true,
-              initialQuery: query,
-            ),
-          ),
-        ),
-      ),
-    );
+    return;
   }
 
   /// 查词教程用的练习句子：按已安装词典的词头语言挑，没有就按推荐包（日语）/
@@ -888,159 +849,9 @@ class _OnboardingWizardPageState extends BasePageState<OnboardingWizardPage>
   Widget _buildStep(OnboardingStepId step) {
     // Kitapsen: only the welcome and account steps exist ([kKitapsenOnboardingSteps]);
     // returning before the switch compiles every other step page out.
-    if (kKitapsenEdition) {
-      return step == OnboardingStepId.kitapsenAccount
-          ? _buildKitapsenAccountStep()
-          : _buildWelcomeStep();
-    }
-    switch (step) {
-      case OnboardingStepId.welcome:
-        return _buildWelcomeStep();
-      case OnboardingStepId.features:
-        return _buildFeaturesStep();
-      case OnboardingStepId.recommendedPack:
-        return _buildPackStep();
-      case OnboardingStepId.manualResources:
-        return _buildManualResourcesStep();
-      case OnboardingStepId.anki:
-        return _buildAnkiStep();
-      case OnboardingStepId.onlineServices:
-        return OnlineServicesOnboardingView(
-          items: onlineServiceOnboardingItems(),
-          onOpenLink: (Uri url) => launchUrl(
-            url,
-            mode: LaunchMode.externalApplication,
-          ),
-          onConfigure: () => _pushPage(
-            (_) => SettingsDetailPage(destination: buildServicesDestination()),
-          ),
-        );
-      case OnboardingStepId.backup:
-        return OnboardingStepView(
-          icon: Icons.cloud_sync_outlined,
-          title: t.onboarding_step_backup_title,
-          body: t.onboarding_step_backup_body,
-          actions: <OnboardingAction>[
-            OnboardingAction(
-              icon: Icons.settings_backup_restore_outlined,
-              label: t.onboarding_step_backup_action,
-              description: t.onboarding_step_backup_action_desc,
-              necessity: OnboardingActionNecessity.recommended,
-              onPressed: () => _pushPage(
-                (_) => SettingsDetailPage(
-                  destination: buildSyncBackupDestination(),
-                ),
-              ),
-            ),
-          ],
-        );
-      case OnboardingStepId.interconnect:
-        return OnboardingStepView(
-          icon: Icons.devices_other_outlined,
-          title: t.onboarding_step_interconnect_title,
-          body: t.onboarding_step_interconnect_body,
-          actions: <OnboardingAction>[
-            OnboardingAction(
-              icon: Icons.hub_outlined,
-              label: t.onboarding_step_interconnect_action,
-              description: t.onboarding_step_interconnect_action_desc,
-              necessity: OnboardingActionNecessity.recommended,
-              onPressed: () => _pushPage(
-                (_) => SettingsDetailPage(
-                  destination: buildInterconnectDestination(),
-                ),
-              ),
-            ),
-          ],
-        );
-      case OnboardingStepId.browserExtension:
-        return OnboardingStepView(
-          icon: Icons.extension_outlined,
-          title: t.onboarding_step_extension_title,
-          body: t.onboarding_step_extension_body,
-          actions: <OnboardingAction>[
-            OnboardingAction(
-              icon: Icons.open_in_new_outlined,
-              label: t.onboarding_step_extension_action,
-              description: t.onboarding_step_extension_action_desc,
-              necessity: OnboardingActionNecessity.recommended,
-              onPressed: () => _pushPage((_) => const BrowserExtensionPage()),
-            ),
-            // 装完之后总得有个地方真试一下。页面由本机 server 提供（http，扩展才注入得了；
-            // Chrome 默认不给扩展 file:// 权限），server 没开就不给点。
-            OnboardingAction(
-              icon: Icons.public_outlined,
-              label: t.browser_extension_test_page_action,
-              description: appModel.yomitanApiServerEnabled
-                  ? t.browser_extension_test_page_action_desc
-                  : t.browser_extension_test_page_server_off,
-              necessity: OnboardingActionNecessity.recommended,
-              onPressed: appModel.yomitanApiServerEnabled
-                  ? () => launchUrl(
-                        Uri.parse(appModel.browserExtensionTestPageUrl),
-                        mode: LaunchMode.externalApplication,
-                      )
-                  : null,
-            ),
-          ],
-        );
-      case OnboardingStepId.fonts:
-        return OnboardingStepView(
-          icon: Icons.font_download_outlined,
-          title: t.onboarding_step_fonts_title,
-          body: t.onboarding_step_fonts_body,
-          actions: <OnboardingAction>[
-            OnboardingAction(
-              icon: Icons.font_download_outlined,
-              label: t.custom_fonts_catalog_title,
-              description: t.onboarding_step_fonts_action_desc,
-              necessity: OnboardingActionNecessity.recommended,
-              onPressed: () => _pushPage((_) => const CustomFontsPage()),
-            ),
-          ],
-        );
-      case OnboardingStepId.clickLookup:
-        return OnboardingOperationTutorialView(
-          icon: Icons.touch_app_outlined,
-          title: t.onboarding_step_click_lookup_title,
-          body: t.onboarding_click_lookup_intro,
-          preface: _sampleSentencePreface(),
-          items: <OnboardingTutorialItem>[
-            OnboardingTutorialItem(
-              icon: Icons.ads_click_outlined,
-              title: t.onboarding_click_lookup_tap_title,
-              description: t.onboarding_click_lookup_tap_desc,
-            ),
-            OnboardingTutorialItem(
-              icon: Icons.account_tree_outlined,
-              title: t.onboarding_click_lookup_nested_title,
-              description: t.onboarding_click_lookup_nested_body,
-            ),
-            OnboardingTutorialItem(
-              icon: Icons.add_card_outlined,
-              title: t.onboarding_click_lookup_mine_title,
-              description: t.onboarding_click_lookup_mine_body,
-            ),
-          ],
-          actions: <OnboardingAction>[
-            OnboardingAction(
-              icon: Icons.manage_search_outlined,
-              label: t.onboarding_lookup_practice_action,
-              description: t.onboarding_lookup_practice_desc,
-              necessity: OnboardingActionNecessity.mustDo,
-              onPressed: () => _openStandaloneLookup(query: _sampleSentence),
-            ),
-          ],
-        );
-      case OnboardingStepId.globalLookup:
-        return _buildGlobalLookupTutorial();
-      case OnboardingStepId.firstAnkiCard:
-        return _buildFirstAnkiCardTutorial();
-      case OnboardingStepId.finish:
-        return _buildFinishStep();
-      case OnboardingStepId.kitapsenAccount:
-        return _buildKitapsenAccountStep();
-    }
+    return step == OnboardingStepId.kitapsenAccount
+        ? _buildKitapsenAccountStep()
+        : _buildWelcomeStep();
   }
 
   /// Kitapsen sign-in step: the same account section as Settings › Kitapsen

@@ -682,20 +682,7 @@ extension _ReaderCaret on _ReaderFushiPageState {
         // 一键打开有声书面板（默认 B）；没挂有声书时直接进导入。
         // 「听书」模块关掉时本键**不消费**（ignored 而非 handled）：吃掉按键会让
         // 同一个键上可能存在的通用动作也跟着失效，而模块关掉只该关自己的入口。
-        if (!(!kKitapsenEdition &&
-            _moduleVisibility.isEnabled(ModuleId.listening))) {
-          return KeyEventResult.ignored;
-        }
-        if (isDictionaryShown) {
-          clearDictionaryResult();
-          return KeyEventResult.handled;
-        }
-        if (_audiobookController != null) {
-          unawaited(_showAppearanceSheet(initialSubPage: 'audiobook'));
-        } else {
-          unawaited(_openAudioImportDialog());
-        }
-        return KeyEventResult.handled;
+        return KeyEventResult.ignored;
       case ShortcutAction.readerToggleStudyClock:
         // 一键停 / 续阅读统计计时（默认 P），与状态行 / 播放条内联读数里那颗
         // [ReaderStudyClockButton] 同一入口。纯状态切换、不动任何界面，故不像开面板
@@ -730,39 +717,15 @@ extension _ReaderCaret on _ReaderFushiPageState {
         return KeyEventResult.handled;
       case ShortcutAction.readerCreateCardFromPopup:
         // 「制卡」模块关掉时不消费（同 readerOpenAudiobook 的 ignored 理由）。
-        if (!(!kKitapsenEdition &&
-            _moduleVisibility.isEnabled(ModuleId.cardCreation))) {
-          return KeyEventResult.ignored;
-        }
-        final Future<void>? mining = _caretTopPopupState
-            ?.mineFirstVisibleEntry();
-        if (mining != null) {
-          unawaited(mining);
-        }
-        return KeyEventResult.handled;
+        return KeyEventResult.ignored;
       // 三个有声书传输键同属 [ShortcutScope.audiobook]，「听书」模块关掉时统一
       // 不消费（ignored），让键继续冒泡给可能绑同一键的通用动作。
       case ShortcutAction.audiobookPlayPause:
-        if (!(!kKitapsenEdition &&
-            _moduleVisibility.isEnabled(ModuleId.listening))) {
-          return KeyEventResult.ignored;
-        }
-        _audiobookController?.togglePlayPause();
-        return KeyEventResult.handled;
+        return KeyEventResult.ignored;
       case ShortcutAction.audiobookNextSentence:
-        if (!(!kKitapsenEdition &&
-            _moduleVisibility.isEnabled(ModuleId.listening))) {
-          return KeyEventResult.ignored;
-        }
-        _audiobookController?.skipToNextCue();
-        return KeyEventResult.handled;
+        return KeyEventResult.ignored;
       case ShortcutAction.audiobookPrevSentence:
-        if (!(!kKitapsenEdition &&
-            _moduleVisibility.isEnabled(ModuleId.listening))) {
-          return KeyEventResult.ignored;
-        }
-        _audiobookController?.skipToPrevCue();
-        return KeyEventResult.handled;
+        return KeyEventResult.ignored;
       default:
         return KeyEventResult.ignored;
     }
@@ -785,30 +748,7 @@ extension _ReaderCaret on _ReaderFushiPageState {
   /// its remembered position, so this re-shows the ring where the user left it.
   Future<void> _enterCaret() async {
     // Kitapsen: no lookup cursor.
-    if (kKitapsenEdition) return;
-    if (_controller == null || !_readerContentReady || _caretBusy) return;
-    _caretBusy = true;
-    try {
-      final Object? raw = await _controller!.evaluateJavascript(
-        source: _lyricsMode
-            ? ReaderLyricsCaretScripts.enterInvocation()
-            : ReaderCaretScripts.enterInvocation(),
-      );
-      if (!mounted) return;
-      // enter() returns {ok:false} on an empty page (no visible character).
-      if (ReaderCaretScripts.moveStatus(raw) != 'moved') return;
-      if (_lyricsMode) {
-        // 激活后暂停播放跟随滚动：setCue 只换高亮，不抢滚动。
-        await _controller!.evaluateJavascript(
-          source: 'window.__lyricsCaretActive = true;',
-        );
-        _rebuild(() => _caretSurface = CaretSurface.lyrics);
-      } else {
-        _rebuild(() => _caretSurface = CaretSurface.reader);
-      }
-    } finally {
-      _caretBusy = false;
-    }
+    return;
   }
 
   /// Fully leave cursor mode — hide the ring on whichever surface holds it.

@@ -582,22 +582,6 @@ class _HomeDashboardPageState
         .database
         .watchDashboardDataChanges()
         .listen((_) => _scheduleReload());
-    // P4：游戏改名/刮削（库页写穿 galgames 表后 GalgameRepository.load() 通知）
-    // 也要刷新日明细/时间轴的游戏显示名——galgames 表不在
-    // watchDashboardDataChanges 的表集里，走仓储 ChangeNotifier 这条既有通道
-    // 与视频（videoBooks 表级信号）对齐失效语义。
-    if (!kKitapsenEdition) {
-      _galgameRepo = ref.read(appProvider).galgameRepo
-        ..addListener(_scheduleReload);
-    }
-    // Bangumi 同步状态：outbox 与偏好都不在 watchDashboardDataChanges 的表集里，
-    // 由服务层每轮同步结束后自增的 revision 通知（后台自动同步完成也会刷新本卡）。
-    // Kitapsen: media tracking (Bangumi) is not part of the edition.
-    if (!kKitapsenEdition) {
-      _trackingRevision =
-          ref.read(appProvider).mediaTrackingService.statusRevision
-            ..addListener(_scheduleReload);
-    }
     // 「显示远端条目」门控翻转（BUG-1182 同款，视频页已修、本页此前漏了）：
     // 翻开 → 立即补拉远端；关掉 → 立即清掉已混排进「继续」/时间轴的远端条目。
     _prefsRepoForRemoteGate = ref.read(appProvider).prefsRepo
@@ -676,9 +660,7 @@ class _HomeDashboardPageState
     _armMidnightReload(loadedAt);
     // 视频书架、统计事实面、合集/附加图四张表互不依赖：一次全部发出，让 Drift
     // 后台执行器流水线化（首页首绘被这串 await 串行 gate）。
-    final Future<List<VideoBookRow>> videosF = kKitapsenEdition
-        ? Future<List<VideoBookRow>>.value(const <VideoBookRow>[])
-        : widget.videoRepo.listForShelf();
+    final Future<List<VideoBookRow>> videosF = Future<List<VideoBookRow>>.value(const <VideoBookRow>[]);
     // v92：学习统计只经统一事实面读取（study_segments + 冻结的 legacy 投影表，
     // 游戏时长来自 galgame_sessions、游戏 hook 字数来自 legacy game 行 + 段），
     // 首页不再自己读六张表各自累加——与阅读/视频/游戏统计页同一份事实。
@@ -711,13 +693,7 @@ class _HomeDashboardPageState
     // 未载入过才真查 DB（毫秒级）；load() 会 notify → 本页监听器防抖重载一次
     // 后 isLoaded=true，不再形成回环。
     final List<GalgameEntry> games;
-    if (kKitapsenEdition) {
-      games = const <GalgameEntry>[];
-    } else {
-      final GalgameRepository galgameRepo = appModel.galgameRepo;
-      games =
-          galgameRepo.isLoaded ? galgameRepo.games : await galgameRepo.load();
-    }
+    games = const <GalgameEntry>[];
     // 合集归属映射（统计页/书架同源）：显示名规则「非合集上下文拼合集名」用。
     final Map<int, String> collectionNamesById = <int, String>{
       for (final MediaCollectionRow c in await collectionsF) c.id: c.name,
@@ -875,100 +851,7 @@ class _HomeDashboardPageState
       return;
     }
     // Kitapsen: the dashboard's remote data is interconnect-only; none in this edition.
-    if (kKitapsenEdition) return;
-    final SyncRepository syncRepo = SyncRepository(appModel.database);
-    // 互联是独立开关（已与云备份后端解耦），未启用/未配对直接跳过。
-    if (!await syncRepo.isInterconnectEnabled()) return;
-    final InterconnectSyncBackend backend = InterconnectSyncBackend.instance;
-    if (!await backend.restoreAuth(syncRepo)) return;
-    try {
-      // BUG-1180：首页不在 `_keepAliveTabs` 里，每次切回首页整页重建 → 这三个请求
-      // 原本每次都重发；`_scheduleReload` 的 400ms 防抖重载还会再走一遍。改为
-      // ① 过共享 TTL 缓存（书/视频清单与书架、视频页同槽，谁先拉到谁受益），
-      // ② 三个请求并行而不是串行（原本是三次完整往返首尾相接）。
-      final RemoteLibraryCache cache = ref.read(remoteLibraryCacheProvider);
-      final List<Object> results = await Future.wait<Object>(<Future<Object>>[
-        // 首页只走互联（上面已 return 掉未启用的情况），来源身份仍从 backend 自己
-        // 取而不是写字面量——书/视频两个域与书架、视频页同槽命中，靠的就是双方报出
-        // 同一个 id（BUG-1202）。
-        cache.read<List<RemoteBookInfo>>(
-          sourceId: backend.remoteLibrarySourceId,
-          key: RemoteLibraryCacheKeys.books,
-          fetch: backend.listRemoteBooks,
-        ),
-        cache.read<List<RemoteVideoInfo>>(
-          sourceId: backend.remoteLibrarySourceId,
-          key: RemoteLibraryCacheKeys.videos,
-          fetch: backend.listRemoteVideos,
-        ),
-        cache.read<List<RemoteActivityEvent>>(
-          sourceId: backend.remoteLibrarySourceId,
-          key: RemoteLibraryCacheKeys.activity(200),
-          fetch: () => backend.listRemoteActivity(limit: 200),
-        ),
-      ]);
-      final List<RemoteBookInfo> remoteBooks =
-          results[0] as List<RemoteBookInfo>;
-      final List<RemoteVideoInfo> remoteVideos =
-          results[1] as List<RemoteVideoInfo>;
-      final RemoteCollectionAdoptionService adoption =
-          RemoteCollectionAdoptionService(appModel.database);
-      await adoption.adoptBooks(remoteBooks);
-      for (final RemoteVideoInfo video in remoteVideos) {
-        await adoption.adoptVideo(video);
-      }
-      final List<RemoteActivityEvent> remoteActivity =
-          results[2] as List<RemoteActivityEvent>;
-      if (!mounted) return;
-      final List<MediaItem> books =
-          ref.read(fushiBooksProvider(kShelfBooksKey)).valueOrNull ??
-              const <MediaItem>[];
-      final Set<String> localBookKeys = <String>{
-        for (final MediaItem item in books)
-          ReaderFushiSource.parseBookKey(item.mediaIdentifier) ??
-              item.mediaIdentifier,
-      };
-      localBookKeys.addAll(
-        (await CollectionBookIdentityIndex.load(appModel.database)).uidByKey.keys,
-      );
-      if (!mounted) return;
-      final Set<String> localVideoUids = <String>{
-        for (final VideoBookRow v in _videos) v.bookUid,
-      };
-      final List<RemoteContinueCandidate> continueCandidates =
-          remoteContinueCandidates(
-        localBookKeys: localBookKeys,
-        localVideoUids: localVideoUids,
-        remoteBooks: remoteBooks,
-        remoteVideos: remoteVideos,
-      );
-      // 设备来源标注：配对时存下的 host 设备名（多地址时取第一个启用且有名的）。
-      final List<FushiClientUrl> urls = await syncRepo.getFushiClientUrls();
-      String? deviceName;
-      for (final FushiClientUrl u in urls) {
-        final String? name = u.deviceName;
-        if (u.enabled && name != null && name.isNotEmpty) {
-          deviceName = name;
-          break;
-        }
-      }
-      final List<ActivityEventRow> remoteRows =
-          remoteActivityAsRows(remoteActivity);
-      if (!mounted) return;
-      setState(() {
-        _remoteContinue = continueCandidates;
-        _remoteCoverFetcher = remoteCoverFetcherFor(backend);
-        _remoteDeviceName = deviceName;
-        _remoteActivityRows = Set<ActivityEventRow>.identity()
-          ..addAll(remoteRows);
-        _activityEvents = mergeActivityEvents(
-          _localActivityEvents,
-          remoteRows,
-        );
-      });
-    } catch (_) {
-      // 互联瞬断/超时：保持纯本地视图；下次进入首页自然重试。
-    }
+    return;
   }
 
   /// 门控关闭时清掉已混排进页面的远端状态（「继续」补位卡 / 时间轴远端行 /
@@ -1031,11 +914,7 @@ class _HomeDashboardPageState
     // 关掉时整卡不挂载——卡内的「去设置」直落 mediaTracking 分类，而那个分类此刻
     // 已被同一个开关从设置页藏掉，留着就是一条通往不存在页面的死路。
     final Widget? trackingCard =
-        kMediaTrackingEnabled &&
-            !kKitapsenEdition &&
-            appModel.moduleVisibility.isEnabled(ModuleId.services)
-        ? _buildTrackingCard(tokens, appModel, now)
-        : null;
+        null;
 
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
@@ -1115,25 +994,6 @@ class _HomeDashboardPageState
           controller: _dashboardScrollController,
           padding: EdgeInsets.all(tokens.spacing.card),
           children: <Widget>[
-            // v101 更新提醒：有未读时才占位（横幅自己在 total==0 时收成
-            // SizedBox.shrink），没有更新的日子首页不多一块空卡。
-            // Kitapsen: no update feeds and no Hibiki -> Fushi migration.
-            if (!kKitapsenEdition)
-              UpdatesDashboardBanner(service: appModel.updateFeedService),
-            // 已迁移只读态（Fushi 迁移 P1-4，仅老包生效）：首屏常驻引导。
-            if (!kKitapsenEdition && appModel.isMigrationReadonly) ...<Widget>[
-              _MigrationReadonlyBanner(appModel: appModel),
-              SizedBox(height: tokens.spacing.card),
-            ],
-            // Fushi 侧（P2-2/P2-3）：检测到迁移数据 → 导入引导；导入完成且旧包
-            // 仍在 → 卸载引导（ACTION_DELETE + 复查）。仅 Android。
-            if (!kKitapsenEdition &&
-                !kIsWeb &&
-                Platform.isAndroid &&
-                appModel.packageInfo.packageName !=
-                    kHibikiPackageName) ...<Widget>[
-              _FushiMigrationBanner(appModel: appModel),
-            ],
             body,
           ],
         );
@@ -1595,26 +1455,6 @@ class _HomeDashboardPageState
     _ContinueEntry entry, {
     required bool videoLandscape,
   }) {
-    // 首页横滑行的视频卡：单行允许横竖混排（用户拍板「继续观看只有一行，混排
-    // 不破排版；书架里不可以」）——朝向随**选图链选中的那张图**探测：titleCard /
-    // backdrop（天然 16:9）→ 横卡；只有竖版海报 → 自然竖卡，不强制模糊垫底成
-    // 16:9。「继续」与「最近添加」两行同口径（BUG-2005）；书 / 游戏恒竖版
-    // （BUG-1299 口径不变）。探测与卡内渲染共用同一 provider 键，零额外解码
-    // （CoverOrientationBuilder 契约）。
-    if (!kKitapsenEdition && videoLandscape && entry.isVideo) {
-      final ImageProvider? probe =
-          _continueArtworkProvider(entry) ?? _continueVideoCoverProvider(entry);
-      return CoverOrientationBuilder(
-        image: probe,
-        builder: (BuildContext context, VideoCardOrientation orientation) =>
-            _buildContinueCardBody(
-          tokens,
-          appModel,
-          entry,
-          landscape: orientation == VideoCardOrientation.landscape,
-        ),
-      );
-    }
     return _buildContinueCardBody(tokens, appModel, entry, landscape: false);
   }
 
@@ -1972,24 +1812,7 @@ class _HomeDashboardPageState
   /// 播放页关闭后无需手动刷新——lastPositionMs 落库触发 videoBooks 表级变更，
   /// [_scheduleReload] 自动重查。测试经 [HomeDashboardPage.openVideoOverride] 注入替身。
   Future<void> _openLocalVideo(String bookUid) async {
-    if (kKitapsenEdition) return; // no video library in the Kitapsen edition
-    final int? playlistCollectionId =
-        _primaryCollectionByEntry[MediaKind.video.compositeKey(bookUid)];
-    final Future<void> Function(
-      BuildContext context,
-      VideoBookRepository repo,
-      String bookUid,
-      int? playlistCollectionId,
-    ) open = widget.openVideoOverride ??
-        (BuildContext context, VideoBookRepository repo, String bookUid,
-                int? playlistCollectionId) =>
-            openLocalVideoBook(
-              context: context,
-              repo: repo,
-              bookUid: bookUid,
-              playlistCollectionId: playlistCollectionId,
-            );
-    await open(context, widget.videoRepo, bookUid, playlistCollectionId);
+    return;
   }
 
   // ── 区块 3：学习活动热力图 ───────────────────────────────────────────────
@@ -2041,17 +1864,6 @@ class _HomeDashboardPageState
             icon: Icons.bar_chart_outlined,
             onTap: _openStatisticsCenter,
           ),
-          // 排行榜：统计中心隔壁单独一颗按钮（2026-10-01 从统计中心 tab 抽出）。
-          // Kitapsen has no leaderboard (it is a Fushi-hosted service).
-          if (!kKitapsenEdition) ...<Widget>[
-            SizedBox(width: tokens.spacing.gap),
-            FushiIconButton(
-              tooltip: t.leaderboard_title,
-              label: t.leaderboard_title,
-              icon: Icons.emoji_events_outlined,
-              onTap: _openLeaderboard,
-            ),
-          ],
         ],
       ),
       child: Column(
@@ -2347,11 +2159,7 @@ class _HomeDashboardPageState
     if (mediaKey.isNotEmpty) {
       if (mediaKind == kActivityMediaVideo &&
           _videos.any((VideoBookRow v) => v.bookUid == mediaKey)) {
-        if (!(!kKitapsenEdition && visibility.isEnabled(ModuleId.video))) {
-          _showModuleHiddenHint();
-          return;
-        }
-        await _openLocalVideo(mediaKey);
+        _showModuleHiddenHint();
         return;
       }
       if (mediaKind == kActivityMediaBook) {
@@ -2741,11 +2549,7 @@ class _HomeDashboardPageState
     if (key != null && key.isNotEmpty) {
       if (entry.mediaType == kActivityMediaVideo &&
           videosByUid.containsKey(key)) {
-        if (!(!kKitapsenEdition && visibility.isEnabled(ModuleId.video))) {
-          _showModuleHiddenHint();
-          return;
-        }
-        await _openLocalVideo(key);
+        _showModuleHiddenHint();
         return;
       }
       if (entry.mediaType == kActivityMediaBook) {
@@ -3273,11 +3077,8 @@ class _HomeDashboardPageState
     List<(T, String)>? trailing,
   }) => <(T, String)>[
     all,
-    if (visibility.isEnabled(ModuleId.books) ||
-        !kKitapsenEdition && visibility.isEnabled(ModuleId.manga))
+    if (visibility.isEnabled(ModuleId.books))
       read,
-    if (!kKitapsenEdition && visibility.isEnabled(ModuleId.video)) watch,
-    if (!kKitapsenEdition && visibility.isEnabled(ModuleId.games)) game,
     ...?trailing,
   ];
 

@@ -117,20 +117,7 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
     super.initState();
 
     // Kitapsen: no dictionary popup and no Anki card-source navigation.
-    if (kKitapsenEdition) return;
-
-    ExternalMediaNavigation.instance.register(
-      this,
-      _closeForSourceReturn,
-      returnToReading: SourceReviewScope.read(context)?.onReturnToReading,
-      isSourceReview: () => SourceReviewScope.read(context)?.isReview ?? false,
-      ownsRoute: (Route<dynamic> route) =>
-          mounted && identical(ModalRoute.of(context), route),
-    );
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _seedWarmPopup();
-    });
+    return;
   }
 
   /// BUG-092: seed a single persistent, hidden popup slot on open so its
@@ -152,13 +139,6 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
 
   @override
   void dispose() {
-    if (!kKitapsenEdition) {
-      ExternalMediaNavigation.instance.unregister(this);
-      _visibleRenderFailsafeTimer?.cancel();
-      _closeAutoAiPickClient();
-      // TODO-058：controller 现持有挂起层兜底 Timer，作为其所有者必须 dispose 取消，防泄漏。
-      _popup.dispose();
-    }
     _isSearchingNotifier.dispose();
     super.dispose();
   }
@@ -199,7 +179,7 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
   /// 只提供「过阈了要关哪一层」，不再各自持 tracker + 三个转发方法。横拖走该
   /// widget 内不入手势竞技场的 raw Listener，判轴规则写在可单测的代码里。
   bool get isDictionaryShown =>
-      !kKitapsenEdition && _hasVisiblePopup(_popup.entries);
+      false;
 
   @protected
   void onDismissBarrierHover(PointerHoverEvent event) {}
@@ -260,18 +240,7 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
   /// `void Function(String)` 用，既有回调点零改动）。
   @protected
   bool onDictionaryPopupInputToken(String token) {
-    if (kKitapsenEdition) return false;
-    final ShortcutScope? scope = dictionaryPopupInputScope;
-    if (scope == null) return false;
-    final ShortcutAction? action = resolveDictionaryPopupInputToken(
-      registry: appModel.shortcutRegistry,
-      token: token,
-      scope: scope,
-    );
-    if (action == null) return false;
-    if (!dictionaryPopupForwardedActions.contains(action)) return false;
-    clearDictionaryResult();
-    return true;
+    return false;
   }
 
   /// 指针落在**弹窗矩形之外**、按下鼠标非主键。
@@ -293,17 +262,7 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
   /// 整本书，而键盘 Esc 只关词典——键鼠语义分叉。认领后 app 根让路，两者一致。
   @protected
   void onDismissBarrierNonPrimaryButton(PointerDownEvent event) {
-    if (kKitapsenEdition) return;
-    // 「解析到但没执行」不认领：那等价于键盘侧「明明 ignored 却返回 handled」，会把
-    // 同一按钮上 universal / global 的合法绑定白白挡掉。
-    dispatchClaimedMouseAction(event, () {
-      final String? token = dictionaryPopupPointerToken(
-        buttons: event.buttons,
-        spec: dictionaryPopupInputSpec,
-      );
-      if (token == null) return false;
-      return onDictionaryPopupInputToken(token);
-    });
+    return;
   }
 
   /// TODO-1027：点全屏 dismiss barrier（弹窗矩形外的真空白处）的钩子。默认行为
@@ -322,8 +281,7 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
   /// Handles leaving a source page. All sources should
   /// use this and wrap their [build] function with a [PopScope].
   Future<bool> onWillPop() async {
-    final bool isSourceReview = !kKitapsenEdition &&
-        (SourceReviewScope.read(context)?.isReview ?? false);
+    final bool isSourceReview = false;
     final mediaSource = appModel.currentMediaSource;
     final item = widget.item;
     final messenger = ScaffoldMessenger.maybeOf(context);
@@ -408,107 +366,7 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
     bool deferDisplay = false,
     LookupOrigin origin = LookupOrigin.explicit,
   }) async {
-    if (kKitapsenEdition) return 0;
-    overrideMaximumTerms ??= appModel.maximumTerms;
-
-    final gen = _bumpSearchGeneration();
-    _pendingSelectionRect = selectionRect;
-    _deferredPopupItem = null;
-
-    try {
-      if (!deferDisplay) {
-        _isSearchingNotifier.value = true;
-      }
-
-      final dictionaryResult = await appModel.searchDictionary(
-        searchTerm: searchTerm,
-        searchWithWildcards: false,
-        overrideMaximumTerms: overrideMaximumTerms,
-      );
-
-      if (_searchGeneration != gen) return 0;
-
-      appModel.addToDictionaryHistory(result: dictionaryResult);
-
-      // 复用条件与旧 _reusableHiddenTopPopup 等价：栈恰为 [单个隐藏热槽] 时原地复用，
-      // 否则（嵌套等）追加新层。reuse=false 时 beginTop 直接 append。
-      final bool reuse = _popup.entries.length == 1 &&
-          _popup.entries.first.isWarmSlot &&
-          !_popup.entries.first.visible;
-      final DictionaryPopupEntry item = _popup.beginTop(
-        term: searchTerm,
-        rect: selectionRect,
-        reuseWarmSlot: reuse,
-        replaceStack: false,
-        visible: false,
-      );
-      // TODO-962：阅读器/有声书弹窗此前硬编码 allLoaded:true，关掉了「加载更多」分页
-      // （[_buildPopupLayer] 的 onScrolledToBottom 恒 null），使弹窗永远停在第一页。
-      // maximumTerms 按 glossary 注释**行**计预算（language.dart），一个高频词头的注释
-      // 行就能吃满整个上限 → 只剩 1 个词头（首页/视频弹窗均正常，唯一差异就在此标志 +
-      // load-more 接线）。按真实截断计算：结果数 < 本次查询上限 ⇒ 已全部加载，否则可能
-      // 被截断，开放下滑加载（[loadMoreForLayer]，与 mixin/home 同构）。
-      _popup.fillResult(
-        item,
-        result: dictionaryResult,
-        allLoaded: !dictionaryResult.truncated,
-      );
-      // 这一层查词时的原句（✨ 与自动挑词条只认它，不再回头读页面「当前句」——
-      // 嵌套层的词来自释义，外层阅读器的句子与它无关）。
-      item.lookupSentence = origin == LookupOrigin.nested
-          ? null
-          : _nonEmptyOrNull(favoriteLookupContext?.sentence);
-      // 「查词时自动按句意挑词条」：弹窗照常先显示词典顺序，AI 回来再换（见
-      // [aiPickLookupEntry]）。只对明确的查词发请求：悬停扫一行会连查十几个词，
-      // 嵌套层没有可信句子；开关关着或没指派提供商时也不发。
-      if (origin == LookupOrigin.explicit &&
-          appModel.lookupAiContextAuto &&
-          resolveLookupAiProvider() != null) {
-        unawaited(aiPickLookupEntry(item, automatic: true));
-      }
-
-      // TODO-058 / BUG-480：嵌套冷层继续挂起到 popupRendered；复用热槽也不能裸奔
-      // 直显内容区。macOS 上隐藏/屏外热槽的 JS 注入可能没跑到当前结果，直 show 会露出
-      // 白色空 WebView。需要 WebView 渲染的结果先显示带盖板的壳，并在可见后一帧强制
-      // 重推当前结果，收到 popupRendered 后再撤盖板。空结果走 Flutter 占位，不靠 WebView。
-      final bool needsWebViewRender = _itemNeedsWebViewRender(item);
-      final bool revealImmediately = reuse || dictionaryResult.entries.isEmpty;
-      if (deferDisplay) {
-        _deferredPopupItem = item;
-        _deferredGeneration = gen;
-      } else if (revealImmediately && needsWebViewRender) {
-        _showPopupWaitingForRender(item, gen);
-      } else if (revealImmediately) {
-        _popup.show(item);
-      } else {
-        _popup.markPendingReveal(item);
-      }
-
-      final int highlightCount = lookupHighlightCharCount(
-        result: dictionaryResult,
-        searchTerm: searchTerm,
-        language: JapaneseLanguage.instance,
-      );
-
-      final bool arEnabled = ReaderFushiSource.instance.autoReadOnLookup;
-      if (arEnabled && dictionaryResult.entries.isNotEmpty) {
-        final entry = dictionaryResult.entries.first;
-        final expression = entry.word;
-        final reading = entry.reading;
-        if (expression.isNotEmpty) {
-          _autoReadWord(expression, reading);
-        }
-      }
-
-      return highlightCount;
-    } finally {
-      if (_searchGeneration == gen &&
-          (!deferDisplay || _deferredPopupItem == null) &&
-          _visibleRenderPendingItem == null) {
-        _isSearchingNotifier.value = false;
-        _pendingSelectionRect = null;
-      }
-    }
+    return 0;
   }
 
   /// 正在等 AI 挑词条的弹窗层 → 那次请求的客户端（顶栏 ✨ 换成转圈）。存客户端
@@ -836,27 +694,7 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
   }
 
   void showDeferredPopup({Rect? selectionRect}) {
-    if (kKitapsenEdition) return;
-    final item = _deferredPopupItem;
-    final gen = _deferredGeneration;
-    _deferredPopupItem = null;
-    if (item != null) {
-      _lastDeferredShown = item;
-      if (selectionRect != null) {
-        item.selectionRect = selectionRect;
-      }
-      // item 已在栈内（beginTop 时加入，隐藏）。需要 WebView 渲染的结果先带盖板
-      // 翻可见，等当前结果 popupRendered 后再撤盖板，避免 macOS 隐藏热槽漏注入后露白。
-      if (_itemNeedsWebViewRender(item)) {
-        _showPopupWaitingForRender(item, gen);
-      } else {
-        _popup.show(item);
-      }
-    }
-    if (_searchGeneration == gen && _visibleRenderPendingItem == null) {
-      _isSearchingNotifier.value = false;
-      _pendingSelectionRect = null;
-    }
+    return;
   }
 
   /// BUG-717 ②：当前查词代次快照。阅读器把显示与高亮 eval 解耦后，捕获它传给
@@ -868,10 +706,7 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
   /// [generation] 仍是当前查词代次（其间没有更新查词、没清栈）时才动，且委托
   /// [DictionaryPopupController.reanchorEntry] 再校验该条目仍显示 / rect 有变。
   void reanchorTopPopup(Rect rect, int generation) {
-    if (kKitapsenEdition || generation != _searchGeneration) return;
-    final DictionaryPopupEntry? item = _lastDeferredShown;
-    if (item == null) return;
-    _popup.reanchorEntry(item, rect);
+    return;
   }
 
   bool _itemNeedsWebViewRender(DictionaryPopupEntry item) {
@@ -957,8 +792,7 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
   }
 
   void clearDictionaryResult() {
-    if (kKitapsenEdition) return;
-    _dismissPopupAt(0);
+    return;
   }
 
   // 弹窗盒子尺寸随「界面大小」一起放大：阅读器/词典页整树被 FushiAppUiScaleNeutralizer
@@ -1048,87 +882,7 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
   }
 
   Widget buildDictionary() {
-    if (kKitapsenEdition) return const SizedBox.shrink();
-    return Theme(
-      data: appModel.overrideDictionaryTheme ?? theme,
-      child: AnimatedBuilder(
-        animation: _popupListenable,
-        builder: (context, _) {
-          final stack = _popup.entries;
-          final searching = _isSearchingNotifier.value;
-          if (stack.isEmpty && !searching) return const SizedBox.shrink();
-          final hasVisiblePopup = _hasVisiblePopup(stack);
-          final visibleTopIndex = _lastVisiblePopupIndex(stack);
-
-          final showLoadingPlaceholder =
-              searching && !hasVisiblePopup && _pendingSelectionRect != null;
-
-          return LayoutBuilder(
-            builder: (context, constraints) {
-              final screen = Size(constraints.maxWidth, constraints.maxHeight);
-              return Stack(
-                key: _popupCoordinateSpaceKey,
-                // BUG-135: 隐藏热槽停到屏幕右外侧（_buildPopupLayer），Clip.none 让它
-                // 在屏外照常预热、又不裁掉（默认 hardEdge 会裁，原生 WebView 失温）。
-                clipBehavior: Clip.none,
-                children: [
-                  if (hasVisiblePopup || searching)
-                    Positioned.fill(
-                      // TODO-834（反转 TODO-720 / BUG-403）：点**所有弹窗矩形外**的
-                      // 真空白 = 一次性清整栈（会话级路径 [clearDictionaryResult]
-                      // → [_dismissPopupAt(0)] 触发会话收尾 [onAllPopupsDismissed]，
-                      // 保留隐藏热槽 BUG-092）。barrier 只在弹窗矩形之外命中（弹窗本
-                      // 体的 onTapOutside 单独处理「点某层本体空白」只关其后代）。光标
-                      // B/Esc 的逐层退回（[dismissTopPopup]）不受本改动影响。
-                      // TODO-1027：tap 带全局坐标转发给 [onDismissBarrierTap]
-                      // （阅读器覆写为「命中词→换新查词」，默认表面仍清整栈）。
-                      child: LookupDismissBarrier(
-                        onTapDismiss: onDismissBarrierTap,
-                        // TODO-716：水平拖过阈关一层（逐层，与光标 B/Esc 同语义）。
-                        onSwipeDismiss: dismissTopPopup,
-                        swipeEnabled:
-                            ReaderFushiSource.instance.enableSwipeToClose,
-                        // BUG-2770：触摸半边未设置时所有平台默认开。
-                        touchSwipeEnabled:
-                            ReaderFushiSource.instance.enableTouchSwipeToClose,
-                        sensitivity:
-                            ReaderFushiSource.instance.dismissSwipeSensitivity,
-                        onPointerHover: onDismissBarrierHover,
-                        onPointerSignal: onDismissBarrierPointerSignal,
-                        // 弹窗可见时唯一还能接到指针的地方（barrier 命中行为
-                        // opaque，页面根 Listener 收不到）——见该钩子的文档。
-                        onNonPrimaryButtonDown:
-                            onDismissBarrierNonPrimaryButton,
-                        scrollDismissAxis: dismissBarrierScrollAxis,
-                        onScrollDismiss: onDismissBarrierScrollDrag,
-                      ),
-                    ),
-                  if (showLoadingPlaceholder) _buildLoadingPlaceholder(screen),
-                  for (int i = 0; i < stack.length; i++)
-                    _buildPopupLayer(
-                      stack,
-                      i,
-                      screen,
-                      isTop: i == visibleTopIndex,
-                    ),
-                  // BUG-2039 ③：停驻的嵌套 realm 屏外挂着，下一次嵌套直接接管热
-                  // WebView。本页没混入 DictionaryPageMixin，所以直接调共享原语，
-                  // 不再把循环体内联抄一遍。
-                  ...parkedRealmPopupLayers(
-                    parkedRealms: _popup.parkedRealms,
-                    screen: screen,
-                    isDark: (appModel.overrideDictionaryTheme ?? theme)
-                            .brightness ==
-                        Brightness.dark,
-                    overrideFillColor: appModel.overrideDictionaryColor,
-                  ),
-                ],
-              );
-            },
-          );
-        },
-      ),
-    );
+    return const SizedBox.shrink();
   }
 
   Widget _buildLoadingPlaceholder(Size screen) {
@@ -1193,8 +947,7 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
     // 收藏（onFavoriteEntry / onFavoriteCheck）**不在此列**：收藏句子/词写的是本地
     // FavoriteWords 表，与 Anki 无关，属阅读能力而非制卡能力。
     final bool cardCreationEnabled =
-        !kKitapsenEdition &&
-        appModel.moduleVisibility.isEnabled(ModuleId.cardCreation);
+        false;
     // 「+句」草稿（多句合一制卡 / 调整上下文）只为制卡服务，跟着制卡一起关。
     final bool sentenceDraftEnabled =
         supportsSentenceDraft && cardCreationEnabled;
@@ -1585,22 +1338,18 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
   /// char-level cursor drives when it lives in the dictionary. Null when no
   /// popup is visible.
   @protected
-  DictionaryPopupWebViewState? get topPopupState => kKitapsenEdition
-      ? null
-      : _lastVisiblePopup(_popup.entries)?.webViewKey.currentState;
+  DictionaryPopupWebViewState? get topPopupState => null;
 
   /// Index of the top-most visible popup in the stack, or -1.
   @protected
   int get topVisiblePopupIndex =>
-      kKitapsenEdition ? -1 : _lastVisiblePopupIndex(_popup.entries);
+      -1;
 
   /// Dismiss only the top-most visible popup (one layer), leaving any parent
   /// popup in place — used by the cursor's B/Esc "back one layer".
   @protected
   void dismissTopPopup() {
-    if (kKitapsenEdition) return;
-    final int index = _lastVisiblePopupIndex(_popup.entries);
-    if (index >= 0) _dismissPopupAt(index);
+    return;
   }
 
   /// TODO-834：关闭第 [index] 层**衍生的所有后代层**（index 更大的全部层），保留本层
@@ -1610,10 +1359,7 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
   /// [onDictionaryStackChanged] 让光标跟随回到新顶层（与 B/Esc 逐层退回同钩子）。
   @protected
   void dismissDescendantsOf(int index) {
-    if (kKitapsenEdition) return;
-    if (index < 0 || index >= _popup.entries.length - 1) return; // 无后代=no-op
-    _popup.truncateTo(index + 1);
-    onDictionaryStackChanged();
+    return;
   }
 
   /// 竖排避让（放当前列左/右侧而非上/下）只对**顶层弹窗**成立：顶层选区来自
@@ -1716,35 +1462,7 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
   }
 
   Widget buildDictionaryLoading() {
-    if (kKitapsenEdition) return const SizedBox.shrink();
-    return ValueListenableBuilder<bool>(
-      valueListenable: _isSearchingNotifier,
-      builder: (context, value, child) {
-        return Visibility(
-          visible: value,
-          child: SizedBox(
-            height: double.infinity,
-            width: double.infinity,
-            child: FushiCard(
-              padding: EdgeInsets.zero,
-              color: Colors.transparent,
-              borderColor: Colors.transparent,
-              borderRadius: BorderRadius.zero,
-              child: Column(
-                children: [
-                  LinearProgressIndicator(
-                    backgroundColor: Colors.transparent,
-                    color: theme.colorScheme.primary,
-                    minHeight: 2.75,
-                  ),
-                  Expanded(child: Container())
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-    );
+    return const SizedBox.shrink();
   }
 
   Future<MinePopupResult> onMineFromPopup(Map<String, String> fields) async {
@@ -1951,40 +1669,16 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
   }
 
   DictionarySearchResult? get currentResult =>
-      kKitapsenEdition ? null : _lastVisiblePopup(_popup.entries)?.result;
+      null;
 
   /// 顶层（从正文点出来的那一层）查词结果。收藏句时用它的首个词头记下「为哪个词
   /// 收藏的这句」；嵌套层是在释义里再查的词，不代表原文里的那个词。
   DictionarySearchResult? get rootLookupResult =>
-      kKitapsenEdition || _popup.entries.isEmpty
-          ? null
-          : _popup.entries.first.result;
+      null;
 
   @protected
   void prunePopupStack(int keepCount) {
-    if (kKitapsenEdition) return;
-    if (keepCount > 0) {
-      final pending = _visibleRenderPendingItem;
-      if (pending != null) {
-        final index = _popup.entries.indexOf(pending);
-        if (index < 0 || index >= keepCount) {
-          _clearVisibleRenderPending(item: pending);
-        }
-      }
-      _popup.truncateTo(keepCount);
-      return;
-    }
-    // keepCount <= 0: a fresh top-level lookup is starting. Preserve the
-    // persistent warm slot (index 0) so its already-loaded WebView survives and
-    // the upcoming lookup reuses it warm (BUG-092) — only drop nested children
-    // and hide the slot. Low-memory mode keeps no warm slot, so it clears.
-    if (_popup.entries.isEmpty) return;
-    _popup.lowMemory = appModel.lowMemoryMode;
-    if (_popup.entries.first.isWarmSlot && !appModel.lowMemoryMode) {
-      _popup.entries.first.webViewKey.currentState?.clearSelection();
-    }
-    _clearVisibleRenderPending();
-    _popup.pruneToWarmSlot();
+    return;
   }
 
   bool _hasVisiblePopup(List<DictionaryPopupEntry> stack) {

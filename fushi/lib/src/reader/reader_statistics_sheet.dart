@@ -354,11 +354,6 @@ class _ReaderStatisticsSheetState extends State<ReaderStatisticsSheet> {
                   cells: <String>[
                     formatStatTime(book.todayMs),
                     t.stat_format_chars(n: formatGroupedInt(book.todayChars)),
-                    // Kitapsen: no lookup or card creation to count.
-                    if (!kKitapsenEdition)
-                      t.reader_stats_lookups(n: '${book.todayLookups}'),
-                    if (!kKitapsenEdition)
-                      t.reader_stats_cards(n: '${book.todayCards}'),
                   ],
                 ),
                 const _Rule(),

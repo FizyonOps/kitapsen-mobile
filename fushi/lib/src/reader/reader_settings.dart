@@ -53,9 +53,9 @@ enum FontTarget {
 /// 其余平台勾上等于写一个永远没人读的偏好键——UI 必须据此隐藏，否则用户会以为
 /// 自己已经设好了。其余用途五平台通用。
 bool isFontTargetAvailableOnPlatform(FontTarget target) => switch (target) {
-      FontTarget.gameLookup => !kKitapsenEdition && Platform.isWindows,
+      FontTarget.gameLookup => false,
       // Kitapsen: no dictionary popup and no video, so only UI and book fonts.
-      FontTarget.dictionary || FontTarget.videoSubtitle => !kKitapsenEdition,
+      FontTarget.dictionary || FontTarget.videoSubtitle => false,
       FontTarget.appUi || FontTarget.body => true,
     };
 
@@ -80,10 +80,10 @@ class ReaderSettings {
   /// 的 fallback 默认引用，避免三处来源（settings / source / aggregate）互相矛盾。
   // Kitapsen: horizontal Latin-script books read better with print-like side
   // margins and a little air above and below the text block.
-  static const double defaultMarginTopPercent = kKitapsenEdition ? 3 : 0;
-  static const double defaultMarginBottomPercent = kKitapsenEdition ? 3 : 0;
-  static const double defaultMarginLeftPercent = kKitapsenEdition ? 6 : 2;
-  static const double defaultMarginRightPercent = kKitapsenEdition ? 6 : 2;
+  static const double defaultMarginTopPercent = 3;
+  static const double defaultMarginBottomPercent = 3;
+  static const double defaultMarginLeftPercent = 6;
+  static const double defaultMarginRightPercent = 6;
 
   /// 边距是百分比（vw/vh），CSS padding 不接受负值且过大会吃光正文；统一夹在
   /// `[0, 50]`，非有限值（NaN/∞）落 0。
@@ -242,7 +242,7 @@ class ReaderSettings {
 
   /// Kitapsen reads Turkish / European books: horizontal, left-to-right.
   static const String defaultWritingMode =
-      kKitapsenEdition ? 'horizontal-tb' : 'vertical-rl';
+      'horizontal-tb';
 
   String get writingMode => _get<String>('writing_mode', defaultWritingMode);
   Future<void> setWritingMode(String v) => _set<String>('writing_mode', v);
@@ -259,7 +259,7 @@ class ReaderSettings {
   /// TODO-909: VN (Visual-Novel) is the third book view-mode, alongside
   /// `'paginated'` / `'continuous'`. It detaches the chapter and renders one
   /// Block/sentence screen at a time on its own stage.
-  bool get isVnMode => !kKitapsenEdition && viewMode == 'vn';
+  bool get isVnMode => false;
 
   // ── VN (Visual-Novel) settings (TODO-909) ──────────────────────────────
   // Defaults copied from hoshi a ReaderSettings.kt (🔒③). per-Profile global,
@@ -397,7 +397,7 @@ class ReaderSettings {
 
   /// `ltr` or `rtl`.
   static const String defaultSpreadDirection =
-      kKitapsenEdition ? 'ltr' : 'rtl';
+      'ltr';
 
   String get spreadDirection =>
       _get<String>('spread_direction', defaultSpreadDirection);
@@ -593,11 +593,10 @@ class ReaderSettings {
 
   /// Tap-to-look-up. Kitapsen has no dictionary, so a tap on text must never
   /// open a lookup popup; taps fall through to the toolbar toggle instead.
-  static const bool defaultHighlightOnTap = !kKitapsenEdition;
+  static const bool defaultHighlightOnTap = false;
 
   bool get highlightOnTap {
-    if (kKitapsenEdition) return false;
-    return _get<bool>('highlight_on_tap', defaultHighlightOnTap);
+    return false;
   }
   Future<void> toggleHighlightOnTap() =>
       _set<bool>('highlight_on_tap', !highlightOnTap);

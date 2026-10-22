@@ -83,10 +83,7 @@ SettingsDestination buildAiDestination() {
         // 条（判据只在 store_compliance.dart 写一次）或用户关了下载模块，这一段
         // 整个不渲染、不进搜索索引。
         visible: (SettingsContext c) =>
-            StoreRestrictedCapability.downloads.isAvailable &&
-            StoreRestrictedCapability.externalDiscovery.isAvailable &&
-            !kKitapsenEdition &&
-            c.appModel.moduleVisibility.isEnabled(ModuleId.browse),
+            false,
         items: <SettingsItem>[
           SettingsSegmentedItem<String>(
             id: 'ai.video_download_quality',

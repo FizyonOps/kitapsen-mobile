@@ -64,35 +64,8 @@ class AudioController {
     // Kitapsen plays no audio (audiobooks / video are not shipped), so the
     // audio_service media-playback foreground service is not even declared
     // in its manifest; use the in-process handler directly.
-    if (kKitapsenEdition) {
-      _audioHandler = _localHandler();
-      return;
-    }
-
-    try {
-      _audioHandler = await ag.AudioService.init<FushiAudioHandler>(
-        builder: () => FushiAudioHandler(
-          onPlayPause: () => _playController.add(null),
-          onSeek: (pos) => _seekController.add(pos),
-          onRewind: () => _rewindController.add(null),
-          onFastForward: () => _fastForwardController.add(null),
-          onSkipToNext: () => _skipNextController.add(null),
-          onSkipToPrevious: () => _skipPreviousController.add(null),
-          onToggleFloatingLyric: () => _toggleFloatingLyricController.add(null),
-        ),
-        config: const ag.AudioServiceConfig(
-          androidNotificationChannelId: 'app.fushi.reader.channel.audio',
-          androidNotificationChannelName: 'fushi',
-          androidNotificationIcon: 'drawable/ic_stat_fushi',
-          notificationColor: Colors.black,
-          fastForwardInterval: Duration(seconds: 5),
-          rewindInterval: Duration(seconds: 5),
-        ),
-      );
-    } catch (e) {
-      debugPrint('[Fushi] AudioService.init failed (non-fatal): $e');
-      _audioHandler = _localHandler();
-    }
+    _audioHandler = _localHandler();
+    return;
   }
 
   /// In-process handler without the audio_service platform session.

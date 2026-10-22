@@ -44,17 +44,7 @@ GalleryImagePickerBackend galleryImagePickerBackendFor(
   // Kitapsen ships image_picker without its native plugin (no camera code);
   // covers come from file_picker's image picker, the one the import dialog's
   // cover row already uses.
-  if (kKitapsenEdition) return GalleryImagePickerBackend.filePicker;
-  switch (platform) {
-    case TargetPlatform.android:
-    case TargetPlatform.iOS:
-      return GalleryImagePickerBackend.imagePicker;
-    case TargetPlatform.windows:
-    case TargetPlatform.macOS:
-    case TargetPlatform.linux:
-    case TargetPlatform.fuchsia:
-      return GalleryImagePickerBackend.filePicker;
-  }
+  return GalleryImagePickerBackend.filePicker;
 }
 
 /// 选一张图片并返回其 [File]；用户取消返回 null。

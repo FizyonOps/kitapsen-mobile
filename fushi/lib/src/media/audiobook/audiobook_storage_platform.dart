@@ -29,8 +29,4 @@ Future<int> justAudioDurationProbeMs(String path) async {
 /// 解析器（也不覆盖测试预先注入的临时目录）。
 void installAudiobookStoragePlatform() {
   AudiobookStorage.documentsRootResolver ??= getApplicationDocumentsDirectory;
-  // Kitapsen has no audiobooks, so nothing ever probes an audio duration.
-  if (!kKitapsenEdition) {
-    AudiobookStorage.audioDurationProbeMs = justAudioDurationProbeMs;
-  }
 }

@@ -40,48 +40,17 @@ class NavRailBrandButton extends StatelessWidget {
     // 挤了就等比缩小，而不是画到框外。
     // Kitapsen: the brand mark is not a link (a store reader app must not
     // point at the web storefront).
-    if (kKitapsenEdition) {
-      return Padding(
-        padding: EdgeInsets.all(tokens.spacing.gap),
-        child: Semantics(
-          label: 'Kitapsen',
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
-            child: SizedBox.square(
-              dimension: 64,
-              child: ClipRRect(
-                borderRadius: tokens.radii.controlRadius,
-                child: const CurrentAppIcon(),
-              ),
-            ),
-          ),
-        ),
-      );
-    }
     return Padding(
       padding: EdgeInsets.all(tokens.spacing.gap),
-      child: Tooltip(
-        message: t.options_website,
-        child: InkWell(
-          onTap: () => unawaited(openOfficialWebsite()),
-          canRequestFocus: false,
-          borderRadius: tokens.radii.controlRadius,
-          child: Semantics(
-            button: true,
-            label: 'Kitapsen',
-            child: FushiFocusTarget(
-              id: focusId,
-              autoHome: false,
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                child: SizedBox.square(
-                  dimension: 64,
-                  child: ClipRRect(
-                    borderRadius: tokens.radii.controlRadius,
-                    child: const CurrentAppIcon(),
-                  ),
-                ),
-              ),
+      child: Semantics(
+        label: 'Kitapsen',
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: SizedBox.square(
+            dimension: 64,
+            child: ClipRRect(
+              borderRadius: tokens.radii.controlRadius,
+              child: const CurrentAppIcon(),
             ),
           ),
         ),

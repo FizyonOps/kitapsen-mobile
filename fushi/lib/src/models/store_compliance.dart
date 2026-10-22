@@ -62,7 +62,7 @@ enum StoreRestrictedCapability {
   /// 是这里的一行，而不是回头去把一个被共享的布尔拆开。
   ///
   /// Kitapsen (store e-book reader) ships none of these on any platform.
-  bool availableOn({required bool isIOS}) => !kKitapsenEdition && !isIOS;
+  bool availableOn({required bool isIOS}) => false;
 
   /// 真实平台上的判据。widget / 页面层用它，避免把平台参数一路透传下去。
   ///

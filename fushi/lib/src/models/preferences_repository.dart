@@ -175,7 +175,6 @@ class PreferencesRepository extends ChangeNotifier
     DandanplayConfig.current = DandanplayConfig.decode(
       getPref('video_danmaku_config', defaultValue: '') as String,
     );
-    if (!kKitapsenEdition) await _repairOpenSubtitlesEnabledOnce();
     // 上面那次修复写会经 setPref 抬高持久化版本号，而缓存是**在它之前**读的。
     // 不把版本重读回来，loadFromDb 一结束进程内值就比 DB 少一个，
     // 「版本不同 = 别的进程改过」于是每次启动误报一次、白重载一次。
@@ -448,7 +447,7 @@ class PreferencesRepository extends ChangeNotifier
   /// Kitapsen sells Turkish books, so its unset default is `tr`.
   String get defaultContentLanguage =>
       getPref('default_content_language',
-              defaultValue: kKitapsenEdition ? 'tr' : '')
+              defaultValue: 'tr')
           as String;
 
   Future<void> setDefaultContentLanguage(String language) async {
@@ -722,10 +721,7 @@ class PreferencesRepository extends ChangeNotifier
   bool get floatingBallInApp {
     // Kitapsen has no floating ball at all (its settings category is hidden),
     // so a stored value can never turn it back on.
-    if (kKitapsenEdition) return false;
-    final Object? value = getPref('floating_ball.in_app', defaultValue: null);
-    if (value is bool) return value;
-    return getPref('floating_ball.mode', defaultValue: '') != 'off';
+    return false;
   }
 
   Future<void> setFloatingBallInApp(bool value) async {
@@ -736,10 +732,7 @@ class PreferencesRepository extends ChangeNotifier
   /// 应用外悬浮球（Android 悬浮窗服务 / Windows、macOS 置顶窗口）。默认关。旧版
   /// 选过 `system` 的用户保持开。不支持的平台（iOS / Linux）读到 true 也不起球。
   bool get floatingBallSystem {
-    if (kKitapsenEdition) return false;
-    final Object? value = getPref('floating_ball.system', defaultValue: null);
-    if (value is bool) return value;
-    return getPref('floating_ball.mode', defaultValue: '') == 'system';
+    return false;
   }
 
   Future<void> setFloatingBallSystem(bool value) async {

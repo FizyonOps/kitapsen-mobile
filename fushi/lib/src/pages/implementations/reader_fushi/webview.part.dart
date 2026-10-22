@@ -1809,54 +1809,6 @@ updateLive: function(patch) {
               // Kitapsen: no dictionary and no audio clips; selected text can
               // be copied but never shared or sent out of the app.
               menuItems: [
-                if (!kKitapsenEdition)
-                ContextMenuItem(
-                  id: 1,
-                  title: t.search,
-                  action: () async {
-                    final text = await _controller?.getSelectedText();
-                    if (text == null || text.isEmpty) return;
-                    if (!mounted) return;
-                    final size = MediaQuery.of(context).size;
-                    final rect = Rect.fromCenter(
-                      center: Offset(size.width / 2, size.height / 3),
-                      width: 1,
-                      height: 1,
-                    );
-                    _webviewPrunePopupStack(0);
-                    // BUG-455：原生菜单查词不经 tap（_handleTextSelected），必须显式把
-                    // 原生选区写进查词状态，否则弹窗顶栏「收藏句子」读 currentSentence 为空
-                    // → 误报「未选择句子」。句级解析失败也要满足非空契约：退回选中文本。
-                    final ReaderSelectionData? sel =
-                        await _fillLookupStateFromNativeSelection();
-                    if (!mounted) return;
-                    if (sel == null) {
-                      appModel.currentMediaSource?.setCurrentSentence(
-                        selection: FushiTextSelection(text: text),
-                      );
-                    }
-                    // BUG-1344：先保留原生选区完成句子/夹图采集，再在打开弹窗前清除。
-                    // WKWebView 否则会把失焦选区绘成灰块并残留到应用切换。
-                    await _clearReaderAppSelection();
-                    if (!mounted) return;
-                    await searchDictionaryResult(
-                      searchTerm: text,
-                      selectionRect: rect,
-                    );
-                    if (mounted) _checkFavoriteStatus();
-                  },
-                ),
-                // TODO-954：移动端选区右键也提供「导出片段」，与 Windows 一致都从选区
-                // 触发；handler 内部判 hasCue/音频，无音频时走 noAudio 兜底 toast。
-                // BUG-544：提到第二位（复制之前），不再垫底。
-                if (!kKitapsenEdition)
-                ContextMenuItem(
-                  id: 2,
-                  title: t.audiobook_export_clip,
-                  action: () async {
-                    await _exportAudiobookClipFromSelection();
-                  },
-                ),
                 // BUG-544：补自定义「复制」补偿被隐藏的系统复制项，逻辑与桌面右键菜单
                 // 的 'copy' 分支同源（Clipboard.setData + copied_to_clipboard toast）。
                 ContextMenuItem(
@@ -1875,44 +1827,6 @@ updateLive: function(patch) {
                     await _clearReaderAppSelection();
                   },
                 ),
-                if (isAndroidPlatform && !kKitapsenEdition)
-                  ContextMenuItem(
-                    id: 4,
-                    title: t.share,
-                    action: () async {
-                      final String? text = await _controller?.getSelectedText();
-                      if (text == null || text.isEmpty) return;
-                      final bool shared = await SelectionExternalActions
-                          .instance
-                          .shareText(text);
-                      if (mounted && !shared) {
-                        FushiToast.show(
-                          msg: t.selection_share_failed,
-                          severity: ToastSeverity.error,
-                        );
-                      }
-                      await _clearReaderAppSelection();
-                    },
-                  ),
-                if (isAndroidPlatform && !kKitapsenEdition)
-                  ContextMenuItem(
-                    id: 5,
-                    title: t.selection_web_search,
-                    action: () async {
-                      final String? text = await _controller?.getSelectedText();
-                      if (text == null || text.isEmpty) return;
-                      final bool opened = await SelectionExternalActions
-                          .instance
-                          .searchWeb(text);
-                      if (mounted && !opened) {
-                        FushiToast.show(
-                          msg: t.selection_web_search_unavailable,
-                          severity: ToastSeverity.error,
-                        );
-                      }
-                      await _clearReaderAppSelection();
-                    },
-                  ),
               ],
             ),
       initialUserScripts: UnmodifiableListView<UserScript>(<UserScript>[
@@ -2155,7 +2069,7 @@ updateLive: function(patch) {
             if (_closeSideSheetForWebViewPointer()) return;
             // Kitapsen has no lookup, so Shift+tap is just a tap.
             final bool shiftKey =
-                !kKitapsenEdition && args.length >= 3 && args[2] == true;
+                false;
             if (!_tapGateChrome && !shiftKey) {
               _toggleChrome();
               // Tap handed OS focus to the WebView; reclaim it so ESC still
@@ -2164,44 +2078,26 @@ updateLive: function(patch) {
               _focusOwnership.reclaim(FocusReclaimCause.gesture);
               return;
             }
-            if (kKitapsenEdition ||
-                (!shiftKey && !ReaderFushiSource.instance.highlightOnTap)) {
-              // Without tap-to-look-up the JS side reports every tap here (text
-              // or blank alike), so a tap must do what a tap on blank space
-              // does: drop a leftover selection and reveal / hide the floating
-              // toolbar. Otherwise the auto-hidden toolbar could never come
-              // back by tapping the page.
-              unawaited(_clearReaderAppSelection());
-              if (_anyChromeFloating) {
-                _handleFloatingChromeReveal();
-              } else if (ReaderFushiSource.instance.tapEmptyToHideChrome) {
-                _toggleChrome();
-              }
-              _focusOwnership.reclaim(FocusReclaimCause.gesture);
-              return;
+            // Without tap-to-look-up the JS side reports every tap here (text
+            // or blank alike), so a tap must do what a tap on blank space
+            // does: drop a leftover selection and reveal / hide the floating
+            // toolbar. Otherwise the auto-hidden toolbar could never come
+            // back by tapping the page.
+            unawaited(_clearReaderAppSelection());
+            if (_anyChromeFloating) {
+              _handleFloatingChromeReveal();
+            } else if (ReaderFushiSource.instance.tapEmptyToHideChrome) {
+              _toggleChrome();
             }
-            final double x = _ReaderFushiPageState._toDouble(args[0]) ?? 0;
-            final double y = _ReaderFushiPageState._toDouble(args[1]) ?? 0;
-            // Selection → onTextSelected → popup, which takes focus itself; do
-            // not reclaim here or we would fight the popup for focus.
-            _selectTextAt(x, y);
+            _focusOwnership.reclaim(FocusReclaimCause.gesture);
+            return;
           },
         );
 
         controller.addJavaScriptHandler(
           handlerName: 'onShiftHover',
           callback: (args) {
-            if (kKitapsenEdition || args.length < 2) return;
-            // 连续查词（和鼠标一样）：**不再**门控 isDictionaryShown（旧 TODO-851
-            // 放开）。弹窗未出时这里出首弹；某些平台弹窗出现后 WebView DOM 仍收
-            // mousemove（barrier 不拦原生视图指针），此时也照常换词——与
-            // onDismissBarrierHover 入口一致，防平台事件路由差异漏网。换词经
-            // prunePopupStack(0) 复用热槽无缝替换，同词由 JS selectText 的 fromHover
-            // 同词短路去重，二者协同不叠层不闪。
-            final double x = _ReaderFushiPageState._toDouble(args[0]) ?? 0;
-            final double y = _ReaderFushiPageState._toDouble(args[1]) ?? 0;
-            // TODO-851：悬停路径传 fromHover:true，命中空白不触发 onTapEmpty。
-            _selectTextAt(x, y, fromHover: true);
+            return;
           },
         );
 

@@ -524,13 +524,7 @@ class _AudiobookImportDialogState extends State<AudiobookImportDialog>
         await widget.repo.database.getEpubBook(widget.bookKey);
     if (!mounted) return;
     // Kitapsen: no speech-to-text; the transcription sheet is compiled out.
-    final String? srtPath = kKitapsenEdition
-        ? null
-        : await showAsrTranscribeSheet(
-      context: context,
-      audioPaths: List<String>.of(audio),
-      languageHint: asrLanguageHintFromBookLanguage(book?.language),
-    );
+    final String? srtPath = null;
     if (srtPath == null || !mounted) return;
     setState(() {
       _alignmentPath = srtPath;

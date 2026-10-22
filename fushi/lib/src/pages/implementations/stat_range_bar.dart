@@ -298,9 +298,7 @@ Widget buildStatRangeCalendarSection(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         Text(
-          kKitapsenEdition
-              ? t.kitapsen_stat_range_calendar
-              : t.stat_range_calendar,
+          t.kitapsen_stat_range_calendar,
           style: Theme.of(context).textTheme.titleMedium,
         ),
         SizedBox(height: tokens.spacing.gap),

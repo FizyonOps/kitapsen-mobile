@@ -176,14 +176,7 @@ extension _ReaderChrome on _ReaderFushiPageState {
   ) async {
     if (!mounted) return;
     // Kitapsen: book images are not shared or copied out of the app.
-    if (kKitapsenEdition) return;
-    if (!isWindowsPlatform) {
-      await _shareReaderImage(imgUrl);
-      return;
-    }
-    final RenderBox? box = context.findRenderObject() as RenderBox?;
-    final Offset global = box?.localToGlobal(webViewOffset) ?? webViewOffset;
-    await _showReaderImageContextMenuAtGlobalPosition(imgUrl, global);
+    return;
   }
 
   /// 菜单本体（锚点经 Overlay 映射、尺寸写常量，BUG-381 / BUG-1438）在
@@ -528,21 +521,9 @@ extension _ReaderChrome on _ReaderFushiPageState {
               // dictionary lookup or audio clips, and store books never leave
               // the app through share / web search.
               children: <Widget>[
-                if (!kKitapsenEdition)
-                  button(Icons.search_outlined, t.search, 'search'),
                 button(Icons.copy_outlined, t.copy, 'copy'),
-                if (isAndroidPlatform && !kKitapsenEdition)
-                  button(Icons.share_outlined, t.share, 'share'),
-                if (isAndroidPlatform && !kKitapsenEdition)
-                  button(Icons.travel_explore, t.selection_web_search,
-                      'webSearch'),
-                kKitapsenEdition
-                    ? button(Icons.border_color_outlined,
-                        t.kitapsen_reader_highlight, 'favorite')
-                    : button(Icons.star_border, t.action_favorite, 'favorite'),
-                if (hasAudio && !kKitapsenEdition)
-                  button(Icons.movie_creation_outlined, t.audiobook_export_clip,
-                      'export'),
+                button(Icons.border_color_outlined,
+                        t.kitapsen_reader_highlight, 'favorite'),
               ],
             ),
           ),
@@ -758,15 +739,7 @@ extension _ReaderChrome on _ReaderFushiPageState {
   /// 原样生效）。与桌面右键 / 原生 ActionMode 的「导出片段」共用同一后端动作。
   Future<void> _exportAudiobookClipFromSelectionData(
       ReaderSelectionData data) async {
-    if (kKitapsenEdition) return;
-    if (data.text.isEmpty) {
-      FushiToast.show(
-          msg: t.audiobook_export_clip_no_text, severity: ToastSeverity.error);
-      return;
-    }
-    await _fillLookupStateFromSelectionData(data, extractNativeImages: false);
-    if (!mounted) return;
-    _exportAudiobookClip();
+    return;
   }
 
   /// TODO-1366：只隐藏拖选起止手柄（不清选区 / 高亮）——查词收敛到匹配词后，手柄不再描述
@@ -864,14 +837,7 @@ extension _ReaderChrome on _ReaderFushiPageState {
   /// [copyImageFileToClipboard]），与书架端插图册共用；这里只把 fushi.local URL
   /// 解析成本书解压目录里的文件。
   Future<void> _shareReaderImage(String imgUrl) async {
-    if (kKitapsenEdition) return;
-    final File? file = _readerImageFileForUrl(imgUrl);
-    if (file == null) {
-      FushiToast.show(
-          msg: t.reader_image_file_unavailable, severity: ToastSeverity.error);
-      return;
-    }
-    await shareImageFile(file);
+    return;
   }
 
   Future<void> _copyReaderImageToClipboard(String imgUrl) async {
@@ -1030,10 +996,7 @@ extension _ReaderChrome on _ReaderFushiPageState {
   // reader 只保留设置开关，翻转后委托 session 装/清通知卡片。
 
   Future<void> _toggleMediaNotification() async {
-    if (kKitapsenEdition) return;
-    final bool newValue = !appModel.showMediaNotification;
-    await appModel.setShowMediaNotification(newValue);
-    appModel.audiobookSession.onMediaNotificationToggled(enabled: newValue);
+    return;
   }
 
   // ── Bottom Chrome ─────────────────────────────────────────────────
@@ -1609,14 +1572,13 @@ extension _ReaderChrome on _ReaderFushiPageState {
         return !_lyricsMode;
       // 「听书」模块关掉时整颗不渲染（不是画一个点了没反应的按钮）。
       case ReaderControlItem.audiobook:
-        return !kKitapsenEdition &&
-            _moduleVisibility.isEnabled(ModuleId.listening);
+        return false;
       // 桌面才有窗口可全屏，移动端不渲染这颗按钮。
       case ReaderControlItem.fullscreen:
         return desktopWindowFullscreenSupported;
       // Kitapsen has no floating ball to take the toolbar buttons over.
       case ReaderControlItem.toolbars:
-        return !kKitapsenEdition;
+        return false;
       // 有声书传输键：没挂控制器就没有可控的音频，整颗不出现（不论拖在哪个槽）。
       case ReaderControlItem.audiobookPrev:
       case ReaderControlItem.audiobookPlayPause:
@@ -2220,7 +2182,7 @@ extension _ReaderChrome on _ReaderFushiPageState {
     // 快照一次：[AppModel.moduleVisibility] 每读一次都重新合成一个 Set，下面三个
     // 有声书回调都要问它。
     final bool listeningEnabled =
-        !kKitapsenEdition && _moduleVisibility.isEnabled(ModuleId.listening);
+        false;
     return ReaderQuickSettingsSheet(
       controller: _audiobookController,
       toc: toc,
@@ -2256,7 +2218,7 @@ extension _ReaderChrome on _ReaderFushiPageState {
       onThemeChanged: _onThemeChanged,
       extractDir: _extractDir,
       onReloadChapter: _reloadWithCurrentSettings,
-      onLyricsReload: kKitapsenEdition ? null : _loadLyricsPage,
+      onLyricsReload: null,
       // 「听书」关掉时三个有声书回调一律传 null——面板侧已有「回调为空就不渲染
       // 该行」的既有契约，用同一条通道关掉「导入音频 / 换对齐文件 / 设备端转录」。
       onAudioImport: listeningEnabled && _srtBookUid != null
@@ -2279,38 +2241,15 @@ extension _ReaderChrome on _ReaderFushiPageState {
           : null,
       lyricsMode: _lyricsMode,
       // Kitapsen: no lyrics mode, floating lyrics or media notification.
-      onToggleLyricsMode: kKitapsenEdition ? null : _toggleLyricsMode,
+      onToggleLyricsMode: null,
       showFloatingLyric: appModel.showFloatingLyric,
-      onToggleFloatingLyric: kKitapsenEdition ? null : _toggleFloatingLyric,
+      onToggleFloatingLyric: null,
       floatingLyricFontSize: appModel.floatingLyricFontSize,
-      onFloatingLyricFontSizeChanged: kKitapsenEdition
-          ? null
-          : (v) async {
-              await appModel.setFloatingLyricFontSize(v);
-              final FloatingLyricStyle style = _readerFloatingLyricStyle(
-                fontSize: v,
-              );
-              await FloatingLyricChannel.updateStyle(
-                fontSize: style.fontSize,
-                textColor: style.textColor,
-                bgColor: style.bgColor,
-                buttonTextColor: style.buttonTextColor,
-                buttonBgColor: style.buttonBgColor,
-                highlightColor: style.highlightColor,
-                activeColor: style.activeColor,
-              );
-            },
+      onFloatingLyricFontSizeChanged: null,
       floatingLyricClickLookup: appModel.floatingLyricClickLookup,
-      onFloatingLyricClickLookupChanged: kKitapsenEdition
-          ? null
-          : (bool value) async {
-              await appModel.setFloatingLyricClickLookup(value);
-              await FloatingLyricChannel.setClickLookupEnabled(value);
-            },
+      onFloatingLyricClickLookupChanged: null,
       showMediaNotification: appModel.showMediaNotification,
-      onToggleMediaNotification: kKitapsenEdition
-          ? null
-          : _toggleMediaNotification,
+      onToggleMediaNotification: null,
       charProgress: _progressCurrentChars != null && _progressTotalChars != null
           ? (_progressCurrentChars!, _progressTotalChars!)
           : null,
@@ -2335,7 +2274,7 @@ extension _ReaderChrome on _ReaderFushiPageState {
         }
       },
       onJumpToFavorite: _jumpToFavoriteSentence,
-      extraLocationSection: kKitapsenEdition && !_lyricsMode
+      extraLocationSection: !_lyricsMode
           ? KitapsenReaderAnnotations(
               db: appModel.database,
               bookKey: widget.bookKey,
@@ -2350,20 +2289,7 @@ extension _ReaderChrome on _ReaderFushiPageState {
               onJump: _jumpToSectionFraction,
             )
           : null,
-      onPlayFavorite: kKitapsenEdition || _audiobookController == null
-          ? null
-          : (fav) async {
-              final AudioCue? target = _favoriteAudioCue(fav);
-              if (target != null) {
-                await _audiobookController!.playRange(
-                  AudioPlaybackRange(
-                    audioFileIndex: target.audioFileIndex,
-                    startMs: target.startMs,
-                    endMs: target.endMs,
-                  ),
-                );
-              }
-            },
+      onPlayFavorite: null,
       presentation: presentation,
       onOpenStatistics: _openReadingStatistics,
       // 导航抽屉（Ctrl+F / 工具栏目录键）在桌面端打开即聚焦书内搜索框；移动端
@@ -2825,33 +2751,7 @@ extension _ReaderChrome on _ReaderFushiPageState {
   Future<void> _openAlignmentImportDialog({
     String? initialAlignmentPath,
   }) async {
-    if (kKitapsenEdition) return;
-    final Audiobook? audiobook = _audiobookController?.audiobook;
-    final AudiobookRepository repo = AudiobookRepository(appModel.database);
-    // BUG-2208：导入 / 对齐对话框压着正文期间停表。
-    await _withStudyClockPaused(
-      () => showAppDialog<void>(
-        context: context,
-        builder: (ctx) => AudiobookImportDialog(
-          bookKey: widget.bookKey,
-          repo: repo,
-          extractDir: _extractDir,
-          initialAudioPaths: audiobook?.audioPaths,
-          initialAlignmentPath: initialAlignmentPath,
-        ),
-      ),
-    );
-    try {
-      await _resolveAudioSlot(forceReload: true);
-    } catch (e, stack) {
-      ErrorLogService.instance.log('ReaderFushi.openAlignmentImport', e, stack);
-    }
-    if (!mounted) return;
-    _rebuild(() {});
-    // 导入 / 对齐完成后回到有声书面板，「资源」页立刻显示新的对齐文件名。
-    if (_audiobookController != null) {
-      unawaited(_showAppearanceSheet(initialSubPage: 'audiobook'));
-    }
+    return;
   }
 
   /// 有声书面板「转录生成字幕」：对当前音频跑设备端 ASR，产物 SRT 作为对齐文件
@@ -2869,15 +2769,7 @@ extension _ReaderChrome on _ReaderFushiPageState {
         await appModel.database.getEpubBook(widget.bookKey);
     if (!mounted) return;
     // Kitapsen: no speech-to-text; the transcription sheet is compiled out.
-    final String? srtPath = kKitapsenEdition
-        ? null
-        : await _withStudyClockPaused(
-      () => showAsrTranscribeSheet(
-        context: context,
-        audioPaths: List<String>.of(audio),
-        languageHint: asrLanguageHintFromBookLanguage(book?.language),
-      ),
-    );
+    final String? srtPath = null;
     if (srtPath == null || !mounted) return;
     await _openAlignmentImportDialog(initialAlignmentPath: srtPath);
   }
@@ -3222,11 +3114,6 @@ extension _ReaderChrome on _ReaderFushiPageState {
     // ran when the chapter had favorites).
     await _settings?.setTheme(appModel.appThemeKey);
     _syncDictionaryTheme();
-    if (!kKitapsenEdition && appModel.showFloatingLyric) {
-      // reader 主题变了：让 session 用新的 reader 样式重刷悬浮窗
-      // （reader 样式已在 attach 时 install 进 session）。
-      await appModel.audiobookSession.applyFloatingLyricStyle();
-    }
     if (_lyricsMode) {
       await _updateLyricsStyleLive();
     }
@@ -3243,22 +3130,7 @@ extension _ReaderChrome on _ReaderFushiPageState {
   /// [deriveSurfaceRolesFrom]，所见即所得。
   void _syncDictionaryTheme() {
     // Kitapsen: no dictionary popup to theme.
-    if (kKitapsenEdition) return;
-    // 决策全在 [resolveDictionaryPopupTheme]（纯函数、可直接断言）：它保证覆盖
-    // 主题带上 FushiEinkTheme 扩展，并在墨水屏下跳过纸色派生。这里只负责把
-    // AppModel / 阅读器主题的当前取值喂进去。
-    final DictionaryPopupTheme resolved = resolveDictionaryPopupTheme(
-      eink: appModel.einkMode,
-      einkDark: appModel.isDarkMode,
-      readerBackground: _themeBackgroundColor(),
-      readerForeground: _themeTextColor(),
-      readerDark: _isReaderThemeDark,
-      buildColorScheme: appModel.buildColorScheme,
-      textTheme: appModel.textTheme,
-      designSystem: appModel.themeNotifier.designSystemTheme,
-    );
-    appModel.setOverrideDictionaryColor(resolved.fillColor);
-    appModel.setOverrideDictionaryTheme(resolved.theme);
+    return;
   }
 
   // ── JS result helpers (evaluateJavascript returns dynamic) ────────

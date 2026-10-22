@@ -93,7 +93,7 @@ class ProfileRepository {
     final entries = <ProfileSettingsCompanion>[];
 
     // Anki settings (SharedPreferences)
-    final BaseAnkiRepository? ankiRepo = kKitapsenEdition ? null : _ankiRepo;
+    final BaseAnkiRepository? ankiRepo = null;
     if (ankiRepo != null) {
       final ankiSettings = await ankiRepo.loadSettings();
       final ankiMap = ProfileKeys.ankiSettingsToMap(ankiSettings);
@@ -272,7 +272,7 @@ class ProfileRepository {
     });
 
     // Anki settings (SharedPreferences)
-    final BaseAnkiRepository? ankiRepo = kKitapsenEdition ? null : _ankiRepo;
+    final BaseAnkiRepository? ankiRepo = null;
     if (ankiRepo != null && ankiMap.isNotEmpty) {
       final current = await ankiRepo.loadSettings();
       final updated = ProfileKeys.mapToAnkiSettings(ankiMap, current);

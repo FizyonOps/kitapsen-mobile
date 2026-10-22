@@ -43,11 +43,6 @@ abstract interface class DownloadKeepAlive {
 
 /// 按平台选实现：只有 Android 有原生侧，其余平台一律 no-op。
 DownloadKeepAlive createDownloadKeepAlive() {
-  // Kitapsen declares no foreground service: store downloads run without the
-  // keep-alive notification.
-  if (!kKitapsenEdition && Platform.isAndroid) {
-    return AndroidDownloadKeepAlive();
-  }
   return const NoopDownloadKeepAlive();
 }
 

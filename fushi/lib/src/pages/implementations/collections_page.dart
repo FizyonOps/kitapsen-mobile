@@ -710,42 +710,7 @@ class _CollectionsPageState extends BasePageState<CollectionsPage> {
   }
 
   Future<void> _openVideoSentence(_CollectionItem item) async {
-    if (kKitapsenEdition) return; // no video library in the Kitapsen edition
-    final String? bookUid = item.bookKey;
-    if (bookUid == null || bookUid.isEmpty) return;
-
-    final VideoBookRepository repo = VideoBookRepository(appModel.database);
-    final VideoBookRow? row = await repo.getByBookUid(bookUid);
-    if (row == null) return;
-
-    final int? startMs = await _resolveVideoFavoriteStartMs(repo, row, item);
-    final target = resolveVideoFavoriteOpenTarget(
-      row: row,
-      favoriteSectionIndex: item.sectionIndex,
-      favoriteStartMs: startMs,
-    );
-    // BUG-1067：本集若属于某 playlist 合集，必须带上主合集 id 进播放器——否则
-    // 视频初始化时系列级音轨/字幕调轴记忆分支（video_fushi_page 1884-1894，
-    // schema v52）被整段跳过，退回读本集 per-book 默认值（音轨 null / 调轴 0），
-    // 表现为「从收藏跳转后音轨与调好的字幕轴又被重置」。解析口径与书架/首页
-    // dashboard 续播一致（getPrimaryCollectionIdByEntry，key='video|<bookUid>'）。
-    final int? playlistCollectionId =
-        await _resolveVideoPlaylistCollectionId(row.bookUid);
-    if (!mounted) return;
-    Navigator.push(
-      context,
-      adaptivePageRoute<void>(
-        context: context,
-        builder: (_) => VideoFushiPage.neutralized(
-          bookUid: row.bookUid,
-          repo: repo,
-          playlistCollectionId: playlistCollectionId,
-          initialCueStartMs: target.startMs,
-          initialEpisodeIndex: target.episodeIndex,
-          initialSubtitleListVisible: true,
-        ),
-      ),
-    );
+    return;
   }
 
   /// 解析该视频条目所属的主 playlist 合集 id（无归属返回 null → 按散卡单视频打开）。
@@ -1539,10 +1504,7 @@ class _CollectionsPageState extends BasePageState<CollectionsPage> {
               label: Text(t.collection_mine_card),
               onPressed: () {
                 Navigator.pop(ctx);
-                if (kKitapsenEdition) return;
-                showFavoriteBatchMining(context, <FavoriteMiningItem>[
-                  miningItem,
-                ]);
+                return;
               },
             ),
           TextButton.icon(
@@ -1769,46 +1731,13 @@ class _CollectionsPageState extends BasePageState<CollectionsPage> {
 
   /// 「制卡」模块关掉时批量 / 单条制卡入口整颗不出现（与弹窗 + 按钮同一判据）。
   bool get _cardCreationEnabled =>
-      !kKitapsenEdition &&
-      appModel.moduleVisibility.isEnabled(ModuleId.cardCreation);
+      false;
 
   /// 收藏行 → 批量制卡输入。收藏词以词条本身制卡、原句作例句；收藏句只有记着查词
   /// 对象（顶栏 ★ 收藏）时才有词可制；制卡句本来就是制过的卡，不再进。
   FavoriteMiningItem? _miningItemOf(_CollectionItem item) {
     // Kitapsen: no card creation.
-    if (kKitapsenEdition) return null;
-    switch (item.type) {
-      case _CollectionType.word:
-        final String expression = item.text ?? '';
-        if (expression.isEmpty) return null;
-        return FavoriteMiningItem(
-          expression: expression,
-          reading: item.wordReading ?? '',
-          sentence: item.contextSentence ?? '',
-          source: item.wordSourceType ?? kFavoriteSentenceSourceBook,
-          bookKey: item.bookKey,
-          bookTitle: _itemDisplayBookTitle(item),
-          sectionIndex: item.sectionIndex,
-          normCharOffset: item.normCharOffset,
-          normCharLength: item.normCharLength,
-        );
-      case _CollectionType.sentence:
-        final String? headword = item.headword;
-        if (headword == null || headword.isEmpty) return null;
-        return FavoriteMiningItem(
-          expression: headword,
-          reading: item.headwordReading ?? '',
-          sentence: item.text ?? '',
-          source: item.source,
-          bookKey: item.bookKey,
-          bookTitle: _itemDisplayBookTitle(item),
-          sectionIndex: item.sectionIndex,
-          normCharOffset: item.normCharOffset,
-          normCharLength: item.normCharLength,
-        );
-      case _CollectionType.mined:
-        return null;
-    }
+    return null;
   }
 
   /// 当前筛选下可制卡的收藏行。
@@ -1819,33 +1748,7 @@ class _CollectionsPageState extends BasePageState<CollectionsPage> {
   /// 批量制卡：勾选要制卡的收藏（默认全选当前筛选下全部可制卡条目），逐条串行
   /// 写进 Anki。视频 / 有声书来源自动带该句音频（与截图）。
   Future<void> _openBatchMineSheet() async {
-    if (kKitapsenEdition) return;
-    final List<_CollectionItem> candidates = _mineableItems;
-    if (candidates.isEmpty) {
-      FushiToast.show(
-        msg: t.collection_batch_mine_empty,
-        severity: ToastSeverity.info,
-      );
-      return;
-    }
-    final List<_CollectionItem>? picked =
-        await showModalBottomSheet<List<_CollectionItem>>(
-      context: context,
-      isScrollControlled: true,
-      builder: (BuildContext ctx) => _BatchMineSheet(
-        candidates: candidates,
-        titleOf: (_CollectionItem i) =>
-            i.isWord ? (i.text ?? '') : (i.headword ?? ''),
-        subtitleOf: (_CollectionItem i) =>
-            i.isWord ? i.contextSentence : i.text,
-      ),
-    );
-    if (picked == null || picked.isEmpty || !mounted) return;
-    await showFavoriteBatchMining(context, <FavoriteMiningItem>[
-      for (final _CollectionItem i in picked) _miningItemOf(i)!,
-    ]);
-    // 制卡成功会写制卡历史（制卡句），重载让它们出现在列表里。
-    if (mounted) await _load();
+    return;
   }
 
   Widget _buildTypeFilterBar() {

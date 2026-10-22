@@ -31,127 +31,9 @@ SettingsDestination buildSystemDestination() {
     id: SettingsDestinationId.system,
     title: t.settings_destination_system_about,
     // Kitapsen has no in-app updater (the stores update the app).
-    summary: kKitapsenEdition
-        ? t.kitapsen_settings_destination_system_summary
-        : t.settings_destination_system_summary,
+    summary: t.kitapsen_settings_destination_system_summary,
     icon: Icons.settings_suggest_outlined,
     sections: <SettingsSection>[
-      if (!kKitapsenEdition)
-        SettingsSection(
-          id: 'system.section.updates',
-          presentation: SettingsSectionPresentation.alwaysExpanded,
-          title: t.section_update,
-          // 更新分区在所有平台可见（至少能「检查→打开发布页」）；自动安装开关
-          // 仅在支持应用内安装的平台显示（platformSupportsInAppInstall，见
-          // platform_updater.dart 单一真相源）。
-          // Kitapsen updates through Google Play / the App Store only.
-          visible: (_) => platformSupportsUpdateCheck(),
-          items: <SettingsItem>[
-            SettingsSegmentedItem<String>(
-              id: 'system.update_channel',
-              title: t.settings_section_update_channel,
-              icon: Icons.system_update_alt_outlined,
-              controlBelow: true,
-              options: <SettingsSegmentOption<String>>[
-                SettingsSegmentOption<String>(
-                  value: 'stable',
-                  label: t.update_channel_stable,
-                  icon: Icons.verified_outlined,
-                  tooltip: t.update_channel_stable,
-                ),
-                SettingsSegmentOption<String>(
-                  value: 'beta',
-                  label: t.update_channel_beta,
-                  icon: Icons.science_outlined,
-                  tooltip: t.update_channel_beta,
-                ),
-                SettingsSegmentOption<String>(
-                  value: 'debug',
-                  label: t.update_channel_debug,
-                  icon: Icons.bug_report_outlined,
-                  tooltip: t.update_channel_debug,
-                ),
-              ],
-              selected: _selectedUpdateChannel,
-              onChanged: setUpdateChannel,
-            ),
-            SettingsSegmentedItem<String>(
-              id: 'system.update_download_source',
-              title: t.update_download_source_preference,
-              subtitle: t.update_download_source_preference_hint,
-              icon: Icons.cloud_download_outlined,
-              dropdown: true,
-              // 标签走 updateDownloadSourceLabel 这一份真相源：下载遮罩的「本次没用上
-              // 所选来源」通告要说出同一个名字，两处各写一套迟早对不上。
-              options: <SettingsSegmentOption<String>>[
-                for (final String value in <String>[
-                  updateDownloadSourceAutomatic,
-                  updateDownloadSourceCloudflare,
-                  updateDownloadSourceGitHub,
-                  for (final String prefix in updateCheckProxyPrefixes)
-                    updateDownloadSourceForProxy(prefix),
-                ])
-                  SettingsSegmentOption<String>(
-                    value: value,
-                    label: updateDownloadSourceLabel(value),
-                    tooltip: updateDownloadSourceLabel(value),
-                  ),
-              ],
-              selected: (SettingsContext c) => c.appModel.updateDownloadSource,
-              onChanged: (SettingsContext c, String value) async {
-                await c.appModel.setUpdateDownloadSource(value);
-                c.refresh();
-              },
-            ),
-            // TODO-898：手动「立即检查更新」。分区已被 platformSupportsUpdateCheck()
-            // 网关，按钮全平台可见（不能自装的平台仍可「检查→打开发布页」）。
-            SettingsActionItem(
-              id: 'system.check_update_now',
-              title: t.settings_check_update_now,
-              icon: Icons.system_update_outlined,
-              onTap: _checkUpdateNow,
-            ),
-            // TODO-1310：应用内查看更新日志。推 ChangelogPage，在线拉本仓库 GitHub
-            // releases 列表并用 Markdown 渲染各版本说明；customProxy 透传设置里现有的
-            // 更新代理项，与「立即检查更新」同源。
-            SettingsNavigationItem(
-              id: 'system.view_changelog',
-              title: t.settings_view_changelog,
-              icon: Icons.history_outlined,
-              onTap: (SettingsContext settingsContext) async {
-                await pushSettingsPage(
-                  settingsContext,
-                  (_) => ChangelogPage(
-                    customProxy: settingsContext.appModel.updateCustomProxy,
-                  ),
-                );
-              },
-            ),
-            SettingsSwitchItem(
-              id: 'system.update_never_remind',
-              title: t.update_never_remind,
-              icon: Icons.notifications_off_outlined,
-              value: (SettingsContext settingsContext) =>
-                  settingsContext.appModel.updateNeverRemind,
-              onChanged: (SettingsContext settingsContext, bool value) async {
-                await settingsContext.appModel.setUpdateNeverRemind(value);
-                settingsContext.refresh();
-              },
-            ),
-            SettingsSwitchItem(
-              id: 'system.update_auto_install',
-              title: t.update_auto_install,
-              icon: Icons.download_done_outlined,
-              visible: (_) => platformSupportsInAppInstall(),
-              value: (SettingsContext settingsContext) =>
-                  settingsContext.appModel.updateAutoInstall,
-              onChanged: (SettingsContext settingsContext, bool value) async {
-                await settingsContext.appModel.setUpdateAutoInstall(value);
-                settingsContext.refresh();
-              },
-            ),
-          ],
-        ),
       SettingsSection(
         id: 'system.section.general',
         presentation: SettingsSectionPresentation.alwaysExpanded,
@@ -161,58 +43,6 @@ SettingsDestination buildSystemDestination() {
         // （settingsSearchBreadcrumb），双保险消灭整类重复。
         title: t.settings_section_general,
         items: <SettingsItem>[
-          // 「界面语言」（id 'appearance.language'）已归位到「外观 · 界面」分区
-          //（与主题/明暗/缩放并列）；id 前缀本就是 appearance，此前放系统分类
-          // 是历史错配。
-          // Kitapsen (a phone / tablet reader) does not surface the keyboard /
-          // gamepad customisation pages, whose scopes are mostly Fushi
-          // features (dictionary popup, video, games).
-          if (!kKitapsenEdition)
-            SettingsNavigationItem(
-              id: 'system.keyboard_shortcuts',
-              title: t.shortcut_settings_title,
-              // 「实验性」后缀已摘除（用户决策）：改键/冲突重分配/可视化键盘与
-              // 手柄图/三通道实时录键均已齐备，页面不再是实验功能。
-              icon: Icons.keyboard_outlined,
-              onTap: (SettingsContext settingsContext) async {
-                await pushSettingsPage(
-                  settingsContext,
-                  (_) => const ShortcutSettingsPage(),
-                );
-              },
-            ),
-          if (!kKitapsenEdition)
-            SettingsSwitchItem(
-              id: 'system.focus_navigation',
-              title: t.focus_navigation_enabled,
-              subtitle: t.focus_navigation_enabled_hint,
-              icon: Icons.gamepad_outlined,
-              value: (SettingsContext settingsContext) =>
-                  settingsContext.appModel.experimentalFocusNavigationEnabled,
-              onChanged: (SettingsContext settingsContext, bool value) async {
-                await settingsContext.appModel
-                    .setExperimentalFocusNavigationEnabled(value);
-                settingsContext.refresh();
-              },
-            ),
-          // 「启动时打开查词」从「外观 · 应用」分区归位到此处（启动落地页/导航行为，
-          // 与键盘/手柄焦点导航同属通用应用项）。item id 保持 'appearance.
-          // startup_default_dictionary_tab' 不变（历史命名，非持久化 key），仅换分区。
-          if (!kKitapsenEdition)
-            SettingsSwitchItem(
-              id: 'appearance.startup_default_dictionary_tab',
-              title: t.startup_default_dictionary_tab,
-              subtitle: t.startup_default_dictionary_tab_hint,
-              icon: Icons.manage_search_outlined,
-              value: (SettingsContext settingsContext) =>
-                  settingsContext.appModel.startupDefaultDictionaryTab,
-              onChanged: (SettingsContext settingsContext, bool value) async {
-                await settingsContext.appModel.setStartupDefaultDictionaryTab(
-                  value,
-                );
-                settingsContext.refresh();
-              },
-            ),
           // 新手引导重开入口（首启由 HomePage 自动弹一次）；引导本身只跳转
           // 既有配置页面，不写任何功能开关。
           SettingsNavigationItem(
@@ -226,24 +56,6 @@ SettingsDestination buildSystemDestination() {
               );
             },
           ),
-          // 推荐包下载的常驻可见入口（BUG-2097）。下载归 [AppModel] 上的
-          // controller 所有，关掉向导也照跑——那就必须有一个不依赖向导的地方
-          // 看得到它、停得掉它、下完能就地导入。空闲时整行不渲染，设置页不常驻
-          // 一条恒为「无任务」的死行；本行随 controller 的阶段变化实时显隐，靠
-          // [SettingsDetailPage] 订阅 stage 重建（同 galgame 准入那一行的做法）。
-          if (!kKitapsenEdition)
-            SettingsCustomItem(
-              id: 'system.recommended_pack_download',
-              searchTitle: t.onboarding_step_pack_title,
-              subtitle: t.onboarding_pack_intro,
-              visible: (SettingsContext settingsContext) =>
-                  !kKitapsenEdition &&
-                  settingsContext
-                      .appModel
-                      .recommendedPackDownloadController
-                      .isActive,
-              builder: _buildRecommendedPackDownloadRow,
-            ),
           SettingsSwitchItem(
             id: 'system.low_memory_mode',
             title: t.low_memory_mode,
@@ -261,73 +73,6 @@ SettingsDestination buildSystemDestination() {
             icon: Icons.info_outline,
             builder: _buildRuntimeAppVersionRow,
           ),
-          // 官网。与宽屏侧栏左上角的 app 图标是同一个入口（openOfficialWebsite），
-          // URL 只存在 official_links.dart 一处。
-          // Kitapsen: no link to the web storefront (store reader-app policy);
-          // its legal / support / source links live in the About section.
-          if (!kKitapsenEdition)
-            SettingsActionItem(
-              id: 'system.website',
-              title: t.options_website,
-              icon: Icons.language_outlined,
-              onTap: (_) async {
-                await openOfficialWebsite();
-              },
-            ),
-          if (!kKitapsenEdition)
-            SettingsActionItem(
-              id: 'system.github',
-              title: t.options_github,
-              icon: Icons.public_outlined,
-              onTap: (_) async {
-                await launchUrl(
-                  Uri.parse('https://github.com/hajisensai/fushi'),
-                  mode: LaunchMode.externalApplication,
-                );
-              },
-            ),
-          if (!kKitapsenEdition)
-            SettingsActionItem(
-              id: 'system.github_sponsors',
-              title: t.options_github_sponsors,
-              icon: Icons.favorite_border,
-              onTap: (_) async {
-                await launchUrl(
-                  Uri.parse(kGitHubSponsorsUrl),
-                  mode: LaunchMode.externalApplication,
-                );
-              },
-            ),
-          // TMDB 署名 —— **合约义务，不是可选的致谢**。
-          //
-          // 视频封面/元数据刮削使用 TMDB API（内置 key，见 tmdb_default_key.dart），
-          // 其 Terms of Use 第 3 节要求应用内显著位置展示 TMDB 标识与下面这句原文
-          // 免责声明。声明句**刻意不翻译**：TMDB 要求逐字展示该英文原句，17 种语言
-          // 都用同一份。文案照抄条款当前版本（2023-10-20）的括号占位句，应用场景取
-          // "application"：`This application uses TMDB and the TMDB APIs but is not
-          // endorsed, certified, or otherwise approved by TMDB.` —— 旧措辞
-          // "not endorsed or certified" 少了 "or otherwise approved"，不是原句。
-          //
-          // logo 部分见 [_buildTmdbAttributionRow]：条款同时要求展示 TMDB 标识，
-          // 原图已逐字节入库（assets/attribution/tmdb/，provenance 见该目录
-          // README.md）。文字与 logo 是**一对合约义务**——删 about_tmdb_attribution
-          // 前不要先删 logo，反之亦然；要走一起走（连同内置 key 一并移除时）。
-          // Kitapsen never calls TMDB (no video module), so no attribution.
-          if (!kKitapsenEdition)
-            SettingsCustomItem(
-              id: 'system.tmdb_attribution',
-              searchTitle: 'TMDB',
-              // 免责声明正文同时挂在 schema 上：custom 行的正文由 builder 自绘
-              //（settings_schema_widgets 的 switch 只调 builder，不读 title/
-              // subtitle/icon），所以这里的 subtitle 是**纯搜索元数据、零渲染影响**
-              // ——filterSettingsEntries 的 haystack 取 `item.subtitle`，不挂就只剩
-              // searchTitle 'TMDB' 可搜，用户搜声明正文里的词（endorsed / certified
-              // / approved）搜不到这一行。同款用法见 settings_search 里
-              // bodySearchEntries 的合成项。
-              subtitle: t.about_tmdb_attribution,
-              icon: Icons.movie_outlined,
-              builder: _buildTmdbAttributionRow,
-            ),
         ],
       ),
       // Kitapsen › About: privacy policy, support, GPL source + upstream credit
@@ -336,7 +81,7 @@ SettingsDestination buildSystemDestination() {
         id: 'system.section.kitapsen_about',
         presentation: SettingsSectionPresentation.alwaysExpanded,
         title: t.kitapsen_about_section,
-        visible: (_) => kKitapsenEdition,
+        visible: (_) => true,
         items: <SettingsItem>[
           SettingsActionItem(
             id: 'system.kitapsen_privacy_policy',
@@ -455,7 +200,7 @@ SettingsDestination buildSystemDestination() {
             // Kitapsen: the hint is about the torrent engine, which this
             // edition does not have.
             subtitle:
-                kKitapsenEdition ? null : t.network_proxy_credentials_scope_hint,
+                null,
             icon: Icons.person_outline,
             visible: (SettingsContext c) =>
                 c.appModel.networkProxyMode == kProxyModeManual,
@@ -478,135 +223,8 @@ SettingsDestination buildSystemDestination() {
               resetSyncHttpClient();
             },
           ),
-          // P2P（torrent）传输单独列出：**默认直连**，用户明确改档才跟上面的
-          // 全局出口。三档：direct 直连；proxy 全代理（可能降速，且不少代理
-          // 服务商禁止 BT 流量：限速/警告/封号）；mixed 混合——tracker 经代理、
-          // DHT 与 peer 直连，节点获取范围最大，但真实 IP 暴露给 DHT/peer/
-          // tracker（连通性工具，非隐私工具）。副标题就是警告。只对内置引擎
-          // 生效；外接 qBittorrent 的代理在它自己的 WebUI 里配，这里不越权改
-          // 用户的 qB 设置。
-          if (!kKitapsenEdition)
-          SettingsSegmentedItem<String>(
-            id: 'system.network_proxy_p2p',
-            visible: (_) => !kKitapsenEdition,
-            title: t.network_proxy_p2p_label,
-            subtitle: t.network_proxy_p2p_warning,
-            icon: Icons.swap_vert_outlined,
-            options: <SettingsSegmentOption<String>>[
-              SettingsSegmentOption<String>(
-                value: 'direct',
-                label: t.network_proxy_p2p_mode_direct,
-                icon: Icons.link_off_outlined,
-              ),
-              SettingsSegmentOption<String>(
-                value: 'proxy',
-                label: t.network_proxy_p2p_mode_proxy,
-                icon: Icons.dns_outlined,
-              ),
-              SettingsSegmentOption<String>(
-                value: 'mixed',
-                label: t.network_proxy_p2p_mode_mixed,
-                icon: Icons.alt_route_outlined,
-              ),
-            ],
-            selected: (SettingsContext settingsContext) =>
-                settingsContext.appModel.p2pProxyMode,
-            onChanged: (SettingsContext settingsContext, String value) async {
-              await settingsContext.appModel.setP2pProxyMode(value);
-              settingsContext.refresh();
-            },
-          ),
         ],
       ),
-      // v101 统一更新提醒。四个域各一个开关 + 系统通知总开关。
-      //
-      // 四个域开关**不经 `AppModel.updateFeedService`**，直接读写 pref 键：
-      // service 本身也只是这些键的读写者，走它等于给纯偏好项挂上整条 DB 依赖。
-      // **例外是「系统通知」总开关**：它的显示值要合并系统权限状态、打开时要
-      // 申请权限，这两件事只有 service 知道（BUG-2498）。所以渲染系统页的
-      // widget 测试必须 `wireDatabaseForTesting`——`updateFeedService` 首次访问
-      // 会解引用数据库。
-      if (!kKitapsenEdition)
-        SettingsSection(
-          id: 'system.section.update_notifications',
-          // Kitapsen has no video / manga / release update feeds.
-          title: t.updates_notify_section,
-          items: <SettingsItem>[
-            for (final (
-                  UpdateFeedKind kind,
-                  String title,
-                  String hint,
-                  IconData icon,
-                )
-                in <(UpdateFeedKind, String, String, IconData)>[
-                  (
-                    UpdateFeedKind.videoEpisode,
-                    t.updates_notify_video_episode,
-                    t.updates_notify_video_episode_hint,
-                    Icons.movie_outlined,
-                  ),
-                  (
-                    UpdateFeedKind.mangaChapter,
-                    t.updates_notify_manga_chapter,
-                    t.updates_notify_manga_chapter_hint,
-                    Icons.photo_library_outlined,
-                  ),
-                  (
-                    UpdateFeedKind.mangaExtension,
-                    t.updates_notify_manga_extension,
-                    t.updates_notify_manga_extension_hint,
-                    Icons.extension_outlined,
-                  ),
-                  (
-                    UpdateFeedKind.appRelease,
-                    t.updates_notify_app_release,
-                    t.updates_notify_app_release_hint,
-                    Icons.system_update_outlined,
-                  ),
-                ])
-              SettingsSwitchItem(
-                id: 'system.updates.${kind.dbValue}',
-                title: title,
-                subtitle: hint,
-                icon: icon,
-                value: (SettingsContext settingsContext) =>
-                    settingsContext.appModel.prefsRepo.getPref(
-                          kind.enabledPrefKey,
-                          defaultValue: true,
-                        )
-                        as bool,
-                onChanged: (SettingsContext settingsContext, bool value) async {
-                  await settingsContext.appModel.prefsRepo.setPref(
-                    kind.enabledPrefKey,
-                    value,
-                  );
-                  settingsContext.refresh();
-                },
-              ),
-            // 显示值 = 偏好开 && 系统已授权；打开 = 唯一会弹系统权限框的地方
-            // （BUG-2498：启动期不再申请，申请只跟着用户这一下）。
-            SettingsSwitchItem(
-              id: 'system.updates.system_notifications',
-              title: t.updates_system_notifications,
-              subtitle: t.updates_system_notifications_hint,
-              icon: Icons.notifications_active_outlined,
-              value: (SettingsContext settingsContext) => settingsContext
-                  .appModel
-                  .updateFeedService
-                  .systemNotificationsActive,
-              onChanged: (SettingsContext settingsContext, bool value) async {
-                final UpdateFeedService feed =
-                    settingsContext.appModel.updateFeedService;
-                if (value) {
-                  await feed.enableSystemNotifications();
-                } else {
-                  await feed.disableSystemNotifications();
-                }
-                settingsContext.refresh();
-              },
-            ),
-          ],
-        ),
       SettingsSection(
         id: 'system.section.diagnostics',
         presentation: SettingsSectionPresentation.collapsed,
@@ -661,43 +279,6 @@ SettingsDestination buildSystemDestination() {
                 DebugLogService.instance.entries.isNotEmpty,
             builder: (_) => const DebugLogPage(),
           ),
-          // 用户 2026-09-12：导出统计诊断日志排查阅读速度异常。正文 = 头信息 +
-          // 最近会话快照（字/时一列）+ StudyClock / 阅读器账本 / 有声书恢复流水；
-          // 桌面弹保存对话框、移动端走系统分享（saveLogToFile 内部分流）。
-          if (!kKitapsenEdition)
-            SettingsActionItem(
-              id: 'diagnostics.study_diag_export',
-              title: t.settings_study_diag_export,
-              subtitle: t.settings_study_diag_export_hint,
-              icon: Icons.save_alt_outlined,
-              onTap: _exportStudyDiagLog,
-            ),
-          // 用户 2026-09-22：「视频模块加入日志用于分析视频为什么卡顿、查词为什么
-          // 卡」。与统计诊断流水（永远开着、密度低）不同，这套是 mpv 级别的详尽日志
-          // ——每秒一行帧耗时汇总 + 每秒一行 libmpv 属性快照 + libmpv 自己的 verbose
-          // log-file，常开会白白吃 IO，所以默认关闭、复现期才打开。
-          if (!kKitapsenEdition)
-            SettingsSwitchItem(
-              id: 'diagnostics.video_diag_log_enabled',
-              title: t.settings_video_diag_toggle,
-              subtitle: t.settings_video_diag_toggle_hint,
-              icon: Icons.videocam_outlined,
-              value: (_) => VideoDiagLog.instance.enabled,
-              onChanged: (SettingsContext settingsContext, bool value) async {
-                await VideoDiagLog.instance.setEnabled(value);
-                settingsContext.refresh();
-              },
-            ),
-          if (!kKitapsenEdition)
-            SettingsActionItem(
-              id: 'diagnostics.video_diag_export',
-              title: t.settings_video_diag_export,
-              subtitle: t.settings_video_diag_export_hint,
-              icon: Icons.save_alt_outlined,
-              // 开关关着也留着导出：复现完先关掉再导出是很自然的顺序，此时流水仍在
-              // （[VideoDiagLog.setEnabled] 只停止记录、不清空）。
-              onTap: _exportVideoDiagLog,
-            ),
         ],
       ),
     ],

@@ -67,9 +67,7 @@ class _StatisticsCenterPageState extends BasePageState<StatisticsCenterPage> {
   }
 
   /// Tabs of the domains this build ships.
-  static const List<StatsCenterTab> _visibleTabs = kKitapsenEdition
-      ? <StatsCenterTab>[StatsCenterTab.overview, StatsCenterTab.reading]
-      : StatsCenterTab.values;
+  static const List<StatsCenterTab> _visibleTabs = <StatsCenterTab>[StatsCenterTab.overview, StatsCenterTab.reading];
 
   @override
   Widget build(BuildContext context) {
@@ -82,9 +80,7 @@ class _StatisticsCenterPageState extends BasePageState<StatisticsCenterPage> {
       title: t.stat_center_title,
       // Kitapsen: one implicit profile with no profile UI, so no scope line
       // (it would show the internal "Default" name).
-      subtitle: kKitapsenEdition || profileName == null
-          ? null
-          : t.stat_center_profile_scope(name: profileName),
+      subtitle: null,
       actions: <Widget>[
         // 「今日」重置整点是三域学习段共用的 dateKey 输入，所以入口放在统计中心
         // 页头而不是某一域的设置页；宽窗展开成「图标 + 文字」药丸（label），窄窗
@@ -131,18 +127,8 @@ class _StatisticsCenterPageState extends BasePageState<StatisticsCenterPage> {
                         rangeSelection: _rangeSelection,
                       ),
                       // Kitapsen: no video / game statistics in the build.
-                      StatsCenterTab.video => kKitapsenEdition
-                          ? const SizedBox.shrink()
-                          : VideoStatisticsPage(
-                              embedded: true,
-                              rangeSelection: _rangeSelection,
-                            ),
-                      StatsCenterTab.game => kKitapsenEdition
-                          ? const SizedBox.shrink()
-                          : GameStatisticsPage(
-                              embedded: true,
-                              rangeSelection: _rangeSelection,
-                            ),
+                      StatsCenterTab.video => const SizedBox.shrink(),
+                      StatsCenterTab.game => const SizedBox.shrink(),
                     },
                 ],
               ),
@@ -267,14 +253,6 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
           c.id: c.name,
       };
       _primaryCollectionByEntry = await db.getPrimaryCollectionIdByEntry();
-      if (!kKitapsenEdition) {
-        _games = await appModel.galgameRepo.load();
-        _videoCoverPathByUid = <String, String>{
-          for (final VideoBookRow b in await VideoBookRepository(db).listAll())
-            if (b.coverPath case final String path when path.isNotEmpty)
-              b.bookUid: path,
-        };
-      }
       _bookItemsByKey = <String, MediaItem>{
         for (final MediaItem item
             in ref
@@ -373,17 +351,6 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
             extraLines: <StatSummaryLine>[
               if (statBookCphOf(_daily, range.contains) case final String cph)
                 StatSummaryLine(label: t.stat_reading_speed, value: cph),
-              // Kitapsen: no lookup or card creation to count.
-              if (!kKitapsenEdition)
-                StatSummaryLine(
-                  label: t.stat_lookup,
-                  value: '${sumStatEventsInRange(_lookupEvents, range)}',
-                ),
-              if (!kKitapsenEdition)
-                StatSummaryLine(
-                  label: t.stat_mined,
-                  value: '${sumStatEventsInRange(_minedEvents, range)}',
-                ),
             ],
           ),
         ),
@@ -501,9 +468,7 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
   Future<void> _confirmAndClearAll() async {
     final bool confirmed = await confirmClearAllStatistics(
       context,
-      kKitapsenEdition
-          ? t.kitapsen_stat_clear_all_overview_message
-          : t.stat_clear_all_overview_message,
+      t.kitapsen_stat_clear_all_overview_message,
     );
     if (!confirmed || !mounted) return;
     final FushiDatabase db = ref.read(appProvider).database;
@@ -621,14 +586,6 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
         StatSummaryLine(value: formatStatChars(chars)),
         if (cph != null)
           StatSummaryLine(label: t.stat_reading_speed, value: cph),
-        // Kitapsen: no lookup, card creation or saved words.
-        if (!kKitapsenEdition)
-          StatSummaryLine(label: t.stat_lookup, value: '${pick(_lookup)}'),
-        if (!kKitapsenEdition)
-          StatSummaryLine(label: t.stat_mined, value: '${pick(_mined)}'),
-        if (!kKitapsenEdition)
-          StatSummaryLine(
-              label: t.stat_favorited, value: '${pick(_favorited)}'),
         StatSummaryLine(
           label: t.stat_favorited_sentence,
           value: '${pick(_favoritedSentences)}',
@@ -709,30 +666,6 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
   Future<void> _openEntry(String mediaKind, String mediaKey) async {
     if (mediaKey.isEmpty || !mounted) return;
     final AppModel appModel = ref.read(appProvider);
-    if (!kKitapsenEdition && mediaKind == kActivityMediaVideo) {
-      await openLocalVideoBook(
-        context: context,
-        repo: VideoBookRepository(appModel.database),
-        bookUid: mediaKey,
-        playlistCollectionId:
-            _primaryCollectionByEntry[MediaKind.video.compositeKey(mediaKey)],
-      );
-      return;
-    }
-    if (!kKitapsenEdition && mediaKind == kActivityMediaGame) {
-      for (final GalgameEntry game in _games) {
-        if (game.id == mediaKey) {
-          await Navigator.of(context).push(
-            MaterialPageRoute<void>(
-              builder: (BuildContext _) =>
-                  GalgameDetailPage(gameId: game.id, initialTab: 0),
-            ),
-          );
-          return;
-        }
-      }
-      return;
-    }
     if (mediaKind == kActivityMediaBook) {
       final List<MediaItem> books =
           ref.read(fushiBooksProvider(kShelfBooksKey)).valueOrNull ??

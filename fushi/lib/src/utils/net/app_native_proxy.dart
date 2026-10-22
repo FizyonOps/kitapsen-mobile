@@ -127,7 +127,7 @@ String redactAppNativeProxySecrets(String value) {
     value = value.replaceAll(secret, '[native-proxy]');
   }
   // Kitapsen: no Blu-ray relay, so nothing to redact (keeps AACS code out).
-  return kKitapsenEdition ? value : redactAacsRelayUrls(value);
+  return value;
 }
 
 /// 中继失败原因的落点。默认 [debugPrint]（被 `DebugLogService` 钩住，进得了

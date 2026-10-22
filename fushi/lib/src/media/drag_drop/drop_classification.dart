@@ -320,7 +320,7 @@ DroppedFiles classifyDroppedFiles(
     final String ext = _ext(path);
     // Kitapsen: no Blu-ray (video) import; the disc reader is compiled out.
     final String? discRoot =
-        kKitapsenEdition ? null : blurayDiscRootForFile(path);
+        null;
     if (discRoot != null) blurayDiscs.add(discRoot);
     bool matched = discRoot != null;
     // 图片包（`.zip`）：光看扩展名与词典包同形，必须真读包——同 isDirectory，判据

@@ -170,21 +170,6 @@ class _MediaSourcesPageState extends ConsumerState<MediaSourcesPage> {
           QuickImportSection(actions: quickActions),
           const SizedBox(height: 28),
         ],
-        // Kitapsen imports single files only: folder sources and scan roots
-        // need all-files access, which a store e-book reader does not request.
-        if (!kKitapsenEdition) ...<Widget>[
-          _buildSourcesSectionHeader(),
-          const SizedBox(height: 8),
-        ],
-        if (!kKitapsenEdition)
-        MediaSourcesView(
-          key: _viewKey,
-          mediaKind: widget.mediaKind,
-          onScrapeSource: widget.onScrapeSource,
-          onVideoScanCompleted: widget.onVideoScanCompleted,
-          scrapeTaskController: widget.scrapeTaskController,
-          onLibraryChanged: widget.onLibraryChanged,
-        ),
       ],
     );
   }
@@ -201,12 +186,6 @@ class _MediaSourcesPageState extends ConsumerState<MediaSourcesPage> {
             label: t.srt_import,
             onTap: _importBookFile,
           ),
-          if (!kKitapsenEdition)
-            QuickImportAction(
-              icon: Icons.drive_folder_upload_outlined,
-              label: t.media_import_folder,
-              onTap: _importFolder,
-            ),
         ],
       'video' => <QuickImportAction>[
           QuickImportAction(

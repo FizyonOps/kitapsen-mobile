@@ -29,11 +29,7 @@ bool tryDictionaryPopupGamepadButton(
   GamepadButton button,
 ) {
   // Kitapsen: no dictionary popup.
-  if (kKitapsenEdition) return false;
-  final DictionaryPopupGamepadHooks? hooks =
-      DictionaryPopupGamepadRegistry.current;
-  if (hooks == null) return false;
-  return dispatchDictionaryPopupGamepadButton(hooks, registry, button);
+  return false;
 }
 
 /// TODO-1066 — globalExternal scope 的手柄触发：把 app 外全局查词（默认键盘
@@ -52,15 +48,7 @@ bool tryGlobalExternalLookupGamepadButton(
   GamepadButton button,
 ) {
   // Kitapsen: no app-external lookup.
-  if (kKitapsenEdition) return false;
-  if (registry?.resolveGamepad(button, scope: ShortcutScope.globalExternal) !=
-      ShortcutAction.globalExternalLookup) {
-    return false;
-  }
-  final Future<void> Function()? trigger = GlobalExternalLookupRoute.current;
-  if (trigger == null) return false;
-  unawaited(trigger());
-  return true;
+  return false;
 }
 
 /// 按 dictionaryPopup scope 解析 [button] 并在 [hooks] 上执行。
@@ -395,8 +383,7 @@ class GamepadService {
     _installHighlightTracking();
     if (!needsGamepadPoller) return; // Android: engine key events, no poller
     // Kitapsen ships the gamepads plugin without its native side: no poller.
-    if (kKitapsenEdition) return;
-    _startGamepadPoller();
+    return;
   }
 
   /// TODO-939: seeds the explicit [FocusHighlightStrategy] management and the

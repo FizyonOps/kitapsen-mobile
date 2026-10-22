@@ -13,12 +13,5 @@ import 'package:fushi/src/utils/net/dictionary_dio.dart';
 Future<void> installAppNetworkBindings({
   @visibleForTesting Future<void> Function() primeProxy = primeAppProxy,
 }) async {
-  // Kitapsen: no dictionary downloads and no Anki, so nothing to route.
-  if (!kKitapsenEdition) {
-    installDictionaryDioFactory();
-    installDictionaryUrlCandidatesResolver();
-    installAnkiRemoteMediaHttpClientFactory();
-    installAnkiAddonDownloadHttpClientFactory();
-  }
   await primeProxy();
 }

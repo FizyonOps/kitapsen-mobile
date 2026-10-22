@@ -641,17 +641,6 @@ class _ReadingStatisticsPageState extends BasePageState<ReadingStatisticsPage> {
           extraLines: <StatSummaryLine>[
             if (statBookCphOf(_bookFacts, range.contains) case final String cph)
               StatSummaryLine(label: t.stat_reading_speed, value: cph),
-            // Kitapsen: no lookup or card creation to count.
-            if (!kKitapsenEdition)
-              StatSummaryLine(
-                label: t.stat_lookup,
-                value: '${sumStatEventsInRange(_lookupEvents, range)}',
-              ),
-            if (!kKitapsenEdition)
-              StatSummaryLine(
-                label: t.stat_mined,
-                value: '${sumStatEventsInRange(_minedEvents, range)}',
-              ),
           ],
         ),
       ],
@@ -943,13 +932,6 @@ class _ReadingStatisticsPageState extends BasePageState<ReadingStatisticsPage> {
         // 速度（字/时）紧跟字数：用户 2026-09-12 要求顶部方框直接给出每小时字数。
         if (cph != null)
           StatSummaryLine(label: t.stat_reading_speed, value: cph),
-        // Kitapsen: no lookup, card creation or saved words.
-        if (!kKitapsenEdition)
-          StatSummaryLine(label: t.stat_lookup, value: '$lookup'),
-        if (!kKitapsenEdition)
-          StatSummaryLine(label: t.stat_mined, value: '$mined'),
-        if (!kKitapsenEdition)
-          StatSummaryLine(label: t.stat_favorited, value: '$favorited'),
         StatSummaryLine(
           label: t.stat_favorited_sentence,
           value: '$favoritedSentences',
@@ -1193,12 +1175,6 @@ class _ReadingStatisticsPageState extends BasePageState<ReadingStatisticsPage> {
               Expanded(
                 child: _miniStat(t.stat_streak, t.stat_format_days(n: _streak)),
               ),
-              // Kitapsen: no saved words.
-              if (!kKitapsenEdition)
-                Expanded(
-                  child:
-                      _miniStat(t.stat_favorited, _favorited.today.toString()),
-                ),
             ],
           ),
         ],
@@ -1491,9 +1467,7 @@ class _ReadingStatisticsPageState extends BasePageState<ReadingStatisticsPage> {
   Future<void> _confirmAndClearAll() async {
     final bool confirmed = await confirmClearAllStatistics(
       context,
-      kKitapsenEdition
-          ? t.kitapsen_stat_clear_all_reading_message
-          : t.stat_clear_all_reading_message,
+      t.kitapsen_stat_clear_all_reading_message,
     );
     if (!confirmed || !mounted) return;
     await appModelNoUpdate.database.clearAllReadingStatistics();
@@ -1628,9 +1602,7 @@ class _ReadingStatisticsPageState extends BasePageState<ReadingStatisticsPage> {
       meta: '${formatStatChars(book.chars)} · '
           '${t.stat_sessions_count(n: sessionCount)}$speed',
       // Kitapsen: no lookup, card or saved-word counters.
-      meta2: kKitapsenEdition
-          ? null
-          : '${t.stat_lookup}: ${counter.lookups} · ${t.stat_mined}: ${counter.mines} · ${t.stat_favorited}: $favorites',
+      meta2: null,
       trailing: formatStatTime(book.ms),
       onTap: () => unawaited(_showBookSessions(book)),
       onDelete: () => unawaited(_confirmAndDeleteBook(book)),

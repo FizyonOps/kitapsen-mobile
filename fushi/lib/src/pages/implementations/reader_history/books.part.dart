@@ -235,17 +235,6 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
             removeFromCollection();
           },
         ),
-      if (_srtBookHasMissingAudio(book) &&
-          !kKitapsenEdition &&
-          modules.isEnabled(ModuleId.listening))
-        DialogQuickAction(
-          label: t.audiobook_relocate,
-          icon: Icons.find_replace_outlined,
-          onPressed: () async {
-            Navigator.pop(dialogContext);
-            await _relocateSrtBookAudio(book);
-          },
-        ),
       // 单卡「加入合集」：与 EPUB 卡菜单对称，纯字幕书（bookKey 为空）也可加入；
       // entryKey 编码与 shelfSelectionToEntry 对 'srt_<uid>' 选择键的解码一致（= uid）。
       // 合集详情页成员卡语境（已注入「移出合集」）不显示——同一条目在详情页语境下
@@ -288,19 +277,6 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
           MediaRef(kind: MediaKind.srt, entryKey: book.uid),
         ),
       ),
-      // 「重新导入」：音频 + 字幕两半一起换。旧入口叫「导入音频」且只能换音频，
-      // 字幕书的字幕在首次导入后全仓无处可换（用户报「有声书没办法重新导入 /
-      // 导不了字幕文件」）。对 bookKey 为空的孤儿字幕书同样可见——它们才是最需要
-      // 换字幕的一类（首次导入 cue 解析失败才会落成孤儿）。
-      if (!kKitapsenEdition && modules.isEnabled(ModuleId.listening))
-        DialogQuickAction(
-          label: t.srt_book_reimport,
-          icon: Icons.headphones_outlined,
-          onPressed: () async {
-            Navigator.pop(dialogContext);
-            await _openSrtBookReimport(book);
-          },
-        ),
       if (bookKey.isNotEmpty) ...[
         // 与 EPUB 卡菜单对称：手动「标记为已读完 / 取消」。有声书完成状态与 EPUB 共用
         // 同一 EpubBooks.completedAt（按配对 bookKey），故复用同一 [_toggleBookCompleted]。
@@ -338,19 +314,6 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
             _openCssEditor(bookKey);
           },
         ),
-        // TODO-1068：SRT/有声书卡长按菜单对称补「悬浮字幕」项（与 EPUB 侧
-        // extraActions 一致）。复用同一 i18n key、同一回调、同一平台门控；
-        // bookKey 非空才可用，_toggleFloatingLyricFromShelf 按 bookKey 解析。
-        if ((Platform.isAndroid || Platform.isWindows) &&
-            !kKitapsenEdition &&
-            modules.isEnabled(ModuleId.listening))
-          DialogListAction(
-            label: _isBackgroundListeningBook(bookKey)
-                ? '${t.floating_lyric_toggle_action} ✓'
-                : t.floating_lyric_toggle_action,
-            icon: Icons.subtitles_outlined,
-            onPressed: () => _toggleFloatingLyricFromShelf(bookKey),
-          ),
       ],
     ];
   }
@@ -601,54 +564,21 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
         final String? bookKey = _parseBookKey(key);
         if (bookKey != null) sessionKeys.add(bookKey);
       }
-      // Kitapsen has no audiobook session to stop.
-      if (!kKitapsenEdition) {
-        await appModel.audiobookSession.stopIfPlayingAny(sessionKeys);
-      }
     }
     for (final key in toDelete) {
       // Kitapsen has no subtitle books (no `srt_` keys).
-      if (!kKitapsenEdition && key.startsWith('srt_')) {
-        final String uid = key.substring(4);
-        final SrtBookRepository repo = SrtBookRepository(appModel.database);
-        final SrtBook? book = await repo.findByUid(uid);
-        if (book != null) {
-          if (book.bookKey.isNotEmpty) {
+      final String? bookKey = _parseBookKey(key);
+      if (bookKey != null) {
+        final DeleteBookResult result =
             await ReaderFushiSource.instance.deleteBook(
-              db: appModel.database,
-              bookKey: book.bookKey,
-              scope: scope,
-              deleteLocalFiles: deleteLocalFiles,
-              deleteStatistics: deleteStatistics,
-            );
-          }
-          // 纯字幕书（bookKey 空）刻意不删统计：它的统计只能按 title 定位，会连坐
-          // 同名 EPUB（见 [_selectionHasStatisticsTarget]）。
-          // BUG-439：以前无条件 deleted++，即便 repo.delete 实际没删到行也计数，
-          // 末尾照样弹「已删除 N 本」谎报。改为只对真删掉的 srt_books 行计数。
-          // TODO-2470 死角①：纯字幕书（bookKey 空）没有上面那次 deleteBook，
-          // scope 以前到这里就被丢弃、勾了「从所有设备删除」完全无效。propagateDeletion
-          // 由 repo 按 standalone 判据决定写不写墓碑（srt-backed 已由 deleteBook 写过）。
-          final SrtBookDeleteResult removed = await repo.delete(uid,
-              propagateDeletion: scope == DeleteScope.syncEverywhere,
-              deleteLocalFiles: deleteLocalFiles);
-          localFiles = localFiles.merge(removed.localFiles);
-          if (removed.deleted > 0) deleted++;
-        }
-      } else {
-        final String? bookKey = _parseBookKey(key);
-        if (bookKey != null) {
-          final DeleteBookResult result =
-              await ReaderFushiSource.instance.deleteBook(
-            db: appModel.database,
-            bookKey: bookKey,
-            scope: scope,
-            deleteLocalFiles: deleteLocalFiles,
-            deleteStatistics: deleteStatistics,
-          );
-          localFiles = localFiles.merge(result.localFiles);
-          if (result.deleted) deleted++;
-        }
+          db: appModel.database,
+          bookKey: bookKey,
+          scope: scope,
+          deleteLocalFiles: deleteLocalFiles,
+          deleteStatistics: deleteStatistics,
+        );
+        localFiles = localFiles.merge(result.localFiles);
+        if (result.deleted) deleted++;
       }
     }
     if (!mounted) return;
@@ -687,16 +617,8 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
   Future<bool> _selectionHasStatisticsTarget(Set<String> keys) async {
     final FushiDatabase db = appModel.database;
     for (final String key in keys) {
-      if (kKitapsenEdition || !key.startsWith('srt_')) {
-        if (_parseBookKey(key) != null) return true;
-        continue;
-      }
-      final SrtBook? book =
-          await SrtBookRepository(db).findByUid(key.substring(4));
-      if (book != null &&
-          ReaderFushiSource.srtBookOffersStatisticsDeletion(book)) {
-        return true;
-      }
+      if (_parseBookKey(key) != null) return true;
+      continue;
     }
     return false;
   }
@@ -706,23 +628,11 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
   Future<bool> _selectionHasLocalFiles() async {
     final FushiDatabase db = appModel.database;
     for (final String key in _selectedLocalKeys) {
-      if (!kKitapsenEdition && key.startsWith('srt_')) {
-        final SrtBook? book =
-            await SrtBookRepository(db).findByUid(key.substring(4));
-        if (book == null) continue;
-        if (await resolveAudiobookHasLocalFiles(book.audioPaths)) return true;
-        if (book.bookKey.isNotEmpty &&
-            await ReaderFushiSource.instance
-                .hasLocalFiles(db: db, bookKey: book.bookKey)) {
-          return true;
-        }
-      } else {
-        final String? bookKey = _parseBookKey(key);
-        if (bookKey != null &&
-            await ReaderFushiSource.instance
-                .hasLocalFiles(db: db, bookKey: bookKey)) {
-          return true;
-        }
+      final String? bookKey = _parseBookKey(key);
+      if (bookKey != null &&
+          await ReaderFushiSource.instance
+              .hasLocalFiles(db: db, bookKey: bookKey)) {
+        return true;
       }
     }
     return false;
@@ -754,9 +664,7 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
       for (final EpubBookMeta row in epubBooks)
         if (row.uid.isNotEmpty) row.bookKey: row.uid,
     };
-    final List<SrtBook> srtBooks = kKitapsenEdition
-        ? const <SrtBook>[]
-        : await SrtBookRepository(db).listAll();
+    final List<SrtBook> srtBooks = const <SrtBook>[];
     final List<MediaCollectionRow> collections =
         await db.getAllMediaCollections();
     if (!mounted) return false;
@@ -1037,13 +945,6 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
     final DeleteScope scope = decision.scope;
 
     LocalFileDeleteReport localFiles = const LocalFileDeleteReport();
-    if (!kKitapsenEdition && decision.deleteLocalFiles) {
-      // 先停止引用再销毁实体（会话身份：srt-backed 是 uid，EPUB 是 bookKey）。
-      await appModel.audiobookSession.stopIfPlayingAny(<String>[
-        book.uid,
-        if (book.bookKey.isNotEmpty) book.bookKey,
-      ]);
-    }
     if (book.bookKey.isNotEmpty) {
       final DeleteBookResult result =
           await ReaderFushiSource.instance.deleteBook(
@@ -1075,9 +976,7 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
 
   /// 该书当前是否就是活动后台听书会话。
   bool _isBackgroundListeningBook(String bookKey) {
-    if (kKitapsenEdition) return false;
-    final session = appModel.audiobookSession;
-    return session.isActive && session.book?.bookKey == bookKey;
+    return false;
   }
 
   /// 书架长按菜单切「后台听书」（TODO-291 阶段2）。
@@ -1129,10 +1028,6 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
     );
     if (decision == null) return;
 
-    if (!kKitapsenEdition && decision.deleteLocalFiles) {
-      // 先停止引用再销毁实体：正在播的就是这本时，句柄不放掉删除必然失败。
-      await appModel.audiobookSession.stopIfPlayingAny(<String>[bookKey]);
-    }
     final DeleteBookResult result = await ReaderFushiSource.instance.deleteBook(
       db: appModel.database,
       bookKey: bookKey,
@@ -1304,9 +1199,7 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
     // 性判完（[probeDroppedImageArchives]），再把结果当同步谓词喂回去，分类函数保持
     // 纯函数不变。
     // Kitapsen has no manga, so dropped archives are never probed for pages.
-    final Map<String, bool> imageArchives = kKitapsenEdition
-        ? const <String, bool>{}
-        : await probeDroppedImageArchives(paths);
+    final Map<String, bool> imageArchives = const <String, bool>{};
     if (!mounted) return;
 
     // 目录（漫画页图文件夹）没有扩展名，纯分类函数分不出来——把真实文件系统判据
@@ -1363,11 +1256,8 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
         // 漫画（.mokuro / .cbz / 页图目录 / 图片型 zip）走漫画自己的导入对话框。
         // 决策层本来就把漫画和书分成了两个 intent，此前两个 intent 却落到同一个
         // 对话框；现在落点跟着 intent 走，载体身份不再在半路丢失。
-        if (!(!kKitapsenEdition && modules.isEnabled(ModuleId.manga))) {
-          showModuleDisabled();
-          return;
-        }
-        _openMangaImportPrefilled(mangaPath: files.mangas.first);
+        showModuleDisabled();
+        return;
       case DropIntent.unsupportedMangaArchive:
         debugPrint(
           '[fushi-drop] [reader-shelf] intent=unsupportedMangaArchive',
@@ -1377,16 +1267,8 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
         );
       case DropIntent.attachToBookCard:
         // 往书卡上拖音频/字幕 = 给这本书挂有声书，属听书模块。
-        if (!(!kKitapsenEdition && modules.isEnabled(ModuleId.listening))) {
-          showModuleDisabled();
-          return;
-        }
-        _openAudiobookPrefilled(
-          bookKey: hitBookKey!,
-          audioPaths: files.audios,
-          alignmentPath:
-              files.subtitles.isNotEmpty ? files.subtitles.first : null,
-        );
+        showModuleDisabled();
+        return;
       case DropIntent.needCardTarget:
         debugPrint('[fushi-drop] [reader-shelf] intent=needCardTarget');
         ScaffoldMessenger.of(context).showSnackBar(
@@ -1395,47 +1277,22 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
       case DropIntent.importNewVideo:
         // 书架拖入视频 → 自动切到视频导入流程，带上文件（不再只提示让用户手动切，
         // TODO-558）。视频卡与书卡同页渲染，无需跨 tab 通信。
-        if (!(!kKitapsenEdition && modules.isEnabled(ModuleId.video))) {
-          showModuleDisabled();
-          return;
-        }
-        _openVideoImportPrefilled(
-          videoPath: files.videos.first,
-          subtitlePath:
-              files.subtitles.isNotEmpty ? files.subtitles.first : null,
-        );
+        showModuleDisabled();
+        return;
       case DropIntent.importNewPlaylist:
-        if (!(!kKitapsenEdition && modules.isEnabled(ModuleId.video))) {
-          showModuleDisabled();
-          return;
-        }
-        _openPlaylistImportPrefilled(playlistPath: files.playlists.first);
+        showModuleDisabled();
+        return;
       case DropIntent.importVideoUrl:
         // 书架拖入网络流 URL → 自动切到视频导入（预填 URL 并入库），与拖视频文件的
         // 自动切换一致（TODO-1306）。
-        if (!(!kKitapsenEdition && modules.isEnabled(ModuleId.video))) {
-          showModuleDisabled();
-          return;
-        }
-        _openStreamImportPrefilled(streamUrl: files.urls.first);
+        showModuleDisabled();
+        return;
       case DropIntent.importTorrent:
         // 拖入 .torrent → 下载中心「添加任务」对话框预填种子；内容类型按落点预填
         // （漫画库→漫画、书架→小说），用户可在框里改。下载中心是独立模块，关掉
         // 时与其它模块一样给可见提示而不是静默。
-        if (!(!kKitapsenEdition && modules.isEnabled(ModuleId.browse))) {
-          showModuleDisabled();
-          return;
-        }
-        unawaited(
-          showManualDownloadTaskDialog(
-            context: context,
-            appModel: appModel,
-            torrentPaths: files.torrents,
-            initialDiscoveryKind: _mangaOnly
-                ? DiscoveryMediaKind.manga
-                : DiscoveryMediaKind.novel,
-          ),
-        );
+        showModuleDisabled();
+        return;
       case DropIntent.unsupportedSurface:
         debugPrint('[fushi-drop] [reader-shelf] intent=unsupportedSurface');
         ScaffoldMessenger.of(context).showSnackBar(

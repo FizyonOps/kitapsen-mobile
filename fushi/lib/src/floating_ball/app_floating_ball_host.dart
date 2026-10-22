@@ -753,11 +753,7 @@ class _AppFloatingBallHostState extends ConsumerState<AppFloatingBallHost>
   Future<void> _manualSync() async {
     final BuildContext? ctx = _navigatorContext;
     // Kitapsen: no floating ball and no sync channels.
-    if (kKitapsenEdition || ctx == null) return;
-    await runManualSyncWithFeedback(
-      context: ctx,
-      appModel: ref.read(appProvider),
-    );
+    return;
   }
 
   /// Android 截屏 OCR 截到帧（或放弃）：把藏起来的球放回来。

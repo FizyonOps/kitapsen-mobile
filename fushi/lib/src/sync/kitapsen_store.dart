@@ -2,7 +2,7 @@
 /// categories, book pages, reviews, authors, wishlist and notifications.
 ///
 /// Store policy (Apple 3.1.1 / 3.1.3(a), Google Play payments, see
-/// [kKitapsenEdition]): nothing here carries a price or a purchase link. A
+/// [true]): nothing here carries a price or a purchase link. A
 /// book is either in the reader's library (read it), free (claim it into the
 /// library), or neither (wishlist only).
 library;

@@ -259,8 +259,7 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
   /// 「听书」模块是否可见。关掉时本面板不再渲染「有声书」分类（设置抽屉标签栏 +
   /// 窄窗导航行两处），即便宿主还持有一个控制器也一样——模块关掉 = 入口消失。
   bool get _listeningEnabled =>
-      !kKitapsenEdition &&
-      widget.appModel.moduleVisibility.isEnabled(ModuleId.listening);
+      false;
 
   /// 桌面端右侧「设置」抽屉当前展开的分组 id（初值来自页面记忆）。
   late String _sideSheetTab = widget.initialSideSheetTab;
@@ -401,8 +400,7 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
         return _buildAppearanceSideSheet(context, theme);
       case ReaderQuickSettingsPresentation.audiobookPanel:
         // Kitapsen: no audiobooks, so no audiobook panel.
-        if (kKitapsenEdition) return const SizedBox.shrink();
-        return _buildAudiobookPanel(context, theme);
+        return const SizedBox.shrink();
       case ReaderQuickSettingsPresentation.sheet:
         break;
     }
@@ -575,32 +573,7 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
 
   Widget _buildSideSheetTabContent(BuildContext context, String tab) {
     final Widget content = _subPageContent(tab);
-    if (kKitapsenEdition ||
-        tab != 'layout' ||
-        widget.onToggleLyricsMode == null) {
-      return content;
-    }
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        content,
-        ReaderSideSheetSectionLabel(t.lyrics_mode),
-        AdaptiveSettingsSection(children: <Widget>[
-          AdaptiveSettingsNavigationRow(
-            key: const ValueKey<String>('fushi_lyrics_mode_toggle'),
-            title: widget.lyricsMode ? t.book_mode : t.lyrics_mode,
-            icon: widget.lyricsMode
-                ? Icons.auto_stories_outlined
-                : Icons.lyrics_outlined,
-            onTap: () {
-              Navigator.of(context).pop();
-              widget.onToggleLyricsMode!();
-            },
-          ),
-        ]),
-      ],
-    );
+    return content;
   }
 
   /// 桌面端居中「有声书」面板：外壳与三个 tab 在 [ReaderAudiobookPanel]；「设置」
@@ -646,13 +619,6 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
         icon: Icons.touch_app_outlined,
         label: t.settings_destination_reading_controls,
       ),
-      // Kitapsen has no dictionary lookup, so no lookup settings page.
-      if (!kKitapsenEdition)
-        (
-          id: 'lookup',
-          icon: Icons.manage_search_outlined,
-          label: t.settings_destination_lookup,
-        ),
       if (widget.controller != null && _listeningEnabled)
         (
           id: 'audiobook',
@@ -685,12 +651,6 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
         label: t.settings_destination_reading_controls,
         page: 'behavior',
       ),
-      if (!kKitapsenEdition)
-        _categoryTile(
-          icon: Icons.manage_search_outlined,
-          label: t.settings_destination_lookup,
-          page: 'lookup',
-        ),
       if (widget.controller != null && _listeningEnabled)
         _categoryTile(
           icon: Icons.headphones_outlined,
@@ -753,9 +713,7 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
         // exposes the theme selector + book-CSS row via _buildLyricsDisplaySection
         // so the theme/CSS stay reachable after the appearance group was dropped
         // (TODO-802 reachability).
-        return !kKitapsenEdition && widget.lyricsMode
-            ? _buildLyricsDisplaySection()
-            : _buildLayoutDetail();
+        return _buildLayoutDetail();
       case 'behavior':
         return _buildReaderGroupContent(
           ReaderGroup.behavior,
@@ -769,8 +727,7 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
       case 'location':
         return _buildLocationSection(Theme.of(context));
       case 'audiobook':
-        if (kKitapsenEdition) return const SizedBox.shrink();
-        return _buildAudiobookSettingsSection(Theme.of(context));
+        return const SizedBox.shrink();
       default:
         return const SizedBox.shrink();
     }

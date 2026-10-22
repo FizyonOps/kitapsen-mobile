@@ -803,11 +803,7 @@ class _ReaderPdfPageState extends BaseSourcePageState<ReaderPdfPage>
               PdfViewerGeneralTapHandlerDetails details,
             ) {
               // Kitapsen has no dictionary: taps keep pdfrx's own behaviour.
-              if (kKitapsenEdition) return false;
-              if (details.type != PdfViewerGeneralTapType.tap) return false;
-              if (details.tapOn == PdfViewerPart.background) return false;
-              unawaited(_lookupAtDocumentPosition(details.documentPosition));
-              return true;
+              return false;
             },
           ),
         );

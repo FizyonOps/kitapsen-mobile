@@ -100,21 +100,7 @@ VideoAcquisitionService createAppVideoAcquisitionService({
 /// 下载就绪 / 受管来源），缺什么回稳定短码；每场会话自建一份发现服务，会话结束即关。
 VideoAcquisitionAssistantHost createVideoAcquisitionAssistantHost(AppModel appModel) => VideoAcquisitionAssistantHost(
   videoAcquireBlocker: () async {
-    if (!StoreRestrictedCapability.downloads.isAvailable ||
-        !StoreRestrictedCapability.externalDiscovery.isAvailable ||
-        !(!kKitapsenEdition &&
-            appModel.moduleVisibility.isEnabled(ModuleId.browse))) {
-      return kHostAssistantReasonDisabled;
-    }
-    if (resolveVideoAcquireAiProvider(appModel.prefsRepo) == null) {
-      return kHostAssistantReasonNoProvider;
-    }
-    if (appModel.videoResourceRegistry == null ||
-        appModel.videoDownloadPipelineService == null ||
-        (await appModel.getManagedVideoDownloadSources()).isEmpty) {
-      return kHostAssistantReasonNotReady;
-    }
-    return null;
+    return kHostAssistantReasonDisabled;
   },
   openVideoAcquisition: (String locale) async {
     final VideoResourceRegistry? registry = appModel.videoResourceRegistry;

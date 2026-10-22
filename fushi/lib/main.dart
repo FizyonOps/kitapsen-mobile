@@ -183,8 +183,6 @@ SystemUiOverlayStyle fushiSystemOverlayStyle(Brightness brightness) {
 
 @pragma('vm:entry-point')
 void popupMain() {
-  // Kitapsen: no popup dictionary, so its entry point compiles to nothing.
-  if (!kKitapsenEdition) popup_entrypoint.popupMain();
 }
 
 /// Application execution starts here.
@@ -246,13 +244,6 @@ void main([List<String> args = const <String>[]]) {
     // 时序前置条件，而 `initialise()` 有两个 entry point 绕开它（弹窗词典与悬浮
     // 词典），写在 main 里哪个入口都不会漏。
     installEngineHostBindings();
-    // Kitapsen: no speech-to-text, so the ASR host is not compiled in.
-    if (!kKitapsenEdition) {
-      installAsrHostBindings();
-      // 用户的模型选择 / 自带模型包住在数据根下，必须在装完数据根解析器之后读。
-      // 不 await 的话第一次转录会按内置表规划，用户的选择要等下一次才生效。
-      await loadAsrModelCatalog();
-    }
     AppIconSelection startupAppIcon = currentAppIconSelection.value;
     try {
       // BUG-1920：在 runApp 前把持久化选择灌入 Flutter 侧唯一真值，避免侧栏
@@ -391,12 +382,6 @@ void main([List<String> args = const <String>[]]) {
     // 调用 setPitch（无变调 UI），关掉后调速改走 mpv 原生 `speed` 属性（稳定，不重配
     // 滤镜图），mpv 默认 `audio-pitch-correction=yes` 仍保留音高 → 有声书加速不变调。
     JustAudioMediaKit.pitch = false;
-    // Kitapsen: no video and no desktop audio backend, and libmpv is not
-    // bundled (media_kit_libs_video removed), so media_kit is never started.
-    if (!kKitapsenEdition) {
-      JustAudioMediaKit.ensureInitialized();
-      MediaKit.ensureInitialized();
-    }
 
     // BUG-1015 的查词播放器冷启动静音预热**不在启动路径**（BUG-1690）：预热要在真实
     // 音频输出设备上开渲染流，启动即预热会打断其他 app 正在播的音乐（iOS 激活音频会话
@@ -533,10 +518,6 @@ void main([List<String> args = const <String>[]]) {
     // 并发跑；串行 await 四段小 IO 是启动到 LoadingPage 之前的纯等待。
     await Future.wait<void>(<Future<void>>[
       DebugLogService.instance.init(),
-      // 用户 2026-09-22：视频卡顿 / 查词卡的分析日志。默认关闭（开关在设置 › 诊断），
-      // init 只读一次偏好 + 解析日志文件位置，关着时后续全链路零开销。
-      // Kitapsen has no video diagnostics log.
-      if (!kKitapsenEdition) VideoDiagLog.instance.init(),
       // TODO-1232 A3：读一次 native 持久化的渲染后端选择（关 Impeller 实验开关），
       // 供设置项同步渲染。非 Android 静默降级为不支持。
       RenderBackendService.instance.init(),
@@ -569,42 +550,17 @@ void main([List<String> args = const <String>[]]) {
       );
     }
 
-    /// Run the heavy initialisation after the first frame has been scheduled.
-    /// [AppModel.isInitialised] will flip to true and notify listeners when
-    /// done, causing [FushiReaderApp] to navigate from [LoadingPage] to
-    /// [HomePage].
-    // Kitapsen: no dictionaries, so no deinflection tables to load.
-    if (!kKitapsenEdition) await FushiDicts.preloadTransforms();
 
     final appModel = container.read(appProvider);
-    // TODO-2936：浏览器扩展查词命中 yomitan-api server 时应用「浏览器」媒体类型
-    // 的 Profile 绑定。必须在 initialise() 之前注入（server 在 initialise 内启动）。
-    if (!kKitapsenEdition) {
-      appModel.browserLookupProfileApplier = () => container
-          .read(profileViewModelProvider.notifier)
-          .autoApplyBinding(mediaType: ProfileMediaKind.browser);
-      appModel.ankiRepositoryReader =
-          () => container.read(ankiRepositoryProvider);
-    }
     await appModel.initialise();
     // Kitapsen: a reading sample the app was killed on is still on the shelf.
-    if (kKitapsenEdition) unawaited(removeKitapsenSample(appModel.database));
-    // 互联 P2P 隧道（原生库可用才装）：client 选路在直连全失败后经隧道兜底
-    // （docs/specs/2026-09-28-interconnect-remote-reach.md §5）。
-    if (!kKitapsenEdition) {
-      installInterconnectP2pClient(SyncRepository(appModel.database));
-    }
+    unawaited(removeKitapsenSample(appModel.database));
 
     // ── 预热 WebView 引擎 ──────────────────────────────────────────────
     // 用户还在看主页/书架时就把冷启动成本吃掉：~500-1500ms。
     // 移动端可直接预热；桌面端（WebView2）必须等首帧渲染、Flutter view
     // 已挂载后再构造 HeadlessInAppWebView，否则会崩 WebView2。
 
-    // Windows/iOS 弹窗内联资产（popup.html/js/css ~300KB）异步预读：把 4 次
-    // 同步读盘从「第一次查词」路径挪到启动空闲期（内部平台门控，其它平台 no-op）。
-    if (!kKitapsenEdition) {
-      unawaited(DictionaryPopupWebViewState.preloadInlinePopupAssets());
-    }
 
     final bool isMobilePlatform = Platform.isAndroid || Platform.isIOS;
     final bool isDesktopPlatform =
@@ -660,45 +616,6 @@ void main([List<String> args = const <String>[]]) {
       }));
     }
 
-    // TODO-617: start the global lookup overlay trigger on desktop (Windows MVP).
-    // After the first frame so the Flutter view / WebView2 host is attached.
-    // Kitapsen: no global lookup or galgame overlay.
-    if (!kKitapsenEdition && isDesktopPlatform) {
-      unawaited(Future(() async {
-        try {
-          await WidgetsBinding.instance.endOfFrame;
-          // 两个控制器分属不同模块，各判各的门——**必须写成两条独立的 if**：
-          // 它们此前在同一个 try 里顺序执行，给第一个加 early return 会连带
-          // 跳过 galgame 浮窗（games 与 lookup 正交）。
-          //
-          // 「下次启动不再自启」的语义在这里是字面的：两个 start() 都只有单向
-          // 闩（`_started`）、生产路径没有 stop，所以关掉模块要到下次启动才
-          // 真的不装钩子；这正是用户选的「不切断进行中的任务」。
-          final ModuleVisibility modules = appModel.moduleVisibility;
-          // app 外全局取词：OS 级热键 + 鼠标侧键 RawInput + 手柄触发 + 离屏
-          // WebView2 预热，四条通道全部依附于同一次 start()。查词模块关着就
-          // 不往系统里装钩子（快捷键设置页的 globalExternal 分区同步隐藏，见
-          // shortcut_settings_page）；模块门在 followLookupModule 里判，会话
-          // 中途打开模块时它沿同一条 start() 补起。
-          await GlobalLookupController.instance.followLookupModule(appModel);
-          if (!kKitapsenEdition &&
-              modules.isEnabled(ModuleId.games) &&
-              GalHookTextOverlayController.isSupported) {
-            await GalHookTextOverlayController.instance
-                .start(appModel: appModel);
-          }
-        } catch (e, st) {
-          // 🔴 这里以前只有 debugPrint —— release 构建下它**无处可去**。于是这一整段
-          // 桌面查词启动链（全局查词覆盖窗 / galgame 台词浮窗）里任何一步抛异常，
-          // 都会静默地把后面全部跳过：用户看到的是"某个功能
-          // 就是不工作"，日志里一个字都没有。真机上正因为这个，galgame 台词浮窗控制器
-          // 没启动这件事查了很久才定位到。落盘记录，别再让启动失败无声无息。
-          glog('startup: global lookup chain FAILED (non-fatal): $e');
-          glog('startup: stack: $st');
-          debugPrint('[Fushi] global lookup start failed (non-fatal): $e');
-        }
-      }));
-    }
 
     // galgame helper 与 Magpie 都只从 Windows 主包随附归档安装（BUG-1196 / BUG-1292）。
     // 版本与 app 强绑定：要新组件就更新 Hibiki。不要恢复后台静默下载或旧包联网兜底。
@@ -882,11 +799,6 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
     super.initState();
 
     WidgetsBinding.instance.addObserver(this);
-    // Kitapsen: no card mining, so nothing is ever queued for Anki.
-    if (!kKitapsenEdition) {
-      _pendingMineArrivals =
-          PendingMineRelay.arrivals.listen((_) => _flushPendingMines());
-    }
     // BUG-772：仅 Windows 挂 present-watchdog——runApp 后 30s 仍无一帧 rasterize
     // （firstFrameRasterized==false）判定 raster/present 楔死（快速进出视频的
     // libmpv/ANGLE/WGC churn 污染进程共享 D3D device），落盘取证 + 一次性自动重启。
@@ -997,16 +909,7 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
   /// 回到前台补发待发制卡队列：桌面 / Android 上连续补发；AnkiMobile 只有在用户
   /// 点过「全部发送」的会话里才发下一张（每张卡 `x-success` 跳回都会走到这里）。
   void _flushPendingMines() {
-    if (kKitapsenEdition) return;
-    if (!ref.read(appProvider).isInitialised) return;
-    // 「Anki 同步客户端」后端：上次没同步成功（离线等）的卡留在它自己的日志里，
-    // 回到前台补一次。没登录时 syncNow 在读账号那一步就停，不会拉起 helper。
-    final PlatformServices platform = ref.read(platformServicesProvider);
-    if (platform.useAnkiSyncClient) platform.ankiSyncSession?.scheduleSync();
-    final BaseAnkiRepository repo = ref.read(ankiRepositoryProvider);
-    if (repo is! PendingMiningAnkiRepository) return;
-    // 补发失败只影响那几张待发卡（它们留在队列里），不能冒泡成未处理异常。
-    unawaited(repo.flush().then((_) {}, onError: (Object _) {}));
+    return;
   }
 
   @override
@@ -1014,11 +917,6 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
     if (state == AppLifecycleState.resumed) {
       ref.read(appProvider).refreshSystemPalette();
       _flushPendingMines();
-      if (!kKitapsenEdition && Platform.isIOS) {
-        unawaited(_consumeAnkiMobileInfoReturn(
-          AnkiMobileInfoReturnTrigger.appResumed,
-        ));
-      }
       return;
     }
     if (Platform.isAndroid) {
@@ -1128,13 +1026,6 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
     // ①② 并行：切断 Bonsoir 事件源只动 mDNS 订阅，页面 flush 只写 Drift，两者互不
     //    依赖。过去串行 await 让各自的超时预算直接相加。
     await Future.wait(<Future<void>>[
-      // Kitapsen: no LAN sync server (reading it here would construct one).
-      if (!kKitapsenEdition)
-        _guardedExitStep('sync source fast shutdown', () async {
-          await appModel.syncServerController
-              .shutdownForExitFast()
-              .timeout(const Duration(milliseconds: 1500));
-        }),
       // ② flush 活跃页面 pending 进度/统计（缓存值落库，不碰退出期正在拆的 WebView）。
       _guardedExitStep('exit flush', () async {
         await ExitFlushRegistry.instance.flushAll();
@@ -1210,12 +1101,6 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
     _shutdownStarted = true;
     final AppModel appModel = ref.read(appProvider);
     try {
-      // Kitapsen: no LAN sync server (reading it here would construct one).
-      if (!kKitapsenEdition) {
-        await appModel.syncServerController
-            .shutdownForExit()
-            .timeout(const Duration(milliseconds: 1500));
-      }
     } on TimeoutException {
       debugPrint('[Fushi] sync source shutdown on exit timed out; continuing');
     } catch (e) {
@@ -1278,46 +1163,14 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
     required bool isInitial,
   }) async {
     if (data == null || !mounted) return false;
-    // Kitapsen: none of these deep links exist in the edition (card sources,
-    // interconnect pairing, shortcuts, lookup, cloud OAuth, AnkiMobile).
-    if (!kKitapsenEdition && SourceUrlChannel.isSourceUrl(data)) {
-      _queueCardSourceUrl(data);
-      return true;
-    }
-    if (!kKitapsenEdition && FushiPairLink.tryParse(data) != null) {
-      _queuePairLink(data);
-      return true;
-    }
     final AppShortcut? shortcut =
-        kKitapsenEdition ? null : AppShortcut.tryParse(data);
-    if (!kKitapsenEdition && shortcut != null) {
-      _queueAppShortcut(shortcut);
-      return true;
-    }
+        null;
     // iOS：快捷指令 / 其它 app 打开的 `fushi://lookup?word=` 交给应用内查词弹窗
     // （Android 的这条链接由 manifest 直接路由到 :popup 查词窗，到不了这里；
     // Windows 走 argv / WM_COPYDATA，见 [lookupWordFromDeepLink]）。
     final String? lookupWord =
-        kKitapsenEdition ? null : lookupWordFromDeepLink(data);
-    if (!kKitapsenEdition && lookupWord != null) {
-      deliverExternalLookup(lookupWord);
-      return true;
-    }
+        null;
     final String normalized = data.toLowerCase();
-    if (!kKitapsenEdition && normalized.startsWith('fushi://auth/')) {
-      await _handleOAuthRedirect(data);
-      return true;
-    }
-    if (!kKitapsenEdition &&
-        normalized.startsWith(fushiAnkiFetchCallback.toLowerCase())) {
-      await _handleAnkiMobileInfoCallback();
-      return true;
-    }
-    if (!kKitapsenEdition &&
-        normalized.startsWith(fushiAnkiSuccessCallback.toLowerCase())) {
-      await _recordAnkiMobileMinedNote(data);
-      return true;
-    }
     return false;
   }
 
@@ -1356,16 +1209,7 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
 
   void _schedulePairLinks() {
     // Kitapsen: no device pairing (fushi://pair links are never queued).
-    if (kKitapsenEdition) return;
-    if (_pairLinkScheduled || _pairLinkRunning || _pendingPairLinks.isEmpty) {
-      return;
-    }
-    _pairLinkScheduled = true;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _pairLinkScheduled = false;
-      if (mounted) unawaited(_drainPairLinks());
-    });
-    WidgetsBinding.instance.ensureVisualUpdate();
+    return;
   }
 
   /// 逐条弹「连接到 <设备>？」确认框再配对：链接可能来自任何网页，绝不静默配对。
@@ -1421,30 +1265,7 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
 
   Future<void> _drainCardSourceNavigation() async {
     // Kitapsen: card source links come from Anki cards, which it never makes.
-    if (kKitapsenEdition) return;
-    if (_sourceNavigationRunning) return;
-    _sourceNavigationRunning = true;
-    try {
-      while (mounted && _pendingCardSourceUrls.isNotEmpty) {
-        final String url = _pendingCardSourceUrls.removeAt(0);
-        final CardSourceLink? link = CardSourceLink.tryParse(url);
-        if (link == null) {
-          FushiToast.show(msg: t.card_source_review_invalid);
-          continue;
-        }
-        try {
-          _openingCardSourceUrl = url;
-          await openCardSource(ref: ref, link: link);
-        } catch (error, stackTrace) {
-          ErrorLogService.instance.log('CardSource.open', error, stackTrace);
-          FushiToast.show(msg: t.card_source_review_failed);
-        } finally {
-          _openingCardSourceUrl = null;
-        }
-      }
-    } finally {
-      _sourceNavigationRunning = false;
-    }
+    return;
   }
 
   /// AnkiMobile 加完卡回跳（`fushi://ankiSuccess?expression=…`）。
@@ -1645,105 +1466,11 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
     // 判定必须排在**入库之前**：下面会经 VideoBookRepository 建/取一行
     // video_books，若放行到那之后再拦，视频就进了一个用户根本看不见的库。给
     // toast 而不是静默——双击 mkv 毫无反应会被当成 app 坏了。
-    if (!(!kKitapsenEdition &&
-        appModel.moduleVisibility.isEnabled(ModuleId.video))) {
-      FushiToast.show(
-        msg: t.module_disabled_hint,
-        severity: ToastSeverity.info,
-      );
-      return;
-    }
-
-    // ③ 存在性校验：冷启动 argv 路径虽在 main() 已 existsSync 过，但从那次检查到
-    // 此处首帧入库之间文件可能被移动/删除（或检查与使用间的竞态），故再校验一次；
-    // 文件不存在则不入库、不静默吞，给与既有失败路径一致的 toast 反馈（TODO-903）。
-    if (!await File(videoPath).exists()) {
-      FushiToast.show(
-        msg: t.video_file_not_found,
-        severity: ToastSeverity.error,
-      );
-      return;
-    }
-
-    final VideoBookRepository repo = VideoBookRepository(appModel.database);
-
-    String bookUid;
-    try {
-      bookUid = await _runExternalVideoCoverMutation(
-        (bool allowAutoCover) async {
-          // ② 去重：同一物理文件若已库内导入（`video/<basename>` 身份），复用其旧
-          // bookUid，不再派生 `video/ext/<sha1>` 第二身份插第二行。按 videoPath 命中
-          // 走仓库单一真相源 findByVideoPath（与 isDuplicateVideoPath 同比对语义）。
-          final VideoBookRow? sameFile = await repo.findByVideoPath(videoPath);
-          if (sameFile != null) return sameFile.bookUid;
-
-          final String candidateUid = externalVideoBookUid(videoPath);
-          final VideoBookRow? existing = await repo.getByBookUid(candidateUid);
-          if (existing != null) return candidateUid;
-
-          CoverMetaStore? coverMetaStore;
-          String? coverPath;
-          if (allowAutoCover) {
-            try {
-              final CoverMetaStore store =
-                  CoverMetaStore(await VideoStorage.coversDir());
-              if (await store.allowsAutoFrameWrite(candidateUid)) {
-                coverMetaStore = store;
-                // ① 封面：复用库内导入同款 extractVideoCover（桌面 ffmpeg 抽帧；移动端无
-                // ffmpeg 时返 null 留空占位）。仅新建外部条目时抽一次。
-                coverPath = await extractVideoCover(
-                  videoPath: videoPath,
-                  bookUid: candidateUid,
-                );
-              }
-            } on Object catch (error) {
-              // provenance 不可读时 fail closed：仍建无封面的媒体行。
-              debugPrint(
-                '[Fushi] external video cover admission failed: $error',
-              );
-            }
-          }
-          await repo.saveVideoBook(VideoBooksCompanion(
-            bookUid: Value(candidateUid),
-            title: Value(p.basenameWithoutExtension(videoPath)),
-            videoPath: Value(videoPath),
-            coverPath: Value<String?>(coverPath),
-            importedAt: Value(DateTime.now().millisecondsSinceEpoch),
-          ));
-          if (coverPath != null && coverMetaStore != null) {
-            try {
-              final bool committed =
-                  await coverMetaStore.markAutoFrameAfterWrite(candidateUid);
-              if (!committed) {
-                debugPrint(
-                  '[Fushi] external video cover provenance changed during '
-                  'automatic write: $candidateUid',
-                );
-              }
-            } on Object catch (error) {
-              debugPrint(
-                '[Fushi] external video cover provenance commit failed: '
-                '$error',
-              );
-            }
-          }
-          return candidateUid;
-        },
-      );
-    } catch (e) {
-      debugPrint('[Fushi] external video upsert failed: $e');
-      return;
-    }
-
-    if (!mounted) return;
-    // This process-level launch path owns a NavigatorState but has no themed
-    // descendant BuildContext, so its route contract is explicitly Material.
-    await navigator.push(
-      MaterialPageRoute<void>(
-        builder: (_) =>
-            VideoFushiPage.neutralized(bookUid: bookUid, repo: repo),
-      ),
+    FushiToast.show(
+      msg: t.module_disabled_hint,
+      severity: ToastSeverity.info,
     );
+    return;
   }
 
   void _scheduleWindowsUpdateHandoffReconcile() {
@@ -2109,61 +1836,6 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
         ),
       );
     }
-    // TODO-959: 桌面「数据存储位置」整目录迁移期间，迁移引擎会 closeDatabase()（置
-    // isInitialised=false）以释放 Windows 文件锁。若直接落到下面的裸 loading 分支，背景
-    // _savedSplashColor 可能为 null/深色 → 近黑 + 转圈，搬大库数秒~数分钟被误判死机。
-    // 这里在 loading 分支之前拦截：改显一个带「请勿关闭」文案 + 进度条的迁移遮罩（明确
-    // 主题色背景），并保证「遮罩已上屏 → closeDatabase → 搬文件」的顺序（见
-    // _DataRootWidget._changeLocation 先调 beginDataRootMigration 再 migrate）。
-    if (!kKitapsenEdition && appModel.dataRootMigrationActive) {
-      final brightness =
-          WidgetsBinding.instance.platformDispatcher.platformBrightness;
-      final ThemeData fallbackTheme = buildFushiFallbackTheme(brightness);
-      return TranslationProvider(
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: fallbackTheme,
-          home: DataRootMigrationView(
-            progress: appModel.dataRootMigrationProgress,
-            background: _savedSplashColor,
-            // TODO-1182：失败态在同一遮罩上改显「原因 + 建议 + 重启」，用户点重启回旧根。
-            failure: appModel.dataRootMigrationFailure,
-            onRestart: () => dataRootMigrationRestart(appModel),
-          ),
-        ),
-      );
-    }
-    // TODO-1151: 本地备份「导入/恢复」期间会 closeDatabase() 置 isInitialised=false。
-    // 若落到下面的裸 loading 分支，设置页会「突然消失」变近黑转圈，导入完再 exit(0)，
-    // 用户误以为崩溃/失败。这里镜像上面的迁移遮罩：running 显「正在导入备份，请勿关闭」
-    // + 进度条；done 显结果，导入成功后 ~1s 自动重启（backupImportRestart 走 restartApp 真
-    // 拉新进程），「立即重启」按钮保留为手动兜底可提前点；失败态不自动、由用户读完原因手点。
-    // BUG-2106：**只有关库后的相位**（running/done/failed）才换根独占。validating 段
-    // DB 仍打开、可取消，换根会把调用方路由连 Navigator 一起销毁（引导向导被整段摧毁），
-    // 改由压在调用方页面之上的模态遮罩路由承载，见 [buildBackupValidatingOverlayRoute]。
-    if (!kKitapsenEdition && appModel.backupImportOwnsAppRoot) {
-      final brightness =
-          WidgetsBinding.instance.platformDispatcher.platformBrightness;
-      final ThemeData fallbackTheme = buildFushiFallbackTheme(brightness);
-      return TranslationProvider(
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: fallbackTheme,
-          home: BackupImportOverlayView(
-            phase: appModel.backupImportPhase!,
-            message: appModel.backupImportMessage,
-            background: _savedSplashColor,
-            // TODO-1183: 确定进度条监听（只进度条重建，不整树重绘）。
-            progress: appModel.backupImportProgress,
-            onRestart: () => backupImportRestart(appModel),
-            // BUG-2106：这里**不再**接 onCancel。「取消」只属于 validating 相位，而
-            // validating 已不由本根分支承载（它是压在调用方页面之上的模态路由，取消按钮
-            // 由 [buildBackupValidatingOverlayRoute] 的调用方接线）。本分支只剩
-            // running/done/failed，本视图在这三个相位根本不渲染取消按钮。
-          ),
-        ),
-      );
-    }
     if (!appModel.isInitialised) {
       // TODO-1260：进入裸加载态即挂看门狗；超时前显示转圈，超时后显示逃生 UI。
       _startLoadingWatchdogIfNeeded();
@@ -2254,8 +1926,6 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
           // freshly-entered page (BUG-398).
           navigatorObservers: <NavigatorObserver>[
             appModel.focusHighlightObserver,
-            // Kitapsen has no floating ball.
-            if (!kKitapsenEdition) floatingBallRouteObserver,
           ],
           home: home,
           locale: locale,
@@ -2342,10 +2012,6 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
                           child: Stack(
                             children: <Widget>[
                               child!,
-                              // Kitapsen: no floating ball and no lookup popups.
-                              if (!kKitapsenEdition) const AppFloatingBallHost(),
-                              if (!kKitapsenEdition)
-                                const FloatingLyricLookupHost(),
                             ],
                           ),
                         ),

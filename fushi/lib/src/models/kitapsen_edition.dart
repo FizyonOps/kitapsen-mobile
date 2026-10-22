@@ -5,7 +5,7 @@
 /// other Fushi capability (manga, video, games, dictionaries and lookup, Anki,
 /// AI, browse / downloads, interconnect and cloud sync, floating ball, update
 /// feeds, ...) stays in the source tree but is unreachable: the gates read
-/// [kKitapsenEdition] instead of deleting code, so upstream merges stay
+/// [true] instead of deleting code, so upstream merges stay
 /// tractable and every Kitapsen-specific decision is greppable.
 library;
 

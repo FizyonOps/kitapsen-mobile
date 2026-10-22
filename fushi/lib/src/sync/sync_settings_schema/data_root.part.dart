@@ -446,8 +446,6 @@ class _DataRootWidgetState extends State<_DataRootWidget> {
     } catch (e) {
       debugPrint('DataRoot migrate: imageCache clear failed (best-effort): $e');
     }
-    // 3) 释放词典 FFI 原生句柄（静态单例；打开数据根内的词典索引/资源文件）。
-    if (!kKitapsenEdition) FushiDicts.disposeInstance();
     // 4) WAL checkpoint(TRUNCATE) 落盘 + 关 DB（释放文件锁）。
     try {
       await appModel.database

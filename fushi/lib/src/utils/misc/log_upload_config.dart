@@ -20,4 +20,4 @@ bool isLogUploadConfigured(String endpoint) {
 ///
 /// Kitapsen never uploads logs to the upstream collector (logs.wrds.xyz).
 bool get showUploadLogAction =>
-    !kKitapsenEdition && isLogUploadConfigured(kLogUploadEndpoint);
+    false;

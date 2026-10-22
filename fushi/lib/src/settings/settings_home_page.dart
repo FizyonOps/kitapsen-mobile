@@ -44,22 +44,6 @@ class _SettingsHomePageState extends BasePageState<SettingsHomePage>
     super.initState();
     ErrorLogService.instance.addListener(_onLogChanged);
     DebugLogService.instance.addListener(_onLogChanged);
-    // 游戏内查词准入是 hook **异步**报上来的：settingsContext.refresh 只由交互驱动，
-    // 事件走不到它。不听这一条，用户开着设置页启动游戏时那一行永远停在旧状态。
-    // Kitapsen: no in-game lookup.
-    if (!kKitapsenEdition) {
-      GalIngameLookupController.instance.admission.addListener(_onLogChanged);
-    }
-    // 推荐包下载阶段同理，而且宽屏（>=720，Windows 桌面的主用形态）是**内联**
-    // 主从：详情内容直接在本页渲染，走不到 [SettingsDetailPage] 那份订阅
-    // （BUG-2165）。不听这一条，开着设置页时下载开始/下完/暂停，「推荐包」那一行
-    // 的出现与消失就只能靠 AppModel 顺带 notify 撞上，变成偶发刷新。
-    // Kitapsen has no recommended dictionary packs.
-    if (!kKitapsenEdition) {
-      appModelNoUpdate.recommendedPackDownloadController.stage.addListener(
-        _onLogChanged,
-      );
-    }
   }
 
   @override
@@ -67,15 +51,6 @@ class _SettingsHomePageState extends BasePageState<SettingsHomePage>
     _searchController.dispose();
     ErrorLogService.instance.removeListener(_onLogChanged);
     DebugLogService.instance.removeListener(_onLogChanged);
-    if (!kKitapsenEdition) {
-      GalIngameLookupController.instance.admission
-          .removeListener(_onLogChanged);
-    }
-    if (!kKitapsenEdition) {
-      appModelNoUpdate.recommendedPackDownloadController.stage.removeListener(
-        _onLogChanged,
-      );
-    }
     super.dispose();
   }
 

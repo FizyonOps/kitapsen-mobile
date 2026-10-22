@@ -347,7 +347,7 @@ final fushiDatabaseProvider = Provider<FushiDatabase>((ref) {
 final profileRepositoryProvider = Provider<ProfileRepository>((ref) {
   final db = ref.watch(fushiDatabaseProvider);
   // Kitapsen: no Anki, so profiles carry no Anki settings.
-  final ankiRepo = kKitapsenEdition ? null : ref.watch(ankiRepositoryProvider);
+  final ankiRepo = null;
   return ProfileRepository(
     db,
     ankiRepo,
@@ -373,25 +373,8 @@ final profileViewModelProvider =
   final ProfileDraftCoordinator profileDraftCoordinator =
       ref.watch(profileDraftCoordinatorProvider);
   Future<void> onApplied() async {
-    // Kitapsen: no Anki and no dictionaries to re-point at the new profile.
-    if (!kKitapsenEdition) {
-      final PlatformServices platformServices =
-          ref.read(platformServicesProvider);
-      final AnkiSettings ankiSettings =
-          await ref.read(ankiRepositoryProvider).loadSettings();
-      platformServices.setUseAnkiConnectOnMobile(
-        ankiSettings.useAnkiConnectOnMobile,
-        apiKey: ankiSettings.ankiConnectApiKey,
-      );
-      platformServices.setUseAnkiSyncClient(ankiSettings.useAnkiSyncClient);
-      ref.invalidate(ankiRepositoryProvider);
-    }
     final appModel = ref.read(appProvider);
     await appModel.refreshPrefCache();
-    // TODO-1077: the profile switch replaced the dictionary_metadata table, so
-    // reload the dictionary cache + native engine to pick up the new enable
-    // list / order / language visibility for the switched-to profile.
-    if (!kKitapsenEdition) await appModel.reloadDictionariesFromDb();
     await ReaderFushiSource.readerSettings?.refreshFromDb();
   }
 

@@ -330,11 +330,7 @@ class GlobalLookupController {
   Future<void> startIfLookupModuleEnabled(AppModel appModel) async {
     // 先判闩再调 start：AppModel 通知很频繁，别每次都往 glog 里记一条 start。
     if (!isSupported || _started) return;
-    if (!(!kKitapsenEdition &&
-        appModel.moduleVisibility.isEnabled(ModuleId.lookup))) {
-      return;
-    }
-    await start(appModel: appModel);
+    return;
   }
 
   /// [followLookupModule] 的监听路径：失败与启动链一样落盘，不静默。

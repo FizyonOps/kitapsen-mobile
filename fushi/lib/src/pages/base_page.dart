@@ -29,8 +29,6 @@ abstract class BasePageState<T extends BasePage> extends ConsumerState<T>
   void initState() {
     super.initState();
     _cachedAppModel = ref.read(appProvider);
-    // Kitapsen: no card creation, so pages never build the card creator.
-    if (!kKitapsenEdition) _cachedCreatorModel = ref.read(creatorProvider);
   }
 
   /// Access the global model responsible for app-wide state management.

@@ -860,19 +860,7 @@ class BackupRestoreService {
       );
 
       // Kitapsen: no dictionaries, so a backup never carries any to reapply.
-      if (!kKitapsenEdition &&
-          effectiveHasDictionaries &&
-          dictionaryReapplyPlan != null &&
-          dictionaryReapplyDirectory != null) {
-        // Backup carries dictionaries → replace this device's resources with
-        // the backup's (the DB overwrite already brought the matching rows).
-        await _reapplyDictionaryResources(
-          zipPath: zipPath,
-          reapplyPlan: dictionaryReapplyPlan,
-          dictionaryResourceDirectory: dictionaryReapplyDirectory,
-          onBytes: reportBytes,
-        );
-      } else if (!effectiveHasDictionaries &&
+      if (!effectiveHasDictionaries &&
           haveCurrent &&
           dictionaryReapplyDirectory != null) {
         // BUG-454: backup has NO dictionaries → keep this device's. The DB was

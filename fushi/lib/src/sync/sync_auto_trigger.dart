@@ -216,29 +216,7 @@ Future<List<SyncChannel>> enabledSyncChannelBackends(
 ) async {
   // Kitapsen: no cloud / interconnect sync (reading progress goes through
   // KitapsenClient), so none of those backends are compiled in.
-  if (kKitapsenEdition) return const <SyncChannel>[];
-  final Future<List<SyncChannel>> Function(SyncRepository repo)? override =
-      debugSyncChannelsOverride;
-  if (override != null) return override(repo);
-  final SyncBackendType cloudType = await repo.getBackendType();
-  final SyncBackend cloud = resolveSyncBackend(cloudType);
-  // isInterconnect 由后端身份决定，不由「它排在云通道那一格」决定：备份后端被选成
-  // 互联时只剩这一条通道，它跑的就是互联链路（SyncOrchestrator 内部同样按
-  // `backend is InterconnectSyncBackend` 判断），分资产开关必须跟着读互联专属的
-  // 上传开关——否则用户在互联页看到的四个上传开关会被静默忽略、改由云备份开关决定。
-  final List<SyncChannel> channels = <SyncChannel>[
-    SyncChannel(cloud,
-        type: cloudType, isInterconnect: cloud is InterconnectSyncBackend),
-  ];
-  if (await repo.isInterconnectEnabled()) {
-    final SyncBackend interconnect =
-        resolveSyncBackend(SyncBackendType.fushiServer);
-    if (!identical(interconnect, cloud)) {
-      channels.add(SyncChannel(interconnect,
-          type: SyncBackendType.fushiServer, isInterconnect: true));
-    }
-  }
-  return channels;
+  return const <SyncChannel>[];
 }
 
 /// 一条同步通道要用的分资产开关集（喂给 [SyncOrchestrator]）。
@@ -410,18 +388,6 @@ void triggerAutoSyncAfterClose({
   BookExitSyncScope.instance.register(
     syncKitapsenBookProgress(db, mediaIdentifier),
   );
-  // Kitapsen: no cloud / interconnect channels, so the generic sync runner
-  // (and the backends behind it) is compiled out.
-  if (!kKitapsenEdition) {
-    BookExitSyncScope.instance.register(
-      _runAutoSync(
-        db: db,
-        mediaIdentifier: mediaIdentifier,
-        messenger: messenger,
-        onReport: onReport,
-      ),
-    );
-  }
 }
 
 void triggerAutoSyncOnBackground({
@@ -431,9 +397,6 @@ void triggerAutoSyncOnBackground({
   // Background (app→paused) intentionally has NO onReport: the user can't see a
   // dialog, so conflicts stay silent until a later visible sync surfaces them.
   unawaited(syncKitapsenBookProgress(db, mediaIdentifier));
-  if (!kKitapsenEdition) {
-    _runAutoSync(db: db, mediaIdentifier: mediaIdentifier, messenger: null);
-  }
 }
 
 /// Full bidirectional sweep on app open: imports remote-only books, syncs all
@@ -453,18 +416,6 @@ void triggerAutoSyncOnAppOpen({
 }) {
   // Kitapsen 书店进度：在网页上读过的书，打开 app 时把位置带回本机。
   unawaited(syncKitapsenLibraryProgress(db));
-  if (!kKitapsenEdition) {
-    _runAutoSyncAll(
-      db: db,
-      dictionaryResourceRoot: dictionaryResourceRoot,
-      audioDatabaseRoot: audioDatabaseRoot,
-      tempDir: tempDir,
-      localAudioEntries: localAudioEntries,
-      onLocalAudioImported: onLocalAudioImported,
-      onReport: onReport,
-      onPostRun: onPostRun,
-    );
-  }
 }
 
 /// BUG-1569① 测试入口：以可 await 的方式跑一轮自动全量 sweep（生产入口
@@ -759,112 +710,7 @@ Future<ManualSyncResult> runManualFullSync({
   SyncProgressCallback? onProgress,
 }) async {
   // Kitapsen: no sync channels exist (see [enabledSyncChannelBackends]).
-  if (kKitapsenEdition) {
-    return const ManualSyncResult(ManualSyncOutcome.notConfigured);
-  }
-  if (!_syncingIds.add('__all__')) {
-    return const ManualSyncResult(ManualSyncOutcome.busy);
-  }
-  _beginSyncActivity(const SyncActivity(SyncActivityKind.fullSweep));
-  SyncOutcomeReason reason = SyncOutcomeReason.failed;
-  int channelsRun = 0;
-  try {
-    return await _autoSyncMutex.withLock(() async {
-      final repo = SyncRepository(db);
-      // option B 双通道：云备份通道 + 互联通道（若启用），互不排斥。合并两条通道的
-      // 报告成单一汇总返回；任一通道认证成功即算 completed，两条都未配置才是
-      // notConfigured。
-      final SyncRunReport merged = SyncRunReport();
-      final List<ManualSyncChannelReport> channelReports =
-          <ManualSyncChannelReport>[];
-      // BUG-1573：手动路径也**逐通道**隔离。BUG-1552 只修了自动 sweep 那个循环；
-      // 这里原来整体裸奔——云通道恒排第一（见 enabledSyncChannelBackends），它令牌
-      // 失效 / WebDAV 不可达时异常直接冒出 runManualFullSync，于是 **已经跑完的通道**
-      // 的 channelReports 连同它们的冲突/删除弹窗被整体丢弃，用户只看到一句「同步
-      // 失败」。一条通道炸了只该记它自己的账。
-      Object? firstError;
-      StackTrace? firstStack;
-      for (final SyncChannel channel
-          in await enabledSyncChannelBackends(repo)) {
-        try {
-          final SyncRunReport? report = await _runSyncChannel(
-            db: db,
-            repo: repo,
-            channel: channel,
-            dictionaryResourceRoot: dictionaryResourceRoot,
-            audioDatabaseRoot: audioDatabaseRoot,
-            tempDir: tempDir,
-            localAudioEntries: localAudioEntries,
-            onLocalAudioImported: onLocalAudioImported,
-            // Publish to the app-wide notifier in addition to the caller's
-            // callback, so any other visible "立即同步" surface reflects the bar.
-            onProgress: (SyncProgress p) {
-              syncProgress.value = p;
-              onProgress?.call(p);
-            },
-          );
-          if (report == null) continue;
-          channelsRun++;
-          logSyncReportErrors(report);
-          await onPostRun?.call(report);
-          merged.mergeFrom(report);
-          channelReports.add(ManualSyncChannelReport(channel.backend, report));
-        } catch (e, stack) {
-          // 不吞事实：这条通道的失败照样进汇总报告的 errors（鉴权类还会带类型进
-          // authFailures，见 SyncRunReport.noteError），「立即同步」的结果提示因此
-          // 仍会说「N 项失败」+ 可操作的鉴权原因。
-          firstError ??= e;
-          firstStack ??= stack;
-          merged.noteError(
-            'sync channel (interconnect=${channel.isInterconnect})',
-            e,
-          );
-          developer.log(
-            'Manual sync channel failed '
-            '(interconnect=${channel.isInterconnect})',
-            error: e,
-            stackTrace: stack,
-            name: 'SyncAutoTrigger',
-          );
-        }
-      }
-      if (channelReports.isEmpty) {
-        // 一条都没跑成：把第一个异常原样抛回去，让 UI 层既有的
-        // `on SyncAuthError` 分支照旧登出 + 提示重新登录（TODO-836 / BUG-1323）。
-        // 这条路径上没有任何「已完成通道的结果」会因此丢失——本就一个都没有。
-        if (firstError != null) {
-          reason = SyncOutcomeReason.failed;
-          Error.throwWithStackTrace(
-              firstError, firstStack ?? StackTrace.current);
-        }
-        reason = SyncOutcomeReason.noChannels;
-        return const ManualSyncResult(ManualSyncOutcome.notConfigured);
-      }
-      reason = firstError == null
-          ? SyncOutcomeReason.completed
-          : SyncOutcomeReason.failed;
-      return ManualSyncResult(
-        ManualSyncOutcome.completed,
-        merged,
-        channelReports,
-      );
-    });
-  } finally {
-    _syncingIds.remove('__all__');
-    final int finishedAt = DateTime.now().millisecondsSinceEpoch;
-    // BUG-1569①：手动同步不受退避闸约束（显式意图恒放行），但结局同样喂给退避
-    // 状态机——跑成清零（对端被证实活着），失败推进（避免手动失败后紧跟的定时
-    // tick 又立刻全额探测一遍）。
-    noteAutoSweepOutcomeForBackoff(reason, nowMs: finishedAt);
-    _endSyncActivity(SyncRunOutcome(
-      kind: SyncActivityKind.fullSweep,
-      reason: reason,
-      channelsRun: channelsRun,
-      finishedAt: finishedAt,
-    ));
-    // BUG-1569③：手动全量 sweep 期间被挡下的退出书同步同样在此补跑。
-    drainPendingBookSyncsAfterSweep();
-  }
+  return const ManualSyncResult(ManualSyncOutcome.notConfigured);
 }
 
 /// 手动资产传输要跑在哪条通道上（BUG-2494）。

@@ -74,51 +74,12 @@ class IllustrationZoomViewer extends StatelessWidget {
 /// Kitapsen: book images never leave the app, so this is a no-op (the hosts
 /// below also stop wiring the gestures that would call it).
 Future<void> shareImageFile(File file) async {
-  if (kKitapsenEdition) return;
-  if (!file.existsSync()) {
-    FushiToast.show(
-      msg: t.reader_image_file_unavailable,
-      severity: ToastSeverity.error,
-    );
-    return;
-  }
-  try {
-    await FushiShare.shareFiles(<XFile>[
-      XFile(file.path, mimeType: fallbackMimeType(file.path)),
-    ], subject: p.basename(file.path));
-  } catch (e) {
-    FushiToast.show(
-      msg: t.reader_image_share_failed(error: e),
-      severity: ToastSeverity.error,
-    );
-  }
+  return;
 }
 
 /// Windows：经原生 `copyImageFile` channel 把图片文件放进剪贴板（CF_DIB）。
 Future<void> copyImageFileToClipboard(File file) async {
-  if (kKitapsenEdition) return;
-  if (!file.existsSync()) {
-    FushiToast.show(
-      msg: t.reader_image_file_unavailable,
-      severity: ToastSeverity.error,
-    );
-    return;
-  }
-  try {
-    await FushiChannels.clipboardImage.invokeMethod<void>(
-      'copyImageFile',
-      <String, String>{'path': file.path},
-    );
-    FushiToast.show(
-      msg: t.copied_to_clipboard,
-      severity: ToastSeverity.success,
-    );
-  } catch (e) {
-    FushiToast.show(
-      msg: t.reader_image_copy_failed(error: e),
-      severity: ToastSeverity.error,
-    );
-  }
+  return;
 }
 
 /// Windows 右键图片的「复制图片」菜单，锚在 [globalPosition]；选中后调 [onCopy]。

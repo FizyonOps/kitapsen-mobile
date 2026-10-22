@@ -2119,14 +2119,13 @@ class _ReaderFushiPageState extends BaseSourcePageState<ReaderFushiPage>
   //
   // Kitapsen: no dictionary, so the cursor never exists (always [CaretSurface.none]).
   CaretSurface get _caretSurface =>
-      kKitapsenEdition ? CaretSurface.none : _caret.surface;
+      CaretSurface.none;
   set _caretSurface(CaretSurface value) {
-    if (!kKitapsenEdition) _caret.surface = value;
   }
 
-  bool get _caretActive => !kKitapsenEdition && _caret.active;
-  bool get _caretOnReader => !kKitapsenEdition && _caret.onReader;
-  bool get _caretOnLyrics => !kKitapsenEdition && _caret.onLyrics;
+  bool get _caretActive => false;
+  bool get _caretOnReader => false;
+  bool get _caretOnLyrics => false;
 
   // The WebView char caret and focus-layer hops are part of the experimental
   // keyboard/gamepad focus navigation system. Page-turn and media shortcuts stay
@@ -2139,9 +2138,8 @@ class _ReaderFushiPageState extends BaseSourcePageState<ReaderFushiPage>
   // pagination DOM and make the cursor jump. New directional input is dropped
   // while an op is in flight; the next auto-repeat tick moves instead.
   // Backed by [_caret].
-  bool get _caretBusy => !kKitapsenEdition && _caret.busy;
+  bool get _caretBusy => false;
   set _caretBusy(bool value) {
-    if (!kKitapsenEdition) _caret.busy = value;
   }
 
   bool get _showTopProgress =>
@@ -2394,7 +2392,7 @@ class _ReaderFushiPageState extends BaseSourcePageState<ReaderFushiPage>
     super.initState();
     // Kitapsen: no Anki card-source review.
     _sourceReviewSession =
-        kKitapsenEdition ? null : SourceReviewScope.read(context);
+        null;
     _sourceReviewWasActive = _sourceReviewActive;
     _suppressPositionPersist = _sourceReviewActive;
     _sourceReviewSession?.addListener(_onSourceReviewChanged);
@@ -2631,7 +2629,7 @@ class _ReaderFushiPageState extends BaseSourcePageState<ReaderFushiPage>
     unawaited(_loadVolumeContext(db));
     // Kitapsen: bring in bookmarks / highlights made on kitapsen.com or
     // another device (and send ones made here), then redraw highlights.
-    if (kKitapsenEdition) unawaited(_syncKitapsenAnnotations(db));
+    unawaited(_syncKitapsenAnnotations(db));
 
     // Source links must resolve exactly. Ordinary stale bookmarks may fall
     // back to a saved position, which would show unrelated text for this card.
@@ -3140,37 +3138,6 @@ class _ReaderFushiPageState extends BaseSourcePageState<ReaderFushiPage>
     // 探不到实时锚是 [ExitFlushRegistry] 一贯认下的降级（至多丢最后一窗滚动）。
     // 学习段不用在这里再 flush：上面的 detach 已把它攒进同一个汇合点。
     ExitFlushRegistry.instance.defer(_flushPosition);
-    // TODO-702：有声书退出即停（默认）/ 后台续播（可选）。
-    // 两种情况都先 detachReader——卸下本 reader 的 WebView 侧回调（跨章/边界跳句
-    // 退化为安全无操作），不 dispose 控制器；上面的 [_syncAndFlushPosition] 已把
-    // 退出那一刻的位置写穿，控制器侧另有 force-flush 兜底（stopPlayback /
-    // dispose），位置安全。
-    //
-    // - 默认（audiobookBackgroundPlay=false）：detach 后再 [AudiobookSession.stop]
-    //   真正止声、释放 native 解码器、清悬浮窗/通知。stop 是 async，dispose 同步
-    //   签名只能 fire-and-forget（unawaited）；但 stop 的同步首段已立刻置空
-    //   `_controller`（audiobook_session.dart），秒重进的竞态窗口收敛到微任务级。
-    // - 开启（=true）：只 detachReader，控制器留在 [AudiobookSession] 进程级常驻
-    //   持有者里继续后台播放（保 TODO-291 阶段2 的后台续播）。
-    // Kitapsen has no audiobooks: no session to detach from or stop.
-    if (!kKitapsenEdition) appModel.audiobookSession.detachReader(this);
-    if (!kKitapsenEdition &&
-        (_sourceReviewSession != null || !appModel.audiobookBackgroundPlay) &&
-        _audiobookController != null &&
-        identical(appModel.audiobookSession.controller, _audiobookController)) {
-      // fire-and-forget 必须 catchError：dispose 同步签名无法 await，stop 内
-      // stopPlayback 在 await 边界后若抛平台异常（native 解码器半销毁），会逃进
-      // 当前 zone 成未捕获异步错误。与本文件其它 unawaited future 惯例对齐。
-      unawaited(
-        appModel.audiobookSession.stop().catchError((Object e, StackTrace s) {
-          ErrorLogService.instance.log(
-            'ReaderFushi.disposeStopAudiobook',
-            e,
-            s,
-          );
-        }),
-      );
-    }
     _focusNode.dispose();
     _chromeFocusScope.dispose();
     _popupHeaderScope.dispose();
@@ -3202,36 +3169,6 @@ class _ReaderFushiPageState extends BaseSourcePageState<ReaderFushiPage>
     await _syncAndFlushPosition();
     // 关书不是翻走：站着的那页不结算（`ReadUnitLedger` 类文档），只把时钟写穿。
     await _flushReadingStats();
-    // TODO-831：「退出后续播」关闭（audiobookBackgroundPlay=false）时，把真正
-    // 停会话从 dispose 提前到这里——此刻页面仍 mounted、pop 动画尚未开始，
-    // [AudiobookSession.stop] 的**同步首段**（第一个 await 之前）就把会话置空
-    // （_book/_controller = null + notifyListeners），下层书架在 pop 动画首帧重建时
-    // NowListeningMiniBar 即见空会话从一开始 SizedBox.shrink，消除「显一帧再收起」
-    // 的闪播放条。dispose() 里的 unawaited(stop()) 兜底保留（硬 kill / 系统回收 /
-    // 非 PopScope 退出路径 onWillPop 不一定跑到），stop() 内部对已清空的 controller
-    // 做 no-op，二次调用安全。
-    //
-    // BUG-1273：这里**不得 await** stop()。stop() 的 await 段是「停 native 播放器 +
-    // 销毁解码器」（stopPlayback → just_audio `_setPlatformActive(false)` 拆平台，
-    // 随后 disposeAndRelease 再 await 一次 `_player.dispose()`），耗时不可控，且
-    // **只有播放态才真正干活**（暂停态几乎瞬时返回）。而 onSourcePagePop 被
-    // onWillPop await、onWillPop 又被 PopScope 的 onPopInvokedWithResult await，
-    // 外层还有 `_popInProgress` 单飞门：一旦这一步慢/挂，用户播放中按返回（手势
-    // 侧滑 / 返回键 / ESC）第一次触发就把单飞门顶住，**后续每一次返回都被静默丢弃**，
-    // 直到 native 播放器真停下来那一刻才连着止声一起 pop——用户感知就是「播放时侧滑
-    // 返回无效，等句子停了那次返回才生效」。会话可见状态由同步首段负责，native 资源
-    // 释放与「用户已经离开这一页」无因果关系，改 fire-and-forget（catchError 兜住
-    // 平台异常，语义与 dispose 路径一致）。
-    if (!kKitapsenEdition &&
-        (_sourceReviewSession != null || !appModel.audiobookBackgroundPlay) &&
-        _audiobookController != null &&
-        identical(appModel.audiobookSession.controller, _audiobookController)) {
-      unawaited(
-        appModel.audiobookSession.stop().catchError((Object e, StackTrace s) {
-          ErrorLogService.instance.log('ReaderFushi.popStopAudiobook', e, s);
-        }),
-      );
-    }
   }
 
   // The input device flipped between touch (mouse/pointer) and keyboard/gamepad.
@@ -3276,7 +3213,6 @@ class _ReaderFushiPageState extends BaseSourcePageState<ReaderFushiPage>
   }
 
   void _resumePopupCaretForHardwareNav() {
-    if (!kKitapsenEdition) _caret.resumePopupCaretForHardwareNav();
   }
 
   @override
@@ -3652,9 +3588,6 @@ class _ReaderFushiPageState extends BaseSourcePageState<ReaderFushiPage>
                         // 底栏之前，让它们盖在其上。
                         _buildProgressEdgeLine(),
                         _buildStatusFooter(),
-                        // 悬浮球的阅读器场景按钮（零尺寸登记器，球画在根上）。
-                        // Kitapsen: no floating ball.
-                        if (!kKitapsenEdition) _buildReaderFloatingBallScene(),
                         buildDictionary(),
                         // The bottom chrome returns a Positioned; it MUST stay a direct
                         // child of this Stack. The chrome FocusScope is mounted INSIDE
@@ -4345,13 +4278,6 @@ $liveConfigJs
     // held the keyboard/gamepad focus, so without this the reader receives no key
     // events after the popup closes and the user is stuck with no way back in.
     _focusOwnership.reclaim(FocusReclaimCause.popupDismissed);
-    // If the cursor was living in a popup (controller/keyboard flow), the popup
-    // it was in is gone — bring it back to the reader at its remembered word.
-    // This covers every dismiss path (B/Esc, tap-outside, swipe).
-    if (!kKitapsenEdition && _caretSurface == CaretSurface.popup) {
-      _caret.popupState = null;
-      unawaited(_enterCaret());
-    }
   }
 
   /// 查词收尾序列：清栈热槽 → deferDisplay 查词 → 高亮并展示弹窗。reader 选词的
@@ -4401,30 +4327,13 @@ $liveConfigJs
   /// re-measure its ring.
   @override
   void onDictionaryStackChanged() {
-    if (!kKitapsenEdition) _caret.onDictionaryStackChanged();
   }
 
   /// Hand the char-level cursor to the freshly rendered top popup when in cursor
   /// mode. Pure-touch users (surface == none) are unaffected.
   @override
   void onDictionaryPopupRendered(int index) {
-    if (kKitapsenEdition) return;
-    _caret.onDictionaryPopupRendered(index);
-    // BUG-1071 ②：指针（触摸/鼠标点词）唤出的弹窗此前**没有任何 Flutter 焦点持有者**
-    // —— 弹窗是纯原生平台 WebView（无 Flutter FocusNode），点词后 OS 焦点落在原生
-    // WebView 上，Esc/关词典键被它吞或到不了 [_handleKeyEvent] → 用户报「键盘关词典
-    // 经常失效」（光标/手柄唤出时焦点仍在 _focusNode 才「有时能关」）。这里把 Flutter
-    // 焦点收回正文 _focusNode（与阅读器每个指针手势 BUG-136 reclaim 同一已验证机制，
-    // requestFocus 会把平台焦点从原生 WebView 夺回），使关词典键确定性抵达
-    // _handleKeyEvent → readerDismissDict → clearDictionaryResult，不再依赖飘忽焦点。
-    //
-    // 仅指针唤出（[_caretSurface] == none）路径 reclaim：光标/手柄唤出时
-    // [_caret.onDictionaryPopupRendered] 会把光标 transfer 进弹窗，_focusNode 本就持焦
-    // 驱动光标键，此处不介入以免与 transfer 竞争（不回归 BUG-136：弹窗无 Flutter 焦点
-    // 节点，reclaim 键盘焦点不影响弹窗指针交互——嵌套查词/制卡/收藏均 pointer 驱动）。
-    if (_caretSurface == CaretSurface.none) {
-      _focusOwnership.reclaim(FocusReclaimCause.popupRendered);
-    }
+    return;
   }
 
   /// BUG-1071 复诉：上面的焦点 reclaim 只在**弹窗渲染那一刻**成立。用户与弹窗交互
@@ -4663,15 +4572,7 @@ $liveConfigJs
   /// 查词。[hoverAutoLookup] 由调用方按入口决定，barrier 恒 false。
   /// TODO-851：悬停是 hover 路径，传 fromHover:true，命中空白不触发 onTapEmpty。
   void _hostHoverLookupAt(Offset local, {required bool hoverAutoLookup}) {
-    if (kKitapsenEdition) return;
-    if (!_hostHoverGate.shouldLookup(
-      local,
-      shiftPressed: HardwareKeyboard.instance.isShiftPressed,
-      hoverAutoLookup: hoverAutoLookup,
-    )) {
-      return;
-    }
-    _selectTextAt(local.dx, local.dy, fromHover: true);
+    return;
   }
 
   /// BUG-2508：正文 WebView 上的宿主侧 hover——只在 [hostOwnsWebViewHoverLookup]
@@ -4699,9 +4600,7 @@ $liveConfigJs
   /// 刚出、barrier 接管 hover 引起的 exit（此时指针仍在正文上，位置由
   /// [onDismissBarrierHover] 接力更新）。
   void _handleWebViewHostHoverExit(PointerExitEvent event) {
-    if (kKitapsenEdition || isDictionaryShown) return;
-    _lastWebViewHoverLocal = null;
-    _hostHoverGate.reset();
+    return;
   }
 
   /// BUG-2508（对齐视频页 BUG-880）：Shift 按下瞬间在最后指针位置直接查词，不必

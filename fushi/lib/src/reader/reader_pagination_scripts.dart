@@ -966,12 +966,10 @@ class ReaderPaginationScripts {
     required bool continuousMode,
   }) {
     // Kitapsen: no visual-novel mode (readerViewMode never reports 'vn').
-    final String shell = !kKitapsenEdition && vnMode
-        ? ReaderVisualNovelScripts.vnShellScript()
-        : (continuousMode ? continuousShellSource() : paginatedShellSource());
+    final String shell = (continuousMode ? continuousShellSource() : paginatedShellSource());
     return '''<script>
 $kStudyUnitJs
-${kKitapsenEdition ? '' : kSentenceAudioOwnershipJs}
+${''}
 window.__fushiShells = {};
 ${_stripShellScriptTags(shell)}
 window.__fushiInstallShell = function(C) {
@@ -990,7 +988,7 @@ window.__fushiInstallShell = function(C) {
   // ── Shared JS (properties + methods used by both modes) ────────────
 
   static const String _sharedJs = _sharedJsHead +
-      (kKitapsenEdition ? '' : _sharedSentenceAudioJs) +
+      ('') +
       _sharedJsTail;
 
   static const String _sharedJsHead = r'''
@@ -2241,12 +2239,7 @@ window.__fushiInstallShell = function(C) {
     }''';
 
   /// 有声书 cue 下发：旧实现「有 cue 才注入这一行」，现在「有 cue 才调用」。
-  static const String _sharedSentenceAudioInitJs = kKitapsenEdition
-      ? ''
-      : '''
-    if (C.sentenceAudioCues !== null && C.sentenceAudioCues !== undefined) {
-      window.fushiReader.applySentenceAudioCues(C.sentenceAudioCues);
-    }''';
+  static const String _sharedSentenceAudioInitJs = '';
 
   /// 三种 shell 共用的视口 meta 重写（BUG-1688 第二处：VN shell 原先没跑这段）。
   ///

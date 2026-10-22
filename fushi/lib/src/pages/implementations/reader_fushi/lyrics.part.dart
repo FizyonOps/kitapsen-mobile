@@ -461,29 +461,6 @@ extension _ReaderLyrics on _ReaderFushiPageState {
   /// pending 必须在请求切 tab **之前**就位（这里顺序即如此），否则页面挂载时读不到。
   Future<void> _lookupFromFloatingLyric(
       String text, int index, Rect? wordRect) async {
-    if (kKitapsenEdition || !mounted) return;
-    // TODO-872 — 覆盖窗接手即返回；false 时继续原「切主窗词典 tab」回落路由。
-    if (await tryFloatingLyricGlobalLookup(
-      appModel: appModel,
-      text: text,
-      index: index,
-      wordRect: wordRect,
-    )) {
-      return;
-    }
-    if (!mounted) return;
-    final String searchTerm = floatingLyricSearchTerm(
-      text: text,
-      index: index,
-      word: JapaneseLanguage.instance.wordFromIndex(text: text, index: index),
-    );
-    if (searchTerm.isEmpty) return;
-    if (!DesktopLookupService.isDesktop) return;
-    DesktopLookupService.instance.triggerLookup(searchTerm);
-    await DesktopLookupService.instance.bringPendingLookupToFront();
-    if (!mounted) return;
-    // 显式请求主窗切到查词 tab（与被动剪贴板正交）：HomeDictionaryPage 挂载后消费
-    // pendingText 展示结果。不在阅读器内弹 in-app 中心浮层（用户决策）。
-    appModel.requestHomeDictionaryTab();
+    return;
   }
 }

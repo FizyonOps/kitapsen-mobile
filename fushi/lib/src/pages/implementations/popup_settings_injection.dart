@@ -889,8 +889,7 @@ PopupStaticSettingsJs buildPopupStaticSettingsJs({
   // 浮窗），不会像散在宿主里那样漏掉一处。宿主侧「回调为 null 就不渲染」的既有契约
   // 与它正交、互不覆盖。
   final bool miningEnabled =
-      !kKitapsenEdition &&
-      appModel.moduleVisibility.isEnabled(ModuleId.cardCreation);
+      false;
 
   final String slotKey =
       '${options.globalLookup}|${options.mobileExternal}'

@@ -158,22 +158,7 @@ List<HomeTab> homeActiveTabs(ModuleVisibility visibility) => <HomeTab>[
   // 七个库页/工具 tab 都可按「功能模块」偏好隐藏（设置 → 外观 → 功能模块）；
   // 首页/设置恒在，是全部隐藏后的安全回退面（故 [ModuleId] 里没有它们）。
   if (visibility.isEnabled(ModuleId.books)) HomeTab.books,
-  if (kKitapsenEdition) HomeTab.store,
-  if (!kKitapsenEdition && visibility.isEnabled(ModuleId.manga)) HomeTab.manga,
-  if (!kKitapsenEdition && visibility.isEnabled(ModuleId.video)) HomeTab.video,
-  if (!kKitapsenEdition && visibility.isEnabled(ModuleId.games)) HomeTab.games,
-  // 下载 tab（统一下载中心）：除番剧 torrent 外还承载通用磁力（书）与漫画
-  // 「在线目录」卷下载队列，所以不随视频开关联动，只听自己的模块开关；位置在
-  // 视频/游戏之后。
-  if (!kKitapsenEdition && visibility.isEnabled(ModuleId.browse))
-    HomeTab.browse,
-  if (!kKitapsenEdition && visibility.isEnabled(ModuleId.lookup))
-    HomeTab.dictionaries,
-  // 浏览器扩展管理（安装引导 + 连接检测 + 版本）独立成页，仅桌面出现（手机浏览器
-  // 不支持加载未解压扩展，故按平台而非实验开关门控——平台判据在
-  // [ModuleId.availableOn]），位置紧邻设置之前。
-  if (!kKitapsenEdition && visibility.isEnabled(ModuleId.browserExtension))
-    HomeTab.browserExtension,
+  HomeTab.store,
   HomeTab.settings,
 ];
 
@@ -453,18 +438,11 @@ class _HomePageState extends BasePageState<HomePage>
   @override
   void initState() {
     super.initState();
-    // 7a：把本页持有的刮削控制器借给互联 host（远程候选搜索 / 重刮）。getter 按
-    // 当前偏好惰性建，所以解析器每次都返回配置正确的那一个。
-    if (!kKitapsenEdition) {
-      appModelNoUpdate.videoScrapeControllerResolver =
-          () async => _videoSourceScrapeController;
-    }
 
     _currentTab = homeInitialTab(
       startupDefaultDictionaryTab: appModelNoUpdate.startupDefaultDictionaryTab,
       dictionariesEnabled:
-          !kKitapsenEdition &&
-          appModelNoUpdate.moduleVisibility.isEnabled(ModuleId.lookup),
+          false,
       fallback: _currentTab,
     );
     // Seed the shared shell notifier (drives the macOS root sidebar) and listen
@@ -481,15 +459,6 @@ class _HomePageState extends BasePageState<HomePage>
       return true;
     }());
     appModelNoUpdate.databaseCloseNotifier.addListener(refresh);
-    // TODO-376：只监听显式「打开查词 tab」请求（桌面悬浮字幕点词等手势触发），切到
-    // 查词 tab 让 HomeDictionaryPage 挂载并消费 pending。不在此监听 DesktopLookupService
-    // ——spec 2026-07-10 §7 后服务由 AppModel 持有 app 级监听，消费按
-    // resolveDesktopLookupConsumer 分区（mainTab 仍只归 HomeDictionaryPage），
-    // HomePage 根节点依旧不消费查词请求。
-    if (!kKitapsenEdition) {
-      appModelNoUpdate.homeDictionaryTabRequest
-          .addListener(_onHomeDictionaryTabRequested);
-    }
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (!mounted) return;
@@ -497,38 +466,13 @@ class _HomePageState extends BasePageState<HomePage>
       // 区分全新安装与升级（见 browse_moved_notice.dart）。
       final bool freshInstall = appModelNoUpdate.isFirstTimeSetup;
       // Kitapsen ships no recommended dictionary pack.
-      final RecommendedPackTutorialState? tutorialState = kKitapsenEdition
-          ? null
-          : RecommendedPackTutorialState(appModelNoUpdate.appDirectory);
-      if (!kKitapsenEdition && await tutorialState!.shouldPrompt) {
-        // Persist before the prompt can consume its receipt or open a tutorial.
-        // Killing the app in the tutorial must not replay the setup wizard.
-        appModelNoUpdate.setFirstTimeSetupFlag();
-        await appModelNoUpdate.setOnboardingCompleted(value: true);
-      }
+      final RecommendedPackTutorialState? tutorialState = null;
       if (!mounted) return;
       // Serialize follow-up with ordinary onboarding and update dialogs.
-      final bool tutorialOffered = !kKitapsenEdition &&
-          await showRecommendedPackTutorialPrompt(
-        context: context,
-        state: tutorialState!,
-        onStart: () async {
-          await Navigator.of(context).push(
-            adaptivePageRoute<void>(
-              context: context,
-              builder: (_) => const OnboardingWizardPage(tutorialOnly: true),
-              fullscreenDialog: true,
-            ),
-          );
-        },
-      );
+      final bool tutorialOffered = false;
       if (!mounted) return;
 
       if (!tutorialOffered && appModel.isFirstTimeSetup) {
-        if (!kKitapsenEdition) {
-          appModel.setLastSelectedDictionaryFormat(
-              JapaneseLanguage.instance.standardFormat);
-        }
         appModel.setFirstTimeSetupFlag();
         // 全新安装：把新手引导标成「待完成」再进下面的弹出分支。既有安装升级
         // 上来时该键缺省即 true（不弹）；中途杀进程下次启动值仍是 false，会
@@ -549,127 +493,33 @@ class _HomePageState extends BasePageState<HomePage>
         await appModel.setOnboardingCompleted(value: true);
       }
 
-      // 「下载」改名「浏览」：升级前关着下载的用户照旧关着，但一次性告诉他们发现与
-      // 在线来源搬到了哪里、在哪里打开（所有者 2026-09-28 拍板）。排在新手引导之后、
-      // 更新弹窗之前，与它们串行，不抢同一帧。
-      if (mounted && !kKitapsenEdition) {
-        await maybeShowBrowseMovedNotice(
-          context: context,
-          appModel: appModelNoUpdate,
-          freshInstall: freshInstall,
-        );
-      }
 
       // Kitapsen never talks to the Fushi release feed: store builds ask
       // Google Play / the App Store instead (store_update_check.dart).
-      // (kKitapsenEdition is tested on its own so the GitHub updater branch
-      // folds away; `mounted && kKitapsenEdition` is not a constant.)
-      if (kKitapsenEdition) {
-        if (mounted) unawaited(checkStoreUpdate(context));
-      } else if (mounted) {
-        UpdateChecker.scheduleCheck(
-          context,
-          appVersion,
-          // BUG-457：beta/debug 通道用 buildNumber 还原本机已安装 release sequence，
-          // 避免无后缀 `X.Y.Z` release 包永判「已是最新」。
-          currentBuildNumber: appModel.packageInfo.buildNumber,
-          neverRemind: appModel.updateNeverRemind,
-          autoInstall: appModel.updateAutoInstall,
-          betaChannel: appModel.updateBetaChannel,
-          debugChannel: appModel.updateDebugChannel,
-          customProxy: appModel.updateCustomProxy,
-          // TODO-1024 / BUG-479：启动期后台检查跑完即把结果写回缓存，下次「检查更新」
-          // 直接读缓存乐观反馈（恒快）。auto 路径不读缓存（仍后台静默刷新）。
-          cacheWriter: appModel.setUpdateCheckCache,
-          // v101：把「确实有新版」这条事实同时投进更新中心。既有对话框照旧——
-          // 用户点掉对话框之后，红点与更新页仍留着这条，不再是「弹过一次就没了」。
-          // 回调是同步的（投递不该挡住更新流程），所以这里 unawaited 出去。
-          onUpdateAvailable: (String version, String? releaseUrl) => unawaited(
-            publishAppReleaseUpdate(
-              feed: appModel.updateFeedService,
-              version: version,
-              releaseUrl: releaseUrl,
-            ),
-          ),
-        );
-      }
+      if (mounted) unawaited(checkStoreUpdate(context));
 
-      // v101 后台更新检查（漫画新章 / 漫画扩展）。与上面的 app 版本检查并列放在
-      // 启动期：用户最想知道「我不在的时候更新了什么」的时刻就是刚打开应用。
-      // 各域自己的到期判据挡住频繁重启造成的重复请求。
-      // Kitapsen has no manga / extension update feeds or chapter downloads.
-      if (!kKitapsenEdition) {
-        appModel.startUpdateChecks();
-        // 在线漫画章节下载 worker（设计稿 2026-09-12 §4）：复位上次进程死亡留下的
-        // running 行并续跑队列。放在这里而不是 initialise()：完成钩子的自动 OCR 要
-        // 从 navigator 的 context 装配引擎，HomePage 就绪之前拿不到。
-        unawaited(appModel.startMangaDownloads());
-      }
 
       // 这一段是 HomePage 层的模块专属后台自启：同步（sync）与视频索引（video）。
       // 模块关掉就不再拉起——「关掉的模块下次启动不该还在后台跑」。已经在飞的
       // 任务不受影响（这里只决定启不启，不去 stop 任何东西）。
       final ModuleVisibility startupModules = appModelNoUpdate.moduleVisibility;
-      if (!kKitapsenEdition && startupModules.isEnabled(ModuleId.sync)) {
-        _triggerFullAutoSync();
-      } else {
-        // The sync module (cloud / interconnect) is off — always so in Kitapsen —
-        // but books read on kitapsen.com still bring their position back on
-        // app open (5 min cooldown inside).
-        unawaited(syncKitapsenLibraryProgress(appModel.database));
-      }
-      if (!kKitapsenEdition && startupModules.isEnabled(ModuleId.video)) {
-        unawaited(
-          appModel.database.interruptStaleVideoSourceScrapeRuns().catchError((
-            Object error,
-            StackTrace stackTrace,
-          ) {
-            ErrorLogService.instance.log(
-              'HomePage.interruptStaleVideoScrapeRuns',
-              error,
-              stackTrace,
-            );
-            return 0;
-          }),
-        );
-        // v77 之前已经存在于库中的来源不会自动重触发扫描。启动时做一次纯本地、
-        // 幂等的作品索引，把旧合集/独立电影补成规范 VideoMetadataWork；否则系列页
-        // 能看到临时卡片，点进详情却永远只能落到无资料的旧合集视图。
-        unawaited(_backfillVideoMetadataWorks());
-      }
+      // The sync module (cloud / interconnect) is off — always so in Kitapsen —
+      // but books read on kitapsen.com still bring their position back on
+      // app open (5 min cooldown inside).
+      unawaited(syncKitapsenLibraryProgress(appModel.database));
       // 首帧同步之后挂定时轮询，让静止不动的设备也能周期性拉到远端改动（见
       // [_periodicSyncInterval] 注释）。dispose 时 cancel。排行榜书架同步挂在同一个
       // 定时器上（它自己有 30 分钟节流），所以定时器不再只随同步模块开启。
       final bool periodicAutoSync =
-          !kKitapsenEdition && startupModules.isEnabled(ModuleId.sync);
-      if (periodicAutoSync || !kKitapsenEdition) {
+          false;
+      if (periodicAutoSync) {
         _periodicSyncTimer = Timer.periodic(_periodicSyncInterval, (_) {
           if (periodicAutoSync) _triggerFullAutoSync();
           _maybeSyncLeaderboard();
         });
       }
 
-      // Lapis 模板启动自动迁移：Hibiki 基线/客制化变了且 Anki 端仍是 Hibiki
-      // 已知产物时，自动备份后推送新 styling（手改内容绝不自动覆盖，Anki 未
-      // 运行静默跳过）。服务内部有每进程一次的闸门，HomePage 重建不会重跑。
-      if (mounted && !kKitapsenEdition) {
-        unawaited(LapisTemplateService(ref.read(ankiRepositoryProvider))
-            .maybeAutoMigrateOnStartup()
-            .catchError((Object e, StackTrace s) {
-          ErrorLogService.instance.log('HomePage.lapisAutoMigrate', e, s);
-        }));
-      }
 
-      // Anki 媒体去重的自动处理：**默认关**，只有用户在设置页主动打开才会跑。
-      // 打开之后也只是自动干跑并把清单提示出来，用户确认后才真删；只有再显式
-      // 打开「自动直接删除」才跳过确认（判定全在
-      // [AnkiMediaDedupRunner.maybeAutoRunOnStartup]，这里不做二次决策）。
-      if (mounted && !kKitapsenEdition) {
-        unawaited(
-            _maybeAutoDedupAnkiMedia().catchError((Object e, StackTrace s) {
-          ErrorLogService.instance.log('HomePage.ankiMediaDedupAuto', e, s);
-        }));
-      }
 
       _maybeSyncLeaderboard();
     });
@@ -679,12 +529,7 @@ class _HomePageState extends BasePageState<HomePage>
   /// 上传关闭 / 30 分钟内同步或尝试过都是 no-op（节流在服务里）；失败只记日志。
   void _maybeSyncLeaderboard() {
     // Kitapsen has no leaderboard (rank.fushi.moe is upstream infrastructure).
-    if (kKitapsenEdition || !mounted) return;
-    unawaited(Future<void>(
-      () => ref.read(leaderboardServiceProvider).maybeSyncInBackground(),
-    ).catchError((Object e, StackTrace s) {
-      ErrorLogService.instance.log('HomePage.leaderboardSync', e, s);
-    }));
+    return;
   }
 
   /// 启动期自动处理一轮 Anki 媒体去重的 UI 侧收尾：报结果，或提示 + 等确认。
@@ -789,30 +634,7 @@ class _HomePageState extends BasePageState<HomePage>
   /// HomeDictionaryPage，spec 2026-07-10 §7）」的守卫。已在查词 tab 时无需切换
   /// （页面已挂载并消费）。
   void _onHomeDictionaryTabRequested() {
-    if (kKitapsenEdition || !mounted) return;
-    // 「已经在查词 tab 上」只有在 HomePage 真的是栈顶时才等于「已经显示出来了」。
-    // 阅读器 / 播放器压在上面时那个 tab 被完全遮住，早退会让本次请求变成彻底的
-    // no-op（窗口弹到前台、一点反馈都没有）。被遮住时继续走 [_revealDictionary]，
-    // 由它推独立查词路由到最上层。
-    // app 外热键「置顶主窗并打开查词页」= 用户要打字：把用户送进搜索框并全选已有
-    // 文本（直接打字就替换、什么都不打就保留上次结果）。携带待查词的调用方
-    // （focusSearch: false）不碰焦点——它们正要把 pending 的词填进去出词卡。
-    final DictionaryFocusIntent? focus =
-        appModelNoUpdate.homeDictionaryTabRequest.value.focusSearch
-            ? DictionaryFocusIntent.selectQuery
-            : null;
-    if (_currentTab == HomeTab.dictionaries &&
-        (ModalRoute.of(context)?.isCurrent ?? true)) {
-      // 已经显示着：不切 tab，但聚焦意图仍要落地（否则「已在查词页时按热键」
-      // 就成了唯一一条不聚焦的路径）。
-      if (focus != null) {
-        _dictFocusSignal.value = DictionaryFocusRequest(focus);
-      }
-      return;
-    }
-    // 这条是「用户刚用桌面取词 / 悬浮字幕点词 / 扩展回流发起了一次查词」，携带待
-    // 消费的 pendingText，即便查词模块关着也必须给它落地面，否则请求永远挂着。
-    _revealDictionary(carryingPendingLookup: true, focus: focus);
+    return;
   }
 
   @override
@@ -847,14 +669,6 @@ class _HomePageState extends BasePageState<HomePage>
     super.didChangeAppLifecycleState(state);
     if (AppLifecycleState.resumed == state) {
       debugPrint('Lifecycle Resumed');
-      // Kitapsen: no dictionaries to keep warm.
-      if (!kKitapsenEdition) {
-        appModel.searchDictionary(
-          searchTerm: JapaneseLanguage.instance.helloWorld,
-          searchWithWildcards: false,
-          useCache: false,
-        );
-      }
       // TODO-900: OS 层失焦（Alt+Tab 切窗）后 Flutter 不保证把 primaryFocus 归还到
       // 首页键事件 Focus，导致切窗回来后页级 / 全局快捷键全死，只能重启 app 才靠
       // autofocus 抢回。对齐视频页 [_reclaimVideoFocusIfOwned] 的 resumed 回收范式。
@@ -1069,52 +883,7 @@ class _HomePageState extends BasePageState<HomePage>
     bool carryingPendingLookup = false,
   }) {
     // Kitapsen: no dictionary page.
-    if (kKitapsenEdition || !mounted) return;
-    if (!carryingPendingLookup &&
-        !(!kKitapsenEdition &&
-            appModel.moduleVisibility.isEnabled(ModuleId.lookup))) {
-      return;
-    }
-    void requestFocus() {
-      if (focus == null) return;
-      _dictFocusSignal.value = DictionaryFocusRequest(focus);
-    }
-
-    // 切 tab 只有在 HomePage **真的是栈顶**时才等于「用户看得见查词页」：阅读器 /
-    // 播放器 / 漫画都是 `Navigator.push` 压在 HomePage 之上的全屏路由（BUG-286 已
-    // 记过这条），此时 [_selectTab] 只是在被完全遮住的 IndexedStack 里换了一页 ——
-    // 用户看到的是「窗口弹到前台却什么都没变」，正是本方法要消灭的那个形态。
-    //
-    // 所以判据是「查词页会不会被看见」，而不是「查词 tab 在不在导航里」。被遮住时
-    // 改推独立查词路由压在最上层：立刻可见，返回键退回原来的书 / 视频。**刻意不用
-    // popUntil 把上面的路由弹掉** —— BUG-286 定过这条边界：不能为了看个词强退阅读器
-    // 并停掉有声书。
-    final bool homeIsTopmost = ModalRoute.of(context)?.isCurrent ?? true;
-    if (homeIsTopmost && _activeTabs().contains(HomeTab.dictionaries)) {
-      _selectTab(HomeTab.dictionaries);
-      requestFocus();
-      return;
-    }
-    final Route<void>? existing = _standaloneDictionaryRoute;
-    if (existing != null && existing.isActive) {
-      // 已经开着：翻到最上层即可，绝不叠第二个查词页。
-      Navigator.of(context)
-          .popUntil((Route<Object?> route) => route == existing);
-      requestFocus();
-      return;
-    }
-    final Route<void> route = adaptivePageRoute<void>(
-      context: context,
-      builder: (_) => _StandaloneDictionaryRoute(focusSignal: _dictFocusSignal),
-    );
-    _standaloneDictionaryRoute = route;
-    unawaited(Navigator.of(context).push<void>(route).whenComplete(() {
-      if (identical(_standaloneDictionaryRoute, route)) {
-        _standaloneDictionaryRoute = null;
-      }
-    }));
-    // 请求是可挂起的 pending，页面挂载后自己取；不必等帧。
-    requestFocus();
+    return;
   }
 
   /// 用户从导航（移动底栏 / 桌面 rail）点选 tab 的**唯一**入口。
@@ -1125,10 +894,7 @@ class _HomePageState extends BasePageState<HomePage>
   /// pending 的词填进去，清空会把它擦掉）。
   void _selectTabFromNav(HomeTab tab) {
     _selectTab(tab);
-    if (kKitapsenEdition || tab != HomeTab.dictionaries) return;
-    if (!_activeTabs().contains(HomeTab.dictionaries)) return;
-    _dictFocusSignal.value =
-        const DictionaryFocusRequest(DictionaryFocusIntent.clearQuery);
+    return;
   }
 
   /// 统一切换顶层 tab：进入「设置」前记录来源 tab，供设置全屏返回箭头切回。
@@ -1241,13 +1007,7 @@ class _HomePageState extends BasePageState<HomePage>
       case ShortcutAction.homeTabBooks:
         return _selectTabFromShortcut(HomeTab.books);
       case ShortcutAction.homeTabDict:
-        if (kKitapsenEdition ||
-            !(!kKitapsenEdition &&
-                appModel.moduleVisibility.isEnabled(ModuleId.lookup))) {
-          return KeyEventResult.ignored;
-        }
-        _revealDictionary();
-        return KeyEventResult.handled;
+        return KeyEventResult.ignored;
       case ShortcutAction.homeTabSettings:
         // 设置恒在，不可能不可达；仍走同一条路保持形态一致。
         return _selectTabFromShortcut(HomeTab.settings);
@@ -1258,13 +1018,7 @@ class _HomePageState extends BasePageState<HomePage>
         _cycleTab(-1);
         return KeyEventResult.handled;
       case ShortcutAction.homeFocusSearch:
-        if (kKitapsenEdition ||
-            !(!kKitapsenEdition &&
-                appModel.moduleVisibility.isEnabled(ModuleId.lookup))) {
-          return KeyEventResult.ignored;
-        }
-        _revealDictionary(focus: DictionaryFocusIntent.keepQuery);
-        return KeyEventResult.handled;
+        return KeyEventResult.ignored;
       case ShortcutAction.globalBack:
         Navigator.of(context).maybePop();
         return KeyEventResult.handled;
@@ -1556,10 +1310,6 @@ class _HomePageState extends BasePageState<HomePage>
       key: _homeBodyKey,
       children: <Widget>[
         Expanded(child: buildBody()),
-        if (!kKitapsenEdition && visibility.isEnabled(ModuleId.browse))
-          const RecommendedPackDownloadMiniBar(),
-        if (!kKitapsenEdition && visibility.isEnabled(ModuleId.listening))
-          const NowListeningMiniBar(),
       ],
     );
   }
@@ -2142,13 +1892,7 @@ class _HomePageState extends BasePageState<HomePage>
   ///   不查 `visible`），所以这里按同一判据 [isSettingsDestinationVisible] 收起。
   /// - 下载模块关了：这个功能的产物就是下载任务，与设置里「AI 下视频」段
   ///   （`settings_schema_ai.dart`）同一个门。
-  bool get _aiAcquireModulesEnabled =>
-      isSettingsDestinationVisible(
-        SettingsDestinationId.ai,
-        appModel.moduleVisibility,
-      ) &&
-      !kKitapsenEdition &&
-      appModel.moduleVisibility.isEnabled(ModuleId.browse);
+  bool get _aiAcquireModulesEnabled => false;
 
   /// 打开「AI 下视频」对话页：组装全部端口后交给 [VideoAcquisitionService]。
   ///
@@ -3022,27 +2766,6 @@ class _HomePageState extends BasePageState<HomePage>
             key: ValueKey<HomeTab>(visible),
             child: _buildTabContent(visible),
           ),
-        if (!kKitapsenEdition)
-        if (_videoSourceScrapeTaskController case final controller?)
-          if (controller.isBusy)
-            Positioned(
-              right: 20,
-              bottom: 20,
-              child: SafeArea(
-                child: FloatingActionButton.small(
-                  key: const ValueKey<String>(
-                    'video-source-background-task-panel',
-                  ),
-                  tooltip: t.video_source_scrape_tasks_open,
-                  onPressed: () => unawaited(_openVideoSourceScrapeTasks()),
-                  child: Icon(
-                    controller.pendingConfirmation == null
-                        ? Icons.sync
-                        : Icons.rule_folder_outlined,
-                  ),
-                ),
-              ),
-            ),
       ],
     );
   }
@@ -3081,60 +2804,23 @@ class _HomePageState extends BasePageState<HomePage>
     final Widget content = switch (tab) {
       HomeTab.home => HomeDashboardPage(videoRepo: _videoRepository),
       HomeTab.store =>
-        kKitapsenEdition ? const KitapsenStorePage() : const SizedBox.shrink(),
+        const KitapsenStorePage(),
       // Kitapsen: hidden tabs build nothing, so their pages are tree-shaken out.
-      HomeTab.video => kKitapsenEdition
-          ? const SizedBox.shrink()
-          : VideoLibraryShell(
-          repository: _videoRepository,
-          libraryRefreshSignal: _videoLibraryRefreshSignal,
-          scrapeTaskController: _videoSourceScrapeController,
-          onScrapeAll: _scrapeAllVideosFromSources,
-          onClearAllScrapeRecords: _clearAllVideoScrapeRecords,
-          onScrapeSource: _scrapeVideoSource,
-          onVideoScanCompleted: _onVideoSourceScanCompleted,
-          onOpenScrapeTasks: () => unawaited(_openVideoSourceScrapeTasks()),
-          onLibraryChanged: _notifyVideoLibraryChanged,
-          // 补刮的触发点收口在视频页：首次进入 / 切回 / 库里多出条目时各调一次
-          // （BUG-2199）。旧实现把它挂在 HomePage 的进 tab 时机上并以进程为幂等
-          // 键，于是本次会话下载入库的作品永远赶不上那唯一一轮。
-          loadPendingScrapeWorks: () =>
-              _videoLibraryScrapeSweep.sweepAndListPending(),
-          mediaServerServersLoader: _loadMediaServerEntries,
-          // 视频库「发现」分区与浏览页签共用同一个生产端口（同一实例）。
-          discoveryController: _productionVideoDiscoveryController,
-          discoveryActions: _productionVideoDiscoveryActions,
-          systemBackActive: _visibleTab == HomeTab.video,
-        ),
-      HomeTab.browse => kKitapsenEdition
-          ? const SizedBox.shrink()
-          : BrowsePage(
-          navigationRequest: _browseRequest,
-          videoDiscoveryController: _productionVideoDiscoveryController,
-          videoDiscoveryActions: _productionVideoDiscoveryActions,
-        ),
-      HomeTab.dictionaries => kKitapsenEdition
-          ? const SizedBox.shrink()
-          : HomeDictionaryPage(
-          focusSignal: _dictFocusSignal,
-        ),
+      HomeTab.video => const SizedBox.shrink(),
+      HomeTab.browse => const SizedBox.shrink(),
+      HomeTab.dictionaries => const SizedBox.shrink(),
       // Android 的 games 模块是串流接收端：远端主机游戏库 + 远程启动串流；
       // Windows 仍是本机 galgame 库。形态判据只在 [GamesModuleForm.on]。
-      HomeTab.games => kKitapsenEdition
-          ? const SizedBox.shrink()
-          : appModelNoUpdate.gamesModuleForm ==
-              GamesModuleForm.streamClient
-          ? GameStreamLibraryPage(services: _gameStreamLibraryServices)
-          : const HomeGamePage(),
+      HomeTab.games => const SizedBox.shrink(),
       HomeTab.browserExtension =>
-        kKitapsenEdition ? const SizedBox.shrink() : const BrowserExtensionPage(),
+        const SizedBox.shrink(),
       HomeTab.settings =>
         // 设置 tab 走侧栏/底栏切回，不显示页头返回箭头；但仍需 PopScope 拦截系统
         // 返回键（否则冒泡到顶层 PopScope = 退出 app，见 BUG-236）。
         _buildSettingsTabContent(showBackButton: false),
       HomeTab.books => const HomeReaderPage(),
       HomeTab.manga =>
-        kKitapsenEdition ? const SizedBox.shrink() : const MangaLibraryPage(),
+        const SizedBox.shrink(),
     };
     return PrimaryScrollController(
       controller: _tabScrollControllers.putIfAbsent(

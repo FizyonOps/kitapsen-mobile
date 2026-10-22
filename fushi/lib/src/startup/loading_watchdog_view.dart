@@ -73,9 +73,7 @@ class LoadingWatchdogView extends StatelessWidget {
             const SizedBox(height: 12),
             Text(
               mobile
-                  ? (kKitapsenEdition
-                      ? t.kitapsen_loading_slow_message_mobile
-                      : t.loading_slow_message_mobile)
+                  ? (t.kitapsen_loading_slow_message_mobile)
                   : t.loading_slow_message,
               style: Theme.of(context)
                   .textTheme

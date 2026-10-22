@@ -202,14 +202,12 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
     extends HistoryReaderPageState {
   ReaderFushiHistoryPage get _pageWidget => widget as ReaderFushiHistoryPage;
   // Kitapsen has no manga shelf.
-  bool get _mangaOnly => !kKitapsenEdition && _pageWidget.mangaOnly;
+  bool get _mangaOnly => false;
 
   /// 「同时删除统计数据」勾选行的副标题：漫画库与书架各说各的统计口径。
   String get _statisticsSubtitle => _mangaOnly
       ? t.delete_statistics_manga_desc
-      : kKitapsenEdition
-          ? t.kitapsen_delete_statistics_book_desc
-          : t.delete_statistics_book_desc;
+      : t.kitapsen_delete_statistics_book_desc;
 
   @override
   MediaType get mediaType => mediaSource.mediaType;
@@ -503,15 +501,6 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
     _collectionTablesSub = appModelNoUpdate.database
         .watchCollectionTablesChanged()
         .listen(_onCollectionTablesChanged);
-    // 统一下载中心：mokuro.moe 卷经漫画下载服务后台落库（可能在「在线目录」
-    // 页关闭后才完成）。监听 mokuroImportedCount 增量失效书架 provider，取代旧的
-    // 「对话框关闭回传导入数」信号（该信号已随对话框改队列化而移除）。
-    if (!kKitapsenEdition) {
-      _mokuroImported =
-          ref.read(appProvider).mangaDownloadService.mokuroImportedCount;
-      _mokuroImportedSeen = _mokuroImported!.value;
-      _mokuroImported!.addListener(_onMokuroImportedChanged);
-    }
     // BUG-992：顶层 tab IndexedStack 保活（BUG-750）后，切回书架不再隐式重拉远端书 →
     // 远端占位卡 + 书库概览总数要等用户手动下拉刷新才补齐。监听全局 tab 信号，切回
     // 书架 tab 时自动重拉一次远端（缓存 _lastRemoteState 顶住 waiting、不闪屏）。
@@ -683,12 +672,9 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
                     onDragEnd: () => setState(_selection.endRangeDrag),
                     child: books.when(
                       data: (bookList) {
-                        _batchAudiobookInfoFuture ??= kKitapsenEdition ||
-                                _mangaOnly
-                            ? Future<Map<String, _AudiobookInfo>>.value(
+                        _batchAudiobookInfoFuture ??= Future<Map<String, _AudiobookInfo>>.value(
                                 const <String, _AudiobookInfo>{},
-                              )
-                            : _loadAllAudiobookInfo();
+                              );
                         // BUG-1182：「显示远端条目」门控已前移进 _loadRemoteBooks
                         // （关掉就不联网，而不是拉完再丢）。开关从关翻到开时 `??=` 不会
                         // 重跑，故这里显式比对上轮门控值，翻转时重新取数——否则用户在设置
@@ -810,29 +796,13 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
       // 够不到「导入」视图）时保留导入按钮兜底。漫画和书籍载体不同，兜底按钮
       // 仍指向两个不同的对话框。
       if (_pageWidget.navigation == null)
-        if (!kKitapsenEdition && _mangaOnly)
-          MangaFushiSource.instance.buildMangaImportButton(
-            context: context,
-            ref: ref,
-            appModel: appModel,
-            focusId: kShelfImportFocusId,
-            label: t.manga_import_action,
-          )
-        else
-          mediaSource.buildBookImportButton(
+        mediaSource.buildBookImportButton(
             context: context,
             ref: ref,
             appModel: appModel,
             focusId: kShelfImportFocusId,
             label: t.srt_import,
           ),
-      // 批量在线刮削同样属「在线服务」模块（整批第三方 API 请求）。
-      if (!kKitapsenEdition && _moduleVisibility.isEnabled(ModuleId.services))
-        _headerAction(
-          tooltip: t.scrape_all,
-          icon: Icons.manage_search_outlined,
-          onTap: _scrapeAllBooks,
-        ),
       // 「管理来源」在库页导航壳里已是一等视图（[MediaSourcesPage]），页头再放一个
       // 按钮就是同一件事的两个入口。书架独立使用（无导航条）时才保留书籍来源按钮；
       // 漫画入口由专属导入对话框负责，不复用书籍来源管理。
@@ -853,14 +823,6 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
           tooltip: t.video_import_action,
           icon: Icons.movie_outlined,
           onTap: _openVideoImport,
-        ),
-      // Favorites (saved sentences / mined cards / words) are Fushi study
-      // tools; Kitapsen cannot create them, so the page is not offered.
-      if (!kKitapsenEdition)
-        _headerAction(
-          tooltip: t.collections,
-          icon: Icons.collections_bookmark_outlined,
-          onTap: _openCollections,
         ),
       // 统计入口已收敛到首页 dashboard（用户定案 2026-09-01：各媒体页头不再
       // 各挂一个「xx统计」，统一从首页进统计中心）。
@@ -1279,9 +1241,7 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
     AsyncSnapshot<_RemoteBookState?>? remoteSnapshot,
   ]) {
     // Kitapsen has no subtitle books.
-    final List<SrtBook> srtBooks = kKitapsenEdition || _mangaOnly
-        ? const <SrtBook>[]
-        : ref.watch(srtBooksProvider).valueOrNull ?? const <SrtBook>[];
+    final List<SrtBook> srtBooks = const <SrtBook>[];
     return _buildBodyWithSrtBooks(books, srtBooks, remoteSnapshot);
   }
 
@@ -2053,31 +2013,10 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
             deleteStatistics: deleteStatistics,
           );
         case MediaKind.srt:
-          if (kKitapsenEdition) break;
-          final SrtBookRepository repo = SrtBookRepository(appModel.database);
-          final SrtBook? book = await repo.findByUid(m.entryKey);
-          if (book != null) {
-            if (book.bookKey.isNotEmpty) {
-              await ReaderFushiSource.instance.deleteBook(
-                db: appModel.database,
-                bookKey: book.bookKey,
-                appModel: appModel,
-                deleteStatistics: deleteStatistics,
-              );
-            }
-            // 纯字幕书（bookKey 空）刻意不删统计：它的 legacy 统计与墓碑只能按
-            // title 定位，会连坐同名 EPUB 的统计（与书架单删 / 批删同一边界）。
-            await repo.delete(m.entryKey);
-          }
+          break;
         case MediaKind.video:
           // Kitapsen: no video library, so there is no video member to delete.
-          if (kKitapsenEdition) break;
-          // 混合合集里若混入视频成员：删视频 DB 行 + app 拥有副本，保留原始视频文件。
-          await _videoRepo.deleteVideoBookAndReclaimAssets(
-            m.entryKey,
-            compactDatabase: false,
-          );
-          anyVideo = true;
+          break;
         case MediaKind.game:
           // 游戏成员**刻意跳过**：game 维度只支持解散合集不删本体——游戏本体是
           // 用户安装目录（exe 及其资源），绝不能从合集删除路径连带删除；从库移除
@@ -2101,11 +2040,7 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
   /// 行头数字与详情页对不上」。
   bool get _remotePlaceholdersAllowed =>
       ref.read(selectedTagIdsProvider).isEmpty &&
-      _readStatusFilter == null &&
-      (kKitapsenEdition ||
-          (appModel.prefsRepo.showRemoteEntries &&
-              !kKitapsenEdition &&
-              _moduleVisibility.isEnabled(ModuleId.sync)));
+      _readStatusFilter == null;
 
   /// 远端占位卡在**合集详情页**的可见门控：目录拉取成功 + [_remotePlaceholdersAllowed]。
   /// 详情页的本地成员卡同样取自被筛选过的 [_visibleEpubBooks] / [_visibleSrtBooks]，
@@ -2351,7 +2286,7 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
     // 用户唯一入库位置；独立使用（无壳）时回退为直接开导入对话框。
     final MediaLibraryShellScope? shell =
         MediaLibraryShellScope.maybeOf(context);
-    if (kKitapsenEdition && !_mangaOnly) {
+    if (!_mangaOnly) {
       final bool? signedIn = _kitapsenSignedIn;
       // Still resolving the account: stay blank rather than flash a prompt.
       if (signedIn == null) return const SizedBox.shrink();
@@ -2476,24 +2411,6 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
             ),
       dragLabel: displayTitleForBook(item: item, rawTitle: item.title),
       onTap: () async {
-        // 漫画先进作品页，不直接开书。
-        //
-        // 作品页**刻意不走 `openMedia`**：那条路是「媒体会话」语义——沉浸模式、
-        // wakelock、audio handler、_currentMediaSource 全在里面开。作品页是个可
-        // 浏览的库页面（章节列表、已读标记、刷新），当媒体会话打开会让它顶着
-        // 隐藏的系统 UI、亮着屏。真正的会话由作品页内部再 `openMedia` 开阅读器
-        // 时启动，语义与 v88 前逐字相同。
-        if (!kKitapsenEdition && _isMangaItem(item) && bookKey != null) {
-          await Navigator.of(context).push(
-            adaptivePageRoute<void>(
-              context: context,
-              builder: (BuildContext context) => MangaSeriesPage(
-                target: ShelfMangaSeriesTarget(bookKey, item: item),
-              ),
-            ),
-          );
-          return;
-        }
         final MediaSource source = item.getMediaSource(appModel: appModel);
         await appModel.openMedia(
           ref: ref,
@@ -2572,42 +2489,12 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
         icon: Icons.image_outlined,
         onPressed: () => _openIllustrations(item, bookKey),
       ),
-      // 有声书导入仍受听书模块门控（develop 侧）；「重命名」不受它管。
-      if (!kKitapsenEdition && modules.isEnabled(ModuleId.listening))
-        DialogQuickAction(
-          label: t.audiobook_import,
-          icon: Icons.headphones_outlined,
-          onPressed: () => _openAudiobookImport(item, bookKey),
-        ),
-      // BUG-2505：本地已有这本书、还没有它的有声书、而对端有配套有声书 → 给一个
-      // 显式的补拉入口。远端卡按「本端已有」被整条藏掉后，这里是唯一能到达对端
-      // 有声书的地方（候选表由 _loadRemoteBooks 随远端清单一起算，见
-      // [_RemoteBookState.audiobookOnly]）。同受听书模块门控。
-      if (!kKitapsenEdition &&
-          modules.isEnabled(ModuleId.listening) &&
-          _remoteAudiobookOnlyFor(bookKey) != null)
-        DialogQuickAction(
-          label: t.remote_book_audiobook_download,
-          icon: Icons.cloud_download_outlined,
-          onPressed: () => _downloadRemoteAudiobookOnly(
-              _remoteAudiobookOnlyFor(bookKey)!, bookKey),
-        ),
       // 三库页对称：视频卡/游戏卡的菜单里「重命名」都排在列表项首位，书卡对齐。
       DialogListAction(
         label: t.book_rename,
         icon: Icons.drive_file_rename_outline,
         onPressed: () => _renameBook(context, item),
       ),
-      // 桌面才有文件管理器契约（[currentRevealHost] 在移动端返回 null）——整条隐藏，
-      // 而不是画一个点了没反应的按钮。漫画卷要手改 mokuro 数据时，这一条直接把书目录
-      // 里的 manga.json 选中，省掉「书在哪个 bookKey 目录」这层猜。
-      // Kitapsen: book files stay in app storage, never revealed.
-      if (currentRevealHost() != null && !kKitapsenEdition)
-        DialogListAction(
-          label: t.media_file_location_open,
-          icon: Icons.folder_open_outlined,
-          onPressed: () => _openBookFileLocation(bookKey),
-        ),
       // 右键 / 长按反查本书（漫画卷同一身份 bookKey）的学习统计。
       DialogListAction(
         label: t.media_stats_action,
@@ -2623,15 +2510,6 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
             : Icons.check_circle_outline,
         onPressed: () => _toggleBookCompleted(bookKey),
       ),
-      // 统一三库页刮削入口：书卡菜单直达「在线刮削封面」（视频/游戏的刮削都在
-      // 卡菜单一层，书此前必须绕「编辑信息→封面字段小图标」两层，用户实报）。
-      // 刮削要打第三方 API，属「在线服务」模块。
-      if (!kKitapsenEdition && modules.isEnabled(ModuleId.services))
-        DialogListAction(
-          label: t.book_scrape_cover,
-          icon: Icons.image_search_outlined,
-          onPressed: () => _scrapeEpubCover(item),
-        ),
       // 单卡「加入合集」：与批量三档共用同一 DAO 路径；身份从 bookKey 起步，
       // 落库前在 _addEpubToCollection 内换算成 uid（v83 成员表键）。
       if (!inCollectionDetail)
@@ -2650,13 +2528,6 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
           MediaRef(kind: MediaKind.epub, entryKey: bookKey),
         ),
       ),
-      // Kitapsen hides per-media profiles (see settings_schema_profiles).
-      if (!kKitapsenEdition)
-        DialogListAction(
-          label: t.profile_book_profile,
-          icon: Icons.account_circle_outlined,
-          onPressed: () => _openBookProfilePicker(item, bookKey),
-        ),
       // 内容语言：决定这本书正文用哪条字体链。导入时从 EPUB OPF 的 dc:language
       // 自动回填，但自制/旧 EPUB 常常不声明，那时只有用户知道这本是什么语言的。
       DialogListAction(
@@ -2664,72 +2535,6 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
         icon: Icons.translate,
         onPressed: () => _openBookLanguagePicker(bookKey),
       ),
-      if (!kKitapsenEdition)
-        DialogListAction(
-          label: t.book_css_editor_edit_css,
-          icon: Icons.code_outlined,
-          onPressed: () => _openCssEditor(bookKey),
-        ),
-      // 「书 ↔ 漫画」转化。放这张卡菜单里，因为漫画库与书架本就是同一个页面
-      // （`manga_library_page` 只是 `mangaOnly: true` 的壳）、同一张卡、同一份
-      // 菜单——转化恰好是「这本书用哪个阅读器打开」的开关，与「标记已读完」
-      // 「换封面」同一层级。方向由当前卡自己的源标识决定，不额外读库：
-      // `mediaSourceIdentifier` 就是 `EpubBooks.format` 派生出来的
-      // （`ReaderFushiSource.mediaSourceKeyFor`），与书架的漫画/书分流同一判据。
-      //
-      // ⚠️ 模块门控**只关一个方向**：漫画关掉时不再提供「转成漫画」（那是把书送进
-      // 一个够不到的库）；反向的「转回书」**恒可用**——已经是 manga 格式的书被
-      // [filterShelfEntriesByMangaSplit] 从普通书架排除、漫画库又不可达，把回程也
-      // 关掉就等于把这些书永久锁死。
-      if (!kKitapsenEdition &&
-          (isManga || !kKitapsenEdition && modules.isEnabled(ModuleId.manga)))
-        DialogListAction(
-          label: isManga
-              ? t.book_convert_to_book_action
-              : t.book_convert_to_manga_action,
-          icon:
-              isManga ? Icons.menu_book_outlined : Icons.auto_stories_outlined,
-          onPressed: () => _convertBookFormat(
-            bookKey,
-            isManga ? BookFormatTarget.book : BookFormatTarget.manga,
-          ),
-        ),
-      // 漫画作品页：卡片点击已经先进这里，但键盘/手柄用户长按 A 弹的是本对话框，
-      // 没有这一条就只能从对话框退出去再确认一次卡片。菜单里给出同一个入口。
-      if (!kKitapsenEdition &&
-          isManga &&
-          !kKitapsenEdition &&
-          modules.isEnabled(ModuleId.manga))
-        DialogListAction(
-          label: t.manga_series_open_series,
-          icon: Icons.auto_stories_outlined,
-          onPressed: () {
-            Navigator.pop(context);
-            unawaited(
-              Navigator.of(context).push(
-                adaptivePageRoute<void>(
-                  context: context,
-                  builder: (BuildContext context) => MangaSeriesPage(
-                    target: ShelfMangaSeriesTarget(bookKey, item: item),
-                  ),
-                ),
-              ),
-            );
-          },
-        ),
-      // TODO-291 阶段2：书架长按「悬浮字幕」= 启动该书的后台听书会话（无正在播则用该书
-      // 启动 + 拉起悬浮窗），不再只翻 bool。该书已是活动会话则改为「停止后台听书」。
-      // 「悬浮字幕」= 用该书起一个后台听书会话，属听书模块。
-      if ((Platform.isAndroid || Platform.isWindows) &&
-          !kKitapsenEdition &&
-          modules.isEnabled(ModuleId.listening))
-        DialogListAction(
-          label: _isBackgroundListeningBook(bookKey)
-              ? '${t.floating_lyric_toggle_action} ✓'
-              : t.floating_lyric_toggle_action,
-          icon: Icons.subtitles_outlined,
-          onPressed: () => _toggleFloatingLyricFromShelf(bookKey),
-        ),
     ];
   }
 

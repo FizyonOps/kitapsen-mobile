@@ -28,8 +28,7 @@ import 'package:fushi/src/models/kitapsen_edition.dart';
 /// 领域文件边界不变，settings_redesign_static_test 的「一域一文件」契约照旧成立。
 List<SettingsSection> buildListeningSections() {
   bool listeningModuleOn(SettingsContext c) =>
-      !kKitapsenEdition &&
-      c.appModel.moduleVisibility.isEnabledOrUngated(ModuleId.listening);
+      false;
   return <SettingsSection>[
     SettingsSection(
       // 模块门原先挂在 destination 上，并入阅读后下放到分区自己身上。

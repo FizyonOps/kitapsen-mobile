@@ -92,21 +92,8 @@ List<SettingsDestination> _buildDestinations() {
     // so their pages (video, manga, torrent, interconnect, ...) are not in
     // the binary at all.
     buildAppearanceDestination(),
-    if (!kKitapsenEdition) buildFloatingBallDestination(),
     buildReadingDestination(),
-    if (!kKitapsenEdition) buildMangaDestination(),
-    if (!kKitapsenEdition) buildVideoDestination(),
-    if (!kKitapsenEdition) buildGameDestination(),
-    if (!kKitapsenEdition && kMediaTrackingEnabled)
-      buildMediaTrackingDestination(),
-    if (!kKitapsenEdition) buildLookupDestination(),
-    if (!kKitapsenEdition) buildCardCreationDestination(),
-    if (!kKitapsenEdition) buildDownloadsDestination(),
     buildServicesDestination(),
-    if (!kKitapsenEdition) buildAiDestination(),
-    if (!kKitapsenEdition) buildProfilesDestination(),
-    if (!kKitapsenEdition) buildSyncBackupDestination(),
-    if (!kKitapsenEdition) buildInterconnectDestination(),
     buildStorageDestination(),
     buildSystemDestination(),
   ]);
@@ -285,9 +272,7 @@ SettingsDestination buildReaderQuickSettingsDestination(
   return SettingsDestination(
     id: SettingsDestinationId.readerQuickSettings,
     title: t.reader_settings_section,
-    summary: kKitapsenEdition
-        ? t.kitapsen_source_description_epub
-        : t.source_description_epub,
+    summary: t.kitapsen_source_description_epub,
     icon: Icons.tune_outlined,
     sections: <SettingsSection>[
       sectionFor(ReaderGroup.layout, t.section_layout),

@@ -735,9 +735,7 @@ FfmpegBackend? _cachedBackend;
 ///
 /// Kitapsen edition: no Blu-ray (AACS) input layer; the platform backend is
 /// used directly so the AACS code is not compiled in.
-FfmpegBackend resolveFfmpegBackend() => _cachedBackend ??= kEngineKitapsenEdition
-    ? _selectBackend()
-    : BlurayFfmpegBackend(_selectBackend());
+FfmpegBackend resolveFfmpegBackend() => _cachedBackend ??= _selectBackend();
 
 /// Adapts the shared input contract for desktop and platform FFmpeg backends.
 class BlurayFfmpegBackend implements FfmpegBackend {

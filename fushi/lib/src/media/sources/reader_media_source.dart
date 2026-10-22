@@ -33,7 +33,6 @@ abstract class ReaderMediaSource extends MediaSource {
   @override
   List<MediaSource> get legacyOverrideStores => <MediaSource>[
         ReaderFushiSource.instance,
-        if (!kKitapsenEdition) MangaFushiSource.instance,
         ReaderPdfSource.instance,
       ];
 

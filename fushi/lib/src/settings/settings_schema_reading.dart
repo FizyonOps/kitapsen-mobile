@@ -34,9 +34,7 @@ SettingsDestination buildReadingDestination() {
     // 副标题带上「听书」：并入后本分类是听书设置的唯一入口，标题本身看不出这
     // 一点；且 summary 参与设置搜索的命中面（settings_search 的 haystack），
     // 用户搜「听书」才还能落到这里。复用原一级分类名，不新增 i18n key。
-    summary: kKitapsenEdition
-        ? t.section_layout
-        : '${t.section_layout} · ${t.settings_destination_listening}',
+    summary: t.section_layout,
     icon: Icons.auto_stories_outlined,
     sections: <SettingsSection>[
       // 「模式与排版方向」：阅读呈现的模式与方向选择（翻页/滚动、竖排、跨页展开、
@@ -66,13 +64,6 @@ SettingsDestination buildReadingDestination() {
                 label: t.reader_scroll,
                 tooltip: t.reader_scroll,
               ),
-              // Visual-novel mode is a Japanese-learning layout Kitapsen omits.
-              if (!kKitapsenEdition)
-                SettingsSegmentOption<String>(
-                  value: 'vn',
-                  label: t.reader_vn,
-                  tooltip: t.reader_vn,
-                ),
             ],
             selected: (SettingsContext c) => c.readerSource.readerViewMode,
             onChanged: (SettingsContext c, String v) async {
@@ -85,35 +76,6 @@ SettingsDestination buildReadingDestination() {
               notifyReaderLayoutChanged(c);
             },
           ),
-          // Kitapsen books are horizontal left-to-right (Turkish / European).
-          if (!kKitapsenEdition)
-            SettingsSegmentedItem<String>(
-              id: 'reading_display.writing_mode',
-              title: t.reader_writing_direction,
-              icon: Icons.text_rotate_vertical,
-              controlBelow: true,
-              reader: const ReaderPlacement(
-                group: ReaderGroup.layout,
-                order: 5,
-              ),
-              options: <SettingsSegmentOption<String>>[
-                SettingsSegmentOption<String>(
-                  value: 'horizontal-tb',
-                  label: t.reader_horizontal,
-                  tooltip: t.reader_horizontal,
-                ),
-                SettingsSegmentOption<String>(
-                  value: 'vertical-rl',
-                  label: t.reader_vertical,
-                  tooltip: t.reader_vertical,
-                ),
-              ],
-              selected: (SettingsContext c) => c.readerSource.readerWritingMode,
-              onChanged: (SettingsContext c, String v) async {
-                await c.readerSource.setReaderWritingMode(v);
-                notifyReaderLayoutChanged(c);
-              },
-            ),
           SettingsSegmentedItem<String>(
             id: 'reading_display.spread_mode',
             title: t.spread_mode,
@@ -199,182 +161,8 @@ SettingsDestination buildReadingDestination() {
               notifyReaderSettingsChanged(c);
             },
           ),
-          if (!kKitapsenEdition)
-            SettingsSegmentedItem<String>(
-              id: 'reading_display.furigana_mode',
-              title: t.reader_furigana_mode,
-              icon: Icons.translate_outlined,
-              controlBelow: true,
-              reader: const ReaderPlacement(
-                group: ReaderGroup.layout,
-                order: 13,
-              ),
-              // 四态：Off / Toggle / Hidden（对齐 Hoshi Reader iOS）+ Dimmed
-              // （2026-09-12 用户追加的「显示但淡」）。
-              options: <SettingsSegmentOption<String>>[
-                SettingsSegmentOption<String>(
-                  value: 'off',
-                  label: t.reader_furigana_off,
-                  tooltip: t.reader_furigana_off,
-                ),
-                SettingsSegmentOption<String>(
-                  value: 'toggle',
-                  label: t.reader_furigana_toggle,
-                  tooltip: t.reader_furigana_toggle,
-                ),
-                SettingsSegmentOption<String>(
-                  value: 'hidden',
-                  label: t.reader_furigana_hidden,
-                  tooltip: t.reader_furigana_hidden,
-                ),
-                SettingsSegmentOption<String>(
-                  value: 'dimmed',
-                  label: t.reader_furigana_dimmed,
-                  tooltip: t.reader_furigana_dimmed,
-                ),
-              ],
-              selected: (SettingsContext c) =>
-                  c.readerSource.readerFuriganaMode,
-              onChanged: (SettingsContext c, String v) {
-                c.readerSource.setReaderFuriganaMode(v);
-                notifyReaderSettingsChanged(c);
-              },
-            ),
         ],
       ),
-      // Kitapsen has no visual-novel view mode, so its settings group is not built.
-      if (!kKitapsenEdition)
-        SettingsSection(
-          // #1351 新增的 VN 设置组；本轮重构要求每个 ordinary section 都有持久化 id
-          // （守卫 settings_schema_information_architecture），按同文件命名补上。
-          id: 'reading.section.visual_novel',
-          title: t.reader_vn_settings,
-          visible: isVisualNovel,
-          items: <SettingsItem>[
-            SettingsSliderItem(
-              id: 'reading_vn.reveal_speed',
-              title: t.reader_vn_reveal_speed,
-              icon: Icons.animation_outlined,
-              min: 0,
-              max: 120,
-              divisions: 24,
-              step: 5,
-              titleReadout: true,
-              commitOnRelease: true,
-              visible: isVisualNovel,
-              reader: const ReaderPlacement(
-                group: ReaderGroup.layout,
-                order: 22,
-              ),
-              value: (SettingsContext c) =>
-                  c.readerSource.readerVisualNovelRevealSpeed.toDouble(),
-              label: (double v) =>
-                  v.round() == 0 ? t.reader_vn_reveal_instant : '${v.round()}/s',
-              onChanged: (SettingsContext c, double v) async {
-                await c.readerSource.setReaderVisualNovelRevealSpeed(v.round());
-                notifyReaderLayoutChanged(c);
-              },
-            ),
-            SettingsSegmentedItem<String>(
-              id: 'reading_vn.screen_mode',
-              title: t.reader_vn_screen_mode,
-              icon: Icons.view_agenda_outlined,
-              controlBelow: true,
-              visible: isVisualNovel,
-              reader: const ReaderPlacement(
-                group: ReaderGroup.layout,
-                order: 23,
-              ),
-              options: <SettingsSegmentOption<String>>[
-                SettingsSegmentOption<String>(
-                  value: 'block',
-                  label: t.reader_vn_screen_block,
-                  tooltip: t.reader_vn_screen_block,
-                ),
-                SettingsSegmentOption<String>(
-                  value: 'sentences',
-                  label: t.reader_vn_screen_sentences,
-                  tooltip: t.reader_vn_screen_sentences,
-                ),
-              ],
-              selected: (SettingsContext c) =>
-                  c.readerSource.readerVisualNovelScreenMode,
-              onChanged: (SettingsContext c, String v) async {
-                await c.readerSource.setReaderVisualNovelScreenMode(v);
-                notifyReaderLayoutChanged(c);
-              },
-            ),
-            SettingsStepperItem(
-              id: 'reading_vn.sentences_per_screen',
-              title: t.reader_vn_sentences_per_screen,
-              icon: Icons.format_list_numbered,
-              visible: isVisualNovelSentenceMode,
-              min: 1,
-              max: 12,
-              step: 1,
-              reader: const ReaderPlacement(
-                group: ReaderGroup.layout,
-                order: 24,
-              ),
-              value: (SettingsContext c) =>
-                  c.readerSource.readerVisualNovelSentencesPerScreen.toDouble(),
-              format: (double v) => '${v.round()}',
-              onChanged: (SettingsContext c, double v) async {
-                await c.readerSource
-                    .setReaderVisualNovelSentencesPerScreen(v.round());
-                notifyReaderLayoutChanged(c);
-              },
-            ),
-            SettingsSwitchItem(
-              id: 'reading_vn.preserve_dialogue',
-              title: t.reader_vn_preserve_dialogue,
-              icon: Icons.format_quote,
-              visible: isVisualNovelSentenceMode,
-              reader: const ReaderPlacement(
-                group: ReaderGroup.layout,
-                order: 25,
-              ),
-              value: (SettingsContext c) =>
-                  c.readerSource.readerVisualNovelPreserveDialogue,
-              onChanged: (SettingsContext c, bool v) async {
-                await c.readerSource.setReaderVisualNovelPreserveDialogue(v);
-                notifyReaderLayoutChanged(c);
-              },
-            ),
-            SettingsSwitchItem(
-              id: 'reading_vn.click_advance',
-              title: t.reader_vn_click_advance,
-              icon: Icons.touch_app_outlined,
-              visible: isVisualNovel,
-              reader: const ReaderPlacement(
-                group: ReaderGroup.behavior,
-                order: 20,
-              ),
-              value: (SettingsContext c) =>
-                  c.readerSource.readerVisualNovelClickAdvance,
-              onChanged: (SettingsContext c, bool v) async {
-                await c.readerSource.setReaderVisualNovelClickAdvance(v);
-                notifyReaderLayoutChanged(c);
-              },
-            ),
-            SettingsSwitchItem(
-              id: 'reading_vn.merge_spoken_sentence',
-              title: t.reader_vn_merge_spoken_sentence,
-              icon: Icons.graphic_eq_outlined,
-              visible: isVisualNovel,
-              reader: const ReaderPlacement(
-                group: ReaderGroup.audiobook,
-                order: 0,
-              ),
-              value: (SettingsContext c) =>
-                  c.readerSource.readerVisualNovelMergeSpokenSentence,
-              onChanged: (SettingsContext c, bool v) async {
-                await c.readerSource.setReaderVisualNovelMergeSpokenSentence(v);
-                notifyReaderLayoutChanged(c);
-              },
-            ),
-          ],
-        ),
       SettingsSection(
         id: 'reading.section.typography',
         presentation: SettingsSectionPresentation.alwaysExpanded,
@@ -560,23 +348,6 @@ SettingsDestination buildReadingDestination() {
         title: t.settings_section_page_turn_input,
         collapsedByDefault: true,
         items: <SettingsItem>[
-          // Kitapsen has no dictionary: tap-to-look-up is off and not offered.
-          if (!kKitapsenEdition)
-            SettingsSwitchItem(
-              id: 'reading_controls.highlight_on_tap',
-              title: t.highlight_on_tap,
-              icon: Icons.touch_app_outlined,
-              reader: const ReaderPlacement(
-                group: ReaderGroup.behavior,
-                order: 0,
-              ),
-              value: (SettingsContext settingsContext) =>
-                  settingsContext.readerSource.highlightOnTap,
-              onChanged: (SettingsContext settingsContext, bool value) {
-                settingsContext.readerSource.toggleHighlightOnTap();
-                notifyReaderSettingsChanged(settingsContext);
-              },
-            ),
           SettingsSwitchItem(
             id: 'reading_controls.volume_page_turning',
             title: t.volume_button_page_turning,
@@ -707,24 +478,6 @@ SettingsDestination buildReadingDestination() {
               notifyReaderSettingsChanged(settingsContext);
             },
           ),
-          // TODO-830: 反转有声书底栏 ⏮⏭ 前进/后退按钮的功能方向（per-reader）。
-          if (!kKitapsenEdition)
-            SettingsSwitchItem(
-              id: 'reading_controls.invert_audiobook_skip_direction',
-              title: t.invert_audiobook_skip_direction,
-              icon: Icons.swap_horizontal_circle_outlined,
-              reader: const ReaderPlacement(
-                group: ReaderGroup.behavior,
-                order: 5,
-              ),
-              value: (SettingsContext settingsContext) =>
-                  settingsContext.readerSource.invertAudiobookSkipDirection,
-              onChanged: (SettingsContext settingsContext, bool value) {
-                settingsContext.readerSource
-                    .toggleInvertAudiobookSkipDirection();
-                notifyReaderSettingsChanged(settingsContext);
-              },
-            ),
         ],
       ),
       // 原「导航」13 项混杂平铺，拆两组：阅读界面（进度条/悬浮 chrome/底栏提示/
@@ -802,32 +555,6 @@ SettingsDestination buildReadingDestination() {
               notifyReaderChromeChanged(settingsContext);
             },
           ),
-          // 关掉顶栏和底栏，由应用内悬浮球接管（返回 / 设置 / 开回栏固定在球上）。
-          // 偏好只在应用内悬浮球开着时生效（readerToolbarsHidden），所以拨开时球若
-          // 关着就一并打开（setHideReaderToolbars）；球后来被关掉则栏自动回来，
-          // 副标题说明原因。改变栏的占位 → 走重锚通道。
-          // Hiding the toolbars hands their buttons to the floating ball,
-          // which Kitapsen does not ship.
-          if (!kKitapsenEdition)
-            SettingsSwitchItem(
-              id: 'reading_controls.hide_toolbars',
-              title: t.reader_toolbars_hide,
-              icon: Icons.web_asset_off_outlined,
-              subtitleBuilder: (SettingsContext c) =>
-                  c.readerSource.hideToolbars &&
-                      !c.appModel.prefsRepo.floatingBallInApp
-                  ? t.reader_toolbars_hide_ball_off
-                  : t.reader_toolbars_hide_subtitle,
-              reader: const ReaderPlacement(
-                group: ReaderGroup.behavior,
-                order: 21,
-              ),
-              value: (SettingsContext c) => c.readerSource.hideToolbars,
-              onChanged: (SettingsContext c, bool value) async {
-                await setHideReaderToolbars(c.appModel, value);
-                notifyReaderChromeReanchored(c);
-              },
-            ),
           SettingsSwitchItem(
             id: 'reading_controls.keep_screen_awake',
             title: t.keep_screen_awake,
@@ -859,39 +586,6 @@ SettingsDestination buildReadingDestination() {
               notifyReaderChromeChanged(c);
             },
           ),
-          // 阅读器顶栏 / 底栏按钮拖拽编辑器（与视频页 video.player.controls_editor
-          // 同一套泛型编辑器，用户 2026-09-13 要求「和视频一样支持可视化调整」）。
-          // 写 appModel.setReaderControlLayout → prefsRepo 通知 → 阅读器页重建，
-          // 开着的书立即换布局。底栏「空 ↔ 非空」会翻转挤压态的底栏预留高
-          // （_bottomChromeReserve），所以走重锚通道重下 chrome insets。
-          // Kitapsen keeps the default toolbar: the editor's tray would offer
-          // audiobook / floating-ball buttons for features it does not ship.
-          if (!kKitapsenEdition)
-            SettingsCustomItem(
-              id: 'reading_controls.controls_editor',
-              searchTitle: t.reader_control_editor_title,
-              reader: const ReaderPlacement(
-                group: ReaderGroup.behavior,
-                order: 14,
-              ),
-              builder: buildReaderControlLayoutEditor,
-            ),
-          if (!kKitapsenEdition)
-            SettingsActionItem(
-              id: 'reading_controls.reset_control_layout',
-              title: t.reader_control_reset_layout,
-              icon: Icons.restart_alt_outlined,
-              reader: const ReaderPlacement(
-                group: ReaderGroup.behavior,
-                order: 15,
-              ),
-              onTap: (SettingsContext c) async {
-                await c.appModel.setReaderControlLayout(
-                  ReaderControlLayout.defaults,
-                );
-                notifyReaderChromeReanchored(c);
-              },
-            ),
           // 悬浮球不在这里：唯一入口是 设置 → 悬浮球（阅读器场景的按钮在那里勾选）。
         ],
       ),
@@ -905,9 +599,7 @@ SettingsDestination buildReadingDestination() {
           SettingsStepperItem(
             id: 'reading.stats_idle_timeout_minutes',
             title: t.reading_stats_idle_timeout,
-            subtitle: kKitapsenEdition
-                ? t.kitapsen_reading_stats_idle_timeout_hint
-                : t.reading_stats_idle_timeout_hint,
+            subtitle: t.kitapsen_reading_stats_idle_timeout_hint,
             icon: Icons.timer_off_outlined,
             min: PreferencesRepository.readingIdleTimeoutMinutesMin.toDouble(),
             max: PreferencesRepository.readingIdleTimeoutMinutesMax.toDouble(),
@@ -1013,11 +705,6 @@ SettingsDestination buildReadingDestination() {
           ),
         ],
       ),
-      // 听书（有声书 + 悬浮歌词）2026-08-24 并入本分类，见 buildListeningSections
-      // 的合并说明。放在阅读各组之后：同一本 EPUB 的「读」与「听」从此在一个分类里。
-      // 这两个分区自带听书模块门，关掉模块时它们不渲染、也不进搜索索引。
-      // Kitapsen has no audiobooks.
-      if (!kKitapsenEdition) ...buildListeningSections(),
     ],
   );
 }

@@ -76,11 +76,7 @@ class MangaFushiSource extends ReaderMediaSource {
     // 保证弹窗坐标契约（JS getClientRects 视口坐标 → 屏幕坐标恒等映射）。
     // Kitapsen: no manga reader in the build (this source is never
     // registered, but dispatch through [MediaSource] still sees it).
-    return kKitapsenEdition
-        ? const SizedBox.shrink()
-        : FushiAppUiScaleNeutralizer(
-            child: MangaFushiPage(item: item, bookKey: bookKey),
-          );
+    return const SizedBox.shrink();
   }
 
   @override
@@ -109,24 +105,7 @@ class MangaFushiSource extends ReaderMediaSource {
     FushiFocusId? focusId,
     String? label,
   }) {
-    return kKitapsenEdition
-        ? const SizedBox.shrink()
-        : FushiIconButton(
-      tooltip: t.manga_import_action,
-      label: label,
-      icon: Icons.library_add_outlined,
-      focusId: focusId,
-      onTap: () async {
-        final bool? imported = await showAppDialog<bool>(
-          context: context,
-          builder: (_) => MangaImportDialog(db: appModel.database),
-        );
-        if (imported == true) {
-          ref.invalidate(fushiBooksProvider);
-          ref.invalidate(srtBooksProvider);
-        }
-      },
-    );
+    return const SizedBox.shrink();
   }
 
   @override

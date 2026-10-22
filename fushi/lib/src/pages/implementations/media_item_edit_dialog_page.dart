@@ -120,27 +120,7 @@ class _MediaItemEditDialogPageState
             // 「onScrape 为空就不渲染刮削按钮」的契约（书/视频/游戏三库共用本弹窗，
             // 一处接线三处生效）。手动选图 / 撤销不受影响：那是本地操作。
             onScrape:
-                !(!kKitapsenEdition &&
-                    appModel.moduleVisibility.isEnabled(ModuleId.services))
-                ? null
-                : () async {
-                    // 在线刮削封面（P1b）：搜 Bangumi 书籍条目，选中即下载封面成临时文件，
-                    // 走与手动选图完全相同的 override 通道（保存时 setOverrideThumbnail）。
-                    final String query =
-                        _nameOverrideController.text.trim().isNotEmpty
-                        ? _nameOverrideController.text.trim()
-                        : widget.item.title;
-                    final File? scraped = await showBookCoverScrapeDialog(
-                      context: context,
-                      initialQuery: query,
-                    );
-                    if (scraped != null) {
-                      _newFile = scraped;
-                      _coverImageProvider = FileImage(scraped);
-                      _clearOverrideImage = false;
-                      setState(() {});
-                    }
-                  },
+                null,
             onPickImage: () async {
               // BUG-1074：桌面端 image_picker 无平台实现，直接调 pickImage 抛
               // MissingPluginException 且无人捕获 → 按钮「点了没反应」。统一走
