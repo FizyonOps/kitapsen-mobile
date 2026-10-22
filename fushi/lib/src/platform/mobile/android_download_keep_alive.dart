@@ -20,6 +20,7 @@ import 'dart:io' show Platform;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:fushi/src/utils/misc/channel_constants.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 
 /// 通知进度条的「不确定」取值（原生侧画转圈而不是进度条）。
 const int kDownloadKeepAliveIndeterminate = -1;
@@ -42,7 +43,9 @@ abstract interface class DownloadKeepAlive {
 
 /// 按平台选实现：只有 Android 有原生侧，其余平台一律 no-op。
 DownloadKeepAlive createDownloadKeepAlive() {
-  if (Platform.isAndroid) {
+  // Kitapsen declares no foreground service: store downloads run without the
+  // keep-alive notification.
+  if (!kKitapsenEdition && Platform.isAndroid) {
     return AndroidDownloadKeepAlive();
   }
   return const NoopDownloadKeepAlive();

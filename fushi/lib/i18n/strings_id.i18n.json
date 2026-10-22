@@ -6568,5 +6568,12 @@
   "kitapsen_stat_range_calendar": "Kalender membaca",
   "kitapsen_book_read_sample": "Baca sampel",
   "kitapsen_sample_notice": "Sampel: ${percent}% pertama buku ini.",
-  "kitapsen_sample_unavailable": "Buku ini tidak memiliki sampel."
+  "kitapsen_sample_unavailable": "Buku ini tidak memiliki sampel.",
+  "kitapsen_settings_destination_system_summary": "Umum, tentang & diagnostik",
+  "kitapsen_theme_role_selection": "Sorotan pilihan",
+  "kitapsen_theme_preview_chapter": "Bab 1",
+  "kitapsen_theme_preview_body": "Teks isi",
+  "kitapsen_theme_preview_selection": "teks terpilih",
+  "kitapsen_theme_preview_link": "Tautan",
+  "kitapsen_storage_category_books": "Buku"
 }

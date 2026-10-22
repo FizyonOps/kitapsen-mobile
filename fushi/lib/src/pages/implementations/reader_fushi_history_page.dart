@@ -201,7 +201,8 @@ class ReaderFushiHistoryPage extends HistoryReaderPage {
 class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
     extends HistoryReaderPageState {
   ReaderFushiHistoryPage get _pageWidget => widget as ReaderFushiHistoryPage;
-  bool get _mangaOnly => _pageWidget.mangaOnly;
+  // Kitapsen has no manga shelf.
+  bool get _mangaOnly => !kKitapsenEdition && _pageWidget.mangaOnly;
 
   /// 「同时删除统计数据」勾选行的副标题：漫画库与书架各说各的统计口径。
   String get _statisticsSubtitle => _mangaOnly
@@ -682,7 +683,8 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
                     onDragEnd: () => setState(_selection.endRangeDrag),
                     child: books.when(
                       data: (bookList) {
-                        _batchAudiobookInfoFuture ??= _mangaOnly
+                        _batchAudiobookInfoFuture ??= kKitapsenEdition ||
+                                _mangaOnly
                             ? Future<Map<String, _AudiobookInfo>>.value(
                                 const <String, _AudiobookInfo>{},
                               )
@@ -1276,7 +1278,8 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
     List<MediaItem> books, [
     AsyncSnapshot<_RemoteBookState?>? remoteSnapshot,
   ]) {
-    final List<SrtBook> srtBooks = _mangaOnly
+    // Kitapsen has no subtitle books.
+    final List<SrtBook> srtBooks = kKitapsenEdition || _mangaOnly
         ? const <SrtBook>[]
         : ref.watch(srtBooksProvider).valueOrNull ?? const <SrtBook>[];
     return _buildBodyWithSrtBooks(books, srtBooks, remoteSnapshot);
@@ -2050,6 +2053,7 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
             deleteStatistics: deleteStatistics,
           );
         case MediaKind.srt:
+          if (kKitapsenEdition) break;
           final SrtBookRepository repo = SrtBookRepository(appModel.database);
           final SrtBook? book = await repo.findByUid(m.entryKey);
           if (book != null) {
@@ -2100,6 +2104,7 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
       _readStatusFilter == null &&
       (kKitapsenEdition ||
           (appModel.prefsRepo.showRemoteEntries &&
+              !kKitapsenEdition &&
               _moduleVisibility.isEnabled(ModuleId.sync)));
 
   /// 远端占位卡在**合集详情页**的可见门控：目录拉取成功 + [_remotePlaceholdersAllowed]。
@@ -2568,7 +2573,7 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
         onPressed: () => _openIllustrations(item, bookKey),
       ),
       // 有声书导入仍受听书模块门控（develop 侧）；「重命名」不受它管。
-      if (modules.isEnabled(ModuleId.listening))
+      if (!kKitapsenEdition && modules.isEnabled(ModuleId.listening))
         DialogQuickAction(
           label: t.audiobook_import,
           icon: Icons.headphones_outlined,
@@ -2578,7 +2583,8 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
       // 显式的补拉入口。远端卡按「本端已有」被整条藏掉后，这里是唯一能到达对端
       // 有声书的地方（候选表由 _loadRemoteBooks 随远端清单一起算，见
       // [_RemoteBookState.audiobookOnly]）。同受听书模块门控。
-      if (modules.isEnabled(ModuleId.listening) &&
+      if (!kKitapsenEdition &&
+          modules.isEnabled(ModuleId.listening) &&
           _remoteAudiobookOnlyFor(bookKey) != null)
         DialogQuickAction(
           label: t.remote_book_audiobook_download,
@@ -2620,7 +2626,7 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
       // 统一三库页刮削入口：书卡菜单直达「在线刮削封面」（视频/游戏的刮削都在
       // 卡菜单一层，书此前必须绕「编辑信息→封面字段小图标」两层，用户实报）。
       // 刮削要打第三方 API，属「在线服务」模块。
-      if (modules.isEnabled(ModuleId.services))
+      if (!kKitapsenEdition && modules.isEnabled(ModuleId.services))
         DialogListAction(
           label: t.book_scrape_cover,
           icon: Icons.image_search_outlined,
@@ -2675,7 +2681,8 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
       // 一个够不到的库）；反向的「转回书」**恒可用**——已经是 manga 格式的书被
       // [filterShelfEntriesByMangaSplit] 从普通书架排除、漫画库又不可达，把回程也
       // 关掉就等于把这些书永久锁死。
-      if (!kKitapsenEdition && (isManga || modules.isEnabled(ModuleId.manga)))
+      if (!kKitapsenEdition &&
+          (isManga || !kKitapsenEdition && modules.isEnabled(ModuleId.manga)))
         DialogListAction(
           label: isManga
               ? t.book_convert_to_book_action
@@ -2689,7 +2696,10 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
         ),
       // 漫画作品页：卡片点击已经先进这里，但键盘/手柄用户长按 A 弹的是本对话框，
       // 没有这一条就只能从对话框退出去再确认一次卡片。菜单里给出同一个入口。
-      if (!kKitapsenEdition && isManga && modules.isEnabled(ModuleId.manga))
+      if (!kKitapsenEdition &&
+          isManga &&
+          !kKitapsenEdition &&
+          modules.isEnabled(ModuleId.manga))
         DialogListAction(
           label: t.manga_series_open_series,
           icon: Icons.auto_stories_outlined,
@@ -2711,6 +2721,7 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
       // 启动 + 拉起悬浮窗），不再只翻 bool。该书已是活动会话则改为「停止后台听书」。
       // 「悬浮字幕」= 用该书起一个后台听书会话，属听书模块。
       if ((Platform.isAndroid || Platform.isWindows) &&
+          !kKitapsenEdition &&
           modules.isEnabled(ModuleId.listening))
         DialogListAction(
           label: _isBackgroundListeningBook(bookKey)

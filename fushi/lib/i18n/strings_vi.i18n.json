@@ -6568,5 +6568,12 @@
   "kitapsen_stat_range_calendar": "Lịch đọc",
   "kitapsen_book_read_sample": "Đọc thử",
   "kitapsen_sample_notice": "Bản đọc thử: ${percent}% đầu tiên của sách.",
-  "kitapsen_sample_unavailable": "Sách này không có bản đọc thử."
+  "kitapsen_sample_unavailable": "Sách này không có bản đọc thử.",
+  "kitapsen_settings_destination_system_summary": "Chung, giới thiệu & chẩn đoán",
+  "kitapsen_theme_role_selection": "Tô sáng vùng chọn",
+  "kitapsen_theme_preview_chapter": "Chương 1",
+  "kitapsen_theme_preview_body": "Nội dung",
+  "kitapsen_theme_preview_selection": "văn bản được chọn",
+  "kitapsen_theme_preview_link": "Liên kết",
+  "kitapsen_storage_category_books": "Sách"
 }

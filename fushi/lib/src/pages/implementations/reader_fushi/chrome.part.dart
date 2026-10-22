@@ -1030,6 +1030,7 @@ extension _ReaderChrome on _ReaderFushiPageState {
   // reader 只保留设置开关，翻转后委托 session 装/清通知卡片。
 
   Future<void> _toggleMediaNotification() async {
+    if (kKitapsenEdition) return;
     final bool newValue = !appModel.showMediaNotification;
     await appModel.setShowMediaNotification(newValue);
     appModel.audiobookSession.onMediaNotificationToggled(enabled: newValue);
@@ -1608,7 +1609,8 @@ extension _ReaderChrome on _ReaderFushiPageState {
         return !_lyricsMode;
       // 「听书」模块关掉时整颗不渲染（不是画一个点了没反应的按钮）。
       case ReaderControlItem.audiobook:
-        return _moduleVisibility.isEnabled(ModuleId.listening);
+        return !kKitapsenEdition &&
+            _moduleVisibility.isEnabled(ModuleId.listening);
       // 桌面才有窗口可全屏，移动端不渲染这颗按钮。
       case ReaderControlItem.fullscreen:
         return desktopWindowFullscreenSupported;
@@ -2217,9 +2219,8 @@ extension _ReaderChrome on _ReaderFushiPageState {
     final String? extractDir = _extractDir;
     // 快照一次：[AppModel.moduleVisibility] 每读一次都重新合成一个 Set，下面三个
     // 有声书回调都要问它。
-    final bool listeningEnabled = _moduleVisibility.isEnabled(
-      ModuleId.listening,
-    );
+    final bool listeningEnabled =
+        !kKitapsenEdition && _moduleVisibility.isEnabled(ModuleId.listening);
     return ReaderQuickSettingsSheet(
       controller: _audiobookController,
       toc: toc,
@@ -2255,7 +2256,7 @@ extension _ReaderChrome on _ReaderFushiPageState {
       onThemeChanged: _onThemeChanged,
       extractDir: _extractDir,
       onReloadChapter: _reloadWithCurrentSettings,
-      onLyricsReload: _loadLyricsPage,
+      onLyricsReload: kKitapsenEdition ? null : _loadLyricsPage,
       // 「听书」关掉时三个有声书回调一律传 null——面板侧已有「回调为空就不渲染
       // 该行」的既有契约，用同一条通道关掉「导入音频 / 换对齐文件 / 设备端转录」。
       onAudioImport: listeningEnabled && _srtBookUid != null
@@ -2277,30 +2278,39 @@ extension _ReaderChrome on _ReaderFushiPageState {
           ? () => unawaited(_transcribeFromAudiobookPanel())
           : null,
       lyricsMode: _lyricsMode,
-      onToggleLyricsMode: _toggleLyricsMode,
+      // Kitapsen: no lyrics mode, floating lyrics or media notification.
+      onToggleLyricsMode: kKitapsenEdition ? null : _toggleLyricsMode,
       showFloatingLyric: appModel.showFloatingLyric,
-      onToggleFloatingLyric: _toggleFloatingLyric,
+      onToggleFloatingLyric: kKitapsenEdition ? null : _toggleFloatingLyric,
       floatingLyricFontSize: appModel.floatingLyricFontSize,
-      onFloatingLyricFontSizeChanged: (v) async {
-        await appModel.setFloatingLyricFontSize(v);
-        final FloatingLyricStyle style = _readerFloatingLyricStyle(fontSize: v);
-        await FloatingLyricChannel.updateStyle(
-          fontSize: style.fontSize,
-          textColor: style.textColor,
-          bgColor: style.bgColor,
-          buttonTextColor: style.buttonTextColor,
-          buttonBgColor: style.buttonBgColor,
-          highlightColor: style.highlightColor,
-          activeColor: style.activeColor,
-        );
-      },
+      onFloatingLyricFontSizeChanged: kKitapsenEdition
+          ? null
+          : (v) async {
+              await appModel.setFloatingLyricFontSize(v);
+              final FloatingLyricStyle style = _readerFloatingLyricStyle(
+                fontSize: v,
+              );
+              await FloatingLyricChannel.updateStyle(
+                fontSize: style.fontSize,
+                textColor: style.textColor,
+                bgColor: style.bgColor,
+                buttonTextColor: style.buttonTextColor,
+                buttonBgColor: style.buttonBgColor,
+                highlightColor: style.highlightColor,
+                activeColor: style.activeColor,
+              );
+            },
       floatingLyricClickLookup: appModel.floatingLyricClickLookup,
-      onFloatingLyricClickLookupChanged: (bool value) async {
-        await appModel.setFloatingLyricClickLookup(value);
-        await FloatingLyricChannel.setClickLookupEnabled(value);
-      },
+      onFloatingLyricClickLookupChanged: kKitapsenEdition
+          ? null
+          : (bool value) async {
+              await appModel.setFloatingLyricClickLookup(value);
+              await FloatingLyricChannel.setClickLookupEnabled(value);
+            },
       showMediaNotification: appModel.showMediaNotification,
-      onToggleMediaNotification: _toggleMediaNotification,
+      onToggleMediaNotification: kKitapsenEdition
+          ? null
+          : _toggleMediaNotification,
       charProgress: _progressCurrentChars != null && _progressTotalChars != null
           ? (_progressCurrentChars!, _progressTotalChars!)
           : null,
@@ -2340,7 +2350,7 @@ extension _ReaderChrome on _ReaderFushiPageState {
               onJump: _jumpToSectionFraction,
             )
           : null,
-      onPlayFavorite: _audiobookController == null
+      onPlayFavorite: kKitapsenEdition || _audiobookController == null
           ? null
           : (fav) async {
               final AudioCue? target = _favoriteAudioCue(fav);
@@ -2812,8 +2822,10 @@ extension _ReaderChrome on _ReaderFushiPageState {
 
   /// 有声书面板「对齐文件」：打开导入对话框并预填当前音频（对话框内可选文件 /
   /// 转录），关掉后按导入后的同一条路重载音频槽。
-  Future<void> _openAlignmentImportDialog(
-      {String? initialAlignmentPath}) async {
+  Future<void> _openAlignmentImportDialog({
+    String? initialAlignmentPath,
+  }) async {
+    if (kKitapsenEdition) return;
     final Audiobook? audiobook = _audiobookController?.audiobook;
     final AudiobookRepository repo = AudiobookRepository(appModel.database);
     // BUG-2208：导入 / 对齐对话框压着正文期间停表。
@@ -3210,7 +3222,7 @@ extension _ReaderChrome on _ReaderFushiPageState {
     // ran when the chapter had favorites).
     await _settings?.setTheme(appModel.appThemeKey);
     _syncDictionaryTheme();
-    if (appModel.showFloatingLyric) {
+    if (!kKitapsenEdition && appModel.showFloatingLyric) {
       // reader 主题变了：让 session 用新的 reader 样式重刷悬浮窗
       // （reader 样式已在 attach 时 install 进 session）。
       await appModel.audiobookSession.applyFloatingLyricStyle();

@@ -47,6 +47,7 @@ import 'package:fushi_core/fushi_core.dart'
 import 'package:fushi_dictionary/fushi_dictionary.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:path/path.dart' as p;
+import 'package:fushi/src/models/kitapsen_edition.dart';
 
 /// Per-lookup placement facts supplied by a native hit surface.
 ///
@@ -329,7 +330,10 @@ class GlobalLookupController {
   Future<void> startIfLookupModuleEnabled(AppModel appModel) async {
     // 先判闩再调 start：AppModel 通知很频繁，别每次都往 glog 里记一条 start。
     if (!isSupported || _started) return;
-    if (!appModel.moduleVisibility.isEnabled(ModuleId.lookup)) return;
+    if (!(!kKitapsenEdition &&
+        appModel.moduleVisibility.isEnabled(ModuleId.lookup))) {
+      return;
+    }
     await start(appModel: appModel);
   }
 

@@ -125,6 +125,7 @@ class _BookImportDialogState extends State<BookImportDialog>
   double _similarityThreshold = EpubSrtMatcher.defaultSimilarityThreshold;
 
   bool get _willRunMatcher {
+    if (kKitapsenEdition) return false;
     if (_epubPath == null || _subtitlePath == null) return false;
     final String ext = _subtitlePath!.split('.').last.toLowerCase();
     return SubtitleRematch.supportedFormats.contains(ext);
@@ -152,13 +153,23 @@ class _BookImportDialogState extends State<BookImportDialog>
   @override
   void initState() {
     super.initState();
-    _carrierResolver = ImportCarrierResolver(
-      isDirectory: (String pth) => Directory(pth).existsSync(),
-      isImageArchive: widget.imageArchiveProbe ?? MangaModule.isImageArchive,
-      directoryHasPageImages: MangaModule.directoryHasPageImages,
-      directoryCarrierFileCount: MangaModule.directoryCarrierFileCount,
-      directoryMokuroFileCount: MangaModule.directoryMokuroFileCount,
-    );
+    // Kitapsen has no manga, so it never probes archives or folders for pages.
+    _carrierResolver = kKitapsenEdition
+        ? ImportCarrierResolver(
+            isDirectory: (String pth) => Directory(pth).existsSync(),
+            isImageArchive: (String _) => false,
+            directoryHasPageImages: (String _) => false,
+            directoryCarrierFileCount: (String _) => 0,
+            directoryMokuroFileCount: (String _) => 0,
+          )
+        : ImportCarrierResolver(
+            isDirectory: (String pth) => Directory(pth).existsSync(),
+            isImageArchive:
+                widget.imageArchiveProbe ?? MangaModule.isImageArchive,
+            directoryHasPageImages: MangaModule.directoryHasPageImages,
+            directoryCarrierFileCount: MangaModule.directoryCarrierFileCount,
+            directoryMokuroFileCount: MangaModule.directoryMokuroFileCount,
+          );
     final String? epub = widget.initialEpubPath;
     if (epub != null) {
       _epubPath = epub;
@@ -172,6 +183,8 @@ class _BookImportDialogState extends State<BookImportDialog>
         ImportTitleSource.epub,
       );
     }
+    // Kitapsen imports plain books: subtitle / audio carriers are never taken.
+    if (kKitapsenEdition) return;
     final String? sub = widget.initialSubtitlePath;
     if (sub != null) {
       _subtitlePath = sub;
@@ -288,7 +301,7 @@ class _BookImportDialogState extends State<BookImportDialog>
     // 拖进来的「书」其实是漫画（图片型 zip / 扫描版 epub）→ 确认后转交漫画流程。
     if (!kKitapsenEdition && droppedEpub != null && await _handoffIfManga(droppedEpub)) return;
     if (!mounted) return;
-    final bool gotAudio = r.audioPaths.isNotEmpty;
+    final bool gotAudio = !kKitapsenEdition && r.audioPaths.isNotEmpty;
     setState(() {
       if (droppedEpub != null) {
         _epubPath = droppedEpub;
@@ -296,7 +309,7 @@ class _BookImportDialogState extends State<BookImportDialog>
         _autoFillTitle(
             p.basenameWithoutExtension(droppedEpub), ImportTitleSource.epub);
       }
-      if (r.subtitlePath != null) {
+      if (!kKitapsenEdition && r.subtitlePath != null) {
         _subtitlePath = r.subtitlePath;
         _subtitleName = p.basename(r.subtitlePath!);
       }
@@ -573,9 +586,8 @@ class _BookImportDialogState extends State<BookImportDialog>
     // 弹一次确认并转交 [MangaImportDialog]。留着是为了不打断老习惯——用户从书架
     // 「导入书籍」里选到一本漫画时，得到的是一句「这是漫画」而不是「格式不支持」。
     // `.zip` / `.epub` 无论如何都得留（图片型压缩包与词典包/普通电子书同形）。
-    'mokuro',
-    'cbz',
-    'zip',
+    // Kitapsen has no manga: comic and mokuro carriers are not offered.
+    if (!kKitapsenEdition) ...<String>['mokuro', 'cbz', 'zip'],
     ...TextToEpub.supportedExtensions,
   ];
 
@@ -616,6 +628,7 @@ class _BookImportDialogState extends State<BookImportDialog>
   /// 用户手选）。音频必须配字幕，故仅在字幕已就位时才填音频。桌面端有效；
   /// 移动端是缓存副本目录、扫不到兄弟文件，[findSidecars] 静默返回空。
   Future<void> _autoAttachSidecars(String mainPath) async {
+    if (kKitapsenEdition) return;
     final SidecarMatch m = await findSidecars(mainPath);
     if (!mounted || m.isEmpty) return;
     bool attachedSub = false;
@@ -932,7 +945,10 @@ class _BookImportDialogState extends State<BookImportDialog>
     final String? epubPath = _epubPath;
     if (!kKitapsenEdition && epubPath != null && await _handoffIfManga(epubPath)) return;
     if (!mounted) return;
-    if (_epubPath != null && !_hasSubtitles && _audioPaths.isNotEmpty) {
+    if (!kKitapsenEdition &&
+        _epubPath != null &&
+        !_hasSubtitles &&
+        _audioPaths.isNotEmpty) {
       // 有音频没字幕：本机能转录就直接问字幕来源（选文件 / 转录），拿到字幕后接着
       // 导入；只有不能转录的平台才提示。转录入口只是字幕行尾一枚无字图标，用户
       // 「下载了语音模型 → 选 EPUB + 音频 → 点导入」走到这里，若只给一句「音频需要
@@ -983,7 +999,9 @@ class _BookImportDialogState extends State<BookImportDialog>
         debugPrint(
             '[fushi-import] route: epub=$_epubPath sub=$_subtitlePath audio=${_audioPaths.length} files');
         String? tail;
-        if (_epubPath != null && _hasSubtitles) {
+        if (kKitapsenEdition) {
+          await _importEpubOnly(title: title);
+        } else if (_epubPath != null && _hasSubtitles) {
           debugPrint('[fushi-import] → _importEpubWithAlignment');
           tail = await _importEpubWithAlignment(title: title);
         } else if (_hasSubtitles) {

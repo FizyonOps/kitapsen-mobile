@@ -6568,5 +6568,12 @@
   "kitapsen_stat_range_calendar": "Календарь чтения",
   "kitapsen_book_read_sample": "Читать отрывок",
   "kitapsen_sample_notice": "Отрывок: первые ${percent}% книги.",
-  "kitapsen_sample_unavailable": "У этой книги нет отрывка."
+  "kitapsen_sample_unavailable": "У этой книги нет отрывка.",
+  "kitapsen_settings_destination_system_summary": "Общие, о приложении и диагностика",
+  "kitapsen_theme_role_selection": "Подсветка выделения",
+  "kitapsen_theme_preview_chapter": "Глава 1",
+  "kitapsen_theme_preview_body": "Основной текст",
+  "kitapsen_theme_preview_selection": "выделенный текст",
+  "kitapsen_theme_preview_link": "Ссылка",
+  "kitapsen_storage_category_books": "Книги"
 }

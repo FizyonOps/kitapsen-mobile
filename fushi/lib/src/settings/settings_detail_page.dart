@@ -72,9 +72,12 @@ class _SettingsDetailPageState extends BasePageState<SettingsDetailPage>
     // 推荐包下载同理（BUG-2097）：它跑在 app 级 controller 里，用户可能是在设置页
     // 开着的时候点了下载、或者下载在后台跑完了——不听这一条，「推荐包」那一行的
     // 显隐就停在进页面那一刻的旧状态。
-    appModelNoUpdate.recommendedPackDownloadController.stage.addListener(
-      _onLogChanged,
-    );
+    // Kitapsen has no recommended dictionary packs.
+    if (!kKitapsenEdition) {
+      appModelNoUpdate.recommendedPackDownloadController.stage.addListener(
+        _onLogChanged,
+      );
+    }
   }
 
   @override
@@ -85,9 +88,11 @@ class _SettingsDetailPageState extends BasePageState<SettingsDetailPage>
       GalIngameLookupController.instance.admission
           .removeListener(_onLogChanged);
     }
-    appModelNoUpdate.recommendedPackDownloadController.stage.removeListener(
-      _onLogChanged,
-    );
+    if (!kKitapsenEdition) {
+      appModelNoUpdate.recommendedPackDownloadController.stage.removeListener(
+        _onLogChanged,
+      );
+    }
     super.dispose();
   }
 

@@ -1192,9 +1192,9 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
     //
     // 收藏（onFavoriteEntry / onFavoriteCheck）**不在此列**：收藏句子/词写的是本地
     // FavoriteWords 表，与 Anki 无关，属阅读能力而非制卡能力。
-    final bool cardCreationEnabled = appModel.moduleVisibility.isEnabled(
-      ModuleId.cardCreation,
-    );
+    final bool cardCreationEnabled =
+        !kKitapsenEdition &&
+        appModel.moduleVisibility.isEnabled(ModuleId.cardCreation);
     // 「+句」草稿（多句合一制卡 / 调整上下文）只为制卡服务，跟着制卡一起关。
     final bool sentenceDraftEnabled =
         supportsSentenceDraft && cardCreationEnabled;

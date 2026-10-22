@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:image_picker/image_picker.dart';
 
 /// 「从相册 / 文件系统选一张图片」的平台感知统一入口（BUG-1074）。
@@ -40,6 +41,10 @@ enum GalleryImagePickerBackend {
 GalleryImagePickerBackend galleryImagePickerBackendFor(
   TargetPlatform platform,
 ) {
+  // Kitapsen ships image_picker without its native plugin (no camera code);
+  // covers come from file_picker's image picker, the one the import dialog's
+  // cover row already uses.
+  if (kKitapsenEdition) return GalleryImagePickerBackend.filePicker;
   switch (platform) {
     case TargetPlatform.android:
     case TargetPlatform.iOS:

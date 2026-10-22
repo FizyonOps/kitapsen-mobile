@@ -103,7 +103,8 @@ void installEngineHostBindings() {
   if (!kKitapsenEdition) {
     releaseDictionaryMappings = FushiDicts.releaseAllMappings;
   }
-  ffmpegPlatformBackendProvider = _platformFfmpegBackend;
+  // Kitapsen ships without ffmpeg (no audio clipping, probing or video).
+  if (!kKitapsenEdition) ffmpegPlatformBackendProvider = _platformFfmpegBackend;
   // 制卡 ffmpeg 的远端输入经本机中继（在线视频源伪装分片，BUG-2642 残留）：
   // 视频页登记，引擎按输入地址来查。
   // Kitapsen: no stream mining, so no ffmpeg relay routes.

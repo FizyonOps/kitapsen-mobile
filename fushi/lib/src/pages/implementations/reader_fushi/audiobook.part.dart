@@ -245,7 +245,9 @@ extension _ReaderAudiobook on _ReaderFushiPageState {
     // 起/接管 [AudiobookSession]（媒体通知 + 后台播放）的地方，在这里早退即满足
     // 「模块专属后台下次启动不再拉起」——已在跑的会话不受影响（本函数只在开书 /
     // 换源时调用，不碰 session 已有的播放）。
-    if (!_moduleVisibility.isEnabled(ModuleId.listening)) {
+    if (kKitapsenEdition ||
+        !(!kKitapsenEdition &&
+            _moduleVisibility.isEnabled(ModuleId.listening))) {
       // 歌词模式靠有声书 cue 活着；没有控制器就把它复位，与函数末尾那条
       // 「_audiobookController == null → 关歌词」是同一条不变式。
       if (_lyricsMode) {
@@ -451,6 +453,8 @@ extension _ReaderAudiobook on _ReaderFushiPageState {
   }
 
   Future<void> _primeAudioCuesForCurrentBook() async {
+    // Kitapsen: no audiobooks or subtitle books.
+    if (kKitapsenEdition) return;
     final AudiobookPlayerController? controller = _audiobookController;
     if (controller == null) return;
 
@@ -2150,7 +2154,11 @@ extension _ReaderAudiobook on _ReaderFushiPageState {
     // 兜底早退：四个入口（底栏耳机键 / 快速设置面板 / 桌面顶栏 / 快捷键 B）在
     // 「听书」关闭时都已不渲染，这里只挡住将来新接的调用方，不是用户可达路径，
     // 故无需提示。
-    if (!_moduleVisibility.isEnabled(ModuleId.listening)) return;
+    if (kKitapsenEdition ||
+        !(!kKitapsenEdition &&
+            _moduleVisibility.isEnabled(ModuleId.listening))) {
+      return;
+    }
     if (_srtBookUid != null) {
       await _openSrtBookReimport();
       return;
@@ -2185,6 +2193,7 @@ extension _ReaderAudiobook on _ReaderFushiPageState {
   /// 旧实现只能换音频（`ReaderSrtAudioPickerDialog`），字幕书的字幕在首次导入后
   /// 无处可换——用户报的「有声书没办法重新导入 / 导不了字幕文件」即此。
   Future<void> _openSrtBookReimport() async {
+    if (kKitapsenEdition) return;
     final SrtBookRepository repo = SrtBookRepository(appModel.database);
     final SrtBook? book = await repo.findByUid(_srtBookUid!);
     if (book == null || !mounted) return;

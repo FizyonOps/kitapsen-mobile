@@ -11,6 +11,7 @@ import 'package:fushi/src/settings/settings_destination.dart';
 import 'package:fushi/utils.dart';
 import 'package:fushi_engine/media/video/subtitle/subtitle_language_preference.dart'
     show subtitleLanguageNativeName;
+import 'package:fushi/src/models/kitapsen_edition.dart';
 
 /// 「AI」一级设置分类：用户自配的大模型提供商 + 每个功能用哪家。
 ///
@@ -84,6 +85,7 @@ SettingsDestination buildAiDestination() {
         visible: (SettingsContext c) =>
             StoreRestrictedCapability.downloads.isAvailable &&
             StoreRestrictedCapability.externalDiscovery.isAvailable &&
+            !kKitapsenEdition &&
             c.appModel.moduleVisibility.isEnabled(ModuleId.browse),
         items: <SettingsItem>[
           SettingsSegmentedItem<String>(

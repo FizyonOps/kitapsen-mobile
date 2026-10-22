@@ -31,6 +31,7 @@ import 'package:fushi/src/reader/dictionary_language_css.dart';
 import 'package:fushi/src/reader/reader_settings.dart';
 import 'package:fushi_dictionary/fushi_dictionary.dart';
 import 'package:path/path.dart' as p;
+import 'package:fushi/src/models/kitapsen_edition.dart';
 
 /// Call-site-specific knobs for [buildPopupSettingsJs]. Everything that must be
 /// IDENTICAL between the in-app popup and the app-outside global-lookup window
@@ -887,9 +888,9 @@ PopupStaticSettingsJs buildPopupStaticSettingsJs({
   // app 外全局查词窗**共用**的唯一注入点，一处判据就同时覆盖两类表面（含 galgame
   // 浮窗），不会像散在宿主里那样漏掉一处。宿主侧「回调为 null 就不渲染」的既有契约
   // 与它正交、互不覆盖。
-  final bool miningEnabled = appModel.moduleVisibility.isEnabled(
-    ModuleId.cardCreation,
-  );
+  final bool miningEnabled =
+      !kKitapsenEdition &&
+      appModel.moduleVisibility.isEnabled(ModuleId.cardCreation);
 
   final String slotKey =
       '${options.globalLookup}|${options.mobileExternal}'

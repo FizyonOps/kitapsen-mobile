@@ -26,6 +26,7 @@ import 'package:fushi_engine/media/video/download/video_resource_registry.dart';
 import 'package:fushi_engine/media/video/metadata/video_source_scrape_config.dart';
 import 'package:fushi_engine/sync/assistant/host_assistant.dart';
 import 'package:fushi_engine/sync/assistant/video_acquisition_assistant_host.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 
 // 身份匹配 / 订阅查找 / 在库判定随组合根下沉到引擎（无头服务端共用）；首页仍经
 // 本文件拿它们。
@@ -101,7 +102,8 @@ VideoAcquisitionAssistantHost createVideoAcquisitionAssistantHost(AppModel appMo
   videoAcquireBlocker: () async {
     if (!StoreRestrictedCapability.downloads.isAvailable ||
         !StoreRestrictedCapability.externalDiscovery.isAvailable ||
-        !appModel.moduleVisibility.isEnabled(ModuleId.browse)) {
+        !(!kKitapsenEdition &&
+            appModel.moduleVisibility.isEnabled(ModuleId.browse))) {
       return kHostAssistantReasonDisabled;
     }
     if (resolveVideoAcquireAiProvider(appModel.prefsRepo) == null) {

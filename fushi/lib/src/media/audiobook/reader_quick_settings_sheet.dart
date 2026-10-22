@@ -259,6 +259,7 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
   /// 「听书」模块是否可见。关掉时本面板不再渲染「有声书」分类（设置抽屉标签栏 +
   /// 窄窗导航行两处），即便宿主还持有一个控制器也一样——模块关掉 = 入口消失。
   bool get _listeningEnabled =>
+      !kKitapsenEdition &&
       widget.appModel.moduleVisibility.isEnabled(ModuleId.listening);
 
   /// 桌面端右侧「设置」抽屉当前展开的分组 id（初值来自页面记忆）。
@@ -399,6 +400,8 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
       case ReaderQuickSettingsPresentation.sideSheetAppearance:
         return _buildAppearanceSideSheet(context, theme);
       case ReaderQuickSettingsPresentation.audiobookPanel:
+        // Kitapsen: no audiobooks, so no audiobook panel.
+        if (kKitapsenEdition) return const SizedBox.shrink();
         return _buildAudiobookPanel(context, theme);
       case ReaderQuickSettingsPresentation.sheet:
         break;
@@ -572,7 +575,11 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
 
   Widget _buildSideSheetTabContent(BuildContext context, String tab) {
     final Widget content = _subPageContent(tab);
-    if (tab != 'layout' || widget.onToggleLyricsMode == null) return content;
+    if (kKitapsenEdition ||
+        tab != 'layout' ||
+        widget.onToggleLyricsMode == null) {
+      return content;
+    }
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -746,7 +753,7 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
         // exposes the theme selector + book-CSS row via _buildLyricsDisplaySection
         // so the theme/CSS stay reachable after the appearance group was dropped
         // (TODO-802 reachability).
-        return widget.lyricsMode
+        return !kKitapsenEdition && widget.lyricsMode
             ? _buildLyricsDisplaySection()
             : _buildLayoutDetail();
       case 'behavior':
@@ -762,6 +769,7 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
       case 'location':
         return _buildLocationSection(Theme.of(context));
       case 'audiobook':
+        if (kKitapsenEdition) return const SizedBox.shrink();
         return _buildAudiobookSettingsSection(Theme.of(context));
       default:
         return const SizedBox.shrink();

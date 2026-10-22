@@ -3,6 +3,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:flutter/services.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/reader/reader_content_styles.dart';
 import 'package:fushi/src/reader/reader_sentence_audio_ownership_script.dart';
 import 'package:fushi/src/reader/reader_study_unit_script.dart';
@@ -964,12 +965,13 @@ class ReaderPaginationScripts {
     required bool vnMode,
     required bool continuousMode,
   }) {
-    final String shell = vnMode
+    // Kitapsen: no visual-novel mode (readerViewMode never reports 'vn').
+    final String shell = !kKitapsenEdition && vnMode
         ? ReaderVisualNovelScripts.vnShellScript()
         : (continuousMode ? continuousShellSource() : paginatedShellSource());
     return '''<script>
 $kStudyUnitJs
-$kSentenceAudioOwnershipJs
+${kKitapsenEdition ? '' : kSentenceAudioOwnershipJs}
 window.__fushiShells = {};
 ${_stripShellScriptTags(shell)}
 window.__fushiInstallShell = function(C) {
@@ -987,7 +989,11 @@ window.__fushiInstallShell = function(C) {
 
   // ── Shared JS (properties + methods used by both modes) ────────────
 
-  static const String _sharedJs = r'''
+  static const String _sharedJs = _sharedJsHead +
+      (kKitapsenEdition ? '' : _sharedSentenceAudioJs) +
+      _sharedJsTail;
+
+  static const String _sharedJsHead = r'''
   cueWrappers: new Map(),
   cueRangesMap: new Map(),
   cueRubyElements: new Map(),
@@ -1039,7 +1045,7 @@ window.__fushiInstallShell = function(C) {
     var settled = this._reanchorPending === true && value !== true;
     this._reanchorPending = value === true;
     // BUG-2806：重锚落定 = 排版已按新几何落定，有声书补缝阴影按新排版重量。
-    if (settled) this.paintSentenceAudioRubyGaps();
+    if (settled && this.paintSentenceAudioRubyGaps) this.paintSentenceAudioRubyGaps();
     if (settled && window.flutter_inappwebview && window.flutter_inappwebview.callHandler) {
       try { window.flutter_inappwebview.callHandler('onReanchorSettled'); } catch (e) {}
     }
@@ -1659,6 +1665,12 @@ window.__fushiInstallShell = function(C) {
     var end = vertical ? rect.bottom : rect.right;
     return end > firstEdge && start < lastEdge;
   },
+''';
+
+  /// Audiobook sentence highlighting (cue mapping, wrapping, ruby gap fill,
+  /// tap-to-cue lookup). Kitapsen ships no audiobooks, so its engine source
+  /// leaves this part out.
+  static const String _sharedSentenceAudioJs = r'''
   buildSentenceAudioNormIndex: function() {
     // 一次性遍历 DOM 文本节点（createWalker 跳过振假名 rt/rp），构建归一化
     // 全文 full 与反查表 map：map[k] = {node,start,end}（第 k 个归一化字符在其
@@ -2111,6 +2123,9 @@ window.__fushiInstallShell = function(C) {
     this.cueWrappers.clear();
     this.activeCueId = null;
   },
+''';
+
+  static const String _sharedJsTail = r'''
   unwrap: function(wrappers) {
     wrappers.forEach(function(wrapper) {
       var parent = wrapper.parentNode;
@@ -2226,7 +2241,9 @@ window.__fushiInstallShell = function(C) {
     }''';
 
   /// 有声书 cue 下发：旧实现「有 cue 才注入这一行」，现在「有 cue 才调用」。
-  static const String _sharedSentenceAudioInitJs = '''
+  static const String _sharedSentenceAudioInitJs = kKitapsenEdition
+      ? ''
+      : '''
     if (C.sentenceAudioCues !== null && C.sentenceAudioCues !== undefined) {
       window.fushiReader.applySentenceAudioCues(C.sentenceAudioCues);
     }''';

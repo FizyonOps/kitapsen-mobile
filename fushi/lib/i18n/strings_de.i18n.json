@@ -6568,5 +6568,12 @@
   "kitapsen_stat_range_calendar": "Lesekalender",
   "kitapsen_book_read_sample": "Leseprobe",
   "kitapsen_sample_notice": "Leseprobe: die ersten ${percent} % des Buches.",
-  "kitapsen_sample_unavailable": "Für dieses Buch gibt es keine Leseprobe."
+  "kitapsen_sample_unavailable": "Für dieses Buch gibt es keine Leseprobe.",
+  "kitapsen_settings_destination_system_summary": "Allgemein, Info & Diagnose",
+  "kitapsen_theme_role_selection": "Auswahl-Hervorhebung",
+  "kitapsen_theme_preview_chapter": "Kapitel 1",
+  "kitapsen_theme_preview_body": "Fließtext",
+  "kitapsen_theme_preview_selection": "markierter Text",
+  "kitapsen_theme_preview_link": "Link",
+  "kitapsen_storage_category_books": "Bücher"
 }

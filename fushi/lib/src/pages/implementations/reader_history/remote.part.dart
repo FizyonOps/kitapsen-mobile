@@ -66,6 +66,7 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
   bool get _shouldLoadRemoteBooks =>
       kKitapsenEdition ||
       (appModelNoUpdate.prefsRepo.showRemoteEntries &&
+          !kKitapsenEdition &&
           _moduleVisibility.isEnabled(ModuleId.sync));
 
   Future<_RemoteBookState?> _loadRemoteBooks(
@@ -96,9 +97,12 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
         forceRefresh: forceRefresh,
         fetch: client.listRemoteBooks,
       );
-      final RemoteCollectionAdoptionService adoption =
-          RemoteCollectionAdoptionService(appModel.database);
-      await adoption.adoptBooks(books);
+      // Kitapsen store books carry no peer collections to adopt.
+      if (!kKitapsenEdition) {
+        final RemoteCollectionAdoptionService adoption =
+            RemoteCollectionAdoptionService(appModel.database);
+        await adoption.adoptBooks(books);
+      }
       // #6: 远端与本地是同一本书时（同 bookKey）不在混排网格重复展示（只显示本地卡）。
       final List<EpubBookMeta> localBooks =
           await appModel.database.getEpubBookMetas();
@@ -121,7 +125,8 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
       // BUG-2505 好不容易补上的那个补拉入口又被挡掉：用户第一次没下成功之后，
       // 书架上再也找不到第二次下载的地方。
       final Set<String> localAudiobookKeys = <String>{};
-      if (!_mangaOnly) {
+      // Kitapsen has no audiobooks.
+      if (!kKitapsenEdition && !_mangaOnly) {
         for (final AudiobookRow ab
             in await appModel.database.getAllAudiobooks()) {
           if (await audiobookAudioIsIntact(
@@ -155,7 +160,7 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
       // 作为可下载占位卡。云盘后端无此 API → 空列表（占位卡不出现，与能力边界一致）。
       // 漫画书架与有声书无交集，恒空。
       final ({List<RemoteAudiobookInfo> audiobooks, bool failed}) remoteSrt =
-          _mangaOnly
+          kKitapsenEdition || _mangaOnly
               ? (audiobooks: const <RemoteAudiobookInfo>[], failed: false)
               : await _loadStandaloneRemoteSrtAudiobooks(
                   client,
@@ -169,12 +174,14 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
       _consumeKitapsenDownloadRequest(shelfBooks);
       return _RemoteBookState(
         books: shelfBooks,
-        audiobookOnly: remoteAudiobookOnlyCandidates(
-          remote: withContent,
-          localBookKeys: localKeys,
-          localAudiobookKeys: localAudiobookKeys,
-          keyOf: sanitizeTtuFilename,
-        ),
+        audiobookOnly: kKitapsenEdition
+            ? const <String, RemoteBookInfo>{}
+            : remoteAudiobookOnlyCandidates(
+                remote: withContent,
+                localBookKeys: localKeys,
+                localAudiobookKeys: localAudiobookKeys,
+                keyOf: sanitizeTtuFilename,
+              ),
         srtAudiobooks: remoteSrt.audiobooks,
         srtFailed: remoteSrt.failed,
       );
@@ -751,7 +758,7 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
           ? null
           : await appModel.database.getEpubBookByUid(existingUid);
       final bool hasExistingContent = existingBook != null &&
-          (existingBook.format == BookFormat.manga.dbValue
+          (!kKitapsenEdition && existingBook.format == BookFormat.manga.dbValue
               ? hasExportableMangaContent(existingBook.extractDir)
               : resolveExtractedEpubRoot(existingBook.extractDir) != null);
       final String? localBookKey = (hasExistingContent ? existingBook.bookKey : null) ??
@@ -1517,7 +1524,8 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
     // importBookFromFile 的嗅探完全同语义（内容即真相，扩展名不参与判定）。
     // 标题用 [mangaTitleHint]（远端 raw title——身份键 bookKey 由它派生）而非本地
     // 临时文件名（`_safeRemoteBookKey` 已把非 ASCII 打成下划线，用它当标题会漂键）。
-    if (await isMangaPackage(file)) {
+    // Kitapsen's store sells books only, never manga packages.
+    if (!kKitapsenEdition && await isMangaPackage(file)) {
       return importMangaPackageFile(
         db: appModel.database,
         file: file,

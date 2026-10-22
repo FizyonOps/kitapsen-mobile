@@ -7,6 +7,7 @@ import 'package:fushi/src/settings/settings_actions.dart';
 import 'package:fushi/src/settings/settings_context.dart';
 import 'package:fushi/src/settings/settings_destination.dart';
 import 'package:fushi/utils.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 
 /// 「听书」的两个设置分区（有声书 + 悬浮歌词）。
 ///
@@ -27,6 +28,7 @@ import 'package:fushi/utils.dart';
 /// 领域文件边界不变，settings_redesign_static_test 的「一域一文件」契约照旧成立。
 List<SettingsSection> buildListeningSections() {
   bool listeningModuleOn(SettingsContext c) =>
+      !kKitapsenEdition &&
       c.appModel.moduleVisibility.isEnabledOrUngated(ModuleId.listening);
   return <SettingsSection>[
     SettingsSection(

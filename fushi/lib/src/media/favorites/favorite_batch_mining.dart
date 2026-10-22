@@ -11,10 +11,12 @@ import 'package:fushi/src/models/module_id.dart';
 import 'package:fushi/src/pages/implementations/dictionary_popup_webview.dart';
 import 'package:fushi/utils.dart';
 import 'package:fushi_dictionary/fushi_dictionary.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 
 /// 收藏夹「一键制卡」入口是否该出现：制卡模块（[ModuleId.cardCreation]）被用户关掉时
 /// 整个入口不渲染——与阅读器 / 视频页弹窗的制卡按钮同一个总闸。
 bool favoriteBatchMiningAvailable(AppModel appModel) =>
+    !kKitapsenEdition &&
     appModel.moduleVisibility.isEnabled(ModuleId.cardCreation);
 
 /// 把 [items] 逐条写进 Anki：打开一个进度页，按顺序为每条查词、在可见的查词弹窗里

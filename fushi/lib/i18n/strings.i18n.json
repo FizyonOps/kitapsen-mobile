@@ -6568,5 +6568,12 @@
   "kitapsen_stat_range_calendar": "Reading calendar",
   "kitapsen_book_read_sample": "Read sample",
   "kitapsen_sample_notice": "Sample: the first ${percent}% of the book.",
-  "kitapsen_sample_unavailable": "This book has no sample."
+  "kitapsen_sample_unavailable": "This book has no sample.",
+  "kitapsen_settings_destination_system_summary": "General, about & diagnostics",
+  "kitapsen_theme_role_selection": "Selection highlight",
+  "kitapsen_theme_preview_chapter": "Chapter 1",
+  "kitapsen_theme_preview_body": "Body text",
+  "kitapsen_theme_preview_selection": "selected text",
+  "kitapsen_theme_preview_link": "Link",
+  "kitapsen_storage_category_books": "Books"
 }

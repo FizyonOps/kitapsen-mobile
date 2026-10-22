@@ -111,17 +111,9 @@ public final class AppShortcutsHelper {
         }
     }
 
+    // Kitapsen publishes only the books shortcut (the books module is the only
+    // one it ships), so the lookup / manga / video icons are not bundled.
     private static int iconFor(String id) {
-        switch (id) {
-            case "lookup":
-                return R.drawable.ic_shortcut_lookup;
-            case "books":
-                return R.drawable.ic_shortcut_books;
-            case "manga":
-                return R.drawable.ic_shortcut_manga;
-            case "video":
-            default:
-                return R.drawable.ic_shortcut_video;
-        }
+        return R.drawable.ic_shortcut_books;
     }
 }

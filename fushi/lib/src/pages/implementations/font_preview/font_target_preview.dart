@@ -109,15 +109,19 @@ class FontTargetPreview extends StatelessWidget {
               FontTarget.dictionary => kKitapsenEdition
                   ? const SizedBox.shrink()
                   : _DictionaryPreview(families: families),
-              FontTarget.videoSubtitle => _SubtitlePreview(
-                families: families,
-                style: subtitleStyle,
-                sampleText: sampleText,
-              ),
-              FontTarget.gameLookup => _GameOverlayPreview(
-                families: families,
-                sampleText: sampleText,
-              ),
+              FontTarget.videoSubtitle => kKitapsenEdition
+                  ? const SizedBox.shrink()
+                  : _SubtitlePreview(
+                      families: families,
+                      style: subtitleStyle,
+                      sampleText: sampleText,
+                    ),
+              FontTarget.gameLookup => kKitapsenEdition
+                  ? const SizedBox.shrink()
+                  : _GameOverlayPreview(
+                      families: families,
+                      sampleText: sampleText,
+                    ),
             },
           ),
         ),

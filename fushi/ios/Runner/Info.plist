@@ -3,19 +3,13 @@
 <plist version="1.0">
 	<dict>
 		<!--
-			Kitapsen: the camera / photo / microphone / media-library purpose strings
-			stay because linked plugins (image_picker, mobile_scanner, record,
-			file_picker) reference those APIs and App Store processing rejects a
-			binary that references them without a purpose string (ITMS-90683).
-			No Kitapsen screen requests these permissions. Local-network / Bonjour
-			keys are gone with device sync.
+			Kitapsen: only the photo-library purpose string is declared, for the
+			book cover picker (file_picker's image picker). No camera, microphone or
+			media-library code ships: image_picker, mobile_scanner and record have
+			no native part in this edition and file_picker's audio picker is
+			compiled out (Podfile PICKER_AUDIO). Local-network / Bonjour keys are
+			gone with device sync.
 		-->
-		<key>NSMicrophoneUsageDescription</key>
-		<string>Kitapsen uses the microphone only if you start an audio recording in the app.</string>
-		<key>NSAppleMusicUsageDescription</key>
-		<string>Kitapsen accesses your media library only if you choose an audio file to import.</string>
-		<key>NSCameraUsageDescription</key>
-		<string>Kitapsen uses the camera only if you choose to take a photo in the app.</string>
 		<key>NSPhotoLibraryUsageDescription</key>
 		<string>Kitapsen accesses your photo library only if you choose an image to use in the app.</string>
 		<key>CFBundleDevelopmentRegion</key>

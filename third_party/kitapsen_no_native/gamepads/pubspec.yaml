@@ -1,0 +1,19 @@
+# Kitapsen edition: Dart API of this package without its native plugin
+# (no Android/iOS code is bundled). Its feature is compiled out of the
+# app; see third_party/kitapsen_no_native/README.md.
+name: gamepads
+description: A Flutter plugin to handle gamepad input across multiple platforms.
+version: 0.1.10+2
+homepage: https://github.com/flame-engine/gamepads
+repository: https://github.com/flame-engine/gamepads/tree/main/packages/gamepads
+
+flutter: {}
+
+environment:
+  sdk: ">=3.9.0 <4.0.0"
+  flutter: ">=3.35.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  gamepads_platform_interface: ^0.1.3

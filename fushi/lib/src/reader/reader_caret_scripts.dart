@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:ui';
 
+import 'package:fushi/src/models/kitapsen_edition.dart';
+
 /// JavaScript "char caret" for the reader: a single focused character inside the
 /// EPUB DOM that the keyboard/gamepad can step character-by-character, with a
 /// fixed-position focus ring drawn over it. The caret lives in JS because the
@@ -160,7 +162,10 @@ class ReaderCaretScripts {
   // 同步）：_isStop（本文件含弹窗标点/scope/clickable 门控）、_ensureRing（ring id fushi-caret-ring
   // vs fushi-lyrics-caret-ring）、_drawRing（本文件做视口 clamp）、_walker（本文件走 document.body
   // 全文）。
-  static String source() => r"""
+  static String source() =>
+      _sourceHead + (kKitapsenEdition ? '' : _dictJumpSource) + _sourceTail;
+
+  static const String _sourceHead = r"""
 window.fushiCaret = {
   active: false,
   node: null,
@@ -954,6 +959,11 @@ window.fushiCaret = {
     return this._pageOrScroll(!!forwardish);
   },
 
+""";
+
+  /// Gamepad / keyboard jump between dictionary sections of a lookup popup.
+  /// Kitapsen has no dictionary popup, so the reader source leaves it out.
+  static const String _dictJumpSource = r"""
   // ── Jump to dictionary section (Yomitan-style "go to dictionary") ──────
   // Step the caret to the next/previous dictionary section header
   // (summary.dict-label) so a pure gamepad/keyboard user can skip whole
@@ -1006,6 +1016,9 @@ window.fushiCaret = {
     this._place({ node: null, offset: 0, el: target.el, rect: rect });
     return { status: 'moved', rect: this._rectJson(rect) };
   },
+""";
+
+  static const String _sourceTail = r"""
 
   refresh: function() {
     if (!this.active) return { ok: false };

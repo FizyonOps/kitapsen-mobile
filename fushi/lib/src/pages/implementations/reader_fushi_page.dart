@@ -3152,8 +3152,10 @@ class _ReaderFushiPageState extends BaseSourcePageState<ReaderFushiPage>
     //   `_controller`（audiobook_session.dart），秒重进的竞态窗口收敛到微任务级。
     // - 开启（=true）：只 detachReader，控制器留在 [AudiobookSession] 进程级常驻
     //   持有者里继续后台播放（保 TODO-291 阶段2 的后台续播）。
-    appModel.audiobookSession.detachReader(this);
-    if ((_sourceReviewSession != null || !appModel.audiobookBackgroundPlay) &&
+    // Kitapsen has no audiobooks: no session to detach from or stop.
+    if (!kKitapsenEdition) appModel.audiobookSession.detachReader(this);
+    if (!kKitapsenEdition &&
+        (_sourceReviewSession != null || !appModel.audiobookBackgroundPlay) &&
         _audiobookController != null &&
         identical(appModel.audiobookSession.controller, _audiobookController)) {
       // fire-and-forget 必须 catchError：dispose 同步签名无法 await，stop 内
@@ -3220,7 +3222,8 @@ class _ReaderFushiPageState extends BaseSourcePageState<ReaderFushiPage>
     // 返回无效，等句子停了那次返回才生效」。会话可见状态由同步首段负责，native 资源
     // 释放与「用户已经离开这一页」无因果关系，改 fire-and-forget（catchError 兜住
     // 平台异常，语义与 dispose 路径一致）。
-    if ((_sourceReviewSession != null || !appModel.audiobookBackgroundPlay) &&
+    if (!kKitapsenEdition &&
+        (_sourceReviewSession != null || !appModel.audiobookBackgroundPlay) &&
         _audiobookController != null &&
         identical(appModel.audiobookSession.controller, _audiobookController)) {
       unawaited(
@@ -3650,7 +3653,8 @@ class _ReaderFushiPageState extends BaseSourcePageState<ReaderFushiPage>
                         _buildProgressEdgeLine(),
                         _buildStatusFooter(),
                         // 悬浮球的阅读器场景按钮（零尺寸登记器，球画在根上）。
-                        _buildReaderFloatingBallScene(),
+                        // Kitapsen: no floating ball.
+                        if (!kKitapsenEdition) _buildReaderFloatingBallScene(),
                         buildDictionary(),
                         // The bottom chrome returns a Positioned; it MUST stay a direct
                         // child of this Stack. The chrome FocusScope is mounted INSIDE

@@ -4,6 +4,10 @@ platform :ios, '15.1'
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 
+# Kitapsen picks only books (documents) and cover images: file_picker's audio
+# picker (MPMediaPickerController, the Apple Music permission) is compiled out.
+Pod::PICKER_AUDIO = false
+
 project 'Runner', {
   'Debug' => :debug,
   'Profile' => :release,

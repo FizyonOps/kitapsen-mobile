@@ -62,6 +62,8 @@ final fushiBooksProvider =
 const Object kShelfBooksKey = 'shelf';
 
 final srtBooksProvider = FutureProvider<List<SrtBook>>((ref) {
+  // Kitapsen imports plain books only: subtitle books never exist.
+  if (kKitapsenEdition) return const <SrtBook>[];
   // BUG-793：订阅有声书集合变化，任意导入路径落库后自动重算。
   ref.watch(_srtBookUidsProvider);
   final db = ref.watch(appProvider).database;
@@ -420,7 +422,7 @@ class ReaderFushiSource extends ReaderMediaSource {
       return;
     }
     final String? srtUid = parseSrtBookUid(item.mediaIdentifier);
-    if (srtUid == null) return;
+    if (kKitapsenEdition || srtUid == null) return;
     final SrtBookRepository repo = SrtBookRepository(db);
     final SrtBook? book = await repo.findByUid(srtUid);
     if (book == null) return;
@@ -993,7 +995,8 @@ class ReaderFushiSource extends ReaderMediaSource {
     try {
       // 原件位置在 audiobooks / srt_books 行上，deleteEpubBook 的事务会把它们
       // 级联删掉，必须先快照。
-      final Audiobook? audiobookBefore = deleteLocalFiles
+      // Kitapsen has no audiobooks or subtitle books to clean up.
+      final Audiobook? audiobookBefore = !kKitapsenEdition && deleteLocalFiles
           ? await AudiobookRepository(db).findByBookKey(bookKey)
           : null;
       LocalFileDeleteReport localFileReport = const LocalFileDeleteReport();
@@ -1008,8 +1011,9 @@ class ReaderFushiSource extends ReaderMediaSource {
       // The book's on-disk extract dir and the srt uid must be resolved BEFORE
       // the transaction, because deleteEpubBook deletes the rows they live on.
       final EpubBookRow? bookRow = await db.getEpubBook(bookKey);
-      final SrtBookRepository srtRepo = SrtBookRepository(db);
-      final SrtBook? srt = await srtRepo.findByBookKey(bookKey);
+      final SrtBook? srt = kKitapsenEdition
+          ? null
+          : await SrtBookRepository(db).findByBookKey(bookKey);
 
       // BUG-439：bookKey 指向的行不存在（孤儿壳行 bookKey==''、key 不匹配、或重复
       // 删除）时，以前 deleteEpubBook 删 0 行后仍无条件 return true 谎报成功，调用方
@@ -1060,7 +1064,7 @@ class ReaderFushiSource extends ReaderMediaSource {
       try {
         // On-disk cleanups (not covered by the DB transaction). The audiobook
         // persist dir is keyed by the book's own key now (no legacy uid).
-        await AudiobookStorage.deletePersistDir(bookKey);
+        if (!kKitapsenEdition) await AudiobookStorage.deletePersistDir(bookKey);
         if (srt != null) {
           await AudiobookStorage.deletePersistDir(srt.uid);
         }
@@ -1154,7 +1158,7 @@ class ReaderFushiSource extends ReaderMediaSource {
     required FushiDatabase db,
     required String bookKey,
   }) async {
-    if (bookKey.isEmpty) return false;
+    if (kKitapsenEdition || bookKey.isEmpty) return false;
     final Audiobook? ab = await AudiobookRepository(db).findByBookKey(bookKey);
     if (ab != null && await resolveAudiobookHasLocalFiles(ab.audioPaths)) {
       return true;
@@ -1807,12 +1811,15 @@ class ReaderFushiSource extends ReaderMediaSource {
     onSettingsChangedLive?.call();
   }
 
-  String get readerViewMode =>
-      readerSettings?.viewMode ??
-      getPreference<String>(
-        key: 'view_mode',
-        defaultValue: 'paginated',
-      );
+  String get readerViewMode {
+    final String mode =
+        readerSettings?.viewMode ??
+        getPreference<String>(key: 'view_mode', defaultValue: 'paginated');
+    // Kitapsen ships no visual-novel layout; a stray 'vn' value reads as
+    // paginated so the engine never asks for the VN shell.
+    return kKitapsenEdition && mode == 'vn' ? 'paginated' : mode;
+  }
+
   Future<void> setReaderViewMode(String v) async {
     await (readerSettings?.setViewMode(v) ??
         setPreference<String>(key: 'view_mode', value: v));

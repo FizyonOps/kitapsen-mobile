@@ -6568,5 +6568,12 @@
   "kitapsen_stat_range_calendar": "독서 달력",
   "kitapsen_book_read_sample": "샘플 읽기",
   "kitapsen_sample_notice": "샘플: 책의 처음 ${percent}%입니다.",
-  "kitapsen_sample_unavailable": "이 책에는 샘플이 없습니다."
+  "kitapsen_sample_unavailable": "이 책에는 샘플이 없습니다.",
+  "kitapsen_settings_destination_system_summary": "일반, 정보 및 진단",
+  "kitapsen_theme_role_selection": "선택 영역 하이라이트",
+  "kitapsen_theme_preview_chapter": "1장",
+  "kitapsen_theme_preview_body": "본문",
+  "kitapsen_theme_preview_selection": "선택한 텍스트",
+  "kitapsen_theme_preview_link": "링크",
+  "kitapsen_storage_category_books": "책"
 }

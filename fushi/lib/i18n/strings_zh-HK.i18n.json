@@ -6568,5 +6568,12 @@
   "kitapsen_stat_range_calendar": "閱讀日曆",
   "kitapsen_book_read_sample": "閱讀樣章",
   "kitapsen_sample_notice": "樣章：本書的前 ${percent}%。",
-  "kitapsen_sample_unavailable": "本書沒有樣章。"
+  "kitapsen_sample_unavailable": "本書沒有樣章。",
+  "kitapsen_settings_destination_system_summary": "通用、關於與診斷",
+  "kitapsen_theme_role_selection": "選取高亮",
+  "kitapsen_theme_preview_chapter": "第一章",
+  "kitapsen_theme_preview_body": "正文",
+  "kitapsen_theme_preview_selection": "選取的文字",
+  "kitapsen_theme_preview_link": "連結",
+  "kitapsen_storage_category_books": "書籍"
 }

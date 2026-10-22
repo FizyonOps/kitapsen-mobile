@@ -2930,7 +2930,7 @@ class AppModel with ChangeNotifier {
   Future<void> _prepareRuntimeDirectories() async {
     // Windows 安装向导里选的「数据存储位置」经一次性引导文件送达，必须在 resolve
     // 读 data_root pref 之前消费（全新安装才生效，见该函数契约）。
-    await consumeInstallerDataRootBootstrap();
+    if (!kKitapsenEdition) await consumeInstallerDataRootBootstrap();
     // TODO-935 E0：三个数据根经唯一入口 [AppPaths] 解析（内部已honor测试分支
     // [fushiTestDirectory]，故行为与旧的 test/production 双分支逐字节等价）。
     _appPaths = await AppPaths.resolve();
@@ -3004,7 +3004,12 @@ class AppModel with ChangeNotifier {
       // 3) migrate the mutually-exclusive `backendType==fushiServer` interconnect
       //    selection to the independent interconnect toggle (interconnect and a
       //    cloud backup backend can now coexist).
-      await BackupRestoreService.recoverPendingRestore(_databaseDirectory.path);
+      // Kitapsen: no backup import or cloud sync backends, so nothing to recover.
+      if (!kKitapsenEdition) {
+        await BackupRestoreService.recoverPendingRestore(
+          _databaseDirectory.path,
+        );
+      }
 
       // 沙箱重定位自愈：数据根被**平台**挪走后，把库里的绝对路径重基过去。
       //
@@ -3079,21 +3084,26 @@ class AppModel with ChangeNotifier {
       // 代理读取器的绑定已下沉到 `PreferencesRepository.loadFromDb()`（偏好变得可读的
       // 那一刻），这样弹窗词典等**其它**入口不必各自记得补一行——漏一处就是一整个进程
       // 拿不到用户选的模式/凭据。这里只留更新专用的那个。
-      appUpdateDownloadSourceReader = () => prefsRepo.updateDownloadSource;
+      // Kitapsen: store updates only (no GitHub / mirror download sources).
+      if (!kKitapsenEdition) {
+        appUpdateDownloadSourceReader = () => prefsRepo.updateDownloadSource;
+      }
       // 主入口与精简词典入口共用装配，并等系统代理就绪后再启动网络服务。
       await installAppNetworkBindings();
       if (!kKitapsenEdition) _applyEmbeddedTorrentProxy();
       _applyMemoryPolicy();
       // BUG-1647：lazy getter 可能已提前建过实例；替换前先取消其重试定时器，
       // 否则旧定时器会拿着旧 repository 继续同步。
-      _mediaTrackingService?.dispose();
-      _mediaTrackingService = MediaTrackingService(
-        repository: MediaTrackingRepository(_database),
-        preferences: prefsRepo,
-        userAgent: _mediaTrackingUserAgent,
-      );
-      if (kMediaTrackingEnabled) {
-        unawaited(mediaTrackingService.syncNow());
+      if (!kKitapsenEdition) {
+        _mediaTrackingService?.dispose();
+        _mediaTrackingService = MediaTrackingService(
+          repository: MediaTrackingRepository(_database),
+          preferences: prefsRepo,
+          userAgent: _mediaTrackingUserAgent,
+        );
+        if (kMediaTrackingEnabled) {
+          unawaited(mediaTrackingService.syncNow());
+        }
       }
 
       final Map<String, String> prefsSnapshot = prefsRepo.prefsSnapshot;
@@ -3161,10 +3171,13 @@ class AppModel with ChangeNotifier {
             'rebuild-dict-paths', _rebuildDictPathsCacheAsync());
       }
 
-      _localAudioManager = LocalAudioManager(
-        prefsRepo: prefsRepo,
-        databaseDirectory: _databaseDirectory,
-      );
+      // Kitapsen: no dictionary audio, so no local audio databases.
+      if (!kKitapsenEdition) {
+        _localAudioManager = LocalAudioManager(
+          prefsRepo: prefsRepo,
+          databaseDirectory: _databaseDirectory,
+        );
+      }
       _fileExportManager = FileExportManager(
         exportDirectory: _exportDirectory,
         alternateExportDirectory: _alternateExportDirectory,
@@ -3197,7 +3210,7 @@ class AppModel with ChangeNotifier {
         if (!kKitapsenEdition) JapaneseLanguage.instance.initialise(),
         injectAssetLicenses(),
         _seedBuiltInTags(),
-        _prepareLocalAudioForPlayback(),
+        if (!kKitapsenEdition) _prepareLocalAudioForPlayback(),
       ]);
 
       debugPrint(
@@ -3289,7 +3302,7 @@ class AppModel with ChangeNotifier {
       if (!kKitapsenEdition) unawaited(_warmUpSearchAfterFirstFrame());
       // 已下架的本机 OCR 模型（约 10 GB 的 CUDA 档）留在磁盘上的目录：设置页与
       // 存储页都没有它的入口了，不清就永远占着空间。幂等、失败只记日志。
-      unawaited(deleteRemovedMangaOcrModelDirs());
+      if (!kKitapsenEdition) unawaited(deleteRemovedMangaOcrModelDirs());
 
       debugPrint('[Fushi] init: DONE');
       // TODO-1260：启动正常跑完，清掉启动步进面包屑（否则下次启动会误报上次 hang）。
@@ -3335,26 +3348,31 @@ class AppModel with ChangeNotifier {
       // 代价是本机不再作为互联 host 被别的设备发现/连接，合集增删也不再自动推送。
       // Kitapsen: no LAN host / interconnect, so none of it is compiled in.
       if (!kKitapsenEdition && modules.isEnabled(ModuleId.sync)) {
-        if (modules.isEnabled(ModuleId.games)) _configureGameStreamLibrary();
-        unawaited(syncServerController.startIfEnabled().then((
-          FushiServerStartOutcome outcome,
-        ) {
-          if (outcome is FushiServerPortInUse) {
-            ErrorLogService.instance.log(
-              'AppModel.startSyncServer',
-              'port ${outcome.port} in use',
-              StackTrace.current,
-            );
-          } else if (outcome is FushiServerStartError) {
-            ErrorLogService.instance.log(
-              'AppModel.startSyncServer',
-              outcome.message,
-              StackTrace.current,
-            );
-          }
-        }).catchError((Object e, StackTrace s) {
-          ErrorLogService.instance.log('AppModel.startSyncServer', e, s);
-        }));
+        if (!kKitapsenEdition && modules.isEnabled(ModuleId.games)) {
+          _configureGameStreamLibrary();
+        }
+        unawaited(
+          syncServerController
+              .startIfEnabled()
+              .then((FushiServerStartOutcome outcome) {
+                if (outcome is FushiServerPortInUse) {
+                  ErrorLogService.instance.log(
+                    'AppModel.startSyncServer',
+                    'port ${outcome.port} in use',
+                    StackTrace.current,
+                  );
+                } else if (outcome is FushiServerStartError) {
+                  ErrorLogService.instance.log(
+                    'AppModel.startSyncServer',
+                    outcome.message,
+                    StackTrace.current,
+                  );
+                }
+              })
+              .catchError((Object e, StackTrace s) {
+                ErrorLogService.instance.log('AppModel.startSyncServer', e, s);
+              }),
+        );
         // 合集变更 → 防抖轻量同步（根修「合集经常没同步」：合集维度原本只搭载在
         // 低频全量 sweep 上，增删合集后长时间不推送）。任何合集表写入都会在防抖
         // 后跑一轮只含合集维度的双通道同步，见 installCollectionsSyncWatcher 文档。
@@ -3381,7 +3399,7 @@ class AppModel with ChangeNotifier {
       // 助手，模块关掉后那个页面本身也不存在。关掉后不再刷新副本，也不再算内置指纹
       // （查词响应里的 `extensionBuild` 字段随之省略——扩展模块已关，没有消费者）。
       // 平台判据走 modules（browserExtension 仅桌面），与函数内既有的桌面早退同向。
-      if (modules.isEnabled(ModuleId.browserExtension)) {
+      if (!kKitapsenEdition && modules.isEnabled(ModuleId.browserExtension)) {
         unawaited(
             refreshBrowserExtensionCopy().catchError((Object e, StackTrace s) {
           ErrorLogService.instance
@@ -4661,7 +4679,8 @@ class AppModel with ChangeNotifier {
   MihonRuntime get _sharedMihonRuntime {
     final MihonRuntime? existing = _mihonRuntime;
     if (existing != null) return existing;
-    if (!MihonRuntimeFactory.isSupported) {
+    // Kitapsen has no online manga / video sources (no Mihon host).
+    if (kKitapsenEdition || !MihonRuntimeFactory.isSupported) {
       throw UnsupportedError(
         'Mihon extensions are unavailable on this platform',
       );
@@ -6744,7 +6763,8 @@ class AppModel with ChangeNotifier {
     // _resolveAudioSlot、书架后台听书 startBackgroundListening）await 同一份，
     // 「会话挂通知前 handler 必就绪」的时序契约不变。方法自带兜底构造、永不抛，
     // unawaited 安全。
-    unawaited(initialiseAudioHandler());
+    // Kitapsen has no audiobooks, so no audio_service handler.
+    if (!kKitapsenEdition) unawaited(initialiseAudioHandler());
 
     _currentMediaSource = mediaSource;
     if (item != null) {
@@ -6812,7 +6832,8 @@ class AppModel with ChangeNotifier {
     required MediaSource mediaSource,
     MediaItem? item,
   }) async {
-    audioCtrl.audioHandler?.mediaItem.add(null);
+    // Kitapsen has no audio handler (no audiobooks).
+    if (!kKitapsenEdition) audioCtrl.audioHandler?.mediaItem.add(null);
 
     mediaSource.setShouldGenerateImage(value: true);
     mediaSource.setShouldGenerateAudio(value: true);
@@ -6843,7 +6864,7 @@ class AppModel with ChangeNotifier {
       ref: ref,
     );
 
-    await audioCtrl.audioHandler?.stop();
+    if (!kKitapsenEdition) await audioCtrl.audioHandler?.stop();
 
     mediaSource.mediaType.refreshTab();
     if (!kKitapsenEdition) DictionaryMediaType.instance.refreshTab();
@@ -7615,38 +7636,41 @@ class AppModel with ChangeNotifier {
       unawaited(TexthookerWsClientManager.instance.stop());
       unawaited(stopYomitanApiServer());
     }
-    _animeDownloadService?.stop();
-    _animeDownloadSubscriptionService?.stop();
-    _videoDownloadPipelineRuntimeWanted = false;
-    unawaited(_disposeVideoDownloadPipelineRuntime());
-    // 扩展查字幕桥那套 registry 不属于下载管线（管线关着时它才存在），得单独收。
-    _disposeBrowserSubtitleRegistry();
-    _mangaDownloadService?.dispose();
-    _mangaDownloadService = null;
-    // 服务持有 FushiDatabase 引用，db 关闭/重开时必须一并销毁，否则新库开出来后
-    // 旧实例还拿着已关闭的连接，探测队列一落库就抛。
-    _videoSpecsService?.dispose();
-    _videoSpecsService = null;
-    _videoSpecsServiceDb = null;
-    _discoveryDownloadKeepAlive?.dispose();
-    _discoveryDownloadKeepAlive = null;
-    _discoveryDownloadQueue?.dispose();
-    _discoveryDownloadQueue = null;
-    _mediaDiscoveryService?.close();
-    _mediaDiscoveryService = null;
-    _mihonManager?.dispose();
-    _mihonManager = null;
-    _animeMihonManager?.dispose();
-    _animeMihonManager = null;
-    _lnReaderManager?.dispose();
-    _lnReaderManager = null;
-    final ExitFlushCallback? mihonExitShutdown = _mihonRuntimeExitShutdown;
-    _mihonRuntimeExitShutdown = null;
-    if (mihonExitShutdown != null) {
-      ExitFlushRegistry.instance.unregister(mihonExitShutdown);
+    // Kitapsen never starts downloads, online sources or the Mihon host.
+    if (!kKitapsenEdition) {
+      _animeDownloadService?.stop();
+      _animeDownloadSubscriptionService?.stop();
+      _videoDownloadPipelineRuntimeWanted = false;
+      unawaited(_disposeVideoDownloadPipelineRuntime());
+      // 扩展查字幕桥那套 registry 不属于下载管线（管线关着时它才存在），得单独收。
+      _disposeBrowserSubtitleRegistry();
+      _mangaDownloadService?.dispose();
+      _mangaDownloadService = null;
+      // 服务持有 FushiDatabase 引用，db 关闭/重开时必须一并销毁，否则新库开出来后
+      // 旧实例还拿着已关闭的连接，探测队列一落库就抛。
+      _videoSpecsService?.dispose();
+      _videoSpecsService = null;
+      _videoSpecsServiceDb = null;
+      _discoveryDownloadKeepAlive?.dispose();
+      _discoveryDownloadKeepAlive = null;
+      _discoveryDownloadQueue?.dispose();
+      _discoveryDownloadQueue = null;
+      _mediaDiscoveryService?.close();
+      _mediaDiscoveryService = null;
+      _mihonManager?.dispose();
+      _mihonManager = null;
+      _animeMihonManager?.dispose();
+      _animeMihonManager = null;
+      _lnReaderManager?.dispose();
+      _lnReaderManager = null;
+      final ExitFlushCallback? mihonExitShutdown = _mihonRuntimeExitShutdown;
+      _mihonRuntimeExitShutdown = null;
+      if (mihonExitShutdown != null) {
+        ExitFlushRegistry.instance.unregister(mihonExitShutdown);
+      }
+      unawaited(_shutdownMihonRuntime());
+      _mihonRuntime = null;
     }
-    unawaited(_shutdownMihonRuntime());
-    _mihonRuntime = null;
     _prefsRepo?.removeListener(notifyListeners);
     if (_themeListenerAdded) {
       themeNotifier.removeListener(notifyListeners);
@@ -7654,7 +7678,7 @@ class AppModel with ChangeNotifier {
       _themeListenerAdded = false;
     }
     if (!kKitapsenEdition) dictionaryDownloadController.dispose();
-    recommendedPackDownloadController.dispose();
+    if (!kKitapsenEdition) recommendedPackDownloadController.dispose();
     dictionaryEntriesNotifier.dispose();
     dictionarySearchAgainNotifier.dispose();
     dictionaryMenuNotifier.dispose();
@@ -7663,8 +7687,11 @@ class AppModel with ChangeNotifier {
     homeDictionaryTabRequest.dispose();
     mediaOpenNotifier.dispose();
     // session 的控制流订阅引用 audioCtrl 的 stream，须在 audioCtrl.dispose 前拆。
-    audiobookSession.dispose();
-    audioCtrl.dispose();
+    // Kitapsen never creates the audio session or controller.
+    if (!kKitapsenEdition) {
+      audiobookSession.dispose();
+      audioCtrl.dispose();
+    }
     gamepadService.dispose();
     // Dispose the extracted repository notifiers (all ChangeNotifiers). Only
     // when fully initialised — a failed/partial init leaves these `late`
@@ -7677,13 +7704,15 @@ class AppModel with ChangeNotifier {
     }
     _remoteLookupHttpClient?.close();
     _remoteLookupHttpClient = null;
-    _animeDownloadService?.stop();
+    if (!kKitapsenEdition) _animeDownloadService?.stop();
     // TODO-1961-a：退出前强制存一次 resume（下次启动据此续传/继续做种）。
     // 用最近一次 tick 缓存的计划 id 集合剪枝 —— dispose 是同步的，不能在这里
     // await 一次 `store.loadAll()`；缓存最多落后一个 tick（20s），代价只是某个
     // 刚删掉的计划多留一轮 resume 文件，下次启动的剪枝会立刻清掉它。
-    _embeddedTorrentHost?.dispose(keepIds: _animeDownloadPlanIds);
-    _embeddedTorrentHost = null;
+    if (!kKitapsenEdition) {
+      _embeddedTorrentHost?.dispose(keepIds: _animeDownloadPlanIds);
+      _embeddedTorrentHost = null;
+    }
     super.dispose();
   }
 
@@ -9044,6 +9073,8 @@ class AppModel with ChangeNotifier {
     // 上。把它当前的**实际**预算记进时间轴，排查时不必再反推用户开了什么——三级词典
     // 缓存的预算由 [DictionaryRepository] 按同一个 isLowMemory 闭包决定，热槽与停驻
     // realm 则由 [DictionaryPopupController] 按同一个标志决定。
+    // Kitapsen has no video diagnostics log.
+    if (kKitapsenEdition) return;
     final String slots = lowMemoryMode ? 'disabled' : 'enabled';
     videoDiag(
       VideoDiagCategory.memory,

@@ -6568,5 +6568,12 @@
   "kitapsen_stat_range_calendar": "ปฏิทินการอ่าน",
   "kitapsen_book_read_sample": "อ่านตัวอย่าง",
   "kitapsen_sample_notice": "ตัวอย่าง: ${percent}% แรกของหนังสือ",
-  "kitapsen_sample_unavailable": "หนังสือเล่มนี้ไม่มีตัวอย่าง"
+  "kitapsen_sample_unavailable": "หนังสือเล่มนี้ไม่มีตัวอย่าง",
+  "kitapsen_settings_destination_system_summary": "ทั่วไป เกี่ยวกับ และการวินิจฉัย",
+  "kitapsen_theme_role_selection": "ไฮไลต์ส่วนที่เลือก",
+  "kitapsen_theme_preview_chapter": "บทที่ 1",
+  "kitapsen_theme_preview_body": "เนื้อหา",
+  "kitapsen_theme_preview_selection": "ข้อความที่เลือก",
+  "kitapsen_theme_preview_link": "ลิงก์",
+  "kitapsen_storage_category_books": "หนังสือ"
 }

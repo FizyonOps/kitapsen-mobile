@@ -6568,5 +6568,12 @@
   "kitapsen_stat_range_calendar": "تقويم القراءة",
   "kitapsen_book_read_sample": "اقرأ عينة",
   "kitapsen_sample_notice": "عينة: أول ${percent}% من الكتاب.",
-  "kitapsen_sample_unavailable": "لا تتوفر عينة لهذا الكتاب."
+  "kitapsen_sample_unavailable": "لا تتوفر عينة لهذا الكتاب.",
+  "kitapsen_settings_destination_system_summary": "عام، حول التطبيق وتشخيصات",
+  "kitapsen_theme_role_selection": "تمييز التحديد",
+  "kitapsen_theme_preview_chapter": "الفصل 1",
+  "kitapsen_theme_preview_body": "نص الكتاب",
+  "kitapsen_theme_preview_selection": "نص محدد",
+  "kitapsen_theme_preview_link": "رابط",
+  "kitapsen_storage_category_books": "الكتب"
 }

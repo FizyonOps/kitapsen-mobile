@@ -304,7 +304,9 @@ class _CustomThemePageState extends BasePageState<CustomThemePage> {
       case _ThemeRole.link:
         return t.theme_role_link;
       case _ThemeRole.selection:
-        return t.theme_role_selection;
+        return kKitapsenEdition
+            ? t.kitapsen_theme_role_selection
+            : t.theme_role_selection;
       case _ThemeRole.audioHighlight:
         return t.theme_role_audio_highlight;
       case _ThemeRole.secondary:
@@ -879,10 +881,12 @@ class _CustomThemePageState extends BasePageState<CustomThemePage> {
     final FushiDesignTokens tokens = FushiDesignTokens.of(context);
     return <Widget>[
       // ── 让 AI 帮忙 ──
-      AdaptiveSettingsSection(
-        title: t.ai_assist_section,
-        children: <Widget>[_buildAiSection()],
-      ),
+      // Kitapsen has no AI provider settings, so no AI theme assistant.
+      if (!kKitapsenEdition)
+        AdaptiveSettingsSection(
+          title: t.ai_assist_section,
+          children: <Widget>[_buildAiSection()],
+        ),
       // ── 主题色 ──
       AdaptiveSettingsSection(
         title: t.theme_section_accent,
@@ -930,12 +934,15 @@ class _CustomThemePageState extends BasePageState<CustomThemePage> {
         ],
       ),
       // ── 有声书 ──
-      AdaptiveSettingsSection(
-        title: t.theme_section_audiobook,
-        children: <Widget>[_buildRoleRow(_ThemeRole.audioHighlight)],
-      ),
+      // Kitapsen ships no audiobooks or video: no sentence-audio highlight
+      // colour and no subtitle colour note.
+      if (!kKitapsenEdition)
+        AdaptiveSettingsSection(
+          title: t.theme_section_audiobook,
+          children: <Widget>[_buildRoleRow(_ThemeRole.audioHighlight)],
+        ),
       // TODO-072：视频字幕颜色不在此页配置，只放一行说明。
-      _buildNoteRow(t.video_subtitle_color_note),
+      if (!kKitapsenEdition) _buildNoteRow(t.video_subtitle_color_note),
       // ── 微调派生色（默认折叠：多数用户只需要主题色）──
       AdaptiveSettingsSection(
         title: t.theme_section_fine_tune,
@@ -1509,7 +1516,12 @@ class _CustomThemePageState extends BasePageState<CustomThemePage> {
                 children: <Widget>[
                   Icon(Icons.arrow_back, size: 16, color: reader.fg),
                   SizedBox(width: tokens.spacing.gap),
-                  Text('第一章', style: bodyStyle),
+                  Text(
+                    kKitapsenEdition
+                        ? t.kitapsen_theme_preview_chapter
+                        : '第一章',
+                    style: bodyStyle,
+                  ),
                   SizedBox(width: tokens.spacing.gap),
                   Icon(Icons.tune, size: 16, color: reader.fg),
                 ],
@@ -1519,33 +1531,50 @@ class _CustomThemePageState extends BasePageState<CustomThemePage> {
             Wrap(
               crossAxisAlignment: WrapCrossAlignment.center,
               children: <Widget>[
-                _spot(_ThemeRole.readerText, Text('日本語の', style: bodyStyle)),
+                // Kitapsen previews in the interface language, not Japanese.
+                _spot(
+                  _ThemeRole.readerText,
+                  Text(
+                    kKitapsenEdition
+                        ? '${t.kitapsen_theme_preview_body} '
+                        : '日本語の',
+                    style: bodyStyle,
+                  ),
+                ),
                 _spot(
                   _ThemeRole.selection,
                   ColoredBox(
                     color: selectionOnPage,
-                    child: Text('テキスト', style: bodyStyle),
+                    child: Text(
+                      kKitapsenEdition
+                          ? t.kitapsen_theme_preview_selection
+                          : 'テキスト',
+                      style: bodyStyle,
+                    ),
                   ),
                 ),
-                Text('プレビュー', style: bodyStyle),
+                if (!kKitapsenEdition) Text('プレビュー', style: bodyStyle),
               ],
             ),
             Wrap(
               crossAxisAlignment: WrapCrossAlignment.center,
               children: <Widget>[
-                Text('♪ ', style: bodyStyle),
-                _spot(
-                  _ThemeRole.audioHighlight,
-                  ColoredBox(
-                    color: reader.sentenceAudioHighlight,
-                    child: Text('音声ハイライト', style: bodyStyle),
+                // Kitapsen: no audiobook highlight sample in the preview.
+                if (!kKitapsenEdition) ...<Widget>[
+                  Text('♪ ', style: bodyStyle),
+                  _spot(
+                    _ThemeRole.audioHighlight,
+                    ColoredBox(
+                      color: reader.sentenceAudioHighlight,
+                      child: Text('音声ハイライト', style: bodyStyle),
+                    ),
                   ),
-                ),
-                Text('　', style: bodyStyle),
+                  Text('　', style: bodyStyle),
+                ],
                 _spot(
                   _ThemeRole.link,
                   Text(
-                    'リンク',
+                    kKitapsenEdition ? t.kitapsen_theme_preview_link : 'リンク',
                     style: bodyStyle.copyWith(
                       color: reader.link,
                       decoration: TextDecoration.underline,

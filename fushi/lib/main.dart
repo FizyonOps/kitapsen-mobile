@@ -535,7 +535,8 @@ void main([List<String> args = const <String>[]]) {
       DebugLogService.instance.init(),
       // 用户 2026-09-22：视频卡顿 / 查词卡的分析日志。默认关闭（开关在设置 › 诊断），
       // init 只读一次偏好 + 解析日志文件位置，关着时后续全链路零开销。
-      VideoDiagLog.instance.init(),
+      // Kitapsen has no video diagnostics log.
+      if (!kKitapsenEdition) VideoDiagLog.instance.init(),
       // TODO-1232 A3：读一次 native 持久化的渲染后端选择（关 Impeller 实验开关），
       // 供设置项同步渲染。非 Android 静默降级为不支持。
       RenderBackendService.instance.init(),
@@ -590,7 +591,9 @@ void main([List<String> args = const <String>[]]) {
     if (kKitapsenEdition) unawaited(removeKitapsenSample(appModel.database));
     // 互联 P2P 隧道（原生库可用才装）：client 选路在直连全失败后经隧道兜底
     // （docs/specs/2026-09-28-interconnect-remote-reach.md §5）。
-    installInterconnectP2pClient(SyncRepository(appModel.database));
+    if (!kKitapsenEdition) {
+      installInterconnectP2pClient(SyncRepository(appModel.database));
+    }
 
     // ── 预热 WebView 引擎 ──────────────────────────────────────────────
     // 用户还在看主页/书架时就把冷启动成本吃掉：~500-1500ms。
@@ -1352,6 +1355,8 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
   }
 
   void _schedulePairLinks() {
+    // Kitapsen: no device pairing (fushi://pair links are never queued).
+    if (kKitapsenEdition) return;
     if (_pairLinkScheduled || _pairLinkRunning || _pendingPairLinks.isEmpty) {
       return;
     }
@@ -1640,7 +1645,8 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
     // 判定必须排在**入库之前**：下面会经 VideoBookRepository 建/取一行
     // video_books，若放行到那之后再拦，视频就进了一个用户根本看不见的库。给
     // toast 而不是静默——双击 mkv 毫无反应会被当成 app 坏了。
-    if (!appModel.moduleVisibility.isEnabled(ModuleId.video)) {
+    if (!(!kKitapsenEdition &&
+        appModel.moduleVisibility.isEnabled(ModuleId.video))) {
       FushiToast.show(
         msg: t.module_disabled_hint,
         severity: ToastSeverity.info,
@@ -2109,7 +2115,7 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
     // 这里在 loading 分支之前拦截：改显一个带「请勿关闭」文案 + 进度条的迁移遮罩（明确
     // 主题色背景），并保证「遮罩已上屏 → closeDatabase → 搬文件」的顺序（见
     // _DataRootWidget._changeLocation 先调 beginDataRootMigration 再 migrate）。
-    if (appModel.dataRootMigrationActive) {
+    if (!kKitapsenEdition && appModel.dataRootMigrationActive) {
       final brightness =
           WidgetsBinding.instance.platformDispatcher.platformBrightness;
       final ThemeData fallbackTheme = buildFushiFallbackTheme(brightness);
@@ -2135,7 +2141,7 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
     // BUG-2106：**只有关库后的相位**（running/done/failed）才换根独占。validating 段
     // DB 仍打开、可取消，换根会把调用方路由连 Navigator 一起销毁（引导向导被整段摧毁），
     // 改由压在调用方页面之上的模态遮罩路由承载，见 [buildBackupValidatingOverlayRoute]。
-    if (appModel.backupImportOwnsAppRoot) {
+    if (!kKitapsenEdition && appModel.backupImportOwnsAppRoot) {
       final brightness =
           WidgetsBinding.instance.platformDispatcher.platformBrightness;
       final ThemeData fallbackTheme = buildFushiFallbackTheme(brightness);
@@ -2248,7 +2254,8 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
           // freshly-entered page (BUG-398).
           navigatorObservers: <NavigatorObserver>[
             appModel.focusHighlightObserver,
-            floatingBallRouteObserver,
+            // Kitapsen has no floating ball.
+            if (!kKitapsenEdition) floatingBallRouteObserver,
           ],
           home: home,
           locale: locale,

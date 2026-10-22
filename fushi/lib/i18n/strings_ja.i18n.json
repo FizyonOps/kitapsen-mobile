@@ -6568,5 +6568,12 @@
   "kitapsen_stat_range_calendar": "読書カレンダー",
   "kitapsen_book_read_sample": "サンプルを読む",
   "kitapsen_sample_notice": "サンプル：本の最初の${percent}%です。",
-  "kitapsen_sample_unavailable": "この本にはサンプルがありません。"
+  "kitapsen_sample_unavailable": "この本にはサンプルがありません。",
+  "kitapsen_settings_destination_system_summary": "一般、アプリ情報と診断",
+  "kitapsen_theme_role_selection": "選択範囲のハイライト",
+  "kitapsen_theme_preview_chapter": "第1章",
+  "kitapsen_theme_preview_body": "本文",
+  "kitapsen_theme_preview_selection": "選択したテキスト",
+  "kitapsen_theme_preview_link": "リンク",
+  "kitapsen_storage_category_books": "本"
 }

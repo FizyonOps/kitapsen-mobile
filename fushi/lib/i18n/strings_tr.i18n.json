@@ -6568,5 +6568,12 @@
   "kitapsen_stat_range_calendar": "Okuma takvimi",
   "kitapsen_book_read_sample": "Örneği oku",
   "kitapsen_sample_notice": "Örnek: kitabın ilk %${percent} kadarı.",
-  "kitapsen_sample_unavailable": "Bu kitabın örneği yok."
+  "kitapsen_sample_unavailable": "Bu kitabın örneği yok.",
+  "kitapsen_settings_destination_system_summary": "Genel, hakkında ve tanılama",
+  "kitapsen_theme_role_selection": "Seçim vurgusu",
+  "kitapsen_theme_preview_chapter": "Bölüm 1",
+  "kitapsen_theme_preview_body": "Gövde metni",
+  "kitapsen_theme_preview_selection": "seçili metin",
+  "kitapsen_theme_preview_link": "Bağlantı",
+  "kitapsen_storage_category_books": "Kitaplar"
 }

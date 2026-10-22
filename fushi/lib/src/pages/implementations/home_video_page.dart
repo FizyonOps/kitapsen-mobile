@@ -138,6 +138,7 @@ import 'package:fushi/src/media/video/metadata/video_source_scrape_run_detail_di
         showVideoMetadataCandidateSearchDialog,
         showVideoSourceScrapeManualBindingDialog;
 import 'package:fushi/src/media/video/metadata/video_tmdb_ordering_dialog.dart';
+import 'package:fushi/src/models/kitapsen_edition.dart';
 
 /// 顶层 helper：打开本地视频播放页的**共享路由入口**（本页 hero/卡片与首页
 /// dashboard 继续卡/活动条同一条路径），统一经 [VideoFushiPage.neutralized]
@@ -2047,10 +2048,11 @@ class _HomeVideoPageState extends BaseModuleTabPageState<HomeVideoPage> {
         // 拖入 .torrent → 下载中心「添加任务」对话框预填种子，内容类型预填视频。
         // 与页头按钮同一入口：后端未配时同样弹引导，不在这里另写一套。下载中心
         // 关掉时给可见提示（与书架同一形态），不静默。
-        if (!appModel.moduleVisibility.isEnabled(ModuleId.browse)) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(t.module_disabled_hint)),
-          );
+        if (!(!kKitapsenEdition &&
+            appModel.moduleVisibility.isEnabled(ModuleId.browse))) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(t.module_disabled_hint)));
           return;
         }
         unawaited(

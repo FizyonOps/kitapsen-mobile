@@ -11,23 +11,35 @@ import 'package:fushi/src/utils/app_ui_scale.dart';
 // which this app does not target. For platform-specific behavior beyond simple
 // boolean checks, use the service abstractions in package:fushi_platform with
 // implementations under lib/src/platform/{android,ios,desktop}/.
+//
+// The getters below are `vm:platform-const`: an AOT build for a known target
+// OS evaluates them at compile time, so desktop-only branches behind them are
+// dropped from the Android / iOS binary (Kitapsen ships phone builds only).
 
+@pragma('vm:platform-const')
 bool get isDesktopPlatform =>
     Platform.isWindows || Platform.isMacOS || Platform.isLinux;
 
+@pragma('vm:platform-const')
 bool get isMobilePlatform => Platform.isAndroid || Platform.isIOS;
 
+@pragma('vm:platform-const')
 bool get isAndroidPlatform => Platform.isAndroid;
 
+@pragma('vm:platform-const')
 bool get isIOSPlatform => Platform.isIOS;
 
+@pragma('vm:platform-const')
 bool get supportsNativeAudio =>
     Platform.isAndroid || Platform.isIOS || Platform.isMacOS;
 
+@pragma('vm:platform-const')
 bool get supportsFloatingOverlay => Platform.isAndroid;
 
+@pragma('vm:platform-const')
 bool get isWindowsPlatform => Platform.isWindows;
 
+@pragma('vm:platform-const')
 bool get isMacOSPlatform => Platform.isMacOS;
 
 /// Sets the system-UI mode for the **home/menu shell** (book shelf, video,

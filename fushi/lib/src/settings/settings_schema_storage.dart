@@ -41,7 +41,8 @@ SettingsDestination buildStorageDestination() {
     summary: t.settings_destination_storage_summary,
     icon: Icons.sd_storage_outlined,
     sections: <SettingsSection>[
-      buildDataStorageLocationSection(),
+      // Desktop-only data-folder relocation; Kitapsen ships on phones only.
+      if (!kKitapsenEdition) buildDataStorageLocationSection(),
       if (!kKitapsenEdition)
       SettingsSection(
         id: 'storage.section.models_components',
@@ -164,7 +165,10 @@ SettingsDestination buildStorageDestination() {
       // 必然落空；它的删除原语是 SrtBookRepository.delete（连带持久目录 + cue）。
       // 与 deleteDictionary 同纪律：行本来就不在 = 目标状态已达成，按成功处理。
       deleteSrtBook: (String uid) async {
-        await SrtBookRepository(c.appModel.database).delete(uid);
+        // Kitapsen has no subtitle books.
+        if (!kKitapsenEdition) {
+          await SrtBookRepository(c.appModel.database).delete(uid);
+        }
         c.ref.invalidate(fushiBooksProvider);
         c.ref.invalidate(srtBookTagMapProvider);
         return null;

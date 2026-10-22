@@ -6568,5 +6568,12 @@
   "kitapsen_stat_range_calendar": "Leeskalender",
   "kitapsen_book_read_sample": "Fragment lezen",
   "kitapsen_sample_notice": "Fragment: de eerste ${percent}% van het boek.",
-  "kitapsen_sample_unavailable": "Dit boek heeft geen fragment."
+  "kitapsen_sample_unavailable": "Dit boek heeft geen fragment.",
+  "kitapsen_settings_destination_system_summary": "Algemeen, over & diagnostiek",
+  "kitapsen_theme_role_selection": "Selectiemarkering",
+  "kitapsen_theme_preview_chapter": "Hoofdstuk 1",
+  "kitapsen_theme_preview_body": "Broodtekst",
+  "kitapsen_theme_preview_selection": "geselecteerde tekst",
+  "kitapsen_theme_preview_link": "Link",
+  "kitapsen_storage_category_books": "Boeken"
 }

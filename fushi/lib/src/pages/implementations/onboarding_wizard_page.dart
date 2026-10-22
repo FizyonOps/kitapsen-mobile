@@ -231,8 +231,9 @@ class _OnboardingWizardPageState extends BasePageState<OnboardingWizardPage>
     try {
       // 先等模块勾选落盘再 pop，理由见 [_moduleSelectionWrite]。
       await _moduleSelectionWrite;
-      if (_tutorialProgress.shouldMarkCompleted(
-          steps: _steps, finished: finished)) {
+      if (!kKitapsenEdition &&
+          _tutorialProgress.shouldMarkCompleted(
+              steps: _steps, finished: finished)) {
         await RecommendedPackTutorialState(appModelNoUpdate.appDirectory)
             .markCompleted();
       }

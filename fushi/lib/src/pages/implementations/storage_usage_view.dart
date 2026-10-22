@@ -357,7 +357,8 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
   };
 
   /// Kitapsen: categories that belong to features the edition does not ship
-  /// (dictionaries, video, shaders, OCR models) are not listed.
+  /// (dictionaries, video, shaders, OCR models, the in-app browser / web
+  /// archive, card media exports, backup archives) are not listed.
   static bool _categoryInEdition(StorageCategoryId id) {
     if (!kKitapsenEdition) return true;
     switch (id) {
@@ -366,6 +367,9 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
       case StorageCategoryId.subtitles:
       case StorageCategoryId.shaders:
       case StorageCategoryId.ocrModels:
+      case StorageCategoryId.web:
+      case StorageCategoryId.exports:
+      case StorageCategoryId.backups:
         return false;
       default:
         return true;
@@ -375,7 +379,9 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
   String _categoryTitle(StorageCategoryId id) {
     switch (id) {
       case StorageCategoryId.books:
-        return t.storage_category_books;
+        return kKitapsenEdition
+            ? t.kitapsen_storage_category_books
+            : t.storage_category_books;
       case StorageCategoryId.dictionaries:
         return kKitapsenEdition ? '' : t.storage_category_dictionaries;
       case StorageCategoryId.videoDownloads:

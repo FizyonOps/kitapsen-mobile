@@ -17,7 +17,6 @@ import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
-import android.view.WindowManager;
 import androidx.annotation.NonNull;
 import android.net.Uri;
 
@@ -25,10 +24,8 @@ import io.flutter.embedding.engine.FlutterEngine;
 import io.flutter.embedding.engine.FlutterShellArgs;
 import io.flutter.plugin.common.MethodChannel;
 
-import android.provider.Settings;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
-import androidx.core.content.FileProvider;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -48,59 +45,39 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import app.fushi.reader.constants.ChannelNames;
-import app.fushi.reader.constants.FloatingColors;
 import app.fushi.reader.constants.PreferenceKeys;
 
 import androidx.documentfile.provider.DocumentFile;
 
-import com.ryanheise.audioservice.AudioServiceActivity;
+import io.flutter.embedding.android.FlutterActivity;
 import android.content.Context;
 import android.content.res.Configuration;
-import app.fushi.reader.mihon.MihonChannelHandler;
 
-public class MainActivity extends AudioServiceActivity {
+// Kitapsen: only the channels of features the app shows are registered here.
+// Anki, TTS, picture-in-picture, NFC pairing, Mihon extensions, the floating
+// lyric / dictionary / ball overlays, screen and system OCR, the lookup IME
+// hint, data migration, download keep-alive, the APK self-updater and the
+// video brightness drag are not part of this edition, and neither are their
+// Java / Kotlin classes. There is no audio_service player, so this is a plain
+// FlutterActivity.
+public class MainActivity extends FlutterActivity {
     private static final String VOLUME_KEY_CHANNEL = ChannelNames.VOLUME_KEYS;
     private static final String SAF_CHANNEL = ChannelNames.SAF;
-    private static final String UPDATE_CHANNEL = ChannelNames.UPDATE;
     private static final String FONTS_CHANNEL = ChannelNames.FONTS;
-    private static final String FLOATING_LYRIC_CHANNEL = ChannelNames.FLOATING_LYRIC;
-    private static final String FLOATING_DICT_CHANNEL = ChannelNames.FLOATING_DICT;
     private static final String SPLASH_CHANNEL = ChannelNames.SPLASH;
     private static final String LIFECYCLE_CHANNEL = ChannelNames.LIFECYCLE;
     private static final String ICON_CHANNEL = ChannelNames.ICON_SWITCH;
-    private static final String SCREEN_BRIGHTNESS_CHANNEL = ChannelNames.SCREEN_BRIGHTNESS;
     private static final String SPLASH_PREFS = PreferenceKeys.FILE_SPLASH;
     private static final int SAF_PICK_DIR_REQUEST = 1001;
-    // BUG-427/TODO-852: install-permission gate result code. Distinct from
-    // SAF_PICK_DIR_REQUEST so onActivityResult can tell the two flows apart.
-    private static final int INSTALL_PERMISSION_REQUEST = 1002;
     // Native SAF pickers that RESOLVE the picked content URI to a real
     // filesystem path (no copy). Distinct from the copy-based 1001 so
     // onActivityResult routes them to path resolution instead of a tree copy.
     private static final int SAF_PICK_REAL_DIR_REQUEST = 1003;
     private static final int SAF_PICK_REAL_FILE_REQUEST = 1004;
-    private static MethodChannel floatingLyricChannel;
-    private static MethodChannel floatingDictChannel;
 
     private Activity context;
-    private AnkiChannelHandler ankiChannelHandler;
-    private TtsChannelHandler ttsChannelHandler;
-    private MihonChannelHandler mihonChannelHandler;
-    // 系统画中画。持有 Activity，所以是实例而不是静态注册：onDestroy 要断开它，
-    // onPictureInPictureModeChanged 要把系统的进出事件转发给它。
-    private PictureInPictureChannelHandler pictureInPictureChannelHandler;
-    // 互联配对链接写 NFC 贴纸：读卡模式挂在 Activity 上，同样是实例、onDestroy 断开。
-    private NfcTagWriterChannelHandler nfcTagWriterChannelHandler;
     private MethodChannel.Result pendingSafResult;
     private String pendingSafDestPath;
-    // BUG-427/TODO-852: when API 26+ has no install permission we route the
-    // user to the system "install unknown apps" setting with
-    // startActivityForResult and stash the in-flight MethodChannel.Result +
-    // the already-validated cache-dir APK path here, so onActivityResult /
-    // onResume can resume the install once permission is granted instead of
-    // tearing the download session down and forcing a re-download.
-    private MethodChannel.Result pendingInstallResult;
-    private String pendingInstallApkPath;
     private final ExecutorService ioExecutor = Executors.newFixedThreadPool(2);
 
     // Reader opens this gate when volume-key page turning is enabled so
@@ -146,24 +123,6 @@ public class MainActivity extends AudioServiceActivity {
             getWindow().setBackgroundDrawable(new ColorDrawable(bgColor));
         }
         context = MainActivity.this;
-        ankiChannelHandler = new AnkiChannelHandler(context);
-        ttsChannelHandler = new TtsChannelHandler(context);
-        pictureInPictureChannelHandler = new PictureInPictureChannelHandler(context);
-        nfcTagWriterChannelHandler = new NfcTagWriterChannelHandler(context);
-        // Manga extensions are an optional subsystem. Its constructor wires up
-        // Injekt, whose reified type resolution is only as sound as the R8 keep
-        // rules (a stale keep rule once made this throw on every launch and
-        // bricked the whole app). Nothing else in Fushi depends on it, so a
-        // failure here degrades to "manga extensions unavailable" instead of
-        // taking down startup: the Dart side already maps an unregistered
-        // channel to MihonRuntimeException('UNAVAILABLE').
-        try {
-            mihonChannelHandler = new MihonChannelHandler(getApplication());
-        } catch (Throwable e) {
-            mihonChannelHandler = null;
-            android.util.Log.e("fushi-mihon",
-                "Mihon runtime init failed; manga extensions disabled this session", e);
-        }
 
         super.onCreate(savedInstanceState);
 
@@ -208,81 +167,10 @@ public class MainActivity extends AudioServiceActivity {
         disableSystemFocusHighlight();
     }
 
-    // 系统画中画的**唯一**回程。用户从小窗的关闭 / 还原按钮退出时不经过我们的
-    // enter()，Dart 侧只有收到这条才知道自己已经不在 PiP 里。
-    //
-    // 进出 PiP 同时是一次配置变更：本 Activity 的 android:configChanges 已声明
-    // orientation|screenSize|smallestScreenSize|screenLayout，因此 Activity 不会被
-    // 重建、播放不会断；少任何一项都会变成 recreate，表现为切小窗时视频从头开始。
-    @Override
-    public void onPictureInPictureModeChanged(
-            boolean isInPictureInPictureMode, @NonNull Configuration newConfig) {
-        super.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig);
-        if (pictureInPictureChannelHandler != null) {
-            pictureInPictureChannelHandler.notifyModeChanged(isInPictureInPictureMode);
-        }
-    }
-
     @Override
     protected void onDestroy() {
-        if (ttsChannelHandler != null) {
-            ttsChannelHandler.destroy();
-        }
-        if (mihonChannelHandler != null) {
-            mihonChannelHandler.destroy();
-            mihonChannelHandler = null;
-        }
-        // Activity 销毁后再往 Dart 侧 invoke 是对死引擎说话；置空后
-        // notifyModeChanged 退化成安全 no-op。
-        if (nfcTagWriterChannelHandler != null) {
-            nfcTagWriterChannelHandler.destroy();
-            nfcTagWriterChannelHandler = null;
-        }
-        if (pictureInPictureChannelHandler != null) {
-            pictureInPictureChannelHandler.destroy();
-            pictureInPictureChannelHandler = null;
-        }
-        // HBK-AUDIT-057: the static floating-service channels are bound to this
-        // engine's messenger; clear their handlers and null them so stale
-        // notify*() calls after teardown become safe no-ops instead of
-        // targeting a dead FlutterEngine.
-        if (floatingLyricChannel != null) {
-            floatingLyricChannel.setMethodCallHandler(null);
-            floatingLyricChannel = null;
-        }
-        if (floatingDictChannel != null) {
-            floatingDictChannel.setMethodCallHandler(null);
-            floatingDictChannel = null;
-        }
-        FloatingBallChannel.detach(getFlutterEngine());
         ioExecutor.shutdownNow();
         super.onDestroy();
-    }
-
-    // HBK-AUDIT-057: capture the static channel into a final local before
-    // posting; the posted lambda must not re-read the field, which onDestroy
-    // may null in between (TOCTOU NPE). invokeMethod on a detached channel is a
-    // benign no-op.
-    public static void notifyFloatingLyricEvent(String method, Map<String, Object> arguments) {
-        final MethodChannel ch = floatingLyricChannel;
-        if (ch == null) return;
-        new Handler(Looper.getMainLooper()).post(() -> ch.invokeMethod(method, arguments));
-    }
-
-    public static void notifyFloatingDictEvent(String method, Object arguments) {
-        final MethodChannel ch = floatingDictChannel;
-        if (ch == null) return;
-        new Handler(Looper.getMainLooper()).post(() -> ch.invokeMethod(method, arguments));
-    }
-
-    public static void notifyFloatingDictAnki(String word, String reading, String meaning) {
-        final MethodChannel ch = floatingDictChannel;
-        if (ch == null) return;
-        java.util.HashMap<String, Object> args = new java.util.HashMap<>();
-        args.put("word", word);
-        args.put("reading", reading);
-        args.put("meaning", meaning);
-        new Handler(Looper.getMainLooper()).post(() -> ch.invokeMethod("ankiExport", args));
     }
 
     // TODO-112 / BUG-196: volume keys must NEVER reach the FlutterView key
@@ -362,22 +250,6 @@ public class MainActivity extends AudioServiceActivity {
                 AudioManager.FLAG_SHOW_UI);
     }
 
-    /**
-     * BUG-2098：把系统运行时权限结果转发给 {@link AnkiChannelHandler}。
-     *
-     * <p>此前整个 app 没有任何 onRequestPermissionsResult 实现：AnkiDroid 权限请求
-     * 发出去就没人接结果，Dart 侧也就无从等待，权限对话框还开着错误就已经报完了。
-     * 仍先调 super（Flutter 插件的权限回调也走这里）。
-     */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (ankiChannelHandler != null) {
-            ankiChannelHandler.onRequestPermissionsResult(requestCode, grantResults);
-        }
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -450,16 +322,6 @@ public class MainActivity extends AudioServiceActivity {
                 new Handler(Looper.getMainLooper()).post(() ->
                     safResult.success(pickedResult));
             });
-            return;
-        }
-        if (requestCode == INSTALL_PERMISSION_REQUEST) {
-            // BUG-427/TODO-852: returning from the "install unknown apps"
-            // setting. resultCode is usually RESULT_CANCELED here (the settings
-            // page does not setResult), so we re-check canRequestPackageInstalls
-            // rather than trust resultCode. On success we resume the install
-            // with the stashed, already-cache-dir-validated APK path — the
-            // updater never re-downloads (HBK-AUDIT-058).
-            resumePendingInstall();
         }
     }
 
@@ -475,78 +337,6 @@ public class MainActivity extends AudioServiceActivity {
         // rectangle over Hibiki own focus ring. Re-applying here (and in
         // onConfigurationChanged) keeps it killed.
         disableSystemFocusHighlight();
-        // BUG-427/TODO-852: belt-and-braces for OEMs whose settings page does
-        // not deliver onActivityResult after the permission grant. If a pending
-        // install is still parked and the permission is now granted, resume it
-        // here. resumePendingInstall is a no-op when nothing is parked, and only
-        // proceeds when canRequestPackageInstalls is true, so a benign onResume
-        // (e.g. permission still off) leaves the pending result intact for the
-        // user to grant later — it never double-fires the MethodChannel.Result.
-        if (pendingInstallResult != null
-                && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
-                && context.getPackageManager().canRequestPackageInstalls()) {
-            resumePendingInstall();
-        }
-    }
-
-    // BUG-427/TODO-852: finalize a parked install-permission request exactly
-    // once. Clears the stashed fields up front so it can never re-enter, then
-    // decides the single terminal outcome for the in-flight Result:
-    //   * permission still not granted -> INSTALL_PERMISSION_REQUIRED (Dart
-    //     keeps the apk and offers a manual retry);
-    //   * stashed path lost -> INSTALL_ERROR;
-    //   * otherwise resume the install with the already-validated cache-dir apk.
-    private void resumePendingInstall() {
-        final MethodChannel.Result installResult = pendingInstallResult;
-        final String apkPath = pendingInstallApkPath;
-        pendingInstallResult = null;
-        pendingInstallApkPath = null;
-        if (installResult == null) return;
-        boolean granted = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
-                && context.getPackageManager().canRequestPackageInstalls();
-        if (!granted) {
-            installResult.error("INSTALL_PERMISSION_REQUIRED",
-                "Enable installing unknown apps for Hibiki, then retry", null);
-            return;
-        }
-        if (apkPath == null || apkPath.isEmpty()) {
-            installResult.error("INSTALL_ERROR",
-                "Pending install APK path was lost", null);
-            return;
-        }
-        launchApkInstaller(new File(apkPath), installResult);
-    }
-
-    // BUG-427/TODO-852: the actual FileProvider + ACTION_VIEW install launch,
-    // shared by the permission-already-granted path and the resume path so the
-    // intent construction lives in exactly one place (no copy drift). Reports
-    // the terminal outcome on the supplied Result.
-    private void launchApkInstaller(File apkFile, MethodChannel.Result result) {
-        try {
-            Uri apkUri = FileProvider.getUriForFile(
-                    context,
-                    BuildConfig.APPLICATION_ID + ".provider",
-                    apkFile);
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
-            result.success(true);
-        } catch (Exception e) {
-            result.error("INSTALL_ERROR", e.getMessage(), null);
-        }
-    }
-
-    private static boolean isAccessibilityServiceEnabled(Context context,
-            Class<?> serviceClass) {
-        String prefString = android.provider.Settings.Secure.getString(
-                context.getContentResolver(),
-                android.provider.Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
-        if (prefString == null) return false;
-        String flatName = context.getPackageName() + "/"
-                + serviceClass.getName();
-        return prefString.contains(flatName);
     }
 
     private void deleteRecursive(File f) {
@@ -610,15 +400,8 @@ public class MainActivity extends AudioServiceActivity {
     @Override
     public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
         super.configureFlutterEngine(flutterEngine);
-        FloatingDictService.initEngineGroup(getApplicationContext());
         SelectionActionChannel.registerWith(flutterEngine, this);
-        SystemOcrChannel.registerWith(flutterEngine, this);
         ClipboardImageChannel.registerWith(flutterEngine, getApplicationContext());
-        MigrationChannelHandler.registerWith(flutterEngine, getApplicationContext());
-        DownloadKeepAliveService.registerWith(flutterEngine, getApplicationContext());
-        // 全局悬浮球（系统常驻球 + 截屏 OCR）。传 Activity：申请悬浮窗权限 / 发起截屏确认
-        // 都要从 Activity 起，不必再补 NEW_TASK。
-        FloatingBallChannel.registerWith(flutterEngine, this);
 
         volumeKeyChannel = new MethodChannel(
                 flutterEngine.getDartExecutor().getBinaryMessenger(), VOLUME_KEY_CHANNEL);
@@ -631,18 +414,6 @@ public class MainActivity extends AudioServiceActivity {
                 result.notImplemented();
             }
         });
-
-        ankiChannelHandler.register(flutterEngine);
-        ttsChannelHandler.register(flutterEngine);
-        if (nfcTagWriterChannelHandler != null) {
-            nfcTagWriterChannelHandler.register(flutterEngine);
-        }
-        if (pictureInPictureChannelHandler != null) {
-            pictureInPictureChannelHandler.register(flutterEngine);
-        }
-        if (mihonChannelHandler != null) {
-            mihonChannelHandler.register(flutterEngine);
-        }
 
         new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), SAF_CHANNEL)
             .setMethodCallHandler((call, result) -> {
@@ -715,68 +486,6 @@ public class MainActivity extends AudioServiceActivity {
                 }
             });
 
-        new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), UPDATE_CHANNEL)
-            .setMethodCallHandler((call, result) -> {
-                if ("installApk".equals(call.method)) {
-                    String path = call.argument("path");
-                    if (path == null || path.isEmpty()) {
-                        result.error("INVALID_PATH", "APK path is null", null);
-                        return;
-                    }
-                    // BUG-427/TODO-852: a previous install is still parked
-                    // waiting on the permission grant. Finalize it first so a
-                    // stuck/abandoned pending result can never permanently lock
-                    // out the install feature (its Result is resolved here, the
-                    // fields cleared, before we start the new request).
-                    if (pendingInstallResult != null) {
-                        resumePendingInstall();
-                    }
-                    try {
-                        File apkFile = new File(path);
-                        // HBK-AUDIT-058: only install an APK that lives in our
-                        // own cache dir (the updater downloads there); never
-                        // trust an arbitrary caller-supplied path. And ensure we
-                        // may request installs, routing the user to the system
-                        // setting otherwise instead of silently failing.
-                        String apkCanon = apkFile.getCanonicalPath();
-                        String cacheCanon = context.getCacheDir().getCanonicalPath();
-                        if (!apkCanon.startsWith(cacheCanon + File.separator)) {
-                            result.error("INVALID_PATH",
-                                "APK is not in the app cache directory", null);
-                            return;
-                        }
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
-                                && !context.getPackageManager()
-                                        .canRequestPackageInstalls()) {
-                            // BUG-427/TODO-852: route to the setting with
-                            // startActivityForResult (NOT startActivity, and NOT
-                            // FLAG_ACTIVITY_NEW_TASK — a new task detaches the
-                            // result callback so onActivityResult never fires).
-                            // Launch the setting first; only stash the in-flight
-                            // Result + already-validated cache-dir path AFTER the
-                            // launch succeeds, then return immediately. This keeps
-                            // the return path isolated from the catch below: if
-                            // startActivityForResult throws, nothing is parked and
-                            // the catch resolves the Result once with INSTALL_ERROR
-                            // — the same Result is never resolved twice. The parked
-                            // Result is resolved later by resumePendingInstall().
-                            Intent settings = new Intent(
-                                Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,
-                                Uri.parse("package:" + context.getPackageName()));
-                            startActivityForResult(
-                                settings, INSTALL_PERMISSION_REQUEST);
-                            pendingInstallResult = result;
-                            pendingInstallApkPath = apkCanon;
-                            return;
-                        }
-                        launchApkInstaller(apkFile, result);
-                    } catch (Exception e) {
-                        result.error("INSTALL_ERROR", e.getMessage(), null);
-                    }
-                } else {
-                    result.notImplemented();
-                }
-            });
 
         new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), SPLASH_CHANNEL)
             .setMethodCallHandler((call, result) -> {
@@ -816,240 +525,6 @@ public class MainActivity extends AudioServiceActivity {
                         result.notImplemented();
                 }
             });
-
-        floatingLyricChannel = new MethodChannel(
-                flutterEngine.getDartExecutor().getBinaryMessenger(), FLOATING_LYRIC_CHANNEL);
-        floatingLyricChannel.setMethodCallHandler((call, result) -> {
-                switch (call.method) {
-                    case "show": {
-                        if (!Settings.canDrawOverlays(context)) {
-                            Intent intent = new Intent(
-                                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                                    Uri.parse("package:" + getPackageName()));
-                            startActivity(intent);
-                            result.success(false);
-                            return;
-                        }
-                        persistFloatingLyricOptions(call.arguments);
-                        Intent svc = new Intent(context, FloatingLyricService.class);
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            startForegroundService(svc);
-                        } else {
-                            startService(svc);
-                        }
-                        result.success(true);
-                        break;
-                    }
-                    case "hide": {
-                        stopService(new Intent(context, FloatingLyricService.class));
-                        result.success(true);
-                        break;
-                    }
-                    case "updateText": {
-                        String text = call.argument("text");
-                        // TODO-708 P4: 多行上下文块内当前行区间。缺字段回退 -1/0 = 无行标记
-                        // （N=0 单行或旧 payload），退化为无中间行明暗（never-break userspace）。
-                        Number lineStart = call.argument("currentLineStart");
-                        Number lineLength = call.argument("currentLineLength");
-                        int curStart = lineStart != null ? lineStart.intValue() : -1;
-                        int curLen = lineLength != null ? lineLength.intValue() : 0;
-                        // BUG-400/TODO-711: persist the line unconditionally so a
-                        // service that has not yet finished onCreate (startForegroundService
-                        // returns before onCreate; Dart pushes the current cue right after
-                        // show) still renders the current line on its first frame via
-                        // readInitialState — instead of dropping it and showing blank
-                        // until the next cue. Mirrors persistFloatingLyricOptions.
-                        persistFloatingLyricText(text, curStart, curLen);
-                        FloatingLyricService svc = FloatingLyricService.getInstance();
-                        if (svc != null && text != null) {
-                            svc.updateLyricText(text, curStart, curLen);
-                        }
-                        result.success(null);
-                        break;
-                    }
-                    case "updateStyle": {
-                        Number size = call.argument("fontSize");
-                        Number color = call.argument("textColor");
-                        Number bg = call.argument("bgColor");
-                        Number buttonTextColor = call.argument("buttonTextColor");
-                        Number buttonBgColor = call.argument("buttonBgColor");
-                        Number highlightColor = call.argument("highlightColor");
-                        Number activeColor = call.argument("activeColor");
-                        // TODO-708 P2: 圆角半径 / 窗宽（dp，0=平台默认）。旧 payload 缺字段回退 0。
-                        Number cornerRadius = call.argument("cornerRadius");
-                        Number windowWidth = call.argument("windowWidth");
-                        FloatingLyricService svc = FloatingLyricService.getInstance();
-                        persistFloatingLyricOptions(call.arguments);
-                        if (svc != null) {
-                            svc.updateStyle(
-                                    size != null ? size.floatValue() : 16f,
-                                    color != null ? color.intValue() : FloatingColors.LYRIC_TEXT,
-                                    bg != null ? bg.intValue() : FloatingColors.LYRIC_BACKGROUND,
-                                    buttonTextColor != null ? buttonTextColor.intValue() : FloatingColors.LYRIC_BUTTON_TEXT,
-                                    buttonBgColor != null ? buttonBgColor.intValue() : FloatingColors.LYRIC_BUTTON_BG,
-                                    highlightColor != null ? highlightColor.intValue() : FloatingColors.LYRIC_HIGHLIGHT,
-                                    activeColor != null ? activeColor.intValue() : FloatingColors.LYRIC_ACTIVE,
-                                    cornerRadius != null ? cornerRadius.intValue() : 0,
-                                    windowWidth != null ? windowWidth.intValue() : 0);
-                        }
-                        result.success(null);
-                        break;
-                    }
-                    case "highlight": {
-                        Number start = call.argument("start");
-                        Number length = call.argument("length");
-                        FloatingLyricService svc = FloatingLyricService.getInstance();
-                        if (svc != null) {
-                            svc.updateHighlight(
-                                    start != null ? start.intValue() : -1,
-                                    length != null ? length.intValue() : 0);
-                        }
-                        result.success(null);
-                        break;
-                    }
-                    case "updateLabels": {
-                        Object labels = call.arguments;
-                        FloatingLyricService svc = FloatingLyricService.getInstance();
-                        if (svc != null && labels instanceof Map) {
-                            svc.updateLabels((Map<String, Object>) labels);
-                        }
-                        result.success(null);
-                        break;
-                    }
-                    case "setLocked": {
-                        Boolean locked = call.argument("locked");
-                        persistFloatingLyricLocked(locked != null && locked);
-                        FloatingLyricService svc = FloatingLyricService.getInstance();
-                        if (svc != null) {
-                            svc.setLocked(locked != null && locked);
-                        }
-                        result.success(null);
-                        break;
-                    }
-                    case "setClickLookupEnabled": {
-                        Boolean enabled = call.argument("enabled");
-                        boolean value = enabled == null || enabled;
-                        persistFloatingLyricClickLookup(value);
-                        FloatingLyricService svc = FloatingLyricService.getInstance();
-                        if (svc != null) {
-                            svc.setClickLookupEnabled(value);
-                        }
-                        result.success(null);
-                        break;
-                    }
-                    case "setPlaybackState": {
-                        Boolean playing = call.argument("playing");
-                        // BUG-400/TODO-711: replay playback state on startup too, so the
-                        // play/pause icon is correct on the overlay's first frame.
-                        persistFloatingLyricPlaying(playing != null && playing);
-                        FloatingLyricService svc = FloatingLyricService.getInstance();
-                        if (svc != null) {
-                            svc.setPlaybackState(playing != null && playing);
-                        }
-                        result.success(null);
-                        break;
-                    }
-                    case "isShowing": {
-                        result.success(FloatingLyricService.getInstance() != null);
-                        break;
-                    }
-                    case "canDrawOverlays": {
-                        result.success(Settings.canDrawOverlays(context));
-                        break;
-                    }
-                    default:
-                        result.notImplemented();
-                }
-            });
-
-        // 查词输入法语言：Android 切不了系统输入法，这里只把用户选的语言存下来，
-        // 供两个**原生** EditText 查词框（悬浮词典 / 弹窗词典）当 hintLocales 用。
-        // Flutter 的查词框走 TextField.hintLocales 参数，不经这条。
-        new MethodChannel(
-                flutterEngine.getDartExecutor().getBinaryMessenger(),
-                ChannelNames.LOOKUP_IME)
-                .setMethodCallHandler((call, result) -> {
-                    if ("persistLanguage".equals(call.method)) {
-                        Object tag = call.arguments();
-                        LookupImeHint.store(
-                                getApplicationContext(),
-                                tag instanceof String ? (String) tag : "");
-                        result.success(null);
-                        return;
-                    }
-                    // setLanguage / probe 是桌面与 iOS 的真·切换接口，Android 没有
-                    // 对应能力，让 Dart 侧走 MissingPluginException 的静默分支。
-                    result.notImplemented();
-                });
-
-        floatingDictChannel = new MethodChannel(
-                flutterEngine.getDartExecutor().getBinaryMessenger(), FLOATING_DICT_CHANNEL);
-        floatingDictChannel.setMethodCallHandler((call, result) -> {
-            switch (call.method) {
-                case "show": {
-                    if (!Settings.canDrawOverlays(context)) {
-                        Intent intent = new Intent(
-                                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                                Uri.parse("package:" + getPackageName()));
-                        startActivity(intent);
-                        result.success(false);
-                        return;
-                    }
-                    Intent svc = new Intent(context, FloatingDictService.class);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        startForegroundService(svc);
-                    } else {
-                        startService(svc);
-                    }
-                    result.success(true);
-                    break;
-                }
-                case "hide": {
-                    stopService(new Intent(context, FloatingDictService.class));
-                    result.success(true);
-                    break;
-                }
-                case "isShowing": {
-                    result.success(FloatingDictService.getInstance() != null);
-                    break;
-                }
-                case "canDrawOverlays": {
-                    result.success(Settings.canDrawOverlays(context));
-                    break;
-                }
-                case "setClipboardMonitoring": {
-                    Object enabledObj = call.arguments;
-                    boolean enabled = enabledObj instanceof Boolean && (Boolean) enabledObj;
-                    FloatingDictService svc = FloatingDictService.getInstance();
-                    if (svc != null) {
-                        svc.setClipboardMonitoring(enabled);
-                    }
-                    result.success(null);
-                    break;
-                }
-                case "setSearchText": {
-                    Object textObj = call.arguments;
-                    FloatingDictService svc = FloatingDictService.getInstance();
-                    if (svc != null && textObj instanceof String) {
-                        svc.setSearchText(((String) textObj).trim());
-                    }
-                    result.success(null);
-                    break;
-                }
-                case "searchResult": {
-                    Object jsonObj = call.arguments;
-                    String json = jsonObj instanceof String ? (String) jsonObj : null;
-                    FloatingDictService svc = FloatingDictService.getInstance();
-                    if (svc != null) {
-                        svc.onSearchResult(json);
-                    }
-                    result.success(null);
-                    break;
-                }
-                default:
-                    result.notImplemented();
-            }
-        });
 
         new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), FONTS_CHANNEL)
             .setMethodCallHandler((call, result) -> {
@@ -1157,69 +632,6 @@ public class MainActivity extends AudioServiceActivity {
                 }
             });
 
-        // TODO-057: window-level screen brightness for the video player's
-        // left-half vertical drag. We set THIS WINDOW's brightness override
-        // (WindowManager.LayoutParams.screenBrightness in 0..1); it never
-        // touches the system Settings value and is dropped automatically when
-        // the window goes away. restoreBrightness sets it back to
-        // BRIGHTNESS_OVERRIDE_NONE (-1) so the display follows the system again.
-        new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(),
-                SCREEN_BRIGHTNESS_CHANNEL)
-            .setMethodCallHandler((call, result) -> {
-                switch (call.method) {
-                    case "getBrightness": {
-                        runOnUiThread(() -> {
-                            float b = getWindow().getAttributes().screenBrightness;
-                            if (b < 0f) {
-                                // No override set yet: report the current system
-                                // brightness (0..255 -> 0..1) so the drag starts
-                                // from what the user actually sees.
-                                try {
-                                    int sys = Settings.System.getInt(
-                                            getContentResolver(),
-                                            Settings.System.SCREEN_BRIGHTNESS, 128);
-                                    b = sys / 255f;
-                                } catch (Exception e) {
-                                    b = 0.5f;
-                                }
-                            }
-                            result.success((double) b);
-                        });
-                        break;
-                    }
-                    case "setBrightness": {
-                        final Object arg = call.arguments;
-                        if (!(arg instanceof Number)) {
-                            result.error("INVALID_ARG",
-                                "setBrightness requires a number 0..1", null);
-                            break;
-                        }
-                        final float value = Math.max(0f,
-                                Math.min(1f, ((Number) arg).floatValue()));
-                        runOnUiThread(() -> {
-                            WindowManager.LayoutParams lp = getWindow().getAttributes();
-                            lp.screenBrightness = value;
-                            getWindow().setAttributes(lp);
-                            result.success(null);
-                        });
-                        break;
-                    }
-                    case "restoreBrightness": {
-                        runOnUiThread(() -> {
-                            WindowManager.LayoutParams lp = getWindow().getAttributes();
-                            lp.screenBrightness =
-                                    WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
-                            getWindow().setAttributes(lp);
-                            result.success(null);
-                        });
-                        break;
-                    }
-                    default:
-                        result.notImplemented();
-                        break;
-                }
-            });
-
         // TODO-1232 A3: render-backend experiment toggle. Dart writes the flag
         // here; MainActivity.getFlutterShellArgs reads it at the NEXT launch to
         // decide whether to disable Impeller (Skia fallback). Persisted to a
@@ -1254,82 +666,6 @@ public class MainActivity extends AudioServiceActivity {
                         result.notImplemented();
                 }
             });
-    }
-
-    private void persistFloatingLyricOptions(Object rawArgs) {
-        if (!(rawArgs instanceof Map)) return;
-        Map<?, ?> args = (Map<?, ?>) rawArgs;
-        SharedPreferences.Editor editor =
-                getSharedPreferences(PreferenceKeys.FILE_FLOATING_LYRIC, MODE_PRIVATE)
-                        .edit();
-        putFloatIfNumber(editor, PreferenceKeys.LYRIC_FONT_SIZE, args.get("fontSize"));
-        putIntIfNumber(editor, PreferenceKeys.LYRIC_TEXT_COLOR, args.get("textColor"));
-        putIntIfNumber(editor, PreferenceKeys.LYRIC_BG_COLOR, args.get("bgColor"));
-        putIntIfNumber(
-                editor, PreferenceKeys.LYRIC_BUTTON_TEXT_COLOR, args.get("buttonTextColor"));
-        putIntIfNumber(editor, PreferenceKeys.LYRIC_BUTTON_BG_COLOR, args.get("buttonBgColor"));
-        putIntIfNumber(editor, PreferenceKeys.LYRIC_HIGHLIGHT_COLOR, args.get("highlightColor"));
-        putIntIfNumber(editor, PreferenceKeys.LYRIC_ACTIVE_COLOR, args.get("activeColor"));
-        // TODO-708 P2: 圆角半径 / 窗宽（dp，0=平台默认）。启动服务前落盘，让 readInitialState 首帧即应用。
-        putIntIfNumber(editor, PreferenceKeys.LYRIC_CORNER_RADIUS, args.get("cornerRadius"));
-        putIntIfNumber(editor, PreferenceKeys.LYRIC_WIDTH, args.get("windowWidth"));
-        putBooleanIfBoolean(editor, PreferenceKeys.LYRIC_LOCKED, args.get("locked"));
-        putBooleanIfBoolean(
-                editor,
-                PreferenceKeys.LYRIC_CLICK_LOOKUP_ENABLED,
-                args.get("clickLookupEnabled"));
-        editor.apply();
-    }
-
-    private void persistFloatingLyricLocked(boolean locked) {
-        getSharedPreferences(PreferenceKeys.FILE_FLOATING_LYRIC, MODE_PRIVATE)
-                .edit()
-                .putBoolean(PreferenceKeys.LYRIC_LOCKED, locked)
-                .apply();
-    }
-
-    private void persistFloatingLyricClickLookup(boolean enabled) {
-        getSharedPreferences(PreferenceKeys.FILE_FLOATING_LYRIC, MODE_PRIVATE)
-                .edit()
-                .putBoolean(PreferenceKeys.LYRIC_CLICK_LOOKUP_ENABLED, enabled)
-                .apply();
-    }
-
-    private void persistFloatingLyricText(String text, int currentLineStart, int currentLineLength) {
-        getSharedPreferences(PreferenceKeys.FILE_FLOATING_LYRIC, MODE_PRIVATE)
-                .edit()
-                .putString(PreferenceKeys.LYRIC_CURRENT_TEXT, text != null ? text : "")
-                .putInt(PreferenceKeys.LYRIC_CURRENT_LINE_START, currentLineStart)
-                .putInt(PreferenceKeys.LYRIC_CURRENT_LINE_LENGTH, currentLineLength)
-                .apply();
-    }
-
-    private void persistFloatingLyricPlaying(boolean playing) {
-        getSharedPreferences(PreferenceKeys.FILE_FLOATING_LYRIC, MODE_PRIVATE)
-                .edit()
-                .putBoolean(PreferenceKeys.LYRIC_PLAYING, playing)
-                .apply();
-    }
-
-    private static void putFloatIfNumber(
-            SharedPreferences.Editor editor, String key, Object value) {
-        if (value instanceof Number) {
-            editor.putFloat(key, ((Number) value).floatValue());
-        }
-    }
-
-    private static void putIntIfNumber(
-            SharedPreferences.Editor editor, String key, Object value) {
-        if (value instanceof Number) {
-            editor.putInt(key, ((Number) value).intValue());
-        }
-    }
-
-    private static void putBooleanIfBoolean(
-            SharedPreferences.Editor editor, String key, Object value) {
-        if (value instanceof Boolean) {
-            editor.putBoolean(key, (Boolean) value);
-        }
     }
 
     private void copyDocumentTree(DocumentFile srcDir, File destDir) throws Exception {

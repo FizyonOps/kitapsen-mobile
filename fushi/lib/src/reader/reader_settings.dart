@@ -259,7 +259,7 @@ class ReaderSettings {
   /// TODO-909: VN (Visual-Novel) is the third book view-mode, alongside
   /// `'paginated'` / `'continuous'`. It detaches the chapter and renders one
   /// Block/sentence screen at a time on its own stage.
-  bool get isVnMode => viewMode == 'vn';
+  bool get isVnMode => !kKitapsenEdition && viewMode == 'vn';
 
   // ── VN (Visual-Novel) settings (TODO-909) ──────────────────────────────
   // Defaults copied from hoshi a ReaderSettings.kt (🔒③). per-Profile global,

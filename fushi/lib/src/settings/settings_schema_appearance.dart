@@ -262,34 +262,37 @@ SettingsDestination buildAppearanceDestination() {
       //
       // 分区住外观而不是系统：它与同分类的「反转导航栏」同域（此前在 系统 ›
       // 功能模块）。item id 保留 `system.` 历史前缀不动，理由见 [_moduleItemId]。
-      SettingsSection(
-        id: 'appearance.section.modules',
-        presentation: SettingsSectionPresentation.alwaysExpanded,
-        title: t.settings_section_modules,
-        // Kitapsen ships the book module only; a lone "Books" switch would just
-        // let the user hide the whole app.
-        visible: (_) => !kKitapsenEdition,
-        // 遍历 ModuleId.values 生成，不再逐个手写：加模块只加一个 enum 值，
-        // 枚举顺序就是这里的展示顺序（库页 → 工具页 → 横切能力 → 设备数据）。
-        // 平台上不存在的模块由 _moduleSwitch 自己的 visible 判掉。
-        items: <SettingsItem>[
-          for (final ModuleId module in ModuleId.values) _moduleSwitch(module),
-        ],
-      ),
+      if (!kKitapsenEdition)
+        SettingsSection(
+          id: 'appearance.section.modules',
+          presentation: SettingsSectionPresentation.alwaysExpanded,
+          title: t.settings_section_modules,
+          // Kitapsen ships the book module only; a lone "Books" switch would just
+          // let the user hide the whole app.
+          // 遍历 ModuleId.values 生成，不再逐个手写：加模块只加一个 enum 值，
+          // 枚举顺序就是这里的展示顺序（库页 → 工具页 → 横切能力 → 设备数据）。
+          // 平台上不存在的模块由 _moduleSwitch 自己的 visible 判掉。
+          items: <SettingsItem>[
+            for (final ModuleId module in ModuleId.values)
+              _moduleSwitch(module),
+          ],
+        ),
       SettingsSection(
         id: 'appearance.section.navigation',
         presentation: SettingsSectionPresentation.alwaysExpanded,
         title: t.settings_section_app_shell,
         items: <SettingsItem>[
-          SettingsNavigationItem(
-            id: 'appearance.app_icon',
-            title: t.app_icon_label,
-            icon: Icons.widgets_outlined,
-            // Kitapsen has a single launcher icon, so there is nothing to pick.
-            visible: (_) =>
-                !kKitapsenEdition && (Platform.isAndroid || Platform.isWindows),
-            builder: (_) => const MiscellaneousSettingsPage(),
-          ),
+          if (!kKitapsenEdition)
+            SettingsNavigationItem(
+              id: 'appearance.app_icon',
+              title: t.app_icon_label,
+              icon: Icons.widgets_outlined,
+              // Kitapsen has a single launcher icon, so there is nothing to pick.
+              visible: (_) =>
+                  !kKitapsenEdition &&
+                  (Platform.isAndroid || Platform.isWindows),
+              builder: (_) => const MiscellaneousSettingsPage(),
+            ),
           SettingsSwitchItem(
             id: 'appearance.reverse_navigation_bar',
             title: t.reverse_navigation_bar,

@@ -6568,5 +6568,12 @@
   "kitapsen_stat_range_calendar": "Calendario di lettura",
   "kitapsen_book_read_sample": "Leggi un estratto",
   "kitapsen_sample_notice": "Estratto: il primo ${percent}% del libro.",
-  "kitapsen_sample_unavailable": "Questo libro non ha un estratto."
+  "kitapsen_sample_unavailable": "Questo libro non ha un estratto.",
+  "kitapsen_settings_destination_system_summary": "Generali, informazioni e diagnostica",
+  "kitapsen_theme_role_selection": "Evidenziazione della selezione",
+  "kitapsen_theme_preview_chapter": "Capitolo 1",
+  "kitapsen_theme_preview_body": "Testo",
+  "kitapsen_theme_preview_selection": "testo selezionato",
+  "kitapsen_theme_preview_link": "Link",
+  "kitapsen_storage_category_books": "Libri"
 }

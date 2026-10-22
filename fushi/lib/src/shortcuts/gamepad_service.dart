@@ -394,6 +394,8 @@ class GamepadService {
     // platform (Android included). Only the gamepads POLLER is platform-gated.
     _installHighlightTracking();
     if (!needsGamepadPoller) return; // Android: engine key events, no poller
+    // Kitapsen ships the gamepads plugin without its native side: no poller.
+    if (kKitapsenEdition) return;
     _startGamepadPoller();
   }
 

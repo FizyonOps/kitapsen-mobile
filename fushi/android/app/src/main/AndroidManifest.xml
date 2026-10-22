@@ -54,20 +54,12 @@
         xmlns:tools="http://schemas.android.com/tools"
         tools:replace="android:label,android:allowBackup">
         <activity
-            android:name=".mihon.CloudflareChallengeActivity"
-            android:exported="false"
-            android:process=":network_challenge"
-            android:excludeFromRecents="true"
-            android:theme="@style/LaunchTheme"
-            android:configChanges="orientation|keyboardHidden|keyboard|navigation|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode" />
-        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTask"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|navigation|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
-            android:supportsPictureInPicture="true"
             android:windowSoftInputMode="adjustResize">
             <!-- Specifies an Android theme to apply to this Activity as soon as
                     the Android process has started. This theme is visible to the user
@@ -124,8 +116,8 @@
              (PopupDictActivity, PopupDictFlutterActivity, floating dict / lyric /
              ball, screen OCR, accessibility capture, quick-settings tile) are not
              declared: no dictionary ships, and nothing may register system-wide
-             text-selection, share or translate entries. Their Java classes stay
-             compiled but are unreachable. -->
+             text-selection, share or translate entries. Their Java / Kotlin
+             classes are not part of this edition either. -->
         <provider
             android:name="app.fushi.reader.FushiFileProvider"
             android:authorities="${applicationId}.provider"
@@ -135,6 +127,11 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+        <!-- flutter_logs' RxLogs merges in its MQTT log-streaming service; Kitapsen
+             only writes local log files, so the service is not declared. -->
+        <service
+            android:name="org.eclipse.paho.android.service.MqttService"
+            tools:node="remove" />
         <provider
             android:name="com.pichillilorenzo.flutter_inappwebview_android.InAppWebViewFileProvider"
             android:authorities="${applicationId}.flutter_inappwebview.fileprovider"
@@ -144,13 +141,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-        <!-- Kitapsen runs no ML Kit OCR (manga / screen OCR are not shipped), so
-             ML Kit's auto-initialising provider (and its usage-log transport)
-             is stripped from the merged manifest. -->
-        <provider
-            android:name="com.google.mlkit.common.internal.MlKitInitProvider"
-            android:authorities="${applicationId}.mlkitinitprovider"
-            tools:node="remove" />
         <!-- TODO-1110 / BUG-535：禁用 Flutter 的 Android SurfaceControl 后端。
              media_kit_video 1.3.0 起把 Android 纹理从 SurfaceTextureEntry 迁到
              TextureRegistry.SurfaceProducer。在部分 Android 11 ROM/GPU 驱动

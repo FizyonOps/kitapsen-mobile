@@ -196,7 +196,7 @@ class _IllustrationsViewerPageState extends State<IllustrationsViewerPage> {
           child: IllustrationZoomViewer(
             file: file,
             diagnosticTag: 'IllustrationsViewer.zoom',
-            onLongPress: isWindowsPlatform || kKitapsenEdition
+            onLongPress: kKitapsenEdition || isWindowsPlatform
                 ? null
                 : () => unawaited(shareImageFile(file)),
           ),

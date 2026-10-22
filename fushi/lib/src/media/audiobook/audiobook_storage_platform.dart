@@ -1,3 +1,4 @@
+import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi_audio/fushi_audio.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:path_provider/path_provider.dart';
@@ -28,5 +29,8 @@ Future<int> justAudioDurationProbeMs(String path) async {
 /// 解析器（也不覆盖测试预先注入的临时目录）。
 void installAudiobookStoragePlatform() {
   AudiobookStorage.documentsRootResolver ??= getApplicationDocumentsDirectory;
-  AudiobookStorage.audioDurationProbeMs = justAudioDurationProbeMs;
+  // Kitapsen has no audiobooks, so nothing ever probes an audio duration.
+  if (!kKitapsenEdition) {
+    AudiobookStorage.audioDurationProbeMs = justAudioDurationProbeMs;
+  }
 }

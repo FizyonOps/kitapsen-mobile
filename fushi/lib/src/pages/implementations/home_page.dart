@@ -154,26 +154,28 @@ export 'package:fushi/src/models/home_tab.dart';
 /// 说成「macOS 恒 false」。收成一个快照后平台判据只在 [ModuleId.availableOn] 判
 /// 一次，两个调用点各减七行，也不可能再漏配。
 List<HomeTab> homeActiveTabs(ModuleVisibility visibility) => <HomeTab>[
-      HomeTab.home,
-      // 七个库页/工具 tab 都可按「功能模块」偏好隐藏（设置 → 外观 → 功能模块）；
-      // 首页/设置恒在，是全部隐藏后的安全回退面（故 [ModuleId] 里没有它们）。
-      if (visibility.isEnabled(ModuleId.books)) HomeTab.books,
-      if (kKitapsenEdition) HomeTab.store,
-      if (visibility.isEnabled(ModuleId.manga)) HomeTab.manga,
-      if (visibility.isEnabled(ModuleId.video)) HomeTab.video,
-      if (visibility.isEnabled(ModuleId.games)) HomeTab.games,
-      // 下载 tab（统一下载中心）：除番剧 torrent 外还承载通用磁力（书）与漫画
-      // 「在线目录」卷下载队列，所以不随视频开关联动，只听自己的模块开关；位置在
-      // 视频/游戏之后。
-      if (visibility.isEnabled(ModuleId.browse)) HomeTab.browse,
-      if (visibility.isEnabled(ModuleId.lookup)) HomeTab.dictionaries,
-      // 浏览器扩展管理（安装引导 + 连接检测 + 版本）独立成页，仅桌面出现（手机浏览器
-      // 不支持加载未解压扩展，故按平台而非实验开关门控——平台判据在
-      // [ModuleId.availableOn]），位置紧邻设置之前。
-      if (visibility.isEnabled(ModuleId.browserExtension))
-        HomeTab.browserExtension,
-      HomeTab.settings,
-    ];
+  HomeTab.home,
+  // 七个库页/工具 tab 都可按「功能模块」偏好隐藏（设置 → 外观 → 功能模块）；
+  // 首页/设置恒在，是全部隐藏后的安全回退面（故 [ModuleId] 里没有它们）。
+  if (visibility.isEnabled(ModuleId.books)) HomeTab.books,
+  if (kKitapsenEdition) HomeTab.store,
+  if (!kKitapsenEdition && visibility.isEnabled(ModuleId.manga)) HomeTab.manga,
+  if (!kKitapsenEdition && visibility.isEnabled(ModuleId.video)) HomeTab.video,
+  if (!kKitapsenEdition && visibility.isEnabled(ModuleId.games)) HomeTab.games,
+  // 下载 tab（统一下载中心）：除番剧 torrent 外还承载通用磁力（书）与漫画
+  // 「在线目录」卷下载队列，所以不随视频开关联动，只听自己的模块开关；位置在
+  // 视频/游戏之后。
+  if (!kKitapsenEdition && visibility.isEnabled(ModuleId.browse))
+    HomeTab.browse,
+  if (!kKitapsenEdition && visibility.isEnabled(ModuleId.lookup))
+    HomeTab.dictionaries,
+  // 浏览器扩展管理（安装引导 + 连接检测 + 版本）独立成页，仅桌面出现（手机浏览器
+  // 不支持加载未解压扩展，故按平台而非实验开关门控——平台判据在
+  // [ModuleId.availableOn]），位置紧邻设置之前。
+  if (!kKitapsenEdition && visibility.isEnabled(ModuleId.browserExtension))
+    HomeTab.browserExtension,
+  HomeTab.settings,
+];
 
 /// 启动落地 tab。「启动默认打开查词」只在查词 tab 真的可见时成立——查词模块被
 /// 关掉时返回它会让 `_currentTab` 从第一帧起就指向一个不在 [homeActiveTabs] 里的
@@ -460,9 +462,9 @@ class _HomePageState extends BasePageState<HomePage>
 
     _currentTab = homeInitialTab(
       startupDefaultDictionaryTab: appModelNoUpdate.startupDefaultDictionaryTab,
-      dictionariesEnabled: appModelNoUpdate.moduleVisibility.isEnabled(
-        ModuleId.lookup,
-      ),
+      dictionariesEnabled:
+          !kKitapsenEdition &&
+          appModelNoUpdate.moduleVisibility.isEnabled(ModuleId.lookup),
       fallback: _currentTab,
     );
     // Seed the shared shell notifier (drives the macOS root sidebar) and listen
@@ -494,10 +496,11 @@ class _HomePageState extends BasePageState<HomePage>
       // 在下面任何分支改写 first_time_setup 之前取：「下载 → 浏览」搬迁提示要据此
       // 区分全新安装与升级（见 browse_moved_notice.dart）。
       final bool freshInstall = appModelNoUpdate.isFirstTimeSetup;
-      final RecommendedPackTutorialState tutorialState =
-          RecommendedPackTutorialState(appModelNoUpdate.appDirectory);
       // Kitapsen ships no recommended dictionary pack.
-      if (!kKitapsenEdition && await tutorialState.shouldPrompt) {
+      final RecommendedPackTutorialState? tutorialState = kKitapsenEdition
+          ? null
+          : RecommendedPackTutorialState(appModelNoUpdate.appDirectory);
+      if (!kKitapsenEdition && await tutorialState!.shouldPrompt) {
         // Persist before the prompt can consume its receipt or open a tutorial.
         // Killing the app in the tutorial must not replay the setup wizard.
         appModelNoUpdate.setFirstTimeSetupFlag();
@@ -508,7 +511,7 @@ class _HomePageState extends BasePageState<HomePage>
       final bool tutorialOffered = !kKitapsenEdition &&
           await showRecommendedPackTutorialPrompt(
         context: context,
-        state: tutorialState,
+        state: tutorialState!,
         onStart: () async {
           await Navigator.of(context).push(
             adaptivePageRoute<void>(
@@ -559,8 +562,10 @@ class _HomePageState extends BasePageState<HomePage>
 
       // Kitapsen never talks to the Fushi release feed: store builds ask
       // Google Play / the App Store instead (store_update_check.dart).
-      if (mounted && kKitapsenEdition) {
-        unawaited(checkStoreUpdate(context));
+      // (kKitapsenEdition is tested on its own so the GitHub updater branch
+      // folds away; `mounted && kKitapsenEdition` is not a constant.)
+      if (kKitapsenEdition) {
+        if (mounted) unawaited(checkStoreUpdate(context));
       } else if (mounted) {
         UpdateChecker.scheduleCheck(
           context,
@@ -635,7 +640,8 @@ class _HomePageState extends BasePageState<HomePage>
       // 首帧同步之后挂定时轮询，让静止不动的设备也能周期性拉到远端改动（见
       // [_periodicSyncInterval] 注释）。dispose 时 cancel。排行榜书架同步挂在同一个
       // 定时器上（它自己有 30 分钟节流），所以定时器不再只随同步模块开启。
-      final bool periodicAutoSync = startupModules.isEnabled(ModuleId.sync);
+      final bool periodicAutoSync =
+          !kKitapsenEdition && startupModules.isEnabled(ModuleId.sync);
       if (periodicAutoSync || !kKitapsenEdition) {
         _periodicSyncTimer = Timer.periodic(_periodicSyncInterval, (_) {
           if (periodicAutoSync) _triggerFullAutoSync();
@@ -1065,7 +1071,8 @@ class _HomePageState extends BasePageState<HomePage>
     // Kitapsen: no dictionary page.
     if (kKitapsenEdition || !mounted) return;
     if (!carryingPendingLookup &&
-        !appModel.moduleVisibility.isEnabled(ModuleId.lookup)) {
+        !(!kKitapsenEdition &&
+            appModel.moduleVisibility.isEnabled(ModuleId.lookup))) {
       return;
     }
     void requestFocus() {
@@ -1235,7 +1242,8 @@ class _HomePageState extends BasePageState<HomePage>
         return _selectTabFromShortcut(HomeTab.books);
       case ShortcutAction.homeTabDict:
         if (kKitapsenEdition ||
-            !appModel.moduleVisibility.isEnabled(ModuleId.lookup)) {
+            !(!kKitapsenEdition &&
+                appModel.moduleVisibility.isEnabled(ModuleId.lookup))) {
           return KeyEventResult.ignored;
         }
         _revealDictionary();
@@ -1251,7 +1259,8 @@ class _HomePageState extends BasePageState<HomePage>
         return KeyEventResult.handled;
       case ShortcutAction.homeFocusSearch:
         if (kKitapsenEdition ||
-            !appModel.moduleVisibility.isEnabled(ModuleId.lookup)) {
+            !(!kKitapsenEdition &&
+                appModel.moduleVisibility.isEnabled(ModuleId.lookup))) {
           return KeyEventResult.ignored;
         }
         _revealDictionary(focus: DictionaryFocusIntent.keepQuery);
@@ -2138,6 +2147,7 @@ class _HomePageState extends BasePageState<HomePage>
         SettingsDestinationId.ai,
         appModel.moduleVisibility,
       ) &&
+      !kKitapsenEdition &&
       appModel.moduleVisibility.isEnabled(ModuleId.browse);
 
   /// 打开「AI 下视频」对话页：组装全部端口后交给 [VideoAcquisitionService]。

@@ -170,9 +170,11 @@ bool _scopeVisible(SettingsContext c, FloatingBallScope scope) {
       _systemBallSupported && prefs.floatingBallSystem,
     FloatingBallScope.manga =>
       prefs.floatingBallInApp &&
+          !kKitapsenEdition &&
           c.appModel.moduleVisibility.isEnabled(ModuleId.manga),
     FloatingBallScope.video =>
       prefs.floatingBallInApp &&
+          !kKitapsenEdition &&
           c.appModel.moduleVisibility.isEnabled(ModuleId.video),
     FloatingBallScope.reader =>
       prefs.floatingBallInApp &&
@@ -194,9 +196,9 @@ bool _buttonAvailable(SettingsContext c, FloatingBallScope scope, String id) {
         isAndroid: Platform.isAndroid,
         isIOS: Platform.isIOS,
         isDesktop: isDesktopSystemBallPlatform,
-        lookupModuleEnabled: c.appModel.moduleVisibility.isEnabled(
-          ModuleId.lookup,
-        ),
+        lookupModuleEnabled:
+            !kKitapsenEdition &&
+            c.appModel.moduleVisibility.isEnabled(ModuleId.lookup),
       );
 }
 

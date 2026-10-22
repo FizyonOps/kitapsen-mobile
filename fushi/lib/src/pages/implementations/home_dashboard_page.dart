@@ -592,11 +592,12 @@ class _HomeDashboardPageState
     }
     // Bangumi 同步状态：outbox 与偏好都不在 watchDashboardDataChanges 的表集里，
     // 由服务层每轮同步结束后自增的 revision 通知（后台自动同步完成也会刷新本卡）。
-    _trackingRevision = ref
-        .read(appProvider)
-        .mediaTrackingService
-        .statusRevision
-      ..addListener(_scheduleReload);
+    // Kitapsen: media tracking (Bangumi) is not part of the edition.
+    if (!kKitapsenEdition) {
+      _trackingRevision =
+          ref.read(appProvider).mediaTrackingService.statusRevision
+            ..addListener(_scheduleReload);
+    }
     // 「显示远端条目」门控翻转（BUG-1182 同款，视频页已修、本页此前漏了）：
     // 翻开 → 立即补拉远端；关掉 → 立即清掉已混排进「继续」/时间轴的远端条目。
     _prefsRepoForRemoteGate = ref.read(appProvider).prefsRepo
@@ -1031,6 +1032,7 @@ class _HomeDashboardPageState
     // 已被同一个开关从设置页藏掉，留着就是一条通往不存在页面的死路。
     final Widget? trackingCard =
         kMediaTrackingEnabled &&
+            !kKitapsenEdition &&
             appModel.moduleVisibility.isEnabled(ModuleId.services)
         ? _buildTrackingCard(tokens, appModel, now)
         : null;
@@ -2345,7 +2347,7 @@ class _HomeDashboardPageState
     if (mediaKey.isNotEmpty) {
       if (mediaKind == kActivityMediaVideo &&
           _videos.any((VideoBookRow v) => v.bookUid == mediaKey)) {
-        if (!visibility.isEnabled(ModuleId.video)) {
+        if (!(!kKitapsenEdition && visibility.isEnabled(ModuleId.video))) {
           _showModuleHiddenHint();
           return;
         }
@@ -2739,7 +2741,7 @@ class _HomeDashboardPageState
     if (key != null && key.isNotEmpty) {
       if (entry.mediaType == kActivityMediaVideo &&
           videosByUid.containsKey(key)) {
-        if (!visibility.isEnabled(ModuleId.video)) {
+        if (!(!kKitapsenEdition && visibility.isEnabled(ModuleId.video))) {
           _showModuleHiddenHint();
           return;
         }
@@ -3272,10 +3274,10 @@ class _HomeDashboardPageState
   }) => <(T, String)>[
     all,
     if (visibility.isEnabled(ModuleId.books) ||
-        visibility.isEnabled(ModuleId.manga))
+        !kKitapsenEdition && visibility.isEnabled(ModuleId.manga))
       read,
-    if (visibility.isEnabled(ModuleId.video)) watch,
-    if (visibility.isEnabled(ModuleId.games)) game,
+    if (!kKitapsenEdition && visibility.isEnabled(ModuleId.video)) watch,
+    if (!kKitapsenEdition && visibility.isEnabled(ModuleId.games)) game,
     ...?trailing,
   ];
 

@@ -54,9 +54,12 @@ class _SettingsHomePageState extends BasePageState<SettingsHomePage>
     // 主从：详情内容直接在本页渲染，走不到 [SettingsDetailPage] 那份订阅
     // （BUG-2165）。不听这一条，开着设置页时下载开始/下完/暂停，「推荐包」那一行
     // 的出现与消失就只能靠 AppModel 顺带 notify 撞上，变成偶发刷新。
-    appModelNoUpdate.recommendedPackDownloadController.stage.addListener(
-      _onLogChanged,
-    );
+    // Kitapsen has no recommended dictionary packs.
+    if (!kKitapsenEdition) {
+      appModelNoUpdate.recommendedPackDownloadController.stage.addListener(
+        _onLogChanged,
+      );
+    }
   }
 
   @override
@@ -68,9 +71,11 @@ class _SettingsHomePageState extends BasePageState<SettingsHomePage>
       GalIngameLookupController.instance.admission
           .removeListener(_onLogChanged);
     }
-    appModelNoUpdate.recommendedPackDownloadController.stage.removeListener(
-      _onLogChanged,
-    );
+    if (!kKitapsenEdition) {
+      appModelNoUpdate.recommendedPackDownloadController.stage.removeListener(
+        _onLogChanged,
+      );
+    }
     super.dispose();
   }
 

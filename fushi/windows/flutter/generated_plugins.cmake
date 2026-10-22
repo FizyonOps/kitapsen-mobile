@@ -7,9 +7,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   desktop_webview_window
   dynamic_color
   flutter_inappwebview_windows
-  gamepads_windows
   hotkey_manager_windows
-  media_kit_video
   permission_handler_windows
   screen_retriever_windows
   share_plus

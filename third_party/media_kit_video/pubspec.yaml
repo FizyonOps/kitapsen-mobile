@@ -31,18 +31,6 @@ dev_dependencies:
 
 
 
-flutter:
-  plugin:
-    platforms:
-      windows:
-        pluginClass: MediaKitVideoPluginCApi
-      linux:
-        pluginClass: MediaKitVideoPlugin
-      macos:
-        pluginClass: MediaKitVideoPlugin
-      ios:
-        pluginClass: MediaKitVideoPlugin
-      android:
-        package: com.alexmercerind.media_kit_video
-        pluginClass: MediaKitVideoPlugin
-      web:
+# Kitapsen edition: no video player ships, so the native plugin (texture
+# rendering for libmpv) is not registered on any platform.
+flutter: {}

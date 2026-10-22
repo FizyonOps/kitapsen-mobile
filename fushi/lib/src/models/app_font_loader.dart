@@ -9,6 +9,7 @@ import 'package:fushi/src/models/woff2_decoder.dart';
 import 'package:fushi/src/reader/reader_settings.dart' show ReaderCustomFontCss;
 import 'package:fushi/src/utils/misc/error_log_service.dart';
 import 'package:path/path.dart' as p;
+import 'package:fushi/src/models/kitapsen_edition.dart';
 
 /// Registers a user-imported custom font with the Flutter engine so it can be
 /// used for the app-wide UI [TextTheme], not just the reader WebView.
@@ -233,8 +234,11 @@ class AppFontLoader {
       // BUG-897：自定义字体不在系统字体目录（扫描不到），把字节同步喂进 ASS 字号
       // 换算索引（OS/2 win cell 语义），别名=本处注册的家族名——视频字幕用自定义
       // 字体时字号也与 mpv/libass 同源。
-      AssFontCellIndex.instance
-          .registerFontBytes(bytes, aliases: <String>[family]);
+      // Kitapsen has no video subtitles to size.
+      if (!kKitapsenEdition) {
+        AssFontCellIndex.instance
+            .registerFontBytes(bytes, aliases: <String>[family]);
+      }
     } catch (e, stack) {
       ErrorLogService.instance.log('AppFontLoader.resolveAndLoad', e, stack);
       return null;

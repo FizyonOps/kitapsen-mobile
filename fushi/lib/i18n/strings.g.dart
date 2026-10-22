@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 111690 (6570 per locale)
+/// Strings: 111809 (6577 per locale)
 ///
-/// Built on 2026-10-14 at 18:44 UTC
+/// Built on 2026-10-22 at 20:41 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -9395,6 +9395,14 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String kitapsen_sample_notice({required Object percent}) =>
       'Sample: the first ${percent}% of the book.';
   String get kitapsen_sample_unavailable => 'This book has no sample.';
+  String get kitapsen_settings_destination_system_summary =>
+      'General, about & diagnostics';
+  String get kitapsen_theme_role_selection => 'Selection highlight';
+  String get kitapsen_theme_preview_chapter => 'Chapter 1';
+  String get kitapsen_theme_preview_body => 'Body text';
+  String get kitapsen_theme_preview_selection => 'selected text';
+  String get kitapsen_theme_preview_link => 'Link';
+  String get kitapsen_storage_category_books => 'Books';
 }
 
 // Path: <root>
@@ -25143,6 +25151,21 @@ class _StringsAr extends _StringsEn {
       'عينة: أول ${percent}% من الكتاب.';
   @override
   String get kitapsen_sample_unavailable => 'لا تتوفر عينة لهذا الكتاب.';
+  @override
+  String get kitapsen_settings_destination_system_summary =>
+      'عام، حول التطبيق وتشخيصات';
+  @override
+  String get kitapsen_theme_role_selection => 'تمييز التحديد';
+  @override
+  String get kitapsen_theme_preview_chapter => 'الفصل 1';
+  @override
+  String get kitapsen_theme_preview_body => 'نص الكتاب';
+  @override
+  String get kitapsen_theme_preview_selection => 'نص محدد';
+  @override
+  String get kitapsen_theme_preview_link => 'رابط';
+  @override
+  String get kitapsen_storage_category_books => 'الكتب';
 }
 
 // Path: <root>
@@ -41299,6 +41322,21 @@ class _StringsDe extends _StringsEn {
   @override
   String get kitapsen_sample_unavailable =>
       'Für dieses Buch gibt es keine Leseprobe.';
+  @override
+  String get kitapsen_settings_destination_system_summary =>
+      'Allgemein, Info & Diagnose';
+  @override
+  String get kitapsen_theme_role_selection => 'Auswahl-Hervorhebung';
+  @override
+  String get kitapsen_theme_preview_chapter => 'Kapitel 1';
+  @override
+  String get kitapsen_theme_preview_body => 'Fließtext';
+  @override
+  String get kitapsen_theme_preview_selection => 'markierter Text';
+  @override
+  String get kitapsen_theme_preview_link => 'Link';
+  @override
+  String get kitapsen_storage_category_books => 'Bücher';
 }
 
 // Path: <root>
@@ -57512,6 +57550,21 @@ class _StringsEs extends _StringsEn {
       'Muestra: el primer ${percent} % del libro.';
   @override
   String get kitapsen_sample_unavailable => 'Este libro no tiene muestra.';
+  @override
+  String get kitapsen_settings_destination_system_summary =>
+      'General, información y diagnóstico';
+  @override
+  String get kitapsen_theme_role_selection => 'Resaltado de selección';
+  @override
+  String get kitapsen_theme_preview_chapter => 'Capítulo 1';
+  @override
+  String get kitapsen_theme_preview_body => 'Texto';
+  @override
+  String get kitapsen_theme_preview_selection => 'texto seleccionado';
+  @override
+  String get kitapsen_theme_preview_link => 'Enlace';
+  @override
+  String get kitapsen_storage_category_books => 'Libros';
 }
 
 // Path: <root>
@@ -73815,6 +73868,21 @@ class _StringsFr extends _StringsEn {
       'Extrait : les premiers ${percent} % du livre.';
   @override
   String get kitapsen_sample_unavailable => 'Ce livre n’a pas d’extrait.';
+  @override
+  String get kitapsen_settings_destination_system_summary =>
+      'Général, à propos et diagnostics';
+  @override
+  String get kitapsen_theme_role_selection => 'Surlignage de la sélection';
+  @override
+  String get kitapsen_theme_preview_chapter => 'Chapitre 1';
+  @override
+  String get kitapsen_theme_preview_body => 'Texte courant';
+  @override
+  String get kitapsen_theme_preview_selection => 'texte sélectionné';
+  @override
+  String get kitapsen_theme_preview_link => 'Lien';
+  @override
+  String get kitapsen_storage_category_books => 'Livres';
 }
 
 // Path: <root>
@@ -89756,6 +89824,21 @@ class _StringsId extends _StringsEn {
       'Sampel: ${percent}% pertama buku ini.';
   @override
   String get kitapsen_sample_unavailable => 'Buku ini tidak memiliki sampel.';
+  @override
+  String get kitapsen_settings_destination_system_summary =>
+      'Umum, tentang & diagnostik';
+  @override
+  String get kitapsen_theme_role_selection => 'Sorotan pilihan';
+  @override
+  String get kitapsen_theme_preview_chapter => 'Bab 1';
+  @override
+  String get kitapsen_theme_preview_body => 'Teks isi';
+  @override
+  String get kitapsen_theme_preview_selection => 'teks terpilih';
+  @override
+  String get kitapsen_theme_preview_link => 'Tautan';
+  @override
+  String get kitapsen_storage_category_books => 'Buku';
 }
 
 // Path: <root>
@@ -105867,6 +105950,21 @@ class _StringsIt extends _StringsEn {
       'Estratto: il primo ${percent}% del libro.';
   @override
   String get kitapsen_sample_unavailable => 'Questo libro non ha un estratto.';
+  @override
+  String get kitapsen_settings_destination_system_summary =>
+      'Generali, informazioni e diagnostica';
+  @override
+  String get kitapsen_theme_role_selection => 'Evidenziazione della selezione';
+  @override
+  String get kitapsen_theme_preview_chapter => 'Capitolo 1';
+  @override
+  String get kitapsen_theme_preview_body => 'Testo';
+  @override
+  String get kitapsen_theme_preview_selection => 'testo selezionato';
+  @override
+  String get kitapsen_theme_preview_link => 'Link';
+  @override
+  String get kitapsen_storage_category_books => 'Libri';
 }
 
 // Path: <root>
@@ -120962,6 +121060,20 @@ class _StringsJa extends _StringsEn {
       'サンプル：本の最初の${percent}%です。';
   @override
   String get kitapsen_sample_unavailable => 'この本にはサンプルがありません。';
+  @override
+  String get kitapsen_settings_destination_system_summary => '一般、アプリ情報と診断';
+  @override
+  String get kitapsen_theme_role_selection => '選択範囲のハイライト';
+  @override
+  String get kitapsen_theme_preview_chapter => '第1章';
+  @override
+  String get kitapsen_theme_preview_body => '本文';
+  @override
+  String get kitapsen_theme_preview_selection => '選択したテキスト';
+  @override
+  String get kitapsen_theme_preview_link => 'リンク';
+  @override
+  String get kitapsen_storage_category_books => '本';
 }
 
 // Path: <root>
@@ -136063,6 +136175,20 @@ class _StringsKo extends _StringsEn {
       '샘플: 책의 처음 ${percent}%입니다.';
   @override
   String get kitapsen_sample_unavailable => '이 책에는 샘플이 없습니다.';
+  @override
+  String get kitapsen_settings_destination_system_summary => '일반, 정보 및 진단';
+  @override
+  String get kitapsen_theme_role_selection => '선택 영역 하이라이트';
+  @override
+  String get kitapsen_theme_preview_chapter => '1장';
+  @override
+  String get kitapsen_theme_preview_body => '본문';
+  @override
+  String get kitapsen_theme_preview_selection => '선택한 텍스트';
+  @override
+  String get kitapsen_theme_preview_link => '링크';
+  @override
+  String get kitapsen_storage_category_books => '책';
 }
 
 // Path: <root>
@@ -152125,6 +152251,21 @@ class _StringsNl extends _StringsEn {
       'Fragment: de eerste ${percent}% van het boek.';
   @override
   String get kitapsen_sample_unavailable => 'Dit boek heeft geen fragment.';
+  @override
+  String get kitapsen_settings_destination_system_summary =>
+      'Algemeen, over & diagnostiek';
+  @override
+  String get kitapsen_theme_role_selection => 'Selectiemarkering';
+  @override
+  String get kitapsen_theme_preview_chapter => 'Hoofdstuk 1';
+  @override
+  String get kitapsen_theme_preview_body => 'Broodtekst';
+  @override
+  String get kitapsen_theme_preview_selection => 'geselecteerde tekst';
+  @override
+  String get kitapsen_theme_preview_link => 'Link';
+  @override
+  String get kitapsen_storage_category_books => 'Boeken';
 }
 
 // Path: <root>
@@ -168249,6 +168390,21 @@ class _StringsPtBr extends _StringsEn {
       'Amostra: os primeiros ${percent}% do livro.';
   @override
   String get kitapsen_sample_unavailable => 'Este livro não tem amostra.';
+  @override
+  String get kitapsen_settings_destination_system_summary =>
+      'Geral, sobre e diagnósticos';
+  @override
+  String get kitapsen_theme_role_selection => 'Realce da seleção';
+  @override
+  String get kitapsen_theme_preview_chapter => 'Capítulo 1';
+  @override
+  String get kitapsen_theme_preview_body => 'Texto';
+  @override
+  String get kitapsen_theme_preview_selection => 'texto selecionado';
+  @override
+  String get kitapsen_theme_preview_link => 'Link';
+  @override
+  String get kitapsen_storage_category_books => 'Livros';
 }
 
 // Path: <root>
@@ -184321,6 +184477,21 @@ class _StringsRu extends _StringsEn {
       'Отрывок: первые ${percent}% книги.';
   @override
   String get kitapsen_sample_unavailable => 'У этой книги нет отрывка.';
+  @override
+  String get kitapsen_settings_destination_system_summary =>
+      'Общие, о приложении и диагностика';
+  @override
+  String get kitapsen_theme_role_selection => 'Подсветка выделения';
+  @override
+  String get kitapsen_theme_preview_chapter => 'Глава 1';
+  @override
+  String get kitapsen_theme_preview_body => 'Основной текст';
+  @override
+  String get kitapsen_theme_preview_selection => 'выделенный текст';
+  @override
+  String get kitapsen_theme_preview_link => 'Ссылка';
+  @override
+  String get kitapsen_storage_category_books => 'Книги';
 }
 
 // Path: <root>
@@ -200054,6 +200225,21 @@ class _StringsTh extends _StringsEn {
       'ตัวอย่าง: ${percent}% แรกของหนังสือ';
   @override
   String get kitapsen_sample_unavailable => 'หนังสือเล่มนี้ไม่มีตัวอย่าง';
+  @override
+  String get kitapsen_settings_destination_system_summary =>
+      'ทั่วไป เกี่ยวกับ และการวินิจฉัย';
+  @override
+  String get kitapsen_theme_role_selection => 'ไฮไลต์ส่วนที่เลือก';
+  @override
+  String get kitapsen_theme_preview_chapter => 'บทที่ 1';
+  @override
+  String get kitapsen_theme_preview_body => 'เนื้อหา';
+  @override
+  String get kitapsen_theme_preview_selection => 'ข้อความที่เลือก';
+  @override
+  String get kitapsen_theme_preview_link => 'ลิงก์';
+  @override
+  String get kitapsen_storage_category_books => 'หนังสือ';
 }
 
 // Path: <root>
@@ -216005,6 +216191,21 @@ class _StringsTr extends _StringsEn {
       'Örnek: kitabın ilk %${percent} kadarı.';
   @override
   String get kitapsen_sample_unavailable => 'Bu kitabın örneği yok.';
+  @override
+  String get kitapsen_settings_destination_system_summary =>
+      'Genel, hakkında ve tanılama';
+  @override
+  String get kitapsen_theme_role_selection => 'Seçim vurgusu';
+  @override
+  String get kitapsen_theme_preview_chapter => 'Bölüm 1';
+  @override
+  String get kitapsen_theme_preview_body => 'Gövde metni';
+  @override
+  String get kitapsen_theme_preview_selection => 'seçili metin';
+  @override
+  String get kitapsen_theme_preview_link => 'Bağlantı';
+  @override
+  String get kitapsen_storage_category_books => 'Kitaplar';
 }
 
 // Path: <root>
@@ -231881,6 +232082,21 @@ class _StringsVi extends _StringsEn {
       'Bản đọc thử: ${percent}% đầu tiên của sách.';
   @override
   String get kitapsen_sample_unavailable => 'Sách này không có bản đọc thử.';
+  @override
+  String get kitapsen_settings_destination_system_summary =>
+      'Chung, giới thiệu & chẩn đoán';
+  @override
+  String get kitapsen_theme_role_selection => 'Tô sáng vùng chọn';
+  @override
+  String get kitapsen_theme_preview_chapter => 'Chương 1';
+  @override
+  String get kitapsen_theme_preview_body => 'Nội dung';
+  @override
+  String get kitapsen_theme_preview_selection => 'văn bản được chọn';
+  @override
+  String get kitapsen_theme_preview_link => 'Liên kết';
+  @override
+  String get kitapsen_storage_category_books => 'Sách';
 }
 
 // Path: <root>
@@ -246405,6 +246621,20 @@ class _StringsZhCn extends _StringsEn {
       '样章：本书的前 ${percent}%。';
   @override
   String get kitapsen_sample_unavailable => '本书没有样章。';
+  @override
+  String get kitapsen_settings_destination_system_summary => '通用、关于与诊断';
+  @override
+  String get kitapsen_theme_role_selection => '选中高亮';
+  @override
+  String get kitapsen_theme_preview_chapter => '第一章';
+  @override
+  String get kitapsen_theme_preview_body => '正文';
+  @override
+  String get kitapsen_theme_preview_selection => '选中的文字';
+  @override
+  String get kitapsen_theme_preview_link => '链接';
+  @override
+  String get kitapsen_storage_category_books => '书籍';
 }
 
 // Path: <root>
@@ -260957,4 +261187,18 @@ class _StringsZhHk extends _StringsEn {
       '樣章：本書的前 ${percent}%。';
   @override
   String get kitapsen_sample_unavailable => '本書沒有樣章。';
+  @override
+  String get kitapsen_settings_destination_system_summary => '通用、關於與診斷';
+  @override
+  String get kitapsen_theme_role_selection => '選取高亮';
+  @override
+  String get kitapsen_theme_preview_chapter => '第一章';
+  @override
+  String get kitapsen_theme_preview_body => '正文';
+  @override
+  String get kitapsen_theme_preview_selection => '選取的文字';
+  @override
+  String get kitapsen_theme_preview_link => '連結';
+  @override
+  String get kitapsen_storage_category_books => '書籍';
 }

@@ -522,6 +522,8 @@ extension _ReaderMining on _ReaderFushiPageState {
   }
 
   Future<String?> _prepareSentenceAudioCuesJson() async {
+    // Kitapsen: no audiobooks, so no sentence-audio highlight cues.
+    if (kKitapsenEdition) return null;
     // BUG-395：逐句高亮策略判据归一到「cue 是否 sasayaki 编码」（与 playback 端
     // SasayakiMatchCodec.tryDecode 同一判据），不再用 _srtBookUid（音频格式=srt）
     // 当代理。旧代码在 _srtBookUid!=null 时**无条件 return null**：但「普通 EPUB +
@@ -580,6 +582,7 @@ extension _ReaderMining on _ReaderFushiPageState {
   /// [AudiobookRepository]；两源加载后 sasayaki 判据完全一致（BUG-395），setup 不再
   /// 按书源分叉出不同的高亮策略。返回 null = 本书无任何音频 cue 源。
   Future<List<AudioCue>?> _loadHighlightCues() async {
+    if (kKitapsenEdition) return null;
     if (_srtBookUid != null) {
       return SrtBookRepository(appModel.database).cuesFor(_srtBookUid!);
     }
@@ -591,7 +594,11 @@ extension _ReaderMining on _ReaderFushiPageState {
   }
 
   Future<void> _injectAudiobookBridge() async {
-    if (_controller == null || _audiobookController == null) return;
+    if (kKitapsenEdition ||
+        _controller == null ||
+        _audiobookController == null) {
+      return;
+    }
 
     await AudiobookBridge.inject(_controller!,
         primaryColor: _themeSentenceAudioHighlightColor());
