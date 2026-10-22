@@ -295,7 +295,7 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
       );
     }
 
-    if (!isSourceReview && item != null && messenger != null) {
+    if ((item != null) && (messenger != null)) {
       triggerAutoSyncAfterClose(
         db: appModel.database,
         mediaIdentifier: item.mediaIdentifier,
@@ -950,7 +950,7 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
         false;
     // 「+句」草稿（多句合一制卡 / 调整上下文）只为制卡服务，跟着制卡一起关。
     final bool sentenceDraftEnabled =
-        supportsSentenceDraft && cardCreationEnabled;
+        false;
 
     // BUG-135 parking + Visibility 几何收口在 [parkedPopupLayer]。
     return parkedPopupLayer(
@@ -1084,60 +1084,34 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
         // 制卡模块关闭：制卡链路整条断开（不写卡、不问 Anki），点了给一句可见提示
         // 说明为什么没反应——[DictionaryPopupLayer.onMineEntry] 是必填参数，
         // popup.js 也无条件渲染这颗 + 按钮，所以此处只能落到「可点 + 反馈」这一档。
-        onMineEntry: cardCreationEnabled
-            ? onMineFromPopup
-            : _mineBlockedByModuleGate,
-        onUpdateEntry: cardCreationEnabled ? onUpdateFromPopup : null,
+        onMineEntry: _mineBlockedByModuleGate,
+        onUpdateEntry: null,
         // TODO-948②：阅读器/有声书弹窗收藏按钮接线（视频走 mixin，不经此处）。
         onFavoriteEntry: onFavoriteFromPopup,
         onFavoriteCheck: onFavoriteCheckFromPopup,
         // 制卡关掉时恒答「不重复」：既画不出撒谎的 ✓，也不会为一个用不了的按钮
         // 每次查词都去问一遍 Anki（模块关掉 = 该模块的后台流量也一起停）。
-        onDuplicateCheck: cardCreationEnabled
-            ? (expression, reading) async {
-                final repo = ref.read(ankiRepositoryProvider);
-                return repo.isDuplicate(expression, reading);
-              }
-            : (String expression, String reading) async => false,
+        onDuplicateCheck: (String expression, String reading) async => false,
         // TODO-614：覆写范围=「全部」时按内容反查可覆写的已存在 note id，让阅读器/
         // 有声书/视频弹窗里更早制的卡也能点绿 ✓↩ 覆写（默认 latest / AnkiDroid 回 null）。
-        onOverwriteTargetNoteId: cardCreationEnabled
-            ? (expression, reading) async {
-                final repo = ref.read(ankiRepositoryProvider);
-                return repo.findOverwriteTargetNoteId(expression, reading);
-              }
-            : null,
+        onOverwriteTargetNoteId: null,
         // TODO-1007/1008：点 ✓（卡已存在）弹操作选择（覆写/新增重复卡/查看·在 Anki
         // 中打开），命中多张让用户选哪张。reader 覆写 onMineFromPopup/onUpdateFromPopup
         // 做真实制卡/覆盖（基类无操作）。
-        onMinedCardAction: cardCreationEnabled
-            ? onMinedCardActionFromPopup
-            : null,
+        onMinedCardAction: null,
         // TODO-1360：已制卡的词旁「在 Anki 中打开卡片」按钮 → 反查命中卡直接跳转打开。
-        onOpenInAnki: cardCreationEnabled ? onOpenInAnkiFromPopup : null,
+        onOpenInAnki: null,
         // TODO-270 F/G「查词窗口多句合一制卡」(乙方案)：仅支持草稿的表面（reader 覆写
         // [supportsSentenceDraft]=true）传入回调；其余表面传 null，弹窗不渲染「+句」。
-        onAppendSentence: sentenceDraftEnabled ? onAppendSentenceToDraft : null,
-        onSetSentenceContext: sentenceDraftEnabled
-            ? onSetSentenceContextToDraft
-            : null,
-        onClearSentenceDraft: sentenceDraftEnabled
-            ? onClearSentenceDraftToDraft
-            : null,
+        onAppendSentence: null,
+        onSetSentenceContext: null,
+        onClearSentenceDraft: null,
         // Niratan「制卡前调整·选择句子上下文」模态：弹窗按需拉取当前草稿的真实上下
         // 文句（前/当前/后）+ 词偏移做预览。只在支持草稿的表面接线，其余传 null。
-        onSentenceContextPreview: sentenceDraftEnabled
-            ? onSentenceContextPreviewFromDraft
-            : null,
+        onSentenceContextPreview: null,
         // BUG-763/766：点某词条「调整上下文」→ 弹 app 原生顶层对话框（不再画在弹窗
         // WebView 内）；确认制卡回该层 WebView（item.webViewKey）精确点中该词条制卡。
-        onOpenSentenceContextModal: sentenceDraftEnabled
-            ? (int entryIndex, String matched) => _openSentenceContextDialog(
-                  webViewKey: item.webViewKey,
-                  entryIndex: entryIndex,
-                  matched: matched,
-                )
-            : null,
+        onOpenSentenceContextModal: null,
       ),
     );
   }

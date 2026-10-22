@@ -276,20 +276,10 @@ class _BookImportDialogState extends State<BookImportDialog>
         _autoFillTitle(
             p.basenameWithoutExtension(droppedEpub), ImportTitleSource.epub);
       }
-      if (gotAudio) {
-        _audioPaths = r.audioPaths;
-        _audioCoverPath = null;
-      }
     });
     // 拖入主书文件时顺带扫同目录 sidecar（仅填空、不覆盖）；拖入音频时抽内嵌封面。
     if (droppedEpub != null) {
       _autoAttachSidecars(droppedEpub);
-    }
-    if (gotAudio) {
-      if (_coverPath == null) {
-        _tryExtractAudioCover();
-      }
-      _tryExtractAudioMetadata();
     }
   }
 

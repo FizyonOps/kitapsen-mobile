@@ -704,7 +704,7 @@ class _MangaOnlineSourcesViewState
         false;
     final OnlineSourcesSection section = widget.section;
     final List<Widget> slivers = <Widget>[
-      if (aidoku && section != OnlineSourcesSection.sources)
+      if (false && section != OnlineSourcesSection.sources)
         SliverToBoxAdapter(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -722,7 +722,7 @@ class _MangaOnlineSourcesViewState
           ),
         ),
       if (section == OnlineSourcesSection.sources)
-        if (onlineSourcesAvailable && manager != null)
+        if (false && manager != null)
           MihonInstalledSourcesSection(
             key: const ValueKey<String>('manga_mihon_sources'),
             manager: manager,
@@ -734,7 +734,7 @@ class _MangaOnlineSourcesViewState
             ],
             onOpenSource: _openMihonSource,
           )
-        else if (onlineSourcesAvailable)
+        else if (false)
           SliverToBoxAdapter(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -747,7 +747,7 @@ class _MangaOnlineSourcesViewState
           )
         else
           const SliverToBoxAdapter(child: SizedBox.shrink())
-      else if (onlineSourcesAvailable && manager != null)
+      else if (false && manager != null)
         MihonExtensionsPage(
           key: ValueKey<String>('manga_mihon_extensions_${section.name}'),
           embedded: true,
@@ -758,7 +758,7 @@ class _MangaOnlineSourcesViewState
               MihonExtensionsSection.catalog,
           ],
         )
-      else if (onlineSourcesAvailable)
+      else if (false)
         SliverToBoxAdapter(child: _unavailableNote()),
     ];
     return CustomScrollView(

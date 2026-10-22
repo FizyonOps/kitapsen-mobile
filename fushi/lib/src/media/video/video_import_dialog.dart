@@ -704,9 +704,7 @@ class _VideoImportDialogState extends State<VideoImportDialog>
                 !isYoutubeUrl(_streamUrlController.text)) ...<Widget>[
               const SizedBox(height: 4),
               Text(
-                shouldOpenInWebVideoPlayer(_streamUrlController.text)
-                    ? t.web_video_import_hint
-                    : t.web_video_player_unavailable,
+                t.web_video_player_unavailable,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: Theme.of(context).colorScheme.primary,
                     ),

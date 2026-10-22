@@ -1048,7 +1048,7 @@ class GalIngameLookupController {
     if (reader != null) {
       return reader(
             enabledPreferenceKey,
-            defaultValue: PreferencesRepository.galIngameLookupEnabledDefault,
+            defaultValue: true,
           ) ==
           true;
     }
@@ -1059,7 +1059,7 @@ class GalIngameLookupController {
     try {
       return model.galIngameLookupEnabled;
     } catch (_) {
-      return PreferencesRepository.galIngameLookupEnabledDefault;
+      return true;
     }
   }
 

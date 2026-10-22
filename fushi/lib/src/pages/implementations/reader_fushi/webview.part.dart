@@ -678,8 +678,8 @@ extension _ReaderWebView on _ReaderFushiPageState {
     return ReaderEngineConfig(
       navigationGeneration: navigationGeneration,
       continuousMode: continuousMode,
-      vnMode: vnMode,
-      vnClickAdvance: vnMode && s.visualNovelClickAdvance,
+      vnMode: false,
+      vnClickAdvance: false,
       scanNonJapaneseText: appModel.scanNonJapaneseText,
       // TODO-756b：是否“鼠标悬停即自动查词”。live 变更经 _applyHoverAutoLookupLive
       // 改同一个 JS 全局，无需整章重注入。
@@ -721,7 +721,7 @@ extension _ReaderWebView on _ReaderFushiPageState {
       // TODO-perf（跨章）：JS 侧埋点与 Dart 侧同一个开关。生产下恒 false，
       // perfMark / perfSnapshot 在 JS 里直接 early-return。
       perfTraceEnabled: ReaderChapterPerfTrace.enabled,
-      vnRevealSpeed: vnMode ? s.visualNovelRevealSpeed : 0,
+      vnRevealSpeed: 0,
       vnScreenMode: s.visualNovelScreenMode,
       vnSentencesPerScreen: s.visualNovelSentencesPerScreen,
       vnPreserveDialogue: s.visualNovelPreserveDialogueBubbles,
@@ -2070,7 +2070,7 @@ updateLive: function(patch) {
             // Kitapsen has no lookup, so Shift+tap is just a tap.
             final bool shiftKey =
                 false;
-            if (!_tapGateChrome && !shiftKey) {
+            if (!_tapGateChrome) {
               _toggleChrome();
               // Tap handed OS focus to the WebView; reclaim it so ESC still
               // exits after a tap-to-toggle-chrome (BUG-136). _toggleChrome()

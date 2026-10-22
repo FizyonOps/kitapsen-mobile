@@ -7289,13 +7289,7 @@ class AppModel with ChangeNotifier {
         // 游玩状态改动上报媒体记录（Bangumi 收藏 type）。fail-open：同步不可用时
         // 本地状态照常生效，事件留在 outbox 由后续同步重试。
         onPlayStatusChanged: (String id, GalgamePlayStatus status) {
-          if (!kMediaTrackingEnabled) return;
-          unawaited(
-            mediaTrackingService.recordGameStatus(
-              gameId: id,
-              status: status.value,
-            ),
-          );
+          return;
         },
       );
   GalgameRepository? _galgameRepo;
@@ -8324,7 +8318,7 @@ class AppModel with ChangeNotifier {
       prefsRepo.setMangaTapZonePaging(value);
 
   bool get mangaPanelNavigation =>
-      _prefsRepo?.mangaPanelNavigation ?? kMangaPanelNavigationDefault;
+      _prefsRepo?.mangaPanelNavigation ?? false;
   Future<void> setMangaPanelNavigation(bool value) =>
       prefsRepo.setMangaPanelNavigation(value);
 
@@ -8352,7 +8346,7 @@ class AppModel with ChangeNotifier {
       prefsRepo.setMangaSpreadOffset(value);
 
   bool get mangaWidePageSolo =>
-      _prefsRepo?.mangaWidePageSolo ?? kMangaWidePageSoloDefault;
+      _prefsRepo?.mangaWidePageSolo ?? true;
   Future<void> setMangaWidePageSolo(bool value) =>
       prefsRepo.setMangaWidePageSolo(value);
 

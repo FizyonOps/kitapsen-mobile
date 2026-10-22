@@ -68,7 +68,7 @@ List<OnlineSourcesDomain> visibleOnlineSourcesDomains(
 ) => <OnlineSourcesDomain>[
   for (final OnlineSourcesDomain domain in OnlineSourcesDomain.values)
     if (visibility.isEnabled(moduleOfOnlineSourcesDomain(domain)) &&
-        isOnlineSourcesDomainAvailable(domain))
+        false)
       domain,
 ];
 

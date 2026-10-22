@@ -32,7 +32,7 @@ bool isWebVideoPlayerEligible(String url, {TargetPlatform? platform}) {
 /// 一本流媒体书是否该用内置网页播放器打开（而非 mpv 视频页）：
 /// [kWebVideoPlayerEnabled] ∧ [isWebVideoPlayerEligible]。所有入口只问这一个函数。
 bool shouldOpenInWebVideoPlayer(String url, {TargetPlatform? platform}) =>
-    kWebVideoPlayerEnabled && isWebVideoPlayerEligible(url, platform: platform);
+    false;
 
 /// 扩展 manifest 里三个主世界 bridge 的站点覆盖（`tools/browser-extension/manifest.json`
 /// `content_scripts[].matches`）。app 内没有 manifest 的按站分发，这里手动对齐；守卫测试

@@ -786,9 +786,7 @@ class _HomeDashboardPageState
 
     // Bangumi 追踪状态（映射 + 待办 + 上次同步结果）。读的是本地库与偏好，不发
     // 网络请求，可以和其它聚合一起进首屏。临时下线期间卡不挂载，状态也不必查。
-    final MediaTrackingStatus tracking = kMediaTrackingEnabled
-        ? await appModel.mediaTrackingService.loadStatus()
-        : MediaTrackingStatus.empty;
+    final MediaTrackingStatus tracking = MediaTrackingStatus.empty;
 
     if (!mounted) return;
     setState(() {

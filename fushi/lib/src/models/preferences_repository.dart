@@ -3115,7 +3115,7 @@ class PreferencesRepository extends ChangeNotifier
 
   bool get galHookClickLookup =>
       getPref('gal_hook_click_lookup',
-          defaultValue: galHookClickLookupDefault) ==
+          defaultValue: true) ==
       true;
 
   Future<void> setGalHookClickLookup(bool value) async {
@@ -3149,7 +3149,7 @@ class PreferencesRepository extends ChangeNotifier
 
   bool get galHookToolbarAutoHide =>
       getPref('gal_hook_toolbar_auto_hide',
-          defaultValue: galHookToolbarAutoHideDefault) ==
+          defaultValue: true) ==
       true;
 
   Future<void> setGalHookToolbarAutoHide(bool value) async {
@@ -3163,7 +3163,7 @@ class PreferencesRepository extends ChangeNotifier
 
   bool get galHookPassThroughBlocksMouse =>
       getPref('gal_hook_passthrough_blocks_mouse',
-          defaultValue: galHookPassThroughBlocksMouseDefault) ==
+          defaultValue: true) ==
       true;
 
   Future<void> setGalHookPassThroughBlocksMouse(bool value) async {
@@ -3179,7 +3179,7 @@ class PreferencesRepository extends ChangeNotifier
   bool get galHookFoldProgressiveLines =>
       getPref(
         'gal_hook_fold_progressive_lines',
-        defaultValue: galHookFoldProgressiveLinesDefault,
+        defaultValue: true,
       ) ==
       true;
 
@@ -3192,7 +3192,7 @@ class PreferencesRepository extends ChangeNotifier
   bool get galIngameLookupEnabled =>
       getPref(
         'gal_hook_ingame_lookup_enabled',
-        defaultValue: galIngameLookupEnabledDefault,
+        defaultValue: true,
       ) ==
       true;
 
@@ -3655,7 +3655,7 @@ class PreferencesRepository extends ChangeNotifier
 
   bool get mangaPanelNavigation => getPref(
         'manga_panel_navigation',
-        defaultValue: kMangaPanelNavigationDefault,
+        defaultValue: false,
       ) as bool;
 
   Future<void> setMangaPanelNavigation(bool value) async {
@@ -3773,7 +3773,7 @@ class PreferencesRepository extends ChangeNotifier
   /// 宽页（见开き）自动独占一屏。默认开：宽页被塞进半个槽既缩成一半宽，又会把
   /// 它之后所有页的配对错开一位。
   bool get mangaWidePageSolo =>
-      getPref('manga_wide_page_solo', defaultValue: kMangaWidePageSoloDefault)
+      getPref('manga_wide_page_solo', defaultValue: true)
           as bool;
 
   Future<void> setMangaWidePageSolo(bool value) async {

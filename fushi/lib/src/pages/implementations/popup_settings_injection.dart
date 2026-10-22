@@ -912,7 +912,7 @@ PopupStaticSettingsJs buildPopupStaticSettingsJs({
       cached.audioSourcesJson == audioSourcesJson &&
       cached.lookupAudioVolume == lookupAudioVolume &&
       cached.localeTag == localeTag &&
-      cached.miningEnabled == miningEnabled &&
+      cached.miningEnabled == false &&
       cached.deduplicatePitchAccents == appModel.deduplicatePitchAccents &&
       cached.harmonicFrequency == appModel.harmonicFrequency &&
       cached.showExpressionTags == appModel.showExpressionTags &&
@@ -1023,7 +1023,7 @@ PopupStaticSettingsJs buildPopupStaticSettingsJs({
     // 制卡模块开关（见上方 miningEnabled 的注释）。false ⇒ popup.js 的
     // createEntryHeader 不 append「+」制卡按钮 / ↗ 在 Anki 中打开按钮，也不发查重探测。
     // 浏览器扩展没有本注入通道 → undefined ⇒ popup.js 按 `!== false` 照旧渲染。
-    window.__fushiMiningEnabled = $miningEnabled;
+    window.__fushiMiningEnabled = $false;
     window.sentenceDraftEnabled = ${options.sentenceDraftEnabled};
     window._noResultsMessage = ${jsonEncode(t.no_search_results)};
     window.embedMedia = true;
@@ -1068,7 +1068,7 @@ PopupStaticSettingsJs buildPopupStaticSettingsJs({
     audioSourcesJson: audioSourcesJson,
     lookupAudioVolume: lookupAudioVolume,
     localeTag: localeTag,
-    miningEnabled: miningEnabled,
+    miningEnabled: false,
     deduplicatePitchAccents: appModel.deduplicatePitchAccents,
     harmonicFrequency: appModel.harmonicFrequency,
     showExpressionTags: appModel.showExpressionTags,

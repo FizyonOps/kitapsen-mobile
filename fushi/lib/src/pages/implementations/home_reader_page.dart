@@ -38,9 +38,7 @@ class _HomeReaderPageState extends BaseTabPageState<HomeReaderPage> {
   /// 各自过 iOS 合规门 / 平台宿主门；书 tab 存在即书模块开着。
   @override
   Widget build(BuildContext context) {
-    final bool online = isOnlineSourcesDomainAvailable(
-      OnlineSourcesDomain.novel,
-    );
+    final bool online = false;
     return MediaLibraryShell(
       focusIdPrefix: 'book-library-view',
       views: <MediaLibraryViewSpec>[
@@ -50,28 +48,6 @@ class _HomeReaderPageState extends BaseTabPageState<HomeReaderPage> {
           builder: (BuildContext context, Widget navigation) =>
               mediaSource.buildHistoryPage(navigation: navigation),
         ),
-        if (online)
-          MediaLibraryViewSpec(
-            kind: MediaLibraryViewKind.onlineSources,
-            label: t.library_view_sources,
-            builder: (BuildContext context, Widget navigation) =>
-                LibraryOnlineSourcesView(
-              domain: OnlineSourcesDomain.novel,
-              section: OnlineSourcesSection.sources,
-              navigation: navigation,
-            ),
-          ),
-        if (online)
-          MediaLibraryViewSpec(
-            kind: MediaLibraryViewKind.extensions,
-            label: t.media_import_segment_extensions,
-            builder: (BuildContext context, Widget navigation) =>
-                LibraryOnlineSourcesView(
-              domain: OnlineSourcesDomain.novel,
-              section: OnlineSourcesSection.extensions,
-              navigation: navigation,
-            ),
-          ),
         MediaLibraryViewSpec(
           kind: MediaLibraryViewKind.sources,
           label: t.library_view_import,

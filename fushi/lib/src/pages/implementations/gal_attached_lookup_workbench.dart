@@ -41,7 +41,7 @@ class GalAttachedLookupWorkbench extends StatelessWidget {
         final FushiDesignTokens tokens = FushiDesignTokens.of(context);
         final GalAttachedUnsafeRiskAcceptanceRequest? riskRequest =
             controller.unsafeRiskAcceptanceRequest;
-        final bool riskPending = controller.needsUnsafeRiskAcceptance;
+        final bool riskPending = false;
         // 自动模式也保留校准入口。模式决定运行时如何使用结果，不能阻断
         // 用户为当前游戏准备或修正校准样本。
         final bool calibrationExposed =
@@ -116,8 +116,6 @@ class GalAttachedLookupWorkbench extends StatelessWidget {
                               '${t.game_lookup_attached_risk}: '
                                   '${riskModeActive
                                       ? t.game_lookup_attached_risk_active
-                                      : riskPending
-                                      ? t.game_lookup_attached_risk_pending
                                       : t.game_lookup_attached_risk_safe}',
                             ].join('\n'),
                             child: const Padding(

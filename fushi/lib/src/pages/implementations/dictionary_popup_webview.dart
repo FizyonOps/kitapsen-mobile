@@ -1467,8 +1467,7 @@ JSON.stringify((function(){
       options: PopupSettingsOptions(
         // TODO-1065：app 外 / 悬浮字幕独立查词窗令 <html> 透明消除泛白（见字段 doc）。
         mobileExternal: widget.transparentDocumentBackground,
-        sentenceDraftEnabled: kSentenceContextPickerEnabled &&
-            widget.onSetSentenceContext != null,
+        sentenceDraftEnabled: false,
       ),
     );
   }

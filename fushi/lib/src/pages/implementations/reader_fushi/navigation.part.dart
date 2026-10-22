@@ -1561,12 +1561,7 @@ extension _ReaderNavigation on _ReaderFushiPageState {
         DateTime.now(),
       );
     }
-    if (!kMediaTrackingEnabled) return;
-    await appModel.mediaTrackingService.recordBookProgress(
-      bookKey: widget.bookKey,
-      completedChapterCount: section + (progress >= 0.999 ? 1 : 0),
-      completed: completed,
-    );
+    return;
   }
 
   void _syncPositionFromCurrentCue() {

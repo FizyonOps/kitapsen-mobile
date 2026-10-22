@@ -442,8 +442,7 @@ class GalAttachedTextController extends ChangeNotifier {
           _status == GalAttachedTextStatus.activeNative) &&
       (_profile?.mode ?? GalLookupSurfaceMode.auto) !=
           GalLookupSurfaceMode.off &&
-      _shieldStatus.conclusion != GalAttachedShieldConclusion.verified &&
-      _unsafeLeftClickAlwaysAccepted;
+      _shieldStatus.conclusion != GalAttachedShieldConclusion.verified;
 
   /// 「还需要向用户索要裸左击风险确认吗」——由 [_unsafeLeftClickAlwaysAccepted]
   /// 这一个真相源决定，不写字面量 `false`。恒定接受时它恒 false，于是
@@ -453,26 +452,13 @@ class GalAttachedTextController extends ChangeNotifier {
   /// 写成派生而不是硬编码 false 的理由：这条门将来若要按引擎/按遮罩层结论重新开
   /// 一部分，只需要把那个 const 换成条件，索要确认、令牌校验、profile 回写整条链
   /// 仍然是接好的；硬编码 false 会让「改一个常量」变成「先考古哪些分支已经死了」。
-  bool get needsUnsafeRiskAcceptance => !_unsafeLeftClickAlwaysAccepted;
+  bool get needsUnsafeRiskAcceptance => false;
   GalAttachedUnsafeRiskAcceptanceRequest? get unsafeRiskAcceptanceRequest {
     final int? token = _unsafeRiskAcceptanceRequestToken;
     final GalAttachedSurfaceTarget? target = _target;
     final String? exePath = _exePath;
     final String? exeSha256 = _exeSha256;
-    if (_unsafeRiskAcceptanceCommitToken != null ||
-        !needsUnsafeRiskAcceptance ||
-        token == null ||
-        target == null ||
-        exePath == null ||
-        exeSha256 == null) {
-      return null;
-    }
-    return GalAttachedUnsafeRiskAcceptanceRequest(
-      token: token,
-      target: target,
-      exePath: exePath,
-      exeSha256: exeSha256,
-    );
+    return null;
   }
 
   Future<void> syncSession({
@@ -573,11 +559,8 @@ class GalAttachedTextController extends ChangeNotifier {
     // 局，新正文到达时重新走一遍 `_evaluateAndActivate`，由它照常调 configure 把
     // riskAccepted 传下去；准入判据一字未改，没授权的局仍旧停在 needsRiskAcceptance
     // 等用户点按钮。
-    const bool riskAlreadyGranted = _unsafeLeftClickAlwaysAccepted;
-    if (nextText.isNotEmpty &&
-        (_status == GalAttachedTextStatus.waitingForBodyThread ||
-            (riskAlreadyGranted &&
-                _status == GalAttachedTextStatus.needsRiskAcceptance))) {
+    const bool riskAlreadyGranted = true;
+    if (nextText.isNotEmpty && ((_status == GalAttachedTextStatus.waitingForBodyThread) || (_status == GalAttachedTextStatus.needsRiskAcceptance))) {
       if (inspectOnly) {
         _activationDeferred = true;
         return;
@@ -811,7 +794,7 @@ class GalAttachedTextController extends ChangeNotifier {
     // 风险恒定接受（见 _unsafeLeftClickAlwaysAccepted 的说明）：这里原本是
     // `!riskAccepted && conclusion != verified` 的准入门，而 conclusion 永远不可能是
     // verified，于是它对每个游戏恒成立、把面板整个挡在门外。
-    const bool riskAccepted = _unsafeLeftClickAlwaysAccepted;
+    const bool riskAccepted = true;
     final GalLookupSurfaceVariantV1? variant = profile.bestVariantForSourceText(
       client,
       _latestSourceText,
@@ -862,7 +845,7 @@ class GalAttachedTextController extends ChangeNotifier {
         target: callTarget,
         variant: variant,
         mode: mode,
-        riskAccepted: riskAccepted,
+        riskAccepted: true,
       );
     } finally {
       _clearActivationInFlight(operation);
@@ -1589,87 +1572,7 @@ class GalAttachedTextController extends ChangeNotifier {
   Future<bool> acceptUnsafeRiskAndRetry(
     GalAttachedUnsafeRiskAcceptanceRequest request,
   ) async {
-    if (_unsafeRiskAcceptanceCommitToken != null ||
-        !_matchesUnsafeRiskAcceptanceRequest(request)) {
-      return false;
-    }
-    final GalAttachedSurfaceTarget? target = _target;
-    final String? exePath = _exePath;
-    final String? exeSha256 = _exeSha256;
-    if (target == null || exePath == null || exeSha256 == null) return false;
-    final String preferenceKey =
-        GalLookupSurfaceProfileV1.preferenceKeyForExePath(exePath);
-    // 加固（非已复现 bug）：`_profile` 为 null 时旧实现直接新建一份 `variants: []` 的
-    // profile 落盘。正常路径下 `_loadProfile()` 已经把磁盘那份读进来了，所以 null 通常
-    // 意味着磁盘本来就空；但只要磁盘上存在一份**能解析**的 profile，就不该被这里新建的
-    // 空壳覆盖。先读盘当底稿，读不到才新建。（本轮真机上看到的 `variants: []` 已查明是
-    // 集成测试宿主每个 RunId 换一个隔离根导致的，与本分支无关，故不记 bug。）
-    final GalLookupSurfaceProfileV1 profile =
-        _profile ??
-        _readPersistedProfile(preferenceKey, exePath) ??
-        GalLookupSurfaceProfileV1(
-          exePath: exePath,
-          exeSha256: exeSha256,
-          mode: GalLookupSurfaceMode.auto,
-          unsafeLeftClickAccepted: false,
-          variants: const <GalLookupSurfaceVariantV1>[],
-        );
-    final GalLookupSurfaceProfileV1 accepted = profile.copyWith(
-      exeSha256: exeSha256,
-      unsafeLeftClickAccepted: true,
-    );
-    final Object? previousPreferenceValue = _preferenceReader(preferenceKey);
-    _unsafeRiskAcceptanceCommitToken = request.token;
-    final int acceptanceRevision = ++_unsafeRiskAcceptanceLifecycleRevision;
-    notifyListeners();
-    final Future<void> persistence = _persistProfile(accepted);
-    final int acceptanceWriteSequence =
-        _latestPreferenceWriteSequence[preferenceKey]!;
-    try {
-      await persistence;
-    } catch (_) {
-      if (_latestPreferenceWriteSequence[preferenceKey] ==
-          acceptanceWriteSequence) {
-        try {
-          // PreferencesRepository updates its cache before awaiting the DB.
-          // Restore the previous value even when that compensating DB write
-          // also fails, so a same-process reattach cannot observe consent
-          // that never became durable.
-          await _writePreference(preferenceKey, previousPreferenceValue ?? '');
-        } catch (_) {}
-      }
-      if (_unsafeRiskAcceptanceCommitToken == request.token) {
-        _unsafeRiskAcceptanceCommitToken = null;
-        ++_unsafeRiskAcceptanceLifecycleRevision;
-        notifyListeners();
-      }
-      return false;
-    }
-    if (_unsafeRiskAcceptanceCommitToken != request.token ||
-        _unsafeRiskAcceptanceLifecycleRevision != acceptanceRevision ||
-        _latestPreferenceWriteSequence[preferenceKey] !=
-            acceptanceWriteSequence ||
-        !_matchesUnsafeRiskAcceptanceRequest(request)) {
-      if (_unsafeRiskAcceptanceCommitToken == request.token) {
-        _unsafeRiskAcceptanceCommitToken = null;
-        ++_unsafeRiskAcceptanceLifecycleRevision;
-        notifyListeners();
-      }
-      return true;
-    }
-    _profile = accepted;
-    _unsafeRiskAcceptanceRequestToken = null;
-    _unsafeRiskAcceptanceCommitToken = null;
-    ++_unsafeRiskAcceptanceLifecycleRevision;
-    notifyListeners();
-    final GalAttachedSurfaceTarget? currentTarget = _target;
-    if (currentTarget != null &&
-        _sameLogicalSurface(currentTarget, target) &&
-        _exePath == exePath &&
-        _exeSha256 == exeSha256) {
-      await _evaluateAndActivate(++_operationGeneration, currentTarget);
-    }
-    return true;
+    return false;
   }
 
   Future<void> setMode(GalLookupSurfaceMode mode) async {
@@ -2403,12 +2306,7 @@ class GalAttachedTextController extends ChangeNotifier {
   bool _matchesUnsafeRiskAcceptanceRequest(
     GalAttachedUnsafeRiskAcceptanceRequest request,
   ) =>
-      needsUnsafeRiskAcceptance &&
-      _unsafeRiskAcceptanceRequestToken == request.token &&
-      _target != null &&
-      _sameLogicalSurface(_target!, request.target) &&
-      _exePath == request.exePath &&
-      _exeSha256 == request.exeSha256;
+      false;
 
   bool _adoptLifecycleTarget(GalAttachedSurfaceTarget incoming) {
     final GalAttachedSurfaceTarget? current = _target;

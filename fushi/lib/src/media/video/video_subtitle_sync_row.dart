@@ -222,7 +222,7 @@ class _VideoSubtitleSyncRowState extends State<VideoSubtitleSyncRow> {
         // 编译期常量 [kSubtitleAutoAlignButtonEnabled]=true 上线；执行期切 spinner 并禁用
         // （_runAutoAlign/_autoAligning 防重入）。手动对轴（±50/±1000ms 步进、滑条、数值
         // 输入框）与本按钮独立，互不影响、照常可用。
-        if (kSubtitleAutoAlignButtonEnabled && host.onAutoAlign != null)
+        if (host.onAutoAlign != null)
           _autoAligning
               ? Padding(
                   padding: EdgeInsets.all(tokens.spacing.gap / 2),

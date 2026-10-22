@@ -2215,24 +2215,13 @@ extension _ReaderChrome on _ReaderFushiPageState {
       onLyricsReload: null,
       // 「听书」关掉时三个有声书回调一律传 null——面板侧已有「回调为空就不渲染
       // 该行」的既有契约，用同一条通道关掉「导入音频 / 换对齐文件 / 设备端转录」。
-      onAudioImport: listeningEnabled && _srtBookUid != null
-          ? _openAudioImportDialog
-          : null,
+      onAudioImport: null,
       // 有声书面板「资源」页：对齐文件 / 转录只对 EPUB 有声书开放（standalone
       // SRT 书走 _openSrtBookReimport 一条路）。
       onPickAlignment:
-          listeningEnabled &&
-              _srtBookUid == null &&
-              _audiobookController != null
-          ? () => unawaited(_openAlignmentImportDialog())
-          : null,
+          null,
       onTranscribe:
-          listeningEnabled &&
-              _srtBookUid == null &&
-              _audiobookController != null &&
-              isAsrSupported
-          ? () => unawaited(_transcribeFromAudiobookPanel())
-          : null,
+          null,
       lyricsMode: _lyricsMode,
       // Kitapsen: no lyrics mode, floating lyrics or media notification.
       onToggleLyricsMode: null,

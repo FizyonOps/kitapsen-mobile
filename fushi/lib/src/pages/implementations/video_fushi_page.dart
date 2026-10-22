@@ -2962,26 +2962,6 @@ class _VideoFushiPageState extends ConsumerState<VideoFushiPage>
         await _initRemote();
         return;
       }
-      // 网页视频站（Netflix / YouTube 页 / TVer……）在 Windows 上交给内置网页播放器：
-      // 站点自己的播放器播，Fushi 复用字幕面板 / 查词 / 进度登记。在这里分流而非各
-      // push 点：书架 / 首页 / 合集 / 作品页 / app 外打开 8 处入口全部自动覆盖。
-      // media_kit controller 尚未 load，pushReplacement 代价只是本页一次空 build。
-      if (shouldOpenInWebVideoPlayer(row.videoPath)) {
-        final BuildContext pageContext = context;
-        if (!pageContext.mounted) return;
-        unawaited(
-          Navigator.of(pageContext).pushReplacement(
-            adaptivePageRoute<void>(
-              context: pageContext,
-              builder: (_) => WebVideoFushiPage.neutralized(
-                bookUid: widget.bookUid,
-                repo: widget.repo,
-              ),
-            ),
-          ),
-        );
-        return;
-      }
       // TODO-1307：把「正在连接视频流…」阶段反馈提前到 buildStreamVideoLaunch（YouTube 快
       // 解析 getManifest 有网络往返、慢网仍可数秒）之前，避免解析期页面裸转圈「点了没动静」。
       _setLoadingPhase(_VideoLoadPhase.connecting);
@@ -4728,15 +4708,7 @@ class _VideoFushiPageState extends ConsumerState<VideoFushiPage>
                 : (_) async {},
             onEpisodeCompleted: hasLibraryRow
                 ? () async {
-                    if (!kMediaTrackingEnabled) return;
-                    await appModel.mediaTrackingService.recordVideoCompleted(
-                      bookUid: widget.bookUid,
-                      collectionId: widget.playlistCollectionId,
-                      episodeIndex: _currentEpisode,
-                      seriesCompleted:
-                          _episodes.isNotEmpty &&
-                          _currentEpisode == _episodes.length - 1,
-                    );
+                    return;
                   }
                 : null,
           )

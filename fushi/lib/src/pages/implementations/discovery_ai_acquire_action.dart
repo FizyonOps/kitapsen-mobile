@@ -28,20 +28,5 @@ ValueChanged<String>? discoveryAiAcquireAction({
 }) {
   final AppModel appModel = readAppModel();
   final bool gates = false;
-  if (!gates) return null;
-  return (String query) {
-    final AppModel current = readAppModel();
-    unawaited(
-      openAiMediaAcquisition(
-        context,
-        appModel: current,
-        domain: domain,
-        domainLabel: domainLabel,
-        includeOnlineSources: onlineDomain != null &&
-            visibleOnlineSourcesDomains(current.moduleVisibility)
-                .contains(onlineDomain),
-        initialQuery: query,
-      ),
-    );
-  };
+  return null;
 }

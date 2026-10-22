@@ -47,28 +47,6 @@ class MangaLibraryPage extends StatelessWidget {
           builder: (BuildContext context, Widget navigation) =>
               ReaderFushiHistoryPage(mangaOnly: true, navigation: navigation),
         ),
-        if (isOnlineSourcesDomainAvailable(OnlineSourcesDomain.manga))
-          MediaLibraryViewSpec(
-            kind: MediaLibraryViewKind.onlineSources,
-            label: t.library_view_sources,
-            builder: (BuildContext context, Widget navigation) =>
-                LibraryOnlineSourcesView(
-                  domain: OnlineSourcesDomain.manga,
-                  section: OnlineSourcesSection.sources,
-                  navigation: navigation,
-                ),
-          ),
-        if (isOnlineSourcesDomainAvailable(OnlineSourcesDomain.manga))
-          MediaLibraryViewSpec(
-            kind: MediaLibraryViewKind.extensions,
-            label: t.media_import_segment_extensions,
-            builder: (BuildContext context, Widget navigation) =>
-                LibraryOnlineSourcesView(
-                  domain: OnlineSourcesDomain.manga,
-                  section: OnlineSourcesSection.extensions,
-                  navigation: navigation,
-                ),
-          ),
         MediaLibraryViewSpec(
           kind: MediaLibraryViewKind.sources,
           label: t.library_view_import,

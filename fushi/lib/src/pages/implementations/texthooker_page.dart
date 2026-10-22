@@ -1424,7 +1424,7 @@ class _TexthookerPageState extends ConsumerState<TexthookerPage>
       selectedTextThreadKey: _session.selectedTextThreadKey,
       textThreadCount: _session.textThreads.length,
       sessionAlreadyPrompted: _captureSetupShownForSession == sessionStartedAt,
-      lookupRiskAcceptancePending: attachedText.needsUnsafeRiskAcceptance,
+      lookupRiskAcceptancePending: false,
     )) {
       return;
     }
@@ -1442,7 +1442,7 @@ class _TexthookerPageState extends ConsumerState<TexthookerPage>
             selectedTextThreadKey: _session.selectedTextThreadKey,
             textThreadCount: _session.textThreads.length,
             sessionAlreadyPrompted: false,
-            lookupRiskAcceptancePending: attachedText.needsUnsafeRiskAcceptance,
+            lookupRiskAcceptancePending: false,
           )) {
         return;
       }

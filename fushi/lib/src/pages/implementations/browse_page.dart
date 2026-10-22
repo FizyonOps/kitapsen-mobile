@@ -223,7 +223,6 @@ class _BrowsePageState extends ConsumerState<BrowsePage>
         false;
     // 发现排第一（2026-09-28 用户拍板）：打开浏览默认落在发现页签。
     return <BrowseTab>[
-      if (discover) BrowseTab.discover,
       if (online) BrowseTab.sources,
       if (online) BrowseTab.extensions,
       BrowseTab.downloads,

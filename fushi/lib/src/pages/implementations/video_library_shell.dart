@@ -174,9 +174,7 @@ class _VideoLibraryShellState extends State<VideoLibraryShell> {
   @override
   Widget build(BuildContext context) {
     // 页签与横滑切区（[SectionSwipeNavigator]）共用同一份序：加减分区只改这里。
-    final bool online = isOnlineSourcesDomainAvailable(
-      OnlineSourcesDomain.video,
-    );
+    final bool online = false;
     final List<LibrarySectionTab<VideoLibrarySection>> tabs =
         <LibrarySectionTab<VideoLibrarySection>>[
         LibrarySectionTab<VideoLibrarySection>(
@@ -197,16 +195,6 @@ class _VideoLibraryShellState extends State<VideoLibraryShell> {
           value: VideoLibrarySection.mediaServers,
           label: t.video_library_media_servers,
         ),
-        if (online)
-          LibrarySectionTab<VideoLibrarySection>(
-            value: VideoLibrarySection.onlineSources,
-            label: t.library_view_sources,
-          ),
-        if (online)
-          LibrarySectionTab<VideoLibrarySection>(
-            value: VideoLibrarySection.extensions,
-            label: t.media_import_segment_extensions,
-          ),
         LibrarySectionTab<VideoLibrarySection>(
           value: VideoLibrarySection.sources,
           label: t.library_view_import,

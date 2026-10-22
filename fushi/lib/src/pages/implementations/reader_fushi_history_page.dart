@@ -810,18 +810,6 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
           icon: Icons.folder_copy_outlined,
           onTap: _openManageSources,
         ),
-      // 漫画「在线目录」入口已从书架移除（属漫画域，入口收敛到下载页）；
-      // mokuro.moe 下载队列监听仍保留在 initState——下载页触发的后台落库
-      // 依赖它刷新书架。
-      // 视频导入入口**只属于视频 tab**（HomeVideoPage），书架不放视频导入——
-      // 书架是书的地方。这里保留编译期常量门控（默认关）只为旧调试路径，运行时
-      // 实验开关不再在书架放出视频导入（用户反馈：书架不该有视频导入入口）。
-      if (kVideoImportEnabled)
-        _headerAction(
-          tooltip: t.video_import_action,
-          icon: Icons.movie_outlined,
-          onTap: _openVideoImport,
-        ),
       // 统计入口已收敛到首页 dashboard（用户定案 2026-09-01：各媒体页头不再
       // 各挂一个「xx统计」，统一从首页进统计中心）。
     ];

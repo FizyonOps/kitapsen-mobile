@@ -472,7 +472,7 @@ class _HomePageState extends BasePageState<HomePage>
       final bool tutorialOffered = false;
       if (!mounted) return;
 
-      if (!tutorialOffered && appModel.isFirstTimeSetup) {
+      if (appModel.isFirstTimeSetup) {
         appModel.setFirstTimeSetupFlag();
         // 全新安装：把新手引导标成「待完成」再进下面的弹出分支。既有安装升级
         // 上来时该键缺省即 true（不弹）；中途杀进程下次启动值仍是 false，会
@@ -482,7 +482,7 @@ class _HomePageState extends BasePageState<HomePage>
 
       // 新手引导在更新弹窗之前弹（避免两个模态抢同一帧）；向导关闭（完成/
       // 跳过/返回）后统一标记完成，之后可从「设置 → 系统」随时重新打开。
-      if (mounted && !tutorialOffered && !appModel.onboardingCompleted) {
+      if ((mounted) && !appModel.onboardingCompleted) {
         await Navigator.of(context).push(
           adaptivePageRoute<void>(
             context: context,
@@ -512,12 +512,6 @@ class _HomePageState extends BasePageState<HomePage>
       // 定时器上（它自己有 30 分钟节流），所以定时器不再只随同步模块开启。
       final bool periodicAutoSync =
           false;
-      if (periodicAutoSync) {
-        _periodicSyncTimer = Timer.periodic(_periodicSyncInterval, (_) {
-          if (periodicAutoSync) _triggerFullAutoSync();
-          _maybeSyncLeaderboard();
-        });
-      }
 
 
 

@@ -1498,15 +1498,6 @@ class _CollectionsPageState extends BasePageState<CollectionsPage> {
                 Navigator.pop(ctx);
               },
             ),
-          if (canMine)
-            TextButton.icon(
-              icon: const Icon(Icons.style_outlined, size: 18),
-              label: Text(t.collection_mine_card),
-              onPressed: () {
-                Navigator.pop(ctx);
-                return;
-              },
-            ),
           TextButton.icon(
             icon: Icon(Icons.delete_outline, size: 18, color: cs.error),
             label: Text(t.dialog_delete, style: TextStyle(color: cs.error)),

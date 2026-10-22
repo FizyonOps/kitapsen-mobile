@@ -1057,7 +1057,7 @@ class GalHookTextOverlayController extends ChangeNotifier {
     final bool lookupPreferenceEnabled =
         _readPreference(
           GalIngameLookupController.enabledPreferenceKey,
-          PreferencesRepository.galIngameLookupEnabledDefault,
+          true,
         ) ==
         true;
     // 退役未完成时本轮一律不武装新 route：旧 route 还活着，新的绝不能叠上去。
@@ -1464,11 +1464,11 @@ class GalHookTextOverlayController extends ChangeNotifier {
   bool _readClickLookupEnabled() {
     final Object? stored = _readPreference(
       'gal_hook_click_lookup',
-      PreferencesRepository.galHookClickLookupDefault,
+      true,
     );
     return stored is bool
         ? stored
-        : PreferencesRepository.galHookClickLookupDefault;
+        : true;
   }
 
   int _readLookupTrigger() {
@@ -1487,21 +1487,21 @@ class GalHookTextOverlayController extends ChangeNotifier {
   bool _readToolbarAutoHide() {
     final Object? stored = _readPreference(
       'gal_hook_toolbar_auto_hide',
-      PreferencesRepository.galHookToolbarAutoHideDefault,
+      true,
     );
     return stored is bool
         ? stored
-        : PreferencesRepository.galHookToolbarAutoHideDefault;
+        : true;
   }
 
   bool _readPassThroughBlocksMouse() {
     final Object? stored = _readPreference(
       'gal_hook_passthrough_blocks_mouse',
-      PreferencesRepository.galHookPassThroughBlocksMouseDefault,
+      true,
     );
     return stored is bool
         ? stored
-        : PreferencesRepository.galHookPassThroughBlocksMouseDefault;
+        : true;
   }
 
   bool _readHoverAutoLookup() {
@@ -2092,7 +2092,7 @@ class GalHookTextOverlayController extends ChangeNotifier {
   Future<void> _onAttachedLookupText(GalAttachedLookupHitV19 hit) async {
     if (_readPreference(
           GalIngameLookupController.enabledPreferenceKey,
-          PreferencesRepository.galIngameLookupEnabledDefault,
+          true,
         ) !=
         true) {
       glog('gal-click: dropped reason=ingame_lookup_disabled (host)');
