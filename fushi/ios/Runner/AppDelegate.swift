@@ -25,6 +25,20 @@ import Flutter
     installChannels(binaryMessenger: engineBridge.applicationRegistrar.messenger())
   }
 
+  /// The display the app is on right now. iPhone Duo moves the app between its
+  /// outer and inner displays as it folds and unfolds, so `UIScreen.main` can
+  /// be the other display; Apple's guidance is to read the screen from the
+  /// window scene each time rather than keep one. Falls back to `.main` only
+  /// before any scene is connected.
+  static func currentScreen() -> UIScreen {
+    let scenes = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }
+    let scene =
+      scenes.first { $0.activationState == .foregroundActive }
+      ?? scenes.first { $0.activationState == .foregroundInactive }
+      ?? scenes.first
+    return scene?.screen ?? UIScreen.main
+  }
+
   /// 安装来源判据 = 系统写进 bundle 的 App Store 收据文件，不是猜测：
   /// - App Store 安装 → `.../receipt`
   /// - TestFlight 安装 → `.../sandboxReceipt`
@@ -129,7 +143,7 @@ import Flutter
       switch call.method {
       case "getBrightness":
         // UIScreen.brightness is 0...1; main-thread read.
-        result(Double(UIScreen.main.brightness))
+        result(Double(AppDelegate.currentScreen().brightness))
       case "setBrightness":
         guard let value = call.arguments as? NSNumber else {
           result(FlutterError(
@@ -139,14 +153,14 @@ import Flutter
           return
         }
         let clamped = max(0.0, min(1.0, value.doubleValue))
-        UIScreen.main.brightness = CGFloat(clamped)
+        AppDelegate.currentScreen().brightness = CGFloat(clamped)
         result(nil)
       case "restoreBrightness":
         // The Dart side passes the snapshot it took on entry; write it back.
         // nil means "do not touch" (no snapshot available) — leave as-is.
         if let value = call.arguments as? NSNumber {
           let clamped = max(0.0, min(1.0, value.doubleValue))
-          UIScreen.main.brightness = CGFloat(clamped)
+          AppDelegate.currentScreen().brightness = CGFloat(clamped)
         }
         result(nil)
       default:
