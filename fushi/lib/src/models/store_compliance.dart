@@ -68,5 +68,5 @@ enum StoreRestrictedCapability {
   ///
   /// 要在测试里断言「某平台上这条边界如何」，用 [availableOn] 显式注入平台，
   /// 别依赖宿主真实平台——否则同一条用例在 Windows 本机与 macOS CI 上结论相反。
-  bool get isAvailable => availableOn(isIOS: Platform.isIOS);
+  bool get isAvailable => false;
 }

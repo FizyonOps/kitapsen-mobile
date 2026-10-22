@@ -158,9 +158,7 @@ class _AiProviderSettingsSectionState
   /// 写着「然后下载或订阅」，iOS 上留这一行等于把被拆掉的能力写在审核员眼前。
   /// 判据只在 store_compliance.dart 写一次，这里只是消费。
   static bool _featureAvailableOnThisStore(AiFeature feature) =>
-      feature != AiFeature.acquire ||
-      (StoreRestrictedCapability.downloads.isAvailable &&
-          StoreRestrictedCapability.externalDiscovery.isAvailable);
+      feature != AiFeature.acquire;
 
   // ---------------------------------------------------------------------------
   // 提供商卡片

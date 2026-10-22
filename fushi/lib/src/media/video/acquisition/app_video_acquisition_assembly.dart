@@ -118,7 +118,7 @@ VideoAcquisitionAssistantHost createVideoAcquisitionAssistantHost(AppModel appMo
     final VideoDiscoveryService discovery = VideoDiscoveryService.production(
       videoDiscoveryScrapeConfig(appModel.prefsRepo, uiLocaleTag: uiLocale),
       discoveryAvailable:
-          StoreRestrictedCapability.externalDiscovery.isAvailable,
+          false,
     );
     return (
       service: createAppVideoAcquisitionService(

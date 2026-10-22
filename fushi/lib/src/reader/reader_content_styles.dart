@@ -622,9 +622,7 @@ svg.block-img.blurred {
       marginLeftCss: marginLeftCss,
       marginRightCss: marginRightCss,
     );
-    final String layoutCss = settings.isVnMode
-        ? _vnLayoutCss(layoutArgs)
-        : settings.isContinuousMode
+    final String layoutCss = settings.isContinuousMode
             ? _continuousLayoutCss(layoutArgs)
             : _paginatedLayoutCss(
                 layoutArgs,
@@ -638,12 +636,12 @@ svg.block-img.blurred {
         settings.prioritizeReaderStyles ? '' : ' !important';
     // BUG-2761：只有多列分页有跨列问题，连续滚动与 VN 不发。
     final String rubyPageTopReserveCss =
-        settings.isVnMode || settings.isContinuousMode
+        settings.isContinuousMode
             ? ''
             : _webKitPaginatedRubyReserveCss(settings.lineHeight);
     // BUG-2819：末页够不着也只发生在多列分页。
     final String paginatedScrollEndCss =
-        settings.isVnMode || settings.isContinuousMode
+        settings.isContinuousMode
             ? ''
             : _webKitPaginatedScrollEndCss();
 

@@ -197,11 +197,6 @@ class _VideoLibraryShellState extends State<VideoLibraryShell> {
           value: VideoLibrarySection.mediaServers,
           label: t.video_library_media_servers,
         ),
-        if (StoreRestrictedCapability.externalDiscovery.isAvailable)
-          LibrarySectionTab<VideoLibrarySection>(
-            value: VideoLibrarySection.discover,
-            label: t.library_view_discover,
-          ),
         if (online)
           LibrarySectionTab<VideoLibrarySection>(
             value: VideoLibrarySection.onlineSources,

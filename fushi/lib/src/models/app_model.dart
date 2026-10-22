@@ -5199,62 +5199,9 @@ class AppModel with ChangeNotifier {
     // 仍然建一份**空**注册表而不是返回 null：设置页的「发现来源」开关区、停用
     // 清单、发现页自身都无条件解引用本 getter，把合规边界做成一条空指针路径只会
     // 换来一批 iOS 专属崩溃。空注册表让这些消费端自然渲染成「没有源」。
-    if (!StoreRestrictedCapability.externalDiscovery.isAvailable) {
-      return _mediaDiscoveryService = MediaDiscoveryService(
-        sources: const <MediaDiscoverySource>[],
-      );
-    }
-    return _mediaDiscoveryService =
-        MediaDiscoveryService(sources: <MediaDiscoverySource>[
-      CoreAudioDiscoverySource(
-        httpClientFactory: createDownloadHttpClient,
-      ),
-      NyaaDiscoverySource(
-        id: 'nyaa',
-        displayName: 'Nyaa',
-        priority: 10,
-        categoryByKind: const <DiscoveryMediaKind, String>{
-          // nyaa.si 分类：Literature=3_0 / Audio=2_0。
-          DiscoveryMediaKind.novel: '3_0',
-          DiscoveryMediaKind.audiobook: '2_0',
-        },
-        client: NyaaClient(),
-        // 每次请求按当前偏好取：源实例常驻，偏好可随时改。偏好未就绪
-        // （早一帧打开发现页）时用默认「全部」。
-        qualityFilter: () => NyaaQualityFilter.fromIndex(
-          isPreferencesReady ? prefsRepo.discoveryNyaaQualityFilter : 0,
-        ),
-      ),
-      NyaaDiscoverySource(
-        id: 'sukebei',
-        displayName: 'Sukebei',
-        priority: 15,
-        categoryByKind: const <DiscoveryMediaKind, String>{
-          // sukebei 分类：Art - Games=1_3（galgame 种子主阵地）。
-          DiscoveryMediaKind.game: '1_3',
-        },
-        client: NyaaClient(baseUrl: 'https://sukebei.nyaa.si'),
-      ),
-      AListDiscoverySource(
-        id: 'alist-erogame',
-        displayName: 'erogame.space',
-        priority: 20,
-        baseUrl: 'https://alist.erogame.space',
-        kinds: const <DiscoveryMediaKind>{DiscoveryMediaKind.game},
-      ),
-      ShinnkuDiscoverySource(),
-      // 用户自配的 OPDS 服务器：**运行期**由偏好展开，一条配置 = 一个源
-      // 实例。停用的条目直接不进注册表（而不是进了再靠停用清单挡）——
-      // 源开关列表遍历的就是本注册表，两套「关掉」的语义并存只会让设置页
-      // 出现一个既在清单里又被排除的幽灵条目。
-      if (isPreferencesReady)
-        for (final OpdsServerConfig server in prefsRepo.discoveryOpdsServers)
-          if (server.enabled) OpdsDiscoverySource(config: server),
-      // 用户自配的 AList / OpenList 站点：同上，一条配置 = 一个源实例。
-      if (isPreferencesReady)
-        for (final AListSiteConfig site in prefsRepo.discoveryAListSites)
-          if (site.enabled) AListDiscoverySource.fromConfig(site),
-    ]);
+    return _mediaDiscoveryService = MediaDiscoveryService(
+      sources: const <MediaDiscoverySource>[],
+    );
   }
 
   MediaDiscoveryService? _mediaDiscoveryService;

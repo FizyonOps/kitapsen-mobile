@@ -75,16 +75,6 @@ class _ErrorLogPageState extends State<ErrorLogPage> {
             FushiShare.shareFiles([xFile], subject: t.error_log_share_subject);
           },
         ),
-        if (showUploadLogAction)
-          FushiIconButton(
-            icon: Icons.cloud_upload_outlined,
-            tooltip: t.log_upload_action,
-            onTap: () => uploadLogToServer(
-              context: context,
-              log: _log,
-              kind: 'error',
-            ),
-          ),
         if (showSaveLogAction)
           FushiIconButton(
             icon: Icons.save_alt_outlined,

@@ -985,11 +985,6 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
   ///   并拉起悬浮窗。无可播放音频时提示。
   Future<void> _toggleFloatingLyricFromShelf(String bookKey) async {
     Navigator.pop(context);
-    if (_isBackgroundListeningBook(bookKey)) {
-      await appModel.stopBackgroundListening();
-      if (mounted) _rebuild(() {});
-      return;
-    }
     final BackgroundListenResult result =
         await appModel.startBackgroundListening(bookKey);
     if (!mounted) return;
@@ -1221,7 +1216,7 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
     final String? hitBookKey = _cardDropRegistry.hitTest(globalPosition);
     // 漫画库是同一个页面的 mangaOnly 壳，但落点语义不同（见 DropSurface.manga）。
     final DropIntent intent = decideDropIntent(
-      surface: _mangaOnly ? DropSurface.manga : DropSurface.books,
+      surface: DropSurface.books,
       files: files,
       cardHit: hitBookKey != null,
     );

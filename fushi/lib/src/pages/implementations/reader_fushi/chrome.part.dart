@@ -1076,7 +1076,7 @@ extension _ReaderChrome on _ReaderFushiPageState {
     if (!mounted) return;
     final bool hidden = readerToolbarsHidden(
       hideToolbarsPreference: ReaderFushiSource.instance.hideToolbars,
-      inAppFloatingBallEnabled: appModelNoUpdate.prefsRepo.floatingBallInApp,
+      inAppFloatingBallEnabled: false,
     );
     if (_toolbarsHidden == hidden) return;
     _rebuild(() {
@@ -1242,12 +1242,6 @@ extension _ReaderChrome on _ReaderFushiPageState {
   /// 丢掉当前句属于双重副作用；底栏已经可见时，下一次空白点击才推进。
   void _handleVnBlankTap() {
     if (_lyricsMode) return;
-    // 与 onTapEmpty 同语义：有可见查词弹窗时，本次点击只清弹窗栈（BUG-072 续播 /
-    // BUG-092 热槽），既不翻页也不动控制栏。
-    if (isDictionaryShown) {
-      clearDictionaryResult();
-      return;
-    }
     // 与 onTapEmpty 同语义（TODO-1366）：点空白顺带清掉残留的 app 自绘选区。
     _clearReaderAppSelection();
     // 本次 pointer 手势把 OS 焦点交给了 WebView，不夺回 Flutter _focusNode 就收不到
@@ -1886,7 +1880,7 @@ extension _ReaderChrome on _ReaderFushiPageState {
             // 底栏槽位里的按钮并进播放条右端（播放条在场时底栏只有这一条），
             // 状态读数仍在最右。
             trailing: _buildAudiobookBarTrailing(),
-            showSettingsButton: !_desktopChromeEnabled,
+            showSettingsButton: false,
           ),
         );
       },
@@ -2652,7 +2646,7 @@ extension _ReaderChrome on _ReaderFushiPageState {
   }
 
   Widget _buildDesktopHeader() {
-    if (!_desktopChromeEnabled || !_bottomBarShouldPaint) {
+    if (!_bottomBarShouldPaint) {
       return const SizedBox.shrink();
     }
     final Color fg = _themeTextColor();

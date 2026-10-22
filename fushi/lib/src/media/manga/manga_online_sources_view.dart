@@ -79,9 +79,6 @@ class _MangaOnlineSourcesViewState
   void initState() {
     super.initState();
     _aidokuRepositoryClient = AidokuRepositoryClient();
-    if (AidokuRuntimeFactory.isSupported) {
-      unawaited(_initializeAidokuStore());
-    }
   }
 
   Future<void> _initializeAidokuStore() async {
@@ -160,145 +157,11 @@ class _MangaOnlineSourcesViewState
   }
 
   Future<void> _importAidoku() async {
-    if (!AidokuRuntimeFactory.isSupported || _aidokuBusy) return;
-    final bool acceptedRisk =
-        await showAppDialog<bool>(
-          context: context,
-          builder: (BuildContext dialogContext) => AlertDialog.adaptive(
-            title: Text(t.aidoku_extension_import),
-            content: Text(t.aidoku_extension_warning),
-            actions: <Widget>[
-              adaptiveDialogAction(
-                context: dialogContext,
-                onPressed: () => Navigator.pop(dialogContext, false),
-                child: Text(t.dialog_cancel),
-              ),
-              adaptiveDialogAction(
-                context: dialogContext,
-                isDefaultAction: true,
-                onPressed: () => Navigator.pop(dialogContext, true),
-                child: Text(t.dialog_select),
-              ),
-            ],
-          ),
-        ) ??
-        false;
-    if (!acceptedRisk || !mounted) return;
-
-    final String? path = await pickSystemFilePath(
-      context: context,
-      allowedExtensions: const <String>{'aix'},
-    );
-    if (!mounted || path == null) return;
-
-    setState(() {
-      _aidokuBusy = true;
-      _aidokuError = null;
-    });
-    try {
-      final AidokuRuntime runtime = AidokuRuntimeFactory.create();
-      final AidokuPackageInspection inspection = await runtime.inspect(path);
-      if (!mounted) return;
-      if (inspection.requiresWebView) {
-        throw AidokuRuntimeException(
-          'WEBVIEW_REQUIRED',
-          t.aidoku_webview_unsupported,
-        );
-      }
-      final Map<String, Object?> info = inspection.sourceInfo;
-      final bool confirmed =
-          await showAppDialog<bool>(
-            context: context,
-            builder: (BuildContext dialogContext) => AlertDialog.adaptive(
-              title: Text(t.aidoku_extension_confirm_title),
-              content: Text(
-                '${info['name']}\n${info['id']}\n'
-                '${t.aidoku_extension_version}: ${info['version']}',
-              ),
-              actions: <Widget>[
-                adaptiveDialogAction(
-                  context: dialogContext,
-                  onPressed: () => Navigator.pop(dialogContext, false),
-                  child: Text(t.dialog_cancel),
-                ),
-                adaptiveDialogAction(
-                  context: dialogContext,
-                  isDefaultAction: true,
-                  onPressed: () => Navigator.pop(dialogContext, true),
-                  child: Text(t.dialog_import),
-                ),
-              ],
-            ),
-          ) ??
-          false;
-      if (!confirmed || !mounted) return;
-      final AidokuPackageStore store =
-          _aidokuStore ?? await AidokuPackageStore.open();
-      _aidokuStore = store;
-      final AidokuInstalledPackage installed = await store.install(
-        File(path),
-        inspection,
-      );
-      final List<AidokuInstalledPackage> packages = await store.listInstalled();
-      if (!mounted) return;
-      setState(() => _aidokuPackages = packages);
-      FushiToast.show(
-        msg: '${t.aidoku_extension_imported}: ${installed.name}',
-        severity: ToastSeverity.success,
-      );
-    } on Object catch (error, stack) {
-      ErrorLogService.instance.log('Aidoku.install.local', error, stack);
-      if (mounted) {
-        setState(() => _aidokuError = error);
-        FushiToast.show(msg: '$error', severity: ToastSeverity.error);
-      }
-    } finally {
-      if (mounted) setState(() => _aidokuBusy = false);
-    }
+    return;
   }
 
   Future<void> _addAidokuRepository() async {
-    if (!AidokuRuntimeFactory.isSupported || _aidokuBusy) return;
-    final String? repositoryUrl = await showAppDialog<String>(
-      context: context,
-      builder: (BuildContext context) => const _AidokuRepositoryUrlDialog(),
-    );
-    if (repositoryUrl == null || !mounted) return;
-    setState(() {
-      _aidokuBusy = true;
-      _aidokuError = null;
-    });
-    try {
-      final AidokuRepositoryIndex index = await _aidokuRepositoryClient.fetch(
-        repositoryUrl,
-      );
-      final AidokuRepositoryStore repositoryStore =
-          _aidokuRepositoryStore ?? await AidokuRepositoryStore.open();
-      _aidokuRepositoryStore = repositoryStore;
-      final List<AidokuSavedRepository> repositories = await repositoryStore
-          .add(index);
-      if (!mounted) return;
-      setState(() {
-        _aidokuRepositories = repositories;
-        _upsertAidokuIndex(index);
-      });
-      FushiToast.show(
-        msg: '${t.aidoku_repository_added}: ${index.name}',
-        severity: ToastSeverity.success,
-      );
-    } on Object catch (error, stack) {
-      ErrorLogService.instance.log(
-        'Aidoku.repository.add[$repositoryUrl]',
-        error,
-        stack,
-      );
-      if (mounted) {
-        setState(() => _aidokuError = error);
-        FushiToast.show(msg: '$error', severity: ToastSeverity.error);
-      }
-    } finally {
-      if (mounted) setState(() => _aidokuBusy = false);
-    }
+    return;
   }
 
   Future<void> _browseAidokuRepository(AidokuSavedRepository repository) async {
@@ -834,11 +697,11 @@ class _MangaOnlineSourcesViewState
   Widget build(BuildContext context) {
     final MihonManager? manager = _manager;
     final bool onlineSourcesAvailable =
-        StoreRestrictedCapability.onlineMangaSource.isAvailable;
+        false;
     // Aidoku 与 Mihon 共用「仓库」「扩展」两节时各带一行小标题分开；没有
     // Aidoku 宿主的构建整节不挂，也就不需要小标题。
     final bool aidoku =
-        onlineSourcesAvailable && AidokuRuntimeFactory.isSupported;
+        false;
     final OnlineSourcesSection section = widget.section;
     final List<Widget> slivers = <Widget>[
       if (aidoku && section != OnlineSourcesSection.sources)

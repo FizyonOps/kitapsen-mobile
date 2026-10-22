@@ -40,6 +40,6 @@ class EngineDeepLinkRouteGuard with WidgetsBindingObserver {
   Future<bool> didPushRouteInformation(
     RouteInformation routeInformation,
   ) async {
-    return swallowEngineDeepLinkRoute(routeInformation);
+    return true;
   }
 }

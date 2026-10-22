@@ -619,12 +619,6 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
         icon: Icons.touch_app_outlined,
         label: t.settings_destination_reading_controls,
       ),
-      if (widget.controller != null && _listeningEnabled)
-        (
-          id: 'audiobook',
-          icon: Icons.headphones_outlined,
-          label: t.section_audiobook,
-        ),
     ];
   }
 
@@ -651,12 +645,6 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
         label: t.settings_destination_reading_controls,
         page: 'behavior',
       ),
-      if (widget.controller != null && _listeningEnabled)
-        _categoryTile(
-          icon: Icons.headphones_outlined,
-          label: t.section_audiobook,
-          page: 'audiobook',
-        ),
     ];
 
     if (widget.onOpenStatistics != null) {

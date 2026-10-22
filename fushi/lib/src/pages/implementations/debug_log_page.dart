@@ -64,16 +64,6 @@ class _DebugLogPageState extends State<DebugLogPage> {
             FushiShare.shareFiles([xFile], subject: t.debug_log_share_subject);
           },
         ),
-        if (showUploadLogAction)
-          FushiIconButton(
-            icon: Icons.cloud_upload_outlined,
-            tooltip: t.log_upload_action,
-            onTap: () => uploadLogToServer(
-              context: context,
-              log: _log,
-              kind: 'debug',
-            ),
-          ),
         if (showSaveLogAction)
           FushiIconButton(
             icon: Icons.save_alt_outlined,

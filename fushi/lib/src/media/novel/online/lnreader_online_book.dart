@@ -424,7 +424,7 @@ LnReaderOnlineChapterLoader? lnReaderOnlineChapterLoaderFor({
   required LnReaderManager Function() manager,
   bool? onlineSourcesAvailable,
 }) {
-  if (!(onlineSourcesAvailable ?? isNovelOnlineSourcesAvailable)) return null;
+  if (!(onlineSourcesAvailable ?? false)) return null;
   final LnReaderOnlineBookDescriptor? descriptor =
       LnReaderOnlineBookDescriptor.tryParse(row?.sourceMetadata);
   if (row == null || descriptor == null) return null;

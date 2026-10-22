@@ -27,13 +27,7 @@ ValueChanged<String>? discoveryAiAcquireAction({
   OnlineSourcesDomain? onlineDomain,
 }) {
   final AppModel appModel = readAppModel();
-  final bool gates = appModel.isPreferencesReady &&
-      StoreRestrictedCapability.downloads.isAvailable &&
-      StoreRestrictedCapability.externalDiscovery.isAvailable &&
-      isSettingsDestinationVisible(
-        SettingsDestinationId.ai,
-        appModel.moduleVisibility,
-      );
+  final bool gates = false;
   if (!gates) return null;
   return (String query) {
     final AppModel current = readAppModel();

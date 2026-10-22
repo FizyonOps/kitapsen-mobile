@@ -54,12 +54,7 @@ Future<void> maybeShowBrowseMovedNotice({
   final BrowseMovedNoticeDecision decision = decideBrowseMovedNotice(
     handled: appModel.browseMovedNoticeHandled,
     freshInstall: freshInstall,
-    browseAvailable: ModuleId.browse.availableOn(
-      isWindows: appModel.platformServices.isWindows,
-      isDesktop: appModel.platformServices.isDesktop,
-      isIOS: appModel.platformServices.isIOS,
-      isAndroid: appModel.platformServices.isAndroid,
-    ),
+    browseAvailable: false,
     browseEnabled: appModel.moduleEnabled(ModuleId.browse),
   );
   if (decision == BrowseMovedNoticeDecision.none) return;

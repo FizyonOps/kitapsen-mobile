@@ -97,8 +97,7 @@ class _MangaGlobalSearchPageState extends State<MangaGlobalSearchPage> {
   AidokuRuntime? _resolveAidokuRuntime() {
     if (widget.aidokuRuntime != null) return widget.aidokuRuntime;
     if (widget.aidokuPackages.isEmpty) return null;
-    if (!AidokuRuntimeFactory.isSupported) return null;
-    return _aidokuRuntime ??= AidokuRuntimeFactory.create();
+    return null;
   }
 
   Future<void> _search() async {

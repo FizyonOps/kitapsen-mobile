@@ -386,8 +386,8 @@ extension _ReaderNavigation on _ReaderFushiPageState {
     // readerScrollCaretFollowAllowed 门控真值表 + _caretRefresh 文档）。
     if (readerScrollCaretFollowAllowed(
       continuousMode: _settings?.isContinuousMode == true,
-      caretActive: _caretActive,
-      caretOnReader: _caretOnReader,
+      caretActive: false,
+      caretOnReader: false,
     )) {
       _caretRefresh();
     }

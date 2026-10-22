@@ -2944,37 +2944,9 @@ class _VideoFushiPageState extends ConsumerState<VideoFushiPage>
           // 合规门 + 运行时平台门（iOS 不带在线源宿主、Linux 没有 Mihon 宿主）：
           // 取 animeMihonManager 之前先问门——门外取用会在不该有宿主的平台上起宿主
           // （或直接抛 UnsupportedError）。不可用走下面「扩展不可用」的失败提示。
-          if (!isVideoOnlineSourcesAvailable) {
-            throw const AnimeSourceLaunchUnavailable(
-              'online video sources are unavailable on this platform',
-            );
-          }
-          final ({
-            AnimeSourceVideoClient client,
-            RemoteVideoInfo info,
-            List<RemoteVideoInfo> members,
-            int startIndex,
-          })
-          launch = await buildAnimeSourceLaunch(
-            row: row,
-            database: appModel.database,
-            repository: widget.repo,
-            manager: appModel.animeMihonManager,
-            playlistCollectionId: widget.playlistCollectionId,
-            subtitleLanguageResolver: () => resolveSubtitleDownloadLanguage(
-              explicitSubtitlePreference: appModel.jimakuDefaultLanguage,
-              globalDefaultContentLanguage: appModel.defaultContentLanguage,
-            ),
+          throw const AnimeSourceLaunchUnavailable(
+            'online video sources are unavailable on this platform',
           );
-          if (!mounted) {
-            launch.client.dispose();
-            return;
-          }
-          _ownedAnimeClient = launch.client;
-          _resolvedStreamClient = launch.client;
-          _resolvedStreamInfo = launch.info;
-          _resolvedStreamMembers = launch.members;
-          _resolvedStreamStartIndex = launch.startIndex;
         } catch (e) {
           debugPrint('[VideoFushiPage] anime-source launch failed: $e');
           if (mounted) {
@@ -6643,15 +6615,6 @@ class _VideoFushiPageState extends ConsumerState<VideoFushiPage>
     // 而非穿透控制后台视频。放在解析出 action 之后——未绑定的键仍交回 GamepadService 兜底
     // （焦点移动等），不误吞导航。
     if (_hasVisiblePopup) {
-      // 手柄重设计 P2：先给浮层自己的 dictionaryPopup 绑定一次消费机会，再落到上面
-      // 那条「已绑键 = 关浮层」。少了这一步，dpad 上下 / X / Y 在 video scope 全都
-      // 有绑定（音量 / 上下条字幕），于是 P2 的词条导航 / 制卡 / 发音四个默认绑定在
-      // 视频页**结构性不可达**——GamepadService 的弹窗兜底排在页面 Actions 之后，
-      // 这里已经 return true 了，永远轮不到。设置里能配、按了没反应正是要禁的形态。
-      // B 不在 dictionaryPopup 绑定里，逐级退出关浮层的行为不变。
-      if (tryDictionaryPopupGamepadButton(appModel.shortcutRegistry, button)) {
-        return true;
-      }
       _dismissTopVisiblePopup();
       return true;
     }

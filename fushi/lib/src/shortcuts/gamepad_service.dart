@@ -453,19 +453,6 @@ class GamepadService {
       dispatchDictionaryPopupGamepadButton(galHooks, registry, button);
       return;
     }
-    // TODO-1066：app 外全局查词的手柄触发。
-    //
-    // 位置刻意在取 `_dispatchContext` **之前**，两个理由缺一不可：
-    //   ① 后台可用性——本功能唯一的使用场景就是"用户正在别的程序里看文本"，
-    //      那时主窗失焦、`MainWindowFocusGate` 已把整棵焦点树设成不可聚焦，
-    //      下面 `Actions.maybeInvoke` 那条路必然落空。这里不碰焦点树。
-    //   ② 与键盘同构——键盘那条是 win32 `RegisterHotKey`（OS 级），在 app 内按
-    //      也照样抢在页面之前触发。手柄要和它同一语义，就必须同样排在页面
-    //      Actions 之前，否则同一个动作在两个通道上行为不一致。
-    //
-    // 正因为它优先于页面，`globalExternalLookup` 的手柄默认绑定**必须留空**
-    // （见 shortcut_defaults）：给任何默认值都等于从页面手里抢走一个按钮。
-    if (tryGlobalExternalLookupGamepadButton(registry, button)) return;
     final BuildContext? ctx = _dispatchContext;
     if (ctx == null) return;
     _setHighlightForHardwareNav();
@@ -477,10 +464,6 @@ class GamepadService {
         true;
     if (handled) return;
 
-    // 手柄重设计 P2：页面没消费的按钮，弹窗可见时先按 dictionaryPopup scope 解析
-    // （词条导航/制卡/发音）。排在页面之后 = 页面专属键永远优先；排在滚动/焦点
-    // 兜底之前 = 弹窗可见时 dpad 上下先导航词条，而不是把焦点从弹窗底下移走。
-    if (tryDictionaryPopupGamepadButton(registry, button)) return;
 
     // The page didn't consume the button: LB/RB (or whatever the user bound to
     // the global scroll-page actions) page-scrolls the current page's primary

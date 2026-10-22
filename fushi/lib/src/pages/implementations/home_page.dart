@@ -1404,7 +1404,7 @@ class _HomePageState extends BasePageState<HomePage>
     final VideoDiscoveryService service = VideoDiscoveryService.production(
       config,
       discoveryAvailable:
-          StoreRestrictedCapability.externalDiscovery.isAvailable,
+          false,
     );
     final VideoDiscoveryController controller =
         _ProductionVideoDiscoveryController(service);
@@ -1445,9 +1445,7 @@ class _HomePageState extends BasePageState<HomePage>
       onCancelDownloads: _cancelVideoDiscoveryDownloads,
       // 「AI 下视频」入口：仅平台合规不可用（iOS）时不接线、整颗按钮不渲染；
       // AI 未指派 / 下载 runtime 没起在点击时引导配置（见 _canAiAcquire）。
-      onAiAcquire: _canAiAcquire && _aiAcquireModulesEnabled
-          ? _openAiVideoAcquisition
-          : null,
+      onAiAcquire: null,
     );
   }
 
@@ -1880,9 +1878,7 @@ class _HomePageState extends BasePageState<HomePage>
   /// 去 AI 设置指派」（用户 2026-09-26 反馈 Windows / Mac 都找不到）。缺什么改由
   /// [_openAiVideoAcquisition] 在点击时直接弹对应的配置引导。
   bool get _canAiAcquire =>
-      appModelNoUpdate.isPreferencesReady &&
-      StoreRestrictedCapability.downloads.isAvailable &&
-      StoreRestrictedCapability.externalDiscovery.isAvailable;
+      false;
 
   /// 「AI 下视频」入口的模块门：用户在「功能模块」里关掉的东西，入口不能再把它
   /// 带出来。

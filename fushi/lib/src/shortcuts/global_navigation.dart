@@ -792,10 +792,6 @@ Widget wrapWithGlobalNavigation({
       // 路径 GamepadService._dispatchButton 的弹窗兜底同一入口、同一次序。
       if (event is KeyDownEvent) {
         final GamepadButton? nativeButton = GamepadButton.fromKeyEvent(event);
-        if (nativeButton != null &&
-            tryDictionaryPopupGamepadButton(registry, nativeButton)) {
-          return KeyEventResult.handled;
-        }
       }
       if (focusNavigationEnabled) {
         final KeyEventResult arrowResult =

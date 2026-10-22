@@ -14,5 +14,4 @@ bool get isLnReaderRuntimeSupported =>
 /// 判据只写在这一处，消费端只问它——这条边界失效是静默的（本地与 CI 全绿、
 /// 上架才被拒），守卫见 `test/build/ios_store_compliance_guard_test.dart`。
 bool get isNovelOnlineSourcesAvailable =>
-    StoreRestrictedCapability.onlineNovelSource.isAvailable &&
-    isLnReaderRuntimeSupported;
+    false;

@@ -1234,7 +1234,7 @@ class _MangaFushiPageState extends BaseSourcePageState<MangaFushiPage>
       // 词典弹窗是纯原生 WebView、没有 Flutter 焦点节点，不主动收回就全部落空。
       // 这也正是本页覆写 [capturesDictionaryPopupNavigationKeys] 的同一诉求。
       case FocusReclaimCause.popupRendered:
-        return isDictionaryShown;
+        return false;
       case FocusReclaimCause.gesture:
       case FocusReclaimCause.popupDismissed:
       case FocusReclaimCause.contentReady:
@@ -3346,19 +3346,6 @@ class _MangaFushiPageState extends BaseSourcePageState<MangaFushiPage>
       unawaited(Navigator.of(context).maybePop());
       return;
     }
-    if (isDictionaryShown) {
-      // Keep the native dictionary WebView focused through a key burst. Removing
-      // it on the first arrow creates a short HWND focus hand-off in which the
-      // immediately following real key can be lost. The page turn is queued
-      // now; only the visual popup dismissal waits for the burst to settle.
-      _dictionaryTurnDismissTimer?.cancel();
-      _dictionaryTurnDismissTimer = Timer(
-        const Duration(milliseconds: 180),
-        () {
-          if (mounted) clearDictionaryResult();
-        },
-      );
-    }
     final String turn = action == MangaReaderInputAction.next ? 'next' : 'prev';
     unawaited(
       _mode.isContinuous ? _jumpToPageAnchor(turn) : _onMangaTurn(turn),
@@ -3482,7 +3469,7 @@ class _MangaFushiPageState extends BaseSourcePageState<MangaFushiPage>
       crossPageStep:
           key == LogicalKeyboardKey.arrowLeft ||
           key == LogicalKeyboardKey.arrowRight,
-      dictionaryShown: isDictionaryShown,
+      dictionaryShown: false,
       mode: _mode,
     );
   }
@@ -3513,7 +3500,7 @@ class _MangaFushiPageState extends BaseSourcePageState<MangaFushiPage>
     return MangaFushiPage.inputActionForShortcut(
       action: corrected,
       crossPageStep: true,
-      dictionaryShown: isDictionaryShown,
+      dictionaryShown: false,
       mode: _mode,
     );
   }
@@ -3544,7 +3531,7 @@ class _MangaFushiPageState extends BaseSourcePageState<MangaFushiPage>
     return MangaFushiPage.inputActionForShortcut(
       action: bound,
       crossPageStep: false,
-      dictionaryShown: isDictionaryShown,
+      dictionaryShown: false,
       mode: _mode,
     );
   }

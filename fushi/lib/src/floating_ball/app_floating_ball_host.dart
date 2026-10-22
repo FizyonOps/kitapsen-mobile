@@ -378,16 +378,10 @@ class _AppFloatingBallHostState extends ConsumerState<AppFloatingBallHost>
     final List<Future<void>> writes = <Future<void>>[];
     if (_systemBallClosed && !restore.restoresSystem) {
       _systemBallClosed = false;
-      if (prefs.floatingBallSystem) {
-        writes.add(prefs.setFloatingBallSystem(false));
-      }
     }
     if (_dismissed && !restore.restoresInApp) {
       _dismissed = false;
       _dismissedOwner = null;
-      if (prefs.floatingBallInApp) {
-        writes.add(prefs.setFloatingBallInApp(false));
-      }
     }
     if (writes.isEmpty) return;
     final Future<void> settle = Future.wait(writes).then((_) {});
@@ -435,109 +429,9 @@ class _AppFloatingBallHostState extends ConsumerState<AppFloatingBallHost>
   void _syncSystemBall({bool force = false}) {
     final PreferencesRepository? prefs = _prefs;
     if (prefs == null || !floatingBallSystemBallSupported) return;
-    if (!prefs.floatingBallSystem) {
-      _systemBallClosed = false;
-      _stopSystemBall();
-      return;
-    }
-    // 用户关掉的球等回到 Fushi 再起，期间配置变化不能把它拉起来。
-    if (_systemBallClosed) return;
-    final bool lookupModuleEnabled = ref
-        .read(appProvider)
-        .moduleVisibility
-        .isEnabled(ModuleId.lookup);
-    // 应用外只有全局按钮（原生侧拿不到任何页面的场景按钮）。
-    final List<String> actions = <String>[
-      for (final String id in prefs.floatingBallButtons(
-        FloatingBallScope.system,
-      ))
-        if (FloatingBallGlobalAction.fromStorage(id)
-            case final FloatingBallGlobalAction action
-            when floatingBallSystemActionAvailable(
-              action,
-              lookupModuleEnabled: lookupModuleEnabled,
-            ))
-          action.storageValue,
-    ];
-    final Map<String, String> labels = floatingBallNativeLabels();
-    final Map<String, int> icons = floatingBallNativeIcons();
-    final Map<String, int> colors = _systemBallColors;
-    // 文案 / 配色进签名：切换界面语言或主题后原生球也要换。
-    final String signature =
-        '${actions.join(',')}|${labels.values.join('|')}|'
-        '${colors.values.join(',')}';
-    if (!force && signature == _systemSignature) return;
-    final int generation = ++_systemGeneration;
-    _systemRequested = true;
-    // 起球要 await 原生回话与桌面资源；回来时还是最新一代、开关还开着，才继续。
-    // 「用户关过、等回到 Fushi 再起」也算过期：那个标记可能是同时在路上的另一代
-    // 读到并落下的，本代已经过了入口那道门。
-    bool stale() =>
-        generation != _systemGeneration ||
-        !prefs.floatingBallSystem ||
-        _systemBallClosed;
-    final Future<void> run = () async {
-      // 用户在系统球上点过关闭、而当时主引擎不在（没收到推送）：按「自动恢复」
-      // 处理——含应用外时这次起球就是「打开 Fushi 自动恢复」（还在后台则等回到
-      // 前台）；否则按开关把球拉起来就违背了用户刚做的事，改为把开关关掉。
-      //
-      // 这个标记是一次性的（Android 读即清，见 FloatingBallService
-      // .takeClosedByUser）：拿到它的那一代就必须处理，不论自己是否已被新一代
-      // 取代——过期代丢掉 true，下一代读到的只剩 false，会把球重新拉起来。
-      final bool closedByUser =
-          await FloatingBallChannel.takeSystemBallClosedByUser();
-      if (closedByUser) {
-        if (!prefs.floatingBallAutoRestore.restoresSystem) {
-          _systemSignature = null;
-          if (prefs.floatingBallSystem) {
-            await prefs.setFloatingBallSystem(false);
-          }
-          return;
-        }
-        if (!_foreground) {
-          _systemSignature = null;
-          _systemBallClosed = true;
-          return;
-        }
-      }
-      // 桌面原生窗口不加载图标字体：图标画成已着色的 PNG、球面带原图、位置由
-      // Dart 持久化后交给它。
-      final bool desktop = isDesktopSystemBallPlatform;
-      final Map<String, Uint8List>? iconImages = desktop
-          ? await renderFloatingBallIconPngs(
-              floatingBallNativeIconData(),
-              Color(colors['onSurface'] ?? 0xFF1D1B20),
-            )
-          : null;
-      final Uint8List? ballImage = desktop
-          ? await loadFloatingBallImage()
-          : null;
-      // 调 start 之前唯一一道门：此前的 await 只产出本地数据（图标、球面），
-      // 过期代多做完它们不留任何痕迹，逐个 await 设门只是重复同一个判断。
-      if (stale()) return;
-      final bool started = await FloatingBallChannel.startSystemBall(
-        actions: actions,
-        labels: labels,
-        icons: icons,
-        colors: colors,
-        ocrLanguage: kFloatingBallOcrLanguage,
-        iconImages: iconImages,
-        ballImage: ballImage,
-        dock: desktop ? prefs.floatingBallSystemDock : null,
-        fraction: desktop ? prefs.floatingBallSystemVerticalFraction : null,
-      );
-      // 起的过程中被更新的决定取代：结果归新一代处理（关了开关的那一代已经发过
-      // stop，消息按序到原生，这颗球不会留下）。签名更不能记：记了之后同样配置
-      // 的下一次起球会被当成「已下发」跳过，开关开着却没有球。
-      if (stale()) return;
-      // 起不来（Android 没权限 / 桌面建窗失败）：不记签名，下次同步再试。
-      _systemSignature = started ? signature : null;
-      if (started) {
-        await FloatingBallChannel.setAppForeground(_foreground);
-      }
-    }();
-    debugLatestSystemBallSync = run;
-    unawaited(run);
+    _systemBallClosed = false;
+    _stopSystemBall();
+    return;
   }
 
   /// 停原生系统球，并让还在路上的起球闭包作废。
@@ -645,15 +539,7 @@ class _AppFloatingBallHostState extends ConsumerState<AppFloatingBallHost>
       await FloatingBallChannel.takeSystemBallClosedByUser();
       _systemSignature = null;
       final PreferencesRepository? prefs = _prefs;
-      if (prefs == null || !prefs.floatingBallSystem) return;
-      // 「自动恢复」含应用外：开关不动，回到 Fushi 再拉起。原生那边球已经收了，
-      // 让在路上的起球闭包作废，免得它又把球摆出来。
-      if (prefs.floatingBallAutoRestore.restoresSystem) {
-        _systemGeneration++;
-        _systemBallClosed = true;
-        return;
-      }
-      await prefs.setFloatingBallSystem(false);
+      return;
     }());
   }
 
@@ -978,55 +864,7 @@ class _AppFloatingBallHostState extends ConsumerState<AppFloatingBallHost>
       _dismissed = false;
       _dismissedOwner = null;
     }
-    if (!prefs.floatingBallInApp ||
-        scene.hidesBall ||
-        _capturing ||
-        _dismissed) {
-      return const SizedBox.shrink();
-    }
-    final List<ReaderHeaderAction> buttons = <ReaderHeaderAction>[
-      for (final String id in scene.pinnedIds)
-        if (scene.actions[id] case final ReaderHeaderAction action) action,
-      ...prefs
-          .floatingBallButtons(scene.scope)
-          .where((String id) => !scene.pinnedIds.contains(id))
-          .map((String id) => _resolveButton(id, scene))
-          .nonNulls,
-    ];
-    // 勾选的按钮一颗都不剩 = 用户不要这颗球（关闭键不算数）。
-    if (buttons.isEmpty) return const SizedBox.shrink();
-    // 「关闭悬浮球」排最上（离球最远，防误触）；按钮在下、末颗紧贴球。接管中的
-    // 页面没有关闭键，固定按钮占最上面那几格。
-    final List<ReaderHeaderAction> actions = <ReaderHeaderAction>[
-      if (!pinned) _closeInAppAction(scene, prefs),
-      ...buttons,
-    ];
-    final Size window = MediaQuery.sizeOf(context);
-    final Rect viewport = appFloatingBallViewport(
-      window,
-      MediaQuery.viewPaddingOf(context),
-      sensorHousingEdge: _sensorHousingEdge,
-    );
-    // ReaderFloatingBall 返回 Positioned，必须是 Stack 的直接子节点。本宿主挂在
-    // 导航之上，没有 Overlay 祖先，球与按钮的 Tooltip 要自带一层；Stack 只在
-    // 球 / 按钮上命中，空白处照常穿透到底下页面。
-    return Overlay.wrap(
-      child: Stack(
-        children: <Widget>[
-          ReaderFloatingBall(
-            key: const ValueKey<String>('fushi_app_floating_ball'),
-            viewport: viewport,
-            actions: actions,
-            dock: ReaderFloatingBallDock.decode(prefs.floatingBallDock),
-            verticalFraction: prefs.floatingBallVerticalFraction,
-            animate: !appModel.einkMode,
-            onDockChanged: (ReaderFloatingBallDock dock, double fraction) {
-              unawaited(prefs.setFloatingBallPosition(dock.id, fraction));
-            },
-          ),
-        ],
-      ),
-    );
+    return const SizedBox.shrink();
   }
 }
 

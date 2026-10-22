@@ -107,25 +107,6 @@ extension _ReaderCaret on _ReaderFushiPageState {
         : null;
     if (gamepadAResult != null) return gamepadAResult;
 
-    // Holding an arrow (or Tab) while the char cursor is active steps the cursor
-    // continuously: the OS auto-repeat (KeyRepeatEvent) drives the SAME caret
-    // MOVE action as the press edge does below, so the cursor advances per
-    // repeat instead of one char per discrete press. Consuming it here also
-    // stops the repeat from bubbling to the app-wide wrapper, which would
-    // otherwise move FOCUS off the reading content ([_focusNode]) instead of
-    // moving the cursor. ONLY movement actions repeat — activate (Enter/A look-
-    // up) and dismissOrExit (Esc/B) must fire once per press, never on auto-
-    // repeat, or a held Enter/Esc would re-look-up / re-exit every frame.
-    if (_focusNavEnabled && _caretActive && event is KeyRepeatEvent) {
-      final CaretAction? repeatCaret = ReaderCaretRouter.decideKeyboard(
-        event.logicalKey,
-        shift: HardwareKeyboard.instance.isShiftPressed,
-      );
-      if (repeatCaret != null && _isRepeatableCaretMove(repeatCaret)) {
-        unawaited(_runCaretAction(repeatCaret));
-        return KeyEventResult.handled;
-      }
-    }
 
     // TODO-1370：长按方向键连续切句。按住一个绑定到「可重复」阅读器/有声书动作
     // （翻页 或 有声书上一句/下一句）的键时，OS 自动重复的 [KeyRepeatEvent] 继续
@@ -137,7 +118,6 @@ extension _ReaderCaret on _ReaderFushiPageState {
     // （KeyDown 走 [_handleGamepadButton]）；字符光标激活时它自己的重复已在上面处理。
     // 必须落在 KeyDown-only 闸门之前，否则闸门会先把 KeyRepeat 拦掉。
     if (event is KeyRepeatEvent) {
-      if (_focusNavEnabled && _caretActive) return KeyEventResult.ignored;
       if (GamepadButton.fromKeyEvent(event) != null) {
         return KeyEventResult.ignored;
       }
@@ -218,22 +198,7 @@ extension _ReaderCaret on _ReaderFushiPageState {
     // Char-level reading cursor (book has focus; chrome already returned above).
     // While active, the cursor owns Tab / arrows / A(Enter) / B(Esc) before the
     // registry is consulted. While inactive, A / Enter ENTER the cursor.
-    if (_focusNavEnabled && _caretActive) {
-      if (_isReaderDirectCaretShortcut(directReaderAction)) {
-        return _executeShortcutAction(
-          directReaderAction!,
-          keyboardTriggerKey: event.logicalKey,
-        );
-      }
-      final CaretAction? caretAction = ReaderCaretRouter.decideKeyboard(
-        event.logicalKey,
-        shift: HardwareKeyboard.instance.isShiftPressed,
-      );
-      if (caretAction != null) {
-        unawaited(_runCaretAction(caretAction));
-        return KeyEventResult.handled;
-      }
-    } else if (_isReaderDirectCaretShortcut(directReaderAction)) {
+    if (_isReaderDirectCaretShortcut(directReaderAction)) {
       return _executeShortcutAction(
         directReaderAction!,
         keyboardTriggerKey: event.logicalKey,
@@ -366,8 +331,7 @@ extension _ReaderCaret on _ReaderFushiPageState {
       _gamepadAHoldTimer = Timer(const Duration(milliseconds: 500), () {
         _gamepadAHoldTimer = null;
         _gamepadALongFired = true;
-        if (!mounted || !_focusNavEnabled || !_caretActive) return;
-        unawaited(_runCaretAction(CaretAction.longPress));
+        return;
       });
       return KeyEventResult.handled;
     }
@@ -443,41 +407,12 @@ extension _ReaderCaret on _ReaderFushiPageState {
     // and removed; focus stays on the reading content.
 
     // Char-level reading cursor — same contextual routing as the keyboard path.
-    if (_focusNavEnabled && _caretActive) {
-      // LB/RB flip a whole page on the cursor surface (popup scrolls, paged
-      // reader turns) before the directional caret map — the shoulders are not
-      // caret-directional, so they would otherwise fall through to the reader
-      // scope and never reach the popup WebView.
-      if (button == GamepadButton.rb) {
-        unawaited(_caretScrollPage(true));
-        return true;
-      }
-      if (button == GamepadButton.lb) {
-        unawaited(_caretScrollPage(false));
-        return true;
-      }
-      final CaretAction? caretAction = ReaderCaretRouter.decideGamepad(button);
-      if (caretAction != null) {
-        unawaited(_runCaretAction(caretAction));
-        return true;
-      }
-    } else if (ReaderCaretRouter.isEnterTriggerGamepad(
+    if (ReaderCaretRouter.isEnterTriggerGamepad(
       button,
       focusNavEnabled: _focusNavEnabled,
       enterButtons: _readerEnterCaretButtons(),
     )) {
       unawaited(_enterCaret());
-      return true;
-    }
-    // 手柄重设计 P2：排在 caret 路由**之后**、reader/audiobook 解析**之前**。
-    // caret 保留 dpad 四向（方向键移动字级光标去选词，是查词的操作方式本身，不能
-    // 让给词条翻页）；但 X / Y 在 reader+audiobook scope 都有绑定
-    // （audiobookNextSentence / readerToggleChrome），不在这里拦一次，P2 的制卡 /
-    // 发音两个默认绑定在阅读器里永远不可达——GamepadService 的弹窗兜底排在页面
-    // Actions 之后，页面已经消费掉了就永远轮不到。弹窗不可见时
-    // DictionaryPopupGamepadRegistry.current 为 null，直接返回 false，对非查词
-    // 场景零影响。
-    if (tryDictionaryPopupGamepadButton(appModel.shortcutRegistry, button)) {
       return true;
     }
     // TODO-700 T8: the bottom bar is excluded from focus traversal, so D-pad
@@ -505,11 +440,7 @@ extension _ReaderCaret on _ReaderFushiPageState {
   }
 
   bool _handleGamepadLongPress(GamepadButton button) {
-    if (!_focusNavEnabled || button != GamepadButton.a || !_caretActive) {
-      return false;
-    }
-    unawaited(_runCaretAction(CaretAction.longPress));
-    return true;
+    return false;
   }
 
   bool _isCaretEntryTrigger({
@@ -605,37 +536,14 @@ extension _ReaderCaret on _ReaderFushiPageState {
         _paginate(ReaderNavigationDirection.backward);
         return KeyEventResult.handled;
       case ShortcutAction.readerDismissDict:
-        // 「只关词典、绝不退出」的专用动作（默认无键盘绑定，典型用法是绑鼠标侧键）。
-        // 无弹窗时不消费（ignored 让事件继续冒泡），**绝不退书**——退出是
-        // globalBack 的职责。
-        if (isDictionaryShown) {
-          clearDictionaryResult();
-          return KeyEventResult.handled;
-        }
         return KeyEventResult.ignored;
       case ShortcutAction.globalBack:
-        // 「返回上一级」在阅读器的阶梯（用户拍板：Esc 一键包办）：
-        //   ① 词典弹窗可见 → 只关弹窗，留在书里；
-        //   ② 否则退出书籍 —— 必须走 maybePop 触发 PopScope→onWillPop 闸门
-        //      （flush 阅读位置 / closeMedia / 关书自动同步，BUG-782 同径），与底栏
-        //      退出按钮同一条路。
-        // 两级都在**本页**消费，不再依赖「返回 ignored → 冒泡到最外层硬编码 Esc」
-        // 那条隐形链路：那条链路让退书行为与设置页显示的键位对不上（设置页写
-        // Ctrl+W，实际 Esc 也能退），也让改键改不动真正生效的那个键。
-        if (isDictionaryShown) {
-          clearDictionaryResult();
-          return KeyEventResult.handled;
-        }
         // ③ 窗口全屏中 → 先退全屏、留在书里；不在全屏才真的退书。用户裁定「Esc 也可以
         //    退出全屏」，次序见 [_exitWindowFullscreenOrPopReader]。非全屏时它只多读一次
         //    窗口状态就落回原来的 maybePop，退书路径本身没变。
         unawaited(_exitWindowFullscreenOrPopReader());
         return KeyEventResult.handled;
       case ShortcutAction.readerToggleChrome:
-        if (isDictionaryShown) {
-          clearDictionaryResult();
-          return KeyEventResult.handled;
-        }
         // TODO-700 T8: showing the bar no longer moves focus into it — the bar
         // is excluded from focus traversal; focus stays on the reading content.
         // BUG-1423: route through the mode-aware helper so a floating bottom bar
@@ -644,38 +552,15 @@ extension _ReaderCaret on _ReaderFushiPageState {
         _toggleChromeFromShortcut();
         return KeyEventResult.handled;
       case ShortcutAction.readerOpenMenu:
-        // TODO-728：一键打开阅读器设置菜单（外观/进度/目录快速设置面板），免去先
-        // 开底栏再把焦点移到齿轮按钮。_showAppearanceSheet 自带重入守卫。
-        if (isDictionaryShown) {
-          clearDictionaryResult();
-          return KeyEventResult.handled;
-        }
         unawaited(_showAppearanceSheet());
         return KeyEventResult.handled;
       case ShortcutAction.readerOpenNavigation:
-        // TODO-1309①：Ctrl+F 直接打开阅读器导航界面（直达 location 子页：书内搜索/
-        // 字符跳转/目录/书签/收藏）。与 readerOpenMenu 一样先关词典弹窗再开面板，
-        // 复用 _showAppearanceSheet 的重入守卫。
-        if (isDictionaryShown) {
-          clearDictionaryResult();
-          return KeyEventResult.handled;
-        }
         unawaited(_showAppearanceSheet(initialSubPage: 'location'));
         return KeyEventResult.handled;
       case ShortcutAction.readerOpenGallery:
-        // 一键打开插图画廊（默认 G）；先关词典弹窗，与 readerOpenMenu 同一范式。
-        if (isDictionaryShown) {
-          clearDictionaryResult();
-          return KeyEventResult.handled;
-        }
         _openGallery();
         return KeyEventResult.handled;
       case ShortcutAction.readerOpenStatistics:
-        // 一键打开阅读统计浮层（默认 I）。
-        if (isDictionaryShown) {
-          clearDictionaryResult();
-          return KeyEventResult.handled;
-        }
         _openReadingStatistics();
         return KeyEventResult.handled;
       case ShortcutAction.readerOpenAudiobook:
@@ -699,9 +584,7 @@ extension _ReaderCaret on _ReaderFushiPageState {
         );
         return KeyEventResult.handled;
       case ShortcutAction.readerLookupAtCursor:
-        if (_focusNavEnabled && _caretActive) {
-          unawaited(_runCaretAction(CaretAction.activate));
-        } else if (_isCaretEntryTrigger(
+        if (_isCaretEntryTrigger(
           keyboardTriggerKey: keyboardTriggerKey,
           gamepadTriggerButton: gamepadTriggerButton,
         )) {
@@ -709,9 +592,7 @@ extension _ReaderCaret on _ReaderFushiPageState {
         }
         return KeyEventResult.handled;
       case ShortcutAction.readerShiftLookup:
-        if (_focusNavEnabled && _caretActive) {
-          unawaited(_runCaretAction(CaretAction.lookup));
-        } else if (_focusNavEnabled) {
+        if (_focusNavEnabled) {
           unawaited(_enterCaret());
         }
         return KeyEventResult.handled;
@@ -881,11 +762,7 @@ extension _ReaderCaret on _ReaderFushiPageState {
       _caretDismissTopPopup();
       return;
     }
-    if (isDictionaryShown) {
-      clearDictionaryResult();
-    } else {
-      _exitCaret();
-    }
+    _exitCaret();
   }
 
   /// Move focus from the popup content caret UP to the Flutter header toolbar
@@ -939,9 +816,7 @@ extension _ReaderCaret on _ReaderFushiPageState {
     }
     if (_controller == null) return;
     final Object? raw = await _controller!.evaluateJavascript(
-      source: _caretOnLyrics
-          ? ReaderLyricsCaretScripts.moveInvocation(physicalDir)
-          : ReaderCaretScripts.moveInvocation(physicalDir),
+      source: ReaderCaretScripts.moveInvocation(physicalDir),
     );
     if (!mounted || _controller == null) return;
     // lyrics caret 只返回 moved/blocked，永不 pageForward/Backward，故下面分支天然跳过。
@@ -973,9 +848,7 @@ extension _ReaderCaret on _ReaderFushiPageState {
       }
       if (_controller == null) return;
       final Object? raw = await _controller!.evaluateJavascript(
-        source: _caretOnLyrics
-            ? ReaderLyricsCaretScripts.scrollPageInvocation(forward)
-            : ReaderCaretScripts.scrollPageInvocation(forward),
+        source: ReaderCaretScripts.scrollPageInvocation(forward),
       );
       if (!mounted || _controller == null) return;
       final String status = ReaderCaretScripts.moveStatus(raw);
@@ -999,9 +872,7 @@ extension _ReaderCaret on _ReaderFushiPageState {
     }
     if (_controller == null) return;
     await _controller!.evaluateJavascript(
-      source: _caretOnLyrics
-          ? ReaderLyricsCaretScripts.lookupInvocation()
-          : ReaderCaretScripts.lookupInvocation(),
+      source: ReaderCaretScripts.lookupInvocation(),
     );
   }
 
@@ -1017,9 +888,7 @@ extension _ReaderCaret on _ReaderFushiPageState {
     }
     if (_controller == null) return;
     await _controller!.evaluateJavascript(
-      source: _caretOnLyrics
-          ? ReaderLyricsCaretScripts.activateInvocation()
-          : ReaderCaretScripts.activateInvocation(),
+      source: ReaderCaretScripts.activateInvocation(),
     );
   }
 
@@ -1030,9 +899,7 @@ extension _ReaderCaret on _ReaderFushiPageState {
     }
     if (_controller == null) return;
     await _controller!.evaluateJavascript(
-      source: _caretOnLyrics
-          ? ReaderLyricsCaretScripts.longPressInvocation()
-          : ReaderCaretScripts.longPressInvocation(),
+      source: ReaderCaretScripts.longPressInvocation(),
     );
   }
 
@@ -1060,24 +927,13 @@ extension _ReaderCaret on _ReaderFushiPageState {
   /// Place the reader cursor at the entering edge of the freshly paginated page.
   /// Reader-only — the popup never paginates.
   Future<void> _caretReanchor(ReaderNavigationDirection direction) async {
-    if (!_caretOnReader || _controller == null) return;
-    final String edge = direction == ReaderNavigationDirection.forward
-        ? 'forward'
-        : 'backward';
-    await _controller!.evaluateJavascript(
-      source: ReaderCaretScripts.reanchorInvocation(edge),
-    );
+    return;
   }
 
   /// Re-measure the reader ring after a relayout (chrome toggle, font/size). If
   /// the cursor's node detached, JS re-anchors to the first visible character.
   /// Reader-only.
   Future<void> _caretRefresh() async {
-    if (_controller == null || (!_caretOnReader && !_caretOnLyrics)) return;
-    await _controller!.evaluateJavascript(
-      source: _caretOnLyrics
-          ? ReaderLyricsCaretScripts.refreshInvocation()
-          : ReaderCaretScripts.refreshInvocation(),
-    );
+    return;
   }
 }

@@ -220,11 +220,7 @@ class _BrowsePageState extends ConsumerState<BrowsePage>
     // 今天都只在 iOS 缺席，但它们是两条独立的审核理由，日后范围分开时发现页签
     // 不能静默漏门。
     final bool discover =
-        StoreRestrictedCapability.externalDiscovery.isAvailable &&
-        _visibleResourceDomains(
-          appModel.moduleVisibility,
-          gamesForm: appModel.gamesModuleForm,
-        ).isNotEmpty;
+        false;
     // 发现排第一（2026-09-28 用户拍板）：打开浏览默认落在发现页签。
     return <BrowseTab>[
       if (discover) BrowseTab.discover,

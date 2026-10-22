@@ -143,7 +143,7 @@ void notifyReaderChromeReanchored(SettingsContext settingsContext) {
 /// 什么都不会发生。开回栏不动球。调用方随后要让阅读器重下 chrome 预留
 /// （设置页经 [notifyReaderChromeReanchored]，阅读器内直接同步）。
 Future<void> setHideReaderToolbars(AppModel appModel, bool hide) async {
-  if (hide && !appModel.prefsRepo.floatingBallInApp) {
+  if (hide) {
     await appModel.prefsRepo.setFloatingBallInApp(true);
   }
   await ReaderFushiSource.instance.setHideToolbars(hide);

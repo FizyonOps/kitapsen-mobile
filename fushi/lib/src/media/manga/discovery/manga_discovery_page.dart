@@ -132,11 +132,6 @@ class _MangaDiscoveryPageState extends ConsumerState<MangaDiscoveryPage> {
   @override
   void initState() {
     super.initState();
-    // Aidoku 包清单：装/卸/启停后立即重载，否则保活的本页停在旧清单上。
-    if (!_injected && AidokuRuntimeFactory.isSupported) {
-      _aidokuChanges = AidokuPackageStore.changes.listen((_) => _loadAidoku());
-      unawaited(_loadAidoku());
-    }
   }
 
   Future<void> _loadAidoku() async {
@@ -183,9 +178,6 @@ class _MangaDiscoveryPageState extends ConsumerState<MangaDiscoveryPage> {
       _generation++;
       _rowFailures.clear();
     });
-    if (!_injected && AidokuRuntimeFactory.isSupported) {
-      unawaited(_loadAidoku());
-    }
   }
 
   /// 热门行拉取结束的回报：[error] 为 null = 成功。晚到的旧一代回报直接丢弃。

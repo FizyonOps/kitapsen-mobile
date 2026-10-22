@@ -111,9 +111,7 @@ enum ModuleId {
     // 「浏览」装的是发现页、三域在线扩展源与通用 torrent / 磁力下载器，都不能进
     // App Store。判据不在这里写死，委托给合规边界的唯一真相源；各页签内的每个域
     // 仍各自再问对应的 [StoreRestrictedCapability]，两处若各判各的就会分头漂移。
-    ModuleId.browse => StoreRestrictedCapability.downloads.availableOn(
-      isIOS: isIOS,
-    ),
+    ModuleId.browse => false,
     ModuleId.books ||
     ModuleId.manga ||
     ModuleId.video ||

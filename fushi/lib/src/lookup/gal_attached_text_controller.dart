@@ -894,15 +894,6 @@ class GalAttachedTextController extends ChangeNotifier {
       providerId: result.providerId,
       providerStatus: result.providerStatus,
     )) {
-      if (!_nativeRiskGateSatisfied) {
-        _activeVariant = null;
-        _surfaceVisible = false;
-        _setStatus(
-          GalAttachedTextStatus.needsRiskAcceptance,
-          reason: 'native_provider_risk_gate_unsatisfied',
-        );
-        return;
-      }
       _activeVariant = null;
       _surfaceVisible = false;
       _setStatus(GalAttachedTextStatus.activeNative);
@@ -2590,14 +2581,6 @@ class GalAttachedTextController extends ChangeNotifier {
   void _activateNativeOrRequestRisk({String? reason}) {
     _activeVariant = null;
     _surfaceVisible = false;
-    if (!_nativeRiskGateSatisfied) {
-      // BUG-2143：这里的 reason 是可选入参，之前调用方不传就报 null。
-      _setStatus(
-        GalAttachedTextStatus.needsRiskAcceptance,
-        reason: reason ?? 'native_activation_risk_gate_unsatisfied',
-      );
-      return;
-    }
     _setStatus(GalAttachedTextStatus.activeNative, reason: reason);
   }
 

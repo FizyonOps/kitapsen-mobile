@@ -2236,7 +2236,7 @@ class _ReaderFushiPageState extends BaseSourcePageState<ReaderFushiPage>
   /// 盖在正文上，用户 2026-09-13 拍板；历史见 [readerDesktopHeaderReserve]），
   /// 并入 [_readerTopOffset]。
   double get _desktopHeaderReserve => readerDesktopHeaderReserve(
-    enabled: _desktopChromeEnabled,
+    enabled: true,
     barOccupiesLayout: _hasEverLoaded && _chromeBarsExpanded,
     floating: _bottomBarFloating,
     headerHeight: kReaderDesktopHeaderHeight,
@@ -3174,41 +3174,6 @@ class _ReaderFushiPageState extends BaseSourcePageState<ReaderFushiPage>
   // The input device flipped between touch (mouse/pointer) and keyboard/gamepad.
   void _onHighlightModeChanged(FocusHighlightMode mode) {
     if (!mounted) return;
-    // The char caret is a keyboard/gamepad affordance: hide its ring on the
-    // mouse ("用鼠标的时候焦点应消失") and bring it back on hardware nav. Crucially
-    // we SUSPEND (hide the ring) rather than exit — the caret keeps its surface,
-    // so when the controller is picked back up the directions still drive the
-    // popup/reader caret instead of falling through to the reader's page-turn.
-    if (_caretActive) {
-      final bool suspend = mode == FocusHighlightMode.touch;
-      switch (_caretSurface) {
-        case CaretSurface.popup:
-          if (suspend) {
-            topPopupState?.caretSuspend();
-          } else {
-            _resumePopupCaretForHardwareNav();
-          }
-          break;
-        case CaretSurface.reader:
-          _controller?.evaluateJavascript(
-            source: suspend
-                ? ReaderCaretScripts.suspendInvocation()
-                : ReaderCaretScripts.resumeInvocation(),
-          );
-          break;
-        case CaretSurface.lyrics:
-          _controller?.evaluateJavascript(
-            source: suspend
-                ? ReaderLyricsCaretScripts.suspendInvocation()
-                : ReaderLyricsCaretScripts.resumeInvocation(),
-          );
-          break;
-        case CaretSurface.none:
-        // video 面属于视频页，阅读器不可能持有——防御性忽略。
-        case CaretSurface.video:
-          break;
-      }
-    }
     setState(() {});
   }
 
@@ -3421,7 +3386,7 @@ class _ReaderFushiPageState extends BaseSourcePageState<ReaderFushiPage>
             ),
             GamepadLongPressIntent: CallbackAction<GamepadLongPressIntent>(
               onInvoke: (GamepadLongPressIntent intent) =>
-                  _handleGamepadLongPress(intent.button),
+                  false,
             ),
           },
           child: Focus(
@@ -4208,7 +4173,7 @@ $liveConfigJs
       // 键（Esc / 绑定键）永远抵达不了 [_handleKeyEvent]。故此 cause 与下面 gesture
       // 的「弹窗可见就让位」正好相反——这正是两者当初必须是两个 helper 的原因。
       case FocusReclaimCause.popupRendered:
-        return _lyricsMode ? false : isDictionaryShown;
+        return _lyricsMode ? false : false;
       // 整条查词浮层栈关闭：曾持键盘的弹窗 WebView 已消失，不归还用户会被困死
       // （收不到任何按键，没有任何办法回到正文）。
       case FocusReclaimCause.popupDismissed:
@@ -4224,7 +4189,7 @@ $liveConfigJs
       // Flutter 焦点所有者**（可见弹窗 / 底栏 chrome），其余一律收回。
       case FocusReclaimCause.gesture:
         return shouldReclaimReaderFocusAfterGesture(
-          popupVisible: isDictionaryShown,
+          popupVisible: false,
           chromeHasFocus: _chromeFocusScope.hasFocus,
         );
       // TODO-700 T3 / TODO-900：内容就绪、切窗回前台、底栏显隐后的归位。严格门控：
@@ -4236,8 +4201,8 @@ $liveConfigJs
       case FocusReclaimCause.surfaceRemounted:
       case FocusReclaimCause.overlayClosed:
         if (!_readerContentReady || _lyricsMode) return false;
-        if (_caretActive || _caretSurface != CaretSurface.none) return false;
-        if (isDictionaryShown) return false; // 弹窗 WebView 持焦点期间不抢
+        if (_caretSurface != CaretSurface.none) return false;
+         // 弹窗 WebView 持焦点期间不抢
         // resumed 是全局生命周期回调，阅读器上方可能压着设置 / 查词大对话框；
         // 直接抢会夺走对话框焦点（Never break userspace 红线）。那些覆盖层关闭
         // 时各自的返回点会归还焦点。contentReady / surfaceRemounted 同理：在设置
@@ -4270,8 +4235,7 @@ $liveConfigJs
   ) async {
     await _clearSelectionJs();
     if (!mounted ||
-        activeLookupGeneration != dismissedGeneration ||
-        isDictionaryShown) {
+        activeLookupGeneration != dismissedGeneration) {
       return;
     }
     // Return Flutter focus to the reading content. The dismissed popup's WebView
@@ -4617,7 +4581,6 @@ $liveConfigJs
   ///   扩选的起点，视频页 BUG-880 没有光标选区，「对齐」到这里不能无条件。
   void _triggerShiftLookupAtLastPointer() {
     if (!hostOwnsWebViewHoverLookup) return;
-    if (_focusNavEnabled && _caretActive) return;
     final Offset? local = _lastWebViewHoverLocal;
     if (local == null) return;
     _hostHoverGate.markLookedUp(local);

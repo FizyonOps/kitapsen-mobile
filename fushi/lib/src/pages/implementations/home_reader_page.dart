@@ -50,26 +50,6 @@ class _HomeReaderPageState extends BaseTabPageState<HomeReaderPage> {
           builder: (BuildContext context, Widget navigation) =>
               mediaSource.buildHistoryPage(navigation: navigation),
         ),
-        if (StoreRestrictedCapability.externalDiscovery.isAvailable)
-          MediaLibraryViewSpec(
-            kind: MediaLibraryViewKind.discover,
-            label: t.library_view_discover,
-            builder: (BuildContext context, Widget navigation) =>
-                MediaDiscoveryPage(
-              kinds: const <DiscoveryMediaKind>[
-                DiscoveryMediaKind.novel,
-                DiscoveryMediaKind.audiobook,
-              ],
-              navigation: navigation,
-              onAiAcquire: discoveryAiAcquireAction(
-                context: context,
-                readAppModel: () => appModelNoUpdate,
-                domain: AiMediaAcquisitionDomain.novel,
-                domainLabel: t.books,
-                onlineDomain: OnlineSourcesDomain.novel,
-              ),
-            ),
-          ),
         if (online)
           MediaLibraryViewSpec(
             kind: MediaLibraryViewKind.onlineSources,

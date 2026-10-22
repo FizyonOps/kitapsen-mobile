@@ -1406,7 +1406,7 @@ class _CollectionsPageState extends BasePageState<CollectionsPage> {
         (!item.isWord || item.hasWordAnchor) &&
         (item.bookKey?.isNotEmpty ?? false);
     final FavoriteMiningItem? miningItem = _miningItemOf(item);
-    final bool canMine = miningItem != null && _cardCreationEnabled;
+    final bool canMine = false;
     final hasAudio = _hasAudio(item);
     final displayTitle = item.text ?? '';
     // P4：副标题（所属书/视频名）过 display-title 门面（快照列保持 raw 身份）。
@@ -1558,13 +1558,6 @@ class _CollectionsPageState extends BasePageState<CollectionsPage> {
             // 全平台统一 Material 分享图标（ios_share 是 iOS 专属视觉，巡检 PR-3）。
             icon: Icons.share_outlined,
             onTap: _openExportSheet,
-          ),
-        // 批量制卡：收藏词 / 记着查词对象的收藏句可一键制卡（含视频 / 有声书音频）。
-        if (!_loading && _cardCreationEnabled && _mineableItems.isNotEmpty)
-          FushiIconButton(
-            tooltip: t.collection_batch_mine,
-            icon: Icons.style_outlined,
-            onTap: _openBatchMineSheet,
           ),
         // 只要列表非空就显示「清空」；点开可选范围面板（书签/收藏句/制卡句/收藏词），
         // 按勾选批量清空。取代旧的「仅制卡句才显示、只清制卡」特例。

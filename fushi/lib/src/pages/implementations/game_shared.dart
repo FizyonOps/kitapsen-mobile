@@ -142,8 +142,6 @@ final List<GameSection> kGameSectionTabOrder = <GameSection>[
   GameSection.dashboard,
   GameSection.library,
   GameSection.monitor,
-  if (StoreRestrictedCapability.externalDiscovery.isAvailable)
-    GameSection.discover,
   GameSection.importGames,
   GameSection.settings,
 ];

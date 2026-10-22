@@ -47,25 +47,6 @@ class MangaLibraryPage extends StatelessWidget {
           builder: (BuildContext context, Widget navigation) =>
               ReaderFushiHistoryPage(mangaOnly: true, navigation: navigation),
         ),
-        if (StoreRestrictedCapability.externalDiscovery.isAvailable)
-          MediaLibraryViewSpec(
-            kind: MediaLibraryViewKind.discover,
-            label: t.library_view_discover,
-            // 「浏览来源」节经库页壳的 [MediaLibraryShellScope] 切到本页「来源」。
-            builder: (BuildContext context, Widget navigation) => Consumer(
-              builder: (BuildContext context, WidgetRef ref, Widget? _) =>
-                  MangaDiscoveryPage(
-                    navigation: navigation,
-                    onAiAcquire: discoveryAiAcquireAction(
-                      context: context,
-                      readAppModel: () => ref.read(appProvider),
-                      domain: AiMediaAcquisitionDomain.manga,
-                      domainLabel: t.manga_library,
-                      onlineDomain: OnlineSourcesDomain.manga,
-                    ),
-                  ),
-            ),
-          ),
         if (isOnlineSourcesDomainAvailable(OnlineSourcesDomain.manga))
           MediaLibraryViewSpec(
             kind: MediaLibraryViewKind.onlineSources,

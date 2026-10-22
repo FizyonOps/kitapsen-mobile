@@ -669,7 +669,7 @@ extension _ReaderWebView on _ReaderFushiPageState {
     // TODO-909: select the VN shell when view-mode == 'vn'. VN is mutually
     // exclusive with continuous (it is a page-flip stage, not native scroll),
     // so continuousMode stays false here.
-    final bool vnMode = s.isVnMode;
+    final bool vnMode = false;
     final Size screenSize = MediaQuery.of(context).size;
     // BUG-111: 这就是 JS 分页用的权威宽高（dartPageWidth/Height）。记下来作为
     // content-ready 后的「已分页基线」，供 _syncPageSize 与 settle 后的真实视口比对。
@@ -2106,15 +2106,6 @@ updateLive: function(patch) {
           callback: (_) {
             // BUG-2276：抽屉压着正文时，这次点击是「点遮罩关抽屉」，不是正文点击。
             if (_closeSideSheetForWebViewPointer()) return;
-            // TODO-1027：有可见查词弹窗时，本 onTapEmpty 是 dismiss barrier 转发的
-            // 真点击命中空白（onDismissBarrierTap → _selectTextAt 命中真空白才 fire）。
-            // 此时按 barrier 旧语义清整栈（clearDictionaryResult → onAllPopupsDismissed
-            // 续播 BUG-072 / 保留热槽 BUG-092），不走下面的隐藏控制栏分支。命中词的
-            // 情形不会到这里（走 onTextSelected）。无弹窗时（正常正文点空白）维持旧行为。
-            if (isDictionaryShown) {
-              clearDictionaryResult();
-              return;
-            }
             // TODO-1366：点空白取消残留的拖选（app 自绘选区 + 起止手柄）。拖选松手弹的
             // 菜单被 dismiss 后不再清选区（留着让用户拖手柄改选），于是「点空白 = 取消选择」
             // 成为自然清除路径；无选区时 clearSelection 是空操作，零副作用。
@@ -2160,10 +2151,6 @@ updateLive: function(patch) {
             if (!_lyricsMode) return;
             // BUG-2276：抽屉压着歌词页时，这次点击是「点遮罩关抽屉」。
             if (_closeSideSheetForWebViewPointer()) return;
-            if (isDictionaryShown) {
-              clearDictionaryResult();
-              return;
-            }
             if (_anyChromeFloating) {
               _handleFloatingChromeReveal();
             } else {
@@ -2189,10 +2176,6 @@ updateLive: function(patch) {
           callback: (_) {
             // BUG-2276：抽屉压着双页 spread 时，这次点击是「点遮罩关抽屉」。
             if (_closeSideSheetForWebViewPointer()) return;
-            if (isDictionaryShown) {
-              clearDictionaryResult();
-              return;
-            }
             if (_anyChromeFloating) {
               _handleFloatingChromeReveal();
             } else {
@@ -2986,13 +2969,6 @@ updateLive: function(patch) {
       ReaderChapterPerfTrace.mark('evalSetupScript');
       if (!mounted || _navigateGeneration != gen) return;
 
-      // The setup script rebuilds window.fushiCaret fresh (inactive). If the
-      // reading cursor was on the reader, restore it on the new chapter's first
-      // page. (If it's on a popup, the reader ring is already hidden — leave it.)
-      if (_caretOnReader) {
-        await _caretReanchor(ReaderNavigationDirection.forward);
-        if (!mounted || _navigateGeneration != gen) return;
-      }
       ReaderChapterPerfTrace.mark('caretReanchor');
 
       _initialFragment = null;

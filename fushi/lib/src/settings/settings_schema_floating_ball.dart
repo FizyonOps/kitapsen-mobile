@@ -167,15 +167,14 @@ bool _scopeVisible(SettingsContext c, FloatingBallScope scope) {
   final PreferencesRepository prefs = _prefs(c);
   return switch (scope) {
     FloatingBallScope.system =>
-      _systemBallSupported && prefs.floatingBallSystem,
+      false,
     FloatingBallScope.manga =>
       false,
     FloatingBallScope.video =>
       false,
     FloatingBallScope.reader =>
-      prefs.floatingBallInApp &&
-          c.appModel.moduleVisibility.isEnabled(ModuleId.books),
-    FloatingBallScope.general => prefs.floatingBallInApp,
+      false,
+    FloatingBallScope.general => false,
   };
 }
 

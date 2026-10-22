@@ -801,8 +801,7 @@ class AidokuLibraryAdapter implements OnlineMangaRuntimeAdapter {
   /// 而不是崩在懒建运行时上。
   @override
   bool get isSupportedOnThisPlatform =>
-      (_runtime != null && presetPackage != null) ||
-      AidokuRuntimeFactory.isSupported;
+      (_runtime != null && presetPackage != null);
 
   @override
   Future<String?> sourceLabel(OnlineMangaLibraryEntry entry) async {
@@ -931,22 +930,9 @@ class AidokuLibraryAdapter implements OnlineMangaRuntimeAdapter {
   Future<AidokuInstalledPackage> _package(OnlineMangaLibraryEntry entry) async {
     final AidokuInstalledPackage? preset = presetPackage;
     if (preset != null) return preset;
-    if (!AidokuRuntimeFactory.isSupported) {
-      throw const OnlineMangaUnavailable(
-        OnlineMangaUnavailableReason.platformUnsupported,
-        'No Aidoku runtime host is bundled in this build',
-      );
-    }
-    final List<AidokuInstalledPackage> installed =
-        await (await AidokuPackageStore.open()).listInstalled();
-    for (final AidokuInstalledPackage package in installed) {
-      if (package.id == entry.extensionPackage && package.enabled) {
-        return package;
-      }
-    }
     throw const OnlineMangaUnavailable(
-      OnlineMangaUnavailableReason.sourceDisabled,
-      'The Aidoku source package is missing or disabled',
+      OnlineMangaUnavailableReason.platformUnsupported,
+      'No Aidoku runtime host is bundled in this build',
     );
   }
 

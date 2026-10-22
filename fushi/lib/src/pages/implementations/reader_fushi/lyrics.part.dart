@@ -295,8 +295,6 @@ extension _ReaderLyrics on _ReaderFushiPageState {
           .log('ReaderFushi.updateLyricsStyleLive.eval', e, stack);
       return;
     }
-    // cue 文本随字号/边距重排，激活中的焦点环坐标会过期——重测一次跟上新布局。
-    if (_caretOnLyrics) await _caretRefresh();
     if (mounted) _rebuild(() {});
   }
 

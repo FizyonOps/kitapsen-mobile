@@ -205,9 +205,7 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
   bool get _mangaOnly => false;
 
   /// 「同时删除统计数据」勾选行的副标题：漫画库与书架各说各的统计口径。
-  String get _statisticsSubtitle => _mangaOnly
-      ? t.delete_statistics_manga_desc
-      : t.kitapsen_delete_statistics_book_desc;
+  String get _statisticsSubtitle => t.kitapsen_delete_statistics_book_desc;
 
   @override
   MediaType get mediaType => mediaSource.mediaType;
@@ -524,7 +522,7 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
   void _onPrefsChangedForRemoteGate() {
     if (!mounted) return;
     if (_remoteGateAtLastLoad == null) return;
-    if (_remoteGateAtLastLoad == _shouldLoadRemoteBooks) return;
+    if (_remoteGateAtLastLoad == true) return;
     _rebuild(() {});
   }
 
@@ -680,16 +678,16 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
                         // 重跑，故这里显式比对上轮门控值，翻转时重新取数——否则用户在设置
                         // 里打开开关后要下拉刷新才看得到远端卡。
                         if (_remoteGateAtLastLoad != null &&
-                            _remoteGateAtLastLoad != _shouldLoadRemoteBooks) {
+                            _remoteGateAtLastLoad != true) {
                           _remoteBooksFuture = null;
                         }
-                        _remoteGateAtLastLoad = _shouldLoadRemoteBooks;
+                        _remoteGateAtLastLoad = true;
                         _remoteBooksFuture ??= _loadRemoteBooks();
                         _shelfMapsFuture ??= _loadShelfMaps();
                         final List<MediaItem> shelfBooks =
                             filterShelfEntriesByMangaSplit(
                           bookList,
-                          mangaOnly: _mangaOnly,
+                          mangaOnly: false,
                         );
                         final Set<String>? filterSet = filteredIds.valueOrNull;
                         List<MediaItem> filtered;
@@ -806,7 +804,7 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
       // 「管理来源」在库页导航壳里已是一等视图（[MediaSourcesPage]），页头再放一个
       // 按钮就是同一件事的两个入口。书架独立使用（无导航条）时才保留书籍来源按钮；
       // 漫画入口由专属导入对话框负责，不复用书籍来源管理。
-      if (_pageWidget.navigation == null && !_mangaOnly)
+      if (_pageWidget.navigation == null)
         _headerAction(
           tooltip: t.media_source_manage_title,
           icon: Icons.folder_copy_outlined,
@@ -835,7 +833,7 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
       );
     }
     return FushiPageHeader(
-      title: _mangaOnly ? t.manga_library : t.books,
+      title: t.books,
       actions: actions,
     );
   }
@@ -860,7 +858,7 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
     await showAppDialog<void>(
       context: context,
       builder: (_) =>
-          MediaSourcesDialog(mediaKind: _mangaOnly ? 'manga' : 'book'),
+          MediaSourcesDialog(mediaKind: 'book'),
     );
     if (!mounted) return;
     ref.invalidate(fushiBooksProvider);
@@ -2286,12 +2284,10 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
     // 用户唯一入库位置；独立使用（无壳）时回退为直接开导入对话框。
     final MediaLibraryShellScope? shell =
         MediaLibraryShellScope.maybeOf(context);
-    if (!_mangaOnly) {
-      final bool? signedIn = _kitapsenSignedIn;
-      // Still resolving the account: stay blank rather than flash a prompt.
-      if (signedIn == null) return const SizedBox.shrink();
-      if (!signedIn) return _buildKitapsenSignedOutPlaceholder(shell);
-    }
+    final bool? signedIn = _kitapsenSignedIn;
+    // Still resolving the account: stay blank rather than flash a prompt.
+    if (signedIn == null) return const SizedBox.shrink();
+    if (!signedIn) return _buildKitapsenSignedOutPlaceholder(shell);
 
     return Center(
       child: Column(
@@ -2311,14 +2307,12 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
           else
             FilledButton.icon(
               icon: const Icon(Icons.library_add_outlined, size: 18),
-              label: Text(_mangaOnly ? t.manga_import_action : t.srt_import),
+              label: Text(t.srt_import),
               onPressed: () async {
                 // 空态兜底与页头兜底指向同一个对话框：漫画库开漫画框，书架开书籍框。
                 final bool? imported = await showAppDialog<bool>(
                   context: context,
-                  builder: (_) => _mangaOnly
-                      ? MangaImportDialog(db: appModel.database)
-                      : BookImportDialog(
+                  builder: (_) => BookImportDialog(
                           repo: SrtBookRepository(appModel.database),
                           audiobookRepo: AudiobookRepository(appModel.database),
                           db: appModel.database,
@@ -2466,7 +2460,7 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
   /// 被替换、关掉「显示远端条目」/ 同步模块后不会清空，若只看它，远端卡已经消失、
   /// 本地书卡菜单还露着「从互联对端下载有声书」，点下去只能弹「不可用」。
   RemoteBookInfo? _remoteAudiobookOnlyFor(String bookKey) =>
-      _shouldLoadRemoteBooks ? _lastRemoteState?.audiobookOnly[bookKey] : null;
+      _lastRemoteState?.audiobookOnly[bookKey];
 
   /// EPUB 书卡长按菜单动作真身。[inCollectionDetail] = 合集详情页成员卡语境
   /// （菜单已注入「移出合集」）——该语境下隐藏「加入合集」，同一条目在详情页
@@ -2608,12 +2602,12 @@ class _ReaderFushiHistoryPageState<T extends HistoryReaderPage>
             const <MediaItem>[];
     final List<MediaItem> books = filterShelfEntriesByMangaSplit(
       all,
-      mangaOnly: _mangaOnly,
+      mangaOnly: false,
     ).where((MediaItem item) => item.canEdit).toList();
     if (!mounted) return;
     await showScrapeBatchDialog(
       context: context,
-      mediaLabel: _mangaOnly ? t.manga_library : t.books,
+      mediaLabel: t.books,
       itemCount: books.length,
       runner: (ScrapeBatchProgressCallback onProgress) async {
         final BookMetadataScraper scraper = BookMetadataScraper();
