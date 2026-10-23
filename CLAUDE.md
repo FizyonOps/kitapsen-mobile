@@ -11,7 +11,10 @@
 > `fushi_reading` (see its CLAUDE.md); `permission_handler` and the
 > feature-module gate are gone. Comments inside the reader's injected JS/CSS
 > string literals ship verbatim in the binary, so never mention removed
-> features there. The repository map and rules below describe
+> features there. Every iOS plugin on Apple's commonly-used SDK list must
+> ship a `PrivacyInfo.xcprivacy` (ITMS-91061 made build 15 an Invalid
+> Binary); check each `Runner.app/Frameworks/*.framework` in the archive
+> before uploading. The repository map and rules below describe
 > upstream Fushi; paths they name may no longer exist here. In this checkout
 > the user's rules override the upstream ones: reply in English, work on
 > `main`, no worktrees, no tests, never `dart format` upstream files.
