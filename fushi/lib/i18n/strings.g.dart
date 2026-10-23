@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 15946 (938 per locale)
+/// Strings: 15929 (937 per locale)
 ///
-/// Built on 2026-10-23 at 06:13 UTC
+/// Built on 2026-10-23 at 06:38 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -425,7 +425,6 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
 	String get profile_book_profile => 'Assign profile';
 	String profile_follow_default_current({required Object name}) => 'Following default (${name})';
 	String get quick_import_title => 'Quick import';
-	String get reader_auto_hide_chrome_duration => 'Auto-hide floating controls after';
 	String get reader_blur_images => 'Blur images (spoiler guard)';
 	String get reader_content_timeout => 'Content loading timed out. Reopen if display is abnormal';
 	String get reader_font_size => 'Font size';
@@ -1386,7 +1385,6 @@ class _StringsAr extends _StringsEn {
 	@override String get profile_book_profile => 'تعيين ملف التعريف';
 	@override String profile_follow_default_current({required Object name}) => 'يتبع الافتراضي (${name})';
 	@override String get quick_import_title => 'استيراد سريع';
-	@override String get reader_auto_hide_chrome_duration => 'إخفاء أدوات التحكم العائمة تلقائياً بعد';
 	@override String get reader_blur_images => 'تمويه الصور (حماية المحتوى)';
 	@override String get reader_content_timeout => 'انتهت مهلة تحميل المحتوى. أعد الفتح إذا كان العرض غير طبيعي';
 	@override String get reader_font_size => 'حجم الخط';
@@ -2347,7 +2345,6 @@ class _StringsDe extends _StringsEn {
 	@override String get profile_book_profile => 'Profil zuweisen';
 	@override String profile_follow_default_current({required Object name}) => 'Folgt Standard (${name})';
 	@override String get quick_import_title => 'Schnellimport';
-	@override String get reader_auto_hide_chrome_duration => 'Schwebende Steuerelemente ausblenden nach';
 	@override String get reader_blur_images => 'Bilder unscharf (Spoiler-Schutz)';
 	@override String get reader_content_timeout => 'Zeitüberschreitung beim Laden des Inhalts. Bei fehlerhafter Anzeige erneut öffnen';
 	@override String get reader_font_size => 'Schriftgröße';
@@ -3308,7 +3305,6 @@ class _StringsEs extends _StringsEn {
 	@override String get profile_book_profile => 'Asignar perfil';
 	@override String profile_follow_default_current({required Object name}) => 'Siguiendo el predeterminado (${name})';
 	@override String get quick_import_title => 'Importación rápida';
-	@override String get reader_auto_hide_chrome_duration => 'Ocultar controles flotantes después de';
 	@override String get reader_blur_images => 'Difuminar imágenes (protección de spoilers)';
 	@override String get reader_content_timeout => 'Se agotó el tiempo al cargar el contenido. Reabre si la visualización es anómala';
 	@override String get reader_font_size => 'Tamaño de fuente';
@@ -4269,7 +4265,6 @@ class _StringsFr extends _StringsEn {
 	@override String get profile_book_profile => 'Attribuer un profil';
 	@override String profile_follow_default_current({required Object name}) => 'Suit le profil par défaut (${name})';
 	@override String get quick_import_title => 'Importation rapide';
-	@override String get reader_auto_hide_chrome_duration => 'Masquer automatiquement les contrôles flottants après';
 	@override String get reader_blur_images => 'Flouter les images (anti-spoiler)';
 	@override String get reader_content_timeout => 'Délai de chargement du contenu dépassé. Rouvrez si l\'affichage est anormal';
 	@override String get reader_font_size => 'Taille de police';
@@ -5230,7 +5225,6 @@ class _StringsId extends _StringsEn {
 	@override String get profile_book_profile => 'Tetapkan Profil';
 	@override String profile_follow_default_current({required Object name}) => 'Mengikuti default (${name})';
 	@override String get quick_import_title => 'Impor cepat';
-	@override String get reader_auto_hide_chrome_duration => 'Sembunyikan kontrol mengambang otomatis setelah';
 	@override String get reader_blur_images => 'Buramkan gambar (pelindung spoiler)';
 	@override String get reader_content_timeout => 'Pemuatan konten habis waktu. Buka ulang jika tampilan tidak normal';
 	@override String get reader_font_size => 'Ukuran Font';
@@ -6191,7 +6185,6 @@ class _StringsIt extends _StringsEn {
 	@override String get profile_book_profile => 'Assegna profilo';
 	@override String profile_follow_default_current({required Object name}) => 'Segue il predefinito (${name})';
 	@override String get quick_import_title => 'Importazione rapida';
-	@override String get reader_auto_hide_chrome_duration => 'Nascondi controlli flottanti dopo';
 	@override String get reader_blur_images => 'Sfoca immagini (anti-spoiler)';
 	@override String get reader_content_timeout => 'Timeout nel caricamento del contenuto. Riapri se la visualizzazione è anomala';
 	@override String get reader_font_size => 'Dimensione carattere';
@@ -7152,7 +7145,6 @@ class _StringsJa extends _StringsEn {
 	@override String get profile_book_profile => 'プロファイル指定';
 	@override String profile_follow_default_current({required Object name}) => 'デフォルトに従う（${name}）';
 	@override String get quick_import_title => 'クイックインポート';
-	@override String get reader_auto_hide_chrome_duration => 'フローティングコントロールの自動非表示';
 	@override String get reader_blur_images => '画像をぼかす（ネタバレ防止）';
 	@override String get reader_content_timeout => 'コンテンツの読み込みがタイムアウトしました。表示が異常な場合は開き直してください';
 	@override String get reader_font_size => 'フォントサイズ';
@@ -8113,7 +8105,6 @@ class _StringsKo extends _StringsEn {
 	@override String get profile_book_profile => '프로필 지정';
 	@override String profile_follow_default_current({required Object name}) => '기본값 따르기 (${name})';
 	@override String get quick_import_title => '빠른 가져오기';
-	@override String get reader_auto_hide_chrome_duration => '플로팅 컨트롤 자동 숨김 시간';
 	@override String get reader_blur_images => '이미지 블러 (스포일러 방지)';
 	@override String get reader_content_timeout => '콘텐츠 로딩 시간이 초과되었습니다. 표시가 비정상이면 다시 열어 주세요';
 	@override String get reader_font_size => '글꼴 크기';
@@ -9074,7 +9065,6 @@ class _StringsNl extends _StringsEn {
 	@override String get profile_book_profile => 'Profiel toewijzen';
 	@override String profile_follow_default_current({required Object name}) => 'Volgt standaard (${name})';
 	@override String get quick_import_title => 'Snel importeren';
-	@override String get reader_auto_hide_chrome_duration => 'Zwevende bediening automatisch verbergen na';
 	@override String get reader_blur_images => 'Afbeeldingen vervagen (spoilerbescherming)';
 	@override String get reader_content_timeout => 'Time-out bij laden van inhoud. Open opnieuw als de weergave afwijkt';
 	@override String get reader_font_size => 'Lettergrootte';
@@ -10035,7 +10025,6 @@ class _StringsPtBr extends _StringsEn {
 	@override String get profile_book_profile => 'Atribuir Perfil';
 	@override String profile_follow_default_current({required Object name}) => 'Seguindo o padrão (${name})';
 	@override String get quick_import_title => 'Importação rápida';
-	@override String get reader_auto_hide_chrome_duration => 'Ocultar controles flutuantes automaticamente após';
 	@override String get reader_blur_images => 'Desfocar imagens (proteção contra spoiler)';
 	@override String get reader_content_timeout => 'O carregamento do conteúdo expirou. Reabra se a exibição estiver anormal';
 	@override String get reader_font_size => 'Tamanho da Fonte';
@@ -10996,7 +10985,6 @@ class _StringsRu extends _StringsEn {
 	@override String get profile_book_profile => 'Назначить профиль';
 	@override String profile_follow_default_current({required Object name}) => 'Следует за стандартным (${name})';
 	@override String get quick_import_title => 'Быстрый импорт';
-	@override String get reader_auto_hide_chrome_duration => 'Автоскрытие плавающих элементов управления через';
 	@override String get reader_blur_images => 'Размытие изображений (защита от спойлеров)';
 	@override String get reader_content_timeout => 'Время загрузки контента истекло. Откройте заново, если отображение некорректно';
 	@override String get reader_font_size => 'Размер шрифта';
@@ -11957,7 +11945,6 @@ class _StringsTh extends _StringsEn {
 	@override String get profile_book_profile => 'กำหนดโปรไฟล์';
 	@override String profile_follow_default_current({required Object name}) => 'ตามค่าเริ่มต้น (${name})';
 	@override String get quick_import_title => 'นำเข้าด่วน';
-	@override String get reader_auto_hide_chrome_duration => 'ซ่อนแถบควบคุมลอยอัตโนมัติหลัง';
 	@override String get reader_blur_images => 'เบลอรูปภาพ (ป้องกันสปอยล์)';
 	@override String get reader_content_timeout => 'โหลดเนื้อหาหมดเวลา หากแสดงผลผิดปกติให้เปิดใหม่';
 	@override String get reader_font_size => 'ขนาดฟอนต์';
@@ -12918,7 +12905,6 @@ class _StringsTr extends _StringsEn {
 	@override String get profile_book_profile => 'Profil Ata';
 	@override String profile_follow_default_current({required Object name}) => 'Varsayılanı takip ediyor (${name})';
 	@override String get quick_import_title => 'Hızlı içe aktarma';
-	@override String get reader_auto_hide_chrome_duration => 'Yüzen kontrolleri gizleme süresi';
 	@override String get reader_blur_images => 'Görselleri bulanıklaştır (spoiler koruması)';
 	@override String get reader_content_timeout => 'İçerik yüklemesi zaman aşımına uğradı. Görüntü anormalse yeniden açın';
 	@override String get reader_font_size => 'Yazı tipi boyutu';
@@ -13879,7 +13865,6 @@ class _StringsVi extends _StringsEn {
 	@override String get profile_book_profile => 'Chỉ định cấu hình';
 	@override String profile_follow_default_current({required Object name}) => 'Theo mặc định (${name})';
 	@override String get quick_import_title => 'Nhập nhanh';
-	@override String get reader_auto_hide_chrome_duration => 'Tự động ẩn điều khiển nổi sau';
 	@override String get reader_blur_images => 'Làm mờ hình ảnh (chống spoiler)';
 	@override String get reader_content_timeout => 'Tải nội dung quá thời gian. Mở lại nếu hiển thị bất thường';
 	@override String get reader_font_size => 'Cỡ chữ';
@@ -14840,7 +14825,6 @@ class _StringsZhCn extends _StringsEn {
 	@override String get profile_book_profile => '指定配置';
 	@override String profile_follow_default_current({required Object name}) => '跟随默认（${name}）';
 	@override String get quick_import_title => '快速导入';
-	@override String get reader_auto_hide_chrome_duration => '悬浮控件自动隐藏延时';
 	@override String get reader_blur_images => '图片模糊（防剧透）';
 	@override String get reader_content_timeout => '内容加载超时，如显示异常请重新打开';
 	@override String get reader_font_size => '字体大小';
@@ -15801,7 +15785,6 @@ class _StringsZhHk extends _StringsEn {
 	@override String get profile_book_profile => '指定設定檔';
 	@override String profile_follow_default_current({required Object name}) => '跟隨預設（${name}）';
 	@override String get quick_import_title => '快速導入';
-	@override String get reader_auto_hide_chrome_duration => '懸浮控件自動隱藏延時';
 	@override String get reader_blur_images => '圖片模糊（防劇透）';
 	@override String get reader_content_timeout => '內容載入逾時，如顯示異常請重新開啟';
 	@override String get reader_font_size => '字型大小';

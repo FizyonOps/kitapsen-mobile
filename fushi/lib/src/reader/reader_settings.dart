@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:fushi_core/fushi_core.dart';
 import 'package:fushi/src/media/media_source.dart' show dbSourcePrefKey;
 import 'package:fushi/src/reader/font_catalog.dart';
-import 'package:fushi/src/reader/reader_chrome_floating.dart';
 import 'package:fushi/src/utils/misc/error_log_service.dart';
 import 'package:path/path.dart' as p;
 import 'package:fushi/src/media/sources/reader_fushi_source.dart';
@@ -420,18 +419,9 @@ class ReaderSettings {
       _set<bool>('tap_empty_hide_chrome', !tapEmptyToHideChrome);
 
   /// TODO-975 决策#2：顶部阅读进度悬浮开关（与底栏悬浮独立，时长共用）。开启时顶部
-  /// 进度变成「点击唤出、计时自动收起、不占正文位置」。默认 true = 悬浮（不占 18px
+  /// 进度变成「点击唤出、再点收起、不占正文位置」。默认 true = 悬浮（不占 18px
   /// 预留）。与 [showTopProgressBar] 正交：进度关时本开关在 UI 隐藏。
   bool get topProgressFloating => _get<bool>('top_progress_floating', true);
-
-  /// TODO-975 决策#1：悬浮 chrome（顶部进度 / 底栏）唤出后自动收起的时长（毫秒），
-  /// 顶部与底栏共用同一个值。默认 [kDefaultAutoHideChromeMillis]（3000ms），可调滑块
-  /// 1000–10000，越界值经 [normalizeAutoHideChromeMillis] 归一。
-  int get autoHideChromeMillis => normalizeAutoHideChromeMillis(
-        _get<int>('auto_hide_chrome_millis', kDefaultAutoHideChromeMillis),
-      );
-  Future<void> setAutoHideChromeMillis(int v) =>
-      _set<int>('auto_hide_chrome_millis', normalizeAutoHideChromeMillis(v));
 
   /// 关掉顶栏和底栏，由应用内悬浮球接管（返回 / 设置 / 开回栏的键固定在球上）。
   /// 默认 false。只在应用内悬浮球开着时生效，判据见 `readerToolbarsHidden`。

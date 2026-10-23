@@ -9,7 +9,7 @@
 ///    text never sits under the chrome.
 ///  * **悬浮 (floating)**: the surface reserves ZERO height and is painted as a
 ///    [Positioned] overlay on top of the body. It is hidden by default, revealed
-///    by a tap, and auto-hidden after [autoHideChromeMillis]. Because the reserve
+///    by a tap and hidden by the next one. Because the reserve
 ///    never changes while floating, revealing/hiding it needs no re-anchor.
 ///
 /// These functions are the single source of truth for "how much height does the
@@ -17,21 +17,6 @@
 /// part-of the reader page) so they are unit-testable without the full page and
 /// reused by the reader chrome + its guards.
 library;
-
-/// Clamps a stored auto-hide duration (milliseconds) into a sane range. `0` is
-/// not allowed (the surface would vanish instantly on reveal); the slider min is
-/// 1s and max 10s. Non-finite / out-of-range values degrade to the 3s default.
-int normalizeAutoHideChromeMillis(int value) {
-  const int min = 1000;
-  const int max = 10000;
-  if (value < min || value > max) {
-    return value.clamp(min, max);
-  }
-  return value;
-}
-
-/// Default auto-hide duration: 3 seconds (TODO-975 decision #1).
-const int kDefaultAutoHideChromeMillis = 3000;
 
 /// Font size (logical px) of the top progress pill text (historical `12`).
 const double kTopProgressFontSize = 12;

@@ -520,32 +520,6 @@ SettingsDestination buildReadingDestination() {
               notifyReaderChromeReanchored(settingsContext);
             },
           ),
-          // TODO-975 决策#1：悬浮 chrome 唤出后自动收起的时长（秒，顶部/底栏共用）。
-          // 仅当存在任一悬浮 chrome（顶部进度悬浮 或 点空白隐藏=底栏悬浮）时显示。
-          // 纯时长不改预留高 → 走 settings 刷新即可，无需重锚。
-          SettingsSliderItem(
-            id: 'reading_controls.auto_hide_chrome_duration',
-            titleReadout: true,
-            title: t.reader_auto_hide_chrome_duration,
-            icon: Icons.timer_outlined,
-            min: 1,
-            max: 10,
-            divisions: 9,
-            visible: (SettingsContext c) => c.readerSource.tapEmptyToHideChrome,
-            reader: const ReaderPlacement(
-              group: ReaderGroup.behavior,
-              order: 19,
-            ),
-            value: (SettingsContext settingsContext) =>
-                settingsContext.readerSource.autoHideChromeMillis / 1000.0,
-            label: (double value) => '${value.round()}s',
-            onChanged: (SettingsContext settingsContext, double value) {
-              settingsContext.readerSource.setAutoHideChromeMillis(
-                (value * 1000).round(),
-              );
-              notifyReaderChromeChanged(settingsContext);
-            },
-          ),
           SettingsSwitchItem(
             id: 'reading_controls.keep_screen_awake',
             title: t.keep_screen_awake,

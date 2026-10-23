@@ -269,7 +269,6 @@
   "profile_book_profile": "プロファイル指定",
   "profile_follow_default_current": "デフォルトに従う（$name）",
   "quick_import_title": "クイックインポート",
-  "reader_auto_hide_chrome_duration": "フローティングコントロールの自動非表示",
   "reader_blur_images": "画像をぼかす（ネタバレ防止）",
   "reader_content_timeout": "コンテンツの読み込みがタイムアウトしました。表示が異常な場合は開き直してください",
   "reader_font_size": "フォントサイズ",

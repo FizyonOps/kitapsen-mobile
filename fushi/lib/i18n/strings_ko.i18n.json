@@ -269,7 +269,6 @@
   "profile_book_profile": "프로필 지정",
   "profile_follow_default_current": "기본값 따르기 ($name)",
   "quick_import_title": "빠른 가져오기",
-  "reader_auto_hide_chrome_duration": "플로팅 컨트롤 자동 숨김 시간",
   "reader_blur_images": "이미지 블러 (스포일러 방지)",
   "reader_content_timeout": "콘텐츠 로딩 시간이 초과되었습니다. 표시가 비정상이면 다시 열어 주세요",
   "reader_font_size": "글꼴 크기",

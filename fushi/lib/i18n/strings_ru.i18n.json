@@ -269,7 +269,6 @@
   "profile_book_profile": "Назначить профиль",
   "profile_follow_default_current": "Следует за стандартным ($name)",
   "quick_import_title": "Быстрый импорт",
-  "reader_auto_hide_chrome_duration": "Автоскрытие плавающих элементов управления через",
   "reader_blur_images": "Размытие изображений (защита от спойлеров)",
   "reader_content_timeout": "Время загрузки контента истекло. Откройте заново, если отображение некорректно",
   "reader_font_size": "Размер шрифта",

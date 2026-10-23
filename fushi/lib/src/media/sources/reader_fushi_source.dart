@@ -12,7 +12,6 @@ import 'package:fushi/pages.dart';
 import 'package:fushi_core/fushi_core.dart';
 import 'package:fushi_engine/epub/epub_storage.dart';
 import 'package:fushi_reading/fushi_reading.dart';
-import 'package:fushi/src/reader/reader_chrome_floating.dart';
 import 'package:fushi/src/reader/reader_settings.dart';
 import 'package:fushi/utils.dart';
 import 'package:fushi_engine/media/media_pref_keys.dart' as pref_keys;
@@ -1079,26 +1078,6 @@ class ReaderFushiSource extends ReaderMediaSource {
   bool get topProgressFloating =>
       readerSettings?.topProgressFloating ??
       getPreference<bool>(key: 'top_progress_floating', defaultValue: true);
-
-  // TODO-975 决策#1：悬浮 chrome 自动收起时长（毫秒，顶部/底栏共用），默认 3000，
-  // 可调 1000–10000。分层同上；经 ReaderSettings 归一，越界存值降级回默认。
-  int get autoHideChromeMillis =>
-      readerSettings?.autoHideChromeMillis ??
-      normalizeAutoHideChromeMillis(
-        getPreference<int>(
-          key: 'auto_hide_chrome_millis',
-          defaultValue: kDefaultAutoHideChromeMillis,
-        ),
-      );
-
-  void setAutoHideChromeMillis(int value) async {
-    final int normalized = normalizeAutoHideChromeMillis(value);
-    await (readerSettings?.setAutoHideChromeMillis(normalized) ??
-        setPreference<int>(
-          key: 'auto_hide_chrome_millis',
-          value: normalized,
-        ));
-  }
 
   /// 关掉顶栏和底栏、由应用内悬浮球接管（per-reader，分层同上）。默认 false。
   /// 是否真的生效还要看应用内悬浮球开没开（`readerToolbarsHidden`）。
