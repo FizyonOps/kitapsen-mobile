@@ -33,7 +33,7 @@ import 'package:fushi/src/sync/sync_repository.dart';
 /// true 的 key，[BackupService._readDeviceLocalPrefs] 都会用同一谓词从本机捞出
 /// 来、在导入后由 `_applyPreservedConfig` 写回去。两侧共用本谓词，是这条对称
 /// 契约不再随新增 key 漂移的原因——绝不能一侧改成硬编码清单。
-abstract final class PrefRedactionPolicy {
+abstract class PrefRedactionPolicy {
   /// 形状兜底：key 含这些子串即视为凭据，**不限前缀**。
   ///
   /// 已核对全仓 128 个真实 pref key：命中者只有 `yomitan_api_key` /

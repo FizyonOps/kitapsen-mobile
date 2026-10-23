@@ -43,8 +43,7 @@ import 'package:fushi/src/storage/data_root_migrator.dart'
 ///
 /// 反推失败、或改写抛错，都**不阻塞启动**：调用方吞掉并上报，用户至多回到修复前
 /// 的状态（照旧报「找不到书籍文件」），绝不会因为自愈失败而进不去 app。
-class SandboxRelocation {
-  const SandboxRelocation._();
+abstract class SandboxRelocation {
 
   /// 上次启动时的 documents 根。落在 DB 的 `preferences` 表而不是
   /// SharedPreferences：台账描述的就是这个库里的路径，两者必须同生共死。分家的

@@ -73,14 +73,6 @@ ImagePixelSize? _probeFile(String path) {
   }
 }
 
-/// 从图片文件头解析「宽 / 高」；认不出格式、字节不够、尺寸非法时 null。
-/// 纯函数，[bytes] 可以是被截断的文件头。
-double? imageAspectRatioFromHeader(Uint8List bytes) {
-  final ({int width, int height})? size = imageSizeFromHeader(bytes);
-  if (size == null || size.width <= 0 || size.height <= 0) return null;
-  return size.width / size.height;
-}
-
 /// 从图片文件头解析像素尺寸。支持 PNG / JPEG / GIF / BMP / WebP（VP8 / VP8L /
 /// VP8X）；其它格式或字节不够返回 null。
 ({int width, int height})? imageSizeFromHeader(Uint8List bytes) {

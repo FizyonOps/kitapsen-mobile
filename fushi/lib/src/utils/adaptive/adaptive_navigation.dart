@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fushi/src/shortcuts/gamepad_forwarding_action.dart';
@@ -30,8 +29,7 @@ class AdaptiveNavItem {
 /// 即默认小圆点，用 error 色吸引注意），否则原样返回。底栏（Material/Cupertino）与
 /// 侧栏共用，保证徽标位置/样式一致。
 Widget _maybeBadge({required AdaptiveNavItem item, required Widget child}) {
-  if (!item.experimentalBadge) return child;
-  return Badge(child: child);
+  return child;
 }
 
 /// Marks the root of the self-drawn Material navigation (bottom bar / side rail)
@@ -39,12 +37,6 @@ Widget _maybeBadge({required AdaptiveNavItem item, required Widget child}) {
 /// on the private widget type or the stock NavigationBar/NavigationRail (which
 /// this no longer uses on Material).
 const Key fushiMaterialNavKey = ValueKey<String>('hibiki-material-nav');
-
-/// Marks the macOS-native (macos_ui) shell's content subtree so integration
-/// tests can locate the top-level destinations without depending on the
-/// MacosWindow/Sidebar internals. Mirrors [fushiMaterialNavKey] for the macOS
-/// design system.
-const Key fushiMacosNavKey = ValueKey<String>('hibiki-macos-nav');
 
 /// Height of the mobile bottom bar's **content box**, in logical pixels —
 /// the system gesture inset is let through by [SafeArea] on top of this.
@@ -69,27 +61,6 @@ Widget adaptiveBottomBar({
   required ValueChanged<int> onTap,
   required List<AdaptiveNavItem> items,
 }) {
-  if (isCupertinoPlatform(context)) {
-    // Cupertino keeps the stock tab bar as a single whole-bar gamepad stop. iOS
-    // is touch-first and we don't self-draw its chrome; per-item focus is a
-    // Material-only refinement (the rail/bottom bar the gamepad users hit).
-    return GamepadNavCluster(
-      axis: Axis.horizontal,
-      count: items.length,
-      currentIndex: currentIndex,
-      onSelect: onTap,
-      child: CupertinoTabBar(
-        currentIndex: currentIndex,
-        onTap: onTap,
-        items: items
-            .map((AdaptiveNavItem e) => BottomNavigationBarItem(
-                  icon: _maybeBadge(item: e, child: Icon(e.icon)),
-                  label: e.label,
-                ))
-            .toList(),
-      ),
-    );
-  }
   // Material: each destination is its OWN gamepad/keyboard focus target, so the
   // app focus ring hugs the single selected item instead of wrapping the whole
   // bar. Directional D-pad steps between adjacent tiles through the normal
@@ -480,53 +451,4 @@ class _GamepadNavClusterState extends State<GamepadNavCluster> {
 class _NavStepIntent extends Intent {
   const _NavStepIntent(this.delta);
   final int delta;
-}
-
-PreferredSizeWidget adaptiveAppBar({
-  required BuildContext context,
-  Widget? leading,
-  Widget? title,
-  List<Widget>? actions,
-  double? titleSpacing,
-  PreferredSizeWidget? bottom,
-}) {
-  if (isCupertinoPlatform(context)) {
-    final navBar = CupertinoNavigationBar(
-      leading: leading,
-      middle: title,
-      trailing: actions != null && actions.isNotEmpty
-          ? Row(mainAxisSize: MainAxisSize.min, children: actions)
-          : null,
-    );
-    if (bottom == null) return navBar;
-    return _CupertinoAppBarWithBottom(navBar: navBar, bottom: bottom);
-  }
-  return AppBar(
-    leading: leading,
-    title: title,
-    actions: actions,
-    titleSpacing: titleSpacing,
-    bottom: bottom,
-  );
-}
-
-class _CupertinoAppBarWithBottom extends StatelessWidget
-    implements PreferredSizeWidget {
-  final CupertinoNavigationBar navBar;
-  final PreferredSizeWidget bottom;
-
-  const _CupertinoAppBarWithBottom(
-      {required this.navBar, required this.bottom});
-
-  @override
-  Size get preferredSize => Size.fromHeight(
-      navBar.preferredSize.height + bottom.preferredSize.height);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [navBar, bottom],
-    );
-  }
 }

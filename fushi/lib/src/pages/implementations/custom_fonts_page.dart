@@ -1,14 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fushi/media.dart';
 import 'package:fushi/models.dart';
 import 'package:fushi/pages.dart';
-import 'package:fushi/src/media/video/video_subtitle_style.dart';
-import 'package:fushi/src/lookup/gal_hook_text_overlay_controller.dart';
 import 'package:fushi/src/models/app_font_loader.dart';
 import 'package:fushi/src/pages/implementations/font_preview/font_specimen.dart';
 import 'package:fushi/src/pages/implementations/font_preview/font_target_preview.dart';
@@ -51,28 +48,12 @@ class CustomFontEntry {
   /// Whether this font is active in the reader.
   final bool enabled;
 
-  /// True when this entry references an imported file (vs a system font).
-  bool get isFile => path != null;
-
-  factory CustomFontEntry.fromMap(Map<String, dynamic> map) {
-    final Object? rawName = map['name'];
-    final Object? rawPath = map['path'];
-    final Object? rawEnabled = map['enabled'];
-    return CustomFontEntry(
-      name: rawName is String ? rawName : rawName?.toString() ?? '',
-      path: rawPath is String ? rawPath : null,
-      enabled: rawEnabled is bool ? rawEnabled : true,
-    );
-  }
-
   Map<String, dynamic> toMap() => <String, dynamic>{
     'name': name,
     'path': path,
     'enabled': enabled,
   };
 
-  CustomFontEntry copyWith({bool? enabled}) =>
-      CustomFontEntry(name: name, path: path, enabled: enabled ?? this.enabled);
 }
 
 /// 字体目录的一行（页面内存态；浏览器扩展字体端点追加行时也用它）。
@@ -983,9 +964,6 @@ class _CustomFontsPageState extends BasePageState<CustomFontsPage> {
               FontTargetPreview(
                 target: _previewTarget,
                 families: families,
-                subtitleStyle: VideoSubtitleStyle.decode(
-                  appModel.videoSubtitleStyle,
-                ),
               ),
             ],
           ),
@@ -1481,10 +1459,7 @@ class _CustomFontCatalogTileState extends State<CustomFontCatalogTile> {
   Widget build(BuildContext context) {
     final ColorScheme scheme = Theme.of(context).colorScheme;
     final FushiDesignTokens tokens = FushiDesignTokens.of(context);
-    final bool cupertino = isCupertinoPlatform(context);
-    final TextStyle? titleStyle = cupertino
-        ? tokens.type.listTitle
-        : Theme.of(context).textTheme.bodyMedium;
+    final TextStyle? titleStyle = Theme.of(context).textTheme.bodyMedium;
     final TextStyle? subtitleStyle = Theme.of(
       context,
     ).textTheme.bodySmall?.copyWith(color: scheme.onSurfaceVariant);
@@ -1566,11 +1541,11 @@ class _CustomFontCatalogTileState extends State<CustomFontCatalogTile> {
     //（它按输入设备分流起拖：鼠标按下即拖、触摸长按），行内容保持纯净。
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: cupertino ? 16 : 12,
+        horizontal: 12,
         vertical: 10,
       ),
       child: ConstrainedBox(
-        constraints: BoxConstraints(minHeight: cupertino ? 58 : 60),
+        constraints: BoxConstraints(minHeight: 60),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,

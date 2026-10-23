@@ -32,21 +32,6 @@ const String _kBookUidPrefPrefix = 'kitapsen_book_uid__';
 /// Store book id of a downloaded Kitapsen book, keyed by the local book uid.
 const String _kUidBookPrefPrefix = 'kitapsen_uid_book__';
 
-/// Whether the local book with uid [bookUid] was downloaded from the Kitapsen
-/// store.
-///
-/// Store books are licensed for reading inside this app only, so every path
-/// that would copy their content out (backup archives, cloud / interconnect
-/// uploads, the LAN host, share sheets) must skip them. The link is written
-/// right after import ([KitapsenClient.recordDownloaded]); the Kitapsen
-/// edition additionally hides those features for all books, which covers the
-/// short window before the link exists.
-Future<bool> isKitapsenBook(FushiDatabase db, String bookUid) async {
-  if (bookUid.isEmpty) return false;
-  final String? mapped = await db.getPref('$_kUidBookPrefPrefix$bookUid');
-  return mapped != null && mapped.isNotEmpty;
-}
-
 /// Uids of every local book downloaded from the Kitapsen store.
 Future<Set<String>> kitapsenBookUids(FushiDatabase db) async {
   final Map<String, String> links = await db.getPrefsByPrefix(
@@ -165,9 +150,6 @@ class KitapsenClient implements RemoteBookClient, RemoteCoverFetcher {
 
   @override
   String get remoteLibrarySourceId => kKitapsenRemoteLibrarySourceId;
-
-  @override
-  RemoteBookSourceKind get remoteSourceKind => RemoteBookSourceKind.cloud;
 
   @override
   String get coverCacheNamespace =>
@@ -748,7 +730,6 @@ class KitapsenClient implements RemoteBookClient, RemoteCoverFetcher {
   }
 
   Future<EpubBookRow?> _localBookFor(String? bookId) async {
-    if (bookId == null) return null;
     final String? uid = await _db.getPref('$_kBookUidPrefPrefix$bookId');
     if (uid == null || uid.isEmpty) return null;
     return _db.getEpubBookByUid(uid);
@@ -827,18 +808,6 @@ class KitapsenClient implements RemoteBookClient, RemoteCoverFetcher {
         ?.toDouble()
         .clamp(0, 100)
         .toDouble();
-  }
-
-  @override
-  Future<void> putRemoteBookProgress(
-    String bookKey,
-    RemoteBookProgress progress,
-  ) async {
-    final int? bookId = await _storeBookId(bookKey);
-    if (bookId == null) return;
-    final EpubBookRow? book = await _localBookFor('$bookId');
-    if (book == null) return;
-    await _putProgress(bookId, book, progress);
   }
 
   Future<void> _putProgress(

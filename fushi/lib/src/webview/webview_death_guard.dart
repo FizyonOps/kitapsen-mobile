@@ -94,12 +94,6 @@ class WebViewDeathGuard {
   int _deathCount = 0;
   bool _handling = false;
 
-  /// 当前这块表面的第几代 WebView（从 0 起）。
-  int get epoch => _epoch;
-
-  /// 累计观测到的 renderer 死亡次数（含预算用尽后不再重建的那些）。
-  int get deathCount => _deathCount;
-
   /// 重建预算是否已用尽：此后只抢救数据、不再重建。
   bool get isRebuildBudgetExhausted => _deathCount > _maxRebuilds;
 

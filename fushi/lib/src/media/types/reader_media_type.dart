@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fushi/media.dart';
-import 'package:fushi/pages.dart';
 
 /// Media type that encapsulates text-based media, like books or articles.
 class ReaderMediaType extends MediaType {
@@ -18,6 +17,4 @@ class ReaderMediaType extends MediaType {
   static final ReaderMediaType _instance =
       ReaderMediaType._privateConstructor();
 
-  @override
-  Widget get home => const HomeReaderPage();
 }

@@ -10,8 +10,7 @@ import 'dart:typed_data';
 /// underlying sfnt and hand THAT to the engine. This file covers WOFF 1.0
 /// (per-table zlib). WOFF2 (Brotli + glyf/loca transform) is handled
 /// separately.
-class FontDecoder {
-  FontDecoder._();
+abstract class FontDecoder {
 
   static const int _woffSignature = 0x774F4646; // 'wOFF'
   static const int _headTag = 0x68656164; // 'head'

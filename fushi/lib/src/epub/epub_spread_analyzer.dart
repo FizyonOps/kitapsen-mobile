@@ -11,8 +11,7 @@ import 'package:path/path.dart' as p;
 ///
 /// Runs edge-pixel comparison in an isolate and caches results in the
 /// Drift preferences table so subsequent opens are instant.
-class EpubSpreadAnalyzer {
-  EpubSpreadAnalyzer._();
+abstract class EpubSpreadAnalyzer {
 
   static String _cacheKey(String bookId) => 'spread_match:$bookId';
 

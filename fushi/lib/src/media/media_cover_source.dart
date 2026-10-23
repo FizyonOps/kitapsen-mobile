@@ -74,19 +74,6 @@ ImageProvider? resolveMediaCoverImage({
         ? provider
         : ResizeImage(provider, width: decodeWidth, allowUpscaling: false);
   }
-  if (remoteUrl != null && remoteUrl.isNotEmpty && remoteFetcher != null) {
-    // 远端封面与本机文件**对称**套解码上限（BUG-959 的远端半边）：host 下发的
-    // 封面常是 Jellyfin / Emby 原图（1000×1500 起步），此前默认 [decodeWidth] 时
-    // 直接返回裸 [RemoteCoverImage]，整帧解进 ImageCache——远端库页 / 剧集面板
-    // 几十张封面就把 100MB 上限撑爆，滚动时反复淘汰重解码，iOS 上是低内存被杀
-    // 的主因之一。[ResizeImage] 把 targetWidth 经 decode 回调交给
-    // `RemoteCoverImage._loadAsync`，磁盘 / 网络字节不变、只降解码尺寸。
-    return ResizeImage(
-      RemoteCoverImage(remoteUrl, remoteFetcher, cacheKey: remoteCacheKey),
-      width: decodeWidth,
-      allowUpscaling: false,
-    );
-  }
   if (localPath != null && localPath.isNotEmpty) {
     return resizedFileImage(File(localPath), width: decodeWidth);
   }

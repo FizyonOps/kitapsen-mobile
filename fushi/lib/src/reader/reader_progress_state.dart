@@ -18,18 +18,6 @@ class ReaderProgressState {
   /// 每章之前的累计字数前缀（`cumulative[i]` = 第 i 章之前所有章字数之和）。
   List<int> chapterCumulativeChars = <int>[];
 
-  /// 落定每章字数并重建累计前缀（与旧 `_applyCharCounts` 同一算法）。
-  void applyChapterCharCounts(List<int> counts) {
-    chapterCharCounts = counts;
-    int cumulative = 0;
-    final List<int> prefix = <int>[];
-    for (final int count in counts) {
-      prefix.add(cumulative);
-      cumulative += count;
-    }
-    chapterCumulativeChars = prefix;
-  }
-
   /// 某章总字数；下标越界 / 未落定时 null。
   int? chapterTotal(int section) =>
       section >= 0 && section < chapterCharCounts.length
@@ -48,17 +36,4 @@ class ReaderProgressState {
     return (current - chapterCumulativeChars[section]).clamp(0, total);
   }
 
-  /// 本章剩余字数；未知时 null。
-  int? remainingChapterChars(int section) {
-    final int? total = chapterTotal(section);
-    final int? current = chapterCurrent(section);
-    return total == null || current == null ? null : total - current;
-  }
-
-  /// 全书剩余字数；未知时 null。
-  int? get remainingBookChars {
-    final int? total = totalChars;
-    final int? current = currentChars;
-    return total == null || current == null ? null : total - current;
-  }
 }

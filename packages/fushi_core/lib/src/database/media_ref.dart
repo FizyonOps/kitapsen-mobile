@@ -33,16 +33,6 @@ class MediaRef {
   /// 复合键 `'<kind>|<entryKey>'`（委托 [MediaKind.compositeKey]）。
   String get compositeKey => kind.compositeKey(entryKey);
 
-  /// 把 DB / wire 的 `(mediaType, entryKey)` 串对解析为 [MediaRef]。
-  ///
-  /// 未知 / 空种类（含合集墓碑 `''` 哨兵）或空 entryKey 一律返回 `null`，
-  /// **绝不抛异常**——同步引擎须容忍未知值原样透传（此时调用方保留裸串）。
-  static MediaRef? tryParse(String? mediaType, String? entryKey) {
-    final MediaKind? kind = MediaKind.tryParse(mediaType);
-    if (kind == null || entryKey == null || entryKey.isEmpty) return null;
-    return MediaRef(kind: kind, entryKey: entryKey);
-  }
-
   @override
   bool operator ==(Object other) =>
       other is MediaRef && other.kind == kind && other.entryKey == entryKey;

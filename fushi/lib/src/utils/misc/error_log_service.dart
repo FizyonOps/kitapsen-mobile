@@ -4,8 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:fushi/i18n/strings.g.dart';
 import 'package:fushi/src/startup/test_environment.dart';
 import 'package:fushi/src/utils/misc/frame_safe_notifier.dart';
-import 'package:fushi/src/utils/misc/fushi_toast.dart';
-import 'package:fushi_anki/fushi_anki.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:fushi_engine/foundation/engine_log.dart';
 
@@ -57,8 +55,6 @@ class ErrorLogService extends ChangeNotifier
   /// * 仍进 [getFullLog]（复制/分享/上传链路），单独成一「诊断/取证」段，保住 BUG-209
   ///   崩前生命周期证据可上传，不做删除式绕过。
   final List<ErrorLogEntry> _diagnosticEntries = [];
-  List<ErrorLogEntry> get diagnosticEntries =>
-      List.unmodifiable(_diagnosticEntries);
 
   File? _logFile;
   String _persistedLog = '';
@@ -78,33 +74,12 @@ class ErrorLogService extends ChangeNotifier
   /// 泵到而死锁，故只在**纯 `test()`**（真实事件循环）里经 [pendingFileWrite] 排空。
   Future<void> _pendingFileWrite = Future<void>.value();
 
-  /// 见 [_pendingFileWrite]：暴露给测试确定性 await「fire-and-forget 落盘」是否写完，
-  /// 取代靠 `pumpEventQueue(times:N)` 猜时序（并发跑时不足 → 竞态误红）。生产不读。
-  /// 只在纯 `test()`（真实事件循环）里 await；testWidgets 的 FakeAsync 区不要 await。
-  @visibleForTesting
-  Future<void> get pendingFileWrite => _pendingFileWrite;
-
-  /// BUG-1505：**生产**用的落盘屏障——等在途的 fire-and-forget append 全部写完。
-  ///
-  /// [log] 刻意不 await（热路径），代价是「记完日志立刻结束进程」的调用方会把在途
-  /// 写入一起带走。迁移导入失败路径就是这样：它记了原因、2 秒后 System.exit，于是
-  /// 用户机器上导入失败后诊断页显示「错误日志 (0)」——唯一有价值的那条恰恰丢了。
-  /// 任何「记完就要退出/重启」的路径都必须先 await 本方法。
-  Future<void> flush() => _pendingFileWrite;
-
   /// 导入面包屑文件：在每本词典调 native FFI 前**同步**写入，返回后清空。
   /// native 硬崩溃（访问违例 / 栈溢出）会绕过 Dart try/catch 直接带崩进程，
   /// 异步日志缓冲来不及落盘；这个文件因为同步写入而能存活崩溃，下次启动
   /// 把残留内容折进错误日志，即可定位是哪本词典把进程带崩的。
   File? _breadcrumbFile;
 
-  /// 目录路径，经 FFI 透传给 native 词典导入（TODO-892）：native 在每条 bank 提交前
-  /// **同步**覆写 [_importStepFile]（`import_step_breadcrumb.txt`），文件名与 native
-  /// `import_breadcrumb::kStepFileName` 保持一致。导入热路径在 worker 线程并发解压时
-  /// 发生 native 访问违例（SEH，绕过所有 Dart / C++ try-catch）会带崩进程，此文件因
-  /// 同步落盘而存活；下次启动把「崩前最后一步（哪本词典 / 哪个 bank / 解压 vs 写盘）」
-  /// 折进 [_breadcrumbFile] 的 `DictImport.crashRecovered`，回应「日志写不清楚」。
-  Directory? _appDir;
   File? _importStepFile;
 
   /// 查词面包屑文件（TODO-607 P0-2，**独立**于导入面包屑 [_breadcrumbFile]）：
@@ -217,7 +192,6 @@ class ErrorLogService extends ChangeNotifier
     final dir = directoryOverride ??
         fushiTestDirectory('app-documents') ??
         await getApplicationDocumentsDirectory();
-    _appDir = dir;
     _logFile = File('${dir.path}/error_log.txt');
     _breadcrumbFile = File('${dir.path}/import_crash_breadcrumb.txt');
     // 文件名必须与 native `import_breadcrumb::kStepFileName` 完全一致（TODO-892）。
@@ -292,74 +266,6 @@ class ErrorLogService extends ChangeNotifier
     }
   }
 
-  /// 在调用 native 词典导入 FFI 之前**同步**落盘一条面包屑。[detail] 应能唯一
-  /// 标识本次导入（如词典文件名）。必须同步，否则进程在异步 flush 前就已崩溃。
-  ///
-  /// 写入内容带时间戳：用户「正常强杀」恰好命中某本 FFI 执行中时，下次启动会
-  /// 把残留误报为崩溃（与真硬崩在文件层不可区分）；带上时间戳让人工读日志时
-  /// 能判断这条残留有多旧，区分「刚导一半被杀」和「很久以前的残留」。
-  /// TODO-892：native 词典导入步进面包屑要写入的固定目录（应用文档目录）。导入管理器
-  /// 把它经 FFI 透传给 native；[init] 未跑完（极早期）时返回 `''`，native 视为禁用。
-  String get importStepBreadcrumbDir => _appDir?.path ?? '';
-
-  void markImportStart(String detail) {
-    try {
-      _breadcrumbFile?.writeAsStringSync('[${DateTime.now()}] $detail',
-          flush: true);
-    } catch (e) {
-      debugPrint('[ErrorLogService] markImportStart failed: $e');
-    }
-  }
-
-  /// native 导入正常返回（成功或被捕获的失败）后清掉面包屑。
-  void markImportEnd() {
-    try {
-      final f = _breadcrumbFile;
-      if (f != null && f.existsSync()) f.deleteSync();
-      // TODO-892：native 正常返回时本就 clear 了步进文件；这里再兜底删一次，避免
-      // native 端 clear 失败的残留把下次启动误报成崩溃。
-      final step = _importStepFile;
-      if (step != null && step.existsSync()) step.deleteSync();
-    } catch (e) {
-      debugPrint('[ErrorLogService] markImportEnd failed: $e');
-    }
-  }
-
-  /// TODO-607 P0-2：查词弹窗栈层进出时**同步**写一条查词面包屑（[_lookupBreadcrumbFile]）。
-  /// [depth] 是当前**可见**查词栈深度（0=已无可见弹窗，1=顶层查词，>=2=嵌套查词第
-  /// `depth` 层）；[topTerm] 是栈顶在查的词（可空）。必须同步落盘，否则进程在异步
-  /// flush 前就已 native 崩溃。[depth]<=0 时改为清掉面包屑（栈已空，无活跃查词，
-  /// 此后再崩与查词无关——避免把「正常关弹窗后很久的崩溃」误报成查词崩）。
-  ///
-  /// 由 [DictionaryPopupController] 的栈进出方法经注入回调驱动（三查词表面共用一份
-  /// 栈原语，一处接通覆盖书内 / 视频 / 首页查词全部路径）。带时间戳：用户「正常强杀」
-  /// 恰好命中查词活跃期时下次启动会把残留报为崩溃，时间戳让人工读日志能判断残留新旧。
-  void markLookupStackDepth(int depth, {String? topTerm}) {
-    if (depth <= 0) {
-      clearLookupBreadcrumb();
-      return;
-    }
-    try {
-      final String term = (topTerm == null || topTerm.isEmpty) ? '?' : topTerm;
-      _lookupBreadcrumbFile?.writeAsStringSync(
-        '[${DateTime.now()}] 查词栈深度=$depth（>=2 为嵌套查词），栈顶词=「$term」',
-        flush: true,
-      );
-    } catch (e) {
-      debugPrint('[ErrorLogService] markLookupStackDepth failed: $e');
-    }
-  }
-
-  /// 查词栈清空（所有弹窗关闭）后删掉查词面包屑——此后崩溃与查词无关。
-  void clearLookupBreadcrumb() {
-    try {
-      final f = _lookupBreadcrumbFile;
-      if (f != null && f.existsSync()) f.deleteSync();
-    } catch (e) {
-      debugPrint('[ErrorLogService] clearLookupBreadcrumb failed: $e');
-    }
-  }
-
   /// 读取并删除面包屑文件，返回其内容（空 / 不存在返回 null）。纯文件操作，
   /// 便于单测注入临时文件。
   @visibleForTesting
@@ -424,7 +330,6 @@ class ErrorLogService extends ChangeNotifier
   /// 混进「错误日志」页用户可见错误计数/正文、但仍有排障与上传价值的信息：
   /// * 更新检查多镜像 failover 的**瞬时网络探测失败**摘要（连不上某个 gh 镜像是预期路径，
   ///   全失败才是真失败，中途每个镜像不可达都是噪声，不该当应用错误刷进报错日志）。
-  /// * WGC 帧捕获生命周期取证（BUG-209，见 [WgcCaptureLog.foldIntoErrorLog]）。
   ///
   /// 进入 [_diagnosticEntries]（独立于 [_entries]）：不计入错误计数、不进用户可见错误
   /// 列表、不写持久化文件；但仍纳入 [getFullLog] 的「诊断/取证」段，随复制/分享/上传带走
@@ -452,7 +357,6 @@ class ErrorLogService extends ChangeNotifier
   /// `writeAsStringSync(flush:true)` **同步**把这条 entry 追加进日志文件（复用
   /// 导入/查词面包屑同一「同步落盘存活崩溃」范式），保证即便下一刻崩溃，这条致命
   /// 错误也已在磁盘上，下次启动能读到。同步 IO 仅在罕见的致命路径触发，不影响热路径。
-  @override
   void logFatal(String source, Object error, [StackTrace? stack]) {
     final entry = ErrorLogEntry(
       timestamp: DateTime.now(),
@@ -529,159 +433,5 @@ class ErrorLogService extends ChangeNotifier
     } catch (e) {
       debugPrint('[ErrorLogService] clear failed: $e');
     }
-  }
-}
-
-/// TODO-607 P0-2：查词栈深度变化的顶层回调（tear-off 友好），转调
-/// [ErrorLogService.instance.markLookupStackDepth]。各查词宿主把它注入
-/// [DictionaryPopupController.onLookupStackDepthChanged]，让 controller 保持纯逻辑
-/// （不直接依赖单例 / 文件 IO），同时一处接通查词崩溃面包屑覆盖所有查词表面。
-void recordLookupStackDepth(int depth, String? topTerm) {
-  ErrorLogService.instance.markLookupStackDepth(depth, topTerm: topTerm);
-}
-
-/// BUG-089：制卡失败的统一处理。在所有 `MineResult.error` 分支调用：
-/// ① 把**完整诊断**（原始异常 + 栈）写进 [ErrorLogService]（错误日志页可查），
-/// ② 返回给用户看的**简短 toast 文案**（带后端带回的简短原因，无原因则降级到
-///    通用文案）。
-///
-/// 单一真相源：5 个调用点（dictionary_page_mixin / reader_fushi_page /
-/// floating_dict_page / video_fushi_page / app_model）都走这里，避免「记日志 +
-/// 文案」逻辑被复制 5 份后各自漂移。[outcome] 应满足 `result == MineResult.error`。
-String logMineFailure(MineOutcome outcome) {
-  ErrorLogService.instance.log(
-    'Anki.mineEntry',
-    outcome.error ?? outcome.errorDetail ?? 'unknown card export error',
-    outcome.stackTrace,
-  );
-  // TODO-752a：失败已分类（errorCode 非空）时，用与 locale 无关的稳定码映射本地化
-  // toast——绝不把后端带回的 errorDetail（可能含 socket/http 的英文/latin1 乱码原文）
-  // 直接喂给用户。errorDetail/error 仍写进上面的诊断日志。未分类失败维持旧行为。
-  final String? localized = localizeAnkiMineError(outcome.errorCode);
-  if (localized != null) return localized;
-  final String? detail = outcome.errorDetail;
-  return detail != null && detail.isNotEmpty
-      ? t.card_export_failed_detail(reason: detail)
-      : t.card_export_failed;
-}
-
-/// TODO-752a：把 [MineOutcome.errorCode] 映射成本地化的制卡失败 toast 文案；
-/// 未分类（[code] 为 null 或未知）返回 `null`，由调用方退回旧的 [errorDetail] 文案。
-/// 与 [localizeAnkiFetchError] 共享同一组 [AnkiErrorCode] 网络分类。
-String? localizeAnkiMineError(String? code) {
-  switch (code) {
-    case AnkiErrorCode.permissionDenied:
-      // BUG-824：AnkiDroid 权限未授予。native 侧已同时弹出系统授权对话框，这里给
-      // 用户一句可读、可操作的提醒，替代 provider 抛出的英文技术原文。
-      return t.anki_error_permission_denied;
-    // BUG-2098：权限拒绝的另外两种终态，下一步动作与上面那条完全不同——「再点一次
-    // 按钮就会弹框」在这两种情况下都是空头支票（系统不再弹 / 权限压根不存在）。
-    case AnkiErrorCode.permissionPermanentlyDenied:
-      return t.anki_error_permission_permanently_denied;
-    case AnkiErrorCode.ankiDroidUnavailable:
-      return t.anki_error_ankidroid_unavailable;
-    // BUG-2150：iOS 上 `anki://` 打不开 = 没装 AnkiMobile。fetch 与制卡两条路径共用
-    // 这一个码，所以放在这里（[localizeAnkiFetchError] 会回落到本函数）。
-    case AnkiErrorCode.ankiMobileUnavailable:
-      return t.anki_error_ankimobile_unavailable;
-    case AnkiErrorCode.connectionRefused:
-      return t.anki_error_connection_refused;
-    case AnkiErrorCode.connectionTimeout:
-      return t.anki_error_connection_timeout;
-    case AnkiErrorCode.httpError:
-      return t.anki_error_http;
-    case AnkiErrorCode.connectionUnknown:
-      return t.anki_error_connection_unknown;
-    case AnkiErrorCode.pairedDeviceUnreachable:
-      return t.anki_error_paired_device_unreachable;
-    // BUG-1900：此前这两种情形都由 AnkiConnect 透传同一句
-    // `cannot create note because it is empty`——用户既看不出是自己选错了笔记类型 /
-    // 没配好字段映射，也不知道该去哪儿改。现在由本地预检分类后给可操作的文案。
-    case AnkiErrorCode.fieldMappingMismatch:
-      return t.anki_error_field_mapping_mismatch;
-    case AnkiErrorCode.firstFieldEmpty:
-      return t.anki_error_first_field_empty;
-    case AnkiErrorCode.syncClientSignedOut:
-      return t.anki_error_sync_signed_out;
-    case AnkiErrorCode.syncClientUnavailable:
-      return t.anki_error_sync_unavailable;
-    default:
-      return null;
-  }
-}
-
-/// 把一次制卡结果映射成「给用户看的消息 + 是否成功 + 是否应计入制卡统计」的单一真相。
-///
-/// 此前这套四分支 switch（success/duplicate/notConfigured/error）在 5 个调用点
-/// （dictionary_page_mixin / reader_fushi_page / video_fushi_page /
-/// floating_dict_page / app_model）各复制一份，新增 outcome 类型或改文案要改 5 处。
-/// 收口于此后各调用点只决定**怎么展示**（toast / OSD）与**是否记账/返回 bool**。
-///
-/// - error 分支内调 [logMineFailure]（写日志 + 取简短文案，单一来源）。
-/// - 成功消息的牌组名只认 [MineOutcome.deckName]——后端**实际落卡**用的 deck 名
-///   （BUG-1549）。此前由调用方事后 `loadSettings().selectedDeckName` 猜：旧存档/
-///   旧 Profile 快照只有 `selectedDeckId` 没有 name 时，AnkiConnect 按 id 照样落卡
-///   成功，toast 却显示「已添加到『』」空引号。
-/// - [overwrite]=true 表示这是「覆盖已有卡片」（update 路径，非新制）：成功消息用
-///   `card_overwritten`、且 `record=false`（覆盖不计入制卡统计）。此前 reader/video/
-///   mixin 的 update 方法各自复制一份与 mine 几乎相同的 switch（只差 card_overwritten
-///   + 不记账），一并收口于此。
-({String message, bool success, bool record, MineToastStatus status})
-    describeMineOutcome(
-  MineOutcome outcome, {
-  bool overwrite = false,
-}) {
-  switch (outcome.result) {
-    case MineResult.success:
-      // TODO-779：卡片已建好，但单词远程音频下载失败（非 200 / 网络异常）时，把
-      // 失败原因（含 HTTP 码/URL）追加到成功 toast，终结用户「没音频不知为何」的盲猜。
-      // audioWarning 为 null（音频本就没有或下载成功）时维持原成功文案（向后兼容）。
-      final String? audioWarning = outcome.audioWarning;
-      final String deckName = outcome.deckName ?? '';
-      final String baseMessage = overwrite
-          ? t.card_overwritten(deck: deckName)
-          : t.card_exported(deck: deckName);
-      final String message = audioWarning != null && audioWarning.isNotEmpty
-          ? '$baseMessage ${t.card_exported_audio_failed(reason: audioWarning)}'
-          : baseMessage;
-      return (
-        message: message,
-        success: true,
-        // 覆盖已有卡片不是新制一张，不计入制卡统计（与新制路径区分）。
-        record: !overwrite,
-        // TODO-1325 #6：新制与覆写成功都是绿色 added（覆写用 card_overwritten 文案区分）。
-        status: MineToastStatus.added,
-      );
-    case MineResult.duplicate:
-      return (
-        message: t.card_duplicate,
-        success: false,
-        record: false,
-        status: MineToastStatus.duplicate,
-      );
-    case MineResult.notConfigured:
-      return (
-        message: t.card_export_not_configured,
-        success: false,
-        record: false,
-        status: MineToastStatus.failed,
-      );
-    case MineResult.queued:
-      // 卡已经冻结进待发队列（媒体都拷走了），对用户而言「收下了」：清草稿、画 ✓、
-      // 计入制卡统计与句子历史，与成功同待遇；toast 用蓝色说明它还没进 Anki。
-      // 代价：补发时若被 Anki 判重复，统计会多算这一张——可接受。
-      return (
-        message: t.anki_pending_mine_queued,
-        success: true,
-        record: !overwrite,
-        status: MineToastStatus.queued,
-      );
-    case MineResult.error:
-      return (
-        message: logMineFailure(outcome),
-        success: false,
-        record: false,
-        status: MineToastStatus.failed,
-      );
   }
 }

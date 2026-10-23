@@ -141,7 +141,6 @@ class _MediaCardDraggableState extends State<MediaCardDraggable> {
 
   @override
   Widget build(BuildContext context) {
-    if (!widget.enabled) return widget.child;
     switch (Theme.of(context).platform) {
       case TargetPlatform.android:
       case TargetPlatform.iOS:
@@ -333,7 +332,6 @@ class _CollectionDropTargetState extends State<CollectionDropTarget> {
 
   @override
   Widget build(BuildContext context) {
-    if (!widget.enabled) return widget.child;
     final FushiDesignTokens tokens = FushiDesignTokens.of(context);
     final Color hoverColor = tokens.surfaces.primary;
     final bool eink = isEinkTheme(context);

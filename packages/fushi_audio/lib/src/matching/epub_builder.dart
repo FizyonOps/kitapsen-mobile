@@ -11,7 +11,7 @@ import 'dart:typed_data';
 /// Used by [CuesToEpub] (cue spans) and the app-side `TextToEpub`
 /// (plain text / HTML / Markdown); both render their own chapter XHTML and
 /// hand the finished strings to [assemble].
-class EpubBuilder {
+abstract class EpubBuilder {
   /// Packs [chapterXhtmls] plus all container metadata into EPUB bytes.
   ///
   /// [uidPrefix] is embedded verbatim before the timestamp in the

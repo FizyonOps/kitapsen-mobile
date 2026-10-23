@@ -23,7 +23,6 @@ library;
 
 import 'dart:async';
 
-import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:flutter/material.dart';
 import 'package:fushi_audio/fushi_audio.dart' show StudySessionTotals;
 import 'package:fushi_core/fushi_core.dart' show LookupMiningCounterRow;
@@ -31,7 +30,7 @@ import 'package:fushi_core/fushi_core.dart' show LookupMiningCounterRow;
 import 'package:fushi/src/pages/implementations/stat_shared.dart'
     show formatStatTime;
 import 'package:fushi/src/pages/implementations/stat_trends.dart'
-    show computeCph, kMinCphSampleMs;
+    show computeCph;
 import 'package:fushi/src/reader/reader_desktop_chrome.dart'
     show ReaderSideSheetSectionLabel;
 import 'package:fushi/src/reader/reader_status_footer.dart'
@@ -133,14 +132,6 @@ double? readerFinishCph({
   if (sessionCph != null && sessionCph > 0) return sessionCph;
   final double? allCph = computeCph(book.allChars, book.allMs);
   return (allCph != null && allCph > 0) ? allCph : null;
-}
-
-/// 今日 / 累计卡的速度文案（BUG-2218）：与统计页同一口径 [computeCph]（最小样本
-/// [kMinCphSampleMs]），样本不足显示与统计页一致的 `—`，不再把几十秒的脏样本外推成
-/// 爆表数字。会话卡是实时秒表，仍走 [readingCharsPerHour] 开局即显 `0`。
-String readerBookSpeedLabel(int chars, int ms) {
-  final double? cph = computeCph(chars, ms);
-  return cph == null ? '—' : '${cph.round()}';
 }
 
 /// `h:mm:ss`（恒带小时位，与 Hoshi 一致）。

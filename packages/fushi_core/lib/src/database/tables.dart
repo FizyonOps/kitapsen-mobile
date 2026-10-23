@@ -2093,7 +2093,6 @@ class VideoSidecarArtifacts extends Table {
 // 否则恢复时无法知道该从下载、字幕还是整理阶段继续。
 abstract final class VideoDownloadJobLifecycle {
   static const String active = 'active';
-  static const String needsAttention = 'needsAttention';
   static const String completed = 'completed';
   static const String failed = 'failed';
   static const String cancelled = 'cancelled';
@@ -2105,15 +2104,7 @@ abstract final class VideoDownloadJobStage {
   static const String organize = 'organize';
   static const String subtitle = 'subtitle';
   static const String import = 'import';
-  static const String scrape = 'scrape';
 }
-
-/// 文件还没进受管来源的阶段：种子排队中或下载中（BUG-2755）。改订阅目标来源时
-/// 只带走这些任务——已进整理的任务可能已把文件改名进旧来源，中途换根会拆散它。
-const List<String> kVideoDownloadPreOrganizeStages = <String>[
-  VideoDownloadJobStage.enqueue,
-  VideoDownloadJobStage.download,
-];
 
 /// 目标来源失效时仍可重绑到别的来源的阶段（BUG-2755）：整理没做完，文件还没
 /// 最终落进来源目录；来源都没了，整理只能在新来源里重来。
@@ -2164,12 +2155,6 @@ class WebMineQueue extends Table {
   IntColumn get minedAt => integer().nullable()();
 }
 
-abstract final class WebMineQueueStatus {
-  static const String pending = 'pending';
-  static const String done = 'done';
-  static const String failed = 'failed';
-}
-
 /// 设备端「待发制卡」队列（schema v116）。
 ///
 /// 制卡后端（AnkiConnect / 互联 host 等）不可达、或处于批量模式时，卡片先入队、
@@ -2209,16 +2194,6 @@ class PendingMineQueue extends Table {
 
   @override
   Set<Column> get primaryKey => {id};
-}
-
-abstract final class PendingMineStatus {
-  static const String pending = 'pending';
-  static const String sending = 'sending';
-  static const String failed = 'failed';
-
-  /// 已交给 Anki，但远端中转命名空间还有这张卡的记录（本机上传过，或它来自其他
-  /// 设备），等下一轮同步清理远端后再删行。
-  static const String landed = 'landed';
 }
 
 @DataClassName('VideoDownloadJobRow')
@@ -2321,9 +2296,6 @@ class VideoDownloadJobs extends Table {
 
 abstract final class VideoDownloadJobFileStatus {
   static const String pending = 'pending';
-  static const String downloading = 'downloading';
-  static const String downloaded = 'downloaded';
-  static const String organized = 'organized';
   static const String imported = 'imported';
   static const String skipped = 'skipped';
   static const String failed = 'failed';
@@ -2371,8 +2343,6 @@ class VideoDownloadJobFiles extends Table {
 
 abstract final class VideoDownloadJobSubtitleStatus {
   static const String pending = 'pending';
-  static const String resolving = 'resolving';
-  static const String staged = 'staged';
   static const String placed = 'placed';
   static const String unavailable = 'unavailable';
   static const String skipped = 'skipped';
@@ -2486,7 +2456,6 @@ class VideoDownloadSubscriptions extends Table {
 abstract final class VideoDownloadSubscriptionItemStatus {
   static const String discovered = 'discovered';
   static const String queued = 'queued';
-  static const String processed = 'processed';
   static const String skipped = 'skipped';
   static const String failed = 'failed';
 }
@@ -3112,15 +3081,6 @@ class UpdateFeedEntries extends Table {
 
   @override
   Set<Column> get primaryKey => {entryId};
-}
-
-/// 漫画章节下载任务的种类值域（`manga_download_jobs.kind`）。
-abstract final class MangaDownloadJobKind {
-  /// 在线来源（Mihon / Aidoku / 互联）的单章。
-  static const String chapter = 'chapter';
-
-  /// mokuro.moe 整卷（替代原内存队列 `MokuroMoeDownloadQueue`）。
-  static const String mokuroVolume = 'mokuro_volume';
 }
 
 /// 漫画下载任务状态值域（`manga_download_jobs.status`）。

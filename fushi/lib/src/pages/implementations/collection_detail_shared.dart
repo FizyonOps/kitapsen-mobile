@@ -158,18 +158,4 @@ mixin CollectionDetailShared<T extends StatefulWidget> on State<T> {
     );
   }
 
-  /// 「移出合集」确认（逐成员）：同走 [FushiDestructiveConfirmDialog]。true = 确认。
-  Future<bool> confirmDetailRemoveMember() async {
-    final FushiDestructiveConfirmResult? result =
-        await showAppDialog<FushiDestructiveConfirmResult>(
-      context: context,
-      builder: (_) => FushiDestructiveConfirmDialog(
-        title: t.collection_remove_member,
-        message: t.collection_remove_member_confirm,
-        confirmLabel: t.collection_remove_member,
-        leadingIcon: Icons.remove_circle_outline,
-      ),
-    );
-    return result != null;
-  }
 }

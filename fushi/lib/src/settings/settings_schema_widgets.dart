@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fushi/src/settings/settings_context.dart';
 import 'package:fushi/src/settings/settings_destination.dart';
-import 'package:fushi/src/settings/settings_detail_page.dart';
 import 'package:fushi/src/settings/settings_schema_fields.dart';
 import 'package:fushi/src/settings/settings_search.dart';
 import 'package:fushi/src/settings/settings_section_container.dart';
-import 'package:fushi/src/utils/components/fushi_design_tokens.dart';
 import 'package:fushi/src/utils/components/settings_shared.dart';
 
 /// 把一个父级 [WidgetBuilder] 包成平台对应的页面路由（Material/Cupertino）。
@@ -72,8 +70,6 @@ class SettingsSchemaSection extends StatelessWidget {
               .toList(),
           children: rows,
         ),
-        if (section.footer != null && section.footer!.isNotEmpty)
-          SettingsSectionFooter(section.footer!, style: footerStyle),
       ],
     );
   }
@@ -106,8 +102,6 @@ class SettingsSchemaItem extends StatelessWidget {
       SettingsSliderItem slider => _slider(slider),
       SettingsStepperItem stepper => _stepper(stepper),
       SettingsTextItem text => _text(text),
-      SettingsNumberItem number => _number(number),
-      SettingsStatusItem status => _status(status),
       SettingsCustomItem custom => custom.builder(settingsContext),
     };
     // 设置搜索跳转落点：本项是待定位目标时消费一次性挂点，包上滚动定位 +
@@ -129,56 +123,11 @@ class SettingsSchemaItem extends StatelessWidget {
           await navigation.onTap!(settingsContext);
           return;
         }
-        final SettingsDestination Function()? child = navigation.child;
-        if (child != null) {
-          // 子 schema 页：与顶层分类同一套详情壳；取新鲜树靠闭包而非 id。
-          await Navigator.of(context).push(
-            routeBuilder(context, (_) => SettingsDetailPage.subPage(child)),
-          );
-          // 子页里改的偏好会改本行的实时摘要（AniDB 填完账号 → 「已配置」），
-          // 而 ModalRoute 缓存页面内容、弹回来不会重算 resolveSubtitle；
-          // 不在这里刷一次，状态行就停在进子页那一刻的旧值（BUG-2586）。
-          settingsContext.refresh();
-          return;
-        }
         final WidgetBuilder? builder = navigation.builder;
         if (builder == null) return;
         await Navigator.of(context).push(routeBuilder(context, builder));
         settingsContext.refresh();
       },
-    );
-  }
-
-  Widget _status(SettingsStatusItem status) {
-    final SettingsItemAction? onAction = status.onAction;
-    // 行级 onTap 让本行注册成 FushiFocusTarget，方向导航 / 手柄 A 才到得了
-    // （BUG-016）。`AdaptiveSettingsRow` 里 `if (onTap == null) return content;`
-    // ——没有 onTap 的行根本不包 _SettingsRowFocusTarget、不进 FushiFocusController
-    // 的注册表，而方向导航只走已注册目标。带行尾按钮却不给行级 onTap，键盘/手柄
-    // 用户从上一行按 Down 会**整行被跳过**，本面板下方再无目标时焦点还会跨 pane
-    // 落到左侧导航栏——BUG-016 实报的原症状。
-    //
-    // 纯状态行（onAction == null）**故意**不给 onTap：它没有可执行的动作，不该
-    // 成为焦点停靠点。
-    Future<void> runAction() async {
-      await onAction!(settingsContext);
-      settingsContext.refresh();
-    }
-
-    return AdaptiveSettingsRow(
-      // resolveTitle / resolveSubtitle：状态文本在渲染时求值（schema 树是缓存的常量树）。
-      title: status.resolveTitle(settingsContext),
-      subtitle: status.resolveSubtitle(settingsContext),
-      icon: status.icon,
-      showIcon: showIcons,
-      controlBelow: onAction != null,
-      onTap: onAction == null ? null : runAction,
-      trailing: onAction == null
-          ? null
-          : FilledButton.tonal(
-              onPressed: runAction,
-              child: Text(status.actionLabel!),
-            ),
     );
   }
 
@@ -215,25 +164,6 @@ class SettingsSchemaItem extends StatelessWidget {
     // dropdown 渲染分支（TODO-209）：同一数据模型换下拉单选控件——标签长/选项多的
     // 行在窄 pane 里分段条只能横向滚动裁断，下拉行内只显示当前选中标签、永不被裁。
     if (segmented.dropdown) {
-      return AdaptiveSettingsPickerRow<T>(
-        title: segmented.title,
-        subtitle: segmented.subtitle,
-        icon: segmented.icon,
-        showIcon: showIcons,
-        controlBelow: segmented.controlBelow,
-        selected: segmented.selected(settingsContext),
-        options: <AdaptiveSettingsPickerOption<T>>[
-          for (final SettingsSegmentOption<T> option in segmented.options)
-            AdaptiveSettingsPickerOption<T>(
-              value: option.value,
-              label: option.label,
-            ),
-        ],
-        onChanged: (T value) async {
-          await segmented.dispatchChange(settingsContext, value);
-          settingsContext.refresh();
-        },
-      );
     }
     return AdaptiveSettingsSegmentedRow<T>(
       title: segmented.title,
@@ -281,8 +211,6 @@ class SettingsSchemaItem extends StatelessWidget {
       onChangeEnd: slider.onChangeEnd == null
           ? null
           : (double next) async {
-              await slider.onChangeEnd!(settingsContext, next);
-              settingsContext.refresh();
             },
     );
   }
@@ -329,49 +257,6 @@ class SettingsSchemaItem extends StatelessWidget {
           ? null
           : () async => text.onChanged(settingsContext, reset),
       onChanged: (String value) async => text.onChanged(settingsContext, value),
-    );
-  }
-
-  /// 数字项渲染复用 [SettingsNumberField]；解析/夹取收在此处（widget 保持哑）：
-  /// int/double 按 [SettingsNumberItem.integer] 解析，失败不写，越界夹到 min/max。
-  Widget _number(SettingsNumberItem number) {
-    final num? reset = number.resetValue?.call(settingsContext);
-    String format(num value) =>
-        number.integer ? value.toInt().toString() : value.toString();
-    num clamp(num value) {
-      num result = value;
-      final num? min = number.min;
-      final num? max = number.max;
-      if (min != null && result < min) result = min;
-      if (max != null && result > max) result = max;
-      return result;
-    }
-
-    return SettingsNumberField(
-      title: number.title,
-      subtitle: number.subtitle,
-      icon: number.icon,
-      showIcon: showIcons,
-      suffixText: number.suffixText,
-      initialValue: format(number.value(settingsContext)),
-      // 失焦回显真实存储值：写穿时越界被夹取（如 max 100 键入 9999 实存 100），
-      // 输入框不再停留在未夹取的陈旧文本。
-      committedText: () => format(number.value(settingsContext)),
-      resetValue: reset == null ? null : format(reset),
-      onReset: reset == null
-          ? null
-          : () async {
-              await number.onChanged(settingsContext, clamp(reset));
-              settingsContext.refresh();
-            },
-      onChanged: (String value) async {
-        final num? parsed = number.integer
-            ? int.tryParse(value.trim())
-            : double.tryParse(value.trim());
-        if (parsed == null) return;
-        await number.onChanged(settingsContext, clamp(parsed));
-        settingsContext.refresh();
-      },
     );
   }
 
@@ -445,28 +330,6 @@ class _CommitOnReleaseSliderState extends State<_CommitOnReleaseSlider> {
         }
         widget.settingsContext.refresh();
       },
-    );
-  }
-}
-
-/// section 底部说明文字。padding 两渲染器一致，文字样式经 [style] 注入。
-class SettingsSectionFooter extends StatelessWidget {
-  const SettingsSectionFooter(this.text, {super.key, required this.style});
-
-  final String text;
-  final SettingsFooterStyle style;
-
-  @override
-  Widget build(BuildContext context) {
-    final FushiDesignTokens tokens = FushiDesignTokens.of(context);
-    return Padding(
-      padding: EdgeInsets.fromLTRB(
-        tokens.spacing.gap + tokens.spacing.gap / 2,
-        0,
-        tokens.spacing.gap + tokens.spacing.gap / 2,
-        tokens.spacing.gap + tokens.spacing.gap / 2,
-      ),
-      child: Text(text, style: style(context)),
     );
   }
 }

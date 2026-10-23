@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:fushi/src/utils/misc/fushi_share.dart';
-import 'package:fushi/src/utils/misc/log_exporter.dart';
-import 'package:fushi/src/utils/misc/log_upload_config.dart';
-import 'package:fushi/src/utils/misc/log_uploader.dart';
 import 'package:fushi/utils.dart';
 
 class ErrorLogPage extends StatefulWidget {
@@ -75,17 +72,6 @@ class _ErrorLogPageState extends State<ErrorLogPage> {
             FushiShare.shareFiles([xFile], subject: t.error_log_share_subject);
           },
         ),
-        if (showSaveLogAction)
-          FushiIconButton(
-            icon: Icons.save_alt_outlined,
-            tooltip: t.log_export_file,
-            onTap: () => saveLogToFile(
-              context: context,
-              log: _log,
-              fileName: 'fushi_error_log.txt',
-              subject: t.error_log_share_subject,
-            ),
-          ),
         FushiIconButton(
           icon: Icons.delete_outline,
           tooltip: t.clear,

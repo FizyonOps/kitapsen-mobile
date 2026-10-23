@@ -6,8 +6,7 @@ import 'package:fushi/src/models/cjk_font_families.dart';
 import 'package:fushi/src/models/content_font_chain.dart';
 import 'package:fushi/src/reader/reader_settings.dart';
 
-class ReaderLayoutDefaults {
-  ReaderLayoutDefaults._();
+abstract class ReaderLayoutDefaults {
 
   static const int fontSizePx = 22;
   static const int bottomOverlapPx = fontSizePx;
@@ -21,10 +20,6 @@ class ReaderLayoutDefaults {
   // maxScroll = totalSize - pageStep 与对齐量同源，杜绝「翻一半跳章」（pitch≠列周期失配）。
   static const int columnGapPx = fontSizePx;
 
-  // TODO-362（PR#3 响应式页边距）：默认左右各 2vw（= ReaderSettings 默认左右 2%），
-  // 上下 0。运行时实际 padding 由 marginTop/Bottom/Left/Right 动态算（见 css()），
-  // 此常量是文档化的默认快照。
-  static const String pagePaddingCss = '0vh 2vw';
   static const String imageMaxWidthFallbackCss = '95vw';
   static const String imageMaxHeightFallbackCss =
       'calc(var(--page-height, 100vh) - 22px)';
@@ -57,8 +52,7 @@ typedef _LayoutCssArgs = ({
   String marginRightCss,
 });
 
-class ReaderContentStyles {
-  ReaderContentStyles._();
+abstract class ReaderContentStyles {
 
   // TODO-734：竖排分页列高（content-box）的唯一真相源，由 CSS 模板、JS 几何与
   // 代数守卫共用，消除「CSS 改一半 / JS 改一半」复活 TODO-729 跳章的风险。
@@ -116,62 +110,6 @@ class ReaderContentStyles {
     // max(1px, ...) 兜底：坍塌视口 + 大 N 时裸 calc 可能 ≤0（非法列宽），钳到 1px；
     // 正常视口远大于地板，max 取 calc，零行为变化。
     return 'max(1px, calc(($baseContentBoxCss - ${totalGapPx}px) / $pageColumns))';
-  }
-
-  /// TODO-734：竖排列高 content-box 的纯代数值（px），与 [verticalColumnWidthCss]
-  /// 的 `max(F, calc(...))` 逐项同构。仅供代数守卫核算漏出量用，不参与 CSS 生成。
-  /// V=视口高，F=字号（只作坍塌地板，不再从列高里扣，BUG-2469），mt/mb=上下页边距(px)，
-  /// cT/cB=chrome 上下 inset(px)。
-  ///
-  /// TODO-743（P0 坍塌地板）：与 CSS 的 `max(${fontSizePx}px, calc(...))` 成对——当
-  /// cT + cB + F ≥ V（横屏短边小 + 大字号）时裸 calc 为负，浏览器把 column-width 钳
-  /// 成 0 → 列叠印。这里用 `math.max(fontSizePx, 裸代数)` 夹同一个 fontSizePx 地板，
-  /// 正常视口裸值远大于地板（max 取裸值，零行为变化），坍塌区返回 fontSizePx 地板。
-  static double verticalColumnContentHeight({
-    required double viewportHeightPx,
-    required double fontSizePx,
-    required double marginTopPx,
-    required double marginBottomPx,
-    required double chromeTopInsetPx,
-    required double chromeBottomInsetPx,
-  }) =>
-      math.max(
-        fontSizePx,
-        viewportHeightPx -
-            marginTopPx -
-            marginBottomPx -
-            chromeTopInsetPx -
-            chromeBottomInsetPx,
-      );
-
-  static String styleTag({
-    required ReaderSettings settings,
-    String? fontFaces,
-    String? fontFamily,
-    String? customBg,
-    String? customFg,
-    String? selectionColor,
-    String? sentenceAudioHighlightColor,
-    String? linkColor,
-    String? themeOverride,
-    bool einkMode = false,
-    bool einkDark = false,
-    String? contentLanguage,
-  }) {
-    return '<style>\n${css(
-      settings: settings,
-      contentLanguage: contentLanguage,
-      fontFaces: fontFaces,
-      fontFamily: fontFamily,
-      customBg: customBg,
-      customFg: customFg,
-      selectionColor: selectionColor,
-      sentenceAudioHighlightColor: sentenceAudioHighlightColor,
-      linkColor: linkColor,
-      themeOverride: themeOverride,
-      einkMode: einkMode,
-      einkDark: einkDark,
-    )}\n</style>';
   }
 
   /// 正文 `font-family` 的值：用户字体 -> 内容语言的明朝体/宋体链 -> `serif`。
@@ -431,10 +369,7 @@ body::after {
 
     final String resolvedFontFaces;
     final String resolvedFontFamily;
-    if (fontFaces != null && fontFamily != null) {
-      resolvedFontFaces = fontFaces;
-      resolvedFontFamily = _bodyFontFamily(fontFamily, contentLanguage);
-    } else {
+    {
       final ({String fontFamily, String fontFaces}) custom =
           settings.buildCustomFontCss();
       resolvedFontFaces = custom.fontFaces;
@@ -1209,115 +1144,6 @@ html::before {
   border-bottom-width: calc($marginBottomCss + var(--chrome-bottom-inset, 0px)) !important;
   border-left-width: $marginLeftCss !important;
 }''';
-  }
-
-  /// TODO-909: VN (Visual-Novel) stage layout. The chapter is detached by the
-  /// VN JS and one Block/sentence screen is rendered onto `fushi-vn-stage` >
-  /// `fushi-vn-screen` > `fushi-vn-content`. The stage fills the viewport; the
-  /// screen reserves the reader chrome insets (top/bottom) and centres its
-  /// content. No multicol columns — text flows naturally within one screen, so
-  /// this does NOT reuse the paginated column geometry.
-  static String _vnLayoutCss(_LayoutCssArgs a) {
-    // 公共参数解构自 _LayoutCssArgs（局部名 / 值与旧命名参数一致）；下方 CSS 原始串一字未改。
-    final ReaderSettings settings = a.settings;
-    final bool isVertical = a.isVertical;
-    final _ThemeColors colors = a.colors;
-    final String resolvedFontFamily = a.resolvedFontFamily;
-    final String fontWeightCss = a.fontWeightCss;
-    final String textSpacingCss = a.textSpacingCss;
-    final String paddingCss = a.paddingCss;
-    final String gridCss = a.gridCss;
-    final String textIndentCss = a.textIndentCss;
-    final String vertKerningCss = a.vertKerningCss;
-    final String vpalCss = a.vpalCss;
-    final String textOrientCss = a.textOrientCss;
-    final String marginTopCss = a.marginTopCss;
-    final String marginBottomCss = a.marginBottomCss;
-    // TODO-958：VN 居中需区分主轴。flex 容器 `.fushi-vn-screen` 的物理主轴恒为水平
-    // （flex-direction:row），但「沿主轴居中」的语义在两种写排下不同：竖排
-    // vertical-rl 文字列沿水平主轴展开，水平居中即左右居中；横排文字行沿垂直交叉轴
-    // 堆叠，主轴是水平的单行宽度。两轴都给 content 上界由 flex 居中即可对齐；此处用
-    // isVertical 标注主/交叉轴，便于后续真机微调而不回退到硬编码 width:100%。
-    final String vnAxisComment = isVertical
-        ? '/* VN axis: vertical-rl — main axis = horizontal (left/right centering) */'
-        : '/* VN axis: horizontal-tb — main axis = horizontal single-line width */';
-    return '''
-html, body {
-  margin: 0 !important;
-  padding: 0 !important;
-  background: ${colors.backgroundColor} !important;
-  color: ${colors.textColor} !important;
-  writing-mode: ${settings.writingMode} !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  overflow: hidden !important;
-}
-body {
-  font-family: $resolvedFontFamily !important;
-  font-size: ${settings.fontSize}px !important;
-  $fontWeightCss
-  -webkit-text-size-adjust: none !important;
-  overflow-wrap: anywhere !important;
-  box-sizing: border-box !important;
-  $textSpacingCss
-  $gridCss
-  $textOrientCss
-  $textIndentCss
-  $vertKerningCss
-  $vpalCss
-}
-.fushi-vn-stage {
-  /* BUG-2638: absolute, NOT fixed. macOS WebKit composites a fixed stage as
-     its own layer, and when a vertical-rl screen swap changes the content
-     box size it only invalidates the OLD content rect — the new screen's
-     columns outside it stay unpainted (glyphs sliced) until some unrelated
-     repaint. The VN document never scrolls (html/body are 100vw x 100vh with
-     overflow hidden and the chapter lives in a detached sourceRoot), so the
-     initial containing block is the viewport and the geometry is identical. */
-  position: absolute !important;
-  inset: 0 !important;
-  box-sizing: border-box !important;
-  /* Reserve the reader chrome (top/bottom bars) + the user's vertical margins
-     so the screen never sits under the notch or the bottom chrome. */
-  padding-top: calc($marginTopCss + var(--chrome-top-inset, 0px)) !important;
-  padding-bottom: calc($marginBottomCss + var(--chrome-bottom-inset, 0px)) !important;
-}
-.fushi-vn-screen {
-  box-sizing: border-box !important;
-  width: 100% !important;
-  height: 100% !important;
-  padding: $paddingCss !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  overflow: hidden !important;
-}
-.fushi-vn-content {
-  $vnAxisComment
-  /* TODO-958：内容沿两轴**有上界但不强制占满**，再交给 `.fushi-vn-screen` 的
-     flex 居中（align-items + justify-content 都是 center）把单句台词放到屏幕正
-     中。旧代码硬写 `width: 100%`（物理宽度）：竖排 vertical-rl 下文字列从右边缘
-     向左排却占满全宽 → 主轴被填满 → justify-content:center 失效 → 台词贴最右。
-     改成 `max-*: 100%` 后内容少时沿主轴收缩由 flex 居中；内容多时撑到交叉轴上界
-     后向主轴溢出，仍被 fitScreensToViewport 的 scrollWidth/Height ≤ client 判据
-     正确捕获并拆屏（盒尺寸测量语义不变）。 */
-  max-width: 100% !important;
-  max-height: 100% !important;
-}
-/* BUG-2905: no hanging punctuation in VN. The body's `hanging-punctuation:
-   allow-end` (WebKit only) hangs a line-final 、。 past the inline-end edge,
-   but the VN screen clips at that edge (overflow hidden, no inline-end slack)
-   and fitScreensToViewport rightly measures the hung glyph as overflow — so
-   a paragraph that fits gets cut right before its 、 onto a second screen.
-   With hanging off WebKit pushes the preceding char down like Blink does. */
-.fushi-vn-content, .fushi-vn-content * {
-  hanging-punctuation: none !important;
-}
-/* The reveal (M1) hides not-yet-typed text by collapsing the trailing span. */
-[data-fushi-visual-novel-unrevealed] {
-  visibility: hidden !important;
-}
-''';
   }
 
   static String _continuousLayoutCss(_LayoutCssArgs a) {

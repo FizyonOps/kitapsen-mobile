@@ -34,9 +34,6 @@ class ExitFlushRegistry {
   /// 单个来源 flush 的硬上限：任何来源卡住都不得拖住整个退出。
   static const Duration perCallbackTimeout = Duration(seconds: 2);
 
-  @visibleForTesting
-  int get callbackCount => _callbacks.length;
-
   /// 登记一个退出 flush 回调（幂等）。页面 `initState` 调用，`dispose` 时
   /// [unregister]。返回传入的回调本身，便于持有以注销。
   ExitFlushCallback register(ExitFlushCallback callback) {
@@ -64,15 +61,6 @@ class ExitFlushRegistry {
   /// 见 [defer]。用 List 而非 Set：同一页面可能先后交多笔（位置 + 学习段），顺序即
   /// 提交顺序，且它们是不同闭包，没有去重需求。
   final List<ExitFlushCallback> _deferred = <ExitFlushCallback>[];
-
-  @visibleForTesting
-  int get deferredCount => _deferred.length;
-
-  @visibleForTesting
-  void clear() {
-    _callbacks.clear();
-    _deferred.clear();
-  }
 
   /// 退出路径调用：并发跑完所有登记的 flush 回调，每个有 [perCallbackTimeout]
   /// 上限（卡住的来源被放行，不阻塞退出）。任一回调抛异常也不影响其余——退出清理

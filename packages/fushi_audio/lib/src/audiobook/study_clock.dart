@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:drift/drift.dart' show Value;
-import 'package:meta/meta.dart';
 import 'package:fushi_core/fushi_core.dart';
 
 /// 单个 tick 允许的最大连续窗口。学习时长由 [StudyClock] 的 60s 定时器驱动，正常窗口
@@ -11,19 +10,6 @@ import 'package:fushi_core/fushi_core.dart';
 /// 阅读侧此前缺失，导致整夜后台挂起被一次性计入阅读时长（BUG-892）；视频侧的
 /// `kMaxWatchGap` 与本常量同值同义，v92 起统一只剩这一个。
 const Duration kMaxReadingGap = Duration(seconds: 120);
-
-/// 视频 cue 字数的停留门（BUG-1763）：cue 要真实播放停留这么久才算「看过」其字幕字数。
-///
-/// 阅读三域（EPUB / 漫画 / PDF）**不用**停留门：2026-09-06 裁定「读过」= 翻走即计 +
-/// 会话覆盖并集（`fushi/lib/src/stats/read_unit_ledger.dart`，对齐 Hoshi Reader），
-/// 离开一个单元那一刻把其中未覆盖的部分全额计入，没有停留门、没有速率封顶（旧的
-/// EPUB 字数水位 + 速度封顶、漫画到达停留 1.5s 都已拆除）。本常量因此只剩视频 cue
-/// 一个消费者（`kCueDwellMs`）；仍保留为具名常量而不是回落成字面量。
-///
-/// 用毫秒 int 而不是 Duration：`Duration.inMilliseconds` 是 getter、不能 const 求值，
-/// 而消费端两侧一个要 int、一个要 Duration，只有 int 能让两边都真正引用同一个数
-/// （`Duration(milliseconds: kArrivalDwellMs)` 仍是 const）。
-const int kArrivalDwellMs = 1500;
 
 /// 阅读空闲门默认值：这么久没有任何输入（翻页 / 滚动 / 听书播放态的 cue 推进）就
 /// 视为没在读，之后的 tick 不入账。查词**不**喂门（BUG-2212：它走词典弹窗，不经
@@ -177,11 +163,6 @@ void retireStudySegmentUids(Iterable<String> uids) {
   _retiredStudySegmentUids.addAll(uids);
 }
 
-/// 测试用：清空退役登记（进程级全局，用例之间必须互不串味）。
-void debugClearRetiredStudySegmentUids() {
-  _retiredStudySegmentUids.clear();
-}
-
 class StudyClock {
   StudyClock({
     required FushiDatabase database,
@@ -318,18 +299,6 @@ class StudyClock {
       chars: _sessionChars,
       active: accepted,
     );
-  }
-
-  /// 当前打开段的 uid（测试 / 诊断）。
-  @visibleForTesting
-  String? get debugOpenUid => _open?.uid;
-
-  /// 当前打开段的累计（测试 / 诊断）。
-  @visibleForTesting
-  ({int durationMs, int chars, int pages})? get debugOpenTotals {
-    final _OpenSegment? s = _open;
-    if (s == null) return null;
-    return (durationMs: s.durationMs, chars: s.chars, pages: s.pages);
   }
 
   /// 起表。start 本身由用户动作触发（回前台 / 手动继续 / 关掉面板），就是一次
@@ -512,21 +481,6 @@ class StudyClock {
     }
   }
 
-  /// 显式记账（仅 [StudyAccrual.explicit]）：把 [ms] 墙钟毫秒计到当前打开段（没有 /
-  /// 已跨小时就开新段）。消费方按自己的采样节奏（≤ 1s 一次）推入，不会跨小时边界
-  /// 拆分——单次记账最多几百毫秒，落在 `now` 所在小时即可。
-  void addActiveMs(int ms) {
-    assert(accrual == StudyAccrual.explicit, '墙钟模式的时长由 tick 结算，不许外推');
-    if (ms <= 0) return;
-    final DateTime now = _now();
-    final _OpenSegment seg = _ensureOpen(now);
-    seg.durationMs += ms;
-    seg.endAt = now;
-    seg.dirty = true;
-    _creditedSinceTick = true;
-    _sessionDurationMs += ms;
-  }
-
   /// 立刻结算当前部分窗口并落库（不停表、不封段）。页面在章导航 / 生命周期节点调用，
   /// 让「上一次 tick 到现在」这段不因随后的 dispose 而丢。
   Future<void> flushNow() async {
@@ -541,7 +495,6 @@ class StudyClock {
     _accrue(now);
     final _OpenSegment? seg = _open;
     if (seg != null && _needsWrite(seg)) _enqueueWrite(seg);
-    onTick?.call(now);
     await _writeChain;
   }
 

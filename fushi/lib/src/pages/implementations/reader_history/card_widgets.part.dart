@@ -42,12 +42,6 @@ const double kShelfCoverBadgeDimension = 22.0;
 /// 裁掉，封面竖向全貌完整不变形。
 BoxFit get _bookCardCoverFit => BoxFit.fitHeight;
 
-/// Stable below-cover title footer height for reader shelf cards.
-///
-/// The cover and title areas must not resize when a title wraps to two lines;
-/// this fixed footer keeps long book names from pushing the grid around.
-const double kShelfTitleFooterHeight = 40.0;
-
 /// Book / audiobook / SRT / remote shelf card slot aspect ratio (width / height).
 ///
 /// TODO-786 是 TODO-552 「封面不裁切」决策的延续，同向而非回退：TODO-552 改回
@@ -358,8 +352,7 @@ extension _ReaderHistoryCardWidgets on _ReaderFushiHistoryPageState {
                     bottom: 0,
                     child: metadata,
                   ),
-                if (coverBadge != null)
-                  PositionedDirectional(
+                PositionedDirectional(
                     end: overlayInset,
                     top: overlayInset,
                     // 封面右上角类型徽章（TODO-284 / TODO-355 / TODO-361 / TODO-552）。
@@ -470,28 +463,4 @@ extension _ReaderHistoryCardWidgets on _ReaderFushiHistoryPageState {
     );
   }
 
-  Widget _audiobookBadge(HealthKind kind) {
-    final ColorScheme cs = theme.colorScheme;
-    final Color bg;
-    final Color fg;
-    switch (kind) {
-      case HealthKind.failed:
-        bg = cs.errorContainer;
-        fg = cs.onErrorContainer;
-      case HealthKind.partial:
-        bg = cs.tertiaryContainer;
-        fg = cs.onTertiaryContainer;
-      case HealthKind.ok:
-      case HealthKind.unrun:
-      case HealthKind.running:
-      case HealthKind.notApplicable:
-        bg = cs.secondaryContainer;
-        fg = cs.onSecondaryContainer;
-    }
-    return _cardBadge(
-      icon: Icons.headphones_outlined,
-      background: bg,
-      foreground: fg,
-    );
-  }
 }

@@ -1,7 +1,5 @@
-import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:fushi/src/media/video/video_subtitle_style.dart';
 import 'package:fushi/src/models/app_font_loader.dart';
 import 'package:fushi/src/models/app_ui_font_chain.dart';
 import 'package:fushi/src/models/cjk_font_families.dart' show CjkFontStyle;
@@ -65,7 +63,6 @@ class FontTargetPreview extends StatelessWidget {
   const FontTargetPreview({
     required this.target,
     required this.families,
-    this.subtitleStyle = VideoSubtitleStyle.defaults,
     this.sampleText,
     super.key,
   });
@@ -74,9 +71,6 @@ class FontTargetPreview extends StatelessWidget {
 
   /// [effectiveFontTargetFamilies] 的结果；空 = 该用途没配字体，走系统默认。
   final List<String> families;
-
-  /// 视频字幕样张用的外观（字色 / 字重 / 阴影 / 底板），默认值同播放器。
-  final VideoSubtitleStyle subtitleStyle;
 
   /// 覆盖默认日文样张（系统字体浏览页允许用户输入自己的样字）。
   final String? sampleText;
@@ -440,218 +434,6 @@ class _VerticalText extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class _DictionaryPreview extends StatelessWidget {
-  const _DictionaryPreview({required this.families});
-
-  final List<String> families;
-
-  @override
-  Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final ColorScheme scheme = theme.colorScheme;
-    final FushiDesignTokens tokens = FushiDesignTokens.of(context);
-    TextStyle content(TextStyle? style) =>
-        _contentStyle(style ?? const TextStyle(), families);
-    return ColoredBox(
-      color: tokens.surfaces.card,
-      child: Padding(
-        padding: EdgeInsets.all(tokens.spacing.card),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              'けんとう',
-              style: content(
-                theme.textTheme.bodySmall,
-              ).copyWith(color: scheme.onSurfaceVariant),
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text('見当', style: content(theme.textTheme.headlineSmall)),
-                SizedBox(width: tokens.spacing.gap),
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: tokens.spacing.gap,
-                    vertical: 2,
-                  ),
-                  decoration: BoxDecoration(
-                    color: scheme.secondaryContainer,
-                    borderRadius: tokens.radii.chipRadius,
-                  ),
-                  child: Text(
-                    '名詞',
-                    style: content(
-                      theme.textTheme.labelSmall,
-                    ).copyWith(color: scheme.onSecondaryContainer),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: tokens.spacing.gap),
-            Text(
-              '① 大体の方向や位置。「駅の見当がつかない」\n'
-              '② おおよその予想。見込み。「見当違い」',
-              style: content(
-                theme.textTheme.bodyMedium,
-              ).copyWith(color: scheme.onSurface, height: 1.6),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-/// 视频字幕样张：仿浏览器扩展「字体、排版与底板」的预览舞台——21:9 的暗色渐变
-/// 画面，底部一句日文字幕，字色 / 字重 / 柔和投影 / 底板照播放器当前外观。
-class _SubtitlePreview extends StatelessWidget {
-  const _SubtitlePreview({
-    required this.families,
-    required this.style,
-    this.sampleText,
-  });
-
-  final List<String> families;
-  final VideoSubtitleStyle style;
-  final String? sampleText;
-
-  // 画面底色是「一帧视频」的示意，不跟随主题：字幕本就叠在任意画面上，
-  // 暗色舞台才能如实呈现白字 + 投影的观感（与扩展预览同一组取值）。
-  static const LinearGradient _stageGradient = LinearGradient(
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-    colors: <Color>[Color(0xFF35506A), Color(0xFF1A2430), Color(0xFF0D1218)],
-    stops: <double>[0, 0.6, 1],
-  );
-
-  @override
-  Widget build(BuildContext context) {
-    final FushiDesignTokens tokens = FushiDesignTokens.of(context);
-    final Color textColor = style.textColor ?? Colors.white;
-    final Color shadowColor = style.shadowColor ?? Colors.black;
-    final Color? boxColor = style.backgroundOpacity > 0
-        ? (style.backgroundColor ?? kDefaultSubtitleBackgroundColor).withValues(
-            alpha: style.backgroundOpacity,
-          )
-        : null;
-    return AspectRatio(
-      aspectRatio: 21 / 9,
-      child: DecoratedBox(
-        decoration: const BoxDecoration(gradient: _stageGradient),
-        child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            // 播放器字号以 1080p 画面高为基准，按舞台高度等比缩放。
-            final double scale = constraints.maxHeight / 1080 * 2.2;
-            final double fontSize = (style.fontSize * scale).clamp(14, 40);
-            final TextStyle text = _contentStyle(
-              TextStyle(
-                fontSize: fontSize,
-                color: textColor,
-                fontWeight: FontWeight.values.firstWhere(
-                  (FontWeight w) => w.value == style.resolveFontWeight(1),
-                  orElse: () => FontWeight.w400,
-                ),
-                height: 1.35,
-                shadows: buildSubtitleSoftShadow(
-                  shadowColor,
-                  style.resolveShadowThickness(1),
-                ),
-              ),
-              families,
-            );
-            return Align(
-              alignment: const Alignment(0, 0.82),
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 4,
-                ),
-                decoration: boxColor == null
-                    ? null
-                    : BoxDecoration(
-                        color: boxColor,
-                        borderRadius: tokens.radii.controlRadius,
-                      ),
-                child: Text(
-                  sampleText ?? 'こんなふうに字幕が表示されます。',
-                  style: text,
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            );
-          },
-        ),
-      ),
-    );
-  }
-}
-
-/// 游戏文本浮窗样张：半透明暗色浮窗叠在一帧「游戏画面」上。
-class _GameOverlayPreview extends StatelessWidget {
-  const _GameOverlayPreview({required this.families, this.sampleText});
-
-  final List<String> families;
-  final String? sampleText;
-
-  static const LinearGradient _sceneGradient = LinearGradient(
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,
-    colors: <Color>[Color(0xFF8DB4D9), Color(0xFFE8C6B0), Color(0xFF4A3A48)],
-  );
-
-  @override
-  Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final FushiDesignTokens tokens = FushiDesignTokens.of(context);
-    final TextStyle line = _contentStyle(
-      (theme.textTheme.titleMedium ?? const TextStyle()).copyWith(
-        color: Colors.white,
-        height: 1.5,
-      ),
-      families,
-    );
-    return AspectRatio(
-      aspectRatio: 16 / 7,
-      child: DecoratedBox(
-        decoration: const BoxDecoration(gradient: _sceneGradient),
-        child: Align(
-          alignment: Alignment.bottomCenter,
-          child: Container(
-            margin: const EdgeInsets.all(10),
-            padding: const EdgeInsets.fromLTRB(14, 8, 14, 10),
-            decoration: BoxDecoration(
-              color: Colors.black.withValues(alpha: 0.62),
-              borderRadius: tokens.radii.cardRadius,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Text(
-                  '【ミカ】',
-                  style: line.copyWith(
-                    fontSize: (line.fontSize ?? 16) * 0.8,
-                    color: Colors.white70,
-                  ),
-                ),
-                Text(
-                  sampleText ?? '「……ねえ、ここで待っていてくれる？すぐ戻るから。」',
-                  style: line,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

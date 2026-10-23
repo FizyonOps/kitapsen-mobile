@@ -22,13 +22,3 @@ Future<void> loadShortcutRegistry(
     registry.resetToDefaults(platform);
   }
 }
-
-Future<void> saveShortcutRegistry(
-  FushiShortcutRegistry registry,
-  ReaderFushiSource source,
-) async {
-  await source.setPreference<String>(
-    key: _prefKey,
-    value: registry.toJsonString(),
-  );
-}

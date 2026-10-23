@@ -29,8 +29,7 @@ const Object _kNotTagged = _NotTagged();
 /// it back with a matching default is NOT supported and will throw on the
 /// cast. No typed-list pref exists in the codebase; do not add generic
 /// `List<T>` support unless a concrete need appears.
-class PrefCodec {
-  PrefCodec._();
+abstract class PrefCodec {
 
   static String encode(dynamic value) {
     if (value == null) return 'z:';

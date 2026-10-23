@@ -19,9 +19,6 @@ class CoalescedAsyncRunner {
   bool _running = false;
   bool _dirty = false;
 
-  /// 是否有一趟动作正在执行（含即将补跑的脏标记趟）。
-  bool get isRunning => _running;
-
   /// 触发一趟动作；在飞时只置脏标记。返回的 Future 在本次触发所属的
   /// 执行链（含补跑）全部结束后完成。
   Future<void> trigger() async {

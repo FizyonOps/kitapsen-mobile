@@ -200,7 +200,7 @@ int statHeatmapRankLevel(int value, List<int> sortedActive, {int levels = 4}) {
   }
   final int n = sortedActive.length;
   final int level = (lo * levels + n - 1) ~/ n;
-  return level < 1 ? 1 : (level > levels ? levels : level);
+  return level < 1 ? 1 : ((level));
 }
 
 /// 纯函数：以 [weeks] 周为翻页步长，能向前翻到的最深 [buildStatHeatmap] `weekOffset`

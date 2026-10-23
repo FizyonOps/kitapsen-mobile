@@ -34,8 +34,7 @@ const Duration _kSharePresentationTimeout = Duration(seconds: 30);
 /// （`Share.shareFiles`，`isWithResult=false`，从根上绕开 `ShareSuccessManager`
 /// 整套回调状态机——它是错误的唯一来源），并叠加进程内**防重入**串行化，
 /// 避免在面板呈现的瞬间被重复触发而堆叠两个分享面板。
-class FushiShare {
-  FushiShare._();
+abstract class FushiShare {
 
   // iOS 分享锚点（BUG-2064）：share_plus 的 iOS 端把 text / uri / files 三条
   // 路径统一汇进 `+share:`（`FPPSharePlusPlugin.m`）。只要
@@ -63,9 +62,6 @@ class FushiShare {
 
   /// 防重入：全 App 同一时刻只允许一个系统分享面板在途。
   static bool _sharing = false;
-
-  /// 测试可见：当前是否有分享在途（仅供守卫断言，勿在业务逻辑读取）。
-  static bool get debugIsSharing => _sharing;
 
   /// 由 [viewSize] 推出一个**必定合法**的 iOS popover 锚点：位于 view 正中、
   /// 边长 1 逻辑点的矩形。

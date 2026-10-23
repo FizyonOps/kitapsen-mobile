@@ -79,29 +79,10 @@ class ReaderPlacement {
   final int order;
 }
 
-/// 视频快捷设置面板的分组维度，与全局 [SettingsDestinationId] 正交；与
-/// [ReaderGroup] 同款设计。取值对齐 video_quick_settings_sheet 的现有大分类
-/// （playback/audio/subtitle/shaders/mpv/danmaku/controls），阶段 B 重写该
-/// 面板时按此投影 schema。
-enum VideoGroup { playback, audio, subtitle, shaders, mpv, danmaku, controls }
-
 /// 描述某个 [SettingsItem] 在视频快捷面板里的放置位置。
 /// 为 null 表示该项不出现在视频面板（仅全局可见）。
-class VideoPlacement {
-  const VideoPlacement({
-    required this.group,
-    required this.order,
-    this.section,
-  });
+abstract class VideoPlacement {
 
-  final VideoGroup group;
-
-  /// 在所属 [group] 内的升序排序键（仅组内有效，可有间隔）。
-  final int order;
-
-  /// 组内小节标题（如 mpv 组的「画质 / 画面几何 / 色彩均衡」）。投影时相邻同名
-  /// 条目并入同一个带标题 [SettingsSection]；null = 无题小节（相邻 null 合并）。
-  final String? section;
 }
 
 typedef SettingsVisibility = bool Function(SettingsContext context);
@@ -229,11 +210,6 @@ class SettingsSection {
   final SettingsVisibility? visible;
   final List<SettingsItem> items;
 
-  /// 旧调用点的兼容读取；新代码显式使用 presentation。折叠仅影响展示，
-  /// 搜索可临时展开，业务配置值不受影响。
-  bool get collapsedByDefault =>
-      presentation == SettingsSectionPresentation.collapsed;
-
   bool isVisible(SettingsContext context) => visible?.call(context) ?? true;
 
   SettingsSection visibleCopy(SettingsContext context) {
@@ -344,35 +320,6 @@ class SettingsNavigationItem extends SettingsItem {
   /// `settings_schema_cache_test` 纪律）。
   final SettingsDestination Function()? child;
   final bool showIcon;
-}
-
-/// 只读状态行：图标 + 标题 + 状态文本 + 可选一个行尾动作按钮。
-///
-/// 存在的理由：设置页里「当前账号 / 服务在跑在哪个端口 / 此项已挪到别处」这类
-/// 指路与状态行此前只能用 [SettingsCustomItem] 手拼 `AdaptiveSettingsRow`——四处
-/// 各写一份、且默认进不了搜索。收成一等 item 后渲染、搜索、焦点遍历都走框架。
-/// 状态文本随运行期变化时用 [subtitleBuilder]；无动作时整行不可点。
-class SettingsStatusItem extends SettingsItem {
-  const SettingsStatusItem({
-    required super.id,
-    required super.title,
-    super.titleBuilder,
-    super.subtitle,
-    super.subtitleBuilder,
-    super.icon,
-    super.visible,
-    super.reader,
-    super.video,
-    this.actionLabel,
-    this.onAction,
-  }) : assert(
-         (actionLabel == null) == (onAction == null),
-         'actionLabel 与 onAction 必须同时给或同时不给',
-       );
-
-  /// 行尾动作按钮文案；null = 无按钮。
-  final String? actionLabel;
-  final SettingsItemAction? onAction;
 }
 
 class SettingsActionItem extends SettingsItem {
@@ -565,43 +512,6 @@ class SettingsTextItem extends SettingsItem {
 
   /// null 时按 [secret] 取 visiblePassword / text。
   final TextInputType? keyboardType;
-}
-
-/// 一等数字输入项：文本框输入 int/double，镜像 [SettingsNumberField] 行为
-/// （逐击键解析写穿 + 重置按钮），另支持可选 min/max 夹取；解析失败不写。
-class SettingsNumberItem extends SettingsItem {
-  const SettingsNumberItem({
-    required super.id,
-    required super.title,
-    required this.value,
-    required this.onChanged,
-    this.resetValue,
-    this.integer = false,
-    this.min,
-    this.max,
-    this.suffixText,
-    super.subtitle,
-    super.icon,
-    super.visible,
-    super.reader,
-    super.video,
-  });
-
-  final num Function(SettingsContext context) value;
-  final SettingsValueChanged<num> onChanged;
-
-  /// 非 null 时行尾提供重置按钮，点击把该值写回并回填输入框。
-  final num Function(SettingsContext context)? resetValue;
-
-  /// true = 整数输入（int 解析），false = 小数（double 解析）。
-  final bool integer;
-
-  /// 写穿前的夹取边界；null = 不限。
-  final num? min;
-  final num? max;
-
-  /// 输入框尾缀单位文字（如 ms / px）。
-  final String? suffixText;
 }
 
 class SettingsCustomItem extends SettingsItem {

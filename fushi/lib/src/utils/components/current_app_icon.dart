@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:fushi/src/utils/misc/app_icon_preferences.dart';
+/// The launcher icon, shown as the navigation rail's brand mark.
+const String kAppIconAsset = 'assets/meta/launcher_icon_squircle.png';
 
-/// Renders the application icon selected in Settings and rebuilds as soon as a
-/// the native switch succeeds (and normally after its preference is persisted).
+/// Renders the application icon.
 class CurrentAppIcon extends StatelessWidget {
   const CurrentAppIcon({
     super.key,
@@ -16,27 +16,11 @@ class CurrentAppIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<AppIconSelection>(
-      valueListenable: currentAppIconSelection,
-      builder:
-          (BuildContext context, AppIconSelection selection, Widget? child) {
-            return Image(
-              key: ValueKey<int>(selection.revision),
-              image: appIconImageProvider(selection),
-              fit: fit,
-              filterQuality: filterQuality,
-              excludeFromSemantics: true,
-              errorBuilder:
-                  (BuildContext context, Object error, StackTrace? stackTrace) {
-                    return Image.asset(
-                      presetIconAssets['default']!,
-                      fit: fit,
-                      filterQuality: filterQuality,
-                      excludeFromSemantics: true,
-                    );
-                  },
-            );
-          },
+    return Image.asset(
+      kAppIconAsset,
+      fit: fit,
+      filterQuality: filterQuality,
+      excludeFromSemantics: true,
     );
   }
 }

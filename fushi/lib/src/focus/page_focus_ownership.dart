@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:fushi/src/sync/desktop_foreground_guard.dart';
 
 /// 触发「把键盘焦点收回本页正文」的原因。
 ///
@@ -87,45 +86,9 @@ class PageFocusOwnership {
   /// 返回是否真的发起了请求——供测试断言，也让调用点能在被判据否决时走别的
   /// 路径（正常业务代码通常忽略返回值）。
   bool reclaim(FocusReclaimCause cause) {
-    // BUG-1619：[FocusReclaimCause.appResumed] 背后的 `AppLifecycleState.resumed`
-    // 是**进程级**信号。桌面版 Fushi 是多顶层窗口进程，剪贴板查词面板 / app 外
-    // 查词覆盖窗夺得前台时同样会把进程带到前台，而主窗其实还压在用户的游戏 /
-    // 浏览器底下。此时 requestFocus 会被引擎翻译成 SetFocus(FlutterView)，
-    // Win32 语义下连带激活主窗 —— 主界面凭空盖住用户正在用的窗口。
-    // 判据是**窗口级**的：主窗自己在前台才回收（Alt+Tab 真的切回来那次照常）。
-    if (cause == FocusReclaimCause.appResumed &&
-        !DesktopForegroundGuard.isMainWindowForeground()) {
-      return false;
-    }
     if (!_canOwn(cause)) return false;
     node.requestFocus();
     return true;
   }
 
-  /// 在下一帧结束后回收。
-  ///
-  /// 用于「回收动作本身依赖尚未完成的 build/reparent」的时序：例如进出全屏
-  /// 时同步 requestFocus 会跑在路由 build 之前，reparent 会把 primary focus
-  /// 让给新路由的 ModalScope，导致进全屏后快捷键直接死掉。
-  ///
-  /// [addPostFrameCallback] **本身不调度帧**：树静止（阅读器停在一页上、视频
-  /// 暂停）时没有别的东西请求下一帧，回调就一直挂着、焦点永远回不来。故这里
-  /// 显式 [ensureVisualUpdate] 把帧要出来。
-  void reclaimAfterFrame(FocusReclaimCause cause) {
-    WidgetsBinding.instance.addPostFrameCallback((_) => reclaim(cause));
-    WidgetsBinding.instance.ensureVisualUpdate();
-  }
-
-  /// 包裹一个会夺走焦点的覆盖层，在它**任何**退出路径上归还焦点。
-  ///
-  /// 覆盖 `await showDialog(...)` / `FilePicker.platform.pickFiles()` /
-  /// `showMenu(...)` 等：正常返回、抛异常、被 pop 掉都会经 `finally` 归还，
-  /// 消除「某个返回点忘了写归还」这一类必然发生的遗漏。
-  Future<T> guardOverlay<T>(Future<T> Function() body) async {
-    try {
-      return await body();
-    } finally {
-      reclaim(FocusReclaimCause.overlayClosed);
-    }
-  }
 }

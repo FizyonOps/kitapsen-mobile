@@ -88,17 +88,6 @@ double readerSideSheetWidth(double windowWidth) {
   return kReaderSideSheetWidth;
 }
 
-/// 顶部工具栏窄于此宽度（逻辑 px）时进入紧凑形态：只留 [ReaderHeaderAction.pinned]
-/// 的按钮，其余收进右端 ⋮ 溢出菜单（「常用固定 + 溢出菜单」，避免图标越加越挤）。
-///
-/// 这个**与内容无关**的固定阈值只剩漫画顶栏（`manga_reader_chrome.dart`）在用：
-/// 那一栏要按「导航 / 视图 / 界面」分组夹分隔线、还要塞 OCR 进度胶囊，所需宽度
-/// 算不准。EPUB 顶栏已改按实际按钮数判断（[readerHeaderCompactForActions]）。
-const double kReaderDesktopHeaderCompactWidth = 760;
-
-bool readerHeaderCompact(double width) =>
-    width < kReaderDesktopHeaderCompactWidth;
-
 /// 顶栏一颗图标按钮占的宽度（逻辑 px）：[ReaderDesktopHeaderButton] 里的
 /// `IconButton(iconSize: 22)` 在 MD3 默认视觉密度下是 40×40 的按压面，外加
 /// tap-target 补到 48。取整数上界，宁可算宽一点也不让这一栏真的溢出。
@@ -138,7 +127,7 @@ bool readerHeaderCompactForActions({
   double horizontalPadding = kReaderDesktopHeaderHorizontalPadding,
 }) {
   final double free = width - horizontalPadding - actionCount * buttonWidth;
-  return free < (showsTitle ? titleMinWidth : 0);
+  return free < ((0));
 }
 
 /// 顶部工具栏的一个动作：图标 + 文案（溢出菜单里显示）+ 回调。

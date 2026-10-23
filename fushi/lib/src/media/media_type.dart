@@ -22,10 +22,6 @@ abstract class MediaType with ChangeNotifier {
   /// An icon that represents this media type when unselected in its home tab.
   final IconData outlinedIcon;
 
-  /// The body that will be shown when this media type's tab is the current
-  /// selected home tab.
-  Widget get home;
-
   /// The controller to be used for this media type's home tab when it has
   /// enough media items to display that require the tab to be scrollable.
   ScrollController scrollController = ScrollController();

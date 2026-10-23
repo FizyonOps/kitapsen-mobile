@@ -12,24 +12,6 @@ class RemoteCollectionAdoptionService {
 
   final FushiDatabase database;
 
-  Future<void> adoptVideo(RemoteVideoInfo video) => adoptMembership(
-    membership: video.collection,
-    mediaType: MediaKind.video,
-    remoteEntryKey: video.id,
-    localEntryKey: video.id,
-  );
-
-  /// 目录刷新：整份远端清单一次收养。身份索引只装载一次（全表读
-  /// `epub_books` + alias），不按本数重复物化——dashboard 启动路径也走这里。
-  Future<void> adoptBooks(Iterable<RemoteBookInfo> books) async {
-    CollectionBookIdentityIndex? identities;
-    for (final RemoteBookInfo book in books) {
-      if (book.collection == null) continue;
-      identities ??= await CollectionBookIdentityIndex.load(database);
-      await adoptBook(book, identities: identities);
-    }
-  }
-
   /// [localBook] 必须是 importer/add 实际返回或按返回键重新读取的入库行。
   /// 目录刷新未提供时按 [identities]（未给则现装）从数据库解析，因而也能修复
   /// 历史已下载但无合集的孤儿。
@@ -40,45 +22,6 @@ class RemoteCollectionAdoptionService {
   }) =>
       database.transaction(() async {
         if (book.collection == null) return;
-        final String key = book.downloadId;
-        final EpubBookRow? local =
-            localBook ?? await _findLocalBook(key, identities);
-        if (local != null && local.bookKey != key) {
-          await database.setCollectionBookAlias(local.uid, key);
-        }
-        await adoptMembership(
-          membership: book.collection,
-          mediaType: MediaKind.epub,
-          remoteEntryKey: key,
-          localEntryKey: local?.uid,
-        );
       });
 
-  Future<EpubBookRow?> _findLocalBook(
-    String remoteKey,
-    CollectionBookIdentityIndex? preloaded,
-  ) async {
-    final CollectionBookIdentityIndex identities =
-        preloaded ?? await CollectionBookIdentityIndex.load(database);
-    final String? uid = identities.uidByKey[remoteKey];
-    return uid == null ? null : database.getEpubBookByUid(uid);
-  }
-
-  /// 适配器已经持有入库行和 DTO 归属时使用；无归属是纯 no-op。
-  Future<void> adoptMembership({
-    required RemoteCollectionMembership? membership,
-    required MediaKind mediaType,
-    required String remoteEntryKey,
-    String? localEntryKey,
-  }) async {
-    if (membership == null) return;
-    await database.adoptRemoteCollectionMember(
-      name: membership.collectionName,
-      collectionType: membership.collectionType,
-      mediaType: mediaType,
-      remoteEntryKey: remoteEntryKey,
-      sortIndex: membership.sortIndex,
-      localEntryKey: localEntryKey,
-    );
-  }
 }

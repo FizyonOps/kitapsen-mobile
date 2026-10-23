@@ -21,12 +21,6 @@ abstract class EnginePaths {
   /// 内容/书库根（等价 `getApplicationDocumentsDirectory()`）。
   Future<Directory> documentsRootDirectory();
 
-  /// 数据库/模型根（等价 `getApplicationSupportDirectory()`）。
-  Future<Directory> supportRootDirectory();
-
-  /// 临时目录（等价 `getTemporaryDirectory()`）。
-  Future<Directory> tempRootDirectory();
-
   /// `<documents>/<child>` 的绝对路径目录（不创建）。与 `AppPaths.documentsSubdirectory`
   /// 同派生规则，保证两边对同一子目录名拿到逐字节一致的路径。
   Future<Directory> documentsSubdirectory(String child) async {
@@ -42,13 +36,6 @@ abstract class EnginePaths {
   Future<Directory> videoSubtitlesDirectory() =>
       documentsSubdirectory('video_subtitles');
 
-  /// EPUB 解压正文根 `<documents>/fushi_books`。
-  Future<Directory> epubBooksDirectory() => documentsSubdirectory('fushi_books');
-
-  /// 有声书音频持久根 `<documents>/audiobooks`。
-  Future<Directory> audiobooksDirectory() =>
-      documentsSubdirectory('audiobooks');
-
   /// 系统文件选择器把用户选中的文件**拷进** app 沙盒时落盘的目录（BUG-2863）。
   ///
   /// 这些目录里的媒体文件不是用户的原件，而是 app 为了能读到它才复制出来的整份
@@ -62,28 +49,6 @@ abstract class EnginePaths {
       const <Directory>[];
 }
 
-/// 固定根目录实现（服务端 / 测试用）。
-class FixedEnginePaths extends EnginePaths {
-  const FixedEnginePaths({
-    required this.documents,
-    required this.support,
-    required this.temp,
-  });
-
-  final Directory documents;
-  final Directory support;
-  final Directory temp;
-
-  @override
-  Future<Directory> documentsRootDirectory() async => documents;
-
-  @override
-  Future<Directory> supportRootDirectory() async => support;
-
-  @override
-  Future<Directory> tempRootDirectory() async => temp;
-}
-
 class UninstalledEnginePaths extends EnginePaths {
   const UninstalledEnginePaths();
 
@@ -95,11 +60,6 @@ class UninstalledEnginePaths extends EnginePaths {
   @override
   Future<Directory> documentsRootDirectory() async => _fail();
 
-  @override
-  Future<Directory> supportRootDirectory() async => _fail();
-
-  @override
-  Future<Directory> tempRootDirectory() async => _fail();
 }
 
 /// 全局装配点。宿主进程入口写一次。

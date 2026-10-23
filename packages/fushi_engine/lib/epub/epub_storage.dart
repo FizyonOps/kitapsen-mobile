@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:path/path.dart' as p;
 import 'package:fushi_engine/foundation/engine_paths.dart';
-import 'package:meta/meta.dart';
-
 
 /// Manages on-disk storage of extracted EPUB content.
 ///
@@ -16,19 +14,8 @@ import 'package:meta/meta.dart';
 /// `epub_books.extract_dir` column. Use [bookDirectory]/[bookPath] only when
 /// importing a NEW book; to locate an EXISTING book read its `extractDir`
 /// column and operate on that absolute path (e.g. [deleteBookDir]).
-class EpubStorage {
+abstract class EpubStorage {
   static String? _cachedBaseDir;
-
-  /// Test-only override for the base directory, used by suites that exercise
-  /// the real [EpubImporter] without a Flutter binding / path_provider plugin
-  /// (e.g. the interconnect orchestrator tests that download over a real HTTP
-  /// server, where installing `TestWidgetsFlutterBinding` would break the
-  /// socket). Production never sets this — it stays null and resolution falls
-  /// through to [AppPaths.documentsRootDirectory].
-  @visibleForTesting
-  static set debugBaseDirectoryOverride(String? path) {
-    _cachedBaseDir = path == null ? null : p.join(path, 'fushi_books');
-  }
 
   /// Base directory for all extracted books.
   static Future<String> baseDirectory() async {

@@ -89,13 +89,6 @@ class SettingsSecretFieldState extends State<SettingsSecretField> {
     unawaited(widget.onChanged(value));
   }
 
-  void _reset() {
-    _debounce?.cancel();
-    _controller.text = widget.resetValue!;
-    widget.onReset!();
-    FocusScope.of(context).unfocus();
-  }
-
   Widget? _suffix() {
     final List<Widget> actions = <Widget>[
       if (widget.revealToggle)
@@ -106,13 +99,6 @@ class SettingsSecretFieldState extends State<SettingsSecretField> {
               ? Icons.visibility_outlined
               : Icons.visibility_off_outlined,
           onTap: () => setState(() => _obscured = !_obscured),
-        ),
-      if (widget.resetValue != null && widget.onReset != null)
-        FushiIconButton(
-          tooltip: t.reset,
-          size: 18,
-          icon: Icons.undo_outlined,
-          onTap: _reset,
         ),
     ];
     if (actions.isEmpty) return null;
@@ -138,107 +124,6 @@ class SettingsSecretFieldState extends State<SettingsSecretField> {
         suffixIcon: _suffix(),
         onChanged: _scheduleChanged,
         onSubmitted: _submit,
-      ),
-    );
-  }
-}
-
-class SettingsNumberField extends StatefulWidget {
-  const SettingsNumberField({
-    super.key,
-    required this.title,
-    required this.icon,
-    required this.initialValue,
-    required this.onChanged,
-    this.resetValue,
-    this.onReset,
-    this.suffixText,
-    this.subtitle,
-    this.showIcon = false,
-    this.committedText,
-  });
-
-  final String title;
-  final IconData? icon;
-  final String initialValue;
-
-  /// 非 null（连同 [onReset]）时行尾提供重置按钮：回填输入框 + 触发 [onReset]。
-  final String? resetValue;
-  final String? suffixText;
-
-  /// TODO-1353: 可选副标题（如「Ctrl+滚轮可直接缩放弹窗内容」提示）。null 时不渲染，
-  /// 现有调用点行为不变。
-  final String? subtitle;
-  final bool showIcon;
-  final ValueChanged<String> onChanged;
-  final VoidCallback? onReset;
-
-  /// 当前已提交（解析 + 夹取后）值的格式化文本。非 null 时失焦同步输入框——键入
-  /// 中不打扰（越界值在编辑途中很常见），编辑结束把「9999 实存 100」这类静默夹取
-  /// 显性化，输入框回显真实存储值。null = 保持旧行为（不回写）。
-  final String Function()? committedText;
-
-  @override
-  State<SettingsNumberField> createState() => SettingsNumberFieldState();
-}
-
-class SettingsNumberFieldState extends State<SettingsNumberField> {
-  late final TextEditingController _controller;
-  late final FocusNode _focusNode;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = TextEditingController(text: widget.initialValue);
-    _focusNode = FocusNode();
-    _focusNode.addListener(_syncCommittedOnUnfocus);
-  }
-
-  @override
-  void dispose() {
-    _focusNode.removeListener(_syncCommittedOnUnfocus);
-    _focusNode.dispose();
-    _controller.dispose();
-    super.dispose();
-  }
-
-  /// 失焦把输入框文本对齐到已提交值（见 [SettingsNumberField.committedText]）。
-  void _syncCommittedOnUnfocus() {
-    if (_focusNode.hasFocus) return;
-    final String? committed = widget.committedText?.call();
-    if (committed != null && committed != _controller.text) {
-      _controller.text = committed;
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final bool resettable = widget.resetValue != null && widget.onReset != null;
-    return AdaptiveSettingsRow(
-      title: widget.title,
-      subtitle: widget.subtitle,
-      icon: widget.icon,
-      showIcon: widget.showIcon,
-      controlBelow: true,
-      trailing: FushiTextField(
-        controller: _controller,
-        focusNode: _focusNode,
-        keyboardType: TextInputType.number,
-        suffixText: widget.suffixText,
-        suffixIcon: resettable
-            ? FushiIconButton(
-                tooltip: t.reset,
-                size: 18,
-                icon: Icons.undo_outlined,
-                onTap: () {
-                  _controller.text = widget.resetValue!;
-                  widget.onReset!();
-                  FocusScope.of(context).unfocus();
-                },
-              )
-            : null,
-        labelText: widget.title,
-        onChanged: widget.onChanged,
       ),
     );
   }

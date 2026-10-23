@@ -2,16 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/media.dart';
 import 'package:fushi/pages.dart';
 import 'package:fushi/src/media/display_title.dart';
 import 'package:fushi/src/media/media_cover_source.dart';
-import 'package:fushi_engine/media/video/video_book_repository.dart';
-import 'package:fushi/src/mining/galgame_library.dart';
-import 'package:fushi/src/pages/implementations/game_statistics_page.dart';
 import 'package:fushi/src/models/app_model.dart';
-import 'package:fushi/src/pages/implementations/galgame_detail_page.dart';
 import 'package:fushi/src/pages/implementations/stat_activity.dart';
 import 'package:fushi/src/pages/implementations/stat_charts.dart';
 import 'package:fushi/src/pages/implementations/stat_delete_confirm_dialog.dart';
@@ -19,7 +14,6 @@ import 'package:fushi/src/pages/implementations/stat_day_reset_hour_dialog.dart'
 import 'package:fushi/src/pages/implementations/stat_period_detail_sheet.dart';
 import 'package:fushi/src/pages/implementations/stat_session_list.dart';
 import 'package:fushi/src/pages/implementations/stat_shared.dart';
-import 'package:fushi/src/profile/profile_view_model.dart';
 import 'package:fushi_engine/stats/stat_facts.dart';
 import 'package:fushi/src/pages/implementations/stat_range_bar.dart';
 import 'package:fushi/src/stats/stat_range.dart';
@@ -71,11 +65,6 @@ class _StatisticsCenterPageState extends BasePageState<StatisticsCenterPage> {
 
   @override
   Widget build(BuildContext context) {
-    // v105：统计按 Profile 隔离——页头点明当前看的是哪个 Profile 的数字，否则
-    // 切个 Profile「统计全没了」无从解释。名字取 ProfileViewModel 的激活项
-    // （它在 _load 前是 -1 哨兵，此时不显示副标题，等它装好再重建）。
-    final String? profileName =
-        ref.watch(profileViewModelProvider).activeProfile?.name;
     return FushiPageScaffold(
       title: t.stat_center_title,
       // Kitapsen: one implicit profile with no profile UI, so no scope line
@@ -165,20 +154,14 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
   Map<String, String> _epubUidByBookKey = <String, String>{};
   Map<String, int> _primaryCollectionByEntry = <String, int>{};
   Map<int, String> _collectionNamesById = <int, String>{};
-  List<GalgameEntry> _games = <GalgameEntry>[];
 
   /// 会话行封面的两张表：书条目（键 = 段 mediaKey，bookKey / 有声书 srt uid
   /// 两种书身份都收，与 [_openEntry] 同一判据）与视频封面路径（键 = bookUid）。
   /// 游戏封面直接从 [_games] 取。
   Map<String, MediaItem> _bookItemsByKey = <String, MediaItem>{};
-  Map<String, String> _videoCoverPathByUid = <String, String>{};
+  final Map<String, String> _videoCoverPathByUid = <String, String>{};
 
-  /// 跨域计数面分桶（阅读 + 视频 + 游戏三个来源之和）。时段卡之前只有时长 / 字数，
-  /// 制卡与查词这两个每天都在动的数字在总览上一个都看不到，只能逐个 tab 翻——
-  /// 现在与三个域 tab 的时段卡逐行同形。
-  StatActivityBuckets _lookup = StatActivityBuckets();
-  StatActivityBuckets _mined = StatActivityBuckets();
-  StatActivityBuckets _favorited = StatActivityBuckets();
+  /// 收藏语句计数分桶（时段卡）。
   StatActivityBuckets _favoritedSentences = StatActivityBuckets();
 
   /// 本轮加载时的统计窗口（「今日」只有一个，BUG-2219）。
@@ -186,10 +169,6 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
 
   /// 跨域逐日合计（范围图表 / 所选范围卡 / 学习日历共用）。
   Map<String, StatDayData> _byDay = <String, StatDayData>{};
-
-  /// 跨域查词 / 制卡事件（dateKey, 次数），所选范围卡按范围求和。
-  List<(String, int)> _lookupEvents = const <(String, int)>[];
-  List<(String, int)> _minedEvents = const <(String, int)>[];
 
   @override
   void initState() {
@@ -232,11 +211,8 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
       final DateTime now = DateTime.now();
       _window = StatWindow(now);
       final StatCounterFacts counters = facts.counters;
-      _lookupEvents = counters.lookupEvents().toList();
-      _minedEvents = counters.minedEvents().toList();
-      _lookup = bucketActivityByDateKey(counters.lookupEvents(), now);
-      _mined = bucketActivityByDateKey(counters.minedEvents(), now);
-      _favorited = bucketActivityByDateKey(counters.favoriteWordEvents(), now);
+      counters.lookupEvents().toList();
+      counters.minedEvents().toList();
       _favoritedSentences = bucketActivityByDateKey(
         counters.favoriteSentenceEvents(),
         now,
@@ -389,12 +365,7 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
   /// override 书名），只是输入是会话而非事实行。
   String _sessionTitle(StudySession s) {
     if (s.isGame) {
-      final GalgameEntry? entry = findGalgameForActivity(
-        _games,
-        mediaKey: s.mediaKey,
-        title: s.title,
-      );
-      return displayTitleForGame(entry: entry, rawTitle: s.title);
+      return displayTitleForGame( rawTitle: s.title);
     }
     if (s.isBook) {
       return ReaderFushiSource.instance.overrideTitleForBookKey(s.mediaKey) ??
@@ -409,11 +380,6 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
     if (s.isGame) {
       return resolveMediaCoverImage(
         kind: MediaKind.game,
-        localPath: findGalgameForActivity(
-          _games,
-          mediaKey: s.mediaKey,
-          title: s.title,
-        )?.coverPath,
         decodeWidth: kActivityCoverDecodePixelWidth,
       );
     }
@@ -621,12 +587,7 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
   /// 事实行 → 展示标题（合集名走 sheet 组头；与首页 dashboard 同判据）。
   String _entryTitle(StatFact f) {
     if (f.isGame) {
-      final GalgameEntry? entry = findGalgameForActivity(
-        _games,
-        mediaKey: f.mediaKey,
-        title: f.title,
-      );
-      final String name = displayTitleForGame(entry: entry, rawTitle: f.title);
+      final String name = displayTitleForGame( rawTitle: f.title);
       return name.isEmpty ? f.mediaKey : name;
     }
     if (f.isBook) {

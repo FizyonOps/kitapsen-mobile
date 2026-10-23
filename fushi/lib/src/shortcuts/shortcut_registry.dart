@@ -45,9 +45,6 @@ class FushiShortcutRegistry extends ChangeNotifier {
     _unknownEntries.clear();
   }
 
-  void loadFromJson(Map<String, dynamic> json) =>
-      _loadFromJson(json, platform: null);
-
   void _loadFromJson(Map<String, dynamic> json, {TargetPlatform? platform}) {
     // HBK-AUDIT-135: 先把整段 JSON 解析进本地 map，全部成功后再原子地提交到
     // _bindings/_unknownEntries。之前是逐条写入 _bindings，一旦
@@ -422,8 +419,6 @@ class FushiShortcutRegistry extends ChangeNotifier {
     };
   }
 
-  String toJsonString() => jsonEncode(toJson());
-
   void loadFromJsonString(String jsonString, TargetPlatform platform) {
     loadDefaults(platform);
     try {
@@ -435,78 +430,8 @@ class FushiShortcutRegistry extends ChangeNotifier {
     }
   }
 
-  void updateBinding(ShortcutAction action, ShortcutBindingSet bindings) {
-    _bindings[action] = bindings;
-    notifyListeners();
-  }
-
-  void updateBindingWithReassignments(
-    ShortcutAction action,
-    ShortcutBindingSet bindings, {
-    Iterable<InputBinding> removeKeyboardConflicts = const <InputBinding>[],
-    Iterable<GamepadBinding> removeGamepadConflicts = const <GamepadBinding>[],
-    Iterable<MouseBinding> removeMouseConflicts = const <MouseBinding>[],
-    Iterable<WheelBinding> removeWheelConflicts = const <WheelBinding>[],
-  }) {
-    final Set<InputBinding> keyboardToRemove =
-        Set<InputBinding>.of(removeKeyboardConflicts);
-    final Set<GamepadBinding> gamepadToRemove =
-        Set<GamepadBinding>.of(removeGamepadConflicts);
-    final Set<MouseBinding> mouseToRemove =
-        Set<MouseBinding>.of(removeMouseConflicts);
-    final Set<WheelBinding> wheelToRemove =
-        Set<WheelBinding>.of(removeWheelConflicts);
-
-    if (keyboardToRemove.isNotEmpty ||
-        gamepadToRemove.isNotEmpty ||
-        mouseToRemove.isNotEmpty ||
-        wheelToRemove.isNotEmpty) {
-      for (final ShortcutScope scope in action.scope.coactiveScopes) {
-        for (final ShortcutAction oldAction
-            in ShortcutAction.actionsForScope(scope)) {
-          if (oldAction == action) continue;
-          final ShortcutBindingSet oldBindings = bindingsFor(oldAction);
-          final List<InputBinding> keyboard = oldBindings.keyboardBindings
-              .where((InputBinding b) => !keyboardToRemove.contains(b))
-              .toList(growable: false);
-          final List<GamepadBinding> gamepad = oldBindings.gamepadBindings
-              .where((GamepadBinding b) => !gamepadToRemove.contains(b))
-              .toList(growable: false);
-          final List<MouseBinding> mouse = oldBindings.mouseBindings
-              .where((MouseBinding b) => !mouseToRemove.contains(b))
-              .toList(growable: false);
-          final List<WheelBinding> wheel = oldBindings.wheelBindings
-              .where((WheelBinding b) => !wheelToRemove.contains(b))
-              .toList(growable: false);
-          if (keyboard.length != oldBindings.keyboardBindings.length ||
-              gamepad.length != oldBindings.gamepadBindings.length ||
-              mouse.length != oldBindings.mouseBindings.length ||
-              wheel.length != oldBindings.wheelBindings.length) {
-            _bindings[oldAction] = oldBindings.copyWith(
-              keyboardBindings: keyboard,
-              gamepadBindings: gamepad,
-              mouseBindings: mouse,
-              wheelBindings: wheel,
-            );
-          }
-        }
-      }
-    }
-
-    _bindings[action] = bindings;
-    notifyListeners();
-  }
-
   void resetToDefaults(TargetPlatform platform) {
     loadDefaults(platform);
-    notifyListeners();
-  }
-
-  void resetScopeToDefaults(ShortcutScope scope, TargetPlatform platform) {
-    final defaults = ShortcutDefaults.forPlatform(platform);
-    for (final action in ShortcutAction.actionsForScope(scope)) {
-      _bindings[action] = defaults[action] ?? const ShortcutBindingSet();
-    }
     notifyListeners();
   }
 
@@ -583,118 +508,4 @@ class FushiShortcutRegistry extends ChangeNotifier {
     return null;
   }
 
-  /// 键盘冲突检测**额外**扫 `globalExternal`，理由与
-  /// [_gamepadPreemptingScopes] 同构、而且更强：这个 scope 的键盘绑定由
-  /// `GlobalLookupController` 注册成 win32 `RegisterHotKey`，是**全系统级**吞键
-  /// ——命中时前台程序（包括 Hibiki 自己的页面）根本收不到那次按键。于是用户把
-  /// app 外热键改成某个 app 内已用组合键（比如 Ctrl+F）后，阅读器 / 首页的
-  /// Ctrl+F 会在全 app 静默失效，而设置页一声不吭。
-  ///
-  /// 同样只改**检测**不改 `coactiveScopes`：后者同时喂运行时解析
-  /// （`resolveKeyboard` / `reverse_binding_index`），动它就是改派发。
-  static const List<ShortcutScope> _keyboardPreemptingScopes = <ShortcutScope>[
-    ShortcutScope.globalExternal
-  ];
-
-  ShortcutAction? hasKeyboardConflict(
-    ShortcutScope scope,
-    InputBinding binding, {
-    required ShortcutAction? exclude,
-  }) {
-    // globalExternal 自己改键时只扫自己：它已经是被扫的那一方，再把页面 scope 全
-    // 拉进来会让「OS 热键 vs 页面键」这条**单向**抢占被报成双向冲突。
-    final List<ShortcutScope> scopes = scope == ShortcutScope.globalExternal
-        ? scope.coactiveScopes
-        : <ShortcutScope>[
-            ...scope.coactiveScopes,
-            ..._keyboardPreemptingScopes
-          ];
-    for (final coactive in scopes) {
-      for (final action in ShortcutAction.actionsForScope(coactive)) {
-        if (action == exclude) continue;
-        final bindings = _bindings[action];
-        if (bindings == null) continue;
-        for (final kb in bindings.keyboardBindings) {
-          if (kb == binding) return action;
-        }
-      }
-    }
-    return null;
-  }
-
-  /// 手柄冲突检测**额外**扫 `globalExternal`。
-  ///
-  /// `globalExternal` 的 `coactiveScopes` 是它自己（"不经页面派发"），但 TODO-1066
-  /// 之后手柄那条已经**排在页面 Actions 之前**（`GamepadService` 里
-  /// `tryGlobalExternalLookupGamepadButton` 先跑，理由是主窗失焦时焦点树整棵不可
-  /// 聚焦、页面那条必然落空）。于是用户把手柄 Y 绑给 app 外查词后，Y 在阅读器 /
-  /// 视频 / 漫画里会被静默吃掉，而设置页一声不吭。
-  ///
-  /// 只改**检测**不改 `coactiveScopes`：后者同时喂运行时解析
-  /// （`resolveMouse` / `reverse_binding_index`），动它就是改派发。
-  static const List<ShortcutScope> _gamepadPreemptingScopes = <ShortcutScope>[
-    ShortcutScope.globalExternal
-  ];
-
-  ShortcutAction? hasGamepadConflict(
-    ShortcutScope scope,
-    GamepadBinding binding, {
-    required ShortcutAction? exclude,
-  }) {
-    final List<ShortcutScope> scopes = scope == ShortcutScope.globalExternal
-        ? scope.coactiveScopes
-        : <ShortcutScope>[...scope.coactiveScopes, ..._gamepadPreemptingScopes];
-    for (final coactive in scopes) {
-      for (final action in ShortcutAction.actionsForScope(coactive)) {
-        if (action == exclude) continue;
-        final bindings = _bindings[action];
-        if (bindings == null) continue;
-        for (final gp in bindings.gamepadBindings) {
-          if (gp == binding) return action;
-        }
-      }
-    }
-    return null;
-  }
-
-  /// TODO-1088: mouse-button conflict detection, mirroring the keyboard/gamepad
-  /// checks so binding a mouse button that's already owned by another action in a
-  /// coactive scope can prompt the same reassignment flow.
-  ShortcutAction? hasMouseConflict(
-    ShortcutScope scope,
-    MouseBinding binding, {
-    required ShortcutAction? exclude,
-  }) {
-    for (final coactive in scope.coactiveScopes) {
-      for (final action in ShortcutAction.actionsForScope(coactive)) {
-        if (action == exclude) continue;
-        final bindings = _bindings[action];
-        if (bindings == null) continue;
-        for (final mb in bindings.mouseBindings) {
-          if (mb == binding) return action;
-        }
-      }
-    }
-    return null;
-  }
-
-  /// 滚轮绑定的冲突检测，与键盘/手柄/鼠标三条同形：同一 co-active 组里同一
-  /// 「修饰键 + 方向」组合只能属于一个动作，否则后者永远不触发。
-  ShortcutAction? hasWheelConflict(
-    ShortcutScope scope,
-    WheelBinding binding, {
-    required ShortcutAction? exclude,
-  }) {
-    for (final coactive in scope.coactiveScopes) {
-      for (final action in ShortcutAction.actionsForScope(coactive)) {
-        if (action == exclude) continue;
-        final bindings = _bindings[action];
-        if (bindings == null) continue;
-        for (final wb in bindings.wheelBindings) {
-          if (wb == binding) return action;
-        }
-      }
-    }
-    return null;
-  }
 }

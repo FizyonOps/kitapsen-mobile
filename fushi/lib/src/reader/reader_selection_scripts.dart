@@ -1,23 +1,6 @@
 import 'dart:convert';
-import 'dart:ui';
 
-/// TODO-393：阅读器 DOM 里「当前查词句」前后一条上下文句的解析结果。
-/// [normOffset]/[normLength] 是整书归一化偏移（有 [window.fushiReader] 时才有值），
-/// 供有声书把这句映射到音频区间；纯阅读时为 null（只合文本）。
-class SurroundingSentence {
-  const SurroundingSentence({
-    required this.sentence,
-    this.normOffset,
-    this.normLength,
-  });
-
-  final String sentence;
-  final int? normOffset;
-  final int? normLength;
-}
-
-class ReaderSelectionScripts {
-  ReaderSelectionScripts._();
+abstract class ReaderSelectionScripts {
 
   /// TODO-956：「收藏句子」的数据契约——选中可见词 ⇒ currentSentence 必非空。
   /// 唯一写点 `lookup.part.dart` 把 `currentSentence` 写成 JS 回传的 [sentence]
@@ -31,20 +14,6 @@ class ReaderSelectionScripts {
   /// 非空）。与 JS 块级兜底叠加，彻底消灭「未选择句子」误报。
   static String resolveCurrentSentenceText(String sentence, String word) =>
       sentence.isNotEmpty ? sentence : word;
-
-  /// TODO-851：[fromHover] 区分调用来源——`true` 表示悬停查词（onShiftHover /
-  /// onDismissBarrierHover），命中空白时 JS 端**不** fire `onTapEmpty`（只清选区），
-  /// 避免悬停扫过正文空白反复 toggle 操作栏导致闪烁；`false`（默认）是真点击路径，
-  /// 命中空白仍 fire `onTapEmpty`（保留「点空白隐藏操作栏」行为，向后兼容）。
-  static String selectInvocation(
-    double x,
-    double y,
-    int maxLength, {
-    bool fromHover = false,
-  }) => 'window.fushiSelection.selectText($x, $y, $maxLength, $fromHover)';
-
-  static String highlightInvocation(int count) =>
-      'JSON.stringify(window.fushiSelection.highlightSelection($count))';
 
   static String clearInvocation() => 'window.fushiSelection.clearSelection()';
 
@@ -189,55 +158,6 @@ class ReaderSelectionScripts {
     }
   }
 
-  /// TODO-393：取「当前查词句」前后各 N 句的上下文（制卡「上 N 句 / 下 N 句」用）。
-  /// 返回的 JSON 由 [surroundingSentencesFromResult] 解析。[prevCount] / [nextCount]
-  /// 是想要的最大句数（实际可能更少，到段首/文首即止）。
-  static String surroundingSentencesInvocation(int prevCount, int nextCount) =>
-      'JSON.stringify(window.fushiSelection.getSurroundingSentences('
-      '$prevCount, $nextCount))';
-
-  /// 解析 [surroundingSentencesInvocation] 的结果为 `(prev, next)` 两组句子上下文，
-  /// 每条带 [sentence] 文本与（可选）整书归一化偏移 [normOffset]/[normLength]
-  /// （供有声书裁句子音频区间）。无选区 / 解析失败时返回两个空列表。
-  static ({List<SurroundingSentence> prev, List<SurroundingSentence> next})
-  surroundingSentencesFromResult(Object? raw) {
-    const empty = (
-      prev: <SurroundingSentence>[],
-      next: <SurroundingSentence>[],
-    );
-    if (raw == null) return empty;
-    try {
-      final Object decoded;
-      if (raw is String) {
-        final String trimmed = raw.trim();
-        if (trimmed.isEmpty || trimmed == 'null') return empty;
-        decoded = jsonDecode(trimmed) as Object;
-      } else {
-        decoded = raw;
-      }
-      if (decoded is! Map) return empty;
-      List<SurroundingSentence> parseList(Object? list) {
-        if (list is! List) return const <SurroundingSentence>[];
-        return <SurroundingSentence>[
-          for (final Object? item in list)
-            if (item is Map)
-              SurroundingSentence(
-                sentence: item['sentence']?.toString() ?? '',
-                normOffset: (item['normOffset'] as num?)?.toInt(),
-                normLength: (item['normLength'] as num?)?.toInt(),
-              ),
-        ];
-      }
-
-      return (
-        prev: parseList(decoded['prev']),
-        next: parseList(decoded['next']),
-      );
-    } catch (_) {
-      return empty;
-    }
-  }
-
   /// TODO-954：取**浏览器原生选区**的句级归一化区间（阅读器右键「导出片段」用）。
   /// 回传 JSON 字段与 onTextSelected 同构（[ReaderSelectionData.fromJson] 直接可解），
   /// 让右键导出复用 tap 路径同一套选区→cue 状态，不另起特例。无选区回传 `null`。
@@ -284,41 +204,6 @@ class ReaderSelectionScripts {
       return const <({String src, int normOffset})>[];
     }
   }
-
-  static bool didSelectNothing(String? result) {
-    if (result == null) return true;
-    final String trimmed = result.trim().replaceAll('"', '');
-    return trimmed.isEmpty || trimmed == 'null';
-  }
-
-  static Rect? highlightRectFromResult(Object? raw, {double topOffset = 0}) {
-    if (raw == null) return null;
-    try {
-      final Map<String, dynamic> data;
-      if (raw is String) {
-        final String trimmed = raw.trim();
-        if (trimmed.isEmpty || trimmed == 'null') return null;
-        data = jsonDecode(trimmed) as Map<String, dynamic>;
-      } else if (raw is Map) {
-        data = Map<String, dynamic>.from(raw);
-      } else {
-        return null;
-      }
-      final double width = (data['width'] as num).toDouble();
-      final double height = (data['height'] as num).toDouble();
-      if (width <= 0 || height <= 0) return null;
-      return Rect.fromLTWH(
-        (data['x'] as num).toDouble(),
-        (data['y'] as num).toDouble() + topOffset,
-        width,
-        height,
-      );
-    } catch (_) {
-      return null;
-    }
-  }
-
-  static String script() => '<script>\n${source()}\n</script>';
 
   static String source() => r"""
 const CJK_UNIFIED_IDEOGRAPHS_RANGE = [0x4e00, 0x9fff];

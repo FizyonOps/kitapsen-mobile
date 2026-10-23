@@ -19,8 +19,6 @@ abstract interface class EngineLogSink {
   /// 诊断信息（非错误）。
   void logDiagnostic(String source, Object info);
 
-  /// 致命错误（宿主可能据此触发上报）。
-  void logFatal(String source, Object error, [StackTrace? stack]);
 }
 
 /// 默认 sink：写 stderr，不缓存、不上传。
@@ -38,11 +36,6 @@ class StderrEngineLogSink implements EngineLogSink {
     stderr.writeln('[fushi-engine] $source: $info');
   }
 
-  @override
-  void logFatal(String source, Object error, [StackTrace? stack]) {
-    stderr.writeln('[fushi-engine] FATAL $source: $error');
-    if (stack != null) stderr.writeln(stack);
-  }
 }
 
 /// 全局装配点。宿主进程入口写一次。

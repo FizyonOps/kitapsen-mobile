@@ -1,25 +1,10 @@
-import 'dart:async' show unawaited;
 import 'dart:math' as math;
 
-import 'package:flutter/cupertino.dart' show CupertinoIcons;
-import 'package:flutter/foundation.dart' show defaultTargetPlatform;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 // SelectedContent 住在 rendering 层（selection.dart），material 不转出它。
 import 'package:flutter/rendering.dart' show SelectedContent;
-import 'package:flutter/scheduler.dart' show SchedulerBinding;
-import 'package:flutter/services.dart'
-    show
-        Clipboard,
-        ClipboardData,
-        HardwareKeyboard,
-        KeyDownEvent,
-        KeyEvent,
-        LogicalKeyboardKey,
-        SystemChannels,
-        TextInputAction;
-import 'package:macos_ui/macos_ui.dart'
-    show MacosTextField, MacosIcon, OverlayVisibilityMode;
+import 'package:flutter/services.dart' show Clipboard, ClipboardData, TextInputAction;
 import 'package:fushi/src/shortcuts/context_menu_trigger.dart';
 import 'package:fushi/i18n/strings.g.dart';
 import 'package:fushi/src/utils/adaptive/adaptive_platform.dart';
@@ -375,211 +360,6 @@ class _FushiListItemState extends State<FushiListItem> {
   }
 }
 
-class FushiSearchField extends StatelessWidget {
-  const FushiSearchField({
-    required this.controller,
-    required this.focusNode,
-    required this.hintText,
-    required this.onChanged,
-    required this.onSubmitted,
-    super.key,
-    this.fieldKey,
-    this.clearButtonKey,
-    this.focusId,
-    this.onClear,
-  });
-
-  final Key? fieldKey;
-  final Key? clearButtonKey;
-  final FushiFocusId? focusId;
-  final TextEditingController controller;
-  final FocusNode focusNode;
-  final String hintText;
-  final ValueChanged<String> onChanged;
-  final ValueChanged<String> onSubmitted;
-  final VoidCallback? onClear;
-
-  /// 提交的收尾：清 composing，移动端再收起软键盘（BUG-2686）。
-  ///
-  /// 焦点刻意**不**交出去：unfocus 之后 [FushiFocusRoot] 的被动修复会把焦点
-  /// 还给登记过的搜索框（BUG-2620），移动端键盘随之再弹一次。所以只收键盘、
-  /// 不交焦点——再点一下框（EditableText.requestKeyboard）键盘就回来。
-  ///
-  /// 收键盘必须排在 EditableText 自己的收尾**之后**：提交动作带 shouldUnfocus，
-  /// 而焦点还在，它会在 onSubmitted 之后排一个 microtask 重建输入连接并 show
-  /// （flutter#84240 的「开发者把焦点留住了就重置键盘」）。在这里同步 hide 会被
-  /// 那次 show 覆盖——实测日志就是 hide → clearClient → setClient → show。
-  /// 所以收键盘排到下一帧的后帧回调：帧总在 microtask 队列排空之后才开始，顺序
-  /// 是确定的，不是靠等时间。后帧回调本身不调度帧，必须显式 scheduleFrame，否则
-  /// 没有别的 setState 时它永远不跑。桌面端没有要收的软键盘，维持原样。
-  void _finishSubmit() {
-    controller.clearComposing();
-    if (defaultTargetPlatform != TargetPlatform.android &&
-        defaultTargetPlatform != TargetPlatform.iOS) {
-      return;
-    }
-    SchedulerBinding.instance
-      ..addPostFrameCallback((_) {
-        if (!focusNode.hasFocus) return;
-        unawaited(
-            SystemChannels.textInput.invokeMethod<void>('TextInput.hide'));
-      })
-      ..scheduleFrame();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final FushiDesignTokens tokens = FushiDesignTokens.of(context);
-    final Widget searchBar;
-    if (isMacosPlatform(context)) {
-      // macOS-native: MacosTextField maps the search field faithfully —
-      // search-icon prefix, native clear button (clearButtonMode), and it keeps
-      // onSubmitted (MacosSearchField drops it, which would break enter-to-search).
-      searchBar = MacosTextField(
-        key: fieldKey,
-        controller: controller,
-        focusNode: focusNode,
-        placeholder: hintText,
-        prefix: const Padding(
-          padding: EdgeInsets.only(left: 6, right: 2),
-          child: MacosIcon(CupertinoIcons.search),
-        ),
-        clearButtonMode: OverlayVisibilityMode.editing,
-        onChanged: onChanged,
-        onSubmitted: onSubmitted,
-      );
-    } else {
-      searchBar = ValueListenableBuilder<TextEditingValue>(
-        valueListenable: controller,
-        builder: (context, value, _) {
-          final Widget? inputSuffix = _hibikiTextFieldInputSuffix(
-            context: context,
-            controller: controller,
-            onChanged: onChanged,
-            iconSize: kFushiSearchFieldIconSize,
-            padding: const EdgeInsets.all(4),
-          );
-          final List<Widget> trailing = <Widget>[
-            if (onClear != null && value.text.isNotEmpty)
-              FushiIconButton(
-                key: clearButtonKey,
-                icon: Icons.close,
-                tooltip: t.clear,
-                size: kFushiSearchFieldIconSize,
-                padding: const EdgeInsets.all(4),
-                onTap: () {
-                  onClear?.call();
-                  if (focusNode.canRequestFocus) {
-                    focusNode.requestFocus();
-                  }
-                },
-              ),
-            if (inputSuffix != null) inputSuffix,
-          ];
-          return SizedBox(
-            height: kFushiSearchFieldHeight,
-            child: TextField(
-              key: fieldKey,
-              controller: controller,
-              focusNode: focusNode,
-              style: tokens.type.listTitle,
-              decoration: InputDecoration(
-                isDense: true,
-                hintText: hintText,
-                hintStyle: tokens.type.listSubtitle,
-                prefixIcon: const Icon(
-                  Icons.search,
-                  size: kFushiSearchFieldIconSize,
-                ),
-                border: const OutlineInputBorder(),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 8,
-                  vertical: 4,
-                ),
-                suffixIcon: trailing.isEmpty
-                    ? null
-                    : Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: trailing,
-                      ),
-                suffixIconConstraints: const BoxConstraints(
-                  minWidth: 32,
-                  minHeight: 32,
-                ),
-              ),
-              // 搜索框的提交动作必须显式声明：不声明时软键盘/IME 给的是
-              // 「完成」，而 `TextInputAction.done` 的默认收尾是 unfocus——焦点
-              // 一掉，[FushiFocusRoot] 的修复链又会把它以编程方式还回来，桌面端
-              // 的 EditableText 对非点击获得的焦点整段选中，于是按下回车的观感
-              // 就是「文字被全选、什么也没搜」（BUG-2620）。
-              textInputAction: TextInputAction.search,
-              // 给了 onEditingComplete 就不会走默认的 unfocus 收尾，焦点留在
-              // 框里；onSubmitted 仍照常触发。composing 要自己清，移动端的软
-              // 键盘也要自己收（见 [_finishSubmit]）。
-              onEditingComplete: _finishSubmit,
-              onChanged: onChanged,
-              onSubmitted: onSubmitted,
-            ),
-          );
-        },
-      );
-    }
-    // 物理回车的兜底：提交动作本该由平台 text-input 桥转成 onSubmitted，但那条
-    // 路要穿过 engine 的输入插件，桌面端一旦没走到，按回车就是「什么也没发生」，
-    // 用户只能靠改动输入再等防抖才搜得出来（BUG-2620）。键事件这一层是确定性的，
-    // 直接在这里认领裸回车并调 onSubmitted，handled 同时挡住重复提交。
-    //
-    // 两种情况必须放行：带修饰键的回车（不是提交语义），以及 IME 组字期间的回车
-    // ——那一下是确认候选词，抢走它等于日文/中文输入法在搜索框里没法选词。
-    final Widget submittable = Focus(
-      canRequestFocus: false,
-      skipTraversal: true,
-      onKeyEvent: (FocusNode node, KeyEvent event) {
-        if (event is! KeyDownEvent) return KeyEventResult.ignored;
-        if (event.logicalKey != LogicalKeyboardKey.enter &&
-            event.logicalKey != LogicalKeyboardKey.numpadEnter) {
-          return KeyEventResult.ignored;
-        }
-        if (HardwareKeyboard.instance.isControlPressed ||
-            HardwareKeyboard.instance.isShiftPressed ||
-            HardwareKeyboard.instance.isAltPressed ||
-            HardwareKeyboard.instance.isMetaPressed) {
-          return KeyEventResult.ignored;
-        }
-        if (!focusNode.hasFocus) return KeyEventResult.ignored;
-        if (controller.value.composing.isValid) return KeyEventResult.ignored;
-        onSubmitted(controller.text);
-        // 有的移动端输入法把「搜索」键发成回车键事件而不是 editor action，
-        // 走到这里的提交同样要收键盘。
-        _finishSubmit();
-        return KeyEventResult.handled;
-      },
-      child: searchBar,
-    );
-    if (focusId == null) return submittable;
-    if (FushiFocusRoot.maybeControllerOf(context) == null) return submittable;
-    return FushiFocusRegistration(
-      id: focusId!,
-      focusNode: focusNode,
-      child: submittable,
-    );
-  }
-}
-
-/// 搜索框统一形态（2026-09）：与三大媒体库页（书架 / 视频库 / 游戏库）的工具条搜索框
-/// 逐字对齐——固定 40 高、[OutlineInputBorder] 描边、透明底、18px 图标 + `isDense`。
-/// 此前 [FushiSearchField] 用的是 MD3 搜索条形态（高填充容器色、圆角 12、高约 56），
-/// 导致同一导航里「发现」页与「全部视频」页两种外观，且比同行的筛选按钮更高。
-///
-/// 常量定义放在类之后：`md3_design_system_static_test` 用 `class FushiSearchField`
-/// 这个字面量当上一段切片的终点，插在类前会把这段注释卷进它的扫描面。
-const double kFushiSearchFieldHeight = 40;
-
-/// 搜索框内前缀/后缀图标尺寸。[FushiIconButton] 默认 24px 图标 + `spacing.gap` 内边距
-/// 合计约 40 高，正好撑破 [kFushiSearchFieldHeight] 的内容区，故 trailing 按钮必须同时
-/// 收窄 size 与 padding。
-const double kFushiSearchFieldIconSize = 18;
-
 class FushiTextField extends StatefulWidget {
   const FushiTextField({
     super.key,
@@ -709,12 +489,10 @@ class _FushiTextFieldState extends State<FushiTextField> {
   }
 }
 
-/// The input-assist suffix icon for a text field. On desktop (no system IME) it
-/// opens the on-screen [showGamepadKeyboard]; on mobile it offers one-tap
-/// clipboard paste (the system IME types, but paste otherwise needs a
-/// long-press). [onChanged] is forwarded so a programmatic edit (on-screen
-/// keyboard input or paste) still updates reactive fields — Flutter does not
-/// fire `onChanged` on programmatic controller mutations.
+/// The input-assist suffix icon for a text field: one-tap clipboard paste (the
+/// system IME types, but paste otherwise needs a long-press). [onChanged] is
+/// forwarded so a programmatic edit (paste) still updates reactive fields —
+/// Flutter does not fire `onChanged` on programmatic controller mutations.
 /// [iconSize] / [padding] 为空时保持 [FushiIconButton] 的默认尺寸（[FushiTextField]
 /// 等常规输入框沿用原样）；[FushiSearchField] 传紧凑值，否则默认按钮会撑破 40 高的
 /// 搜索框内容区。
@@ -726,20 +504,6 @@ Widget? _hibikiTextFieldInputSuffix({
   EdgeInsets? padding,
 }) {
   if (controller == null) return null;
-  final TargetPlatform platform = Theme.of(context).platform;
-  final bool isDesktop = platform == TargetPlatform.windows ||
-      platform == TargetPlatform.linux ||
-      platform == TargetPlatform.macOS;
-  if (isDesktop) {
-    return FushiIconButton(
-      icon: Icons.keyboard_outlined,
-      tooltip: t.on_screen_keyboard,
-      size: iconSize,
-      padding: padding,
-      onTap: () =>
-          showGamepadKeyboard(context, controller, onChanged: onChanged),
-    );
-  }
   return FushiIconButton(
     icon: Icons.content_paste_outlined,
     tooltip: t.paste,
@@ -850,23 +614,7 @@ class FushiSelectableChip extends StatelessWidget {
     final Widget withTooltip = effectiveTooltip == null
         ? chip
         : Tooltip(message: effectiveTooltip, child: chip);
-    if (focusId == null) return withTooltip;
-    if (FushiFocusRoot.maybeControllerOf(context) == null) return withTooltip;
-    return Actions(
-      actions: <Type, Action<Intent>>{
-        ActivateIntent: CallbackAction<ActivateIntent>(
-          onInvoke: (_) {
-            onSelected?.call(!selected);
-            return null;
-          },
-        ),
-      },
-      child: FushiFocusTarget(
-        id: focusId!,
-        enabled: onSelected != null,
-        child: withTooltip,
-      ),
-    );
+    return withTooltip;
   }
 }
 
@@ -905,22 +653,7 @@ class FushiActionChip extends StatelessWidget {
         style: tokens.type.controlLabel,
       ),
     );
-    if (focusId == null) return button;
-    if (FushiFocusRoot.maybeControllerOf(context) == null) return button;
-    return Actions(
-      actions: <Type, Action<Intent>>{
-        ActivateIntent: CallbackAction<ActivateIntent>(
-          onInvoke: (_) {
-            onPressed();
-            return null;
-          },
-        ),
-      },
-      child: FushiFocusTarget(
-        id: focusId!,
-        child: button,
-      ),
-    );
+    return button;
   }
 }
 
@@ -1081,7 +814,6 @@ class _FushiTagChipState extends State<FushiTagChip> {
             if (intent.button != GamepadButton.x || widget.onDeleted == null) {
               return false;
             }
-            widget.onDeleted!();
             return true;
           },
         ),
@@ -1554,23 +1286,7 @@ Widget _buildSwatchInteractive(
     selected: selected,
     child: interactiveSwatch,
   );
-  if (label == null) return semanticSwatch;
-  final FushiDesignTokens tokens = FushiDesignTokens.of(context);
-  return Column(
-    mainAxisSize: MainAxisSize.min,
-    children: <Widget>[
-      semanticSwatch,
-      SizedBox(height: tokens.spacing.gap / 2),
-      Text(
-        label,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        style: tokens.type.metadata.copyWith(
-          color: textColor ?? tokens.surfaces.onSurface,
-        ),
-      ),
-    ],
-  );
+  return semanticSwatch;
 }
 
 /// Registers [child] as a single gamepad/keyboard focus stop whose A/Enter
@@ -2673,49 +2389,6 @@ class FushiToolScaffold extends StatelessWidget {
   }
 }
 
-class FushiTransientScaffold extends StatelessWidget {
-  const FushiTransientScaffold({
-    required this.body,
-    super.key,
-    this.backgroundColor,
-    this.safeArea = true,
-  });
-
-  final Widget body;
-  final Color? backgroundColor;
-  final bool safeArea;
-
-  @override
-  Widget build(BuildContext context) {
-    final FushiDesignTokens tokens = FushiDesignTokens.of(context);
-    final Widget content = safeArea ? SafeArea(child: body) : body;
-    return Scaffold(
-      backgroundColor: backgroundColor ?? tokens.surfaces.page,
-      body: content,
-    );
-  }
-}
-
-class FushiOverlayScaffold extends StatelessWidget {
-  const FushiOverlayScaffold({
-    required this.body,
-    super.key,
-    this.safeArea = true,
-  });
-
-  final Widget body;
-  final bool safeArea;
-
-  @override
-  Widget build(BuildContext context) {
-    final Widget content = safeArea ? SafeArea(child: body) : body;
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: content,
-    );
-  }
-}
-
 class FushiFilePickerRow extends StatelessWidget {
   const FushiFilePickerRow({
     required this.title,
@@ -2737,9 +2410,7 @@ class FushiFilePickerRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FushiDesignTokens tokens = FushiDesignTokens.of(context);
-    final Color foreground = enabled
-        ? tokens.surfaces.onVariant
-        : tokens.surfaces.onVariant.withValues(alpha: 0.38);
+    final Color foreground = (tokens.surfaces.onVariant);
     return FushiListItem(
       onTap: enabled ? onTap : null,
       minHeight: 60,
@@ -2868,7 +2539,7 @@ class _FushiPopupMenuItemContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final FushiDesignTokens tokens = FushiDesignTokens.of(context);
     final Color foreground = color ??
-        (selected ? tokens.surfaces.primary : tokens.surfaces.onSurface);
+        ((tokens.surfaces.onSurface));
     final TextStyle textStyle = tokens.type.listTitle.copyWith(
       color: foreground,
       fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
@@ -3367,16 +3038,10 @@ class _LogSelectionScrollController extends ScrollController {
     required Curve curve,
   }) {
     if (!_allowProgrammaticScroll(offset, animated: true)) {
-      return Future<void>.value();
     }
     return super.animateTo(offset, duration: duration, curve: curve);
   }
 
-  @override
-  void jumpTo(double value) {
-    if (!_allowProgrammaticScroll(value, animated: false)) return;
-    super.jumpTo(value);
-  }
 }
 
 class _LogSelectionScrollPosition extends ScrollPositionWithSingleContext {
@@ -3401,7 +3066,6 @@ class _LogSelectionScrollPosition extends ScrollPositionWithSingleContext {
     required Curve curve,
   }) {
     if (!controller._allowProgrammaticScroll(to, animated: true)) {
-      return Future<void>.value();
     }
     return super.animateTo(to, duration: duration, curve: curve);
   }
@@ -3460,241 +3124,6 @@ class FushiEditorPanel extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class FushiPopupSurface extends StatelessWidget {
-  const FushiPopupSurface({
-    required this.child,
-    super.key,
-    this.color,
-    this.padding = EdgeInsets.zero,
-    this.elevation = 0,
-    this.showBorder = true,
-    this.clipBehavior = Clip.antiAlias,
-    this.borderOnForeground = true,
-    this.borderRadius,
-  });
-
-  final Widget child;
-  final Color? color;
-  final EdgeInsetsGeometry padding;
-  final double elevation;
-  final bool showBorder;
-  final Clip clipBehavior;
-
-  /// 圆角覆写。默认 null = 走设计令牌的卡片圆角（10）。
-  ///
-  /// 唯一的现实用途是**贴边的 surface**：查词弹窗的底部 dock 面板铺满屏幕最左到最右
-  /// （BUG-2439），此时左右两侧的圆角弧会在屏幕边缘露出背景，看起来就是「没铺满」。
-  /// 贴哪条边就把那两个角摊平，别整块改令牌——其余 surface 的圆角是全局一致的。
-  final BorderRadius? borderRadius;
-
-  /// BUG-1692：描边画在子节点**之前**还是**之后**。
-  ///
-  /// 默认 true（Flutter [Material] 的默认值）时，描边走 `CustomPaint.foregroundPainter`，
-  /// 在子节点之后绘制，且其 paint bounds 是**整个 surface**。当 surface 里装的是原生
-  /// 平台视图（查词浮层的 WebView）时这是致命的：macOS engine 会把「平台视图之上
-  /// 的 Flutter 绘制区域」逐 rect 写进 `FlutterMutatorView` 的 `_hitTestIgnoreRegion`，
-  /// 落在其中的点 `hitTest:` 直接 return nil，于是**整块 WebView 收不到任何鼠标事件**
-  /// ——用户看到的就是「查词框点哪都没反应」。
-  ///
-  /// 装平台视图的 surface 传 false，把描边挪到子节点之前绘制即可解除。纯 Flutter
-  /// 子树无须改动（描边盖在不透明子节点上才需要 foreground）。
-  ///
-  /// BUG-2166：改成「之前绘制」的代价是**不透明的子节点会把描边整条盖掉**。查词浮层
-  /// 的 WebView 铺满顶栏以下的整块 surface 且文档背景不透明，于是四边描边只剩顶栏那
-  /// 一小段、以及圆角弧被 [clipBehavior] 裁出 WebView 的那几段还看得见——用户看到的
-  /// 就是「查词框没包边」。修法见 [_borderInsetChild]：为 false 时把子节点沿描边内缩
-  /// 一圈并按内圈半径再裁一次，描边环永远落在子节点之外，两个 bug 同时成立。
-  final bool borderOnForeground;
-
-  /// [BorderSide] 的默认笔宽，也是 [borderOnForeground] 为 false 时子节点内缩的量。
-  static const double _borderWidth = 1;
-
-  /// BUG-2166：描边画在子节点之前（[borderOnForeground] = false）时，给子节点让出
-  /// 描边所占的那一圈——沿四边内缩 [_borderWidth]，再按**内圈**半径
-  /// （`cardRadius - _borderWidth`）裁一次。不这样做，铺满 surface 的不透明子节点
-  /// （查词浮层的 WebView）会把描边直边段整条盖住，只在圆角处漏出几段弧。
-  ///
-  /// 描边走 [BorderSide.strokeAlignInside]（[RoundedRectangleBorder] 的默认），
-  /// 占 shape 内侧 `[0, _borderWidth]`，因此内缩一个笔宽即可完全避让。
-  ///
-  /// 描边仍画在子节点**之前**，BUG-1692 的 macOS 命中测试修复不受影响。
-  Widget _borderInsetChild(FushiDesignTokens tokens, Widget content) {
-    if (!showBorder || borderOnForeground) return content;
-    return Padding(
-      padding: const EdgeInsets.all(_borderWidth),
-      child: ClipRRect(
-        borderRadius: _deflate(_outerRadius(tokens)),
-        child: content,
-      ),
-    );
-  }
-
-  BorderRadius _outerRadius(FushiDesignTokens tokens) =>
-      borderRadius ?? tokens.radii.cardRadius;
-
-  /// 内圈半径 = 外圈逐角减一个笔宽（摊平的角保持摊平，不会被减成负数）。
-  static BorderRadius _deflate(BorderRadius outer) {
-    Radius shrink(Radius r) => Radius.elliptical(
-          math.max(0, r.x - _borderWidth),
-          math.max(0, r.y - _borderWidth),
-        );
-    return BorderRadius.only(
-      topLeft: shrink(outer.topLeft),
-      topRight: shrink(outer.topRight),
-      bottomLeft: shrink(outer.bottomLeft),
-      bottomRight: shrink(outer.bottomRight),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final FushiDesignTokens tokens = FushiDesignTokens.of(context);
-    return Material(
-      color: color ?? tokens.surfaces.card,
-      elevation: elevation,
-      shape: RoundedRectangleBorder(
-        borderRadius: _outerRadius(tokens),
-        side: showBorder
-            ? BorderSide(color: tokens.surfaces.outline, width: _borderWidth)
-            : BorderSide.none,
-      ),
-      clipBehavior: clipBehavior,
-      borderOnForeground: borderOnForeground,
-      child: _borderInsetChild(
-        tokens,
-        Padding(
-          padding: padding,
-          child: child,
-        ),
-      ),
-    );
-  }
-}
-
-class FushiCompactSearchRow extends StatelessWidget {
-  const FushiCompactSearchRow({
-    required this.controller,
-    required this.focusNode,
-    required this.hintText,
-    required this.onSubmit,
-    super.key,
-    this.onClose,
-    this.fieldKey,
-    this.closeButtonKey,
-    this.searchButtonKey,
-    this.hintLocales,
-  });
-
-  final TextEditingController controller;
-  final FocusNode focusNode;
-  final String hintText;
-  final ValueChanged<String> onSubmit;
-  final VoidCallback? onClose;
-  final Key? fieldKey;
-  final Key? closeButtonKey;
-  final Key? searchButtonKey;
-
-  /// 希望输入法切到哪种语言（Android `EditorInfo.hintLocales`，API 24+）。
-  ///
-  /// 由调用方从「查词输入法语言」偏好算出来传进来（`AppModel.lookupImeHintLocales`），组件
-  /// **不自己读设置**：这几个组件被大量无 ProviderScope 的 widget 测试直接 pump，
-  /// 往 build 路径里加 Riverpod 读取会让整页 build 抛。
-  final List<Locale>? hintLocales;
-
-  void _submit() {
-    final String query = controller.text.trim();
-    if (query.isEmpty) return;
-    onSubmit(query);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final FushiDesignTokens tokens = FushiDesignTokens.of(context);
-    final String closeTooltip =
-        MaterialLocalizations.of(context).closeButtonTooltip;
-    final Widget? keyboardSuffix = _hibikiTextFieldInputSuffix(
-      context: context,
-      controller: controller,
-    );
-    return FushiCard(
-      color: tokens.surfaces.search,
-      borderRadius: tokens.radii.controlRadius,
-      padding: const EdgeInsets.symmetric(horizontal: 4),
-      child: SizedBox(
-        height: 44,
-        child: Row(
-          children: <Widget>[
-            if (onClose != null)
-              _CompactSearchIconButton(
-                key: closeButtonKey,
-                icon: Icons.close,
-                tooltip: closeTooltip,
-                onPressed: onClose!,
-              ),
-            Expanded(
-              child: TextField(
-                key: fieldKey,
-                controller: controller,
-                focusNode: focusNode,
-                style: tokens.type.listTitle,
-                decoration: InputDecoration(
-                  hintText: hintText,
-                  hintStyle: tokens.type.listSubtitle,
-                  isDense: true,
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-                  border: InputBorder.none,
-                  enabledBorder: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                ),
-                textInputAction: TextInputAction.search,
-                hintLocales: hintLocales,
-                onSubmitted: (_) => _submit(),
-              ),
-            ),
-            if (keyboardSuffix != null) keyboardSuffix,
-            _CompactSearchIconButton(
-              key: searchButtonKey,
-              icon: Icons.search,
-              tooltip: MaterialLocalizations.of(context).searchFieldLabel,
-              onPressed: _submit,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _CompactSearchIconButton extends StatelessWidget {
-  const _CompactSearchIconButton({
-    required this.icon,
-    required this.tooltip,
-    required this.onPressed,
-    super.key,
-  });
-
-  final IconData icon;
-  final String tooltip;
-  final VoidCallback onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    final FushiDesignTokens tokens = FushiDesignTokens.of(context);
-    return SizedBox(
-      width: 36,
-      height: 36,
-      child: FushiIconButton(
-        icon: icon,
-        enabledColor: tokens.surfaces.onVariant,
-        size: 20,
-        tooltip: tooltip,
-        padding: EdgeInsets.zero,
-        onTap: onPressed,
       ),
     );
   }

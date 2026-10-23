@@ -18,7 +18,6 @@
 /// 执行体也只有那一份），仲裁只回答「更内层已经派发过了吗」。
 library;
 
-import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:flutter/gestures.dart' show PointerDownEvent;
 
 import 'package:fushi/src/shortcuts/input_binding.dart';
@@ -82,8 +81,7 @@ ShortcutAction? resolveMouseBindingActionForButton({
 /// dismiss barrier）写成了「调完回调就往下走」——一个 claim 都没有。后果是浮层可见时
 /// 一次侧键被 barrier 与 app 根各派发一次：关词典 **+** 退书，而键盘 Esc 只关词典。
 /// 那次教训的结论不是「再加一条守卫检查有没有写对」，而是**把写错的可能性删掉**。
-class MouseBindingDispatch {
-  MouseBindingDispatch._();
+abstract class MouseBindingDispatch {
 
   static int? _claimedPointer;
 
@@ -92,10 +90,6 @@ class MouseBindingDispatch {
 
   static void _claim(PointerDownEvent event) => _claimedPointer = event.pointer;
 
-  /// 仅测试：清掉认领槽。静态态跨用例残留会让「第二个用例复用同一个 pointer id」
-  /// 静默变成 no-op（测试假绿）。
-  @visibleForTesting
-  static void resetForTest() => _claimedPointer = null;
 }
 
 /// 鼠标绑定派发的**唯一**入口：更内层已派发就让路，否则跑 [execute]，只有它确实

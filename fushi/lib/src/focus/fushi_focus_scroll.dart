@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fushi/src/focus/focus_geometry.dart';
 import 'package:fushi/src/focus/page_scroll_registry.dart';
 
-class FushiFocusScroll {
-  const FushiFocusScroll._();
+abstract class FushiFocusScroll {
 
   /// [alignment] 默认居中（0.5）。目录/章节这类「打开即定位」的场景常要偏上
   /// 一点（0.3），让当前行下面还能看见后续几行——给个参数，免得调用方为这一个
@@ -73,31 +72,6 @@ class FushiFocusScroll {
       return false;
     }
     return scrollPositionByViewportFraction(position, signedFraction);
-  }
-
-  /// 把 [context] 最近的 [PrimaryScrollController] 滚动 viewport 的
-  /// [signedFraction] 比例。用于手柄 LB/RB 整页翻屏——纯展示零焦点页（统计/日志）
-  /// 没有焦点几何目标，只能靠页面主滚动区翻屏。命中且仍能滚返回 true；无
-  /// PrimaryScrollController / 无 client / 已到边界返回 false。
-  static bool scrollPrimary(BuildContext context, double signedFraction) {
-    final ScrollController? controller =
-        PrimaryScrollController.maybeOf(context);
-    if (controller == null) return false;
-    return scrollController(controller, signedFraction);
-  }
-
-  /// Page a [controller] by the viewport [signedFraction]. Used by the gamepad
-  /// LB/RB fallback via PageScrollRegistry so it works even when focus is the
-  /// top-level fallback node (which has no PrimaryScrollController ancestor).
-  /// Exactly one attached position required: 0 = nothing to scroll; >1 =
-  /// ambiguous and `.position` would throw.
-  static bool scrollController(
-    ScrollController controller,
-    double signedFraction,
-  ) {
-    if (controller.positions.length != 1) return false;
-    return scrollPositionByViewportFraction(
-        controller.position, signedFraction);
   }
 
   /// 把一个已附着的 [position] 按 viewport 的 [signedFraction] 比例滚动一段。

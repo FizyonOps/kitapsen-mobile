@@ -1,8 +1,5 @@
-import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:flutter/material.dart';
 import 'package:fushi/pages.dart';
-import 'package:fushi/src/lookup/gal_ingame_lookup_controller.dart';
-import 'package:fushi/src/settings/cupertino_settings_renderer.dart';
 import 'package:fushi/src/settings/material_settings_renderer.dart';
 import 'package:fushi/src/settings/settings_context.dart';
 import 'package:fushi/src/settings/settings_destination.dart';
@@ -10,7 +7,6 @@ import 'package:fushi/src/settings/settings_detail_page.dart';
 import 'package:fushi/src/settings/settings_renderer.dart';
 import 'package:fushi/src/settings/settings_schema.dart';
 import 'package:fushi/src/settings/settings_search.dart';
-import 'package:fushi/src/utils/components/fushi_desktop_title_bar.dart';
 import 'package:fushi/utils.dart';
 
 class SettingsHomePage extends BasePage {
@@ -79,9 +75,7 @@ class _SettingsHomePageState extends BasePageState<SettingsHomePage>
       _selectedDestinationId = destinations.first.id;
     }
     final SettingsDestinationId selectedDestinationId = _selectedDestinationId!;
-    final SettingsRenderer renderer = isCupertinoPlatform(context)
-        ? const CupertinoSettingsRenderer()
-        : const MaterialSettingsRenderer();
+    const SettingsRenderer renderer = MaterialSettingsRenderer();
 
     final Widget content = LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
@@ -288,20 +282,6 @@ class _SettingsHomePageState extends BasePageState<SettingsHomePage>
 
   Widget _buildEmbeddedShell(Widget content) {
     if (!widget.embedded) {
-      return content;
-    }
-    // 自绘顶栏的桌面主窗口（Windows / macOS）已经由应用壳层提供当前 tab 标题；
-    // 设置仍是普通 home tab，左侧主导航始终可见，因此无需再画第二条
-    // 「返回 + 设置」页头。
-    if (FushiDesktopTitleBar.isEnabled) {
-      return content;
-    }
-    // Cupertino 手机（compact 走底栏导航、onBack 为空、无需返回出口）保持原生
-    // 无页头观感，不强加 Material 风页头。只有桌面/平板全屏设置（隐藏图标侧栏、
-    // 由 onBack 提供返回）才需补页头出口——这正是 BUG-009 R2 让 Cupertino 桌面
-    // 从「无出口的三栏混排」恢复成「页头(返回) + 二栏」的地方。Material 维持其
-    // 一贯页头（手机标题 / 桌面带返回箭头）。
-    if (isCupertinoPlatform(context) && widget.onBack == null) {
       return content;
     }
     // 全屏嵌入设置统一加自绘页头 + 返回箭头；叶子设置控件仍由各自渲染器保持

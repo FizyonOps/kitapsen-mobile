@@ -18,7 +18,7 @@ import 'package:fushi/src/utils/app_ui_scale.dart';
 
 @pragma('vm:platform-const')
 bool get isDesktopPlatform =>
-    Platform.isWindows || Platform.isMacOS || Platform.isLinux;
+    false;
 
 @pragma('vm:platform-const')
 bool get isMobilePlatform => Platform.isAndroid || Platform.isIOS;
@@ -31,16 +31,16 @@ bool get isIOSPlatform => Platform.isIOS;
 
 @pragma('vm:platform-const')
 bool get supportsNativeAudio =>
-    Platform.isAndroid || Platform.isIOS || Platform.isMacOS;
+    Platform.isAndroid || Platform.isIOS;
 
 @pragma('vm:platform-const')
 bool get supportsFloatingOverlay => Platform.isAndroid;
 
 @pragma('vm:platform-const')
-bool get isWindowsPlatform => Platform.isWindows;
+bool get isWindowsPlatform => false;
 
 @pragma('vm:platform-const')
-bool get isMacOSPlatform => Platform.isMacOS;
+bool get isMacOSPlatform => false;
 
 /// Sets the system-UI mode for the **home/menu shell** (book shelf, video,
 /// dictionary search, settings -- everything that is NOT an open media session).
@@ -74,10 +74,7 @@ Future<void> setHomeShellSystemUiMode() async {
 /// 平台，刻意不动）与移动端保持原有可回弹物理。始终保留 AlwaysScrollable 外层，
 /// 使短内容也可滚动 / 触发下拉刷新等行为。
 ScrollPhysics desktopAwareScrollPhysics() {
-  final bool md3Desktop = Platform.isWindows || Platform.isLinux;
-  return md3Desktop
-      ? const AlwaysScrollableScrollPhysics(parent: ClampingScrollPhysics())
-      : const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics());
+  return const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics());
 }
 
 /// 让**横向**滚动区接受鼠标 / 触控板 / 触笔的拖动滚动。
@@ -111,74 +108,6 @@ class HorizontalDragScrollable extends StatelessWidget {
     ),
     child: child,
   );
-}
-
-/// 让**横向**滚动区接受鼠标滚轮（把滚轮的纵向 delta 投到横轴）。BUG-1214。
-///
-/// 根因：Flutter 的 `Scrollable` 取 pointer signal 的分量是按**自身轴**取的
-/// （`scrollable.dart` 的 `_pointerSignalEventDelta`：横向取 `scrollDelta.dx`、
-/// 纵向取 `dy`），只有按住 `pointerAxisModifiers`（默认 Shift）且是物理鼠标时
-/// 才翻轴。物理滚轮发的是 `(0, dy)`，所以横向滚动区**裸滚轮完全没反应**——用户
-/// 只能拖滚动条或横拖（后者还受 `dragDevices` 限制，见 [HorizontalDragScrollable]）。
-///
-/// 修法与 Flutter 自己处理滚轮的路径一致：向 [PointerSignalResolver] 登记，命中
-/// 后调 [ScrollPosition.pointerScroll]（会正确更新 [ScrollDirection]、走物理钳制），
-/// 不是自造 `jumpTo`。
-///
-/// **只认物理鼠标**（`PointerDeviceKind.mouse`）：触控板两个方向都能给，横向分量
-/// 本来就被 `Scrollable` 直接吃掉，翻轴反而会让纵向双指手势莫名横滚——这也是
-/// Flutter 只对鼠标做轴翻转的理由。
-///
-/// 事件派发是内层优先：内层 `Scrollable` 若已表态（如触控板给了 dx、或 Shift 已
-/// 翻轴），它先登记、本件的登记自动变 no-op，不会双份滚动。内容没超出视口时本件
-/// 不登记，滚轮照常冒泡给外层（弹窗纵向滚动不被吞）。
-///
-/// **什么时候不要用**（BUG-1536）：横向区**嵌在纵向滚动页面里**时不要包本件——
-/// 内容超出视口时它会一直登记，指针停在这一行上整页就纵向滚不动了（用户实报的
-/// 视频首页横滚行症状）。那种场景把本件撤掉即可：未按 Shift 时横向 `Scrollable`
-/// 取 `dx`（物理滚轮恒 0）不登记，滚轮冒泡给外层纵滚；按住 Shift 时 Flutter 自己
-/// 就翻轴横滚。本件只留给**自身占满一屏、外面没有纵向滚动可抢**的横向面板（如
-/// 波形对轴弹窗的时间轴，那里用户明确要过裸滚轮平移）。
-class WheelToHorizontalScroll extends StatelessWidget {
-  const WheelToHorizontalScroll({
-    required this.controller,
-    required this.child,
-    super.key,
-  });
-
-  /// 目标横向滚动区的控制器（本件挂在滚动件**外面**，故不能靠 context 查 position）。
-  final ScrollController controller;
-
-  final Widget child;
-
-  void _onPointerSignal(PointerSignalEvent event) {
-    if (event is! PointerScrollEvent) return;
-    if (event.kind != PointerDeviceKind.mouse) return;
-    if (!controller.hasClients) return;
-
-    final ScrollPosition position = controller.position;
-    final double raw = event.scrollDelta.dy;
-    if (raw == 0) return;
-    // 与 Flutter 同口径：轴方向反向（RTL 下的横向滚动区）时取负。
-    final double delta = axisDirectionIsReversed(position.axisDirection)
-        ? -raw
-        : raw;
-    final double target = (position.pixels + delta).clamp(
-      position.minScrollExtent,
-      position.maxScrollExtent,
-    );
-    // 滚不动（已到头 / 内容没超出视口）就不登记，把事件让给外层滚动区。
-    if (target == position.pixels) return;
-
-    GestureBinding.instance.pointerSignalResolver.register(
-      event,
-      (PointerSignalEvent _) => position.pointerScroll(delta),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) =>
-      Listener(onPointerSignal: _onPointerSignal, child: child);
 }
 
 enum WindowSizeClass { compact, medium, expanded }
@@ -219,42 +148,6 @@ WindowSizeClass windowSizeClassReal(double logicalWidth, double appUiScale) {
   return windowSizeClassForWidth(realWidth);
 }
 
-WindowSizeClass windowSizeClassOf(BoxConstraints constraints) =>
-    windowSizeClassForWidth(constraints.maxWidth);
-
-WindowSizeClass windowSizeClassFromContext(BuildContext context) =>
-    windowSizeClassForWidth(MediaQuery.sizeOf(context).width);
-
-double? desktopContentMaxWidth(
-  WindowSizeClass sizeClass,
-  DesktopContentKind kind,
-) {
-  if (sizeClass == WindowSizeClass.compact) return null;
-  return switch (kind) {
-    // UI v2：取消书架/视频库在宽屏上的 1280px 内容宽上限（用户实报「莫名的左右
-    // 宽度上限」）。合集横排行/卡片网格是媒体墙布局，随窗口放宽天然多排一列，
-    // 居中锁窄反而两侧留白。侧向留白也为零（见 [desktopContentPadding]），
-    // 卡片自带内边距，真正 full-bleed。
-    DesktopContentKind.readerShelf => null,
-    // TODO-1352: 取消查词页（nav「查词」）在宽屏上的强制内容宽度上限。此前 1040px 把
-    // 查词结果区 WebView 居中锁死在窄栏，宽屏两侧大片留白、用户无法让词典正文占满。
-    // 返回 null 让 [DesktopContentLayout] 走 full-bleed 分支（词典正文是文字流，
-    // 仍保留 16/24px 侧向留白不贴边），词典正文随窗口放宽（可容纳更多
-    // --dict-columns 与更长释义）。嵌套查词弹窗渲染在根 Overlay、独立走
-    // popupMaxWidth，不受此项影响。
-    DesktopContentKind.dictionary => null,
-    // 取消设置页（含各库页内嵌的 [ModuleSettingsView] 设置标签页）在宽屏上的
-    // 960px 强制内容宽上限——这是书架（1280）/ 查词（1040）同款「莫名奇妙的宽度
-    // 限制」的最后一处残留：设置详情本身就是填满 pane 的列表流（设置主页的宽屏
-    // 主从布局早已按用户拍板不限宽，见 settings_home_page._buildWideLayout 注释），
-    // 唯独走 [DesktopContentLayout] 的这一支还把正文居中锁在 960，4K 窗口下两侧
-    // 各留 700+px 空白、且与同一 app 内不限宽的设置详情自相矛盾。
-    // 返回 null 走 full-bleed 分支，仍由 [desktopContentPadding] 保留 16/24px
-    // 侧向留白（正文不贴边）。
-    DesktopContentKind.settings => null,
-  };
-}
-
 /// [DesktopContentLayout] 的侧向留白。媒体墙类页面（[DesktopContentKind.readerShelf]：
 /// 书架/视频/游戏/漫画目录/来源页）恒为零——卡片自带内边距，宽屏上再叠 16/24px
 /// 强制侧向留白只是在侧栏与内容间挤出一条空带（用户实报「首页左右强制的间距」）。
@@ -269,10 +162,6 @@ EdgeInsets desktopContentPadding(
     WindowSizeClass.medium => const EdgeInsets.symmetric(horizontal: 16),
     WindowSizeClass.expanded => const EdgeInsets.symmetric(horizontal: 24),
   };
-}
-
-double desktopDialogContentWidth(double availableWidth) {
-  return (availableWidth * 0.8).clamp(256.0, 420.0);
 }
 
 double readerShelfGridExtentForWidth(double width) {
@@ -293,10 +182,6 @@ double supportingPaneWidthForLayout(double width) {
   return (width * 0.3).clamp(280.0, 360.0);
 }
 
-/// 书籍 / 视频快捷设置宽窗 master-detail 左父菜单的固定宽度。比
-/// [supportingPaneWidthForLayout] 更窄，给右侧详情留更多空间。
-const double kFushiSettingsSupportingPaneWidth = 208.0;
-
 /// 书籍 / 视频快捷设置切换到宽窗 master-detail（左父菜单 + 右详情）的**宽度**阈值。
 /// 窄于此值走窄窗 push。
 ///
@@ -315,21 +200,6 @@ const double kFushiSettingsWideMinHeight = 440.0;
 /// 全屏 push 的设置类页面（如 `BookCssEditorPage`）也用它约束正文宽度，与限宽弹窗
 /// 里的兄弟设置页保持同宽，消除各处重复出现的 `900` 魔法数。
 const double kFushiSettingsDialogMaxWidth = 900.0;
-
-/// 页内快捷设置面板（视频设置侧栏等）的自适应内容宽度：取窗口宽度的一半，
-/// 下限 [kFushiSettingsWideThreshold]（560，即旧固定宽——窄窗行为零变化），
-/// 上限对齐兄弟设置弹窗的 [kFushiSettingsDialogMaxWidth]（900）。
-///
-/// BUG-1546：视频页内设置侧栏此前硬编码 560 固定宽，桌面大窗口下被挤成窄条
-/// （用户实报「视频、小说等设置被限制了宽度」）。宽度跟随窗口自适应后，
-/// ≥1120 逻辑宽的窗口面板随之放宽，≥1800 达到 900 上限；同时下限保住旧值，
-/// 手机 / 窄窗仍由 [VideoTranslucentSidePanel] 的 94% 可用宽钳制兜底。
-double fushiQuickSettingsPanelWidth(double windowWidth) {
-  if (!windowWidth.isFinite) return kFushiSettingsWideThreshold;
-  return (windowWidth * 0.5)
-      .clamp(kFushiSettingsWideThreshold, kFushiSettingsDialogMaxWidth)
-      .toDouble();
-}
 
 class DesktopContentLayout extends StatelessWidget {
   const DesktopContentLayout({
@@ -352,18 +222,11 @@ class DesktopContentLayout extends StatelessWidget {
           constraints.maxWidth,
           FushiAppUiScale.of(context),
         );
-        final double? maxWidth = desktopContentMaxWidth(sizeClass, kind);
         final Widget padded = Padding(
           padding: desktopContentPadding(sizeClass, kind),
           child: child,
         );
-        if (maxWidth == null) return padded;
-        return Center(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: maxWidth),
-            child: padded,
-          ),
-        );
+        return padded;
       },
     );
   }
@@ -401,15 +264,6 @@ class MaterialSupportingPaneLayout extends StatelessWidget {
         final double resolvedSupportingWidth =
             supportingWidth ??
             supportingPaneWidthForLayout(constraints.maxWidth);
-        final Color resolvedDividerColor =
-            dividerColor ?? Theme.of(context).dividerColor;
-        final Widget? divider = showDivider
-            ? VerticalDivider(
-                width: 1,
-                thickness: 1,
-                color: resolvedDividerColor,
-              )
-            : null;
         final Widget fixedSupporting = SizedBox(
           width: resolvedSupportingWidth,
           child: supporting,
@@ -429,12 +283,10 @@ class MaterialSupportingPaneLayout extends StatelessWidget {
           children: supportingSide == SupportingPaneSide.start
               ? <Widget>[
                   fixedSupporting,
-                  if (divider != null) divider,
                   flexiblePrimary,
                 ]
               : <Widget>[
                   flexiblePrimary,
-                  if (divider != null) divider,
                   fixedSupporting,
                 ],
         );

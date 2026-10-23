@@ -34,10 +34,6 @@ class SyncChannelScope {
   /// 未声明通道身份的后端（测试 fake）。
   static const SyncChannelScope unscoped = SyncChannelScope._('unscoped');
 
-  /// 从 [id] 还原槽位（跨「报告 → UI」这类只搬得动纯数据的边界时用；id 本身就是
-  /// 这个类产出的，故是无损往返）。
-  factory SyncChannelScope.byId(String id) => SyncChannelScope._(id);
-
   /// 全部可能的槽位（键目录展开用，见 [SyncRepository.deviceLocalPrefKeys]）。
   static List<SyncChannelScope> get all => <SyncChannelScope>[
         for (final SyncBackendType t in SyncBackendType.values)

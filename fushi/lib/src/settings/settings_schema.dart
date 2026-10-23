@@ -1,26 +1,12 @@
-import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:flutter/material.dart';
 import 'package:fushi/i18n/strings.g.dart';
 import 'package:fushi/src/settings/settings_context.dart';
 import 'package:fushi/src/settings/settings_destination.dart';
-import 'package:fushi/src/settings/settings_schema_ai.dart';
 import 'package:fushi/src/settings/settings_schema_appearance.dart';
-import 'package:fushi/src/settings/settings_schema_card_creation.dart';
-import 'package:fushi/src/settings/settings_schema_downloads.dart';
-import 'package:fushi/src/settings/settings_schema_floating_ball.dart';
-import 'package:fushi/src/settings/settings_schema_game.dart';
-import 'package:fushi/src/settings/settings_schema_lookup.dart';
-import 'package:fushi/src/settings/settings_schema_manga.dart';
-import 'package:fushi_engine/media/tracking/media_tracking_service.dart'
-    show kMediaTrackingEnabled;
-import 'package:fushi/src/settings/settings_schema_tracking.dart';
-import 'package:fushi/src/settings/settings_schema_profiles.dart';
 import 'package:fushi/src/settings/settings_schema_reading.dart';
 import 'package:fushi/src/settings/settings_schema_services.dart';
 import 'package:fushi/src/settings/settings_schema_storage.dart';
 import 'package:fushi/src/settings/settings_schema_system.dart';
-import 'package:fushi/src/settings/settings_schema_video.dart';
-import 'package:fushi/src/sync/sync_settings_schema.dart';
 import 'package:fushi/utils.dart';
 
 /// 记忆化的 schema 快照：整棵声明树 + 两张按 [ReaderPlacement] / [VideoPlacement]
@@ -46,7 +32,6 @@ class _SettingsSchemaCache {
   final List<SettingsDestination> destinations;
 
   Map<ReaderGroup, List<SettingsItem>>? readerItems;
-  Map<VideoGroup, List<SettingsItem>>? videoItems;
 }
 
 _SettingsSchemaCache? _schemaCache;
@@ -179,106 +164,5 @@ SettingsDestination buildReaderGroupDestination(
     title: title,
     icon: Icons.tune_outlined,
     sections: <SettingsSection>[SettingsSection(items: items)],
-  );
-}
-
-/// 遍历完整 schema，收集所有带 [VideoPlacement] 的 item，按 group + order 升序
-/// 分组（与 [collectReaderItems] 同款；阶段 B 视频面板据此投影渲染）。
-Map<VideoGroup, List<SettingsItem>> collectVideoItems(SettingsContext context) {
-  final _SettingsSchemaCache snapshot = _schemaSnapshot();
-  return snapshot.videoItems ??= _collectVideoItems(
-    snapshot.destinations,
-    context,
-  );
-}
-
-/// 与 [_collectReaderItems] 同款：只过滤 destination 级 `visible`，section / item
-/// 级留给渲染器每帧求值（理由见那边的注释——`videoHostVisible` 正是不能烘进缓存的
-/// 典型：投影发生在没有 host 的那一刻就会把整个面板冻成空）。
-Map<VideoGroup, List<SettingsItem>> _collectVideoItems(
-  List<SettingsDestination> destinations,
-  SettingsContext context,
-) {
-  final Map<VideoGroup, List<SettingsItem>> grouped =
-      <VideoGroup, List<SettingsItem>>{};
-  for (final SettingsDestination destination in destinations) {
-    if (!destination.isVisible(context)) continue;
-    for (final SettingsSection section in destination.sections) {
-      for (final SettingsItem item in section.items) {
-        final VideoPlacement? placement = item.video;
-        if (placement == null) continue;
-        grouped.putIfAbsent(placement.group, () => <SettingsItem>[]).add(item);
-      }
-    }
-  }
-  for (final List<SettingsItem> items in grouped.values) {
-    items.sort(
-      (SettingsItem a, SettingsItem b) =>
-          a.video!.order.compareTo(b.video!.order),
-    );
-  }
-  return _freezeGroups(grouped);
-}
-
-/// 把某个 [VideoGroup] 的 item 包装成一个可被 SettingsRenderer 渲染的 destination。
-/// 与 reader 版不同：按 [VideoPlacement.section] 把相邻同名条目并入同一个带标题小节
-/// （mpv 组的「画质 / 画面几何 / 色彩均衡」等），复刻旧手写面板的组内分区结构。
-SettingsDestination buildVideoGroupDestination(
-  SettingsContext context,
-  VideoGroup group,
-  String title,
-) {
-  final List<SettingsItem> items =
-      collectVideoItems(context)[group] ?? <SettingsItem>[];
-  final List<SettingsSection> sections = <SettingsSection>[];
-  String? sectionTitle;
-  List<SettingsItem> pending = <SettingsItem>[];
-  void flush() {
-    if (pending.isEmpty) return;
-    sections.add(SettingsSection(title: sectionTitle, items: pending));
-    pending = <SettingsItem>[];
-  }
-
-  for (final SettingsItem item in items) {
-    final String? next = item.video!.section;
-    if (pending.isNotEmpty && next != sectionTitle) flush();
-    sectionTitle = next;
-    pending.add(item);
-  }
-  flush();
-  return SettingsDestination(
-    id: SettingsDestinationId.videoQuickSettings,
-    title: title,
-    icon: Icons.tune_outlined,
-    sections: sections.isEmpty
-        ? <SettingsSection>[const SettingsSection(items: <SettingsItem>[])]
-        : sections,
-  );
-}
-
-SettingsDestination buildReaderQuickSettingsDestination(
-  SettingsContext context,
-) {
-  final Map<ReaderGroup, List<SettingsItem>> grouped = collectReaderItems(
-    context,
-  );
-  SettingsSection sectionFor(ReaderGroup group, String title) {
-    return SettingsSection(
-      title: title,
-      items: grouped[group] ?? <SettingsItem>[],
-    );
-  }
-
-  return SettingsDestination(
-    id: SettingsDestinationId.readerQuickSettings,
-    title: t.reader_settings_section,
-    summary: t.kitapsen_source_description_epub,
-    icon: Icons.tune_outlined,
-    sections: <SettingsSection>[
-      sectionFor(ReaderGroup.layout, t.section_layout),
-      sectionFor(ReaderGroup.behavior, t.settings_destination_reading_controls),
-      sectionFor(ReaderGroup.lookup, t.settings_destination_lookup),
-      sectionFor(ReaderGroup.audiobook, t.section_audiobook),
-    ].where((SettingsSection s) => s.items.isNotEmpty).toList(growable: false),
   );
 }

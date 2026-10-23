@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fushi/media.dart';
 import 'package:fushi/pages.dart';
 import 'package:fushi/src/media/media_cover_service.dart';
-import 'package:fushi/src/media/metadata/book_cover_scrape_dialog.dart';
-import 'package:fushi/src/models/module_id.dart';
 import 'package:fushi/utils.dart';
-import 'package:fushi/src/models/kitapsen_edition.dart';
 
 /// The content of the dialog upon selecting 'Edit' in the
 /// [MediaItemDialogPage].
@@ -71,10 +68,6 @@ class _MediaItemEditDialogPageState
       content: buildContent(),
       actions: actions,
     );
-  }
-
-  Widget buildTitle() {
-    return Text(mediaSource.getDisplayTitleFromMediaItem(widget.item));
   }
 
   Widget buildContent() {

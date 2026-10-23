@@ -5,34 +5,7 @@ library;
 
 import 'dart:io';
 
-import 'package:archive/archive_io.dart';
 import 'package:path/path.dart' as p;
-
-/// Re-package an extracted book directory back into a single `.epub` at
-/// [outputPath]. Hibiki stores imported books EXTRACTED (the extract dir is a
-/// valid EPUB layout: `mimetype` + `META-INF/` + OPF + content) and keeps no
-/// standalone `.epub` on disk, so content sync must rebuild one to upload
-/// (BUG-088). Entries are rooted at the zip top (`includeDirName: false`) so
-/// `mimetype` / `META-INF` sit at the archive root and the result re-imports
-/// cleanly via [EpubImporter] on the other device.
-///
-/// Returns true if an archive was written; false when [extractDir] is empty or
-/// absent (nothing to package).
-Future<bool> repackageExtractedEpub(
-  String extractDir,
-  String outputPath,
-) async {
-  final Directory? dir = resolveExtractedEpubRoot(extractDir);
-  if (dir == null) return false;
-  final ZipFileEncoder encoder = ZipFileEncoder();
-  encoder.create(outputPath);
-  try {
-    encoder.addDirectory(dir, includeDirName: false);
-  } finally {
-    encoder.close();
-  }
-  return true;
-}
 
 /// Returns the directory whose root is a valid extracted EPUB layout.
 ///

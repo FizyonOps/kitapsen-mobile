@@ -1,103 +1,10 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/pages.dart';
-import 'package:fushi/src/models/module_id.dart';
-import 'package:fushi/src/models/module_registry.dart';
 import 'package:fushi/src/settings/settings_actions.dart';
 import 'package:fushi/src/settings/settings_context.dart';
 import 'package:fushi/src/settings/settings_destination.dart';
-import 'package:fushi/src/sync/desktop_lookup_service.dart';
 import 'package:fushi/utils.dart';
-
-/// 「功能模块」开关行的 item id。
-///
-/// **历史前缀 `system.` 冻结不改**：这些 id 是设置搜索的定位锚点，与展示分类本就
-/// 解耦（同款先例见下面 app_shell 里关于 `appearance.startup_default_dictionary_tab`
-/// 的注释），改 id 只会平白动摇锚点。四个后加的模块沿用同一前缀保持一致。
-String _moduleItemId(ModuleId module) => switch (module) {
-  ModuleId.books => 'system.module_books',
-  ModuleId.manga => 'system.module_manga',
-  ModuleId.video => 'system.module_video',
-  ModuleId.games => 'system.module_games',
-  ModuleId.browse => 'system.module_downloads',
-  ModuleId.lookup => 'system.module_lookup',
-  ModuleId.browserExtension => 'system.module_browser_extension',
-  ModuleId.listening => 'system.module_listening',
-  ModuleId.cardCreation => 'system.module_card_creation',
-  ModuleId.services => 'system.module_services',
-  ModuleId.sync => 'system.module_sync',
-};
-
-/// 「功能模块」开关行的标题与图标。
-///
-/// **一律取别处已有的真值，绝不在这里抄第二份标签**——此前这里抄了一套
-/// `module_*_label`（'小说' 对底栏「书架」、'Galgame' 对底栏「游戏」），两份真值
-/// 各改各的必然漂移，用户看到的就是设置项名字对不上底栏。
-/// 有底栏 tab 的模块取 [homeNavItemFor]（底栏改名这里自动跟着改）；没有 tab 的四个
-/// 取它自己那个设置一级分类的标题与图标（同理，分类改名这里自动跟着改）。
-({String label, IconData icon}) _moduleNavIdentity(ModuleId module) {
-  final HomeTab? tab = homeTabOfModule(module);
-  if (tab != null) {
-    final AdaptiveNavItem navItem = homeNavItemFor(tab);
-    return (label: navItem.label, icon: navItem.icon);
-  }
-  return switch (module) {
-    ModuleId.listening => (
-      label: t.settings_destination_listening,
-      icon: Icons.headphones_outlined,
-    ),
-    ModuleId.cardCreation => (
-      label: t.settings_destination_card_creation,
-      icon: Icons.style_outlined,
-    ),
-    ModuleId.services => (
-      label: t.settings_destination_services,
-      icon: Icons.cloud_outlined,
-    ),
-    ModuleId.sync => (
-      label: t.settings_destination_sync_backup,
-      icon: Icons.sync,
-    ),
-    // 上面 homeTabOfModule 已经把有 tab 的七个消化掉了；这里补齐 switch 让编译器
-    // 在新增模块时强制点名，而不是静默落进一个 default 里显示错标签。
-    ModuleId.books ||
-    ModuleId.manga ||
-    ModuleId.video ||
-    ModuleId.games ||
-    ModuleId.browse ||
-    ModuleId.lookup ||
-    ModuleId.browserExtension => throw StateError(
-      '$module 有对应 HomeTab，标识应走 homeNavItemFor',
-    ),
-  };
-}
-
-/// 「功能模块」里的单个模块开关。
-SettingsSwitchItem _moduleSwitch(ModuleId module) {
-  final ({String label, IconData icon}) identity = _moduleNavIdentity(module);
-  return SettingsSwitchItem(
-    id: _moduleItemId(module),
-    title: identity.label,
-    icon: identity.icon,
-    // 平台上不存在的模块不出开关（galgame 仅 Windows、浏览器扩展仅桌面、下载
-    // 中心不进 App Store）。判据与读取端同源（[ModuleId.availableOn]），不在这里
-    // 另写一份 Platform 判断。
-    visible: (_) => module.availableOn(
-      isWindows: Platform.isWindows,
-      isDesktop: DesktopLookupService.isDesktop,
-      isIOS: Platform.isIOS,
-      isAndroid: Platform.isAndroid,
-    ),
-    value: (SettingsContext settingsContext) =>
-        settingsContext.appModel.moduleEnabled(module),
-    onChanged: (SettingsContext settingsContext, bool enabled) async {
-      await settingsContext.appModel.setModuleEnabled(module, enabled);
-      settingsContext.refresh();
-    },
-  );
-}
 
 SettingsDestination buildAppearanceDestination() {
   return SettingsDestination(

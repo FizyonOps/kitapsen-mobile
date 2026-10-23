@@ -1,20 +1,14 @@
-import 'dart:convert';
 
-import 'package:fushi_anki/fushi_anki.dart';
 import 'package:fushi_core/fushi_core.dart' show kStatLegacyProfileIdPrefKey;
 
 import 'package:fushi_engine/media/override_title_key.dart';
 import 'package:fushi_engine/profile/profile_document.dart'
     show kObsoleteGalgameUpscalingModePrefKey, kProfileSettingCategoryPref;
-import 'package:fushi/src/media/video/video_online_services_preferences.dart';
-import 'package:fushi/src/media/video/video_screenshot_destination.dart'
-    show kVideoScreenshotDirectoryPref;
 import 'package:fushi/src/models/module_id.dart';
 import 'package:fushi/src/models/preferences_repository.dart';
 import 'package:fushi/src/sync/pref_redaction_policy.dart';
 
-class ProfileKeys {
-  ProfileKeys._();
+abstract class ProfileKeys {
 
   static const String categoryAnki = 'anki';
   static const String categoryPref = kProfileSettingCategoryPref;
@@ -64,7 +58,6 @@ class ProfileKeys {
     // 封面模式迁到片段默认的一次性标记：同族。进快照的话，切 Profile 会把旧值 gif
     // 带回来，下次启动迁移重跑，把用户此后自己选的 GIF 又改成片段。
     'mining_image_mode_install_default',
-    kVideoOnlineServicesSetupDismissedPref,
     'current_home_tab_index',
     'startup_default_dictionary_tab',
     'app_ui_scale',
@@ -102,10 +95,6 @@ class ProfileKeys {
     // path that may not even exist on this machine.
     'download_save_root',
     'download_save_root_history',
-    // 截图目录与 download_save_root 同族同理：它描述的是这台设备的磁盘，不是阅读
-    // Profile。随 Profile 走会让切 Profile 后截图落到本机不存在的路径上。
-    // 去向枚举（对话框/剪贴板/目录）是真偏好，照常随 Profile。
-    kVideoScreenshotDirectoryPref,
     obsoleteGalgameUpscalingModePrefKey,
     // TODO-855: the monotonic prefs-version counter is the cross-process signal
     // the :popup process reads to decide whether to refresh its warm-reuse
@@ -181,83 +170,4 @@ class ProfileKeys {
     return false;
   }
 
-  static Map<String, String> ankiSettingsToMap(AnkiSettings s) => {
-        'selectedDeckId': s.selectedDeckId?.toString() ?? '',
-        'selectedDeckName': s.selectedDeckName ?? '',
-        'selectedNoteTypeId': s.selectedNoteTypeId?.toString() ?? '',
-        'selectedNoteTypeName': s.selectedNoteTypeName ?? '',
-        'fieldMappings': jsonEncode(s.fieldMappings),
-        'tags': s.tags,
-        'tagIncludeHibiki': s.tagIncludeHibiki.toString(),
-        'tagIncludeCategory': s.tagIncludeCategory.toString(),
-        'allowDupes': s.allowDupes.toString(),
-        'compactGlossaries': s.compactGlossaries.toString(),
-        'embedMedia': s.embedMedia.toString(),
-        // 两个范围单选必须进快照：[mapToAnkiSettings] 重建的是一个全新
-        // AnkiSettings，不在这里的字段会在切 Profile 时静默回默认值
-        // （overwriteScope 原本就漏了，顺手一并补上）。
-        'overwriteScope': s.overwriteScope.name,
-        'duplicateScope': s.duplicateScope.name,
-      };
-
-  static AnkiSettings mapToAnkiSettings(
-    Map<String, String> m,
-    AnkiSettings current,
-  ) {
-    int? parseInt(String? v) => v == null || v.isEmpty ? null : int.tryParse(v);
-    String? nonEmpty(String? v) => v?.isNotEmpty == true ? v : null;
-
-    // 只覆盖快照拥有的字段（[ankiSettingsToMap] 那几项），其余一律保留当前值：
-    // 连接状态与后端选择（设备本地）、Lapis 样式、媒体去重、自动重排、批量制卡……
-    // 在 JSON 层合并而不是逐个列字段——此前这里从头构造一个新 AnkiSettings，
-    // 没列到的字段在切 Profile 时静默回默认值（Lapis 自定义 CSS、自动重排开关都会丢），
-    // 以后新加的字段也会重蹈覆辙。
-    return AnkiSettings.fromJson(<String, dynamic>{
-      ...current.toJson(),
-      'selectedDeckId': parseInt(m['selectedDeckId']),
-      'selectedDeckName': nonEmpty(m['selectedDeckName']),
-      'selectedNoteTypeId': parseInt(m['selectedNoteTypeId']),
-      'selectedNoteTypeName': nonEmpty(m['selectedNoteTypeName']),
-      'fieldMappings':
-          _parseFieldMappings(m['fieldMappings'], current.fieldMappings),
-      'tags': m['tags'] ?? '',
-      'tagIncludeHibiki': m.containsKey('tagIncludeHibiki')
-          ? m['tagIncludeHibiki'] == 'true'
-          : true,
-      'tagIncludeCategory': m.containsKey('tagIncludeCategory')
-          ? m['tagIncludeCategory'] == 'true'
-          : true,
-      'allowDupes': m['allowDupes'] == 'true',
-      'compactGlossaries': m['compactGlossaries'] == 'true',
-      'embedMedia':
-          m.containsKey('embedMedia') ? m['embedMedia'] == 'true' : true,
-      // 旧快照没有这两个键 → 保留当前值（而不是回默认），否则一次切
-      // Profile 就把用户已选的范围抹掉。
-      if (m.containsKey('overwriteScope'))
-        'overwriteScope': m['overwriteScope'],
-      if (m.containsKey('duplicateScope'))
-        'duplicateScope': m['duplicateScope'],
-    });
-  }
-
-  /// Parses the stored fieldMappings JSON defensively. The value comes from the
-  /// profile_settings DB table, which can hold malformed data (manual edit,
-  /// aborted snapshot write, cross-version backup import). A single bad row
-  /// must not throw and abort the entire profile-apply flow (HBK-AUDIT-043).
-  static Map<String, String> _parseFieldMappings(
-    String? raw,
-    Map<String, String> fallback,
-  ) {
-    if (raw == null || raw.isEmpty) return const {};
-    try {
-      final dynamic decoded = jsonDecode(raw);
-      if (decoded is Map) {
-        return decoded.map(
-            (dynamic k, dynamic v) => MapEntry(k.toString(), v.toString()));
-      }
-    } catch (_) {
-      // Fall through to the fallback below.
-    }
-    return fallback;
-  }
 }

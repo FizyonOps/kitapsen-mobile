@@ -1,20 +1,12 @@
 import 'dart:async';
 
-import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:fushi/models.dart';
 import 'package:fushi/pages.dart';
-import 'package:fushi_engine/ai/ai_chat_client.dart';
-import 'package:fushi_engine/ai/ai_feature.dart';
-import 'package:fushi_engine/ai/ai_provider_config.dart';
-import 'package:fushi/src/ai/ai_theme_assistant.dart';
-import 'package:fushi/src/models/preferences_repository.dart';
 import 'package:fushi/src/models/theme_notifier.dart'
     show buildEinkColorScheme, kCustomThemeDefaultSeed;
-import 'package:fushi/src/pages/implementations/ai_provider_settings_section.dart'
-    show aiFailureText;
 import 'package:fushi/utils.dart';
 
 /// 自定义主题编辑页里可改的颜色「角色」——按用户看得见的用途命名，不按 Material
@@ -57,17 +49,6 @@ enum _ThemeRole {
 /// 自己改了什么，是本页重设计前的头号抱怨）。
 const double kCustomThemeWideLayoutMinWidth = 900;
 
-/// 解析「自定义主题」功能当前可用的 AI 提供商。返回 null = 没配 / 配的那家已被删或
-/// 没配全，页面据此提示去设置里配，而**不发请求**。
-///
-/// 生产路径默认从 `AppModel.prefsRepo` 读；做成回调是给 widget 测试留缝——测试里
-/// 的假 AppModel 没有初始化偏好仓库。
-typedef CustomThemeAiProviderResolver = AiProviderConfig? Function();
-
-/// 造 AI 调用客户端。测试注入假 `http.Client` 走这条缝；生产路径恒是
-/// [AiChatClient] 的默认构造。
-typedef CustomThemeAiClientFactory = AiChatClient Function();
-
 class CustomThemePage extends BasePage {
   // TODO-930: edit an existing custom theme by id, or (null) draft a new one.
   // BUG-1841: a draft lives only in this page's state until the user taps
@@ -77,17 +58,9 @@ class CustomThemePage extends BasePage {
   const CustomThemePage({
     super.key,
     this.themeId,
-    this.resolveAiProvider,
-    this.aiClientFactory,
   });
 
   final String? themeId;
-
-  /// 非 null 时替代生产路径的提供商解析（仅测试传）。
-  final CustomThemeAiProviderResolver? resolveAiProvider;
-
-  /// 非 null 时替代 [AiChatClient] 默认构造（仅测试传）。
-  final CustomThemeAiClientFactory? aiClientFactory;
 
   @override
   BasePageState createState() => _CustomThemePageState();
@@ -134,17 +107,6 @@ class _CustomThemePageState extends BasePageState<CustomThemePage> {
   // ── 「让 AI 帮忙」区状态 ──
 
   final TextEditingController _aiRequestController = TextEditingController();
-  bool _aiBusy = false;
-
-  /// 上一次 AI 调用的结果提示（没配提供商 / 空结果 / 失败 / 已填入）。
-  String? _aiMessage;
-
-  /// AI 对本次改动的一句话说明。
-  String _aiExplanation = '';
-
-  /// AI 改动前的草稿快照（条目 + 当时的全局音频高亮色），非 null 时显示「撤销」。
-  /// 一次 AI 生成会同时改十个角色，逐个「恢复跟随主题」既慢又拿不回原来的覆盖值。
-  ({CustomThemeEntry entry, Color? audioHighlight})? _aiUndoSnapshot;
 
   @override
   void initState() {
@@ -618,175 +580,6 @@ class _CustomThemePageState extends BasePageState<CustomThemePage> {
     }
   }
 
-  // ── AI 生成 ──
-
-  AiProviderConfig? _resolveAiProvider() {
-    final CustomThemeAiProviderResolver? injected = widget.resolveAiProvider;
-    if (injected != null) return injected();
-    final PreferencesRepository prefs = appModelNoUpdate.prefsRepo;
-    return prefs.aiFeatureAssignments.resolve(
-      AiFeature.customTheme,
-      prefs.aiProviders,
-    );
-  }
-
-  Future<void> _runAi() async {
-    if (_aiBusy) return;
-    final String request = _aiRequestController.text.trim();
-    if (request.isEmpty) return;
-    final AiProviderConfig? provider = _resolveAiProvider();
-    if (provider == null) {
-      // 没有可用提供商就**一个请求都不发**：发出去只会拿回一条脱敏错误码，用户
-      // 还得自己猜「是 key 错了还是根本没配」。
-      setState(() {
-        _aiMessage = t.ai_assist_no_provider;
-        _aiExplanation = '';
-      });
-      return;
-    }
-    setState(() {
-      _aiBusy = true;
-      _aiMessage = null;
-      _aiExplanation = '';
-    });
-    final AiChatClient client =
-        widget.aiClientFactory?.call() ?? AiChatClient();
-    final CustomThemeEntry before = _buildEntry();
-    final Color? audioBefore = _overrides[_ThemeRole.audioHighlight];
-    try {
-      final AiThemeSuggestion suggestion = await requestAiTheme(
-        client: client,
-        provider: provider,
-        request: request,
-        current: before,
-        darkMode: _previewBrightness == Brightness.dark,
-        audioHighlight: audioBefore?.toARGB32(),
-      );
-      if (!mounted) return;
-      if (suggestion.isEmpty) {
-        setState(() => _aiMessage = t.ai_assist_empty);
-        return;
-      }
-      // 只进**草稿**：与导入分享码同一条装载路径（[_applyImportedTheme]），
-      // 落进主题列表仍然只有底部「应用」一个按钮——AI 不是第二条落盘路径。
-      final CustomThemeEntry merged = suggestion.applyTo(before);
-      _aiUndoSnapshot = (entry: before, audioHighlight: audioBefore);
-      _nameController.text = merged.name;
-      _applyImportedTheme(
-        merged,
-        // AI 没给音频高亮色时保持现状，不要因为条目里该字段为 null 就把用户已有
-        // 的全局偏好清掉。
-        audioHighlight:
-            suggestion.colors.containsKey(AiThemeRole.audioHighlight)
-                ? Color(merged.sentenceAudioHighlightColor!)
-                : audioBefore,
-      );
-      setState(() {
-        _aiMessage = t.theme_ai_applied;
-        _aiExplanation = suggestion.explanation;
-      });
-    } on AiChatFailure catch (failure) {
-      if (!mounted) return;
-      setState(
-        () => _aiMessage = t.ai_assist_failed(
-          reason: aiFailureText(failure.message),
-        ),
-      );
-    } finally {
-      client.close();
-      if (mounted) setState(() => _aiBusy = false);
-    }
-  }
-
-  /// 回到上一次 AI 生成前的草稿（含当时的全局音频高亮色）。
-  void _undoAi() {
-    final ({CustomThemeEntry entry, Color? audioHighlight})? snapshot =
-        _aiUndoSnapshot;
-    if (snapshot == null) return;
-    _aiUndoSnapshot = null;
-    _nameController.text = snapshot.entry.name;
-    _applyImportedTheme(snapshot.entry,
-        audioHighlight: snapshot.audioHighlight);
-    setState(() {
-      _aiMessage = null;
-      _aiExplanation = '';
-    });
-  }
-
-  /// 「让 AI 帮忙」区：一行输入 + 生成按钮，结果状态与撤销在下面。
-  Widget _buildAiSection() {
-    final FushiDesignTokens tokens = FushiDesignTokens.of(context);
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: tokens.spacing.card,
-        vertical: tokens.spacing.gap,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Expanded(
-                child: FushiTextField(
-                  key: const ValueKey<String>('custom-theme-ai-request'),
-                  controller: _aiRequestController,
-                  hintText: t.theme_ai_hint,
-                  minLines: 1,
-                  maxLines: 2,
-                ),
-              ),
-              SizedBox(width: tokens.spacing.gap),
-              FilledButton.icon(
-                key: const ValueKey<String>('custom-theme-ai-generate'),
-                onPressed: _aiBusy ? null : () => unawaited(_runAi()),
-                icon: _aiBusy
-                    ? const SizedBox(
-                        width: 16,
-                        height: 16,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      )
-                    : const Icon(Icons.auto_awesome_outlined),
-                label: Text(
-                  _aiBusy ? t.ai_assist_working : t.ai_assist_generate,
-                ),
-              ),
-            ],
-          ),
-          if (_aiMessage != null) ...<Widget>[
-            SizedBox(height: tokens.spacing.gap / 2),
-            Text(
-              _aiMessage!,
-              key: const ValueKey<String>('custom-theme-ai-message'),
-              style: tokens.type.listSubtitle,
-            ),
-          ],
-          if (_aiExplanation.isNotEmpty) ...<Widget>[
-            SizedBox(height: tokens.spacing.gap / 2),
-            Text(
-              _aiExplanation,
-              key: const ValueKey<String>('custom-theme-ai-explanation'),
-              style: tokens.type.listSubtitle,
-            ),
-          ],
-          if (_aiUndoSnapshot != null) ...<Widget>[
-            SizedBox(height: tokens.spacing.gap / 2),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: TextButton.icon(
-                key: const ValueKey<String>('custom-theme-ai-undo'),
-                onPressed: _aiBusy ? null : _undoAi,
-                icon: const Icon(Icons.undo),
-                label: Text(t.theme_ai_undo),
-              ),
-            ),
-          ],
-        ],
-      ),
-    );
-  }
-
   // ── 页面骨架 ──
 
   @override
@@ -819,8 +612,7 @@ class _CustomThemePageState extends BasePageState<CustomThemePage> {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         final bool wide =
-            constraints.maxWidth >= kCustomThemeWideLayoutMinWidth &&
-                !isCupertinoPlatform(context);
+            constraints.maxWidth >= kCustomThemeWideLayoutMinWidth;
         _wideLayout = wide;
         if (!wide) {
           return AdaptiveSettingsScaffold(
@@ -1594,32 +1386,6 @@ class _CustomThemePageState extends BasePageState<CustomThemePage> {
     );
   }
 
-  /// A standalone note line (info icon + secondary text) shown between or below
-  /// sections. TODO-072 uses it to point out that subtitle colours live in the
-  /// video player, not on this page.
-  Widget _buildNoteRow(String text) {
-    final FushiDesignTokens tokens = FushiDesignTokens.of(context);
-    final ColorScheme cs = Theme.of(context).colorScheme;
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: tokens.spacing.gap,
-        vertical: tokens.spacing.gap / 2,
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(Icons.info_outline, size: 16, color: cs.onSurfaceVariant),
-          SizedBox(width: tokens.spacing.gap),
-          Expanded(
-            child: Text(
-              text,
-              style: tokens.type.metadata.copyWith(color: cs.onSurfaceVariant),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
 
 /// 紧凑选色器：固定尺寸的 HSV 面板 + 色相条（+ 可选透明度条）+ 十六进制输入

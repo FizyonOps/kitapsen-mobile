@@ -1,14 +1,7 @@
-import 'dart:io';
 import 'dart:async';
-import 'package:fushi_engine/sync/remote_collection_adoption_service.dart';
-import 'package:fushi_engine/sync/collection_book_identity_index.dart';
-import 'package:flutter/foundation.dart'
-    show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:transparent_image/transparent_image.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/media.dart';
 import 'package:fushi/utils.dart';
 import 'package:fushi/src/models/app_model.dart';
@@ -18,47 +11,21 @@ import 'package:fushi/src/models/preferences_repository.dart';
 import 'package:fushi/src/media/collections/collection_continue.dart';
 import 'package:fushi/src/media/display_title.dart';
 import 'package:fushi/src/media/media_cover_source.dart';
-import 'package:fushi_engine/media/tracking/bangumi_api_client.dart';
-import 'package:fushi/src/media/tracking/media_tracking_labels.dart';
-import 'package:fushi_engine/media/tracking/media_tracking_repository.dart';
-import 'package:fushi_engine/media/tracking/media_tracking_service.dart';
-import 'package:fushi/src/mining/galgame_library.dart';
-import 'package:fushi/src/mining/galgame_repository.dart';
-import 'package:fushi/src/media/video/cover_ui/cover_orientation_builder.dart';
-import 'package:fushi/src/media/video/cover_ui/portrait_cover_image.dart';
-import 'package:fushi/src/media/video/video_home_layout.dart'
-    show VideoCardOrientation;
-import 'package:fushi_engine/media/video/m3u8_playlist.dart';
-import 'package:fushi_engine/media/video/video_book_repository.dart';
+import 'package:fushi/src/media/cover_ui/portrait_cover_image.dart';
 import 'package:fushi/src/pages/base_module_tab_page.dart';
 import 'package:fushi/src/pages/implementations/activity_feed.dart';
 import 'package:fushi/src/pages/implementations/home_page.dart';
-import 'package:fushi/src/pages/implementations/updates_dashboard_banner.dart';
-import 'package:fushi/src/pages/implementations/home_video_page.dart'
-    show openLocalVideoBook;
 import 'package:fushi/src/pages/implementations/stat_period_detail_sheet.dart';
 import 'package:fushi/src/pages/implementations/stat_shared.dart';
 import 'package:fushi/src/pages/implementations/statistics_center_page.dart';
-import 'package:fushi/src/pages/implementations/leaderboard/leaderboard_tab.dart';
-import 'package:fushi/src/settings/settings_detail_page.dart';
-import 'package:fushi/src/settings/settings_schema_tracking.dart';
 import 'package:fushi_engine/stats/stat_facts.dart';
 import 'package:fushi/src/stats/stat_window.dart';
-import 'package:fushi/src/sync/interconnect_sync_backend.dart';
-import 'package:fushi_engine/sync/fushi_library_host_service.dart';
 import 'package:fushi/src/sync/remote_cover_image.dart';
-import 'package:fushi/src/sync/remote_library_cache.dart';
 import 'package:fushi/src/sync/sync_repository.dart';
 import 'package:fushi/src/utils/components/stat_contribution_heatmap.dart';
 import 'package:fushi/src/utils/cover_image.dart';
 import 'package:fushi/src/utils/misc/dashboard_remote_merge.dart';
 import 'package:fushi_core/fushi_core.dart';
-import 'package:fushi/src/migration/migration_target_channel.dart';
-import 'package:fushi/src/pages/implementations/migration_page.dart';
-import 'package:fushi/src/pages/implementations/migration_import_page.dart';
-import 'package:fushi/src/migration/migration_importer.dart';
-import 'package:fushi_engine/foundation/engine_notifier.dart';
-import 'package:fushi/src/utils/net/app_http_image.dart';
 
 /// 首页仪表盘（阅读向），参考 ReinaManager 首页改造：
 ///
@@ -78,19 +45,14 @@ import 'package:fushi/src/utils/net/app_http_image.dart';
 class HomeDashboardPage extends BaseModuleTabPage {
   const HomeDashboardPage({
     super.key,
-    required this.videoRepo,
     this.openVideoOverride,
   });
-
-  /// 视频库仓库：仪表盘「继续观看」与视频计数的数据源（[VideoBookRepository.listForShelf]）。
-  final VideoBookRepository videoRepo;
 
   /// 测试缝：打开本地视频播放页的实现覆盖（默认走共享 [openLocalVideoBook] 真实
   /// 路由）。widget 测试无法构建 media_kit 播放页，注入替身即可断言「点继续卡/
   /// 活动条 = 直接续播（带 playlistCollectionId）」的接线；生产恒 null。
   final Future<void> Function(
     BuildContext context,
-    VideoBookRepository repo,
     String bookUid,
     int? playlistCollectionId,
   )? openVideoOverride;
@@ -120,8 +82,6 @@ class _ContinueEntry {
     this.subtitleOverride,
     this.book,
     this.video,
-    this.game,
-    this.remote,
   });
 
   /// 所属主合集 id（v68 横版选图链按它取合集附加图组）；null = 散卡。
@@ -141,19 +101,7 @@ class _ContinueEntry {
   bool get isGame => kind == MediaKind.game;
 
   /// 本条所属功能模块（首页聚合列表的门控判据）。
-  ///
-  /// ⚠️ 漫画盖不住 [MediaKind]（见 `module_registry.dart`）：漫画行是
-  /// `EpubBooks.format=='manga'` 派生，[kind] 仍是 [MediaKind.epub]。本地书条目
-  /// 能从 [MediaItem.mediaSourceIdentifier] 认出漫画身份（`_bookToMediaItem` 给
-  /// 漫画行打的就是 [MangaFushiSource.kUniqueKey]），所以这里能按 manga 单独门控。
-  ///
-  /// 远端补位条目（[remote]）判不出漫画，一律按 [moduleOfMediaKind] 归 books
-  /// ——host 侧的漫画本就进不了「继续」（`remoteContinueCandidates` 按
-  /// `hasContent` 已把无 EPUB 内容树的漫画/PDF 行滤掉，BUG-1638）。
-  ModuleId get module =>
-      book?.mediaSourceIdentifier == MangaFushiSource.kUniqueKey
-      ? ModuleId.manga
-      : moduleOfMediaKind(kind);
+  ModuleId get module => moduleOfMediaKind(kind);
 
   final String title;
 
@@ -176,13 +124,6 @@ class _ContinueEntry {
   final String? subtitleOverride;
   final MediaItem? book;
   final VideoBookRow? video;
-
-  /// 本地游戏（BUG-1111）。游戏是**本机局域身份**（`galgames.id`），不参与互联
-  /// 远端补位——对端没有对应行，拿过来也打不开。
-  final GalgameEntry? game;
-
-  /// 互联 host 上的在读书/在看视频（本地无此条目时的远端补位，「继续也走互联」）。
-  final RemoteContinueCandidate? remote;
 }
 
 /// 每日字数目标编辑对话框。独立 StatefulWidget **自持** controller 生命周期：
@@ -292,123 +233,6 @@ class _DailyGoalDialogState extends State<_DailyGoalDialog> {
   }
 }
 
-class _BangumiWatchedDialog extends StatefulWidget {
-  const _BangumiWatchedDialog({
-    required this.service,
-    required this.onOpenSubject,
-  });
-
-  final MediaTrackingService service;
-  final Future<void> Function(int subjectId) onOpenSubject;
-
-  @override
-  State<_BangumiWatchedDialog> createState() => _BangumiWatchedDialogState();
-}
-
-class _BangumiWatchedDialogState extends State<_BangumiWatchedDialog> {
-  late final Future<List<BangumiWatchedItem>> _watched =
-      widget.service.loadWatchedAnime();
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Row(
-        children: <Widget>[
-          const Icon(Icons.visibility_outlined),
-          const SizedBox(width: 12),
-          Expanded(child: Text(t.media_tracking_watched_title)),
-        ],
-      ),
-      content: SizedBox(
-        width: 640,
-        height: MediaQuery.sizeOf(context).height * 0.6,
-        child: FutureBuilder<List<BangumiWatchedItem>>(
-          future: _watched,
-          builder: (
-            BuildContext context,
-            AsyncSnapshot<List<BangumiWatchedItem>> snapshot,
-          ) {
-            if (snapshot.connectionState != ConnectionState.done) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            if (snapshot.hasError) {
-              return Center(
-                child: Text(
-                  t.media_tracking_watched_load_failed(
-                    error: snapshot.error!,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              );
-            }
-            final List<BangumiWatchedItem> watched =
-                snapshot.data ?? const <BangumiWatchedItem>[];
-            if (watched.isEmpty) {
-              return Center(child: Text(t.media_tracking_watched_empty));
-            }
-            return ListView.separated(
-              itemCount: watched.length,
-              separatorBuilder: (_, __) => const Divider(height: 1),
-              itemBuilder: (BuildContext context, int index) {
-                final BangumiWatchedItem item = watched[index];
-                final String? coverUrl = item.subject.coverUrl;
-                return FushiListItem(
-                  padding: EdgeInsets.zero,
-                  titleMaxLines: 2,
-                  leading: SizedBox(
-                    width: 42,
-                    height: 56,
-                    child: coverUrl == null
-                        ? const Icon(Icons.movie_outlined)
-                        : ClipRRect(
-                            borderRadius: FushiBorderRadius.chip,
-                            child: Image(
-                              image: AppHttpImage(coverUrl),
-                              fit: BoxFit.cover,
-                              errorBuilder: (_, __, ___) =>
-                                  const Icon(Icons.broken_image_outlined),
-                            ),
-                          ),
-                  ),
-                  title: Text(
-                    item.subject.displayName,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  subtitle: Text(
-                    t.media_tracking_watched_progress(
-                      n: item.episodeProgress,
-                    ),
-                  ),
-                  trailing: Tooltip(
-                    message: t.media_tracking_open_subject,
-                    child: const Icon(Icons.open_in_new, size: 18),
-                  ),
-                  onTap: () => unawaited(widget.onOpenSubject(item.subject.id)),
-                );
-              },
-            );
-          },
-        ),
-      ),
-      actions: <Widget>[
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(),
-          child: Text(t.dialog_close),
-        ),
-      ],
-    );
-  }
-}
-
-/// Bangumi 同步卡最多列出的已关联条目数（超出的去设置页看全量；首页卡片是状态
-/// 概览，不是映射管理器）。有失败的条目由
-/// [MediaTrackingStatus.mappingsProblemFirst] 排到最前，不会被这个上限挤掉。
-const int _kTrackingMappingLimit = 5;
-
-/// 首页卡最多直接摊开的待手动关联条目数；完整清单在「管理关联」页。
-const int _kTrackingUnlinkedLimit = 5;
-
 class _HomeDashboardPageState
     extends BaseModuleTabPageState<HomeDashboardPage> {
   static const int _kActivityPageSize = 24;
@@ -463,10 +287,6 @@ class _HomeDashboardPageState
       const <int, List<MediaImageRow>>{};
   Map<String, List<MediaImageRow>> _mediaImagesByBookUid =
       const <String, List<MediaImageRow>>{};
-
-  /// [_loadDashboardDataUnsafe] 载入的游戏库整表缓存（P4：日明细「游戏」节 +
-  /// 活动时间轴游戏行的显示名反查用；空表 = 库为空或尚未载入）。
-  List<GalgameEntry> _games = const <GalgameEntry>[];
 
   /// [initState] 异步载入的活动事件流（时间轴原始数据，本地 + 远端混排后）。
   List<ActivityEventRow> _activityEvents = const <ActivityEventRow>[];
@@ -550,12 +370,6 @@ class _HomeDashboardPageState
   /// 每个视频 bookUid 的最近观看时刻（epoch 毫秒），继续观看排序用。
   Map<String, int> _videoWatchAtByUid = const <String, int>{};
 
-  /// Bangumi 追踪链路的可见状态（[MediaTrackingService.loadStatus]）。
-  MediaTrackingStatus _tracking = MediaTrackingStatus.empty;
-
-  /// 「立即同步」按钮的进行中态。
-  bool _trackingSyncBusy = false;
-
   /// 订阅「数据变了」信号（阅读/观看/导入落库）以自动刷新，及其防抖定时器。
   /// 首页不保活、且阅读器是 pushed 路由（读完回来首页不重建 initState），故必须靠
   /// DB 表级变更主动重查，否则「打开一本书读完回来」活动/热力图仍是旧数据。
@@ -597,12 +411,6 @@ class _HomeDashboardPageState
     unawaited(_loadRemoteDashboardData());
   }
 
-  /// 追踪状态版本号（[initState] 挂监听，[dispose] 解除）。
-  EngineValueListenable<int>? _trackingRevision;
-
-  /// 游戏库仓储（[initState] 挂监听，[dispose] 解除）。
-  GalgameRepository? _galgameRepo;
-
   /// 表变更后防抖重载（多次连续写只重查一次，避免频繁 setState）。
   void _scheduleReload() {
     _reloadDebounce?.cancel();
@@ -624,8 +432,6 @@ class _HomeDashboardPageState
     _reloadDebounce?.cancel();
     _midnightReload?.cancel();
     unawaited(_dataChangeSub?.cancel());
-    _galgameRepo?.removeListener(_scheduleReload);
-    _trackingRevision?.removeListener(_scheduleReload);
     _prefsRepoForRemoteGate?.removeListener(_onPrefsChangedForRemoteGate);
     _dashboardScrollController.dispose();
     super.dispose();
@@ -689,11 +495,6 @@ class _HomeDashboardPageState
     // added 导入事件）∪ v92 段映射行 ∪ galgame_sessions 合成的游玩事件，按时刻倒序
     // 截 200（与旧 getRecentActivityEvents(limit: 200) 对齐）。
     final List<ActivityEventRow> events = facts.activityRows;
-    // P4：游戏库整表（日明细/时间轴的游戏显示名反查）。仓储缓存与表恒一致，
-    // 未载入过才真查 DB（毫秒级）；load() 会 notify → 本页监听器防抖重载一次
-    // 后 isLoaded=true，不再形成回环。
-    final List<GalgameEntry> games;
-    games = const <GalgameEntry>[];
     // 合集归属映射（统计页/书架同源）：显示名规则「非合集上下文拼合集名」用。
     final Map<int, String> collectionNamesById = <int, String>{
       for (final MediaCollectionRow c in await collectionsF) c.id: c.name,
@@ -784,17 +585,11 @@ class _HomeDashboardPageState
       }
     }
 
-    // Bangumi 追踪状态（映射 + 待办 + 上次同步结果）。读的是本地库与偏好，不发
-    // 网络请求，可以和其它聚合一起进首屏。临时下线期间卡不挂载，状态也不必查。
-    final MediaTrackingStatus tracking = MediaTrackingStatus.empty;
-
     if (!mounted) return;
     setState(() {
       _statWindow = statWindow;
       _ambiguousBookTitles = ambiguousTitles;
       _videos = videos;
-      _games = games;
-      _tracking = tracking;
       _localActivityEvents = events;
       _activityEvents = events;
       _readingCharsByDay = charsByDay;
@@ -905,14 +700,6 @@ class _HomeDashboardPageState
         _buildActivitySection(tokens, now, appModel, booksByKey, videosByUid);
     final Widget? recentCard =
         _buildRecentlyAddedSection(tokens, appModel, books, now);
-    // Bangumi 同步临时下线（kMediaTrackingEnabled，见 media_tracking_service.dart）。
-    // 上线状态下此卡恒显示（未连接时也要显示——「没连上」本身就是用户最需要看到的
-    // 那条状态，隐藏它就回到了「看完了没反应」的黑盒）。
-    // 媒体追踪属 [ModuleId.services]（追踪靠在线服务的凭据跑，同一个开关）：模块
-    // 关掉时整卡不挂载——卡内的「去设置」直落 mediaTracking 分类，而那个分类此刻
-    // 已被同一个开关从设置页藏掉，留着就是一条通往不存在页面的死路。
-    final Widget? trackingCard =
-        null;
 
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
@@ -955,10 +742,6 @@ class _HomeDashboardPageState
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    if (trackingCard != null) ...<Widget>[
-                      trackingCard,
-                      SizedBox(height: tokens.spacing.card),
-                    ],
                     activityCard,
                   ],
                 ),
@@ -978,10 +761,6 @@ class _HomeDashboardPageState
               // 时间轴之下，时间轴天然很长，用户要滚到底才看得见新入库的条目。
               if (recentCard != null) ...<Widget>[
                 recentCard,
-                SizedBox(height: tokens.spacing.card),
-              ],
-              if (trackingCard != null) ...<Widget>[
-                trackingCard,
                 SizedBox(height: tokens.spacing.card),
               ],
               activityCard,
@@ -1084,53 +863,6 @@ class _HomeDashboardPageState
         collectionName: _collectionNamesById[ce.key],
         collectionId: ce.key,
         recentMs: recent,
-      ));
-    }
-    // BUG-1111：在玩的游戏。判据是「玩过」（lastPlayedMs>0）——游戏没有「读完/
-    // 看完」这种完成度概念（`galgames` 无 completedAt，时长/次数由
-    // `galgame_sessions` 现算），所以不做「未完成」过滤；排序与取前 N 由下面统一
-    // 的 recentMs 倒序 + take(10) 兜住，不会淹没书与视频。
-    // 合集单元收敛与视频侧 [_collectionResumeTarget] 同口径：**一个合集在继续区
-    // 最多一张卡**。卡标题恒取合集名，不收敛的话同合集 N 个游戏会排出 N 张同名
-    // 卡，直接把继续区刷屏。游戏无完成度可推进「下一部」（视频那套 Next-Up 依赖
-    // completedAt），续玩目标取组内 lastPlayedMs 最大的一部——与该单元的 recentMs
-    // 同源，混排位置也就是「这个系列最近一次玩」的时刻。
-    final Map<int, GalgameEntry> gameResumeByCollection = <int, GalgameEntry>{};
-    for (final GalgameEntry g in _games) {
-      if (g.lastPlayedMs <= 0) continue;
-      final int? cid =
-          _primaryCollectionByEntry[MediaKind.game.compositeKey(g.id)];
-      if (cid == null) {
-        entries.add(_gameContinueEntry(g, collectionName: null));
-        continue;
-      }
-      final GalgameEntry? best = gameResumeByCollection[cid];
-      if (best == null || g.lastPlayedMs > best.lastPlayedMs) {
-        gameResumeByCollection[cid] = g;
-      }
-    }
-    for (final MapEntry<int, GalgameEntry> ge
-        in gameResumeByCollection.entries) {
-      entries.add(_gameContinueEntry(
-        ge.value,
-        // 合集名缺失（名字表没这行）→ null，与散卡同渲染，安全降级。
-        collectionName: _collectionNamesById[ge.key],
-      ));
-    }
-    // 互联 host 的远端补位（本地无同 key/uid 的在读书/在看视频），与本地条目
-    // 按最近活动时刻统一混排（「继续也走互联」）。
-    for (final RemoteContinueCandidate c in _remoteContinue) {
-      entries.add(_ContinueEntry(
-        // BUG-1119：此前是 `c.isVideo ? video : epub` 二元降维——远端 SRT 书会被
-        // 抹成 epub、第三种媒体装不下（BUG-1111 的漏网消费点）。直读候选种类。
-        kind: c.kind,
-        title: c.title,
-        recentMs: c.recentMs,
-        percent: c.percent,
-        // 远端书带 host 阅读百分比可画进度条；远端视频无集数/完成信息不画。
-        progress: c.isVideo ? null : c.percent / 100,
-        collectionName: c.collectionName,
-        remote: c,
       ));
     }
     entries.sort(
@@ -1288,25 +1020,6 @@ class _HomeDashboardPageState
         video: v,
       ));
     }
-    // BUG-1111：游戏也进「最近添加」。addedAt 即 `galgames.id` 的微秒时间戳来源
-    // （添加时刻），与书的 importedAt / 视频的 importedAt 同量纲，可直接混排。
-    for (final GalgameEntry g in _games) {
-      final int addedMs = g.addedAt.millisecondsSinceEpoch;
-      if (addedMs <= 0) continue;
-      entries.add(_ContinueEntry(
-        kind: MediaKind.game,
-        title: g.displayName,
-        recentMs: addedMs,
-        collectionName: statCollectionName(
-          MediaKind.game.compositeKey(g.id),
-          _primaryCollectionByEntry,
-          _collectionNamesById,
-        ),
-        subtitleOverride:
-            '${t.home_filter_game} · ${_relativeTimeLabel(addedMs, now)}',
-        game: g,
-      ));
-    }
     // 模块门控与「继续」同判据，同样**先过滤再 take(12)**（顺序反了会出现「过滤
     // 后不足 12 条」）。整行被过滤空 = 与空库同样返回 null，不留一张空卡占位。
     final ModuleVisibility visibility = appModel.moduleVisibility;
@@ -1362,30 +1075,9 @@ class _HomeDashboardPageState
       kind: MediaKind.video,
       title: v.title,
       recentMs: recentMs,
-      progress: videoWatchFraction(
-        completed: v.completedAt != null,
-        currentEpisode: v.currentEpisode,
-        episodeCount: playlistEpisodeCount(v.playlistJson),
-      ),
       collectionName: collectionName,
       collectionId: collectionId,
       video: v,
-    );
-  }
-
-  /// 游戏行 → 继续卡条目（散卡与合集续玩目标共用）：与库页/时间轴同一显示名
-  /// 口径（改名/刮削后首页同步）；无完成度概念不画进度条（progress 留 null），
-  /// [recentMs] 恒取最近游玩时刻。
-  _ContinueEntry _gameContinueEntry(
-    GalgameEntry game, {
-    required String? collectionName,
-  }) {
-    return _ContinueEntry(
-      kind: MediaKind.game,
-      title: game.displayName,
-      recentMs: game.lastPlayedMs,
-      collectionName: collectionName,
-      game: game,
     );
   }
 
@@ -1456,24 +1148,6 @@ class _HomeDashboardPageState
     return _buildContinueCardBody(tokens, appModel, entry, landscape: false);
   }
 
-  /// 续播视频卡的朝向探测 provider（与 [_continueCover] 渲染路共用键）：远端走
-  /// 互联封面，本地走条目封面；取不到 → null（探测默认竖卡）。
-  ImageProvider? _continueVideoCoverProvider(_ContinueEntry entry) {
-    final RemoteContinueCandidate? remote = entry.remote;
-    if (remote != null) {
-      final RemoteCoverFetcher? fetcher = _remoteCoverFetcher;
-      final String? url = remote.coverUrl;
-      if (url == null || url.isEmpty || fetcher == null) return null;
-      return RemoteCoverImage(url, fetcher, cacheKey: remote.id);
-    }
-    final VideoBookRow? video = entry.video;
-    if (video == null) return null;
-    return resolveMediaCoverImage(
-      kind: MediaKind.video,
-      localPath: video.coverPath,
-    );
-  }
-
   Widget _buildContinueCardBody(
     FushiDesignTokens tokens,
     AppModel appModel,
@@ -1481,8 +1155,8 @@ class _HomeDashboardPageState
     required bool landscape,
   }) {
     final bool eink = isEinkTheme(context);
-    final double coverWidth =
-        landscape ? _kContinueCoverHeight * 16 / 9 : _kContinueCoverWidth;
+    const double coverWidth =
+        (_kContinueCoverWidth);
     // BUG-1111：游戏没有阅读百分比（无完成度概念），状态段只标类型，不能套用
     // 书的「阅读 · x%」——否则一律显示「阅读 · 0%」。
     String status = switch (entry.kind) {
@@ -1492,10 +1166,6 @@ class _HomeDashboardPageState
       MediaKind.srt =>
         '${t.home_filter_read} · ${entry.percent}%',
     };
-    if (entry.remote != null) {
-      // 标明设备来源：优先 host 设备名（配对时存下），取不到回退通用「远端」。
-      status = '$status · ${_remoteDeviceName ?? t.home_remote_source}';
-    }
     // 「最近添加」行覆盖状态段（类型 · 相对时间）；继续区恒 null 走上面默认。
     status = entry.subtitleOverride ?? status;
     final String? collectionName = entry.collectionName;
@@ -1576,9 +1246,6 @@ class _HomeDashboardPageState
     _ContinueEntry entry, {
     bool landscapeSlot = false,
   }) {
-    if (entry.remote != null) {
-      return _remoteCover(tokens, entry, landscapeSlot: landscapeSlot);
-    }
     if (entry.isVideo) {
       // v68 横版选图链（Jellyfin preferThumb 口径）：合集/散装的带字横图 →
       // 无字背景 → 目标集封面（剧照天然合槽；竖版海报模糊垫底）。
@@ -1594,7 +1261,6 @@ class _HomeDashboardPageState
       }
       return _videoCover(tokens, entry.video!, landscapeSlot: landscapeSlot);
     }
-    if (entry.isGame) return _gameCover(tokens, entry.game!);
     return _bookCoverImage(
       tokens,
       ReaderFushiSource.instance.getDisplayThumbnailFromMediaItem(
@@ -1622,29 +1288,6 @@ class _HomeDashboardPageState
       fit: BoxFit.cover,
       imageErrorBuilder: (_, __, ___) =>
           _coverPlaceholder(tokens, Icons.menu_book_outlined),
-    );
-  }
-
-  /// 远端条目封面：互联 coverUrl + 取图器可用则 [RemoteCoverImage]（按稳定 id
-  /// 磁盘缓存），否则占位图标。
-  Widget _remoteCover(
-    FushiDesignTokens tokens,
-    _ContinueEntry entry, {
-    bool landscapeSlot = false,
-  }) {
-    final RemoteContinueCandidate remote = entry.remote!;
-    final String? coverUrl = remote.coverUrl;
-    final RemoteCoverFetcher? fetcher = _remoteCoverFetcher;
-    final IconData icon =
-        entry.isVideo ? Icons.movie_outlined : Icons.menu_book_outlined;
-    if (coverUrl == null || coverUrl.isEmpty || fetcher == null) {
-      return _coverPlaceholder(tokens, icon);
-    }
-    // BUG-1299：远端封面横竖不可知（host 侧可能是截帧也可能是海报），槽向自适应。
-    return PortraitCoverImage(
-      image: RemoteCoverImage(coverUrl, fetcher, cacheKey: remote.id),
-      landscapeSlot: landscapeSlot,
-      errorBuilder: (BuildContext _) => _coverPlaceholder(tokens, icon),
     );
   }
 
@@ -1685,24 +1328,6 @@ class _HomeDashboardPageState
       tokens,
       kind: MediaKind.video,
       path: video.coverPath,
-      landscapeSlot: landscapeSlot,
-      decodeWidth: decodeWidth,
-    );
-  }
-
-  /// 游戏封面（BUG-1111 / BUG-1112）：目录扫描 / exe 图标 / 刮削最终都落到
-  /// `galgames.coverPath`，显示侧交给统一来源解析器，不在页面重复同步文件探测。
-  /// exe 内嵌图标是方图，走 [PortraitCoverImage] 垫底完整显示而非硬裁（BUG-1299）。
-  Widget _gameCover(
-    FushiDesignTokens tokens,
-    GalgameEntry game, {
-    bool landscapeSlot = false,
-    int decodeWidth = kLocalCoverDecodePixelWidth,
-  }) {
-    return _localCover(
-      tokens,
-      kind: MediaKind.game,
-      path: game.coverPath,
       landscapeSlot: landscapeSlot,
       decodeWidth: decodeWidth,
     );
@@ -1755,10 +1380,6 @@ class _HomeDashboardPageState
   ) async {
     // 卡片本身已按 [_ContinueEntry.module] 过滤过（关掉的模块根本没有卡），所以
     // 这里的每条落地路径都在开着的模块内；[_goToTab] 的门只是防御性兜底。
-    if (entry.remote != null) {
-      _goToTab(entry.isVideo ? HomeTab.video : HomeTab.books);
-      return;
-    }
     if (entry.isVideo) {
       await _openLocalVideo(entry.video!.bookUid);
       return;
@@ -1796,14 +1417,6 @@ class _HomeDashboardPageState
       ..hideCurrentSnackBar()
       ..showSnackBar(SnackBar(content: Text(t.module_disabled_hint)));
   }
-
-  /// 本地书条目所属模块：漫画行（[MangaFushiSource]）归 manga，其余（EPUB / PDF /
-  /// SRT）归 books。与 [_ContinueEntry.module] 同一判据，都靠
-  /// [MediaItem.mediaSourceIdentifier] 认漫画身份。
-  ModuleId _moduleOfBookItem(MediaItem item) =>
-      item.mediaSourceIdentifier == MangaFushiSource.kUniqueKey
-      ? ModuleId.manga
-      : ModuleId.books;
 
   /// 直接续播本地视频：与视频页 hero/卡片同一条共享路由入口 [openLocalVideoBook]
   /// （合集成员带主合集 id → 播放器建剧集面板/上下集/连播；散卡单视频打开）。
@@ -2069,17 +1682,6 @@ class _HomeDashboardPageState
     );
   }
 
-  /// 排行榜入口（统计中心入口旁的独立按钮）。
-  void _openLeaderboard() {
-    Navigator.push(
-      context,
-      adaptivePageRoute<void>(
-        context: context,
-        builder: (_) => const LeaderboardPage(),
-      ),
-    );
-  }
-
   /// 点热力图某日 → 时段明细 sheet（阶段 1 统一组件 [showStatPeriodDetailSheet]：
   /// 单日=退化时段，与统计页时段卡同一实现——来源分节 + 合集分组 + 时长倒序 +
   /// 条目跳转）。
@@ -2153,7 +1755,6 @@ class _HomeDashboardPageState
     final AppModel appModel = ref.read(appProvider);
     // 日明细 sheet 的行来自事实面（历史统计，不按模块删行），所以打开路径必须
     // 自己判模块：关掉的模块只给提示，不静默、也不真把页面拉起来。
-    final ModuleVisibility visibility = appModel.moduleVisibility;
     if (mediaKey.isNotEmpty) {
       if (mediaKind == kActivityMediaVideo &&
           _videos.any((VideoBookRow v) => v.bookUid == mediaKey)) {
@@ -2170,10 +1771,6 @@ class _HomeDashboardPageState
               ReaderFushiSource.parseBookKey(item.mediaIdentifier) ??
                   ReaderFushiSource.parseSrtBookUid(item.mediaIdentifier);
           if (key == mediaKey) {
-            if (!visibility.isEnabled(_moduleOfBookItem(item))) {
-              _showModuleHiddenHint();
-              return;
-            }
             final MediaSource source = item.getMediaSource(appModel: appModel);
             await appModel.openMedia(ref: ref, mediaSource: source, item: item);
             return;
@@ -2192,12 +1789,7 @@ class _HomeDashboardPageState
   /// 再按「落库时的标题快照 == 库内条目任一已知名」兜底（老事件无 mediaKey），
   /// 最后回落快照原文。查找委托 [displayTitleForGame]。
   String _gameDisplayTitle(String rawTitle, {String? mediaKey}) {
-    final GalgameEntry? entry = findGalgameForActivity(
-      _games,
-      mediaKey: mediaKey,
-      title: rawTitle,
-    );
-    return displayTitleForGame(entry: entry, rawTitle: rawTitle);
+    return displayTitleForGame( rawTitle: rawTitle);
   }
 
   // ── 区块 4：Activity 时间轴 ──────────────────────────────────────────────
@@ -2453,27 +2045,6 @@ class _HomeDashboardPageState
   ) {
     final String? key = entry.mediaKey;
     if (entry.mediaType == kActivityMediaGame) {
-      // 新事件用 galgames.id；旧启动事件曾写 exePath，attach 事件还可能只有标题。
-      // 统一反查器兼容三者，封面和显示名因此命中同一个 GalgameEntry。
-      final GalgameEntry? game = findGalgameForActivity(
-        _games,
-        mediaKey: key,
-        title: entry.title,
-      );
-      if (game != null) {
-        return ClipRRect(
-          borderRadius: FushiBorderRadius.card,
-          child: SizedBox(
-            width: 40,
-            height: 56,
-            child: _gameCover(
-              tokens,
-              game,
-              decodeWidth: kActivityCoverDecodePixelWidth,
-            ),
-          ),
-        );
-      }
     } else if (key != null && key.isNotEmpty) {
       if (entry.mediaType == kActivityMediaVideo) {
         final VideoBookRow? video = videosByUid[key];
@@ -2542,7 +2113,6 @@ class _HomeDashboardPageState
   ) async {
     // 时间轴的行是历史事实、不按模块删（删了像是记录丢了），所以打开路径自己判
     // 模块：关掉的模块给提示、不真拉起页面（[_goToTab] 同样带这道门）。
-    final ModuleVisibility visibility = appModel.moduleVisibility;
     final String? key = entry.mediaKey;
     if (key != null && key.isNotEmpty) {
       if (entry.mediaType == kActivityMediaVideo &&
@@ -2553,10 +2123,6 @@ class _HomeDashboardPageState
       if (entry.mediaType == kActivityMediaBook) {
         final MediaItem? book = booksByKey[key];
         if (book != null) {
-          if (!visibility.isEnabled(_moduleOfBookItem(book))) {
-            _showModuleHiddenHint();
-            return;
-          }
           final MediaSource source = book.getMediaSource(appModel: appModel);
           await appModel.openMedia(ref: ref, mediaSource: source, item: book);
           return;
@@ -2612,401 +2178,6 @@ class _HomeDashboardPageState
       formatActivityRelativeTime(timestampMs, now);
 
   // ── 区块 5：Bangumi 同步 ─────────────────────────────────────────────────
-
-  /// Bangumi 同步卡：把原本全静默的追踪链路摊成用户可见状态。
-  ///
-  /// 这条链路每一步失败都不出声——没令牌不建映射、标题匹配不唯一不建映射且 10 分钟
-  /// 内不再重试、上报失败只进错误日志并退避最长 6 小时、成功则删 outbox 行不留痕迹。
-  /// 于是「看完一部作品」之后没有任何反馈可看。这张卡按链路的三段（连接 → 关联 →
-  /// 发送）依次给出当前事实与下一步动作：哪一段断了，卡上就只可能显示那一段的文案。
-  Widget _buildTrackingCard(
-    FushiDesignTokens tokens,
-    AppModel appModel,
-    DateTime now,
-  ) {
-    final MediaTrackingStatus status = _tracking;
-    final ColorScheme scheme = Theme.of(context).colorScheme;
-
-    // 第一段：没连令牌 → 后面两段都无从谈起，只给连接入口。
-    if (!status.configured) {
-      return _sectionCard(
-        tokens,
-        title: t.media_tracking_card_title,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text(t.media_tracking_not_connected, style: tokens.type.metadata),
-            SizedBox(height: tokens.spacing.gap),
-            Align(
-              alignment: AlignmentDirectional.centerStart,
-              child: FilledButton.tonalIcon(
-                onPressed: _openTrackingSettings,
-                icon: const Icon(Icons.link),
-                label: Text(t.media_tracking_connect),
-              ),
-            ),
-          ],
-        ),
-      );
-    }
-
-    final List<String> summary = <String>[
-      '${t.media_tracking_last_sync}: '
-          '${trackingLastSyncLabel(status, now)}',
-      t.media_tracking_linked_count(n: status.mappings.length),
-      status.pending > 0
-          ? t.media_tracking_pending_count(n: status.pending)
-          : t.media_tracking_all_synced,
-    ];
-
-    return _sectionCard(
-      tokens,
-      title: t.media_tracking_card_title,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Tooltip(
-            message: t.media_tracking_watched_show,
-            child: InkWell(
-              onTap: () => unawaited(_showBangumiWatched()),
-              borderRadius: FushiBorderRadius.card,
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: tokens.spacing.gap / 2,
-                ),
-                child: Row(
-                  children: <Widget>[
-                    Icon(
-                      Icons.person_outline,
-                      size: 18,
-                      color: scheme.primary,
-                    ),
-                    SizedBox(width: tokens.spacing.gap / 2),
-                    Expanded(
-                      child: Text(
-                        status.accountName.isEmpty
-                            ? t.media_tracking_account
-                            : status.accountName,
-                        style: tokens.type.listTitle,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    Text(
-                      t.media_tracking_watched_show,
-                      style: tokens.type.metadata.copyWith(
-                        color: scheme.primary,
-                      ),
-                    ),
-                    SizedBox(width: tokens.spacing.gap / 4),
-                    Icon(
-                      Icons.chevron_right,
-                      size: 18,
-                      color: scheme.primary,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          SizedBox(height: tokens.spacing.gap / 2),
-          Text(summary.join(' · '), style: tokens.type.metadata),
-
-          // 令牌被拒是「已连接」下最容易误判成「没反应」的情形：令牌还在偏好里，
-          // isConfigured 仍为 true，但每次同步都在 getMe 就 401 中止。
-          if (status.unauthorized) ...<Widget>[
-            SizedBox(height: tokens.spacing.gap),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Icon(Icons.error_outline, size: 18, color: scheme.error),
-                SizedBox(width: tokens.spacing.gap / 2),
-                Expanded(
-                  child: Text(
-                    t.media_tracking_unauthorized,
-                    style: tokens.type.metadata.copyWith(color: scheme.error),
-                  ),
-                ),
-              ],
-            ),
-          ],
-
-          SizedBox(height: tokens.spacing.gap),
-
-          // 本地历史与映射是两个独立口径：先明确列出已有进度但仍没关联的条目。
-          // 旧文案只在映射表为空时泛泛说“其余需手动关联”，既没写出“哪些”，
-          // 又把“零映射”误当成“零历史”。
-          if (status.unlinked.isNotEmpty) ...<Widget>[
-            Text(
-              t.media_tracking_manual_required_count(n: status.unlinked.length),
-              style: tokens.type.listTitle.copyWith(color: scheme.error),
-            ),
-            SizedBox(height: tokens.spacing.gap / 4),
-            Text(
-              t.media_tracking_manual_required_hint,
-              style: tokens.type.metadata,
-            ),
-            for (final MediaTrackingUnlinkedItem item
-                in status.unlinked.take(_kTrackingUnlinkedLimit))
-              _buildTrackingUnlinkedRow(tokens, item),
-            if (status.unlinked.length > _kTrackingUnlinkedLimit)
-              TextButton(
-                onPressed: _openTrackingSettings,
-                child: Text(
-                  t.media_tracking_more_manual_required(
-                    n: status.unlinked.length - _kTrackingUnlinkedLimit,
-                  ),
-                ),
-              ),
-          ] else if (status.mappings.isEmpty)
-            Text(
-              t.media_tracking_no_local_history,
-              style: tokens.type.metadata,
-            ),
-
-          // 已关联条目仍保留作同步诊断；失败原因挂在对应行上并排到最前。
-          for (final MediaTrackingMappingRow mapping
-              in status.mappingsProblemFirst.take(_kTrackingMappingLimit))
-            _buildTrackingMappingRow(
-              tokens,
-              mapping,
-              status.failureByMappingId[mapping.id],
-            ),
-          for (final String error in status.automaticMappingErrors)
-            Text(
-              '${t.media_tracking_last_error}: $error',
-              style: tokens.type.metadata.copyWith(color: scheme.error),
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
-            ),
-
-          SizedBox(height: tokens.spacing.gap),
-          Wrap(
-            spacing: tokens.spacing.gap,
-            runSpacing: tokens.spacing.gap / 2,
-            children: <Widget>[
-              FilledButton.tonalIcon(
-                onPressed: _trackingSyncBusy ? null : _syncTrackingNow,
-                icon: _trackingSyncBusy
-                    ? const SizedBox.square(
-                        dimension: 16,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      )
-                    : const Icon(Icons.sync),
-                label: Text(t.media_tracking_sync_now),
-              ),
-              if (status.automaticMappingMissCount > 0)
-                FilledButton.tonalIcon(
-                  onPressed: _trackingSyncBusy ? null : _retryTrackingMappings,
-                  icon: const Icon(Icons.refresh),
-                  label: Text(t.media_tracking_retry_mapping),
-                ),
-              TextButton.icon(
-                onPressed: _openTrackingSettings,
-                icon: const Icon(Icons.tune),
-                label: Text(t.media_tracking_manage_links),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTrackingUnlinkedRow(
-    FushiDesignTokens tokens,
-    MediaTrackingUnlinkedItem item,
-  ) {
-    final ColorScheme scheme = Theme.of(context).colorScheme;
-    return InkWell(
-      onTap: _openTrackingSettings,
-      borderRadius: FushiBorderRadius.card,
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: tokens.spacing.gap / 2),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Icon(Icons.link_off, size: 18, color: scheme.error),
-            SizedBox(width: tokens.spacing.gap / 2),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    item.mediaTitle,
-                    style: tokens.type.listTitle,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Text(
-                    '${trackingKindLabel(item.kind.value)} · '
-                    '${t.media_tracking_manual_required}',
-                    style: tokens.type.metadata.copyWith(color: scheme.error),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(width: tokens.spacing.gap / 2),
-            const Icon(Icons.chevron_right, size: 18),
-          ],
-        ),
-      ),
-    );
-  }
-
-  /// 一条已关联条目：本地标题 + 「类别 · Bangumi 条目名 · 进度单位」+（有则）失败
-  /// 原因，整行点击在浏览器打开该 Bangumi 条目页。
-  ///
-  /// 打开 bgm.tv 是「怎么查看这个 bangumi 数据」的落点：远端收藏与进度的真相在
-  /// Bangumi，app 内不镜像一份（镜像就得再养一套失效逻辑，且永远可能与远端不符）。
-  Widget _buildTrackingMappingRow(
-    FushiDesignTokens tokens,
-    MediaTrackingMappingRow mapping,
-    MediaTrackingFailure? failure,
-  ) {
-    final ColorScheme scheme = Theme.of(context).colorScheme;
-    return InkWell(
-      onTap: () => unawaited(_openBangumiSubject(mapping.subjectId)),
-      borderRadius: FushiBorderRadius.card,
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: tokens.spacing.gap / 2),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            if (failure != null) ...<Widget>[
-              Icon(Icons.sync_problem_outlined, size: 18, color: scheme.error),
-              SizedBox(width: tokens.spacing.gap / 2),
-            ],
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    mapping.mediaTitle,
-                    style: tokens.type.listTitle,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Text(
-                    trackingMappingSubtitle(mapping),
-                    style: tokens.type.metadata,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  // 退避窗口内也照显：markFailed 最长把重试推到 6 小时后，那段时间
-                  // 里发送侧看不到这一行，展示侧不说就等于「零错误」。
-                  if (failure != null)
-                    Text(
-                      '${t.media_tracking_last_error}: ${failure.error}',
-                      style: tokens.type.metadata.copyWith(color: scheme.error),
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                ],
-              ),
-            ),
-            SizedBox(width: tokens.spacing.gap / 2),
-            Tooltip(
-              message: t.media_tracking_open_subject,
-              child: const Icon(Icons.open_in_new, size: 16),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Future<void> _openBangumiSubject(int subjectId) async {
-    await launchUrl(
-      Uri.parse(BangumiApiClient.subjectUrl(subjectId)),
-      mode: LaunchMode.externalApplication,
-    );
-  }
-
-  Future<void> _showBangumiWatched() async {
-    await showDialog<void>(
-      context: context,
-      builder: (BuildContext dialogContext) => _BangumiWatchedDialog(
-        service: ref.read(appProvider).mediaTrackingService,
-        onOpenSubject: _openBangumiSubject,
-      ),
-    );
-  }
-
-  void _openTrackingSettings() {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (_) =>
-            SettingsDetailPage(destination: buildMediaTrackingDestination()),
-      ),
-    );
-  }
-
-  /// 手动同步：结果用 SnackBar 明确回执（成功/失败），再刷新卡片状态。
-  /// 服务层的 `statusRevision` 也会触发重载，这里的 await 只为按钮 busy 态收敛。
-  Future<void> _syncTrackingNow() async {
-    setState(() => _trackingSyncBusy = true);
-    try {
-      final MediaTrackingSyncResult result =
-          await ref.read(appProvider).mediaTrackingService.syncNow(force: true);
-      if (!mounted) return;
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(
-          SnackBar(
-            content: Text(result.isSuccess
-                ? t.media_tracking_sync_success
-                : t.media_tracking_sync_failed),
-          ),
-        );
-    } catch (e, stack) {
-      ErrorLogService.instance.log('HomeDashboardPage.syncTracking', e, stack);
-    } finally {
-      if (mounted) setState(() => _trackingSyncBusy = false);
-    }
-  }
-
-  /// 自动匹配重试：由服务层清掉对应 miss 退避并重新调用原匹配解析器；结果必须明确
-  /// 回显，不能把「按钮被 10 分钟退避挡住」伪装成成功。
-  Future<void> _retryTrackingMappings() async {
-    setState(() => _trackingSyncBusy = true);
-    try {
-      final MediaTrackingMappingRetryResult result = await ref
-          .read(appProvider)
-          .mediaTrackingService
-          .retryAutomaticMappings();
-      if (!mounted) return;
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(
-          SnackBar(
-            content: Text(
-              !result.matchedAny
-                  ? t.media_tracking_retry_no_match
-                  : (result.syncResult?.isSuccess ?? false)
-                      ? t.media_tracking_retry_matched
-                      : t.media_tracking_sync_failed,
-            ),
-          ),
-        );
-    } catch (e, stack) {
-      ErrorLogService.instance.log(
-        'HomeDashboardPage.retryTrackingMappings',
-        e,
-        stack,
-      );
-      if (mounted) {
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(
-            SnackBar(content: Text(t.media_tracking_sync_failed)),
-          );
-      }
-    } finally {
-      if (mounted) setState(() => _trackingSyncBusy = false);
-    }
-  }
 
   // ── 共享外壳 ────────────────────────────────────────────────────────────
 
@@ -3114,172 +2285,6 @@ class _HomeDashboardPageState
             },
           ),
       ],
-    );
-  }
-}
-
-/// 已迁移只读态的首屏常驻引导（Fushi 迁移 P1-4）：数据已导出，引导用户改用
-/// Fushi；保留「重新导出」通道（Fushi 校验缺批时回头重传）。
-class _MigrationReadonlyBanner extends StatelessWidget {
-  const _MigrationReadonlyBanner({required this.appModel});
-
-  final AppModel appModel;
-
-  static const MigrationTargetChannel _channel = MigrationTargetChannel();
-
-  @override
-  Widget build(BuildContext context) {
-    return FushiCard(
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(t.migration_readonly_note),
-            const SizedBox(height: 8),
-            Row(
-              children: <Widget>[
-                FilledButton.tonal(
-                  onPressed: () => _channel.launchFushi(),
-                  child: Text(t.migration_open_fushi),
-                ),
-                const SizedBox(width: 8),
-                TextButton(
-                  onPressed: () => Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => MigrationPage(appModel: appModel),
-                    ),
-                  ),
-                  child: Text(t.migration_reexport),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-/// Fushi 侧迁移引导 banner（P2-2/P2-3）：
-/// - 未导入且中转目录有数据 → 「检测到 Hibiki 迁移数据 → 导入」；
-/// - 已导入且旧包仍安装 → 「卸载旧版」（ACTION_DELETE 弹系统框，回来复查
-///   getPackageInfo——用户可能点了取消，绝不乐观标成功）；
-/// - 其余情况渲染为空。
-class _FushiMigrationBanner extends StatefulWidget {
-  const _FushiMigrationBanner({required this.appModel});
-
-  final AppModel appModel;
-
-  @override
-  State<_FushiMigrationBanner> createState() => _FushiMigrationBannerState();
-}
-
-class _FushiMigrationBannerState extends State<_FushiMigrationBanner>
-    with WidgetsBindingObserver {
-  static const MigrationTargetChannel _channel = MigrationTargetChannel();
-  static const MigrationImporter _importer = MigrationImporter();
-
-  bool _hasTransferData = false;
-  bool _legacyInstalled = false;
-
-  /// 是否持有「所有文件访问权限」。决定 [_legacyInstalled] 能不能当兜底入口用：
-  /// 只有**没**权限时「读不到中转数据」才是不可信的答案。
-  bool _storageGranted = true;
-
-  bool get _importDone =>
-      widget.appModel.prefsRepo.getPref(kMigrationImportDonePrefKey) == true;
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-    _refresh();
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    // 从系统卸载确认框回来（resumed）时复查旧包是否真被卸了。
-    if (state == AppLifecycleState.resumed) _refresh();
-  }
-
-  Future<void> _refresh() async {
-    final Directory dir = await migrationTransferDir();
-    // **只做存在性检查**，绝不在这里调 scan()：banner 只需要知道「要不要显示
-    // 入口」，而 scan 会把中转目录全量算一遍 SHA-256（11GB 库＝CPU 满载数分钟）。
-    // 这个方法在 initState 和每次回前台都跑，用 scan 等于让手机一直在发烫。
-    // 归档到底能不能信，由导入页在用户真的要导时去校验。
-    final bool hasData = _importer.hasTransferData(dir);
-    final bool installed =
-        await _channel.isPackageInstalled(kHibikiPackageName);
-    final bool granted = await _channel.hasAllFilesAccess();
-    if (!mounted) return;
-    setState(() {
-      _hasTransferData = hasData;
-      _legacyInstalled = installed;
-      _storageGranted = granted;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final FushiDesignTokens tokens = FushiDesignTokens.of(context);
-    Widget? inner;
-    // 「老包还装着」只能在**没有存储权限时**当兜底入口，不能单独成立。
-    //
-    // 要兜的死路是：缺「所有文件访问权限」时 existsSync 直接返回 false（不抛
-    // 异常，兜不住），入口一藏用户就再也走不到那个能授权的页面 → 无法授权 →
-    // 死锁。那种情况下「读不到数据」是个不可信的答案，宁可多显示一次入口。
-    //
-    // 但**有**权限时它就是可信的：导入成功后中转目录已被整个删掉，此时老包大
-    // 概率还没卸（卸载提示正是下面那条分支要做的事），若仍拿它当入口，用户会
-    // 在数据早已导完、无事可做的情况下一直被问「检测到迁移数据，现在导入？」。
-    if (!_importDone &&
-        (_hasTransferData || (_legacyInstalled && !_storageGranted))) {
-      inner = Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(t.migration_import_detected),
-          const SizedBox(height: 8),
-          FilledButton.tonal(
-            onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute<void>(
-                builder: (_) => MigrationImportPage(appModel: widget.appModel),
-              ),
-            ),
-            child: Text(t.migration_import_entry),
-          ),
-        ],
-      );
-    } else if (_importDone && _legacyInstalled) {
-      inner = Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(t.migration_uninstall_prompt),
-          const SizedBox(height: 8),
-          FilledButton.tonal(
-            onPressed: () async {
-              await _channel.requestUninstall(kHibikiPackageName);
-              // resumed 回调会复查；这里再主动刷一次兜底。
-              await _refresh();
-            },
-            child: Text(t.migration_uninstall_button),
-          ),
-        ],
-      );
-    }
-    if (inner == null) return const SizedBox.shrink();
-    return Padding(
-      padding: EdgeInsets.only(bottom: tokens.spacing.card),
-      child: FushiCard(
-        child: Padding(padding: const EdgeInsets.all(12), child: inner),
-      ),
     );
   }
 }

@@ -1,14 +1,10 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import 'package:fushi/src/models/kitapsen_edition.dart';
-import 'package:fushi/i18n/strings.g.dart';
 import 'package:fushi/src/focus/fushi_focus_controller.dart' show FushiFocusId;
 import 'package:fushi/src/focus/fushi_focus_target.dart';
 import 'package:fushi/src/utils/components/current_app_icon.dart';
 import 'package:fushi/src/utils/components/fushi_design_tokens.dart';
-import 'package:fushi/src/utils/misc/official_links.dart';
 
 /// 宽屏主导航 rail 顶部的品牌位（`adaptiveNavRail` 的 leading）。应用图标直接占
 /// rail 顶部固定区域，不叠加卡片底色、描边或额外内边距；下面的目的地仍在剩余空间

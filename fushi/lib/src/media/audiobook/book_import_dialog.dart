@@ -1,41 +1,23 @@
-import 'dart:developer' as developer;
 import 'dart:io';
-import 'dart:isolate';
 import 'dart:typed_data';
 
 import 'package:drift/drift.dart' show Value;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:fushi_audio/fushi_audio.dart';
 import 'package:path/path.dart' as p;
-import 'package:fushi/src/models/kitapsen_edition.dart';
-import 'package:fushi/src/media/drag_drop/drop_classification.dart';
-import 'package:fushi/src/media/drag_drop/fushi_file_drop_target.dart';
-import 'package:fushi/src/media/drag_drop/import_dialog_drop.dart';
-import 'package:fushi_asr_core/asr_core.dart';
-import 'package:fushi/src/asr_host/asr_host.dart';
-import 'package:fushi/src/media/audiobook/asr_transcribe_sheet.dart';
-import 'package:fushi_engine/media/audiobook/audiobook_alignment_service.dart';
-import 'package:fushi/src/media/audiobook/subtitle_rematch.dart';
 import 'package:fushi_engine/media/audiobook/text_to_epub.dart';
-import 'package:fushi/src/media/import/audiobook_health_summary.dart';
 import 'package:fushi/src/media/import/import_carrier.dart';
 import 'package:fushi/src/media/import/import_dialog_frame.dart';
 import 'package:fushi/src/media/import/import_flow_mixin.dart';
 import 'package:fushi/src/media/import/real_path_directory_picker.dart';
-import 'package:fushi/src/media/import/sidecar_finder.dart';
 import 'package:fushi/src/media/media_cover_service.dart';
 import 'package:fushi_engine/media/cover_file_writer.dart'
     show CoverImageInvalidException;
-import 'package:fushi/src/models/app_model.dart';
 import 'package:fushi_core/fushi_core.dart';
 import 'package:fushi_engine/epub/book_title_conflict.dart';
 import 'package:fushi_engine/epub/epub_importer.dart';
 import 'package:fushi_engine/epub/epub_parser.dart';
-import 'package:fushi/src/media/manga/manga_import_dialog.dart';
-import 'package:fushi/src/media/manga/manga_module.dart';
 import 'package:fushi/src/pdf/pdf_importer.dart';
 import 'package:fushi/utils.dart';
 
@@ -100,33 +82,17 @@ class _BookImportDialogState extends State<BookImportDialog>
 
   String? _epubPath;
   String? _subtitlePath;
-  List<String> _audioPaths = [];
+  final List<String> _audioPaths = [];
   String? _coverPath;
   String? _audioCoverPath;
   // 内嵌封面抽取（m4b 等经 ffmpeg probe，桌面端有数百毫秒~数秒延迟）的在途
   // Future。各触发点赋值，导入时 _applyBestCoverToEpub 先 await 它，避免用户在
   // 抽取未返回时点「导入」导致 _audioCoverPath 仍为 null 被吞掉（BUG-483）。
-  Future<void>? _coverExtraction;
-  // TODO-1034 次要：单调递增的抽取序号，用于让晚到的旧抽取放弃写 _audioCoverPath。
-  int _coverExtractionToken = 0;
 
   // 原始文件名（file_picker 在 Android 上返回的 cache 路径文件名可能与原始不同）
   String? _epubName;
-  String? _subtitleName;
 
   bool _pickerActive = false;
-
-  /// TODO-935 ①A：「引用原文件（不复制）」开关。仅桌面可见/可选；移动端
-  /// file_picker 返回缓存临时副本，引用即指向会被清掉的文件，故恒 false。
-  bool _referenceOriginal = false;
-
-  bool _autoWindow = true;
-  int _searchWindow = EpubSrtMatcher.defaultSearchWindow;
-  double _similarityThreshold = EpubSrtMatcher.defaultSimilarityThreshold;
-
-  bool get _willRunMatcher {
-    return false;
-  }
 
   bool get _hasSubtitles => _subtitlePath != null;
 
@@ -185,11 +151,7 @@ class _BookImportDialogState extends State<BookImportDialog>
 
   @override
   Widget build(BuildContext context) {
-    return FushiFileDropTarget(
-      enabled: !importing,
-      debugLabel: 'book-import-dialog',
-      onDrop: _handleDialogDrop,
-      child: BookImportDialogFrame(
+    return BookImportDialogFrame(
         title: Text(t.srt_import),
         content: _buildForm(),
         actions: [
@@ -202,51 +164,7 @@ class _BookImportDialogState extends State<BookImportDialog>
           ),
           buildImportAction(context, onImport: _doImport),
         ],
-      ),
-    );
-  }
-
-  /// 选/拖进来的路径若其实是漫画载体，弹一次明确确认并转交 [MangaImportDialog]。
-  ///
-  /// 返回 `true` 表示「本路径已被漫画流程接手，书籍侧不要再收下它」——用户在确认
-  /// 框里点取消也算接手（不继续按书导入，那只会产出一本乱码书）。
-  ///
-  /// 为什么书籍入口还要认漫画：图片型 `.zip` / 扫描版 `.epub` 与词典包/普通电子书
-  /// 同形，拖到书架时分类层按扩展名归 books（它刻意不为每次拖 EPUB 白开一次包）。
-  /// 此前这里是**静默**转漫画导入；现在改成用户可见的一次确认——识别照旧，分派不
-  /// 再背着用户发生。
-  Future<bool> _handoffIfManga(String path) async {
-    if (!_classifyCarrier(path).isManga) return false;
-    final bool? go = await showAppDialog<bool>(
-      context: context,
-      builder: (BuildContext ctx) => AlertDialog(
-        title: Text(t.manga_import_detected_title),
-        content: Text(
-          t.manga_import_detected_message(name: p.basename(path)),
-        ),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () => Navigator.pop(ctx, false),
-            child: Text(t.dialog_cancel),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.pop(ctx, true),
-            child: Text(t.manga_import_detected_confirm),
-          ),
-        ],
-      ),
-    );
-    if (go != true || !mounted) return true;
-
-    final bool? imported = await showAppDialog<bool>(
-      context: context,
-      builder: (_) => MangaImportDialog(db: widget.db, initialPath: path),
-    );
-    if (mounted) {
-      // 关掉书籍框并把漫画侧的导入结果透传出去，书架照常刷新。
-      Navigator.pop(context, imported == true);
-    }
-    return true;
+      );
   }
 
   /// 判定一个待导入路径的载体身份。文件系统判据在此注入，分类函数本身不碰 IO。
@@ -258,30 +176,6 @@ class _BookImportDialogState extends State<BookImportDialog>
   late final ImportCarrierResolver _carrierResolver;
 
   ImportCarrier _classifyCarrier(String path) => _carrierResolver.resolve(path);
-
-  /// 拖文件进本对话框 → 分类 → 按字段覆盖（仅填命中类，不清用户已选）。
-  /// 纯解析交给 [resolveBookDialogDrop]；此处只 setState + sidecar/封面副作用。
-  Future<void> _handleDialogDrop(List<String> paths, Offset _) async {
-    if (importing) return;
-    final DroppedFiles files = classifyDroppedFiles(paths);
-    final BookDialogDropResult r = resolveBookDialogDrop(files);
-    if (r.isEmpty) return;
-    final String? droppedEpub = r.epubPath;
-    if (!mounted) return;
-    final bool gotAudio = false;
-    setState(() {
-      if (droppedEpub != null) {
-        _epubPath = droppedEpub;
-        _epubName = p.basename(droppedEpub);
-        _autoFillTitle(
-            p.basenameWithoutExtension(droppedEpub), ImportTitleSource.epub);
-      }
-    });
-    // 拖入主书文件时顺带扫同目录 sidecar（仅填空、不覆盖）；拖入音频时抽内嵌封面。
-    if (droppedEpub != null) {
-      _autoAttachSidecars(droppedEpub);
-    }
-  }
 
   Widget _buildForm() {
     final FushiDesignTokens tokens = FushiDesignTokens.of(context);
@@ -300,22 +194,6 @@ class _BookImportDialogState extends State<BookImportDialog>
             _coverRow(),
           ],
         ),
-        if (isDesktopPlatform && _audioPaths.isNotEmpty) ...[
-          SizedBox(height: tokens.spacing.gap),
-          AdaptiveSettingsSection(
-            children: [
-              AdaptiveSettingsSwitchRow(
-                title: t.audiobook_reference_original,
-                subtitle: t.audiobook_reference_original_desc,
-                icon: Icons.link_outlined,
-                value: _referenceOriginal,
-                onChanged: importing
-                    ? null
-                    : (bool v) => setState(() => _referenceOriginal = v),
-              ),
-            ],
-          ),
-        ],
         SizedBox(height: tokens.spacing.rowVertical),
         FushiTextField(
           controller: _titleCtrl,
@@ -330,33 +208,6 @@ class _BookImportDialogState extends State<BookImportDialog>
           controller: _authorCtrl,
           labelText: t.srt_import_author_hint,
         ),
-        if (_willRunMatcher) ...[
-          SizedBox(height: tokens.spacing.rowVertical),
-          AdaptiveSettingsSection(
-            children: [
-              AdaptiveSettingsSwitchRow(
-                title: t.auto_select_search_window,
-                subtitle: t.auto_select_search_window_hint,
-                value: _autoWindow,
-                onChanged: importing
-                    ? null
-                    : (bool value) => setState(() => _autoWindow = value),
-              ),
-            ],
-          ),
-          if (!_autoWindow) ...[
-            SizedBox(height: tokens.spacing.gap),
-            SubtitleRematchWindowSlider(
-              value: _searchWindow,
-              onChanged: (v) => setState(() => _searchWindow = v),
-            ),
-            SizedBox(height: tokens.spacing.gap),
-            SubtitleRematchThresholdSlider(
-              value: _similarityThreshold,
-              onChanged: (v) => setState(() => _similarityThreshold = v),
-            ),
-          ],
-        ],
         if (importing) ...buildProgressSection(context, tokens),
       ],
     );
@@ -374,144 +225,6 @@ class _BookImportDialogState extends State<BookImportDialog>
           tooltip: t.srt_import_pick_epub,
           isWideTapArea: true,
           onTap: _pickEpub,
-        ),
-      ],
-    );
-  }
-
-  Widget _subtitleRow() {
-    return FushiFilePickerRow(
-      title: t.srt_import_pick_subtitle_files,
-      subtitle: _subtitlePath == null
-          ? null
-          : _subtitleName ?? p.basename(_subtitlePath!),
-      icon: Icons.subtitles_outlined,
-      onTap: _onSubtitleRowTap,
-      actions: [
-        if (_subtitlePath != null)
-          FushiIconButton(
-            icon: Icons.close,
-            tooltip: t.dialog_clear,
-            isWideTapArea: true,
-            onTap: () async => setState(() {
-              _subtitlePath = null;
-              _subtitleName = null;
-            }),
-          ),
-        FushiIconButton(
-          icon: Icons.subtitles_outlined,
-          tooltip: t.srt_import_pick_subtitle_files,
-          isWideTapArea: true,
-          onTap: _pickSubtitle,
-        ),
-        if (isAsrSupported)
-          FushiIconButton(
-            icon: Icons.record_voice_over_outlined,
-            tooltip: t.audiobook_transcribe_action,
-            isWideTapArea: true,
-            onTap: importing ? null : _transcribeSubtitleFromAudio,
-          ),
-      ],
-    );
-  }
-
-  /// 点字幕行：本机能转录且已选音频时先问来源（选文件 / 转录），否则直进选择器。
-  /// 同目录自动带入的字幕不阻止走这里——选「转录」就是替换它。
-  Future<void> _onSubtitleRowTap() async {
-    if (importing) return;
-    if (!shouldOfferSubtitleSourceChooser(
-      asrSupported: isAsrSupported,
-      hasAudio: _audioPaths.isNotEmpty,
-    )) {
-      await _pickSubtitle();
-      return;
-    }
-    final SubtitleSourceChoice? choice = await showSubtitleSourceChooser(
-      context: context,
-    );
-    if (choice == null || !mounted) return;
-    switch (choice) {
-      case SubtitleSourceChoice.pickFile:
-        await _pickSubtitle();
-      case SubtitleSourceChoice.transcribe:
-        await _transcribeSubtitleFromAudio();
-    }
-  }
-
-  /// 已选但尚未导入的书的语言 → 转录语言初值。只有 EPUB 载体带 OPF 元数据；
-  /// txt / pdf / 漫画没有语言可读，直接 null。读取在后台 isolate 做（zip 解码 +
-  /// 两份 XML，大书也就几十毫秒，但不占 UI 线程）；文件坏了按 null 处理并记日志，
-  /// 不让「猜个初值」这种锦上添花的事挡住转录入口。
-  Future<AsrLanguage?> _asrLanguageHintFromPendingBook() async {
-    final String? path = _epubPath;
-    if (path == null || _classifyCarrier(path) != ImportCarrier.epub) {
-      return null;
-    }
-    try {
-      final String? language =
-          await Isolate.run(() => EpubParser.readLanguageSync(path));
-      return asrLanguageHintFromBookLanguage(language);
-    } catch (error, stack) {
-      developer.log(
-        'read EPUB language for ASR hint failed: $path',
-        name: 'fushi.import',
-        error: error,
-        stackTrace: stack,
-      );
-      return null;
-    }
-  }
-
-  /// 没有 .srt 时用设备端语音模型从已选音频生成一份，回填到字幕位；之后的导入
-  /// 路径与用户自带 SRT 完全相同（解析 → 匹配 → 落库）。
-  Future<void> _transcribeSubtitleFromAudio() async {
-    if (_audioPaths.isEmpty) {
-      FushiToast.show(
-        msg: t.audiobook_transcribe_needs_audio,
-        severity: ToastSeverity.warning,
-      );
-      return;
-    }
-    // 语言初值跟随书本身的语言；此时书还没导入，只能从文件上读 OPF 元数据。
-    final AsrLanguage? languageHint = await _asrLanguageHintFromPendingBook();
-    if (!mounted) return;
-    // Kitapsen: no speech-to-text; the transcription sheet is compiled out.
-    final String? srtPath = null;
-    if (srtPath == null || !mounted) return;
-    setState(() {
-      _subtitlePath = srtPath;
-      _subtitleName = t.audiobook_transcribe_result_name;
-      // ASR 文本有听写差，匹配阈值按实测放宽（用户仍可在滑条上改）。
-      _similarityThreshold = kAsrSuggestedSimilarityThreshold;
-    });
-  }
-
-  Widget _audioRow() {
-    return FushiFilePickerRow(
-      title: t.srt_import_pick_audio_files,
-      subtitle: _audioPaths.isEmpty
-          ? null
-          : _audioPaths.length == 1
-              ? p.basename(_audioPaths.first)
-              : t.file_count(count: _audioPaths.length),
-      icon: Icons.audio_file_outlined,
-      onTap: _pickAudio,
-      actions: [
-        if (_audioPaths.isNotEmpty)
-          FushiIconButton(
-            icon: Icons.close,
-            tooltip: t.dialog_clear,
-            isWideTapArea: true,
-            onTap: () async => setState(() {
-              _audioPaths = [];
-              _audioCoverPath = null;
-            }),
-          ),
-        FushiIconButton(
-          icon: Icons.audio_file_outlined,
-          tooltip: t.srt_import_pick_audio_files,
-          isWideTapArea: true,
-          onTap: _pickAudio,
         ),
       ],
     );
@@ -565,150 +278,10 @@ class _BookImportDialogState extends State<BookImportDialog>
     return;
   }
 
-  static const Set<String> _subtitleExtensions = {
-    'srt',
-    'lrc',
-    'vtt',
-    'ass',
-    'ssa',
-  };
-
-  Future<void> _pickSubtitle() async {
-    if (_pickerActive) return;
-    _pickerActive = true;
-    try {
-      // 字幕导入时即被解析成 cues / 生成 EPUB 当场消费，不以绝对路径长期引用，故维持
-      // 系统文件选择器（board 1360）：用户熟悉，且能触达 Downloads / 云盘 / 最近文件。
-      final String? path = await pickSystemFilePath(
-        context: context,
-        allowedExtensions: _subtitleExtensions,
-      );
-      if (path == null || !mounted) return;
-      final String ext = p.extension(path).toLowerCase().replaceFirst('.', '');
-      if (!_subtitleExtensions.contains(ext)) {
-        FushiToast.show(
-          msg: t.import_unsupported_file_format(ext: '.$ext'),
-          severity: ToastSeverity.error,
-        );
-        return;
-      }
-
-      setState(() {
-        _subtitlePath = path;
-        _subtitleName = p.basename(path);
-        final String name = p.basename(path);
-        final int dot = name.lastIndexOf('.');
-        _autoFillTitle(dot > 0 ? name.substring(0, dot) : name,
-            ImportTitleSource.subtitle);
-      });
-    } finally {
-      _pickerActive = false;
-    }
-  }
-
-  Future<void> _pickAudio() async {
-    if (_pickerActive) return;
-    _pickerActive = true;
-    try {
-      final AppModel appModel =
-          ProviderScope.containerOf(context, listen: false).read(appProvider);
-      final List<String> paths = await pickRealFilePaths(
-        context: context,
-        appModel: appModel,
-        allowedExtensions: AudiobookStorage.audioExtensionsNoDot,
-      );
-      if (!mounted) return;
-      paths.sort(compareAudioFilePath);
-
-      if (paths.isNotEmpty) {
-        setState(() {
-          _audioPaths = paths;
-          _audioCoverPath = null;
-        });
-        if (_coverPath == null) {
-          await _tryExtractAudioCover();
-        }
-        await _tryExtractAudioMetadata();
-      }
-    } finally {
-      _pickerActive = false;
-    }
-  }
-
-  /// 启动内嵌封面抽取，并把在途 Future 存进 [_coverExtraction]，使无论调用方
-  /// fire-and-forget 还是 await，导入时 [_applyBestCoverToEpub] 都能 await 同一个
-  /// Future 后再读 [_audioCoverPath]（已完成则零等待）。返回该 Future 以兼容仍想
-  /// await 的调用点。
-  Future<void> _tryExtractAudioCover() {
-    // TODO-1034 次要：fire-and-forget 多次触发时，给每次抽取发一个单调递增 token；
-    // 只有「仍是最新一次」的抽取才允许写 _audioCoverPath，避免晚到的旧抽取覆盖新封面。
-    final int token = ++_coverExtractionToken;
-    final Future<void> extraction = _runCoverExtraction(token);
-    _coverExtraction = extraction;
-    return extraction;
-  }
-
   /// 等内嵌封面抽取（可能仍在途）落定，使读取 [_audioCoverPath] 不会在 ffmpeg
   /// probe 未返回时拿到 null 把封面吞掉（BUG-483 / TODO-1034）。已完成则零等待。
   /// 主路径 [_applyBestCoverToEpub] 与字幕书+m4b 路径 [_importSubtitleBook] 共用。
   Future<void> _awaitCoverExtraction() async {
-    final Future<void>? extraction = _coverExtraction;
-    if (extraction != null) {
-      await extraction;
-    }
-  }
-
-  Future<void> _runCoverExtraction(int token) async {
-    if (_audioPaths.isEmpty) return;
-    final Directory tmpDir = await getTemporaryDirectory();
-    final String outputPath = p.join(
-      tmpDir.path,
-      'audio_cover_${DateTime.now().millisecondsSinceEpoch}.jpg',
-    );
-    for (final String audioPath in _audioPaths) {
-      final String? result = await TtsChannel.instance.extractEmbeddedCover(
-        audioPath: audioPath,
-        outputPath: outputPath,
-      );
-      if (result != null && mounted && token == _coverExtractionToken) {
-        setState(() => _audioCoverPath = result);
-        return;
-      }
-    }
-  }
-
-  /// TODO-1045：从第一个含 tag 的音频容器（M4B/M4A/MP3…）读标题/作者，**仅当对应
-  /// 输入框为空时**回填（复用 sidecar 的「填空不覆盖」闸门，绝不覆盖用户手打的值）。
-  ///
-  /// 与封面抽取同触发点、并行独立一趟：封面走 ffmpeg 抽帧、元数据走 ffprobe，本就是
-  /// 两个可执行/两次进程，无法共用一次 spawn。缺 ffprobe / 无 tag 时
-  /// [TtsChannel.extractAudioMetadata] 返回 null，保留文件名兜底。全程 mounted 检查
-  /// + setState；「仅填空」闸门天然避免异步竞态覆盖用户已手打的值。
-  ///
-  /// 身份安全：自动填的标题只写进导入前可编辑的 [_titleCtrl]，与既有「标题来自文件名
-  /// 兜底」同语义时机——bookKey=sanitizeTtuFilename(title) 仍由用户可见/可改的标题派生，
-  /// 零新增身份风险。
-  Future<void> _tryExtractAudioMetadata() async {
-    if (_audioPaths.isEmpty) return;
-    // 两框都已填就无事可做（避免无谓 ffprobe 进程）。
-    if (_titleCtrl.text.isNotEmpty && _authorCtrl.text.isNotEmpty) return;
-    for (final String audioPath in _audioPaths) {
-      final AudioMetadata? meta =
-          await TtsChannel.instance.extractAudioMetadata(audioPath: audioPath);
-      if (meta == null) continue;
-      if (!mounted) return;
-      final bool fillAuthor = _authorCtrl.text.isEmpty && meta.author != null;
-      if (meta.title != null || fillAuthor) {
-        setState(() {
-          if (meta.title != null) {
-            _autoFillTitle(meta.title!, ImportTitleSource.metadata);
-          }
-          if (fillAuthor) _authorCtrl.text = meta.author!;
-        });
-      }
-      // 找到首个含可用 tag 的文件即停（多文件有声书用第一段的容器 tag）。
-      if (meta.title != null || meta.author != null) return;
-    }
   }
 
   Widget _coverRow() {
@@ -798,13 +371,6 @@ class _BookImportDialogState extends State<BookImportDialog>
     }
   }
 
-  Future<bool> _epubHasCover(String bookKey) async {
-    final row = await (widget.db.select(widget.db.epubBooks)
-          ..where((tbl) => tbl.bookKey.equals(bookKey)))
-        .getSingleOrNull();
-    return row?.coverPath != null;
-  }
-
   // ── 导入 ────────────────────────────────────────────────────────────────
 
   /// 同名书弹窗回调，喂给 [EpubImporter]。是→加后缀，否/关闭→取消这本书。
@@ -843,7 +409,6 @@ class _BookImportDialogState extends State<BookImportDialog>
     // 兜底闸门：选/拖两条入口在收下路径时就已过 [_handoffIfManga]，但 initialEpubPath
     // 是构造参数直接塞进来的（书架拖入决策层刻意不为每个 EPUB 开包，图片型 .epub 会
     // 以 books 身份到达这里）。同一个闸门在此再守一次，漫画绝不会走进书籍导入分支。
-    final String? epubPath = _epubPath;
     if (!mounted) return;
     final String title = _titleCtrl.text.trim();
     if (title.isEmpty) {
@@ -871,129 +436,18 @@ class _BookImportDialogState extends State<BookImportDialog>
       },
       action: () async {
         reportProgress(0, '');
-        final String? authorText =
-            _authorCtrl.text.trim().isEmpty ? null : _authorCtrl.text.trim();
 
         debugPrint(
             '[fushi-import] route: epub=$_epubPath sub=$_subtitlePath audio=${_audioPaths.length} files');
-        String? tail;
         await _importEpubOnly(title: title);
 
         if (mounted) {
-          final String msg = tail == null
-              ? t.srt_import_success
-              : '${t.srt_import_success} · $tail';
+          final String msg = (t.srt_import_success);
           FushiToast.show(msg: msg, severity: ToastSeverity.success);
           Navigator.pop(context, true);
         }
       },
     );
-  }
-
-  Future<void> _importSubtitleBook({
-    required String title,
-    required String? author,
-  }) async {
-    final String uid = 'srtbook_${DateTime.now().millisecondsSinceEpoch}';
-    reportProgress(0.1, t.import_step_parsing);
-
-    final List<AudioCue> cues = await parseCuesForFormat(
-      File(_subtitlePath!),
-      uid,
-      0,
-    );
-    debugPrint('[fushi-import] subtitleBook: parsed ${cues.length} cues');
-
-    String bookKey = '';
-    if (cues.isNotEmpty) {
-      try {
-        reportProgress(0.3, t.import_step_building_epub);
-        final Directory tmpDir = await getTemporaryDirectory();
-        final String epubPath = p.join(tmpDir.path, 'cues_to_epub_$uid.epub');
-        await CuesToEpub.convert(
-          title: title,
-          cues: cues,
-          outputPath: epubPath,
-          author: author,
-        );
-        reportProgress(0.5, t.import_step_importing_epub);
-        bookKey = await EpubImporter.importFromPath(
-          db: widget.db,
-          filePath: epubPath,
-          fileName: '${title.replaceAll(RegExp(r'[^\w\s\-]'), '')}.epub',
-          policy: DuplicatePolicy.ask(_askOnDuplicate),
-        );
-        debugPrint(
-            '[fushi-import] subtitleBook: EPUB import done, key=$bookKey');
-      } on DuplicateImportCancelledException {
-        // 取消必须冒泡到顶层中止整次导入，不能被吞成 bookId=0 继续。
-        rethrow;
-      } catch (e, stack) {
-        // BUG-439：坏 EPUB（FormatException 等）以前在这里被吞掉、bookKey 留空串，
-        // 下面仍无条件 save 出一条没有 EpubBooks 行的孤儿 SrtBook 壳行——书架有卡
-        // 却打不开（reader 定位磁盘返回 exists:false → book_file_not_found）。
-        // EPUB 是字幕书的正文载体，载体生成/导入失败这本书就不可读，必须让整次
-        // 导入失败而不是落孤儿壳行。与上面的取消同理冒泡到顶层报错。
-        ErrorLogService.instance.log('BookImportDialog.epubImport', e, stack);
-        debugPrint('[fushi-import] EPUB generation/import failed: $e');
-        rethrow;
-      }
-    }
-
-    reportProgress(0.7, t.import_step_persisting);
-    final Directory persistDir = await _ensurePersistDir(uid);
-    final String persistedSrt = await AudiobookStorage.persistFileWithProgress(
-      File(_subtitlePath!),
-      persistDir,
-      onProgress: (int copied, int total) {
-        reportProgress(
-            0.7, t.import_step_copying_file(name: p.basename(_subtitlePath!)));
-      },
-    );
-
-    // TODO-935 ①A：引用模式（仅桌面）直接存原始绝对路径，不复制（仿 VideoBooks）。
-    final bool referenceAudio = _referenceOriginal && isDesktopPlatform;
-    // 持久目录音频的唯一写入原语（同步成恰好这一组，幂等、不会先删掉自己的源）。
-    final List<String> persistedAudioPaths =
-        await AudiobookStorage.syncAudioFiles(
-      persistDir,
-      _audioPaths,
-      copy: !referenceAudio,
-      onFile: (String name) =>
-          reportProgress(0.8, t.import_step_copying_file(name: name)),
-    );
-
-    reportProgress(0.9, t.import_step_saving);
-    final SrtBook book = SrtBook()
-      ..uid = uid
-      ..title = title
-      ..srtPath = persistedSrt
-      ..importedAt = DateTime.now().millisecondsSinceEpoch
-      ..bookKey = bookKey;
-    if (persistedAudioPaths.isNotEmpty) {
-      book.audioPaths = persistedAudioPaths;
-    }
-    if (author != null) {
-      book.author = author;
-    }
-    // TODO-1034：与主路径同根因——读 _audioCoverPath 前必须先等内嵌封面抽取落定，
-    // 否则用户在 ffmpeg probe 未返回时点「导入」会把封面吞掉。
-    await _awaitCoverExtraction();
-    final String? coverSource = _coverPath ?? _audioCoverPath;
-    if (coverSource != null) {
-      final String ext = p.extension(coverSource);
-      final String dest = p.join(persistDir.path, 'cover$ext');
-      if (await _writeCoverOrSkip(source: coverSource, destPath: dest)) {
-        book.coverPath = dest;
-      }
-    }
-
-    debugPrint('[fushi-import] SrtBook save: uid=$uid title="$title" '
-        'bookKey=$bookKey cues=${cues.length}');
-
-    await widget.repo.save(book);
-    await widget.repo.saveCues(uid: uid, cues: cues);
-    reportProgress(1, t.import_step_done);
   }
 
   Future<void> _importEpubOnly({required String title}) async {
@@ -1058,73 +512,9 @@ class _BookImportDialogState extends State<BookImportDialog>
     await _awaitCoverExtraction();
     if (_coverPath != null) {
       await _applyCoverToEpub(bookKey);
-    } else if (_audioCoverPath != null && !(await _epubHasCover(bookKey))) {
-      await _applyCoverToEpub(bookKey, sourcePath: _audioCoverPath);
     }
   }
 
-  Future<String?> _importEpubWithAlignment({required String title}) async {
-    final File epubFile = File(_epubPath!);
-
-    reportProgress(0.05, t.import_step_reading);
-    final String bookKey;
-    if (TextToEpub.isSupported(_epubPath!)) {
-      reportProgress(0.1, t.import_step_converting_epub);
-      final Uint8List importBytes =
-          await TextToEpub.convert(file: epubFile, title: title);
-      final String importFilename =
-          '${title.replaceAll(RegExp(r'[^\w\s\-]'), '')}.epub';
-      reportProgress(0.2, t.import_step_importing_epub);
-      bookKey = await EpubImporter.import(
-        db: widget.db,
-        bytes: importBytes,
-        fileName: importFilename,
-        policy: DuplicatePolicy.ask(_askOnDuplicate),
-      );
-    } else {
-      reportProgress(0.2, t.import_step_importing_epub);
-      bookKey = await EpubImporter.importFromPath(
-        db: widget.db,
-        filePath: _epubPath!,
-        fileName: _epubName ?? p.basename(_epubPath!),
-        policy: DuplicatePolicy.ask(_askOnDuplicate),
-      );
-    }
-
-    await _applyBestCoverToEpub(bookKey);
-
-    // EPUB 导入之后的对齐落库下沉到非 UI 的 alignAndPersistAudiobook：解析章节、
-    // 解析 cue、跑 matcher、持久字幕/音频、写 Audiobooks + 配对 SrtBook + cue +
-    // health overlay。对话框只把进度/文案/字段透传给 service，行为逐字节等价。
-    final AudiobookAlignmentResult result = await alignAndPersistAudiobook(
-      db: widget.db,
-      repo: widget.repo,
-      audiobookRepo: widget.audiobookRepo,
-      bookKey: bookKey,
-      title: title,
-      author: _authorCtrl.text.trim().isEmpty ? null : _authorCtrl.text.trim(),
-      subtitlePath: _subtitlePath!,
-      audioPaths: _audioPaths,
-      autoWindow: _autoWindow,
-      searchWindow: _searchWindow,
-      similarityThreshold: _similarityThreshold,
-      onProgress: reportProgress,
-      messages: AudiobookAlignmentMessages(
-        readingIdb: t.import_step_reading_idb,
-        parsing: t.import_step_parsing,
-        matching: t.import_step_matching,
-        persisting: t.import_step_persisting,
-        saving: t.import_step_saving,
-        done: t.import_step_done,
-        copyingFile: (String name) => t.import_step_copying_file(name: name),
-      ),
-    );
-
-    return summarizeAudiobookHealth(result.health);
-  }
-
-  Future<Directory> _ensurePersistDir(String key) =>
-      AudiobookStorage.ensurePersistDir(key);
 }
 
 @visibleForTesting

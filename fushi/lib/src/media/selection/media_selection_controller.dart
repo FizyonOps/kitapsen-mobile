@@ -149,22 +149,6 @@ class MediaSelectionController {
         },
       );
 
-  /// 内部选中集（含当前不可见的）。仅供测试比对派生视图是否陈旧。
-  @visibleForTesting
-  Set<String> get retainedLooseKeys => UnmodifiableSetView<String>(_looseKeys);
-
-  /// 内部合集选中集（含当前不可见的）。仅供测试。
-  @visibleForTesting
-  Set<int> get retainedCollectionIds =>
-      UnmodifiableSetView<int>(_collectionIds);
-
-  /// 当前锚点（无则 null）。仅供测试与调试断言。
-  @visibleForTesting
-  SelectionSlot? get anchor => _anchor;
-
-  /// 是否正在长按扫选。
-  bool get isRangeDragging => _dragBaseLoose != null;
-
   /// 选中总数（散卡 + 合集），**只数可见的**——底栏「已选 N」必须等于用户屏幕上
   /// 勾着的卡片数。
   int get length => looseKeys.length + collectionIds.length;
@@ -177,14 +161,6 @@ class MediaSelectionController {
   @visibleForTesting
   int get retainedLength => _looseKeys.length + _collectionIds.length;
 
-  /// 勾过、但当前被筛选/搜索挡住看不见的格数。
-  ///
-  /// 批量操作只作用于可见的那部分（见库文档「可见性约束」），这个差值就是**这次
-  /// 不会被处理的条数**。确认框必须把它说出来：否则用户勾了 5 个、切个筛选只剩
-  /// 3 个可见，点删除只删 3 个，剩下 2 个既没被删也没被告知，退出多选态时还一起
-  /// 丢掉——他会以为 5 个都删了。
-  int get hiddenSelectedCount => retainedLength - length;
-
   /// [hiddenSelectedCount] 的散卡子集版：只数满足 [looseWhere] 的散卡键（合集照数）。
   /// 书架的散卡选中集里混着远端占位键（BUG-2458），删除确认框只该报「本地键里被
   /// 筛选挡住的」——远端键本来就不是删除对象，计进去数字误导。
@@ -195,12 +171,6 @@ class MediaSelectionController {
     }
     return hidden;
   }
-
-  bool isSelected(SelectionSlot slot) => slot.isCollection
-      ? _collectionIds.contains(slot.collectionId) &&
-          _visibleCollectionSet.contains(slot.collectionId)
-      : _looseKeys.contains(slot.looseKey) &&
-          _visibleLooseSet.contains(slot.looseKey);
 
   /// 当前可见的散卡键（[setVisibleOrder] 最近一次登记的那份）。
   ///
@@ -362,9 +332,6 @@ class MediaSelectionController {
     _invalidateViews();
     _anchor = null;
   }
-
-  /// 清空选中集但**留在**多选态（批量操作落库后调用）。
-  void clearSelection() => _resetSelection();
 
   /// 把选中集收敛到**当前真实存在**的条目上，返回被剔掉的个数。
   ///

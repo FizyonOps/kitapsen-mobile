@@ -41,12 +41,6 @@ class StudyDiagLog {
   File? _file;
   Future<void> _chain = Future<void>.value();
 
-  /// 本次运行内存流水（只读快照，最旧在前）。
-  List<String> get lines => List<String>.unmodifiable(_lines);
-
-  /// 在途落盘链（测试确定性 await）。
-  Future<void> get pending => _chain;
-
   /// [directoryOverride] 仅供测试；生产走 [fushiTestDirectory] / 应用文档目录。
   Future<void> init({Directory? directoryOverride}) async {
     try {
@@ -109,32 +103,6 @@ class StudyDiagLog {
     return content.substring(nl + 1);
   }
 
-  /// 等在途落盘写完（导出 / 退出前）。
-  Future<void> flush() => _chain;
-
-  /// 持久化全文（含此前运行）；没文件就退回内存流水。
-  Future<String> readPersisted() async {
-    await flush();
-    final File? file = _file;
-    try {
-      if (file != null && await file.exists()) {
-        return utf8.decode(await file.readAsBytes(), allowMalformed: true);
-      }
-    } catch (e) {
-      debugPrint('[StudyDiagLog] read failed: $e');
-    }
-    return _lines.join('\n');
-  }
-
-  Future<void> clear() async {
-    _lines.clear();
-    await flush();
-    try {
-      await _file?.writeAsString('');
-    } catch (e) {
-      debugPrint('[StudyDiagLog] clear failed: $e');
-    }
-  }
 }
 
 /// 阅读器 / 时钟埋点的统一入口：`studyDiag('reader', '...')`。

@@ -43,7 +43,6 @@ class FontDownloadResult {
 
   int get importedCount => files.length;
 
-  bool get succeeded => error == null && !cancelled && files.isNotEmpty;
 }
 
 /// 字体文件的下载 / 导入执行体：从 `CustomFontsPage` 里搬出来的纯文件层——

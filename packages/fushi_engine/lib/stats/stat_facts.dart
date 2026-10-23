@@ -58,8 +58,6 @@ class StatFact {
   bool get isGame => mediaKind == kActivityMediaGame;
   bool get isManga => format == BookFormat.manga.dbValue;
 
-  /// 分组键：有身份用身份，否则 title（legacy 回退）。
-  String get identityKey => mediaKey.isNotEmpty ? mediaKey : title;
 }
 
 /// 「查词 / 制卡 / 收藏词 / 收藏句」四类计数事实（学习事实面之外的**计数面**）。
@@ -276,13 +274,6 @@ class StatFacts {
 
   Iterable<StatFact> get dailyBooks => daily.where((StatFact f) => f.isBook);
 
-  /// 阅读域日面里属于某本书的行（阅读器内统计浮层 / 按书切片共用）：身份优先
-  /// `mediaKey == bookKey`，legacy 无身份行按 title 回退——判据见 [statFactBelongsToBook]。
-  Iterable<StatFact> dailyBooksFor({required String bookKey, String? title}) =>
-      dailyBooks.where(
-        (StatFact f) =>
-            statFactBelongsToBook(f, bookKey: bookKey, title: title),
-      );
   Iterable<StatFact> get dailyVideos => daily.where((StatFact f) => f.isVideo);
   Iterable<StatFact> get dailyGames => daily.where((StatFact f) => f.isGame);
 }

@@ -1,3 +1,8 @@
+> **Modified version.** This is Kitapsen, a fork of Fushi by FizyonOps
+> (2026-10-23). It keeps only the EPUB/PDF reader, the book shelf and the
+> Kitapsen store for Android and iOS, and removes every other Fushi feature
+> and platform. The rest of this README describes upstream Fushi.
+
 <div align="center">
 
 # Fushi

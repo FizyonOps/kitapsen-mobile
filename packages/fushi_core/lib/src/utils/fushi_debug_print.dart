@@ -19,7 +19,3 @@ void _defaultDebugPrint(String? message, {int? wrapWidth}) {
 
 /// 全局装配点。写入一次即可（Flutter app：`main()`；服务端：CLI 入口）。
 FushiDebugPrint fushiDebugPrint = _defaultDebugPrint;
-
-/// 与 Flutter 的 `kDebugMode` 同语义（既非 product 也非 profile 构建）。
-const bool fushiDebugMode = !bool.fromEnvironment('dart.vm.product') &&
-    !bool.fromEnvironment('dart.vm.profile');

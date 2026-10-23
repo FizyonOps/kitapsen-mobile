@@ -70,11 +70,7 @@ class _FushiFocusableState extends State<FushiFocusable> {
 
   FushiFocusId get _focusId {
     final Key? key = widget.key;
-    final FocusNode? node = widget.focusNode;
     if (key != null) return FushiFocusId('focusable-key-$key');
-    if (node != null) {
-      return FushiFocusId('focusable-node-${identityHashCode(node)}');
-    }
     return _fallbackId;
   }
 

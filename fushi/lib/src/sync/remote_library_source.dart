@@ -28,26 +28,6 @@ abstract class RemoteLibrarySource {
   String get remoteLibrarySourceId;
 }
 
-/// 互联对端（局域网 hibiki host live 库）的来源身份。
-///
-/// 全局只有一台「当前对端」（`InterconnectSyncBackend` 是单例），换对端由
-/// `sessionIdentityRevision` → `invalidateAll()` 兜底，故不按对端地址细分。
-const String kInterconnectRemoteLibrarySourceId = 'interconnect';
-
 /// Kitapsen 书店（`KitapsenClient`）的来源身份。全局只有一个登录账号；换账号走
 /// 登录页，TTL 内可能看到上一个账号的清单，与云盘换账号同一已知残留。
 const String kKitapsenRemoteLibrarySourceId = 'kitapsen';
-
-/// 云盘备份后端的来源身份：按**后端类型**细分（Google Drive / WebDAV / OneDrive /
-/// Dropbox / FTP / SFTP 各一个槽），因为换后端类型是设置页里一个开关就能做到的事，
-/// 换完两边的清单毫无关系。
-///
-/// [backendTypeName] 传 `SyncBackendType.<x>.name`（本文件刻意不 import
-/// `sync_backend.dart`：那条链会把整套后端实现拖进来，而这里只需要一个名字）。
-///
-/// 已知残留：同一后端类型下换账号（如退出 Google Drive A 登录 B）身份不变，TTL 内
-/// 仍可能看到上一个账号的清单。上界是 60s 且需要在同一分钟内完成「换账号 + 回库页」，
-/// 与本 bug 修掉的「跨源无限期串味」不是一个量级；真要治需要后端侧给出账号级身份
-/// 信号，属独立议题，不在此就地推断（推断会错，见 BUG-1180 的教训）。
-String cloudRemoteLibrarySourceId(String backendTypeName) =>
-    'cloud:$backendTypeName';

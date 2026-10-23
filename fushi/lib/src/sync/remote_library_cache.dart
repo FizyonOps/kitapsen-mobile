@@ -1,9 +1,6 @@
-import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fushi/src/sync/interconnect_sync_backend.dart';
 import 'package:fushi/src/sync/remote_library_source.dart';
 
 /// 远端库列表（互联对端 / 云盘）的统一读取入口：TTL 缓存 + in-flight 去重 + 显式失效。
@@ -137,11 +134,6 @@ class RemoteLibraryCache {
   /// 两侧都不含竖线，所以拼不出歧义槽名。
   static String _slotKey(String sourceId, String key) => '$sourceId|$key';
 
-  /// 作废 [sourceId] 的 [key] 槽（含在途请求的写回）。下次 [read] 必然重新取数。
-  void invalidate(String sourceId, String key) {
-    _invalidateSlot(_slotKey(sourceId, key));
-  }
-
   /// 作废 [sourceId] 的**全部**域槽（books/videos/audiobooks/activity:* …）。
   ///
   /// 「我刚对这个来源做了写操作（删远端条目等），它的远端库整体可能已变」的
@@ -165,42 +157,6 @@ class RemoteLibraryCache {
     slot.fetchedAtMs = 0;
   }
 
-  /// 作废全部槽（所有来源、所有域）。用于对端换人 / 配对变更 / 同步跑完这类
-  /// 「远端库整体可能已变」的信号。
-  void invalidateAll() {
-    for (final String slotKey in _slots.keys.toList()) {
-      _invalidateSlot(slotKey);
-    }
-  }
-
-  /// 只读取已缓存的值，**绝不触发取数**（BUG-1891）。
-  ///
-  /// 「关掉自动列出条目」的语义就是这个：进页面不发请求，但上一次手动刷新拿到的
-  /// 清单还得留在屏幕上——否则切一次 tab 回来卡片就全没了，用户只能反复手动刷新，
-  /// 比自动枚举还糟。
-  ///
-  /// [maxAge] 为 null = 不看新鲜度，返回槽里最后一次成功的值（[invalidate] /
-  /// [invalidateSource] / [invalidateAll] 之后为 null）。命中在途请求不算——
-  /// 本方法是纯读，不复用 future。
-  T? peek<T>({
-    required String sourceId,
-    required String key,
-    Duration? maxAge,
-  }) {
-    final _CacheSlot? slot = _slots[_slotKey(sourceId, key)];
-    if (slot == null || !slot.hasValue) return null;
-    if (maxAge != null && _nowMs() - slot.fetchedAtMs >= maxAge.inMilliseconds) {
-      return null;
-    }
-    return slot.value as T?;
-  }
-
-  /// 仅供测试与诊断：[sourceId] 的 [key] 槽当前是否持有未过期的缓存值。
-  bool isFresh(String sourceId, String key, {Duration? ttl}) {
-    final _CacheSlot? slot = _slots[_slotKey(sourceId, key)];
-    if (slot == null || !slot.hasValue) return false;
-    return _nowMs() - slot.fetchedAtMs < (ttl ?? defaultTtl).inMilliseconds;
-  }
 }
 
 class _CacheSlot {
@@ -240,8 +196,7 @@ final remoteLibraryCacheProvider = Provider<RemoteLibraryCache>((ref) {
 /// 这里只有「哪一类东西」，没有「问谁要的」——后者是 [RemoteLibraryCache.read] 的
 /// `sourceId` 参数（BUG-1202）。两个维度分开，才不会出现「videos 是共用的、
 /// cloud_videos 是云盘专用的」这种一半按域、一半按源的混合命名。
-class RemoteLibraryCacheKeys {
-  const RemoteLibraryCacheKeys._();
+abstract class RemoteLibraryCacheKeys {
 
   static const String books = 'books';
 
@@ -255,7 +210,4 @@ class RemoteLibraryCacheKeys {
   static const String audiobooks = 'audiobooks';
   static const String dictionaries = 'dictionaries';
 
-  /// 活动流按 limit 分槽——不同 limit 是不同的结果集，共用一个 slot 会让首页的
-  /// limit:200 被别处的 limit:20 污染成截断列表。
-  static String activity(int limit) => 'activity:$limit';
 }

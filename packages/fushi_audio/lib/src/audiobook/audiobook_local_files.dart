@@ -59,17 +59,6 @@ List<String> audiobookLocalFilePaths({
   return out;
 }
 
-/// 纯函数：这条记录有没有可删的用户原件——删除确认框据此决定摆不摆
-/// 「同时删除本地文件」勾选框。
-bool audiobookHasLocalFiles({
-  required List<String>? audioPaths,
-  required String persistRoot,
-}) =>
-    audiobookLocalFilePaths(
-      audioPaths: audioPaths,
-      persistRoot: persistRoot,
-    ).isNotEmpty;
-
 /// [audiobookLocalFilePaths] 的取根版本（持久根从 [AudiobookStorage] 现取）。
 Future<List<String>> resolveAudiobookLocalFiles(
   List<String>? audioPaths,

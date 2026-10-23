@@ -74,8 +74,6 @@ class ReaderChromeController extends ChangeNotifier {
   /// 自动收起计时器（只读；页面 dispose 路径按旧守卫字面量 `cancel()` 它）。
   Timer? get autoHideTimer => _autoHideTimer;
 
-  bool get autoHideArmed => _autoHideTimer != null;
-
   /// 武装自动收起：到时把临时可见态收起并通知。重复武装 = 重新计时。
   void armAutoHide(Duration after) {
     cancelAutoHide();
@@ -90,35 +88,6 @@ class ReaderChromeController extends ChangeNotifier {
   void cancelAutoHide() {
     _autoHideTimer?.cancel();
     _autoHideTimer = null;
-  }
-
-  /// 唤出悬浮 chrome 而**不**武装自动收起：点出来就留着，只有下一次点击能关掉它
-  /// （用户 2026-09-14 定的悬浮控制栏口径）。已在计时的收起一并停掉，否则上一轮
-  /// 武装的计时会把这次刚点出来的栏收走。
-  void showTransient() {
-    cancelAutoHide();
-    if (_transientVisible || _toolbarsHidden) return;
-    _transientVisible = true;
-    notifyListeners();
-  }
-
-  /// 唤出悬浮 chrome 并（重新）武装自动收起。
-  ///
-  /// 只剩「点空白已被别的动作占死、收起没有第二条手势通道」的场景还该用它
-  /// （EPUB 的 VN 翻页）；常规显隐一律用 [showTransient] + [hideTransient]。
-  void reveal(Duration autoHideAfter) {
-    if (_toolbarsHidden) return;
-    _transientVisible = true;
-    notifyListeners();
-    armAutoHide(autoHideAfter);
-  }
-
-  /// 立即收起临时可见态（并取消计时）。
-  void hideTransient() {
-    cancelAutoHide();
-    if (!_transientVisible) return;
-    _transientVisible = false;
-    notifyListeners();
   }
 
   @override

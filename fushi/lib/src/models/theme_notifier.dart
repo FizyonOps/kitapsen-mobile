@@ -1,13 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/cupertino.dart'
     show CupertinoPageTransitionsBuilder, CupertinoRouteTransitionMixin;
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fushi/i18n/strings.g.dart';
 import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/utils/adaptive/adaptive_platform.dart';
 import 'package:fushi/src/utils/adaptive/predictive_back_page_transitions.dart';
@@ -15,7 +12,6 @@ import 'package:fushi/src/utils/misc/channel_constants.dart';
 import 'package:fushi_core/fushi_core.dart';
 import 'package:material_color_utilities/material_color_utilities.dart';
 
-import 'package:fushi/src/models/app_model.dart';
 import 'package:fushi/src/utils/app_ui_scale.dart';
 import 'package:fushi/src/utils/components/fushi_design_tokens.dart';
 
@@ -554,26 +550,6 @@ class CustomThemeEntry {
   /// 派生色中性灰：标签 / 选中项 / 菜单 / 表面不带主题色相，只留主题色作强调。
   final bool neutralDerived;
 
-  CustomThemeEntry copyWith({String? id, String? name, int? seed}) {
-    return CustomThemeEntry(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      seed: seed ?? this.seed,
-      fontColor: fontColor,
-      bgColor: bgColor,
-      selectionColor: selectionColor,
-      primaryColor: primaryColor,
-      secondaryColor: secondaryColor,
-      tertiaryColor: tertiaryColor,
-      containerColor: containerColor,
-      sentenceAudioHighlightColor: sentenceAudioHighlightColor,
-      linkColor: linkColor,
-      surfaceColor: surfaceColor,
-      followSystemAccent: followSystemAccent,
-      neutralDerived: neutralDerived,
-    );
-  }
-
   Map<String, dynamic> toJson() => <String, dynamic>{
         'id': id,
         'name': name,
@@ -994,37 +970,6 @@ class ThemeNotifier extends ChangeNotifier {
     );
   }
 
-  static const _themeLabelKeys = {
-    'light-theme': 'theme_light',
-    'ecru-theme': 'theme_ecru',
-    'water-theme': 'theme_water',
-    'eyecare-theme': 'theme_eyecare',
-    'gray-theme': 'theme_gray',
-    'dark-theme': 'theme_dark',
-    'black-theme': 'theme_black',
-  };
-
-  static String themeLabel(String key) {
-    switch (_themeLabelKeys[key]) {
-      case 'theme_light':
-        return t.theme_light;
-      case 'theme_ecru':
-        return t.theme_ecru;
-      case 'theme_water':
-        return t.theme_water;
-      case 'theme_eyecare':
-        return t.theme_eyecare;
-      case 'theme_gray':
-        return t.theme_gray;
-      case 'theme_dark':
-        return t.theme_dark;
-      case 'theme_black':
-        return t.theme_black;
-      default:
-        return key;
-    }
-  }
-
   // ── Theme getters ────────────────────────────────────────────────
 
   /// Prefix marking the active app theme as a custom theme. The stored value is
@@ -1138,10 +1083,6 @@ class ThemeNotifier extends ChangeNotifier {
     switch (designSystem) {
       case 'material':
         return FushiDesignSystem.material;
-      case 'cupertino':
-        return FushiDesignSystem.cupertino;
-      case 'macos':
-        return FushiDesignSystem.macos;
       default:
         return FushiDesignSystem.auto;
     }
@@ -1431,60 +1372,29 @@ class ThemeNotifier extends ChangeNotifier {
     return Color(v);
   }
 
-  Future<void> setCustomThemeSeed(Color color) async {
-    await _set('custom_theme_seed', color.toARGB32());
-  }
-
   bool get customThemeDark =>
       _get('custom_theme_dark', defaultValue: false) as bool;
 
-  Future<void> setCustomThemeDark(bool dark) async {
-    await _set('custom_theme_dark', dark);
-  }
-
   Color? get customThemeFontColor => _colorPref('custom_theme_font_color');
-  Future<void> setCustomThemeFontColor(Color? c) =>
-      _setColorPref('custom_theme_font_color', c);
 
   Color? get customThemeBackgroundColor => _colorPref('custom_theme_bg_color');
-  Future<void> setCustomThemeBackgroundColor(Color? c) =>
-      _setColorPref('custom_theme_bg_color', c);
 
   Color? get customThemeSelectionColor =>
       _colorPref('custom_theme_selection_color');
-  Future<void> setCustomThemeSelectionColor(Color? c) =>
-      _setColorPref('custom_theme_selection_color', c);
 
   Color? get customThemePrimaryColor =>
       _colorPref('custom_theme_primary_color');
-  Future<void> setCustomThemePrimaryColor(Color? c) =>
-      _setColorPref('custom_theme_primary_color', c);
 
   Color? get customThemeSecondaryColor =>
       _colorPref('custom_theme_secondary_color');
-  Future<void> setCustomThemeSecondaryColor(Color? c) =>
-      _setColorPref('custom_theme_secondary_color', c);
 
   Color? get customThemeTertiaryColor =>
       _colorPref('custom_theme_tertiary_color');
-  Future<void> setCustomThemeTertiaryColor(Color? c) =>
-      _setColorPref('custom_theme_tertiary_color', c);
 
   Color? get customThemeContainerColor =>
       _colorPref('custom_theme_container_color');
-  Future<void> setCustomThemeContainerColor(Color? c) =>
-      _setColorPref('custom_theme_container_color', c);
-
-  // 历史键 'custom_theme_sasayaki_color'（Drift preferences 表）已由 v71
-  // Drift 迁移搬到本键。
-  Color? get customThemeSentenceAudioHighlightColor =>
-      _colorPref('custom_theme_sentence_audio_color');
-  Future<void> setCustomThemeSentenceAudioHighlightColor(Color? c) =>
-      _setColorPref('custom_theme_sentence_audio_color', c);
 
   Color? get customThemeLinkColor => _colorPref('custom_theme_link_color');
-  Future<void> setCustomThemeLinkColor(Color? c) =>
-      _setColorPref('custom_theme_link_color', c);
 
   /// TODO-977: 音频高亮（原 sasayaki 跟随高亮）颜色，**全局、与阅读器主题解耦**。
   ///
@@ -1680,73 +1590,11 @@ class ThemeNotifier extends ChangeNotifier {
     _persistSplashColor();
   }
 
-  // TODO-928: 自定义主题不再拥有自己的明暗真值。删掉 `brightnessMode` 参数后，
-  // applyCustomTheme 只落 seed + 角色色 + `app_theme_key='custom-theme'`，**不再写**
-  // `custom_theme_dark`、**不再写** `brightness_mode`。切到自定义主题保留用户当前的
-  // 全局明暗（浅色态切自定义=浅色，深色态=深色），明暗变体由
-  // buildFushiColorScheme(seed, brightness) 在 light/dark 各自从 seed 派生。
-  // 想改明暗用全局的 brightness 选择器，自带/自定义一视同仁。
-  //
-  // 向后兼容（Never break userspace）：老用户历史一直双写过 `brightness_mode`，故其
-  // 全局明暗持久值仍在、不回归；`customThemeDark` getter + brightnessMode 的 custom
-  // 回退（:260）保留为纯只读兜底，只是不再产生新值。
-  Future<void> applyCustomTheme({
-    required Color seed,
-    Color? fontColor,
-    Color? backgroundColor,
-    Color? selectionColor,
-    Color? primaryColor,
-    Color? secondaryColor,
-    Color? tertiaryColor,
-    Color? containerColor,
-    Color? sentenceAudioHighlightColor,
-    Color? linkColor,
-  }) async {
-    // TODO-930: write the same values into the new list model so the share-code
-    // import path keeps working: replace the currently-selected entry, or create
-    // one when the list is empty. The legacy flat keys are still written so
-    // pre-migration fallback and any code still reading them stays consistent.
-    await setCustomThemeSeed(seed);
-    await setCustomThemeFontColor(fontColor);
-    await setCustomThemeBackgroundColor(backgroundColor);
-    await setCustomThemeSelectionColor(selectionColor);
-    await setCustomThemePrimaryColor(primaryColor);
-    await setCustomThemeSecondaryColor(secondaryColor);
-    await setCustomThemeTertiaryColor(tertiaryColor);
-    await setCustomThemeContainerColor(containerColor);
-    await setCustomThemeSentenceAudioHighlightColor(
-        sentenceAudioHighlightColor);
-    await setCustomThemeLinkColor(linkColor);
-
-    int? argb(Color? c) => c?.toARGB32();
-    final CustomThemeEntry? current = activeCustomThemeEntry;
-    final CustomThemeEntry entry = CustomThemeEntry(
-      id: current?.id ?? _customThemeIdGenerator(),
-      name: current?.name ?? '',
-      seed: seed.toARGB32(),
-      fontColor: argb(fontColor),
-      bgColor: argb(backgroundColor),
-      selectionColor: argb(selectionColor),
-      primaryColor: argb(primaryColor),
-      secondaryColor: argb(secondaryColor),
-      tertiaryColor: argb(tertiaryColor),
-      containerColor: argb(containerColor),
-      sentenceAudioHighlightColor: argb(sentenceAudioHighlightColor),
-      linkColor: argb(linkColor),
-    );
-    await upsertCustomTheme(entry);
-
-    await _set('app_theme_key', 'custom-theme');
-    notifyListeners();
-    _persistSplashColor();
-  }
-
   // ── Splash ────────────────────────────────────────────────────────
 
   static const _splashChannel = FushiChannels.splash;
 
   void _persistSplashColor() {
-    if (!Platform.isAndroid && !Platform.isIOS) return;
     final brightness = isDarkMode ? Brightness.dark : Brightness.light;
     final surface = buildColorScheme(brightness).surface;
     _splashChannel.invokeMethod('setSplashColor', {
@@ -1757,11 +1605,6 @@ class ThemeNotifier extends ChangeNotifier {
     });
   }
 }
-
-final themeProvider = ChangeNotifierProvider<ThemeNotifier>((ref) {
-  final appModel = ref.watch(appProvider);
-  return appModel.themeNotifier;
-});
 
 /// 全应用唯一的「ColorScheme → ThemeData」工厂。
 ///

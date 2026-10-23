@@ -1,12 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fushi_core/fushi_core.dart';
 import 'package:fushi/src/models/app_model.dart';
-import 'package:fushi/src/pages/implementations/tag_management_page.dart';
-import 'package:fushi/src/utils/adaptive/adaptive_widgets.dart';
-import 'package:fushi/src/utils/components/fushi_design_tokens.dart';
-import 'package:fushi/src/utils/components/fushi_material_components.dart';
-import 'package:fushi/i18n/strings.g.dart';
 
 final selectedTagIdsProvider = StateProvider<Set<int>>((_) => {});
 
@@ -71,42 +65,6 @@ final filteredSrtBookUidsProvider = FutureProvider<Set<String>?>((ref) async {
   return db.getSrtUidsForAllTags(tagIds);
 });
 
-/// 视频书 → 标签列表（keyed by bookUid）。与 [bookTagMapProvider] /
-/// [srtBookTagMapProvider] 同形，三者共用同一 [BookTags] 标签池。
-final videoBookTagMapProvider =
-    FutureProvider<Map<String, List<BookTagRow>>>((ref) async {
-  return _tagMapForKind(ref.watch(appProvider).database, TagHostKind.video);
-});
-
-/// 当前标签筛选下命中的视频 bookUid 集合（共享 [selectedTagIdsProvider]，与
-/// 书架/SRT 联动）；无筛选时返回 null（= 不过滤）。
-final filteredVideoBookUidsProvider = FutureProvider<Set<String>?>((ref) async {
-  final tagIds = ref.watch(selectedTagIdsProvider);
-  if (tagIds.isEmpty) return null;
-  final db = ref.watch(appProvider).database;
-  return db.getVideoBookUidsForAllTags(tagIds);
-});
-
-/// 游戏 → 用户标签列表（keyed by `galgames.id`）。与 [bookTagMapProvider] /
-/// [videoBookTagMapProvider] 同形，共用同一 [BookTags] 标签池（BUG-1113：游戏此前
-/// 根本没有映射表，接不进这套共享标签体系）。
-///
-/// 注意与游戏的**元数据标签**（bgm/vndb 刮削来的字符串，`GalgameEntry.tags`）区分：
-/// 那是外部事实、另一条筛选轴，由游戏库筛选面板按名筛，不进这个用户标签池。
-final gameTagMapProvider =
-    FutureProvider<Map<String, List<BookTagRow>>>((ref) async {
-  return _tagMapForKind(ref.watch(appProvider).database, TagHostKind.game);
-});
-
-/// 当前标签筛选下命中的游戏 id 集合（共享 [selectedTagIdsProvider]，与书架 / 视频
-/// 联动）；无筛选时返回 null（= 不过滤）。
-final filteredGameIdsProvider = FutureProvider<Set<String>?>((ref) async {
-  final tagIds = ref.watch(selectedTagIdsProvider);
-  if (tagIds.isEmpty) return null;
-  final db = ref.watch(appProvider).database;
-  return db.getGameIdsForAllTags(tagIds);
-});
-
 /// 含【全部】选中标签的合集 id（无选中标签时 null = 不过滤）。合集卡按此显隐。
 final filteredCollectionIdsProvider = FutureProvider<Set<int>?>((ref) async {
   final Set<int> tagIds = ref.watch(selectedTagIdsProvider);
@@ -114,116 +72,3 @@ final filteredCollectionIdsProvider = FutureProvider<Set<int>?>((ref) async {
   final db = ref.watch(appProvider).database;
   return db.getCollectionIdsForAllTags(tagIds);
 });
-
-class TagFilterSheet extends ConsumerStatefulWidget {
-  const TagFilterSheet({super.key});
-
-  @override
-  ConsumerState<TagFilterSheet> createState() => _TagFilterSheetState();
-}
-
-class _TagFilterSheetState extends ConsumerState<TagFilterSheet> {
-  List<BookTagRow>? _tags;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadTags();
-  }
-
-  Future<void> _loadTags() async {
-    final db = ref.read(appProvider).database;
-    final tags = await db.getAllTags();
-    if (mounted) setState(() => _tags = tags);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final FushiDesignTokens tokens = FushiDesignTokens.of(context);
-    final selectedIds = ref.watch(selectedTagIdsProvider);
-    final bool hasScrollableTags = _tags != null && _tags!.isNotEmpty;
-
-    return FushiModalSheetFrame(
-      title: t.tag_filter_title,
-      leadingIcon: Icons.sell_outlined,
-      scrollable: hasScrollableTags,
-      bodyPadding: hasScrollableTags
-          ? EdgeInsets.symmetric(horizontal: tokens.spacing.page)
-          : EdgeInsets.zero,
-      body: _buildBody(context, selectedIds),
-      footer: Row(
-        children: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              Navigator.push(
-                context,
-                adaptivePageRoute(
-                  context: context,
-                  builder: (_) => const TagManagementPage(),
-                ),
-              );
-            },
-            child: Text(t.tag_manage),
-          ),
-          const Spacer(),
-          if (selectedIds.isNotEmpty)
-            TextButton(
-              onPressed: () {
-                ref.read(selectedTagIdsProvider.notifier).state = {};
-              },
-              child: Text(t.tag_clear_filter),
-            ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBody(BuildContext context, Set<int> selectedIds) {
-    final FushiDesignTokens tokens = FushiDesignTokens.of(context);
-    final ThemeData theme = Theme.of(context);
-    final List<BookTagRow>? tags = _tags;
-    if (tags == null) {
-      return Padding(
-        padding: EdgeInsets.all(tokens.spacing.page + tokens.spacing.card),
-        child: Center(child: adaptiveIndicator(context: context)),
-      );
-    }
-    if (tags.isEmpty) {
-      return Padding(
-        padding: EdgeInsets.all(tokens.spacing.card + tokens.spacing.gap),
-        child: Text(
-          t.tag_no_tags_hint,
-          textAlign: TextAlign.center,
-          style: theme.textTheme.bodyMedium?.copyWith(
-            color: theme.colorScheme.onSurfaceVariant,
-          ),
-        ),
-      );
-    }
-    return Wrap(
-      spacing: tokens.spacing.gap,
-      runSpacing: tokens.spacing.gap / 2,
-      children: tags.map((tag) {
-        final isSelected = selectedIds.contains(tag.id);
-        return FushiSelectableChip(
-          selected: isSelected,
-          avatar: CircleAvatar(
-            backgroundColor: Color(tag.colorValue),
-            radius: 6,
-          ),
-          label: tag.name,
-          onSelected: (selected) {
-            final current = Set<int>.from(ref.read(selectedTagIdsProvider));
-            if (selected) {
-              current.add(tag.id);
-            } else {
-              current.remove(tag.id);
-            }
-            ref.read(selectedTagIdsProvider.notifier).state = current;
-          },
-        );
-      }).toList(),
-    );
-  }
-}

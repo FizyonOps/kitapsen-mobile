@@ -1,4 +1,4 @@
-﻿import 'dart:convert';
+import 'dart:convert';
 
 import 'package:drift/drift.dart';
 import 'package:fushi_core/fushi_core.dart';
@@ -137,34 +137,6 @@ class BookmarkRepository {
     await (_db.delete(_db.bookmarks)..where((tbl) => tbl.id.equals(id))).go();
   }
 
-  /// 清空全部书签（所有书籍）。收藏夹「清空」面板的书签范围走这里，一次性删表。
-  Future<void> clearAllBookmarks() async {
-    await _db.delete(_db.bookmarks).go();
-  }
-
-  Future<void> removeBookmark(String bookUid, int index) async {
-    final bookmarks = await getBookmarks(bookUid);
-    if (index < 0 || index >= bookmarks.length) return;
-    final int? id = bookmarks[index].id;
-    if (id == null) return;
-    await removeBookmarkById(id);
-  }
-
-  Future<void> removeBookmarkMatching(
-    String bookUid, {
-    required int sectionIndex,
-    required int normCharOffset,
-    required DateTime createdAt,
-  }) async {
-    await (_db.delete(_db.bookmarks)
-          ..where((tbl) =>
-              tbl.bookUid.equals(bookUid) &
-              tbl.sectionIndex.equals(sectionIndex) &
-              tbl.normCharOffset.equals(normCharOffset) &
-              tbl.createdAt.equals(createdAt.millisecondsSinceEpoch)))
-        .go();
-  }
-
   Future<void> _migrateLegacyBookmarks(
     String bookUid,
     String legacyBookKey,
@@ -206,18 +178,4 @@ class BookmarkRepository {
     await _db.deletePref(_key(legacyBookKey));
   }
 
-  Future<List<Bookmark>> getAllBookmarks() async {
-    await _db.migrateLegacyBookmarkPreferences();
-    final rows = await (_db.select(_db.bookmarks)
-          ..orderBy([(tbl) => OrderingTerm.desc(tbl.createdAt)]))
-        .get();
-    return rows.map(Bookmark.fromRow).toList();
-  }
-
-  Future<void> importLegacyBookmark(
-    String bookUid,
-    Bookmark bookmark,
-  ) async {
-    await addBookmark(bookUid, bookmark);
-  }
 }

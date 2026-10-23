@@ -6,13 +6,7 @@ import Flutter
 @objc class AppDelegate: FlutterAppDelegate, FlutterStreamHandler, FlutterImplicitEngineDelegate {
   private var initialUrl: String?
   private var urlEventSink: FlutterEventSink?
-  /// 强引用：channel handler 只弱持有它，且它自己是文档选择器的 delegate（UIKit 弱引用）。
-  private var directoryImport: FushiDirectoryImport?
 
-  // TODO-057: brightness override applied during a video session. We snapshot
-  // the user's brightness the first time the player asks (getBrightness) and
-  // restore it on exit (restoreBrightness) so dragging never leaves the system
-  // brightness permanently changed.
   override func application(
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
@@ -25,56 +19,7 @@ import Flutter
     installChannels(binaryMessenger: engineBridge.applicationRegistrar.messenger())
   }
 
-  /// The display the app is on right now. iPhone Duo moves the app between its
-  /// outer and inner displays as it folds and unfolds, so `UIScreen.main` can
-  /// be the other display; Apple's guidance is to read the screen from the
-  /// window scene each time rather than keep one. Falls back to `.main` only
-  /// before any scene is connected.
-  static func currentScreen() -> UIScreen {
-    let scenes = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }
-    let scene =
-      scenes.first { $0.activationState == .foregroundActive }
-      ?? scenes.first { $0.activationState == .foregroundInactive }
-      ?? scenes.first
-    return scene?.screen ?? UIScreen.main
-  }
-
-  /// 安装来源判据 = 系统写进 bundle 的 App Store 收据文件，不是猜测：
-  /// - App Store 安装 → `.../receipt`
-  /// - TestFlight 安装 → `.../sandboxReceipt`
-  /// - 侧载 / 自签 / Xcode 直接跑 → 收据**文件不存在**（`appStoreReceiptURL` 仍给得
-  ///   出路径，所以必须查文件是否真的在，只看文件名会把侧载误判成 TestFlight）。
-  private static func currentInstallSource() -> String {
-    guard let receiptUrl = Bundle.main.appStoreReceiptURL,
-      FileManager.default.fileExists(atPath: receiptUrl.path)
-    else {
-      return "sideload"
-    }
-    return receiptUrl.lastPathComponent == "sandboxReceipt" ? "testFlight" : "appStore"
-  }
-
   private func installChannels(binaryMessenger: FlutterBinaryMessenger) {
-    // Kitapsen: no system OCR, speech transcription, floating ball (OCR +
-    // lookup), lookup keyboard language, online-source challenge browser or
-    // AnkiMobile bridge. Their Dart callers are compiled out of the edition, so
-    // their native halves are not built either (App Review guideline 2.3.1).
-    // 复制图片到剪贴板（视频截图 / 阅读器内联图）。与 macOS 同一份实现，
-    // 方法名与入参逐字对齐 Windows 那份 CF_DIB 实现。
-    FushiClipboardImage.register(binaryMessenger: binaryMessenger)
-    // 目录导入（BUG-2786）：iOS 上沙盒外文件夹只能在安全作用域访问窗口内整卷拷进来。
-    // 呈现者必须是最顶层的 VC——导入对话框本身就是 Flutter 路由，但若此刻上面还压着
-    // 别的原生表单，从 root 直接 present 会被 UIKit 拒掉（静默不弹）。
-    directoryImport = FushiDirectoryImport(binaryMessenger: binaryMessenger) {
-      var top = UIApplication.shared.connectedScenes
-        .compactMap { $0 as? UIWindowScene }
-        .filter { $0.activationState == .foregroundActive }
-        .flatMap { $0.windows }
-        .first { $0.isKeyWindow }?.rootViewController
-      while let presented = top?.presentedViewController {
-        top = presented
-      }
-      return top
-    }
     let splashChannel = FlutterMethodChannel(
       name: "app.fushi.reader/splash",
       binaryMessenger: binaryMessenger)
@@ -135,53 +80,6 @@ import Flutter
       name: "app.fushi.reader/url_events/stream",
       binaryMessenger: binaryMessenger)
     urlEventChannel.setStreamHandler(self)
-
-    let brightnessChannel = FlutterMethodChannel(
-      name: "app.fushi.reader/screen_brightness",
-      binaryMessenger: binaryMessenger)
-    brightnessChannel.setMethodCallHandler { (call, result) in
-      switch call.method {
-      case "getBrightness":
-        // UIScreen.brightness is 0...1; main-thread read.
-        result(Double(AppDelegate.currentScreen().brightness))
-      case "setBrightness":
-        guard let value = call.arguments as? NSNumber else {
-          result(FlutterError(
-            code: "INVALID_ARG",
-            message: "setBrightness requires a number 0..1",
-            details: nil))
-          return
-        }
-        let clamped = max(0.0, min(1.0, value.doubleValue))
-        AppDelegate.currentScreen().brightness = CGFloat(clamped)
-        result(nil)
-      case "restoreBrightness":
-        // The Dart side passes the snapshot it took on entry; write it back.
-        // nil means "do not touch" (no snapshot available) — leave as-is.
-        if let value = call.arguments as? NSNumber {
-          let clamped = max(0.0, min(1.0, value.doubleValue))
-          AppDelegate.currentScreen().brightness = CGFloat(clamped)
-        }
-        result(nil)
-      default:
-        result(FlutterMethodNotImplemented)
-      }
-    }
-
-    // 更新落地入口分流（Dart 侧 IosUpdater.resolveDownloadLanding）。iOS 有三条互不
-    // 相干的分发链路 —— App Store / TestFlight / GitHub 未签名 ipa 侧载 —— 而「该去
-    // 哪儿更新」只由「这份 app 是从哪儿装来的」决定。这里回答的就是这一个事实。
-    let updateChannel = FlutterMethodChannel(
-      name: "app.fushi.reader/update",
-      binaryMessenger: binaryMessenger)
-    updateChannel.setMethodCallHandler { (call, result) in
-      switch call.method {
-      case "getInstallSource":
-        result(Self.currentInstallSource())
-      default:
-        result(FlutterMethodNotImplemented)
-      }
-    }
 
     // 字体库「浏览系统字体」（四端同一契约，见 Windows system_font_list.cpp /
     // Android MainActivity / macOS AppDelegate）：返回 [{family, supportsJapanese?}]。
@@ -258,8 +156,6 @@ import Flutter
   private static func appShortcutSymbol(_ id: String) -> String {
     switch id {
     case "books": return "book"
-    case "manga": return "photo.on.rectangle"
-    case "video": return "film"
     default: return "app"
     }
   }

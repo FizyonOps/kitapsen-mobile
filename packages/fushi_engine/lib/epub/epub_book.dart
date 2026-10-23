@@ -73,16 +73,6 @@ class EpubBook {
     _charCountHints = counts;
   }
 
-  Uint8List? readResource(String path) {
-    final String normalized = normalizeHref(path);
-    final EpubResource? resource = resources[normalized];
-    if (resource != null) return resource.readBytes();
-    if (rootDirectory == null) return null;
-    final File file = File(p.join(rootDirectory!, normalized));
-    if (file.existsSync()) return file.readAsBytesSync();
-    return null;
-  }
-
   String mediaType(String path) {
     return resources[normalizeHref(path)]?.mediaType ?? fallbackMimeType(path);
   }
@@ -907,12 +897,6 @@ class EpubChapter {
     return _lazyHtml ??= _readChapterFile(_filePath);
   }
 
-  /// 章节文件在盘上被换掉后（在线小说按需取章：占位页 → 正文）丢掉已读入的
-  /// 正文，下次访问 [html] 重新读盘。eager 章节没有盘上文件，不受影响。
-  void discardCachedHtml() {
-    _lazyHtml = null;
-  }
-
   static String _readChapterFile(String? filePath) {
     if (filePath == null) return '';
     final File file = File(filePath);
@@ -936,12 +920,6 @@ class EpubResource {
   final Uint8List? bytes;
   final String? filePath;
 
-  Uint8List? readBytes() {
-    if (bytes != null) return bytes;
-    if (filePath == null) return null;
-    final File file = File(filePath!);
-    return file.existsSync() ? file.readAsBytesSync() : null;
-  }
 }
 
 /// Decodes EPUB text-file bytes as UTF-8, degrading gracefully instead of

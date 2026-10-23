@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fushi/i18n/strings.g.dart';
 import 'package:fushi/src/settings/settings_context.dart';
 import 'package:fushi/src/settings/settings_destination.dart';
 import 'package:fushi/src/settings/settings_detail_page.dart';
@@ -42,11 +41,7 @@ class MaterialSettingsRenderer implements SettingsRenderer {
       selectedDestinationId: selectedDestinationId,
       onDestinationSelected: onDestinationSelected,
     );
-    if (embedded) return list;
-    return FushiPageScaffold(
-      title: settingsContext.context.t.settings,
-      body: list,
-    );
+    return list;
   }
 
   @override
@@ -129,7 +124,6 @@ class MaterialSettingsRenderer implements SettingsRenderer {
     );
   }
 
-  @override
   Widget buildDetailPage({
     required SettingsContext settingsContext,
     required SettingsDestination destination,
@@ -252,27 +246,4 @@ class MaterialSettingsRenderer implements SettingsRenderer {
     );
   }
 
-  @override
-  List<Widget> buildSectionRows({
-    required SettingsContext settingsContext,
-    required SettingsSection section,
-    bool showIcons = true,
-  }) {
-    final SettingsSection visible = section.visibleCopy(settingsContext);
-    return visible.items
-        .map(
-          // 行级稳定 key：visibleCopy 按运行时谓词过滤，行增删时以 item.id 锚定
-          // State 归属（否则同类型相邻行按位置错配旧 State）。
-          (SettingsItem item) => SettingsSchemaItem(
-            key: ValueKey<String>(item.id),
-            item: item,
-            settingsContext: settingsContext,
-            showIcons: showIcons,
-            routeBuilder: (BuildContext context, WidgetBuilder builder) {
-              return MaterialPageRoute<void>(builder: builder);
-            },
-          ),
-        )
-        .toList(growable: false);
-  }
 }

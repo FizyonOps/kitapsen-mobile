@@ -20,7 +20,6 @@ import 'epub_book_meta.dart';
 import 'media_kind.dart';
 import 'media_kind_mappings.dart';
 import 'pref_codec.dart';
-import 'sync_tombstone_kind.dart';
 import 'tables.dart';
 import 'tag_host_kind.dart';
 
@@ -260,11 +259,6 @@ Future<QueryExecutor> _openWithRecovery(
   //    connection (sidecar too poisoned). Only the MAIN process is allowed to
   //    delete; the :popup process backs off so the two never race.
   if (!allowSidecarDelete) {
-    throw FushiDatabaseUnrecoverableException(
-      dbPath: path,
-      cause: 'sidecar open error in a non-main (:popup) process; backing off '
-          'so the main process performs sidecar recovery first',
-    );
   }
   await _rebuildSidecar(dbFile);
   try {
@@ -594,25 +588,6 @@ _MergedTagState _mergeTagClocks(
     }
   }
   return _MergedTagState(present, tombstones);
-}
-
-void _requireOneVideoMetadataOwner({
-  int? workId,
-  int? seasonId,
-  int? episodeId,
-  String? personKey,
-  String? characterKey,
-}) {
-  final int count = <Object?>[
-    workId,
-    seasonId,
-    episodeId,
-    personKey,
-    characterKey,
-  ].where((Object? value) => value != null).length;
-  if (count != 1) {
-    throw ArgumentError('exactly one video metadata owner is required');
-  }
 }
 
 @DriftDatabase(tables: [
@@ -4256,9 +4231,6 @@ class FushiDatabase extends _$FushiDatabase
   static String favoriteWordItemKey(
           String expression, String reading, String sourceType) =>
       '$expression\u0000$reading\u0000$sourceType';
-
-  /// 上限：保留最近 [kMinedSentenceHistoryLimit] 条制卡历史，避免无限增长。
-  static const int kMinedSentenceHistoryLimit = 1000;
 
   /// sourceType 常量：与统计聚合 / lookup_mining_counters 的 source_type 同值。
   static const String statSourceBook = 'book';

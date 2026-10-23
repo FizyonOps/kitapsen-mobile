@@ -37,9 +37,6 @@ class BookExitSyncScope {
   /// drain 的默认硬上限：在飞关书同步卡住（弱网/远端慢）也不得无限拖住退出。
   static const Duration defaultDrainTimeout = Duration(seconds: 8);
 
-  @visibleForTesting
-  int get inFlightCount => _inFlight.length;
-
   /// 登记一个在飞的关书同步 [future]（幂等：同一 Future 实例只记一次）。Future
   /// 完成（成功或失败）后**自动注销**，避免集合无限增长 / 泄漏。
   ///
@@ -78,10 +75,6 @@ class BookExitSyncScope {
           'exiting anyway (remote transfer may be partial)');
     }
   }
-
-  /// 测试用：清空跟踪表（不取消在飞 Future，仅复位单例状态）。
-  @visibleForTesting
-  void clear() => _inFlight.clear();
 
   static Future<void> _guard(Future<void> future) async {
     try {

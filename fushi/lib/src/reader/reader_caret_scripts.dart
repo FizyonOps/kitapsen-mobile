@@ -1,7 +1,4 @@
-import 'dart:convert';
-import 'dart:ui';
 
-import 'package:fushi/src/models/kitapsen_edition.dart';
 
 /// JavaScript "char caret" for the reader: a single focused character inside the
 /// EPUB DOM that the keyboard/gamepad can step character-by-character, with a
@@ -18,45 +15,10 @@ import 'package:fushi/src/models/kitapsen_edition.dart';
 /// This Dart class only builds the script and the `evaluateJavascript`
 /// invocation strings, and parses the small JSON status payloads returned by
 /// [moveInvocation] / [reanchorInvocation] / [enterInvocation].
-class ReaderCaretScripts {
-  ReaderCaretScripts._();
-
-  /// Activate the caret (restore remembered position if still visible, else the
-  /// first visible character). Returns `{ok, rect}`.
-  static String enterInvocation() =>
-      'JSON.stringify(window.fushiCaret.enter())';
+abstract class ReaderCaretScripts {
 
   /// Deactivate the caret and hide the ring (keeps the remembered position).
   static String exitInvocation() => 'window.fushiCaret.exit()';
-
-  /// Hide the ring but keep the caret active/owned (used when the user switches
-  /// to the mouse); [resumeInvocation] re-shows it for keyboard/gamepad.
-  static String suspendInvocation() => 'window.fushiCaret.suspend()';
-  static String resumeInvocation() =>
-      'JSON.stringify(window.fushiCaret.resume())';
-
-  /// Move the caret. [dir] is a physical direction (`up`/`down`/`left`/`right`)
-  /// or a logical one (`forward`/`backward`/`lineNext`/`linePrev`). Returns
-  /// `{status, rect}` where status ∈ moved | pageForward | pageBackward |
-  /// blocked.
-  static String moveInvocation(String dir) =>
-      "JSON.stringify(window.fushiCaret.move('$dir'))";
-
-  /// Whole-page scroll accelerator (LB/RB) on the active caret surface.
-  /// [forward] true scrolls toward reading order. Returns the same
-  /// `{status, rect}` shape as [moveInvocation] (popup → moved/blocked,
-  /// paged reader → pageForward/pageBackward) so callers reuse [moveStatus].
-  static String scrollPageInvocation(bool forward) =>
-      'JSON.stringify(window.fushiCaret.scrollPage($forward))';
-
-  /// Jump the popup caret to the next/previous dictionary section header
-  /// (`summary.dict-label`), Yomitan-style "go to dictionary". [forward] true
-  /// jumps to the next dictionary below the cursor, false to the previous one
-  /// above. Returns the same `{status, rect}` shape as [moveInvocation]
-  /// (`moved`/`blocked`) so callers reuse [moveStatus] / [rectOf]. Popup-only:
-  /// the reader has no dictionary sections, so this no-ops there (`blocked`).
-  static String jumpDictInvocation(bool forward) =>
-      'JSON.stringify(window.fushiCaret.jumpDict($forward))';
 
   /// Toggle popup caret scrolling between the default browser movement and
   /// explicit instant movement for e-ink screens.
@@ -71,28 +33,6 @@ class ReaderCaretScripts {
   static String instantScrollInvocation(bool enabled) =>
       'window.fushiCaret && window.fushiCaret.setInstantScroll($enabled)';
 
-  /// After a page turn, place the caret at the entering edge of the new page
-  /// ([edge] = `forward` → first visible char, `backward` → last visible char).
-  static String reanchorInvocation(String edge) =>
-      "JSON.stringify(window.fushiCaret.reanchor('$edge'))";
-
-  /// Look up the word at the caret (reuses the tap dictionary pipeline).
-  static String lookupInvocation() => 'window.fushiCaret.lookup()';
-
-  /// Context "click" at the caret: follow a hyperlink, click an interactive
-  /// control (popup audio/expand buttons), or — on plain text — look up the
-  /// word. Returns `'link'` | `'activated'` | `'lookup'` | `'none'`.
-  static String activateInvocation() => 'window.fushiCaret.activate()';
-
-  /// Long-press at the caret. Used by gamepad hold-A for actions that are not
-  /// the same as short activation, such as marking a popup dictionary summary
-  /// without toggling its disclosure row.
-  static String longPressInvocation() => 'window.fushiCaret.longPress()';
-
-  /// Re-measure the ring after a relayout; re-anchors if the node detached.
-  static String refreshInvocation() =>
-      'JSON.stringify(window.fushiCaret.refresh())';
-
   /// Configure the ring colour and the chrome insets used for the
   /// "is on the current page" viewport test. [scopeSelector] (a CSS selector)
   /// restricts the cursor to text inside matching elements — the dictionary
@@ -106,52 +46,6 @@ class ReaderCaretScripts {
     final String scope = scopeSelector == null ? 'null' : "'$scopeSelector'";
     return "window.fushiCaret.init({color:'$color',insetTop:$insetTop,"
         'insetBottom:$insetBottom,scopeSelector:$scope})';
-  }
-
-  /// Status field of a [moveInvocation] / [reanchorInvocation] / [enterInvocation]
-  /// result; defaults to `blocked` when the payload is missing/unparseable.
-  static String moveStatus(Object? raw) {
-    final Map<String, dynamic>? data = _decode(raw);
-    if (data == null) return 'blocked';
-    final Object? status = data['status'];
-    if (status is String) return status;
-    // enter()/reanchor() return {ok:bool,...}; treat ok as moved/blocked.
-    final Object? ok = data['ok'];
-    if (ok is bool) return ok ? 'moved' : 'blocked';
-    return 'blocked';
-  }
-
-  /// Caret rect from a result payload, if present.
-  static Rect? rectOf(Object? raw) {
-    final Map<String, dynamic>? data = _decode(raw);
-    if (data == null) return null;
-    final Object? r = data['rect'];
-    if (r is! Map) return null;
-    final Map<String, dynamic> rect = Map<String, dynamic>.from(r);
-    final num? x = rect['x'] as num?;
-    final num? y = rect['y'] as num?;
-    final num? w = rect['width'] as num?;
-    final num? h = rect['height'] as num?;
-    if (x == null || y == null || w == null || h == null) return null;
-    if (w <= 0 || h <= 0) return null;
-    return Rect.fromLTWH(
-        x.toDouble(), y.toDouble(), w.toDouble(), h.toDouble());
-  }
-
-  static Map<String, dynamic>? _decode(Object? raw) {
-    if (raw == null) return null;
-    try {
-      if (raw is Map) return Map<String, dynamic>.from(raw);
-      if (raw is String) {
-        final String trimmed = raw.trim();
-        if (trimmed.isEmpty || trimmed == 'null') return null;
-        final Object? decoded = jsonDecode(trimmed);
-        if (decoded is Map) return Map<String, dynamic>.from(decoded);
-      }
-    } catch (_) {
-      return null;
-    }
-    return null;
   }
 
   // 互指注释（参照本仓 _jsStringLiteral 双实现先例）：本对象的字符模型 / 焦点环 JS 辅助与
@@ -959,63 +853,6 @@ window.fushiCaret = {
     return this._pageOrScroll(!!forwardish);
   },
 
-""";
-
-  /// Gamepad / keyboard jump between dictionary sections of a lookup popup.
-  /// Kitapsen has no dictionary popup, so the reader source leaves it out.
-  static const String _dictJumpSource = r"""
-  // ── Jump to dictionary section (Yomitan-style "go to dictionary") ──────
-  // Step the caret to the next/previous dictionary section header
-  // (summary.dict-label) so a pure gamepad/keyboard user can skip whole
-  // dictionaries at once instead of D-padding through every line. Forward
-  // jumps to the first dict header whose top is below the current anchor;
-  // backward to the last header whose top is above it (DOM order ties broken by
-  // position, so jumping is deterministic even with multiple stacked sections).
-  // The header is placed as an element stop (the same machinery move() uses for
-  // an interactive stop), so the ring hugs the dict-label and A toggles the
-  // section open/closed exactly as it does after a D-pad landing. Reader-only
-  // surfaces have no summary.dict-label → blocked (no-op). The chosen header is
-  // scrolled fully into view so the cursor follows the jump.
-  _dictHeaders: function() {
-    var out = [];
-    var nodes = document.body.querySelectorAll('summary.dict-label');
-    for (var i = 0; i < nodes.length; i++) {
-      var r = this._elRect(nodes[i]);
-      if (r.width <= 0 || r.height <= 0) continue;
-      out.push({ el: nodes[i], top: r.top, rect: r });
-    }
-    // DOM order already follows visual order top→bottom; sort by top as a guard
-    // for any reflow/transform that reorders rects.
-    out.sort(function(a, b) { return a.top - b.top; });
-    return out;
-  },
-  jumpDict: function(forward) {
-    if (!this.active) return { status: 'blocked' };
-    this._markClickables();
-    var headers = this._dictHeaders();
-    if (!headers.length) return { status: 'blocked' };
-    var anchor = this._anchorRect();
-    // No anchor yet (just entered an empty-text page): jump to the first/last.
-    var refTop = anchor ? (anchor.top + anchor.height / 2) : -Infinity;
-    var eps = 2;
-    var target = null;
-    if (forward) {
-      for (var i = 0; i < headers.length; i++) {
-        if (headers[i].top > refTop + eps) { target = headers[i]; break; }
-      }
-    } else {
-      for (var j = headers.length - 1; j >= 0; j--) {
-        if (headers[j].top < refTop - eps) { target = headers[j]; break; }
-      }
-    }
-    if (!target) return { status: 'blocked' };
-    // The header may sit off the current scroll position; scroll it in and
-    // re-measure before placing, so the ring lands on the visible header.
-    this._scrollIntoView(target.rect);
-    var rect = this._elRect(target.el);
-    this._place({ node: null, offset: 0, el: target.el, rect: rect });
-    return { status: 'moved', rect: this._rectJson(rect) };
-  },
 """;
 
   static const String _sourceTail = r"""

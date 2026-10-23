@@ -42,97 +42,9 @@ ModuleId? moduleOfHomeTab(HomeTab tab) => switch (tab) {
 bool isHomeTabVisible(HomeTab tab, ModuleVisibility visibility) =>
     visibility.isEnabledOrUngated(moduleOfHomeTab(tab));
 
-/// 模块 → 它的顶层 tab。四个横切模块（听书/制卡/在线服务/同步）**没有 tab**，
-/// 返回 `null`——它们只有设置分类与散落在各页的入口。
-HomeTab? homeTabOfModule(ModuleId module) => switch (module) {
-  ModuleId.books => HomeTab.books,
-  ModuleId.manga => HomeTab.manga,
-  ModuleId.video => HomeTab.video,
-  ModuleId.browse => HomeTab.browse,
-  ModuleId.lookup => HomeTab.dictionaries,
-  ModuleId.games => HomeTab.games,
-  ModuleId.browserExtension => HomeTab.browserExtension,
-  ModuleId.listening ||
-  ModuleId.cardCreation ||
-  ModuleId.services ||
-  ModuleId.sync => null,
-};
-
 // ── SettingsDestinationId ──────────────────────────────────────────────────
 
-/// 设置一级分类 → 所属模块（`null` = 恒在）。
-///
-/// 几个刻意判 `null` 的：
-/// - `reading`：books 与 manga **共用**的阅读偏好（漫画库页内嵌的设置分区引的
-///   正是它，见 `manga_library_page.dart`），挂 books 会在「books 关 + manga 开」
-///   这个合法组合下把漫画库的设置分区一起连坐。
-/// - `lookup`：用户明确要求「关掉查词模块只关页面入口、查词能力全留」——词典
-///   导入管理与音频来源是阅读器划词弹窗的配置面，藏了等于把弹窗锁死成空壳。
-/// - `storage` / `system` / `appearance` / `profiles`：设备级，不属任何模块
-///   （storage 正文里按模块分的**条目**另行过滤，见 `storage_usage_view.dart`）。
-/// - 四个 synthetic 分类（`readerQuickSettings` / `appIcon` /
-///   `videoQuickSettings` / `shortcuts`）不是设置主页上的一级分类，藏它们只会
-///   让对应的合成面板整个消失。
-ModuleId? moduleOfSettingsDestination(SettingsDestinationId id) => switch (id) {
-  SettingsDestinationId.appearance => null,
-  SettingsDestinationId.floatingBall => null,
-  SettingsDestinationId.profiles => null,
-  SettingsDestinationId.reading => null,
-  SettingsDestinationId.lookup => null,
-  SettingsDestinationId.storage => null,
-  SettingsDestinationId.system => null,
-  SettingsDestinationId.readerQuickSettings => null,
-  SettingsDestinationId.appIcon => null,
-  SettingsDestinationId.videoQuickSettings => null,
-  SettingsDestinationId.shortcuts => null,
-  SettingsDestinationId.manga => ModuleId.manga,
-  SettingsDestinationId.video => ModuleId.video,
-  SettingsDestinationId.cardCreation => ModuleId.cardCreation,
-  SettingsDestinationId.downloads => ModuleId.browse,
-  SettingsDestinationId.game => ModuleId.games,
-  // 在线服务与媒体追踪同属「第三方服务」一个开关：追踪本就是靠在线服务的
-  // 凭据跑的，分成两个开关只会让用户关了一半还留着另一半。
-  SettingsDestinationId.services => ModuleId.services,
-  SettingsDestinationId.mediaTracking => ModuleId.services,
-  // AI 提供商配置就是第三方在线服务的端点 + 凭据，与 Jimaku / OpenSubtitles /
-  // Torznab 同类，共用 services 这一个开关，不另开 ModuleId。
-  SettingsDestinationId.ai => ModuleId.services,
-  // 互联是从同步备份拆出去的一级分类，共享同一套后端与私有状态，同一个开关。
-  SettingsDestinationId.syncBackup => ModuleId.sync,
-  SettingsDestinationId.interconnect => ModuleId.sync,
-};
-
-/// 某个设置一级分类此刻是否该出现。挂给 `SettingsDestination.visible` 即可同时
-/// 满足「列表看不见 + 搜索搜不到 + 主从详情不可选」——三条渲染路径共用
-/// `isVisible`。
-bool isSettingsDestinationVisible(
-  SettingsDestinationId id,
-  ModuleVisibility visibility,
-) => visibility.isEnabledOrUngated(moduleOfSettingsDestination(id));
-
 // ── ShortcutScope ──────────────────────────────────────────────────────────
-
-/// 快捷键作用域 → 所属模块（`null` = 恒在）。
-///
-/// `dictionaryPopup`（划词弹窗内部导航）判 `null`：它跨全部弹窗宿主常驻，属于
-/// 查词**能力**而非查词页面，与 lookup 模块开关无关。
-/// `globalExternal`（app 外系统级取词热键）判 lookup：它是把用户送进查词界面的
-/// 外部入口，模块关掉时不该还能装系统钩子。
-ModuleId? moduleOfShortcutScope(ShortcutScope scope) => switch (scope) {
-  ShortcutScope.global => null,
-  ShortcutScope.universal => null,
-  ShortcutScope.home => null,
-  ShortcutScope.gamepad => null,
-  ShortcutScope.dictionaryPopup => null,
-  ShortcutScope.globalExternal => ModuleId.lookup,
-  ShortcutScope.reader => ModuleId.books,
-  ShortcutScope.audiobook => ModuleId.listening,
-  ShortcutScope.manga => ModuleId.manga,
-  ShortcutScope.video => ModuleId.video,
-};
-
-bool isShortcutScopeVisible(ShortcutScope scope, ModuleVisibility visibility) =>
-    visibility.isEnabledOrUngated(moduleOfShortcutScope(scope));
 
 // ── MediaKind ──────────────────────────────────────────────────────────────
 
@@ -147,9 +59,3 @@ ModuleId moduleOfMediaKind(MediaKind kind) => switch (kind) {
   MediaKind.video => ModuleId.video,
   MediaKind.game => ModuleId.games,
 };
-
-/// 此刻该出现在首页聚合列表里的媒体种类。
-Set<MediaKind> visibleMediaKinds(ModuleVisibility visibility) => MediaKind
-    .values
-    .where((MediaKind k) => visibility.isEnabled(moduleOfMediaKind(k)))
-    .toSet();

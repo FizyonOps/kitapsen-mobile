@@ -1,9 +1,7 @@
 import 'dart:async';
 
-import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:fushi/src/anki/source_review_navigation.dart';
 import 'package:fushi/src/models/home_tab.dart';
 import 'package:fushi/src/models/module_id.dart';
 import 'package:fushi/src/platform/app_shortcuts.dart';
@@ -22,29 +20,11 @@ class AppShortcutQueue {
   final Future<void> Function(AppShortcut shortcut) run;
 
   AppShortcut? _pending;
-  bool _scheduled = false;
-
-  @visibleForTesting
-  AppShortcut? get pending => _pending;
-
-  /// URL 到达：先存下；[ready]（app 已初始化、首页即将渲染）时立刻排到下一帧。
-  /// 未就绪时由宿主在就绪后的 build 里调 [schedule]。
-  void enqueue(AppShortcut shortcut, {required bool ready}) {
-    _pending = shortcut;
-    if (ready) schedule();
-  }
+  final bool _scheduled = false;
 
   /// 有排队的快捷方式就在下一帧落地。根 build 每次都会调，重复调用是 no-op。
   void schedule() {
     if (_scheduled || _pending == null) return;
-    _scheduled = true;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scheduled = false;
-      final AppShortcut? shortcut = _pending;
-      _pending = null;
-      if (shortcut != null && isActive()) unawaited(run(shortcut));
-    });
-    WidgetsBinding.instance.ensureVisualUpdate();
   }
 }
 
@@ -67,7 +47,6 @@ Future<void> runAppShortcut(
   required NavigatorState? navigator,
   required void Function(HomeTab tab) selectHomeTab,
   required VoidCallback openLookup,
-  ExternalMediaNavigation? media,
 }) async {
   if (!visibility.isEnabled(shortcut.module)) return;
   if (!onboardingCompleted) {
@@ -83,37 +62,6 @@ Future<void> runAppShortcut(
   selectHomeTab(shortcut.homeTab);
   if (navigator != null) await _popToHomeRoute(navigator);
   return;
-}
-
-/// 逐层退回首页根路由。
-///
-/// - 栈顶是登记在 [ExternalMediaNavigation] 的媒体页（阅读器 / 漫画 / PDF /
-///   视频，含视频全屏路由）：**不按返回键**，直接交给它的 `closeActive`，与卡片
-///   来源回跳同口径。媒体页的返回回调是 async 的（漫画页先 await 退出窗口全屏），
-///   `maybePop` 不等它；先按返回再 closeActive 会让同一页的退出（落盘、
-///   closeMedia、自动同步）跑两遍。返回键在视频页上还只会关掉一层前台浮层
-///   （BUG-1862 逐级退出）。closeActive 一次关掉全部浮层、落库、出栈并等路由
-///   真正结束；它拒绝（例如上面还压着对话框）就停在原地、不丢页面。
-/// - 其它页面：`maybePop`（等同按返回键），让编辑页的 PopScope 拦下未保存的改动。
-///   路由还在就停下交给用户。
-///
-/// 判「这层走没走」看路由是否还 active，而不是栈顶是否换了：拒绝出栈时弹出的
-/// 确认对话框也会换掉栈顶，按身份比较会把对话框当成进展，下一轮再 pop 掉它
-/// （= 替用户点了取消），然后无限重来。
-Future<void> unwindToHomeRoute(
-  NavigatorState navigator, {
-  required ExternalMediaNavigation media,
-}) async {
-  while (navigator.mounted && navigator.canPop()) {
-    final Route<dynamic>? top = _topRoute(navigator);
-    if (top == null) return;
-    if (media.ownsRoute(top)) {
-      if (!await media.closeActive()) return;
-    } else {
-      await navigator.maybePop();
-    }
-    if (!navigator.mounted || top.isActive) return;
-  }
 }
 
 /// [unwindToHomeRoute] without the media-page queue (Kitapsen edition).

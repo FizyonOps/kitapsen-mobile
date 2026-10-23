@@ -7,6 +7,5 @@ library hibiki_platform;
 // was pseudo-extensibility scaffolding; the files have been deleted.
 export 'src/services/platform_directory_service.dart';
 export 'src/services/platform_lifecycle_service.dart';
-export 'src/services/platform_clipboard_service.dart';
 export 'src/services/platform_permission_service.dart';
 export 'src/services/platform_device_info_service.dart';

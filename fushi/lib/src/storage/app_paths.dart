@@ -8,8 +8,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:fushi/src/startup/test_environment.dart';
-import 'package:fushi/src/storage/macos_data_root_access.dart';
-import 'package:fushi/src/utils/misc/platform_utils.dart';
 
 /// TODO-935 E0：应用数据根目录的**唯一入口**。
 ///
@@ -78,13 +76,6 @@ class AppPaths {
   /// 的观感）。仅当用户已显式选择「本次用默认位置启动」（[forceDefaultRootForSession]）
   /// 时跳过预检、走默认根。无自定义根的普通用户（configured==null）不受影响。
   static Future<AppPaths> resolve() async {
-    if (isDesktopPlatform && !forceDefaultRootForSession) {
-      final String? configured = await _configuredDataRootPath();
-      if (configured != null &&
-          !await _probeDataRootExists(Directory(configured))) {
-        throw DataRootUnavailableException(configuredPath: configured);
-      }
-    }
     // BUG-1115：默认 documents 布局的判定**只在这里**做一次（启动期，真实异步环境）。
     // 判定要探测文件系统，绝不能塞进 [_resolveDocumentsRoot]——那条路径会被运行时的静态
     // 便捷层（`documentsSubdirectory` 等）高频调用，其中就包括 widget 测试里的封面/资源
@@ -142,13 +133,6 @@ class AppPaths {
 
   // ---- 单一真相源：三个根的解析函数（实例 + 静态层共用） ----
 
-  /// TODO-935 E1：SharedPreferences 里「自定义数据根」的键名。值是一个**绝对目录路径**
-  /// （仅桌面有效）。把它落 SharedPreferences 而非 Drift `preferences` 表，是因为数据根
-  /// 配置必须在 DB 打开*之前*可读——而 DB 自身正是要被迁移的对象（鸡生蛋）。
-  /// SharedPreferences 在桌面是固定平台落点（不随数据根迁移），启动早期即可读
-  /// （`desktop_window_placement.dart` 已证明 DB 打开前 `getInstance()` 可用）。
-  static const String dataRootPrefKey = 'data_root';
-
   /// `<dataRoot>` 下「内容/书库」子目录名。dataRoot 覆盖生效时，documentsRoot 落这里，
   /// 不与 supportRoot 子目录冲突（两根共一个 dataRoot 时仍各有独立子树）。
   static const String dataRootDocumentsChild = 'documents';
@@ -199,78 +183,6 @@ class AppPaths {
   /// 启动期写一次，之后所有解析共用——布局在一次运行里必须恒定。
   static bool? _legacyFlatDocumentsRoot;
 
-  /// 仅供测试：清掉进程内布局判定，让同一测试文件里的多个用例能各自注入不同的
-  /// prefs / 老安装痕迹（生产永不调用——布局在一次运行里恒定）。
-  @visibleForTesting
-  static void debugResetDocumentsLayoutCache() {
-    _legacyFlatDocumentsRoot = null;
-    _documentsContainerName = null;
-  }
-
-  /// 仅供测试：直接注入 nested 容器名锚点（模拟存量 `Hibiki` 安装 / 新装
-  /// `Fushi`），跳过 [_ensureDocumentsContainerDecided] 的文件系统探测。
-  @visibleForTesting
-  static void debugSetDocumentsContainer(String? name) =>
-      _documentsContainerName = name;
-
-  /// 测试注入钩子：覆盖「读 SharedPreferences 的 data_root」这一步，使 [AppPaths] 的
-  /// dataRoot 派生在纯 Dart 单测里可断言（无需平台 SharedPreferences 通道）。返回 null
-  /// 时走真实读取；返回空串视为「无覆盖」。仅供测试设置，生产恒 null。
-  static Future<String?> Function()? debugDataRootReader;
-
-  /// BUG-815：用户在「数据位置未响应」逃生屏上**显式选择**「仍用默认位置启动」时置真。
-  /// 置真后本次启动跳过 [resolve] 的不可达预检、[_resolveDataRoot] 直接返回 null（走
-  /// `path_provider` 默认根），让配置了自定义根但盘暂时不可达的用户能主动进入空态而不被
-  /// 锁在门外——**绝不自动置真**（默认 false）。仅本次进程有效：下次启动重新探测配置根，
-  /// 盘醒了即自动用回真实数据；用户的 `data_root` 配置与原盘数据一字节不动。
-  static bool forceDefaultRootForSession = false;
-
-  /// 读取桌面自定义数据根**配置路径**（绝对路径，不做存在性探测）。无覆盖 / 非桌面 /
-  /// 未设 / 空白 / prefs 通道不可用 → 返回 null（调用方退回默认根）。macOS 下顺带激活
-  /// 安全域书签。存在性探测分离到 [_probeDataRootExists]。
-  static Future<String?> _configuredDataRootPath() async {
-    if (!isDesktopPlatform) return null;
-    final Future<String?> Function()? reader = debugDataRootReader;
-    String? raw;
-    if (reader != null) {
-      raw = await reader();
-    } else {
-      try {
-        final SharedPreferences prefs = await SharedPreferences.getInstance();
-        raw = prefs.getString(dataRootPrefKey);
-        if (raw != null && raw.trim().isNotEmpty && Platform.isMacOS) {
-          raw = await MacOSDataRootAccess.startAccessingStoredBookmark(prefs) ??
-              raw;
-        }
-      } catch (_) {
-        // SharedPreferences 平台通道不可用（无插件注册的纯 Dart 测试环境 / 极端
-        // 启动早期）→ 按「无覆盖」处理，退回 path_provider 默认根，与 E1 前行为
-        // 逐字节一致。生产端插件恒注册，正常读到 data_root 覆盖值。
-        return null;
-      }
-    }
-    if (raw == null || raw.trim().isEmpty) return null;
-    return raw;
-  }
-
-  /// TODO-1260 / BUG-572：对数据根目录做**带 2s 超时的异步存在性探测**。自定义数据根可能
-  /// 落在网络盘 / 移动盘上，盘**掉线**时旧代码的同步 `existsSync()`（阻塞式 `stat`）会在
-  /// **主 isolate** 卡到 OS 层超时（Windows 对断链网络盘可达数十秒），而它跑在 app 启动
-  /// 最早期 → 无限加载。异步 `exists()` 不阻塞主 isolate，再叠 2s 超时兜底断链盘连异步
-  /// stat 都不回的极端情况。**铁律**：只准 `exists().timeout(...)`，永不 `existsSync()`
-  /// （守卫 `test/storage/app_paths_data_root_timeout_test.dart`）。超时 / 抛错 / 不存在
-  /// 都返回 false。
-  static Future<bool> _probeDataRootExists(Directory dir) async {
-    try {
-      return await dir
-          .exists()
-          .timeout(const Duration(seconds: 2), onTimeout: () => false);
-    } catch (_) {
-      // 断链盘的异步 stat 也可能直接抛（而非挂起）→ 同样当作不可用。
-      return false;
-    }
-  }
-
   /// 解析桌面自定义数据根（可用时返回目录，否则 null → 调用方退回默认根）。
   ///
   /// **数据安全语义**：返回 null 只代表「本次启动用默认根」，pref 里的自定义根路径与原盘
@@ -282,14 +194,7 @@ class AppPaths {
   /// **顺序铁律**：[fushiTestDirectory] 测试分支在三个 `_resolve*` 里**优先于**本覆盖
   /// （测试根始终赢），保证现有测试与 E0 行为等价的断言不被 dataRoot 改动破坏。
   static Future<Directory?> _resolveDataRoot() async {
-    if (!isDesktopPlatform) return null;
-    // BUG-815：用户已显式选择本次用默认位置启动（配置根不可达时）→ 直接退回默认根。
-    if (forceDefaultRootForSession) return null;
-    final String? raw = await _configuredDataRootPath();
-    if (raw == null) return null;
-    final Directory dir = Directory(raw);
-    if (!await _probeDataRootExists(dir)) return null;
-    return dir;
+    return null;
   }
 
   static Future<Directory> _resolveDocumentsRoot() async {
@@ -366,9 +271,7 @@ class AppPaths {
   /// * 只有**桌面的老扁平安装**为 false —— 那里 documents 根就是用户自己的文档
   ///   文件夹，把用户的文件算成 app 占用既不准也吓人。
   static Future<bool> documentsRootIsFushiOwned() async {
-    if (!isDesktopPlatform) return true;
-    if (await _resolveDataRoot() != null) return true;
-    return !await _useLegacyFlatDocumentsRoot();
+    return true;
   }
 
   /// 判定 + 固化默认布局。**唯一做探测 IO 的地方**，只由 [resolve] 在启动期调用一次；
@@ -401,12 +304,6 @@ class AppPaths {
       debugPrint('AppPaths: 固化 documents 布局失败（下次启动重新判定）: $e');
     }
   }
-
-  /// 供 [resolve] 之前就需要「默认位置」定义的调用方（安装器数据根引导）提前定下容器名，
-  /// 保证它算出的 [defaultLocationDocumentsRoot] 与紧随其后的 [resolve] 是同一个；
-  /// [resolve] 内再调时已判定、直接沿用。
-  static Future<void> ensureDocumentsContainerDecided() async =>
-      _ensureDocumentsContainerDecided(await _prefsOrNull());
 
   /// Fushi 改名（Phase 3）：判定 + 固化 nested 容器名。锚点已有直接用；没有则
   /// 探测一次：老容器 `<Documents>/Hibiki/data` 存在而新容器不存在 → 存量安装，
@@ -489,17 +386,6 @@ class AppPaths {
   static Future<Directory> _resolveTempRoot() async =>
       fushiTestDirectory('temp') ?? await getTemporaryDirectory();
 
-  /// 给迁移引擎（E1）/ 设置 UI（E2）复用的纯派生：把一个 dataRoot 绝对路径映射成它
-  /// 派生的 (documentsRoot, supportRoot) 对，子目录名与 [_resolveDocumentsRoot] /
-  /// [_resolveSupportRoot] 的 dataRoot 分支逐字节一致。
-  static (Directory documents, Directory support) rootsForDataRoot(
-    String dataRootPath,
-  ) =>
-      (
-        Directory(p.join(dataRootPath, dataRootDocumentsChild)),
-        Directory(p.join(dataRootPath, dataRootSupportChild)),
-      );
-
   /// TODO-1226：documents 根顶层**属于 Hibiki 的目录名全集**（数据根迁移白名单）。
   ///
   /// **老安装（[documentsLayoutFlat]）** 的 documents 根 = 整个用户 `Documents`（共享目录，含
@@ -574,35 +460,6 @@ class AppPaths {
     'card_source_drafts',
   };
 
-  /// BUG-1115：[newDataRoot] 落在**共享** documents 根（老安装的扁平布局 = 平台
-  /// `Documents`）内部时，它是否是一个安全的迁移目标。
-  ///
-  /// 一般规则是「新数据根不能位于旧数据目录内部」（自我嵌套 → 边搬边把目标搬进自己）。
-  /// 但共享根是个例外：那里的迁移是**白名单选择性搬移**——只有
-  /// [fushiOwnedDocumentsEntries] 里的顶层项会被搬走，别的顶层项一律不碰。所以只要新根
-  /// 的顶层段不是白名单里的名字，它在搬移中就是个旁观者，`Documents\Hibiki` 这种「把散
-  /// 落的 16 个目录收进一个自己的子目录」的迁移是安全的，不该被一刀切拒绝。
-  ///
-  /// 顶层段比较**大小写不敏感**：`p.canonicalize` 在 Windows 上会把路径转小写，直接与
-  /// 白名单原样比对会让 `Documents\hibikiExport` 漏网（它其实是白名单项，会被搬走 →
-  /// 目标边搬边消失）。小写比较在 Linux 上只会更保守（多拒绝几个），不会放行危险目标。
-  /// [ownedEntries] 是本次搬移真正生效的白名单（引擎传
-  /// `DataRootMigrationRequest.documentsTopLevelIncludeNames`，UI 传默认全集）——判定必须
-  /// 与实际会被搬走的顶层项同源，否则两边对「哪些名字会消失」的认知会漂开。
-  static bool isSafeNestedTargetInSharedDocuments({
-    required String sharedDocumentsRoot,
-    required String newDataRoot,
-    Set<String> ownedEntries = fushiOwnedDocumentsEntries,
-  }) {
-    final String canonRoot = p.canonicalize(sharedDocumentsRoot);
-    final String canonNew = p.canonicalize(newDataRoot);
-    if (!p.isWithin(canonRoot, canonNew)) return false;
-    final String firstSegment =
-        p.split(p.relative(canonNew, from: canonRoot)).first.toLowerCase();
-    return !ownedEntries
-        .any((String owned) => owned.toLowerCase() == firstSegment);
-  }
-
   // ---- 静态便捷层（给无 AppModel 实例的 static 存储助手） ----
 
   /// 内容/书库根目录。等价于过去散落各处的 `getApplicationDocumentsDirectory()`。
@@ -621,36 +478,8 @@ class AppPaths {
     return Directory(p.join(root.path, child));
   }
 
-  /// 有声书音频持久根 `<documents>/audiobooks`（复制导入的统一落点）。
-  static Future<Directory> audiobooksDirectory() =>
-      documentsSubdirectory('audiobooks');
-
-  /// EPUB 解压正文根 `<documents>/fushi_books`。
-  static Future<Directory> epubBooksDirectory() =>
-      documentsSubdirectory('fushi_books');
-
   /// 视频封面目录 `<documents>/video_covers`。
   static Future<Directory> videoCoversDirectory() =>
       documentsSubdirectory('video_covers');
 
-  /// 游戏库封面目录 `<documents>/game_covers`（手动设置与自动获取的统一落点，
-  /// 文件名是 `<GalgameEntry.id>.<ext>`）。
-  static Future<Directory> gameCoversDirectory() =>
-      documentsSubdirectory('game_covers');
-
-  /// 视频外挂字幕副本目录 `<documents>/video_subtitles`。
-  static Future<Directory> videoSubtitlesDirectory() =>
-      documentsSubdirectory('video_subtitles');
-
-  /// mpv 着色器目录 `<documents>/mpv_shaders`。
-  static Future<Directory> mpvShadersDirectory() =>
-      documentsSubdirectory('mpv_shaders');
-
-  /// mpv Lua 脚本目录 `<documents>/mpv_scripts`。
-  static Future<Directory> mpvLuaScriptsDirectory() =>
-      documentsSubdirectory('mpv_scripts');
-
-  /// 远程视频下载目录 `<documents>/remote_videos`。
-  static Future<Directory> remoteVideosDirectory() =>
-      documentsSubdirectory('remote_videos');
 }

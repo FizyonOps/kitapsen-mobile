@@ -2,8 +2,7 @@ import 'package:flutter/services.dart' hide ModifierKey;
 import 'package:fushi/src/shortcuts/input_binding.dart';
 import 'package:fushi/src/shortcuts/shortcut_action.dart';
 
-class ShortcutDefaults {
-  ShortcutDefaults._();
+abstract class ShortcutDefaults {
 
   static Map<ShortcutAction, ShortcutBindingSet> forPlatform(
     TargetPlatform platform,

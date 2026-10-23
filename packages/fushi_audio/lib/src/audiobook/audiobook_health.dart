@@ -89,13 +89,6 @@ class AudiobookHealth {
     );
   }
 
-  /// 旧记录 / 字段全 null 时的回退值。UI 用灰色 `?` 角标表示。
-  factory AudiobookHealth.unrun() {
-    return AudiobookHealth(
-      kind: HealthKind.unrun,
-      measuredAt: DateTime.fromMillisecondsSinceEpoch(0),
-    );
-  }
   const AudiobookHealth({
     required this.kind,
     required this.measuredAt,
@@ -127,28 +120,4 @@ class AudiobookHealth {
     ab.healthReason = reason;
   }
 
-  /// 从 [Audiobook] 字段还原。字段全 null → [AudiobookHealth.unrun]。
-  ///
-  /// matchRatePct 被 clamp 到 [0, 100]：历史上 "两次 put 写坏记录" 的 bug
-  /// 会把回读值弄成 33554526 这种值，无脑显示会让 UI 出现荒谬百分比。
-  /// 落库前本就 0..100，越界即视为脏数据。
-  static AudiobookHealth fromAudiobook(Audiobook ab) {
-    final String? raw = ab.healthKindRaw;
-    if (raw == null) {
-      return AudiobookHealth.unrun();
-    }
-    final HealthKind kind = HealthKind.values.firstWhere(
-      (k) => k.name == raw,
-      orElse: () => HealthKind.unrun,
-    );
-    final int? rawPct = ab.matchRatePct;
-    final int? pct =
-        (rawPct == null || rawPct < 0 || rawPct > 100) ? null : rawPct;
-    return AudiobookHealth(
-      kind: kind,
-      ratePct: pct,
-      reason: ab.healthReason,
-      measuredAt: ab.healthMeasuredAt ?? DateTime.fromMillisecondsSinceEpoch(0),
-    );
-  }
 }

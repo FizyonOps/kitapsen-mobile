@@ -63,15 +63,6 @@ Widget buildStatMediaRow(
                 overflow: TextOverflow.ellipsis,
                 style: metaStyle,
               ),
-              if (meta2 != null) ...<Widget>[
-                SizedBox(height: tokens.spacing.gap / 4),
-                Text(
-                  meta2,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: metaStyle,
-                ),
-              ],
             ],
           ),
         ),
@@ -85,7 +76,7 @@ Widget buildStatMediaRow(
             style: Theme.of(context).textTheme.titleMedium,
           ),
         ),
-        if (onTap != null) ...<Widget>[
+        ...<Widget>[
           SizedBox(width: tokens.spacing.gap / 2),
           Icon(Icons.chevron_right, color: colors.onSurfaceVariant),
         ],
@@ -97,12 +88,10 @@ Widget buildStatMediaRow(
       horizontal: tokens.spacing.card,
       vertical: tokens.spacing.gap / 2,
     ),
-    child: onDelete == null
-        ? card
-        : ContextMenuTrigger(
+    child: (ContextMenuTrigger(
             onInvoke: contextMenuInvoker(onDelete),
             child: card,
-          ),
+          )),
   );
 }
 
@@ -755,24 +744,6 @@ String? statCollectionName(
   return namesById[cid];
 }
 
-/// 纯函数：非合集上下文的「合集名 + 条目名」显示名解析（显示名只在渲染层拼，DB
-/// 落库保持原名——BUG-1018 惯例）。[entryKey] 是 '<mediaType>|<entryKey>' 归属键
-/// （与 [statCollectionName] 同契约：epub=uid（v83）/ srt=srtUid / video=bookUid）；
-/// 命中合集返回 (合集名, 原名)，未命中 (null, 原名)——调用方据此决定
-/// 「标题=合集名、副标题=条目名」还是「标题=条目名」。
-({String? collectionName, String title}) resolveEntryDisplayTitle({
-  required String entryKey,
-  required String rawTitle,
-  required Map<String, int> primaryByEntry,
-  required Map<int, String> collectionNamesById,
-}) {
-  return (
-    collectionName:
-        statCollectionName(entryKey, primaryByEntry, collectionNamesById),
-    title: rawTitle,
-  );
-}
-
 /// [resolveEntryDisplayTitle] 的单行拼接便捷函数：命中合集返回「合集名 - 条目名」
 /// （分隔符 ' - ' 与制卡 documentTitle 口径一致，见 composeVideoMiningDocumentTitle；
 /// 同样不做合集名==条目名去重），未命中原样返回条目名。活动时间轴等单行场景用。
@@ -1000,20 +971,6 @@ String formatStatHeatmapDay(String dateKey) {
   final String dd = d.day.toString().padLeft(2, '0');
   if (d.year == now.year) return '${d.month}-$dd';
   return '${d.year}-${d.month}-$dd';
-}
-
-/// 「今日按小时」单色柱状图区块（视频统计用：观看时长没有阅读面之分，只有一带）。
-/// [hourlyMs] 为 0-23 每小时的毫秒值。
-Widget buildStatHourlyChartSection(BuildContext context, List<int> hourlyMs) {
-  final colorScheme = Theme.of(context).colorScheme;
-  return _buildStatHourlyChartSection(
-    context,
-    bands: <StatHourlyBand>[
-      StatHourlyBand(values: hourlyMs, color: colorScheme.tertiary),
-    ],
-    legendBands: const <StatHourlyFormatBand>[],
-    showUnattributedNote: false,
-  );
 }
 
 /// 「今日按小时」按阅读面（format）分色堆叠的柱状图区块（阅读统计用）。

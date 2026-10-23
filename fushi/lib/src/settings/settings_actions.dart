@@ -6,10 +6,8 @@ import 'package:fushi/pages.dart';
 import 'package:fushi/src/media/sources/reader_fushi_source.dart';
 import 'package:fushi/src/models/theme_notifier.dart'
     show CustomThemeEntry, ThemePreset, kCustomThemeDefaultSeed;
-import 'package:fushi/src/profile/profile_view_model.dart';
 import 'package:fushi/src/settings/settings_context.dart';
 import 'package:fushi/utils.dart';
-import 'package:fushi_core/fushi_core.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
 const double _swatchSize = 48.0;
@@ -24,79 +22,6 @@ Future<void> pushSettingsPage(
       builder: builder,
     ),
   );
-}
-
-Future<void> showSettingsDialog(
-  SettingsContext settingsContext,
-  WidgetBuilder builder,
-) async {
-  await showAppDialog(
-    context: settingsContext.context,
-    builder: builder,
-  );
-}
-
-Future<bool> showSettingsConfirmationDialog(
-  SettingsContext settingsContext, {
-  required String title,
-  required String body,
-  String? cancelLabel,
-  String? confirmLabel,
-  bool destructive = false,
-}) async {
-  final BuildContext context = settingsContext.context;
-  final bool? confirmed = await showAppDialog<bool>(
-    context: context,
-    builder: (BuildContext ctx) {
-      final FushiDesignTokens tokens = FushiDesignTokens.of(ctx);
-      return FushiDialogFrame(
-        maxWidth: 420,
-        maxHeightFactor: 0.86,
-        insetPadding: EdgeInsets.symmetric(
-          horizontal: tokens.spacing.card,
-          vertical: tokens.spacing.card,
-        ),
-        scrollable: false,
-        child: FushiModalSheetFrame(
-          title: title,
-          scrollable: true,
-          bodyPadding: EdgeInsets.fromLTRB(
-            tokens.spacing.card,
-            0,
-            tokens.spacing.card,
-            tokens.spacing.gap,
-          ),
-          footerPadding: EdgeInsets.fromLTRB(
-            tokens.spacing.card,
-            tokens.spacing.gap,
-            tokens.spacing.card,
-            tokens.spacing.card,
-          ),
-          body: Text(body, style: tokens.type.listSubtitle),
-          footer: Wrap(
-            alignment: WrapAlignment.end,
-            spacing: tokens.spacing.gap,
-            runSpacing: tokens.spacing.gap,
-            children: <Widget>[
-              adaptiveDialogAction(
-                context: ctx,
-                onPressed: () => Navigator.pop(ctx, false),
-                child: Text(cancelLabel ?? t.dialog_cancel),
-              ),
-              adaptiveDialogAction(
-                context: ctx,
-                isDefaultAction: true,
-                isDestructiveAction: destructive,
-                onPressed: () => Navigator.pop(ctx, true),
-                child: Text(confirmLabel ?? t.dialog_done),
-              ),
-            ],
-          ),
-        ),
-      );
-    },
-  );
-  return confirmed == true;
 }
 
 void notifyReaderSettingsChanged(SettingsContext settingsContext) {
@@ -137,18 +62,6 @@ void notifyReaderChromeReanchored(SettingsContext settingsContext) {
   settingsContext.refresh();
 }
 
-/// 关掉 / 开回阅读器的顶栏和底栏（设置开关、顶栏 / 底栏 / 悬浮球上的同一颗键
-/// 共用这一个写入口）。栏关掉后由应用内悬浮球接管，偏好只在球开着时生效
-/// （`readerToolbarsHidden`），所以关栏时球若关着就一并打开——否则开关拨过去
-/// 什么都不会发生。开回栏不动球。调用方随后要让阅读器重下 chrome 预留
-/// （设置页经 [notifyReaderChromeReanchored]，阅读器内直接同步）。
-Future<void> setHideReaderToolbars(AppModel appModel, bool hide) async {
-  if (hide) {
-    await appModel.prefsRepo.setFloatingBallInApp(true);
-  }
-  await ReaderFushiSource.instance.setHideToolbars(hide);
-}
-
 Future<void> setKeepScreenAwake(
   SettingsContext settingsContext,
   bool value,
@@ -164,25 +77,6 @@ Future<void> setKeepScreenAwake(
     debugPrint('[Fushi] wakelock toggle failed: $e');
   }
   notifyReaderSettingsChanged(settingsContext);
-}
-
-Future<void> setUpdateChannel(
-  SettingsContext settingsContext,
-  String value,
-) async {
-  final bool debug = value == 'debug';
-  if (debug && !settingsContext.appModel.updateDebugChannel) {
-    final bool confirmed = await showSettingsConfirmationDialog(
-      settingsContext,
-      title: t.update_debug_channel,
-      body: t.update_debug_channel_warning,
-    );
-    if (!confirmed) return;
-  }
-
-  await settingsContext.appModel.setUpdateDebugChannel(debug);
-  await settingsContext.appModel.setUpdateBetaChannel(value == 'beta' || debug);
-  settingsContext.refresh();
 }
 
 Widget buildDesignSystemSelector(SettingsContext settingsContext) {
@@ -214,55 +108,6 @@ Widget buildDesignSystemSelector(SettingsContext settingsContext) {
     onChanged: (String value) async {
       await settingsContext.appModel.themeNotifier.setDesignSystem(value);
       settingsContext.refresh();
-    },
-  );
-}
-
-Widget buildProfilePickerRow(SettingsContext settingsContext) {
-  final ProfileUiState uiState =
-      settingsContext.ref.watch(profileViewModelProvider);
-  final ProfileViewModel viewModel =
-      settingsContext.ref.read(profileViewModelProvider.notifier);
-
-  if (uiState.isLoading || uiState.profiles.isEmpty) {
-    return AdaptiveSettingsRow(
-      title: t.profile_label,
-      icon: Icons.person_outline,
-      trailing: SizedBox(
-        width: 20,
-        height: 20,
-        child: adaptiveIndicator(
-          context: settingsContext.context,
-          strokeWidth: 2,
-        ),
-      ),
-    );
-  }
-
-  final int activeId = uiState.profiles.any(
-    (ProfileRow profile) => profile.id == uiState.activeProfileId,
-  )
-      ? uiState.activeProfileId
-      : uiState.profiles.first.id;
-
-  return AdaptiveSettingsPickerRow<int>(
-    title: t.profile_label,
-    icon: Icons.person_outline,
-    selected: activeId,
-    options: <AdaptiveSettingsPickerOption<int>>[
-      for (final ProfileRow profile in uiState.profiles)
-        AdaptiveSettingsPickerOption<int>(
-          value: profile.id,
-          label: profile.name,
-        ),
-    ],
-    onChanged: (int profileId) {
-      if (profileId == activeId) return;
-      unawaited(
-        viewModel.switchProfile(profileId).then<void>(
-              (_) => settingsContext.refresh(),
-            ),
-      );
     },
   );
 }

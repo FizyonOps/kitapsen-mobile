@@ -227,24 +227,6 @@ void gamepadKeyboardInsert(TextEditingController controller, String ch) {
   );
 }
 
-/// Deletes the selection, or the single character before the cursor.
-void gamepadKeyboardBackspace(TextEditingController controller) {
-  final TextSelection sel = controller.selection;
-  if (sel.isValid && sel.start != sel.end) {
-    controller.value = TextEditingValue(
-      text: controller.text.replaceRange(sel.start, sel.end, ''),
-      selection: TextSelection.collapsed(offset: sel.start),
-    );
-    return;
-  }
-  final int pos = sel.isValid ? sel.start : controller.text.length;
-  if (pos <= 0) return;
-  controller.value = TextEditingValue(
-    text: controller.text.replaceRange(pos - 1, pos, ''),
-    selection: TextSelection.collapsed(offset: pos - 1),
-  );
-}
-
 /// Reads the clipboard's plain text and inserts it at the controller's cursor
 /// (replacing any selection) via [gamepadKeyboardInsert]. Returns true if text
 /// was inserted; false when the clipboard holds no text (no-op). Shared by the
@@ -255,42 +237,4 @@ Future<bool> gamepadKeyboardPaste(TextEditingController controller) async {
   if (text == null || text.isEmpty) return false;
   gamepadKeyboardInsert(controller, text);
   return true;
-}
-
-/// Shows [FushiGamepadKeyboard] in a bottom sheet wired to [controller] — text
-/// entry for desktop/console where no system IME exists. Characters insert at
-/// the cursor, ⌫ deletes, 📋 pastes the clipboard, ✓ dismisses.
-///
-/// [onChanged] is fired after every programmatic edit (type/backspace/paste) so
-/// reactive fields update — Flutter does not fire `onChanged` on programmatic
-/// controller mutations.
-Future<void> showGamepadKeyboard(
-  BuildContext context,
-  TextEditingController controller, {
-  ValueChanged<String>? onChanged,
-}) {
-  return showModalBottomSheet<void>(
-    context: context,
-    builder: (BuildContext ctx) => SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: FushiGamepadKeyboard(
-          onChar: (String ch) {
-            gamepadKeyboardInsert(controller, ch);
-            onChanged?.call(controller.text);
-          },
-          onBackspace: () {
-            gamepadKeyboardBackspace(controller);
-            onChanged?.call(controller.text);
-          },
-          onPaste: () async {
-            if (await gamepadKeyboardPaste(controller)) {
-              onChanged?.call(controller.text);
-            }
-          },
-          onSubmit: () => Navigator.of(ctx).maybePop(),
-        ),
-      ),
-    ),
-  );
 }

@@ -10,7 +10,7 @@ import 'package:fushi_audio/fushi_audio_core.dart';
 /// Container assembly (ZIP/OPF/NCX/nav) is shared with [CuesToEpub] via
 /// [EpubBuilder]; only the input parsing and chapter body generation live
 /// here.
-class TextToEpub {
+abstract class TextToEpub {
   static const int kMaxCharsPerChapter = 30000;
 
   static const Set<String> supportedExtensions = {

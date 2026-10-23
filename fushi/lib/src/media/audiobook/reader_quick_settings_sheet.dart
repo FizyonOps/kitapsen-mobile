@@ -3,11 +3,8 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fushi/src/models/kitapsen_edition.dart';
-import 'package:fushi/src/media/audiobook/audiobook_controller.dart';
 import 'package:intl/intl.dart';
 import 'package:fushi_engine/epub/epub_book.dart';
 import 'package:fushi/src/focus/fushi_focus_controller.dart';
@@ -16,15 +13,12 @@ import 'package:fushi/src/media/audiobook/audiobook_bridge.dart';
 import 'package:fushi_audio/fushi_audio.dart';
 import 'package:fushi/src/media/sources/reader_fushi_source.dart';
 import 'package:fushi/src/models/app_model.dart';
-import 'package:fushi/src/models/module_id.dart';
 import 'package:fushi/src/pages/implementations/book_css_editor_page.dart';
-import 'package:fushi/src/reader/reader_audiobook_panel.dart';
 import 'package:fushi/src/reader/reader_settings_side_dialog.dart';
 import 'package:fushi/src/reader/reader_desktop_chrome.dart'
-    show ReaderSideSheet, ReaderSideSheetSectionLabel;
+    show ReaderSideSheet;
 import 'package:fushi/src/reader/ttu_toc_flatten.dart'
     show resolveCurrentTocEntry;
-import 'package:fushi/src/settings/cupertino_settings_renderer.dart';
 import 'package:fushi/src/settings/master_detail_settings_sheet.dart';
 import 'package:fushi/src/settings/material_settings_renderer.dart';
 import 'package:fushi/src/settings/settings_actions.dart';
@@ -71,7 +65,6 @@ class ReaderTocVolumeSwitch {
 
 class ReaderQuickSettingsSheet extends StatefulWidget {
   const ReaderQuickSettingsSheet({
-    required this.controller,
     required this.toc,
     required this.readerProgress,
     required this.onJumpSection,
@@ -125,7 +118,6 @@ class ReaderQuickSettingsSheet extends StatefulWidget {
     super.key,
   });
 
-  final AudiobookPlayerController? controller;
   final List<TtuTocEntry> toc;
 
   /// 0-indexed section index and total chapter count.
@@ -243,7 +235,6 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
     with
         SettingsContextHost<ReaderQuickSettingsSheet>,
         SingleTickerProviderStateMixin {
-  ReaderFushiSource get _src => ReaderFushiSource.instance;
 
   final TextEditingController _searchController = TextEditingController();
   final TextEditingController _charJumpController = TextEditingController();
@@ -255,11 +246,6 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
   bool _exitScheduled = false;
 
   late String? _subPage = widget.initialSubPage;
-
-  /// 「听书」模块是否可见。关掉时本面板不再渲染「有声书」分类（设置抽屉标签栏 +
-  /// 窄窗导航行两处），即便宿主还持有一个控制器也一样——模块关掉 = 入口消失。
-  bool get _listeningEnabled =>
-      false;
 
   /// 桌面端右侧「设置」抽屉当前展开的分组 id（初值来自页面记忆）。
   late String _sideSheetTab = widget.initialSideSheetTab;
@@ -287,15 +273,6 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
   late List<FavoriteSentence> _favorites =
       List<FavoriteSentence>.of(widget.favoriteSentences);
 
-  // Local mirror of the audiobook overlay toggles. These are NOT schema items:
-  // flipping them needs reader-page side effects (overlay show/hide, permission
-  // request, live floating-lyric style) that a preference-only schema item
-  // cannot perform, so the rows stay bespoke and call back into the page.
-  late bool _localShowFloatingLyric = widget.showFloatingLyric;
-  late bool _localShowMediaNotification = widget.showMediaNotification;
-  late bool _localFloatingLyricClickLookup = widget.floatingLyricClickLookup;
-  late double _localFloatingLyricFontSize = widget.floatingLyricFontSize;
-
   @override
   void dispose() {
     _sideSheetTabController?.dispose();
@@ -306,11 +283,6 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
 
   Future<void> _updateSetting(String key, Object value) async {
     if (!widget.isFushiReader) {
-      await AudiobookBridge.setReaderSetting(
-        widget.webViewController,
-        key: key,
-        value: value,
-      );
     }
     final ReaderFushiSource src = ReaderFushiSource.instance;
     switch (key) {
@@ -326,9 +298,6 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
       case 'theme':
         await src.setReaderTheme(value as String);
       case 'hideFurigana':
-        // 布尔开关只能表达两态：开 = hidden，关 = off（旧实现关掉落到 toggle，
-        // 永远回不到显示态）。
-        await src.setReaderFuriganaMode((value as bool) ? 'hidden' : 'off');
       case 'textIndentation':
         await src.setReaderTextIndentation((value as num).toDouble());
       case 'marginTop':
@@ -576,26 +545,6 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
     return content;
   }
 
-  /// 桌面端居中「有声书」面板：外壳与三个 tab 在 [ReaderAudiobookPanel]；「设置」
-  /// tab 的内容仍由本 sheet 提供（音量 / 速度 / 延迟等行的写路径在这里）。
-  Widget _buildAudiobookPanel(BuildContext context, ThemeData theme) {
-    return ReaderAudiobookPanel(
-      controller: widget.controller,
-      toc: widget.toc,
-      currentSection: widget.readerProgress?.$1,
-      currentCharOffset: widget.readerCharOffset,
-      onJumpSection: widget.onJumpSection,
-      title: widget.epubBook?.title ?? '',
-      chapterLabel: widget.chapterLabel,
-      coverPath: widget.coverPath,
-      onAudioImport: widget.onAudioImport,
-      onPickAlignment: widget.onPickAlignment,
-      onTranscribe: widget.onTranscribe,
-      settingsBuilder: (BuildContext ctx) =>
-          _buildAudiobookSettingsSection(Theme.of(ctx)),
-    );
-  }
-
   /// 面板分类项（id 与 [_subPageContent] 的 case 对齐）：设置抽屉标签栏、有声书
   /// 面板与窄窗主页共用同一份顺序。
   /// audiobook 仅在有 controller 时出现。
@@ -764,10 +713,7 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
     SettingsContext settingsContext,
     SettingsDestination destination,
   ) {
-    final bool cupertino = isCupertinoPlatform(context);
-    final SettingsRenderer renderer = cupertino
-        ? const CupertinoSettingsRenderer()
-        : const MaterialSettingsRenderer();
+    const SettingsRenderer renderer = MaterialSettingsRenderer();
     return renderer.buildDetailContent(
       settingsContext: settingsContext,
       destination: destination,
@@ -924,15 +870,13 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
 
     final (int, int)? pp = widget.pageProgress;
     if (pp != null && pp.$2 > 0) {
-      lines.add(t.page_progress(current: pp.$1, total: pp.$2));
     }
 
-    final AudiobookPlayerController? ctrl = widget.controller;
     final String? rawTitle = widget.epubBook?.title.trim();
     final String? rawChapter = widget.chapterLabel?.trim();
     final bool hasTitle = rawTitle != null && rawTitle.isNotEmpty;
     final bool hasChapter = rawChapter != null && rawChapter.isNotEmpty;
-    if (lines.isEmpty && ctrl == null && !hasTitle && !hasChapter) {
+    if (((lines.isEmpty) && !hasTitle) && !hasChapter) {
       return const SizedBox.shrink();
     }
     final FushiDesignTokens tokens = FushiDesignTokens.of(context);
@@ -957,52 +901,9 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
           ),
         for (final String line in lines)
           Text(line, style: theme.textTheme.bodyMedium),
-        if (ctrl != null) _buildAudioProgressLine(theme, ctrl),
       ],
     );
   }
-
-  /// 音频播放进度行（position / duration），跟随控制器 notifyListeners 刷新
-  /// （cue 切换 / 播放暂停时触发，与 `_buildSpeedSection` 同一订阅模式）。
-  Widget _buildAudioProgressLine(
-    ThemeData theme,
-    AudiobookPlayerController ctrl,
-  ) {
-    return ListenableBuilder(
-      listenable: ctrl,
-      builder: (BuildContext context, _) {
-        final Duration pos = ctrl.globalPosition;
-        final Duration dur = ctrl.totalDuration;
-        final double fraction = dur.inMilliseconds > 0
-            ? (pos.inMilliseconds / dur.inMilliseconds).clamp(0.0, 1.0)
-            : 0.0;
-        final FushiDesignTokens tokens = FushiDesignTokens.of(context);
-        return Padding(
-          padding: EdgeInsets.only(top: tokens.spacing.gap / 2),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                '${_formatDuration(pos)} / ${_formatDuration(dur)}',
-                style: theme.textTheme.bodyMedium,
-              ),
-              SizedBox(height: tokens.spacing.gap / 2),
-              ClipRRect(
-                borderRadius: tokens.radii.chipRadius,
-                child: LinearProgressIndicator(
-                  value: fraction,
-                  minHeight: 3,
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  static String _formatDuration(Duration d) => FushiTimeFormat.clockPadded(d);
 
   Future<void> _doSearch() async {
     final String query = _searchController.text.trim();
@@ -1400,472 +1301,6 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
     );
   }
 
-  Widget _buildVolumeSection(AudiobookPlayerController ctrl) {
-    return AudiobookVolumeRow(
-      volume: ctrl.volume,
-      onChanged: (double v) {
-        ctrl.setVolume(v);
-        setState(() {});
-      },
-    );
-  }
-
-  Widget _buildSpeedSection(AudiobookPlayerController ctrl) {
-    return ListenableBuilder(
-      listenable: ctrl,
-      builder: (context, _) {
-        final FushiDesignTokens tokens = FushiDesignTokens.of(context);
-        final double current = ctrl.speed;
-        return AdaptiveSettingsRow(
-          title: '${t.playback_speed} (${current.toStringAsFixed(2)}x)',
-          icon: Icons.speed_outlined,
-          controlBelow: true,
-          trailing: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              gamepadSeekableSlider(
-                value: current.clamp(0.25, 3.0),
-                min: 0.25,
-                max: 3,
-                divisions: 55,
-                onChanged: (v) {
-                  final double rounded = (v * 20).roundToDouble() / 20;
-                  ctrl.setSpeed(rounded);
-                },
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: FushiIconButton(
-                  icon: Icons.restart_alt_outlined,
-                  size: 18,
-                  enabled: (current - 1.0).abs() >= 0.001,
-                  padding: EdgeInsets.all(tokens.spacing.gap / 2),
-                  onTap: () => ctrl.setSpeed(1),
-                  tooltip: t.av_sync_reset,
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  static String _formatDelayMs(int ms) {
-    final String sign = ms > 0 ? '+' : '';
-    final int abs = ms.abs();
-    if (abs < 1000) return '$sign${ms}ms';
-    final double sec = ms / 1000;
-    return '$sign${sec.toStringAsFixed(1)}s';
-  }
-
-  Widget _buildDelaySection(ThemeData theme, AudiobookPlayerController ctrl) {
-    return ValueListenableBuilder<int>(
-      valueListenable: ctrl.delayMs,
-      builder: (ctx, ms, _) {
-        return AdaptiveSettingsRow(
-          title: t.av_sync,
-          icon: Icons.sync_outlined,
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _RepeatIconButton(
-                icon: Icons.keyboard_double_arrow_left,
-                tooltip: '-1000ms',
-                onPressed: () => ctrl.setDelayMs(ctrl.delayMs.value - 1000),
-              ),
-              _RepeatIconButton(
-                icon: Icons.chevron_left,
-                tooltip: '-50ms',
-                onPressed: () => ctrl.setDelayMs(ctrl.delayMs.value - 50),
-              ),
-              FushiFocusable(
-                onTap: ms == 0 ? null : () => ctrl.setDelayMs(0),
-                child: SizedBox(
-                  width: 72,
-                  child: Text(
-                    _formatDelayMs(ms),
-                    textAlign: TextAlign.center,
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ),
-              _RepeatIconButton(
-                icon: Icons.chevron_right,
-                tooltip: '+50ms',
-                onPressed: () => ctrl.setDelayMs(ctrl.delayMs.value + 50),
-              ),
-              _RepeatIconButton(
-                icon: Icons.keyboard_double_arrow_right,
-                tooltip: '+1000ms',
-                onPressed: () => ctrl.setDelayMs(ctrl.delayMs.value + 1000),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  static const List<int> _imagePauseOptions = [0, 5, 10, 15];
-
-  static const List<int> _skipActionOptions = [0, 5, 10, 15, 30];
-
-  Widget _buildSkipActionSection() {
-    final int current = _src.skipActionSeconds;
-    return AdaptiveSettingsPickerRow<int>(
-      title: t.skip_action,
-      icon: Icons.skip_next_outlined,
-      options: _skipActionOptions
-          .map((s) => AdaptiveSettingsPickerOption<int>(
-                value: s,
-                label: s == 0
-                    ? t.skip_action_sentence
-                    : t.skip_action_seconds(n: s),
-              ))
-          .toList(),
-      selected: current,
-      onChanged: (int value) {
-        _src.setSkipActionSeconds(value);
-        setState(() {});
-      },
-    );
-  }
-
-  Widget _buildImagePauseSection(AudiobookPlayerController ctrl) {
-    return ValueListenableBuilder<int>(
-      valueListenable: ctrl.imagePauseSec,
-      builder: (ctx, sec, _) {
-        return AdaptiveSettingsSegmentedRow<int>(
-          title: t.image_pause,
-          subtitle: t.image_pause_hint,
-          icon: Icons.image_outlined,
-          controlBelow: true,
-          segments: _imagePauseOptions
-              .map((s) => ButtonSegment<int>(
-                    value: s,
-                    label: Text(s == 0 ? t.image_pause_off : '${s}s'),
-                    tooltip: s == 0 ? t.image_pause_off : '${s}s',
-                  ))
-              .toList(),
-          selected: sec,
-          onChanged: ctrl.setImagePauseSec,
-        );
-      },
-    );
-  }
-
-  /// Bespoke audiobook overlay toggles. Not schema items: each toggle drives a
-  /// reader-page side effect (media-notification publish/clear, floating-lyric
-  /// overlay show/hide + permission request, live floating-lyric restyle) that
-  /// a preference-only schema item cannot perform. The global Listening page
-  /// keeps the plain preference toggles for the no-reader-open case.
-  Widget _buildPlayBarToggle() {
-    return AdaptiveSettingsSection(
-      children: [
-        AdaptiveSettingsSwitchRow(
-          title: t.show_media_notification,
-          value: _localShowMediaNotification,
-          onChanged: (_) {
-            widget.onToggleMediaNotification?.call();
-            setState(() {
-              _localShowMediaNotification = !_localShowMediaNotification;
-            });
-          },
-        ),
-        AdaptiveSettingsSwitchRow(
-          title: t.show_floating_lyric,
-          subtitle: t.floating_lyric_hint,
-          value: _localShowFloatingLyric,
-          onChanged: (_) async {
-            final bool ok = await widget.onToggleFloatingLyric?.call() ?? false;
-            if (ok && mounted) {
-              setState(() {
-                _localShowFloatingLyric = !_localShowFloatingLyric;
-              });
-            }
-          },
-        ),
-        AdaptiveSettingsStepperRow(
-          title: t.floating_lyric_font_size,
-          value: _localFloatingLyricFontSize,
-          step: 1,
-          min: 8,
-          max: 64,
-          format: (double value) => '${value.round()}',
-          onChanged: (double value) {
-            widget.onFloatingLyricFontSizeChanged?.call(value);
-            setState(() => _localFloatingLyricFontSize = value);
-          },
-        ),
-        AdaptiveSettingsSwitchRow(
-          title: t.floating_lyric_click_lookup,
-          subtitle: t.floating_lyric_click_lookup_hint,
-          value: _localFloatingLyricClickLookup,
-          onChanged: (_) {
-            final bool value = !_localFloatingLyricClickLookup;
-            widget.onFloatingLyricClickLookupChanged?.call(value);
-            setState(() => _localFloatingLyricClickLookup = value);
-          },
-        ),
-      ],
-    );
-  }
-
-  Widget _buildAudiobookSettingsSection(ThemeData theme) {
-    // The audiobook overlay toggles persist via AppModel but need reader-page
-    // side effects, so they are rendered bespoke (not via the schema). With no
-    // audiobook loaded, the toggles are the entire sub-page.
-    if (widget.controller == null) {
-      return _buildPlayBarToggle();
-    }
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Runtime transport controls — read live state off `widget.controller`,
-        // not preferences, so they stay bespoke (not schema items).
-        AdaptiveSettingsSection(
-          children: [
-            _buildVolumeSection(widget.controller!),
-            _buildSpeedSection(widget.controller!),
-            _buildDelaySection(theme, widget.controller!),
-            _buildImagePauseSection(widget.controller!),
-            _buildSkipActionSection(),
-          ],
-        ),
-        _buildPlayBarToggle(),
-        if (widget.onAudioImport != null)
-          AdaptiveSettingsSection(
-            children: [
-              // Action row, not navigation: a leading icon + state-layer ripple
-              // signals tappability (MD3 list-item convention, same as the
-              // other rows in this sheet); the tap closes the sheet and runs the
-              // audio-import callback rather than opening a subpage, so there is
-              // no trailing chevron (plain AdaptiveSettingsRow, not
-              // NavigationRow which would force a chevron_right).
-              AdaptiveSettingsRow(
-                // 这一行现在换的是音频**与**字幕两半（[SrtBookReimportDialog]），
-                // 不再只是「替换音频文件」。
-                title: t.srt_book_reimport,
-                icon: Icons.swap_horiz_outlined,
-                showIcon: true,
-                onTap: () {
-                  Navigator.pop(context);
-                  widget.onAudioImport!();
-                },
-              ),
-            ],
-          ),
-      ],
-    );
-  }
-
-  /// 歌词模式的「布局与显示」子页详情。TODO-802 可达性修复：删「外观」组后，歌词
-  /// 模式以前经外观组才够得到的主题选择器 + 编辑书籍 CSS 行，现随歌词布局子页一并
-  /// 露出（主题在最前，其次歌词字号/边距等专属控件，最后 extractDir 可用时的 CSS
-  /// 行），否则歌词模式将完全够不到主题/CSS。歌词字号/边距是歌词专属设置（写
-  /// 歌词-only `setLyrics*` setter），非 schema 项，故保持 bespoke。
-  Widget _buildLyricsDisplaySection() {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        _buildThemeSelectorSection(),
-        _buildLyricsMarginSection(),
-        if (widget.extractDir != null) _buildBookCssEditorSection(),
-      ],
-    );
-  }
-
-  /// 歌词专属字号 / 文字色 / 四边距控件（歌词-only `setLyrics*` setter，非 schema）。
-  Widget _buildLyricsMarginSection() {
-    return AdaptiveSettingsSection(
-      children: [
-        AdaptiveSettingsRow(
-          title: t.lyrics_font_size_hint,
-        ),
-        // TODO-907: 歌词竖排开关（独立于正文 writing-mode）。切换走整页重建。
-        AdaptiveSettingsSwitchRow(
-          title: t.lyrics_vertical_writing,
-          subtitle: t.lyrics_vertical_writing_hint,
-          value: _src.lyricsVerticalWriting,
-          onChanged: (bool enabled) async {
-            await _src.setLyricsVerticalWriting(enabled);
-            if (!mounted) return;
-            setState(() {});
-            await widget.onLyricsReload?.call();
-          },
-        ),
-        // TODO-908: 歌词听力沉浸模糊开关（独立 key）。模糊是 live 维度，走
-        // onStyleChanged（_updateLyricsStyleLive → __lyricsSetBlur），不重建整页。
-        AdaptiveSettingsSwitchRow(
-          title: t.lyrics_blur,
-          subtitle: t.lyrics_blur_hint,
-          value: _src.lyricsBlur,
-          onChanged: (bool enabled) async {
-            await _src.setLyricsBlur(enabled);
-            if (!mounted) return;
-            setState(() {});
-            widget.onStyleChanged?.call();
-          },
-        ),
-        _numberStepper(
-          label: t.lyrics_font_size,
-          value: _src.lyricsFontSize,
-          step: 1,
-          min: 8,
-          max: 64,
-          format: (double v) => '${v.round()}',
-          onChanged: (double v) {
-            _src.setLyricsFontSize(v);
-            setState(() {});
-            widget.onStyleChanged?.call();
-          },
-        ),
-        _buildLyricsTextColorRow(context),
-        _numberStepper(
-          label: t.margin_top,
-          value: _src.lyricsMarginTop,
-          step: 1,
-          min: 0,
-          max: 30,
-          format: (double v) => '${v.round()}',
-          onChanged: (double v) {
-            _src.setLyricsMarginTop(v);
-            setState(() {});
-            widget.onStyleChanged?.call();
-          },
-        ),
-        _numberStepper(
-          label: t.margin_bottom,
-          value: _src.lyricsMarginBottom,
-          step: 1,
-          min: 0,
-          max: 30,
-          format: (double v) => '${v.round()}',
-          onChanged: (double v) {
-            _src.setLyricsMarginBottom(v);
-            setState(() {});
-            widget.onStyleChanged?.call();
-          },
-        ),
-        _numberStepper(
-          label: t.margin_left,
-          value: _src.lyricsMarginLeft,
-          step: 1,
-          min: 0,
-          max: 30,
-          format: (double v) => '${v.round()}',
-          onChanged: (double v) {
-            _src.setLyricsMarginLeft(v);
-            setState(() {});
-            widget.onStyleChanged?.call();
-          },
-        ),
-        _numberStepper(
-          label: t.margin_right,
-          value: _src.lyricsMarginRight,
-          step: 1,
-          min: 0,
-          max: 30,
-          format: (double v) => '${v.round()}',
-          onChanged: (double v) {
-            _src.setLyricsMarginRight(v);
-            setState(() {});
-            widget.onStyleChanged?.call();
-          },
-        ),
-      ],
-    );
-  }
-
-  /// TODO-368: 歌词字幕文字色独立色选。开关 = 是否用自定义色（关 = 跟随主题，与历史
-  /// 行为一致，哨兵 0）；开时下方展开内联取色器。改色即写穿 source + 触发 live 重绘。
-  Widget _buildLyricsTextColorRow(BuildContext context) {
-    final int stored = _src.lyricsTextColor;
-    final bool custom = stored != 0;
-    final Color themeFallback = Theme.of(context).colorScheme.onSurface;
-    final Color current = custom ? Color(stored) : themeFallback;
-    return AdaptiveSettingsSwitchActionRow(
-      title: t.lyrics_text_color,
-      subtitle: t.lyrics_text_color_hint,
-      value: custom,
-      onChanged: (bool enabled) {
-        if (enabled) {
-          // 开启自定义：种一个不透明的初始色（用当前主题文字色），避免落哨兵 0。
-          final Color seed =
-              Color(0xFF000000 | (themeFallback.value & 0xFFFFFF));
-          _src.setLyricsTextColor(seed.value);
-        } else {
-          _src.clearLyricsTextColor();
-        }
-        setState(() {});
-        widget.onStyleChanged?.call();
-      },
-      body: Row(
-        children: [
-          FushiColorSwatch(
-            color: current,
-            size: 20,
-            shape: FushiColorSwatchShape.dot,
-            borderColor: Theme.of(context).dividerColor,
-          ),
-        ],
-      ),
-      panel: custom
-          ? LayoutBuilder(
-              builder:
-                  (BuildContext layoutContext, BoxConstraints constraints) {
-                final double pickerWidth = constraints.maxWidth.clamp(
-                  0.0,
-                  MediaQuery.of(layoutContext).size.width - 64,
-                );
-                return ColorPicker(
-                  pickerColor: current,
-                  onColorChanged: (Color c) {
-                    // 强制不透明（文字色透明无意义；也保证非哨兵 0）。
-                    final Color opaque =
-                        Color(0xFF000000 | (c.value & 0xFFFFFF));
-                    _src.setLyricsTextColor(opaque.value);
-                    setState(() {});
-                    widget.onStyleChanged?.call();
-                  },
-                  portraitOnly: true,
-                  colorPickerWidth: pickerWidth,
-                  pickerAreaHeightPercent: 0.5,
-                  enableAlpha: false,
-                  displayThumbColor: true,
-                  hexInputBar: true,
-                  labelTypes: const <ColorLabelType>[],
-                );
-              },
-            )
-          : null,
-    );
-  }
-
-  Widget _numberStepper({
-    required String label,
-    required double value,
-    required double step,
-    required double min,
-    required double max,
-    required String Function(double) format,
-    required ValueChanged<double> onChanged,
-  }) {
-    return AdaptiveSettingsStepperRow(
-      title: label,
-      value: value,
-      step: step,
-      min: min,
-      max: max,
-      format: format,
-      onChanged: onChanged,
-    );
-  }
-
   /// 收藏行副标题：`书名 - 章节 - 时间`，末尾追加阅读位置百分比（解析成功时）。
   String _favoriteMetaLabel(FavoriteSentence favorite, DateFormat fmt) {
     final String base =
@@ -1948,8 +1383,6 @@ class _ReaderQuickSettingsSheetState extends State<ReaderQuickSettingsSheet>
                     : Icons.lyrics_outlined,
                 label: widget.lyricsMode ? t.book_mode : t.lyrics_mode,
                 onTap: () {
-                  Navigator.of(context).pop();
-                  widget.onToggleLyricsMode!();
                 },
               ),
             ),
@@ -2048,7 +1481,6 @@ class _InBookTocRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool cupertino = isCupertinoPlatform(context);
     final FushiDesignTokens tokens = FushiDesignTokens.of(context);
     final String title = entry.label.isEmpty ? t.untitled_chapter : entry.label;
     final double indent = entry.depth * tokens.spacing.card;
@@ -2057,9 +1489,7 @@ class _InBookTocRow extends StatelessWidget {
       final ThemeData theme = Theme.of(context);
       return Padding(
         padding: EdgeInsetsDirectional.only(
-          start: (cupertino
-                  ? tokens.spacing.rowHorizontal
-                  : tokens.spacing.gap + tokens.spacing.gap / 2) +
+          start: (tokens.spacing.gap + tokens.spacing.gap / 2) +
               indent,
           top: tokens.spacing.gap + tokens.spacing.gap / 2,
           bottom: tokens.spacing.gap / 2,
@@ -2073,9 +1503,7 @@ class _InBookTocRow extends StatelessWidget {
       );
     }
 
-    final Color selectedColor = cupertino
-        ? CupertinoTheme.of(context).primaryColor
-        : Theme.of(context).colorScheme.primary;
+    final Color selectedColor = Theme.of(context).colorScheme.primary;
 
     return Padding(
       padding: EdgeInsetsDirectional.only(start: indent),
@@ -2093,7 +1521,7 @@ class _InBookTocRow extends StatelessWidget {
           children: <Widget>[
             if (selected)
               Icon(
-                cupertino ? CupertinoIcons.check_mark : Icons.check,
+                Icons.check,
                 size: 18,
                 color: selectedColor,
               ),
@@ -2132,15 +1560,10 @@ class _InBookSearchResultRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool cupertino = isCupertinoPlatform(context);
     final ThemeData theme = Theme.of(context);
     final FushiDesignTokens tokens = FushiDesignTokens.of(context);
-    final Color primary = cupertino
-        ? CupertinoTheme.of(context).primaryColor
-        : theme.colorScheme.primary;
-    final Color highlight = cupertino
-        ? primary.withValues(alpha: 0.14)
-        : theme.colorScheme.primaryContainer;
+    final Color primary = theme.colorScheme.primary;
+    final Color highlight = theme.colorScheme.primaryContainer;
     final Widget child = Padding(
       padding: EdgeInsets.symmetric(
         horizontal: tokens.spacing.gap + tokens.spacing.gap / 2,
@@ -2150,7 +1573,7 @@ class _InBookSearchResultRow extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(
-            cupertino ? CupertinoIcons.search : Icons.search,
+            Icons.search,
             size: 18,
             color: primary,
           ),
@@ -2192,14 +1615,6 @@ class _InBookSearchResultRow extends StatelessWidget {
       ),
     );
 
-    if (cupertino) {
-      return CupertinoButton(
-        padding: EdgeInsets.zero,
-        onPressed: onTap,
-        child: Align(alignment: Alignment.centerLeft, child: child),
-      );
-    }
-
     return InkWell(
       borderRadius: tokens.radii.controlRadius,
       onTap: onTap,
@@ -2233,9 +1648,7 @@ class _InBookFavoriteRow extends StatelessWidget {
     return AdaptiveSettingsRow(
       title: favorite.text,
       subtitle: metaLabel,
-      icon: isCupertinoPlatform(context)
-          ? CupertinoIcons.quote_bubble
-          : Icons.format_quote_outlined,
+      icon: Icons.format_quote_outlined,
       onTap: onJump,
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
@@ -2302,28 +1715,10 @@ class _InBookIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool cupertino = isCupertinoPlatform(context);
     final FushiDesignTokens tokens = FushiDesignTokens.of(context);
     final Color color = destructive
-        ? (cupertino
-            ? CupertinoColors.destructiveRed.resolveFrom(context)
-            : Theme.of(context).colorScheme.error)
-        : (cupertino
-            ? CupertinoTheme.of(context).primaryColor
-            : Theme.of(context).colorScheme.onSurfaceVariant);
-
-    if (cupertino) {
-      return CupertinoButton(
-        padding: EdgeInsets.zero,
-        minSize: 32,
-        onPressed: onPressed,
-        child: Semantics(
-          button: true,
-          label: tooltip,
-          child: Icon(cupertinoIcon, size: 18, color: color),
-        ),
-      );
-    }
+        ? (Theme.of(context).colorScheme.error)
+        : (Theme.of(context).colorScheme.onSurfaceVariant);
 
     return FushiIconButton(
       icon: materialIcon,
@@ -2336,121 +1731,6 @@ class _InBookIconButton extends StatelessWidget {
       ),
       padding: EdgeInsets.zero,
       onTap: onPressed,
-    );
-  }
-}
-
-class _RepeatIconButton extends StatefulWidget {
-  const _RepeatIconButton({
-    required this.icon,
-    required this.tooltip,
-    required this.onPressed,
-  });
-
-  final IconData icon;
-  final String tooltip;
-  final VoidCallback onPressed;
-
-  static const Duration _initialDelay = Duration(milliseconds: 500);
-  static const Duration _repeatInterval = Duration(milliseconds: 100);
-
-  @override
-  State<_RepeatIconButton> createState() => _RepeatIconButtonState();
-}
-
-class _RepeatIconButtonState extends State<_RepeatIconButton> {
-  Timer? _timer;
-
-  void _start() {
-    widget.onPressed();
-    _timer = Timer(_RepeatIconButton._initialDelay, () {
-      _timer = Timer.periodic(_RepeatIconButton._repeatInterval, (_) {
-        widget.onPressed();
-      });
-    });
-  }
-
-  void _stop() {
-    _timer?.cancel();
-    _timer = null;
-  }
-
-  @override
-  void dispose() {
-    _stop();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onLongPressStart: (_) => _start(),
-      onLongPressEnd: (_) => _stop(),
-      // BUG-912 #3：手势被取消（指针滑出 / 识别器被上层夺走）而非正常 End 时，
-      // onLongPressEnd 不必然回调；不补 cancel 的话 _timer 会持续每 100ms 连触
-      // widget.onPressed()（数值狂涨 / 狂降）直到 dispose。与 video_fushi_page.dart
-      // 的 _VideoRepeatGestureButton 对齐。
-      onLongPressCancel: () => _stop(),
-      child: FushiIconButton(
-        icon: widget.icon,
-        size: 18,
-        tooltip: widget.tooltip,
-        constraints: const BoxConstraints.tightFor(width: 32, height: 32),
-        padding: EdgeInsets.zero,
-        onTap: widget.onPressed,
-      ),
-    );
-  }
-}
-
-/// 有声书音量行：拖动按 1% 一档吸附，键盘 / 手柄左右键单按 5% 一步。
-///
-/// 粒度拆成两个常量：拖动要「细」（1% 档位足够精修不同书的响度差异），但
-/// 方向键 / D-pad 若也按 1% 走，0–200% 全程要按 200 下，单按步进就退化成
-/// 不可用 —— 所以按键步进固定 5%（仍比旧的 10% 细一倍），经
-/// [AdaptiveSettingsSliderRow.step] 与拖动档位解耦。200 档刻度点过密时
-/// Material Slider 自动不画（SDK 阈值 trackWidth/divisions >= 3*tickWidth），
-/// 轨道保持干净；Cupertino 滑条本就不画刻度。
-///
-/// 独立成公开 widget（而非 sheet 私有方法）是为了让行为测试不实例化
-/// [AudiobookPlayerController]（其构造即持有 just_audio 平台播放器，
-/// headless 测试不可用）就能直接 pump 验证步进 / 档位 / 读数。
-class AudiobookVolumeRow extends StatelessWidget {
-  const AudiobookVolumeRow({
-    required this.volume,
-    required this.onChanged,
-    super.key,
-  });
-
-  /// 音量上限（200%，与 [AudiobookPlayerController.setVolume] 的 clamp 一致）。
-  static const double maxVolume = 2.0;
-
-  /// 拖动吸附档数：0–200% 共 200 档 = 1% 一档。
-  static const int sliderDivisions = 200;
-
-  /// 键盘 / 手柄左右键单按步进：5%。
-  static const double keyStep = 0.05;
-
-  /// 当前音量（0.0–2.0，1.0 = 100%）。
-  final double volume;
-
-  /// 音量变化回调（已按档位吸附 / 步进对齐的值）。
-  final ValueChanged<double> onChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    final double value = volume.clamp(0.0, maxVolume);
-    final String percentLabel = '${(value * 100).round()}%';
-    return AdaptiveSettingsSliderRow(
-      // 与速度行同款的标题实时读数：1%/5% 的细步进没有可见读数等于白调。
-      title: '${t.audio_volume} ($percentLabel)',
-      icon: Icons.volume_up_outlined,
-      value: value,
-      max: maxVolume,
-      divisions: sliderDivisions,
-      label: percentLabel,
-      step: keyStep,
-      onChanged: onChanged,
     );
   }
 }

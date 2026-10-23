@@ -65,7 +65,7 @@ extension _ReaderWebView on _ReaderFushiPageState {
   }
 
   static bool get _usesReaderResourceCustomScheme =>
-      Platform.isMacOS || Platform.isIOS;
+      Platform.isIOS;
 
   static bool _isReaderResourceUrl(WebUri url) {
     if (url.host != ReaderFushiSource.kHost) return false;
@@ -173,10 +173,6 @@ extension _ReaderWebView on _ReaderFushiPageState {
     if (!p.isWithin(p.canonicalize(_extractDir!), p.canonicalize(joinedPath))) {
       return _forbidden('path traversal blocked: $epubPath');
     }
-    final LnReaderOnlineChapterLoader? onlineChapters = _onlineChapterLoader;
-    if (onlineChapters != null) {
-      await _ensureOnlineChapter(onlineChapters, filePath);
-    }
     final File file = File(filePath);
     if (!file.existsSync()) {
       return _notFound('resource not found: $epubPath (resolved: $filePath)');
@@ -257,32 +253,6 @@ extension _ReaderWebView on _ReaderFushiPageState {
       },
       data: data,
     );
-  }
-
-  /// 在线小说书：WebView 要的章节还是占位页就先经插件取正文写回解压树（按需
-  /// 取章，见 [LnReaderOnlineChapterLoader]）。换成正文后丢掉这一章的 sanitize
-  /// 缓存与 [EpubChapter] 的正文缓存，否则会继续下发 / 计数占位页。取不到（断网
-  /// / 站点挂了 / 插件被删）时照常下发占位页，并提示原因——重进这一章会再取。
-  Future<void> _ensureOnlineChapter(
-    LnReaderOnlineChapterLoader loader,
-    String filePath,
-  ) async {
-    try {
-      if (!await loader.ensureLoaded(filePath)) return;
-      _sanitizedHtmlCache.remove(filePath);
-      final int? index = loader.chapterIndexForFile(filePath);
-      final EpubBook? book = _book;
-      if (book != null && index != null && index < book.chapters.length) {
-        book.chapters[index].discardCachedHtml();
-      }
-    } catch (e, stack) {
-      ErrorLogService.instance.log('ReaderFushi.onlineChapter', e, stack);
-      if (!mounted) return;
-      FushiToast.show(
-        msg: t.novel_online_chapter_failed(error: '$e'),
-        severity: ToastSeverity.error,
-      );
-    }
   }
 
   Future<WebResourceResponse?> _interceptRequest(WebUri url) async {
@@ -520,14 +490,6 @@ extension _ReaderWebView on _ReaderFushiPageState {
           if (!await file.exists()) return;
           final Uint8List raw = await file.readAsBytes();
           if (!mounted || _settings == null) return;
-          // 在线小说书还没取正文的章：占位页不进缓存。正文随后由拦截层 /
-          // 后台预取写盘，占位页若进了缓存，翻到这一章时会被原样下发。
-          if (_onlineChapterLoader != null &&
-              utf8
-                  .decode(raw, allowMalformed: true)
-                  .contains(kLnReaderPendingChapterAttribute)) {
-            return;
-          }
           final Uint8List built = _buildSanitizedChapterHtmlBytes(
             raw,
             chapterIndex: index,
@@ -669,7 +631,6 @@ extension _ReaderWebView on _ReaderFushiPageState {
     // TODO-909: select the VN shell when view-mode == 'vn'. VN is mutually
     // exclusive with continuous (it is a page-flip stage, not native scroll),
     // so continuousMode stays false here.
-    final bool vnMode = false;
     final Size screenSize = MediaQuery.of(context).size;
     // BUG-111: 这就是 JS 分页用的权威宽高（dartPageWidth/Height）。记下来作为
     // content-ready 后的「已分页基线」，供 _syncPageSize 与 settle 后的真实视口比对。
@@ -686,7 +647,7 @@ extension _ReaderWebView on _ReaderFushiPageState {
       hoverAutoLookup: ReaderFushiSource.instance.hoverAutoLookup,
       // BUG-2508：macOS 由宿主腿接管悬停查词，关掉文档内 mousemove 腿（判据见
       // [hostOwnsWebViewHoverLookup]，只有 macOS；其余平台 JS 腿不动）。
-      hostHoverLookup: hostOwnsWebViewHoverLookup,
+      hostHoverLookup: false,
       highlightOnTap: ReaderFushiSource.instance.highlightOnTap,
       showChrome: _tapGateChrome,
       debugLogging: DebugLogService.instance.enabled,
@@ -1735,9 +1696,7 @@ updateLive: function(patch) {
     required bool vnMode,
     required bool continuousMode,
   }) {
-    final String key = vnMode
-        ? 'vn'
-        : (continuousMode ? 'continuous' : 'paged');
+    final String key = ((continuousMode ? 'continuous' : 'paged'));
     return _cachedEngineSource.putIfAbsent(
       key,
       () => ReaderScriptCompactor.compact(
@@ -1766,20 +1725,6 @@ updateLive: function(patch) {
   // ── WebView ──────────────────────────────────────────────────────────
 
   Widget _buildWebView() {
-    if (Platform.isLinux) {
-      // flutter_inappwebview has no Linux backend; the EPUB renderer is
-      // unsupported on Linux for now (see
-      // docs/specs/2026-05-30-five-platform-build.md).
-      return Center(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Text(
-            t.reader_unsupported_platform,
-            textAlign: TextAlign.center,
-          ),
-        ),
-      );
-    }
     // KeyedSubtree carries [_webViewKey] (a GlobalKey) on the InAppWebView's own
     // render subtree so [onDismissBarrierHover] can read the WebView's RenderBox
     // for global→local coordinate mapping (TODO-806), while the ValueKey stays on
@@ -1795,14 +1740,7 @@ updateLive: function(patch) {
       // 「导出片段」永远垫底、淹没在系统项后。改为隐藏系统默认项、只留自定义项，顺序
       // [查词][导出片段][复制]，把导出提到第二位；因隐藏系统项会一并去掉系统「复制」，
       // 补一条自定义复制项（复用桌面右键菜单 `t.copy` / `t.copied_to_clipboard`，不丢功能）。
-      contextMenu: isWindowsPlatform
-          ? ContextMenu(
-              settings: ContextMenuSettings(
-                hideDefaultSystemContextMenuItems: true,
-              ),
-              menuItems: const [],
-            )
-          : ContextMenu(
+      contextMenu: (ContextMenu(
               settings: ContextMenuSettings(
                 hideDefaultSystemContextMenuItems: true,
               ),
@@ -1828,7 +1766,7 @@ updateLive: function(patch) {
                   },
                 ),
               ],
-            ),
+            )),
       initialUserScripts: UnmodifiableListView<UserScript>(<UserScript>[
         UserScript(
           source:
@@ -1845,7 +1783,7 @@ updateLive: function(patch) {
         // （见 packages/flutter_inappwebview_windows/.../in_app_webview.cpp:231）。
         // 故 Windows 下显式禁掉原生菜单，只留 Flutter 菜单。移动端不设（值 false），原生
         // ContextMenu（查词+导出）仍可用，不回归。
-        disableContextMenu: isWindowsPlatform,
+        disableContextMenu: false,
         // BUG-2607：iOS 上 TODO-1279「触屏不建原生选区」不能再靠 CSS
         // `user-select: none`——WebKit 对 user-select:none 的文字不绘制任何
         // ::highlight()，查词/划选/收藏/搜索高亮在 iOS 上全部不可见（见
@@ -1888,77 +1826,33 @@ updateLive: function(patch) {
         _controller = controller;
         _openTrace.mark('webViewCreated');
         assert(() {
-          // TODO-2603：调试钩子的生命周期属于**本页 State**，不属于单个 WebView
-          // 实例。旧判据是「钩子必须为 null」——它把「同一页重装钩子」和「两个阅读器
-          // 同时活着」混成一件事。renderer 死后换 key 重建时 State 不重建、
-          // `onWebViewCreated` 会第二次触发，那一刻钩子还挂着上一代 controller，旧
-          // 断言必炸（这是阅读器不敢走重建路径的硬阻塞之一）。
-          //
-          // 判据改成**所有者身份**：没有主人（首次安装 / 上一页已 dispose 释放），或
-          // 主人就是本 State（重建重装），都合法；主人是**另一个** State 才是真的两个
-          // 阅读器同时活着——检测力度与旧断言等价，只是不再误伤重装。
-          assert(
-            ReaderFushiPage.debugHookOwner == null ||
-                identical(ReaderFushiPage.debugHookOwner, this),
-            'reader debug hooks are owned by another live reader — a previous '
-            'reader did not clear them on dispose, or two readers are live at '
-            'once.',
-          );
-          ReaderFushiPage.debugHookOwner = this;
-          ReaderFushiPage.debugEvaluateJavascript = (String source) =>
-              controller.evaluateJavascript(source: source);
-          ReaderFushiPage.debugCaptureWebView = () =>
-              controller.takeScreenshot();
-          ReaderFushiPage.debugCaretSurface = () => _caretSurface.name;
-          ReaderFushiPage.debugEvaluateTopPopup = (String source) async =>
-              _webviewTopPopupState?.debugEval(source);
-          ReaderFushiPage.debugInjectAudiobookBridge = () =>
-              AudiobookBridge.inject(
-                controller,
-                primaryColor: _themeSentenceAudioHighlightColor(),
-              );
           return true;
         }());
         _startContentReadyTimeout();
-        if (_lyricsMode && _audiobookController != null) {
-          final List<AudioCue> allCues =
-              _audiobookController!.allBookCuesSnapshot;
-          if (allCues.isNotEmpty) {
-            _audiobookController!.setChapterCues(allCues);
-          }
-          _lyricsEntryChapter = _currentChapter;
-          // BUG-872：位置优先索引，避免暂停态重建时 _currentCue 未填充导致
-          // 入场高亮 clamp 回第一句。
-          _lyricsEntryCueIndex = allCues.isNotEmpty
-              ? _audiobookController!.allBookCueIdxAtPosition
-              : _audiobookController!.currentCueIdx;
-          _loadLyricsPage();
-        } else {
-          _restoreInFlight = true;
-          // TODO-1128：开书恢复落到被吸收单图片章（如封面 ch0 被吸收进 ch1，或旧存档
-          // 停在某图片章后再开启合并）时，重定向到宿主文本章——只加载宿主（图片内联在
-          // 顶部）那一份，绝不加载独立单图页（否则往后翻同图又在宿主顶部出现=重复）。
-          final int hostChapter = _resolveNavChapter(_currentChapter);
-          if (hostChapter != _currentChapter) {
-            _currentChapter = hostChapter;
-            _lastProgressSection = _currentChapter;
-            // 重定向换了章，旧章的恢复锚必须一起归零——否则 _loadChapterDirectly
-            // 会拿这三个字段给**宿主章**建恢复脚本（见下方 initialProgress /
-            // initialCharOffset / initialCharOffsetEnd 三个参数）。真实存档里这不是
-            // 假想值：合并关闭时往回翻到独立插图章会走 _handlePageTurnLimit 的
-            // progress:0.99，而纯图片章 totalChars==0 让真实滚动值永远覆盖不掉它，
-            // 退出落库 normCharOffset=9900；开启合并后冷开该书就会被甩到宿主正文章
-            // 的 ~99% 处，整章正文被跳过。归零口径与另两个重定向点一致
-            // （navigation.part.dart 的 _navigateToChapter、chrome.part.dart 的
-            // reloadWithCurrentSettings）：宿主顶部就是那张被吸收的图。
-            _initialProgress = 0.0;
-            _initialCharOffset = -1;
-            _initialCharOffsetEnd = -1;
-            _lastProgressValue = 0.0;
-            _lastProgressCharOffset = -1;
-          }
-          _loadChapterDirectly(_currentChapter);
+        _restoreInFlight = true;
+        // TODO-1128：开书恢复落到被吸收单图片章（如封面 ch0 被吸收进 ch1，或旧存档
+        // 停在某图片章后再开启合并）时，重定向到宿主文本章——只加载宿主（图片内联在
+        // 顶部）那一份，绝不加载独立单图页（否则往后翻同图又在宿主顶部出现=重复）。
+        final int hostChapter = _resolveNavChapter(_currentChapter);
+        if (hostChapter != _currentChapter) {
+          _currentChapter = hostChapter;
+          _lastProgressSection = _currentChapter;
+          // 重定向换了章，旧章的恢复锚必须一起归零——否则 _loadChapterDirectly
+          // 会拿这三个字段给**宿主章**建恢复脚本（见下方 initialProgress /
+          // initialCharOffset / initialCharOffsetEnd 三个参数）。真实存档里这不是
+          // 假想值：合并关闭时往回翻到独立插图章会走 _handlePageTurnLimit 的
+          // progress:0.99，而纯图片章 totalChars==0 让真实滚动值永远覆盖不掉它，
+          // 退出落库 normCharOffset=9900；开启合并后冷开该书就会被甩到宿主正文章
+          // 的 ~99% 处，整章正文被跳过。归零口径与另两个重定向点一致
+          // （navigation.part.dart 的 _navigateToChapter、chrome.part.dart 的
+          // reloadWithCurrentSettings）：宿主顶部就是那张被吸收的图。
+          _initialProgress = 0.0;
+          _initialCharOffset = -1;
+          _initialCharOffsetEnd = -1;
+          _lastProgressValue = 0.0;
+          _lastProgressCharOffset = -1;
         }
+        _loadChapterDirectly(_currentChapter);
 
         controller.addJavaScriptHandler(
           handlerName: 'onTextSelected',
@@ -2068,8 +1962,6 @@ updateLive: function(patch) {
             // BUG-2276：抽屉压着正文时，这次点击是「点遮罩关抽屉」，不是正文点击。
             if (_closeSideSheetForWebViewPointer()) return;
             // Kitapsen has no lookup, so Shift+tap is just a tap.
-            final bool shiftKey =
-                false;
             if (!_tapGateChrome) {
               _toggleChrome();
               // Tap handed OS focus to the WebView; reclaim it so ESC still
@@ -2148,15 +2040,7 @@ updateLive: function(patch) {
         controller.addJavaScriptHandler(
           handlerName: 'onLyricsTapEmpty',
           callback: (_) {
-            if (!_lyricsMode) return;
-            // BUG-2276：抽屉压着歌词页时，这次点击是「点遮罩关抽屉」。
-            if (_closeSideSheetForWebViewPointer()) return;
-            if (_anyChromeFloating) {
-              _handleFloatingChromeReveal();
-            } else {
-              _toggleChrome();
-            }
-            _focusOwnership.reclaim(FocusReclaimCause.gesture);
+            return;
           },
         );
 
@@ -2200,7 +2084,7 @@ updateLive: function(patch) {
         controller.addJavaScriptHandler(
           handlerName: 'onSpreadKey',
           callback: (List<dynamic> args) {
-            if (args.isEmpty || _lyricsMode) return;
+            if (args.isEmpty) return;
             final InputBinding? binding = InputBinding.deserialize(
               args[0] as String,
             );
@@ -2218,7 +2102,7 @@ updateLive: function(patch) {
         controller.addJavaScriptHandler(
           handlerName: 'onSwipe',
           callback: (List<dynamic> args) {
-            if (args.isEmpty || _lyricsMode) return;
+            if (args.isEmpty) return;
             // The swipe/wheel gesture handed OS focus to the WebView; reclaim it
             // so ESC still exits the book after a page turn (BUG-136).
             _focusOwnership.reclaim(FocusReclaimCause.gesture);
@@ -2258,7 +2142,7 @@ updateLive: function(patch) {
         controller.addJavaScriptHandler(
           handlerName: 'onWheelPaginate',
           callback: (List<dynamic> args) {
-            if (args.length < 2 || _lyricsMode) return;
+            if (args.length < 2) return;
             final String dir = args[0] as String;
             final String axis = args[1] as String;
             // BUG-1745：老 shell（或未来别的注入点）可能只传两个参数；缺省按
@@ -2313,7 +2197,6 @@ updateLive: function(patch) {
         controller.addJavaScriptHandler(
           handlerName: 'onSpaceKey',
           callback: (List<dynamic> args) {
-            if (_lyricsMode) return;
             final ShortcutAction? action = _resolveWebViewSpaceAction();
             if (action == null) return;
             _executeShortcutAction(action);
@@ -2324,7 +2207,7 @@ updateLive: function(patch) {
         controller.addJavaScriptHandler(
           handlerName: 'onBoundarySwipe',
           callback: (List<dynamic> args) async {
-            if (args.isEmpty || _lyricsMode) return;
+            if (args.isEmpty) return;
             // TODO-737 节流分流：连续滚轮跨章直接调 _handlePageTurnLimit、**绕过
             // _paginate 入口闸门**，所以用户配的「滚轮翻页间隔」必须在这里就地补一道，
             // 否则连续模式的跨章不受任何限速。
@@ -2421,7 +2304,7 @@ updateLive: function(patch) {
 
         controller.addJavaScriptHandler(
           handlerName: 'onImageDetected',
-          callback: (_) => _audiobookController?.triggerImagePause(),
+          callback: (_) => null,
         );
 
         // TODO-1289 / BUG-898：JS 揭开防剧透图后回传稳定 key（extractDir 相对归一路径）。
@@ -2533,18 +2416,7 @@ updateLive: function(patch) {
         controller.addJavaScriptHandler(
           handlerName: 'onCueTap',
           callback: (List<dynamic> args) {
-            if (args.isEmpty || _audiobookController == null) return;
-            // BUG-2276：抽屉压着正文时，点句子是「点遮罩关抽屉」，不是跳播。
-            if (_closeSideSheetForWebViewPointer()) return;
-            final int sentenceIndex = (args[0] as num).toInt();
-            final List<AudioCue>? allCues = _cachedAllCues;
-            if (allCues == null) return;
-            final int idx = allCues.indexWhere(
-              (AudioCue c) => c.sentenceIndex == sentenceIndex,
-            );
-            if (idx >= 0) {
-              _audiobookController!.playCueAndContinue(allCues[idx]);
-            }
+            return;
           },
         );
 
@@ -2555,22 +2427,6 @@ updateLive: function(patch) {
             final int button = (args[0] as num?)?.toInt() ?? -1;
             if (button < 0) return;
             final registry = appModel.shortcutRegistry;
-            // ① **位置型动作**先行：「seek 到点击句」需要知道点在哪一句上，只有页内
-            // JS 拿得到坐标，故它恒由本条路承担（Flutter 侧那个入口会跳过它，判据
-            // [isSeekToClickedSentenceButton] 两侧共用）。仅有声书表面有意义，故仍需
-            // controller。
-            if (isSeekToClickedSentenceButton(registry, button)) {
-              if (_audiobookController == null) return;
-              final double x = _ReaderFushiPageState._toDouble(args[1]) ?? 0;
-              final double y = _ReaderFushiPageState._toDouble(args[2]) ?? 0;
-              await _seekToClickedSentence(x, y);
-              return;
-            }
-            // ② 指针归宿主的平台（Windows 的 composition WebView）上，其余绑定由页面
-            // 根 [Listener]（[_handleReaderPointerDown]）派发；这里再派一次就是同一次
-            // 按下触发两回。判据与漫画、查词弹窗三处共用同一个
-            // [hostOwnsWebViewPointerInput]。
-            if (hostOwnsWebViewPointerInput) return;
             // ③ 其余一律走与键盘/手柄**完全相同**的执行体。
             //
             // 此前这里硬编码只判两件事（关词典 + seek 到点击句），于是 reader /
@@ -2590,34 +2446,7 @@ updateLive: function(patch) {
         controller.addJavaScriptHandler(
           handlerName: 'onLyricsPointerSeek',
           callback: (List<dynamic> args) {
-            if (args.length < 2 || _audiobookController == null) return;
-            final int button = (args[0] as num?)?.toInt() ?? -1;
-            final int idx = (args[1] as num?)?.toInt() ?? -1;
-            final AudioCue? cue = cueForLyricsPointer(
-              appModel.shortcutRegistry,
-              button,
-              idx,
-              _lyricsCueList,
-            );
-            if (cue != null) _audiobookController!.playCueAndContinue(cue);
-          },
-        );
-
-        // BUG-1809：iOS WKWebView 的 loadData() 可返回却不发 onLoadStop。
-        // LyricsModeHtml 在 DOM API 全部就绪后主动回传；与 onLoadStop 共用幂等
-        // finalize，谁先到谁完成，另一条只读到 ready 后早返回。
-        controller.addJavaScriptHandler(
-          handlerName: 'onLyricsReady',
-          callback: (args) {
-            final dynamic raw = args.isEmpty ? null : args.first;
-            final int? generation = raw is num
-                ? raw.toInt()
-                : int.tryParse(raw?.toString() ?? '');
-            if (generation == null) return false;
-            return _finalizeLyricsDocumentIfReady(
-              controller,
-              generation: generation,
-            );
+            return;
           },
         );
       },
@@ -2629,7 +2458,7 @@ updateLive: function(patch) {
       },
       shouldOverrideUrlLoading: (controller, action) async {
         final String url = action.request.url?.toString() ?? '';
-        if (_isNavigatingToChapter || _isCurrentLyricsDocumentUrl(url)) {
+        if (_isNavigatingToChapter) {
           return NavigationActionPolicy.ALLOW;
         }
         // BUG-117: shouldOverrideUrlLoading is NOT invoked for <a> clicks on the
@@ -2651,18 +2480,6 @@ updateLive: function(patch) {
           '[ReaderFushi] onLoadStop: url=$url '
           'chapter=$chapterSnapshot progress=$_initialProgress',
         );
-        if (_lyricsMode) {
-          if (!await _finalizeLyricsDocumentIfReady(
-            controller,
-            generation: _lyricsLoadGeneration,
-          )) {
-            debugPrint(
-              '[ReaderFushi] onLoadStop: stale non-lyrics page '
-              'while lyrics mode is active, ignoring',
-            );
-          }
-          return;
-        }
         final String expectedUrl = _chapterUrl(chapterSnapshot);
         if (url != null &&
             Uri.parse(url.toString()).path != Uri.parse(expectedUrl).path) {
@@ -2753,80 +2570,13 @@ updateLive: function(patch) {
     // WebView 同尺寸同原点，[_webViewKey] 读到的 RenderBox 几何不变。
     final Widget keyed = KeyedSubtree(
       key: _webViewKey,
-      child: hostOwnsWebViewHoverLookup
-          ? MouseRegion(
-              opaque: false,
-              onHover: _handleWebViewHostHover,
-              onExit: _handleWebViewHostHoverExit,
-              child: webView,
-            )
-          : webView,
+      child: (webView),
     );
     // TODO-954：Windows 文字选区右键。`HitTestBehavior.translucent` 让左键框选 / 滚动 /
     // 查词点击照常落进 WebView（与 dictionary_popup_webview 的 BUG-261 范式同），只额外
     // 截菜单键弹出 Flutter 菜单——后者随界面大小缩放。BUG-2111 之后「菜单键」由绑定表决定
     // （默认右键），阅读器阶梯里 reader / audiobook 先解析，故右键改绑翻页等动作时菜单让位。
-    if (!isWindowsPlatform) return keyed;
-    return ContextMenuTrigger(
-      // 右键菜单改由绑定表决定唤出键（默认仍是右键）；右键被别的动作占用时自动让位。
-      onInvoke: (Offset position) => _showReaderTextContextMenu(position),
-      ladder: kReaderMouseLadder,
-      child: keyed,
-    );
-  }
-
-  Future<bool> _isLoadedLyricsDocument(
-    InAppWebViewController controller, {
-    required int generation,
-  }) async {
-    try {
-      final dynamic result = await controller.evaluateJavascript(
-        source:
-            '''Boolean(window.__lyricsSetCue && document.getElementById('lc') && window.__fushiLyricsLoadGeneration === $generation)''',
-      );
-      return result == true || result == 'true' || result == 1 || result == '1';
-    } catch (e, stack) {
-      ErrorLogService.instance.log(
-        'ReaderFushi.isLoadedLyricsDocument',
-        e,
-        stack,
-      );
-      return false;
-    }
-  }
-
-  Future<bool> _finalizeLyricsDocumentIfReady(
-    InAppWebViewController controller, {
-    required int generation,
-  }) async {
-    if (!mounted || !_lyricsMode || generation != _lyricsLoadGeneration) {
-      return false;
-    }
-    if (_lyricsPageReady) return true;
-    if (_lyricsReadyFinalizingGeneration == generation) return false;
-    _lyricsReadyFinalizingGeneration = generation;
-    try {
-      if (!await _isLoadedLyricsDocument(controller, generation: generation)) {
-        return false;
-      }
-      if (!mounted || !_lyricsMode || generation != _lyricsLoadGeneration) {
-        return false;
-      }
-      if (!_lyricsPageReady) {
-        await _onChapterLoadComplete(controller, lyricsGeneration: generation);
-      }
-      if (!mounted || !_lyricsMode || generation != _lyricsLoadGeneration) {
-        return false;
-      }
-      if (_lyricsDocumentLoadGeneration == generation) {
-        _lyricsDocumentLoadGeneration = null;
-      }
-      return _lyricsPageReady;
-    } finally {
-      if (_lyricsReadyFinalizingGeneration == generation) {
-        _lyricsReadyFinalizingGeneration = null;
-      }
-    }
+    return keyed;
   }
 
   int? _lyricsDocumentGenerationFromUrl(String? raw) {
@@ -2840,18 +2590,9 @@ updateLive: function(patch) {
     return int.tryParse(uri.queryParameters['generation'] ?? '');
   }
 
-  bool _isCurrentLyricsDocumentUrl(String raw) {
-    final int? generation = _lyricsDocumentGenerationFromUrl(raw);
-    return _lyricsMode &&
-        generation != null &&
-        generation == _lyricsDocumentLoadGeneration &&
-        generation == _lyricsLoadGeneration;
-  }
-
   Future<void> _onChapterLoadComplete(
-    InAppWebViewController controller, {
-    int? lyricsGeneration,
-  }) async {
+    InAppWebViewController controller,
+  ) async {
     // BUG-1280（平台分叉守卫）：spread 独立文档绝不注入正文引擎。
     //
     // `_loadSpreadPage` 传给 `loadData` 的 baseUrl 与 `_chapterUrl(_currentChapter)`
@@ -2878,74 +2619,10 @@ updateLive: function(patch) {
       );
       return;
     }
-    if (_lyricsMode) {
-      bool currentLyricsLoad() =>
-          mounted &&
-          _lyricsMode &&
-          lyricsGeneration != null &&
-          lyricsGeneration == _lyricsLoadGeneration;
-      if (!currentLyricsLoad()) return;
-      if (!_readerContentReady) {
-        // BUG-438 / TODO-889：歌词模式内容就绪，清兜底 deadline，下次导航拿新窗口。
-        _clearContentReadyTimeout();
-        _rebuild(() {
-          _readerContentReady = true;
-          _hasEverLoaded = true;
-        });
-      }
-      if (!currentLyricsLoad()) return;
-      _lyricsPageReady = true;
-      // BUG-2597：开书自动恢复歌词模式（BUG-785）可能抢在正文 `_onRestoreComplete`
-      // 之前——歌词 `loadData` 换掉文档后那次回调永远不来，`_studyClock` 一直为 null，
-      // `_onCueChanged` 的 `touch()` / 账本回调全部 no-op → 整段歌词会话零时长零字数。
-      // 歌词文档就绪也是「书能读了」，与正文就绪同样建/起表（对已在跑的是 no-op）。
-      _ensureStudyClock();
-      // 首次进入歌词模式的提示对话框：挂在歌词文档真正就绪的这一刻消费一次性旗
-      // （_toggleLyricsMode 进入分支置位），替代旧的裸 delay 100ms（事件驱动，见旗注释）。
-      if (_pendingLyricsHintOnReady) {
-        _pendingLyricsHintOnReady = false;
-        _showLyricsModeHintIfNeeded();
-      }
-      // 注入歌词专用行级 caret（键盘/手柄逐词查词），镜像 reader 的 fushiCaret 注入。
-      // 文档刚加载，caret inactive；surface 在 _enterCaret 成功时才置 lyrics。
-      await controller.evaluateJavascript(
-        source: ReaderLyricsCaretScripts.source(),
-      );
-      if (!currentLyricsLoad()) return;
-      if (mounted) {
-        await controller.evaluateJavascript(
-          source: ReaderLyricsCaretScripts.initInvocation(
-            color: _caretRingColorCss(),
-            insetTop: _readerTopOffset,
-            insetBottom: 0,
-          ),
-        );
-      }
-      if (!currentLyricsLoad()) return;
-      _onCueChanged();
-      await _applyLyricsFavorites();
-      if (!currentLyricsLoad()) return;
-      // BUG-844: 歌词是独立文档，正文 setup 脚本（下发 window.__hoverAutoLookup 初值）
-      // 不在此分支注入。歌词页的 mousemove 悬停查词监听据此全局跳过 Shift 门控（纯悬停即
-      // 查词），必须在页面就绪时把当前开关值同步进新文档，否则纯悬停查词要等一次设置热更
-      // 才生效。Shift-悬停不依赖此全局（监听器直接读 e.shiftKey），本行只补齐纯悬停路径。
-      if (mounted) await _applyHoverAutoLookupLive();
-      if (!currentLyricsLoad()) return;
-      // BUG-767: 此前（BUG-755）在歌词页就绪即强夺阅读焦点，想让 ESC 从进入那刻就能退。
-      // 但桌面 loadData 后强夺 Flutter 焦点会把原生 WebView2 顶焦、重置其滚动到顶
-      // （→ 高亮看似回第一句），并与页面自身抢焦点抖动；一旦叠加重载路径每次 loadData
-      // 都触发一次，放大成持续闪烁。故移除这处 on-load 强夺焦（本行下方原有的焦点 reclaim
-      // 调用已删）。ESC 退出仍可用：点空白唤底栏走 onLyricsTapEmpty（内含焦点 reclaim）、
-      // 查词弹窗关闭走 onAllPopupsDismissed reclaim——任一交互后焦点即回阅读内容，ESC 正常退出。
-      return;
-    }
     final int gen = _navigateGeneration;
     final int chapterSnapshot = _currentChapter;
     try {
       String? sentenceAudioCuesJson;
-      if (_audiobookController != null) {
-        sentenceAudioCuesJson = await _prepareSentenceAudioCuesJson();
-      }
       ReaderChapterPerfTrace.mark('sentenceAudioCues');
       if (_currentChapter != chapterSnapshot || _navigateGeneration != gen) {
         return;
@@ -2972,9 +2649,6 @@ updateLive: function(patch) {
       ReaderChapterPerfTrace.mark('caretReanchor');
 
       _initialFragment = null;
-      if (_audiobookController != null) {
-        await _injectAudiobookBridge();
-      }
       ReaderChapterPerfTrace.mark('audiobookBridge');
       if (!mounted || _navigateGeneration != gen) return;
       await HighlightBridge.inject(controller);
@@ -2995,9 +2669,6 @@ updateLive: function(patch) {
       // 无有声书（controller==null）则不恢复（歌词模式依赖音频），意图也一并清掉。
       if (_pendingLyricsRestore) {
         _pendingLyricsRestore = false;
-        if (_audiobookController != null && !_lyricsMode) {
-          unawaited(_toggleLyricsMode());
-        }
       }
     } catch (e, stack) {
       ErrorLogService.instance.log(
@@ -3009,38 +2680,6 @@ updateLive: function(patch) {
     }
   }
 }
-
-/// 静态引擎源码的公开入口（默认分页模式）。
-///
-/// 守卫测试用它断言「引擎里确实含有全部载荷」「引擎与导航状态无关」——这条链路
-/// 此前完全没有：所有脚本守卫都只断言各 builder 的返回值，没人断言那些返回值真的
-/// 进了注入物，漏装一个载荷 ~100 条测试照样全绿。
-String readerFushiEngineSource({
-  bool vnMode = false,
-  bool continuousMode = false,
-}) => _ReaderWebView.readerEngineSource(
-  vnMode: vnMode,
-  continuousMode: continuousMode,
-);
-
-/// 每次导航下发的那一小份（config + install 调用），供守卫测试断言它不含引擎本体。
-String readerFushiEngineBoot(ReaderEngineConfig config) =>
-    _ReaderWebView.readerEngineBoot(config);
-
-/// 压缩**之前**的引擎源码 = 生产上真正交给 [ReaderScriptCompactor] 的那份。
-///
-/// 给压缩器守卫测试用：它要证明压缩器对**真实最终注入载荷**只删空行与整行注释、
-/// 幂等、扫完词法状态干净。此前那份「最终拼装脚本」是把 `webview.part.dart` 的三引号
-/// 模板抠出来、按一张手写替身表重建的——那张表是查找表，**新增**插值会 StateError
-/// （响亮），**删掉**一个载荷完全静默：整份注入物少一块，压缩覆盖跟着少一块，而没有
-/// 一条测试会红。现在直接向生产代码要同一份对象，那个不对称从根上没有了。
-String readerFushiEngineSourceUncompacted({
-  bool vnMode = false,
-  bool continuousMode = false,
-}) => _ReaderWebView._buildReaderEngineSource(
-  vnMode: vnMode,
-  continuousMode: continuousMode,
-);
 
 /// BUG-1745：分页滚轮手势桥的 JS 片段，**两个注入点的唯一真值源**。
 ///

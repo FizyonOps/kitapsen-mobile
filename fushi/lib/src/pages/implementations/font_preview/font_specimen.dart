@@ -6,10 +6,6 @@ import 'package:fushi/src/reader/reader_settings.dart' show ReaderCustomFontCss;
 /// （「永」永字八法看笔画、平假名看圆转、片假名看硬折、「漢」看繁密汉字）。
 const String kJaFontSpecimenGlyphs = 'Ag 永あア漢';
 
-/// 预览面板的日文正文样张。带假名、汉字、长音与句读，能同时看出字重、字距与
-/// 标点位置。
-const String kJaFontSampleSentence = '吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。';
-
 /// 字体库条目（系统族名或导入的文件）→ 引擎里可用的族名。
 ///
 /// 系统字体直接用族名；文件字体经 [AppFontLoader] 注册（幂等，与 app 字体链、

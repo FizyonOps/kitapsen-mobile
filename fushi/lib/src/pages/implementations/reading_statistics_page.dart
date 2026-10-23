@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:math' as math;
 
-import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fushi/media.dart';
@@ -88,7 +87,6 @@ class _ReadingStatisticsPageState extends BasePageState<ReadingStatisticsPage> {
   List<LookupMiningCounterRow> _counterRows = <LookupMiningCounterRow>[];
   List<FavoriteWordRow> _favoriteRows = <FavoriteWordRow>[];
   List<(String, int)> _lookupEvents = const <(String, int)>[];
-  List<(String, int)> _minedEvents = const <(String, int)>[];
 
   /// bookKey → 书架条目（按书行的封面走书架同一条缩略图链）。
   Map<String, MediaItem> _bookItemsByKey = <String, MediaItem>{};
@@ -158,12 +156,9 @@ class _ReadingStatisticsPageState extends BasePageState<ReadingStatisticsPage> {
   StatActivityBuckets _lookup = StatActivityBuckets();
 
   // per-book 查词/制卡计数（按 title 聚合，对齐字数/时长 tile 的聚合键）。
-  Map<String, ({int lookups, int mines})> _bookCounters =
-      <String, ({int lookups, int mines})>{};
 
   // per-book 收藏计数（TODO-1252：按 title 聚合当前收藏活行，无书收藏 title='' 跳过，
   // 只进汇总面板）。收藏取消即删行 → 聚合活行天然回落。
-  Map<String, int> _bookFavorites = <String, int>{};
 
   // 按书聚合
   List<_BookData> _bookData = [];
@@ -269,9 +264,7 @@ class _ReadingStatisticsPageState extends BasePageState<ReadingStatisticsPage> {
       _lookupEvents = counterFacts
           .lookupEvents(source: StatSourceKind.book)
           .toList();
-      _minedEvents = counterFacts
-          .minedEvents(source: StatSourceKind.book)
-          .toList();
+      counterFacts.minedEvents(source: StatSourceKind.book).toList();
       _lookup = bucketActivityByDateKey(_lookupEvents, now);
       _counterRows = counters;
       _favoriteRows = favs;
@@ -442,16 +435,8 @@ class _ReadingStatisticsPageState extends BasePageState<ReadingStatisticsPage> {
     }
     _bookData = bookMap.values.toList();
     _sortBookData();
-    _bookCounters = aggregateStatCountersByTitle(
-      _counterRows
-          .where((LookupMiningCounterRow r) => range.contains(r.dateKey))
-          .toList(),
-    );
-    _bookFavorites = aggregateStatFavoritesByTitle(
-      _favoriteRows
-          .where((FavoriteWordRow r) => range.contains(r.dateKey))
-          .toList(),
-    );
+    aggregateStatCountersByTitle(_counterRows.where((LookupMiningCounterRow r) => range.contains(r.dateKey)).toList());
+    aggregateStatFavoritesByTitle(_favoriteRows.where((FavoriteWordRow r) => range.contains(r.dateKey)).toList());
 
     // 阅读域来源合计（普通书 + 漫画）：所选范围内求和。
     _breakdownTotals = <StatBreakdownSource, StatSourceTotals>{
@@ -530,12 +515,7 @@ class _ReadingStatisticsPageState extends BasePageState<ReadingStatisticsPage> {
       emptyMessage: t.stat_no_data,
       contentBuilder: _buildContent,
     );
-    if (widget.embedded) return buildEmbeddedStatTab(context, actions, body);
-    return FushiPageScaffold(
-      title: t.reading_statistics,
-      actions: actions,
-      body: body,
-    );
+    return buildEmbeddedStatTab(context, actions, body);
   }
 
   /// 页面骨架与视频 / 游戏 tab 同形（用户 2026-09-08「统计全改成游戏那种」）：
@@ -1577,9 +1557,6 @@ class _ReadingStatisticsPageState extends BasePageState<ReadingStatisticsPage> {
   /// 制卡 · 收藏，右侧时长；点按进该书的会话 sheet，长按 / 右键删该书统计。
   Widget _buildBookTile(_BookData book) {
     // TODO-1204：查词/制卡计数按 title 聚合（无记录则 0）。
-    final ({int lookups, int mines}) counter =
-        _bookCounters[book.title] ?? (lookups: 0, mines: 0);
-    final int favorites = _bookFavorites[book.title] ?? 0;
     final String? bookKey = book.bookKey ?? _bookKeyByTitle[book.title];
     final int sessionCount = bookKey == null
         ? 0

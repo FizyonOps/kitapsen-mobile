@@ -68,7 +68,6 @@ extension _ReaderCaret on _ReaderFushiPageState {
         (event.logicalKey == LogicalKeyboardKey.shiftLeft ||
             event.logicalKey == LogicalKeyboardKey.shiftRight) &&
         focusedEditableText() == null) {
-      _triggerShiftLookupAtLastPointer();
     }
     // The popup header toolbar (sibling of the popup content). Down returns to
     // the content caret; B/Escape dismiss the popup (ascend out of it). Left/
@@ -77,7 +76,6 @@ extension _ReaderCaret on _ReaderFushiPageState {
     if (_popupHeaderScope.hasFocus) {
       if (event is! KeyDownEvent) return KeyEventResult.ignored;
       if (event.logicalKey == LogicalKeyboardKey.arrowDown) {
-        _returnToPopupContent();
         return KeyEventResult.handled;
       }
       // The header is the TOP of the popup — nothing is above it. Consume Up so
@@ -89,7 +87,6 @@ extension _ReaderCaret on _ReaderFushiPageState {
       }
       if (event.logicalKey == LogicalKeyboardKey.gameButtonB ||
           event.logicalKey == LogicalKeyboardKey.escape) {
-        unawaited(_caretDismissOrExit()); // popup surface → dismissTopPopup()
         return KeyEventResult.handled;
       }
       return KeyEventResult.ignored;
@@ -150,25 +147,6 @@ extension _ReaderCaret on _ReaderFushiPageState {
     if (event is! KeyDownEvent) return KeyEventResult.ignored;
 
     final Set<ModifierKey> modifiers = _activeModifiers();
-
-    // BUG-402：桌面 Windows 阅读器复制兼容层。Windows WebView2 合成模式下 fork 只
-    // 转发鼠标不转发键盘，Ctrl+C 到不了 WebView2 触发不了原生 copy；这里在应用层
-    // 接管：取浏览器原生选区文本写系统剪贴板。仅 Windows + 纯 Ctrl+C 命中（谓词
-    // readerShouldHandleDesktopCopy），其余键/平台一律不进，default 行为不变。
-    if (readerShouldHandleDesktopCopy(
-      key: event.logicalKey,
-      modifiers: modifiers,
-      isWindows: isWindowsPlatform,
-    )) {
-      // 已确认是 Windows 纯 Ctrl+C（我们专属的手势），且有 WebView：接管这条
-      // 复制路径并吞键。空选区在 _copyNativeSelectionToClipboard 内静默跳过
-      // （不覆盖剪贴板），但仍吞键——Windows 阅读器 Ctrl+C 没有其它合法语义。
-      // 无 WebView 时不吞键，交回默认解析（不存在的边界情况下也不破坏行为）。
-      if (_controller != null) {
-        unawaited(_copyNativeSelectionToClipboard());
-        return KeyEventResult.handled;
-      }
-    }
 
     // Android/native controller events can surface as KeyEvents. D-pad arrows
     // share logical keys with keyboard arrows, so controller-like sources must
@@ -239,7 +217,7 @@ extension _ReaderCaret on _ReaderFushiPageState {
     final ShortcutAction? spaceOverride = resolveReaderSpaceOverride(
       key: event.logicalKey,
       modifiers: modifiers,
-      hasActiveAudiobook: _hasActiveAudiobook,
+      hasActiveAudiobook: false,
       physicalKey: imeFallbackPhysicalKey,
     );
     final ShortcutAction? bareArrowBinding =
@@ -296,12 +274,6 @@ extension _ReaderCaret on _ReaderFushiPageState {
   /// 到 reader scope 注册表里裸 Space 的真实绑定（默认 [ShortcutAction.readerPageForward]，
   /// 用户改键后跟随其绑定）。返回 null 表示裸 Space 当前无绑定，调用方不执行。
   ShortcutAction? _resolveWebViewSpaceAction() {
-    final ShortcutAction? override = resolveReaderSpaceOverride(
-      key: LogicalKeyboardKey.space,
-      modifiers: const <ModifierKey>{},
-      hasActiveAudiobook: _hasActiveAudiobook,
-    );
-    if (override != null) return override;
     return appModel.shortcutRegistry.resolveKeyboard(
       LogicalKeyboardKey.space,
       modifiers: const <ModifierKey>{},
@@ -348,27 +320,6 @@ extension _ReaderCaret on _ReaderFushiPageState {
     return KeyEventResult.handled;
   }
 
-  /// BUG-402：取浏览器原生选区文本（[ReaderSelectionScripts.nativeSelectionText...]）
-  /// 写入系统剪贴板。空选区不写（不覆盖剪贴板已有内容）。WebView 半销毁时
-  /// evaluateJavascript 会抛 PlatformException，吞掉即可（复制是尽力而为）。
-  Future<void> _copyNativeSelectionToClipboard() async {
-    final InAppWebViewController? controller = _controller;
-    if (controller == null) return;
-    Object? raw;
-    try {
-      raw = await controller.evaluateJavascript(
-        source: ReaderSelectionScripts.nativeSelectionTextInvocation(),
-      );
-    } catch (_) {
-      return;
-    }
-    final String text = ReaderSelectionScripts.nativeSelectionTextFromResult(
-      raw,
-    );
-    if (text.isEmpty) return;
-    await Clipboard.setData(ClipboardData(text: text));
-  }
-
   void _clearGamepadAHold() {
     _gamepadAHoldTimer?.cancel();
     _gamepadAHoldTimer = null;
@@ -386,7 +337,6 @@ extension _ReaderCaret on _ReaderFushiPageState {
     // GamepadService traverses the buttons and activates the focused one.
     if (_popupHeaderScope.hasFocus) {
       if (button == GamepadButton.dpadDown) {
-        _returnToPopupContent();
         return true;
       }
       // Header is the top of the popup — consume Up so focus stays here (don't
@@ -396,7 +346,6 @@ extension _ReaderCaret on _ReaderFushiPageState {
         return true;
       }
       if (button == GamepadButton.b) {
-        unawaited(_caretDismissOrExit());
         return true;
       }
       return false;
@@ -412,7 +361,6 @@ extension _ReaderCaret on _ReaderFushiPageState {
       focusNavEnabled: _focusNavEnabled,
       enterButtons: _readerEnterCaretButtons(),
     )) {
-      unawaited(_enterCaret());
       return true;
     }
     // TODO-700 T8: the bottom bar is excluded from focus traversal, so D-pad
@@ -437,10 +385,6 @@ extension _ReaderCaret on _ReaderFushiPageState {
     if (action == null) return false;
     return _executeShortcutAction(action, gamepadTriggerButton: button) ==
         KeyEventResult.handled;
-  }
-
-  bool _handleGamepadLongPress(GamepadButton button) {
-    return false;
   }
 
   bool _isCaretEntryTrigger({
@@ -504,23 +448,7 @@ extension _ReaderCaret on _ReaderFushiPageState {
     // 补上这道门后，任一平台恒只有一条腿活着。代价是非 Windows 上**页面外壳**（正文
     // WebView 之外）的鼠标绑定不生效——那恰是本轮之前的行为（本页当时根本没有 Flutter
     // 侧鼠标腿），故不是回归；正文区照常由 JS 腿覆盖完整阶梯。
-    if (!hostOwnsWebViewPointerInput) return;
-    final int? button = domMouseButtonFromPointerButtons(event.buttons);
-    if (button == null) return;
-    final FushiShortcutRegistry registry = appModel.shortcutRegistry;
-    if (isSeekToClickedSentenceButton(registry, button)) return;
-    final ShortcutAction? action = resolveMouseBindingActionForButton(
-      registry: registry,
-      button: button,
-      ladder: kReaderMouseLadder,
-    );
-    if (action == null) return;
-    // 执行体返回 ignored（例如无弹窗时的 readerDismissDict）说明本页没消费，等价于
-    // 键盘的 ignored 冒泡：**不认领**，让 app 根兜底照常解析 universal / global。
-    dispatchClaimedMouseAction(
-      event,
-      () => _executeShortcutAction(action) == KeyEventResult.handled,
-    );
+    return;
   }
 
   KeyEventResult _executeShortcutAction(
@@ -588,12 +516,10 @@ extension _ReaderCaret on _ReaderFushiPageState {
           keyboardTriggerKey: keyboardTriggerKey,
           gamepadTriggerButton: gamepadTriggerButton,
         )) {
-          unawaited(_enterCaret());
         }
         return KeyEventResult.handled;
       case ShortcutAction.readerShiftLookup:
         if (_focusNavEnabled) {
-          unawaited(_enterCaret());
         }
         return KeyEventResult.handled;
       case ShortcutAction.readerCreateCardFromPopup:
@@ -622,306 +548,6 @@ extension _ReaderCaret on _ReaderFushiPageState {
         )
         .primary;
     return readerColorToCssRgba(accent, alphaOverride: 0.98);
-  }
-
-  /// Enter the cursor on the READER content (A/Enter in the book with no cursor,
-  /// or returning from a dismissed popup). The reader's own fushiCaret restores
-  /// its remembered position, so this re-shows the ring where the user left it.
-  Future<void> _enterCaret() async {
-    // Kitapsen: no lookup cursor.
-    return;
-  }
-
-  /// Fully leave cursor mode — hide the ring on whichever surface holds it.
-  void _exitCaret() {
-    switch (_caretSurface) {
-      case CaretSurface.none:
-        return;
-      case CaretSurface.reader:
-        _controller?.evaluateJavascript(
-          source: ReaderCaretScripts.exitInvocation(),
-        );
-        break;
-      case CaretSurface.lyrics:
-        _controller?.evaluateJavascript(
-          source: ReaderLyricsCaretScripts.exitInvocation(),
-        );
-        // 退出焦点：恢复播放跟随并立即把当前播放行重新居中。
-        _controller?.evaluateJavascript(
-          source:
-              'window.__lyricsCaretActive = false;'
-              'if(window.__lyricsScrollToCue&&window.__lyricsGetCurrentIndex)'
-              'window.__lyricsScrollToCue(window.__lyricsGetCurrentIndex());',
-        );
-        break;
-      case CaretSurface.popup:
-        _caretTopPopupState?.caretExit();
-        break;
-      case CaretSurface.video:
-        // 阅读器页面不可能持有 video 面（它属于视频页），防御性 no-op。
-        break;
-    }
-    _rebuild(() {
-      _caretSurface = CaretSurface.none;
-      _caret.popupState = null;
-    });
-  }
-
-  /// Whether [action] is a cursor MOVEMENT that may fire on keyboard auto-repeat
-  /// (holding the key steps the cursor continuously). Activation / dismissal /
-  /// lookup must stay one-per-press, so only the directional + step actions
-  /// repeat.
-  static bool _isRepeatableCaretMove(CaretAction action) {
-    switch (action) {
-      case CaretAction.stepForward:
-      case CaretAction.stepBackward:
-      case CaretAction.moveUp:
-      case CaretAction.moveDown:
-      case CaretAction.moveLeft:
-      case CaretAction.moveRight:
-        return true;
-      case CaretAction.activate:
-      case CaretAction.lookup:
-      case CaretAction.longPress:
-      // 跳转词典是离散跳整段，每次按一下跳一本，绝不随长按连发（否则一口气
-      // 冲过所有词典段）。词条级跳转（TODO-1325 #5）同理，一按跳一条，不连发。
-      case CaretAction.jumpDictNext:
-      case CaretAction.jumpDictPrev:
-      case CaretAction.focusEntryNext:
-      case CaretAction.focusEntryPrev:
-      case CaretAction.dismissOrExit:
-        return false;
-    }
-  }
-
-  Future<void> _runCaretAction(CaretAction action) async {
-    // Leaving is always allowed, even mid-operation — it must never be dropped
-    // by the in-flight guard, or the user could get stuck unable to back out.
-    if (action == CaretAction.dismissOrExit) {
-      await _caretDismissOrExit();
-      return;
-    }
-    if (_caretBusy) return;
-    _caretBusy = true;
-    try {
-      switch (action) {
-        case CaretAction.stepForward:
-          await _caretMove('forward');
-          break;
-        case CaretAction.stepBackward:
-          await _caretMove('backward');
-          break;
-        case CaretAction.moveUp:
-          await _caretMove('up');
-          break;
-        case CaretAction.moveDown:
-          await _caretMove('down');
-          break;
-        case CaretAction.moveLeft:
-          await _caretMove('left');
-          break;
-        case CaretAction.moveRight:
-          await _caretMove('right');
-          break;
-        case CaretAction.activate:
-          await _caretActivate();
-          break;
-        case CaretAction.lookup:
-          await _caretLookup();
-          break;
-        case CaretAction.longPress:
-          await _caretLongPress();
-          break;
-        case CaretAction.jumpDictNext:
-          await _caretJumpDict(true);
-          break;
-        case CaretAction.jumpDictPrev:
-          await _caretJumpDict(false);
-          break;
-        case CaretAction.focusEntryNext:
-          await _caretFocusEntry(true);
-          break;
-        case CaretAction.focusEntryPrev:
-          await _caretFocusEntry(false);
-          break;
-        case CaretAction.dismissOrExit:
-          break; // handled above
-      }
-    } finally {
-      _caretBusy = false;
-    }
-  }
-
-  /// B/Esc while the cursor is active. On the popup it walks one layer back; the
-  /// cursor then follows to the parent popup ([onDictionaryStackChanged]) or back
-  /// to the reader ([onAllPopupsDismissed]) — the same hooks that fire on a swipe
-  /// dismissal, so every back path is handled in one place. On the reader it
-  /// dismisses a touch-opened popup or, with none, leaves cursor mode.
-  Future<void> _caretDismissOrExit() async {
-    if (_caretSurface == CaretSurface.popup) {
-      _caretDismissTopPopup();
-      return;
-    }
-    _exitCaret();
-  }
-
-  /// Move focus from the popup content caret UP to the Flutter header toolbar
-  /// (sibling layer). Called when the caret is at the top of the popup content
-  /// and Up is pressed. Hides the popup caret ring so the header's standard
-  /// FushiFocusRing is the single indicator. No-op (focus stays on content) if
-  /// the header has no focusable button.
-  void _focusPopupHeader() {
-    if (!mounted || _caretSurface != CaretSurface.popup) return;
-    // The header toolbar exists only on the bottom popup (index 0, see
-    // base_source_page._buildPopupLayer). When the caret is on a deeper
-    // sub-lookup popup there is no header for it — don't grab the (occluded)
-    // bottom popup's toolbar; Up at the top simply blocks.
-    if (_caretTopVisiblePopupIndex != 0) return;
-    _popupHeaderScope.requestFocus();
-    if (_popupHeaderScope.nextFocus()) {
-      _caretTopPopupState
-          ?.caretExit(); // header owns focus → hide the popup caret ring
-    } else {
-      _focusNode.requestFocus(); // nothing focusable in the header — undo
-    }
-  }
-
-  /// Move focus from the header toolbar back DOWN to the popup content caret
-  /// (sibling layer). Re-shows the popup caret ring at its remembered position.
-  void _returnToPopupContent() {
-    if (!mounted || _caretSurface != CaretSurface.popup) return;
-    _focusNode.requestFocus(); // take Flutter focus off the header buttons
-    unawaited(
-      _caretTopPopupState?.caretEnter(),
-    ); // re-show + re-place the popup caret
-  }
-
-  /// Drive one cursor move on the active surface. On the reader, a paged
-  /// page-edge ('pageForward'/'pageBackward') asks Dart to turn the page (which
-  /// re-anchors the cursor). The popup has no fushiReader, so its cursor scrolls
-  /// internally and only ever returns 'moved'/'blocked'.
-  Future<void> _caretMove(String physicalDir) async {
-    if (_caretSurface == CaretSurface.popup) {
-      final String status =
-          await _caretTopPopupState?.caretMove(physicalDir) ?? 'blocked';
-      if (!mounted) return;
-      // At the top edge of the popup content, an upward move is blocked. Treat
-      // that as crossing into the sibling header layer (like reader content →
-      // bottom bar, but upward). Only 'up' promotes; left/right/down that block
-      // simply stay put.
-      if (status == 'blocked' && physicalDir == 'up') {
-        _focusPopupHeader();
-      }
-      return;
-    }
-    if (_controller == null) return;
-    final Object? raw = await _controller!.evaluateJavascript(
-      source: ReaderCaretScripts.moveInvocation(physicalDir),
-    );
-    if (!mounted || _controller == null) return;
-    // lyrics caret 只返回 moved/blocked，永不 pageForward/Backward，故下面分支天然跳过。
-    final String status = ReaderCaretScripts.moveStatus(raw);
-    switch (readerCaretMoveOutcome(physicalDir, status)) {
-      case ReaderCaretMoveOutcome.paginateForward:
-        await _paginate(ReaderNavigationDirection.forward);
-        break;
-      case ReaderCaretMoveOutcome.paginateBackward:
-        await _paginate(ReaderNavigationDirection.backward);
-        break;
-      case ReaderCaretMoveOutcome.none:
-        break;
-    }
-  }
-
-  /// LB/RB whole-page flip on the active cursor surface. On the popup it scrolls
-  /// the content one page and the ring follows; on the paged reader a returned
-  /// 'pageForward'/'pageBackward' turns the page (re-anchoring the cursor), the
-  /// same edge handling as a line move in [_caretMove]. Shares the [_caretBusy]
-  /// guard so a mashed shoulder cannot race an in-flight move.
-  Future<void> _caretScrollPage(bool forward) async {
-    if (_caretBusy) return;
-    _caretBusy = true;
-    try {
-      if (_caretSurface == CaretSurface.popup) {
-        await _caretTopPopupState?.caretScrollPage(forward);
-        return;
-      }
-      if (_controller == null) return;
-      final Object? raw = await _controller!.evaluateJavascript(
-        source: ReaderCaretScripts.scrollPageInvocation(forward),
-      );
-      if (!mounted || _controller == null) return;
-      final String status = ReaderCaretScripts.moveStatus(raw);
-      if (status == 'pageForward') {
-        await _paginate(ReaderNavigationDirection.forward);
-      } else if (status == 'pageBackward') {
-        await _paginate(ReaderNavigationDirection.backward);
-      }
-    } finally {
-      _caretBusy = false;
-    }
-  }
-
-  /// Look up the word at the cursor. On the reader it fires onTextSelected → a
-  /// popup; on the popup it fires the popup's textSelected → a deeper popup.
-  /// Either way the new popup's onRendered hands the cursor to it.
-  Future<void> _caretLookup() async {
-    if (_caretSurface == CaretSurface.popup) {
-      await _caretTopPopupState?.caretLookup();
-      return;
-    }
-    if (_controller == null) return;
-    await _controller!.evaluateJavascript(
-      source: ReaderCaretScripts.lookupInvocation(),
-    );
-  }
-
-  /// A / Enter "context click" at the cursor: follow a hyperlink, click an
-  /// interactive control, or look up plain text — [ReaderCaretScripts.activate]
-  /// decides. A followed link navigates the WebView (→ shouldOverrideUrlLoading);
-  /// a lookup fires the existing onTextSelected pipeline. Fire-and-forget either
-  /// way, like [_caretLookup].
-  Future<void> _caretActivate() async {
-    if (_caretSurface == CaretSurface.popup) {
-      await _caretTopPopupState?.caretActivate();
-      return;
-    }
-    if (_controller == null) return;
-    await _controller!.evaluateJavascript(
-      source: ReaderCaretScripts.activateInvocation(),
-    );
-  }
-
-  Future<void> _caretLongPress() async {
-    if (_caretSurface == CaretSurface.popup) {
-      await _caretTopPopupState?.caretLongPress();
-      return;
-    }
-    if (_controller == null) return;
-    await _controller!.evaluateJavascript(
-      source: ReaderCaretScripts.longPressInvocation(),
-    );
-  }
-
-  /// Jump the cursor to the next/previous dictionary section header in a
-  /// multi-dictionary popup (Yomitan-style "go to dictionary"). Popup-only — the
-  /// reader and lyrics surfaces have no dictionary sections, so the keys/triggers
-  /// no-op there (the JS returns 'blocked'). [forward] true → next dictionary
-  /// below the cursor, false → previous above.
-  Future<void> _caretJumpDict(bool forward) async {
-    if (_caretSurface != CaretSurface.popup) return;
-    await _caretTopPopupState?.caretJumpDict(forward);
-  }
-
-  /// TODO-1325 #5 part1: move the popup's ENTRY-level focus (the blue-triangle
-  /// `.entry-current` indicator) to the next/previous word entry in a
-  /// multi-entry result, and scroll it into view. Popup-only — the reader and
-  /// lyrics surfaces have no word entries, so this no-ops there. Distinct from
-  /// [_caretJumpDict] (dictionary sections within one entry); orthogonal to the
-  /// char caret ring (moves only the entry indicator + viewport).
-  Future<void> _caretFocusEntry(bool forward) async {
-    if (_caretSurface != CaretSurface.popup) return;
-    await _caretTopPopupState?.focusEntryMove(forward);
   }
 
   /// Place the reader cursor at the entering edge of the freshly paginated page.

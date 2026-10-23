@@ -2,15 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:fushi/src/models/kitapsen_edition.dart';
-import 'package:fushi/src/asr_host/asr_host.dart';
-import 'package:fushi/src/media/audiobook/asr_models_settings_section.dart';
-import 'package:fushi/src/media/manga/manga_ocr_models_storage_section.dart';
-import 'package:fushi/src/media/manga/manga_ocr_provider.dart';
 import 'package:path/path.dart' as p;
-import 'package:fushi_audio/fushi_audio.dart' show SrtBookRepository;
 import 'package:fushi_core/fushi_core.dart';
-import 'package:fushi_dictionary/fushi_dictionary.dart';
 
 import 'package:fushi/src/media/sources/reader_fushi_source.dart';
 import 'package:fushi/src/pages/implementations/storage_usage_view.dart';
@@ -20,8 +13,6 @@ import 'package:fushi/src/settings/settings_context.dart';
 import 'package:fushi/src/settings/settings_destination.dart';
 import 'package:fushi/src/storage/app_paths.dart';
 import 'package:fushi/src/storage/storage_usage_service.dart';
-import 'package:fushi/src/sync/sync_settings_schema.dart'
-    show buildDataStorageLocationSection;
 import 'package:fushi/utils.dart';
 
 /// 「存储」一级设置分类：数据存储位置（数据根在哪）+ 磁盘占用总览（每个类目
@@ -182,38 +173,6 @@ SettingsDestination buildStorageDestination() {
         subtitle: t.storage_bundled_hint,
       ),
     ],
-  );
-}
-
-/// Global model resources remain reachable even when listening is disabled.
-SettingsDestination _buildAsrModelsDestination() {
-  return SettingsDestination(
-    id: SettingsDestinationId.storage,
-    visible: (_) => isAsrSupported,
-    title: t.asr_models_section,
-    icon: Icons.record_voice_over_outlined,
-    sections: const <SettingsSection>[],
-    body: (SettingsContext _) => AsrModelsSettingsSection(
-      service: createAsrTranscriptionService(),
-    ),
-  );
-}
-
-/// 本机能不能跑本地 ONNX OCR（ORT native 可用性，BUG-1780）。
-bool get _isMangaOcrLocalSupported =>
-    createMangaOcrService().isSupportedPlatform;
-
-/// 每个本机 OCR 模型的下载 / 删除（漫画 OCR 设置里只管「用哪个」）。
-SettingsDestination _buildMangaOcrModelsDestination() {
-  return SettingsDestination(
-    id: SettingsDestinationId.storage,
-    visible: (_) => _isMangaOcrLocalSupported,
-    title: t.manga_ocr_local_model,
-    icon: Icons.document_scanner_outlined,
-    sections: const <SettingsSection>[],
-    body: (SettingsContext _) => MangaOcrModelsStorageSection(
-      serviceFor: (model) => createMangaOcrService(localModel: model),
-    ),
   );
 }
 

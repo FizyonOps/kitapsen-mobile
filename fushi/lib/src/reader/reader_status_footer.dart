@@ -90,7 +90,7 @@ double readerStatusFooterReserve({
   bool absorbedByBar = false,
   bool floating = false,
 }) =>
-    enabled && !absorbedByBar && !floating ? footerHeight : 0;
+    (0);
 
 /// 状态行是否此刻绘制：启用、首屏已就绪、未被底栏吸收；悬浮态额外随
 /// [transientVisible]（与 `bottomBarVisible` 同一唤出 / 收起真值）。
@@ -199,10 +199,6 @@ String? readerProgressLabel({required int? current, required int? total}) {
   if (ratio == null) return null;
   return '${(ratio * 100).toStringAsFixed(1)}%';
 }
-
-/// 播放条内联形态里那颗计时开关键的边长（逻辑 px）。播放条本身 56 高，容得下比
-/// 状态行（行高就是上限）更大的一颗，与条上其余传输键同一密度。
-const double kReaderStatusInlineClockButtonSize = 32;
 
 /// 学习计时开关键：状态行 / 播放条右端那颗「计时中 ⏸ / 已停 ▶」。
 ///
@@ -572,124 +568,6 @@ class _ReaderStatusFooterState extends State<ReaderStatusFooter> {
           ),
         ),
       ),
-    );
-  }
-}
-
-/// 状态行文案的单行内联版：桌面端有声书播放条唤出时，把「阅读追踪 + 进度」并进播放条
-/// 右端（底部只留一条）。同一读口、同一格式函数，只是排版成一行两段。
-class ReaderStatusInline extends StatefulWidget {
-  const ReaderStatusInline({
-    super.key,
-    required this.sessionTotals,
-    required this.currentChars,
-    required this.totalChars,
-    required this.showTimer,
-    required this.showProgress,
-    required this.textColor,
-    this.onToggleTimer,
-    this.tick = const Duration(seconds: 1),
-  });
-
-  final StudySessionTotals Function() sessionTotals;
-  final int? currentChars;
-  final int? totalChars;
-  final bool showTimer;
-  final bool showProgress;
-  final Color textColor;
-
-  /// 停 / 续表（与状态行的 [ReaderStatusFooter.onTapTracker] 同一入口
-  /// `_toggleStudyClockManualPause`）。此前内联形态整块不接指针：播放条一唤出，
-  /// 状态行让位（BUG-2467），屏幕上就只剩这一份写着「计时中」的读数，而它点不动。
-  final VoidCallback? onToggleTimer;
-
-  final Duration tick;
-
-  @override
-  State<ReaderStatusInline> createState() => _ReaderStatusInlineState();
-}
-
-class _ReaderStatusInlineState extends State<ReaderStatusInline> {
-  Timer? _ticker;
-  String? _lastTracker;
-
-  @override
-  void initState() {
-    super.initState();
-    _ticker = Timer.periodic(widget.tick, (_) {
-      if (!mounted) return;
-      // 计时器读数隐藏时这一层没有随秒变化的内容，秒表 tick 不必重建。
-      if (!widget.showTimer) return;
-      final String tracker = readerTrackerLabel(widget.sessionTotals());
-      if (tracker == _lastTracker) return;
-      setState(() => _lastTracker = tracker);
-    });
-  }
-
-  @override
-  void dispose() {
-    _ticker?.cancel();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final StudySessionTotals totals = widget.sessionTotals();
-    final Color muted = widget.textColor.withValues(alpha: 0.55);
-    final TextStyle style = TextStyle(
-      fontSize: kReaderStatusFooterFontSize,
-      color: muted,
-      height: 1.0,
-    );
-    final double? ratio = widget.showProgress
-        ? readerProgressRatio(
-            current: widget.currentChars,
-            total: widget.totalChars,
-          )
-        : null;
-    final String? progress = ratio == null
-        ? null
-        : readerProgressLabel(
-            current: widget.currentChars,
-            total: widget.totalChars,
-          );
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        if (widget.showTimer) ...<Widget>[
-          // 播放条上一排都是按钮，这里也给一颗真按钮（状态行形态里那层「点读数也
-          // 停表」的兜底是 28px 行高逼出来的，56px 的播放条不需要）。
-          ReaderStudyClockButton(
-            key: const ValueKey<String>('fushi_bar_status_clock_toggle'),
-            active: totals.active,
-            color: muted,
-            size: kReaderStatusInlineClockButtonSize,
-            onPressed: widget.onToggleTimer,
-          ),
-          const SizedBox(width: 2),
-          Text(
-            readerTrackerLabel(totals),
-            key: const ValueKey<String>('fushi_bar_status_tracker'),
-            style: style,
-            maxLines: 1,
-          ),
-        ],
-        if (progress != null) ...<Widget>[
-          if (widget.showTimer) const SizedBox(width: 16),
-          ReaderStatusProgressTrack(
-            key: const ValueKey<String>('fushi_bar_status_progress_track'),
-            ratio: ratio!,
-            color: muted,
-          ),
-          const SizedBox(width: 8),
-          Text(
-            progress,
-            key: const ValueKey<String>('fushi_bar_status_progress'),
-            style: style,
-            maxLines: 1,
-          ),
-        ],
-      ],
     );
   }
 }

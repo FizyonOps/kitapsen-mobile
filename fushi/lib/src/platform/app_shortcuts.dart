@@ -24,9 +24,7 @@ import 'package:fushi/src/utils/misc/channel_constants.dart';
 /// 侧置灰，旧 URL 在这里解析为 `null` 按「未处理」放行。
 enum AppShortcut {
   lookup(HomeTab.dictionaries, ModuleId.lookup),
-  books(HomeTab.books, ModuleId.books),
-  manga(HomeTab.manga, ModuleId.manga),
-  video(HomeTab.video, ModuleId.video);
+  books(HomeTab.books, ModuleId.books);
 
   const AppShortcut(this.homeTab, this.module);
 
@@ -62,7 +60,7 @@ enum AppShortcut {
     return null;
   }
 
-  /// 本平台此刻该发布的快捷方式（按展示顺序）：查词 > 书 > 漫画 > 视频。
+  /// 本平台此刻该发布的快捷方式（按展示顺序）。
   static List<AppShortcut> available(ModuleVisibility visibility) => [
     for (final AppShortcut shortcut in values)
       if (visibility.isEnabled(shortcut.module)) shortcut,
@@ -78,7 +76,7 @@ class AppShortcutsPublisher {
   AppShortcutsPublisher({required this.platformSupported});
 
   static final AppShortcutsPublisher instance = AppShortcutsPublisher(
-    platformSupported: !kIsWeb && (Platform.isAndroid || Platform.isIOS),
+    platformSupported: (Platform.isAndroid || Platform.isIOS),
   );
 
   static const MethodChannel _channel = FushiChannels.appShortcuts;

@@ -1,29 +1,18 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
-import 'dart:math' as math;
-import 'dart:typed_data';
-import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:path/path.dart' as p;
 import 'package:pdfrx/pdfrx.dart';
 
-import 'package:fushi_anki/fushi_anki.dart';
 import 'package:fushi_audio/fushi_audio.dart';
 import 'package:fushi_core/fushi_core.dart';
-import 'package:fushi/src/models/kitapsen_edition.dart';
-import 'package:fushi/src/anki/anki_view_model.dart';
 import 'package:fushi/src/epub/book_file_location.dart';
-import 'package:fushi/src/lookup/sentence_extraction.dart';
-import 'package:fushi/src/models/module_id.dart';
 import 'package:fushi/src/pages/base_source_page.dart';
-import 'package:fushi/src/pages/implementations/dictionary_popup_webview.dart';
 import 'package:fushi/src/pdf/pdf_engine.dart';
 import 'package:fushi/src/startup/exit_flush_registry.dart';
 import 'package:fushi/src/stats/read_unit_ledger.dart';
 import 'package:fushi/utils.dart';
-import 'package:fushi/src/media/video/video_exit_flush.dart';
+import 'package:fushi/src/media/reader_exit_flush.dart';
 
 /// PDF 阅读器页面（Phase 1 渲染 / Phase 2 点选查词 / Phase 3 页码进度 / Phase 4 制卡）。
 ///
@@ -50,24 +39,10 @@ class _ReaderPdfPageState extends BaseSourcePageState<ReaderPdfPage>
     with WidgetsBindingObserver {
   final PdfViewerController _pdfController = PdfViewerController();
 
-  @override
-  ModuleId? get popupDockModule => ModuleId.books;
-
-  /// 每页结构化文本缓存（`loadStructuredText` 有解析成本，点一次查一次会卡）。
-  /// key = 0-based 页索引。
-  final Map<int, PdfPageText> _pageTextCache = <int, PdfPageText>{};
-
   late final Future<_PdfBookLoad?> _loadFuture = _load();
 
   /// 打开时读回的书行（标题/总页数）与已保存页码，供恢复与进度落库使用。
   EpubBookRow? _bookRow;
-
-  /// P4 写侧收敛：查词 / 制卡计数归属本书（此前 PDF 漏覆写，全落 '' 汇总桶）。
-  /// 口径照抄 EPUB 阅读器（reader_fushi_page 的同名覆写）：[bookKey] 存书身份，
-  /// title 恒 raw（`_bookRow?.title`，统计聚合键不过 display-title 门面）。
-  @override
-  ({String? bookKey, String? title})? get lookupBookIdentity =>
-      (bookKey: widget.bookKey, title: _bookRow?.title);
 
   /// v82：位置/书签子表键（= [_bookRow] 的 `uid`，_load 时一次解析）。null =
   /// 书行缺失或旧行无 uid——相关读写跳过，不拿 bookKey 兜底写孤儿行。
@@ -98,23 +73,8 @@ class _ReaderPdfPageState extends BaseSourcePageState<ReaderPdfPage>
   /// 任何会话时长字段——旧的 `_sessionReadingMs` / `_sessionStartTime` 形态整个消失。
   StudyClock? _studyClock;
 
-  /// 无文本层（扫描图 PDF）只提示一次。
-  bool _noTextLayerNotified = false;
-
   /// PDF 自带目录（outline），懒加载一次；空列表 = 已加载但该 PDF 无目录。
   List<PdfOutlineNode>? _outline;
-
-  /// 最近一次查词命中的句子与词在句中的偏移，喂制卡（[AnkiMiningContext]）。
-  String _lastSentence = '';
-  int _lastSentenceOffset = 0;
-
-  /// 命中判定容差（PDF point）。点在字符矩形外但足够近仍算命中；超出即视为点在
-  /// 空白/图片上不查词（对齐 pdfrx 自身 `_findTextAndIndexForPoint` 的 8pt）。
-  static const double _kHitTestMarginPt = 8;
-
-  /// 交给词典引擎的最长子串长度。引擎做最长匹配 + 去屈折并回吐命中长度，故这里
-  /// **不做分词**——与视频字幕查词（取到句尾逐字查）同构。
-  static const int _kLookupWindow = 30;
 
   @override
   void initState() {
@@ -287,176 +247,6 @@ class _ReaderPdfPageState extends BaseSourcePageState<ReaderPdfPage>
 
   // ── Phase 2：点选查词 ─────────────────────────────────────────────────
 
-  /// 取（并缓存）某页的结构化文本。[pageIndex] 为 0-based。
-  Future<PdfPageText?> _pageText(int pageIndex, PdfPage page) async {
-    final PdfPageText? cached = _pageTextCache[pageIndex];
-    if (cached != null) return cached;
-    try {
-      final PdfPageText text = await page.loadStructuredText();
-      _pageTextCache[pageIndex] = text;
-      return text;
-    } catch (e, stack) {
-      ErrorLogService.instance
-          .log('ReaderPdfPage.loadStructuredText', e, stack);
-      return null;
-    }
-  }
-
-  /// 单击正文即查词（对齐视频字幕「点字查词」，日语最顺手）。
-  ///
-  /// [documentPosition] 是 pdfrx 的**文档坐标**（整册布局空间，未缩放）。流程：
-  /// 文档点 → 命中页 → 页内 PDF 坐标 → 最近字符索引 → 从该字符起取子串当查询词 →
-  /// 字符矩形换算成屏幕矩形当弹窗锚点。
-  Future<void> _lookupAtDocumentPosition(Offset documentPosition) async {
-    if (!_pdfController.isReady) return;
-    final PdfPageLayout layout = _pdfController.layout;
-    final List<PdfPage> pages = _pdfController.pages;
-
-    for (int i = 0; i < pages.length && i < layout.pageLayouts.length; i++) {
-      final Rect pageRect = layout.pageLayouts[i];
-      if (!pageRect.contains(documentPosition)) continue;
-
-      final PdfPage page = pages[i];
-      final PdfPageText? text = await _pageText(i, page);
-      if (!mounted) return;
-      if (text == null || text.charRects.isEmpty) {
-        _notifyNoTextLayer();
-        return;
-      }
-
-      // 文档坐标 → 页内 PDF 坐标（原点左下、Y 轴向上、单位 point）。
-      final PdfPoint pt = documentPosition
-          .translate(-pageRect.left, -pageRect.top)
-          .toPdfPoint(page: page, scaledPageSize: pageRect.size);
-
-      final int? charIndex = _closestCharIndex(text.charRects, pt);
-      if (charIndex == null) return; // 点在空白/图片上：不查词，也不关栈。
-
-      await _lookupFromChar(
-        page: page,
-        pageRect: pageRect,
-        text: text,
-        charIndex: charIndex,
-      );
-      return;
-    }
-  }
-
-  /// 在 [charRects] 里找命中（或容差内最近）的字符索引；超出容差返回 null。
-  static int? _closestCharIndex(List<PdfRect> charRects, PdfPoint pt) {
-    double bestDistanceSquared = double.infinity;
-    int? bestIndex;
-    for (int c = 0; c < charRects.length; c++) {
-      final PdfRect rect = charRects[c];
-      if (rect.containsPoint(pt)) return c;
-      final double d2 = rect.distanceSquaredTo(pt);
-      if (d2 < bestDistanceSquared) {
-        bestDistanceSquared = d2;
-        bestIndex = c;
-      }
-    }
-    if (bestIndex == null) return null;
-    if (bestDistanceSquared > _kHitTestMarginPt * _kHitTestMarginPt) {
-      return null;
-    }
-    return bestIndex;
-  }
-
-  /// 由命中字符发起查词：组装查询串 + 句子（喂制卡/收藏）+ 屏幕锚点矩形。
-  Future<void> _lookupFromChar({
-    required PdfPage page,
-    required Rect pageRect,
-    required PdfPageText text,
-    required int charIndex,
-  }) async {
-    final String fullText = text.fullText;
-    if (charIndex < 0 || charIndex >= fullText.length) return;
-
-    // 不分词：从命中字符起取一段交给引擎做最长匹配（引擎回吐真实命中长度）。
-    final String searchTerm = fullText.substring(
-      charIndex,
-      math.min(charIndex + _kLookupWindow, fullText.length),
-    );
-    if (searchTerm.trim().isEmpty) return;
-
-    // 整句喂给制卡/收藏通道（复用阅读器同款 [extractSentenceAt]，同一套句读口径）。
-    //
-    // PDF 的 fullText 在**视觉换行**处普遍带 \n/\r，而换行是分句符——直接分句会把每个
-    // 视觉行切成一句，制卡拿到半截话。这里用**等长替换**把 \n/\r 换成空格（1 字符换
-    // 1 字符，charIndex 与 charRects 的索引对齐**完全不变**），只让句读标点决定句子边界。
-    final String flattened =
-        fullText.replaceAll('\n', ' ').replaceAll('\r', ' ');
-    final SentenceExtractionResult extracted =
-        extractSentenceAt(flattened, charIndex, 1);
-    _lastSentence = extracted.sentence.trim();
-    _lastSentenceOffset = extracted.selStart;
-    if (_lastSentence.isNotEmpty) {
-      appModel.currentMediaSource?.setCurrentSentence(
-        selection: FushiTextSelection(text: _lastSentence),
-      );
-    }
-
-    final Rect? selectionRect = _screenRectForChar(
-      page: page,
-      pageRect: pageRect,
-      charRect: text.charRects[charIndex],
-    );
-    if (selectionRect == null || !mounted) return;
-
-    prunePopupStack(0);
-    final int highlightCount = await searchDictionaryResult(
-      searchTerm: searchTerm,
-      selectionRect: selectionRect,
-    );
-    if (!mounted || highlightCount <= 0) return;
-
-    // 把引擎实际命中的词在 PDF 上做原生蓝选高亮（复用 pdfrx 选区，零手绘），
-    // 与 EPUB 查词后高亮原文同语义。两端 inclusive。
-    _highlightMatchedTerm(text, charIndex, highlightCount);
-  }
-
-  /// 字符矩形（PDF 页坐标）→ 屏幕全局矩形（弹窗锚点坐标系）。
-  Rect? _screenRectForChar({
-    required PdfPage page,
-    required Rect pageRect,
-    required PdfRect charRect,
-  }) {
-    final Rect documentRect =
-        charRect.toRectInDocument(page: page, pageRect: pageRect);
-    final Rect? localRect =
-        _pdfController.doc2local.rectToLocal(context, documentRect);
-    if (localRect == null) return null;
-    final RenderBox? box = _pdfController.renderBox;
-    if (box == null) return null;
-    final Offset globalTopLeft = box.localToGlobal(localRect.topLeft);
-    return globalTopLeft & localRect.size;
-  }
-
-  void _highlightMatchedTerm(PdfPageText text, int charIndex, int length) {
-    try {
-      final int endIndex =
-          math.min(charIndex + length - 1, text.charRects.length - 1);
-      if (endIndex < charIndex) return;
-      unawaited(
-        _pdfController.textSelectionDelegate.setTextSelectionPointRange(
-          PdfTextSelectionRange.fromPoints(
-            PdfTextSelectionPoint(text, charIndex),
-            PdfTextSelectionPoint(text, endIndex),
-          ),
-        ),
-      );
-    } catch (e, stack) {
-      // 高亮是锦上添花，失败绝不影响已弹出的查词结果。
-      ErrorLogService.instance.log('ReaderPdfPage.highlight', e, stack);
-    }
-  }
-
-  void _notifyNoTextLayer() {
-    if (_noTextLayerNotified) return;
-    _noTextLayerNotified = true;
-    FushiToast.show(msg: t.pdf_no_text_layer, severity: ToastSeverity.error);
-  }
-
   // ── Phase 5：书签（复用 EPUB 的 Bookmarks 表）───────────────────────
 
   /// 在当前页加书签。PDF 复用同一张 `Bookmarks` 表：`sectionIndex` 存 0-based 页码
@@ -565,141 +355,6 @@ class _ReaderPdfPageState extends BaseSourcePageState<ReaderPdfPage>
 
   // ── Phase 4：制卡 ─────────────────────────────────────────────────────
 
-  /// 查词弹窗里点「+」制卡。句子来自最近一次查词（[_lastSentence]），卡图是**当前页
-  /// 栅格化 PNG**（PDF 没有视频帧/封面图可用，页面本身就是最有信息量的图）。
-  @override
-  Future<MinePopupResult> onMineFromPopup(Map<String, String> fields) async {
-    final BaseAnkiRepository repo = ref.read(ankiRepositoryProvider);
-    Directory? tempDir;
-    try {
-      final String sentence =
-          _lastSentence.isNotEmpty ? _lastSentence : (fields['sentence'] ?? '');
-
-      // 当前页栅格化成临时 PNG 当卡图；失败则无图落卡（不阻断制卡）。
-      String? coverPath;
-      final Uint8List? pagePng = await _renderCurrentPagePng();
-      if (pagePng != null) {
-        tempDir = await Directory.systemTemp.createTemp('fushi_pdf_mine_');
-        final File file = File(p.join(tempDir.path, 'page.png'));
-        await file.writeAsBytes(pagePng, flush: true);
-        coverPath = file.path;
-      }
-
-      final AnkiMiningContext miningContext = AnkiMiningContext(
-        sentence: sentence,
-        documentTitle: _bookRow?.title,
-        coverPath: coverPath,
-        sentenceOffset: _lastSentenceOffset,
-        source: AnkiMiningSource.book,
-        bookTitleTag: appModel.autoAddBookNameToTags
-            ? BaseAnkiRepository.sanitizeTitleTag(_bookRow?.title)
-            : null,
-      );
-
-      FushiToast.showMine(
-        msg: t.card_mining_pending,
-        status: MineToastStatus.pending,
-      );
-      final MineOutcome outcome = await repo.mineEntry(
-        rawPayloadJson: jsonEncode(fields),
-        context: miningContext,
-      );
-      final described = describeMineOutcome(outcome);
-      if (described.record) {
-        unawaited(_recordMinedCount());
-      }
-      FushiToast.showMine(msg: described.message, status: described.status);
-      if (described.success) {
-        return MinePopupResult.mined(outcome);
-      }
-      return MinePopupResult.failed(outcome);
-    } catch (e, stack) {
-      ErrorLogService.instance.log('ReaderPdfPage.onMineFromPopup', e, stack);
-      return const MinePopupResult();
-    } finally {
-      // 卡图已由 repo 拷进 Anki 媒体库，临时目录用完即删。
-      if (tempDir != null) {
-        try {
-          if (tempDir.existsSync()) tempDir.deleteSync(recursive: true);
-        } catch (_) {
-          // 临时文件清理失败无害（系统临时目录会被回收）。
-        }
-      }
-    }
-  }
-
-  Future<void> _recordMinedCount() async {
-    // P4 写侧收敛：走 DB 复合入口（同事务全局汇总 + per-book 计数），并补上此前
-    // 漏写的书身份（旧代码只写全局 addMiningCount，per-book 恒漏 → 恒等式单边偏差）。
-    final ({String? bookKey, String? title})? identity = lookupBookIdentity;
-    try {
-      await appModel.database.recordMiningEvent(
-        bookKey: identity?.bookKey,
-        title: identity?.title ?? '',
-        sourceType: kStatSourceBook,
-        at: DateTime.now(),
-      );
-    } catch (e, stack) {
-      ErrorLogService.instance.log('ReaderPdfPage.recordMined', e, stack);
-    }
-  }
-
-  /// 当前页栅格化成 PNG 字节（2x 提清晰度）。纯 CPU/FFI 路径，不依赖 GPU 帧回读。
-  Future<Uint8List?> _renderCurrentPagePng() async {
-    try {
-      if (!_pdfController.isReady) return null;
-      final List<PdfPage> pages = _pdfController.pages;
-      if (_currentPageIndex < 0 || _currentPageIndex >= pages.length) {
-        return null;
-      }
-      final PdfPage page = pages[_currentPageIndex];
-      final PdfImage? rendered = await page.render(
-        fullWidth: page.width * 2,
-        fullHeight: page.height * 2,
-        backgroundColor: 0xFFFFFFFF,
-      );
-      if (rendered == null) return null;
-      try {
-        return await _bgraToPng(
-          rendered.pixels,
-          rendered.width,
-          rendered.height,
-        );
-      } finally {
-        rendered.dispose();
-      }
-    } catch (e, stack) {
-      ErrorLogService.instance.log('ReaderPdfPage.renderPage', e, stack);
-      return null;
-    }
-  }
-
-  static Future<Uint8List?> _bgraToPng(
-    Uint8List bgra,
-    int width,
-    int height,
-  ) async {
-    final ui.ImmutableBuffer buffer =
-        await ui.ImmutableBuffer.fromUint8List(bgra);
-    final ui.ImageDescriptor descriptor = ui.ImageDescriptor.raw(
-      buffer,
-      width: width,
-      height: height,
-      pixelFormat: ui.PixelFormat.bgra8888,
-    );
-    final ui.Codec codec = await descriptor.instantiateCodec();
-    final ui.FrameInfo frame = await codec.getNextFrame();
-    final ui.Image image = frame.image;
-    try {
-      final ByteData? png =
-          await image.toByteData(format: ui.ImageByteFormat.png);
-      return png?.buffer.asUint8List();
-    } finally {
-      image.dispose();
-      codec.dispose();
-    }
-  }
-
   // ── UI ────────────────────────────────────────────────────────────────
 
   @override
@@ -746,13 +401,7 @@ class _ReaderPdfPageState extends BaseSourcePageState<ReaderPdfPage>
             ),
           ],
         ),
-        body: Stack(
-          children: <Widget>[
-            Positioned.fill(child: _buildViewer()),
-            // 查词弹窗层：必须在树里，否则 searchDictionaryResult 查到也不显示。
-            buildDictionary(),
-          ],
-        ),
+        body: _buildViewer(),
       ),
     );
   }

@@ -22,16 +22,6 @@ abstract interface class ControlSlotSpec {
 abstract interface class ControlItemSpec<S> {
   String get storageValue;
 
-  /// 必需项：任何平台都不能移入 hidden。
-  bool get pinnedRequired;
-
-  /// 触屏专属必需项：只在 UI 门（`isTouchControls: true`）上禁止移入 hidden，
-  /// 持久化模型永远按 `false` 判，保证一份布局跨平台解码一致。
-  bool get pinnedOnTouch;
-
-  /// 单实例项：从调色板拖入按「移动」而不是「复制」处理。
-  bool get isSingleInstance;
-
   /// 必需项被错误移除后回落的槽位。
   S get recoverySlot;
 
@@ -83,20 +73,6 @@ class ControlLayoutScheme<S extends ControlSlotSpec,
       };
 }
 
-/// 拖拽载荷：被拖的按钮 + 来源槽位（null = 来自「全部按钮」调色板，即新增）+
-/// 来源槽内下标（同槽重排 / 多副本精确删除用）。
-class ControlDragData<S, I> {
-  const ControlDragData({
-    required this.item,
-    required this.sourceSlot,
-    this.sourceIndex,
-  });
-
-  final I item;
-  final S? sourceSlot;
-  final int? sourceIndex;
-}
-
 class _NormalizedControlLayoutData<S, I> {
   const _NormalizedControlLayoutData({
     required this.slots,
@@ -111,44 +87,6 @@ class _NormalizedControlLayoutData<S, I> {
 class ControlLayout<S extends ControlSlotSpec, I extends ControlItemSpec<S>> {
   ControlLayout._(this.scheme, this._slots, Set<I> removed)
       : _removed = Set<I>.unmodifiable(removed);
-
-  /// 从「按钮 → 槽位」平铺表构建；[explicitOrder] 决定槽内顺序（保留用户拖拽顺序）。
-  factory ControlLayout.fromAssignments(
-    ControlLayoutScheme<S, I> scheme,
-    Map<I, S> assignments, {
-    Map<S, List<I>>? explicitOrder,
-  }) {
-    final Map<S, List<I>> slots = scheme.emptySlotMap();
-    final Set<I> removed = <I>{};
-
-    if (explicitOrder != null) {
-      final Set<I> placed = <I>{};
-      for (final S slot in scheme.slots) {
-        for (final I item in explicitOrder[slot] ?? const <Never>[]) {
-          if (placed.add(item)) {
-            _placeRawItem(scheme, slots, removed, item, slot);
-          }
-        }
-      }
-      for (final I item in scheme.items) {
-        if (placed.contains(item)) continue;
-        final S slot = assignments[item] ?? scheme.hiddenSlot;
-        _placeRawItem(scheme, slots, removed, item, slot);
-      }
-    } else {
-      for (final I item in scheme.items) {
-        final S slot = assignments[item] ?? scheme.hiddenSlot;
-        _placeRawItem(scheme, slots, removed, item, slot);
-      }
-    }
-
-    return _fromRaw(
-      scheme,
-      slots,
-      removedItems: removed,
-      fallbackAssignments: assignments,
-    );
-  }
 
   /// 直接从「槽位 → 有序按钮」构建，**不跨槽去重**（同一按钮可在多个槽）。不在任何
   /// 可见槽的按钮按 [assignments] 回填，除非它在 [removedItems]；pinned 守卫照常。
@@ -288,151 +226,6 @@ class ControlLayout<S extends ControlSlotSpec, I extends ControlItemSpec<S>> {
     }
     return scheme.hiddenSlot;
   }
-
-  bool isOnPlayer(I item) => scheme.isOnPlayer(slotOf(item));
-
-  /// 显式移除的按钮，按 [ControlLayoutScheme.items] 顺序。
-  List<I> get removedItems => <I>[
-        for (final I item in scheme.items)
-          if (_removed.contains(item)) item,
-      ];
-
-  /// hidden 槽渲染面（归一化后恒空；保留给直接查槽的旧调用方）。
-  List<I> get hiddenItems => itemsIn(scheme.hiddenSlot);
-
-  /// 按钮所在的全部槽位（按 [ControlLayoutScheme.slots] 顺序）；一个都没有时，
-  /// 已移除 ⇒ `[hidden]`，否则空表。
-  List<S> slotsOf(I item) {
-    final List<S> hits = <S>[
-      for (final S slot in scheme.slots)
-        if (_slots[slot]!.contains(item)) slot,
-    ];
-    if (hits.isNotEmpty) return hits;
-    return _removed.contains(item) ? <S>[scheme.hiddenSlot] : <S>[];
-  }
-
-  Map<S, List<I>> _copySlots() => <S, List<I>>{
-        for (final S slot in scheme.slots) slot: List<I>.from(_slots[slot]!),
-      };
-
-  bool _stillVisible(Map<S, List<I>> slots, I item) => scheme.slots.any(
-        (S s) => scheme.isOnPlayer(s) && slots[s]!.contains(item),
-      );
-
-  /// 把 [item] 的所有副本收拢成一份放进 [target] 的 [index]（核心拖拽写操作）。
-  /// 必需项移入 hidden 被拒（返回 this）。
-  ControlLayout<S, I> moveItem(I item, S target, {int? index}) {
-    if (!item.canMoveToSlot(target)) return this;
-    final Map<S, List<I>> next = _copySlots();
-    for (final S slot in scheme.slots) {
-      next[slot]!.removeWhere((I i) => i == item);
-    }
-    final Set<I> removed = <I>{..._removed};
-    if (target == scheme.hiddenSlot) {
-      removed.add(item);
-      return _fromRaw(scheme, next, removedItems: removed);
-    }
-    removed.remove(item);
-    final List<I> targetList = next[target]!;
-    final int insertAt =
-        (index == null) ? targetList.length : index.clamp(0, targetList.length);
-    targetList.insert(insertAt, item);
-    return _fromRaw(scheme, next, removedItems: removed);
-  }
-
-  /// 往 [target] 加一份 [item] 副本，**不**动其它槽里的副本；同槽幂等。
-  ControlLayout<S, I> addItemToSlot(I item, S target, {int? index}) {
-    if (!item.canMoveToSlot(target)) return this;
-    if (item.isSingleInstance || target == scheme.hiddenSlot) {
-      return moveItem(item, target, index: index);
-    }
-    if (_slots[target]!.contains(item)) return this;
-    final Map<S, List<I>> next = _copySlots();
-    final Set<I> removed = <I>{..._removed}..remove(item);
-    final List<I> targetList = next[target]!;
-    final int insertAt =
-        (index == null) ? targetList.length : index.clamp(0, targetList.length);
-    targetList.insert(insertAt, item);
-    return _fromRaw(scheme, next, removedItems: removed);
-  }
-
-  /// 把 [payload] 代表的那一份精确副本移进 [target]。
-  ///
-  /// 调色板拖拽（sourceSlot == null）= 新增副本；已放置 chip 的拖拽只删来源槽的
-  /// [ControlDragData.sourceIndex] 那一份，别处副本保留；同槽拖拽 = 带下标的重排。
-  ControlLayout<S, I> moveDraggedItem(
-    ControlDragData<S, I> payload,
-    S target, {
-    int? targetIndex,
-  }) {
-    final I item = payload.item;
-    if (payload.sourceSlot == null) {
-      return addItemToSlot(item, target, index: targetIndex);
-    }
-    if (!item.canMoveToSlot(target)) return this;
-    if (item.isSingleInstance) {
-      return moveItem(item, target, index: targetIndex);
-    }
-
-    final S source = payload.sourceSlot!;
-    final Map<S, List<I>> next = _copySlots();
-    final List<I> sourceList = next[source]!;
-    final int sourceIndex = payload.sourceIndex ??
-        sourceList.indexWhere((I candidate) => candidate == item);
-    if (sourceIndex < 0 ||
-        sourceIndex >= sourceList.length ||
-        sourceList[sourceIndex] != item) {
-      return this;
-    }
-
-    final Set<I> removed = <I>{..._removed};
-    if (target == scheme.hiddenSlot) {
-      sourceList.removeAt(sourceIndex);
-      if (!_stillVisible(next, item)) removed.add(item);
-      return _fromRaw(scheme, next, removedItems: removed);
-    }
-    removed.remove(item);
-    final List<I> targetList = next[target]!;
-    if (source != target && targetList.contains(item)) return this;
-
-    sourceList.removeAt(sourceIndex);
-    int insertAt = targetIndex ?? targetList.length;
-    if (source == target && targetIndex != null && sourceIndex < targetIndex) {
-      insertAt -= 1;
-    }
-    insertAt = insertAt.clamp(0, targetList.length);
-    targetList.insert(insertAt, item);
-    return _fromRaw(scheme, next, removedItems: removed);
-  }
-
-  /// 删掉 [slot] 里那一份 [item]；若是最后一份可见副本则记为已移除；必需项的最后
-  /// 一份不可删（返回 this）。
-  ControlLayout<S, I> removeItemFromSlot(I item, S slot) {
-    if (!_slots[slot]!.contains(item)) return this;
-    final Map<S, List<I>> next = _copySlots();
-    next[slot]!.removeWhere((I i) => i == item);
-    final Set<I> removed = <I>{..._removed};
-    if (!_stillVisible(next, item)) {
-      if (!scheme.canBeRemoved(item)) return this;
-      removed.add(item);
-    }
-    return _fromRaw(scheme, next, removedItems: removed);
-  }
-
-  /// 「槽位名 → 按钮名列表」编码骨架；默认不含 hidden 槽（它不是渲染面）。
-  Map<String, List<String>> encodeSlots({bool includeHidden = false}) =>
-      <String, List<String>>{
-        for (final S slot in scheme.slots)
-          if (includeHidden || slot != scheme.hiddenSlot)
-            slot.storageValue: <String>[
-              for (final I item in _slots[slot]!) item.storageValue,
-            ],
-      };
-
-  /// 已移除按钮名，按 [ControlLayoutScheme.items] 顺序。
-  List<String> encodeRemoved() => <String>[
-        for (final I item in removedItems) item.storageValue,
-      ];
 
   /// 归一化不变式维护者：
   ///   1. 同一可见槽内按钮至多一次；

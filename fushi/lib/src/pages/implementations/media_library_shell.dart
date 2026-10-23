@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:fushi/src/media/drag_drop/drop_surface_scope.dart';
 import 'package:fushi/utils.dart';
 
 /// 库页视图种类：一个顶层 tab 内部的几个平级视图。
@@ -79,13 +78,6 @@ class MediaLibraryShellScope extends InheritedWidget {
   /// 契约——那条契约只在「调用页正好是壳上面唯一一层路由」时才成立，第二个调用点
   /// 就不成立了（BUG-1871）。
   final void Function(MediaLibraryViewKind kind) select;
-
-  /// 切到 [kind] 的动作；本壳没有该视图时返回 null。
-  ///
-  /// 空态引导按钮的唯一正确判据：[select] 对不存在的视图是静默忽略，拿「壳在不在」
-  /// 当判据会渲染出一个点了什么都不发生的按钮。
-  VoidCallback? actionFor(MediaLibraryViewKind kind) =>
-      kinds.contains(kind) ? () => select(kind) : null;
 
   static MediaLibraryShellScope? maybeOf(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<MediaLibraryShellScope>();
@@ -205,13 +197,10 @@ class _MediaLibraryShellState extends State<MediaLibraryShell> {
                   // 照样是 true —— 隐藏的书架仍会把拖入的文件夹当漫画导入。
                   // 判据与上面 `offstage:` 用的是同一个表达式，且写成回调、在 drop
                   // 落地那一刻求值。
-                  child: DropSurfaceScope(
-                    isActive: () => i == _currentIndex,
-                    child: views[i].builder(
+                  child: views[i].builder(
                       context,
                       i == _currentIndex ? navigation : const SizedBox.shrink(),
                     ),
-                  ),
                 ),
               ),
         ],

@@ -2,31 +2,16 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fushi_anki/fushi_anki.dart';
 
-import 'package:fushi/src/anki/anki_view_model.dart';
-import 'package:fushi/src/platform/platform_providers.dart';
-import 'package:fushi/src/platform/platform_services.dart';
 import 'package:fushi_core/fushi_core.dart';
 import 'package:fushi/src/media/sources/reader_fushi_source.dart';
 import 'package:fushi/src/models/app_model.dart';
-import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/profile/profile_repository.dart';
 
-/// Serializes Profile application with temporary draft persistence.
-///
-/// A scope check on its own is racy: Profile application may start after Save
-/// checks the scope, or Save may run against an intermediate AppModel while a
-/// Profile is being applied. Both operations therefore use this same lock.
+/// Serializes Profile application: one change runs at a time, in call order,
+/// so a second change never observes an AppModel the first left half applied.
 class ProfileDraftCoordinator {
-  Object _draftScope = Object();
   Future<void> _tail = Future<void>.value();
-
-  Object get draftScope => _draftScope;
-
-  void invalidateDrafts() {
-    _draftScope = Object();
-  }
 
   Future<T> _exclusive<T>(Future<T> Function() action) {
     final Future<void> previous = _tail;
@@ -43,56 +28,8 @@ class ProfileDraftCoordinator {
     })();
   }
 
-  Future<T> runProfileChange<T>(Future<T> Function() action) {
-    return _runProfileMutation((_ProfileDraftMutation mutation) async {
-      mutation.invalidateDrafts();
-      return action();
-    });
-  }
-
-  Future<T> _runProfileMutation<T>(
-    Future<T> Function(_ProfileDraftMutation mutation) action,
-  ) {
-    return _exclusive(() async {
-      final _ProfileDraftMutation mutation = _ProfileDraftMutation(this);
-      try {
-        return await action(mutation);
-      } finally {
-        mutation.finish();
-      }
-    });
-  }
-
-  Future<bool> saveDraftIfCurrent(
-    Object expectedScope,
-    Future<void> Function() save,
-  ) {
-    return _exclusive(() async {
-      if (!identical(expectedScope, _draftScope)) return false;
-      await save();
-      return true;
-    });
-  }
-}
-
-class _ProfileDraftMutation {
-  _ProfileDraftMutation(this._coordinator);
-
-  final ProfileDraftCoordinator _coordinator;
-  bool _invalidatesDrafts = false;
-
-  void invalidateDrafts() {
-    if (_invalidatesDrafts) return;
-    _invalidatesDrafts = true;
-    _coordinator.invalidateDrafts();
-  }
-
-  void finish() {
-    if (!_invalidatesDrafts) return;
-    // A dialog opened while settings were being applied observed an
-    // intermediate AppModel and must not survive the completed change.
-    _coordinator.invalidateDrafts();
-  }
+  Future<T> runProfileChange<T>(Future<T> Function() action) =>
+      _exclusive(action);
 }
 
 class ProfileUiState {
@@ -177,8 +114,6 @@ class ProfileViewModel extends StateNotifier<ProfileUiState> {
     );
   }
 
-  Future<void> reload() => _load();
-
   /// TODO-2936：解析绑定（book 级 > 语言级 > 媒体类型级 > 当前激活）并在结果与当前激活
   /// 不同时切换。各媒体入口（阅读器 / 视频 / 漫画开页、gal launch/attach、浏览
   /// 器扩展查词）共用的非致命入口：失败只记日志，绝不打断调用方的加载/查词链。
@@ -216,127 +151,6 @@ class ProfileViewModel extends StateNotifier<ProfileUiState> {
         await _onProfileApplied();
       });
 
-  Future<void> createProfile(String name) =>
-      _whileInvalidatingProfileDrafts(() async {
-        await _repo.snapshotCurrentSettings(state.activeProfileId);
-        final newId = await _repo.createProfile(name);
-        await _repo.snapshotCurrentSettings(newId);
-        await _repo.setActiveProfileId(newId);
-        state = state.copyWith(
-          profiles: await _repo.getAllProfiles(),
-          activeProfileId: newId,
-        );
-      });
-
-  Future<void> copyProfile(int sourceId, String newName) async {
-    if (sourceId == state.activeProfileId) {
-      await _repo.snapshotCurrentSettings(sourceId);
-    }
-    await _repo.copyProfile(sourceId, newName);
-    state = state.copyWith(
-      profiles: await _repo.getAllProfiles(),
-    );
-  }
-
-  Future<void> renameProfile(int id, String name) async {
-    await _repo.renameProfile(id, name);
-    state = state.copyWith(profiles: await _repo.getAllProfiles());
-  }
-
-  Future<void> deleteProfile(int id) => _profileDraftCoordinator
-          ._runProfileMutation((_ProfileDraftMutation mutation) async {
-        // This repository read must happen after acquiring the same lock used
-        // by switch/create/Save. State may still describe the previous Profile
-        // while an earlier switch has already updated the repository.
-        final int previousActiveId = await _repo.getActiveProfileId();
-        final bool deletesActiveProfile = id == previousActiveId;
-        if (deletesActiveProfile) {
-          mutation.invalidateDrafts();
-        }
-
-        await _repo.deleteProfile(id);
-        final profiles = await _repo.getAllProfiles();
-        final activeId = await _repo.getActiveProfileId();
-        state = state.copyWith(profiles: profiles, activeProfileId: activeId);
-        if (deletesActiveProfile && activeId != previousActiveId) {
-          await _onProfileApplied();
-        }
-      });
-
-  Future<void> setMediaTypeBinding(
-      ProfileMediaKind mediaType, int? profileId) async {
-    if (profileId == null) {
-      await _repo.removeMediaTypeBinding(mediaType);
-    } else {
-      await _repo.setMediaTypeBinding(mediaType, profileId);
-    }
-    state = state.copyWith(
-      mediaTypeBindings: await _repo.getAllMediaTypeBindings(),
-    );
-  }
-
-  /// 绑定 / 解绑一种内容语言（[profileId] 为 null 即解绑）。[languageTag] 传任意
-  /// 形态的 BCP-47 串，归一在 repository 层做。
-  Future<void> setLanguageBinding(String languageTag, int? profileId) async {
-    if (profileId == null) {
-      await _repo.removeLanguageBinding(languageTag);
-    } else {
-      await _repo.setLanguageBinding(languageTag, profileId);
-    }
-    state = state.copyWith(
-      languageBindings: await _repo.getAllLanguageBindings(),
-    );
-  }
-
-  Future<void> saveCurrentSettingsToActiveProfile() async {
-    await _repo.snapshotCurrentSettings(state.activeProfileId);
-  }
-
-  /// 把指定 Profile 序列化成可分享的 JSON（凭据已剔除、字体绝对路径已剥离）。
-  /// [fontsRootDirectory] 是本机 `custom_fonts/` 根，用于 A1 字体路径剥离。
-  Future<String> exportProfile(
-    int profileId, {
-    String? fontsRootDirectory,
-  }) =>
-      _repo.exportProfileToJson(
-        profileId,
-        fontsRootDirectory: fontsRootDirectory,
-      );
-
-  /// 从导出 JSON 导回一个 Profile。坏文件在写 DB 前抛 [ProfileImportException]。
-  ///
-  /// 默认新建 Profile（重名加后缀）；overwrite 模式覆盖 [targetProfileId]。
-  /// 导入后刷新 Profile 列表；若覆盖的是当前激活 Profile，立即 [applyProfile]
-  /// 并触发 [_onProfileApplied] 让设置生效。
-  Future<int> importProfile(
-    String json, {
-    ProfileImportMode mode = ProfileImportMode.createNew,
-    int? targetProfileId,
-  }) =>
-      _profileDraftCoordinator
-          ._runProfileMutation((_ProfileDraftMutation mutation) async {
-        // Do not decide this from [state] before entering the lock: a queued
-        // switch can make [targetProfileId] active before the overwrite runs.
-        final int activeProfileId = await _repo.getActiveProfileId();
-        final bool overwritesActiveProfile =
-            mode == ProfileImportMode.overwrite &&
-                targetProfileId == activeProfileId;
-        if (overwritesActiveProfile) {
-          mutation.invalidateDrafts();
-        }
-
-        final int writtenId = await _repo.importProfileFromJson(
-          json,
-          mode: mode,
-          targetProfileId: targetProfileId,
-        );
-        state = state.copyWith(profiles: await _repo.getAllProfiles());
-        if (overwritesActiveProfile && writtenId == activeProfileId) {
-          await _repo.applyProfile(writtenId);
-          await _onProfileApplied();
-        }
-        return writtenId;
-      });
 }
 
 final fushiDatabaseProvider = Provider<FushiDatabase>((ref) {
@@ -346,11 +160,8 @@ final fushiDatabaseProvider = Provider<FushiDatabase>((ref) {
 
 final profileRepositoryProvider = Provider<ProfileRepository>((ref) {
   final db = ref.watch(fushiDatabaseProvider);
-  // Kitapsen: no Anki, so profiles carry no Anki settings.
-  final ankiRepo = null;
   return ProfileRepository(
     db,
-    ankiRepo,
     // BUG-1994：回插被旧 prune 删掉的词典行时，「装没装」只认磁盘目录。
     isDictionaryInstalled: ref.read(appProvider).isDictionaryInstalledOnDisk,
   );

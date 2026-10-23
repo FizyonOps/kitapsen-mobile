@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:fushi/src/pages/base_page.dart';
 import 'package:fushi/src/pages/implementations/home_page.dart';
 
@@ -24,8 +23,6 @@ abstract class BaseModuleTabPage extends BasePage {
   /// Create an instance of this tab page.
   const BaseModuleTabPage({super.key});
 
-  @override
-  BaseModuleTabPageState<BaseModuleTabPage> createState();
 }
 
 /// [BaseModuleTabPage] 的 State 基类；见类注释。
@@ -40,28 +37,15 @@ abstract class BaseModuleTabPageState<T extends BaseModuleTabPage>
   void initState() {
     super.initState();
     if (shellTab != null) {
-      homeShellTabNotifier.addListener(_onShellTabChanged);
     }
   }
 
   @override
   void dispose() {
     if (shellTab != null) {
-      homeShellTabNotifier.removeListener(_onShellTabChanged);
     }
     super.dispose();
   }
-
-  void _onShellTabChanged() {
-    if (!mounted) return;
-    if (homeShellTabNotifier.value == shellTab) {
-      onTabActivated();
-    }
-  }
-
-  /// 用户切回本 tab（[shellTab]）时的钩子；仅 [shellTab] 非 null 时会被调用。
-  @protected
-  void onTabActivated() {}
 
   /// 守卫式整页刷新（原 `BaseTabPageState.refresh` 上提，供各 tab 复用）。
   void refresh() {

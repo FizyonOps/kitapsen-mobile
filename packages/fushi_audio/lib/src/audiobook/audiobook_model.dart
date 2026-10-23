@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:fushi_core/fushi_core.dart';
 import '../parsers/subtitle_markup.dart';
@@ -16,15 +15,6 @@ class Audiobook {
 
   /// 手动选择的音频文件路径列表。files 模式下非 null，folder 模式下为 null。
   List<String>? audioPaths;
-
-  List<String>? get audioPathsInCueOrder {
-    final List<String>? paths = audioPaths;
-    if (paths == null) return null;
-    return List<String>.unmodifiable(paths);
-  }
-
-  List<File> get audioFilesInCueOrder =>
-      (audioPathsInCueOrder ?? const <String>[]).map(File.new).toList();
 
   /// 对齐文件格式：'smil' | 'json' | 'lrc'。
   late String alignmentFormat;
@@ -76,7 +66,6 @@ class CueTokenTiming {
 ///
 /// 解析对齐文件后批量写入；运行时按 (bookUid, chapterHref) 查询并缓存。
 class AudioCue {
-  int? id;
 
   /// 对应 [Audiobook.bookKey]（或 standalone SRT 的 uid）。
   late String bookKey;
@@ -117,27 +106,6 @@ class AudioCue {
   /// （`VideoBookRepository.saveCues` 过滤）。由 `AssParser.parseString(includeDrawings:
   /// true)` 产出，其余解析路径默认不产出。
   bool get isRenderOnly => text.isEmpty && markup?.drawing != null;
-
-  File? resolveAudioFile(List<File> audioFiles) {
-    if (audioFileIndex < 0 || audioFileIndex >= audioFiles.length) {
-      return null;
-    }
-    return audioFiles[audioFileIndex];
-  }
-
-  static AudioCue fromRow(AudioCueRow r) {
-    final c = AudioCue();
-    c.id = r.id;
-    c.bookKey = r.bookKey;
-    c.chapterHref = r.chapterHref;
-    c.sentenceIndex = r.sentenceIndex;
-    c.textFragmentId = r.textFragmentId;
-    c.text = r.cueText;
-    c.startMs = r.startMs;
-    c.endMs = r.endMs;
-    c.audioFileIndex = r.audioFileIndex;
-    return c;
-  }
 
   static AudioCuesCompanion toCompanion(AudioCue c) =>
       AudioCuesCompanion.insert(

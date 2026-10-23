@@ -1,4 +1,3 @@
-import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:flutter/foundation.dart' show defaultTargetPlatform;
 import 'package:flutter/material.dart';
 

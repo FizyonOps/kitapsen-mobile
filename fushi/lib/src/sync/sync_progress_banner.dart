@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fushi/src/sync/manual_sync_ui.dart';
 import 'package:fushi/src/sync/sync_activity.dart';
 import 'package:fushi/src/sync/sync_auto_trigger.dart';
 import 'package:fushi/src/sync/sync_progress.dart';
@@ -37,35 +36,14 @@ class SyncProgressBanner extends StatelessWidget {
               valueListenable: syncActivity,
               builder: (BuildContext context, SyncActivity? activity, ___) {
                 final ThemeData theme = Theme.of(context);
-                final String? line = p != null
-                    ? syncProgressLine(p)
-                    : (activity != null ? syncActivityLine(activity) : null);
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    if (line != null)
-                      Padding(
-                        padding: compact
-                            ? const EdgeInsets.fromLTRB(12, 0, 12, 2)
-                            : const EdgeInsets.fromLTRB(16, 0, 16, 4),
-                        child: Text(
-                          line,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: (compact
-                                  ? theme.textTheme.labelSmall
-                                  : theme.textTheme.bodySmall)
-                              ?.copyWith(
-                            color: theme.colorScheme.onSurfaceVariant,
-                          ),
-                        ),
-                      ),
                     // 阶段没有可测总数时退化成不确定进度条（value 为 null；eink
                     // 下钉成 0——不定态动画在墨水屏上是整条带子持续刷新，且默认
                     // 轨道色塌成底色，给实色轨道才看得见）。
                     LinearProgressIndicator(
-                      value: einkSafeProgressValue(context, p?.fraction),
                       minHeight: 2,
                       backgroundColor: isEinkTheme(context)
                           ? theme.colorScheme.surface

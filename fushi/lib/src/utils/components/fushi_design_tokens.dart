@@ -13,12 +13,6 @@ const double kTextBlockSlack = 4.0;
 /// 那颗星就是这么被压住并点不动的）。
 const double kFushiScrollbarThickness = 3.0;
 
-/// 滚动条实际占据的横向宽度 = thumb 粗细 + Material 的 `crossAxisMargin`(2)。
-///
-/// 需要给滚动条让出独立通道（gutter）的列表按这个值内缩内容，别写死数字——它必须
-/// 跟着 [kFushiScrollbarThickness] 走，否则下次调粗细又会压回内容上。
-const double kFushiScrollbarGutter = kFushiScrollbarThickness + 2.0;
-
 /// 一行 [style] 文字在当前文字缩放下占的实际高度。
 ///
 /// BUG-1184：有一类布局必须**先给出**「能放下 N 行文字」的固定高度——网格的
@@ -107,10 +101,6 @@ class FushiRadii {
   static const double dialogValue = 16;
   static const double sheetValue = 16;
 
-  /// galgame 竖版海报卡的圆角（对齐 ReinaManager 的圆润卡片观感，比 Hibiki 常规
-  /// [cardValue] 稍大一档；见 `docs/design/galgame-library-reina-visual-parity.md`）。
-  static const double posterValue = 16;
-
   final double group;
   final double card;
   final double control;
@@ -125,8 +115,6 @@ class FushiRadii {
   BorderRadius get chipRadius => BorderRadius.circular(chip);
   BorderRadius get menuRadius => BorderRadius.circular(menu);
   BorderRadius get dialogRadius => BorderRadius.circular(dialog);
-  BorderRadius get sheetRadius =>
-      BorderRadius.vertical(top: Radius.circular(sheet));
   Radius get chipCorner => Radius.circular(chip);
 }
 
@@ -135,13 +123,11 @@ class FushiRadii {
 /// these stay `const`: migrating a hardcoded `BorderRadius.circular(N)` to one
 /// of these preserves const-ness at the call site (routing through
 /// `FushiDesignTokens.of(context)` would not). Values come from [FushiRadii].
-abstract final class FushiBorderRadius {
+abstract class FushiBorderRadius {
   static const BorderRadius group =
       BorderRadius.all(Radius.circular(FushiRadii.groupValue));
   static const BorderRadius card =
       BorderRadius.all(Radius.circular(FushiRadii.cardValue));
-  static const BorderRadius poster =
-      BorderRadius.all(Radius.circular(FushiRadii.posterValue));
   static const BorderRadius control =
       BorderRadius.all(Radius.circular(FushiRadii.controlValue));
   static const BorderRadius chip =
@@ -308,7 +294,7 @@ class FushiTypeSpec {
 /// and a slightly larger, more legible reading body. Tracking is kept at 0 for
 /// most roles because the UI locale is often CJK (positive tracking spaces out
 /// ideographs badly); only the single largest display size gets mild tightening.
-abstract final class FushiTypeScale {
+abstract class FushiTypeScale {
   static const FushiTypeSpec displayLarge =
       FushiTypeSpec(40, FontWeight.w400, 1.15, -0.25);
   static const FushiTypeSpec displayMedium =

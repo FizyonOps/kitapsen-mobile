@@ -250,7 +250,7 @@ Future<void> _deleteCollection({
       confirmLabel: t.delete_collection,
       checkboxLabel: canDeleteMembers ? deleteMembersCheckboxLabel : null,
       localFilesSubtitle:
-          canDeleteMembers ? deleteMembersLocalFilesSubtitle : null,
+          (null),
       statisticsSubtitle:
           canDeleteMembers ? deleteMembersStatisticsSubtitle : null,
       checkedDisclosure: canDeleteMembers ? deleteMembersDisclosure : null,

@@ -185,18 +185,6 @@ List<bool> detectAnomalies(List<double> values, {double sigmaMultiple = 2.0}) {
   return flags;
 }
 
-/// 纯函数：按书列表进度条的填充比例（W1）。
-/// [metric] 是该书在当前排序维度下的度量值，[topMetric] 是同维度下第一名（最大值）
-/// 的度量值。保证填充维度与排序维度一致（字数/时长/速度）。
-/// [topMetric] <= 0（无数据或速度为 0）时返回 0，避免除零；否则裁剪到 [0, 1]。
-double bookProgressFraction(double metric, double topMetric) {
-  if (topMetric <= 0) return 0;
-  final double f = metric / topMetric;
-  if (f < 0) return 0;
-  if (f > 1) return 1;
-  return f;
-}
-
 /// 纯函数：阅读目标进度比例（TODO-1046）。
 /// [read] 为当前已读字符数，[goal] 为目标字符数。
 /// [goal] <= 0 表示未设定/关闭，返回 null（调用方不渲染进度）。

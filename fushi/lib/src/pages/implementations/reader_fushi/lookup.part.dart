@@ -17,34 +17,6 @@ part of '../reader_fushi_page.dart';
 extension _ReaderLookup on _ReaderFushiPageState {
   // ── Text Selection → Dictionary ───────────────────────────────────
 
-  /// [fromHover]（默认 false）透传给 [ReaderSelectionScripts.selectInvocation]：
-  /// true 表示悬停查词路径（onShiftHover / onDismissBarrierHover），命中空白不再
-  /// fire `onTapEmpty`（TODO-851，消操作栏闪烁）；false 是真点击路径，行为不变。
-  Future<void> _selectTextAt(
-    double cssX,
-    double cssY, {
-    bool fromHover = false,
-  }) async {
-    if (_controller == null) return;
-    const int maxLength = 400;
-    try {
-      await _controller!.evaluateJavascript(
-        source: ReaderSelectionScripts.selectInvocation(
-          cssX,
-          cssY,
-          maxLength,
-          fromHover: fromHover,
-        ),
-      );
-    } catch (e, stack) {
-      // TODO-678（BUG-005 同根因）：onTap / onShiftHover / onDismissBarrierHover
-      // 都 fire-and-forget 调本方法（不 await、不 catch），半销毁 WebView 上
-      // evaluateJavascript 抛 MissingPluginException 会无主逃当前 zone。`_controller
-      // != null` 防不了通道已废，必须就地兜底；选词失败 no-op，不影响后续手势。
-      ErrorLogService.instance.log('ReaderFushi.selectTextAt.eval', e, stack);
-    }
-  }
-
   /// BUG-712 ①：把点词门控（chrome 可见性 / highlightOnTap）只读镜像同步进阅读器
   /// JS 的 `window.__fushiTapGate`。Dart 是唯一写者：初始值随 setup 脚本注入，
   /// 之后 chrome 翻转（[_toggleChrome]）与设置热更新
@@ -70,111 +42,9 @@ extension _ReaderLookup on _ReaderFushiPageState {
     }
   }
 
-  void _clearLookupState() {
-    if (_pausedForLookup) {
-      _pausedForLookup = false;
-      _audiobookController?.play();
-    }
-    // BUG-1344：DOM/CSS 选区由整栈关闭的异步收尾显式 await；不能在这里
-    // fire-and-forget 后马上 reclaim 焦点，否则 macOS WKWebView 会把失焦灰选区绘在
-    // 清理完成之前并残帧。
-  }
-
-  /// 清除 WebView 内的选区高亮（[ReaderSelectionScripts.clearInvocation]）。
-  /// 半销毁 WebView 上 evaluateJavascript 抛 MissingPluginException，就地吞掉并
-  /// 记日志：调用方会 await，但平台视图销毁竞态仍应 no-op，不能阻断焦点归还。
-  Future<void> _clearSelectionJs() async {
-    try {
-      await _controller?.evaluateJavascript(
-        source: ReaderSelectionScripts.clearInvocation(),
-      );
-    } catch (e, stack) {
-      ErrorLogService.instance.log(
-        'ReaderFushi.clearLookupState.eval',
-        e,
-        stack,
-      );
-    }
-  }
-
-  Future<void> _highlightAndShowPopup(
-    int highlightCount,
-    Rect fallbackRect,
-  ) async {
-    // BUG-717 ②：把「显示弹窗」与「正文高亮 eval」解耦。旧实现先 `await` 高亮 eval（打在
-    // 正在渲染 EPUB 的大 reader WebView 上，其忙于分页/滚动/渲染时每次 JS 往返 stall 到
-    // 数十 ms），`finally` 才 `showDeferredPopup` —— 弹窗显示 + 弹窗 WebView 内容注入被
-    // 死死串在繁忙大 WebView 之后，是 app 内查词比 app 外覆盖窗慢数倍的主乘数。
-    //
-    // 现改为：先用原始选区 rect **立即显示**（弹窗 WebView 注入与下面的高亮 eval 分属两个
-    // WebView、并行不争用），高亮 eval 异步回来拿到精修后的词 bbox 再经 [reanchorTopPopup]
-    // 重锚（多字去屈折时高亮比选区宽，重锚保证弹窗不覆盖被查词 BUG-767；代次守卫防迟到
-    // 回调错位到新查词弹窗）。高亮副作用（正文里高亮被查词）随之从「弹窗前」变「弹窗后
-    // ~一跳」，与 app 外一致（app 外根本不在正文高亮）。
-    final int generation = activeLookupGeneration;
-    showDeferredPopup(selectionRect: fallbackRect);
-    if (highlightCount <= 0 || _controller == null) return;
-    try {
-      final raw = await _controller!.evaluateJavascript(
-        source: ReaderSelectionScripts.highlightInvocation(highlightCount),
-      );
-      if (!mounted) return;
-      final rect = ReaderSelectionScripts.highlightRectFromResult(
-        raw,
-        topOffset: 0,
-      );
-      if (rect != null) reanchorTopPopup(rect, generation);
-    } catch (e, stack) {
-      // BUG-005 同根因（TODO-678）：WebView 半销毁（页面 teardown / 设置 reload 重建
-      // 瞬态）时其 per-instance method channel 的 setMethodCallHandler(null) 已摘除，
-      // evaluateJavascript 抛 MissingPluginException。`_controller != null` 守卫只防
-      // null，防不了通道已废 —— 必须 try/catch 兜底。弹窗已显示，重锚失败仅停在选区
-      // rect（查词弹窗不中断）。
-      ErrorLogService.instance.log(
-        'ReaderFushi.highlightAndShowPopup.eval',
-        e,
-        stack,
-      );
-    }
-  }
-
-  /// 选词来源：JS 回传的 `fromHover`（Shift 悬停 / 悬停查词）是悬停，其余是明确的
-  /// 点击 / 按键。宿主据此决定是否跑「每查一次就付费一次」的旁路工作。
-  LookupOrigin _lookupOriginOf(ReaderSelectionData data) =>
-      data.fromHover ? LookupOrigin.hover : LookupOrigin.explicit;
-
   Future<void> _handleTextSelected(ReaderSelectionData data) async {
     // Kitapsen: no lookup; a tap never selects a word for one.
     return;
   }
 
-  Future<void> _checkFavoriteStatus() async {
-    final String sentence =
-        appModel.currentMediaSource?.currentSentence.text ?? '';
-    if (sentence.isEmpty) {
-      if (_currentSentenceIsFavorited) {
-        _rebuild(() => _currentSentenceIsFavorited = false);
-      }
-      return;
-    }
-    final sentenceRange = _cachedSentenceRange ??
-        (_cachedSelectionRange != null
-            ? (
-                offset: _cachedSelectionRange!.offset,
-                length: _cachedSelectionRange!.length,
-              )
-            : null);
-    // BUG-494：拿匹配条目的精确 id（未收藏 → null），供 toggle 用 removeById 精确删单条。
-    final String? matchedId =
-        await FavoriteSentenceRepository(appModel.database).matchedFavoriteId(
-      text: sentence,
-      bookKey: widget.bookKey,
-      sectionIndex: _favoriteSectionIndex,
-      normCharOffset: sentenceRange?.offset,
-    );
-    final bool favorited = matchedId != null;
-    if (mounted && favorited != _currentSentenceIsFavorited) {
-      _rebuild(() => _currentSentenceIsFavorited = favorited);
-    }
-  }
 }

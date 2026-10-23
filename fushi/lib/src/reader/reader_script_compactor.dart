@@ -18,8 +18,7 @@
 /// 把后续真模板串的内部当成代码区，把模板里的空行/数据行剥掉，CI 全绿而线上白屏。现在
 /// 改成真正的单遍词法扫描（[_JsLexer]）：行注释、块注释、单/双引号串、模板串（含 `${}`
 /// 嵌套）、正则字面量各自成状态，反引号只有出现在代码区才计数。那个地雷从根上不存在了。
-class ReaderScriptCompactor {
-  ReaderScriptCompactor._();
+abstract class ReaderScriptCompactor {
 
   /// 返回剥离整行注释与空行后的等价脚本。行内容不做任何改写。
   static String compact(String js) {
@@ -39,18 +38,6 @@ class ReaderScriptCompactor {
     return out.join('\n');
   }
 
-  /// 扫完整份脚本后词法状态是否回到干净顶层（不在模板串 / 块注释 / `${}` 内）。
-  ///
-  /// 这是给**守卫测试**用的自检：真实注入脚本都是完整的 IIFE，扫完必然干净。一旦某次
-  /// 编辑把扫描器带跑偏（比如写出扫描器读不懂的正则/字符串），这里会转假、守卫测试转红
-  /// ——而不是静默地产出一份坏脚本。
-  static bool scansCleanly(String js) {
-    final _JsLexer lexer = _JsLexer();
-    for (final String line in js.split('\n')) {
-      lexer.scanLine(line);
-    }
-    return lexer.isClean;
-  }
 }
 
 /// 一个词法上下文：要么是模板字符串体，要么是代码区（顶层，或模板 `${}` 内）。
@@ -95,10 +82,6 @@ class _JsLexer {
 
   /// 行首是否处于代码区（可以按「整行注释/空行」剥掉本行）。
   bool get atCode => !_inBlockComment && !_stack.last.isTemplate;
-
-  /// 扫完全文后是否回到干净顶层。
-  bool get isClean =>
-      !_inBlockComment && _stack.length == 1 && !_stack.first.isTemplate;
 
   void scanLine(String line) {
     final int n = line.length;

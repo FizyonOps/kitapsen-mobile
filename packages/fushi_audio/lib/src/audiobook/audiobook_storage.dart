@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:fushi_core/fushi_core.dart' show fnv1a32Hex, fushiDebugPrint;
 import 'package:path/path.dart' as p;
 
-abstract final class AudiobookStorage {
+abstract class AudiobookStorage {
   static const Set<String> audioExtensions = {
     '.mp3',
     '.m4a',
@@ -19,11 +19,6 @@ abstract final class AudiobookStorage {
     '.eac3',
     '.mp4',
   };
-
-  /// [audioExtensions] 的去点形式（file picker 的 `allowedExtensions` 用）。
-  /// 两个导入对话框原各持同一派生副本，收敛到源集合旁的单一真相。
-  static final Set<String> audioExtensionsNoDot =
-      audioExtensions.map((String ext) => ext.replaceFirst('.', '')).toSet();
 
   static bool isAudioFile(String path) =>
       audioExtensions.contains(p.extension(path).toLowerCase());
@@ -52,50 +47,6 @@ abstract final class AudiobookStorage {
         'AudiobookStorage.documentsRootResolver 未装配：Flutter app 调 '
         'installAudiobookStoragePlatform() / AppModel 注入 AppPaths；服务端在 CLI 入口注入。',
       ));
-
-  /// 单文件音频时长探测（毫秒）装配点；探测失败返回 0。平台实现（just_audio 一次性
-  /// [AudioPlayer]）由 `installAudiobookStoragePlatform()` 装入。
-  ///
-  /// null = 未装配 → [probeAudioDurationsMs] 全 0，与插件不可用时逐文件 catch 返回 0
-  /// 的既有降级**行为一致**（调用方据 0 判定无法可靠分文件）。
-  static Future<int> Function(String path)? audioDurationProbeMs;
-
-  /// TODO-811: 逐个探测音频文件时长（毫秒），下标与 [paths] 对齐。某个文件探测失败
-  /// （损坏/解码不支持）返回 0（调用方据此判定无法可靠分文件）。多文件单时间轴有声书
-  /// 导入时用这些边界给 cue 重新分配 [AudioCue.audioFileIndex]（见
-  /// [reindexCuesByFileBoundaries]）。探测走 [audioDurationProbeMs]。
-  static Future<List<int>> probeAudioDurationsMs(List<String> paths) async {
-    // 每个文件一次平台播放器 构造→探头→释放 往返（Android 上 100~500 ms）；
-    // 60 章的 m4b 串行就是半分钟卡在「保存中」。有界并行（同时 4 个），
-    // 结果按下标回填保持与 [paths] 对齐。
-    final List<int> out = List<int>.filled(paths.length, 0);
-    int next = 0;
-    Future<void> worker() async {
-      while (next < paths.length) {
-        final int i = next++;
-        out[i] = await _probeOneDurationMs(paths[i]);
-      }
-    }
-
-    final int workers = paths.length < probeDurationConcurrency
-        ? paths.length
-        : probeDurationConcurrency;
-    await Future.wait<void>(
-      List<Future<void>>.generate(workers, (_) => worker()),
-    );
-    return out;
-  }
-
-  /// [probeAudioDurationsMs] 的并行度。
-  static const int probeDurationConcurrency = 4;
-
-  static Future<int> _probeOneDurationMs(String path) {
-    final Future<int> Function(String path)? probe = audioDurationProbeMs;
-    if (probe == null) {
-      return Future<int>.value(0);
-    }
-    return probe(path);
-  }
 
   /// FNV-1a 32 位（UTF-8 逐字节），委托 hibiki_core 单一真相源；输出与历史手写
   /// 副本逐字节一致（金标锁在 hibiki_core 的 stable_hash_test.dart）——哈希已
@@ -206,18 +157,6 @@ abstract final class AudiobookStorage {
     return p.join(docs.path, 'audiobooks');
   }
 
-  /// 任一 [paths] 落在持久根之外即视为「引用导入」。空列表返回 false。
-  static bool anyReferenced({
-    required List<String> paths,
-    required String persistRoot,
-  }) =>
-      paths.any(
-        (String path) => isReferencedPath(
-          filePath: path,
-          persistRoot: persistRoot,
-        ),
-      );
-
   /// TODO-935 ①A 断链检测：返回 [paths] 中在磁盘上不存在的路径子集（保持原序）。
   /// [exists] 默认查真实文件系统，测试可注入假谓词。空列表返回空列表。
   static List<String> missingPaths(
@@ -267,8 +206,7 @@ abstract final class AudiobookStorage {
     void Function(String name)? onFile,
   }) async {
     final Set<String> keep = <String>{
-      if (copy)
-        for (final String path in sources) p.canonicalize(path),
+      for (final String path in sources) p.canonicalize(path),
     };
     await _pruneAudioFiles(persistDir, keep: keep);
     if (!copy) return List<String>.from(sources);
@@ -293,7 +231,6 @@ abstract final class AudiobookStorage {
             onProgress?.call(base + copied, totalBytes),
       ));
       if (!_isInside(persistDir, path)) copiedBytes += await src.length();
-      onProgress?.call(copiedBytes, totalBytes);
     }
     return persisted;
   }

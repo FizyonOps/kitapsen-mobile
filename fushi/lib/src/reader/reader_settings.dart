@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:fushi_core/fushi_core.dart';
-import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/media/media_source.dart' show dbSourcePrefKey;
 import 'package:fushi/src/reader/font_catalog.dart';
 import 'package:fushi/src/reader/reader_chrome_floating.dart';
@@ -196,46 +195,29 @@ class ReaderSettings {
   Future<void> setFontWeight(int v) => _set<int>('font_weight', v);
 
   double get lyricsFontSize => _get<double>('lyrics_font_size', 24);
-  Future<void> setLyricsFontSize(double v) =>
-      _set<double>('lyrics_font_size', v);
 
   /// TODO-368: 歌词字幕文字色，独立于主题色单独可调（参照视频字幕色）。存储为 ARGB
   /// int；`0`（完全透明，作为正文色永远无效）作哨兵 = 「未设置 / 跟随主题」，保持
   /// 向后兼容：未设过的用户落 0 → 消费端回退到主题文字色，与历史行为一致。
   int get lyricsTextColor => _get<int>('lyrics_text_color', 0);
-  Future<void> setLyricsTextColor(int v) => _set<int>('lyrics_text_color', v);
-
-  /// 清除自定义歌词色 → 回退跟随主题（哨兵 0）。
-  Future<void> clearLyricsTextColor() => _set<int>('lyrics_text_color', 0);
 
   double get lyricsMarginTop => _get<double>('lyrics_margin_top', 0);
-  Future<void> setLyricsMarginTop(double v) =>
-      _set<double>('lyrics_margin_top', v);
 
   double get lyricsMarginBottom => _get<double>('lyrics_margin_bottom', 0);
-  Future<void> setLyricsMarginBottom(double v) =>
-      _set<double>('lyrics_margin_bottom', v);
 
   double get lyricsMarginLeft => _get<double>('lyrics_margin_left', 0);
-  Future<void> setLyricsMarginLeft(double v) =>
-      _set<double>('lyrics_margin_left', v);
 
   double get lyricsMarginRight => _get<double>('lyrics_margin_right', 0);
-  Future<void> setLyricsMarginRight(double v) =>
-      _set<double>('lyrics_margin_right', v);
 
   /// TODO-907: 歌词模式竖排开关，**独立**于正文 `writing_mode`（正文默认
   /// vertical-rl，复用会连坐正文）。默认 `false` = 横排，向后兼容历史行为。
   bool get lyricsVerticalWriting =>
       _get<bool>('lyrics_vertical_writing', false);
-  Future<void> setLyricsVerticalWriting(bool v) =>
-      _set<bool>('lyrics_vertical_writing', v);
 
   /// TODO-908: 歌词听力沉浸模糊开关，**独立** bool key（不复用视频字幕键）。
   /// 默认 `false` = 不模糊，向后兼容历史行为。开启时仅当前句盖 8px 高斯模糊，
   /// hover / 点击显形。
   bool get lyricsBlur => _get<bool>('lyrics_blur', false);
-  Future<void> setLyricsBlur(bool v) => _set<bool>('lyrics_blur', v);
 
   double get lineHeight => _get<double>('line_height', 1.65);
   Future<void> setLineHeight(double v) => _set<double>('line_height', v);
@@ -256,21 +238,10 @@ class ReaderSettings {
   /// NOT fire for VN. TODO-909.
   bool get isContinuousMode => viewMode == 'continuous';
 
-  /// TODO-909: VN (Visual-Novel) is the third book view-mode, alongside
-  /// `'paginated'` / `'continuous'`. It detaches the chapter and renders one
-  /// Block/sentence screen at a time on its own stage.
-  bool get isVnMode => false;
-
   // ── VN (Visual-Novel) settings (TODO-909) ──────────────────────────────
   // Defaults copied from hoshi a ReaderSettings.kt (🔒③). per-Profile global,
   // same `src:reader_fushi:` Drift mechanism as view_mode. All six values are
   // exposed by the reading settings schema and consumed by the VN shell.
-
-  /// Typewriter reveal speed in chars/sec (0 = instant). hoshi default 45.
-  int get visualNovelRevealSpeed =>
-      _get<int>('vn_reveal_speed', 45).clamp(0, 120);
-  Future<void> setVisualNovelRevealSpeed(int v) =>
-      _set<int>('vn_reveal_speed', v.clamp(0, 120));
 
   /// `'block'` (one Block per screen) or `'sentences'` (group N sentences).
   String get visualNovelScreenMode {
@@ -278,34 +249,17 @@ class ReaderSettings {
     return raw == 'sentence' || raw == 'sentences' ? 'sentences' : 'block';
   }
 
-  Future<void> setVisualNovelScreenMode(String v) {
-    final String norm = v.toLowerCase() == 'sentences' ? 'sentences' : 'block';
-    return _set<String>('vn_screen_mode', norm);
-  }
-
   /// Sentences per screen in `'sentences'` mode (1-12). hoshi default 1.
   int get visualNovelSentencesPerScreen =>
       _get<int>('vn_sentences_per_screen', 1).clamp(1, 12);
-  Future<void> setVisualNovelSentencesPerScreen(int v) =>
-      _set<int>('vn_sentences_per_screen', v.clamp(1, 12));
 
   /// Keep 「」/『』 dialogue brackets intact when splitting sentences.
   bool get visualNovelPreserveDialogueBubbles =>
       _get<bool>('vn_preserve_dialogue', false);
-  Future<void> setVisualNovelPreserveDialogueBubbles(bool v) =>
-      _set<bool>('vn_preserve_dialogue', v);
-
-  /// Advance to the next screen on a blank tap. hoshi default false
-  /// (commit `42c0bab`).
-  bool get visualNovelClickAdvance => _get<bool>('vn_click_advance', false);
-  Future<void> setVisualNovelClickAdvance(bool v) =>
-      _set<bool>('vn_click_advance', v);
 
   /// Merge Sasayaki cues that straddle a screen boundary.
   bool get visualNovelMergeCrossScreenSentenceAudioCues =>
       _get<bool>('vn_merge_cross_screen_cues', false);
-  Future<void> setVisualNovelMergeCrossScreenSentenceAudioCues(bool v) =>
-      _set<bool>('vn_merge_cross_screen_cues', v);
 
   String get theme => _get<String>('theme', 'light-theme');
   Future<void> setTheme(String v) => _set<String>('theme', v);
@@ -343,9 +297,6 @@ class ReaderSettings {
       _get<String>('furigana_mode', 'off'),
     );
   }
-
-  Future<void> setFuriganaMode(String v) =>
-      _set<String>('furigana_mode', normalizeFuriganaMode(v));
 
   double get textIndentation => _get<double>('text_indentation', 0);
   Future<void> setTextIndentation(double v) =>
@@ -439,49 +390,6 @@ class ReaderSettings {
   bool get prioritizeReaderStyles => _get<bool>('reader_styles', true);
   Future<void> setPrioritizeReaderStyles(bool v) =>
       _set<bool>('reader_styles', v);
-
-  // ── Behavior settings ─────────────────────────────────────────────
-
-  bool get autoReadOnLookup => _get<bool>('auto_read_on_lookup', true);
-  Future<void> toggleAutoReadOnLookup() =>
-      _set<bool>('auto_read_on_lookup', !autoReadOnLookup);
-
-  static int normalizeLookupAudioVolume(num value) =>
-      value.round().clamp(0, 100).toInt();
-
-  int get lookupAudioVolume =>
-      _get<int>('lookup_audio_volume', 100).clamp(0, 100).toInt();
-  Future<void> setLookupAudioVolume(num value) => _set<int>(
-        'lookup_audio_volume',
-        normalizeLookupAudioVolume(value),
-      );
-
-  double get dismissSwipeSensitivity =>
-      _get<double>('dismiss_swipe_sensitivity', 0.6);
-  Future<void> setDismissSwipeSensitivity(double v) =>
-      _set<double>('dismiss_swipe_sensitivity', v);
-
-  /// 滑动关闭查词弹窗时，松手后是否播放「补间滑出屏外 / 弹回原位」动画。默认 true
-  /// （保持既有手感）；关掉则松手当帧就关，与墨水屏模式下的行为一致。
-  bool get popupDismissAnimation => _get<bool>('popup_dismiss_animation', true);
-  Future<void> setPopupDismissAnimation(bool v) =>
-      _set<bool>('popup_dismiss_animation', v);
-
-  /// TODO-407②：查词弹窗是否允许"水平滑动关闭"（[SwipeDismissWrapper]）。桌面端
-  /// （Windows/Linux）鼠标左键框选正文与滑动手势的位移序列同形，默认关闭滑动关闭、
-  /// 用顶栏 X 兜底；触摸为主的平台（macOS/iOS/Android）默认开启。未持久化覆盖时
-  /// 回退到 [defaultSwipeToClose]，让"换平台即取该平台默认"成立。
-  bool get enableSwipeToClose => _get<bool>(
-        'enable_swipe_to_close',
-        defaultSwipeToClose(defaultTargetPlatform),
-      );
-  Future<void> setEnableSwipeToClose(bool v) =>
-      _set<bool>('enable_swipe_to_close', v);
-
-  /// 纯函数：某平台下查词弹窗"滑动关闭"的默认开关。Windows/Linux 默认 false
-  /// （鼠标框选易误触），其余（macOS/iOS/Android/fuchsia）默认 true。
-  static bool defaultSwipeToClose(TargetPlatform platform) =>
-      !(platform == TargetPlatform.windows || platform == TargetPlatform.linux);
 
   /// 翻页滑动**灵敏度**（TODO-113 / BUG-2563）。1.0 = 默认手感；**值越大越灵敏**
   /// （更短的滑动即可翻页），越小越迟钝（需滑得更远）。阈值取 `base / 灵敏度`，
@@ -591,16 +499,6 @@ class ReaderSettings {
   Future<void> setWheelPageTurnInterval(int v) =>
       _set<int>('wheel_page_turn_interval', v);
 
-  /// Tap-to-look-up. Kitapsen has no dictionary, so a tap on text must never
-  /// open a lookup popup; taps fall through to the toolbar toggle instead.
-  static const bool defaultHighlightOnTap = false;
-
-  bool get highlightOnTap {
-    return false;
-  }
-  Future<void> toggleHighlightOnTap() =>
-      _set<bool>('highlight_on_tap', !highlightOnTap);
-
   bool get showTopProgressBar => _get<bool>('show_top_progress_bar', true);
   Future<void> toggleShowTopProgressBar() =>
       _set<bool>('show_top_progress_bar', !showTopProgressBar);
@@ -610,19 +508,10 @@ class ReaderSettings {
   /// 正交；两个都关时整条状态行不画也不占预留（见 `readerStatusFooterEnabled`）。
   /// 只关显示，不停表——计时账仍在 `StudyClock` 照记。
   bool get showReadingTimer => _get<bool>('show_reading_timer', true);
-  Future<void> toggleShowReadingTimer() =>
-      _set<bool>('show_reading_timer', !showReadingTimer);
 
   bool get keepScreenAwake => _get<bool>('keep_screen_awake', true);
   Future<void> toggleKeepScreenAwake() =>
       _set<bool>('keep_screen_awake', !keepScreenAwake);
-
-  // TODO-728②：有声书底栏是否显示「当前句子」cue 文本（per-reader，每本书各自
-  // 记忆）。默认 true = 现状（始终显示）；false = 隐藏 cue 文本但保留布局占位，
-  // 底栏其它控件位置不动。
-  bool get showBottomBarCue => _get<bool>('show_bottom_bar_cue', true);
-  Future<void> toggleShowBottomBarCue() =>
-      _set<bool>('show_bottom_bar_cue', !showBottomBarCue);
 
   // TODO-728: top reading-progress position (per-reader). One of
   // 'left' | 'center' | 'right'; default 'center' = current behavior
@@ -635,8 +524,6 @@ class ReaderSettings {
 
   String get topProgressPosition => normalizeTopProgressPosition(
       _get<String>('top_progress_position', 'center'));
-  Future<void> setTopProgressPosition(String v) =>
-      _set<String>('top_progress_position', normalizeTopProgressPosition(v));
 
   // TODO-975 决策#3：「点空白处隐藏控制栏」开启 ⟺ 底栏进入悬浮模式（点击唤出、
   // 计时自动收起、不占正文位置）。复用此既有 key 作为底栏悬浮开关，不新增独立偏好
@@ -649,8 +536,6 @@ class ReaderSettings {
   /// 进度变成「点击唤出、计时自动收起、不占正文位置」。默认 true = 悬浮（不占 18px
   /// 预留）。与 [showTopProgressBar] 正交：进度关时本开关在 UI 隐藏。
   bool get topProgressFloating => _get<bool>('top_progress_floating', true);
-  Future<void> toggleTopProgressFloating() =>
-      _set<bool>('top_progress_floating', !topProgressFloating);
 
   /// TODO-975 决策#1：悬浮 chrome（顶部进度 / 底栏）唤出后自动收起的时长（毫秒），
   /// 顶部与底栏共用同一个值。默认 [kDefaultAutoHideChromeMillis]（3000ms），可调滑块
@@ -675,15 +560,6 @@ class ReaderSettings {
   bool get reverseArrowPageTurn => _get<bool>('reverse_arrow_page_turn', false);
   Future<void> toggleReverseArrowPageTurn() =>
       _set<bool>('reverse_arrow_page_turn', !reverseArrowPageTurn);
-
-  // TODO-830: 反转有声书底栏 ⏮⏭ 前进/后退按钮的功能方向（per-reader，每本书
-  // 各自记忆，与 invert_swipe_direction / reverse_arrow_page_turn 一致）。
-  // 默认 false = 现有行为（左=上一句/快退、右=下一句/快进）；true = 左右功能互换。
-  // 这是「功能反转」维度，与 reverseReaderBottomBar 的「位置镜像」维度严格正交。
-  bool get invertAudiobookSkipDirection =>
-      _get<bool>('invert_audiobook_skip_direction', false);
-  Future<void> toggleInvertAudiobookSkipDirection() => _set<bool>(
-      'invert_audiobook_skip_direction', !invertAudiobookSkipDirection);
 
   // ── Custom fonts (catalog + per-target refs) ─────────────────────
   //
@@ -948,14 +824,6 @@ class ReaderSettings {
         _ => 'off',
       };
 
-  static String furiganaModeToStyle(String mode) =>
-      switch (normalizeFuriganaMode(mode)) {
-        'hidden' => 'Hide',
-        'toggle' => 'Toggle',
-        'dimmed' => 'Dimmed',
-        _ => 'Show',
-      };
-
   static ({String fontFamily, String fontFaces}) customFontCssForEntries(
     Iterable<Map<String, dynamic>> fonts, {
     Iterable<String> allowedDirectories = const <String>[],
@@ -977,84 +845,9 @@ class ReaderSettings {
         FontTarget.gameLookup => fontKeyGameLookup,
       };
 
-  /// Persists the whole list for [target]. The body convenience overload
-  /// [setCustomFonts] preserves the pre-split call sites unchanged.
-  Future<void> setFontsForTarget(
-    FontTarget target,
-    List<Map<String, dynamic>> fonts,
-  ) async {
-    final FontCatalogState state = await _ensureFontCatalogState();
-    final FontCatalogState updated = state.withTargetFonts(
-      fontKeyForTarget(target),
-      fonts,
-    );
-    await _persistFontCatalogState(updated, syncLegacyKeys: true);
-  }
-
-  Future<void> setCustomFonts(List<Map<String, dynamic>> fonts) =>
-      setFontsForTarget(FontTarget.body, fonts);
-
-  Future<void> addFontForTarget(
-    FontTarget target, {
-    required String name,
-    String? path,
-  }) async {
-    final List<Map<String, dynamic>> list =
-        List<Map<String, dynamic>>.from(fontsForTarget(target));
-    list.add(<String, dynamic>{'name': name, 'path': path, 'enabled': true});
-    await setFontsForTarget(target, list);
-  }
-
-  Future<void> removeFontForTarget(FontTarget target, int index) async {
-    final List<Map<String, dynamic>> list =
-        List<Map<String, dynamic>>.from(fontsForTarget(target));
-    if (index < 0 || index >= list.length) return;
-    list.removeAt(index);
-    await setFontsForTarget(target, list);
-  }
-
-  Future<void> toggleFontForTarget(FontTarget target, int index) async {
-    final List<Map<String, dynamic>> list =
-        List<Map<String, dynamic>>.from(fontsForTarget(target));
-    if (index < 0 || index >= list.length) return;
-    list[index]['enabled'] = !(list[index]['enabled'] as bool? ?? true);
-    await setFontsForTarget(target, list);
-  }
-
-  Future<void> reorderFontsForTarget(
-    FontTarget target,
-    int oldIndex,
-    int newIndex,
-  ) async {
-    final List<Map<String, dynamic>> list =
-        List<Map<String, dynamic>>.from(fontsForTarget(target));
-    if (newIndex > oldIndex) newIndex--;
-    if (oldIndex < 0 ||
-        oldIndex >= list.length ||
-        newIndex < 0 ||
-        newIndex > list.length) {
-      return;
-    }
-    final Map<String, dynamic> item = list.removeAt(oldIndex);
-    list.insert(newIndex, item);
-    await setFontsForTarget(target, list);
-  }
-
-  // Body-target convenience overloads kept for existing reader call sites.
-  Future<void> addCustomFont({required String name, String? path}) =>
-      addFontForTarget(FontTarget.body, name: name, path: path);
-
-  Future<void> removeCustomFont(int index) =>
-      removeFontForTarget(FontTarget.body, index);
-
-  Future<void> toggleCustomFont(int index) =>
-      toggleFontForTarget(FontTarget.body, index);
-
-  Future<void> reorderCustomFonts(int oldIndex, int newIndex) =>
-      reorderFontsForTarget(FontTarget.body, oldIndex, newIndex);
 }
 
-class ReaderCustomFontCss {
+abstract class ReaderCustomFontCss {
   /// 值住在引擎（`EpubBook.resolveInternalLink` 也按它识别内链），这里只是别名。
   static const String kReaderResourceHost = engine_host.kReaderResourceHost;
   static const String kReaderResourceScheme = 'fushi-reader';
@@ -1128,6 +921,6 @@ class ReaderCustomFontCss {
   }
 
   static String fontUrl(String path) =>
-      '${defaultTargetPlatform == TargetPlatform.macOS || defaultTargetPlatform == TargetPlatform.iOS ? kReaderResourceScheme : 'https'}'
+      '${defaultTargetPlatform == TargetPlatform.iOS ? kReaderResourceScheme : 'https'}'
       '://$kReaderResourceHost/fonts/${Uri.encodeComponent(path)}';
 }

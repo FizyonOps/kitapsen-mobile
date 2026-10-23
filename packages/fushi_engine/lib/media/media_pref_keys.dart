@@ -18,9 +18,6 @@ const String kReaderSourcePersistedKey = 'reader_fushi';
 /// 书籍媒体标识前缀（`fushi://book/<bookKey>`）。
 const String kReaderBookIdentifierPrefix = 'fushi://book/';
 
-String readerBookMediaIdentifierFor(String bookKey) =>
-    '$kReaderBookIdentifierPrefix$bookKey';
-
 /// 规范书名覆盖键：`override_title://<mediaIdentifier>`。
 String overrideTitleKeyFor(String mediaIdentifier) =>
     '$kOverrideTitleKeyMarker$mediaIdentifier';

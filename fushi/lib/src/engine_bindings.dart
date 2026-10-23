@@ -10,37 +10,18 @@
 /// 幂等：重复调用只是重复赋同一批值。
 library;
 
-import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart' show debugPrint;
 import 'package:flutter/painting.dart';
-import 'package:flutter/services.dart' show RootIsolateToken;
-import 'package:fushi/src/media/audiobook/audiobook_storage_platform.dart';
 import 'package:fushi/src/media/audiobook/platform_charset_detector.dart';
 import 'package:fushi/src/utils/cover_image.dart';
-import 'package:fushi/src/media/video/ffmpeg_kit_backend.dart';
-import 'package:fushi/src/models/store_compliance.dart';
-import 'package:fushi/src/ocr/gal_lookup_calibration_ocr.dart';
-import 'package:fushi/src/ocr/ocr_inference_ort.dart';
 import 'package:fushi/src/storage/app_paths.dart';
 import 'package:fushi/src/utils/misc/error_log_service.dart';
 import 'package:fushi_core/fushi_core.dart';
-import 'package:fushi_dictionary/fushi_dictionary.dart' show FushiDicts;
 import 'package:fushi_engine/foundation/engine_log.dart';
 import 'package:fushi_engine/foundation/engine_paths.dart';
-import 'package:fushi_engine/dictionary/dictionary_engine_hooks.dart';
 import 'package:fushi_engine/foundation/engine_platform_hooks.dart';
-import 'package:fushi_engine/media/video/bluray/aacs_media_session.dart'
-    show aacsDecryptionAvailable;
-import 'package:fushi_engine/media/video/ffmpeg_backend.dart';
-import 'package:fushi_engine/media/video/metadata/video_metadata_provider_display_name.dart';
-import 'package:fushi/src/media/video/metadata/video_metadata_provider_label.dart';
-import 'package:fushi_engine/utils/misc/desktop_audio_clipper.dart'
-    show ffmpegRemoteInputRouteResolver;
-import 'package:fushi/src/utils/net/ffmpeg_relay_route.dart';
-import 'package:fushi_engine/ocr/ocr_host_bindings.dart';
-import 'package:fushi/src/media/manga/manga_panel_model_service.dart';
 
 /// `AppPaths` 静态便捷层 → 引擎 [EnginePaths]。三个根逐一委派，子目录派生规则
 /// 在引擎基类里与 `AppPaths.documentsSubdirectory` 同构。
@@ -50,12 +31,6 @@ class AppPathsEngineBridge extends EnginePaths {
   @override
   Future<Directory> documentsRootDirectory() =>
       AppPaths.documentsRootDirectory();
-
-  @override
-  Future<Directory> supportRootDirectory() => AppPaths.supportRootDirectory();
-
-  @override
-  Future<Directory> tempRootDirectory() => AppPaths.tempRootDirectory();
 
   /// iOS：file_picker 把选中文件搬进 `NSTemporaryDirectory()`（容器 `tmp/`，iOS
   /// 把 `TMPDIR` 设成它，即 [Directory.systemTemp]）。注意它**不是**
@@ -85,21 +60,13 @@ Future<void> _releaseImageCacheBeforeDelete(File file) async {
   }
 }
 
-FfmpegBackend _platformFfmpegBackend() {
-  if (Platform.isAndroid || Platform.isIOS) return const KitFfmpegBackend();
-  return const CliFfmpegBackend();
-}
-
 void installEngineHostBindings() {
   fushiDebugPrint = debugPrint;
   engineLog = ErrorLogService.instance;
   enginePaths = const AppPathsEngineBridge();
-  // 发现来源 chip 的资料源名走 i18n 出口（引擎默认是不翻译的品牌名）。
-  videoMetadataProviderDisplayName = videoMetadataProviderLabel;
   evictImageCacheForFile = _evictImageCacheForFile;
   releaseImageCacheBeforeDelete = _releaseImageCacheBeforeDelete;
   // fushi_audio 的两个插件级装配点（charset 探测 method channel、just_audio 时长探测 +
   // path_provider 文档根）：纯 Dart 一半住 fushi_audio_core，插件实现由这里写入。
   installPlatformCharsetDetector();
-  installAudiobookStoragePlatform();
 }

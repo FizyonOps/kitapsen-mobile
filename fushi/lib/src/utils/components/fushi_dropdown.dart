@@ -49,7 +49,6 @@ class GamepadMenuDropdown<T> extends StatefulWidget {
     this.label,
     this.hintText,
     this.focusId,
-    this.entrySubtitle,
   });
 
   final List<GamepadDropdownEntry<T>> entries;
@@ -64,12 +63,6 @@ class GamepadMenuDropdown<T> extends StatefulWidget {
   final String? label;
   final String? hintText;
   final FushiFocusId? focusId;
-
-  /// Optional per-entry subtitle (a second, muted line under the label inside
-  /// the open menu — e.g. a latest-line preview for text threads). Returning
-  /// null/empty for a value keeps that row single-line. The closed trigger
-  /// still shows only the label.
-  final String? Function(T value)? entrySubtitle;
 
   @override
   State<GamepadMenuDropdown<T>> createState() => _GamepadMenuDropdownState<T>();
@@ -139,7 +132,6 @@ class _GamepadMenuDropdownState<T> extends State<GamepadMenuDropdown<T>> {
           DropdownMenuEntry<T>(
             value: e.value,
             label: e.label,
-            labelWidget: _entryLabelWidget(context, e),
           ),
       ],
       onSelected: widget.enabled
@@ -151,29 +143,6 @@ class _GamepadMenuDropdownState<T> extends State<GamepadMenuDropdown<T>> {
     return widget.width == null
         ? menu
         : SizedBox(width: widget.width, child: menu);
-  }
-
-  /// Two-line label for the stock [DropdownMenu] path when a subtitle exists;
-  /// null falls back to the plain `label` string rendering.
-  Widget? _entryLabelWidget(BuildContext context, GamepadDropdownEntry<T> e) {
-    final String? subtitle = widget.entrySubtitle?.call(e.value);
-    if (subtitle == null || subtitle.isEmpty) return null;
-    final ThemeData theme = Theme.of(context);
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(e.label, maxLines: 2, softWrap: true),
-        Text(
-          subtitle,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: theme.textTheme.bodySmall?.copyWith(
-            color: theme.colorScheme.onSurfaceVariant,
-          ),
-        ),
-      ],
-    );
   }
 
   Widget _buildMenuAnchor(BuildContext context) {
@@ -317,24 +286,7 @@ class _GamepadMenuDropdownState<T> extends State<GamepadMenuDropdown<T>> {
         fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
       ),
     );
-    final String? subtitle = widget.entrySubtitle?.call(entry.value);
-    final Widget text = (subtitle == null || subtitle.isEmpty)
-        ? title
-        : Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              title,
-              Text(
-                subtitle,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: tokens.type.metadata.copyWith(
-                  color: tokens.surfaces.onVariant,
-                ),
-              ),
-            ],
-          );
+    final Widget text = title;
     // Flex (Expanded) needs a bounded width; only the pinned-width menu hands
     // the item finite constraints. The unbounded fallback uses a min-size row
     // so a flex child can never assert against infinite width.
@@ -387,80 +339,5 @@ class _GamepadMenuDropdownState<T> extends State<GamepadMenuDropdown<T>> {
         child: label,
       ),
     );
-  }
-}
-
-/// A helper for creating a dropdown styled for the application. Delegates to
-/// [GamepadMenuDropdown]: a gamepad-enterable [MenuAnchor] on every polled
-/// platform (Windows/Linux/iOS/macOS) and a stock [DropdownMenu] on Android.
-class FushiDropdown<T> extends StatefulWidget {
-  /// Define a dropdown with options and an action to do when the selected
-  /// option is changed.
-  const FushiDropdown({
-    required this.options,
-    required this.initialOption,
-    required this.generateLabel,
-    required this.onChanged,
-    this.enabled = true,
-    this.focusId,
-    super.key,
-  });
-
-  /// List of options that are available to pick from.
-  final List<T> options;
-
-  /// An option that will appear as default when this dropdown appears for the
-  /// first time. Must be an option available in [options].
-  final T initialOption;
-
-  /// A function that converts a [T] to a usable label.
-  final String Function(T) generateLabel;
-
-  /// A callback that will occur when a new option has been selected.
-  final Function(T?) onChanged;
-
-  /// Whether the button allows changing the option or not.
-  final bool enabled;
-  final FushiFocusId? focusId;
-
-  @override
-  State<FushiDropdown<T>> createState() => _FushiDropdownState<T>();
-}
-
-class _FushiDropdownState<T> extends State<FushiDropdown<T>> {
-  late T? selectedOption;
-
-  @override
-  void initState() {
-    selectedOption = widget.initialOption;
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final List<T> uniqueOptions = widget.options.toSet().toList();
-    T? dropdownValue = selectedOption;
-    if (!uniqueOptions.contains(dropdownValue)) {
-      dropdownValue = uniqueOptions.isNotEmpty ? uniqueOptions.first : null;
-    }
-
-    return GamepadMenuDropdown<T>(
-      enabled: widget.enabled,
-      selected: dropdownValue,
-      onChanged: _onSelected,
-      focusId: widget.focusId,
-      entries: <GamepadDropdownEntry<T>>[
-        for (final T value in uniqueOptions)
-          (value: value, label: widget.generateLabel(value)),
-      ],
-    );
-  }
-
-  void _onSelected(T? value) {
-    widget.onChanged(value);
-
-    setState(() {
-      selectedOption = value;
-    });
   }
 }

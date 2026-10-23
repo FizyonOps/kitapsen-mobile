@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fushi/src/utils/adaptive/adaptive_platform.dart';
 
@@ -25,41 +24,6 @@ const ValueKey<String> _kSectionTabLeadingOverflowCueKey = ValueKey<String>(
 const ValueKey<String> _kSectionTabTrailingOverflowCueKey = ValueKey<String>(
   'library-section-tabs-trailing-overflow-cue',
 );
-
-/// 向子树广播「模块此刻真正显示的是哪个分区」，让同一模块里**同时常驻**的多份
-/// [LibrarySectionTabs] 跟着它走。
-///
-/// 动因：游戏模块的七个子区在 IndexedStack 里一起常驻，每个子页各自挂一份页签、
-/// 各自的 `selected` 是常量——切到别的子区时，那一页的页签早就停在自己的位置上，
-/// 指示条没有起点可滑，看起来就是「导航栏没动画」。挂了本作用域后，**隐藏**页的
-/// 页签把指示器投影到 [current]（跟着用户真正所在的分区走），被切出来的那一刻才
-/// 从来源分区滑到自己。
-///
-/// [current] 的值不在某份页签的段里（如游戏「诊断」不设页签）时，该页签回落到
-/// 自己的 `selected`。只对自持形态生效；[LibrarySectionTabs.controlled] 的真相在
-/// 宿主 controller，不受影响。
-///
-/// 同一时刻只挂**一份**页签、切分区时整份换位置的壳（视频 / 书架 / 漫画）不用它，
-/// 而是给页签一个壳持有的 [GlobalKey]，让同一个 State 随分区移动——见
-/// `VideoLibraryShell` / `MediaLibraryShell`。
-class LibrarySectionFollowScope extends InheritedWidget {
-  const LibrarySectionFollowScope({
-    required this.current,
-    required super.child,
-    super.key,
-  });
-
-  /// 模块当前真正显示的分区值（与页签的 `LibrarySectionTab.value` 同值域）。
-  final ValueListenable<Object?> current;
-
-  static ValueListenable<Object?>? maybeOf(BuildContext context) => context
-      .dependOnInheritedWidgetOfExactType<LibrarySectionFollowScope>()
-      ?.current;
-
-  @override
-  bool updateShouldNotify(LibrarySectionFollowScope oldWidget) =>
-      current != oldWidget.current;
-}
 
 /// [LibrarySectionTabs] 的一段：值 + 用户可读标签。
 class LibrarySectionTab<T> {
@@ -268,28 +232,8 @@ class _FushiSectionTabBarState<T extends Object>
     return index < 0 ? 0 : index;
   }
 
-  /// [LibrarySectionFollowScope] 广播的「模块当前分区」；没挂作用域时为 null。
-  ValueListenable<Object?>? _follow;
-
-  /// 指示器该停在哪：挂了跟随作用域且当前分区在本页签的段里时跟它走（隐藏页的
-  /// 页签就这样一直停在用户真正所在的分区上），否则是自己的 [widget.selected]。
-  /// 可见那一份两者恒等。
-  int get _targetIndex {
-    final Object? followed = _follow?.value;
-    if (followed != null) {
-      final int index = widget.tabs.indexWhere(
-        (LibrarySectionTab<T> tab) => tab.value == followed,
-      );
-      if (index >= 0) return index;
-    }
-    return _selectedIndex;
-  }
-
-  void _onFollowChanged() {
-    if (!mounted) return;
-    // 重建即经 build 里的投影校正滑过去；listener 触发时不在 build 阶段，可以 setState。
-    setState(() {});
-  }
+  /// 指示器该停在哪：自己的 [widget.selected]。
+  int get _targetIndex => _selectedIndex;
 
   /// 自持 controller 的指示条滑动时长：eink 下归零（滑动 = 一串局部刷新的残影），
   /// 首帧 initState 里读不到 Theme，先按默认建，didChangeDependencies 再对齐。
@@ -311,13 +255,6 @@ class _FushiSectionTabBarState<T extends Object>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final ValueListenable<Object?>? follow = widget.controller == null
-        ? LibrarySectionFollowScope.maybeOf(context)
-        : null;
-    if (!identical(follow, _follow)) {
-      _follow?.removeListener(_onFollowChanged);
-      _follow = follow?..addListener(_onFollowChanged);
-    }
     final Duration duration = einkSafeDuration(context, kTabScrollDuration);
     if (duration == _animationDuration) return;
     _animationDuration = duration;
@@ -349,7 +286,6 @@ class _FushiSectionTabBarState<T extends Object>
 
   @override
   void dispose() {
-    _follow?.removeListener(_onFollowChanged);
     _owned?.dispose();
     super.dispose();
   }
@@ -440,24 +376,7 @@ class _FushiSectionTabBarState<T extends Object>
     // 而 TabBar 的内部 controller 取不到。两侧渐隐则不能省——即使 tabs 比旧等宽段窄，
     // 窄窗、界面缩放与长译文仍会把尾部页签完整裁到视口外，用户实报看不出后面还有
     // 内容（BUG-1971）。通过冒泡的 scroll metrics 动态显示渐隐，不需要拿 controller。
-    if (!widget.fill) return _buildScrollableWithCues();
-    // 铺满形态没有 Scrollable，也就没有滚动通知来收回渐隐：窗口先窄（出了尾部
-    // 渐隐）再拉宽进入铺满时，旧的 cue 会一直盖在最后一段上。所以渐隐只挂在可滚动
-    // 分支里；进入铺满时顺手把残留状态清零，免得再退回可滚动的第一帧先闪一下旧值
-    // （新 Scrollable 的首条 metrics 通知随后给出真值）。这里只改字段不 setState：
-    // 它们只被可滚动分支读取，而那一支正是本 builder 下次要建的东西。
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        if (!_fitsWidth(context, constraints.maxWidth)) {
-          return _buildScrollableWithCues();
-        }
-        _showLeadingOverflowCue = false;
-        _showTrailingOverflowCue = false;
-        _pendingLeadingOverflowCue = false;
-        _pendingTrailingOverflowCue = false;
-        return _buildTabBar(fillWidth: true);
-      },
-    );
+    return _buildScrollableWithCues();
   }
 
   /// 可滚动形态：拖滚 + 由冒泡滚动通知驱动的两侧渐隐。
@@ -497,25 +416,6 @@ class _FushiSectionTabBarState<T extends Object>
     );
   }
 
-  /// 铺满形态下每段都摆得下吗（与页头「摆不摆得下」同一张字宽表）。
-  ///
-  /// 判据是 `段数 × 最宽段 <= maxWidth`，**不是**各段自然宽之和：
-  /// `TabBar(isScrollable: false, tabAlignment: fill)` 给每段包 Expanded，每段
-  /// 只分到 `maxWidth / n`（含两侧 labelPadding），而 Tab 文字不换行、溢出渐隐。
-  /// 一段长其余短时（德 / 俄译文、大字号）总和摆得下，长段照样被截——所以要让
-  /// 最宽那段在等分格里也放得下。每段宽口径与估算一致：文字进距 + 两侧内边距。
-  bool _fitsWidth(BuildContext context, double maxWidth) {
-    if (!maxWidth.isFinite || widget.tabs.isEmpty) return false;
-    double widest = 0.0;
-    for (final LibrarySectionTab<T> tab in widget.tabs) {
-      final double width = estimateSectionTabBarWidth(context, <String>[
-        tab.label,
-      ], horizontalPaddingPerTab: _kSectionTabHorizontalPadding);
-      if (width > widest) widest = width;
-    }
-    return widest * widget.tabs.length <= maxWidth;
-  }
-
   /// [fillWidth]：本行摆得下全部段时铺满整行（不滚动、等分宽度），见
   /// [FushiSectionTabBar.fill]。铺满形态没有可滚动内容，不包拖滚。
   Widget _buildTabBar({bool fillWidth = false}) {
@@ -536,33 +436,16 @@ class _FushiSectionTabBarState<T extends Object>
     // 与页头标题 / 页面内容左缘对齐，故贴左。MD3 的 tab 分隔线会横贯整条
     // TabBar，而这里 TabBar 旁边还有动作区——画出来是条半截线，故去掉。
     if (fillWidth) {
-      return widget.secondary
-          ? TabBar.secondary(
+      return (TabBar(
               controller: _controller,
               isScrollable: false,
               tabAlignment: TabAlignment.fill,
               dividerHeight: 0,
               onTap: onTap,
               tabs: tabs,
-            )
-          : TabBar(
-              controller: _controller,
-              isScrollable: false,
-              tabAlignment: TabAlignment.fill,
-              dividerHeight: 0,
-              onTap: onTap,
-              tabs: tabs,
-            );
+            ));
     }
     if (widget.secondary) {
-      return TabBar.secondary(
-        controller: _controller,
-        isScrollable: true,
-        tabAlignment: TabAlignment.start,
-        dividerHeight: 0,
-        onTap: onTap,
-        tabs: tabs,
-      );
     }
     return TabBar(
       controller: _controller,

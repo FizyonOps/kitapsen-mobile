@@ -28,10 +28,6 @@ String _crossPlatformBasenameWithoutExtension(String path) {
 String coreSingleVideoBookUid(String videoPath) =>
     'video/${sanitizeTtuFilename(_crossPlatformBasenameWithoutExtension(videoPath))}';
 
-/// m3u8 播放列表文件 → `video/playlist/<sanitize(文件名去扩展名)>`。
-String corePlaylistBookUid(String m3u8Path) =>
-    'video/playlist/${sanitizeTtuFilename(_crossPlatformBasenameWithoutExtension(m3u8Path))}';
-
 /// 同名去重：若 [base] 已在 [existingKeys] 中，返回首个空位的加后缀变体
 /// （`base (2)` / `base (3)`...）；否则原样返回。纯函数，无回调静默加后缀
 /// （照搬 EpubImporter 策略），保证「本地不出现两个同 book_uid 视频」不变量。

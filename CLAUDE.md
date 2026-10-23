@@ -1,5 +1,15 @@
 # Hibiki Agent Rules
 
+> **Kitapsen edition (FizyonOps fork, 2026-10-23).** This checkout ships only
+> what the Kitapsen app shows: Home, the Books shelf and EPUB/PDF reader,
+> the Kitapsen store and account, and Settings, on Android and iOS. Everything
+> else was deleted, not gated: desktop and web platforms, video, manga, novel
+> and online sources, dictionary, Anki, audiobooks, ASR/OCR, torrent, P2P,
+> interconnect, the headless server, `native/`, `services/`, `tools/`, every
+> `third_party/` package except `flutter_inappwebview_android`, the
+> `references/` submodules and the test suites. The repository map and rules
+> below describe upstream Fushi; paths they name may no longer exist here.
+
 本文件是 Claude/Codex 进入 Hibiki 仓库后长期执行规则的**唯一真相源**，不是项目宣传页。
 只保留会影响分析、修改、验证、审查、提交的规则；详细操作流程拆到 `docs/agent/`，项目介绍/构建上手见 [README.md](README.md)。
 `AGENTS.md` 只是指向本文件的薄指针。

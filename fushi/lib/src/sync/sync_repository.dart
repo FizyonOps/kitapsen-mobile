@@ -3,24 +3,9 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart' show ValueNotifier;
 import 'package:fushi/src/models/preferences_repository.dart'
     show kDownloadExecutionHostPrefKey, kGameStreamRemoteLaunchPrefKey;
-import 'package:fushi_engine/sync/fushi_sync_server.dart';
-import 'package:fushi/src/media/video/media_server/media_server_config.dart';
-import 'package:fushi/src/media/video/media_server/media_server_registry.dart';
-import 'package:fushi/src/sync/jellyfin_video_client.dart'
-    show JellyfinServerConfig, JellyfinVideoClient;
 import 'package:fushi/src/sync/sync_backend.dart';
-import 'package:fushi_engine/sync/tls/fushi_pinning_http.dart';
 import 'package:fushi_core/fushi_core.dart';
-import 'package:fushi_engine/sync/interconnect_host_addresses.dart'
-    show decodeInterconnectPublicUrls, kInterconnectPublicUrlsPref;
-import 'package:fushi_engine/sync/interconnect_p2p.dart'
-    show
-        kInterconnectP2pEnabledPref,
-        kInterconnectP2pRelayUrlsPref,
-        kInterconnectP2pSecretPref;
-import 'package:fushi_engine/sync/interconnect_transcode_prefs.dart';
 import 'package:fushi_engine/sync/sync_channel_scope.dart';
-import 'package:fushi_engine/sync/collection_sync_baseline.dart';
 export 'package:fushi_engine/sync/sync_channel_scope.dart' show SyncChannelScope;
 
 /// 触达一台 Hibiki 同步服务器的一个候选地址。
@@ -126,41 +111,6 @@ class FushiClientUrl {
       );
 }
 
-/// BUG-1550：解析某个候选地址该用哪份凭据——地址行自带的 [FushiClientUrl.token]
-/// 优先，为空时回落全局 token（老配置 / 同 host 的备用地址）。两者都空返回 null，
-/// 调用方按「未配置凭据」处理。
-///
-/// 抽成顶层函数而非 [SyncRepository] 方法：全部消费方（sync backend / POST 传输层 /
-/// 漫画 OCR client）都已经各自把候选列表与全局 token 读在手上，这里只做纯选择，
-/// 不再多打一次库。
-String? interconnectTokenFor(FushiClientUrl candidate, String? fallbackToken) {
-  final String? own = candidate.token;
-  if (own != null && own.isNotEmpty) return own;
-  if (fallbackToken != null && fallbackToken.isNotEmpty) return fallbackToken;
-  return null;
-}
-
-/// TODO-961 M1：当一个已记录非空指纹的 https 候选地址再次出现、但带来的新指纹与
-/// 已存指纹不符时抛出（疑似 MITM 或 host 重置了证书）。**绝不静默覆盖已存指纹**——
-/// 由调用方告警并要求用户显式重置该条目，这是 TOFU 钉扎的硬约束（设计稿 §3.5）。
-class FushiFingerprintMismatchException implements Exception {
-  const FushiFingerprintMismatchException({
-    required this.url,
-    required this.storedFingerprint,
-    required this.incomingFingerprint,
-  });
-
-  final String url;
-  final String storedFingerprint;
-  final String incomingFingerprint;
-
-  @override
-  String toString() =>
-      'FushiFingerprintMismatchException($url: stored=$storedFingerprint '
-      'incoming=$incomingFingerprint)';
-}
-
-
 /// 同步配置和缓存的持久化层（基于 Preferences 表）。
 ///
 /// 桌面 OAuth 凭据（refresh token, client secret）存储在用户级 SQLite 数据库中，
@@ -172,22 +122,6 @@ class SyncRepository {
 
   static const _keyRootFolderId = 'sync_root_folder_id';
   static const _keyFolderCache = 'sync_folder_cache';
-  static const _keySyncStats = 'sync_stats_enabled';
-  static const _keySyncAudioBook = 'sync_audiobook_enabled';
-  // 废弃：词典与本地音频源数据库不再有「同步开关」，改成设置页的显式上传 / 下载
-  // 动作（见 `SyncOrchestrator.runAssetTransferOnly`）。存量库里的这两行不做 schema
-  // 迁移（要冒着改动已发布版本的风险），但**必须还读一次**：升级前开着自动同步的
-  // 用户，升级后同步会静默停下——「立即同步」照常报「完成 N 项」，而新导入的词典
-  // 再也不上云。用户没有任何信号知道备份里已经没有词典了。这不是数据丢失，是
-  // 「我以为还在备份」的静默失效，正是 never break userspace 要挡的东西。所以留一条
-  // 一次性告知（见 sync_settings_schema 的 sync.asset_legacy_notice），读到 true 就
-  // 在同步设置页说明改动，用户确认后写 false 关掉，此后这两个键才真正是死数据。
-  static const _keyLegacySyncDictionary = 'sync_dictionary_enabled';
-  static const _keyLegacySyncLocalAudio = 'sync_local_audio_enabled';
-  static const _keySyncAudioBookFiles = 'sync_audiobook_files_enabled';
-  static const _keySyncVideoFiles = 'sync_video_files_enabled';
-  static const _keyAutoSync = 'sync_auto_enabled';
-  static const _keyLastSyncMs = 'sync_last_sync_ms';
   static const _keyCollectionsBaselineMs = 'sync_collections_baseline_ms';
   // 删除墓碑消费的因果基线：描述「本设备见过远端删除标记到什么时刻」。远端墓碑
   // deletedAt 晚于它才是「新闻」（弹逐条确认），早于它视为本设备已处理过、不再反复弹。
@@ -212,34 +146,6 @@ class SyncRepository {
       'sync_deletion_tombstones_push_baseline_ms';
   static const _keyDesktopCredentials = 'sync_desktop_credentials';
   static const _keyBackendType = 'sync_backend_type';
-  // 「与 Hoshi/ッツ 共享」开关：开启后 Google Drive 后端改用可见 My Drive /
-  // ttu-reader-data + 完整 drive scope（[GoogleDriveSyncSpace]）。属设备本地（改的是
-  // 本机 Drive 存储空间/scope），不随备份导入覆盖。
-  static const _keySyncContent = 'sync_content_enabled';
-  // BUG-988：互联通道专属的「上传内容到互联对端」开关，独立于云备份的
-  // sync_*_enabled（那套只管云通道）。互联解耦(PR#223)后互联通道曾复用云备份的
-  // 共享开关，用户失去「只对互联单独控制上不上传」的能力；这几个键把互联通道的内容
-  // 上传拆出来单独控制。默认 false（用户显式 opt-in，不被「启用互联连接」裹挟着自动传）。
-  // 词典原本也有一个（`interconnect_sync_dictionary`），BUG-2762 删掉了：互联词典只由
-  // 设置页的显式上传 / 下载动作搬，库里残留的旧行不再有读取方。
-  static const _keyInterconnectSyncContent = 'interconnect_sync_content';
-  static const _keyInterconnectSyncAudioBookFiles =
-      'interconnect_sync_audiobook_files';
-  static const _keyInterconnectSyncVideoFiles = 'interconnect_sync_video_files';
-  // 互联「配置文件」（Profile）双向搬运的 **host 侧**开关：允许已配对设备读取 /
-  // 写入本机配置。默认 false —— 入站写没有显式开关就是「无 UI 的隐形通道」
-  // （BUG-988 立过的规矩），出站也一样：整份 Profile 比四个内容上传开关更敏感。
-  static const _keyInterconnectProfileTransfer =
-      'interconnect_profile_transfer';
-  // 互联通道专属的「共享统计 / 共享收藏夹」开关。此前互联的聚合同步（统计 + 收藏
-  // 词句）无条件复用云备份的 sync_stats_enabled，用户在互联页既看不到这两类数据
-  // 正在跨设备流动，也没法只对互联单独关掉——与 BUG-988 拆四个上传开关时修掉的
-  // 是同一个毛病（互联通道借用云备份开关 = 用户失去分通道控制权）。
-  // 缺键时**继承旧键 sync_stats_enabled 的当前值**（不是硬编码 true）：旧键是个
-  // 用户可见开关，把它关掉的存量用户升级后绝不能被默认值静默复位成「又在同步」。
-  // 只有用户真的动过互联这两个新开关（新键有行）时才用新值。
-  static const _keyInterconnectSyncStats = 'interconnect_sync_stats';
-  static const _keyInterconnectSyncFavorites = 'interconnect_sync_favorites';
   // apikey 同步设定重设计（2026-08-17）：互联 service-config（host 的外部服务
   // API key / 服务配置，interconnect_service_config.dart 白名单）此前是**无 UI、
   // 无开关**的隐形通道——用户既看不见「配对后 host 的 Jimaku/TMDB key 会同步过来」
@@ -259,78 +165,6 @@ class SyncRepository {
   // (`POST /auth/mobile/session`) instead of a password.
   static const _keyKitapsenToken = 'sync_kitapsen_token';
 
-  static const String syncStatsPreferenceKey = _keySyncStats;
-  static const String syncAudioBookPreferenceKey = _keySyncAudioBook;
-
-  // ── Folder cache（按通道分槽，BUG-1576） ───────────────────────────
-  //
-  // 根 folderId 与「书名→folderId」映射描述的是**某一个远端**的目录布局，绝不是
-  // 设备的属性。双通道并存后共用一份全局键 = 后写者覆盖先写者，而互联/WebDAV 的
-  // folderId 是绝对 URL，被另一条通道读回后会连同自己的凭据发往对端主机
-  // （webdav_ops 的 buildRequest 对绝对 URL 直接 open + 附 Authorization）。
-  // 故读写一律带 [SyncChannelScope]。
-
-  Future<String?> getRootFolderId(SyncChannelScope scope) async {
-    final row = await (_db.select(_db.preferences)
-          ..where((t) => t.key.equals(scope.key(_keyRootFolderId))))
-        .getSingleOrNull();
-    return row?.value;
-  }
-
-  Future<void> setRootFolderId(SyncChannelScope scope, String? id) async {
-    final String key = scope.key(_keyRootFolderId);
-    if (id == null) {
-      await (_db.delete(_db.preferences)..where((t) => t.key.equals(key))).go();
-      return;
-    }
-    await _db.into(_db.preferences).insertOnConflictUpdate(
-          PreferencesCompanion.insert(key: key, value: id),
-        );
-  }
-
-  Future<Map<String, String>> getFolderCache(SyncChannelScope scope) async {
-    final row = await (_db.select(_db.preferences)
-          ..where((t) => t.key.equals(scope.key(_keyFolderCache))))
-        .getSingleOrNull();
-    if (row == null) return {};
-    return Map<String, String>.from(
-        jsonDecode(row.value) as Map<String, dynamic>);
-  }
-
-  Future<void> setFolderCache(
-      SyncChannelScope scope, Map<String, String> cache) async {
-    await _db.into(_db.preferences).insertOnConflictUpdate(
-          PreferencesCompanion.insert(
-              key: scope.key(_keyFolderCache), value: jsonEncode(cache)),
-        );
-  }
-
-  Future<void> clearFolderCache(SyncChannelScope scope) async {
-    await (_db.delete(_db.preferences)
-          ..where((t) => t.key.isIn(<String>[
-                scope.key(_keyRootFolderId),
-                scope.key(_keyFolderCache),
-              ])))
-        .go();
-  }
-
-  /// 清掉**所有**通道的 folder 缓存（含解耦前的旧全局键）。
-  ///
-  /// 备份导入用：导入库里带的是**备份来源机**的目录布局，对本机保留下来的后端账号
-  /// 全部无效，一条通道都不能留。键目录由 [SyncChannelScope.all] 展开，新增后端
-  /// 自动被覆盖。
-  Future<void> clearAllFolderCaches() async {
-    final List<String> keys = <String>[
-      _keyRootFolderId,
-      _keyFolderCache,
-      for (final SyncChannelScope scope in SyncChannelScope.all) ...<String>[
-        scope.key(_keyRootFolderId),
-        scope.key(_keyFolderCache),
-      ],
-    ];
-    await (_db.delete(_db.preferences)..where((t) => t.key.isIn(keys))).go();
-  }
-
   /// 一次性清理解耦前的**全局** folder 缓存键（BUG-1576 迁移）。
   ///
   /// 迁移语义是**丢弃而不是搬运**：这两个键的值此刻已经无法归因到任何一条通道
@@ -349,219 +183,6 @@ class SyncRepository {
   }
 
   // ── Sync settings ─────────────────────────────────────────────────
-
-  /// 升级前这台设备是否开着词典 / 本地音频的自动同步（任一为真即算）。
-  /// 只被那条一次性告知读；确认后经 [acknowledgeLegacyAssetAutoSync] 归零。
-  Future<bool> hadLegacyAssetAutoSync() async =>
-      await _db.getPrefTyped<bool>(_keyLegacySyncDictionary, false) ||
-      await _db.getPrefTyped<bool>(_keyLegacySyncLocalAudio, false);
-
-  /// 用户已看过告知：把两个废弃键写 false，提示不再出现。
-  /// 写 false 而不是删行——`Preferences` 没有删除接口，写值不需要动已发布 schema。
-  Future<void> acknowledgeLegacyAssetAutoSync() async {
-    await _db.setPrefTyped<bool>(_keyLegacySyncDictionary, false);
-    await _db.setPrefTyped<bool>(_keyLegacySyncLocalAudio, false);
-  }
-
-  Future<bool> isSyncStatsEnabled() =>
-      _db.getPrefTyped<bool>(_keySyncStats, true);
-  Future<void> setSyncStatsEnabled(bool v) =>
-      _db.setPrefTyped<bool>(_keySyncStats, v);
-
-  Future<bool> isSyncAudioBookEnabled() async => true;
-  Future<void> setSyncAudioBookEnabled(bool v) =>
-      _db.setPrefTyped<bool>(_keySyncAudioBook, true);
-
-  /// 是否同步有声书文件（音频 + 字幕包）。默认 false：包大，需用户显式开启。
-  Future<bool> isSyncAudioBookFilesEnabled() =>
-      _db.getPrefTyped<bool>(_keySyncAudioBookFiles, false);
-  Future<void> setSyncAudioBookFilesEnabled(bool v) =>
-      _db.setPrefTyped<bool>(_keySyncAudioBookFiles, v);
-
-  /// 是否上传本地视频文件到云 `__videos__/` 命名空间（多端库联合视图 §2.6）。
-  /// 默认 false：视频体积 / 流量大，须用户显式 opt-in。与 syncAudioBookFiles 同为
-  /// 行为开关，不进 [deviceLocalPrefKeys]（当作用户设置，随备份跨设备恢复）。
-  Future<bool> isSyncVideoFilesEnabled() =>
-      _db.getPrefTyped<bool>(_keySyncVideoFiles, false);
-  Future<void> setSyncVideoFilesEnabled(bool v) =>
-      _db.setPrefTyped<bool>(_keySyncVideoFiles, v);
-
-  Future<bool> isAutoSyncEnabled() =>
-      _db.getPrefTyped<bool>(_keyAutoSync, false);
-  Future<void> setAutoSyncEnabled(bool v) =>
-      _db.setPrefTyped<bool>(_keyAutoSync, v);
-
-  /// 「与 Hoshi/ッツ 共享 Google Drive」开关。默认关（老用户云端数据留在隐藏
-  /// appDataFolder 原地不动）。
-
-  /// 某条通道上次**整轮**同步完成的时刻（自动同步冷却窗判据）。
-  ///
-  /// 按通道分槽（BUG-1580）：解耦前是单份全局键，两条通道各写各的、却被
-  /// [sync_auto_trigger] 的一次冷却判定当成同一个闸——云通道刚跑完就把互联通道
-  /// 一起压住 5 分钟，反之亦然；一条通道失败重试也会被另一条的成功戳压制。
-  ///
-  /// 迁移：本槽位无值时回落解耦前的全局键（升级后第一轮不会因为「新键为空」而把
-  /// 刚同步过的通道当成从未同步、立刻再跑一轮）。写侧只写本槽位。
-  Future<int?> getLastSyncMs(SyncChannelScope scope) async {
-    final s = await _getStringOrNull(scope.key(_keyLastSyncMs)) ??
-        await _getStringOrNull(_keyLastSyncMs);
-    return s == null ? null : int.tryParse(s);
-  }
-
-  Future<void> setLastSyncMs(SyncChannelScope scope, int ms) =>
-      _setString(scope.key(_keyLastSyncMs), ms.toString());
-
-  /// 本端上次**成功**合集同步的毫秒戳（多端库联合视图 §2.3：合集同步引擎的
-  /// 因果基线——removedAt/deletedAt 晚于它的墓碑才是「新闻」，早于它的墓碑视为
-  /// 本端已裁决过、成员/合集仍在即代表之后重加/重建）。0 = 从未同步过。
-  /// 设备本地（[deviceLocalPrefKeys]）：它描述「本设备见过共享清单到什么时刻」，
-  /// 随备份跨设备会让新设备把没见过的墓碑误判为旧闻而复活成员。
-  ///
-  /// 按通道分槽（BUG-1579）：云通道、互联 client 通道、以及本机作为互联 host 收到
-  /// 对端 POST 时的合并，三方原先读写**同一个键**。双通道下的具体后果是：互联对端
-  /// 推来的「成员移出墓碑」被云通道刚推进过的基线判成旧闻 → 引擎按「活胜」撤销这
-  /// 次移出 → 再回传给 host，用户的移出操作被自己另一条通道悄悄撤销。因果基线描述
-  /// 的是「本端相对**某一个远端**见过什么」，三条轴必须各记各的。
-  ///
-  /// 迁移：本槽位无值时回落解耦前的全局键作初值（升级后第一轮不会把所有历史墓碑
-  /// 当成新闻重裁一遍）。写侧只写本槽位。
-  Future<int> getCollectionsSyncBaselineMs(SyncChannelScope scope) =>
-      readCollectionsSyncBaselineMs(_db, scope);
-
-  Future<void> setCollectionsSyncBaselineMs(SyncChannelScope scope, int ms) =>
-      writeCollectionsSyncBaselineMs(_db, scope, ms);
-
-  /// 7c 视频刮削元数据增量拉取基线：上次从该通道见过的最大 host `updatedAt`
-  /// （毫秒）。0 = 从未拉过（全量）。设备本地、按通道分槽。
-  Future<int> getVideoMetadataSyncSinceMs(SyncChannelScope scope) async {
-    final String? s =
-        await _getStringOrNull(scope.key(_keyVideoMetadataSyncSinceMs));
-    return s == null ? 0 : int.tryParse(s) ?? 0;
-  }
-
-  Future<void> setVideoMetadataSyncSinceMs(SyncChannelScope scope, int ms) =>
-      _setString(scope.key(_keyVideoMetadataSyncSinceMs), ms.toString());
-
-  /// 删除墓碑消费的因果基线（毫秒）。远端删除标记 deletedAt 晚于它才弹逐条确认；
-  /// 早于它视为本设备已处理过、不再反复弹。0 = 从未消费过。设备本地
-  /// （[deviceLocalPrefKeys]），随备份跨设备会让新设备把老墓碑误判为新闻反复骚扰。
-  ///
-  /// 按通道分槽（BUG-1579）：**推送**基线早就是互联通道专属的独立键（见
-  /// [getDeletionTombstonesPushBaselineMs] 的理由——「两个通道各记各的账」），消费侧
-  /// 却仍是一份全局键，两边不对称。后果：用户在云通道的确认框里处理完一批删除、
-  /// 基线被推到 T，互联对端此前那批 deletedAt < T 的墓碑就此永远不再弹确认——那些
-  /// 条目在本机留了下来，而用户以为「所有设备都删了」。消费轴按通道拆开后与推送轴
-  /// 同形。
-  ///
-  /// 迁移：本槽位无值时回落解耦前的全局键作初值（升级后不会把用户早已复核过的老
-  /// 墓碑重新当成新闻、逐条再弹一遍）。写侧只写本槽位。
-  Future<int> getDeletionTombstonesBaselineMs(SyncChannelScope scope) async {
-    final String? s =
-        await _getStringOrNull(scope.key(_keyDeletionTombstonesBaselineMs)) ??
-            await _getStringOrNull(_keyDeletionTombstonesBaselineMs);
-    return s == null ? 0 : int.tryParse(s) ?? 0;
-  }
-
-  Future<void> setDeletionTombstonesBaselineMs(
-          SyncChannelScope scope, int ms) =>
-      _setString(scope.key(_keyDeletionTombstonesBaselineMs), ms.toString());
-
-  /// 删除墓碑**推送**的因果基线（毫秒，互联通道专用）。本地墓碑 deletedAt 晚于它才
-  /// 推给对端 host；早于它视为本设备已推过、不再重复请求。0 = 从未推送过。
-  ///
-  /// 单一全局键（不按 host 分）：互联是 host/client 模型且 client 侧后端是单例
-  /// [InterconnectSyncBackend.instance]，实际只对一个 host 推送；消费侧基线
-  /// （[getDeletionTombstonesBaselineMs]）也是同样的全局口径，两侧保持一致。
-  /// 设备本地（[deviceLocalPrefKeys]），理由见键定义处注释。
-  Future<int> getDeletionTombstonesPushBaselineMs() async {
-    final String? s =
-        await _getStringOrNull(_keyDeletionTombstonesPushBaselineMs);
-    return s == null ? 0 : int.tryParse(s) ?? 0;
-  }
-
-  Future<void> setDeletionTombstonesPushBaselineMs(int ms) =>
-      _setString(_keyDeletionTombstonesPushBaselineMs, ms.toString());
-
-  // ── Desktop OAuth credentials ──────────────────────────────────────
-
-  Future<String?> getDesktopCredentials() async {
-    final encoded = await _getStringOrNull(_keyDesktopCredentials);
-    return encoded != null ? _decodeSecret(encoded) : null;
-  }
-
-  Future<void> setDesktopCredentials(String? json) async {
-    if (json == null) {
-      await (_db.delete(_db.preferences)
-            ..where((t) => t.key.equals(_keyDesktopCredentials)))
-          .go();
-      return;
-    }
-    await _setString(_keyDesktopCredentials, _encodeSecret(json));
-  }
-
-  Future<void> clearDesktopSession() async {
-    await (_db.delete(_db.preferences)
-          ..where((t) => t.key.equals(_keyDesktopCredentials)))
-        .go();
-  }
-
-  // ── Backend type ───────────────────────────────────────────────────
-
-  Future<SyncBackendType> getBackendType() async {
-    final raw = await _getStringOrNull(_keyBackendType);
-    if (raw == null) return SyncBackendType.googleDrive;
-    for (final type in SyncBackendType.values) {
-      if (type.name == raw) return type;
-    }
-    return SyncBackendType.googleDrive;
-  }
-
-  Future<void> setBackendType(SyncBackendType type) =>
-      _setString(_keyBackendType, type.name);
-
-  /// [type] 这条通道在本机**是否已配置**（凭据/地址已落盘）。
-  ///
-  /// 纯本地 preferences 读，**零网络**——调用点包括删除确认弹窗这类不许做 IO 的 UI
-  /// 路径，绝不能改成去探测连通性（互联后端的 `restoreAuth` 会探测地址）。
-  ///
-  /// 语义是「配置过」而非「此刻连得上」：离线时删东西、勾「从所有设备删除」，墓碑
-  /// 留在本地等下次同步发布，这是正确行为，不该因为当下离线就把选项藏起来。
-  ///
-  /// 穷尽 switch 无 default：新增后端时编译器强制在此表态，避免新后端被默默当成
-  /// 「未配置」而让用户失去删除传播选项。
-  ///
-  /// googleDrive 移动端的登录态由 google_sign_in 插件自己持有、不落本表，所以它多认
-  /// 一个 [getRootFolderId]（同步真跑过一次就有），剩下的缺口由调用方 OR 上后端的
-  /// 内存态 `isAuthenticated` 补齐（见 `hasDeletionPropagationChannel`）。
-  Future<bool> hasStoredBackendConfig(SyncBackendType type) async {
-    bool present(String? v) => v != null && v.isNotEmpty;
-    switch (type) {
-      case SyncBackendType.googleDrive:
-        // BUG-1576：这里读的必须是 **Drive 自己那格** 的根 folderId。用全局键时，
-        // 一台从未登录过 Drive 的设备只要跑过一轮互联同步，全局键里就躺着互联对端
-        // 的 URL，于是「云已配置」为真 → `hasDeletionPropagationChannel` 放行
-        // 「从所有设备删除」→ 用户以为删干净了，实际没有任何云通道去发布墓碑。
-        return present(await getDesktopCredentials()) ||
-            present(await getRootFolderId(
-                SyncChannelScope.forBackendType(SyncBackendType.googleDrive)));
-      case SyncBackendType.webDav:
-        return present(await getWebDavUrl());
-      case SyncBackendType.ftp:
-        return present(await getFtpHost());
-      case SyncBackendType.sftp:
-        return present(await getSftpHost());
-      case SyncBackendType.dropbox:
-        return present(await getDropboxToken());
-      case SyncBackendType.oneDrive:
-        return present(await getOneDriveToken());
-      case SyncBackendType.fushiServer:
-        // 互联双向：本机连别人（已填对端地址）或别人连本机（开着服务且有已配对
-        // 对端——对端会经 `/api/tombstones` 读走本机墓碑）都算通道存在。
-        if ((await getFushiClientUrls()).isNotEmpty) return true;
-        return await isServerEnabled() &&
-            (await _db.getPairedPeers()).isNotEmpty;
-    }
-  }
 
   /// 一次性迁移：把已废弃的 "SMB"(实为 WebDAV 网关) 配置并入 WebDAV，并删除全部
   /// `sync_smb_*` 死键。仅当对应 WebDAV 字段为空时才搬运，绝不覆盖用户已有的
@@ -635,133 +256,6 @@ class SyncRepository {
     await _db.setPrefTyped<bool>(_keyInterconnectBackendMigrated, true);
   }
 
-  // ── Content sync ──────────────────────────────────────────────────
-
-  Future<bool> isSyncContentEnabled() =>
-      _db.getPrefTyped<bool>(_keySyncContent, false);
-  Future<void> setSyncContentEnabled(bool v) =>
-      _db.setPrefTyped<bool>(_keySyncContent, v);
-
-  // ── 互联通道专属上传开关（BUG-988） ────────────────────────────────
-  // 只作用于互联通道（[_runSyncChannel] 的 isInterconnect==true），与上面的云备份
-  // sync_*_enabled 完全解耦；默认 false，让用户独立控制「要不要把本设备内容上传到
-  // 互联对端」，不被「启用互联连接」自动裹挟。位置/统计等轻量进度仍走共享开关（跨设备
-  // 续读是互联本意），此处仅拆「重内容」三类：书籍/内容、有声书文件、视频文件（词典
-  // 已无自动同步开关，见 BUG-2762）。
-
-  Future<bool> isInterconnectSyncContentEnabled() =>
-      _db.getPrefTyped<bool>(_keyInterconnectSyncContent, false);
-  Future<void> setInterconnectSyncContentEnabled(bool v) =>
-      _db.setPrefTyped<bool>(_keyInterconnectSyncContent, v);
-
-  Future<bool> isInterconnectSyncAudioBookFilesEnabled() =>
-      _db.getPrefTyped<bool>(_keyInterconnectSyncAudioBookFiles, false);
-  Future<void> setInterconnectSyncAudioBookFilesEnabled(bool v) =>
-      _db.setPrefTyped<bool>(_keyInterconnectSyncAudioBookFiles, v);
-
-  Future<bool> isInterconnectSyncVideoFilesEnabled() =>
-      _db.getPrefTyped<bool>(_keyInterconnectSyncVideoFiles, false);
-  Future<void> setInterconnectSyncVideoFilesEnabled(bool v) =>
-      _db.setPrefTyped<bool>(_keyInterconnectSyncVideoFiles, v);
-
-  /// host 侧：是否允许已配对设备读取 / 写入本机「配置文件」（Profile）。
-  ///
-  /// 端点还要求 TLS + 已配对 peer token；本开关是**用户意图**那一道，默认关。
-  Future<bool> isInterconnectProfileTransferEnabled() =>
-      _db.getPrefTyped<bool>(_keyInterconnectProfileTransfer, false);
-  Future<void> setInterconnectProfileTransferEnabled(bool v) =>
-      _db.setPrefTyped<bool>(_keyInterconnectProfileTransfer, v);
-
-  /// 互联通道「共享统计」：阅读/观看时长、字数、逐时桶、查词与制卡计数。关掉后本设备
-  /// 既不把统计推给对端，也不把对端统计折进本地——两个方向一起停，否则「关了还在收」
-  /// 会让本地统计继续被对端撑大，用户看到的仍是没关掉。
-  ///
-  /// **缺键时继承旧开关 [isSyncStatsEnabled]**，不是硬编码 true。拆开关前互联的
-  /// 统计/收藏就是由 `sync_stats_enabled` 一刀切代管的（那是个**无 visible 门控、
-  /// 文案就叫「同步统计」的用户可见开关**）。存量用户把它关掉 = 明示「别同步我的
-  /// 统计」；新键硬编码默认 true 会让升级后第一轮互联 sweep 就把统计 + 收藏词句推给
-  /// 对端并把对端的折回本地，用户零操作、零提示 —— never break userspace。只有用户
-  /// **真的动过互联那个新开关**（新键有行才成立）时才用新值。
-  Future<bool> isInterconnectSyncStatsEnabled() =>
-      _interconnectAggregateFlag(_keyInterconnectSyncStats);
-  Future<void> setInterconnectSyncStatsEnabled(bool v) =>
-      _db.setPrefTyped<bool>(_keyInterconnectSyncStats, v);
-
-  /// 互联通道「共享收藏夹」：收藏词 + 收藏句（以及它们的删除墓碑，取消收藏要能
-  /// 跨端传播）。与统计同为聚合快照的一半，但语义不同——收藏是用户挑出来的内容，
-  /// 值得独立开关。同样双向一起停；缺键时同样继承旧的 [isSyncStatsEnabled]
-  /// （收藏族拆开关前也归它管，见 [isInterconnectSyncStatsEnabled] 的说明）。
-  Future<bool> isInterconnectSyncFavoritesEnabled() =>
-      _interconnectAggregateFlag(_keyInterconnectSyncFavorites);
-  Future<void> setInterconnectSyncFavoritesEnabled(bool v) =>
-      _db.setPrefTyped<bool>(_keyInterconnectSyncFavorites, v);
-
-  /// 聚合快照两族（统计 / 收藏）互联侧开关的统一读法：新键有行就用新值，缺行则
-  /// 回退到拆开关前代管它们的旧键 `sync_stats_enabled`（其自身默认 true）。
-  Future<bool> _interconnectAggregateFlag(String key) async {
-    if (await _db.getPref(key) == null) return isSyncStatsEnabled();
-    return _db.getPrefTyped<bool>(key, true);
-  }
-
-  /// 互联 service-config 同步（host 的外部服务 API key / 服务配置随互联下发）。
-  /// 默认 true = 既有行为不变；关掉后本设备不再向 host 请求 service-config，
-  /// 已导入的值保持原样（不回滚——那是用户此刻正在用的配置）。
-  Future<bool> isInterconnectServiceConfigSyncEnabled() =>
-      _db.getPrefTyped<bool>(_keyInterconnectServiceConfigSync, true);
-  Future<void> setInterconnectServiceConfigSyncEnabled(bool v) =>
-      _db.setPrefTyped<bool>(_keyInterconnectServiceConfigSync, v);
-
-  // ── Per-book audiobook position (synced) ──────────────────────────
-
-  static const _keyAudiobookPositionPrefix = 'audiobook_pos_';
-
-  /// 每本书的有声书播放位置（毫秒）。键为书的 bookKey，与
-  /// AudiobookRepository 的 `audiobook_pos_<bookKey>` 同一键空间。默认 0 表示
-  /// 无记录。集中走仓库层，避免散落的 `audiobook_pos_...` 字面量与类型漂移。
-  Future<int> getAudiobookPosition(String bookKey) =>
-      _db.getPrefTyped<int>('$_keyAudiobookPositionPrefix$bookKey', 0);
-  Future<void> setAudiobookPosition(String bookKey, int positionMs) =>
-      _db.setPrefTyped<int>('$_keyAudiobookPositionPrefix$bookKey', positionMs);
-
-  // ── WebDAV credentials ────────────────────────────────────────────
-
-  Future<String?> getWebDavUrl() => _getStringOrNull(_keyWebDavUrl);
-  Future<void> setWebDavUrl(String? url) async {
-    if (url == null) {
-      await (_db.delete(_db.preferences)
-            ..where((t) => t.key.equals(_keyWebDavUrl)))
-          .go();
-      return;
-    }
-    await _setString(_keyWebDavUrl, url);
-  }
-
-  Future<String?> getWebDavUsername() => _getStringOrNull(_keyWebDavUsername);
-  Future<void> setWebDavUsername(String? username) async {
-    if (username == null) {
-      await (_db.delete(_db.preferences)
-            ..where((t) => t.key.equals(_keyWebDavUsername)))
-          .go();
-      return;
-    }
-    await _setString(_keyWebDavUsername, username);
-  }
-
-  Future<String?> getWebDavPassword() async {
-    final encoded = await _getStringOrNull(_keyWebDavPassword);
-    return encoded != null ? _decodeSecret(encoded) : null;
-  }
-
-  Future<void> setWebDavPassword(String? password) async {
-    if (password == null) {
-      await (_db.delete(_db.preferences)
-            ..where((t) => t.key.equals(_keyWebDavPassword)))
-          .go();
-      return;
-    }
-    await _setString(_keyWebDavPassword, _encodeSecret(password));
-  }
-
   // ── Kitapsen account ──────────────────────────────────────────────
 
   /// 已登录的 Kitapsen 账号；地址、用户名与凭据（密码或 app token）缺一即视为未登录。
@@ -827,35 +321,9 @@ class SyncRepository {
 
   static const _keyOneDriveToken = 'sync_onedrive_token';
 
-  Future<String?> getOneDriveToken() async {
-    final encoded = await _getStringOrNull(_keyOneDriveToken);
-    return encoded != null ? _decodeSecret(encoded) : null;
-  }
-
-  Future<void> setOneDriveToken(String? token) async {
-    if (token == null) {
-      await _deleteKey(_keyOneDriveToken);
-      return;
-    }
-    await _setString(_keyOneDriveToken, _encodeSecret(token));
-  }
-
   // ── Dropbox credentials ─────────────────────────────────────────
 
   static const _keyDropboxToken = 'sync_dropbox_token';
-
-  Future<String?> getDropboxToken() async {
-    final encoded = await _getStringOrNull(_keyDropboxToken);
-    return encoded != null ? _decodeSecret(encoded) : null;
-  }
-
-  Future<void> setDropboxToken(String? token) async {
-    if (token == null) {
-      await _deleteKey(_keyDropboxToken);
-      return;
-    }
-    await _setString(_keyDropboxToken, _encodeSecret(token));
-  }
 
   // ── FTP credentials ─────────────────────────────────────────────
 
@@ -865,31 +333,6 @@ class SyncRepository {
   static const _keyFtpPassword = 'sync_ftp_password';
   static const _keyFtpUseTls = 'sync_ftp_use_tls';
 
-  Future<String?> getFtpHost() => _getStringOrNull(_keyFtpHost);
-  Future<void> setFtpHost(String? v) => _setOrDelete(_keyFtpHost, v);
-  Future<int> getFtpPort() => _db.getPrefTyped<int>(_keyFtpPort, 21);
-  Future<void> setFtpPort(int v) => _db.setPrefTyped<int>(_keyFtpPort, v);
-  Future<String?> getFtpUsername() => _getStringOrNull(_keyFtpUsername);
-  Future<void> setFtpUsername(String? v) => _setOrDelete(_keyFtpUsername, v);
-
-  Future<String?> getFtpPassword() async {
-    final encoded = await _getStringOrNull(_keyFtpPassword);
-    return encoded != null ? _decodeSecret(encoded) : null;
-  }
-
-  Future<void> setFtpPassword(String? v) async {
-    if (v == null) {
-      await _deleteKey(_keyFtpPassword);
-      return;
-    }
-    await _setString(_keyFtpPassword, _encodeSecret(v));
-  }
-
-  Future<bool> isFtpTlsEnabled() =>
-      _db.getPrefTyped<bool>(_keyFtpUseTls, false);
-  Future<void> setFtpTlsEnabled(bool v) =>
-      _db.setPrefTyped<bool>(_keyFtpUseTls, v);
-
   // ── SFTP credentials ────────────────────────────────────────────
 
   static const _keySftpHost = 'sync_sftp_host';
@@ -897,39 +340,6 @@ class SyncRepository {
   static const _keySftpUsername = 'sync_sftp_username';
   static const _keySftpPassword = 'sync_sftp_password';
   static const _keySftpPrivateKey = 'sync_sftp_private_key';
-
-  Future<String?> getSftpHost() => _getStringOrNull(_keySftpHost);
-  Future<void> setSftpHost(String? v) => _setOrDelete(_keySftpHost, v);
-  Future<int> getSftpPort() => _db.getPrefTyped<int>(_keySftpPort, 22);
-  Future<void> setSftpPort(int v) => _db.setPrefTyped<int>(_keySftpPort, v);
-  Future<String?> getSftpUsername() => _getStringOrNull(_keySftpUsername);
-  Future<void> setSftpUsername(String? v) => _setOrDelete(_keySftpUsername, v);
-
-  Future<String?> getSftpPassword() async {
-    final encoded = await _getStringOrNull(_keySftpPassword);
-    return encoded != null ? _decodeSecret(encoded) : null;
-  }
-
-  Future<void> setSftpPassword(String? v) async {
-    if (v == null) {
-      await _deleteKey(_keySftpPassword);
-      return;
-    }
-    await _setString(_keySftpPassword, _encodeSecret(v));
-  }
-
-  Future<String?> getSftpPrivateKey() async {
-    final encoded = await _getStringOrNull(_keySftpPrivateKey);
-    return encoded != null ? _decodeSecret(encoded) : null;
-  }
-
-  Future<void> setSftpPrivateKey(String? v) async {
-    if (v == null) {
-      await _deleteKey(_keySftpPrivateKey);
-      return;
-    }
-    await _setString(_keySftpPrivateKey, _encodeSecret(v));
-  }
 
   // ── Hibiki Server config ────────────────────────────────────────
 
@@ -952,27 +362,8 @@ class SyncRepository {
   static const _keyPendingMineLandingClaimedAt =
       'sync_pending_mine_landing_claimed_at';
 
-  Future<int> getPendingMineLandingClaimedAt() =>
-      _db.getPrefTyped<int>(_keyPendingMineLandingClaimedAt, 0);
-
-  /// 打开时记下此刻（作为新的认领），关闭写 0。
-  Future<void> setPendingMineLanding(bool enabled) => _db.setPrefTyped<int>(
-    _keyPendingMineLandingClaimedAt,
-    enabled ? DateTime.now().millisecondsSinceEpoch : 0,
-  );
   static const _keyLanRequiresPin = 'sync_lan_requires_pin';
   static const _keyServerTlsEnabled = 'sync_server_tls_enabled';
-  static const _keyInterconnectPublicUrls = kInterconnectPublicUrlsPref;
-  static const _keyInterconnectP2pEnabled = kInterconnectP2pEnabledPref;
-  static const _keyInterconnectP2pSecret = kInterconnectP2pSecretPref;
-  static const _keyInterconnectP2pRelayUrls = kInterconnectP2pRelayUrlsPref;
-
-  /// Single source of truth for the default Hibiki sync-server port.
-  /// 38765 is in the IANA User Ports range (1024–49151) but unassigned and
-  /// clear of the crowded 8xxx dev-server band and the 49152+ ephemeral range,
-  /// so initial bind conflicts are unlikely. Referenced everywhere the default
-  /// is needed so the value can never drift between call sites.
-  static const int defaultServerPort = 38765;
 
   /// 互联总开关，独立于 [getBackendType]（云备份后端选择）。为 true 时互联作为
   /// 一条独立的同步/端到端通道运行——连接对端、远端查词/音频/占位卡 live 数据源、
@@ -1002,122 +393,6 @@ class SyncRepository {
     interconnectEnabledRevision.value++;
   }
 
-  Future<bool> isServerEnabled() =>
-      _db.getPrefTyped<bool>(_keyServerEnabled, false);
-  Future<void> setServerEnabled(bool v) =>
-      _db.setPrefTyped<bool>(_keyServerEnabled, v);
-  Future<int> getServerPort() =>
-      _db.getPrefTyped<int>(_keyServerPort, defaultServerPort);
-  Future<void> setServerPort(int v) => _db.setPrefTyped<int>(_keyServerPort, v);
-
-  /// TODO-961 取舍 A：LAN 自动发现的对端是否仍需 PIN 才能配对。默认 false=
-  /// 自家局域网免 PIN（公网入站恒强制，与本开关无关，见配对协议
-  /// [FushiPairingProtocol.computePinRequired]）。
-  /// host 侧用户填写的公网 / 反代 / DDNS 地址（有序，可多条）。经
-  /// `/api/capabilities` 的地址集公布给已配对 client 自动学习
-  /// （docs/specs/2026-09-28-interconnect-remote-reach.md §1）。设备本地：这是
-  /// 「这台机器在外网叫什么」，换一台机器就不对了。
-  Future<List<String>> getInterconnectPublicUrls() async {
-    return decodeInterconnectPublicUrls(
-      await _getStringOrNull(_keyInterconnectPublicUrls),
-    );
-  }
-
-  Future<void> setInterconnectPublicUrls(List<String> urls) async {
-    final List<String> cleaned = <String>[
-      for (final String u in urls)
-        if (u.trim().isNotEmpty) u.trim(),
-    ];
-    if (cleaned.isEmpty) {
-      await _deleteKey(_keyInterconnectPublicUrls);
-      return;
-    }
-    await _setString(_keyInterconnectPublicUrls, jsonEncode(cleaned));
-  }
-
-  /// host 侧「允许经 P2P 隧道远程连接」（默认关，见 [kInterconnectP2pEnabledPref]）。
-  Future<bool> isInterconnectP2pEnabled() =>
-      _db.getPrefTyped<bool>(_keyInterconnectP2pEnabled, false);
-  Future<void> setInterconnectP2pEnabled(bool v) =>
-      _db.setPrefTyped<bool>(_keyInterconnectP2pEnabled, v);
-
-  /// 本机 iroh 私钥（设备本地；同一把钥匙出现在两台设备上就是同一个 NodeId）。
-  Future<String?> getInterconnectP2pSecret() async {
-    final String? encoded = await _getStringOrNull(_keyInterconnectP2pSecret);
-    return encoded != null ? _decodeSecret(encoded) : null;
-  }
-
-  Future<void> setInterconnectP2pSecret(String v) =>
-      _setString(_keyInterconnectP2pSecret, _encodeSecret(v));
-
-  /// 自建 iroh-relay 地址（空 = iroh 默认公共中继）。
-  Future<List<String>> getInterconnectP2pRelayUrls() async =>
-      decodeInterconnectPublicUrls(
-        await _getStringOrNull(_keyInterconnectP2pRelayUrls),
-      );
-
-  Future<void> setInterconnectP2pRelayUrls(List<String> urls) async {
-    final List<String> cleaned = <String>[
-      for (final String u in urls)
-        if (u.trim().isNotEmpty) u.trim(),
-    ];
-    if (cleaned.isEmpty) {
-      await _deleteKey(_keyInterconnectP2pRelayUrls);
-      return;
-    }
-    await _setString(_keyInterconnectP2pRelayUrls, jsonEncode(cleaned));
-  }
-
-  Future<bool> getLanRequiresPin() =>
-      _db.getPrefTyped<bool>(_keyLanRequiresPin, false);
-  Future<void> setLanRequiresPin(bool v) =>
-      _db.setPrefTyped<bool>(_keyLanRequiresPin, v);
-
-  /// TODO-961 M1：host 是否以 HTTPS（自签证书 + 指纹钉扎）对外服务。默认 false=
-  /// 明文 HTTP 老路径（Never break userspace：现有 LAN 用户升级后行为不变，直到
-  /// 主动开 TLS）。开启后 [FushiSyncServerController] 用 [FushiTlsIdentityStore]
-  /// 起 TLS 并在配对响应里回传指纹供 client TOFU 钉扎。
-  Future<bool> getServerTlsEnabled() =>
-      _db.getPrefTyped<bool>(_keyServerTlsEnabled, false);
-  Future<void> setServerTlsEnabled(bool v) =>
-      _db.setPrefTyped<bool>(_keyServerTlsEnabled, v);
-
-  /// TODO-961 B 段：全新设备**首次**启用 hosting 时默认打开 TLS。判据是
-  /// preferences 表里 [_keyServerTlsEnabled] 与 [_keyServerEnabled] 两个 key 都
-  /// **从未写入过**——存量 hosting（或曾 hosting）设备至少写过 serverEnabled，
-  /// 显式设置过 TLS 的更不动，保持明文现状（Never break userspace）。
-  /// 返回是否真的应用了默认值（供 UI 同步开关显示）。
-  Future<bool> applyFirstHostingTlsDefault() async {
-    if (await _getStringOrNull(_keyServerTlsEnabled) != null) return false;
-    if (await _getStringOrNull(_keyServerEnabled) != null) return false;
-    await setServerTlsEnabled(true);
-    return true;
-  }
-
-  Future<String?> getServerPassword() async {
-    final encoded = await _getStringOrNull(_keyServerPassword);
-    return encoded != null ? _decodeSecret(encoded) : null;
-  }
-
-  Future<void> setServerPassword(String? v) async {
-    if (v == null) {
-      await _deleteKey(_keyServerPassword);
-      return;
-    }
-    await _setString(_keyServerPassword, _encodeSecret(v));
-  }
-
-  /// Stable per-install identifier used to (a) advertise this device over the
-  /// LAN and (b) filter our own service out of discovery results. Generated
-  /// once on first use and persisted; never overwritten by a backup import.
-  Future<String> getOrCreateDeviceId() async {
-    final existing = await _getStringOrNull(_keyDeviceId);
-    if (existing != null && existing.isNotEmpty) return existing;
-    final String id = FushiSyncServer.generateToken();
-    await _setString(_keyDeviceId, id);
-    return id;
-  }
-
   // ── 媒体服务器（Jellyfin / Emby / Plex） ─────────────────────────────
 
   /// v1 单服务器键（一条 [JellyfinServerConfig] JSON）。只在 [getJellyfinServers]
@@ -1130,181 +405,11 @@ class SyncRepository {
   /// 字段区分，缺字段 = Jellyfin。
   static const _keyJellyfinServers = 'sync_jellyfin_servers';
 
-  /// 已登录的全部媒体服务器（Jellyfin 家族 + Plex，按添加顺序）；未配置 → 空列表。
-  ///
-  /// 与 Jellyfin 共用 [_keyJellyfinServers]（键名冻结不改）：每项按
-  /// `kind` 字段经 [decodeMediaServerConfig] 分发，**缺字段按 Jellyfin 读**
-  /// （存量数据全是它）。认不出的 `kind` 与脏项逐项丢弃。
-  ///
-  /// **旧单值键迁移在读路径完成**：列表键不存在而 [_keyJellyfinServer] 存在时，把
-  /// 旧值包成单元素列表写进列表键并删旧键。不走 schema migration——这只是 prefs
-  /// 表里一行 JSON 的形状变化，读一次就收敛，且旧键脏 JSON 时同样删旧键（它本来
-  /// 也读成「未配置」，留着只会让每次读都重跑一遍迁移）。
-  ///
-  /// 脏项（非 Map / 缺必填字段）逐项丢弃，不整列表作废：一台服务器的配置坏了
-  /// 不该把其它几台一起登出。
-  Future<List<MediaServerConfig>> getMediaServers() async {
-    final String? raw = await _getStringOrNull(_keyJellyfinServers);
-    if (raw != null) return _decodeMediaServers(raw);
-    final String? legacy = await _getStringOrNull(_keyJellyfinServer);
-    if (legacy == null) return const <MediaServerConfig>[];
-    final JellyfinServerConfig? migrated = _decodeJellyfinServer(legacy);
-    final List<MediaServerConfig> servers = <MediaServerConfig>[
-      if (migrated != null) migrated,
-    ];
-    await setMediaServers(servers);
-    await _deleteKey(_keyJellyfinServer);
-    return servers;
-  }
-
-  /// 整表覆盖；空列表 = 删键（全部登出）。
-  Future<void> setMediaServers(List<MediaServerConfig> servers) async {
-    if (servers.isEmpty) {
-      await _deleteKey(_keyJellyfinServers);
-      return;
-    }
-    await _setString(
-      _keyJellyfinServers,
-      jsonEncode(<Map<String, Object?>>[
-        for (final MediaServerConfig s in servers) s.toJson(),
-      ]),
-    );
-  }
-
-  /// 按 [MediaServerConfig.sourceId] 身份替换（原位，不打乱用户排好的顺序）或追加。
-  Future<void> upsertMediaServer(MediaServerConfig config) async {
-    final List<MediaServerConfig> servers = await getMediaServers();
-    final int index = servers.indexWhere(
-      (MediaServerConfig s) => s.sourceId == config.sourceId,
-    );
-    final List<MediaServerConfig> next = List<MediaServerConfig>.of(servers);
-    if (index < 0) {
-      next.add(config);
-    } else {
-      next[index] = config;
-    }
-    await setMediaServers(next);
-  }
-
-  /// 只登出一台（按 [MediaServerConfig.sourceId]）；不在列表里 = no-op。
-  Future<void> removeMediaServer(String sourceId) async {
-    final List<MediaServerConfig> servers = await getMediaServers();
-    final List<MediaServerConfig> next = <MediaServerConfig>[
-      for (final MediaServerConfig s in servers)
-        if (s.sourceId != sourceId) s,
-    ];
-    if (next.length == servers.length) return;
-    await setMediaServers(next);
-  }
-
-  /// 已登录的全部 Jellyfin/Emby 服务器（按添加顺序）；未配置 → 空列表。
-  /// = [getMediaServers] 里 [MediaServerKind.jellyfin] 的那些（Plex 不在其中）。
-  Future<List<JellyfinServerConfig>> getJellyfinServers() async =>
-      <JellyfinServerConfig>[
-        for (final MediaServerConfig s in await getMediaServers())
-          if (s is JellyfinServerConfig) s,
-      ];
-
-  /// 覆盖全部 Jellyfin 家族服务器；**其它类型（Plex）原样保留**在原位。空列表 =
-  /// 只登出全部 Jellyfin 家族服务器（整表空了才删键）。
-  ///
-  /// 保序口径：旧表里 Jellyfin 项的槽位按顺序由 [servers] 依次填入，多出来的
-  /// 追加到末尾、少了的槽位删掉；非 Jellyfin 项位置不动。
-  Future<void> setJellyfinServers(List<JellyfinServerConfig> servers) async {
-    final List<MediaServerConfig> current = await getMediaServers();
-    final Iterator<JellyfinServerConfig> replacements = servers.iterator;
-    final List<MediaServerConfig> next = <MediaServerConfig>[
-      for (final MediaServerConfig s in current)
-        if (s is! JellyfinServerConfig)
-          s
-        else if (replacements.moveNext())
-          replacements.current,
-    ];
-    while (replacements.moveNext()) {
-      next.add(replacements.current);
-    }
-    await setMediaServers(next);
-  }
-
-  /// 按 `(serverUrl, userId)` 身份替换或追加一台服务器。
-  ///
-  /// 身份键走 [JellyfinVideoClient.sourceIdFor]（= 远端清单缓存槽的身份），同一
-  /// 账号重复登录只是换令牌 / 改库选择，列表里不会出现第二张同服务器卡片；替换
-  /// 保持原位，不把用户排好的顺序打乱。
-  Future<void> upsertJellyfinServer(JellyfinServerConfig config) =>
-      upsertMediaServer(config);
-
-  /// 只登出一台（按 `(serverUrl, userId)` 身份）；不在列表里 = no-op。
-  Future<void> removeJellyfinServer({
-    required String serverUrl,
-    required String userId,
-  }) =>
-      removeMediaServer(
-        JellyfinVideoClient.sourceIdFor(serverUrl: serverUrl, userId: userId),
-      );
-
-  /// 过渡口径：**列表第一项**（多服务器化之前只有一台，「第一台」就是那一台）。
-  /// 单远端源架构的消费端（home_video_page `_resolveJellyfinVideoClient`）在改成
-  /// 逐台解析前先靠它维持旧行为；新代码一律用 [getJellyfinServers]。
-  @Deprecated('Use getJellyfinServers')
-  Future<JellyfinServerConfig?> getJellyfinServer() async {
-    final List<JellyfinServerConfig> servers = await getJellyfinServers();
-    return servers.isEmpty ? null : servers.first;
-  }
-
-  /// 过渡口径：`null` = 清空全部 Jellyfin 家族服务器（旧的「登出 = 删键」语义，
-  /// 多台时等于全部登出；Plex 不受影响）；非 null = [upsertJellyfinServer]。新代码
-  /// 用 [upsertJellyfinServer] / [removeJellyfinServer] 点名操作。
-  @Deprecated('Use upsertJellyfinServer / removeJellyfinServer')
-  Future<void> setJellyfinServer(JellyfinServerConfig? config) => config == null
-      ? setJellyfinServers(const <JellyfinServerConfig>[])
-      : upsertJellyfinServer(config);
-
-  static List<MediaServerConfig> _decodeMediaServers(String raw) {
-    if (raw.isEmpty) return const <MediaServerConfig>[];
-    try {
-      final Object? decoded = jsonDecode(raw);
-      if (decoded is List) {
-        return <MediaServerConfig>[
-          for (final Object? item in decoded)
-            if (item is Map<String, dynamic>)
-              if (decodeMediaServerConfig(item)
-                  case final MediaServerConfig config)
-                config,
-        ];
-      }
-    } catch (_) {
-      // Best-effort: 脏 JSON 一律当「未配置」（下面返回空表），不弹错也不抛——
-      // 这条只是读缓存里的服务器配置，设置页会让用户重新登录。
-    }
-    return const <MediaServerConfig>[];
-  }
-
-  static JellyfinServerConfig? _decodeJellyfinServer(String raw) {
-    if (raw.isEmpty) return null;
-    try {
-      final Object? decoded = jsonDecode(raw);
-      if (decoded is Map<String, dynamic>) {
-        return JellyfinServerConfig.fromJson(decoded);
-      }
-    } catch (_) {
-      // 同上：旧单值键的脏 JSON 当「未配置」。
-    }
-    return null;
-  }
-
   // ── Hibiki Client (connect to another Hibiki instance) ─────────
 
   static const _keyFushiClientUrl = 'sync_hibiki_client_url';
   static const _keyFushiClientUrls = 'sync_hibiki_client_urls';
   static const _keyFushiClientToken = 'sync_hibiki_client_token';
-
-  /// 旧的单地址 API，仅为向后兼容保留；新代码请用 [getFushiClientUrls]。
-  @Deprecated('Use getFushiClientUrls / setFushiClientUrls')
-  Future<String?> getFushiClientUrl() => _getStringOrNull(_keyFushiClientUrl);
-  @Deprecated('Use getFushiClientUrls / setFushiClientUrls')
-  Future<void> setFushiClientUrl(String? v) =>
-      _setOrDelete(_keyFushiClientUrl, v);
 
   /// 有序候选地址列表（下标即优先级）。新键缺失时，从旧的单地址键迁移种子，
   /// 保证老用户无感。
@@ -1321,201 +426,9 @@ class SyncRepository {
     return const <FushiClientUrl>[];
   }
 
-  /// 候选地址列表的进程内「已变更」广播。除了设置页，后台的地址学习
-  /// （[InterconnectAddressLearner]）也会写这个列表；设置页若只认自己的内存副本，
-  /// 下一次用户编辑就会把刚学到的地址整份覆盖掉。bump 放在**唯一的写方法**
-  /// [setFushiClientUrls] 里（与 [interconnectEnabledRevision] 同一范式），消费方
-  /// 收到后重读真值。
-  static final ValueNotifier<int> fushiClientUrlsRevision =
-      ValueNotifier<int>(0);
-
-  /// 候选列表「读-改-写」的进程级串行化：后台地址学习、链接配对各自读-改-写，
-  /// 并发时后写者会把前者的结果（甚至用户刚删掉的 host 连同 token）写回来
-  /// （审查问题 10）。[transform] 返回同一个实例 = 不写盘。
-  static Future<void> _urlsWriteChain = Future<void>.value();
-
-  Future<List<FushiClientUrl>> updateFushiClientUrls(
-    List<FushiClientUrl> Function(List<FushiClientUrl> current) transform,
-  ) {
-    final Future<List<FushiClientUrl>> result =
-        _urlsWriteChain.then((_) async {
-      final List<FushiClientUrl> before = await getFushiClientUrls();
-      final List<FushiClientUrl> after = transform(before);
-      if (!identical(after, before)) await setFushiClientUrls(after);
-      return after;
-    });
-    _urlsWriteChain = result.then<void>((_) {}, onError: (Object _) {});
-    return result;
-  }
-
-  Future<void> setFushiClientUrls(List<FushiClientUrl> urls) async {
-    if (urls.isEmpty) {
-      await _deleteKey(_keyFushiClientUrls);
-    } else {
-      await _setString(
-        _keyFushiClientUrls,
-        jsonEncode(urls.map((FushiClientUrl u) => u.toJson()).toList()),
-      );
-    }
-    fushiClientUrlsRevision.value++;
-  }
-
-  /// 追加 / 升级一个候选地址（TOFU 指纹记录器）。保持原有顺序与 token 不变，返回最终列表。
-  /// 用于 LAN 发现与手动配对：把对端地址加入列表，而不是覆盖整套配置。
-  ///
-  /// TODO-961 M1（TOFU 接线，设计稿 §3.1 / §3.5）：
-  /// - [fingerprint] 非空（https 钉扎指纹）时，把它写进对应条目；这是「首次信任并
-  ///   记录」(TOFU) 的落脚点。
-  /// - 若该 URL 已存在且**已记录非空指纹**，而本次新指纹与之**不符**，抛
-  ///   [FushiFingerprintMismatchException]，**绝不覆盖已存指纹**（疑似 MITM）。
-  /// - 已存指纹为空（明文老条目）→ 允许首次写入指纹（http 升级为 https 钉扎）。
-  /// - 指纹相同 / 本次 [fingerprint] 为 null（明文 http）→ 幂等：仅补 deviceName。
-  Future<List<FushiClientUrl>> addFushiClientUrl(
-    String url, {
-    String? fingerprint,
-    String? deviceName,
-  }) {
-    final String? incomingFp =
-        (fingerprint != null && fingerprint.isNotEmpty) ? fingerprint : null;
-    // 读改写在 [updateFushiClientUrls] 的串行链里做：与后台地址学习、链接配对、
-    // 设置页编辑互斥，谁都不会拿过期快照覆盖别人刚写的条目。
-    return updateFushiClientUrls((List<FushiClientUrl> urls) {
-      final int existingIdx =
-          urls.indexWhere((FushiClientUrl u) => u.url == url);
-      if (existingIdx < 0) {
-        return <FushiClientUrl>[
-          ...urls,
-          FushiClientUrl(
-            url: url,
-            fingerprintSha256: incomingFp,
-            deviceName: deviceName,
-          ),
-        ];
-      }
-      final FushiClientUrl existing = urls[existingIdx];
-      final String? storedFp = existing.fingerprintSha256;
-      // MITM 守卫：已记录非空指纹且新指纹非空且不符 → 拒绝覆盖，抛异常告警。
-      if (incomingFp != null &&
-          storedFp != null &&
-          storedFp.isNotEmpty &&
-          !_fingerprintEquals(storedFp, incomingFp)) {
-        throw FushiFingerprintMismatchException(
-          url: url,
-          storedFingerprint: storedFp,
-          incomingFingerprint: incomingFp,
-        );
-      }
-      // 指纹处理：已存非空（且与新值归一化相等，否则上面已抛）→ 保留原存值，
-      // 不被新写法（大小写/冒号差异）改写；已存为空 → 首次写入新指纹（http→https 升级）。
-      final String? nextFp =
-          (storedFp != null && storedFp.isNotEmpty) ? storedFp : incomingFp;
-      final FushiClientUrl upgraded = existing.copyWith(
-        fingerprintSha256: nextFp,
-        deviceName: deviceName,
-      );
-      if (upgraded.fingerprintSha256 == existing.fingerprintSha256 &&
-          upgraded.deviceName == existing.deviceName) {
-        return urls; // 无变化，避免无谓写盘。
-      }
-      return <FushiClientUrl>[...urls]..[existingIdx] = upgraded;
-    });
-  }
-
-  /// 指纹相等比较——直接用铉扎层那份归一化（BUG-1557：原本这里自己又写了一遍
-  /// 同语义的 norm，两份实现一旦漂开就会出现「铉扎握手过了、TOFU 说不符」）。
-  static bool _fingerprintEquals(String a, String b) => fingerprintEquals(a, b);
-
   Future<String?> getFushiClientToken() async {
     final encoded = await _getStringOrNull(_keyFushiClientToken);
     return encoded != null ? _decodeSecret(encoded) : null;
-  }
-
-  Future<void> setFushiClientToken(String? v) async {
-    if (v == null) {
-      await _deleteKey(_keyFushiClientToken);
-      return;
-    }
-    await _setString(_keyFushiClientToken, _encodeSecret(v));
-  }
-
-  /// BUG-1550：把配对拿到的 per-peer token 落在**这一条地址**上，并同步写全局键。
-  ///
-  /// 两处都写的理由：地址行上的 token 让「多台对端各自一份凭据」成立（这是本 bug
-  /// 的根因修复）；全局键继续维持，是为了那些 token 为空的行（老配置、用户手动补
-  /// 的同 host 备用地址）仍能鉴权——升级前的行为逐字保留（Never break userspace）。
-  ///
-  /// [url] 不在列表里时只写全局键（配对流程会在此之前把地址 append 进去，正常路径
-  /// 不会走到；防御性处理避免凭据丢失）。
-  Future<void> setFushiClientTokenForUrl(String url, String token) async {
-    await updateFushiClientUrls((List<FushiClientUrl> urls) {
-      final int idx = urls.indexWhere((FushiClientUrl u) => u.url == url);
-      if (idx < 0 || urls[idx].token == token) return urls;
-      return <FushiClientUrl>[...urls]..[idx] = urls[idx].copyWith(token: token);
-    });
-    await setFushiClientToken(token);
-  }
-
-  /// BUG-1550：清空所有地址行上的 per-peer token，让全局键重新成为唯一凭据。
-  /// 用户在设置页手贴 token 时调用——那是显式覆盖，不该被残留的行内凭据压过。
-  Future<void> clearFushiClientUrlTokens() async {
-    await updateFushiClientUrls((List<FushiClientUrl> urls) {
-      if (!urls.any((FushiClientUrl u) => u.token != null)) return urls;
-      return <FushiClientUrl>[
-        for (final FushiClientUrl u in urls)
-          FushiClientUrl(
-            url: u.url,
-            enabled: u.enabled,
-            fingerprintSha256: u.fingerprintSha256,
-            deviceName: u.deviceName,
-            hostId: u.hostId,
-            learned: u.learned,
-            addressKind: u.addressKind,
-          ),
-      ];
-    });
-  }
-
-  /// BUG-1557：某条地址已铉扎的证书指纹（未铉扎 / 地址不在列表里 → null）。
-  ///
-  /// 配对前的 TOFU 比对靠它：**先**拿这个已存值与本次握手所见指纹比，不符就
-  /// 当场中止；而不是先把设备名/deviceId 送出去、等 host 都落库了才发现不对。
-  Future<String?> getFushiClientFingerprint(String url) async {
-    final List<FushiClientUrl> urls = await getFushiClientUrls();
-    for (final FushiClientUrl u in urls) {
-      if (u.url == url) {
-        final String? fp = u.fingerprintSha256;
-        return (fp != null && fp.isEmpty) ? null : fp;
-      }
-    }
-    return null;
-  }
-
-  /// BUG-1557：清掉某条地址的铉扎指纹（下次配对重新 TOFU）。返回是否真清了。
-  ///
-  /// [addFushiClientUrl] 的 MITM 守卫故意**绝不覆盖**已存指纹，那就必须给用户一个
-  /// 显式的重置入口，否则 host 真换了机器 / 重置了证书时，那条 URL 永远连不上也
-  /// 修不好（只能删了重加，而用户根本不知道要那么做）。
-  Future<bool> clearFushiClientFingerprint(String url) async {
-    bool cleared = false;
-    await updateFushiClientUrls((List<FushiClientUrl> urls) {
-      final int idx = urls.indexWhere((FushiClientUrl u) => u.url == url);
-      if (idx < 0) return urls;
-      final FushiClientUrl existing = urls[idx];
-      final String? fp = existing.fingerprintSha256;
-      if (fp == null || fp.isEmpty) return urls;
-      cleared = true;
-      // 显式构造而非 copyWith：copyWith 的 `?? this.x` 语义根本清不掉字段。
-      return <FushiClientUrl>[...urls]..[idx] = FushiClientUrl(
-          url: existing.url,
-          enabled: existing.enabled,
-          deviceName: existing.deviceName,
-          token: existing.token,
-          hostId: existing.hostId,
-          learned: existing.learned,
-          addressKind: existing.addressKind,
-        );
-    });
-    return cleared;
   }
 
   // ── Device-local key catalog ──────────────────────────────────────
@@ -1594,11 +507,6 @@ class SyncRepository {
     _keyDeviceId,
     _keyLanRequiresPin,
     _keyServerTlsEnabled,
-    _keyInterconnectPublicUrls,
-    // P2P：私钥外带 = 两台设备同一个 NodeId；开关与中继是本机的意愿与网络环境。
-    _keyInterconnectP2pEnabled,
-    _keyInterconnectP2pSecret,
-    _keyInterconnectP2pRelayUrls,
     _keyFushiClientUrls,
     _keyFushiClientToken,
     _keyFushiClientUrl,
@@ -1609,9 +517,6 @@ class SyncRepository {
     // 「要不要接收 host 的 service-config（外部服务 API key）」是每台设备自己的
     // 信任决策，跨设备携带会把 A 机的选择强加给 B 机。
     _keyInterconnectServiceConfigSync,
-    // 「当 host 时愿不愿意为对端转码视频」是本机算力的意愿：一台台式机说「可以」，
-    // 不代表那台跑着同一份备份的旧笔记本也愿意被烤。
-    kInterconnectTranscodeEnabledPref,
     // 合集同步因果基线：描述「本设备见过共享清单到什么时刻」，跨设备携带会让
     // 新设备把没见过的墓碑误判成旧闻而复活成员（见 getCollectionsSyncBaselineMs）。
     // 这两条是**解耦前的全局键**：现值仍被 per-channel 读作迁移初值，故照旧不能
@@ -1652,16 +557,6 @@ class SyncRepository {
     'video_download_target_source_id',
     'video_download_embedded_installation_id',
   ];
-
-  // ── Helpers ───────────────────────────────────────────────────────
-
-  Future<void> _setOrDelete(String key, String? value) async {
-    if (value == null || value.isEmpty) {
-      await _deleteKey(key);
-      return;
-    }
-    await _setString(key, value);
-  }
 
   Future<void> _deleteKey(String key) async {
     await (_db.delete(_db.preferences)..where((t) => t.key.equals(key))).go();

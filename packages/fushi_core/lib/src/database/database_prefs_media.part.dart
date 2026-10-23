@@ -64,43 +64,6 @@ mixin _FushiDbPrefsMedia
     });
   }
 
-  /// Writes several preferences as ONE transaction with a SINGLE version bump.
-  ///
-  /// A multi-key preference (a tri-state projected onto two bool keys, a paired
-  /// value+discriminator) is one logical setting: writing it through repeated
-  /// [setPref] calls costs one transaction — and one fsync — per key, and
-  /// leaves an observable window in which a cross-process reader sees half the
-  /// setting applied (BUG-906 guarantees each key's own atomicity, not the
-  /// group's). Measured on Windows/WAL: two [setPref] calls median 12.3ms vs
-  /// 5.1ms for one, and the caller's UI update sits behind that whole wait.
-  ///
-  /// Same BUG-906 (A) invariant as [setPref]: the business writes and the bump
-  /// land together, so no reader ever pairs a new value with a stale version.
-  /// The bump happens once for the whole group (it is a change *signal*, not a
-  /// per-key counter) and is skipped when the group only carries the version
-  /// key itself. An empty map is a no-op — no transaction, no bump.
-  Future<void> setPrefs(Map<String, String> entries) async {
-    if (entries.isEmpty) return;
-    await transaction(() async {
-      // BUG-1502: one stamp for the whole group — it is ONE logical setting
-      // written atomically, so its rows must not disagree on when that was.
-      final int now = DateTime.now().millisecondsSinceEpoch;
-      for (final MapEntry<String, String> entry in entries.entries) {
-        await into(preferences).insertOnConflictUpdate(
-          PreferencesCompanion.insert(
-            key: entry.key,
-            value: entry.value,
-            updatedAt: Value<int>(now),
-          ),
-        );
-      }
-      if (entries.keys
-          .any((String key) => key != FushiDatabase.prefsVersionKey)) {
-        await _bumpPrefsVersion();
-      }
-    });
-  }
-
   /// Atomically replaces one preference only while its raw persisted value is
   /// still [expectedValue]. A successful non-version write advances
   /// [FushiDatabase.prefsVersionKey] in the same transaction; a failed comparison changes
@@ -203,16 +166,6 @@ mixin _FushiDbPrefsMedia
     });
   }
 
-  /// The LWW stamp of one preference row (BUG-1502); null when the row is
-  /// absent. 0 means "written before v84 / by a device that had no clock" —
-  /// see [Preferences.updatedAt].
-  Future<int?> getPrefUpdatedAt(String key) async {
-    final PreferenceRow? row = await (select(preferences)
-          ..where((t) => t.key.equals(key)))
-        .getSingleOrNull();
-    return row?.updatedAt;
-  }
-
   Future<T> getPrefTyped<T>(String key, T defaultValue) async {
     final raw = await getPref(key);
     if (raw == null) return defaultValue;
@@ -230,11 +183,6 @@ mixin _FushiDbPrefsMedia
     final rows = await select(preferences).get();
     return Map.fromEntries(rows.map((r) => MapEntry(r.key, r.value)));
   }
-
-  /// Every preference row WITH its LWW stamp (BUG-1502) — the [getAllPrefs]
-  /// sibling for callers that must ship the stamp across the wire (interconnect
-  /// host book manifest) rather than just display the value.
-  Future<List<PreferenceRow>> getAllPrefRows() => select(preferences).get();
 
   Future<void> migrateLegacyBookmarkPreferences() async {
     if (!await _tableExists('preferences')) {
@@ -325,78 +273,15 @@ mixin _FushiDbPrefsMedia
             ..orderBy([(t) => OrderingTerm.desc(t.openedAt)]))
           .get();
 
-  /// upsert 一条最近打开（PK = (mediaSource, mediaId)，重开同条目刷新行）。
-  Future<void> upsertMediaOpenHistory(MediaOpenHistoryCompanion entry) =>
-      into(mediaOpenHistory).insertOnConflictUpdate(entry);
-
   Future<int> deleteMediaOpenHistory(String mediaSource, String mediaId) =>
       (delete(mediaOpenHistory)
             ..where((t) =>
                 t.mediaSource.equals(mediaSource) & t.mediaId.equals(mediaId)))
           .go();
 
-  Future<int> deleteMediaOpenHistoryByMediaId(String mediaId) =>
-      (delete(mediaOpenHistory)..where((t) => t.mediaId.equals(mediaId))).go();
-
-  /// 该类型只保留最近 [maxItems] 条（按 [MediaOpenHistory.openedAt] 旧者先删；
-  /// 旧实现按自增 id 序 trim，v80 起时间就是唯一序）。单条批删——本方法在
-  /// 每次打开媒体的热路径上，select 全列会把 snapshot（可能含迁移遗留的
-  /// base64 封面）整批拉进 Dart 只为数个数（review5-6）。
-  Future<void> trimMediaHistory(String typeId, int maxItems) => customStatement(
-        'DELETE FROM media_open_history WHERE media_type = ? AND rowid IN ('
-        'SELECT rowid FROM media_open_history WHERE media_type = ? '
-        'ORDER BY opened_at DESC LIMIT -1 OFFSET ?)',
-        <Object?>[typeId, typeId, maxItems],
-      );
-
   // ── search history ──────────────────────────────────────────────
   Future<List<SearchHistoryItemRow>> getAllSearchHistoryItems() =>
       select(searchHistoryItems).get();
-
-  Future<void> upsertSearchHistoryItem(SearchHistoryItemsCompanion item) async {
-    await into(searchHistoryItems).insert(
-      item,
-      mode: InsertMode.insertOrReplace,
-    );
-  }
-
-  Future<int> deleteSearchHistoryByUniqueKey(String uk) =>
-      (delete(searchHistoryItems)..where((t) => t.uniqueKey.equals(uk))).go();
-
-  Future<int> clearSearchHistory(String historyKey) =>
-      (delete(searchHistoryItems)
-            ..where((t) => t.historyKey.equals(historyKey)))
-          .go();
-
-  Future<List<SearchHistoryItemRow>> getSearchHistory(String historyKey) =>
-      (select(searchHistoryItems)
-            ..where((t) => t.historyKey.equals(historyKey)))
-          .get();
-
-  Future<int> countSearchHistory(String historyKey) async {
-    final cnt = countAll();
-    final q = selectOnly(searchHistoryItems)
-      ..where(searchHistoryItems.historyKey.equals(historyKey))
-      ..addColumns([cnt]);
-    final row = await q.getSingle();
-    return row.read(cnt)!;
-  }
-
-  Future<void> trimSearchHistory(String historyKey, int maxItems) async {
-    await transaction(() async {
-      final count = await countSearchHistory(historyKey);
-      if (count <= maxItems) return;
-      final surplus = count - maxItems;
-      final oldestIds = await (select(searchHistoryItems)
-            ..where((t) => t.historyKey.equals(historyKey))
-            ..orderBy([(t) => OrderingTerm.asc(t.id)])
-            ..limit(surplus))
-          .map((r) => r.id)
-          .get();
-      await (delete(searchHistoryItems)..where((t) => t.id.isIn(oldestIds)))
-          .go();
-    });
-  }
 
   // ── audiobooks ──────────────────────────────────────────────────
   Future<AudiobookRow?> getAudiobookByBookKey(String bookKey) =>
@@ -404,13 +289,6 @@ mixin _FushiDbPrefsMedia
           .getSingleOrNull();
 
   Future<List<AudiobookRow>> getAllAudiobooks() => select(audiobooks).get();
-
-  /// 整行写入（**会覆盖每一列**）。只给「从同步包物化一整行」这种确实持有全部
-  /// 列的场景用。日常「只改其中几列」必须走 [patchAudiobook]——凭空造 companion
-  /// 再走这里，本次没设的列会被静默清空（BUG-1678）。
-  Future<void> upsertAudiobook(AudiobooksCompanion ab) =>
-      into(audiobooks).insert(ab,
-          onConflict: DoUpdate((_) => ab, target: [audiobooks.bookKey]));
 
   /// 局部更新 audiobooks：**只写 [patch] 里 present 的列**，其余原样不动。
   /// 返回受影响行数（0 = 该 bookKey 尚无行）。
@@ -437,16 +315,6 @@ mixin _FushiDbPrefsMedia
   Future<int> patchSrtBook(String uid, SrtBooksCompanion patch) =>
       (update(srtBooks)..where((t) => t.uid.equals(uid))).write(patch);
 
-  Future<int> deleteAudiobookByBookKey(String bookKey) => transaction(() async {
-        await (delete(audioCues)..where((t) => t.bookKey.equals(bookKey))).go();
-        // TODO-616：纯有声书 shelf_entry 以 mediaType='srt'、entryKey=bookKey 登记
-        // （deleteAudiobookByBookKey 拿不到 srtUid——srtUid 级联在上层 host
-        // deleteAudiobook；故登记键 = 删除键 = bookKey）。幂等（删 0 行不报错）。
-        await deleteShelfEntry(MediaKind.srt, bookKey);
-        return (delete(audiobooks)..where((t) => t.bookKey.equals(bookKey)))
-            .go();
-      });
-
   // ── video_books ─────────────────────────────────────────────────
   Future<void> upsertVideoBook(VideoBooksCompanion vb) async {
     await into(videoBooks).insert(vb,
@@ -457,29 +325,6 @@ mixin _FushiDbPrefsMedia
     }
   }
 
-  Future<VideoBookRow?> getVideoBookByBookUid(String bookUid) =>
-      (select(videoBooks)..where((t) => t.bookUid.equals(bookUid)))
-          .getSingleOrNull();
-
   Future<List<VideoBookRow>> allVideoBooks() => select(videoBooks).get();
 
-  /// 仅在视频尚未归属来源时回填 [sourceId]。
-  ///
-  /// 来源重扫复用手动导入的同路径视频时使用。只写 `source_id`，避免以整行 upsert
-  /// 意外覆盖观看进度、字幕、封面或用户资料；已属于其它来源的行保持原归属。
-  Future<int> assignVideoBookSourceIfNull(String bookUid, int sourceId) =>
-      (update(videoBooks)
-            ..where(($VideoBooksTable t) =>
-                t.bookUid.equals(bookUid) & t.sourceId.isNull()))
-          .write(VideoBooksCompanion(sourceId: Value<int?>(sourceId)));
-
-  /// 无条件把视频改归属到 [sourceId]（只写 `source_id`，不动其它列）。
-  ///
-  /// 下载管线把文件放进托管来源根目录后用它收口归属：文件物理上就在这个来源
-  /// 里，哪怕扫描器抢先按别的（重叠的）来源建了行，也该归托管来源，否则按
-  /// `source_id` 过滤的刮削计划看不到刚导入的文件。
-  Future<int> assignVideoBookSource(String bookUid, int sourceId) =>
-      (update(videoBooks)
-            ..where(($VideoBooksTable t) => t.bookUid.equals(bookUid)))
-          .write(VideoBooksCompanion(sourceId: Value<int?>(sourceId)));
 }

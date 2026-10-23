@@ -402,8 +402,6 @@ class KitapsenStore {
     Object? jsonBody,
   }) => _signedIn.requestJson(method, path, query: query, jsonBody: jsonBody);
 
-  List<StoreBook> booksFrom(Object? list) => _books(list);
-
   List<StoreBook> _books(Object? list) => <StoreBook>[
     if (list is List<dynamic>)
       for (final dynamic item in list)
@@ -454,7 +452,6 @@ class KitapsenStore {
       query: <String, String>{
         if (query != null && query.trim().isNotEmpty) 'q': query.trim(),
         if (categorySlug != null) 'category': categorySlug,
-        if (authorUserId != null) 'author_ids': '$authorUserId',
         if (authorName != null) 'author_name': authorName,
         if (publisherId != null) 'publisher_ids': '$publisherId',
         if (freeOnly) 'is_free': 'true',

@@ -82,23 +82,6 @@ String formatStatCphAxis(double cph) {
   return v.toString();
 }
 
-/// 把毫秒时长格式化为坐标轴标签。不足 1 分钟时回退到秒（如 `30s`）而非整除成
-/// `0m`——后者会让整条纵轴退化成 `0m 0m 0m 0m 0m`（观看时长不足 1 分钟时所有
-/// 刻度都被 `ms ~/ 60000` 取整为 0）。
-String formatStatDurationAxis(int ms) {
-  if (ms >= 3600000) {
-    // BUG-892：非整点小时保留一位小数。旧代码 `ms ~/ 3600000` 向下取整，maxMs>1h 时
-    // 相邻刻度（如 2.0h 与 2.5h）都塌成 "2h" → 纵轴出现 "…2h 2h" 重复标签。
-    final double h = ms / 3600000;
-    return h == h.truncateToDouble()
-        ? '${h.toInt()}h'
-        : '${h.toStringAsFixed(1)}h';
-  }
-  if (ms >= 60000) return '${ms ~/ 60000}m';
-  if (ms > 0) return '${ms ~/ 1000}s';
-  return '0';
-}
-
 /// 一条纵轴的完整刻度表：等距刻度值（0 起、末项 ≥ 数据最大值）+ 一一对应的标签。
 ///
 /// 旧实现把 `maxValue` 直接四等分再让每个刻度**各自**挑单位，于是同一条轴上出现

@@ -63,8 +63,6 @@ class ReaderPositionRepository {
     ));
   }
 
-  Future<void> delete(String bookUid) => _db.deleteReaderPosition(bookUid);
-
   static ReaderPosition _rowToModel(ReaderPositionRow r) {
     final pos = ReaderPosition();
     pos.id = r.id;

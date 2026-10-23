@@ -75,28 +75,3 @@ StatSourceTotals sumStatSourceTotals(
   });
   return total;
 }
-
-/// 全部来源在某窗口的合计（跨来源首页目标等场景使用）。
-StatSourceTotals sumAllStatSources(
-  Map<StatBreakdownSource, Map<String, StatSourceTotals>> daily,
-  bool Function(String dateKey) inWindow,
-) {
-  final StatSourceTotals total = StatSourceTotals();
-  for (final Map<String, StatSourceTotals> byDay in daily.values) {
-    total.add(sumStatSourceTotals(byDay, inWindow));
-  }
-  return total;
-}
-
-/// 所有来源出现过的日期键并集（跨来源活跃天数使用）。
-Set<String> allStatSourceDateKeys(
-  Map<StatBreakdownSource, Map<String, StatSourceTotals>> daily,
-) {
-  final Set<String> keys = <String>{};
-  for (final Map<String, StatSourceTotals> byDay in daily.values) {
-    for (final MapEntry<String, StatSourceTotals> e in byDay.entries) {
-      if (!e.value.isEmpty) keys.add(e.key);
-    }
-  }
-  return keys;
-}

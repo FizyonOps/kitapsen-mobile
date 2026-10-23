@@ -32,10 +32,6 @@ class LocalFileDeleteReport {
   /// 尝试删除但失败的路径 + 错误。**不含**本来就不存在的路径（那不是失败）。
   final List<LocalFileDeleteFailure> failures;
 
-  bool get isEmpty => removed.isEmpty && failures.isEmpty;
-
-  Set<String> get removedSet => removed.toSet();
-
   /// 合并两次删除的结果（一条记录可能同时挂有声书与配对字幕书两份原件）。
   LocalFileDeleteReport merge(LocalFileDeleteReport other) =>
       LocalFileDeleteReport(

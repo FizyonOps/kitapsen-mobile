@@ -162,14 +162,6 @@ const Set<StorageCategoryId> kDeletableEntryCategories = <StorageCategoryId>{
   StorageCategoryId.backups,
 };
 
-/// 明细「可直接删」的 kind —— 与 [kDeletableEntryCategories] 是同一件事的两个面：
-/// 前者说哪个类目会产出可删明细，后者说这些明细长什么样。UI 的删除分流按 kind 走
-/// （`storage_usage_view.dart`），扫描侧按类目走，两边必须对得上。
-const Set<StorageEntryKind> kDirectlyDeletableEntryKinds = <StorageEntryKind>{
-  StorageEntryKind.derivedFile,
-  StorageEntryKind.backupArchives,
-};
-
 /// 一个类目内的单条可展开条目（一本书 / 一部词典 / 类目根下的一个子项）。
 class StorageEntryUsage {
   const StorageEntryUsage({
@@ -352,20 +344,6 @@ StorageBookPaths resolveBookStoragePaths({
   );
 }
 
-/// 随包组件（安装目录内、随安装包携带）的一条展示项。
-class BundledComponentUsage {
-  const BundledComponentUsage({
-    required this.name,
-    required this.bytes,
-    required this.path,
-  });
-
-  /// 目录/文件名（不翻译——它就是磁盘上的名字）。
-  final String name;
-  final int bytes;
-  final String path;
-}
-
 /// 每类目 → documents 根下归属的顶层目录名。与
 /// [AppPaths.fushiOwnedDocumentsEntries] 保持全覆盖（守卫测试咬住）。
 const Map<StorageCategoryId, List<String>> kStorageCategoryDocumentsChildren =
@@ -523,10 +501,6 @@ class StorageUsageService {
   final Future<bool> Function() _documentsRootIsFushiOwned;
 
   final StorageIsolateRunner _run;
-
-  /// 多路径求和（isolate 隔离）。
-  Future<int> sizeOfPaths(final List<String> paths) =>
-      _run(() => _pathsSizeSync(paths));
 
   /// 逐类目扫描，每算完一类就产出一个结果（UI 渐进刷新，慢的词典类目
   /// 不挡快的类目）。[books] / [dictionaryNames] 由调用方从 DB/AppModel 取出。
@@ -810,7 +784,7 @@ class StorageUsageService {
   ///   「哪些子目录是我们的」白名单，而白名单漂移正是本 bug 的成因，不再重蹈。
   static Future<List<Directory>> _defaultCacheRoots() async {
     final bool sandboxed = Platform.isIOS || Platform.isAndroid;
-    if (!sandboxed && !Platform.isMacOS) return const <Directory>[];
+    if (!sandboxed) return const <Directory>[];
     final Directory temp = await AppPaths.tempRootDirectory();
     if (!sandboxed) return <Directory>[temp];
     final Directory system = Directory.systemTemp;
@@ -966,41 +940,6 @@ class StorageUsageService {
       }
     }
     return owners;
-  }
-
-  /// 随包组件占用（桌面端安装目录内、随安装包携带；**只展示不可删**——
-  /// 更新 = 安装器整体重写安装目录，删掉的必然回来）。移动端返回空。
-  Future<List<BundledComponentUsage>> scanBundledComponents() async {
-    if (!Platform.isWindows && !Platform.isLinux && !Platform.isMacOS) {
-      return const <BundledComponentUsage>[];
-    }
-    final String exeDir = File(Platform.resolvedExecutable).parent.path;
-    // 已知的可选大件；不存在的项直接不出现（不显示 0 字节噪音行）。
-    // voice_hook / galgame_helper / magpie* 见 galgame_helper_installer.dart
-    // 与 magpie_installer.dart 的目录名常量；mihon_bridge 见
-    // desktop_mihon_runtime.dart。
-    const List<String> candidates = <String>[
-      'voice_hook',
-      'galgame_helper',
-      'magpie',
-      'magpie_bundle',
-      'mihon_bridge',
-      'ffmpeg.exe',
-    ];
-    final List<String> paths = <String>[
-      for (final String name in candidates) p.join(exeDir, name)
-    ];
-    final List<int> sizes = await _run(
-        () => <int>[for (final String path in paths) directorySizeSync(path)]);
-    return <BundledComponentUsage>[
-      for (int i = 0; i < candidates.length; i++)
-        if (sizes[i] > 0)
-          BundledComponentUsage(
-            name: candidates[i],
-            bytes: sizes[i],
-            path: paths[i],
-          ),
-    ];
   }
 }
 

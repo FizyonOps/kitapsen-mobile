@@ -26,9 +26,6 @@ class DownloadKeepAliveHub {
   /// 取来源 [key] 的租约。同一 key 多次取到的是同一份状态（后写覆盖前写）。
   DownloadKeepAlive lease(String key) => _DownloadKeepAliveLease(this, key);
 
-  /// 当前活跃的来源（测试 / 诊断用）。
-  Iterable<String> get activeSources => _active.keys;
-
   Future<void> _update(String key, _LeaseState state) {
     _active[key] = state;
     return _sync();

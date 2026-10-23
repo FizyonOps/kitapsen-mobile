@@ -115,41 +115,6 @@ Future<bool> isDecodableImageFile(File file) async {
   }
 }
 
-/// 给 [destPath] 派生一个**同扩展名**的 staged 临时路径，供外部进程（ffmpeg）直接
-/// 写入后交给 [publishStagedCoverFile] 发布。扩展名必须保留在末尾：ffmpeg 按输出
-/// 扩展名选编码器，`cover.jpg.tmp.123` 会让它报「无法猜测输出格式」。
-String stagedCoverPath(String destPath) {
-  final int dot = destPath.lastIndexOf('.');
-  final int slash = destPath.lastIndexOf(Platform.pathSeparator);
-  final int altSlash = destPath.lastIndexOf('/');
-  final int sep = slash > altSlash ? slash : altSlash;
-  final String ext = dot > sep ? destPath.substring(dot) : '';
-  final String stem = dot > sep ? destPath.substring(0, dot) : destPath;
-  return '$stem.tmp.$pid.${_temporarySerial++}$ext';
-}
-
-/// 把已写好的 staged 文件（见 [stagedCoverPath]）校验后原子发布到 [destPath] 并驱逐
-/// 解码缓存。校验不过则删掉 staged、**不动**旧封面、抛 [CoverImageInvalidException]。
-Future<void> publishStagedCoverFile({
-  required File staged,
-  required String destPath,
-}) async {
-  try {
-    if (!await isDecodableImageFile(staged)) {
-      throw CoverImageInvalidException(
-        'staged cover ${staged.path} is not a complete decodable image',
-      );
-    }
-    final File dest = File(destPath);
-    if (await dest.exists()) await dest.delete();
-    await staged.rename(destPath);
-    await evictImageCacheForFile(dest);
-  } catch (_) {
-    await _deleteQuietly(staged);
-    rethrow;
-  }
-}
-
 Future<void> writeCoverBytesAtomically({
   required List<int> bytes,
   required String destPath,

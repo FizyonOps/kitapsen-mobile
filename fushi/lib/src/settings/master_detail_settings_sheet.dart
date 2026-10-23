@@ -23,29 +23,14 @@ class FushiSettingsSubPageHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool cupertino = isCupertinoPlatform(context);
     final FushiDesignTokens tokens = FushiDesignTokens.of(context);
-    final TextStyle? titleStyle = cupertino
-        ? CupertinoTheme.of(context).textTheme.navTitleTextStyle
-        : Theme.of(context).textTheme.titleMedium;
-    final IconData icon =
-        cupertino ? CupertinoIcons.chevron_back : Icons.arrow_back;
+    final TextStyle? titleStyle = Theme.of(context).textTheme.titleMedium;
+    const IconData icon =
+        Icons.arrow_back;
 
     return Row(
       children: <Widget>[
-        if (cupertino)
-          Semantics(
-            button: true,
-            label: t.back,
-            child: CupertinoButton(
-              padding: EdgeInsets.zero,
-              minSize: 36,
-              onPressed: onBack,
-              child: Icon(icon, size: 22),
-            ),
-          )
-        else
-          FushiIconButton(
+        FushiIconButton(
             icon: icon,
             tooltip: t.back,
             padding: EdgeInsets.all(tokens.spacing.gap / 2),

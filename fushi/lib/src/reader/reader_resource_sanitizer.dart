@@ -1,5 +1,4 @@
-class ReaderResourceSanitizer {
-  ReaderResourceSanitizer._();
+abstract class ReaderResourceSanitizer {
 
   static final RegExp _epubPropertyPattern = RegExp(
     r'^([ \t]*)-epub-([^:;{}\r\n]+)[ \t]*:[ \t]*([^;{}\r\n]*)[ \t]*;',

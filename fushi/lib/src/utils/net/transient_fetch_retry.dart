@@ -54,9 +54,7 @@ Future<T> retryTransient<T>(
       return await attempt();
     } on Object catch (error) {
       if (attemptIndex >= backoff.length || !shouldRetry(error)) rethrow;
-      if (stillWanted != null && !stillWanted()) rethrow;
       await wait(backoff[attemptIndex]);
-      if (stillWanted != null && !stillWanted()) rethrow;
     }
   }
 }

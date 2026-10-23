@@ -69,29 +69,6 @@ enum ImportCarrier {
   bool get isMangaCapable => isManga || this == ImportCarrier.pdf;
 }
 
-/// 单个文件可以承载「一整卷漫画」的扩展名（带点，小写）。
-///
-/// 这是**唯一真相源**：漫画框的文件选择器白名单、目录批量导入的候选枚举、
-/// 以及 [classifyImportCarrier] 的目录分支都从这里取。三处各自手抄的话，
-/// 「选得中但导不了」或「批量漏掉某种卷」这类漂移迟早出现。
-///
-/// `.zip` / `.epub` 在列是因为它们与词典包 / 普通电子书同形——光看扩展名分不出，
-/// 真定性仍由 [classifyImportCarrier] 的 `isImageArchive` 开包完成。
-///
-/// `.pdf` 在列是因为一卷扫描版漫画常常就是一份 PDF：逐页栅格化即页图。它的载体
-/// 身份仍是 [ImportCarrier.pdf]（书籍框据此走 `PdfImporter`），漫画侧的「能不能
-/// 变成漫画」由 [ImportCarrier.isMangaCapable] 单独回答，两边不打架。
-const Set<String> kMangaCarrierFileExtensions = <String>{
-  '.mokuro',
-  '.cbz',
-  '.cbr',
-  '.rar',
-  '.cb7',
-  '.zip',
-  '.epub',
-  '.pdf',
-};
-
 /// 判定 [path] 的载体身份。
 ///
 /// 文件系统判据由调用方注入（与 `classifyDroppedFiles` 同款设计），本函数自身
@@ -232,10 +209,4 @@ class ImportCarrierResolver {
     return carrier;
   }
 
-  /// 丢弃记忆。键已经带内容指纹，正常不需要调它；留给「内容没变但判据本身变了」
-  /// 这种场景（例如用户在对话框里改了受理规则）。
-  void invalidate() {
-    _cachedKey = null;
-    _cachedCarrier = null;
-  }
 }

@@ -1,6 +1,3 @@
-# VLC native library
--keep class org.videolan.libvlc.** { *; }
-
 # Flutter engine & embedding
 -keep class io.flutter.** { *; }
 -keep class io.flutter.plugins.** { *; }
@@ -16,14 +13,8 @@
 # MainActivity.onCreate with "TypeReference constructed without actual type information".
 -keep class app.fushi.reader.** { *; }
 
-# audio_service background isolate
--keep class com.ryanheise.audioservice.** { *; }
-
 # InAppWebView
 -keep class com.pichillilorenzo.flutter_inappwebview_android.** { *; }
-
-# Drift / SQLite (moor_ffi)
--keep class com.tekartik.sqflite.** { *; }
 
 # Kotlin metadata for reflection-based plugins
 -keepattributes *Annotation*

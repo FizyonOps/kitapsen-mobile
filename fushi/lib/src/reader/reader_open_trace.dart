@@ -18,10 +18,6 @@ class ReaderOpenTrace {
       <({String stage, int atMs})>[];
   bool _reported = false;
 
-  int get elapsedMs => _watch.elapsedMilliseconds;
-
-  List<({String stage, int atMs})> get marks => List.unmodifiable(_marks);
-
   /// 记录一个阶段的到达时刻（同名只记第一次，多次调用幂等）。
   void mark(String stage) {
     if (_marks.any((m) => m.stage == stage)) return;

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:fushi/models.dart';
-import 'package:fushi/src/settings/cupertino_settings_renderer.dart';
 import 'package:fushi/src/settings/material_settings_renderer.dart';
 import 'package:fushi/src/settings/settings_context.dart';
 import 'package:fushi/src/settings/settings_destination.dart';
@@ -43,9 +42,7 @@ class _ModuleSettingsViewState extends ConsumerState<ModuleSettingsView>
       (SettingsDestination destination) =>
           destination.id == widget.destinationId,
     );
-    final SettingsRenderer renderer = isCupertinoPlatform(context)
-        ? const CupertinoSettingsRenderer()
-        : const MaterialSettingsRenderer();
+    const SettingsRenderer renderer = MaterialSettingsRenderer();
 
     // BUG-1658：不再包 DesktopContentLayout(settings)。共享的分段导航页头由六个
     // 分区轮流渲染，其余分区（库页/发现/导入）都是 readerShelf 全出血 + 页头自身

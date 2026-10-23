@@ -14,12 +14,6 @@ class StatRangeSelection {
   /// 锚点统计日（`yyyy-MM-dd`）；null = 跟随今日（跨日重聚合后自动前移）。
   final String? anchorKey;
 
-  StatRangeSelection copyWith({StatRangeMode? mode, String? anchorKey}) =>
-      StatRangeSelection(
-        mode: mode ?? this.mode,
-        anchorKey: anchorKey ?? this.anchorKey,
-      );
-
   @override
   bool operator ==(Object other) =>
       other is StatRangeSelection &&

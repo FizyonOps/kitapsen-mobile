@@ -27,13 +27,10 @@
 /// `HttpClient()` / `http.Client()` / `IOClient()` / `Dio()` 必须登记在案并写明理由。
 library;
 
-import 'dart:convert';
 import 'dart:io';
 
-import 'package:fushi_engine/platform/desktop/windows_process_query.dart';
 import 'package:fushi_engine/utils/net/url_input_normalizer.dart';
 import 'package:fushi_core/fushi_core.dart';
-import 'package:meta/meta.dart';
 
 /// 进程级「用户手填代理」读取器——[applyAppProxy] 不显式传 `userProxy` 时的取值来源。
 ///
@@ -207,63 +204,6 @@ bool _isValidProxyHost(String host) {
   return true;
 }
 
-/// **根因修复（TODO-384 第二轮）**：让更新检查/下载用的 [HttpClient] 走用户机器上
-/// 正在运行的系统/环境代理。
-///
-/// 背景：BUG-292 已查明纯 GFW（直连 `api.github.com` 被切、公共 gh 代理又不代理 API）
-/// 环境下检查注定失败，唯一出路是「经用户自己的代理出口直连 API」。但**裸 `HttpClient()`
-/// 默认不设 `findProxy`，连环境变量代理都不读**，所以即便用户开着 clash/v2ray，更新请求
-/// 仍走直连被切——这是真正可修的结构性缺口。
-///
-/// Dart 的 `HttpClient.findProxyFromEnvironment` **只读环境变量**（`HTTPS_PROXY` /
-/// `HTTP_PROXY` / `NO_PROXY`，大小写均认），**不读 Windows 注册表 / macOS / Linux GUI 系统
-/// 代理设置**（已实测 + 官方文档确认）。因此：
-///   * 所有平台：合并 `Platform.environment`，覆盖「代理 app 导出了 env 变量」「用户手动
-///     `set HTTPS_PROXY` 后启动」等场景。
-///   * Windows：clash/v2ray 的「系统代理」模式只写注册表
-///     `HKCU\...\Internet Settings\ProxyServer`，env 变量为空 → 额外读注册表并把它注入
-///     environment map（见 [resolveWindowsSystemProxyEnvironment]）。
-///   * macOS：GUI「网络偏好设置 → 代理」写在系统配置（`scutil --proxy` 可读），env 为空 →
-///     读 scutil 注入（见 [resolveMacSystemProxyEnvironment]）。
-///   * Linux：GNOME「网络 → 网络代理」写在 GSettings（`gsettings get org.gnome.system.proxy`
-///     可读），env 为空 → 读 gsettings 注入（见 [resolveLinuxSystemProxyEnvironment]）。
-///
-/// **统一优先级（TODO-704 硬规则）**：`env > GUI 系统代理 > DIRECT`。三平台共用同一个
-/// `hasEnvProxy` 闸门——用户显式 set 的 env 代理不该被任何 GUI 系统代理覆盖；仅当 env 未给
-/// 代理时才按平台读 GUI 系统代理。GUI 也无 / 命中 PAC / 读取异常 → environment 不含代理键，
-/// `findProxyFromEnvironment` 自然返回 `DIRECT`，等价原「裸 HttpClient 直连」——**不破坏现有
-/// 逐镜像回退**。
-///
-/// **PAC 降级**：mac/Linux GUI 配成 PAC（自动代理）时，本实现**不解析/执行 PAC 脚本**，明确
-/// 降级直连（DIRECT）并打 debug 日志（见 [resolveMacSystemProxyEnvironment] /
-/// [resolveLinuxSystemProxyEnvironment]）。
-///
-/// [userProxy] 省略时取进程级真相源 [appUserProxyReader]（见其文档：全局配置不该靠逐条
-/// 调用链穿参，穿漏一处就是一条不走代理的暗路）。
-///
-/// ⚠️ BUG-1980 起进程级模式一旦已解析（[hasResolvedProxyMode]，偏好一装载即恒成立），
-/// [userProxy] **会被完全忽略**——它只在还没接上偏好的精简入口/旧测试里还起作用。
-/// 生产的三个调用点传的都是同一个 `updateCustomProxy`，行为等价；但别再指望用这个
-/// 参数「给某个 client 单独指定一个代理」，那会被静默吞掉。
-///
-/// 本函数与 [applyAppProxySync] 走**同一条**装配路（[_installAppProxy]），唯一差别是
-/// 自动模式下这里先 await 一次 [primeAppProxy]，保证装配时缓存是此刻的系统代理。
-Future<void> applyAppProxy(HttpClient client, {String? userProxy}) async {
-  final String? trimmed = userProxy?.trim();
-  final String? legacyUserProxy =
-      !hasResolvedProxyMode() && trimmed != null && trimmed.isNotEmpty
-      ? trimmed
-      : null;
-  // 自动模式那一格要的是**此刻**的平台 GUI 系统代理，故先刷新一次进程级缓存。以前这里
-  // 把现场解析结果烘焙进闭包（`systemEnvOverride`），长寿 client 就永远停在建它那一刻的
-  // 系统代理上（#1514 的同一类问题）；现在闭包读的是会按有效期刷新的缓存。非自动模式
-  // 不解析：省掉 `scutil` / `gsettings` 子进程，而且这一格反正不会被查到。
-  if (_resolveProxyDecision(legacyUserProxy).mode == kProxyModeAuto) {
-    await primeAppProxy();
-  }
-  _installAppProxy(client, legacyUserProxy: legacyUserProxy);
-}
-
 /// **唯一装配路**（两个入口共用）：装一个**请求时求值**的 `findProxy` 闭包 + 凭据钩子。
 ///
 /// 「请求时求值」是这次收敛的关键。异步入口以前把模式裁决**烘焙**进闭包、并且只在
@@ -285,9 +225,6 @@ bool _hasEnvProxy(Map<String, String> environment) =>
 /// 按平台读 GUI 系统代理（Windows 注册表 / macOS scutil / Linux gsettings）。
 /// 其余平台返回空 map。
 Future<Map<String, String>> resolveSystemProxyEnvironment() async {
-  if (Platform.isWindows) return readWindowsSystemProxyEnvironmentSync();
-  if (Platform.isMacOS) return resolveMacSystemProxyEnvironment();
-  if (Platform.isLinux) return resolveLinuxSystemProxyEnvironment();
   return const <String, String>{};
 }
 
@@ -312,11 +249,6 @@ Future<Map<String, String>> resolveSystemProxyEnvironment() async {
 // 制卡 `/api/mine` 取 manifest 在墙内全部超时，用户手填同一个地址就好了。所以缓存带有效
 // 期，过期后按平台能力刷新（见 [_currentSystemProxyEnv]）。
 
-/// Windows 系统代理缓存的有效期。注册表读取是同步 FFI（两次 `RegGetValueW`，微秒级），
-/// 过期后在请求线程上直接现读，**过期后的第一个请求就拿到新值**；有效期只是给高频
-/// `findProxy` 限流，不是延迟掩盖。
-const Duration kSyncSystemProxyRefreshInterval = Duration(seconds: 5);
-
 /// macOS / Linux 系统代理缓存的有效期。那边要起 `scutil` / `gsettings` 子进程，而
 /// `findProxy` 是同步回调不能等：过期时后台刷新一次、本次仍用旧值，下一个请求起生效。
 /// 间隔取长一些，避免持续出站时每几秒起一个子进程。
@@ -334,18 +266,11 @@ Future<void>? _systemProxyRefreshInFlight;
 /// 缓存代次：测试重置 / 注入后，还没回来的旧后台刷新不得覆盖新状态。
 int _systemProxyGeneration = 0;
 
-/// 同步读取器：本平台能在请求线程上现读系统代理时非 null（目前只有 Windows）。
-Map<String, String> Function()? _systemProxySyncReader =
-    _defaultSystemProxySyncReader();
-
 /// 异步读取器：[primeAppProxy] 与 macOS / Linux 后台刷新用。
 Future<Map<String, String>> Function() _systemProxyAsyncReader =
     resolveSystemProxyEnvironment;
 
 DateTime Function() _systemProxyClock = DateTime.now;
-
-Map<String, String> Function()? _defaultSystemProxySyncReader() =>
-    Platform.isWindows ? readWindowsSystemProxyEnvironmentSync : null;
 
 void _storeSystemProxyEnv(Map<String, String> env) {
   _cachedSystemProxyEnv = Map<String, String>.of(env);
@@ -374,13 +299,6 @@ Map<String, String> _currentSystemProxyEnv() {
   if (cached == null) return const <String, String>{};
   final DateTime now = _systemProxyClock();
   final Duration age = now.difference(_cachedSystemProxyEnvAt ?? now);
-  final Map<String, String> Function()? syncReader = _systemProxySyncReader;
-  if (syncReader != null) {
-    if (age < kSyncSystemProxyRefreshInterval) return cached;
-    final Map<String, String> fresh = syncReader();
-    _storeSystemProxyEnv(fresh);
-    return _cachedSystemProxyEnv!;
-  }
   if (age >= kAsyncSystemProxyRefreshInterval) {
     _refreshSystemProxyInBackground();
   }
@@ -405,48 +323,6 @@ void _refreshSystemProxyInBackground() {
           _systemProxyRefreshInFlight = null;
         }
       });
-}
-
-/// 重置 GUI 系统代理缓存与读取源（测试用；生产上重新 [primeAppProxy] 即可）。
-@visibleForTesting
-void resetAppProxyCacheForTest() {
-  _systemProxyGeneration++;
-  _cachedSystemProxyEnv = null;
-  _cachedSystemProxyEnvAt = null;
-  _systemProxyRefreshInFlight = null;
-  _systemProxySyncReader = _defaultSystemProxySyncReader();
-  _systemProxyAsyncReader = resolveSystemProxyEnvironment;
-  _systemProxyClock = DateTime.now;
-}
-
-/// 覆盖 GUI 系统代理缓存（测试用：本机跑不出目标平台的 GUI 代理，只能注入）。
-/// 注入值的读取时刻记为当前 [_systemProxyClock]，在有效期内原样生效。
-@visibleForTesting
-void debugSetCachedSystemProxyEnv(Map<String, String>? env) {
-  _systemProxyGeneration++;
-  _systemProxyRefreshInFlight = null;
-  if (env == null) {
-    _cachedSystemProxyEnv = null;
-    _cachedSystemProxyEnvAt = null;
-  } else {
-    _storeSystemProxyEnv(env);
-  }
-}
-
-/// 替换系统代理的读取源与时钟（测试用），[resetAppProxyCacheForTest] 还原。
-///
-/// [syncReader] 为 null 模拟 macOS / Linux（只能后台刷新）；[asyncReader] 省略时
-/// 取 [syncReader] 的结果（都没有则为空 map）。
-@visibleForTesting
-void debugSetSystemProxySourceForTest({
-  required Map<String, String> Function()? syncReader,
-  Future<Map<String, String>> Function()? asyncReader,
-  DateTime Function()? clock,
-}) {
-  _systemProxySyncReader = syncReader;
-  _systemProxyAsyncReader =
-      asyncReader ?? () async => syncReader?.call() ?? const <String, String>{};
-  _systemProxyClock = clock ?? DateTime.now;
 }
 
 /// **同步版** [applyAppProxy]：装一个请求时才求值的 `findProxy` 闭包。
@@ -492,52 +368,6 @@ String resolveAppProxyDirective(
   }
   return HttpClient.findProxyFromEnvironment(uri, environment: environment);
 }
-
-/// 从 `findProxy` 指令串取第一个 `PROXY host:port`；`DIRECT` / 空 → null。
-///
-/// `HttpClient.findProxyFromEnvironment` 可能给出 `PROXY a:1; PROXY b:2; DIRECT`
-/// 这种链，HttpClient 自己会逐个尝试；不是 HttpClient 的消费方（内置 torrent
-/// 引擎）只能拿一个，取第一个即与 HttpClient 的首选一致。
-String? proxyHostPortFromDirective(String directive) {
-  for (final String part in directive.split(';')) {
-    final String p = part.trim();
-    if (p.length > 6 && p.substring(0, 6).toUpperCase() == 'PROXY ') {
-      final String hostPort = p.substring(6).trim();
-      if (hostPort.isNotEmpty) return hostPort;
-    }
-  }
-  return null;
-}
-
-/// app 此刻会给**公网目标**用的代理 `host:port`，直连 → null。与
-/// [resolveAppProxyDirective] 同一份模式裁决，只是把
-/// 「按 URI 给指令」折成「一个出口」，供装不进 `findProxy` 的消费方（内置
-/// torrent 引擎的 libtorrent session）取用。探针 URI 是任意公网主机——只要不
-/// 落进 [isDirectProxyTarget] 的本机/局域网闸门，任何公网 host 得到的答案都一样。
-String? resolveAppProxyHostPort() =>
-    proxyHostPortFromDirective(resolveAppProxyDirective(_kPublicProbeUri));
-
-/// Credentials for the currently selected manual proxy, never for a direct
-/// target or an environment/system proxy. Native clients ask at request time.
-({String username, String password})? resolveAppProxyCredentials(Uri uri) {
-  final ({String mode, String proxy}) decision = _resolveProxyDecision(null);
-  if (decision.mode != kProxyModeManual) return null;
-  final String? endpoint = normalizeUserProxyHostPort(decision.proxy);
-  if (endpoint == null || resolveAppProxyDirective(uri) != 'PROXY $endpoint') {
-    return null;
-  }
-  final String username = appUserProxyUsernameReader();
-  if (username.isEmpty) return null;
-  return (username: username, password: appUserProxyPasswordReader());
-}
-
-final Uri _kPublicProbeUri = Uri.parse('https://example.com/');
-
-/// P2P（torrent）传输该用的代理：开关关 → null（直连，**默认**）；开 → 与
-/// 其它公网出站同一个出口。这是 AppModel 下发给内置引擎的唯一入口，开关的
-/// 语义（默认直连、开了才跟全局）钉在这一个函数上。
-String? resolveP2pProxyHostPort({required bool enabled}) =>
-    enabled ? resolveAppProxyHostPort() : null;
 
 /// **本机 / 局域网直连闸门**：这些目标经 HTTP 代理只会更坏，甚至直接把功能打断。
 ///
@@ -620,331 +450,4 @@ List<int>? _parseIpv4(String host) {
     out.add(value);
   }
   return out;
-}
-
-/// 读取 Windows「系统代理」设置（clash/v2ray 系统代理模式写在这里），返回可喂给
-/// [HttpClient.findProxyFromEnvironment] 的 environment 片段（`{'https_proxy': ...,
-/// 'http_proxy': ...}`）；未启用 / 读取失败 / 非 Windows 返回空 map（= 不补代理）。
-///
-/// 异步签名只为与 macOS / Linux 同形；实际读取是同步的，见
-/// [readWindowsSystemProxyEnvironmentSync]。
-Future<Map<String, String>> resolveWindowsSystemProxyEnvironment() async =>
-    readWindowsSystemProxyEnvironmentSync();
-
-/// [resolveWindowsSystemProxyEnvironment] 的同步本体：经 Win32 FFI 直读注册表
-/// （`RegGetValueW`，无子进程），快到可以在 `findProxy` 请求时调用（#1514）。解析逻辑
-/// 下沉到纯函数 [parseWindowsRegistryProxy] 以便单测。
-Map<String, String> readWindowsSystemProxyEnvironmentSync() {
-  if (!Platform.isWindows) return const <String, String>{};
-  try {
-    const String key =
-        r'Software\Microsoft\Windows\CurrentVersion\Internet Settings';
-    return parseWindowsRegistryProxy(
-      proxyEnable: readWindowsRegistryDword(
-        WindowsRegistryRoot.currentUser,
-        key,
-        'ProxyEnable',
-      ),
-      proxyServer: readWindowsRegistryString(
-        WindowsRegistryRoot.currentUser,
-        key,
-        'ProxyServer',
-      ),
-    );
-  } catch (e) {
-    // 读不到注册表（权限/环境异常）就当没有系统代理，回退直连——best-effort。
-    fushiDebugPrint('[AppProxy] read windows system proxy failed: $e');
-    return const <String, String>{};
-  }
-}
-
-/// **纯函数**：解析 `reg query ... /v ProxyEnable|ProxyServer` 的原始输出，生成
-/// `findProxyFromEnvironment` 用的 environment 片段。
-///
-/// - `ProxyEnable` 必须为 `0x1`（启用）才返回代理；`0x0`/缺失 → 空 map（系统代理关着）。
-/// - `ProxyServer` 形如 `127.0.0.1:7890`（全局）或
-///   `http=127.0.0.1:7890;https=127.0.0.1:7890;...`（分协议）。两种都解析：分协议时取
-///   `https=`（优先）/`http=` 段；全局时直接用整串。
-/// - 输出畸形 / 无 ProxyServer → 空 map。
-///
-/// `reg query` 单行格式：`    ProxyServer    REG_SZ    127.0.0.1:7890`（前导空白 + 三段，
-/// 以连续空白分隔；值本身可能含 `=`/`;`/`:` 但不含空白，故按「类型标记 REG_* 之后」取值）。
-@visibleForTesting
-Map<String, String> parseWindowsRegistryProxy({
-  required int? proxyEnable,
-  required String? proxyServer,
-}) {
-  // ProxyEnable 是 REG_DWORD；非 1 视为未启用。
-  if (proxyEnable != 1) return const <String, String>{};
-  if (proxyServer == null || proxyServer.isEmpty) {
-    return const <String, String>{};
-  }
-
-  final String? https = _proxyForScheme(proxyServer, 'https');
-  final String? http =
-      _proxyForScheme(proxyServer, 'http') ?? _globalProxy(proxyServer);
-  return _buildProxyEnv(https: https, http: http);
-}
-
-/// 从分协议代理串（`http=h:p;https=h:p`）里取指定 scheme 的 `host:port`；全局串
-/// （不含 `=`）返回 null。
-String? _proxyForScheme(String proxyServer, String scheme) {
-  if (!proxyServer.contains('=')) return null;
-  for (final String part in proxyServer.split(';')) {
-    final int eq = part.indexOf('=');
-    if (eq < 0) continue;
-    if (part.substring(0, eq).trim().toLowerCase() == scheme) {
-      return part.substring(eq + 1).trim();
-    }
-  }
-  return null;
-}
-
-/// 全局代理串（不含 `=`，形如 `127.0.0.1:7890`）原样返回；分协议串返回 null。
-String? _globalProxy(String proxyServer) =>
-    proxyServer.contains('=') ? null : proxyServer.trim();
-
-/// 读取 macOS GUI 系统代理（「系统设置 → 网络 → 代理」写在系统配置里，clash/v2ray 等的
-/// 「系统代理」模式也落这里），返回可喂给 [HttpClient.findProxyFromEnvironment] 的
-/// environment 片段；未启用 / 命中 PAC / 读取失败 / 非 macOS 返回空 map（= 不补代理，回退
-/// env / DIRECT）。
-///
-/// 走 `scutil --proxy`（系统自带、无需 FFI、无新依赖），在构建 client 前一次性解析；解析逻辑
-/// 下沉到纯函数 [parseScutilProxy] 以便单测。命中 PAC 时该纯函数返回 `pacDowngraded=true`，
-/// 这里打明确降级日志（TODO-704：PAC 不解析，明确降级直连）。
-Future<Map<String, String>> resolveMacSystemProxyEnvironment() async {
-  if (!Platform.isMacOS) return const <String, String>{};
-  try {
-    final ProcessResult result = await Process.run('scutil', <String>[
-      '--proxy',
-    ]);
-    final String stdout = result.stdout is String
-        ? result.stdout as String
-        : '';
-    final (Map<String, String> proxy, bool pacDowngraded) = parseScutilProxy(
-      stdout,
-    );
-    if (pacDowngraded) {
-      fushiDebugPrint(
-        '[AppProxy] 检测到 macOS PAC 自动代理，降级直连（不解析 PAC）',
-      );
-    }
-    return proxy;
-  } catch (e) {
-    // 读不到系统代理（权限/环境异常）就当没有，回退 env / 直连——best-effort。
-    fushiDebugPrint('[AppProxy] read macOS system proxy failed: $e');
-    return const <String, String>{};
-  }
-}
-
-/// **纯函数**：解析 `scutil --proxy` 的原始输出，生成 `findProxyFromEnvironment` 用的
-/// environment 片段 + 「是否命中 PAC 降级」标志。
-///
-/// `scutil --proxy` 典型输出（每行 `  Key : Value`，分隔符是 ` : `）：
-/// ```
-/// <dictionary> {
-///   HTTPEnable : 1
-///   HTTPProxy : 127.0.0.1
-///   HTTPPort : 7890
-///   HTTPSEnable : 1
-///   HTTPSProxy : 127.0.0.1
-///   HTTPSPort : 7890
-///   ProxyAutoConfigEnable : 1
-/// }
-/// ```
-///
-/// 规则（**⚠️ scutil 的 Enable 值是 `1` 不是 Windows 的 `0x1`，别照搬**）：
-/// - `ProxyAutoConfigEnable : 1`（PAC）→ 返回空 map + `pacDowngraded=true`（明确降级直连，
-///   **不再回退 env**——调用方据此打降级日志）。
-/// - 否则优先 HTTPS（更新走 https）：`HTTPSEnable : 1` 且有 `HTTPSProxy` + `HTTPSPort` →
-///   `host:port`；无则回退 HTTP（`HTTPEnable : 1` + `HTTPProxy` + `HTTPPort`）。
-/// - 全 0 / 缺字段 / 畸形输出 → 空 map + `pacDowngraded=false`（none，回退 env / 直连）。
-///
-/// **字段格式（Enable 值 `1`、分隔符 ` : `、键名 HTTPSEnable 等）属外部命令契约，需 macOS
-/// 真机 dump 一次 `scutil --proxy` 输出核对。**
-@visibleForTesting
-(Map<String, String>, bool) parseScutilProxy(String stdout) {
-  final Map<String, String> fields = <String, String>{};
-  for (final String rawLine in const LineSplitter().convert(stdout)) {
-    final String line = rawLine.trim();
-    final int sep = line.indexOf(' : ');
-    if (sep < 0) continue;
-    final String key = line.substring(0, sep).trim();
-    final String value = line.substring(sep + 3).trim();
-    if (key.isEmpty) continue;
-    fields[key] = value;
-  }
-
-  // PAC（自动代理）命中 → 明确降级直连，不解析脚本。
-  if (fields['ProxyAutoConfigEnable'] == '1') {
-    return (const <String, String>{}, true);
-  }
-
-  final String? https = _scutilSchemeProxy(fields, 'HTTPS');
-  final String? http = _scutilSchemeProxy(fields, 'HTTP');
-  return (_buildProxyEnv(https: https, http: http), false);
-}
-
-/// 从 scutil 字段表里取某个 scheme（`HTTPS` / `HTTP`）的 `host:port`：`<scheme>Enable` 为
-/// `1` 且 `<scheme>Proxy` 非空、`<scheme>Port` 非空才返回，否则 null。
-String? _scutilSchemeProxy(Map<String, String> fields, String scheme) {
-  if (fields['${scheme}Enable'] != '1') return null;
-  final String? host = fields['${scheme}Proxy'];
-  final String? port = fields['${scheme}Port'];
-  if (host == null || host.isEmpty) return null;
-  if (port == null || port.isEmpty) return null;
-  return '$host:$port';
-}
-
-/// 读取 Linux GNOME GUI 系统代理（「设置 → 网络 → 网络代理」写在 GSettings
-/// `org.gnome.system.proxy`），返回可喂给 [HttpClient.findProxyFromEnvironment] 的
-/// environment 片段；mode=none / 命中 PAC（mode=auto）/ gsettings 不存在（非 GNOME 桌面）/
-/// 读取失败 / 非 Linux 返回空 map（= 不补代理，回退 env / DIRECT）。
-///
-/// 走 `gsettings`（GNOME 自带、无需 FFI、无新依赖）：先取 `mode`，仅 `manual` 时再取
-/// `org.gnome.system.proxy.https` 的 `host` + `port`（无 https 配置回退 `.http`）；解析逻辑
-/// 下沉到纯函数 [parseGsettingsProxy] 以便单测。`auto`（PAC）→ 明确降级直连并打日志。
-Future<Map<String, String>> resolveLinuxSystemProxyEnvironment() async {
-  if (!Platform.isLinux) return const <String, String>{};
-  try {
-    final ProcessResult modeResult = await Process.run('gsettings', <String>[
-      'get',
-      'org.gnome.system.proxy',
-      'mode',
-    ]);
-    final String mode = modeResult.stdout is String
-        ? modeResult.stdout as String
-        : '';
-
-    // 只有 manual 才需要再查具体 host/port，省两次 Process.run。
-    String httpsHost = '';
-    String httpsPort = '';
-    String httpHost = '';
-    String httpPort = '';
-    if (parseGsettingsMode(mode) == _GsettingsProxyMode.manual) {
-      httpsHost = await _gsettingsGet('org.gnome.system.proxy.https', 'host');
-      httpsPort = await _gsettingsGet('org.gnome.system.proxy.https', 'port');
-      httpHost = await _gsettingsGet('org.gnome.system.proxy.http', 'host');
-      httpPort = await _gsettingsGet('org.gnome.system.proxy.http', 'port');
-    }
-
-    final (Map<String, String> proxy, bool pacDowngraded) = parseGsettingsProxy(
-      mode: mode,
-      httpsHost: httpsHost,
-      httpsPort: httpsPort,
-      httpHost: httpHost,
-      httpPort: httpPort,
-    );
-    if (pacDowngraded) {
-      fushiDebugPrint(
-        '[AppProxy] 检测到 Linux PAC 自动代理，降级直连（不解析 PAC）',
-      );
-    }
-    return proxy;
-  } catch (e) {
-    // gsettings 不存在（非 GNOME / 无 glib）或读取异常 → 当没有系统代理，回退 env / 直连。
-    fushiDebugPrint('[AppProxy] read Linux system proxy failed: $e');
-    return const <String, String>{};
-  }
-}
-
-/// 跑一条 `gsettings get <schema> <key>` 取裸值（已剥单引号），异常/非 String 返回空串。
-Future<String> _gsettingsGet(String schema, String key) async {
-  final ProcessResult result = await Process.run('gsettings', <String>[
-    'get',
-    schema,
-    key,
-  ]);
-  final String raw = result.stdout is String ? result.stdout as String : '';
-  return _stripGsettingsQuotes(raw);
-}
-
-/// GSettings 代理 mode 三态。`auto` 即 PAC（自动代理）。
-enum _GsettingsProxyMode { none, manual, auto }
-
-/// **纯函数**：解析 `gsettings get org.gnome.system.proxy mode` 的原始输出。gsettings 字符串
-/// 值带单引号（形如 `'manual'`）+ 可能有换行，剥引号 / 空白后归一到三态；未知值当 none。
-@visibleForTesting
-_GsettingsProxyMode parseGsettingsMode(String modeOutput) {
-  final String mode = _stripGsettingsQuotes(modeOutput);
-  switch (mode) {
-    case 'manual':
-      return _GsettingsProxyMode.manual;
-    case 'auto':
-      return _GsettingsProxyMode.auto;
-    default:
-      return _GsettingsProxyMode.none;
-  }
-}
-
-/// **纯函数**：综合 gsettings 的 `mode` + https/http 的 host+port，生成
-/// `findProxyFromEnvironment` 用的 environment 片段 + 「是否命中 PAC 降级」标志。
-///
-/// 规则：
-/// - `mode=auto`（PAC）→ 空 map + `pacDowngraded=true`（明确降级直连，不解析 PAC）。
-/// - `mode=manual` + 有 https host+port → `host:port`（优先 https，更新走 https）；无 https
-///   配置回退 http host+port；都无 → 空 map。
-/// - `mode=none` / 未知 / 空 host → 空 map + `pacDowngraded=false`（回退 env / 直连）。
-///
-/// host/port 入参须为**已剥单引号**的裸值（由 [_gsettingsGet] / 测试保证）。port 为 gsettings
-/// 整数值（形如 `7890`），空串 / `0` 视为未配置。
-///
-/// **字段格式（mode 带单引号、host 带单引号、port 整数、schema 名）属外部命令契约，需 Linux
-/// 真机 dump `gsettings get org.gnome.system.proxy ...` 输出核对。**
-@visibleForTesting
-(Map<String, String>, bool) parseGsettingsProxy({
-  required String mode,
-  required String httpsHost,
-  required String httpsPort,
-  required String httpHost,
-  required String httpPort,
-}) {
-  switch (parseGsettingsMode(mode)) {
-    case _GsettingsProxyMode.auto:
-      return (const <String, String>{}, true);
-    case _GsettingsProxyMode.none:
-      return (const <String, String>{}, false);
-    case _GsettingsProxyMode.manual:
-      final String? https = _gsettingsSchemeProxy(httpsHost, httpsPort);
-      final String? http = _gsettingsSchemeProxy(httpHost, httpPort);
-      return (_buildProxyEnv(https: https, http: http), false);
-  }
-}
-
-/// 从 gsettings 的 host+port 拼 `host:port`：host 非空且 port 非空且非 `0` 才返回，否则 null。
-String? _gsettingsSchemeProxy(String host, String port) {
-  final String h = host.trim();
-  final String p = port.trim();
-  if (h.isEmpty) return null;
-  if (p.isEmpty || p == '0') return null;
-  return '$h:$p';
-}
-
-/// 剥掉 gsettings 字符串值外层的单引号 + 首尾空白（`'manual'\n` → `manual`）。无引号原样
-/// trim。
-String _stripGsettingsQuotes(String raw) {
-  final String trimmed = raw.trim();
-  if (trimmed.length >= 2 && trimmed.startsWith("'") && trimmed.endsWith("'")) {
-    return trimmed.substring(1, trimmed.length - 1);
-  }
-  return trimmed;
-}
-
-/// 把已解析的 https/http `host:port` 拼成 `findProxyFromEnvironment` 用的 environment 片段。
-/// 与 [parseWindowsRegistryProxy] 同范式：`findProxyFromEnvironment` 对 https URL 读
-/// `https_proxy`、回退 `http_proxy`，两者都填最稳；任一缺失互相回退。都无 → 空 map。
-Map<String, String> _buildProxyEnv({
-  required String? https,
-  required String? http,
-}) {
-  final Map<String, String> result = <String, String>{};
-  final String? effectiveHttps = https ?? http;
-  if (effectiveHttps != null && effectiveHttps.isNotEmpty) {
-    result['https_proxy'] = effectiveHttps;
-  }
-  final String? effectiveHttp = http ?? https;
-  if (effectiveHttp != null && effectiveHttp.isNotEmpty) {
-    result['http_proxy'] = effectiveHttp;
-  }
-  return result;
 }

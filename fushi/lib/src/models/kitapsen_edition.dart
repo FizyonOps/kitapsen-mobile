@@ -11,10 +11,6 @@ library;
 
 import 'dart:ui' show Color;
 
-/// Always `true` in this repository. A named constant rather than a bare
-/// literal so each gate documents why it exists.
-const bool kKitapsenEdition = true;
-
 /// kitapsen.com's brand crimson (`--color-primary-600`): the app's accent
 /// in the default theme, so the app looks like the website.
 const Color kKitapsenBrandColor = Color(0xFF9E141F);

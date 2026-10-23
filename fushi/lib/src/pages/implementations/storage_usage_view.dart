@@ -1,4 +1,3 @@
-import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -6,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fushi_core/fushi_core.dart' show DatabaseSnapshotDeletionResult;
 import 'package:path/path.dart' as p;
 
-import 'package:fushi/src/media/video/video_shader_downloader.dart';
 import 'package:fushi/src/storage/storage_usage_service.dart';
 import 'package:fushi/utils.dart';
 
@@ -38,11 +36,6 @@ class StorageUsageView extends ConsumerStatefulWidget {
     required this.deleteDictionary,
     required this.deleteDatabaseSnapshots,
     required this.deleteFiles,
-    // Kitapsen: no video shaders; keeps the shader downloader out of the build.
-    this.anime4kBytesProvider =
-        _noAnime4kBytes,
-    this.anime4kDelete =
-        _noAnime4kFiles,
     super.key,
   });
 
@@ -87,10 +80,6 @@ class StorageUsageView extends ConsumerStatefulWidget {
   /// 返回 null = 成功，非 null = 失败原因。
   final Future<String?> Function(List<String> paths) deleteFiles;
 
-  /// Anime4K 已下载字节数 / 删除（默认真实现；测试注临时目录版）。
-  final Future<int> Function() anime4kBytesProvider;
-  final Future<List<String>> Function() anime4kDelete;
-
   @override
   ConsumerState<StorageUsageView> createState() => _StorageUsageViewState();
 }
@@ -115,11 +104,6 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
   /// 添乱（审查 M2）。
   String? _busyEntryId;
 
-  List<BundledComponentUsage> _bundled = const <BundledComponentUsage>[];
-
-  int _anime4kBytes = 0;
-  bool _anime4kBusy = false;
-
   @override
   void initState() {
     super.initState();
@@ -138,7 +122,6 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
       _scanning = true;
       _usage.clear();
     });
-    unawaited(_loadExtras());
     List<StorageBookRef> books = const <StorageBookRef>[];
     List<String> dictNames = const <String>[];
     Map<String, String> dictDisplayNames = const <String, String>{};
@@ -177,24 +160,6 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
         }
       },
     );
-  }
-
-  /// 总览之外的附加信息：Anime4K 预设占用（决定着色器类目行给不给删除按钮）
-  /// 与随包组件清单。与类目扫描并行跑，慢的一方不挡另一方。
-  Future<void> _loadExtras() async {
-    try {
-      final int bytes = await widget.anime4kBytesProvider();
-      if (mounted) setState(() => _anime4kBytes = bytes);
-    } catch (e) {
-      debugPrint('[storage] anime4k size failed: $e');
-    }
-    try {
-      final List<BundledComponentUsage> bundled =
-          await widget.service.scanBundledComponents();
-      if (mounted) setState(() => _bundled = bundled);
-    } catch (e) {
-      debugPrint('[storage] bundled scan failed: $e');
-    }
   }
 
   // ── 删除动作 ────────────────────────────────────────────────────────
@@ -302,40 +267,6 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
     return rest > 0 ? '$head (+$rest)' : head;
   }
 
-  // ── Anime4K 预设删除 ────────────────────────────────────────────────
-
-  Future<void> _anime4kDeleteAction() async {
-    if (_anime4kBusy) return;
-    if (!await _confirmDelete(
-      t.storage_modules_anime4k_title,
-      t.storage_modules_anime4k_hint,
-    )) {
-      return;
-    }
-    setState(() => _anime4kBusy = true);
-    List<String> deleted = const <String>[];
-    try {
-      deleted = await widget.anime4kDelete();
-    } catch (e) {
-      if (mounted) {
-        FushiToast.show(
-          msg: t.storage_entry_delete_failed(reason: '$e'),
-          severity: ToastSeverity.error,
-        );
-      }
-      return;
-    } finally {
-      if (mounted) setState(() => _anime4kBusy = false);
-    }
-    if (!mounted) return;
-    FushiToast.show(
-      msg: t.storage_modules_anime4k_delete_done(n: deleted.length),
-      severity: ToastSeverity.success,
-    );
-    await _loadExtras();
-    await _rescan();
-  }
-
   // ── 渲染 ────────────────────────────────────────────────────────────
 
   static const Map<StorageCategoryId, IconData> _categoryIcons =
@@ -414,10 +345,6 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         _buildOverviewSection(),
-        if (_bundled.isNotEmpty) ...<Widget>[
-          const SizedBox(height: 12),
-          _buildBundledSection(),
-        ],
       ],
     );
   }
@@ -468,8 +395,6 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
     // Anime4K 预设是唯一「删了还能一键装回来」的着色器资产，而删除原语只此一处
     //（视频设置的画质增强只有下载入口）：挂在着色器类目行上，只删清单内文件，
     // 用户自己导入的同目录 .glsl 不碰。
-    final bool showAnime4kDelete =
-        id == StorageCategoryId.shaders && _anime4kBytes > 0;
     return <Widget>[
       FushiListItem(
         title: Text(_categoryTitle(id)),
@@ -546,31 +471,4 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
         ),
     ];
   }
-
-  Widget _buildBundledSection() {
-    return AdaptiveSettingsSection(
-      title: t.storage_bundled_section,
-      children: <Widget>[
-        for (final BundledComponentUsage c in _bundled)
-          AdaptiveSettingsRow(
-            title: c.name,
-            subtitle: c.path,
-            icon: Icons.inventory_2_outlined,
-            showIcon: true,
-            trailing: Text(formatStorageBytes(c.bytes)),
-          ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
-          child: Text(
-            t.storage_bundled_hint,
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
-        ),
-      ],
-    );
-  }
 }
-
-Future<int> _noAnime4kBytes() async => 0;
-
-Future<List<String>> _noAnime4kFiles() async => const <String>[];

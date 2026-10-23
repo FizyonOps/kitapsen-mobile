@@ -12,43 +12,6 @@
 /// `onKeyEvent` 天然互斥、不会双触发。
 library;
 
-import 'package:fushi/src/utils/misc/platform_utils.dart';
-
-/// 一次鼠标按下**先到谁手里**：宿主 Flutter，还是原生 WebView。
-///
-/// 这不是平台特例分支，而是指针所有权的事实，两侧的输入模型真实不同：
-/// * **Windows**：fork 的 `flutter_inappwebview_windows` 用 WebView2 的 composition
-///   controller（无窗口 visual hosting），WebView **没有自己的输入窗口**——指针先到
-///   Flutter 的 [Listener]，再由 fork 逐个转发给 WebView2。而它的 `PointerButton`
-///   枚举只有 `{none, primary, secondary, tertiary}`：鼠标**侧键**（后退/前进）在
-///   转发前就被折成 `none` 整条丢弃，页内 JS 永远收不到 `Mouse3`/`Mouse4`。
-/// * **Android / iOS / macOS / Linux**：WebView 是真正的原生视图，指针被它直接吃掉，
-///   Flutter 的 [Listener] 在那片区域一个事件都收不到——只能靠页内 JS 桥回传。
-///
-/// 所以谁先拿到事件，谁负责分发；两条路**互斥**，宿主拥有指针时就不该再装 JS 鼠标
-/// 监听（否则中键/右键会被两条路各触发一次：关词典幂等看不出来，漫画翻页会翻两页）。
-bool get hostOwnsWebViewPointerInput => isWindowsPlatform;
-
-/// 阅读器 Shift-悬停 / 纯悬停查词由**宿主 Flutter** 而非页内 JS `mousemove` 腿驱动
-/// （BUG-2508）。
-///
-/// 只有 **macOS** 为 true。这不是 [hostOwnsWebViewPointerInput] 的反面：那条讲的是
-/// 鼠标**按下**先到谁手里，这条讲的是**悬停**——两者机制不同：
-/// * macOS：WebKit 的 `WKMouseTrackingObserver.mouseMoved:` 先对窗口 contentView 做
-///   AppKit 命中测试，只有命中视图是 WKWebView 后代才把 mouseMoved 交给页面；而
-///   Flutter 嵌入层把平台视图之上的任何 Flutter 绘制写进 `_hitTestIgnoreRegion`
-///   （BUG-1692 同机制）——页面 DOM 收不到 `mousemove`，JS 腿是死的。宿主的
-///   `NSTrackingArea` 不经这道门，[PointerHoverEvent] 照常到达，且嵌入层在每个鼠标
-///   事件上同步修饰键，`HardwareKeyboard.isShiftPressed` 在 hover 时可靠。
-/// * Windows：WebView2 是 Flutter 纹理，hover 由 fork 逐个转发进文档，JS 腿已验证可用。
-/// * Android / iOS / Linux：JS 腿一直在用（外接鼠标 / DeX），宿主腿在 hybrid
-///   composition 下能否收到 hover 未验证——**不借 `!hostOwnsWebViewPointerInput`
-///   反推**把它们的唯一一条腿关掉。
-///
-/// 两条腿互斥（BUG-2031 纪律：一平台一条腿）：本 getter 为 true 时 JS 腿由
-/// `window.__fushiHostHoverLookup` 关掉。
-bool get hostOwnsWebViewHoverLookup => isMacOSPlatform;
-
 /// 生成拦截 [keys] / [mouseButtons] 并回传 Dart 的输入监听脚本。
 ///
 /// - [handlerName]：`callHandler` 的 handler 名，Dart 侧须 `addJavaScriptHandler`
@@ -140,12 +103,11 @@ String webViewKeyBridgeScript({
   // 关掉。故各监听体内统一先判这一条。
   const String modalGuard =
       '\n    if ((window.__fushiPopupModalDepth || 0) > 0) return;';
-  final String popupModalGuard = deferToPopupModal ? modalGuard : '';
+  const String popupModalGuard = (modalGuard);
   final String propagationGuard = stopPropagation
       ? '\n    e.stopImmediatePropagation();'
       : '';
-  final String mouseListeners = installMouseListeners
-      ? '''
+  final String mouseListeners = ('''
   document.addEventListener('mousedown', function(e) {
     if (!e || e.button === 0) return;$popupModalGuard
     if ((window[$buttonsVar] || []).indexOf(e.button) === -1) return;
@@ -164,8 +126,7 @@ String webViewKeyBridgeScript({
     if ((window[$buttonsVar] || []).indexOf(2) === -1) return;
     e.preventDefault();$propagationGuard
   }, {capture: true});
-'''
-      : '';
+''');
   return '''
   ;(function () {
   window[$keysVar] = [$keyList];

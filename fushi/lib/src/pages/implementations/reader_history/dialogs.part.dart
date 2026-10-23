@@ -406,24 +406,17 @@ class _BookProfileOptionRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool cupertino = isCupertinoPlatform(context);
-    final Color selectedColor = cupertino
-        ? CupertinoTheme.of(context).primaryColor
-        : Theme.of(context).colorScheme.primary;
-    final Color idleColor = cupertino
-        ? CupertinoColors.secondaryLabel.resolveFrom(context)
-        : Theme.of(context).colorScheme.onSurfaceVariant;
+    final Color selectedColor = Theme.of(context).colorScheme.primary;
+    final Color idleColor = Theme.of(context).colorScheme.onSurfaceVariant;
 
     return AdaptiveSettingsRow(
       title: title,
       onTap: onTap,
       trailing: Icon(
         selected
-            ? (cupertino
-                  ? CupertinoIcons.check_mark
-                  : Icons.radio_button_checked)
-            : (cupertino ? CupertinoIcons.circle : Icons.radio_button_off),
-        size: cupertino ? 20 : 22,
+            ? (Icons.radio_button_checked)
+            : (Icons.radio_button_off),
+        size: 22,
         color: selected ? selectedColor : idleColor,
       ),
     );
@@ -587,7 +580,6 @@ class _BatchTagIntentRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool cupertino = isCupertinoPlatform(context);
     final ThemeData theme = Theme.of(context);
     final ColorScheme colors = theme.colorScheme;
     final Color tagColor = Color(tag.colorValue);
@@ -631,7 +623,7 @@ class _BatchTagIntentRow extends StatelessWidget {
 
     return AdaptiveSettingsRow(
       title: tag.name,
-      icon: cupertino ? CupertinoIcons.tag : Icons.sell_outlined,
+      icon: Icons.sell_outlined,
       controlBelow: true,
       // controlBelow 下 trailing 独占整行；用 Expanded 让三段铺满行宽（不再被
       // mainAxisSize.min + maxWidth:300 挤到 ~270 触发压缩换行）。
@@ -655,9 +647,7 @@ class _BatchTagIntentRow extends StatelessWidget {
                     keepColor,
                   ),
                   icon: Icon(
-                    cupertino
-                        ? CupertinoIcons.minus_circle
-                        : Icons.remove_circle_outline,
+                    Icons.remove_circle_outline,
                     size: 16,
                     color: selected == _BatchTagIntent.keep ? keepColor : null,
                   ),
@@ -671,7 +661,7 @@ class _BatchTagIntentRow extends StatelessWidget {
                     addColor,
                   ),
                   icon: Icon(
-                    cupertino ? CupertinoIcons.add_circled : Icons.add_circle,
+                    Icons.add_circle,
                     size: 16,
                     color: selected == _BatchTagIntent.add ? addColor : null,
                   ),
@@ -685,9 +675,7 @@ class _BatchTagIntentRow extends StatelessWidget {
                     removeColor,
                   ),
                   icon: Icon(
-                    cupertino
-                        ? CupertinoIcons.minus_circle_fill
-                        : Icons.do_not_disturb_on,
+                    Icons.do_not_disturb_on,
                     size: 16,
                     color: selected == _BatchTagIntent.remove
                         ? removeColor
@@ -706,24 +694,4 @@ class _BatchTagIntentRow extends StatelessWidget {
       ),
     );
   }
-}
-
-/// TODO-308 测试钩子：渲染批量打标签的「保持 / 添加 / 移除」三段意图行，供 widget
-/// 守卫断言三段各有可见文字标签与语义区分的图标（不再是两个一样的横杠）。
-/// [selectedIndex] 0=keep / 1=add / 2=remove。
-@visibleForTesting
-Widget buildBatchTagIntentRowForTesting({
-  required BookTagRow tag,
-  int selectedIndex = 0,
-}) {
-  const List<_BatchTagIntent> intents = <_BatchTagIntent>[
-    _BatchTagIntent.keep,
-    _BatchTagIntent.add,
-    _BatchTagIntent.remove,
-  ];
-  return _BatchTagIntentRow(
-    tag: tag,
-    selected: intents[selectedIndex],
-    onChanged: (_) {},
-  );
 }

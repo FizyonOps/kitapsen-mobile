@@ -49,12 +49,6 @@ class WebViewPrewarmSession {
   Timer? _timer;
   bool _finished = false;
 
-  /// 预热是否已终结（dispose 已发起）。
-  bool get isFinished => _finished;
-
-  /// 兜底定时器是否在跑。仅供测试与诊断。
-  bool get hasPendingTimeout => _timer != null;
-
   /// 在 headless WebView 真的 `run()` 起来之后调用：装上兜底终点。
   ///
   /// 已终结时不再装（回调可能比 `run()` 返回还快）。

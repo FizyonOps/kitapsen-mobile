@@ -21,42 +21,7 @@ class IntervalCoverage {
     }
   }
 
-  /// 解析 [toJson] 的输出；null / 非法 / 非数组一律当空覆盖（宁可重算首次，不炸）。
-  factory IntervalCoverage.fromJson(String? json) {
-    if (json == null || json.isEmpty) return IntervalCoverage();
-    final Object? decoded;
-    try {
-      decoded = jsonDecode(json);
-    } on FormatException {
-      return IntervalCoverage();
-    }
-    if (decoded is! List) return IntervalCoverage();
-    final IntervalCoverage out = IntervalCoverage();
-    for (final Object? item in decoded) {
-      if (item is! List || item.length != 2) continue;
-      final Object? a = item[0];
-      final Object? b = item[1];
-      if (a is! num || b is! num) continue;
-      out.add(a.toInt(), b.toInt());
-    }
-    return out;
-  }
-
   final List<(int, int)> _ranges = <(int, int)>[];
-
-  /// 只读视图（测试 / 诊断）。
-  List<(int, int)> get ranges => List<(int, int)>.unmodifiable(_ranges);
-
-  bool get isEmpty => _ranges.isEmpty;
-
-  /// 已覆盖总长度（视频 = 毫秒，阅读 = 字符 / 页）。
-  int get total {
-    int sum = 0;
-    for (final (int start, int end) in _ranges) {
-      sum += end - start;
-    }
-    return sum;
-  }
 
   /// 并入 `[start, end)`，返回**此前未覆盖**的长度（= 本次真正新到的内容量）。
   /// 空 / 倒序区间返回 0 且不改状态。
@@ -115,24 +80,6 @@ class IntervalCoverage {
     return fresh;
   }
 
-  /// `[start, end)` 中已被覆盖的长度。
-  int covered(int start, int end) {
-    if (end <= start) return 0;
-    int sum = 0;
-    for (final (int s, int e) in _ranges) {
-      if (e <= start) continue;
-      if (s >= end) break;
-      final int lo = s > start ? s : start;
-      final int hi = e < end ? e : end;
-      if (hi > lo) sum += hi - lo;
-    }
-    return sum;
-  }
-
-  /// `[start, end)` 是否已整段覆盖（空区间视为已覆盖）。
-  bool covers(int start, int end) =>
-      end <= start || covered(start, end) == end - start;
-
   /// 与 `(-∞, position)` 的交集（新对象）：`ReadUnitLedger` 用它取「当前位置之前
   /// 翻过的部分」作为应入账集合。
   IntervalCoverage clipBelow(int position) {
@@ -169,9 +116,6 @@ class IntervalCoverage {
 
   /// 清空（坐标系整体变更时用，`ReadUnitLedger.reset`）。
   void clear() => _ranges.clear();
-
-  /// 深拷贝（视频 tracker 在 attach 时留一份「本次会话前」快照给字幕字数门用）。
-  IntervalCoverage copy() => IntervalCoverage(_ranges);
 
   String toJson() => jsonEncode(<List<int>>[
     for (final (int s, int e) in _ranges) <int>[s, e],

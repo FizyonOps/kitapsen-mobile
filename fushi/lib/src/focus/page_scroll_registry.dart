@@ -13,8 +13,7 @@ import 'package:flutter/widgets.dart';
 /// Pages push their scroll controller here on mount and pop it on dispose; the
 /// top of the stack is the visible route's controller, reachable regardless of
 /// where focus currently sits in the tree.
-class PageScrollRegistry {
-  PageScrollRegistry._();
+abstract class PageScrollRegistry {
 
   static final List<ScrollController> _stack = <ScrollController>[];
 
@@ -32,9 +31,4 @@ class PageScrollRegistry {
     return controller.positions.length == 1 ? controller : null;
   }
 
-  @visibleForTesting
-  static void debugClear() => _stack.clear();
-
-  @visibleForTesting
-  static int get debugDepth => _stack.length;
 }

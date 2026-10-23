@@ -1,7 +1,5 @@
 import 'package:fushi_engine/media/collections/shelf_sort.dart'
     show naturalCompare;
-import 'package:fushi/src/mining/metadata/galgame_metadata_merge.dart'
-    show GalgameCustomData;
 import 'package:fushi_core/fushi_core.dart';
 
 /// 排序一个合集成员所需的最小事实：显示标题、导入时刻、身份键。
@@ -84,7 +82,6 @@ Future<List<MediaCollectionItemRow>> sortedCollectionRows({
 }) async {
   final List<EpubBookMeta> epubs = await db.getEpubBookMetas();
   final List<SrtBookRow> srts = await db.getAllSrtBooks();
-  final List<GalgameRow> games = await db.getAllGalgames();
   final List<VideoBookRow> videos = await db.allVideoBooks();
   final Map<String, ({String title, int importedAt})> meta =
       <String, ({String title, int importedAt})>{
@@ -100,11 +97,6 @@ Future<List<MediaCollectionItemRow>> sortedCollectionRows({
       MediaKind.srt.compositeKey(r.uid): (
         title: r.title,
         importedAt: r.importedAt,
-      ),
-    for (final GalgameRow r in games)
-      MediaKind.game.compositeKey(r.id): (
-        title: GalgameCustomData.decode(r.customDataJson).name ?? r.name,
-        importedAt: r.addedAt,
       ),
     for (final VideoBookRow r in videos)
       MediaKind.video.compositeKey(r.bookUid): (

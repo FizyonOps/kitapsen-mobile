@@ -13,8 +13,7 @@ import 'package:fushi/src/reader/reader_settings.dart' show ReaderCustomFontCss;
 /// 统一 key = **extractDir 相对、percent-decode、正斜杠** 的路径
 /// （如 `OEBPS/images/foo bar.jpg`），与 `EpubParser` 全程使用的 relPath、以及资源拦截器
 /// `/epub/` 之后 decode 的形态完全一致。
-class ImageRevealKey {
-  const ImageRevealKey._();
+abstract class ImageRevealKey {
 
   /// 资源虚拟域名（与 [ReaderCustomFontCss.kReaderResourceHost] 一致）。
   static const String host = ReaderCustomFontCss.kReaderResourceHost;
@@ -43,11 +42,6 @@ class ImageRevealKey {
     // 已是相对路径（Uri 解析出的 host 为空）。
     return _sanitizeRel(raw);
   }
-
-  /// 图片库磁盘文件路径 [filePath] → 稳定 key（相对 [extractDir]，正斜杠）。
-  /// 文件不在 [extractDir] 内（`..` 越界）返回 `null`。
-  static String? fromFile(String filePath, String extractDir) =>
-      _sanitizeRel(p.relative(filePath, from: extractDir));
 
   /// 某图当前是否应显示防剧透遮罩：有归一 [revealKey] + 未在已揭集 [revealed]，
   /// 且满足以下**任一**遮罩理由——

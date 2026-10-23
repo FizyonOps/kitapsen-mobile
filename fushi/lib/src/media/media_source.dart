@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:fushi/src/utils/net/app_http_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:network_to_file_image/network_to_file_image.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:fushi/media.dart';
 import 'package:fushi/models.dart';
@@ -64,16 +63,6 @@ abstract class MediaSource {
   /// An icon that will show the enhancement if activated by the user in the
   /// quick menu.
   final IconData icon;
-
-  /// Localisations for this source, where the key is a locale tag and
-  /// the value is the [sourceName] of the source. If the value for the current
-  /// locale is non-null, it will be used instead of [sourceName].
-  final Map<String, String> sourceNameLocalisatiton = const {};
-
-  /// Localisations for this source, where the key is a locale tag and
-  /// the value is the [description] of the enhancement. If the value for the
-  /// current locale is non-null, it will be used instead of [description].
-  final Map<String, String> descriptionLocalisation = const {};
 
   /// Whether or not this media source has a search function. If false, this
   /// media source will have an action executed by [onSearchBarTap].
@@ -161,19 +150,6 @@ abstract class MediaSource {
     return defaultValue;
   }
 
-  /// 读**已持久化**（或本会话显式写过）的偏好值；没有就返回 null，且**不**像
-  /// [getPreference] 那样把默认值回填进缓存。
-  ///
-  /// BUG-2770：同一个键要按两套默认值解读时必须走这里——`enable_swipe_to_close`
-  /// 的鼠标半边默认按平台（Windows/Linux false）、触摸半边默认 true。经
-  /// [getPreference] 读的话，先被读到的那个默认值会写进缓存，另一半再读就把它当成
-  /// 「用户设置」，「未设置」这一态就丢了。
-  @protected
-  T? readStoredPreference<T>(String key) {
-    final value = _preferences[key];
-    return value is T ? value : null;
-  }
-
   /// Set the preference [value] for a certain parameter [key] for this source.
   Future<void> setPreference<T>({required String key, required T value}) async {
     _preferences[key] = value;
@@ -202,20 +178,6 @@ abstract class MediaSource {
     }
   }
 
-  /// Get the best localisation for the label of this media source. If there
-  /// is no localisation, the fallback is [sourceName].
-  String getLocalisedSourceName(AppModel appModel) {
-    return sourceNameLocalisatiton[appModel.appLocale.toLanguageTag()] ??
-        sourceName;
-  }
-
-  /// Get the best localisation for the description of this media source. If
-  /// there is no localisation, the fallback is [description].
-  String getLocalisedDescription(AppModel appModel) {
-    return descriptionLocalisation[appModel.appLocale.toLanguageTag()] ??
-        description;
-  }
-
   /// If a media source requires resources to function, they can be prepared
   /// here and this function will be run once only at runtime during the
   /// initialisation step.
@@ -228,16 +190,6 @@ abstract class MediaSource {
     required WidgetRef ref,
   }) async {}
 
-  /// Get the floating search bar actions of this source when it is the active
-  /// source being displayed on its respective media type tab.
-  List<Widget> getActions({
-    required BuildContext context,
-    required WidgetRef ref,
-    required AppModel appModel,
-  }) {
-    return [];
-  }
-
   /// The widget to show when this source is launched. An optional [MediaItem]
   /// can be supplied as a launch parameter.
   ///
@@ -248,111 +200,21 @@ abstract class MediaSource {
   /// return type is contract-compatible.
   Widget buildLaunchPage({MediaItem? item, Bookmark? initialBookmarkJump});
 
-  /// If this is not null, this action is executed when the user taps on the
-  /// search bar. Sources that do not have a search action should have this
-  /// defined.
-  Future<void> onSearchBarTap({
-    required BuildContext context,
-    required WidgetRef ref,
-    required AppModel appModel,
-  }) async {
-    appModel.openMedia(
-      ref: ref,
-      mediaSource: this,
-    );
-  }
-
   /// This function can be used to clean up resources associated with a
   /// media item upon clearing it.
   Future<void> onMediaItemClear(MediaItem item) async {}
 
-  /// Supplies a sentence that can be used for the sentence field when making
-  /// a card while this source is active. Can be set with [setCurrentSentence]
-  /// and [clearCurrentSentence] in a source page.
-  FushiTextSelection get currentSentence => _currentSentence;
-  FushiTextSelection _currentSentence = FushiTextSelection(
-    text: '',
-  );
-
-  /// Update the current sentence.
-  void setCurrentSentence({
-    required FushiTextSelection selection,
-  }) {
-    _currentSentence = selection;
-  }
-
-  /// Clear the current sentence.
-  void clearCurrentSentence() {
-    _currentSentence = FushiTextSelection(
-      text: '',
-    );
-  }
-
-  /// Full subtitle-cue text (not punctuation-segmented).
-  FushiTextSelection get currentCueSentence => _currentCueSentence;
-  FushiTextSelection _currentCueSentence = FushiTextSelection(
-    text: '',
-  );
-
-  void setCurrentCueSentence({
-    required FushiTextSelection selection,
-  }) {
-    _currentCueSentence = selection;
-  }
-
-  void clearCurrentCueSentence() {
-    _currentCueSentence = FushiTextSelection(
-      text: '',
-    );
-  }
-
-  /// This is used to hold data for generating images and audio.
-  String? get currentExtraData => _currentExtraData;
-  String? _currentExtraData;
-
-  /// Set extra export data. This should be simplified in the future and be
-  /// used as the main way of communicating parameters to the creator for
-  /// creating override images/audio information. There should not be media
-  /// source specific parameters for general functions like generating images
-  /// or audio.
-  void setExtraData(String? value) {
-    _currentExtraData = value;
-  }
-
   /// Clear extra export data.
   void clearExtraData() {
-    _currentExtraData = null;
   }
-
-  /// Gets whether or not a media source should currently supply images.
-  bool get shouldGenerateImage => _shouldGenerateImage;
-  bool _shouldGenerateImage = true;
-
-  /// Gets whether or not a media source should currently supply audio.
-  bool get shouldGenerateAudio => _shouldGenerateAudio;
-  bool _shouldGenerateAudio = true;
 
   /// Controls whether or not a media source should currently supply images.
   void setShouldGenerateImage({required bool value}) {
-    _shouldGenerateImage = value;
   }
 
   /// Controls whether or not a media source should currently supply audio.
   void setShouldGenerateAudio({required bool value}) {
-    _shouldGenerateAudio = value;
   }
-
-  /// Supplies a media item that can be used for tracking and updating history,
-  /// as well as generating video and audio with timestamp information. This
-  /// should be uniquely implemented for each source. Some sources may want
-  /// to generate their media item based on current playback information or
-  /// progress.
-  ///
-  /// HBK-AUDIT-123: the base default is an UnsupportedError rather than a bare
-  /// UnimplementedError so a contract violation names the source and the method
-  /// that was not overridden, instead of surfacing an opaque runtime trap.
-  MediaItem get currentMediaItem => throw UnsupportedError(
-      '$runtimeType does not implement currentMediaItem');
 
   /// The body widget to show in the tab when this source's media type and this
   /// source is selected.
@@ -372,13 +234,6 @@ abstract class MediaSource {
     }
 
     return item.title;
-  }
-
-  /// Given a [MediaItem], return its subtitle. Some media items may allow
-  /// overriding of values for display purposes. If a source does this,
-  /// override this function.
-  String getDisplaySubtitleFromMediaItem(MediaItem item) {
-    return item.mediaIdentifier;
   }
 
   /// Given a [MediaItem], return its thumbnail. Some media items may allow
@@ -425,34 +280,6 @@ abstract class MediaSource {
     } else {
       return MemoryImage(kTransparentImage);
     }
-  }
-
-  /// Given a [MediaItem], return its thumbnail. Some media items may allow
-  /// overriding of values for display purposes.
-  String getThumbnailUri({
-    required AppModel appModel,
-    required MediaItem item,
-    bool noOverride = false,
-  }) {
-    if (!noOverride) {
-      final File? overrideFile = resolveOverrideThumbnailFile(
-        appModel: appModel,
-        item: item,
-      );
-      if (overrideFile != null) {
-        return overrideFile.path;
-      }
-    }
-
-    if (item.imageUrl != null) {
-      return item.imageUrl!;
-    }
-
-    if (item.base64Image == null) {
-      return '';
-    }
-
-    return '';
   }
 
   // ── override 身份（BUG-1317）─────────────────────────────────────────
@@ -838,64 +665,4 @@ abstract class MediaSource {
     );
   }
 
-  /// If this source is non-null, this will be used as the initial function
-  /// for the image field over the auto enhancement. Extra durations can be
-  /// invoked and defined when initially opening the creator, to call attention
-  /// to multiple durations to be used for image generation.
-  Future<List<NetworkToFileImage>> generateImages({
-    required AppModel appModel,
-    required MediaItem item,
-    String? data,
-  }) {
-    // HBK-AUDIT-123: gated by overridesAutoImage; a source that sets that flag
-    // must override this. The UnsupportedError names the offending source so
-    // the missing override is debuggable rather than an opaque trap.
-    throw UnsupportedError(
-      '$runtimeType set overridesAutoImage but did not override generateImages',
-    );
-  }
-
-  /// If this source is non-null, this will be used as the initial function
-  /// for the audio field over the auto enhancement.
-  Future<File?>? generateAudio({
-    required AppModel appModel,
-    required MediaItem item,
-    String? data,
-  }) {
-    // HBK-AUDIT-123: gated by overridesAutoAudio; a source that sets that flag
-    // must override this. The UnsupportedError names the offending source so
-    // the missing override is debuggable rather than an opaque trap.
-    throw UnsupportedError(
-      '$runtimeType set overridesAutoAudio but did not override generateAudio',
-    );
-  }
-
-  /// This returns a list of [MediaItem], and is performed to search the media
-  /// source for items.
-  Future<List<MediaItem>?> searchMediaItems({
-    required BuildContext context,
-    required String searchTerm,
-    required int pageKey,
-  }) async {
-    // HBK-AUDIT-123: gated by implementsSearch; a source that sets that flag
-    // must override this. The UnsupportedError names the offending source so
-    // the missing override is debuggable rather than an opaque trap.
-    throw UnsupportedError(
-      '$runtimeType set implementsSearch but did not override searchMediaItems',
-    );
-  }
-
-  /// Given a search term, this source may give search suggestions. If the
-  /// empty list is returned, then search history will be shown instead.
-  ///
-  /// HBK-AUDIT-123: suggestions are optional (an empty list already means
-  /// "show history"), so the base default returns an empty list instead of
-  /// throwing UnimplementedError. This removes a latent unhandled-async-error
-  /// surface for any source that implements search but not suggestions.
-  Future<List<String>> generateSearchSuggestions(String searchTerm) async {
-    return const <String>[];
-  }
-
-  /// Aspect ratio of media items.
-  double get aspectRatio;
 }

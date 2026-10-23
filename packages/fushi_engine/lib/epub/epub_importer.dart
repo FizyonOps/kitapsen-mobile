@@ -15,8 +15,7 @@ import 'package:fushi_engine/epub/epub_storage.dart';
 import 'package:fushi_engine/foundation/engine_log.dart';
 import 'package:meta/meta.dart';
 
-class EpubImporter {
-  EpubImporter._();
+abstract class EpubImporter {
 
   /// Import an EPUB file into the database.
   ///
@@ -38,23 +37,6 @@ class EpubImporter {
       result: result,
       fileName: fileName,
       tempDir: tempDir,
-      policy: policy,
-    );
-  }
-
-  /// Import from a file path on disk.
-  ///
-  /// Preferred over [import] — the file is read inside the isolate,
-  /// avoiding a large byte-array copy across the isolate boundary.
-  static Future<String> importFromFile({
-    required FushiDatabase db,
-    required String filePath,
-    DuplicatePolicy policy = const DuplicatePolicy.suffix(),
-  }) async {
-    return importFromPath(
-      db: db,
-      filePath: filePath,
-      fileName: p.basename(filePath),
       policy: policy,
     );
   }
@@ -256,66 +238,6 @@ class EpubImporter {
     );
   }
 
-  /// 用 [epubFilePath] 这份新生成的 EPUB **就地重建**一本已入库书的解压树，返回
-  /// `(chapterCount, chaptersJson, coverPath)` 三件套供调用方回写 EpubBooks 行。
-  ///
-  /// 与 [importFromPath] 的区别：不插新行、不派生新 bookKey、不动 `extract_dir`
-  /// 列——书的身份（bookKey / extractDir / 合集 / 标签 / 进度）完整保留，只有正文
-  /// 内容被换掉。字幕书换字幕（[SrtBooks.srtPath] 换文件 → cue 全变 → 由 cue 生成
-  /// 的正文必须跟着重建）是唯一调用方：正文与 cue 靠**文本相等**配对
-  /// （`_findCueForSentence`），只换 cue 不换正文会让整本书的高亮同步全断。
-  ///
-  /// 写盘用与导入同一套原子替换（[moveExtractedDirIntoPlace]）：新树先解到临时
-  /// 目录，成功后旧树改名成 `.bak-<ts>` 让位、新树就位、再删 bak；中途失败把 bak
-  /// 改回来。绝不先删后建——中间崩一次两份都没了。
-  static Future<({int chapterCount, String chaptersJson, String? coverPath})>
-      rebuildExtractedInPlace({
-    required String epubFilePath,
-    required String extractDir,
-  }) async {
-    final int tempId = DateTime.now().millisecondsSinceEpoch;
-    final String tempDir = await EpubStorage.bookDirectory('.tmp-$tempId');
-    try {
-      final _ParseResult result = await Isolate.run(() => _parseFromPathInIsolate(_ParseArgsFromPath(filePath: epubFilePath, extractDir: tempDir)));
-      // chaptersJson / coverHref 都是**相对**解压根的路径，先算再搬位置等价。
-      final String chaptersJson =
-          buildChaptersJson(result.book, result.characterCounts);
-      // liveExtractDirs 传空 = 允许覆盖目标目录：这里的目标正是本书自己的解压树，
-      // 覆盖它就是本方法的全部意图（导入路径传 live 列表是为了不撞**别的**书）。
-      moveExtractedDirIntoPlace(
-        srcDir: Directory(tempDir),
-        targetDir: extractDir,
-        liveExtractDirs: const <String>[],
-      );
-      return (
-        chapterCount: result.book.chapters.length,
-        chaptersJson: chaptersJson,
-        coverPath: result.book.coverHref,
-      );
-    } catch (e, stack) {
-      engineLog.log('EpubImporter.rebuildInPlace', e, stack);
-      _tryDeleteDir(tempDir);
-      rethrow;
-    }
-  }
-
-  /// 重新解析**已解压**的书目录 [extractDir]，返回 `(chapterCount, chaptersJson,
-  /// coverPath)` 三件套。
-  ///
-  /// 用于「漫画 → 书」转回：本仓的 EPUB 在盘上只有解压树、没有独立 `.epub`
-  /// （BUG-088），所以「撤销」不存在——只能拿解压树重新算一遍。DOM 解析与字数统计
-  /// 放 isolate（与导入同款 [compute]），不卡 UI。
-  static Future<({int chapterCount, String chaptersJson, String? coverPath})>
-      reparseExtractedBook(String extractDir) async {
-    final _ParseResult result =
-        await Isolate.run(() => _reparseExtractedInIsolate(extractDir));
-    return (
-      chapterCount: result.book.chapters.length,
-      chaptersJson: buildChaptersJson(result.book, result.characterCounts),
-      coverPath: result.book.coverHref,
-    );
-  }
-
   /// Move the freshly-extracted [srcDir] to [targetDir]; returns the
   /// directory that finally holds the content (stored as `extract_dir`).
   ///
@@ -486,16 +408,6 @@ List<int> _computeCharacterCounts(EpubBook book) {
     book.chapters.length,
     (int index) => book.chapterCharacterCount(index),
     growable: false,
-  );
-}
-
-/// 解析一个**已经解压好**的书目录（不解压、不写盘），供「漫画 → 书」转回重算
-/// 章节与字数。
-_ParseResult _reparseExtractedInIsolate(String extractDir) {
-  final EpubBook book = EpubParser.parseFromExtracted(extractDir);
-  return _ParseResult(
-    book: book,
-    characterCounts: _computeCharacterCounts(book),
   );
 }
 

@@ -27,10 +27,3 @@ String fushiUserAgent(String component) {
   assert(trimmed.isNotEmpty, 'UA 组件名不能为空');
   return 'kitapsen/$trimmed ($kFushiUserAgentHomepage)';
 }
-
-/// OpenSubtitles 配置里存量的旧默认 UA。
-///
-/// 这条 UA 被序列化进 `video_subtitle_opensubtitles_config` 偏好，存量用户的
-/// JSON 里躺着的就是它——只改构造默认值改不动已经落盘的那一份。解码时把**恰好
-/// 等于旧默认值**的那一份归一到新默认值（用户自己填过的自定义 UA 原样保留）。
-const String kLegacyOpenSubtitlesUserAgent = 'Hibiki v1';

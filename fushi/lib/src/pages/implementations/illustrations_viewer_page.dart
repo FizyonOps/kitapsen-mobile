@@ -7,7 +7,6 @@ import 'package:fushi_audio/fushi_audio.dart'
     show ReaderPosition, ReaderPositionRepository;
 import 'package:fushi_core/fushi_core.dart' show FushiDatabase;
 import 'package:fushi_engine/epub/epub_book.dart' show EpubBook, EpubImageRef;
-import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/media/audiobook/audiobook_bridge.dart'
     show TtuTocEntry;
 import 'package:fushi/src/media/sources/reader_fushi_source.dart'

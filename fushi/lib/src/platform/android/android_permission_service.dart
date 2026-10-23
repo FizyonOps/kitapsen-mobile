@@ -38,25 +38,4 @@ class AndroidPermissionService implements PlatformPermissionService {
   Future<bool> hasExternalStoragePermission() async =>
       (await _externalStoragePermission()).isGranted;
 
-  @override
-  Future<bool> requestExternalStoragePermission() async {
-    final Permission permission = await _externalStoragePermission();
-    final PermissionStatus status = await permission.request();
-    if (status.isGranted) return true;
-    if (permission != Permission.storage) {
-      // API >= 30：用户拒绝「所有文件访问」后仍申请基础存储权限（保留既有行为）。
-      await Permission.storage.request();
-    }
-    // 结论必须与查询侧同源，否则两侧会对同一件事给出不同答案。
-    return hasExternalStoragePermission();
-  }
-
-  @override
-  Future<bool> hasCameraPermission() => Permission.camera.isGranted;
-
-  @override
-  Future<bool> requestCameraPermission() async {
-    final status = await Permission.camera.request();
-    return status.isGranted;
-  }
 }

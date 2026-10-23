@@ -16,12 +16,11 @@ import 'package:fushi/src/storage/app_paths.dart';
 ///
 /// 用 [AppPaths.tempRootDirectory]（系统临时目录）而非 documents 根：封面是纯 fetch 缓存、
 /// 重下即可，不属用户数据，不进数据根迁移白名单，OS 清理临时目录也无副作用。
-class RemoteCoverCache {
-  RemoteCoverCache._();
+abstract class RemoteCoverCache {
 
   /// 缓存目录解析器（默认系统临时目录下 `remote_cover_cache`）。测试用
   /// [debugSetDirResolver] 覆盖到隔离目录，使读盘缓存在纯 Dart 单测里可断言。
-  static Future<Directory> Function() _dirResolver = _defaultDir;
+  static const Future<Directory> Function() _dirResolver = _defaultDir;
 
   static Future<Directory> _defaultDir() async {
     final Directory base = await AppPaths.tempRootDirectory();
@@ -36,13 +35,6 @@ class RemoteCoverCache {
         await d.create(recursive: true);
         return d;
       });
-
-  /// 测试注入：覆盖缓存目录解析器（传 null 还原默认）。清空 memoized 目录。
-  @visibleForTesting
-  static void debugSetDirResolver(Future<Directory> Function()? resolver) {
-    _dirResolver = resolver ?? _defaultDir;
-    _ensured = null;
-  }
 
   /// 稳定 id → 文件安全名：base64url（无 padding）编码，可逆且无碰撞，规避 id 里的
   /// `/` `:` `?` 等非法文件名字符。
@@ -122,7 +114,4 @@ class RemoteCoverCache {
     }
   }
 
-  /// 测试可见：立即执行一次容量修剪。
-  @visibleForTesting
-  static Future<void> debugTrimNow() async => _trim(await _dir());
 }

@@ -12,12 +12,6 @@ String? _friendlyClause(Object error) {
   if (error is SyncAuthError && error.kind != SyncAuthFailureKind.credentials) {
     return friendlySyncAuthFailure(error.kind, error.serverReason);
   }
-  // BUG-1693：互联对端一台都探不到——最常见成因是对端没运行 Fushi / 设备离线，
-  // 不是本机网络故障。按类型分派（此前它落到兜底、裸英文
-  // 'No reachable Fushi server address' 直接上屏）。
-  if (error is SyncPeerUnreachableError) {
-    return t.sync_err_peer_unreachable;
-  }
   final String msg =
       error is SyncBackendError ? error.message : _rawMessage(error);
   final String l = msg.toLowerCase();
@@ -141,13 +135,6 @@ String _rawMessage(Object error) => error is SyncBackendError
     : error is SyncAuthError
         ? error.message
         : error.toString();
-
-/// Complete, user-facing message for an error shown on its own (snackbar,
-/// dialog body). Known errors become a friendly localized sentence; unknown
-/// ones fall back to the raw message wrapped in [t.sync_error] so the original
-/// text is never hidden.
-String friendlySyncError(Object error) =>
-    _friendlyClause(error) ?? t.sync_error(message: _rawMessage(error));
 
 /// Friendly clause only, for embedding in another template's `message:` slot
 /// (e.g. `t.sync_webdav_test_failed(message: ...)`). Falls back to the raw

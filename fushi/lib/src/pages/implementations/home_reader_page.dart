@@ -1,14 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:fushi/media.dart';
 import 'package:fushi/pages.dart';
-import 'package:fushi_engine/media/discovery/discovery_models.dart';
-import 'package:fushi/src/ai/ai_media_acquisition_assistant.dart'
-    show AiMediaAcquisitionDomain;
-import 'package:fushi/src/models/store_compliance.dart';
-import 'package:fushi/src/pages/implementations/browse_online_sources_view.dart';
-import 'package:fushi/src/pages/implementations/discovery_ai_acquire_action.dart';
-import 'package:fushi/src/pages/implementations/library_online_sources_view.dart';
-import 'package:fushi/src/pages/implementations/media_discovery_page.dart';
 import 'package:fushi/src/pages/implementations/media_library_shell.dart';
 import 'package:fushi/src/pages/implementations/media_sources_page.dart';
 import 'package:fushi/src/pages/implementations/module_settings_view.dart';
@@ -38,7 +30,6 @@ class _HomeReaderPageState extends BaseTabPageState<HomeReaderPage> {
   /// 各自过 iOS 合规门 / 平台宿主门；书 tab 存在即书模块开着。
   @override
   Widget build(BuildContext context) {
-    final bool online = false;
     return MediaLibraryShell(
       focusIdPrefix: 'book-library-view',
       views: <MediaLibraryViewSpec>[
@@ -52,7 +43,7 @@ class _HomeReaderPageState extends BaseTabPageState<HomeReaderPage> {
           kind: MediaLibraryViewKind.sources,
           label: t.library_view_import,
           builder: (BuildContext context, Widget navigation) =>
-              MediaSourcesPage(mediaKind: 'book', navigation: navigation),
+              MediaSourcesPage(navigation: navigation),
         ),
         MediaLibraryViewSpec(
           kind: MediaLibraryViewKind.settings,

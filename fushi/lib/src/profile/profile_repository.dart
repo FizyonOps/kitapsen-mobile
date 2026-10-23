@@ -1,36 +1,23 @@
 import 'dart:convert';
 
 import 'package:drift/drift.dart' show Value;
-import 'package:fushi_anki/fushi_anki.dart';
-import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi_core/fushi_core.dart';
-import 'package:fushi_engine/profile/profile_document.dart';
 import 'package:fushi/src/media/media_source.dart';
 import 'package:fushi/src/models/preferences_repository.dart';
 import 'package:fushi/src/profile/language_binding.dart';
 import 'package:fushi/src/profile/profile_keys.dart';
-import 'package:fushi/src/sync/backup_service.dart'
-    show rebaseFontCatalogJson, rebaseFontListJson;
-import 'package:fushi/src/sync/pref_redaction_policy.dart';
 import 'package:fushi/src/media/sources/reader_fushi_source.dart';
 
 // 分享 JSON 的模型与异常已下沉引擎（服务端共用），这里转出，调用方 import 不变。
 export 'package:fushi_engine/profile/profile_document.dart'
     show ProfileExport, ProfileImportException, ProfileSettingEntry;
 
-/// 导入模式：新建一个 Profile（默认，重名加后缀），或覆盖一个已有 Profile。
-enum ProfileImportMode { createNew, overwrite }
-
 class ProfileRepository {
   ProfileRepository(
-    this._db,
-    this._ankiRepo, {
+    this._db, {
     bool Function(String name)? isDictionaryInstalled,
   }) : _isDictionaryInstalled = isDictionaryInstalled;
   final FushiDatabase _db;
-  /// Null in the Kitapsen edition, which has no Anki: profiles then carry no
-  /// Anki settings.
-  final BaseAnkiRepository? _ankiRepo;
 
   /// 「这本词典**真的装着**吗」的唯一真值源：磁盘上有没有
   /// `dictionaryResourceDirectory/<name>/`。元数据行的存在性**不是**这个判据——
@@ -41,8 +28,6 @@ class ProfileRepository {
   final bool Function(String name)? _isDictionaryInstalled;
 
   Future<List<ProfileRow>> getAllProfiles() => _db.getAllProfiles();
-
-  Future<ProfileRow?> getProfileById(int id) => _db.getProfileById(id);
 
   Future<int> getActiveProfileId() async {
     final raw = await _db.getPref('active_profile_id');
@@ -64,25 +49,6 @@ class ProfileRepository {
     return id;
   }
 
-  Future<void> renameProfile(int id, String name) =>
-      _db.updateProfileName(id, name);
-
-  Future<void> deleteProfile(int id) async {
-    final count = await _db.countProfiles();
-    if (count <= 1) return;
-
-    final activeId = await getActiveProfileId();
-    await _db.deleteProfile(id);
-
-    if (activeId == id) {
-      final remaining = await _db.getAllProfiles();
-      if (remaining.isNotEmpty) {
-        await setActiveProfileId(remaining.first.id);
-        await applyProfile(remaining.first.id);
-      }
-    }
-  }
-
   Future<void> snapshotCurrentSettings(int profileId) async {
     // Profile ids are autoincrement (always >= 1); a non-positive id is the
     // "no active profile" sentinel (e.g. ProfileViewModel.dispose fires before
@@ -93,19 +59,6 @@ class ProfileRepository {
     final entries = <ProfileSettingsCompanion>[];
 
     // Anki settings (SharedPreferences)
-    final BaseAnkiRepository? ankiRepo = null;
-    if (ankiRepo != null) {
-      final ankiSettings = await ankiRepo.loadSettings();
-      final ankiMap = ProfileKeys.ankiSettingsToMap(ankiSettings);
-      for (final entry in ankiMap.entries) {
-        entries.add(ProfileSettingsCompanion.insert(
-          profileId: profileId,
-          category: ProfileKeys.categoryAnki,
-          key: entry.key,
-          value: entry.value,
-        ));
-      }
-    }
 
     // ALL Drift prefs (excluding app-state keys)
     final allPrefs = await _db.getAllPrefs();
@@ -272,27 +225,6 @@ class ProfileRepository {
     });
 
     // Anki settings (SharedPreferences)
-    final BaseAnkiRepository? ankiRepo = null;
-    if (ankiRepo != null && ankiMap.isNotEmpty) {
-      final current = await ankiRepo.loadSettings();
-      final updated = ProfileKeys.mapToAnkiSettings(ankiMap, current);
-      await ankiRepo.saveSettings(updated);
-    }
-  }
-
-  Future<int> copyProfile(int sourceId, String newName) async {
-    final newId = await createProfile(newName);
-    final sourceSettings = await _db.getProfileSettings(sourceId);
-    final copies = sourceSettings
-        .map((s) => ProfileSettingsCompanion.insert(
-              profileId: newId,
-              category: s.category,
-              key: s.key,
-              value: s.value,
-            ))
-        .toList();
-    await _db.replaceProfileSettings(newId, copies);
-    return newId;
   }
 
   /// 全部媒体类型绑定的**裸串视图**（key = [ProfileMediaKind.dbValue]；DB 列
@@ -301,12 +233,6 @@ class ProfileRepository {
     final rows = await _db.getAllMediaTypeProfiles();
     return {for (final r in rows) r.mediaType: r.profileId};
   }
-
-  Future<void> setMediaTypeBinding(ProfileMediaKind mediaType, int profileId) =>
-      _db.setMediaTypeProfile(mediaType.dbValue, profileId);
-
-  Future<void> removeMediaTypeBinding(ProfileMediaKind mediaType) =>
-      _db.deleteMediaTypeProfile(mediaType.dbValue);
 
   /// 全部语言绑定（key = **归一化后**的语言标签，如 `ja` / `zh-Hant`）。
   ///
@@ -323,20 +249,6 @@ class ProfileRepository {
       out[key] = r.profileId;
     }
     return out;
-  }
-
-  /// 绑定一种内容语言到某 Profile。[languageTag] 可以是任意形态的 BCP-47 串，
-  /// 落库前统一归一；归一后为空（语言不可识别）时不写入。
-  Future<void> setLanguageBinding(String languageTag, int profileId) async {
-    final String key = normalizeLanguageBinding(languageTag);
-    if (key.isEmpty) return;
-    await _db.setLanguageProfile(key, profileId);
-  }
-
-  Future<void> removeLanguageBinding(String languageTag) async {
-    final String key = normalizeLanguageBinding(languageTag);
-    if (key.isEmpty) return;
-    await _db.deleteLanguageProfile(key);
   }
 
   Future<int?> getBookProfileId(String bookUid) async {
@@ -386,150 +298,6 @@ class ProfileRepository {
   }
 
   // ── 导出 / 导入（单 Profile JSON 序列化）────────────────────────────
-
-  /// 判断一个 pref key 是否属于「设备本地 / 凭据」，导出时必须剔除。
-  ///
-  /// 判定本身收敛到 [PrefRedactionPolicy]（备份 zip / Profile 快照 / 本分享
-  /// JSON 三条出境通道共用的唯一真相源）。此前这里是一份独立实现，兜底被
-  /// `if (!lower.startsWith('sync_')) return false;` 锁死在 `sync_` 家族，于是
-  /// `media_source_secret_*`（SFTP/FTP 密码 + 私钥 PEM）、`qb_connection_config`
-  /// （明文密码）与 `*_api_key` 全部漏网 —— 分享一个 Profile 就把它们一起送出去。
-  static bool _isCredentialOrDeviceLocalPref(String key) =>
-      PrefRedactionPolicy.isDeviceLocalOrCredential(key);
-
-  /// 把单个 Profile 序列化成可分享的 JSON 字符串。
-  ///
-  /// - 激活 Profile：先 [snapshotCurrentSettings]（autosnapshot）把当前活的
-  ///   偏好写进快照再读，保证导出的是最新状态。
-  /// - 非激活 Profile：直读其已有快照，**不** snapshot（否则会用当前活偏好
-  ///   污染那个 Profile 的快照）。
-  /// - 凭据红线：导出前按 [_isCredentialOrDeviceLocalPref] 剔除全部凭据 /
-  ///   设备本地 key（白名单为主、LIKE 兜底），绝不让 base64 凭据进文件。
-  /// - 字体路径（A1）：把 `font_catalog` / 旧 shadow 列表里指向本机
-  ///   `custom_fonts/` 的绝对路径剥成相对（rebase 到空根），导到别的设备时
-  ///   该字体文件缺失则优雅降级（条目在、文件找不到、加载器跳过），不泄漏
-  ///   本机目录结构、也不会指向不存在的绝对路径。[fontsRootDirectory] 为 null
-  ///   （未知字体根）时跳过剥离，原样导出。
-  ///
-  /// 返回带缩进的 JSON 字符串。调用方负责落盘 / 分享。
-  Future<String> exportProfileToJson(
-    int profileId, {
-    String? fontsRootDirectory,
-  }) async {
-    final ProfileRow? profile = await _db.getProfileById(profileId);
-    if (profile == null) {
-      throw ProfileImportException('profile $profileId not found');
-    }
-
-    final int activeId = await getActiveProfileId();
-    if (profileId == activeId) {
-      // 激活 Profile：导出前刷一次快照，确保拿到当前活偏好。
-      await snapshotCurrentSettings(profileId);
-    }
-
-    final List<ProfileSettingRow> rows =
-        await _db.getProfileSettings(profileId);
-
-    final List<ProfileSettingEntry> settings = <ProfileSettingEntry>[];
-    for (final ProfileSettingRow row in rows) {
-      // 凭据红线：唯一前置防线，剔除全部凭据 / 设备本地 key。
-      if (row.category == ProfileKeys.categoryPref &&
-          _isCredentialOrDeviceLocalPref(row.key)) {
-        continue;
-      }
-      settings.add(ProfileSettingEntry(
-        category: row.category,
-        key: row.key,
-        value: _exportFontPathStrippedValue(
-          category: row.category,
-          key: row.key,
-          value: row.value,
-          fontsRootDirectory: fontsRootDirectory,
-        ),
-      ));
-    }
-
-    return encodeProfileDocument(
-      profileName: profile.name,
-      schemaVersion: _db.schemaVersion,
-      settings: settings,
-    );
-  }
-
-  /// A1 字体路径剥离：把字体配置 JSON 里指向本机 `custom_fonts/` 的绝对路径
-  /// 剥成相对（rebase 到空根）。非字体 key 原样返回。
-  String _exportFontPathStrippedValue({
-    required String category,
-    required String key,
-    required String value,
-    required String? fontsRootDirectory,
-  }) {
-    if (fontsRootDirectory == null) return value;
-    if (category != ProfileKeys.categoryPref) return value;
-    if (key == _fontCatalogPrefKey) {
-      return rebaseFontCatalogJson(value, fontsRootDirectory, '');
-    }
-    if (_legacyFontPrefKeys.contains(key)) {
-      return rebaseFontListJson(value, fontsRootDirectory, '');
-    }
-    return value;
-  }
-
-  /// 字体配置的持久化 key（与 backup_service 同一组值；那边因 const 上下文
-  /// 保留字面量并由 `db_source_pref_key_test` 锁一致）。这里经单一真相编码器
-  /// [dbSourcePrefKey] 生成，不再硬编码 `src:reader_fushi:` 格式。
-  static final String _fontCatalogPrefKey =
-      dbSourcePrefKey(kReaderSourcePersistedKey, 'font_catalog');
-  static final List<String> _legacyFontPrefKeys = <String>[
-    dbSourcePrefKey(kReaderSourcePersistedKey, 'custom_fonts'),
-    dbSourcePrefKey(kReaderSourcePersistedKey, 'app_ui_fonts'),
-    dbSourcePrefKey(kReaderSourcePersistedKey, 'dict_fonts'),
-    dbSourcePrefKey(kReaderSourcePersistedKey, 'video_sub_fonts'),
-    dbSourcePrefKey(kReaderSourcePersistedKey, 'game_lookup_fonts'),
-  ];
-
-  /// 解析并校验一个导出 JSON 字符串。坏文件 / 魔数不符 / 版本不兼容 / 结构非法
-  /// 一律抛 [ProfileImportException]（**在写 DB 之前**）。
-  ProfileExport parseProfileExport(String json) => parseProfileDocument(json);
-
-  /// 从导出 JSON 导回一个 Profile。
-  ///
-  /// 解析 + 校验阶段任何问题都在写 DB 前抛 [ProfileImportException]（事务零
-  /// 破坏）。校验通过后：
-  /// - [ProfileImportMode.createNew]（默认）：新建一个 Profile，名取自文件，
-  ///   重名自动加后缀。
-  /// - [ProfileImportMode.overwrite]：用文件内容覆盖 [targetProfileId] 指向的
-  ///   已有 Profile 的设置（[replaceProfileSettings] 已是事务）；若覆盖的是当前
-  ///   激活 Profile，调用方需再 [applyProfile] 让其立即生效。
-  ///
-  /// 返回写入的 Profile id。
-  Future<int> importProfileFromJson(
-    String json, {
-    ProfileImportMode mode = ProfileImportMode.createNew,
-    int? targetProfileId,
-  }) async {
-    final ProfileExport export = parseProfileExport(json);
-
-    switch (mode) {
-      case ProfileImportMode.createNew:
-        return importProfileDocumentAsNew(_db, export);
-      case ProfileImportMode.overwrite:
-        if (targetProfileId == null) {
-          throw ProfileImportException(
-              'overwrite mode requires targetProfileId');
-        }
-        final ProfileRow? target = await _db.getProfileById(targetProfileId);
-        if (target == null) {
-          throw ProfileImportException(
-              'overwrite target $targetProfileId not found');
-        }
-        await _db.replaceProfileSettings(
-          targetProfileId,
-          profileSettingCompanions(export.settings, targetProfileId),
-        );
-        return targetProfileId;
-    }
-  }
 
   // ── TODO-1077 dictionary_metadata snapshot serialization ────────────
 

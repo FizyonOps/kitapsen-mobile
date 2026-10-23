@@ -1,5 +1,4 @@
 import 'dart:async' show scheduleMicrotask, unawaited;
-import 'dart:io' show Platform;
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -27,11 +26,7 @@ bool isCoarseDesktopPointerScrollDelta(
   double delta, {
   required double devicePixelRatio,
 }) =>
-    !(Platform.isWindows || Platform.isLinux) ||
-    delta.abs() * devicePixelRatio >= kCoarseWheelMinPhysicalDelta;
-
-/// 粗滚轮一档的最小物理像素（见 [isCoarseDesktopPointerScrollDelta]）。
-const double kCoarseWheelMinPhysicalDelta = 30;
+    true;
 
 const Duration kDesktopWheelScrollDuration = Duration(milliseconds: 140);
 

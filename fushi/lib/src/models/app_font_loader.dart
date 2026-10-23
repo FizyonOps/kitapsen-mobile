@@ -3,13 +3,11 @@ import 'dart:isolate';
 import 'dart:typed_data';
 
 import 'package:flutter/services.dart' show FontLoader;
-import 'package:fushi/src/media/video/ass_font_metrics.dart';
 import 'package:fushi/src/models/font_decoder.dart';
 import 'package:fushi/src/models/woff2_decoder.dart';
 import 'package:fushi/src/reader/reader_settings.dart' show ReaderCustomFontCss;
 import 'package:fushi/src/utils/misc/error_log_service.dart';
 import 'package:path/path.dart' as p;
-import 'package:fushi/src/models/kitapsen_edition.dart';
 
 /// Registers a user-imported custom font with the Flutter engine so it can be
 /// used for the app-wide UI [TextTheme], not just the reader WebView.
@@ -22,8 +20,7 @@ import 'package:fushi/src/models/kitapsen_edition.dart';
 /// returns the family name(s) to feed into `TextStyle.fontFamily` /
 /// `fontFamilyFallback`: [resolveAndLoadAll] for targets that consume the whole
 /// ordered list as a fallback chain, [resolveAndLoad] for single-family targets.
-class AppFontLoader {
-  AppFontLoader._();
+abstract class AppFontLoader {
 
   /// Raw sfnt the Flutter engine loads as-is.
   static const Set<String> _directExtensions = <String>{'.ttf', '.otf', '.ttc'};
@@ -51,47 +48,6 @@ class AppFontLoader {
   static bool nativeOverlayCanUse(String? path) =>
       path == null ||
       _directExtensions.contains(p.extension(path).toLowerCase());
-
-  /// Resolves the first font the Windows native DirectWrite overlay can use.
-  ///
-  /// System fonts carry only a family name. Imported fonts additionally carry
-  /// their canonical file path so the runner can build a private DirectWrite
-  /// font collection without installing the font globally. DirectWrite's local
-  /// file API accepts raw OpenType containers; WOFF/WOFF2 entries are therefore
-  /// skipped here and resolution continues to the next enabled entry (Flutter
-  /// targets still support them through [_resolveEntry]'s decoder).
-  ///
-  /// Returning a record keeps the MethodChannel boundary explicit and avoids
-  /// pretending a process-private Flutter [FontLoader] registration is visible
-  /// to the separate Win32 DirectWrite renderer.
-  static ({String family, String? path})? resolveForNativeOverlay(
-    List<Map<String, dynamic>> fonts, {
-    required Iterable<String> allowedDirectories,
-  }) {
-    final Set<String> allowedRoots = allowedDirectories
-        .where((String path) => path.isNotEmpty)
-        .map(p.canonicalize)
-        .toSet();
-    for (final Map<String, dynamic> font in fonts) {
-      if (!(font['enabled'] as bool? ?? true)) continue;
-      final String? rawName = font['name'] as String?;
-      if (rawName == null) continue;
-      final String family =
-          ReaderCustomFontCss.normalizedFontFamilyName(rawName);
-      if (family.isEmpty) continue;
-
-      final String? rawPath = font['path'] as String?;
-      if (rawPath == null) return (family: family, path: null);
-      if (!nativeOverlayCanUse(rawPath)) continue;
-      final String? safePath = ReaderCustomFontCss.safeFontPath(
-        rawPath,
-        allowedRoots: allowedRoots,
-      );
-      if (safePath == null || !File(safePath).existsSync()) continue;
-      return (family: family, path: safePath);
-    }
-    return null;
-  }
 
   /// Resolves the app-wide custom font from [fonts] (the `customFonts` list,
   /// each entry `{name, path, enabled}`), registering its file with the engine

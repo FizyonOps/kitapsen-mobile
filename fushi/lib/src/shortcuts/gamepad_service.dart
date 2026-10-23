@@ -1,86 +1,17 @@
 import 'dart:async';
 import 'dart:io' show Platform;
 
-import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 // Cross-platform controller plugin: GameInput on Windows, GameController on
 // iOS/macOS, evdev/SDL on Linux. Aliased because it also exports a
 // `GamepadButton` enum that would clash with Hibiki's.
-import 'package:gamepads/gamepads.dart' as gp;
 
 import 'package:fushi/src/focus/fushi_focus_controller.dart';
 import 'package:fushi/src/focus/fushi_focus_scroll.dart';
-import 'package:fushi/src/shortcuts/dictionary_popup_gamepad.dart';
-import 'package:fushi/src/shortcuts/global_external_lookup_route.dart';
 import 'package:fushi/src/shortcuts/input_binding.dart';
-import 'package:fushi/src/shortcuts/page_scroll_shortcuts.dart';
-import 'package:fushi/src/shortcuts/shortcut_action.dart';
 import 'package:fushi/src/shortcuts/shortcut_registry.dart';
-
-/// dictionaryPopup scope 的手柄兜底（手柄重设计 P2）：页面 Actions **未消费**的
-/// 按钮，在有可见查词弹窗时按弹窗绑定解析并执行（词条导航/制卡/发音）。桌面轮询
-/// （[GamepadService._dispatchButton]）与 Android 键事件链
-/// （`wrapWithGlobalNavigation`）共用这一个入口——页面专属键永远优先，弹窗只吃
-/// 页面没占的按钮，与 universal「返回上一级」同一哲学。
-bool tryDictionaryPopupGamepadButton(
-  FushiShortcutRegistry? registry,
-  GamepadButton button,
-) {
-  // Kitapsen: no dictionary popup.
-  return false;
-}
-
-/// TODO-1066 — globalExternal scope 的手柄触发：把 app 外全局查词（默认键盘
-/// Ctrl+Alt+D）也开放给手柄按钮。命中并成功派发返回 true。
-///
-/// **不经 Flutter 焦点树**是本函数存在的全部理由：Windows 上主窗一失焦，
-/// `MainWindowFocusGate` 就把整棵子树设成 `descendantsAreFocusable: false`，
-/// `Actions.maybeInvoke<GamepadButtonIntent>` 那条主派发路径必然落空——而"用户
-/// 正在别的程序里看文本"恰恰是本功能唯一的使用场景。底层 GameInput 是进程级
-/// 轮询（每手柄一条 native 线程），按钮读得到，断的只是派发链。
-///
-/// 未注册触发入口（非桌面平台 / controller 未 start）时返回 false **不吞按钮**：
-/// 功能不可用时把键吃掉会让用户以为手柄坏了，比没有这个功能更糟。
-bool tryGlobalExternalLookupGamepadButton(
-  FushiShortcutRegistry? registry,
-  GamepadButton button,
-) {
-  // Kitapsen: no app-external lookup.
-  return false;
-}
-
-/// 按 dictionaryPopup scope 解析 [button] 并在 [hooks] 上执行。
-/// [tryDictionaryPopupGamepadButton]（app 内弹窗兜底）与 P5 的游戏内卡片独占
-/// 路由（[GalIngameLookupGamepadRoute]）共用这一个解析/执行体。
-bool dispatchDictionaryPopupGamepadButton(
-  DictionaryPopupGamepadHooks hooks,
-  FushiShortcutRegistry? registry,
-  GamepadButton button,
-) {
-  if (registry == null) return false;
-  final ShortcutAction? action = registry.resolveGamepad(
-    button,
-    scope: ShortcutScope.dictionaryPopup,
-  );
-  switch (action) {
-    case ShortcutAction.popupNextEntry:
-      unawaited(hooks.entryMove(true));
-      return true;
-    case ShortcutAction.popupPrevEntry:
-      unawaited(hooks.entryMove(false));
-      return true;
-    case ShortcutAction.popupMineEntry:
-      unawaited(hooks.mineFirstEntry());
-      return true;
-    case ShortcutAction.popupPlayAudio:
-      unawaited(hooks.playFirstAudio());
-      return true;
-    default:
-      return false;
-  }
-}
 
 /// Intent dispatched for a physical gamepad button on platforms where Flutter
 /// does NOT deliver `gameButton*` key events (desktop / Apple). The active page
@@ -104,10 +35,8 @@ class GamepadButtonIntent extends Intent {
 /// `onLongPress` uses (see GamepadLongPressActions), so holding A does exactly
 /// what long-pressing with a mouse would.
 @immutable
-class GamepadLongPressIntent extends Intent {
-  const GamepadLongPressIntent(this.button);
+abstract class GamepadLongPressIntent implements Intent {
 
-  final GamepadButton button;
 }
 
 /// Dispatches a normalized gamepad [button] to the [GamepadButtonIntent]
@@ -181,8 +110,6 @@ class _GamepadLongPressActionsState extends State<GamepadLongPressActions> {
       actions: <Type, Action<Intent>>{
         GamepadLongPressIntent: CallbackAction<GamepadLongPressIntent>(
           onInvoke: (GamepadLongPressIntent intent) {
-            if (intent.button != GamepadButton.a) return false;
-            widget.onLongPress!();
             return true; // handled → GamepadService skips its activate fallback
           },
         ),
@@ -239,36 +166,6 @@ class _GamepadLongPressActionsState extends State<GamepadLongPressActions> {
   }
 }
 
-/// Internal controller "frame" bit layout (mirrors the classic XInput wButtons
-/// layout). The plugin poller encodes each `gamepads` event into this bitmask so
-/// [GamepadFrameProcessor] can stay a single, platform-free normalizer.
-class GamepadFrameBits {
-  GamepadFrameBits._();
-
-  static const int dpadUp = 0x0001;
-  static const int dpadDown = 0x0002;
-  static const int dpadLeft = 0x0004;
-  static const int dpadRight = 0x0008;
-  static const int start = 0x0010;
-  static const int back = 0x0020;
-  static const int leftThumb = 0x0040;
-  static const int rightThumb = 0x0080;
-  static const int leftShoulder = 0x0100;
-  static const int rightShoulder = 0x0200;
-  static const int a = 0x1000;
-  static const int b = 0x2000;
-  static const int x = 0x4000;
-  static const int y = 0x8000;
-
-  /// Analog trigger range is 0..[triggerMax]; a value above this counts as a
-  /// digital press.
-  static const int triggerMax = 255;
-  static const int triggerThreshold = 30;
-
-  /// Stick axis magnitude range is -[axisMax]..[axisMax].
-  static const int axisMax = 32767;
-}
-
 /// Bridges physical game controllers into Hibiki's input pipeline on platforms
 /// where the Flutter engine does NOT surface controller buttons as
 /// `LogicalKeyboardKey.gameButton*` key events.
@@ -312,8 +209,6 @@ class GamepadService {
   /// that don't exercise scrolling.
   final FushiShortcutRegistry? registry;
 
-  _PluginGamepadPoller? _poller;
-
   // Whether the global pointer route + key handler were installed by [start]
   // (only on supported platforms). Guards [dispose] from removing routes that
   // were never added — removeGlobalRoute asserts on an unknown route, which
@@ -335,46 +230,7 @@ class GamepadService {
   /// charge — and `automatic` never flips back to touch on a PointerMove
   /// (swipe), so a ring lit by a controller key event stayed stuck.
   static bool get needsGamepadPoller =>
-      Platform.isWindows ||
-      Platform.isIOS ||
-      Platform.isMacOS ||
-      Platform.isLinux;
-
-  /// TODO-1223: the raw platform channel the vendored Windows `gamepads` plugin
-  /// exposes (`packages/gamepads_windows`). Used ONLY to query
-  /// [gameInputBackendAvailable]; normalized controller input still flows
-  /// through the `gamepads` package abstraction (`_PluginGamepadPoller`).
-  static const MethodChannel _windowsGamepadChannel =
-      MethodChannel('xyz.luan/gamepads');
-
-  /// TODO-1223: whether the platform's controller backend is actually usable.
-  ///
-  /// On Windows the native plugin delay-loads `GameInput.dll` so a machine
-  /// without it (no Gaming Services / older Windows 10) no longer crashes at
-  /// launch — it silently degrades to no gamepad support (+488). That silent
-  /// degrade left the user with a dead controller and no explanation, so the
-  /// native `init()` probe records whether the DLL was found and reports it here
-  /// over the `gameInputAvailable` channel method. A `false` result is the
-  /// signal the caller uses to surface an in-app hint ("install Gaming
-  /// Services") on a gamepad-related surface.
-  ///
-  /// Non-Windows platforms have no such optional DLL, so this returns `true`.
-  /// Any query failure also returns `true` — the hint is only shown on a
-  /// definitive `false`, so a transient channel error never nags the user.
-  static Future<bool> gameInputBackendAvailable() async {
-    if (!Platform.isWindows) return true;
-    try {
-      final bool? available =
-          await _windowsGamepadChannel.invokeMethod<bool>('gameInputAvailable');
-      return available ?? true;
-    } on MissingPluginException {
-      // Plugin not registered (should not happen on Windows) — do not nag.
-      return true;
-    } catch (e) {
-      debugPrint('[gamepad] gameInputAvailable query failed: $e');
-      return true;
-    }
-  }
+      Platform.isIOS;
 
   void start() {
     if (_inputRoutesInstalled) return; // already started (idempotent)
@@ -410,201 +266,11 @@ class GamepadService {
     _inputRoutesInstalled = true;
   }
 
-  /// Desktop/Apple only: spins up the `gamepads` plugin poller that translates
-  /// physical controller frames into the same dispatch path Android's engine
-  /// key events use. Android does NOT call this (engine delivers the keys).
-  void _startGamepadPoller() {
-    if (_poller != null) return;
-    _poller = _PluginGamepadPoller(
-      processor: GamepadFrameProcessor(
-        onButton: _dispatchButton,
-        onLongPress: _dispatchLongPress,
-        onStickMove: _dispatchStickMove,
-        onRightStickScroll: _dispatchRightStickScroll,
-      ),
-    )..start();
-  }
-
   void dispose() {
-    _poller?.dispose();
-    _poller = null;
     if (_inputRoutesInstalled) {
       GestureBinding.instance.pointerRouter.removeGlobalRoute(_onPointerGlobal);
       HardwareKeyboard.instance.removeHandler(_onKey);
       _inputRoutesInstalled = false;
-    }
-  }
-
-  BuildContext? get _dispatchContext =>
-      FocusManager.instance.primaryFocus?.context ??
-      navigatorKey.currentContext;
-
-  /// Routes a discrete button press. D-pad buttons are routed here too so the
-  /// reader's registry page-turn bindings (e.g. D-pad-right → page forward)
-  /// fire; when unbound in the active scope they fall back to directional focus.
-  void _dispatchButton(GamepadButton button) {
-    // 手柄重设计 P5：游戏内查词卡片可见时**独占**手柄——命中弹窗动作转发进
-    // 卡片 WebView2，未命中也一律吞掉，绝不驱动后台 app 的页面/焦点/返回
-    // （游戏本身经原生输入照常收到手柄；这里只管 app 进程的这份轮询）。
-    // 不碰焦点高亮策略：app 在后台，别为游戏里的按键点亮 app 的焦点环。
-    final DictionaryPopupGamepadHooks? galHooks =
-        GalIngameLookupGamepadRoute.current;
-    if (galHooks != null) {
-      dispatchDictionaryPopupGamepadButton(galHooks, registry, button);
-      return;
-    }
-    final BuildContext? ctx = _dispatchContext;
-    if (ctx == null) return;
-    _setHighlightForHardwareNav();
-
-    final bool handled = Actions.maybeInvoke<GamepadButtonIntent>(
-          ctx,
-          GamepadButtonIntent(button),
-        ) ==
-        true;
-    if (handled) return;
-
-
-    // The page didn't consume the button: LB/RB (or whatever the user bound to
-    // the global scroll-page actions) page-scrolls the current page's primary
-    // scroll view. This is the only path that scrolls a pure-display page
-    // (statistics/logs) which has no focus geometry for D-pad edge takeover.
-    if (_tryScrollPage(ctx, button)) return;
-
-    switch (button) {
-      case GamepadButton.a:
-        Actions.maybeInvoke<ActivateIntent>(ctx, const ActivateIntent());
-        return;
-      case GamepadButton.b:
-        // TODO-700 T1：B 不再裸 maybePop。仅当注册表把 B 解析成全局
-        // ShortcutAction.globalBack 时才返回，否则无操作（与其它未绑定按钮一致），
-        // 使「返回」键可改键（约束3/5）。页面自己的 globalBack（home）已在上面的
-        // GamepadButtonIntent 分派里消费，这里只兜未自解析的页面。
-        // globalBack 现在住在 universal scope（全 app 唯一的「返回上一级」，退书 /
-        // 退漫画 / 退视频 / 退设置页共用一个配置项），故解析 scope 随之改变；
-        // 行为不变：命中才 pop，未绑定仍是无操作。
-        if (registry?.resolveGamepad(button, scope: ShortcutScope.universal) ==
-            ShortcutAction.globalBack) {
-          navigatorKey.currentState?.maybePop();
-        }
-        return;
-      case GamepadButton.dpadUp:
-      case GamepadButton.dpadDown:
-      case GamepadButton.dpadLeft:
-      case GamepadButton.dpadRight:
-        // TODO-700 T6: the D-pad is a BINDABLE trigger (gamepad scope). Page-
-        // owned bindings (reader page-turn, etc.) were already consumed by the
-        // GamepadButtonIntent dispatch above. Here we resolve the press against
-        // the standalone `gamepad` scope: its DEFAULT maps each dpad* button to
-        // the matching [ShortcutAction.dpad*] direction-action → generic
-        // directional focus movement. If the user rebinds the button to a
-        // different dpad direction-action, focus follows THAT direction; if the
-        // button is unbound in the gamepad scope, fall back to the physical
-        // direction so nothing breaks (约束: Never break userspace).
-        final TraversalDirection dir =
-            _dpadFocusDirection(button) ?? _dpadDirectionOf(button)!;
-        gamepadMoveFocusInDirection(ctx, dir);
-        return;
-
-      default:
-        return;
-    }
-  }
-
-  /// TODO-700 T6: the focus direction a D-pad press should move, resolved through
-  /// the rebindable `gamepad` scope. Maps the registry-resolved
-  /// [ShortcutAction.dpadUp]/[ShortcutAction.dpadDown]/[ShortcutAction.dpadLeft]/
-  /// [ShortcutAction.dpadRight] back to a [TraversalDirection]. Null when the
-  /// button is unbound in the gamepad scope (caller falls back to the physical
-  /// direction) or no registry is wired (tests).
-  TraversalDirection? _dpadFocusDirection(GamepadButton button) {
-    final ShortcutAction? action =
-        registry?.resolveGamepad(button, scope: ShortcutScope.gamepad);
-    switch (action) {
-      case ShortcutAction.dpadUp:
-        return TraversalDirection.up;
-      case ShortcutAction.dpadDown:
-        return TraversalDirection.down;
-      case ShortcutAction.dpadLeft:
-        return TraversalDirection.left;
-      case ShortcutAction.dpadRight:
-        return TraversalDirection.right;
-      default:
-        return null;
-    }
-  }
-
-  /// TODO-700 T6: the LEFT STICK channel. Fixed, generic directional FOCUS
-  /// movement only — it NEVER enters the dictionary cursor, looks a word up, or
-  /// consults the registry (用户否决「动摇杆自动查词」). The stick just moves the
-  /// focus ring like an arrow key; whatever is focused is then activated by a
-  /// SEPARATE explicit press (A / the rebindable enter-caret key).
-  void _dispatchStickMove(TraversalDirection dir) {
-    // P5：游戏内卡片独占期间左摇杆也吞掉——后台 app 的焦点不能被游戏里的
-    // 摇杆悄悄挪走。
-    if (GalIngameLookupGamepadRoute.current != null) return;
-    final BuildContext? ctx = _dispatchContext;
-    if (ctx == null) return;
-    _setHighlightForHardwareNav();
-    gamepadMoveFocusInDirection(ctx, dir);
-  }
-
-  /// 每 tick 满偏时滚动的 CSS 像素（60ms 一 tick ≈ 满偏 400px/s，半偏减半）。
-  static const double _kRightStickScrollPxPerTick = 24;
-
-  /// 手柄重设计 P2：右摇杆连续滚动**可见查词弹窗**的内容。无弹窗时不做事——
-  /// 页面滚动已有 LB/RB 整页滚（globalScrollPage*）与左摇杆焦点滚动兜底，右摇杆
-  /// 现阶段专职弹窗，避免同一根摇杆在不同页面语义漂移。
-  void _dispatchRightStickScroll(double dyNorm) {
-    // P5：游戏内卡片可见时右摇杆滚动卡片内容（独占路由优先）。
-    final DictionaryPopupGamepadHooks? hooks =
-        GalIngameLookupGamepadRoute.current ??
-            DictionaryPopupGamepadRegistry.current;
-    if (hooks == null) return;
-    unawaited(hooks.scrollBy(dyNorm * _kRightStickScrollPxPerTick));
-  }
-
-  /// 手柄的页面滚动兜底：[button] 绑到 global scope 的任一页面滚动动作（默认
-  /// LB/RB = 整屏；单步 / 到顶到底可由用户自绑）时，经三通道共用的
-  /// [executePageScroll] 滚当前页。返回是否真的滚了（滚了就不再往下派发）。
-  ///
-  /// 目标解析在 [FushiFocusScroll.resolveActivePageScrollable]：纯展示页
-  /// （统计 / 日志）的焦点停在顶层兜底节点、位于页面 scaffold 的
-  /// PrimaryScrollController **之上**，只按 context 找必然找不到——所以除了已登记
-  /// 的 PageScrollRegistry，还从 Navigator 当前路由子树里兜底找第一个纵向
-  /// Scrollable；键盘 PageUp/PageDown 与鼠标绑定走的是同一份。
-  bool _tryScrollPage(BuildContext context, GamepadButton button) {
-    final PageScrollRequest? request = pageScrollRequestFor(
-      registry?.resolveGamepad(button, scope: ShortcutScope.global),
-    );
-    if (request == null) return false;
-    return executePageScroll(
-      request,
-      focusContext: context,
-      navigator: navigatorKey.currentState,
-    );
-  }
-
-  /// Routes a long-press (A held past the threshold) to the focused widget as a
-  /// [GamepadLongPressIntent] — the gamepad equivalent of a mouse long-press.
-  /// A widget that supports long-press maps the intent to the same callback its
-  /// `onLongPress` uses; if nothing handles it, the long-press is a no-op.
-  void _dispatchLongPress(GamepadButton button) {
-    // P5：游戏内卡片独占期间长按也吞掉（后台 app 的长按语义不该被游戏触发）。
-    if (GalIngameLookupGamepadRoute.current != null) return;
-    final BuildContext? ctx = _dispatchContext;
-    if (ctx == null) return;
-    _setHighlightForHardwareNav();
-    final bool handled = Actions.maybeInvoke<GamepadLongPressIntent>(
-          ctx,
-          GamepadLongPressIntent(button),
-        ) ==
-        true;
-    // The focused widget has no long-press: a hold should still do what a tap
-    // does (otherwise holding A too long silently does nothing). Fall back to
-    // activate so e.g. a dropdown entry is still selected on a long hold.
-    if (!handled && button == GamepadButton.a) {
-      Actions.maybeInvoke<ActivateIntent>(ctx, const ActivateIntent());
     }
   }
 
@@ -668,20 +334,6 @@ class GamepadService {
         FocusHighlightStrategy.alwaysTouch;
   }
 
-  static TraversalDirection? _dpadDirectionOf(GamepadButton button) {
-    switch (button) {
-      case GamepadButton.dpadUp:
-        return TraversalDirection.up;
-      case GamepadButton.dpadDown:
-        return TraversalDirection.down;
-      case GamepadButton.dpadLeft:
-        return TraversalDirection.left;
-      case GamepadButton.dpadRight:
-        return TraversalDirection.right;
-      default:
-        return null;
-    }
-  }
 }
 
 /// Whether [event] is a keyboard event that should ARM the visible focus ring
@@ -943,399 +595,9 @@ bool _movePrimaryFocusInDirection(
 /// Frames use the [GamepadFrameBits] bitmask layout. Separated from the I/O so
 /// the edge-detection, analog-stick dead-zone/hysteresis and auto-repeat logic
 /// can be unit-tested by feeding synthetic frames with controlled timestamps.
-class GamepadFrameProcessor {
-  GamepadFrameProcessor({
-    required this.onButton,
-    this.onLongPress,
-    this.onStickMove,
-    this.onRightStickScroll,
-  });
-
-  /// 手柄重设计 P2：右摇杆的**连续滚动**通道。每个采样 tick（60ms）在死区外都
-  /// 发一次归一化纵向偏移（-1..1，**向下为正**——插件轴 +Y=上，滚动语义相反，
-  /// 这里翻好号），消费方按偏移量滚动查词弹窗内容。与左摇杆（焦点导航）刻意
-  /// 分开：左手移焦点、右手滚内容，互不抢通道。Null（未接线/单元测试）= no-op。
-  final void Function(double dyNorm)? onRightStickScroll;
-
-  /// 右摇杆滚动死区（约 24% 满偏）：比左摇杆的方向滞回门槛（stickEnter）低——
-  /// 滚动是连续量不怕抖动误触发，门槛太高反而丢慢速微调。
-  static const int rightStickDeadZone = 8000;
-
-  /// Emits a discrete [GamepadButton] press. TODO-700 T6: the D-pad emits here
-  /// (dpad* buttons, routed through the shortcut registry as bindable triggers);
-  /// the LEFT STICK no longer feeds this channel — it goes to [onStickMove]
-  /// instead, so a controller has TWO independent directional channels (stick =
-  /// focus-only navigation, d-pad = bindable).
-  final void Function(GamepadButton button) onButton;
-
-  /// TODO-700 T6: the LEFT STICK's directional channel — fixed, generic FOCUS
-  /// movement only (never the dictionary lookup / caret entry / registry). Null
-  /// (e.g. in pure frame-processor unit tests) makes the stick a no-op rather
-  /// than falling back to [onButton]. Carries the SAME dead-zone hysteresis +
-  /// held-direction auto-repeat as the d-pad (TODO-699 feel preserved), just on
-  /// its own held state and emitting a [TraversalDirection] instead of a button.
-  final void Function(TraversalDirection dir)? onStickMove;
-
-  /// Emits a long-press of [button] (currently only A). To mirror a mouse's
-  /// tap-vs-long-press, A is decided on RELEASE: a release before [longPressMs]
-  /// emits [onButton] (activate); holding past [longPressMs] emits [onLongPress]
-  /// once and suppresses the activate. Null = long-press unsupported.
-  final void Function(GamepadButton button)? onLongPress;
-
-  static const int repeatDelayMs = 450;
-  static const int repeatIntervalMs = 110;
+abstract class GamepadFrameProcessor {
 
   /// Hold threshold that turns A into a long-press (matches mouse long-press).
   static const int longPressMs = 500;
 
-  // Left-stick activation uses hysteresis to avoid jitter at the boundary.
-  static const int stickEnter = 18000;
-  static const int stickExit = 12000;
-
-  // Discrete (edge-detected) buttons, keyed by their frame bitmask. D-pad is
-  // intentionally excluded — it drives the repeating directional channel.
-  static const Map<int, GamepadButton> buttonBits = <int, GamepadButton>{
-    GamepadFrameBits.a: GamepadButton.a,
-    GamepadFrameBits.b: GamepadButton.b,
-    GamepadFrameBits.x: GamepadButton.x,
-    GamepadFrameBits.y: GamepadButton.y,
-    GamepadFrameBits.leftShoulder: GamepadButton.lb,
-    GamepadFrameBits.rightShoulder: GamepadButton.rb,
-    GamepadFrameBits.start: GamepadButton.start,
-    GamepadFrameBits.back: GamepadButton.select,
-    GamepadFrameBits.leftThumb: GamepadButton.thumbLeft,
-    GamepadFrameBits.rightThumb: GamepadButton.thumbRight,
-  };
-
-  int _prevButtons = 0;
-  bool _prevLeftTrigger = false;
-  bool _prevRightTrigger = false;
-
-  // A-button hold state (only used when [onLongPress] is set). _aDownMs is the
-  // frame timestamp A went down (0 = up); _aLongFired guards one long-press per
-  // hold and suppresses the release-activate.
-  int _aDownMs = 0;
-  bool _aLongFired = false;
-
-  // Hysteretic stick direction (null = stick centred).
-  TraversalDirection? _stickDir;
-
-  // Repeating directional channel state — D-pad.
-  TraversalDirection? _heldDir;
-  int _heldSinceMs = 0;
-  int _lastRepeatMs = 0;
-
-  // Repeating directional channel state — LEFT STICK (independent of the D-pad
-  // so each has its own auto-repeat clock; TODO-700 T6 channel split).
-  TraversalDirection? _heldStickDir;
-  int _heldStickSinceMs = 0;
-  int _lastStickRepeatMs = 0;
-
-  /// Clears all transient state — call when the controller disconnects or the
-  /// active controller changes, so a stale bitmask can't fire spurious edges.
-  void reset() {
-    _prevButtons = 0;
-    _prevLeftTrigger = false;
-    _prevRightTrigger = false;
-    _aDownMs = 0;
-    _aLongFired = false;
-    _stickDir = null;
-    _heldDir = null;
-    _heldStickDir = null;
-  }
-
-  void processFrame({
-    required int buttons,
-    required int leftTrigger,
-    required int rightTrigger,
-    required int stickX,
-    required int stickY,
-    required int nowMs,
-    int rightStickX = 0,
-    int rightStickY = 0,
-  }) {
-    // Edge-detected discrete buttons. A is handled separately below when
-    // long-press is supported (decided on release), so skip it here to avoid a
-    // double-fire.
-    for (final MapEntry<int, GamepadButton> entry in buttonBits.entries) {
-      if (onLongPress != null && entry.value == GamepadButton.a) continue;
-      final int mask = entry.key;
-      final bool down = (buttons & mask) != 0;
-      final bool wasDown = (_prevButtons & mask) != 0;
-      if (down && !wasDown) onButton(entry.value);
-    }
-
-    // A: mirror a mouse's tap-vs-long-press. Decide on RELEASE — a release
-    // before [longPressMs] is an activate (onButton A); holding past it emits
-    // one long-press (onLongPress A) and suppresses the activate. Skipped
-    // entirely when long-press is unsupported (A then fired on the press edge
-    // by the loop above).
-    if (onLongPress != null) {
-      final bool aDown = (buttons & GamepadFrameBits.a) != 0;
-      final bool aWas = (_prevButtons & GamepadFrameBits.a) != 0;
-      if (aDown && !aWas) {
-        _aDownMs = nowMs;
-        _aLongFired = false;
-      } else if (aDown && aWas) {
-        if (!_aLongFired && nowMs - _aDownMs >= longPressMs) {
-          _aLongFired = true;
-          onLongPress!(GamepadButton.a);
-        }
-      } else if (!aDown && aWas) {
-        if (!_aLongFired) onButton(GamepadButton.a);
-        _aDownMs = 0;
-      }
-    }
-
-    // Triggers behave as digital buttons past the standard threshold.
-    final bool lt = leftTrigger > GamepadFrameBits.triggerThreshold;
-    if (lt && !_prevLeftTrigger) onButton(GamepadButton.lt);
-    _prevLeftTrigger = lt;
-    final bool rt = rightTrigger > GamepadFrameBits.triggerThreshold;
-    if (rt && !_prevRightTrigger) onButton(GamepadButton.rt);
-    _prevRightTrigger = rt;
-
-    _prevButtons = buttons;
-
-    // TODO-700 T6: TWO independent directional channels.
-    //  * D-pad → onButton(dpad*) (bindable triggers via the registry).
-    //  * Left stick → onStickMove(dir) (fixed focus navigation; never the
-    //    registry / lookup). The D-pad still wins over the stick for the D-pad
-    //    channel; the stick channel reads independently so pushing the stick
-    //    keeps moving focus even while no D-pad is held. Both carry the SAME
-    //    hysteresis + held-direction auto-repeat (TODO-699 feel preserved).
-    final TraversalDirection? dpadDir = _dpadDirection(buttons);
-    if (dpadDir != null) {
-      _updateHeldDirection(dpadDir, nowMs: nowMs);
-    } else {
-      _heldDir = null;
-    }
-
-    final TraversalDirection? stickDir = _readStickDirection(stickX, stickY);
-    if (stickDir != null) {
-      _updateHeldStickDirection(stickDir, nowMs: nowMs);
-    } else {
-      _heldStickDir = null;
-    }
-
-    // 右摇杆连续滚动（P2）：无边沿检测、无自动重复——它是速度量，每 tick 在死区
-    // 外都发（横轴暂不消费，只采纵轴）。
-    final void Function(double dyNorm)? scrollEmit = onRightStickScroll;
-    if (scrollEmit != null && rightStickY.abs() > rightStickDeadZone) {
-      scrollEmit(-rightStickY / GamepadFrameBits.axisMax);
-    }
-  }
-
-  TraversalDirection? _dpadDirection(int buttons) {
-    if ((buttons & GamepadFrameBits.dpadUp) != 0) return TraversalDirection.up;
-    if ((buttons & GamepadFrameBits.dpadDown) != 0) {
-      return TraversalDirection.down;
-    }
-    if ((buttons & GamepadFrameBits.dpadLeft) != 0) {
-      return TraversalDirection.left;
-    }
-    if ((buttons & GamepadFrameBits.dpadRight) != 0) {
-      return TraversalDirection.right;
-    }
-    return null;
-  }
-
-  /// Hysteretic left-stick → direction. Up is +Y.
-  TraversalDirection? _readStickDirection(int lx, int ly) {
-    final int ax = lx.abs();
-    final int ay = ly.abs();
-    final int mag = ax > ay ? ax : ay;
-    if (_stickDir == null) {
-      if (mag < stickEnter) return null;
-    } else {
-      if (mag < stickExit) {
-        _stickDir = null;
-        return null;
-      }
-    }
-    if (ax > ay) {
-      _stickDir = lx > 0 ? TraversalDirection.right : TraversalDirection.left;
-    } else {
-      _stickDir = ly > 0 ? TraversalDirection.up : TraversalDirection.down;
-    }
-    return _stickDir;
-  }
-
-  void _updateHeldDirection(TraversalDirection dir, {required int nowMs}) {
-    if (_heldDir != dir) {
-      _heldDir = dir;
-      _heldSinceMs = nowMs;
-      _lastRepeatMs = nowMs;
-      onButton(dpadButtonFor(dir));
-      return;
-    }
-    if (nowMs - _heldSinceMs >= repeatDelayMs &&
-        nowMs - _lastRepeatMs >= repeatIntervalMs) {
-      _lastRepeatMs = nowMs;
-      onButton(dpadButtonFor(dir));
-    }
-  }
-
-  /// Left-stick held-direction auto-repeat — same timing as [_updateHeldDirection]
-  /// but on its own clock and emitting a [TraversalDirection] to [onStickMove]
-  /// (focus-only) instead of a d-pad button. Null [onStickMove] makes it a no-op
-  /// (the stick channel is unwired, e.g. in frame-processor unit tests).
-  void _updateHeldStickDirection(TraversalDirection dir, {required int nowMs}) {
-    final void Function(TraversalDirection dir)? emit = onStickMove;
-    if (emit == null) return;
-    if (_heldStickDir != dir) {
-      _heldStickDir = dir;
-      _heldStickSinceMs = nowMs;
-      _lastStickRepeatMs = nowMs;
-      emit(dir);
-      return;
-    }
-    if (nowMs - _heldStickSinceMs >= repeatDelayMs &&
-        nowMs - _lastStickRepeatMs >= repeatIntervalMs) {
-      _lastStickRepeatMs = nowMs;
-      emit(dir);
-    }
-  }
-
-  static GamepadButton dpadButtonFor(TraversalDirection dir) {
-    switch (dir) {
-      case TraversalDirection.up:
-        return GamepadButton.dpadUp;
-      case TraversalDirection.down:
-        return GamepadButton.dpadDown;
-      case TraversalDirection.left:
-        return GamepadButton.dpadLeft;
-      case TraversalDirection.right:
-        return GamepadButton.dpadRight;
-    }
-  }
-}
-
-/// Mutable controller "frame" state, folded from `gamepads` normalized events.
-///
-/// Pure + unit-testable (no plugin/stream/timer): maps the plugin's normalized
-/// buttons/axes into the [GamepadFrameBits] bitmask + stick/trigger values that
-/// [GamepadFrameProcessor] consumes. Buttons set/clear a bit on press/release;
-/// the stick and triggers are scaled into the frame's integer ranges.
-class GamepadFrameState {
-  int buttons = 0; // frame bitmask, rebuilt from button down/up events
-  int leftTrigger = 0; // 0..GamepadFrameBits.triggerMax
-  int rightTrigger = 0;
-  int stickX = 0; // -axisMax..axisMax
-  int stickY = 0;
-  int rightStickX = 0; // -axisMax..axisMax（P2：右摇杆滚动通道）
-  int rightStickY = 0;
-
-  // Normalized gamepads button -> frame bitmask (only the directional/face/
-  // shoulder/thumb/menu buttons the processor understands; home/touchpad are
-  // ignored, triggers are handled as analog axes below).
-  static const Map<gp.GamepadButton, int> _bitFor = <gp.GamepadButton, int>{
-    gp.GamepadButton.a: GamepadFrameBits.a,
-    gp.GamepadButton.b: GamepadFrameBits.b,
-    gp.GamepadButton.x: GamepadFrameBits.x,
-    gp.GamepadButton.y: GamepadFrameBits.y,
-    gp.GamepadButton.leftBumper: GamepadFrameBits.leftShoulder,
-    gp.GamepadButton.rightBumper: GamepadFrameBits.rightShoulder,
-    gp.GamepadButton.back: GamepadFrameBits.back,
-    gp.GamepadButton.start: GamepadFrameBits.start,
-    gp.GamepadButton.leftStick: GamepadFrameBits.leftThumb,
-    gp.GamepadButton.rightStick: GamepadFrameBits.rightThumb,
-    gp.GamepadButton.dpadUp: GamepadFrameBits.dpadUp,
-    gp.GamepadButton.dpadDown: GamepadFrameBits.dpadDown,
-    gp.GamepadButton.dpadLeft: GamepadFrameBits.dpadLeft,
-    gp.GamepadButton.dpadRight: GamepadFrameBits.dpadRight,
-  };
-
-  void applyButton(gp.GamepadButton button, double value) {
-    final int? bit = _bitFor[button];
-    if (bit != null) {
-      if (value >= 0.5) {
-        buttons |= bit;
-      } else {
-        buttons &= ~bit;
-      }
-    } else if (button == gp.GamepadButton.leftTrigger) {
-      leftTrigger = value >= 0.5 ? GamepadFrameBits.triggerMax : 0;
-    } else if (button == gp.GamepadButton.rightTrigger) {
-      rightTrigger = value >= 0.5 ? GamepadFrameBits.triggerMax : 0;
-    }
-  }
-
-  void applyAxis(gp.GamepadAxis axis, double value) {
-    if (axis == gp.GamepadAxis.leftStickX) {
-      stickX = (value * GamepadFrameBits.axisMax).round();
-    } else if (axis == gp.GamepadAxis.leftStickY) {
-      stickY = (value * GamepadFrameBits.axisMax).round();
-    } else if (axis == gp.GamepadAxis.rightStickX) {
-      rightStickX = (value * GamepadFrameBits.axisMax).round();
-    } else if (axis == gp.GamepadAxis.rightStickY) {
-      rightStickY = (value * GamepadFrameBits.axisMax).round();
-    } else if (axis == gp.GamepadAxis.leftTrigger) {
-      leftTrigger = (value * GamepadFrameBits.triggerMax).round();
-    } else if (axis == gp.GamepadAxis.rightTrigger) {
-      rightTrigger = (value * GamepadFrameBits.triggerMax).round();
-    }
-  }
-}
-
-/// Subscribes to the `gamepads` plugin's normalized event stream and folds it
-/// into a [GamepadFrameState], then feeds [GamepadFrameProcessor] on a fixed
-/// tick — so edge detection, stick dead-zone/hysteresis and auto-repeat behave
-/// identically on every polled platform.
-class _PluginGamepadPoller {
-  _PluginGamepadPoller({required this.processor});
-
-  final GamepadFrameProcessor processor;
-
-  static const Duration _pollInterval = Duration(milliseconds: 60);
-
-  StreamSubscription<gp.NormalizedGamepadEvent>? _sub;
-  Timer? _timer;
-  // Monotonic clock for auto-repeat timing — immune to wall-clock/NTP/DST jumps.
-  final Stopwatch _clock = Stopwatch()..start();
-  final GamepadFrameState _state = GamepadFrameState();
-
-  void start() {
-    try {
-      _sub ??= gp.Gamepads.normalizedEvents.listen(
-        _onEvent,
-        // Stream errors arrive asynchronously (a backend faulting at runtime);
-        // log rather than letting them surface as unhandled.
-        onError: (Object e) =>
-            debugPrint('[gamepad] gamepads stream error: $e'),
-      );
-    } catch (e) {
-      debugPrint('[gamepad] gamepads plugin unavailable: $e');
-      return;
-    }
-    _timer ??= Timer.periodic(_pollInterval, (_) {
-      processor.processFrame(
-        buttons: _state.buttons,
-        leftTrigger: _state.leftTrigger,
-        rightTrigger: _state.rightTrigger,
-        stickX: _state.stickX,
-        stickY: _state.stickY,
-        rightStickX: _state.rightStickX,
-        rightStickY: _state.rightStickY,
-        nowMs: _clock.elapsedMilliseconds,
-      );
-    });
-  }
-
-  void dispose() {
-    _sub?.cancel();
-    _sub = null;
-    _timer?.cancel();
-    _timer = null;
-  }
-
-  void _onEvent(gp.NormalizedGamepadEvent e) {
-    final gp.GamepadButton? button = e.button;
-    if (button != null) {
-      _state.applyButton(button, e.value);
-      return;
-    }
-    final gp.GamepadAxis? axis = e.axis;
-    if (axis != null) _state.applyAxis(axis, e.value);
-  }
 }

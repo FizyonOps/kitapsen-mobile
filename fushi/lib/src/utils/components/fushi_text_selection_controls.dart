@@ -108,14 +108,10 @@ class FushiTextSelectionControls extends MaterialTextSelectionControls {
       clipboardStatus: clipboardStatus,
       searchAction: (searchAction != null)
           ? () {
-              searchAction?.call(selectedText());
-              delegate.hideToolbar();
             }
           : null,
       stashAction: (stashAction != null)
           ? () {
-              stashAction?.call(selectedText());
-              delegate.hideToolbar();
             }
           : null,
       shareAction: () {

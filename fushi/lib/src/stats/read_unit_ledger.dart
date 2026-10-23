@@ -51,23 +51,6 @@ class ReadUnitLedger {
   final IntervalCoverage _coverage = IntervalCoverage();
   IntervalCoverage _credited = IntervalCoverage();
   (int, int)? _current;
-  bool _rebasePending = false;
-  int? _position;
-
-  /// 当前所在单元（诊断 / 测试）。
-  (int, int)? get current => _current;
-
-  /// 最近一次落定的位置（诊断 / 测试）：arrive 取单元起点，leave 取单元终点。
-  int? get position => _position;
-
-  /// 本会话翻过的单元并集（只读视图）。
-  IntervalCoverage get coverage => _coverage;
-
-  /// 当前已入账集合（只读视图）= [coverage] ∩ `[0, position)`。
-  IntervalCoverage get credited => _credited;
-
-  /// 当前已入账总长（字数 / 页数口径由消费方决定）。
-  int get creditedLength => _credited.total;
 
   /// 位置落定在 `[start, end)`：与当前单元相同 → no-op；不同 → 当前单元并入并集
   /// （[rebaseOnNextArrive] 待生效时只切换不并入），再按新位置 [start] 重算入账。
@@ -76,11 +59,9 @@ class ReadUnitLedger {
     if (end <= start) return;
     final (int, int)? cur = _current;
     if (cur != null && cur.$1 == start && cur.$2 == end) {
-      _rebasePending = false;
       return;
     }
-    if (cur != null && !_rebasePending) _coverage.add(cur.$1, cur.$2);
-    _rebasePending = false;
+    if (cur != null) _coverage.add(cur.$1, cur.$2);
     _current = (start, end);
     _reconcile(start);
   }
@@ -90,34 +71,24 @@ class ReadUnitLedger {
   void leave() {
     final (int, int)? cur = _current;
     _current = null;
-    _rebasePending = false;
     if (cur == null) return;
     _coverage.add(cur.$1, cur.$2);
     _reconcile(cur.$2);
   }
 
-  /// 同一页即将换单元边界（漫画单页↔双页 / spread↔webtoon）：下一次 [arrive] 只替换
-  /// 当前单元边界、不并入。没有当前单元时 no-op。
-  void rebaseOnNextArrive() {
-    if (_current != null) _rebasePending = true;
-  }
-
   /// 丢弃当前单元、不并入、不重算（内容未就绪 / 兜底超时 / 导航失败）。
   void discard() {
     _current = null;
-    _rebasePending = false;
   }
 
   /// 坐标系整体变更：清并集 + 丢当前；已入账的沉没（不撤回）。
   void reset() {
     _coverage.clear();
     _credited = IntervalCoverage();
-    _position = null;
     discard();
   }
 
   void _reconcile(int position) {
-    _position = position;
     final IntervalCoverage target = _coverage.clipBelow(position);
     final List<(int, int)> retracted = _credited.subtract(target);
     final List<(int, int)> fresh = target.subtract(_credited);

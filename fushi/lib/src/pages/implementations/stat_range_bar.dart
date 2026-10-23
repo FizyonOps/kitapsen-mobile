@@ -1,6 +1,5 @@
 import 'dart:math' as math;
 
-import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:flutter/material.dart';
 import 'package:fushi/src/pages/implementations/stat_charts.dart';
 import 'package:fushi/src/pages/implementations/stat_shared.dart';
@@ -171,16 +170,6 @@ Map<String, StatDayData> sumStatDaysByKey(Iterable<StatFact> rows) {
     day.ms += r.ms;
   }
   return byDay;
-}
-
-/// 纯函数：计数面事件（dateKey, 次数）落在 [range] 内的合计（查词 / 制卡 /
-/// 收藏按范围求和，与 [bucketActivityByDateKey] 同一批事件）。
-int sumStatEventsInRange(Iterable<(String, int)> events, StatRange range) {
-  int total = 0;
-  for (final (String dateKey, int count) in events) {
-    if (range.contains(dateKey)) total += count;
-  }
-  return total;
 }
 
 /// 范围时长柱状图：标题 = 「时长 · 区间」，柱粒度随范围自动变（日 / 周 / 月），

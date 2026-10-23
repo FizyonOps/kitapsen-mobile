@@ -1,4 +1,3 @@
-import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -55,13 +54,6 @@ class ReaderPdfSource extends ReaderMediaSource {
   }
 
   @override
-  Future<void> onSearchBarTap({
-    required BuildContext context,
-    required WidgetRef ref,
-    required AppModel appModel,
-  }) async {}
-
-  @override
   Widget buildLaunchPage({
     MediaItem? item,
     Bookmark? initialBookmarkJump,
@@ -71,23 +63,6 @@ class ReaderPdfSource extends ReaderMediaSource {
     return FushiAppUiScaleNeutralizer(
       child: ReaderPdfPage(item: item, bookKey: bookKey),
     );
-  }
-
-  @override
-  List<Widget> getActions({
-    required BuildContext context,
-    required WidgetRef ref,
-    required AppModel appModel,
-  }) {
-    // 导入按钮统一由 EPUB 源提供（同一个对话框已通吃 epub/pdf）；本源作为打开-PDF 的
-    // 短暂当前源，页头动作复用同一按钮以防被设为当前源时缺动作。
-    return <Widget>[
-      ReaderFushiSource.instance.buildBookImportButton(
-        context: context,
-        ref: ref,
-        appModel: appModel,
-      ),
-    ];
   }
 
   @override

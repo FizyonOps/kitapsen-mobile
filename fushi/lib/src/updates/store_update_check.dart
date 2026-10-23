@@ -30,7 +30,6 @@ const String _kDismissedVersionKey = 'kitapsen_store_update_dismissed';
 
 /// Checks the platform store once (call it after the first frame).
 Future<void> checkStoreUpdate(BuildContext context) async {
-  if (kDebugMode) return;
   try {
     if (Platform.isAndroid) {
       await _checkPlayUpdate(context);

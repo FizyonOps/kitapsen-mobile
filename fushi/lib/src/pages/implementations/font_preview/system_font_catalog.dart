@@ -1,13 +1,8 @@
-import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:fushi/src/reader/font_download_service.dart'
-    show kFontFileExtensions;
 import 'package:fushi/src/utils/misc/channel_constants.dart';
 import 'package:fushi/src/utils/misc/error_log_service.dart';
-import 'package:path/path.dart' as p;
 
 /// 本机一款系统字体族。
 ///
@@ -85,35 +80,6 @@ List<SystemFontFamily> parseSystemFontChannelResult(Object? raw) {
   return _sorted(byKey.values);
 }
 
-/// 解析 `fc-list : family` 的输出。一行可能是 `名A,名B`（同族多语言别名），
-/// 只取第一个——fontconfig 按任一别名都能匹配，首项是它自己的规范名。
-@visibleForTesting
-List<String> parseFcListFamilies(String output) {
-  final Set<String> seen = <String>{};
-  final List<String> families = <String>[];
-  for (final String line in const LineSplitter().convert(output)) {
-    final String first = line.split(',').first.trim();
-    if (first.isEmpty) continue;
-    if (seen.add(first.toLowerCase())) families.add(first);
-  }
-  return families;
-}
-
-/// 从字体**文件名**推族名：只作平台枚举不可用时的兜底，名字不保证与引擎一致。
-@visibleForTesting
-String guessFontFamilyFromFileName(String filePath) => p
-    .basenameWithoutExtension(filePath)
-    .replaceAll(RegExp(r'[-_]'), ' ')
-    .replaceAll(
-      RegExp(
-        r'\s+(Regular|Bold|Italic|Light|Medium|Thin|'
-        r'Black|ExtraBold|SemiBold|ExtraLight|Condensed|Expanded)$',
-        caseSensitive: false,
-      ),
-      '',
-    )
-    .trim();
-
 List<SystemFontFamily> _sorted(Iterable<SystemFontFamily> families) =>
     families.toList()..sort(
       (SystemFontFamily a, SystemFontFamily b) =>
@@ -124,8 +90,7 @@ List<SystemFontFamily> _sorted(Iterable<SystemFontFamily> families) =>
 ///
 /// 顺序：平台通道（各端原生 API 给真实族名）→ Linux `fc-list` → 扫字体目录按
 /// 文件名推名（标记 [SystemFontList.namesReliable] = false）。成功结果进程内缓存。
-class SystemFontCatalog {
-  SystemFontCatalog._();
+abstract class SystemFontCatalog {
 
   static SystemFontList? _cache;
 
@@ -133,19 +98,10 @@ class SystemFontCatalog {
   @visibleForTesting
   static Future<SystemFontList> Function()? debugLoaderOverride;
 
-  @visibleForTesting
-  static void debugReset() {
-    _cache = null;
-    debugLoaderOverride = null;
-  }
-
   static Future<SystemFontList> load() async {
     final SystemFontList? cached = _cache;
     if (cached != null) return cached;
-    final Future<SystemFontList> Function()? override = debugLoaderOverride;
-    final SystemFontList result = override != null
-        ? await override()
-        : await _loadFromPlatform();
+    final SystemFontList result = (await _loadFromPlatform());
     if (result.families.isNotEmpty) _cache = result;
     return result;
   }
@@ -154,18 +110,6 @@ class SystemFontCatalog {
     final List<SystemFontFamily> fromChannel = await _loadFromChannel();
     if (fromChannel.isNotEmpty) {
       return SystemFontList(families: fromChannel, namesReliable: true);
-    }
-    if (Platform.isLinux) {
-      final List<SystemFontFamily> fromFc = await _loadFromFcList();
-      if (fromFc.isNotEmpty) {
-        return SystemFontList(families: fromFc, namesReliable: true);
-      }
-    }
-    if (Platform.isWindows || Platform.isMacOS || Platform.isLinux) {
-      return SystemFontList(
-        families: await _scanFontDirectories(),
-        namesReliable: false,
-      );
     }
     return SystemFontList.empty;
   }
@@ -185,73 +129,4 @@ class SystemFontCatalog {
     }
   }
 
-  static Future<List<SystemFontFamily>> _loadFromFcList() async {
-    try {
-      final ProcessResult all = await Process.run('fc-list', <String>[
-        ':',
-        'family',
-      ]);
-      if (all.exitCode != 0) return const <SystemFontFamily>[];
-      final ProcessResult ja = await Process.run('fc-list', <String>[
-        ':lang=ja',
-        'family',
-      ]);
-      final Set<String> japanese = ja.exitCode == 0
-          ? parseFcListFamilies(
-              ja.stdout as String,
-            ).map((String f) => f.toLowerCase()).toSet()
-          : <String>{};
-      return _sorted(<SystemFontFamily>[
-        for (final String family in parseFcListFamilies(all.stdout as String))
-          SystemFontFamily(
-            family: family,
-            supportsJapanese: japanese.contains(family.toLowerCase()),
-          ),
-      ]);
-    } catch (e, stack) {
-      ErrorLogService.instance.log('SystemFontCatalog.fcList', e, stack);
-      return const <SystemFontFamily>[];
-    }
-  }
-
-  static Future<List<SystemFontFamily>> _scanFontDirectories() async {
-    final List<String> fontDirs = <String>[];
-    if (Platform.isWindows) {
-      fontDirs.add(r'C:\Windows\Fonts');
-      final String? localAppData = Platform.environment['LOCALAPPDATA'];
-      if (localAppData != null) {
-        fontDirs.add(p.join(localAppData, r'Microsoft\Windows\Fonts'));
-      }
-    } else if (Platform.isMacOS) {
-      fontDirs.addAll(<String>['/System/Library/Fonts', '/Library/Fonts']);
-      final String? home = Platform.environment['HOME'];
-      if (home != null) fontDirs.add('$home/Library/Fonts');
-    } else if (Platform.isLinux) {
-      fontDirs.addAll(<String>['/usr/share/fonts', '/usr/local/share/fonts']);
-      final String? home = Platform.environment['HOME'];
-      if (home != null) fontDirs.add('$home/.local/share/fonts');
-    }
-
-    final Map<String, SystemFontFamily> byKey = <String, SystemFontFamily>{};
-    for (final String dirPath in fontDirs) {
-      final Directory dir = Directory(dirPath);
-      if (!dir.existsSync()) continue;
-      try {
-        await for (final FileSystemEntity entity in dir.list(recursive: true)) {
-          if (entity is! File) continue;
-          final String ext = p.extension(entity.path).toLowerCase();
-          if (!kFontFileExtensions.contains(ext)) continue;
-          final String name = guessFontFamilyFromFileName(entity.path);
-          if (name.isEmpty) continue;
-          byKey.putIfAbsent(
-            name.toLowerCase(),
-            () => SystemFontFamily(family: name),
-          );
-        }
-      } catch (e) {
-        debugPrint('[fushi-fonts] error scanning $dirPath: $e');
-      }
-    }
-    return _sorted(byKey.values);
-  }
 }

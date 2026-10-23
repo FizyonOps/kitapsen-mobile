@@ -28,8 +28,7 @@ import 'package:fushi_engine/utils/misc/fushi_time_format.dart';
 ///
 /// 删除零改动复用 [FushiDatabase.deleteEpubBook]（按 bookKey 级联）+
 /// [ReaderFushiSource.deleteBook] 的磁盘清理（`EpubStorage.deleteBookDir`）。
-class PdfImporter {
-  PdfImporter._();
+abstract class PdfImporter {
 
   /// 书目录内固定的 PDF 文件名。阅读器按 `extractDir/epubPath` 还原绝对路径，故此名
   /// 与 `epubPath` 列必须一致。

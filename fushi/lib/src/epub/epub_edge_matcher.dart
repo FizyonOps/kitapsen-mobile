@@ -4,8 +4,7 @@ import 'package:image/image.dart' as img;
 
 /// Compares the inner edges of two images to detect whether they form
 /// a two-page spread (e.g. scanned book pages split in half).
-class EpubEdgeMatcher {
-  EpubEdgeMatcher._();
+abstract class EpubEdgeMatcher {
 
   static const double spreadThreshold = 0.85;
 

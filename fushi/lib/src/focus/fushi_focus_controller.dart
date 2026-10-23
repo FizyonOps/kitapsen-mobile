@@ -4,9 +4,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:fushi/src/focus/focus_geometry.dart';
-import 'package:fushi/src/focus/main_window_focus_gate.dart';
 import 'package:fushi/src/focus/fushi_focus_scroll.dart';
-import 'package:fushi/src/sync/desktop_foreground_guard.dart';
 
 @immutable
 class FushiFocusId {
@@ -126,12 +124,6 @@ class FushiFocusController extends ChangeNotifier {
   bool _repairScheduled = false;
   bool _repairMicrotaskScheduled = false;
 
-  /// BUG-1619：有一次被动修复因为「主窗不在前台」被挡下了，欠着。
-  ///
-  /// 主窗真正回到前台时必须补上，否则用户切回来会发现整页没有焦点、键盘 /
-  /// 手柄快捷键全不响应（正是 TODO-900 当初要修的症状）。
-  bool _repairDeferredWhileBackgrounded = false;
-
   BuildContext? get activeContext {
     final _FocusCandidate? active = _currentCandidate(_candidates());
     if (active != null && active.context.mounted) return active.context;
@@ -167,27 +159,6 @@ class FushiFocusController extends ChangeNotifier {
     // 在这里再查一遍是空转：两个调用点都写着 `?? primaryFocus?.context`，
     // 返回 null 会被 `??` 把同一个 unmounted context 立刻递回去。
     return focusNode.context;
-  }
-
-  FushiFocusId? get activeId => _activeId;
-
-  /// Whether the current [FocusManager.primaryFocus] is one of THIS controller's
-  /// registered, focusable targets — i.e. focus actually sits on a directional-
-  /// navigable control we manage, not on some unmanaged sink (e.g. the reader's
-  /// reading-content [FocusNode], a popup scope, or a raw page key-event sink).
-  ///
-  /// The app-wide arrow-repeat handler uses this to decide whether holding an
-  /// arrow should continue moving focus: it must NOT hijack a held arrow while
-  /// focus rests on an unmanaged surface that owns the arrow for its own purpose
-  /// (reader caret / page-turn), only continue movement between real managed
-  /// controls.
-  bool get primaryFocusIsManagedTarget {
-    final FocusNode? primary = FocusManager.instance.primaryFocus;
-    if (primary == null) return false;
-    for (final FushiFocusTargetEntry entry in _entries.values) {
-      if (identical(entry.focusNode, primary)) return _entryCanFocus(entry);
-    }
-    return false;
   }
 
   /// 当前路由上是否登记了**至少一个**可聚焦的受管目标。
@@ -236,29 +207,14 @@ class FushiFocusController extends ChangeNotifier {
     _rootContext = rootContext;
     if (!_attached) {
       FocusManager.instance.addListener(_handleFocusChange);
-      // BUG-1619：主窗回到前台就补一次修复。焦点闸门在关门期间让出了焦点，
-      // 不补的话用户切回来整页没有焦点、键盘 / 手柄快捷键全不响应。
-      // 与 [_handleFocusChange] 里那条 deferred 补票**并存**是有意的：这条走
-      // window_manager 的窗口事件（可能因 channel 延迟晚到），那条走进程内的
-      // FocusManager 通知（不依赖 channel），两条覆盖不同故障模式。
-      mainWindowForegroundNotifier.addListener(_onMainWindowForegroundChanged);
       _attached = true;
     }
-    scheduleRepair();
-  }
-
-  void _onMainWindowForegroundChanged() {
-    if (!_attached || !mainWindowForegroundNotifier.value) return;
-    _repairDeferredWhileBackgrounded = false;
     scheduleRepair();
   }
 
   void detach() {
     if (_attached) {
       FocusManager.instance.removeListener(_handleFocusChange);
-      mainWindowForegroundNotifier.removeListener(
-        _onMainWindowForegroundChanged,
-      );
       _attached = false;
     }
     _entries.clear();
@@ -305,33 +261,6 @@ class FushiFocusController extends ChangeNotifier {
     if (wasActive) {
       _activeId = null;
       scheduleRepair();
-    }
-  }
-
-  /// Register an explicit directional short-circuit: pressing [direction] while
-  /// [source] is the active target moves focus to [target] (revealing it if it
-  /// scrolled off-screen), consulted before geometry in [move]. Re-registering
-  /// the same `(source, direction)` overwrites. Type signatures are explicit so
-  /// callers can register from a declarative widget without casts.
-  void registerDirectionalAnchor(
-    FushiFocusId source,
-    FushiFocusDirection direction,
-    FushiFocusId target,
-  ) {
-    _directionalAnchors[_AnchorKey(source, direction)] = target;
-  }
-
-  /// Remove a previously-registered anchor. No-op if the current mapping does
-  /// not match [target] (so a stale unregister from a rebuilt widget cannot
-  /// clobber a newer registration).
-  void unregisterDirectionalAnchor(
-    FushiFocusId source,
-    FushiFocusDirection direction,
-    FushiFocusId target,
-  ) {
-    final _AnchorKey key = _AnchorKey(source, direction);
-    if (_directionalAnchors[key] == target) {
-      _directionalAnchors.remove(key);
     }
   }
 
@@ -551,24 +480,6 @@ class FushiFocusController extends ChangeNotifier {
   }
 
   void ensureFocus() {
-    // BUG-1619：[ensureFocus] 是**被动焦点修复**的汇合点（attach / register /
-    // unregister / scheduleRepair 全落这里），它下面每一条分支都会 requestFocus。
-    //
-    // 桌面版 Fushi 是多顶层窗口进程。主窗不在前台时（用户正在游戏 / 浏览器里，
-    // 剪贴板查词面板浮在上面），Flutter 引擎会把 requestFocus 翻译成
-    // SetFocus(FlutterView)，而 Win32 语义下 SetFocus(子窗) 会**连带激活它的
-    // 顶层窗口** —— 主界面凭空盖住用户正在用的窗口。真机链路：拖面板顶栏结束
-    // → windowMoved → setClipboardPanelRect → PreferencesRepository
-    // .notifyListeners() → 首页重建 → 焦点目标重新 register → scheduleRepair
-    // → 这里 → 主窗被抬到前台。
-    //
-    // 判据只挡**被动修复**：用户显式输入触发的 [move] / [requestById] 不经这里
-    // 的早退（那时主窗必然已经是前台）。被挡下时记账，等主窗真的回到前台再补
-    // 修一次（见 [_handleFocusChange]），否则切回来就没有焦点、快捷键全失效。
-    if (!DesktopForegroundGuard.isMainWindowForeground()) {
-      _repairDeferredWhileBackgrounded = true;
-      return;
-    }
     final FocusNode? primary = FocusManager.instance.primaryFocus;
     if (_isUsablePrimary(primary)) {
       _handleFocusChange();
@@ -983,15 +894,6 @@ class FushiFocusController extends ChangeNotifier {
   }
 
   void _handleFocusChange() {
-    // BUG-1619：主窗回到前台的补票口。FlutterView 重新拿到 OS 焦点会走到这里，
-    // 此时把「后台期间欠下的那次被动修复」补上——这条路径覆盖同进程内从剪贴板
-    // 面板切回主窗（那种切换不产生 AppLifecycleState.resumed，首页那条 resumed
-    // 回收补不到）。
-    if (_repairDeferredWhileBackgrounded &&
-        DesktopForegroundGuard.isMainWindowForeground()) {
-      _repairDeferredWhileBackgrounded = false;
-      scheduleRepair();
-    }
     final FocusNode? primary = FocusManager.instance.primaryFocus;
     for (final FushiFocusTargetEntry entry in _entries.values) {
       if (identical(entry.focusNode, primary)) {
@@ -1047,13 +949,6 @@ class FushiFocusRoot extends StatefulWidget {
   /// 恒定挂载的意义：切换实验开关不再改变树结构 → 整棵 app 子树的 Element
   /// 全保留（开关滑块动画、各页滚动位置不丢）。
   final bool enabled;
-
-  static FushiFocusController controllerOf(BuildContext context) {
-    final _FushiFocusScope? scope = context
-        .dependOnInheritedWidgetOfExactType<_FushiFocusScope>();
-    assert(scope?.controller != null, 'No FushiFocusRoot found in context');
-    return scope!.controller!;
-  }
 
   static FushiFocusController? maybeControllerOf(
     BuildContext context, {

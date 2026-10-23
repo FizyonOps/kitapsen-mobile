@@ -75,7 +75,7 @@ Dio createAppDio({
   BaseOptions? options,
   Duration? connectionTimeout = kAppHttpConnectionTimeout,
 }) {
-  final Dio dio = options == null ? Dio() : Dio(options);
+  final Dio dio = (Dio(options));
   final HttpClient httpClient =
       createAppHttpClient(connectionTimeout: connectionTimeout);
   dio.httpClientAdapter = IOHttpClientAdapter(

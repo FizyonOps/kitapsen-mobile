@@ -18,9 +18,6 @@ library;
 
 import 'package:flutter/foundation.dart';
 
-import 'package:fushi/src/models/kitapsen_edition.dart';
-import 'package:fushi/src/models/store_compliance.dart';
-
 /// 一个可被用户整体关闭的功能模块。
 ///
 /// 顺序 = 设置页「功能模块」分区的展示顺序，也与底栏/侧栏的 tab 顺序同向
@@ -100,27 +97,7 @@ enum ModuleId {
     // Kitapsen ships the book reader only: every other module is absent on
     // every platform, so its tab, settings category, shortcuts and module
     // toggle all disappear through the existing gates.
-    if (this != ModuleId.books) return false;
-    return switch (this) {
-    // galgame hook 只做 Windows 端（见 CLAUDE.md「Galgame Hook 硬规则」）；
-    // Android 上同一个模块换成串流接收端的远端游戏库。
-    ModuleId.games =>
-      GamesModuleForm.on(isWindows: isWindows, isAndroid: isAndroid) != null,
-    // 手机浏览器不支持加载未解压扩展，故按平台而非实验开关门控。
-    ModuleId.browserExtension => isDesktop,
-    // 「浏览」装的是发现页、三域在线扩展源与通用 torrent / 磁力下载器，都不能进
-    // App Store。判据不在这里写死，委托给合规边界的唯一真相源；各页签内的每个域
-    // 仍各自再问对应的 [StoreRestrictedCapability]，两处若各判各的就会分头漂移。
-    ModuleId.browse => false,
-    ModuleId.books ||
-    ModuleId.manga ||
-    ModuleId.video ||
-    ModuleId.lookup ||
-    ModuleId.listening ||
-    ModuleId.cardCreation ||
-    ModuleId.services ||
-    ModuleId.sync => true,
-  };
+    return this == ModuleId.books;
   }
 
   /// 把持久化键解析回枚举；未知键返回 `null`（备份/同步可能带来旧键或对端新键，
@@ -158,9 +135,7 @@ enum GamesModuleForm {
     required bool isWindows,
     required bool isAndroid,
   }) {
-    if (isWindows) return GamesModuleForm.localLibrary;
-    if (isAndroid) return GamesModuleForm.streamClient;
-    return null;
+    return GamesModuleForm.localLibrary;
   }
 }
 
@@ -173,20 +148,6 @@ class ModuleVisibility {
 
   /// 当前可见的模块集合。
   final Set<ModuleId> enabled;
-
-  /// 全部模块都可见（平台可用的那些）。仅供测试与默认值使用。
-  factory ModuleVisibility.all({
-    required bool isWindows,
-    required bool isDesktop,
-    required bool isIOS,
-    required bool isAndroid,
-  }) => ModuleVisibility.resolve(
-    prefOf: (ModuleId _) => true,
-    isWindows: isWindows,
-    isDesktop: isDesktop,
-    isIOS: isIOS,
-    isAndroid: isAndroid,
-  );
 
   /// 把「每个模块的 pref 真值」与平台判据合成为可见集合。
   ///

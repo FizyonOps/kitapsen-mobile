@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:brotli/brotli.dart';
-import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:fushi/src/models/font_decoder.dart';
 
 /// Decodes a WOFF2 container into raw sfnt (TrueType) bytes that Flutter's
@@ -15,8 +14,7 @@ import 'package:fushi/src/models/font_decoder.dart';
 ///
 /// Returns `null` for anything it cannot faithfully reconstruct (the caller
 /// then skips the font rather than registering a corrupt one).
-class Woff2Decoder {
-  Woff2Decoder._();
+abstract class Woff2Decoder {
 
   static const int _signature = 0x774F4632; // 'wOF2'
   static const int _glyfTag = 0x676C7966; // 'glyf'
@@ -509,16 +507,6 @@ class Woff2Decoder {
   }
 
   // ── hmtx transform reversal (WOFF2 spec §5.2) ──────────────────────────
-
-  /// Test seam for [_reconstructHmtx]: rebuilds a standard `hmtx` table from a
-  /// transformed one, deriving omitted left side bearings from [xMins].
-  @visibleForTesting
-  static Uint8List? reconstructHmtxForTest(
-    Uint8List data,
-    int numberOfHMetrics,
-    List<int> xMins,
-  ) =>
-      _reconstructHmtx(data, numberOfHMetrics, xMins);
 
   static Uint8List? _reconstructHmtx(
     Uint8List data,

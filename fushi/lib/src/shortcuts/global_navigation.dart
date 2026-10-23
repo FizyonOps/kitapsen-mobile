@@ -1,12 +1,7 @@
-import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' hide ModifierKey;
-import 'package:macos_ui/macos_ui.dart' show WindowManipulator;
-import 'package:window_manager/window_manager.dart';
 import 'package:fushi/src/focus/fushi_focus_controller.dart';
-import 'package:fushi/src/utils/window_caption_channel.dart';
 
 import 'package:fushi/src/shortcuts/context_menu_trigger.dart';
 import 'package:fushi/src/shortcuts/input_binding.dart';
@@ -14,18 +9,8 @@ import 'package:fushi/src/shortcuts/mouse_binding_dispatch.dart';
 import 'package:fushi/src/shortcuts/page_scroll_shortcuts.dart';
 import 'package:fushi/src/shortcuts/shortcut_action.dart';
 import 'package:fushi/src/shortcuts/shortcut_registry.dart';
-import 'package:fushi/src/shortcuts/window_fullscreen_hosts.dart';
-import 'package:fushi/src/utils/components/fushi_desktop_title_bar.dart';
 import 'package:fushi/src/shortcuts/gamepad_service.dart'
-    show
-        arrowFocusMoveDirection,
-        arrowKeyClaimedByFocus,
-        arrowTraversalDirection,
-        directionalFocusOrigin,
-        dispatchNativeGamepadButtonIntent,
-        focusedEditableText,
-        gamepadMoveFocusInDirection,
-        tryDictionaryPopupGamepadButton;
+    show arrowFocusMoveDirection, arrowKeyClaimedByFocus, arrowTraversalDirection, directionalFocusOrigin, dispatchNativeGamepadButtonIntent, focusedEditableText, gamepadMoveFocusInDirection;
 
 /// 顶层路由是不是一个**弹层**（对话框 / 下拉 / bottom sheet）。
 ///
@@ -288,25 +273,6 @@ KeyEventResult _handleGlobalBack(
   return KeyEventResult.handled;
 }
 
-/// 注册表缺席时的键盘退出降级：裸 Escape 退一层整页路由，弹层仍让给框架。
-///
-/// 只在 [wrapWithGlobalNavigation] 拿不到 [FushiShortcutRegistry] 时使用（widget
-/// 测试直接调 wrapper）。生产路径一律走可改键的 [_handleGlobalBack]，故这不是
-/// 「第二条硬编码 Escape」——它与注册表路径互斥，永远不会两条同时活着。
-KeyEventResult _handleEscapeWithoutRegistry(
-  GlobalKey<NavigatorState> navigatorKey,
-  KeyEvent event,
-) {
-  if (event is! KeyDownEvent || event.logicalKey != LogicalKeyboardKey.escape) {
-    return KeyEventResult.ignored;
-  }
-  final NavigatorState? nav = navigatorKey.currentState;
-  if (nav == null || !nav.canPop()) return KeyEventResult.ignored;
-  if (_topRouteIsPopup(navigatorKey)) return KeyEventResult.ignored;
-  nav.maybePop();
-  return KeyEventResult.handled;
-}
-
 /// BUG-1266：吞掉**没有任何处理器认领**且带系统兜底的手柄键，阻断 Android 的
 /// `Generic.kcm` fallback 合成第二个键。
 ///
@@ -353,48 +319,6 @@ bool gamepadSystemFallbackMustBeSwallowed(KeyEvent event) {
       return false;
   }
 }
-
-/// Desktop window-level fullscreen toggle for the remappable
-/// [ShortcutAction.globalToggleFullscreen] key (TODO-1093). Distinct from the
-/// video player's own [ShortcutAction.videoToggleFullscreen] (which only toggles
-/// the video surface): this flips the whole app window between fullscreen and
-/// windowed via [WindowManager.setFullScreen], reading the current state the same
-/// way [DesktopWindowPlacement.saveCurrentBoundsNow] does
-/// ([WindowManager.isFullScreen]). Only meaningful on desktop (Windows / macOS /
-/// Linux) where a native window exists; on mobile there is no such window, so the
-/// binding resolves but the toggle is a no-op (guarded by
-/// [desktopWindowFullscreenSupported]).
-///
-/// Resolution is synchronous so [Focus.onKeyEvent] can return a [KeyEventResult]
-/// immediately; the actual (async) [WindowManager] round-trip is fired
-/// unawaited only after the key is confirmed bound to globalToggleFullscreen.
-KeyEventResult _handleGlobalToggleFullscreen(
-  FushiShortcutRegistry registry,
-  KeyEvent event,
-) {
-  if (event is! KeyDownEvent) return KeyEventResult.ignored;
-  ShortcutAction? action = _resolveGlobalKeyboardAction(registry, event);
-  if (action == null) {
-    final GamepadButton? gamepad = GamepadButton.fromKeyEvent(event);
-    if (gamepad != null) {
-      action = registry.resolveGamepad(gamepad, scope: ShortcutScope.global);
-    }
-  }
-  if (action != ShortcutAction.globalToggleFullscreen) {
-    return KeyEventResult.ignored;
-  }
-  // Bound but no desktop window (mobile): consume the key (it is intentionally
-  // assigned) but do nothing — there is no window to toggle.
-  if (desktopWindowFullscreenSupported) {
-    unawaited(_toggleWindowFullscreen());
-  }
-  return KeyEventResult.handled;
-}
-
-/// Whether the running platform has a desktop window whose fullscreen state can
-/// be toggled via [WindowManager] (mirrors [DesktopWindowPlacement] desktop gate).
-bool get desktopWindowFullscreenSupported =>
-    Platform.isWindows || Platform.isLinux || Platform.isMacOS;
 
 /// 键盘的页面滚动兜底（global scope 六件套：默认 PageUp/PageDown 整屏、↑/↓ 单步、
 /// Home/End 到顶到底）。服务所有自己没有键盘滚动语义的表面——库页 / 设置 / 统计 /
@@ -496,8 +420,6 @@ void _handleGlobalPointerDown(
 ///
 /// 每个分支都复用该动作**键盘/手柄通道已有的**落地方式，不新造第二套语义：
 ///   · [ShortcutAction.globalBack] → [Navigator.maybePop]（与 [_handleGlobalBack] 同）；
-///   · [ShortcutAction.globalToggleFullscreen] → [_toggleWindowFullscreen]（与
-///     [_handleGlobalToggleFullscreen] 同，移动端无窗口时有意 no-op）；
 ///   · 页面滚动六件套（[ShortcutAction.globalScrollPageUp] 等）→ 与键盘 / 手柄
 ///     LB/RB 完全同一个执行体 [executePageScroll]（目标解析在
 ///     `FushiFocusScroll.resolveActivePageScrollable`）。
@@ -525,11 +447,6 @@ bool _executeGlobalMouseAction(
       nav.maybePop();
       return true;
     case ShortcutAction.globalToggleFullscreen:
-      // 移动端没有可切换的窗口：键盘那条路在这种情况下仍然 handled（键是用户有意
-      // 分配的，不该再冒泡去干别的），鼠标同口径——认领掉，只是不做事。
-      if (desktopWindowFullscreenSupported) {
-        unawaited(_toggleWindowFullscreen());
-      }
       return true;
     case ShortcutAction.globalScrollPageUp:
     case ShortcutAction.globalScrollPageDown:
@@ -572,156 +489,6 @@ KeyEventResult _neutralizeBareSpace(KeyEvent event) {
   return KeyEventResult.handled;
 }
 
-/// Flips the main window between fullscreen and windowed.
-///
-/// TODO-1375：全屏切换必须由 NSWindow 的**唯一所有者**执行。macOS 壳用
-/// macos_window_utils（[WindowManipulator]）持有 NSWindow.delegate（透明标题栏 /
-/// sidebar vibrancy / 全屏 presentation options 都挂它），而 window_manager 想把
-/// 自己设成 delegate 却在初始化时被 macos_window_utils 覆盖——两者各持一份 NSWindow
-/// 引用与各自的全屏认知。若 macOS 仍走 [WindowManager.setFullScreen]（内部
-/// `toggleFullScreen(nil)`），进出全屏时 delegate 通知全被 macos_window_utils 截获、
-/// window_manager 的 WindowListener 收不到，状态机在双栈间走岔（TODO-1375 症状①：
-/// 全屏退出后 sidebar 卡死）。故 macOS 全屏统一改走 [WindowManipulator]
-/// （enter/exit/isWindowFullscreened，底层同样是 `toggleFullScreen`，但由 delegate
-/// 所有者自洽驱动）。Windows / Linux 无此双栈问题，保持 window_manager。
-///
-/// 任何 platform-channel 失败都以 debug 日志吞掉，杂散按键永不崩应用。
-Future<void> _toggleWindowFullscreen() async {
-  try {
-    // 用户裁定：全屏是**内容模块**（小说 / 漫画 / 视频）的能力，首页 / 书架 / 设置页
-    // 按全屏键不该把整个窗口变成无边框全屏。判据不写成「路由名 == …」的 if 阶梯
-    // （那是把页面清单硬编码进快捷键层，新增内容页必漏改），而是问一个由内容页自己
-    // 声明的布尔量——见 [WindowFullscreenHosts]。
-    //
-    // 门是**非对称**的，这不是疏漏而是必须：只门住「进入」，「退出」永远放行。若两边
-    // 都门住，用户在内容页进全屏、退回首页之后，就再没有任何键能退出全屏——桌面全屏
-    // 是 runner 自绘的保边框巨窗（BUG-1933），系统并不提供第二个出口，那等于把人锁死
-    // 在全屏里。宿主可见时布尔量直接短路，不会多花一次 platform channel 往返；只有
-    // 「非宿主页面按了全屏键」这一种情况才需要读一次真值来判断是不是退出。
-    if (!WindowFullscreenHosts.hasVisibleHost &&
-        (await readDesktopWindowFullscreen()) != true) {
-      return;
-    }
-    await toggleDesktopWindowFullscreen();
-  } catch (e) {
-    debugPrint('[Fushi] window fullscreen toggle skipped: $e');
-  }
-}
-
-/// 当前若处于窗口全屏就退出它，并返回「确实退了」。
-///
-/// 两个调用场景共用这一个原语：
-///   · 内容页「返回上一级」阶梯里的**先退全屏**那一级（用户裁定：Esc 也能退全屏）。
-///     返回 true 表示这次返回已被全屏消费，调用方**不该**再退页。
-///   · 最后一个 [WindowFullscreenHost] 离场时的归还（见该类文档）。
-///
-/// 判据只认 native 真值，不认「这次全屏是不是我进的」：用户按 F11 进的全屏和按页面
-/// 全屏按钮进的全屏，在他眼里是同一个全屏，Esc 都该先把它退掉。先读后写而不是无条件
-/// 写 false，是为了不在「本来就不是全屏」的常态路径上白打一次 platform channel。
-Future<bool> exitWindowFullscreenIfActive() async {
-  if (!desktopWindowFullscreenSupported) return false;
-  if ((await readDesktopWindowFullscreen()) != true) return false;
-  await setDesktopWindowFullscreen(false);
-  return true;
-}
-
-/// Reads the desktop window fullscreen state from its single native owner.
-/// Mobile returns null.
-Future<bool?> readDesktopWindowFullscreen() async {
-  try {
-    // `return await`, never a bare `return <future>`: in an async function the
-    // bare form hands the future to the caller and the enclosing try/catch is
-    // already gone when it rejects. Every branch here exists to *swallow*
-    // platform-channel failures (the callers `unawaited()` them), so a branch
-    // that lets its error escape turns a benign unavailable-window read into an
-    // unhandled zone error -- and in widget tests, into a failing test whose
-    // only message is "Test failed. See exception logs above.".
-    if (Platform.isMacOS) {
-      return await WindowManipulator.isWindowFullscreened();
-    }
-    if (Platform.isWindows) {
-      // BUG-1933：Windows 全屏由 runner 自有实现拥有（保边框巨窗，见
-      // WindowCaptionChannel.setFullscreen 的文档）；window_manager 在 Windows
-      // 上不再进入全屏、其 isFullScreen 恒 false，状态只能问 runner。
-      final bool fullscreen = await WindowCaptionChannel.isFullscreen();
-      FushiDesktopTitleBar.setWindowManagerFullscreen(fullscreen);
-      return fullscreen;
-    }
-    if (Platform.isLinux) {
-      return await windowManager.isFullScreen();
-    }
-  } catch (e) {
-    debugPrint('[Fushi] window fullscreen state unavailable: $e');
-  }
-  return null;
-}
-
-/// Applies [fullscreen] to the native Windows window and returns the state that
-/// is actually in effect.
-///
-/// BUG-1933：变更与读取都走 runner 自有实现（`app.fushi/window` channel）。
-/// window_manager 的 `setFullScreen` 剥 `WS_CAPTION|WS_THICKFRAME` 触发 DWM
-/// 重建窗口 visual，进出全屏各露一帧表面色（浅色主题=白帧）；runner 改为保留
-/// 边框、把窗口放大到客户区盖满显示器（边框悬屏外）+ TOPMOST，与最大化同合成
-/// 路径，实测零露出。runner 是唯一真相源；channel 自身吞平台异常（widget 测试
-/// / 旧宿主下退化为 no-op + false），故此处不再需要 window_manager 式的双重
-/// 读回退，读到什么就是什么。
-Future<bool?> _resolveWindowsFullscreen(bool fullscreen) async {
-  await WindowCaptionChannel.setFullscreen(fullscreen);
-  return WindowCaptionChannel.isFullscreen();
-}
-
-/// Sets the desktop window fullscreen state through the platform's single
-/// native-window owner and returns the resulting state. Mobile returns null.
-Future<bool?> setDesktopWindowFullscreen(bool fullscreen) async {
-  try {
-    if (Platform.isMacOS) {
-      final bool current = await WindowManipulator.isWindowFullscreened();
-      if (current != fullscreen) {
-        if (fullscreen) {
-          await WindowManipulator.enterFullscreen();
-        } else {
-          await WindowManipulator.exitFullscreen();
-        }
-      }
-      return fullscreen;
-    }
-    if (Platform.isWindows) {
-      // Update the app frame explicitly. window_manager's Windows plugin does
-      // not emit leave-full-screen when a fullscreen window returns to its
-      // previous maximized state, so WindowListener alone can remain stuck.
-      final bool previousChromeState =
-          FushiDesktopTitleBar.isWindowManagerFullscreen;
-      // Claim the hidden-caption state before the native flip so the app frame
-      // never paints over the fullscreen surface for a frame.
-      if (fullscreen) {
-        FushiDesktopTitleBar.setWindowManagerFullscreen(true);
-      }
-      // One resolve, one write: the chrome owner is derived from the single
-      // authoritative value below instead of being poked at every step.
-      final bool? applied = await _resolveWindowsFullscreen(fullscreen);
-      FushiDesktopTitleBar.setWindowManagerFullscreen(
-        applied ?? previousChromeState,
-      );
-      return applied;
-    }
-    if (Platform.isLinux) {
-      await windowManager.setFullScreen(fullscreen);
-      return await windowManager.isFullScreen();
-    }
-  } catch (e) {
-    debugPrint('[Fushi] window fullscreen change skipped: $e');
-  }
-  return null;
-}
-
-/// Flips the main desktop window between fullscreen and windowed.
-Future<bool?> toggleDesktopWindowFullscreen() async {
-  final bool? current = await readDesktopWindowFullscreen();
-  if (current == null) return null;
-  return setDesktopWindowFullscreen(!current);
-}
-
 /// Wrap [child] (typically MaterialApp's builder child) with app-wide keyboard /
 /// gamepad navigation:
 
@@ -748,7 +515,7 @@ Widget wrapWithGlobalNavigation({
   required GlobalKey<NavigatorState> navigatorKey,
   required Widget child,
   bool focusNavigationEnabled = true,
-  FushiShortcutRegistry? registry,
+  required FushiShortcutRegistry registry,
 }) {
   final Map<ShortcutActivator, Intent> shortcuts = <ShortcutActivator, Intent>{
     // 焦点导航总开关关闭时，把 Tab / Shift+Tab 中和成 DoNothingIntent，使 Flutter
@@ -787,12 +554,6 @@ Widget wrapWithGlobalNavigation({
       final KeyEventResult gamepadResult =
           dispatchNativeGamepadButtonIntent(event);
       if (gamepadResult == KeyEventResult.handled) return gamepadResult;
-      // 手柄重设计 P2（Android 键事件链）：页面 Actions 没消费的手柄按钮，弹窗
-      // 可见时按 dictionaryPopup scope 解析（词条导航/制卡/发音）——与桌面轮询
-      // 路径 GamepadService._dispatchButton 的弹窗兜底同一入口、同一次序。
-      if (event is KeyDownEvent) {
-        final GamepadButton? nativeButton = GamepadButton.fromKeyEvent(event);
-      }
       if (focusNavigationEnabled) {
         final KeyEventResult arrowResult =
             _handleGlobalArrowFocus(navigatorKey, registry, event);
@@ -801,20 +562,10 @@ Widget wrapWithGlobalNavigation({
       // TODO-700 T1：注册表驱动的全局返回回退（Esc / Alt+← / B，或用户改键后的
       // 「返回」键）。仅对未自解析 globalBack 的页面（设置/对话框）生效；
       // home/reader/manga/video 已在更近的处理器消费。
-      if (registry != null) {
+      {
         final KeyEventResult backResult =
             _handleGlobalBack(navigatorKey, registry, event);
         if (backResult == KeyEventResult.handled) return backResult;
-        // TODO-1093 / BUG-1886：注册表驱动的窗口级全屏切换（默认 F11）。放在 globalBack
-        // 之后、Escape 之前；仅桌面有窗口时真正 toggle，移动端 no-op（见下）。
-        // **不受 [focusNavigationEnabled] 门控**——理由同 globalBack 与手柄分发
-        // （BUG-1266）：全屏改键是正式功能（快捷键设置里有完整 UI 与默认绑定 F11），把它
-        // 挂在一个默认关闭的实验开关上，等于在默认安装上「配了 F11 却永不解析」。
-        final KeyEventResult fullscreenResult =
-            _handleGlobalToggleFullscreen(registry, event);
-        if (fullscreenResult == KeyEventResult.handled) {
-          return fullscreenResult;
-        }
         // 页面滚动六件套（默认 PageUp/PageDown、↑/↓、Home/End）。同样**不受**
         // [focusNavigationEnabled] 门控——「用键盘滚页面」与实验性焦点导航无关，
         // 默认安装就得能用；方向键与焦点导航的让位规则见 [_handleGlobalScroll]。
@@ -828,19 +579,11 @@ Widget wrapWithGlobalNavigation({
       if (gamepadSystemFallbackMustBeSwallowed(event)) {
         return KeyEventResult.handled;
       }
-      // 注册表未注入（widget 测试直接调本 wrapper，不带 registry）时的降级：按裸
-      // Escape 退一层。生产路径永远带 registry，走上面那条可改键的 globalBack；
-      // 这里只是让「不关心快捷键」的测试宿主仍有键盘退出能力，不是第二条产品路径。
-      if (registry == null) {
-        return _handleEscapeWithoutRegistry(navigatorKey, event);
-      }
       return KeyEventResult.ignored;
     },
     child: Shortcuts(
       shortcuts: shortcuts,
-      // 鼠标绑定的兜底派发层（见 [_handleGlobalPointerDown]）。注册表缺席时（widget
-      // 测试直接调本 wrapper）整层不挂，与键盘侧「无 registry 只留裸 Escape 降级」
-      // 同口径：没有绑定表就没有可派发的动作，挂个空监听只会白白进命中路径。
+      // 鼠标绑定的兜底派发层（见 [_handleGlobalPointerDown]）。
       //
       // `translucent`：本层不画任何东西，默认的 deferToChild 会让它在子树没命中时
       // 也收不到事件（例如页面空白区）。旁听式监听必须自己占住命中，但它既不进手势
@@ -848,11 +591,7 @@ Widget wrapWithGlobalNavigation({
       // [ShortcutBindingScope] 把注册表递给子树里所有 [ContextMenuTrigger]
       // （二十余处右键菜单的唯一触发口）。它只在指针按下的那一瞬间被读一次
       // （`getInheritedWidgetOfExactType`，不建立依赖），故改键不会引发任何重建。
-      // 与下面的 Listener 同一个 `registry == null` 门：没有绑定表就回退到硬绑
-      // 右键的历史行为（见 kContextMenuFallbackButton），测试宿主无需搭注册表。
-      child: registry == null
-          ? child
-          : ShortcutBindingScope(
+      child: (ShortcutBindingScope(
               registry: registry,
               child: Builder(
                 builder: (BuildContext context) => Listener(
@@ -867,7 +606,7 @@ Widget wrapWithGlobalNavigation({
                   child: child,
                 ),
               ),
-            ),
+            )),
     ),
   );
 }

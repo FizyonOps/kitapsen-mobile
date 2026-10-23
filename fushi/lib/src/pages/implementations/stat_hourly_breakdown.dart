@@ -77,12 +77,4 @@ class StatHourlyBreakdown {
           (_byBand[band] ?? const <int>[]).any((int ms) => ms > 0))
       .toList(growable: false);
 
-  /// 当日总时长（毫秒）。
-  int get totalMs => _byBand.values.fold<int>(
-      0,
-      (int sum, List<int> values) =>
-          sum + values.fold<int>(0, (int s, int ms) => s + ms));
-
-  /// 当日无任何时长。
-  bool get isEmpty => activeBands.isEmpty;
 }

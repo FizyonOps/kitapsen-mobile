@@ -1,27 +1,12 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:fushi/pages.dart';
-import 'package:fushi/src/models/app_model.dart';
 import 'package:fushi/src/models/kitapsen_edition.dart';
-import 'package:fushi/src/onboarding/recommended_pack_discard.dart';
-import 'package:fushi/src/onboarding/recommended_pack_download_row.dart';
-import 'package:fushi/src/onboarding/recommended_pack_import.dart';
 import 'package:fushi/src/settings/settings_actions.dart';
 import 'package:fushi/src/settings/settings_context.dart';
 import 'package:fushi/src/settings/settings_destination.dart';
-import 'package:fushi/src/diagnostics/video_diag_export.dart';
-import 'package:fushi/src/diagnostics/video_diag_log.dart';
-import 'package:fushi/src/stats/study_diag_export.dart';
-import 'package:fushi/src/sync/sync_http.dart';
-import 'package:fushi/src/updates/app_update_check.dart';
-import 'package:fushi/src/updates/update_feed_service.dart';
-import 'package:fushi_engine/updates/update_feed_kind.dart';
 import 'package:fushi/src/utils/misc/build_version.dart';
-import 'package:fushi/src/utils/misc/crash_dump_locator.dart';
-import 'package:fushi/src/utils/misc/log_exporter.dart';
-import 'package:fushi/src/utils/misc/platform_updater.dart';
 import 'package:fushi/utils.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -156,7 +141,6 @@ SettingsDestination buildSystemDestination() {
             selected: (SettingsContext c) => c.appModel.networkProxyMode,
             onChanged: (SettingsContext c, String value) async {
               await c.appModel.setNetworkProxyMode(value);
-              resetSyncHttpClient();
               c.refresh();
             },
           ),
@@ -174,10 +158,6 @@ SettingsDestination buildSystemDestination() {
             onChanged: (SettingsContext settingsContext, String value) async {
               final String trimmed = value.trim();
               await settingsContext.appModel.setUpdateCustomProxy(trimmed);
-              // 云同步的共享 client 在首次使用时就把代理解析结果固化进 findProxy 了，
-              // 不丢弃它，用户改完代理仍走旧出口——那等于这条设置对同步不生效
-              // （BUG-1348）。更新检查每次新建 client，不受影响。
-              resetSyncHttpClient();
               // 非空且无法归一成合法 host:port → 提示（仍保存原串，运行时忽略）。
               if (trimmed.isNotEmpty &&
                   normalizeUserProxyHostPort(trimmed) == null) {
@@ -207,7 +187,6 @@ SettingsDestination buildSystemDestination() {
             value: (SettingsContext c) => c.appModel.networkProxyUsername,
             onChanged: (SettingsContext c, String value) async {
               await c.appModel.setNetworkProxyUsername(value.trim());
-              resetSyncHttpClient();
             },
           ),
           SettingsTextItem(
@@ -220,7 +199,6 @@ SettingsDestination buildSystemDestination() {
             value: (SettingsContext c) => c.appModel.networkProxyPassword,
             onChanged: (SettingsContext c, String value) async {
               await c.appModel.setNetworkProxyPassword(value);
-              resetSyncHttpClient();
             },
           ),
         ],
@@ -241,22 +219,6 @@ SettingsDestination buildSystemDestination() {
             icon: Icons.report_problem_outlined,
             builder: (_) => const ErrorLogPage(),
           ),
-          // TODO-607 P0-3：崩溃转储（native minidump）。仅 Windows 显示——native
-          // 端只在 Windows runner 经 SetUnhandledExceptionFilter 写 .dmp，移动端无此
-          // 机制（仿 wgc_capture_log 的 isWindows 门控）。让纯 native 闪退（嵌套查词
-          // 把进程带崩等，错误日志里看不到）有可上传的二进制证据。
-          if (Platform.isWindows)
-            SettingsNavigationItem(
-              id: 'diagnostics.crash_dumps',
-              // 同上走 titleBuilder——这一行的计数还要同步扫目录，构造期算等于每次
-              // setState 都做一次磁盘 IO。
-              title: t.crash_dump_label(n: 0),
-              titleBuilder: (_) => t.crash_dump_label(
-                n: CrashDumpLocator.listCurrentPlatformDumps().length,
-              ),
-              icon: Icons.bug_report_outlined,
-              builder: (_) => const CrashDumpPage(),
-            ),
           SettingsSwitchItem(
             id: 'diagnostics.debug_log_enabled',
             title: t.debug_log_toggle,
@@ -293,137 +255,6 @@ Future<void> _openExternal(Uri uri) async {
   } on Object catch (e, stack) {
     ErrorLogService.instance.log('SettingsSystem.openExternal', e, stack);
   }
-}
-
-/// 设置 › 诊断 › 导出统计诊断日志（正文见 [buildStudyDiagExport]）。
-Future<void> _exportStudyDiagLog(SettingsContext settingsContext) async {
-  final AppModel appModel = settingsContext.appModel;
-  final String log = await buildStudyDiagExport(
-    appModel.database,
-    appVersion: resolveCurrentAppVersion(appModel.packageInfo.version),
-    readingIdleTimeoutMinutes: appModel.readingIdleTimeoutMinutes,
-    statDayResetHour: appModel.statDayResetHour,
-  );
-  if (!settingsContext.context.mounted) return;
-  await saveLogToFile(
-    context: settingsContext.context,
-    log: log,
-    fileName: 'fushi_study_diag_log.txt',
-    subject: t.study_diag_share_subject,
-  );
-}
-
-/// 设置 › 诊断 › 导出视频诊断日志（正文见 [buildVideoDiagExportFromDisk]）。
-/// 三段：头信息（含小内存模式 / 热槽状态）+ 统一时间轴 + libmpv 原始日志尾部。
-Future<void> _exportVideoDiagLog(SettingsContext settingsContext) async {
-  final AppModel appModel = settingsContext.appModel;
-  final String log = await buildVideoDiagExportFromDisk(
-    appVersion: resolveCurrentAppVersion(appModel.packageInfo.version),
-    lowMemoryMode: appModel.lowMemoryMode,
-  );
-  if (!settingsContext.context.mounted) return;
-  await saveLogToFile(
-    context: settingsContext.context,
-    log: log,
-    fileName: 'fushi_video_diag_log.txt',
-    subject: t.video_diag_share_subject,
-  );
-}
-
-/// 手动「立即检查更新」：编排在 [checkAppUpdateNow]（与更新中心的 app 新版本
-/// 条目共用同一条应用内下载安装链路）。
-Future<void> _checkUpdateNow(SettingsContext settingsContext) =>
-    checkAppUpdateNow(settingsContext.context, settingsContext.appModel);
-
-String _selectedUpdateChannel(SettingsContext settingsContext) {
-  if (settingsContext.appModel.updateDebugChannel) return 'debug';
-  if (settingsContext.appModel.updateBetaChannel) return 'beta';
-  return 'stable';
-}
-
-/// TMDB 官方标识（`Primary short (blue)`）在包内的路径。
-///
-/// 这张 PNG 由 themoviedb.org/about/logos-attribution 下发的**矢量原图**栅格化而来；
-/// 原图 `assets/attribution/tmdb/blue_square_1.svg` 逐字节入库存证（sha256 即 TMDB
-/// 直链文件名里那串摘要）。之所以不直接渲染 SVG：Flutter 唯一现实的 SVG 方案
-/// `flutter_svg` 不支持 CSS，而 TMDB 原图把唯一填充写在 `<style>` 类里，解析后渐变
-/// 全丢、整个标识渲染成纯黑——那本身就是「改色」。栅格化只做尺寸映射，未改色 /
-/// 改比例 / 翻转 / 旋转 / 裁剪。来源、哈希、配方与守卫见同目录 README.md 与
-/// `test/settings/tmdb_attribution_test.dart`。
-@visibleForTesting
-const String kTmdbLogoAsset = 'assets/attribution/tmdb/logo_tmdb.png';
-
-/// logo 展示高度（dp）；宽度见 [_kTmdbLogoWidth]（24 × 190.24/81.52 ≈ 56.0）。
-///
-/// 条款要求展示 TMDB 标识，但它**不得比本应用自己的标识更显眼**。这条义务的实测
-/// 依据（数字均可按下列位置复核）：
-///
-/// - 同一行左侧的图标徽标是 30dp：`_SettingsIcon` 在 Material 下走
-///   `FushiBadge(size: 18, padding: EdgeInsets.all(6))`，18+6*2 = 30
-///   （`utils/components/settings_shared.dart`）。24dp 与之同量级。
-/// - 应用自身图标在 Flutter widget 树里有两个真渲染点。设置 › 外观 › 应用图标的
-///   预设瓦片（`miscellaneous_settings_page.dart` 的 `_AppIconTile`）中，
-///   `SizedBox.square(72)` 扣掉 `FushiCard` 描边的 1dp 内缩与 `gap/2 = 4` 的
-///   双侧 padding，图片实得 62×62dp；宽屏主导航 rail 的品牌位直接显示经过圆角
-///   裁切的 64×64dp 图片。取较大的 64dp 作比较，TMDB 标识 24dp 高 = 其 37.5%；
-///   面积 24×56.0 ≈ 1344dp²，是其 4096dp² 的 32.8%——
-///   两个维度都更小，满足条款的 "less prominent"。
-/// - 除上述预设瓦片和宽屏 rail 外应用图标不再重复绘制：首页 dashboard、
-///   loading/splash 都不传图；窄屏底栏也没有品牌位。
-///
-/// 所以旧注释那句「远小于应用自身 logo 的**任何**展示尺寸」结论对、依据错：可比
-/// 的最大展示尺寸现在是 64×64dp。调整本值前请重跑上述核对——这段是「不得更显眼」
-/// 的唯一书面依据，守卫只能钉住上限（≤32dp），钉不住依据本身。
-const double _kTmdbLogoHeight = 24;
-
-/// 原图 viewBox 是 `0 0 190.24 81.52`；宽度按该比例算死，配合 [BoxFit.contain]
-/// 保证任何主题/文字缩放下都不会被拉伸变形（改比例同样是条款禁止项）。
-const double _kTmdbLogoWidth = _kTmdbLogoHeight * 190.24 / 81.52;
-
-/// TMDB 署名行：官方标识 + 条款原句免责声明，点击跳官网。
-///
-/// 用 [SettingsCustomItem] 而不是 [SettingsActionItem]，只因为 schema 的 `icon`
-/// 槽是 `IconData`、放不下一张图；行本体仍是共享的 [AdaptiveSettingsRow]，
-/// 焦点/密度/折叠行为与其它设置行完全一致。
-Widget _buildTmdbAttributionRow(SettingsContext settingsContext) {
-  return AdaptiveSettingsRow(
-    title: 'TMDB',
-    subtitle: t.about_tmdb_attribution,
-    icon: Icons.movie_outlined,
-    showIcon: true,
-    trailing: SizedBox(
-      height: _kTmdbLogoHeight,
-      width: _kTmdbLogoWidth,
-      child: Image.asset(
-        kTmdbLogoAsset,
-        fit: BoxFit.contain,
-        filterQuality: FilterQuality.medium,
-        semanticLabel: 'TMDB',
-      ),
-    ),
-    onTap: () async => launchUrl(
-      Uri.parse('https://www.themoviedb.org/'),
-      mode: LaunchMode.externalApplication,
-    ),
-  );
-}
-
-Widget _buildRecommendedPackDownloadRow(SettingsContext settingsContext) {
-  final AppModel appModel = settingsContext.appModel;
-  return RecommendedPackDownloadRow(
-    controller: appModel.recommendedPackDownloadController,
-    // 导入编排是库级共享的（[importDownloadedRecommendedPack]）：设置这一行、
-    // 新手引导那一步、首页迷你条三个发起点同一个真相源。
-    onImport: () => unawaited(importDownloadedRecommendedPack(appModel)),
-    // 放弃编排同样库级共享（[confirmAndDiscardRecommendedPack]）：确认框漏在任何
-    // 一个发起点上，那一处就成了不带确认直接删几 GB 的按钮。
-    onDiscard: () => unawaited(
-      confirmAndDiscardRecommendedPack(
-        settingsContext.context,
-        appModel.recommendedPackDownloadController,
-      ),
-    ),
-  );
 }
 
 Widget _buildRuntimeAppVersionRow(SettingsContext settingsContext) {

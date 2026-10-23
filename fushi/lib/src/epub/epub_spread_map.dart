@@ -32,10 +32,6 @@ class SpreadEntry {
 
   bool get isSpread => secondChapterIndex != null;
 
-  /// True when this entry absorbs one or more preceding single-image chapters
-  /// into its opening flow.
-  bool get hasMergedImages => mergedImageChapters.isNotEmpty;
-
   List<int> get chapterIndices {
     if (secondChapterIndex != null) {
       return <int>[chapterIndex, secondChapterIndex!];

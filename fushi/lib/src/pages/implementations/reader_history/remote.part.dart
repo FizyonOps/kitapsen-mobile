@@ -8,8 +8,6 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
         _pageWidget.remoteBookClientLoader;
     if (injected != null) return injected();
 
-    final SyncRepository syncRepo = SyncRepository(appModel.database);
-
     // Kitapsen 书店账号已登录时，书架远端区展示该账号已购的书（书店是本应用的
     // 书源本体，优先于互联与云备份）。未登录（未配置）才往下走互联 / 云。
     final KitapsenClient? kitapsen =
@@ -18,30 +16,6 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
     // Kitapsen: the store is the only remote library (no interconnect / cloud).
     return null;
   }
-
-  /// 是否应该去问远端要书列表。
-  ///
-  /// BUG-1181：漫画书架（`mangaOnly`）和书架是**同一个 State 类**的两个实例，都注册了
-  /// [_onShellTabActivated]，且该回调判的是 `== HomeTab.books`。于是切到书架会触发两次
-  /// 完整拉取，漫画那次的结果在 build 里被 `!_mangaOnly` 直接丢掉——纯浪费一整轮网络。
-  ///
-  /// BUG-1182：`showRemoteEntries` 开关此前只在 build 的 `showRemote` 处生效（本文件
-  /// 上游 `reader_fushi_history_page.dart` 的 remote 门控），拉取照发不误。关掉「显示
-  /// 远端条目」的用户仍然全额付网络代价，只是结果被丢弃。门控前移到取数之前。
-  /// 用 `appModelNoUpdate`（不 watch）：本门控只读 prefsRepo，与 AppModel 的通知无关；
-  /// 而本 getter 会在 prefsRepo 回调等非 build 时机被调用，那里 `ref.watch` 非法。
-  /// 互联完整支持批次：漫画书架不再被排除在远端之外——host 的漫画（format='manga'
-  /// + hasMangaContent）以占位卡出现在漫画书架并可下载（漫画包通道）。BUG-1181 担心
-  /// 的「双份拉取浪费」由共享 TTL 缓存（BUG-1180）吸收：两个书架命中同一份清单。
-  ///
-  /// 「同步与备份 + 互联」模块（[ModuleId.sync]）关掉时同样在此早退：远端书列表来自
-  /// 互联对端 / 云盘后端，属该模块。门控放在取数之前（与 BUG-1182 同一位置）才能做到
-  /// **零网络请求**，而不是拉完再丢。
-  ///
-  /// Kitapsen: the store library is the app's book source, not an optional
-  /// sync feature, so it always loads (the sync module does not exist there).
-  bool get _shouldLoadRemoteBooks =>
-      true;
 
   Future<_RemoteBookState?> _loadRemoteBooks(
       {bool forceRefresh = false}) async {
@@ -88,7 +62,6 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
       // 和正常有声书长得一模一样，按行算就会被当成「本端已有有声书」——于是
       // BUG-2505 好不容易补上的那个补拉入口又被挡掉：用户第一次没下成功之后，
       // 书架上再也找不到第二次下载的地方。
-      final Set<String> localAudiobookKeys = <String>{};
       // 分架过滤（互联完整支持批次）：普通书架 = 可下载 EPUB（hasContent）；漫画
       // 书架 = 可读漫画（format='manga' + hasMangaContent 的单卷漫画包，或
       // hasMangaChapters 的对端在线条目——BUG-2474：后者根目录只有占位 manga.json，
@@ -99,20 +72,7 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
       // 章节式条目加入本机后是一条 runtime=interconnect 的在线书架行，bookKey 由
       // 身份推导（与对端 bookKey 不同），按对端键去重永远命不中——按本机会得到的
       // 键再去一次重，否则加入后占位卡与本地卡并排出现。
-      final List<RemoteBookInfo> notAdopted = <RemoteBookInfo>[
-        for (final RemoteBookInfo book in withContent)
-          if (!book.hasMangaChapters ||
-              !localKeys.contains(OnlineMangaLibraryService.bookKeyOf(
-                InterconnectMangaCatalog.entryFor(book),
-              )))
-            book,
-      ];
-      // 纯 SRT（standalone）远端有声书：仅互联后端有 live 有声书 API。列出对端全部
-      // 有声书，只留 standalone（bookKey 空、身份=uid）且本地无同 uid SrtBook 的项，
-      // 作为可下载占位卡。云盘后端无此 API → 空列表（占位卡不出现，与能力边界一致）。
-      // 漫画书架与有声书无交集，恒空。
-      final ({List<RemoteAudiobookInfo> audiobooks, bool failed}) remoteSrt =
-          (audiobooks: const <RemoteAudiobookInfo>[], failed: false);
+      final List<RemoteBookInfo> notAdopted = withContent;
       final List<RemoteBookInfo> shelfBooks = dedupeRemoteBooks(
         remote: notAdopted,
         localBookKeys: localKeys,
@@ -122,8 +82,6 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
       return _RemoteBookState(
         books: shelfBooks,
         audiobookOnly: const <String, RemoteBookInfo>{},
-        srtAudiobooks: remoteSrt.audiobooks,
-        srtFailed: remoteSrt.failed,
       );
     } catch (e) {
       // spec §2.4 离线语义：拉取失败 → 占位卡不出现（failed 门控），只剩本地库。
@@ -179,8 +137,6 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
     if (!mounted) return;
     ref.invalidate(fushiBooksProvider);
     ref.invalidate(srtBooksProvider);
-    _batchAudiobookInfoFuture = null;
-    _batchAudiobookInfoResult = const <String, _AudiobookInfo>{};
     // 显式下拉 = 用户要最新的：强制穿透 [RemoteLibraryCache] 的 TTL（BUG-1180）。
     final Future<_RemoteBookState?> future = _loadRemoteBooks(
       forceRefresh: true,
@@ -291,11 +247,6 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
       if (!mounted) return;
       await _downloadRemoteBook(book);
     }
-    for (final RemoteAudiobookInfo book in state.srtAudiobooks) {
-      if (!keys.contains(_remoteSrtSelectionKey(book))) continue;
-      if (!mounted) return;
-      await _downloadRemoteSrtAudiobook(book);
-    }
   }
 
   /// 远端占位卡右上角的下载态角标（BUG-1561 书侧补齐）：进行中 → 进度环，失败 →
@@ -346,7 +297,6 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
   ///   有 deleteRemoteBook/deleteRemoteAudiobook）才显示；云盘后端
   ///   （[CloudRemoteBookClient]）无此能力，按类型门控隐藏（真实能力边界）。
   void _showRemoteBookDialog(RemoteBookInfo book) {
-    final RemoteBookClient? client = _remoteBookClient;
     showAppDialog<void>(
       context: context,
       builder: (BuildContext dialogContext) => MediaItemDialogFrame(
@@ -369,85 +319,13 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
               label: t.remote_book_info,
               icon: Icons.info_outline,
               onPressed: () {
-                Navigator.pop(dialogContext);
-                _showRemoteBookInfo(book);
               },
             ),
         ],
-        dangerActions: <DialogDangerAction>[
+        dangerActions: const <DialogDangerAction>[
         ],
       ),
     );
-  }
-
-  /// 展示远端书的基本元数据（书名 + 是否含有声书）。纯信息弹窗。
-  void _showRemoteBookInfo(RemoteBookInfo book) {
-    showAppDialog<void>(
-      context: context,
-      builder: (BuildContext dialogContext) => AlertDialog(
-        title: Text(book.displayName),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            if (book.hasAudiobook) Text(t.remote_book_info_has_audiobook),
-          ],
-        ),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext),
-            child: Text(t.dialog_close),
-          ),
-        ],
-      ),
-    );
-  }
-
-  /// 删除互联后端上的远端书（含其有声书），删完强制刷新远端列表。仅互联后端可达
-  /// （[InterconnectSyncBackend.deleteRemoteBook] / [deleteRemoteAudiobook]）。
-  ///
-  /// 身份键统一用 [RemoteBookInfo.downloadId]（= `bookKey ?? title`），与下载 / 有声书
-  /// 删除同键（BUG-414 定下的纪律）。host 端 `_findBookByTitleOrKey` 两种键都能命中，
-  /// 故对老 host 也安全；此前这里单独传 `book.title` 属遗漏。
-  Future<void> _confirmDeleteRemoteBook(
-    RemoteBookInfo book,
-    InterconnectSyncBackend backend,
-  ) async {
-    // 确认文案是给人看的 → 显示名（BUG-1488）；下面的删除仍走 downloadId 身份键。
-    final bool? confirmed = await _confirmRemoteDelete(book.displayName);
-    if (confirmed != true) return;
-    // BUG-1565：删除是**两次**远端调用（书 + 有声书），必须分别记账。旧实现只有
-    // 一个 failed 布尔：书删成功、有声书删失败时，它弹「无法在对端设备上删除」并
-    // 直接 return 不刷新 —— 两句都是假的。书其实已经从 host 消失了，列表不刷新就
-    // 留一张点了必 404 的幽灵卡，提示语还告诉用户「没删掉」，与实情正好相反。
-    bool bookDeleted = false;
-    bool audiobookFailed = false;
-    try {
-      await backend.deleteRemoteBook(book.downloadId);
-      bookDeleted = true;
-      if (book.hasAudiobook) {
-        await backend.deleteRemoteAudiobook(book.downloadId);
-      }
-    } catch (e, stack) {
-      audiobookFailed = bookDeleted;
-      ErrorLogService.instance
-          .log('ReaderFushiHistoryPage.deleteRemoteBook', e, stack);
-    }
-    if (!mounted) return;
-    // 书删掉了就必须刷新（哪怕有声书没删掉），否则幽灵卡留在原地。
-    if (bookDeleted) _forceRefreshRemoteBooks();
-    if (!bookDeleted) {
-      // 书本身没删掉：书还在原处，提示与实情一致。
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(t.remote_delete_failed)),
-      );
-      return;
-    }
-    if (audiobookFailed) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(t.remote_delete_audiobook_partial)),
-      );
-    }
   }
 
   /// 远端书卡左上角类型徽章：有有声书 → 耳机徽章（与本地 _audiobookBadge 同色，
@@ -455,17 +333,11 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
   /// _cardBadge 一致）。带稳定 key 供 widget 测试定位（TODO-655a）。
   Widget _buildRemoteBookTypeBadge(RemoteBookInfo book, String safeKey) {
     final ColorScheme cs = theme.colorScheme;
-    final Widget badge = book.hasAudiobook
-        ? _cardBadge(
-            icon: Icons.headphones_outlined,
-            background: cs.secondaryContainer,
-            foreground: cs.onSecondaryContainer,
-          )
-        : _cardBadge(
+    final Widget badge = (_cardBadge(
             icon: Icons.menu_book_outlined,
             background: cs.surfaceContainerHighest,
             foreground: cs.onSurfaceVariant,
-          );
+          ));
     return KeyedSubtree(
       key: ValueKey<String>('remote_book_type_badge_$safeKey'),
       child: badge,
@@ -492,19 +364,6 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
 
   Widget _buildRemoteBookCover(RemoteBookInfo book) {
     final String safeKey = _safeRemoteBookKey(book.title);
-    final String? coverPath = book.coverPath;
-    if (coverPath != null && File(coverPath).existsSync()) {
-      return FadeInImage(
-        key: ValueKey<String>('remote_book_cover_$safeKey'),
-        imageErrorBuilder: (_, __, ___) =>
-            _coverPlaceholderIcon(Icons.menu_book_outlined),
-        placeholder: MemoryImage(kTransparentImage),
-        // BUG-959: 降采样解码，已下载书封面同样避免整帧撑爆 ImageCache。
-        image: resizedFileImage(File(coverPath)),
-        alignment: Alignment.topCenter,
-        fit: _bookCardCoverFit,
-      );
-    }
     final String? coverUrl = book.coverUrl;
     // TODO-1235（TODO-961 回归）：封面走互联同款钉扎客户端拉取，不再用 Image.network
     // （Flutter 内部 HttpClient 无 badCertificateCallback，https 自签握手必失败）。
@@ -556,18 +415,6 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
             _runRemoteBookDownload(book, client, target,
                 onProgress: onProgress),
       );
-    } on _RemoteAudiobookException catch (e, stack) {
-      // EPUB 已成功入库，只是有声书没拉到：给专用可见提示（不静默吞），并照常
-      // 刷新书架（EPUB 行已在）。不再走下方成功路径弹「下载成功」。
-      ErrorLogService.instance.log(
-          'ReaderFushiHistoryPage.downloadRemoteAudiobook', e.cause, stack);
-      if (!mounted) return;
-      ref.invalidate(fushiBooksProvider);
-      _refreshSrtBooks();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(t.remote_book_audiobook_download_failed)),
-      );
-      return;
     } catch (e, stack) {
       ErrorLogService.instance
           .log('ReaderFushiHistoryPage.downloadRemoteBook', e, stack);
@@ -585,51 +432,24 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
     );
   }
 
-  /// 把对端的章节式在线漫画收进本机漫画书架（BUG-2474）。
-  ///
-  /// 走 `AppModel.onlineMangaLibraryService(interconnect)` 这条唯一分派点：入库后它
-  /// 就是一条普通的在线书架条目，作品页 / 章节下载 / 阅读器对它零特判。加入前先经
-  /// adapter 刷新一次拿对端已下载的章表（清单条目本身不带章），失败则不建行——空章
-  /// 条目对用户毫无意义，且作品页会再刷新一次，重复建行只会留下一张空卡。
-  ///
-  /// 只有互联对端能端章节（云盘后端的清单不会带 hasMangaChapters），非互联 client
-  /// 走不可达提示而不是静默。
-  Future<void> _adoptRemoteChapteredManga(
-    RemoteBookInfo book,
-    RemoteBookClient client,
-  ) async {
-    if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(t.remote_book_unavailable)),
-    );
-    return;
-  }
-
   /// 远端书下载任务本体（在 [InterconnectDownloadManager] 的任务里跑，**不得
-  /// 依赖本页存活**）：拉 EPUB/漫画包 → 导入落库 → 回填阅读模式/标签/显示名/
-  /// 进度 → 按需接有声书包。DB 写入经 [appModel]（dispose 后回落缓存实例，见
-  /// base_page.dart），与页面生命周期无关；唯一的页面态（BUG-990 有声书空窗
-  /// 覆盖层）经 [_markAudiobookDownloading] 只在 mounted 时 setState。
+  /// 依赖本页存活**）：拉书 → 导入落库 → 回填显示名 / 进度。DB 写入经 [appModel]
+  /// （dispose 后回落缓存实例，见 base_page.dart），与页面生命周期无关。
   Future<void> _runRemoteBookDownload(
     RemoteBookInfo book,
     RemoteBookClient client,
     File dest, {
     void Function(double progress)? onProgress,
   }) async {
-    // BUG-990：在 try 外持有「已标记有声书下载中的本地 bookKey」，供 finally 清理
-    // （localBookKey 在 try 内声明、finally 不可见）。
-    String? markedAudiobookKey;
     try {
       await client.getRemoteBook(
         book.downloadId,
         dest,
         onProgress: (double progress) {
-          // EPUB 占前半段进度，留后半段给有声书（有声书包通常更大）。否则
-          // EPUB 下完后进度卡 100% 但有声书还在拉，用户以为完了。
-          onProgress?.call(book.hasAudiobook ? progress * 0.5 : progress);
+          onProgress?.call(progress);
         },
       );
-      // 后续有声书失败可重试，已经落地的 EPUB/漫画必须复用实际行。
+      // 已经落地的书必须复用实际行。
       final CollectionBookIdentityIndex identities =
           await CollectionBookIdentityIndex.load(appModel.database);
       final String? existingUid = identities.uidByKey[book.downloadId];
@@ -654,121 +474,20 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
           await client.recordDownloaded(book, localBookKey);
         }
       }
-      // 漫画：把 host 端按本阅读模式作为初始值落地（互联完整支持批次；一次性，
-      // 之后两端各自记忆）。best-effort，不阻塞下载主流程。
-      if (localBookKey != null &&
-          book.format == BookFormat.manga.dbValue &&
-          book.mangaReadingMode != null) {
-        try {
-          final FushiDatabase db = appModel.database;
-          await (db.update(db.epubBooks)
-                ..where(($EpubBooksTable t) => t.bookKey.equals(localBookKey)))
-              .write(EpubBooksCompanion(
-            mangaReadingMode: Value<String?>(book.mangaReadingMode),
-          ));
-        } catch (e, stack) {
-          ErrorLogService.instance.log(
-              'ReaderFushiHistoryPage.adoptRemoteMangaReadingMode', e, stack);
-        }
-      }
-      if (localBookKey != null &&
-          book.format == BookFormat.manga.dbValue &&
-          (book.mangaReaderOverrides.isNotEmpty ||
-              book.mangaReaderOverrideDeleted) &&
-          book.mangaReaderOverrideUpdatedAt >= 0) {
-        try {
-          final EpubBookRow? localBook =
-              await appModel.database.getEpubBook(localBookKey);
-          if (localBook != null && localBook.uid.isNotEmpty) {
-            await appModel.database.mergeMangaReaderOverride(
-              localBook.uid,
-              overrides: book.mangaReaderOverrides,
-              updatedAt: book.mangaReaderOverrideUpdatedAt,
-              deleted: book.mangaReaderOverrideDeleted,
-            );
-          }
-        } catch (e, stack) {
-          ErrorLogService.instance.log(
-              'ReaderFushiHistoryPage.adoptRemoteMangaReaderOverride',
-              e,
-              stack);
-        }
-      }
-      // v83：旧「远端书下载后 bookKey 漂移改键迁移」（TODO-616 §0🔴2）已删——
-      // epub 域 entryKey 换稳定 uid 后导入时刻定死；且该路径删除前已恒 no-op
-      //（能建 downloadId 行的写入方早随 shelf_reorder_page 消亡）。
-      // tags 稳健档：LWW 合并 host 传来的标签时钟 + 移除墓碑（删除/改名跨端传播、
-      // 防复活）。host 带 tagsAddedAt/tagTombstones（v2）→ mergeRemoteBookTags；旧 host
-      // 只有 tags 名单 → 合成 addedAt=1 退化为「只增 + 尊重本地移除墓碑」（向后兼容）。
-      // localBookKey 为 null（注入测试 importer 不返 key）即跳过。
-      if (localBookKey != null &&
-          (book.tagsAddedAt.isNotEmpty ||
-              book.tagTombstones.isNotEmpty ||
-              book.tags.isNotEmpty)) {
-        final Map<String, int> remoteAddedAt = book.tagsAddedAt.isNotEmpty
-            ? book.tagsAddedAt
-            : <String, int>{
-                for (final String name in book.tags)
-                  if (name.isNotEmpty) name: 1,
-              };
-        await appModel.database.mergeRemoteBookTags(
-          localBookKey,
-          remoteAddedAt: remoteAddedAt,
-          remoteTombstones: book.tagTombstones,
-        );
-      }
-      // BUG-1488：把 host 上的自定义书名一并落成本地 override，否则下载后的本地卡
-      // 又变回原始书名（本地书的显示名只认 override 偏好，raw title 来自 EPUB 元
-      // 数据）。放在标签之后、进度之前，与它们同样独立吞错。
+      // BUG-1488：把书店书名一并落成本地 override，否则下载后的本地卡又变回原始
+      // 书名（本地书的显示名只认 override 偏好，raw title 来自 EPUB 元数据）。
       await _adoptRemoteBookDisplayTitle(book, localBookKey);
-      // BUG-813：把该书在 host 端的阅读进度 + 有声书播放断点一并拉回本地，手动下载
-      // 远端书时不再丢「阅读记录」（放在有声书下载之前、独立吞错，保证进度回填不被
-      // 有声书失败连带跳过）。
+      // BUG-813：把该书的阅读进度一并拉回本地，下载远端书时不再丢「阅读记录」。
       await _downloadRemoteBookProgress(book, client, localBookKey);
-      // BUG-990：EPUB 已落库、有声书未落库的空窗起点——标记本地 bookKey「有声书下载中」，
-      // 让被 provider 自动刷新顶替出来的本地卡（EPUB / SRT）继续显示加载覆盖层，不露出
-      // 「无转圈的普通书」。清理统一在下方 finally（覆盖成功 / 失败全部出口）。
-      if (localBookKey != null && book.hasAudiobook) {
-        markedAudiobookKey = localBookKey;
-        _markAudiobookDownloading(localBookKey, downloading: true);
-      }
-      // EPUB 导入成功后才接有声书；EPUB 失败已在上面 throw，不会走到这里。
-      // 失败包成 [_RemoteAudiobookException] 上抛：任务在管理器里落 failed 账，
-      // [_downloadRemoteBook] 的 catch 再按「EPUB 已入库」给专用提示。
-      await _downloadRemoteAudiobook(book, client, localBookKey,
-          // 有声书占整书任务进度后半段（0.5..1.0），直报管理器、与页面无关。
-          onProgress: (double progress) =>
-              onProgress?.call(0.5 + progress * 0.5));
     } finally {
-      // 单点清理（覆盖成功 + 有声书失败 + EPUB 失败全部出口）：Dart 的 finally
-      // 在 throw 之后仍执行，故 audiobook 键只在此清一次即可。
-      if (markedAudiobookKey != null) {
-        _markAudiobookDownloading(markedAudiobookKey, downloading: false);
-      }
       // A Kitapsen store EPUB is licensed to this app only: once imported (or
       // on failure) the downloaded file must not linger in the temp folder.
-      if (client is KitapsenClient) {
-        try {
-          if (await dest.exists()) await dest.delete();
-        } on FileSystemException catch (e, stack) {
-          ErrorLogService.instance
-              .log('ReaderFushiHistoryPage.deleteKitapsenDownload', e, stack);
-        }
+      try {
+        if (await dest.exists()) await dest.delete();
+      } on FileSystemException catch (e, stack) {
+        ErrorLogService.instance
+            .log('ReaderFushiHistoryPage.deleteKitapsenDownload', e, stack);
       }
-    }
-  }
-
-  /// BUG-990 空窗覆盖层的页面态开关。任务活在 app 级管理器里、可能在页面
-  /// dispose 后仍推进到这里：未挂载时只改集合不 setState（State 实例随任务闭包
-  /// 存活，安全；重建的新页面实例自带空集合，覆盖层缺席只是次要视觉损失）。
-  void _markAudiobookDownloading(String bookKey, {required bool downloading}) {
-    void apply() => downloading
-        ? _downloadingAudiobookKeys.add(bookKey)
-        : _downloadingAudiobookKeys.remove(bookKey);
-    if (mounted) {
-      _rebuild(apply);
-    } else {
-      apply();
     }
   }
 
@@ -846,342 +565,7 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
 
   }
 
-  /// EPUB 导入成功后，按需补下该书的有声书包（750a 手动下载补音频）。
-  ///
-  /// 仅当远端书带有声书（[RemoteBookInfo.hasAudiobook]）才动作；下载经
-  /// [InterconnectSyncBackend.getRemoteAudiobook]（live API 仅存在于互联后端，
-  /// 云盘后端 [CloudRemoteBookClient] 无此能力，按类型分支跳过——这是真实能力
-  /// 边界，非掩盖性特例）。解包经 [SyncAssetPackageService.importAudioDatabasePackage]，
-  /// 用刚导入的本地 EPUB 的 [localBookKey] 作 `bookKeyOverride` 把音频绑定到本地书。
-  ///
-  /// 下载用的远端 bookKey = [RemoteBookInfo.downloadId]（= host 传来的真实
-  /// `bookKey ?? title`），与 EPUB 下载（getRemoteBook(book.downloadId)）同源，
-  /// 即 host 端 `Audiobooks.bookKey`（= host EPUB 的 bookKey）。不要再按书名
-  /// 重算 ttu 文件名——书名重名加后缀或迁移时会算出 host 不存在的 key 致 404
-  /// （BUG-414 回归根因）。
-  ///
-  /// 失败处理：有声书下载/导入失败抛出 [_RemoteAudiobookException]，由调用方
-  /// 转成可见错误提示（不静默吞）；EPUB 已成功入库，故不回滚 EPUB。
-  Future<void> _downloadRemoteAudiobook(
-    RemoteBookInfo book,
-    RemoteBookClient client,
-    String? localBookKey, {
-    void Function(double progress)? onProgress,
-  }) async {
-    if (!book.hasAudiobook) return;
-    // 注入式测试钩子：绕过 backend 类型门，直接驱动下载/导入接线（与
-    // [_pageWidget.remoteBookImporter] 同模式，让接线在 widget 测试可落地）。
-    final Future<File> Function(String remoteBookKey)? injectedFetch =
-        _pageWidget.remoteAudiobookFetcher;
-    final Future<void> Function(File package, String? bookKeyOverride)?
-        injectedImport = _pageWidget.remoteAudiobookImporter;
-
-    // 生产路径：有声书 live API 仅存在于互联后端。云盘后端无此能力，按类型分支
-    // 跳过（真实能力边界）。注入钩子缺省时才据此门控。
-    return;
-  }
-
-  /// 本地已有这本书、只从对端补拉它的有声书（BUG-2505）。
-  ///
-  /// 「只下到书、没下到有声书」（有声书包拉取失败 / host 后来才配音）之后，远端卡按
-  /// 「本端已有」被整条藏掉、配套有声书又不是 standalone 占位卡，书架上此前没有任何
-  /// 补拉入口；唯一的自动补拉藏在「上传有声书文件」开关驱动的 sweep 里。这里给本地
-  /// 书卡菜单一个显式动作：任务挂 app 级 [InterconnectDownloadManager]（键与整书下载
-  /// 同为 [InterconnectDownloadManager.bookTaskId]——同一本书的整书任务与补音频任务
-  /// 互斥，不会并跑两条），拉包 + 解包复用 [_downloadRemoteAudiobook]，随后与整书
-  /// 下载同样回填 host 端听书断点（[_downloadRemoteBookProgress] 的有声书段）。
-  Future<void> _downloadRemoteAudiobookOnly(
-    RemoteBookInfo book,
-    String localBookKey,
-  ) async {
-    final RemoteBookClient? client = _remoteBookClient;
-    if (client == null) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(t.remote_book_unavailable)),
-      );
-      return;
-    }
-    final InterconnectDownloadManager manager =
-        ref.read(interconnectDownloadManagerProvider);
-    if (manager
-        .isRunning(InterconnectDownloadManager.bookTaskId(book.downloadId))) {
-      return;
-    }
-    // 管理器要一个 dest 作任务登记；本任务的临时包路径由 [_downloadRemoteAudiobook]
-    // 自己解析并用完即删，这里传同一路径只为登记。
-    final File dest = await _remoteAudiobookDestination(book);
-    try {
-      _markAudiobookDownloading(localBookKey, downloading: true);
-      await manager.startBookDownload(
-        downloadId: book.downloadId,
-        title: book.displayName,
-        dest: dest,
-        run: (File target, {void Function(double progress)? onProgress}) =>
-            _downloadRemoteAudiobook(book, client, localBookKey,
-                onProgress: onProgress),
-      );
-    } catch (e, stack) {
-      final Object cause = e is _RemoteAudiobookException ? e.cause : e;
-      ErrorLogService.instance.log(
-          'ReaderFushiHistoryPage.downloadRemoteAudiobookOnly', cause, stack);
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(t.remote_book_audiobook_download_failed)),
-      );
-      return;
-    } finally {
-      _markAudiobookDownloading(localBookKey, downloading: false);
-    }
-    // 与整书下载同样把 host 端听书断点拉回来（best-effort，独立吞错）。
-    if (client is InterconnectSyncBackend) {
-      try {
-        final ({int positionMs, int updatedAtMs}) pos =
-            await client.remoteAudiobookPosition(book.downloadId);
-        if (pos.updatedAtMs > 0) {
-          await appModel.database.setPrefTyped<int>(
-              audiobookPositionPrefKey(localBookKey), pos.positionMs);
-          await appModel.database.setPrefTyped<int>(
-              audiobookPositionAtPrefKey(localBookKey), pos.updatedAtMs);
-        }
-      } catch (e, stack) {
-        ErrorLogService.instance.log(
-            'ReaderFushiHistoryPage.downloadRemoteAudiobookPosition', e, stack);
-      }
-    }
-    if (!mounted) return;
-    ref.invalidate(fushiBooksProvider);
-    _refreshSrtBooks();
-    // 远端候选表（audiobookOnly）只在 _loadRemoteBooks 里算：不重载一次，菜单会
-    // 一直留着「从对端下载有声书」到切 tab 为止。TTL 内不打网络。
-    _refreshRemoteBooks();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(t.remote_book_downloaded)),
-    );
-  }
-
-  /// 拉取对端「纯 SRT（standalone）有声书」清单：仅互联后端有 live 有声书 API，
-  /// 只留 standalone（bookKey 空、身份=uid）且本地无同 uid SrtBook 的项作占位卡。
-  /// 云盘后端无此能力 → 空列表（占位卡不出现，与真实能力边界一致，不静默 fail-open）。
-  ///
-  /// BUG-1693 批审计 P3：清单拉取**失败**不再降级成「空」——返回 `failed: true`，
-  /// 由 [_RemoteBookState.srtFailed] 汇入下拉刷新的失败提示；旧实现返回空列表，
-  /// 有声书占位卡静默消失、与「对端真没有」不可区分。
-  Future<({List<RemoteAudiobookInfo> audiobooks, bool failed})>
-      _loadStandaloneRemoteSrtAudiobooks(
-    RemoteBookClient client, {
-    bool forceRefresh = false,
-  }) async {
-    return (audiobooks: const <RemoteAudiobookInfo>[], failed: false);
-  }
-
-  /// 纯 SRT 远端有声书占位卡：耳机类型徽章 + 云角标 + 下载按钮/进度。短按/下载按钮
-  /// 走 [_downloadRemoteSrtAudiobook]（拉包 → importAudioDatabasePackage 纯 SRT 分支
-  /// → 落 SrtBooks 行），完成后原地变本地 SRT 卡（重拉远端列表按 uid dedup 隐藏占位）。
-  /// [focusIdPrefix]：同 [_buildRemoteBookCard]，合集详情页传前缀隔离焦点 id。
-  Widget _buildRemoteSrtCard(RemoteAudiobookInfo book,
-      {bool selectable = true, String focusIdPrefix = ''}) {
-    final String title = book.title ?? book.identity;
-    final String safeKey = _safeRemoteBookKey(title);
-    final ColorScheme cs = theme.colorScheme;
-    return _bookCardShell(
-      slotAspectRatio: kShelfBookCardAspectRatio,
-      cardKey: ValueKey<String>('remote_srt_card_$safeKey'),
-      focusId: FushiFocusId('${focusIdPrefix}reader-shelf-remote-srt-$safeKey'),
-      // BUG-2458：与远端 EPUB 卡同规则，多选态可勾选、批量下载。
-      selectionKey: selectable ? _remoteSrtSelectionKey(book) : null,
-      onTap: () => _downloadRemoteSrtAudiobook(book),
-      // 长按 / 右键：弹动作面板，与远端 EPUB 卡（[_showRemoteBookDialog]）一致
-      // （巡检 PR-3——旧行为长按直接开始下载，重手势与轻点击等价且不可预览动作）。
-      onLongPress: () => _showRemoteSrtDialog(book),
-      child: _bookCardLayout(
-        title: title,
-        cover: Stack(
-          fit: StackFit.expand,
-          children: <Widget>[
-            _coverPlaceholderIcon(Icons.headphones_outlined),
-            PositionedDirectional(
-              bottom: 6,
-              start: 6,
-              child: _remoteCloudBadge(
-                key: ValueKey<String>('remote_srt_cloud_badge_$safeKey'),
-              ),
-            ),
-          ],
-        ),
-        // 多选态左上角让位给壳的勾选框（与远端 EPUB 卡同规则）。
-        leadingBadge: _selectionMode && selectable
-            ? null
-            : KeyedSubtree(
-                key: ValueKey<String>('remote_srt_type_badge_$safeKey'),
-                child: _cardBadge(
-                  icon: Icons.headphones_outlined,
-                  background: cs.secondaryContainer,
-                  foreground: cs.onSecondaryContainer,
-                ),
-              ),
-        coverBadge: _remoteBookTaskBadge(
-              taskId:
-                  InterconnectDownloadManager.srtAudiobookTaskId(book.identity),
-              safeKey: safeKey,
-              keyPrefix: 'remote_srt',
-            ) ??
-            IconButton.filledTonal(
-              key: ValueKey<String>('remote_srt_download_$safeKey'),
-              tooltip: t.remote_book_download,
-              iconSize: 18,
-              visualDensity: VisualDensity.compact,
-              icon: const Icon(Icons.download_outlined),
-              onPressed: _selectionMode && selectable
-                  ? null
-                  : () => _downloadRemoteSrtAudiobook(book),
-            ),
-      ),
-    );
-  }
-
-  /// 长按 / 桌面右键纯 SRT 远端占位卡：弹与远端 EPUB 卡一致的动作面板
-  /// （[MediaItemDialogFrame] 复用）。
-  ///
-  /// 动作：「下载」+「删除」。此处曾注明「互联删除 API 面向 EPUB 关联包，standalone
-  /// SRT 不接删除，真实能力边界」——那条描述偏保守：`DELETE /api/library/audiobooks/
-  /// <identity>` 的 host 端 identity 解析同时查 `Audiobooks(bookKey)` 与 `SrtBooks(uid)`，
-  /// 传 uid 本就能命中，缺的只是这个 UI 入口。
-  void _showRemoteSrtDialog(RemoteAudiobookInfo book) {
-    final String title = book.title ?? book.identity;
-    final RemoteBookClient? client = _remoteBookClient;
-    showAppDialog<void>(
-      context: context,
-      builder: (BuildContext dialogContext) => MediaItemDialogFrame(
-        cover: _coverPlaceholderIcon(Icons.headphones_outlined),
-        title: title,
-        showLaunchAction: false,
-        quickActions: <DialogQuickAction>[
-          DialogQuickAction(
-            label: t.remote_book_download,
-            icon: Icons.download_outlined,
-            onPressed: () {
-              Navigator.pop(dialogContext);
-              _downloadRemoteSrtAudiobook(book);
-            },
-          ),
-        ],
-        dangerActions: <DialogDangerAction>[
-        ],
-      ),
-    );
-  }
-
-  /// 删除互联对端 host 上的纯 SRT 有声书（身份键 = uid），删完强制刷新远端列表。
-  /// 反馈与 [_confirmDeleteRemoteBook] 同款：失败必给可见提示，不静默。
-  Future<void> _confirmDeleteRemoteSrt(
-    RemoteAudiobookInfo book,
-    InterconnectSyncBackend backend,
-  ) async {
-    final String title = book.title ?? book.identity;
-    final bool? confirmed = await _confirmRemoteDelete(title);
-    if (confirmed != true) return;
-    bool failed = false;
-    try {
-      await backend.deleteRemoteAudiobook(book.identity);
-    } catch (e, stack) {
-      failed = true;
-      ErrorLogService.instance
-          .log('ReaderFushiHistoryPage.deleteRemoteSrt', e, stack);
-    }
-    if (!mounted) return;
-    if (failed) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(t.remote_delete_failed)),
-      );
-      return;
-    }
-    _forceRefreshRemoteBooks();
-  }
-
-  /// 远端删除的统一二次确认框。
-  ///
-  /// 文案**不能**用 `sync_compare_delete_confirm`（「本地数据保留」）：这里的卡片
-  /// 按构造就是本机没有的条目 —— `dedupeRemoteBooks` 把标题键已存在于本地的远端
-  /// 条目全部滤掉了。所以「本地数据保留」保留的是空集，读起来却像「删了本机还留
-  /// 着一份」，而实际确认之后对端的 DB 行、阅读进度、书签、有声书和整个 extractDir
-  /// 页图目录全没了，用户手上一份都不剩。用说实话的对端专用文案。
-  Future<bool?> _confirmRemoteDelete(String name) {
-    return showAppDialog<bool>(
-      context: context,
-      builder: (BuildContext dialogContext) => AlertDialog(
-        title: Text(name),
-        content: Text(t.sync_peer_book_delete_confirm(name: name)),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext, false),
-            child: Text(t.dialog_cancel),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext, true),
-            child: Text(t.dialog_delete),
-          ),
-        ],
-      ),
-    );
-  }
-
-  /// 远端删除后的列表重取：**必须** forceRefresh 穿透 [RemoteLibraryCache] 的 TTL。
-  /// 非强制的 [_refreshRemoteBooks] 会命中缓存，让刚删掉的条目在 TTL 内继续显示成
-  /// 幽灵卡片（远端书删除的既有毛病）。
-  void _forceRefreshRemoteBooks() {
-    // 强刷 = 该来源整库可能已变（删远端书等）：全域失效（不止 books——
-    // activity 槽不失效的话，首页时间轴 TTL 内继续显示已删条目的活动）。
-    final String? sourceId = _remoteBookClient?.remoteLibrarySourceId;
-    if (sourceId != null) _remoteCache.invalidateSource(sourceId);
-    _rebuild(() {
-      _remoteBooksFuture = _loadRemoteBooks(forceRefresh: true);
-    });
-  }
-
-  /// 下载纯 SRT 远端有声书：`getRemoteAudiobook(identity=uid)` 拉 `.fushiaudio` 包 →
-  /// `importAudioDatabasePackage` 纯 SRT 分支落 SrtBooks 行（bookKey 恒空、cue 走 uid）。
-  /// 只互联后端可达（云盘无 live 有声书 API）。完成后刷新书架（占位卡按 uid dedup 隐藏）。
-  /// 任务挂 app 级 [InterconnectDownloadManager]（BUG-1561 书侧补齐）：离页后
-  /// 照样推进，失败态由占位卡失败角标恒定可见。
-  Future<void> _downloadRemoteSrtAudiobook(RemoteAudiobookInfo book) async {
-    final RemoteBookClient? client = _remoteBookClient;
-    if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(t.remote_book_unavailable)),
-    );
-    return;
-  }
-
-  /// 纯 SRT 有声书包下载临时目标文件（`.fushiaudio`）。
-  Future<File> _remoteSrtDestination(RemoteAudiobookInfo book) async {
-    final Directory temp = await getTemporaryDirectory();
-    final Directory dir =
-        Directory(p.join(temp.path, 'hibiki_remote_audiobooks'));
-    await dir.create(recursive: true);
-    final String safeKey = _safeRemoteBookKey(book.title ?? book.identity);
-    return File(p.join(dir.path, 'srt_$safeKey.fushiaudio'));
-  }
-
-  /// 有声书包下载临时目标文件（`.fushiaudio`）。
-  Future<File> _remoteAudiobookDestination(RemoteBookInfo book) async {
-    final Directory temp = await getTemporaryDirectory();
-    final Directory dir =
-        Directory(p.join(temp.path, 'hibiki_remote_audiobooks'));
-    await dir.create(recursive: true);
-    return File(
-        p.join(dir.path, '${_safeRemoteBookKey(book.title)}.fushiaudio'));
-  }
-
-  /// 本地有声书解包落盘根目录（与 [LocalLibraryHostService] 同源
-  /// `<appDirectory>/audiobooks`，确保导入位置与 host 导入一致）。
-  Directory _audiobookDatabaseRoot() =>
-      Directory(p.join(appModel.appDirectory.path, 'audiobooks'));
-
   Future<File> _remoteBookDestination(RemoteBookInfo book) async {
-    final Future<File> Function(RemoteBookInfo book)? injected =
-        _pageWidget.remoteBookDownloadDestination;
-    if (injected != null) return injected(book);
     final Directory temp = await getTemporaryDirectory();
     final Directory dir = Directory(p.join(temp.path, 'hibiki_remote_books'));
     await dir.create(recursive: true);
@@ -1193,11 +577,6 @@ extension _ReaderHistoryRemote on _ReaderFushiHistoryPageState {
   /// importer 不返回 key 时返回 null（音频接线据此降级跳过 override 绑定）。
   Future<String?> _importRemoteBookFile(File file,
       {String? mangaTitleHint}) async {
-    final Future<String?> Function(File file)? injected =
-        _pageWidget.remoteBookImporter;
-    if (injected != null) {
-      return injected(file);
-    }
     // A Kitapsen book without an EPUB arrives as its PDF.
     if (await _isPdfFile(file)) {
       return PdfImporter.importFromPath(
@@ -1237,9 +616,7 @@ class _RemoteBookState {
   const _RemoteBookState({
     required this.books,
     this.audiobookOnly = const <String, RemoteBookInfo>{},
-    this.srtAudiobooks = const <RemoteAudiobookInfo>[],
     this.failed = false,
-    this.srtFailed = false,
   });
 
   final List<RemoteBookInfo> books;
@@ -1249,29 +626,9 @@ class _RemoteBookState {
   /// 本端已有去重藏掉），它们的有声书只能从本地书卡菜单的「从对端下载有声书」补拉。
   final Map<String, RemoteBookInfo> audiobookOnly;
 
-  /// 纯 SRT（standalone）远端有声书（互联后端 listRemoteAudiobooks 的 standalone 项，
-  /// 本地无同 uid 的 SrtBook）。云盘后端无 live 有声书 API → 恒空。
-  final List<RemoteAudiobookInfo> srtAudiobooks;
-
   /// 远端目录拉取失败（离线/未配对/后端不可达）：占位卡不渲染（spec §2.4）。
   final bool failed;
 
-  /// 纯 SRT 有声书清单**单独**拉取失败（书清单成功）：书占位卡照常渲染、有声书
-  /// 占位卡缺席，但下拉刷新据此给可见失败提示（BUG-1693 批审计 P3——此前被
-  /// 降级成「空」，静默消失）。与 [failed] 分开存：书清单失败才意味着来源整体
-  /// 不可达（门控全部占位卡），有声书清单失败不该连坐藏掉拉取成功的书。
-  final bool srtFailed;
-
-  /// 任一远端清单（书 / standalone 有声书）拉取失败——下拉刷新失败提示的口径。
-  bool get anyFailed => failed || srtFailed;
-}
-
-/// 有声书下载/导入失败的内部信号：[_downloadRemoteBook] 据此与 EPUB 失败区分，
-/// 弹专用提示而非通用「下载失败」。[cause] 是底层真实异常（已记日志）。
-class _RemoteAudiobookException implements Exception {
-  const _RemoteAudiobookException(this.cause);
-  final Object cause;
-
-  @override
-  String toString() => '_RemoteAudiobookException: $cause';
+  /// 远端清单拉取失败——下拉刷新失败提示的口径。
+  bool get anyFailed => failed;
 }

@@ -1,15 +1,11 @@
 import 'dart:io' show Platform;
 
 import 'package:flutter/material.dart';
-import 'package:fushi/src/models/kitapsen_edition.dart';
 import 'package:fushi/src/models/preferences_repository.dart';
-import 'package:fushi/src/reader/reader_control_layout.dart';
-import 'package:fushi/src/reader/reader_control_layout_editor.dart';
 import 'package:fushi/src/reader/reader_settings.dart';
 import 'package:fushi/src/settings/settings_actions.dart';
 import 'package:fushi/src/settings/settings_context.dart';
 import 'package:fushi/src/settings/settings_destination.dart';
-import 'package:fushi/src/settings/settings_schema_listening.dart';
 import 'package:fushi/utils.dart';
 
 SettingsDestination buildReadingDestination() {
@@ -23,11 +19,6 @@ SettingsDestination buildReadingDestination() {
       c.readerSource.readerViewMode == 'paginated';
   bool isContinuous(SettingsContext c) =>
       c.readerSource.readerViewMode == 'continuous';
-  bool isVisualNovel(SettingsContext c) =>
-      c.readerSource.readerViewMode == 'vn';
-  bool isVisualNovelSentenceMode(SettingsContext c) =>
-      isVisualNovel(c) &&
-      c.readerSource.readerVisualNovelScreenMode == 'sentences';
   return SettingsDestination(
     id: SettingsDestinationId.reading,
     title: t.settings_destination_reading,
@@ -704,31 +695,6 @@ SettingsDestination buildReadingDestination() {
             },
           ),
         ],
-      ),
-    ],
-  );
-}
-
-/// 阅读器按钮布局编辑器（设置页 / 书内设置抽屉共用）：读 appModel 当前布局，改动
-/// 立刻写穿偏好；桌面按鼠标手感、其余按触屏。
-Widget buildReaderControlLayoutEditor(SettingsContext context) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: <Widget>[
-      Padding(
-        padding: const EdgeInsets.only(bottom: 8),
-        child: Text(
-          t.reader_control_editor_hint,
-          style: Theme.of(context.context).textTheme.bodySmall,
-        ),
-      ),
-      ReaderControlLayoutEditor(
-        layout: context.appModel.readerControlLayout,
-        onLayoutChanged: (ReaderControlLayout layout) async {
-          await context.appModel.setReaderControlLayout(layout);
-          notifyReaderChromeReanchored(context);
-        },
-        isTouchControls: !isDesktopPlatform,
       ),
     ],
   );

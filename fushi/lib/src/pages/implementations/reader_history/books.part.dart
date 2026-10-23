@@ -108,7 +108,6 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
               )
             : null,
         // BUG-990：两阶段下载末段卡已变 SRT 卡但有声书包仍在下 → 继续显示加载覆盖层。
-        loadingOverlay: _audiobookDownloadingOverlay(book.bookKey),
       ),
     );
   }
@@ -135,10 +134,6 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
     if (overrideCover != null) {
       return _buildFileCover(overrideCover.path, fallbackIcon);
     }
-    final String? ownCoverPath = _existingCoverFilePath(book.coverPath);
-    if (ownCoverPath != null) {
-      return _buildFileCover(ownCoverPath, fallbackIcon);
-    }
     if (book.bookKey.isNotEmpty) {
       final Widget? linkedCover = _buildCoverFromUri(
         epubCoverUri,
@@ -150,10 +145,7 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
   }
 
   MediaItem _srtBookMediaItem(SrtBook book) {
-    final String? ownCoverPath = _existingCoverFilePath(book.coverPath);
-    final String? imageUrl = ownCoverPath != null
-        ? Uri.file(ownCoverPath).toString()
-        : _epubCoverUrisByBookKey[book.bookKey];
+    final String? imageUrl = _epubCoverUrisByBookKey[book.bookKey];
     // BUG-728：EPUB-backed 有声书在书架只以 SRT 卡出现（其 EPUB 卡被过滤），进度
     // 复用同一本 EpubBooks 行已算好的 position/duration（含听书 normCharOffset 回退）。
     // 无 EPUB backing 的纯字幕书没有字符进度真值，退回 0/1（进度条按 [_srtBookHasProgress]
@@ -209,7 +201,6 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
     final String bookKey = book.bookKey;
     final MediaItem item = _srtBookMediaItem(book);
     // 与 EPUB 卡菜单同款：一次快照，逐条按模块过滤通往别的模块的项。
-    final ModuleVisibility modules = _moduleVisibility;
     return [
       DialogDangerAction(
         label: t.dialog_delete,
@@ -366,21 +357,6 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
     return AudiobookStorage.hasMissingPaths(paths);
   }
 
-  /// 重新定位断链音频：让用户重选文件 → 重写 [SrtBook.audioPaths] → 落库。
-  /// 复用与导入一致的「引用原路径」语义（重选的桌面真实路径直接存）。
-  Future<void> _relocateSrtBookAudio(SrtBook book) async {
-    final List<String> picked = await _pickSrtAudioFiles();
-    if (picked.isEmpty || !mounted) return;
-    book.audioPaths = picked;
-    await SrtBookRepository(appModel.database).save(book);
-    if (mounted) {
-      _refreshSrtBooks();
-      _rebuild(() {});
-      FushiToast.show(
-          msg: t.audiobook_relocate_done, severity: ToastSeverity.success);
-    }
-  }
-
   /// 全选 / 反选的候选散卡键 = **屏幕上真的画出来的那些散卡**，直接取每帧
   /// [MediaSelectionController.setVisibleOrder] 登记的可见散卡序（那份就是按
   /// `groupByCollections` 折叠后剩下的散卡组逐项推出来的）。
@@ -492,12 +468,8 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
     final String message = hidden == 0
         ? baseMessage
         : '$baseMessage\n\n${t.batch_hidden_by_filter_note(n: hidden)}';
-    // TODO-2470 死角②：勾选框只在它真能兑现时才摆出来，两个条件缺一不可——
-    //   ① 本轮真会删媒体本体（纯解散合集 mediaCount==0 只解除分组，scope 无处可用，
-    //      合集自身的删除传播走 collection_sync_engine；与视频页同一判断）；
-    //   ② 本机存在删除传播通道（纯本地零网络判据）。
-    final bool canSyncEverywhere = mediaCount > 0 &&
-        await hasDeletionPropagationChannel(SyncRepository(appModel.database));
+    // TODO-2470 死角②：勾选框只在本机存在删除传播通道时才摆出来；Kitapsen 没有
+    // 任何同步通道，所以恒不摆。
     // 「同时删除本地文件」只在选中散卡里至少有一条**显式登记了 app 目录之外的
     // 原始音频**时才摆出来（书本体没有可删原件，见 ReaderFushiSource.deleteBook）。
     final bool anyLocalFiles =
@@ -523,7 +495,7 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
             : buildDeletionDisclosure(
                 target: DeletionDisclosureTarget.shelfBook,
               ),
-        showSyncScope: canSyncEverywhere,
+        showSyncScope: false,
         localFilesSubtitle:
             anyLocalFiles ? t.delete_local_files_audio_desc : null,
         // 纯解散合集不删任何书，统计无从谈起；全是纯字幕书同样不摆。
@@ -615,7 +587,6 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
   /// 键），或配对了 EPUB 的字幕书（bookKey 非空）。纯字幕书（bookKey 空）不算——
   /// 它的 legacy 统计与墓碑只能按 title 定位，删它会连坐同名 EPUB 的统计。
   Future<bool> _selectionHasStatisticsTarget(Set<String> keys) async {
-    final FushiDatabase db = appModel.database;
     for (final String key in keys) {
       if (_parseBookKey(key) != null) return true;
       continue;
@@ -664,7 +635,7 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
       for (final EpubBookMeta row in epubBooks)
         if (row.uid.isNotEmpty) row.bookKey: row.uid,
     };
-    final List<SrtBook> srtBooks = const <SrtBook>[];
+    const List<SrtBook> srtBooks = <SrtBook>[];
     final List<MediaCollectionRow> collections =
         await db.getAllMediaCollections();
     if (!mounted) return false;
@@ -679,8 +650,6 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
         if (remoteState != null) ...<String>[
           for (final RemoteBookInfo book in remoteState.books)
             _remoteBookSelectionKey(book),
-          for (final RemoteAudiobookInfo book in remoteState.srtAudiobooks)
-            _remoteSrtSelectionKey(book),
         ],
       },
       collections: <int>{for (final MediaCollectionRow c in collections) c.id},
@@ -974,35 +943,6 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
     }
   }
 
-  /// 该书当前是否就是活动后台听书会话。
-  bool _isBackgroundListeningBook(String bookKey) {
-    return false;
-  }
-
-  /// 书架长按菜单切「后台听书」（TODO-291 阶段2）。
-  /// - 该书已是活动会话 → 停止后台听书。
-  /// - 否则 → 启动该书的后台听书会话（无正在播用该书启动；有别的书在播则顶掉切到该书），
-  ///   并拉起悬浮窗。无可播放音频时提示。
-  Future<void> _toggleFloatingLyricFromShelf(String bookKey) async {
-    Navigator.pop(context);
-    final BackgroundListenResult result =
-        await appModel.startBackgroundListening(bookKey);
-    if (!mounted) return;
-    switch (result) {
-      case BackgroundListenResult.started:
-        break;
-      case BackgroundListenResult.noAudio:
-        FushiToast.show(
-            msg: t.floating_lyric_no_audio, severity: ToastSeverity.error);
-        break;
-      case BackgroundListenResult.loadFailed:
-        FushiToast.show(
-            msg: t.audiobook_load_error, severity: ToastSeverity.error);
-        break;
-    }
-    _rebuild(() {});
-  }
-
   Future<void> _confirmDeleteEpub(MediaItem item, String bookKey) async {
     Navigator.pop(context);
     final bool hasLocalFiles = await ReaderFushiSource.instance
@@ -1099,271 +1039,6 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
     );
   }
 
-  /// 书架卡片菜单「重新导入」（字幕书）：音频 + 字幕两半一起换。
-  ///
-  /// **先按播放侧真相分流**，这是旧实现最要命的 bug：EPUB 有声书除了 `audiobooks`
-  /// 行还会落一条配对的 `srt_books` 行（`srtbook_epub_<bookKey>`，TODO-894 为打通
-  /// 同步导出），书架把它渲染成 SRT 卡片，于是这个菜单项也出现在**有声书**卡上。
-  /// 旧实现无条件走 [SrtBookRepository.replaceAudio] 写 `SrtBooks.audioPaths`，
-  /// 而 [AudiobookSessionLauncher.resolve] 是**先查 `Audiobooks` 再回退 `SrtBooks`**
-  /// 的——命中 Audiobooks 就返回，刚写的新音频永远读不到。用户报的「导入音频没用」
-  /// 就是这条：写了，但播放侧根本不看那一列。
-  ///
-  /// 判据用「该 bookKey 是否有 `audiobooks` 行」而不是 uid 形态：它正是 resolve 的
-  /// 判据本身，与播放侧逐字同源，不会因为 uid 命名将来变形而悄悄漂开。
-  Future<void> _openSrtBookReimport(SrtBook book) async {
-    final String bookKey = book.bookKey;
-    final AudiobookRow? audiobookRow = bookKey.isEmpty
-        ? null
-        : await appModel.database.getAudiobookByBookKey(bookKey);
-    if (!mounted) return;
-
-    if (audiobookRow != null) {
-      // 播放侧读 Audiobooks：交给管那张表的对话框（它音频/字幕两半都能换）。
-      await _openAudiobookImportForKey(bookKey);
-      return;
-    }
-
-    final SrtBookRepository repo = SrtBookRepository(appModel.database);
-    final SrtBookReimportOutcome? outcome =
-        await showAppDialog<SrtBookReimportOutcome>(
-      context: context,
-      builder: (_) => SrtBookReimportDialog(
-        book: book,
-        db: appModel.database,
-        repo: repo,
-      ),
-    );
-    if (outcome == null || !mounted) return;
-    _refreshSrtBooks();
-    ref.invalidate(fushiBooksProvider);
-    _rebuild(() {});
-  }
-
-  Future<List<String>> _pickSrtAudioFiles() async {
-    final Set<String> audioExtensions = AudiobookStorage.audioExtensions
-        .map((String ext) => ext.replaceFirst('.', ''))
-        .toSet();
-    final List<String> paths = await pickRealFilePaths(
-      context: context,
-      appModel: appModel,
-      allowedExtensions: audioExtensions,
-    );
-    paths.sort(compareAudioFilePath);
-    return paths;
-  }
-
-  Future<void> _openAudiobookImport(MediaItem item, String bookKey) async {
-    Navigator.pop(context);
-    await _openAudiobookImportForKey(bookKey);
-  }
-
-  /// 打开 [AudiobookImportDialog] 本体（调用方负责先收起自己的菜单）。
-  /// 卡菜单入口与字幕书「重新导入」的分流入口共用，避免第二处手抄 extractDir 查询。
-  Future<void> _openAudiobookImportForKey(String bookKey) async {
-    final EpubBookRow? row = await appModel.database.getEpubBook(bookKey);
-    if (!mounted) return;
-    await showAppDialog<bool>(
-      context: context,
-      builder: (_) => AudiobookImportDialog(
-        bookKey: bookKey,
-        repo: AudiobookRepository(appModel.database),
-        extractDir: row?.extractDir,
-      ),
-    );
-    if (mounted) {
-      _refreshSrtBooks();
-      _rebuild(() {});
-    }
-  }
-
-  /// 文件拖入书架后的路由：分类 → 命中测试 → 决策 → 打开对应对话框/提示。
-  /// [globalPosition] 为 [FushiFileDropTarget] 透出的 Flutter global/view 坐标，
-  /// 可直接与卡片登记表（同坐标系屏幕矩形）命中测试。
-  Future<void> _handleShelfDrop(
-    List<String> paths,
-    Offset globalPosition,
-  ) async {
-    final ModalRoute<dynamic>? route = ModalRoute.of(context);
-    if (route != null && !route.isCurrent) return;
-
-    // 图片型 .zip（一包页图的漫画）与 Yomitan 词典包同形，要真读包才分得出——与导入
-    // 对话框的分派同一判据，两条入口对「这算不算漫画」回答一致。但那次「真读包」是
-    // **同步解整个压缩包**，原来就长在下面 classifyDroppedFiles 的注入谓词里，也就
-    // 长在 desktop_drop 回调的同步栈上：拖个大包进来 UI 线程直接卡死。先离线程一次
-    // 性判完（[probeDroppedImageArchives]），再把结果当同步谓词喂回去，分类函数保持
-    // 纯函数不变。
-    // Kitapsen has no manga, so dropped archives are never probed for pages.
-    final Map<String, bool> imageArchives = const <String, bool>{};
-    if (!mounted) return;
-
-    // 目录（漫画页图文件夹）没有扩展名，纯分类函数分不出来——把真实文件系统判据
-    // 注入进去（分类层本身仍不碰 IO）。
-    final DroppedFiles files = classifyDroppedFiles(
-      paths,
-      isDirectory: (String pth) => Directory(pth).existsSync(),
-      isImageArchive: (String pth) => imageArchives[pth] ?? false,
-    );
-    debugPrint(
-      '[fushi-drop] [reader-shelf] classified '
-      'books=${files.books.length} subtitles=${files.subtitles.length} '
-      'audios=${files.audios.length} videos=${files.videos.length} '
-      'mangas=${files.mangas.length} '
-      'unsupportedMangas=${files.unsupportedMangas.length} '
-      'dictionaries=${files.dictionaries.length} unknown=${files.unknown.length} '
-      'global=$globalPosition',
-    );
-    final String? hitBookKey = _cardDropRegistry.hitTest(globalPosition);
-    // 漫画库是同一个页面的 mangaOnly 壳，但落点语义不同（见 DropSurface.manga）。
-    final DropIntent intent = decideDropIntent(
-      surface: DropSurface.books,
-      files: files,
-      cardHit: hitBookKey != null,
-    );
-    // 跨模块落点一次快照。被关掉的模块不再打开它的导入对话框，而是给一条与
-    // [DropIntent.unsupportedSurface] 同形态的 SnackBar——拖放没有「不渲染入口」
-    // 这个选项（落点就是整块书架），所以必须给可见反馈，绝不静默吞掉。
-    final ModuleVisibility modules = _moduleVisibility;
-    void showModuleDisabled() {
-      // 闭包里重判一次 mounted：本函数在 await 之后才走到这里，闭包体外的流分析
-      // 结论传不进来（use_build_context_synchronously）。
-      if (!mounted) return;
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(t.module_disabled_hint)));
-    }
-
-    switch (intent) {
-      // 书架/漫画库不产出这个意图：目录在这两个表面仍是「一本漫画的页图文件夹」
-      // （importNewManga），把整个目录登记成扫描根是视频页的语义。列出来只为让
-      // `decideDropIntent` 以后给 books 也加上文件夹语义时，这里编译期就红。
-      case DropIntent.addFolderAsSource:
-        debugPrint('[fushi-drop] [reader-shelf] intent=addFolderAsSource '
-            '(not produced on this surface)');
-      case DropIntent.importNewBook:
-        _openBookImportPrefilled(
-          epubPath: files.books.first,
-          subtitlePath:
-              files.subtitles.isNotEmpty ? files.subtitles.first : null,
-          audioPaths: files.audios,
-        );
-      case DropIntent.importNewManga:
-        // 漫画（.mokuro / .cbz / 页图目录 / 图片型 zip）走漫画自己的导入对话框。
-        // 决策层本来就把漫画和书分成了两个 intent，此前两个 intent 却落到同一个
-        // 对话框；现在落点跟着 intent 走，载体身份不再在半路丢失。
-        showModuleDisabled();
-        return;
-      case DropIntent.unsupportedMangaArchive:
-        debugPrint(
-          '[fushi-drop] [reader-shelf] intent=unsupportedMangaArchive',
-        );
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(t.drag_drop_manga_archive_unsupported)),
-        );
-      case DropIntent.attachToBookCard:
-        // 往书卡上拖音频/字幕 = 给这本书挂有声书，属听书模块。
-        showModuleDisabled();
-        return;
-      case DropIntent.needCardTarget:
-        debugPrint('[fushi-drop] [reader-shelf] intent=needCardTarget');
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(t.drag_drop_need_card_target)),
-        );
-      case DropIntent.importNewVideo:
-        // 书架拖入视频 → 自动切到视频导入流程，带上文件（不再只提示让用户手动切，
-        // TODO-558）。视频卡与书卡同页渲染，无需跨 tab 通信。
-        showModuleDisabled();
-        return;
-      case DropIntent.importNewPlaylist:
-        showModuleDisabled();
-        return;
-      case DropIntent.importVideoUrl:
-        // 书架拖入网络流 URL → 自动切到视频导入（预填 URL 并入库），与拖视频文件的
-        // 自动切换一致（TODO-1306）。
-        showModuleDisabled();
-        return;
-      case DropIntent.importTorrent:
-        // 拖入 .torrent → 下载中心「添加任务」对话框预填种子；内容类型按落点预填
-        // （漫画库→漫画、书架→小说），用户可在框里改。下载中心是独立模块，关掉
-        // 时与其它模块一样给可见提示而不是静默。
-        showModuleDisabled();
-        return;
-      case DropIntent.unsupportedSurface:
-        debugPrint('[fushi-drop] [reader-shelf] intent=unsupportedSurface');
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(t.drag_drop_unsupported_on_books)),
-        );
-      case DropIntent.attachToVideoCard:
-      case DropIntent.ignore:
-        break;
-    }
-  }
-
-  /// 拖入书文件 → 打开 [BookImportDialog]，预填 EPUB（及可选字幕）路径。
-  /// 复用 [ReaderFushiSource.buildBookImportButton] 的 repo/打开/刷新范式。
-  Future<void> _openBookImportPrefilled({
-    required String epubPath,
-    required String? subtitlePath,
-    List<String> audioPaths = const <String>[],
-  }) async {
-    final bool? imported = await showAppDialog<bool>(
-      context: context,
-      builder: (_) => BookImportDialog(
-        repo: SrtBookRepository(appModel.database),
-        audiobookRepo: AudiobookRepository(appModel.database),
-        db: appModel.database,
-        initialEpubPath: epubPath,
-        initialSubtitlePath: subtitlePath,
-        initialAudioPaths: audioPaths.isEmpty ? null : audioPaths,
-      ),
-    );
-    if (imported == true && mounted) {
-      _refreshSrtBooks();
-      ref.invalidate(fushiBooksProvider);
-    }
-  }
-
-  /// 拖入漫画 → 打开 [MangaImportDialog]，预填漫画路径（目录 / .cbz / .mokuro /
-  /// 图片型 zip）。刷新范式与 [_openBookImportPrefilled] 一致：漫画与书共用
-  /// `EpubBooks` 表和同一块书架，故失效的 provider 也相同。
-  Future<void> _openMangaImportPrefilled({required String mangaPath}) async {
-    final bool? imported = await showAppDialog<bool>(
-      context: context,
-      builder: (_) => MangaImportDialog(
-        db: appModel.database,
-        initialPath: mangaPath,
-      ),
-    );
-    if (imported == true && mounted) {
-      _refreshSrtBooks();
-      ref.invalidate(fushiBooksProvider);
-    }
-  }
-
-  /// 拖入字幕/音频到书卡 → 打开 [AudiobookImportDialog] 附加到该书，预填音频/对齐路径。
-  /// 复用 [_openAudiobookImport] 的 extractDir 取法与刷新范式（此处无外层对话框需 pop）。
-  Future<void> _openAudiobookPrefilled({
-    required String bookKey,
-    required List<String> audioPaths,
-    required String? alignmentPath,
-  }) async {
-    final EpubBookRow? row = await appModel.database.getEpubBook(bookKey);
-    if (!mounted) return;
-    await showAppDialog<bool>(
-      context: context,
-      builder: (_) => AudiobookImportDialog(
-        bookKey: bookKey,
-        repo: AudiobookRepository(appModel.database),
-        extractDir: row?.extractDir,
-        initialAudioPaths: audioPaths.isEmpty ? null : audioPaths,
-        initialAlignmentPath: alignmentPath,
-      ),
-    );
-    if (mounted) {
-      _rebuild(() {});
-    }
-  }
-
   /// 书的内容语言选择框。选择器 UI 与词典共用（[showContentLanguagePicker]），
   /// 这里只负责读当前值与写库。
   ///
@@ -1428,10 +1103,4 @@ extension _ReaderHistoryBooks on _ReaderFushiHistoryPageState {
       ),
     );
   }
-}
-
-class _AudiobookInfo {
-  const _AudiobookInfo({required this.hasAudiobook, required this.healthKind});
-  final bool hasAudiobook;
-  final HealthKind healthKind;
 }

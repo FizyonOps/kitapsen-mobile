@@ -15,11 +15,7 @@ import 'package:fushi_engine/foundation/engine_log.dart';
 /// - [parse]: takes raw ZIP bytes, extracts to `extractDir`, returns [EpubBook].
 /// - [parseFromExtracted]: re-parses an already-extracted directory (e.g. after
 ///   app restart, when the book is already on disk).
-class EpubParser {
-  /// Parse EPUB [bytes], extract to [extractDir], return [EpubBook].
-  static Future<EpubBook> parse(Uint8List bytes, String extractDir) async {
-    return parseSync(bytes, extractDir);
-  }
+abstract class EpubParser {
 
   /// Synchronous parse — safe for use in `compute()` isolates.
   static EpubBook parseSync(Uint8List bytes, String extractDir) {
@@ -39,59 +35,6 @@ class EpubParser {
     final Archive archive = ZipDecoder().decodeBytes(bytes, verify: true);
     _extractArchive(archive, extractDir);
     return parseFromExtracted(extractDir);
-  }
-
-  /// 只读 OPF 元数据里的 `dc:language`，不解压、不解析 spine——给「导入前就要知道
-  /// 书是什么语言」的轻量场景（转录弹层的语言初值）。不是 EPUB / 缺 container.xml
-  /// / 缺 OPF / 没写语言一律返回 null；zip 或 XML 本身坏了照常抛，由调用方决定
-  /// 记日志还是忽略（不在这里吞）。
-  static String? readLanguageSync(String filePath) {
-    final Uint8List bytes = File(filePath).readAsBytesSync();
-    final Archive archive = ZipDecoder().decodeBytes(bytes, verify: true);
-    final ArchiveFile? container = _findArchiveFile(
-      archive,
-      p.posix.join('META-INF', 'container.xml'),
-    );
-    if (container == null) return null;
-    final XmlDocument containerXml =
-        XmlDocument.parse(decodeEpubText(container.content as List<int>));
-    final String? rootfilePath = _findRootfilePath(containerXml);
-    if (rootfilePath == null) return null;
-    final ArchiveFile? opf = _findArchiveFile(archive, rootfilePath);
-    if (opf == null) return null;
-    final XmlDocument opfXml =
-        XmlDocument.parse(decodeEpubText(opf.content as List<int>));
-    return _parseMetadata(opfXml, 'language');
-  }
-
-  /// 按 zip 内路径找条目：先精确匹配，再大小写不敏感（与 [_findContainerXml] 对
-  /// 磁盘目录的宽容一致——有些打包器把 `META-INF` 写成小写）。
-  static ArchiveFile? _findArchiveFile(Archive archive, String zipPath) {
-    final String wanted = zipPath.replaceAll('\\', '/');
-    final String wantedLower = wanted.toLowerCase();
-    ArchiveFile? loose;
-    for (final ArchiveFile file in archive.files) {
-      if (!file.isFile) continue;
-      final String name = file.name.replaceAll('\\', '/');
-      if (name == wanted) return file;
-      if (loose == null && name.toLowerCase() == wantedLower) loose = file;
-    }
-    return loose;
-  }
-
-  /// v115：只读**已解压**目录里的 container.xml + OPF，返回规范化后的 ISBN-13
-  /// （见 [normalizeIsbn13]）；不解析 spine / 目录、不读正文。给存量书回填
-  /// `epub_books.isbn` 用（`backfillEpubIsbns`）。缺 container / OPF 或包里没有
-  /// 合法 ISBN 返回 null；XML 本身坏了照常抛，由调用方决定记日志还是跳过。
-  static String? readIsbnFromExtracted(String extractDir) {
-    final File? containerFile = _findContainerXml(extractDir);
-    if (containerFile == null) return null;
-    final String? rootfilePath =
-        _findRootfilePath(XmlDocument.parse(_readText(containerFile)));
-    if (rootfilePath == null) return null;
-    final File opfFile = File(p.join(extractDir, rootfilePath));
-    if (!opfFile.existsSync()) return null;
-    return _parseIsbn(XmlDocument.parse(_readText(opfFile)));
   }
 
   /// Parse an already-extracted EPUB directory.

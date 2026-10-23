@@ -1,17 +1,7 @@
-import 'dart:io' show Platform;
 
 import 'package:flutter/material.dart';
 
-enum FushiDesignSystem { auto, material, cupertino, macos }
-
-/// macOS 标准标题栏高度（逻辑像素）。`main.dart` 无条件启用透明标题栏 +
-/// full-size content view（macos_ui ToolBar 的硬性前提），Flutter 内容会整块
-/// 延伸到红黄绿交通灯按钮下方；而 macOS full-size content view 下 embedder 不把
-/// 交通灯上报为 `MediaQuery.padding.top`（上报 0），所以普通 `SafeArea` 挡不住。
-/// Material 桌面壳需要用它给 `SafeArea.minimum` 预留顶部内边距，让交通灯落在这条
-/// 保留带里、不再压住导航 rail / 返回按钮（BUG-869）。交通灯直径 12pt、约在
-/// y=[6,18]，28pt 足以完全让位。macos_ui 原生壳由 MacosWindow 自处理让位，不用它。
-const double kMacTitleBarHeight = 28.0;
+enum FushiDesignSystem { auto, material }
 
 @immutable
 class FushiDesignSystemTheme extends ThemeExtension<FushiDesignSystemTheme> {
@@ -72,45 +62,4 @@ Duration einkSafeDuration(BuildContext context, Duration duration) {
 /// 说「正在下载 / 同步中」，静止的空轨道足够表达。非 eink 原样返回。
 double? einkSafeProgressValue(BuildContext context, double? value) {
   return isEinkTheme(context) ? (value ?? 0) : value;
-}
-
-bool isCupertinoPlatform(BuildContext context) {
-  final FushiDesignSystem designSystem =
-      Theme.of(context).extension<FushiDesignSystemTheme>()?.designSystem ??
-          FushiDesignSystem.auto;
-  switch (designSystem) {
-    case FushiDesignSystem.material:
-      return false;
-    case FushiDesignSystem.cupertino:
-      return true;
-    case FushiDesignSystem.macos:
-      // Explicit macOS-native design system is NOT Cupertino. The macos_ui shell
-      // and converted pages route via [isMacosPlatform]; this keeps the two
-      // skins from both claiming the same surface.
-      return false;
-    case FushiDesignSystem.auto:
-      return false;
-  }
-}
-
-/// True when the macOS-native (macos_ui) design system should drive this
-/// subtree. Converted shells/pages branch on this BEFORE
-/// [isCupertinoPlatform].
-bool isMacosPlatform(BuildContext context) {
-  final FushiDesignSystem designSystem =
-      Theme.of(context).extension<FushiDesignSystemTheme>()?.designSystem ??
-          FushiDesignSystem.auto;
-  switch (designSystem) {
-    case FushiDesignSystem.material:
-    case FushiDesignSystem.cupertino:
-      return false;
-    case FushiDesignSystem.macos:
-      // Explicitly selecting the macOS-native design system only routes into the
-      // macos_ui / MacosWindow shell when actually running on macOS; on other
-      // hosts WindowManipulator is unavailable, so fall back to the platform
-      // default rather than crash. (Quality point ②)
-      return Platform.isMacOS;
-    case FushiDesignSystem.auto:
-      return false;
-  }
 }

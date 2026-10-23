@@ -66,10 +66,6 @@ class ReaderRestoreAnchor {
   /// 内链导航的 URL fragment；`null` = 无。**一次性**，同上。
   final String? fragment;
 
-  /// 是否等价于「章首」。恢复锚退化成它 = 用户进度被丢。
-  bool get isChapterStart =>
-      charOffset < 0 && charOffsetEnd < 0 && fragment == null && progress <= 0;
-
   @override
   bool operator ==(Object other) =>
       other is ReaderRestoreAnchor &&

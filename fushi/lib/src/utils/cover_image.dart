@@ -10,9 +10,6 @@ import 'package:flutter/widgets.dart';
 /// 即撑爆上限，滚动时 LRU 反复淘汰→重解码全帧，产生持续卡顿与高内存。
 const int kLocalCoverDecodePixelWidth = 720;
 
-/// 有声书迷你条等极小封面（约 36 逻辑像素）的解码上限，进一步省内存。
-const int kMiniCoverDecodePixelWidth = 144;
-
 /// 首页活动时间轴缩略图（40×56 / 68×40）的解码上限。
 ///
 /// 取 192 而非默认 720：覆盖 3x DPR 仍有余量，同时把活动列表中几十张封面的

@@ -1,8 +1,6 @@
 import 'package:fushi_core/fushi_core.dart' show BookFormat, EpubBookRow;
 import 'package:path/path.dart' as p;
 
-import 'package:fushi/src/utils/misc/reveal_in_file_manager.dart';
-
 /// 书在磁盘上的主产物绝对路径——「这本书的源在哪」的**唯一**真相源。
 /// `book_format_rebuild.dart` 的探测、PDF 阅读器开文件、书架「打开文件位置」都从
 /// 这里取，不各自拼一份。
@@ -25,20 +23,4 @@ String bookMainFilePath(EpubBookRow row) {
     BookFormat.epub => row.extractDir,
     BookFormat.pdf || BookFormat.manga => p.join(row.extractDir, row.epubPath),
   };
-}
-
-/// 在系统文件管理器里定位这本书：优先选中主产物本身（漫画即直接选中 `manga.json`，
-/// 用户要手改 mokuro 数据时省掉一层目录），主产物不在了再退回打开书目录。
-/// EPUB 行的主产物就是书目录，只有一个目标，不会重复定位同一处。
-///
-/// [reveal] 只为测试注入。返回 false = 两个目标都打不开（移动端无契约、书目录已被
-/// 删除、或文件管理器启动失败），调用方必须提示而不是静默。
-Future<bool> revealBookLocation(
-  EpubBookRow row, {
-  Future<bool> Function(String path) reveal = revealInFileManager,
-}) async {
-  final String mainFile = bookMainFilePath(row);
-  if (await reveal(mainFile)) return true;
-  if (mainFile == row.extractDir) return false;
-  return reveal(row.extractDir);
 }
