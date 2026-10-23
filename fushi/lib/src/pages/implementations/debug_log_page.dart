@@ -53,12 +53,12 @@ class _DebugLogPageState extends State<DebugLogPage> {
           tooltip: t.share,
           onTap: () {
             final Uint8List bytes = Uint8List.fromList(utf8.encode(_log));
-            final XFile xFile = XFile.fromData(
-              bytes,
-              name: 'fushi_debug_log.txt',
-              mimeType: 'text/plain',
+            final XFile xFile = XFile.fromData(bytes, mimeType: 'text/plain');
+            FushiShare.shareFiles(
+              [xFile],
+              subject: t.debug_log_share_subject,
+              fileNames: const <String>['fushi_debug_log.txt'],
             );
-            FushiShare.shareFiles([xFile], subject: t.debug_log_share_subject);
           },
         ),
         FushiIconButton(

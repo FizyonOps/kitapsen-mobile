@@ -119,7 +119,9 @@ abstract class FushiShare {
   /// 通过系统分享面板分享一个或多个文件。
   ///
   /// [files] 允许包含内存型 `XFile`（`XFile.fromData`，`path` 为空）——share_plus
-  /// 会先把它落盘到临时目录再分享。
+  /// 会先把它落盘到临时目录再分享。落盘用的文件名取 [fileNames]（与 [files]
+  /// 一一对应）：`XFile.fromData` 的 `name` 在 IO 平台上被忽略，不给时 share_plus
+  /// 只能拿 UUID 加由 mime 推出的扩展名命名，`text/plain` 推出来是 `.conf`。
   ///
   /// 返回的 `Future` 在分享面板**关闭后**才完成，其值是**这次分享是否真的送到了
   /// 平台**：`false` 表示这次分享根本没送出去——被防重入门丢弃、文件列表为空，
@@ -135,6 +137,7 @@ abstract class FushiShare {
     List<XFile> files, {
     String? subject,
     String? text,
+    List<String>? fileNames,
   }) async {
     if (_sharing || files.isEmpty) {
       _logDroppedShare('shareFiles', reentrant: _sharing);
@@ -147,6 +150,7 @@ abstract class FushiShare {
         subject: subject,
         text: text,
         sharePositionOrigin: _sharePositionOrigin(),
+        fileNameOverrides: fileNames,
       ).timeout(_kShareSheetTimeout);
       return true;
     } on TimeoutException {

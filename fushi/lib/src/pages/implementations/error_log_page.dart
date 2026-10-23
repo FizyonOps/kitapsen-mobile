@@ -64,12 +64,12 @@ class _ErrorLogPageState extends State<ErrorLogPage> {
           tooltip: t.share,
           onTap: () {
             final bytes = Uint8List.fromList(utf8.encode(_log));
-            final xFile = XFile.fromData(
-              bytes,
-              name: 'fushi_error_log.txt',
-              mimeType: 'text/plain',
+            final xFile = XFile.fromData(bytes, mimeType: 'text/plain');
+            FushiShare.shareFiles(
+              [xFile],
+              subject: t.error_log_share_subject,
+              fileNames: const ['fushi_error_log.txt'],
             );
-            FushiShare.shareFiles([xFile], subject: t.error_log_share_subject);
           },
         ),
         FushiIconButton(
