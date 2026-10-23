@@ -22,9 +22,6 @@ enum StatHourlyFormatBand {
   /// PDF 阅读器。
   pdf,
 
-  /// 漫画阅读器。
-  manga,
-
   /// 未区分的历史合计。声明序即堆叠序与图例序，它排在最后 ⇒ 画在柱子**最上层**，
   /// 紧挨图例，用户一眼能看见「这一截不属于任何一类」。
   unattributed;
@@ -40,7 +37,6 @@ enum StatHourlyFormatBand {
     return switch (format) {
       BookFormat.epub => StatHourlyFormatBand.epub,
       BookFormat.pdf => StatHourlyFormatBand.pdf,
-      BookFormat.manga => StatHourlyFormatBand.manga,
     };
   }
 }

@@ -231,20 +231,6 @@ class _PeriodDetailSheetBodyState extends State<_PeriodDetailSheetBody> {
               Icons.menu_book,
               kActivityMediaBook,
             ),
-            ..._section(
-              context,
-              tokens,
-              t.home_filter_watch,
-              Icons.movie,
-              kActivityMediaVideo,
-            ),
-            ..._section(
-              context,
-              tokens,
-              t.home_filter_game,
-              Icons.videogame_asset,
-              kActivityMediaGame,
-            ),
             if (_entries.isEmpty) ...<Widget>[
               SizedBox(height: tokens.spacing.card),
               Text(t.stat_detail_empty, style: tokens.type.metadata),

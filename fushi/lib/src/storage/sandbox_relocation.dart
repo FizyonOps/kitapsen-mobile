@@ -11,8 +11,8 @@ import 'package:fushi/src/storage/data_root_migrator.dart'
 ///
 /// ## 为什么需要它
 ///
-/// 库里存的是绝对路径（`epub_books.extract_dir`、`audiobooks.audio_root`、
-/// 封面、字幕、字体……覆盖清单见 `path_rebase_coverage.dart`）。这套持久化模型
+/// 库里存的是绝对路径（`epub_books.extract_dir`、封面、字体……
+/// 覆盖清单见 `path_rebase_coverage.dart`）。这套持久化模型
 /// 隐含一个前提：**数据根在两次启动之间不会变**。
 ///
 /// 桌面成立，移动端不成立：

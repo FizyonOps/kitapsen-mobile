@@ -8,25 +8,11 @@ library;
 /// event_type：一次阅读 session 结束。
 const String kActivityRead = 'read';
 
-/// event_type：一次观看 session 结束。
-const String kActivityWatch = 'watch';
-
 /// event_type：导入了一本书 / 一个视频。
 const String kActivityAdded = 'added';
 
-/// event_type：游戏游玩。两个写入方：`GalgamePlayTracker` 写会话时长
-/// （`durationMs`，前台窗口计时，时长真相源），`GalHookSessionController` 写 hook
-/// 文本字符数（`charsDelta`，不带时长，防双计）。
-const String kActivityGame = 'game';
-
 /// media_type：书（EPUB / 字幕书 / 有声书）。
 const String kActivityMediaBook = 'book';
-
-/// media_type：视频。
-const String kActivityMediaVideo = 'video';
-
-/// media_type：游戏（galgame 游玩会话与 hook 文本活动）。
-const String kActivityMediaGame = 'game';
 
 /// 活动事件 media_type 的**内存态**枚举（命名统一 Phase 3.4，模式照
 /// `SentenceSourceKind` / `MediaKind`）。落库仍存上面的 `kActivityMedia*`
@@ -37,13 +23,7 @@ const String kActivityMediaGame = 'game';
 /// `media_kind_mappings.dart` 的显式映射，不得手写。
 enum ActivityMediaKind {
   /// 书（EPUB / 字幕书 / 有声书；mediaKey=bookKey，无书架种类标记）。
-  book(kActivityMediaBook),
-
-  /// 视频（mediaKey=bookUid）。
-  video(kActivityMediaVideo),
-
-  /// 游戏（mediaKey=galgames.id）。
-  game(kActivityMediaGame);
+  book(kActivityMediaBook);
 
   const ActivityMediaKind(this.dbValue);
 

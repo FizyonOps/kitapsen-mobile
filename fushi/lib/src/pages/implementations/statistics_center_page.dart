@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fushi/media.dart';
 import 'package:fushi/pages.dart';
-import 'package:fushi/src/media/display_title.dart';
 import 'package:fushi/src/media/media_cover_source.dart';
 import 'package:fushi/src/models/app_model.dart';
 import 'package:fushi/src/pages/implementations/stat_activity.dart';
@@ -25,7 +24,7 @@ import 'package:fushi_core/fushi_core.dart';
 
 /// 统计中心的 tab（阶段 2：三个独立统计页收进一个入口）。排行榜 2026-09-28 曾是第 5 个
 /// tab，2026-10-01 抽成首页统计中心入口旁的独立页（[LeaderboardPage]）。
-enum StatsCenterTab { overview, reading, video, game }
+enum StatsCenterTab { overview, reading }
 
 /// 统计中心（阶段 2，统计中心大改造）：总览 + 阅读/观看/游戏三域 tab。
 ///
@@ -60,9 +59,6 @@ class _StatisticsCenterPageState extends BasePageState<StatisticsCenterPage> {
     super.dispose();
   }
 
-  /// Tabs of the domains this build ships.
-  static const List<StatsCenterTab> _visibleTabs = <StatsCenterTab>[StatsCenterTab.overview, StatsCenterTab.reading];
-
   @override
   Widget build(BuildContext context) {
     return FushiPageScaffold(
@@ -82,23 +78,18 @@ class _StatisticsCenterPageState extends BasePageState<StatisticsCenterPage> {
               showStatDayResetHourDialog(context, ref.read(appProvider)),
         ),
       ],
-      // Kitapsen has no video / games: overview + reading only.
       body: DefaultTabController(
-        length: _visibleTabs.length,
-        initialIndex: _visibleTabs.contains(widget.initialTab)
-            ? _visibleTabs.indexOf(widget.initialTab)
-            : 0,
+        length: StatsCenterTab.values.length,
+        initialIndex: widget.initialTab.index,
         child: Column(
           children: <Widget>[
             TabBar(
               tabs: <Widget>[
-                for (final StatsCenterTab tab in _visibleTabs)
+                for (final StatsCenterTab tab in StatsCenterTab.values)
                   Tab(
                     text: switch (tab) {
                       StatsCenterTab.overview => t.stat_center_tab_overview,
                       StatsCenterTab.reading => t.home_filter_read,
-                      StatsCenterTab.video => t.home_filter_watch,
-                      StatsCenterTab.game => t.home_filter_game,
                     },
                   ),
               ],
@@ -106,7 +97,7 @@ class _StatisticsCenterPageState extends BasePageState<StatisticsCenterPage> {
             Expanded(
               child: TabBarView(
                 children: <Widget>[
-                  for (final StatsCenterTab tab in _visibleTabs)
+                  for (final StatsCenterTab tab in StatsCenterTab.values)
                     switch (tab) {
                       StatsCenterTab.overview => _StatsOverviewTab(
                         rangeSelection: _rangeSelection,
@@ -115,9 +106,6 @@ class _StatisticsCenterPageState extends BasePageState<StatisticsCenterPage> {
                         embedded: true,
                         rangeSelection: _rangeSelection,
                       ),
-                      // Kitapsen: no video / game statistics in the build.
-                      StatsCenterTab.video => const SizedBox.shrink(),
-                      StatsCenterTab.game => const SizedBox.shrink(),
                     },
                 ],
               ),
@@ -155,11 +143,8 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
   Map<String, int> _primaryCollectionByEntry = <String, int>{};
   Map<int, String> _collectionNamesById = <int, String>{};
 
-  /// 会话行封面的两张表：书条目（键 = 段 mediaKey，bookKey / 有声书 srt uid
-  /// 两种书身份都收，与 [_openEntry] 同一判据）与视频封面路径（键 = bookUid）。
-  /// 游戏封面直接从 [_games] 取。
+  /// 会话行封面：书条目（键 = 段 mediaKey，与 [_openEntry] 同一判据）。
   Map<String, MediaItem> _bookItemsByKey = <String, MediaItem>{};
-  final Map<String, String> _videoCoverPathByUid = <String, String>{};
 
   /// 收藏语句计数分桶（时段卡）。
   StatActivityBuckets _favoritedSentences = StatActivityBuckets();
@@ -206,13 +191,9 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
       _daily = facts.daily;
       _byDay = sumStatDaysByKey(_daily);
       _sessions = facts.sessions;
-      // 跨域 = 不传 source（三个域 tab 各传自己的那一个），所以总览的四个数字
-      // 恒等于三个 tab 之和：同一批行、同一个分桶函数，没有第二条口径。
       final DateTime now = DateTime.now();
       _window = StatWindow(now);
       final StatCounterFacts counters = facts.counters;
-      counters.lookupEvents().toList();
-      counters.minedEvents().toList();
       _favoritedSentences = bucketActivityByDateKey(
         counters.favoriteSentenceEvents(),
         now,
@@ -235,8 +216,7 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
                     .read(fushiBooksProvider(kShelfBooksKey))
                     .valueOrNull ??
                 const <MediaItem>[])
-          if (ReaderFushiSource.parseBookKey(item.mediaIdentifier) ??
-                  ReaderFushiSource.parseSrtBookUid(item.mediaIdentifier)
+          if (ReaderFushiSource.parseBookKey(item.mediaIdentifier)
               case final String key)
             key: item,
       };
@@ -364,9 +344,6 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
   /// 会话行展示名：与时段明细的 [_entryTitle] 同判据（游戏走库内显示名、书走
   /// override 书名），只是输入是会话而非事实行。
   String _sessionTitle(StudySession s) {
-    if (s.isGame) {
-      return displayTitleForGame( rawTitle: s.title);
-    }
     if (s.isBook) {
       return ReaderFushiSource.instance.overrideTitleForBookKey(s.mediaKey) ??
           s.title;
@@ -377,19 +354,6 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
   /// 会话行封面（三域混排时最快的辨认线索）：与三个域 tab 的会话行 / 「按媒体」
   /// 行同一条 [resolveMediaCoverImage] 解析链，只是按会话所属域分派。
   ImageProvider? _sessionCover(StudySession s) {
-    if (s.isGame) {
-      return resolveMediaCoverImage(
-        kind: MediaKind.game,
-        decodeWidth: kActivityCoverDecodePixelWidth,
-      );
-    }
-    if (s.isVideo) {
-      return resolveMediaCoverImage(
-        kind: MediaKind.video,
-        localPath: _videoCoverPathByUid[s.mediaKey],
-        decodeWidth: kActivityCoverDecodePixelWidth,
-      );
-    }
     final MediaItem? item = _bookItemsByKey[s.mediaKey];
     return item == null
         ? null
@@ -405,32 +369,23 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
   /// 就是分集 / 分册名）。判据与事实行版 [_entryCollection] 同构，输入换成会话；
   /// 会话恒自带身份（段 mediaKey），不需要 legacy 的按 title 反查。
   String? _sessionCollectionName(StudySession s) {
-    if (s.mediaKey.isEmpty) return null;
-    if (s.isBook) {
-      return statCollectionName(
-        MediaKind.epub.compositeKey(
-          _epubUidByBookKey[s.mediaKey] ?? s.mediaKey,
-        ),
-        _primaryCollectionByEntry,
-        _collectionNamesById,
-      );
-    }
+    if (s.mediaKey.isEmpty || !s.isBook) return null;
     return statCollectionName(
-      (s.isVideo ? MediaKind.video : MediaKind.game).compositeKey(s.mediaKey),
+      MediaKind.epub.compositeKey(
+        _epubUidByBookKey[s.mediaKey] ?? s.mediaKey,
+      ),
       _primaryCollectionByEntry,
       _collectionNamesById,
     );
   }
 
-  /// 删一次会话：段写零 + 游戏骨架行硬删（同一事务），再整页重聚合。
+  /// 删一次会话：段写零，再整页重聚合。
   Future<void> _deleteSession(StudySession s) async {
     await deleteStudySession(ref.read(appProvider).database, s);
     if (mounted) await _load();
   }
 
-  /// 清空**三个域**的全部统计（本 tab 是跨域视图，逐域各清一次 = 三个域 tab 上那
-  /// 三颗按钮按一遍的结果，没有第二条清空路径）。确认文案把三域范围与保留项一次
-  /// 列全。收藏的词句、制卡历史、游戏库、活动时间线一律保留。
+  /// 清空全部阅读统计。收藏句与活动时间线一律保留。
   Future<void> _confirmAndClearAll() async {
     final bool confirmed = await confirmClearAllStatistics(
       context,
@@ -439,8 +394,6 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
     if (!confirmed || !mounted) return;
     final FushiDatabase db = ref.read(appProvider).database;
     await db.clearAllReadingStatistics();
-    await db.clearAllVideoStatistics();
-    await db.clearAllGalgameStatistics();
     if (mounted) await _load();
   }
 
@@ -451,8 +404,7 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
     if (mounted) await _load();
   }
 
-  /// 清除这一批会话记录（防呆确认已在按钮里做掉）。本 tab 是跨域视图，这一批就是
-  /// 三个域的全部会话；只清会话事实，收藏 / 制卡历史 / 查词计数一个都不动。
+  /// 清除这一批会话记录（防呆确认已在按钮里做掉）；只清会话事实，收藏不动。
   Future<void> _clearSessions(List<StudySession> batch) async {
     await deleteStudySessions(ref.read(appProvider).database, batch);
     if (mounted) await _load();
@@ -586,10 +538,6 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
 
   /// 事实行 → 展示标题（合集名走 sheet 组头；与首页 dashboard 同判据）。
   String _entryTitle(StatFact f) {
-    if (f.isGame) {
-      final String name = displayTitleForGame( rawTitle: f.title);
-      return name.isEmpty ? f.mediaKey : name;
-    }
     if (f.isBook) {
       final String? bookKey = f.mediaKey.isNotEmpty
           ? f.mediaKey
@@ -614,12 +562,7 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
         _collectionNamesById,
       );
     }
-    if (f.mediaKey.isEmpty) return null;
-    return statCollectionName(
-      (f.isVideo ? MediaKind.video : MediaKind.game).compositeKey(f.mediaKey),
-      _primaryCollectionByEntry,
-      _collectionNamesById,
-    );
+    return null;
   }
 
   /// 明细条目 → 打开媒体：视频直达播放、书直达阅读器、游戏进详情页（不静默
@@ -633,8 +576,7 @@ class _StatsOverviewTabState extends ConsumerState<_StatsOverviewTab> {
           const <MediaItem>[];
       for (final MediaItem item in books) {
         final String? key =
-            ReaderFushiSource.parseBookKey(item.mediaIdentifier) ??
-            ReaderFushiSource.parseSrtBookUid(item.mediaIdentifier);
+            ReaderFushiSource.parseBookKey(item.mediaIdentifier);
         if (key == mediaKey) {
           final MediaSource source = item.getMediaSource(appModel: appModel);
           await appModel.openMedia(ref: ref, mediaSource: source, item: item);

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fushi_audio/fushi_audio.dart'
+import 'package:fushi_reading/fushi_reading.dart'
     show kDefaultReadingIdleTimeout, kStudyIdleTimeoutPrefKey;
 import 'package:fushi_core/fushi_core.dart';
-import 'package:fushi/src/models/module_id.dart';
 import 'package:fushi/src/reader/reader_control_layout.dart';
 // 迁移判据要用「这个存量代理地址归一得出来吗」，与 applyAppProxy 同一份实现，
 // 不在这里重写一遍（重写就会漂移，而漂移的后果是存量用户升级即断网）。
@@ -16,42 +15,7 @@ import 'package:fushi_engine/utils/net/app_proxy.dart'
         kProxyModeDirect,
         kProxyModeManual,
         normalizeUserProxyHostPort;
-import 'package:fushi/src/models/audio_source_config.dart';
 import 'package:fushi_engine/foundation/pref_store.dart';
-
-/// 视频画面缩放/比例模式（作用于 Flutter 层 [Video] widget 的 [BoxFit]，TODO-152 子B）。
-///
-/// 与 mpv 内置几何（`video_setting_mpv_aspect`/`zoom`/`panscan`）是两个不同层：这里只决定
-/// 解码后的画面如何映射进媒体框，不改 mpv 渲染管线。窗口模式与全屏路由共用本偏好。
-/// - [cover]：保持比例铺满媒体框、超出部分裁切（无 letterbox/pillarbox 黑边）。
-/// - [contain]：默认。保持比例完整显示，比例不匹配时上下/左右补黑边（画面缩窄时
-///   加黑，即用户要的「适应」）。
-/// - [fill]：拉伸填满整个媒体框、不保持比例（变形）。
-enum VideoFitMode {
-  cover('cover'),
-  contain('contain'),
-  fill('fill');
-
-  const VideoFitMode(this.storageValue);
-
-  final String storageValue;
-
-  static VideoFitMode fromStorage(String value) {
-    for (final VideoFitMode mode in VideoFitMode.values) {
-      if (mode.storageValue == value) return mode;
-    }
-    return VideoFitMode.contain;
-  }
-}
-
-/// 「新下载任务交给哪台互联 host 执行」的偏好键（空 = 本机）。
-/// 设备本地（见 `SyncRepository.deviceLocalPrefKeys`）。
-const String kDownloadExecutionHostPrefKey = 'download_execution_host';
-
-/// 主机侧「允许已配对设备从游戏库远程启动游戏并串流」。默认关：开启即允许配对
-/// 设备在本机起进程。设备本地（见 `SyncRepository.deviceLocalPrefKeys`），不能随
-/// 备份把这扇门带到另一台电脑上。
-const String kGameStreamRemoteLaunchPrefKey = 'game_stream_remote_launch';
 
 class PreferencesRepository extends ChangeNotifier
     implements PrefStore {
@@ -129,20 +93,6 @@ class PreferencesRepository extends ChangeNotifier
     await _db.setPref(key, strVal);
   }
 
-  /// The prefs-version value currently held in this process's in-memory cache,
-  /// as last populated by [loadFromDb]/[refreshFromDb] (0 when never loaded).
-  /// Cheap synchronous read; NOT a cross-process check and NOT advanced by this
-  /// process's own [setPref] calls (the bump is sunk into the DB layer and only
-  /// re-enters the cache on the next full reload). [AppModel] uses it solely to
-  /// prime its watermark right after a reload; live change detection goes
-  /// through [readPrefsVersionFromDb]. Stored as a PrefCodec int, so
-  /// [PrefCodec.decode] tolerates both the tagged (`i:N`) and legacy raw (`N`)
-  /// form.
-  int get prefsVersion {
-    final String? raw = _prefCache[prefsVersionKey];
-    return raw == null ? 0 : PrefCodec.decode<int>(raw, 0);
-  }
-
   /// Read the prefs-version straight from the DB (single indexed row lookup),
   /// bypassing this process's in-memory cache. The :popup process uses this to
   /// detect that the main app mutated a preference or switched profile while the
@@ -212,13 +162,6 @@ class PreferencesRepository extends ChangeNotifier
     notifyListeners();
   }
 
-  /// 多端库联合视图（spec 2026-07-12 §2.1/§2.4）：书架/视频页主网格是否把「远端有、
-  /// 本地无」的条目渲染成占位卡（云角标 + 远端封面，点击下载/流播）。**默认 true**——
-  /// 用户拍板远端混排默认开。关闭时占位卡全部不渲染，两页只剩本地库。离线/未配对/
-  /// 后端不可达时占位卡本就不出现（远端目录拉取失败态），与本开关正交。
-  bool get showRemoteEntries =>
-      getPref('show_remote_entries', defaultValue: true) as bool;
-
   // ── Jellyfin / Emby 媒体服务器 ───────────────────────────────────────
 
   // ── 实验性：键盘/手柄焦点导航 ──────────────────────────────────────────
@@ -231,47 +174,16 @@ class PreferencesRepository extends ChangeNotifier
 
   // ── galgame 游戏库（首页「游戏」tab）─────────────────────────────────────
 
-  Future<void> setFloatingBallInApp(bool value) async {
-    await setPref('floating_ball.in_app', value);
-    notifyListeners();
-  }
-
-  void setDictionaryFontSize(double fontSize) async {
-    await setPref('dictionary_entry_font_size', fontSize);
-    notifyListeners();
-  }
-
   // Default OFF (smooth/animated popup scrolling). Instant (no-animation)
   // jump scrolling is an e-ink opt-in enabled only by the dedicated lookup
   // setting. getPref returns this default solely when the key was never set,
   // so existing users who already toggled the switch keep their stored value.
-  bool get popupInstantScroll =>
-      getPref('popup_instant_scroll', defaultValue: false) as bool;
 
   bool get isFirstTimeSetup =>
       getPref('first_time_setup', defaultValue: true) as bool;
 
   void setFirstTimeSetupFlag() async {
     await setPref('first_time_setup', false);
-  }
-
-  /// 「功能模块」显隐：用户意愿的**唯一存储**，一个 [ModuleId] 一个键。
-  ///
-  /// 默认全开（与旧版行为一致）；新手引导的功能选择与 设置 → 外观 → 功能模块
-  /// 写同一真值。games（Windows）与浏览器扩展（桌面）的平台门控**不在这里**——
-  /// 这里只存用户意愿，平台判据统一在 [ModuleId.availableOn] 判一次，合成见
-  /// [ModuleVisibility.resolve]。首页/设置恒在，是全部关闭后的安全回退面，
-  /// 没有对应 [ModuleId]。
-  ///
-  /// 此前这里是七对手写 getter/setter（22 行/模块），加一个模块要在 prefs /
-  /// AppModel / 设置 schema / 引导 / 底栏 / macOS 侧栏各抄一遍，少抄一处就静默
-  /// 漏一处门控。现在读写都走枚举，加模块只加一个 enum 值。
-  bool moduleEnabled(ModuleId module) =>
-      getPref(module.prefKey, defaultValue: true) as bool;
-
-  Future<void> setModuleEnabled(ModuleId module, bool value) async {
-    await setPref(module.prefKey, value);
-    notifyListeners();
   }
 
   /// 新手引导完成标志。缺省值刻意取 **true**：既有安装升级上来不重弹引导；
@@ -284,9 +196,6 @@ class PreferencesRepository extends ChangeNotifier
   Future<void> setOnboardingCompleted({required bool value}) async {
     await setPref('onboarding_completed', value);
   }
-
-  bool get startupDefaultDictionaryTab =>
-      getPref('startup_default_dictionary_tab', defaultValue: false) as bool;
 
   bool get reverseNavigationBar =>
       getPref('reverse_navigation_bar', defaultValue: false) as bool;
@@ -304,125 +213,15 @@ class PreferencesRepository extends ChangeNotifier
     notifyListeners();
   }
 
-  /// 新任务默认使用的本机受管视频来源；0 表示尚未选择。
-  int? get videoDownloadTargetSourceId {
-    final int value = getPref(
-      'video_download_target_source_id',
-      defaultValue: 0,
-    ) as int;
-    return value > 0 ? value : null;
-  }
-
-  Future<void> setVideoDownloadTargetSourceId(int? sourceId) async {
-    await setPref('video_download_target_source_id', sourceId ?? 0);
-    notifyListeners();
-  }
-
   /// 阅读器顶栏 / 底栏按钮布局（与视频页同一套泛型模型，2026-09-13）。持久化键
   /// `reader_control_layout`，空 / 坏值回出厂布局。
   ReaderControlLayout get readerControlLayout => ReaderControlLayout.decode(
         getPref('reader_control_layout', defaultValue: '') as String,
       );
 
-  /// 视频字幕外观（JSON；解析见 VideoSubtitleStyle.encode/decode）。空串=默认外观。
-  String get videoSubtitleStyle =>
-      getPref('video_subtitle_style', defaultValue: '') as String;
-
   // ── audio sources ────────────────────────────────────────────────────
 
-  /// 已退役的内置远端音频源 URL。曾经随新装默认写入用户的音频源列表；2026-09-13
-  /// 用户拍板不再依赖任何第三方网络音频库，内置默认远端源整个删掉。老用户列表里
-  /// 残留的这些 URL 在读取时剔除——只删默认值而不清持久化，就等于只对新装生效。
-  /// 消费方一律经 [audioSourceConfigs] 读，这里是唯一咽喉。
-  static const Set<String> retiredAudioSourceUrls = <String>{
-    'https://fushi-reader.manhhaoo-do.workers.dev/?term={term}&reading={reading}',
-  };
-
-  /// Anki 本地音频服务器（local-audio-yomichan，默认端口 5050）的内置预设 URL。
-  /// 用户装了该服务器后，在「管理音频来源」里打开开关即用；默认关闭——本地第三方
-  /// 服务不经用户同意不参与查词发音（与 fushiRemote 同策）。
-  /// 由 [_withDefaultAudioSources] 对所有用户「缺则补」为一条 disabled 源。
-  static const String ankiLocalAudioUrl =
-      'http://localhost:5050/?term={term}&reading={reading}';
-
-  /// legacy `audio_sources`（只存已启用的远端 URL）。无内置默认远端源，未写过即空。
-  List<String> get audioSources {
-    final result = getPref('audio_sources', defaultValue: const <String>[]);
-    if (result is List<String>) return result;
-    if (result is List) return result.cast<String>();
-    return <String>[];
-  }
-
-  List<AudioSourceConfig> get audioSourceConfigs {
-    final result = getPref('audio_source_configs', defaultValue: null);
-    if (result is List) {
-      final configs = result
-          .whereType<Map>()
-          .map((Map json) => AudioSourceConfig.fromJson(
-                Map<String, dynamic>.from(json),
-              ))
-          .where((AudioSourceConfig source) =>
-              source.kind != AudioSourceKind.remoteAudio ||
-              (source.url?.isNotEmpty ?? false))
-          .toList();
-      if (configs.isNotEmpty) return _withDefaultAudioSources(configs);
-    }
-    // 没写过 typed config 就按 legacy audio_sources 装配（fromLegacyUrls 默认
-    // enabled，保留老用户已启用的 URL）；纯新装两个 pref 都空，走同一条路。
-    return _withDefaultAudioSources(
-      AudioSourceConfig.fromLegacyUrls(audioSources),
-    );
-  }
-
-  List<AudioSourceConfig> _withDefaultAudioSources(
-    List<AudioSourceConfig> sources,
-  ) {
-    // 已退役的内置远端源（见 [retiredAudioSourceUrls]）从老用户列表里剔除。
-    final List<AudioSourceConfig> result = <AudioSourceConfig>[
-      for (final AudioSourceConfig source in sources)
-        if (source.kind != AudioSourceKind.remoteAudio ||
-            !retiredAudioSourceUrls.contains(source.url))
-          source,
-    ];
-
-    // fushiRemote 恒在列首（缺则补），历史行为不变。
-    final bool hasFushiRemote = result.any(
-      (AudioSourceConfig source) => source.kind == AudioSourceKind.fushiRemote,
-    );
-    if (!hasFushiRemote) {
-      result.insert(0, AudioSourceConfig.fushiRemote());
-    }
-
-    // Anki 本地音频服务器（5050）内置预设：对所有用户「缺则补」为一条 disabled 源，
-    // 追加在列尾。用户装了服务器打开开关即用；删掉后下次读取会 disabled 重生，与
-    // fushiRemote 恒补策略一致（TODO-083 范式）。
-    final bool hasAnki = result.any((AudioSourceConfig source) =>
-        source.kind == AudioSourceKind.remoteAudio &&
-        source.url == ankiLocalAudioUrl);
-    if (!hasAnki) {
-      result.add(AudioSourceConfig.remoteAudio(
-        url: ankiLocalAudioUrl,
-        label: 'Anki',
-        enabled: false,
-      ));
-    }
-
-    return result;
-  }
-
   // ── UI visibility ────────────────────────────────────────────────────
-
-  bool get showMediaNotification =>
-      getPref('show_media_notification', defaultValue: true) as bool;
-
-  bool get showFloatingLyric =>
-      getPref('show_floating_lyric', defaultValue: false) as bool;
-
-  double get floatingLyricFontSize =>
-      getPref('floating_lyric_font_size', defaultValue: 20.0) as double;
-
-  bool get floatingLyricClickLookup =>
-      getPref('floating_lyric_click_lookup', defaultValue: true) as bool;
 
   // ── update preferences ───────────────────────────────────────────────
 
@@ -518,7 +317,7 @@ class PreferencesRepository extends ChangeNotifier
 
   /// v90 阅读空闲门（分钟）：这么久没有翻页 / 滚动 / 查词等输入就视为没在读，
   /// 之后的时长不入账。只对阅读面（小说 / PDF / 漫画）生效，视频以播放态为准
-  /// （用户拍板）。偏好键与 fushi_audio 的 [kStudyIdleTimeoutPrefKey] 同名。
+  /// （用户拍板）。偏好键与 fushi_reading 的 [kStudyIdleTimeoutPrefKey] 同名。
   static const int readingIdleTimeoutMinutesMin = 1;
   static const int readingIdleTimeoutMinutesMax = 120;
 

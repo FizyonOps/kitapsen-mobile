@@ -50,20 +50,12 @@ import 'package:fushi/src/media/sources/reader_fushi_source.dart';
 ///    **静默返 null**——合成 [MediaItem] 必须 `canEdit: true`（参照
 ///    `reader_fushi_source.dart` `_overrideTitleForIdentifier` 的合成方式），
 ///    否则 override 永远失效且无任何报错。
-/// 2. [bookKey]：EPUB 身份（含 EPUB 配对的 SRT/有声书行——它们与 EPUB 卡共享
-///    `hoshi://book/<bookKey>` 身份，见 BUG-1018 A3）。空串视同未提供。
-/// 3. [srtUid]：standalone SRT 书（bookKey 空串哨兵）的身份
-///    `hoshi://srtbook/<uid>`。
-///
-/// SRT 书可同时传 [bookKey]（`book.bookKey`）与 [srtUid]（`book.uid`）：
-/// bookKey 非空走 EPUB 身份，否则回落 srtUid——与 `_srtBookMediaItem` 的
-/// 身份分派完全一致。
+/// 2. [bookKey]：EPUB 身份 `hoshi://book/<bookKey>`。空串视同未提供。
 ///
 /// 查不到 override 时回退 [rawTitle]。
 String displayTitleForBook({
   MediaItem? item,
   String? bookKey,
-  String? srtUid,
   required String rawTitle,
 }) {
   final ReaderFushiSource source = ReaderFushiSource.instance;
@@ -75,20 +67,6 @@ String displayTitleForBook({
   if (bookKey != null && bookKey.isNotEmpty) {
     return source.overrideTitleForBookKey(bookKey) ?? rawTitle;
   }
-  if (srtUid != null && srtUid.isNotEmpty) {
-    return source.overrideTitleForSrtUid(srtUid) ?? rawTitle;
-  }
-  return rawTitle;
-}
-
-/// 游戏的显示名解析：委托 [GalgameEntry.displayName]
-/// （customData.name > nameCn > name > 本地默认名）。
-///
-/// [entry] 查不到（已删游戏 / 活动行按旧名无法匹配库内条目）时回退 [rawTitle]
-/// （活动事件落库时的标题快照）。
-String displayTitleForGame({
-  required String rawTitle,
-}) {
   return rawTitle;
 }
 

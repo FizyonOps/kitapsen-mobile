@@ -4,21 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:fushi/media.dart';
 import 'package:fushi/pages.dart';
 import 'package:fushi/src/media/reader_exit_flush.dart';
-import 'package:fushi/src/sync/sync_auto_trigger.dart';
-
-/// 一次查词是怎么发起的。决定这次查词要不要跑「每查一次就付费一次」的旁路工作
-/// （查词按句意自动挑词条），以及这一层弹窗有没有可信的原句。
-enum LookupOrigin {
-  /// 明确的一次点击 / 按键 / 菜单「查词」：查的就是读者此刻那句话里的词。
-  explicit,
-
-  /// 指针扫过（Shift 悬停 / 悬停查词）：扫一行就连查十几个词，不自动挑词条。
-  hover,
-
-  /// 在弹窗释义里点词叠出的子层：查的词来自释义，不在读者的原句里，
-  /// 这一层没有可信的句子（不显示 ✨、不自动挑词条）。
-  nested,
-}
+import 'package:fushi/src/sync/kitapsen_client.dart'
+    show syncKitapsenBookProgress;
 
 /// A page template which assumes use of [BaseSourcePageState] by which all
 /// pages in the app that are used for when using a certain source will
@@ -62,7 +49,6 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
   Future<bool> onWillPop() async {
     final mediaSource = appModel.currentMediaSource;
     final item = widget.item;
-    final messenger = ScaffoldMessenger.maybeOf(context);
     await onSourcePagePop();
 
     if (mediaSource != null) {
@@ -73,13 +59,9 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
       );
     }
 
-    if ((item != null) && (messenger != null)) {
-      triggerAutoSyncAfterClose(
-        db: appModel.database,
-        mediaIdentifier: item.mediaIdentifier,
-        messenger: messenger,
-        onReport: appModel.presentSyncPrompts,
-      );
+    // 关书后把这本书的位置报回 Kitapsen（fire-and-forget，不阻塞退出 UI）。
+    if (item != null) {
+      unawaited(syncKitapsenBookProgress(appModel.database, item.mediaIdentifier));
     }
     return true;
   }
@@ -101,27 +83,5 @@ abstract class BaseSourcePageState<T extends BaseSourcePage>
 
   /// Action to perform within the source page upon closing the media.
   Future<void> onSourcePagePop() async {}
-
-  Future<int> searchDictionaryResult({
-    required String searchTerm,
-    required Rect selectionRect,
-    int? overrideMaximumTerms,
-    bool deferDisplay = false,
-    LookupOrigin origin = LookupOrigin.explicit,
-  }) async {
-    return 0;
-  }
-
-  /// Dismiss only the top-most visible popup (one layer), leaving any parent
-  /// popup in place — used by the cursor's B/Esc "back one layer".
-  @protected
-  void dismissTopPopup() {
-    return;
-  }
-
-  @protected
-  void prunePopupStack(int keepCount) {
-    return;
-  }
 
 }

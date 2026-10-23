@@ -327,7 +327,6 @@ class _SettingsHomePageState extends BasePageState<SettingsHomePage>
     return MaterialSupportingPaneLayout(
       minSplitWidth: 720,
       supportingSide: SupportingPaneSide.start,
-      showDivider: false,
       supporting: Padding(
         padding: EdgeInsets.fromLTRB(
           tokens.spacing.page,

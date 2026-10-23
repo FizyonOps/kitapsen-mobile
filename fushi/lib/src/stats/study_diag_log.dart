@@ -16,7 +16,7 @@ import 'package:path_provider/path_provider.dart';
 /// 「昨天那一段」，导出时要能拿到。
 ///
 /// 写入方：
-///  * `StudyClock.trace`（`fushi_audio`）：起停表、开 / 封段、守卫拒窗、字数页数
+///  * `StudyClock.trace`（`fushi_reading`）：起停表、开 / 封段、守卫拒窗、字数页数
 ///    入账 / 撤回 / 停表期间丢弃、落库；
 ///  * 阅读器（`reader_fushi_page` 及 part）：单元 arrive / leave、账本入账 / 撤回、
 ///    位置恢复、有声书恢复与跟随跳页；

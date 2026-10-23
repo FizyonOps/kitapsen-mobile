@@ -495,7 +495,6 @@ abstract class EpubParser {
         href: _relHref(absPath, extractDir),
         mediaType: item.mediaType,
         filePath: absPath,
-        spineIndex: index,
         linear: linear != 'no',
         spreadProperty: spreadProperty,
         isNav: isNavDoc,

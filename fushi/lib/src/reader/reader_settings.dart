@@ -12,51 +12,15 @@ import 'package:fushi/src/media/sources/reader_fushi_source.dart';
 import 'package:fushi_engine/epub/reader_resource_host.dart' as engine_host;
 
 /// The independent font targets a user can configure (TODO-049 / TODO-864):
-/// 软件系统字体 ([appUi]) / 小说正文字体 ([body]) / 词典字体 ([dictionary]) /
-/// 视频字幕字体 ([videoSubtitle]) / 游戏查词窗口字体 ([gameLookup]). Each maps to its own persisted
+/// 软件系统字体 ([appUi]) / 正文字体 ([body]). Each maps to its own persisted
 /// `[{name,path,enabled}]` list; see [ReaderSettings.fontKeyForTarget].
 enum FontTarget {
   /// App-wide UI (ThemeData) font — menus, buttons, settings, etc.
   appUi,
 
-  /// Novel/EPUB body text font, injected into the reader WebView CSS.
+  /// Book body text font, injected into the reader WebView CSS.
   body,
-
-  /// Dictionary popup (definition/meaning) font.
-  dictionary,
-
-  /// Video subtitle font (Flutter `VideoSubtitleOverlay` `TextStyle.fontFamily`,
-  /// not libmpv — Hibiki renders text subtitles in the Flutter layer). New in
-  /// TODO-864.
-  videoSubtitle,
-
-  /// Windows galgame **hook 台词浮窗**（native 分层窗 `FloatingLyricWindow`，
-  /// DirectWrite 自绘）的字体。
-  ///
-  /// ⚠️ 覆盖面只有 hook 台词浮窗这一个表面。**游戏内查词卡不归它管**——那是
-  /// `GlobalLookupRoute.galCard`，和 app 内词典弹窗共用 [dictionary]
-  /// （`popup_settings_injection.dart` 读 `settings.dictionaryFonts`）。
-  /// 旧注释写的 "click-to-lookup overlay" 是错的，别照着它接线；
-  /// 守卫 `test/reader/font_targets_wiring_guard_test.dart` 钉死了这条分界。
-  ///
-  /// native 只吃**第一条可用**的 family/file，且只认 `.ttf/.otf/.ttc`
-  /// （DirectWrite 不吃 WOFF/WOFF2，见 [FontTarget] 消费端 `AppFontLoader
-  /// .resolveForNativeOverlay`）；缺字回退靠 native 追加的系统字体集，
-  /// **不是**用户列表里的第二条。语义与 [appUi] 的整链回退不同。
-  gameLookup,
 }
-
-/// 这个用途在当前平台**是否真有消费端**。
-///
-/// [FontTarget.gameLookup] 只有 Windows 有 native 消费端（分层窗 DirectWrite），
-/// 其余平台勾上等于写一个永远没人读的偏好键——UI 必须据此隐藏，否则用户会以为
-/// 自己已经设好了。其余用途五平台通用。
-bool isFontTargetAvailableOnPlatform(FontTarget target) => switch (target) {
-      FontTarget.gameLookup => false,
-      // Kitapsen: no dictionary popup and no video, so only UI and book fonts.
-      FontTarget.dictionary || FontTarget.videoSubtitle => false,
-      FontTarget.appUi || FontTarget.body => true,
-    };
 
 /// All reader display/behavior settings, decoupled from the media source.
 ///
@@ -194,31 +158,6 @@ class ReaderSettings {
   int get fontWeight => _get<int>('font_weight', 400);
   Future<void> setFontWeight(int v) => _set<int>('font_weight', v);
 
-  double get lyricsFontSize => _get<double>('lyrics_font_size', 24);
-
-  /// TODO-368: 歌词字幕文字色，独立于主题色单独可调（参照视频字幕色）。存储为 ARGB
-  /// int；`0`（完全透明，作为正文色永远无效）作哨兵 = 「未设置 / 跟随主题」，保持
-  /// 向后兼容：未设过的用户落 0 → 消费端回退到主题文字色，与历史行为一致。
-  int get lyricsTextColor => _get<int>('lyrics_text_color', 0);
-
-  double get lyricsMarginTop => _get<double>('lyrics_margin_top', 0);
-
-  double get lyricsMarginBottom => _get<double>('lyrics_margin_bottom', 0);
-
-  double get lyricsMarginLeft => _get<double>('lyrics_margin_left', 0);
-
-  double get lyricsMarginRight => _get<double>('lyrics_margin_right', 0);
-
-  /// TODO-907: 歌词模式竖排开关，**独立**于正文 `writing_mode`（正文默认
-  /// vertical-rl，复用会连坐正文）。默认 `false` = 横排，向后兼容历史行为。
-  bool get lyricsVerticalWriting =>
-      _get<bool>('lyrics_vertical_writing', false);
-
-  /// TODO-908: 歌词听力沉浸模糊开关，**独立** bool key（不复用视频字幕键）。
-  /// 默认 `false` = 不模糊，向后兼容历史行为。开启时仅当前句盖 8px 高斯模糊，
-  /// hover / 点击显形。
-  bool get lyricsBlur => _get<bool>('lyrics_blur', false);
-
   double get lineHeight => _get<double>('line_height', 1.65);
   Future<void> setLineHeight(double v) => _set<double>('line_height', v);
 
@@ -243,60 +182,8 @@ class ReaderSettings {
   // same `src:reader_fushi:` Drift mechanism as view_mode. All six values are
   // exposed by the reading settings schema and consumed by the VN shell.
 
-  /// `'block'` (one Block per screen) or `'sentences'` (group N sentences).
-  String get visualNovelScreenMode {
-    final String raw = _get<String>('vn_screen_mode', 'block').toLowerCase();
-    return raw == 'sentence' || raw == 'sentences' ? 'sentences' : 'block';
-  }
-
-  /// Sentences per screen in `'sentences'` mode (1-12). hoshi default 1.
-  int get visualNovelSentencesPerScreen =>
-      _get<int>('vn_sentences_per_screen', 1).clamp(1, 12);
-
-  /// Keep 「」/『』 dialogue brackets intact when splitting sentences.
-  bool get visualNovelPreserveDialogueBubbles =>
-      _get<bool>('vn_preserve_dialogue', false);
-
-  /// Merge Sasayaki cues that straddle a screen boundary.
-  bool get visualNovelMergeCrossScreenSentenceAudioCues =>
-      _get<bool>('vn_merge_cross_screen_cues', false);
-
   String get theme => _get<String>('theme', 'light-theme');
   Future<void> setTheme(String v) => _set<String>('theme', v);
-
-  /// 振假名显示形态，四态（前三态对齐 Hoshi Reader iOS `FuriganaMode`，
-  /// 2026-09-11 用户拍板；`dimmed` 是 2026-09-12 用户追加的第四态）：
-  ///  * `off`    —— 原样显示（历史值 `show`）；
-  ///  * `toggle` —— 默认隐藏（`visibility:hidden`，注音轨占位保留、行高不抖），
-  ///                点一个 `<ruby>` 揭示一个，且那一下不查词（历史值 `partial`；
-  ///                历史 `toggle` 是「双击整页切换」，并入此态，整页揭示改由
-  ///                `readerToggleFurigana` 快捷键承担）；
-  ///  * `hidden` —— `display:none`（历史值 `hide`）；
-  ///  * `dimmed` —— 照常显示但淡显（`opacity`，不改颜色，深浅主题都成立），
-  ///                `readerToggleFurigana` 快捷键在此态是「临时恢复全亮」。
-  /// 持久化键 `furigana_mode` 不变，旧值经 [normalizeFuriganaMode] 归一化。
-  String get furiganaMode {
-    final dynamic raw = _cache['hide_furigana'];
-    final bool? legacy = raw is bool ? raw : null;
-    if (legacy != null) {
-      final String oldStyle =
-          _get<String>('furigana_style', 'partial').toLowerCase();
-      final String mode = legacy ? 'hidden' : 'off';
-      final String merged = normalizeFuriganaMode(
-        (legacy && (oldStyle == 'partial' || oldStyle == 'toggle'))
-            ? oldStyle
-            : mode,
-      );
-      _set<String>('furigana_mode', merged);
-      _cache.remove('hide_furigana');
-      _db.deletePref('${_prefix}hide_furigana');
-      _db.deletePref('${_prefix}furigana_style');
-      return merged;
-    }
-    return normalizeFuriganaMode(
-      _get<String>('furigana_mode', 'off'),
-    );
-  }
 
   double get textIndentation => _get<double>('text_indentation', 0);
   Future<void> setTextIndentation(double v) =>
@@ -574,16 +461,6 @@ class ReaderSettings {
   /// Persistence key for the app-wide UI (ThemeData) font list. New in TODO-049.
   static const String fontKeyAppUi = 'app_ui_fonts';
 
-  /// Persistence key for the dictionary popup font list. New in TODO-049.
-  static const String fontKeyDictionary = 'dict_fonts';
-
-  /// Persistence key for the video subtitle font list. New in TODO-864.
-  /// Sibling of the other `*_fonts` keys; backs [FontTarget.videoSubtitle].
-  static const String fontKeyVideoSubtitle = 'video_sub_fonts';
-
-  /// Persistence key for the Windows galgame Hook text / lookup overlay font.
-  static const String fontKeyGameLookup = 'game_lookup_fonts';
-
   /// Persistence key for the shared font catalog.
   static const String fontCatalogKey = 'font_catalog';
 
@@ -593,9 +470,6 @@ class ReaderSettings {
   static const List<String> _fontTargetKeys = <String>[
     fontKeyBody,
     fontKeyAppUi,
-    fontKeyDictionary,
-    fontKeyVideoSubtitle,
-    fontKeyGameLookup,
   ];
 
   bool get _hasAnyFontPrefs =>
@@ -625,12 +499,6 @@ class ReaderSettings {
         fontKeyBody: _legacyFontListForKey(fontKeyBody),
       if (_cache.containsKey(fontKeyAppUi))
         fontKeyAppUi: _legacyFontListForKey(fontKeyAppUi),
-      if (_cache.containsKey(fontKeyDictionary))
-        fontKeyDictionary: _legacyFontListForKey(fontKeyDictionary),
-      if (_cache.containsKey(fontKeyVideoSubtitle))
-        fontKeyVideoSubtitle: _legacyFontListForKey(fontKeyVideoSubtitle),
-      if (_cache.containsKey(fontKeyGameLookup))
-        fontKeyGameLookup: _legacyFontListForKey(fontKeyGameLookup),
     };
   }
 
@@ -758,12 +626,10 @@ class ReaderSettings {
 
   List<Map<String, dynamic>> _fontListForTargetKey(String key) {
     final FontCatalogState state = _fontCatalogState();
-    // Historical body-seed compat (TODO-049): ONLY appUi/dictionary with no
-    // stored row inherited the body list so the split didn't change visuals for
-    // users who'd only set the legacy `custom_fonts` list. New targets (video
-    // subtitle and game lookup) must stay empty when unset, preserving their
-    // pre-target platform defaults.
-    if ((key == fontKeyAppUi || key == fontKeyDictionary) &&
+    // Historical body-seed compat (TODO-049): appUi with no stored row
+    // inherits the body list so the split didn't change visuals for users
+    // who'd only set the legacy `custom_fonts` list.
+    if (key == fontKeyAppUi &&
         !state.hasTarget(key) &&
         state.hasTarget(fontKeyBody)) {
       final FontCatalogState seeded = state.withTargetFonts(
@@ -784,45 +650,16 @@ class ReaderSettings {
   List<Map<String, dynamic>> get appUiFonts =>
       _fontListForTargetKey(fontKeyAppUi);
 
-  /// Dictionary popup font list.
-  List<Map<String, dynamic>> get dictionaryFonts =>
-      _fontListForTargetKey(fontKeyDictionary);
-
-  /// Video subtitle font list (TODO-864). Empty when unset -> overlay falls
-  /// back to the platform default + CJK fallback chain.
-  List<Map<String, dynamic>> get videoSubtitleFonts =>
-      _fontListForTargetKey(fontKeyVideoSubtitle);
-
-  /// Windows galgame Hook text / click-to-lookup overlay font list. Empty when
-  /// unset so the native renderer keeps its historical Yu Gothic UI default.
-  List<Map<String, dynamic>> get gameLookupFonts =>
-      _fontListForTargetKey(fontKeyGameLookup);
-
   /// Resolves the persisted font list for a [FontTarget].
   List<Map<String, dynamic>> fontsForTarget(FontTarget target) =>
       switch (target) {
         FontTarget.body => customFonts,
         FontTarget.appUi => appUiFonts,
-        FontTarget.dictionary => dictionaryFonts,
-        FontTarget.videoSubtitle => videoSubtitleFonts,
-        FontTarget.gameLookup => gameLookupFonts,
       };
 
   /// CSS font-family string and @font-face declarations for the BODY fonts.
   ({String fontFamily, String fontFaces}) buildCustomFontCss() =>
       customFontCssForEntries(customFonts);
-
-  /// 四态 `off` / `toggle` / `hidden` / `dimmed`（见 [furiganaMode]）。历史值
-  /// 映射：`show`→`off`、`partial`→`toggle`、`toggle`→`toggle`、`hide`→`hidden`；
-  /// 其余一律 `off`。
-  static String normalizeFuriganaMode(String mode) =>
-      switch (mode.toLowerCase().trim()) {
-        'off' || 'show' => 'off',
-        'toggle' || 'partial' => 'toggle',
-        'hidden' || 'hide' => 'hidden',
-        'dimmed' => 'dimmed',
-        _ => 'off',
-      };
 
   static ({String fontFamily, String fontFaces}) customFontCssForEntries(
     Iterable<Map<String, dynamic>> fonts, {
@@ -840,9 +677,6 @@ class ReaderSettings {
   static String fontKeyForTarget(FontTarget target) => switch (target) {
         FontTarget.body => fontKeyBody,
         FontTarget.appUi => fontKeyAppUi,
-        FontTarget.dictionary => fontKeyDictionary,
-        FontTarget.videoSubtitle => fontKeyVideoSubtitle,
-        FontTarget.gameLookup => fontKeyGameLookup,
       };
 
 }

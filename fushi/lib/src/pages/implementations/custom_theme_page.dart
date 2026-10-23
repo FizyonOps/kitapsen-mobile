@@ -31,9 +31,6 @@ enum _ThemeRole {
   /// 查词选区高亮。
   selection,
 
-  /// 有声书当前句高亮（全局偏好，对所有主题生效）。
-  audioHighlight,
-
   /// ColorScheme.secondary：标签/徽章/选中列表项。
   secondary,
 
@@ -79,8 +76,7 @@ class _CustomThemePageState extends BasePageState<CustomThemePage> {
   /// 派生色中性灰（标签 / 选中项 / 菜单不带主题色相）。
   bool _neutralDerived = false;
 
-  /// 可选角色的显式覆盖；null = 跟随主题。`audioHighlight` 是全局偏好，
-  /// 改动立即写穿 AppModel（TODO-977），其余随「应用」一起落进条目。
+  /// 可选角色的显式覆盖；null = 跟随主题，随「应用」一起落进条目。
   final Map<_ThemeRole, Color?> _overrides = <_ThemeRole, Color?>{};
 
   /// 预览用的明暗：默认跟当前 app 明暗，可在预览卡上临时切换查看另一种模式。
@@ -132,13 +128,13 @@ class _CustomThemePageState extends BasePageState<CustomThemePage> {
     _nameController = TextEditingController(text: entry.name);
     _previewBrightness =
         appModelNoUpdate.isDarkMode ? Brightness.dark : Brightness.light;
-    _loadEntry(entry, audioHighlight: appModelNoUpdate.audioHighlightColor);
+    _loadEntry(entry);
   }
 
   /// 把一条条目装进编辑状态。已钉主色的条目主题色 = 钉的那个（自动调色调关）；
   /// 只有 seed 的条目（旧数据 / 分享码）主题色 = seed 且自动调色调开——正好还原
   /// 它原来的观感。
-  void _loadEntry(CustomThemeEntry entry, {required Color? audioHighlight}) {
+  void _loadEntry(CustomThemeEntry entry) {
     Color? roleColor(int? fromEntry) =>
         fromEntry != null ? Color(fromEntry) : null;
     _accent = Color(entry.primaryColor ?? entry.seed);
@@ -153,10 +149,7 @@ class _CustomThemePageState extends BasePageState<CustomThemePage> {
       ..[_ThemeRole.selection] = roleColor(entry.selectionColor)
       ..[_ThemeRole.secondary] = roleColor(entry.secondaryColor)
       ..[_ThemeRole.tertiary] = roleColor(entry.tertiaryColor)
-      ..[_ThemeRole.container] = roleColor(entry.containerColor)
-      // TODO-977：音频高亮是全局偏好（与主题解耦），从 AppModel 读；条目/分享码
-      // 里的 sentenceAudioHighlightColor 只作分享兼容。
-      ..[_ThemeRole.audioHighlight] = audioHighlight;
+      ..[_ThemeRole.container] = roleColor(entry.containerColor);
   }
 
   @override
@@ -206,7 +199,6 @@ class _CustomThemePageState extends BasePageState<CustomThemePage> {
         selection: _overrides[_ThemeRole.selection],
         link: _overrides[_ThemeRole.link],
       ),
-      audioHighlightOverride: _overrides[_ThemeRole.audioHighlight],
     );
   }
 
@@ -227,8 +219,6 @@ class _CustomThemePageState extends BasePageState<CustomThemePage> {
         return reader.link;
       case _ThemeRole.selection:
         return reader.selection;
-      case _ThemeRole.audioHighlight:
-        return reader.sentenceAudioHighlight;
       case _ThemeRole.secondary:
         return cs.secondary;
       case _ThemeRole.tertiary:
@@ -267,8 +257,6 @@ class _CustomThemePageState extends BasePageState<CustomThemePage> {
         return t.theme_role_link;
       case _ThemeRole.selection:
         return t.kitapsen_theme_role_selection;
-      case _ThemeRole.audioHighlight:
-        return t.theme_role_audio_highlight;
       case _ThemeRole.secondary:
         return t.theme_role_secondary;
       case _ThemeRole.tertiary:
@@ -292,8 +280,6 @@ class _CustomThemePageState extends BasePageState<CustomThemePage> {
         return t.theme_role_link_desc;
       case _ThemeRole.selection:
         return t.kitapsen_theme_role_selection_desc;
-      case _ThemeRole.audioHighlight:
-        return t.theme_role_audio_highlight_desc;
       case _ThemeRole.secondary:
         return t.theme_role_secondary_desc;
       case _ThemeRole.tertiary:
@@ -317,8 +303,6 @@ class _CustomThemePageState extends BasePageState<CustomThemePage> {
         return Icons.link;
       case _ThemeRole.selection:
         return Icons.highlight_alt_outlined;
-      case _ThemeRole.audioHighlight:
-        return Icons.graphic_eq;
       case _ThemeRole.secondary:
         return Icons.label_outline;
       case _ThemeRole.tertiary:
@@ -333,7 +317,6 @@ class _CustomThemePageState extends BasePageState<CustomThemePage> {
     switch (role) {
       case _ThemeRole.readerText:
       case _ThemeRole.selection:
-      case _ThemeRole.audioHighlight:
         return true;
       case _ThemeRole.accent:
       case _ThemeRole.surface:
@@ -376,16 +359,10 @@ class _CustomThemePageState extends BasePageState<CustomThemePage> {
         _overrides[role] = color;
       }
     });
-    if (role == _ThemeRole.audioHighlight) {
-      appModel.setAudioHighlightColor(color);
-    }
   }
 
   void _resetRole(_ThemeRole role) {
     setState(() => _overrides[role] = null);
-    if (role == _ThemeRole.audioHighlight) {
-      appModel.setAudioHighlightColor(null);
-    }
   }
 
   /// TODO-930: build the [CustomThemeEntry] from the current editor state.
@@ -408,7 +385,6 @@ class _CustomThemePageState extends BasePageState<CustomThemePage> {
       secondaryColor: argb(_overrides[_ThemeRole.secondary]),
       tertiaryColor: argb(_overrides[_ThemeRole.tertiary]),
       containerColor: argb(_overrides[_ThemeRole.container]),
-      sentenceAudioHighlightColor: argb(_overrides[_ThemeRole.audioHighlight]),
     );
   }
 
@@ -422,13 +398,14 @@ class _CustomThemePageState extends BasePageState<CustomThemePage> {
     return idx >= 0 ? idx + 1 : appModelNoUpdate.customThemes.length + 1;
   }
 
-  // ── 分享码（wire 格式不变：hibiki-theme:<seed>:<brightness>[:xx<argb>...]）──
+  // ── 分享码：kitapsen-theme:<seed>:<brightness>[:xx<argb>...]；导入仍接受 1.0.0 (13)
+  // 及更早版本生成的 hibiki-theme 前缀（格式相同）──
 
   String _encodeTheme() {
     String hex(int argb) => argb.toRadixString(16).padLeft(8, '0');
     final CustomThemeEntry entry = _buildEntry();
     final String mode = appModelNoUpdate.brightnessMode;
-    var code = 'hibiki-theme:${hex(entry.seed)}:$mode';
+    var code = 'kitapsen-theme:${hex(entry.seed)}:$mode';
     void segment(String tag, int? argb) {
       if (argb != null) code += ':$tag${hex(argb)}';
     }
@@ -440,7 +417,6 @@ class _CustomThemePageState extends BasePageState<CustomThemePage> {
     segment('sr', entry.secondaryColor);
     segment('tr', entry.tertiaryColor);
     segment('cr', entry.containerColor);
-    segment('sk', entry.sentenceAudioHighlightColor);
     segment('lk', entry.linkColor);
     segment('sf', entry.surfaceColor);
     if (entry.followSystemAccent) code += ':sa1';
@@ -451,7 +427,10 @@ class _CustomThemePageState extends BasePageState<CustomThemePage> {
   /// 解析分享码成条目（id/name 用当前编辑中的）。格式不合法返回 null。
   CustomThemeEntry? _decodeTheme(String code) {
     final List<String> parts = code.trim().split(':');
-    if (parts.length < 3 || parts[0] != 'hibiki-theme') return null;
+    if (parts.length < 3 ||
+        (parts[0] != 'kitapsen-theme' && parts[0] != 'hibiki-theme')) {
+      return null;
+    }
     final int? seed = int.tryParse(parts[1], radix: 16);
     if (seed == null) return null;
     if (!const <String>{'dark', 'light', 'system'}.contains(parts[2])) {
@@ -474,7 +453,6 @@ class _CustomThemePageState extends BasePageState<CustomThemePage> {
       secondaryColor: segments['sr'],
       tertiaryColor: segments['tr'],
       containerColor: segments['cr'],
-      sentenceAudioHighlightColor: segments['sk'],
       linkColor: segments['lk'],
       surfaceColor: segments['sf'],
       followSystemAccent: segments['sa'] == 1,
@@ -488,15 +466,9 @@ class _CustomThemePageState extends BasePageState<CustomThemePage> {
     FushiToast.show(msg: t.theme_code_copied, severity: ToastSeverity.success);
   }
 
-  /// 把一条条目整份装进编辑状态（分享码导入 / AI 建议 / AI 撤销共用），并把
-  /// [audioHighlight] 写穿全局偏好。
-  void _applyImportedTheme(
-    CustomThemeEntry imported, {
-    required Color? audioHighlight,
-  }) {
-    setState(() => _loadEntry(imported, audioHighlight: audioHighlight));
-    // TODO-977：导入的音频高亮色也写穿全局偏好（与主题解耦），保持与手动改色一致。
-    appModel.setAudioHighlightColor(audioHighlight);
+  /// 把一条分享码导入的条目整份装进编辑状态。
+  void _applyImportedTheme(CustomThemeEntry imported) {
+    setState(() => _loadEntry(imported));
   }
 
   Future<void> _importTheme() async {
@@ -555,13 +527,7 @@ class _CustomThemePageState extends BasePageState<CustomThemePage> {
                         return;
                       }
                       Navigator.pop(ctx);
-                      _applyImportedTheme(
-                        result,
-                        audioHighlight:
-                            result.sentenceAudioHighlightColor != null
-                                ? Color(result.sentenceAudioHighlightColor!)
-                                : null,
-                      );
+                      _applyImportedTheme(result);
                       FushiToast.show(
                         msg: t.import_theme_success,
                         severity: ToastSeverity.success,

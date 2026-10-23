@@ -7,8 +7,12 @@
 > and online sources, dictionary, Anki, audiobooks, ASR/OCR, torrent, P2P,
 > interconnect, the headless server, `native/`, `services/`, `tools/`, every
 > `third_party/` package except `flutter_inappwebview_android`, the
-> `references/` submodules and the test suites. The repository map and rules
-> below describe upstream Fushi; paths they name may no longer exist here.
+> `references/` submodules and the test suites. Package `fushi_audio` is now
+> `fushi_reading` (see its CLAUDE.md); `permission_handler` and the
+> feature-module gate are gone. The repository map and rules below describe
+> upstream Fushi; paths they name may no longer exist here. In this checkout
+> the user's rules override the upstream ones: reply in English, work on
+> `main`, no worktrees, no tests, never `dart format` upstream files.
 
 本文件是 Claude/Codex 进入 Hibiki 仓库后长期执行规则的**唯一真相源**，不是项目宣传页。
 只保留会影响分析、修改、验证、审查、提交的规则；详细操作流程拆到 `docs/agent/`，项目介绍/构建上手见 [README.md](README.md)。
@@ -177,7 +181,7 @@
 | `packages/fushi_core/` | Dart | DB schema（90 表）/偏好/语言配置 | [CLAUDE.md](packages/fushi_core/CLAUDE.md) |
 | `packages/fushi_dictionary/` | Dart | 词典引擎 Dart 侧/FFI 绑定/多格式导入（C++ 在 `native/fushidicts/`） | [CLAUDE.md](packages/fushi_dictionary/CLAUDE.md) |
 | `packages/fushi_anki/` | Dart | Anki 集成（AnkiDroid + AnkiConnect） | [CLAUDE.md](packages/fushi_anki/CLAUDE.md) |
-| `packages/fushi_audio/` | Dart | 字幕解析/有声书播放/音频匹配 | [CLAUDE.md](packages/fushi_audio/CLAUDE.md) |
+| `packages/fushi_reading/` | Dart | Reading positions, bookmarks, favorite sentences, study clock, text/EPUB helpers (was `fushi_audio`) | [CLAUDE.md](packages/fushi_reading/CLAUDE.md) |
 | `packages/fushi_platform/` | Dart | TTS/平台集成/存储路径抽象 | [CLAUDE.md](packages/fushi_platform/CLAUDE.md) |
 | `packages/flutter_inappwebview_windows/` | Dart+C++ | inappwebview Windows fork | [CLAUDE.md](packages/flutter_inappwebview_windows/CLAUDE.md) |
 | `packages/fushi_torrent/` | Dart | 内置 torrent 引擎 FFI 绑定 + `EmbeddedTorrentEngine`（path 依赖） | — |

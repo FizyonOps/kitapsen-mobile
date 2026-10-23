@@ -1,4 +1,4 @@
-/// Flutter app 对 `fushi_engine`（以及 fushi_core / fushi_audio）平台装配点的
+/// Flutter app 对 `fushi_engine`（以及 fushi_core / fushi_reading）平台装配点的
 /// 一次性接线。
 ///
 /// 引擎包不依赖 Flutter，它需要的日志、数据根、ffmpeg 平台后端、图片缓存失效、
@@ -14,7 +14,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart' show debugPrint;
 import 'package:flutter/painting.dart';
-import 'package:fushi/src/media/audiobook/platform_charset_detector.dart';
+import 'package:fushi/src/media/book/platform_charset_detector.dart';
 import 'package:fushi/src/utils/cover_image.dart';
 import 'package:fushi/src/storage/app_paths.dart';
 import 'package:fushi/src/utils/misc/error_log_service.dart';
@@ -66,7 +66,7 @@ void installEngineHostBindings() {
   enginePaths = const AppPathsEngineBridge();
   evictImageCacheForFile = _evictImageCacheForFile;
   releaseImageCacheBeforeDelete = _releaseImageCacheBeforeDelete;
-  // fushi_audio 的两个插件级装配点（charset 探测 method channel、just_audio 时长探测 +
-  // path_provider 文档根）：纯 Dart 一半住 fushi_audio_core，插件实现由这里写入。
+  // fushi_reading 的两个插件级装配点（charset 探测 method channel、just_audio 时长探测 +
+  // path_provider 文档根）：纯 Dart 一半住 fushi_reading，插件实现由这里写入。
   installPlatformCharsetDetector();
 }

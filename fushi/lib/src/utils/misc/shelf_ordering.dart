@@ -41,39 +41,15 @@ class ShelfEntryRef {
   String toString() => 'ShelfEntryRef($mediaType, $entryKey)';
 }
 
-/// 选择键所属的来源表面：书架（SRT/EPUB 双类前缀）vs 视频库（裸 bookUid）。
-enum ShelfSelectionSurface { books, video }
-
-/// TODO-616 A1：把书架 / 视频库批量选择集里的「选择键」解码成 ShelfEntries 的稳定
-/// 身份 `(mediaType, entryKey)`，供「组合成系列」逐条 `setSeriesForEntry` 用。
-///
-/// 两套选择键编码不对称（计划 §⑦ 风险 6），故按 [surface] 分支：
-/// - [ShelfSelectionSurface.books]：书架 `_selectedKeys`——
-///   - SRT 键 = `'srt_' + srtUid` → `('srt', srtUid)`；
-///   - EPUB 键 = `'hoshi://book/<bookKey>'`（MediaItem.mediaIdentifier）→
-///     `('epub', bookKey)`（内联解析 `hoshi://book/` URI，与
-///     `ReaderFushiSource.parseBookKey` 同语义，但保持本函数 widget/DB-free 可单测）。
-///   - 无法识别（非 srt_ 前缀且非 hoshi://book/）→ null（调用方跳过该条）。
-/// - [ShelfSelectionSurface.video]：视频库 `_selectedUids`——裸 bookUid →
-///   `('video', selectionKey)`（视频选择集本就直接是 bookUid，无前缀）。
-ShelfEntryRef? shelfSelectionToEntry(
-  String selectionKey,
-  ShelfSelectionSurface surface,
-) {
-  switch (surface) {
-    case ShelfSelectionSurface.video:
-      if (selectionKey.isEmpty) return null;
-      return ShelfEntryRef(mediaType: MediaKind.video, entryKey: selectionKey);
-    case ShelfSelectionSurface.books:
-      if (selectionKey.startsWith('srt_')) {
-        final String uid = selectionKey.substring(4);
-        if (uid.isEmpty) return null;
-        return ShelfEntryRef(mediaType: MediaKind.srt, entryKey: uid);
-      }
-      final String? bookKey = _parseFushiBookKey(selectionKey);
-      if (bookKey == null || bookKey.isEmpty) return null;
-      return ShelfEntryRef(mediaType: MediaKind.epub, entryKey: bookKey);
-  }
+/// TODO-616 A1：把书架批量选择集里的「选择键」（EPUB 的 MediaItem.mediaIdentifier，
+/// `'hoshi://book/<bookKey>'`）解码成 ShelfEntries 的稳定身份 `('epub', bookKey)`，
+/// 供「组合成系列」逐条 `setSeriesForEntry` 用。内联解析 `hoshi://book/` URI，与
+/// `ReaderFushiSource.parseBookKey` 同语义，但保持本函数 widget/DB-free。无法识别 → null
+/// （调用方跳过该条）。
+ShelfEntryRef? shelfSelectionToEntry(String selectionKey) {
+  final String? bookKey = _parseFushiBookKey(selectionKey);
+  if (bookKey == null || bookKey.isEmpty) return null;
+  return ShelfEntryRef(mediaType: MediaKind.epub, entryKey: bookKey);
 }
 
 /// TODO-1125 B：从一批成员标题推导一个合集默认名（批量「组合成系列」预填用）。

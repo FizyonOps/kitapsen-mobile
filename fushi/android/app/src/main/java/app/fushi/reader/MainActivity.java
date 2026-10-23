@@ -349,13 +349,8 @@ public class MainActivity extends FlutterActivity {
             .setMethodCallHandler((call, result) -> {
                 if ("setShortcuts".equals(call.method)) {
                     List<Map<String, String>> items = call.argument("items");
-                    String disabledMessage = call.argument("disabledMessage");
-                    List<String> moduleDisabledIds = call.argument("moduleDisabledIds");
                     AppShortcutsHelper.setShortcuts(
-                        this,
-                        items == null ? new ArrayList<>() : items,
-                        disabledMessage,
-                        moduleDisabledIds == null ? new ArrayList<>() : moduleDisabledIds);
+                        this, items == null ? new ArrayList<>() : items);
                     result.success(null);
                 } else {
                     result.notImplemented();

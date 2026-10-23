@@ -64,31 +64,14 @@ const Map<String, String> kMimeTypeByExtension = <String, String>{
   // ── 音频 ──
   'mp3': 'audio/mpeg',
   'm4a': 'audio/mp4',
-  'm4b': 'audio/mp4',
   'aac': 'audio/aac',
   'wav': 'audio/wav',
   'ogg': 'audio/ogg',
   'flac': 'audio/flac',
   // ── 视频 ──
   'mp4': 'video/mp4',
-  'm4v': 'video/mp4',
-  'mkv': 'video/x-matroska',
   'webm': 'video/webm',
-  'avi': 'video/x-msvideo',
-  'mov': 'video/quicktime',
-  'ts': 'video/mp2t',
-  'm2ts': 'video/mp2t',
-  'mts': 'video/mp2t',
-  'flv': 'video/x-flv',
-  'wmv': 'video/x-ms-wmv',
-  'mpg': 'video/mpeg',
-  'mpeg': 'video/mpeg',
-  'ogv': 'video/ogg',
-  '3gp': 'video/3gpp',
   // ── 字幕 ──
-  'srt': 'text/plain; charset=utf-8',
-  'ass': 'text/plain; charset=utf-8',
-  'ssa': 'text/plain; charset=utf-8',
   'vtt': 'text/vtt; charset=utf-8',
 };
 

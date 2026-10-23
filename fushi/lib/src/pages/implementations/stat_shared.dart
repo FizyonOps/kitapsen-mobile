@@ -6,7 +6,6 @@ import 'package:fushi/src/pages/implementations/stat_hourly_breakdown.dart';
 import 'package:fushi/src/pages/implementations/stat_trends.dart';
 import 'package:fushi_engine/stats/stat_facts.dart';
 import 'package:fushi/utils.dart';
-import 'package:fushi_core/fushi_core.dart';
 import 'package:fushi/src/shortcuts/context_menu_trigger.dart';
 
 /// 三个域统计页「按媒体」列表共用的一行（用户 2026-09-08「统计全改成游戏那种」：
@@ -610,8 +609,7 @@ Widget buildStatDailyDurationChartSection(
 ///    「按 title 唯一匹配回填」同判据）；否则独立成无身份组（[identity] = null，
 ///    歧义遗留如实分开展示）。
 ///
-/// 组顺序：先身份组（按行序首见），后无身份组。吸收过无身份行的组置
-/// [absorbedUnattributed]，删除路径据此决定是否连带删该 title 的无身份行。
+/// 组顺序：先身份组（按行序首见），后无身份组。
 class StatIdentityGroup<T> {
   StatIdentityGroup({required this.identity, required this.title});
 
@@ -620,9 +618,6 @@ class StatIdentityGroup<T> {
 
   /// 展示标题（组内首见行的 title 快照）。
   final String title;
-
-  /// 是否吸收了同 title 的无身份行（删除时连带的判据）。
-  bool absorbedUnattributed = false;
 
   final List<T> rows = <T>[];
 }
@@ -674,9 +669,7 @@ List<StatIdentityGroup<T>> groupStatRowsByIdentity<T>(
     if (owners != null &&
         owners.length == 1 &&
         !ambiguousTitles.contains(title)) {
-      owners.single
-        ..absorbedUnattributed = true
-        ..rows.add(row);
+      owners.single.rows.add(row);
     } else {
       orphanGroups
           .putIfAbsent(
@@ -706,29 +699,6 @@ List<StatIdentityGroup<StatFact>> groupStatFactsByIdentity(
   ambiguousTitles: ambiguousTitles,
 );
 
-/// TODO-1204：把查词/制卡计数行按 [LookupMiningCounterRow.title] 聚合成
-/// (查词数, 制卡数)，供 per-book tile 展示。无书查词（title 空）不入
-/// tile，只进汇总面板。聚合键与字数/时长 tile 的 title 一致。
-///
-/// **book 域专用**：书标题导入期强制去重、与 bookKey 双射，按 title 聚合即按身份
-/// 聚合。视频域标题可重复，必须走 [groupStatRowsByIdentity]，且观看/计数/收藏三个
-/// 行宇宙必须**同一次**分组（见 video_stat_aggregates 的 computeVideoStats）。
-Map<String, ({int lookups, int mines})> aggregateStatCountersByTitle(
-    List<LookupMiningCounterRow> rows) {
-  final Map<String, ({int lookups, int mines})> out =
-      <String, ({int lookups, int mines})>{};
-  for (final LookupMiningCounterRow r in rows) {
-    if (r.title.isEmpty) continue;
-    final ({int lookups, int mines}) prev =
-        out[r.title] ?? (lookups: 0, mines: 0);
-    out[r.title] = (
-      lookups: prev.lookups + r.lookupCount,
-      mines: prev.mines + r.mineCount,
-    );
-  }
-  return out;
-}
-
 /// 纯函数：把 '<mediaType>|<entryKey>' 归属键解析成合集名。[key] 命中折叠归属的主
 /// collectionId（[primaryByEntry]，即 getPrimaryCollectionIdByEntry），再取 [namesById]
 /// 的名字；任一步缺失返回 null。锁死统计页 'epub|<uid>' / 'video|<bookUid>' 键契约
@@ -742,21 +712,6 @@ String? statCollectionName(
   final int? cid = primaryByEntry[key];
   if (cid == null) return null;
   return namesById[cid];
-}
-
-/// [resolveEntryDisplayTitle] 的单行拼接便捷函数：命中合集返回「合集名 - 条目名」
-/// （分隔符 ' - ' 与制卡 documentTitle 口径一致，见 composeVideoMiningDocumentTitle；
-/// 同样不做合集名==条目名去重），未命中原样返回条目名。活动时间轴等单行场景用。
-String collectionQualifiedTitle({
-  required String entryKey,
-  required String rawTitle,
-  required Map<String, int> primaryByEntry,
-  required Map<int, String> collectionNamesById,
-}) {
-  final String? name =
-      statCollectionName(entryKey, primaryByEntry, collectionNamesById);
-  if (name == null || name.isEmpty) return rawTitle;
-  return '$name - $rawTitle';
 }
 
 /// 统计页 per-book / per-video tile 的「所属合集」小标签（文件夹图标 + 合集名），
@@ -787,18 +742,6 @@ Widget buildStatCollectionLabel(
       ),
     ],
   );
-}
-
-/// TODO-1252：把收藏活行按 [FavoriteWordRow.title] 聚合成每本书/每个视频的收藏数，
-/// 供 per-book / per-video tile 展示。无书收藏（title 空）不入 tile，只进汇总面板。
-/// 聚合键与查词/制卡 tile 的 title 一致。收藏取消即删行 → 聚合活行天然回落。
-Map<String, int> aggregateStatFavoritesByTitle(List<FavoriteWordRow> rows) {
-  final Map<String, int> out = <String, int>{};
-  for (final FavoriteWordRow r in rows) {
-    if (r.title.isEmpty) continue;
-    out[r.title] = (out[r.title] ?? 0) + 1;
-  }
-  return out;
 }
 
 /// 一次会话的时间范围文案：`2026-07-24 21:03 → 22:41`（游戏详情页会话列表与统计页
@@ -1001,12 +944,11 @@ Widget buildStatHourlyFormatChartSection(
 /// 分带填充色。
 ///
 /// 未区分历史刻意用中性的 [ColorScheme.outlineVariant]，而不是第四个品类色：它不是
-/// 一种书，配一个和 EPUB / PDF / 漫画平级的彩色只会让人以为它也是某一类。
+/// 一种书，配一个和 EPUB / PDF 平级的彩色只会让人以为它也是某一类。
 Color statHourlyBandColor(StatHourlyFormatBand band, ColorScheme scheme) =>
     switch (band) {
       StatHourlyFormatBand.epub => scheme.tertiary,
       StatHourlyFormatBand.pdf => scheme.primary,
-      StatHourlyFormatBand.manga => scheme.secondary,
       StatHourlyFormatBand.unattributed => scheme.outlineVariant,
     };
 
@@ -1014,7 +956,6 @@ Color statHourlyBandColor(StatHourlyFormatBand band, ColorScheme scheme) =>
 String statHourlyBandLabel(StatHourlyFormatBand band) => switch (band) {
       StatHourlyFormatBand.epub => t.stat_hourly_band_epub,
       StatHourlyFormatBand.pdf => t.stat_hourly_band_pdf,
-      StatHourlyFormatBand.manga => t.stat_hourly_band_manga,
       StatHourlyFormatBand.unattributed => t.stat_hourly_band_unattributed,
     };
 

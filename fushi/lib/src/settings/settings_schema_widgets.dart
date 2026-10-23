@@ -11,11 +11,6 @@ import 'package:fushi/src/utils/components/settings_shared.dart';
 typedef SettingsRouteBuilder =
     Route<void> Function(BuildContext context, WidgetBuilder builder);
 
-/// section footer 文字样式解析器。两个渲染器对 footer 用不同的 TextStyle
-/// （Material：bodySmall + surfaces.onVariant；Cupertino：metadata + secondaryLabel），
-/// 是这套共享 schema widget 里唯一的平台差异，作参数注入。
-typedef SettingsFooterStyle = TextStyle? Function(BuildContext context);
-
 /// 渲染单个 schema [SettingsSection]：一组 [SettingsSchemaItem] + 可选 footer。
 ///
 /// 收口自 material_settings_renderer 与 cupertino_settings_renderer 此前逐字节复制的
@@ -29,7 +24,6 @@ class SettingsSchemaSection extends StatelessWidget {
     required this.settingsContext,
     required this.showIcons,
     required this.routeBuilder,
-    required this.footerStyle,
     this.scopeId = 'settings',
   });
 
@@ -37,7 +31,6 @@ class SettingsSchemaSection extends StatelessWidget {
   final SettingsContext settingsContext;
   final bool showIcons;
   final SettingsRouteBuilder routeBuilder;
-  final SettingsFooterStyle footerStyle;
   final String scopeId;
 
   @override
@@ -161,10 +154,6 @@ class SettingsSchemaItem extends StatelessWidget {
   }
 
   Widget _segmented<T extends Object>(SettingsSegmentedItem<T> segmented) {
-    // dropdown 渲染分支（TODO-209）：同一数据模型换下拉单选控件——标签长/选项多的
-    // 行在窄 pane 里分段条只能横向滚动裁断，下拉行内只显示当前选中标签、永不被裁。
-    if (segmented.dropdown) {
-    }
     return AdaptiveSettingsSegmentedRow<T>(
       title: segmented.title,
       subtitle: segmented.subtitle,

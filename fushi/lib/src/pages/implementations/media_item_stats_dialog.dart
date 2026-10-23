@@ -92,8 +92,6 @@ class MediaItemStatsSummary {
     required this.activeDays,
     required this.firstDateKey,
     required this.lastDateKey,
-    required this.lookups,
-    required this.cards,
     required this.sessions,
   });
 
@@ -108,8 +106,6 @@ class MediaItemStatsSummary {
   final int activeDays;
   final String? firstDateKey;
   final String? lastDateKey;
-  final int lookups;
-  final int cards;
 
   /// 属于该条目的会话，按结束时刻倒序（与 [StatFacts.sessions] 同序）。
   final List<StudySession> sessions;
@@ -117,9 +113,7 @@ class MediaItemStatsSummary {
   bool get isEmpty =>
       totalMs <= 0 &&
       totalChars <= 0 &&
-      sessions.isEmpty &&
-      lookups <= 0 &&
-      cards <= 0;
+      sessions.isEmpty;
 }
 
 /// 从统一事实面切出 [target] 的汇总。纯函数，窗口判据只用 [StatWindow]。
@@ -167,19 +161,6 @@ MediaItemStatsSummary summarizeMediaItemStats(
     if (first == null || f.dateKey.compareTo(first) < 0) first = f.dateKey;
     if (last == null || f.dateKey.compareTo(last) > 0) last = f.dateKey;
   }
-  int lookups = 0;
-  int cards = 0;
-  for (final LookupMiningCounterRow c in facts.counters.lookupCounters) {
-    if (!target.owns(
-      mediaKind: c.sourceType,
-      mediaKey: c.bookKey,
-      title: c.title,
-    )) {
-      continue;
-    }
-    lookups += c.lookupCount;
-    cards += c.mineCount;
-  }
   final List<StudySession> sessions = <StudySession>[
     for (final StudySession s in facts.sessions)
       if (target.owns(
@@ -201,8 +182,6 @@ MediaItemStatsSummary summarizeMediaItemStats(
     activeDays: days.length,
     firstDateKey: first,
     lastDateKey: last,
-    lookups: lookups,
-    cards: cards,
     sessions: sessions,
   );
 }
@@ -249,7 +228,6 @@ class _MediaItemStatsDialogState extends State<MediaItemStatsDialog> {
       final StatFacts facts = await loadStatFacts(
         widget.database,
         activityLimit: 0,
-        includeCounters: true,
       );
       if (!mounted) return;
       setState(() {
@@ -355,8 +333,6 @@ class _MediaItemStatsDialogState extends State<MediaItemStatsDialog> {
       ),
       if (s.firstDateKey != null) (t.media_stats_first_date, s.firstDateKey!),
       if (s.lastDateKey != null) (t.media_stats_last_date, s.lastDateKey!),
-      if (s.lookups > 0) (t.stat_lookup, '${s.lookups}'),
-      if (s.cards > 0) (t.stat_mined, '${s.cards}'),
     ];
     return Column(
       key: const ValueKey<String>('media-item-stats-summary'),

@@ -15,7 +15,7 @@ import 'package:fushi/src/media/media_cover_service.dart';
 import 'package:fushi/src/utils/cover_image.dart';
 import 'package:fushi/utils.dart';
 import 'package:fushi_core/fushi_core.dart';
-import 'package:fushi_audio/fushi_audio.dart';
+import 'package:fushi_reading/fushi_reading.dart';
 import 'package:path/path.dart' as path;
 import 'package:fushi_engine/media/media_pref_keys.dart' as pref_keys;
 export 'package:fushi_engine/media/media_pref_keys.dart' show dbSourcePrefKey;
@@ -35,23 +35,15 @@ abstract class MediaSource {
   /// Initialise a media source.
   MediaSource({
     required this.uniqueKey,
-    required this.sourceName,
     required this.description,
     required this.mediaType,
     required this.icon,
-    required this.implementsSearch,
-    required this.implementsHistory,
-    this.overridesAutoImage = false,
-    this.overridesAutoAudio = false,
   });
 
   /// A unique name that allows distinguishing this type from others,
   /// particularly for the purposes of differentiating between persistent
   /// settings keys.
   final String uniqueKey;
-
-  /// Name of the source that very shortly describes what it does.
-  final String sourceName;
 
   /// The media type that this source is for.
   final MediaType mediaType;
@@ -63,27 +55,6 @@ abstract class MediaSource {
   /// An icon that will show the enhancement if activated by the user in the
   /// quick menu.
   final IconData icon;
-
-  /// Whether or not this media source has a search function. If false, this
-  /// media source will have an action executed by [onSearchBarTap].
-  final bool implementsSearch;
-
-  /// Whether or not this media source allows adding items to media history.
-  /// Note that some media sources produce a history of media items but do
-  /// not require this to be set true. For example, the reader fetches its
-  /// history from a source other than the actual internal media history
-  /// system provided by the media source framework. In such cases, this
-  /// should be set as false. Setting this as true results to a media item
-  /// being added to history when media is opened.
-  final bool implementsHistory;
-
-  /// Whether or not a media source overrides the auto image enhancement.
-  /// See [generateImages].
-  final bool overridesAutoImage;
-
-  /// Whether or not a media source overrides the auto audio enhancement.
-  /// See [generateAudio].
-  final bool overridesAutoAudio;
 
   /// Shared database reference, set once by [AppModel.initialise] before
   /// any source is initialised.
@@ -113,7 +84,6 @@ abstract class MediaSource {
       return;
     } else {
       await _loadPreferencesFromDb();
-      await prepareResources();
       _initialised = true;
     }
   }
@@ -178,11 +148,6 @@ abstract class MediaSource {
     }
   }
 
-  /// If a media source requires resources to function, they can be prepared
-  /// here and this function will be run once only at runtime during the
-  /// initialisation step.
-  Future<void> prepareResources() async {}
-
   /// Executed when this media source is closed. Perform this step to clean up
   /// resources or refresh media history.
   Future<void> onSourceExit({
@@ -199,22 +164,6 @@ abstract class MediaSource {
   /// The only caller feeds this straight into a [WidgetBuilder], so the wider
   /// return type is contract-compatible.
   Widget buildLaunchPage({MediaItem? item, Bookmark? initialBookmarkJump});
-
-  /// This function can be used to clean up resources associated with a
-  /// media item upon clearing it.
-  Future<void> onMediaItemClear(MediaItem item) async {}
-
-  /// Clear extra export data.
-  void clearExtraData() {
-  }
-
-  /// Controls whether or not a media source should currently supply images.
-  void setShouldGenerateImage({required bool value}) {
-  }
-
-  /// Controls whether or not a media source should currently supply audio.
-  void setShouldGenerateAudio({required bool value}) {
-  }
 
   /// The body widget to show in the tab when this source's media type and this
   /// source is selected.

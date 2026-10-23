@@ -1,5 +1,4 @@
-/// 开书链路的分阶段计时（与按章的 [ReaderChapterPerfTrace] 正交：那个每次导航
-/// `begin` 重置，这个从页面 initState 起只算一次「点开书 → 首屏恢复完成」）。
+/// 开书链路的分阶段计时（从页面 initState 起只算一次「点开书 → 首屏恢复完成」）。
 ///
 /// 阶段由页面按顺序 [mark]：settings → located → parsed → charCounts → spreadMap →
 /// position → webViewCreated → firstRestore；有声书槽异步落定时补 `audioSlot`。
@@ -41,13 +40,5 @@ class ReaderOpenTrace {
     if (_reported) return;
     _reported = true;
     debugPrint(summary());
-  }
-
-  /// 汇总已打之后到达的阶段：单独一行，带绝对时刻，便于对照。
-  void markLate(String stage) {
-    mark(stage);
-    if (_reported) {
-      debugPrint('[open-perf] $label $stage@${_watch.elapsedMilliseconds}ms');
-    }
   }
 }

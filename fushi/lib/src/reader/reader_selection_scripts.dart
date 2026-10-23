@@ -1,19 +1,5 @@
-import 'dart:convert';
 
 abstract class ReaderSelectionScripts {
-
-  /// TODO-956：「收藏句子」的数据契约——选中可见词 ⇒ currentSentence 必非空。
-  /// 唯一写点 `lookup.part.dart` 把 `currentSentence` 写成 JS 回传的 [sentence]
-  /// （`ReaderSelectionData.sentence`），但某些书籍模式（歌词模式 / TextToEpub
-  /// 合成有声书 / 竖排或空段 DOM 使 findParagraph 落到空容器）即便 JS 端已有块级
-  /// textContent 兜底，[sentence] 仍可能回空。此时收藏读点（chrome.part.dart
-  /// `_toggleFavoriteSentence`）读到空串，误报「未选择句子」。
-  ///
-  /// 本 helper 是模式无关的下限兜底：能派生出完整句子（[sentence] 非空）就用句子；
-  /// 派生不出时退回 [word]（被选中的词本身，由调用方 `data.text.isEmpty` 守卫保证
-  /// 非空）。与 JS 块级兜底叠加，彻底消灭「未选择句子」误报。
-  static String resolveCurrentSentenceText(String sentence, String word) =>
-      sentence.isNotEmpty ? sentence : word;
 
   static String clearInvocation() => 'window.fushiSelection.clearSelection()';
 
@@ -56,13 +42,6 @@ abstract class ReaderSelectionScripts {
     lpsActive = false;
     window.__fushiTextSelectDragActive = false;
   }
-  // Arm over any visible glyph, never over links / form controls / caret ring /
-  // block images (those own their own gestures). Uses the *selection* hit test,
-  // not the lookup one: a long press onto a comma, a full stop or an indent is a
-  // perfectly ordinary place to start selecting text, and gating the arm on the
-  // lookup test (which rejects scan boundaries) is what made the long press feel
-  // dead on exactly those spots. Blank margins still never arm -- the geometry
-  // and visibility checks live in the shared lower layer.
   function lpsAllowed(target, x, y) {
     var el = target || document.elementFromPoint(x, y);
     if (el && el.closest &&
@@ -119,90 +98,11 @@ abstract class ReaderSelectionScripts {
     if (window.fushiSelection && window.fushiSelection.endRangeSelection) {
       window.fushiSelection.endRangeSelection(x, y);
     }
-    // Keep __fushiTextSelectDragActive true until the next touchstart resets it:
-    // a trailing compatibility pointerup (order vs touchend varies by WebView)
-    // must still see the flag so _gestureEnd bails -> no double lookup.
     lpsClearTimer();
     lpsActive = false;
   }, {passive: false});
   document.addEventListener('touchcancel', function() { lpsReset(); }, {passive: true});
 })();''';
-  }
-
-  /// BUG-402：取**浏览器原生选区**（`window.getSelection()`）的纯文本，给桌面
-  /// Windows 的 Ctrl+C 复制兼容层用。刻意走原生 `getSelection()` 而非
-  /// `window.fushiSelection`（后者是查词选区，是另一套坐标/状态），因为短拖/竖拖
-  /// 时原生选区照样建立，与查词逻辑无关（selectstart 在拖动起约 400ms 被
-  /// preventDefault 只影响查词高亮路径）。结果由 [nativeSelectionTextFromResult]
-  /// 解析。JSON.stringify 让结果稳定为带引号的字符串，便于解析 + 兼容各平台
-  /// evaluateJavascript 返回类型差异。
-  static String nativeSelectionTextInvocation() =>
-      'JSON.stringify(window.getSelection ? window.getSelection().toString() : null)';
-
-  /// 解析 [nativeSelectionTextInvocation] 的结果为选中文本。无选区时 JS 端
-  /// `JSON.stringify(null)` 回传字面量 `null` → 空串；有选区回传带引号的 JSON
-  /// 字符串（如 `"text"`）→ 解码出文本。Windows WebView2 经 JSON.stringify 回
-  /// 这种带引号串；若某平台直接回裸 String（非合法 JSON），原样返回兜底。
-  static String nativeSelectionTextFromResult(Object? raw) {
-    if (raw == null) return '';
-    if (raw is! String) return '';
-    final String trimmed = raw.trim();
-    if (trimmed.isEmpty) return '';
-    try {
-      final Object? decoded = jsonDecode(trimmed);
-      // JSON `null` / 非字符串（如数字）→ 无选区，空串。
-      return decoded is String ? decoded : '';
-    } catch (_) {
-      // 不是合法 JSON：当作平台直接回的裸选区文本兜底。
-      return raw;
-    }
-  }
-
-  /// TODO-954：取**浏览器原生选区**的句级归一化区间（阅读器右键「导出片段」用）。
-  /// 回传 JSON 字段与 onTextSelected 同构（[ReaderSelectionData.fromJson] 直接可解），
-  /// 让右键导出复用 tap 路径同一套选区→cue 状态，不另起特例。无选区回传 `null`。
-  static String nativeSelectionSentenceRangeInvocation() =>
-      'JSON.stringify(window.fushiSelection.nativeSelectionSentenceRange())';
-
-  /// TODO-1127：取**当前原生选区**内夹带的 EPUB 插图（<img> / 光栅封面 <svg><image>）。
-  /// 回传 JSON 数组，每项 `{src, normOffset}`，由 [clipSelectionImagesFromResult] 解析。
-  /// 供有声书片段导出把「选区中间的插图」按相对顺序渲进卡片。
-  static String nativeSelectionImagesInvocation() =>
-      'JSON.stringify(window.fushiSelection.nativeSelectionImages())';
-
-  /// 解析 [nativeSelectionImagesInvocation] 的结果为选区插图列表：每项 [src]（可交给
-  /// 宿主 `_readerImageFileForUrl` 解析成解压目录文件的绝对 URL）+ [normOffset]（该图在
-  /// 整书归一化文本坐标里的位置；JS 端 `imageNormOffset` 取不到时回传 null → 这里归一为
-  /// `-1`，宿主据此把图兜底挂到最前一段）。无选区 / 无图 / 解析失败 → 空列表。
-  static List<({String src, int normOffset})> clipSelectionImagesFromResult(
-    Object? raw,
-  ) {
-    if (raw == null) return const <({String src, int normOffset})>[];
-    try {
-      final Object decoded;
-      if (raw is String) {
-        final String trimmed = raw.trim();
-        if (trimmed.isEmpty || trimmed == 'null') {
-          return const <({String src, int normOffset})>[];
-        }
-        decoded = jsonDecode(trimmed) as Object;
-      } else {
-        decoded = raw;
-      }
-      if (decoded is! List) return const <({String src, int normOffset})>[];
-      final List<({String src, int normOffset})> result =
-          <({String src, int normOffset})>[];
-      for (final Object? item in decoded) {
-        if (item is! Map) continue;
-        final String src = item['src']?.toString() ?? '';
-        if (src.isEmpty) continue;
-        final int normOffset = (item['normOffset'] as num?)?.toInt() ?? -1;
-        result.add((src: src, normOffset: normOffset));
-      }
-      return result;
-    } catch (_) {
-      return const <({String src, int normOffset})>[];
-    }
   }
 
   static String source() => r"""
@@ -265,33 +165,11 @@ window.fushiSelection = {
   highlightWrappers: [],
   selectionRubyElements: [],
   scanDelimiters: '。、！？…‥「」『』（）()【】〈〉《》〔〕｛｝{}［］[]・：；:;，,.─\n\r"\'“”‘’«»‹›',
-  // BUG-2196：**换行不是句子边界**。在 HTML 语义里 \n / \r 只是空白，
-  // 而 EPUB 的 XHTML 正文普遍在源码里硬换行；把它们算作分隔符，
-  // `shepherds abiding in the field,\n keeping watch...` 就会被切在逗号后的换行处，
-  // 制卡拿到半截句、按句区间裁出的音频也跟着漏词（用户报的「制卡压没念」）。
-  // 同仓库先例：视觉小说模式（reader_visual_novel_scripts.dart）本来就不含 \n\r；
-  // PDF 路径（reader_pdf_page.dart）则是先把 \n/\r 等长换成空格再分句。
-  // **扁平文本那条路（lookup/sentence_extraction.dart）刻意保留换行**：Windows UIA
-  // 抓到的是没有块级结构的裸串，galgame / 聊天窗里一行就是一句。
   sentenceDelimiters: '。！？.!?',
   trailingSentenceChars: '。、！？…‥」』）)】〉》〕｝}］]',
-  brackets: {'「':'」', '『': '』', '（':'）', '(':')', '【':'】', '〈':'〉', '《':'》', '〔':'〕', '｛':'｝', '{':'}', '［':'］', '[':']'},
   isCodePointJapanese: function(codePoint) {
     return JAPANESE_RANGES.some(function(range) { return codePoint >= range[0] && codePoint <= range[1]; });
   },
-  // BUG-1773：空白不是「词边界」的同义词，这里必须拆成两个谓词。
-  //
-  // isScanBoundary 回答的是「这个字符能不能是一个词的一部分」——点击命中判定
-  // （点空格不查词）和词首回退用它，空白当然算边界。
-  //
-  // 但**前向扫描**问的是另一个问题：「查询串该在哪停」。空格分词语言里空格是
-  // 词**间连接符**而非终点，把它当终点就等于把 `listen to` / `look forward to`
-  // 这类短语词条整类排除在匹配之外。引擎本来就按空格分词生成三级候选
-  // （`listen to music` / `listen to` / `listen`，禁止在单词中间切，见
-  // native/fushidicts/fushidicts_src/scan/word_scan.cpp），单词自己不会被挤掉。
-  //
-  // 故：isScanStop = 真正的扫描终点（标点 + 只扫日文时的门控），**不含空白**；
-  // 空白能否跨过去由 selectFromPosition 的桥接规则单独决定。
   isScanWhitespace: function(char) {
     return /^[\s　]$/.test(char);
   },
@@ -303,43 +181,8 @@ window.fushiSelection = {
     return this.isScanWhitespace(char) || this.isScanStop(char);
   },
 
-  // BUG-2056：撇号在**词内**时不是词边界。英语的缩合形与所有格（don’t / it’s /
-  // John’s / we’ve）在真实 EPUB 里几乎都用排版撇号 U+2019，而它和 ASCII ' 一样躺在
-  // scanDelimiters 里，于是前向扫描一撞上就 break：点 "don" 喂给引擎的查询串是
-  // "don"，点 "t" 是 "t"，en.json 词形还原表里 don't 这类词条整类匹配不到。
-  //
-  // 判据只看上下文、不看语言：撇号两侧都是**空格分词类字母**才算词内。字母集与
-  // native/fushidicts/fushidicts_src/scan/word_scan.cpp 的 is_space_delimited_letter
-  // 逐区间对齐（拉丁/希腊/西里尔/亚美尼亚/希伯来/阿拉伯/格鲁吉亚），全仓一个模型。
-  //   don’t / John’s / l’homme → 撇号被跨过，当一个 token 继续扫
-  //   ‘hello’ world            → 右侧是空白，仍是终点（引号语义不受影响）
-  //   日文/中文正文里的 ’      → 两侧非空格分词脚本，仍是终点
-  //
-  // **只作用于前向扫描，不动词首回退**：回退跨撇号会把法语/意大利语省音写法
-  // （l’homme、dell’arte）的锚点从 homme 拖回 l’，反而查不到 homme。前向跨过是纯
-  // 增益——scan_candidates 会生成 don’t / don’ / don 三级前缀，短词不会被挤掉。
-  //
-  // 撇号集里四个码点的**角色不同**，别当成一视同仁的白名单：
-  //   ' U+0027 / ‘ U+2018 / ’ U+2019 —— 都在 scanDelimiters 里，是真正被本判据
-  //     救回来的三个（U+2018 是 OCR 把 ’ 认错的常见产物：`don‘t` 原本也被截成 don）；
-  //   ʼ U+02BC —— **不在** scanDelimiters 里，本来就不截断，列在这里是为了让
-  //     「撇号类字符」在四份实现里是同一个集合；哪天有人把它加进 scanDelimiters，
-  //     桥接已经就位。测试用不变式钉住这层耦合，而不是假装它改变了行为。
-  //
-  // 扫出整词只是**半条链**：查询串 don’t 还要经 native/fushidicts 的
-  // text_processor 撇号归一（U+2019/U+2018/U+02BC → ASCII '）才对得上 en.json 的
-  // ASCII 还原规则与 ASCII 条目键——U+2019 没有 NFKC 兼容分解，折不掉。
-  //     闭环 e2e：native/fushidicts/tests/en_apostrophe_lookup_test.cpp
   intraWordApostrophePattern: /['‘’ʼ]/,
   spaceDelimitedLetterPattern: /[A-Za-z\u00AA\u00B5\u00BA\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02AF\u0370-\u03FF\u0400-\u052F\u0531-\u0556\u0561-\u0587\u05D0-\u05EA\u05EF-\u05F2\u0620-\u063F\u0641-\u064A\u066E\u066F\u0671-\u06D3\u06D5\u06EE\u06EF\u06FA-\u06FC\u06FF\u0750-\u077F\u08A0-\u08BD\u10A0-\u10C5\u10D0-\u10FA\u1E00-\u1EFF\u1F00-\u1FFF]/,
-  isSpaceDelimitedLetter: function(char) {
-    return char !== undefined && this.spaceDelimitedLetterPattern.test(char);
-  },
-  isIntraWordApostrophe: function(text, index) {
-    return this.intraWordApostrophePattern.test(text[index] || '') &&
-      this.isSpaceDelimitedLetter(text[index - 1]) &&
-      this.isSpaceDelimitedLetter(text[index + 1]);
-  },
   isFurigana: function(node) {
     var el = node.nodeType === Node.TEXT_NODE ? node.parentElement : node;
     return !!(el && el.closest('rt, rp'));
@@ -355,13 +198,6 @@ window.fushiSelection = {
     });
     this.selectionRubyElements = [];
   },
-  // TODO-956：从选区节点解析「界定句子游走范围」的块级祖先。原实现只认
-  // p/.glossary-content/.cue，落在 h1-h6 / div / li / figcaption / blockquote /
-  // section / td / dd 里的词解析不到段落 → getSentenceContext 回退到 document.body
-  // → TreeWalker 跨兄弟块游走，把块间空白 / 换行 nodeValue 当唯一内容 → 句子 trim 成
-  // 空。修：扩到常见块级标签，且永不回退到整个 body：找不到块级祖先时退到选区容器的
-  // 父元素（仍把游走限制在词自身的局部块内），保持 createWalker 的边界永远是「词的块」
-  // 而非整篇文档。
   BLOCK_SELECTOR: 'p, .glossary-content, .cue, h1, h2, h3, h4, h5, h6, div, li, figcaption, blockquote, section, td, dd',
   findParagraph: function(node) {
     var el = node.nodeType === Node.TEXT_NODE ? node.parentElement : node;
@@ -425,12 +261,6 @@ window.fushiSelection = {
       return null;
     }
   },
-  // BUG-1797：这个字符真的可见吗（字形矩形与可见正文盒有正面积交集）。命中链上每个候选
-  // 字符都要过这一关，页边距带里被 clip 掉的相邻页字符因此永远成不了查词/选词目标；跨在
-  // 边界上、还露出半个的字符仍算可见（clip 后用户确实看得到，点它就该查得到）。
-  // [box] 由调用方一次算好往下传：逐字符兜底扫描会跑上千次，每次现算 getComputedStyle
-  // 就是上千次强制 reflow。拿不到盒（无 body / 退化几何）一律返回 true —— 这道守卫只负责
-  // 拦下**确证不可见**的字符，绝不在几何未知时把正常查词一起拦掉。
   charRangeVisible: function(charRange, box) {
     if (box === undefined) box = this.visibleContentBox();
     if (!box) return true;
@@ -486,9 +316,6 @@ window.fushiSelection = {
     // 稳定生效）解析出的底层文本块里做有界的最近字符扫描，横竖排通吃。
     if (document.caretPositionFromPoint) {
       var pos = document.caretPositionFromPoint(x, y);
-      // 命中文本节点走快路（振假名文本仍返回，由 getCharacterAtPoint 自己 reject，
-      // 保持「点振假名不查词」老行为）；命中非文本节点（遮挡的手柄 div /
-      // documentElement）则**不早退**，继续走下面的几何兜底。
       if (pos && pos.offsetNode && pos.offsetNode.nodeType === Node.TEXT_NODE) {
         var caretRange = document.createRange();
         caretRange.setStart(pos.offsetNode, pos.offset);
@@ -547,12 +374,6 @@ window.fushiSelection = {
     }
     return document.caretRangeFromPoint ? document.caretRangeFromPoint(x, y) : null;
   },
-  // BUG-长按选择不灵敏：命中测试拆成两层，因为**查词**和**选文本**对「这个点算不算
-  // 命中」的要求根本不同。查词要的是一个可扫描的词首字，落在空白/标点上必须放弃
-  // （否则拿标点去查词）；而文本选择要的只是「这里有字」——选中标点、选中句号完全
-  // 正当。旧实现让两者共用带 isScanBoundary 剔除的这一个函数，于是长按落在标点、
-  // 行首缩进、句读旁边时 lpsAllowed 直接返回 false，**连计时器都不 arm**，表现就是
-  // 「长按了半天没反应、也没有高亮」。下层保留几何与可见性，上层只给查词加边界剔除。
   getCharacterAtPoint: function(x, y) {
     var hit = this.getSelectableCharacterAtPoint(x, y);
     if (!hit) return null;
@@ -580,10 +401,6 @@ window.fushiSelection = {
         var charRange = document.createRange();
         charRange.setStart(node, offset);
         charRange.setEnd(node, offset + 1);
-        // BUG-1797：caretPositionFromPoint 的快路把落点 clamp 到最近字符，页边距上的点
-        // 因此照样解析出一个字符；这里的可见性确认是「不可见就不可点」这条不变式在查词/
-        // 选词全部入口（selectText / beginRangeSelection / updateRangeSelection /
-        // moveSelectionHandle / tapHasCharacter）上的唯一收口。
         if (this.inCharRange(charRange, x, y, pads[p]) &&
             this.charRangeVisible(charRange, box)) {
           return { node: node, offset: offset };
@@ -648,10 +465,6 @@ window.fushiSelection = {
       start = 0;
     }
     var beforeText = partsBefore.reverse().join('');
-    // BUG-2196：换行在 HTML 里等价于空格。**等长**替换（1 字符换 1 字符），
-    // 因此 beforeText.length / sentenceOffset / sStartOffset / sEndOffset 与
-    // getNormalizedOffset 的下标全部保持不变——用 \s+ 折叠会把偏移打乱，
-    // 进而毁掉喂给 miningSentenceAudioRange 的 normOffset/normLength。
     var rawSentence = (beforeText + partsAfter.join(''))
         .replace(/[\n\r]/g, ' ');
     var trimmedSentence = rawSentence.trim();
@@ -678,358 +491,6 @@ window.fushiSelection = {
       sEndOffset: sEndOffset
     };
   },
-  getSentence: function(startNode, startOffset) {
-    return this.getSentenceContext(startNode, startOffset).sentence;
-  },
-  // TODO-1104：拖选跨句时，让制卡「句子」文本 + 句级归一化区间一起从**起点句首**扩到
-  // **终点句尾**，使卡片文本与裁出的句子音频同源、同宽。入参是同一 normalized 文本坐标
-  // 系里的两端归一化位置（起点句首 startSStart、终点句尾 endSEnd，均由 getNormalizedOffset
-  // 解析），以及两个 getSentenceContext 结果。返回 { offset, length, sStartNode,
-  // sStartOffset, sEndNode, sEndOffset, merged }：
-  //   * merged=true  → 采纳并区间（起点句首 → 终点句尾）；
-  //   * merged=false → 保守回退到起点单句（今天的行为）。
-  // 回退条件（never-break 硬约束）：
-  //   1) 任一归一化位置为 null（reader 未就绪 / 节点未映射）——无法定坐标；
-  //   2) 终点句尾归一化 < 起点句首归一化——两端跨 block 导致区间在 normalized 坐标系里
-  //      反向 / 不连续（拖选跨段落时起点句与终点句可能分属不同块，合并会产出错误区间），
-  //      保守只取起点单句。
-  // start==end（tap 单点 / 未拖动）时两端 getSentenceContext 落同一句，startSStart===
-  // endSStart 且 startSEnd===endSEnd → 合并区间与起点单句逐字节相同（下方调用点对此加
-  // 断言守卫）。
-  spanSentenceRange: function(startContext, endContext, startSStart, endSEnd) {
-    // 起点句自身（回退基准 = 今天的行为）。
-    var startOnly = {
-      offset: startSStart,
-      sStartNode: startContext.sStartNode,
-      sStartOffset: startContext.sStartOffset,
-      sEndNode: startContext.sEndNode,
-      sEndOffset: startContext.sEndOffset,
-      merged: false
-    };
-    if (startSStart === null || startSStart === undefined) return startOnly;
-    if (endSEnd === null || endSEnd === undefined) return startOnly;
-    // 反向 / 不连续（跨 block）：保守回退起点单句，绝不产出错误区间。
-    if (endSEnd < startSStart) return startOnly;
-    return {
-      offset: startSStart,
-      length: Math.max(0, endSEnd - startSStart),
-      sStartNode: startContext.sStartNode,
-      sStartOffset: startContext.sStartOffset,
-      sEndNode: endContext.sEndNode,
-      sEndOffset: endContext.sEndOffset,
-      merged: true
-    };
-  },
-  // TODO-1104：按 document 顺序把 [sStartNode:sStartOffset, sEndNode:sEndOffset) 之间的
-  // 文本节点内容拼起来（跳振假名 / 纯空白节点，与 getSentenceContext 同一套 createWalker
-  // 边界）。用于拖选跨句合并后取「起点句首→终点句尾」并区间正文。sStartNode===sEndNode
-  // 时退化为同节点切片。终点不在起点之后的 walk 可达范围内（跨 block 越界）返回空串，由
-  // 调用点决定回退。
-  textBetween: function(sStartNode, sStartOffset, sEndNode, sEndOffset) {
-    if (sStartNode === sEndNode) {
-      return sStartNode.textContent.slice(sStartOffset, sEndOffset);
-    }
-    var container = this.findParagraph(sStartNode) || document.body;
-    var walker = this.createWalker(container);
-    walker.currentNode = sStartNode;
-    var parts = [];
-    var node = sStartNode;
-    var reachedEnd = false;
-    while (node) {
-      var text = node.textContent;
-      if (node === sStartNode) {
-        parts.push(text.slice(sStartOffset));
-      } else if (node === sEndNode) {
-        parts.push(text.slice(0, sEndOffset));
-        reachedEnd = true;
-        break;
-      } else {
-        parts.push(text);
-      }
-      node = walker.nextNode();
-    }
-    if (!reachedEnd) return '';
-    return parts.join('');
-  },
-  // TODO-393：从「当前查词句」往前 / 往后逐句采集上下文（制卡「上 N 句 / 下 N 句」）。
-  // 以当前 this.selection 的起点定位当前句边界，再用 getSentenceContext 从「当前句首
-  // 的前一个字符」继续往前取上一句、从「当前句尾的后一个字符」往后取下一句，逐句迭代。
-  // 每条返回 sentence 文本 + （有 window.fushiReader 时）整书归一化偏移，供宿主裁句子
-  // 音频区间。到段首 / 文首（无更多字符）即止，故实际句数可能少于请求数。
-  getSurroundingSentences: function(prevCount, nextCount) {
-    var result = { prev: [], next: [] };
-    if (!this.selection) return result;
-    var self = this;
-    var describe = function(ctx) {
-      var entry = { sentence: ctx.sentence };
-      if (window.fushiReader) {
-        var s = self.getMatchableOffset(ctx.sStartNode, ctx.sStartOffset);
-        var e = self.getMatchableOffset(ctx.sEndNode, ctx.sEndOffset);
-        if (s !== null && e !== null) {
-          entry.normOffset = s;
-          entry.normLength = Math.max(0, e - s);
-        }
-      }
-      return entry;
-    };
-    // 当前句边界：从查词选区起点解析。
-    var current = this.getSentenceContext(
-      this.selection.startNode, this.selection.startOffset);
-    // 往前：以「当前句首的前一个位置」作为新起点取上一句，再以它的句首继续。
-    var anchorNode = current.sStartNode;
-    var anchorOffset = current.sStartOffset;
-    for (var i = 0; i < prevCount; i++) {
-      var before = this.charBefore(anchorNode, anchorOffset);
-      if (!before) break;
-      // BUG-934：before.offset 已是「当前句首的前一个字符」（前一句末尾的分隔符 /
-      // trailing）。此处必须直接落在该字符上取前一句；若给该偏移再多加 1 会把起点推回当前
-      // 句首，getSentenceContext 立刻撞分隔符 → 往后取回当前句自身，导致「前加一句」把当前
-      // 句重复采集两遍（与「后加一句」用 after.offset 不加偏移对称）。
-      var ctx = this.getSentenceContext(before.node, before.offset);
-      if (!ctx.sentence) {
-        anchorNode = ctx.sStartNode;
-        anchorOffset = ctx.sStartOffset;
-        // 空句（纯分隔符段）：跳过它继续往前，避免死循环。
-        if (anchorNode === before.node && anchorOffset === before.offset) break;
-        continue;
-      }
-      result.prev.unshift(describe(ctx));
-      anchorNode = ctx.sStartNode;
-      anchorOffset = ctx.sStartOffset;
-    }
-    // 往后：以「当前句尾的后一个位置」作为新起点取下一句，再以它的句尾继续。
-    anchorNode = current.sEndNode;
-    anchorOffset = current.sEndOffset;
-    for (var j = 0; j < nextCount; j++) {
-      var after = this.charAt(anchorNode, anchorOffset);
-      if (!after) break;
-      var ctxN = this.getSentenceContext(after.node, after.offset);
-      if (!ctxN.sentence) {
-        anchorNode = ctxN.sEndNode;
-        anchorOffset = ctxN.sEndOffset;
-        if (anchorNode === after.node && anchorOffset === after.offset) break;
-        continue;
-      }
-      result.next.push(describe(ctxN));
-      anchorNode = ctxN.sEndNode;
-      anchorOffset = ctxN.sEndOffset;
-    }
-    return result;
-  },
-  // TODO-954：从**浏览器原生选区**（window.getSelection()，长按/拖动框选建立）解析出
-  // 句级归一化区间，供阅读器右键「导出片段」在没有查词弹窗（未走 onTextSelected 的
-  // tap 路径、_cachedSentenceRange 为空）时也能定位 cue。复用与 tap 路径同一套
-  // getSentenceContext + getNormalizedOffset 机制，回传字段与 onTextSelected 同构，
-  // 故宿主可填进同样的 _cachedSelectionRange / _cachedSentenceRange 状态后走既有导出链。
-  // 无选区 / 选区不在文本节点上 → 返回 null（宿主走空选区兜底 toast）。
-  nativeSelectionSentenceRange: function() {
-    var sel = window.getSelection ? window.getSelection() : null;
-    if (!sel || sel.rangeCount === 0) return null;
-    var text = sel.toString();
-    if (!text) return null;
-    var range = sel.getRangeAt(0);
-    // Clip against the actual Range. Element offsets are child indexes, not
-    // text offsets; descending to the element's first child shifts selections.
-    // Use the same visible-text walker as lookup, excluding ruby annotations.
-    var walker = this.createWalker(document.body);
-    var selected = [];
-    var node;
-    while ((node = walker.nextNode()) != null) {
-      if (!range.intersectsNode(node)) continue;
-      var start = node === range.startContainer ? range.startOffset : 0;
-      var end = node === range.endContainer ? range.endOffset : node.textContent.length;
-      if (end > start) selected.push({ node: node, start: start, end: end });
-    }
-    if (!selected.length) return null;
-    var first = selected[0], last = selected[selected.length - 1];
-    var startNode = first.node, startOffset = first.start;
-    var endNode = last.node, endOffset = last.end;
-    text = selected.map(function(part) {
-      return part.node.textContent.slice(part.start, part.end);
-    }).join('');
-    var sentenceContext = this.getSentenceContext(startNode, startOffset);
-    var normalizedOffset = window.fushiReader
-      ? this.getNormalizedOffset(startNode, startOffset) : null;
-    var normalizedLength = null;
-    if (normalizedOffset !== null) {
-      var normalizedEnd = this.getNormalizedOffset(endNode, endOffset);
-      if (normalizedEnd !== null) {
-        normalizedLength = Math.max(0, normalizedEnd - normalizedOffset);
-      }
-    }
-    // TODO-1104：拖选跨句时把句级区间 + 卡片正文一起从起点句首扩到终点句尾（文本 / 音频
-    // 同源同宽）。start==end（tap / 未拖动，两端在下钻后落同一 (node,offset)）时只算一次
-    // 起点句，与今天逐字节相同；否则另在终点算一次句上下文并合并。合并 / 回退判定见
-    // spanSentenceRange（跨 block 反向 → 保守回退起点单句）。
-    var sentence = sentenceContext.sentence;
-    var sentenceOffset = sentenceContext.sentenceOffset;
-    var sentenceNormalizedOffset = null;
-    var sentenceNormalizedLength = null;
-    if (window.fushiReader) {
-      var isDrag = !(startNode === endNode && startOffset === endOffset);
-      var endContext = isDrag
-        ? this.getSentenceContext(endNode, endOffset) : sentenceContext;
-      var snStart = this.getNormalizedOffset(
-        sentenceContext.sStartNode, sentenceContext.sStartOffset);
-      var snEnd = this.getNormalizedOffset(
-        endContext.sEndNode, endContext.sEndOffset);
-      var span = this.spanSentenceRange(
-        sentenceContext, endContext, snStart, snEnd);
-      if (span.offset !== null && span.offset !== undefined) {
-        sentenceNormalizedOffset = span.offset;
-        if (span.merged) {
-          sentenceNormalizedLength = span.length;
-          if (isDrag) {
-            // 合并成功：卡片正文也取起点句首→终点句尾的并区间正文（与音频同源）。
-            // textBetween 越界（跨 block 不连续）返回空串时保守保留起点单句正文。
-            var merged = this.textBetween(
-              span.sStartNode, span.sStartOffset,
-              span.sEndNode, span.sEndOffset).trim();
-            if (merged !== '') {
-              sentence = merged;
-              sentenceOffset = 0;
-            }
-          }
-        } else {
-          // 回退：起点单句自身归一化长度（今天的行为）。
-          var fbEnd = this.getNormalizedOffset(
-            sentenceContext.sEndNode, sentenceContext.sEndOffset);
-          if (fbEnd !== null) {
-            sentenceNormalizedLength = Math.max(0, fbEnd - span.offset);
-          }
-        }
-      }
-    }
-    var match = this.matchableRange(startNode, startOffset, endNode, endOffset);
-    var matchSentence = this.matchableRange(
-      sentenceContext.sStartNode, sentenceContext.sStartOffset,
-      span && span.merged ? span.sEndNode : sentenceContext.sEndNode,
-      span && span.merged ? span.sEndOffset : sentenceContext.sEndOffset);
-    return {
-      matchableOffset: match.offset,
-      matchableLength: match.length,
-      sentenceMatchableOffset: matchSentence.offset,
-      sentenceMatchableLength: matchSentence.length,
-      text: text,
-      sentence: sentence,
-      audioCuePayload: window.fushiReader && window.fushiReader.cueIdAtDomPoint
-        ? window.fushiReader.cueIdAtDomPoint(startNode, startOffset) : null,
-      normalizedOffset: normalizedOffset,
-      normalizedLength: normalizedLength,
-      sentenceOffset: sentenceOffset,
-      sentenceNormalizedOffset: sentenceNormalizedOffset,
-      sentenceNormalizedLength: sentenceNormalizedLength
-    };
-  },
-  // TODO-1127：抽取**当前原生选区**内夹带的 EPUB 插图（<img> 与光栅封面 <svg><image>），
-  // 供有声书片段导出把「选区中间的插图」渲进卡片。返回按文档序的数组，每项
-  // { src, normOffset }：src 是可交给宿主 _readerImageFileForUrl 解析成解压目录文件的绝对
-  // URL（fushi.local/epub/...），normOffset 是该图在整书归一化文本坐标里的位置（用相邻文本
-  // 节点算，供宿主把图挂到相对顺序正确的 cue 段后）。选区无图 / 无原生选区 → 空数组。
-  nativeSelectionImages: function() {
-    var sel = window.getSelection ? window.getSelection() : null;
-    if (!sel || sel.rangeCount === 0) return [];
-    var candidates = document.querySelectorAll('img, svg');
-    var out = [];
-    for (var i = 0; i < candidates.length; i++) {
-      var el = candidates[i];
-      var inSel = false;
-      try {
-        inSel = sel.containsNode ? sel.containsNode(el, true) : false;
-      } catch (e) {
-        inSel = false;
-      }
-      if (!inSel) continue;
-      var src = this.resolveClipImageSrc(el);
-      if (!src) continue;
-      out.push({ src: src, normOffset: this.imageNormOffset(el) });
-    }
-    return out;
-  },
-  // 解析一个图节点的可下载源 URL。<img>（跳过外字 gaiji 内联小图）→ el.src；光栅封面
-  // <svg><image xlink:href=..>（BUG-025 先例）→ 内层 <image> 的解析后绝对 href；纯矢量
-  // svg（无 <image>）无对应文件 → null（宿主跳过并记日志）。
-  resolveClipImageSrc: function(el) {
-    var tag = el.tagName ? el.tagName.toLowerCase() : '';
-    if (tag === 'img') {
-      if (el.classList &&
-          (el.classList.contains('gaiji') ||
-           el.classList.contains('gaiji-line'))) {
-        return null;
-      }
-      return el.src || el.getAttribute('src') || null;
-    }
-    if (tag === 'svg') {
-      var inner = el.querySelector('image');
-      if (!inner) return null;
-      var raw = (inner.href && inner.href.baseVal) ||
-        inner.getAttribute('xlink:href') || inner.getAttribute('href');
-      if (!raw) return null;
-      try {
-        return new URL(raw, document.baseURI).href;
-      } catch (e) {
-        return raw;
-      }
-    }
-    return null;
-  },
-  // 图节点在整书归一化文本坐标里的位置：优先取图**后**第一个正文文本节点的归一化偏移
-  // （图排在这句之前），取不到再退到图**前**最后一个文本节点的末端偏移。无 fushiReader
-  // （无归一化映射）时返回 null，宿主兜底挂到最前一段。
-  imageNormOffset: function(el) {
-    if (!window.fushiReader) return null;
-    var w = this.createWalker(document.body);
-    w.currentNode = el;
-    var after = w.nextNode();
-    if (after) {
-      var o = this.getMatchableOffset(after, 0);
-      if (o !== null) return o;
-    }
-    var w2 = this.createWalker(document.body);
-    w2.currentNode = el;
-    var before = w2.previousNode();
-    if (before) {
-      var o2 = this.getMatchableOffset(before, before.textContent.length);
-      if (o2 !== null) return o2;
-    }
-    return null;
-  },
-  // 从任意节点下钻到它包含的第一个非空文本节点（含自身），返回 {node, offset:0}。
-  firstTextNode: function(node) {
-    // TODO-956：下钻首个**含可见文本**的节点。纯空白 / 纯换行文本节点不算正文（其
-    // textContent 全是换行或空格），跳过它们；否则导出路径会把这样一个空白节点当选区
-    // 起点，解析出的句子游走从空白起锚 → 句子退化成空白。createWalker 已 REJECT 纯空白
-    // 节点，但自身是文本节点的入参仍需在此判一次。
-    var isVisible = function(text) { return !!text && /[^\s　]/.test(text); };
-    if (node.nodeType === Node.TEXT_NODE) {
-      return isVisible(node.textContent) ? { node: node, offset: 0 } : null;
-    }
-    var walker = this.createWalker(node);
-    var next = walker.nextNode();
-    while (next) {
-      if (isVisible(next.textContent)) return { node: next, offset: 0 };
-      next = walker.nextNode();
-    }
-    return null;
-  },
-  // 返回 (node, offset) 之前一个文本字符的位置（跨文本节点，跳振假名），无则 null。
-  // TODO-393 修「后加一句/前退一句跨段无反应」：walker 根用 document.body（不是
-  // findParagraph 的当前块），故「上一句」的种子字符能跨 <p>/块级边界回退。句子自身仍
-  // 由 getSentenceContext 的 findParagraph 限定在其块内，这里只把「找相邻句起点」放宽到
-  // 跨段——与 collectRangeBetween 同一套 document 级 walker（同样 REJECT 振假名/空白节点）。
-  charBefore: function(node, offset) {
-    if (offset > 0) return { node: node, offset: offset - 1 };
-    var walker = this.createWalker(document.body);
-    walker.currentNode = node;
-    var prev = walker.previousNode();
-    while (prev) {
-      if (prev.textContent.length > 0) {
-        return { node: prev, offset: prev.textContent.length - 1 };
-      }
-      prev = walker.previousNode();
-    }
-    return null;
-  },
   // 返回 (node, offset) 处（含本位）的下一个有效文本位置，无则 null。
   // TODO-393 修：同 charBefore，walker 根用 document.body 以支持「下一句」跨 <p> 段落取到
   // 下一段首个可见文本节点（旧实现困在 findParagraph 当前块内、段末即 break → 后加一句没反应）。
@@ -1044,141 +505,6 @@ window.fushiSelection = {
     }
     return null;
   },
-  // 振假名 toggle 态（ReaderSettings.furiganaMode == 'toggle'，CSS 把未揭示 ruby 的
-  // rt 设成 visibility:hidden）：命中这样的 ruby 时返回它，调用方只揭示不查词。
-  // 判据读注音的**计算样式**而不是某个模式旗——设置热切换只重发 CSS，读旗会过期；
-  // hidden 态 rt 是 display:none（不算），快捷键 show-all-rt 揭示后 visible（不算）。
-  _hiddenFuriganaRubyAt: function(x, y) {
-    var el = document.elementFromPoint(x, y);
-    var ruby = el && el.closest ? el.closest('ruby') : null;
-    if (!ruby || ruby.classList.contains('furigana-revealed')) return null;
-    var rt = ruby.querySelector('rt');
-    if (!rt) return null;
-    var cs = getComputedStyle(rt);
-    if (cs.display === 'none' || cs.visibility !== 'hidden') return null;
-    return ruby;
-  },
-  selectText: function(x, y, maxLength, fromHover) {
-    if (document.elementFromPoint(x, y)?.closest('a')) {
-      return null;
-    }
-    // Hoshi Reader iOS Toggle 语义：点隐藏注音的 ruby = 揭示它，这一下不查词、
-    // 也不算点空白（不 fire onTapEmpty）；悬停查词（fromHover）不揭示。
-    if (!fromHover) {
-      var hiddenRuby = this._hiddenFuriganaRubyAt(x, y);
-      if (hiddenRuby) {
-        hiddenRuby.classList.add('furigana-revealed');
-        this.clearSelection();
-        return null;
-      }
-    }
-    var hit = this.getCharacterAtPoint(x, y);
-    if (!hit) {
-      this.clearSelection();
-      // TODO-851：悬停查词（fromHover）命中空白只清选区，绝不 fire onTapEmpty——
-      // 否则鼠标在正文空白移动会反复触发「点空白隐藏操作栏」让操作栏闪烁。
-      // 真点击（fromHover falsy）仍 fire，保留点空白隐藏操作栏的旧行为。
-      if (!fromHover) {
-        window.flutter_inappwebview.callHandler('onTapEmpty');
-      }
-      return null;
-    }
-    // Hover identity uses the matched word, not the entire forward scan buffer.
-    // The latter can contain the rest of the sentence and would block new words.
-    if (fromHover && this.selection) {
-      var insideMatch = (this.selection.matchedRanges || []).some(function(r) {
-        return hit.node === r.node && hit.offset >= r.start && hit.offset < r.end;
-      });
-      var wrapper = hit.node.parentElement && hit.node.parentElement.closest('.fushi-dict-highlight');
-      if (insideMatch || (wrapper && this.highlightWrappers.indexOf(wrapper) >= 0)) return null;
-      // Before lookup finishes, normalize Latin hits just as selectFromPosition
-      // does so hovering a different letter does not enqueue the same lookup.
-      var content = hit.node.textContent;
-      var offset = hit.offset;
-      if (offset < content.length && !this.isCodePointJapanese(content.codePointAt(offset))) {
-        while (offset > 0 && !this.isScanBoundary(content[offset - 1])) offset--;
-      }
-      if (hit.node === this.selection.startNode && offset === this.selection.startOffset) return null;
-    }
-    if (this.selection && hit.node === this.selection.startNode && hit.offset === this.selection.startOffset) {
-      // 悬停连续查词（fromHover）命中的还是同一个词：什么都不做，保留当前选区
-      // 高亮与弹窗——这是「按住 Shift 一路滑，弹窗跟着光标走」的去重基石。滑过一
-      // 个词只查一次，同词内继续移动不重复 fire onTextSelected，不闪、不刷 FFI /
-      // 查词历史。真点击（fromHover falsy）保持旧的 toggle 语义：再点同词 = 取消。
-      if (fromHover) {
-        return null;
-      }
-      this.clearSelection();
-      return null;
-    }
-    this.clearSelection();
-    return this.selectFromPosition(hit.node, hit.offset, maxLength, x, y, fromHover);
-  },
-  // Build the dictionary selection starting at (node, offset): expand a
-  // non-Japanese hit left to its token start, scan forward up to maxLength
-  // characters, compute the sentence + whole-book normalized offsets, and fire
-  // onTextSelected. Shared by the coordinate (tap) path and the keyboard/gamepad
-  // caret path. x/y are optional — the caret path omits them, in which case the
-  // selection rect falls back to the first character's bounding box. The caller
-  // is responsible for clearing any prior selection first.
-  selectFromPosition: function(node, offset, maxLength, x, y, fromHover) {
-    var startNode = node;
-    var startOffset = offset;
-    var hitContent = startNode.textContent;
-    if (startOffset < hitContent.length && !this.isCodePointJapanese(hitContent.codePointAt(startOffset))) {
-      while (startOffset > 0 && !this.isScanBoundary(hitContent[startOffset - 1])) {
-        startOffset--;
-      }
-    }
-    var container = this.findParagraph(startNode) || document.body;
-    var walker = this.createWalker(container);
-    var text = '';
-    var scanNode = startNode;
-    var scanOffset = startOffset;
-    var ranges = [];
-    walker.currentNode = scanNode;
-    while (text.length < maxLength && scanNode) {
-      var content = scanNode.textContent;
-      var start = scanOffset;
-      while (scanOffset < content.length && text.length < maxLength) {
-        var char = content[scanOffset];
-        // BUG-2056：词内撇号先于终点判定跨过去（don’t 不被截成 don）。
-        if (this.isIntraWordApostrophe(content, scanOffset)) {
-          text += char;
-          scanOffset++;
-          continue;
-        }
-        if (this.isScanStop(char)) break;
-        // BUG-1773：空白只当**同一文本节点内**的词间连接符跨过去，且只跨一个：
-        // 左边必须已有本节点扫入的内容（`scanOffset === start` 即本节点开头，不桥接），
-        // 右边必须紧跟一个可扫字符。于是本节点开头/末尾的空白、连续空白、空白后接
-        // 标点一律终止——跨节点续扫走下面的 walker 分支，新节点开头的空白照样不吃，
-        // 「跨块级空白把两段正文粘成一个词」不会发生。
-        // 已知取舍：`<b>listen</b> to` 这种被行内标签劈开的短语仍查不到短语（空白落在
-        // 新节点开头）。真实 EPUB 里罕见，换来的是零跨块粘连风险。
-        if (this.isScanWhitespace(char)) {
-          var nextChar = content[scanOffset + 1];
-          if (scanOffset === start || nextChar === undefined ||
-              this.isScanWhitespace(nextChar) || this.isScanStop(nextChar)) break;
-        }
-        text += char;
-        scanOffset++;
-      }
-      if (scanOffset > start) ranges.push({ node: scanNode, start: start, end: scanOffset });
-      if (scanOffset < content.length || text.length >= maxLength) break;
-      scanNode = walker.nextNode();
-      scanOffset = 0;
-    }
-    if (!text) return null;
-    this.selection = { startNode: startNode, startOffset: startOffset, ranges: ranges, text: text };
-    return this.fireTextSelected(x, y, fromHover);
-  },
-  // Build the onTextSelected/onSelectionMenu payload for the current
-  // this.selection. Extracted verbatim from selectFromPosition's tail so the
-  // tap/word path (fireTextSelected), the TODO-1317 drag-select menu path
-  // (fireSelectionMenu) and the drag->lookup path all build the identical payload
-  // (text / sentence / rect / normalized offsets) and reuse one downstream
-  // dictionary/mining pipeline. Returns null when there is no live selection.
   buildSelectionPayload: function(x, y) {
     if (!this.selection || !this.selection.ranges || !this.selection.ranges.length) return null;
     var startNode = this.selection.startNode;
@@ -1186,59 +512,6 @@ window.fushiSelection = {
     var ranges = this.selection.ranges;
     var text = this.selection.text;
     var sentenceContext = this.getSentenceContext(startNode, startOffset);
-    // Manga OCR producers may split one visual sentence into several adjacent
-    // line/column blocks. The overlay resolves that geometry once and exposes
-    // the complete sentence on every participating block. EPUB nodes do not
-    // carry this attribute and retain the normal punctuation-based context.
-    var startElement = startNode.parentElement;
-    var mangaSentenceElement = startElement && startElement.closest
-      ? startElement.closest('[data-manga-sentence]') : null;
-    var mangaSentence = mangaSentenceElement
-      ? mangaSentenceElement.getAttribute('data-manga-sentence') : null;
-    var orientationElement = startElement && startElement.closest
-      ? startElement.closest('[data-ocr-orientation]') : null;
-    var verticalWriting = orientationElement
-      ? orientationElement.getAttribute('data-ocr-orientation') === 'vertical'
-      : false;
-    // Anchor manga popups to the complete reconstructed sentence group rather
-    // than the tapped glyph. This places vertical dialogue outside the left or
-    // right edge of the bubble and horizontal dialogue above or below its text.
-    var mangaGroupRect = null;
-    var mangaGroup = mangaSentenceElement
-      ? mangaSentenceElement.getAttribute('data-manga-sentence-group') : null;
-    var mangaPage = mangaSentenceElement && mangaSentenceElement.closest
-      ? mangaSentenceElement.closest('.manga-page') : null;
-    var mangaPageIndex = mangaPage
-      ? Number(mangaPage.getAttribute('data-page')) : null;
-    if (!Number.isInteger(mangaPageIndex) || mangaPageIndex < 0) {
-      mangaPageIndex = null;
-    }
-    if (mangaGroup !== null && mangaPage) {
-      var groupBoxes = mangaPage.querySelectorAll(
-        '.ocr-box[data-manga-sentence-group]'
-      );
-      var left = Infinity, top = Infinity, right = -Infinity, bottom = -Infinity;
-      for (var groupIndex = 0; groupIndex < groupBoxes.length; groupIndex++) {
-        var groupBox = groupBoxes[groupIndex];
-        if (groupBox.getAttribute('data-manga-sentence-group') !== mangaGroup) {
-          continue;
-        }
-        var groupBoxRect = groupBox.getBoundingClientRect();
-        left = Math.min(left, groupBoxRect.left);
-        top = Math.min(top, groupBoxRect.top);
-        right = Math.max(right, groupBoxRect.right);
-        bottom = Math.max(bottom, groupBoxRect.bottom);
-      }
-      if (Number.isFinite(left) && Number.isFinite(top) &&
-          Number.isFinite(right) && Number.isFinite(bottom)) {
-        mangaGroupRect = {
-          x: left,
-          y: top,
-          width: Math.max(0, right - left),
-          height: Math.max(0, bottom - top)
-        };
-      }
-    }
     var normalizedOffset = window.fushiReader ? this.getNormalizedOffset(startNode, startOffset) : null;
     var normalizedLength = null;
     if (normalizedOffset !== null && ranges.length > 0) {
@@ -1246,85 +519,20 @@ window.fushiSelection = {
       var normalizedEnd = this.getNormalizedOffset(lastRange.node, lastRange.end);
       if (normalizedEnd !== null) normalizedLength = Math.max(0, normalizedEnd - normalizedOffset);
     }
-    var sentenceNormalizedOffset = null;
-    var sentenceNormalizedLength = null;
-    if (window.fushiReader) {
-      var snStart = this.getNormalizedOffset(sentenceContext.sStartNode, sentenceContext.sStartOffset);
-      var snEnd = this.getNormalizedOffset(sentenceContext.sEndNode, sentenceContext.sEndOffset);
-      if (snStart !== null && snEnd !== null) {
-        sentenceNormalizedOffset = snStart;
-        sentenceNormalizedLength = Math.max(0, snEnd - snStart);
-      }
-    }
-    var lastSelectedRange = ranges.length ? ranges[ranges.length - 1] : null;
-    var match = lastSelectedRange
-      ? this.matchableRange(startNode, startOffset, lastSelectedRange.node, lastSelectedRange.end)
-      : { offset: null, length: null };
-    var matchSentence = this.matchableRange(
-      sentenceContext.sStartNode, sentenceContext.sStartOffset,
-      sentenceContext.sEndNode, sentenceContext.sEndOffset);
     return {
-      matchableOffset: match.offset,
-      matchableLength: match.length,
-      sentenceMatchableOffset: matchSentence.offset,
-      sentenceMatchableLength: matchSentence.length,
       text: text,
-      sentence: mangaSentence !== null && mangaSentence !== ''
-        ? mangaSentence : sentenceContext.sentence,
-      rect: mangaGroupRect || this.getSelectionRect(x, y),
-      audioCuePayload: window.fushiReader && window.fushiReader.cueIdAtDomPoint
-        ? window.fushiReader.cueIdAtDomPoint(startNode, startOffset) : null,
+      sentence: sentenceContext.sentence,
+      rect: this.getSelectionRect(x, y),
       normalizedOffset: normalizedOffset,
-      normalizedLength: normalizedLength,
-      sentenceOffset: mangaSentence !== null && mangaSentence !== ''
-        ? 0 : sentenceContext.sentenceOffset,
-      sentenceNormalizedOffset: sentenceNormalizedOffset,
-      sentenceNormalizedLength: sentenceNormalizedLength,
-      verticalWriting: verticalWriting,
-      mangaPageIndex: mangaPageIndex
+      normalizedLength: normalizedLength
     };
   },
-  // Fire onTextSelected for the current this.selection (tap/word lookup path and
-  // the caret/keyboard path). Goes straight to the dictionary/mining popup.
-  // fromHover tells the host this lookup came from a pointer sweep (Shift-hover /
-  // hover lookup), not an explicit tap — the host skips paid per-lookup work
-  // (AI headword pick) for those; see ReaderSelectionData.fromHover.
-  fireTextSelected: function(x, y, fromHover) {
-    var payload = this.buildSelectionPayload(x, y);
-    if (!payload) return null;
-    payload.fromHover = !!fromHover;
-    window.flutter_inappwebview.callHandler('onTextSelected', JSON.stringify(payload));
-    return payload.text;
-  },
-  // TODO-1317: mobile long-press *drag*-select ends here instead of firing
-  // lookup directly. Dart shows a selection menu (Copy / Lookup) so a plain-text
-  // range selection (copy) and lookup/mining coexist -- the user is no longer
-  // forced into an immediate lookup. this.selection (and its fushi-selection
-  // highlight) is kept so the menu overlays the live selection; Dart clears it on
-  // copy/dismiss, or converges it to the match on lookup.
   fireSelectionMenu: function(x, y) {
     var payload = this.buildSelectionPayload(x, y);
     if (!payload) return null;
     window.flutter_inappwebview.callHandler('onSelectionMenu', JSON.stringify(payload));
     return payload.text;
   },
-  // -- TODO-1317: mobile long-press drag-select --------------------------------
-  // Direction B: keep TODO-1279's `@media (pointer: coarse) user-select:none`
-  // (touch never builds a native blue selection -> no double selection) and
-  // instead drive the *app-drawn* selection (this.selection + CSS Custom
-  // Highlight `fushi-selection`) from a long-press drag. These never call
-  // window.getSelection()/addRange, so no native selection is ever created. On
-  // release a real drag hands Dart a selection menu (fireSelectionMenu ->
-  // onSelectionMenu) offering Copy / Lookup so plain-text selection (copy) and
-  // lookup/mining coexist. The anchor glyph is selected as soon as the long-press
-  // threshold fires, so a stationary long-press behaves like Hoshi/Android's
-  // native text selection instead of requiring a hidden extra drag.
-  //
-  // Build the ordered per-textnode ranges + concatenated text spanning the two
-  // character positions (drag anchor + current point). Endpoints are ordered by
-  // document position; the character under the later point is included (+1). The
-  // walker skips furigana (rt/rp) and whitespace-only nodes (createWalker), so a
-  // cross-paragraph drag yields clean matchable text.
   collectRangeBetween: function(nodeA, offA, nodeB, offB) {
     var startNode, startOffset, endNode, endOffset;
     var before;
@@ -1360,10 +568,6 @@ window.fushiSelection = {
     if (!text) return null;
     return { startNode: startNode, startOffset: startOffset, ranges: ranges, text: text };
   },
-  // Render the whole current this.selection via the same highlighter as the tap
-  // path. Only re-render per drag frame on the CSS Custom Highlight path (it is
-  // DOM-mutation-free); the wrapper fallback (extractContents) mutates the DOM,
-  // so it is left to render once post-lookup (highlightSelection from Dart).
   renderSelectionHighlight: function() {
     if (!this.selection || !this.selection.text) return;
     if (window.__fushiCssHighlightsSupported) {
@@ -1399,12 +603,6 @@ window.fushiSelection = {
     this.renderSelectionHighlight();
     return built.text;
   },
-  // Finalize the long-press selection: extend to the release point, then present
-  // the selection menu (Copy / Lookup). `beginRangeSelection` already selected
-  // the anchor glyph, so this also handles a stationary long-press.
-  // TODO-1317: a real drag no longer fires lookup directly -- it keeps
-  // this.selection (highlight stays up) and hands Dart a menu so a plain-text
-  // range selection (copy) and lookup/mining coexist instead of forcing lookup.
   endRangeSelection: function(x, y) {
     this.updateRangeSelection(x, y);
     this.dragAnchor = null;
@@ -1412,21 +610,10 @@ window.fushiSelection = {
       this.clearSelection();
       return false;
     }
-    // TODO-1366: stop at the selection state -- keep the highlight, raise the
-    // start/end grips so the range is adjustable, and hand Dart the confirm
-    // menu. Lookup only happens when the user confirms it (menu "search").
     this.showSelectionHandles();
     this.fireSelectionMenu(x, y);
     return true;
   },
-  // -- TODO-1366: start/end selection handles (touch grips) -------------------
-  // The app-drawn selection (this.selection.ranges) has a visual start (first
-  // glyph of the first range) and end (last glyph of the last range). Two round
-  // touch grips are drawn at those endpoints so the user can adjust the range
-  // after a drag-select instead of being forced into an immediate lookup. Drag
-  // semantics honour the writing mode via fushiReader.isVertical(). The grips
-  // only ever mutate the app-drawn selection, never the browser's native one, so
-  // no double selection is created (TODO-1279).
   _selectionVertical: function() {
     if (window.fushiReader && typeof window.fushiReader.isVertical === 'function') {
       return window.fushiReader.isVertical();
@@ -1525,8 +712,6 @@ window.fushiSelection = {
       var x = t ? t.clientX : 0;
       var y = t ? t.clientY : 0;
       self.positionSelectionHandles();
-      // Re-present the confirm menu at the released grip so lookup/copy/export
-      // stay one tap away after an adjustment.
       self.fireSelectionMenu(x, y);
     }, {passive: false});
     el.addEventListener('touchcancel', function() {
@@ -1557,8 +742,6 @@ window.fushiSelection = {
       handles.start.style.pointerEvents = 'none';
       handles.end.style.pointerEvents = 'none';
     }
-    // 手柄拖动是在调整**选区范围**，不是查词：用选择命中，才能把选区端点停在标点
-    // 或句读上（旧实现走查词命中，拖到句号处 hit 为 null → 手柄卡住不动）。
     var hit = this.getSelectableCharacterAtPoint(x, y);
     if (handles) {
       handles.start.style.pointerEvents = savedStartPe || 'auto';
@@ -1688,8 +871,7 @@ window.fushiSelection = {
         highlights.push(range);
       }
       var selHl = highlights.length ? new Highlight(...highlights) : new Highlight();
-      // BUG-125：查词高亮 priority=1，叠在音频(sasayaki, 默认 priority=0)之上；
-      // 配合 CSS 里查词用的不透明色，重叠处只显示查词单层（查词优先），无双重高亮。
+      // BUG-125：选区高亮 priority=1，叠在其它 Highlight 之上。
       selHl.priority = 1;
       CSS.highlights.set('fushi-selection', selHl);
     } else {
@@ -1709,12 +891,8 @@ window.fushiSelection = {
     }
     return bounds ? { x: bounds.left, y: bounds.top, width: bounds.right - bounds.left, height: bounds.bottom - bounds.top } : null;
   },
-  // Audio coordinates use normalized UTF-16 units, independently of study
-  // counts. Do not read nodeStartOffsets: that index belongs to navigation.
   getMatchableOffset: function(targetNode, offset) {
     if (!window.fushiReader || !targetNode) return null;
-    // VN renders a clone of one screen. Its source map retains the chapter
-    // position; walking document.body here would restart audio offsets at zero.
     if (typeof window.fushiReader.getMatchableOffset === 'function') {
       return window.fushiReader.getMatchableOffset(targetNode, offset);
     }
@@ -1733,14 +911,6 @@ window.fushiSelection = {
     }
     return null;
   },
-  matchableRange: function(startNode, startOffset, endNode, endOffset) {
-    var start = this.getMatchableOffset(startNode, startOffset);
-    var end = this.getMatchableOffset(endNode, endOffset);
-    return { offset: start, length: start !== null && end !== null && end >= start
-      ? end - start : null };
-  },
-  // Historical API name: this is a learning-unit offset for navigation, not
-  // an audio matching or DOM text index. Keep persisted navigation compatible.
   getNormalizedOffset: function(targetNode, offset) {
     if (!window.fushiReader) return null;
     var base = window.fushiReader.nodeStartOffsets

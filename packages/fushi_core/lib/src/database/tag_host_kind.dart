@@ -4,10 +4,7 @@
 /// 范式），禁 UI 层裸字符串比较。
 enum TagHostKind {
   epub('epub'),
-  srt('srt'),
-  video('video'),
-  collection('collection'),
-  game('game');
+  collection('collection');
 
   const TagHostKind(this.dbValue);
 

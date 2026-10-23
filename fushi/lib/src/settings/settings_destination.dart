@@ -5,59 +5,11 @@ import 'package:fushi/src/settings/settings_context.dart';
 
 enum SettingsDestinationId {
   appearance,
-  // 「悬浮球」一级分类：应用内 / 应用外开关与各场景按钮的唯一入口
-  // （settings_schema_floating_ball.dart）。此前散在查词页与阅读页两处。
-  floatingBall,
-  profiles,
   reading,
-  // 「漫画」一级分类：漫画阅读器的观看偏好（方向/缩放/翻页）+ 漫画 OCR。原先
-  // OCR 组寄生在 reading 末尾、观看偏好则完全不在设置里；漫画与 EPUB 阅读没有
-  // 任何共享设置项，故拆成独立大类（见 settings_schema_manga.dart）。
-  manga,
-  lookup,
-  cardCreation,
-  video,
-  mediaTracking,
-  // 「下载」一级分类：torrent / qBittorrent 后端配置从下载页齿轮抬进设置主页
-  // （可达 + 可搜）。位置紧随视频/听，在同步备份之前。
-  downloads,
-  // 「在线服务」一级分类：第三方 API / 索引器 / 媒体服务器的凭据与端点
-  // （Jimaku、OpenSubtitles、Torznab、内置索引器、发现来源、Jellyfin/Emby、AniDB、
-  // TMDB、Dandanplay 服务器）唯一的家。此前按「服务于哪个媒介」散在视频/下载两
-  // 页，同一组件甚至双挂载；用户配完一处不知道另一处还有（BUG-1712 的真根因）。
-  // 本机后端（qBittorrent）、云盘备份后端、Anki/Yomitan 是各自域的核心，不归此。
   services,
-  // 「游戏」一级分类（审计 K/Phase 3.12）：游戏库 / 捕获工作台 / 兼容性诊断此前
-  // 完全没有 settings destination，页面与其中配置项不可搜。与 games 顶层 tab
-  // 同门控（仅 Windows，galgame hook 平台边界）。
-  game,
-  // 「AI」一级分类：用户自配的大模型提供商（端点/凭据/模型/协议）与「哪个功能用
-  // 哪家」的映射。归在 services 模块下（同 Jimaku / OpenSubtitles / Torznab 一类
-  // 第三方在线服务），见 module_registry.dart。
-  ai,
-  syncBackup,
-  // 「存储」一级分类：磁盘占用总览（书/词典单条删除）+ 可选模块（OCR 模型 /
-  // Anime4K 着色器删除恢复）+ 随包组件展示（构建函数在 settings_schema_storage.dart）。
   storage,
   system,
-  // Hibiki P2P 互联（设备直连 + 本机作为服务器）；从 syncBackup 拆出的
-  // 独立一级分类（构建函数在 sync_settings_schema.dart 同库，共享私有状态）。
-  interconnect,
-  // Synthetic destination for the reader quick-settings dialog; its own id so
-  // it never collides with the real reading destination (HBK-AUDIT-131).
   readerQuickSettings,
-  // Synthetic destination for the pushed app-icon sub-page
-  // (MiscellaneousSettingsPage)；own id so the shell no longer borrows
-  // `appearance` for content that isn't the appearance destination.
-  appIcon,
-  // Synthetic destination for the in-video quick-settings sheet; its own id so
-  // it never collides with the real video destination（与 readerQuickSettings
-  // 同款约定）。
-  videoQuickSettings,
-  // Synthetic destination for the pushed shortcut-settings page
-  // (ShortcutSettingsPage)；own id so the shell no longer borrows `system` for
-  // content that isn't the system destination（与 appIcon 同款约定）。
-  shortcuts,
 }
 
 /// 书内快捷面板的分组维度，与全局 [SettingsDestinationId] 正交。
@@ -66,7 +18,7 @@ enum SettingsDestinationId {
 /// TODO-802/774：原「外观」组（appearance）已删——字体/行高/缩进早已并入
 /// [layout]（TODO-774），最后只剩主题选择器，亦并入 [layout]（主题改的也是阅读
 /// 显示），外观组整个不再存在。
-enum ReaderGroup { layout, behavior, lookup, audiobook }
+enum ReaderGroup { layout, behavior }
 
 /// 描述某个 [SettingsItem] 在书内快捷面板里的放置位置。
 /// 为 null 表示该项不出现在书内面板（仅全局可见）。
@@ -77,12 +29,6 @@ class ReaderPlacement {
 
   /// 在所属 [group] 内的升序排序键（仅组内有效，可有间隔）。
   final int order;
-}
-
-/// 描述某个 [SettingsItem] 在视频快捷面板里的放置位置。
-/// 为 null 表示该项不出现在视频面板（仅全局可见）。
-abstract class VideoPlacement {
-
 }
 
 typedef SettingsVisibility = bool Function(SettingsContext context);
@@ -237,7 +183,6 @@ sealed class SettingsItem {
     this.icon,
     this.visible,
     this.reader,
-    this.video,
   });
 
   final String id;
@@ -275,9 +220,6 @@ sealed class SettingsItem {
   /// 书内快捷面板放置；null = 仅全局可见。
   final ReaderPlacement? reader;
 
-  /// 视频快捷面板放置；null = 不出现在视频面板。
-  final VideoPlacement? video;
-
   bool isVisible(SettingsContext context) => visible?.call(context) ?? true;
 
   /// 渲染 / 搜索展示用的标题：有 [titleBuilder] 就用它，否则用静态 [title]。
@@ -304,7 +246,6 @@ class SettingsNavigationItem extends SettingsItem {
     super.icon,
     super.visible,
     super.reader,
-    super.video,
   }) : assert(builder != null || onTap != null || child != null);
 
   final WidgetBuilder? builder;
@@ -332,7 +273,6 @@ class SettingsActionItem extends SettingsItem {
     super.icon,
     super.visible,
     super.reader,
-    super.video,
   });
 
   final SettingsItemAction onTap;
@@ -349,7 +289,6 @@ class SettingsSwitchItem extends SettingsItem {
     super.icon,
     super.visible,
     super.reader,
-    super.video,
   });
 
   final SettingsSwitchGetter value;
@@ -381,20 +320,13 @@ class SettingsSegmentedItem<T extends Object> extends SettingsItem {
     super.icon,
     super.visible,
     super.reader,
-    super.video,
     this.controlBelow = true,
-    this.dropdown = false,
   });
 
   final List<SettingsSegmentOption<T>> options;
   final SettingsValueGetter<T> selected;
   final SettingsValueChanged<T> onChanged;
   final bool controlBelow;
-
-  /// true = 渲染成下拉单选（AdaptiveSettingsPickerRow）而非分段条。用于标签长 /
-  /// 选项多、分段条在窄 pane 只能横向滚动裁断的行（TODO-209 沉浸模式四态、mpv
-  /// 解码/几何/声道等）；数据模型不变，仅换行控件。
-  final bool dropdown;
 
   /// 渲染器持有的是 `SettingsSegmentedItem<Object>`，静态读 [onChanged]（实际签名
   /// `(ctx, T)`）会因函数参数逆变抛 `_TypeError`——故在真实 [T] 上下文里转回再调。
@@ -412,7 +344,6 @@ class SettingsSliderItem extends SettingsItem {
     super.icon,
     super.visible,
     super.reader,
-    super.video,
     this.min = 0,
     this.max = 1,
     this.divisions,
@@ -463,7 +394,6 @@ class SettingsStepperItem extends SettingsItem {
     super.icon,
     super.visible,
     super.reader,
-    super.video,
   });
 
   final double Function(SettingsContext context) value;
@@ -492,7 +422,6 @@ class SettingsTextItem extends SettingsItem {
     super.icon,
     super.visible,
     super.reader,
-    super.video,
   });
 
   final SettingsValueGetter<String> value;
@@ -524,7 +453,6 @@ class SettingsCustomItem extends SettingsItem {
     super.icon,
     super.visible,
     super.reader,
-    super.video,
   });
 
   final SettingsItemBuilder builder;

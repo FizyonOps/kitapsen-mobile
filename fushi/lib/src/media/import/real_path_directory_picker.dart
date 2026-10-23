@@ -30,20 +30,10 @@ class PickedFileWithoutPathException implements Exception {
 /// 事实决策，「安卓一律不能引用」这个特例随之消失。
 @immutable
 class PickedFilePath {
-  const PickedFilePath({required this.path, required this.isRealPath});
+  const PickedFilePath({required this.path});
 
   /// 选中文件的绝对路径。
   final String path;
-
-  /// true = 用户原始位置的真实路径，可被长期引用（桌面的 `pickFiles()`、
-  /// 安卓 SAF 成功解析到原始位置）。全文件访问权限不保证 provider 能解析真实路径。
-  ///
-  /// false = 平台复制出来的**临时副本**：安卓 SAF / file_picker 的 app cache
-  /// （SAF 用 `getCacheDir()/saf_pick/`，file_picker 用 `getCacheDir()/file_picker/`），
-  /// 以及 iOS file_picker 的 import 模式（文件被挪进 `NSTemporaryDirectory()`，
-  /// 只有被选中的那一个文件，同级兄弟不跟过来——BUG-2786）。
-  /// 清缓存即失效，**只能立刻复制消费，不能作为长期引用落库**。
-  final bool isRealPath;
 }
 
 /// 平台安全的「按扩展名选文件」，语义等同

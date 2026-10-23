@@ -12,7 +12,7 @@
 /// web-made ones are CFIs, read back by their spine step.
 library;
 
-import 'package:fushi_audio/fushi_audio.dart';
+import 'package:fushi_reading/fushi_reading.dart';
 import 'package:fushi_core/fushi_core.dart';
 
 import 'package:fushi/src/sync/kitapsen_client.dart';

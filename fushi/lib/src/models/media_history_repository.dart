@@ -6,32 +6,15 @@ import 'package:fushi_core/fushi_core.dart';
 import 'package:fushi/src/media/media_item.dart';
 
 class MediaHistoryRepository extends ChangeNotifier {
-  MediaHistoryRepository(
-    this._db, {
-    this.maximumSearchHistoryItems = 60,
-    this.maximumMediaHistoryItems = 100,
-    this.stashKey = 'stash',
-  });
+  MediaHistoryRepository(this._db);
 
   final FushiDatabase _db;
-  final int maximumSearchHistoryItems;
-  final int maximumMediaHistoryItems;
-  final String stashKey;
 
   List<MediaItem> _mediaItemsCache = [];
-  final Map<String, List<String>> _searchHistoryCache = {};
 
   Future<void> loadFromDb() async {
     final miRows = await _db.getAllMediaOpenHistory();
     _mediaItemsCache = miRows.map(_rowToMediaItem).toList();
-
-    _searchHistoryCache.clear();
-    final shRows = await _db.getAllSearchHistoryItems();
-    for (final row in shRows) {
-      _searchHistoryCache
-          .putIfAbsent(row.historyKey, () => [])
-          .add(row.searchTerm);
-    }
   }
 
   // ── row conversion（v80：身份/时刻/进度是列，其余走 snapshot JSON。

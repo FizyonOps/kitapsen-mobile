@@ -425,7 +425,7 @@ class ReaderSideSheet extends StatelessWidget {
               ),
               ...headerActions,
               Semantics(
-                identifier: 'hibiki.reader.side_sheet.close',
+                identifier: 'fushi.reader.side_sheet.close',
                 child: IconButton(
                   key: const ValueKey<String>('fushi_side_sheet_close'),
                   icon: const Icon(Icons.close),

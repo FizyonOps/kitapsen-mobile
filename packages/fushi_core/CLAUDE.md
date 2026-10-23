@@ -2,6 +2,20 @@
 
 # fushi_core
 
+> **Kitapsen edition (2026-10-23).** The schema keeps 23 tables: `MediaOpenHistory`,
+> `ReaderPositions`, `Bookmarks`, `ReadingStatistics`, `ReadingHourlyLogs`,
+> `ActivityEvents`, `Preferences`, `EpubBooks`, `BookTags`, `TagAssignments`,
+> `Profiles`, `ProfileSettings`, `MediaTypeProfiles`, `BookProfiles`,
+> `LanguageProfiles`, `Series`, `ShelfEntries`, `MediaCollections`,
+> `MediaCollectionItems`, `BookCustomCss`, `RevealedImages`, `StudySegments` and
+> `StudySegmentTombstones`. Every other table below (audiobook, dictionary, Anki,
+> video, manga, galgame, interconnect, sync baselines, and the book / statistics /
+> collection / tag tombstones and `CollectionBookAliases`) was removed from the
+> Drift schema **without a DROP**: `schemaVersion` stays 116, upgraded installs keep
+> the old tables on disk untouched, and the generic `onUpgrade` only creates tables
+> that are missing. Nothing writes tombstones any more; deleting a book, tag or
+> collection is a plain delete. The table list below describes upstream Fushi.
+
 ## 模块职责
 
 共享核心模块：定义 Drift SQLite 数据库 schema（当前 schemaVersion=116；以 `database.dart` 的 `schemaVersion` getter 与 `@DriftDatabase(tables: [...])` 注册清单为准，本文数字仅作快照。v82：ReaderPositions/Bookmarks/BookCustomCss/RevealedImages 书键从 bookKey 切稳定 uid；v90：网页播放器自动制卡队列 `web_mine_queue`；v114：收藏词上下文；v115：排行榜 isbn / completedAt；v116：设备端待发制卡队列 `pending_mine_queue`）、表迁移逻辑、偏好键值编解码器（PrefCodec）、语言配置模型和文本选区模型。是所有其他 packages 的基础依赖。

@@ -29,16 +29,6 @@ class GamepadButtonIntent extends Intent {
   final GamepadButton button;
 }
 
-/// Intent dispatched when [button] (currently only A) is HELD past the
-/// long-press threshold — the gamepad equivalent of a mouse long-press. A
-/// focused widget that supports long-press maps this to the SAME callback its
-/// `onLongPress` uses (see GamepadLongPressActions), so holding A does exactly
-/// what long-pressing with a mouse would.
-@immutable
-abstract class GamepadLongPressIntent implements Intent {
-
-}
-
 /// Dispatches a normalized gamepad [button] to the [GamepadButtonIntent]
 /// handler nearest [context]. Returns true only when a focused page/widget
 /// explicitly consumes the button.
@@ -106,20 +96,11 @@ class _GamepadLongPressActionsState extends State<GamepadLongPressActions> {
   @override
   Widget build(BuildContext context) {
     if (widget.onLongPress == null) return widget.child;
-    return Actions(
-      actions: <Type, Action<Intent>>{
-        GamepadLongPressIntent: CallbackAction<GamepadLongPressIntent>(
-          onInvoke: (GamepadLongPressIntent intent) {
-            return true; // handled → GamepadService skips its activate fallback
-          },
-        ),
-      },
-      child: Focus(
-        canRequestFocus: false,
-        skipTraversal: true,
-        onKeyEvent: _handleNativeGamepadKey,
-        child: widget.child,
-      ),
+    return Focus(
+      canRequestFocus: false,
+      skipTraversal: true,
+      onKeyEvent: _handleNativeGamepadKey,
+      child: widget.child,
     );
   }
 

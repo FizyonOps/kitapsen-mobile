@@ -10,7 +10,8 @@ import 'package:fushi_engine/stats/stat_facts.dart';
 /// - [manga]：漫画（`format == 'manga'`），OCR 字数 + 页数 + 时长。
 /// - [video]：视频，字幕字数 + 观看时长。
 /// - [game]：galgame hook 文本字数 + 游玩时长。
-enum StatBreakdownSource { book, manga, video, game }
+enum StatBreakdownSource { book,
+}
 
 /// 一个来源在某个窗口（某天 / 今日 / 本周 / 全部）内的量纲合计。
 ///
@@ -39,9 +40,7 @@ class StatSourceTotals {
 /// 事实 → 来源桶。书事实按 [StatFact.format] 拆普通书 / 漫画（legacy 行反查库表
 /// 失败的 format '' 归普通书——宁可算进阅读，也不凭 `pages > 0` 这类二元标志猜身份）。
 StatBreakdownSource statSourceOf(StatFact f) {
-  if (f.isVideo) return StatBreakdownSource.video;
-  if (f.isGame) return StatBreakdownSource.game;
-  return f.isManga ? StatBreakdownSource.manga : StatBreakdownSource.book;
+  return StatBreakdownSource.book;
 }
 
 /// 逐来源、逐日的统计合计（v92：输入是统一事实面的**日面**，不再各表各读）。

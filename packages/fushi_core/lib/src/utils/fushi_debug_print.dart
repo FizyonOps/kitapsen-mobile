@@ -1,5 +1,5 @@
 /// 纯 Dart 的调试打印装配点，替代 `package:flutter/foundation.dart` 的
-/// `debugPrint`，让 fushi_core / fushi_audio / fushi_anki / fushi_dictionary /
+/// `debugPrint`，让 fushi_core / fushi_reading / fushi_anki / fushi_dictionary /
 /// fushi_engine 这些被无头服务端（`packages/fushi_server`）消费的包不再拖进
 /// `dart:ui`（`foundation.dart` 传递 import 它，`dart compile exe` 直接编不过）。
 ///

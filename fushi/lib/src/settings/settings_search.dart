@@ -25,7 +25,6 @@ class SettingsSearchEntry {
     required this.destination,
     required this.item,
     this.sectionTitle,
-    this.isBodyEntry = false,
     this.hasRevealTarget = true,
     this.subPagePath = const <SettingsNavigationItem>[],
     String? resolvedTitle,
@@ -44,8 +43,6 @@ class SettingsSearchEntry {
   /// 链）；空 = 行就在顶层分类里。
   final List<SettingsNavigationItem> subPagePath;
 
-  /// 由自绘正文元数据合成。是否可精确定位由 hasRevealTarget 单独声明。
-  final bool isBodyEntry;
   final bool hasRevealTarget;
 
   /// 打分与结果展示用的标题（custom 项取 searchTitle，见
@@ -117,7 +114,6 @@ void _flattenPageInto(
           subtitle: bodyEntry.subtitle,
           builder: (_) => const SizedBox.shrink(),
         ),
-        isBodyEntry: true,
         hasRevealTarget: bodyEntry.hasRevealTarget,
       ),
     );

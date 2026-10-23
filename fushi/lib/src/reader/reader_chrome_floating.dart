@@ -18,8 +18,6 @@
 /// reused by the reader chrome + its guards.
 library;
 
-import 'package:flutter/painting.dart';
-
 /// Clamps a stored auto-hide duration (milliseconds) into a sane range. `0` is
 /// not allowed (the surface would vanish instantly on reveal); the slider min is
 /// 1s and max 10s. Non-finite / out-of-range values degrade to the 3s default.
@@ -90,46 +88,6 @@ double bottomChromeReserve({
   return chromeHeight;
 }
 
-/// BUG-379 / BUG-1343 / BUG-1381：**独立 HTML 文档**（歌词模式 [LyricsModeHtml]、
-/// spread 整页图）的 WebView 四周留白，是「阅读器页给独立文档留多少空间」的唯一真相源。
-///
-/// 为什么独立文档要 Flutter 侧留白、正文不用：正文经 `_applyChromeInsets` 把预留高
-/// 下发给 `window.fushiReader`，由页内 CSS 收缩 body；独立 HTML 没有这个桥，
-/// `_applyChromeInsets` 对它整体 early-return，于是只能由 Flutter 侧收缩视口本身。
-///
-///  * **底部**（BUG-379）：歌词 WebView 原本 `Positioned.fill` 铺满全屏，底栏
-///    （`_buildAudiobookBar`，bottom:0）盖在其上，歌词文档级 CSS 滚动条沿整屏高度绘制，
-///    底部一段被画进底栏区域 → 看上去像「进度条跑进底栏」。留 [bottomReserve] 后视口
-///    不再与底栏重叠。[chromeOccupiesLayout] 就是底栏的占位条件
-///    （`_hasEverLoaded && _showChrome`，与 [bottomChromeReserve] 同一门控），
-///    [bottomReserve] 已含悬浮态恒 0 的语义（悬浮不占正文位置）。
-///    spread 不需要底部留白：它没有文档级滚动条，底栏叠在整页图上是既有可接受形态。
-///  * **顶部**（歌词顶栏对齐）：歌词模式过去整块关掉顶部工具栏，文档从 y=0 起画，
-///    连系统状态栏 / 刘海都压在歌词首行上。顶栏在歌词模式恢复在场后，独立文档必须
-///    像正文一样给它让位：[topReserve] 由调用方喂「此刻顶部 chrome 真占掉多少」
-///    （系统顶 inset + 挤压态顶栏高；悬浮态顶栏不占正文位置，那笔本就是 0）。
-///    它**不含**顶部进度 pill 的预留——歌词模式不画那颗 pill（`_buildTopProgressBar`
-///    对歌词早返回），算进来就是在文档顶上留一条谁也不占的空带。
-///    （更早还有一笔 `titlebarInset`（BUG-1343，macOS 自绘 28pt DragToMoveArea），
-///    macOS 改用 `FushiDesktopTitleBar` 后那条带子连同这笔留白一起删了。）
-///    spread 不需要顶部留白：它是整页图，顶栏叠在图上与底栏叠在图上是同一形态。
-///
-/// 返回 [EdgeInsets.zero] 表示「无需任何留白」，调用方据此跳过 `Padding` 包装。
-/// 判据只认 [lyricsMode]：spread 与「完全没有独立文档」在留白上不可区分（两者都是
-/// 零），所以 `spreadDocumentLoaded` 不在签名里——留一个不影响任何返回值的必填参数
-/// 只会让调用方以为它还有作用。
-EdgeInsets independentDocumentInsets({
-  required bool lyricsMode,
-  required bool chromeOccupiesLayout,
-  required double topReserve,
-  required double bottomReserve,
-}) {
-  return EdgeInsets.only(
-    top: lyricsMode ? topReserve : 0,
-    bottom: lyricsMode && chromeOccupiesLayout ? bottomReserve : 0,
-  );
-}
-
 /// Whether the top progress strip should be painted right now.
 ///
 /// In squeeze mode it follows [showTopProgress] (the historical behavior). In
@@ -156,9 +114,6 @@ bool topProgressVisible({
 /// 它），而挤压态收起过一次再切到悬浮开关，它会以 false 残留——此前这里先判
 /// `!chromeExpanded → false`，于是任何唤出通道都翻了 [transientVisible] 却一像素
 /// 不画，用户看到的就是「悬浮控制栏再也叫不回来」（2026-09-13 用户报告）。
-///
-/// [readerVnBlankTapAction] 读取同一个 [transientVisible] 真值，保证“本次是在唤栏”
-/// 与“本次可以推进”不会漂成两个同时发生的动作。
 bool bottomBarVisible({
   required bool hasEverLoaded,
   required bool chromeExpanded,
@@ -180,87 +135,6 @@ bool readerToolbarsHidden({
   required bool inAppFloatingBallEnabled,
 }) =>
     hideToolbarsPreference && inAppFloatingBallEnabled;
-
-/// BUG-1195：视觉小说（VN）模式下一次「空白点击」的归宿。
-enum ReaderVnBlankTapAction {
-  /// 挤压态底栏被收起（`_showChrome == false`）：只把底栏展开，**不翻页**。
-  ///
-  /// 挤压态展开会改预留高 → `_applyChromeInsets` 触发 reflow 与重锚；同一下再叠一次
-  /// `_paginate` 的 caret 重锚就是两套重锚打架。而且挤压态是**持久开关**：展开一次之后
-  /// 就一直在，这笔「少翻一页」的代价一个阅读会话只付一次，不是每屏都付。
-  expandChrome,
-
-  /// 悬浮底栏已自动收起：只唤出底栏，不推进。
-  revealChrome,
-
-  /// 悬浮态且底栏已经可见：推进到下一屏，同时重新武装自动收起计时。
-  ///
-  /// 悬浮态显隐不改预留高（悬浮恒 0，见 `_handleFloatingChromeReveal` 处注释），纯显隐
-  /// 不重锚，所以同一下里翻页 + 唤栏互不干扰。
-  advanceAndRevealChrome,
-
-  /// 底栏本来就常驻可见（挤压态且已展开），或顶栏和底栏已被关掉（悬浮球接管，
-  /// [readerToolbarsHidden]）：只推进到下一屏。
-  advance,
-}
-
-/// BUG-1195 / BUG-1245：VN 模式空白点击的分派。
-///
-/// 根因回顾：VN 是唯一把「点空白」绑成翻页的 view-mode，而点空白同时是触屏**唯一**
-/// 能唤出控制栏的手势（分页/连续模式的 `onTapEmpty` → `_handleFloatingChromeReveal`
-/// / `_toggleChrome`）。`tap_empty_hide_chrome` 默认 true ⇒ 底栏是悬浮态、几秒后自动
-/// 收起，于是 VN 下底栏一收起就再也叫不回来：点文字=查词、点空白=翻页，没有第三条路。
-///
-/// BUG-1245 的用户验收把交互边界说清楚：当空白点击的可见结果是“底栏出来”，这一击
-/// 不能同时推进，否则用户只是想操作菜单却丢了当前句。故悬浮态必须读
-/// [transientVisible]：隐藏→[ReaderVnBlankTapAction.revealChrome]，可见才推进。
-/// 滑动、键盘等翻屏入口不经这里，仍可单击推进；这只是把一次点击收敛成一个主动作。
-///
-/// 挤压态（[chromeExpanded] 为 false）例外，不在这一下翻页，理由见
-/// [ReaderVnBlankTapAction.expandChrome]。VN 的滑动翻页不经此路径，用户永远不会被卡在
-/// 「翻不动页」的状态。
-///
-ReaderVnBlankTapAction readerVnBlankTapAction({
-  required bool chromeExpanded,
-  required bool bottomBarFloating,
-  required bool transientVisible,
-  required bool toolbarsHidden,
-}) {
-  // 栏被关掉先于一切：此时栏的三态（挤压收起 / 悬浮隐藏 / 悬浮可见）都不存在，
-  // 空白点只剩「推进」这一个含义（否则隐藏态的第一下会被当成「只唤栏不推进」
-  // 吞掉，VN 永远推不动）。回到栏的入口在悬浮球上。
-  if (toolbarsHidden) return ReaderVnBlankTapAction.advance;
-  // 悬浮态与 [bottomBarVisible] 同一口径：不读 chromeExpanded（那是挤压态的
-  // 持久开关，在悬浮态可能以 false 残留）。
-  if (bottomBarFloating) {
-    return transientVisible
-        ? ReaderVnBlankTapAction.advanceAndRevealChrome
-        : ReaderVnBlankTapAction.revealChrome;
-  }
-  if (!chromeExpanded) return ReaderVnBlankTapAction.expandChrome;
-  return ReaderVnBlankTapAction.advance;
-}
-
-/// 执行 VN 空白点击决策。把“隐藏时只 reveal、可见时 reveal+advance”的组合收敛为
-/// 可行为测试的生产分派器，避免页面 switch 与纯谓词各自漂移。
-void dispatchReaderVnBlankTapAction(
-  ReaderVnBlankTapAction action, {
-  required void Function() expandChrome,
-  required void Function() revealChrome,
-  required void Function() advance,
-}) {
-  switch (action) {
-    case ReaderVnBlankTapAction.expandChrome:
-      expandChrome();
-    case ReaderVnBlankTapAction.revealChrome:
-      revealChrome();
-    case ReaderVnBlankTapAction.advanceAndRevealChrome:
-      revealChrome();
-      advance();
-    case ReaderVnBlankTapAction.advance:
-      advance();
-  }
-}
 
 /// Whether the top progress pill paints a frosted-glass (BackdropFilter blur +
 /// translucent fill) background behind its text — single source of truth for

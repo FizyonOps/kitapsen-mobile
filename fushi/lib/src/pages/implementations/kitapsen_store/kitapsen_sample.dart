@@ -16,7 +16,7 @@ library;
 import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fushi_audio/fushi_audio.dart';
+import 'package:fushi_reading/fushi_reading.dart';
 import 'package:fushi_core/fushi_core.dart';
 import 'package:fushi_engine/epub/epub_importer.dart';
 import 'package:fushi_engine/epub/epub_storage.dart';
@@ -70,7 +70,6 @@ Future<void> readKitapsenSample({
         preserveSavedPosition: true,
       ),
       // The book is gone once the reader closes; history would point nowhere.
-      recordHistory: false,
     );
   } finally {
     if (file.existsSync()) await file.delete();

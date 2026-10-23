@@ -166,15 +166,6 @@ mixin _FushiDbPrefsMedia
     });
   }
 
-  Future<T> getPrefTyped<T>(String key, T defaultValue) async {
-    final raw = await getPref(key);
-    if (raw == null) return defaultValue;
-    return PrefCodec.decode<T>(raw, defaultValue);
-  }
-
-  Future<void> setPrefTyped<T>(String key, T value) =>
-      setPref(key, PrefCodec.encode(value));
-
   Future<void> deletePref(String key) async {
     await (delete(preferences)..where((t) => t.key.equals(key))).go();
   }
@@ -182,89 +173,6 @@ mixin _FushiDbPrefsMedia
   Future<Map<String, String>> getAllPrefs() async {
     final rows = await select(preferences).get();
     return Map.fromEntries(rows.map((r) => MapEntry(r.key, r.value)));
-  }
-
-  Future<void> migrateLegacyBookmarkPreferences() async {
-    if (!await _tableExists('preferences')) {
-      return;
-    }
-    if (!await _tableExists('bookmarks')) {
-      return;
-    }
-    // Legacy `bookmarks_<int>` prefs predate the v16 book-key migration and key
-    // on the int ttu_book_id column. After v16 that column is gone (renamed to
-    // book_key) and the v16 prefs migration already drained/re-keyed these, so
-    // this drainer is a no-op on the post-v16 schema. Guard on the column so it
-    // only runs against the pre-v16 schema it understands.
-    if (!await _columnExists('bookmarks', 'ttu_book_id')) {
-      return;
-    }
-    final Map<String, String> allPrefs = await getAllPrefs();
-    await transaction(() async {
-      for (final MapEntry<String, String> entry in allPrefs.entries) {
-        if (!entry.key.startsWith('bookmarks_')) continue;
-        final int? ttuBookId =
-            int.tryParse(entry.key.substring('bookmarks_'.length));
-        if (ttuBookId == null || entry.value.isEmpty) continue;
-        final QueryRow countRow = await customSelect(
-          'SELECT COUNT(*) AS c FROM bookmarks WHERE ttu_book_id = ?',
-          variables: [Variable<int>(ttuBookId)],
-        ).getSingle();
-        final int existing = countRow.read<int>('c');
-        if (existing == 0) {
-          List<dynamic> list;
-          try {
-            list = jsonDecode(entry.value) as List<dynamic>;
-          } catch (_) {
-            await customStatement(
-              'DELETE FROM preferences WHERE key = ?',
-              [entry.key],
-            );
-            continue;
-          }
-          for (final dynamic raw in list) {
-            if (raw is! Map<String, dynamic>) continue;
-            final int sectionIndex = raw['sectionIndex'] as int? ?? 0;
-            final int normCharOffset = raw['normCharOffset'] as int? ?? 0;
-            final String label = raw['label'] as String? ?? '';
-            final DateTime createdAt = DateTime.tryParse(
-                  raw['createdAt'] as String? ?? '',
-                ) ??
-                DateTime.fromMillisecondsSinceEpoch(0, isUtc: true);
-            final int rowBookId = raw['ttuBookId'] as int? ?? ttuBookId;
-            // bookmarks.ttu_book_id is a FK to epub_books(id). Legacy TTU ids
-            // need not map to an imported epub, and INSERT OR IGNORE does NOT
-            // suppress FK violations — an unmatched id would abort the whole
-            // upgrade transaction (app can't open the DB). Skip orphans.
-            final bookExists = await customSelect(
-              'SELECT 1 FROM epub_books WHERE id = ? LIMIT 1',
-              variables: [Variable<int>(rowBookId)],
-            ).getSingleOrNull();
-            if (bookExists == null) continue;
-            await customStatement(
-              'INSERT OR IGNORE INTO bookmarks '
-              '(ttu_book_id, section_index, norm_char_offset, label, '
-              'created_at, book_title, page_in_chapter, total_pages_in_chapter) '
-              'VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-              [
-                rowBookId,
-                sectionIndex,
-                normCharOffset,
-                label,
-                createdAt.millisecondsSinceEpoch,
-                raw['bookTitle'] as String?,
-                raw['pageInChapter'] as int?,
-                raw['totalPagesInChapter'] as int?,
-              ],
-            );
-          }
-        }
-        await customStatement(
-          'DELETE FROM preferences WHERE key = ?',
-          [entry.key],
-        );
-      }
-    });
   }
 
   // ── media open history（v78：取代 media_items）─────────────────────
@@ -278,53 +186,4 @@ mixin _FushiDbPrefsMedia
             ..where((t) =>
                 t.mediaSource.equals(mediaSource) & t.mediaId.equals(mediaId)))
           .go();
-
-  // ── search history ──────────────────────────────────────────────
-  Future<List<SearchHistoryItemRow>> getAllSearchHistoryItems() =>
-      select(searchHistoryItems).get();
-
-  // ── audiobooks ──────────────────────────────────────────────────
-  Future<AudiobookRow?> getAudiobookByBookKey(String bookKey) =>
-      (select(audiobooks)..where((t) => t.bookKey.equals(bookKey)))
-          .getSingleOrNull();
-
-  Future<List<AudiobookRow>> getAllAudiobooks() => select(audiobooks).get();
-
-  /// 局部更新 audiobooks：**只写 [patch] 里 present 的列**，其余原样不动。
-  /// 返回受影响行数（0 = 该 bookKey 尚无行）。
-  Future<int> patchAudiobook(String bookKey, AudiobooksCompanion patch) =>
-      (update(audiobooks)..where((t) => t.bookKey.equals(bookKey)))
-          .write(patch);
-
-  /// 保证 [bookKey] 有一行 audiobooks；已存在则**原样不动**（不覆盖任何列）。
-  /// NOT NULL 的 alignment 两列新建时填空串，等 [patchAudiobook] 写真值。
-  Future<void> ensureAudiobookRow(String bookKey) => transaction(() async {
-        final AudiobookRow? existing = await (select(audiobooks)
-              ..where((t) => t.bookKey.equals(bookKey)))
-            .getSingleOrNull();
-        if (existing != null) return;
-        await into(audiobooks).insert(AudiobooksCompanion.insert(
-          bookKey: bookKey,
-          alignmentFormat: '',
-          alignmentPath: '',
-        ));
-      });
-
-  /// 局部更新 srt_books（按 uid）：**只写 [patch] 里 present 的列**。
-  /// 返回受影响行数（0 = 该 uid 尚无行）。
-  Future<int> patchSrtBook(String uid, SrtBooksCompanion patch) =>
-      (update(srtBooks)..where((t) => t.uid.equals(uid))).write(patch);
-
-  // ── video_books ─────────────────────────────────────────────────
-  Future<void> upsertVideoBook(VideoBooksCompanion vb) async {
-    await into(videoBooks).insert(vb,
-        onConflict: DoUpdate((_) => vb, target: [videoBooks.bookUid]));
-    // 删除传播：重新加入同 bookUid 的视频清除其 sync 删除墓碑（防误判待删）。
-    if (vb.bookUid.present) {
-      await clearSyncDeletionTombstone('video', vb.bookUid.value);
-    }
-  }
-
-  Future<List<VideoBookRow>> allVideoBooks() => select(videoBooks).get();
-
 }

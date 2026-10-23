@@ -2,6 +2,18 @@
 
 # hibiki -- 主应用模块
 
+> **Kitapsen edition (2026-10-23).** The app ships only Home, the Books shelf
+> with the EPUB/PDF reader, the Kitapsen store and account, and Settings (see
+> [../CLAUDE.md](../CLAUDE.md)). The subsystems described below (dictionary,
+> Anki creator, audiobooks, video, torrent, galgame, AI, interconnect/sync,
+> browser extension, popup and floating dictionaries) were deleted from this
+> checkout. Renamed here: `lib/src/media/audiobook/` → `lib/src/media/book/`
+> (`AudiobookBridge` → `BookSearch`, full-text book search), the reader part
+> `reader_fushi/audiobook.part.dart` → `helpers.part.dart`, and the package
+> `fushi_audio` → `fushi_reading`. The feature-module gate (`ModuleId`,
+> `ModuleVisibility`, `module_registry.dart`) is gone: the Books tab is always
+> shown. The reader theme has no audio-sentence highlight role any more.
+
 ## 模块职责
 
 Hibiki 的 Flutter 多平台主应用：日语 EPUB 阅读器，集成划词查词、有声书同步、Anki 卡片创建、阅读统计。基于 Flutter 跨平台框架，`auto` 下 Android / iOS / macOS / Windows / Linux 统一走 Material Design 3；Cupertino / macOS renderer 仅保留为隐藏内部能力，并通过 fork 的 `flutter_inappwebview_windows` 支持 Windows 桌面端。

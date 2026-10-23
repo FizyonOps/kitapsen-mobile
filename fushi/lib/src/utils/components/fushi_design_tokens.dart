@@ -254,13 +254,11 @@ class FushiDensityTokens {
     this.listMinHeight = 56,
     this.compactListMinHeight = 44,
     this.controlHeight = 48,
-    this.compactControlHeight = 36,
   });
 
   final double listMinHeight;
   final double compactListMinHeight;
   final double controlHeight;
-  final double compactControlHeight;
 }
 
 /// One role's type spec (size/weight/line-height/tracking). Applied onto the

@@ -616,7 +616,6 @@ extension _ReaderWebView on _ReaderFushiPageState {
   /// boot 下发，引擎运行时读取。新增 per-nav 参数一律加在这里，不得回到脚本里插值。
   ReaderEngineConfig _buildReaderEngineConfig({
     required int navigationGeneration,
-    String? sentenceAudioCuesJson,
   }) {
     final ReaderSettings s = _settings!;
     // TODO-113 / BUG-滑动翻页不够灵敏：三个滑动阈值随灵敏度缩放（灵敏度越大阈值越
@@ -628,9 +627,6 @@ extension _ReaderWebView on _ReaderFushiPageState {
     // _gestureEnd 的 onSwipe（90% 整屏跳页）只在分页模式有意义；连续模式回传会与
     // 原生滚动产生轴向冲突，故注入 continuousMode 标志在 _gestureEnd 内门控。
     final bool continuousMode = s.isContinuousMode;
-    // TODO-909: select the VN shell when view-mode == 'vn'. VN is mutually
-    // exclusive with continuous (it is a page-flip stage, not native scroll),
-    // so continuousMode stays false here.
     final Size screenSize = MediaQuery.of(context).size;
     // BUG-111: 这就是 JS 分页用的权威宽高（dartPageWidth/Height）。记下来作为
     // content-ready 后的「已分页基线」，供 _syncPageSize 与 settle 后的真实视口比对。
@@ -639,28 +635,13 @@ extension _ReaderWebView on _ReaderFushiPageState {
     return ReaderEngineConfig(
       navigationGeneration: navigationGeneration,
       continuousMode: continuousMode,
-      vnMode: false,
-      vnClickAdvance: false,
       scanNonJapaneseText: appModel.scanNonJapaneseText,
-      // TODO-756b：是否“鼠标悬停即自动查词”。live 变更经 _applyHoverAutoLookupLive
-      // 改同一个 JS 全局，无需整章重注入。
-      hoverAutoLookup: ReaderFushiSource.instance.hoverAutoLookup,
-      // BUG-2508：macOS 由宿主腿接管悬停查词，关掉文档内 mousemove 腿（判据见
-      // [hostOwnsWebViewHoverLookup]，只有 macOS；其余平台 JS 腿不动）。
-      hostHoverLookup: false,
-      highlightOnTap: ReaderFushiSource.instance.highlightOnTap,
-      showChrome: _tapGateChrome,
       debugLogging: DebugLogService.instance.enabled,
       swipeDistThreshold: swipeThresholds.dist,
       swipeFastDistThreshold: swipeThresholds.fastDist,
       swipeFastVelocity: swipeThresholds.fastVelocity,
       wheelGestureQuietMs: ReaderFushiSource.instance.wheelPageTurnInterval
           .clamp(150, 800),
-      furiganaMode: s.furiganaMode,
-      caretColor: _caretRingColorCss(),
-      caretInsetTop: _readerTopOffset,
-      // TODO-975：与 chromeBottomInset 同源 _readerBottomReserve（悬浮 0 / 挤压含底栏）。
-      caretInsetBottom: _readerBottomReserve,
       initialProgress: _initialProgress,
       initialCharOffset: _initialCharOffset,
       // BUG-461: 收藏句跳转的句尾锚（连续模式横排整句对齐进可见区）；非跳转/无句长 = -1。
@@ -679,16 +660,6 @@ extension _ReaderWebView on _ReaderFushiPageState {
       blurImages: s.blurImages,
       // TODO-1289：把本次会话已揭开的防剧透图 key 下发，重载时不再重新遮罩。
       revealedKeys: _revealedImageKeys.toList(),
-      // TODO-perf（跨章）：JS 侧埋点与 Dart 侧同一个开关。生产下恒 false，
-      // perfMark / perfSnapshot 在 JS 里直接 early-return。
-      perfTraceEnabled: ReaderChapterPerfTrace.enabled,
-      vnRevealSpeed: 0,
-      vnScreenMode: s.visualNovelScreenMode,
-      vnSentencesPerScreen: s.visualNovelSentencesPerScreen,
-      vnPreserveDialogue: s.visualNovelPreserveDialogueBubbles,
-      vnMergeCrossScreenSentenceAudioCues:
-          s.visualNovelMergeCrossScreenSentenceAudioCues,
-      sentenceAudioCuesJson: sentenceAudioCuesJson,
     );
   }
 
@@ -734,7 +705,6 @@ extension _ReaderWebView on _ReaderFushiPageState {
   ///
   /// 因为不再读任何实例状态，本方法是 static + memoized。
   static String _buildReaderEngineSource({
-    required bool vnMode,
     required bool continuousMode,
   }) {
     const int tapSlop = ReaderSettings.tapSlopPx;
@@ -747,12 +717,9 @@ extension _ReaderWebView on _ReaderFushiPageState {
     // 侧读 C，Dart 不再把 per-nav 值插值进 shell。
     final String paginationJs = _stripScriptTags(
       ReaderPaginationScripts.engineShell(
-        vnMode: vnMode,
         continuousMode: continuousMode,
       ),
     );
-
-    final String caretJs = ReaderCaretScripts.source();
 
     return '''
 window.__fushiEngine = {
@@ -760,7 +727,7 @@ install: function(C) {
   // BUG-1017: guarantee the `#fushi-cloak` FOUC guard is always removed, even if
   // any synchronous statement in this setup IIFE throws before the tail reaches
   // its removal (below). Without this a single unhandled sync error anywhere in
-  // setup (init / caret / furigana) left `body{visibility:hidden}` stranded =
+  // setup (init / furigana) left `body{visibility:hidden}` stranded =
   // permanent blank book. The microtask runs after this task unwinds whether it
   // completed or threw; the tail removal stays as the fast synchronous path, and
   // this reveal is idempotent (a second remove() on an absent node is a no-op).
@@ -794,26 +761,9 @@ install: function(C) {
   window.__fushiInstallShell(C);
   // BUG-2779: WebKit ruby annotations snap to the base by measured font metrics.
   $kReaderRubyMetricsJs
-  $caretJs
-  // TODO-975：insetBottom 与 chromeBottomInset 同源 _readerBottomReserve
-  // （悬浮 0 / 挤压含底栏），由 Dart 侧算好放进 C。
-  window.fushiCaret.init({
-    color: C.caretColor,
-    insetTop: C.caretInsetTop,
-    insetBottom: C.caretInsetBottom,
-    scopeSelector: null
-  });
   // BUG-239: 连续模式不让 _gestureEnd 回传 onSwipe（交给原生滚动 + 边界 IIFE），
   // 消除横向滑动 90% 跳页与原生滚动的轴向冲突；分页模式照旧水平滑动翻页。
   var fushiContinuousMode = C.continuousMode;
-  // TODO-909: VN-mode blank-tap advance flag (see Dart above).
-  var fushiVnMode = C.vnMode;
-  var fushiVnClickAdvance = C.vnClickAdvance;
-  window.__hoverAutoLookup = C.hoverAutoLookup;
-  // BUG-2508：宿主（Flutter）侧接管悬停查词的平台上，本文档的 mousemove 腿整条关掉
-  // （一平台一条腿，见 reader_host_hover_lookup.dart）。与 __hoverAutoLookup 同为
-  // Dart 单写的只读镜像，live 变更经 _applyHoverAutoLookupLive 改同一全局。
-  window.__fushiHostHoverLookup = C.hostHoverLookup;
   var startX = 0, startY = 0, startTime = 0, hasStart = false;
   var gestureExceededTapSlop = false;
   var imageLongPressTimer = null;
@@ -843,49 +793,6 @@ install: function(C) {
     var tapDy = y - startY;
     if ((tapDx * tapDx + tapDy * tapDy) > ($tapSlop * $tapSlop)) {
       gestureExceededTapSlop = true;
-    }
-  }
-  // TODO-909: a VN tap is "blank" when the user tapped margin/gap rather than
-  // a word (blank -> paginate forward; word -> onTap lookup).
-  // BUG-748: caretPositionFromPoint/caretRangeFromPoint CLAMP to the nearest
-  // character even when the tap is in the margin. VN centers one short block in a
-  // shrink-to-fit .fushi-vn-content, so the whole viewport outside that small box
-  // is margin — yet every tap clamps to a text node, so "text node found" alone
-  // judged EVERY tap (incl. margins) as a word -> blank-tap advance never fired
-  // (a 289-point scan found 0 blank points in centred vertical layout). Fix:
-  // after resolving the clamped caret, verify the point actually falls inside the
-  // resolved character's client rect; a clamped-but-outside hit is real blank.
-  function _fushiVnTapIsBlank(x, y) {
-    try {
-      var range = _fushiReaderCaretRangeAtPoint(x, y);
-      if (!range || !range.startContainer) return true;
-      var node = range.startContainer;
-      if (node.nodeType !== Node.TEXT_NODE) return true;
-      var text = String(node.textContent || '');
-      if (!text.trim()) return true;
-      // Hit-test the resolved glyph box. caretPositionFromPoint clamps offset to
-      // the nearest boundary, so probe the character on each side of the offset
-      // and treat the tap as a word only if it lands inside one of their rects.
-      var tol = 2;
-      var offsets = [range.startOffset, range.startOffset - 1];
-      for (var oi = 0; oi < offsets.length; oi++) {
-        var start = offsets[oi];
-        if (start < 0 || start >= text.length) continue;
-        var charRange = document.createRange();
-        charRange.setStart(node, start);
-        charRange.setEnd(node, start + 1);
-        var rects = charRange.getClientRects();
-        for (var i = 0; i < rects.length; i++) {
-          var r = rects[i];
-          if (x >= r.left - tol && x <= r.right + tol &&
-              y >= r.top - tol && y <= r.bottom + tol) {
-            return false;
-          }
-        }
-      }
-      return true;
-    } catch (err) {
-      return true;
     }
   }
   function _fushiReaderCaretRangeAtPoint(x, y) {
@@ -949,10 +856,6 @@ install: function(C) {
     }
     var selected = window.getSelection && window.getSelection();
     if (selected && !selected.isCollapsed) return false;
-    // 砍掉 PC 鼠标左键拖动平移（连续模式）：鼠标左键回归原生选字/划词查词，连续模式
-    // 桌面滚动改用滚轮。原来 return true 会让鼠标左键走 JS scrollBy 模拟平移——这是
-    // 卡顿（每次 move 触发全文 progress 重算）+「鼠标拖动没到章首就跨章」的来源。
-    // 分页模式仍走下方逻辑（鼠标拖动转翻页 BUG-368 不受影响）。
     if (fushiContinuousMode) return false;
     if (window.fushiSelection &&
         window.fushiSelection.getCharacterAtPoint &&
@@ -1032,9 +935,6 @@ install: function(C) {
     }
     return null;
   }
-  // TODO-861④（移植 Hoshi `f286108`）：若点击落在仍带 `blurred` 类的防剧透大图上，
-  // 先「揭开」（移除 blurred 类）并吞掉本次——不触发放大 lightbox；揭开后再点才正常
-  // 放大。根因消解「点击=放大」与 iOS「点击=揭开」的语义冲突，无特例分支堆叠。
   function _fushiResolveBlockImageElement(target) {
     if (!target) return null;
     if ((target.tagName === 'IMG' || target.tagName === 'svg') && target.classList && target.classList.contains('block-img')) {
@@ -1086,16 +986,8 @@ install: function(C) {
       e.clientY || 0
     );
   }, {passive: false});
-  // BUG-712 ①：点词门控只读镜像的初始值（chrome 可见性 / highlightOnTap / 选词扫描
-  // 上限）。Dart 是唯一写者：本脚本注入时带当前真值，之后 chrome 翻转与设置热更新由
-  // _syncTapGateJs 刷新。tap 手势据此在 JS 侧直接 selectText（见 _gestureEnd 的 tap
-  // 分支），砍掉 onTap→Dart→evaluateJavascript 的整个来回。
-  window.__fushiTapGate = { chrome: C.showChrome, lookup: C.highlightOnTap, maxLen: 400 };
   function _gestureEnd(x, y, e) {
     if (!hasStart) return;
-    // TODO-1317: a mobile long-press drag-select owns this gesture (finalized
-    // by the drag-select IIFE); suppress tap / swipe / image-tap so there is
-    // no double lookup or accidental page turn.
     if (window.__fushiTextSelectDragActive) {
       clearImageLongPressTimer();
       imageLongPressConsumed = false;
@@ -1109,9 +1001,6 @@ install: function(C) {
       if (e && e.preventDefault) e.preventDefault();
       return;
     }
-    // BUG-iPhone 滑动误查词：必须在 hasStart 清掉前记录松手点，并结合每次
-    // touchmove/pointermove 留下的最大轨迹位移。只看最终 dx/dy 会把“已滚动后回到
-    // 起点附近”的手势重新判成 tap。
     _gestureTrackMovement(x, y);
     hasStart = false;
     var dx = x - startX;
@@ -1130,11 +1019,7 @@ install: function(C) {
         window.flutter_inappwebview.callHandler('onSwipe', 'right');
       }
     } else if (!gestureExceededTapSlop) {
-      // BUG-手机翻短了会查词：查词框与翻页距离阈值**解耦**。旧判据把上界取成
-      // swipe 距离阈值（72px），于是任何够不到翻页阈值的横滑（如 50px）都落进这里被
       // 当成点词。现在只允许完整触摸轨迹始终停在 $tapSlop px 径向半径内：正常手指
-      // 抖动仍是 tap；任何 touchmove/pointermove 曾越界都永久归为 pan，即使松手回到
-      // 起点附近也不查词。横向主导、够不到翻页阈值的短滑则落到本 if 之外 → 空操作。
       var tapEl = document.elementFromPoint(x, y);
       if (_fushiRevealBlurredImage(tapEl)) {
         if (e && e.preventDefault) e.preventDefault();
@@ -1143,20 +1028,6 @@ install: function(C) {
       var imgUrl = _fushiBlockImageUrl(tapEl);
       if (imgUrl) {
         window.flutter_inappwebview.callHandler('onImageTap', imgUrl);
-      } else if (fushiVnMode && fushiVnClickAdvance &&
-          _fushiVnTapIsBlank(x, y) &&
-          window.fushiReader && window.fushiReader.paginate) {
-        // TODO-909: VN blank-tap. Only when the tap is NOT over matchable
-        // text (so word lookup still wins on text).
-        // BUG-1195: 这里**不再**自己 paginate。旧实现直调
-        // `window.fushiReader.paginate('forward')` 把每一次空白点都吃掉，而空白点
-        // 同时是触屏唯一能唤出控制栏的手势（onTapEmpty）→ VN 下底栏一自动收起就
-        // 永远唤不回来。翻页还是唤栏必须由 Dart 判（chrome 可见性只有 Dart 知道：
-        // 悬浮态真值是 _chromeTransientVisible，JS 的 __fushiTapGate.chrome 镜像的
-        // 是 _showChrome，悬浮态下恒 true，区分不出「已收起」）。见
-        // chrome.part.dart 的 _handleVnBlankTap。
-        if (e && e.preventDefault) e.preventDefault();
-        window.flutter_inappwebview.callHandler('onVnBlankTap');
       } else {
         // TODO-806 [806-TAP] 框选点击坐标取证探针（默认 off，由 DebugLogService 门控：
         // C.debugLogging 为 false 时整段跳过，不打日志）。打印 onTap
@@ -1171,20 +1042,7 @@ install: function(C) {
               + ' scrollX=' + window.scrollX + ' scrollY=' + window.scrollY);
           } catch (err) {}
         }
-        var shiftTap = !!(e && e.shiftKey);
-        var tapGate = window.__fushiTapGate;
-        if (tapGate && window.fushiSelection &&
-            (shiftTap || (tapGate.chrome && tapGate.lookup))) {
-          // BUG-712 ①（查词时延）：门控通过时 JS 直接选词——与旧链 Dart onTap→
-          // _selectTextAt→evaluateJavascript(selectText) 跑的是完全同一个 selectText
-          // （命中→onTextSelected、空白→onTapEmpty、链接/同字 toggle→静默），只是
-          // 砍掉 JS→Dart→JS 一整个跨语言来回（Windows WebView2 单跳 5-15ms）。
-          // 门控镜像由 Dart 单写（_syncTapGateJs：chrome 翻转/设置热更新时刷新）；
-          // 镜像缺失或 fushiSelection 未就绪时回落旧 onTap 链，行为不变。
-          window.fushiSelection.selectText(x, y, tapGate.maxLen || 400, false);
-        } else {
-          window.flutter_inappwebview.callHandler('onTap', x, y, shiftTap);
-        }
+        window.flutter_inappwebview.callHandler('onTap', x, y);
       }
     }
   }
@@ -1219,19 +1077,15 @@ install: function(C) {
     imageLongPressTimer = setTimeout(function() {
       imageLongPressTimer = null;
       imageLongPressConsumed = true;
-      // TODO-861④：长按仍带 `blurred` 类的防剧透图时，先揭开（移除类）并吞掉本次——
-      // 与单击（_gestureEnd）/键盘·手柄激活（reader_caret_scripts.dart）语义一致：
-      // 「揭开优先」，揭开后再长按才弹出图片操作菜单。复用同一 _fushiRevealBlurredImage。
+      // TODO-861④：长按仍带 `blurred` 类的防剧透图时揭开（移除类）并吞掉本次；
+      // 长按其它图片只吞掉本次（不再落成单击开图）。
       var pressEl = document.elementFromPoint(imageLongPressStartX, imageLongPressStartY);
-      if (_fushiRevealBlurredImage(pressEl)) return;
-      window.flutter_inappwebview.callHandler('onImageLongPress', imgUrl);
+      _fushiRevealBlurredImage(pressEl);
     }, 550);
   }, {passive: true});
   document.addEventListener('touchmove', function(e) {
     if (!e.touches || !e.touches.length) return;
     var t = e.touches[0];
-    // WKWebView 的 PointerEvent 序列不可作为唯一真相；直接从 TouchEvent 记录完整
-    // 轨迹，确保连续滚动/短促 flick 都会取消 tap 查词候选。
     _gestureTrackMovement(t.clientX, t.clientY);
     if (!imageLongPressTimer) return;
     var dx = t.clientX - imageLongPressStartX;
@@ -1275,17 +1129,6 @@ install: function(C) {
     var totalDy = e.clientY - startY;
     var totalDistSq = totalDx * totalDx + totalDy * totalDy;
     if (_fushiReaderMouseNativeTextStart) {
-      // BUG-368: 分页模式下，鼠标在正文上横向拖动应像手机端的「触摸横滑」一样翻页。
-      // 旧实现里鼠标拖动起点落在正文（caret range 命中）时一律当作原生选词起点
-      // （_fushiReaderMouseNativeTextStart），移动 >6px 就放弃手势交还原生选区，
-      // 永不回传 onSwipe → 桌面鼠标在分页模式根本「翻不了页」（只有空白边距能拖、
-      // 或全靠滚轮）。触摸路径（touchend→_gestureEnd）早已能在正文上横滑翻页，鼠标
-      // 却被这道闸门挡住，造成「鼠标 ≠ 手机」的不对称。这里在仍是分页模式时，先判
-      // 定这次拖动是否已构成一次明确的横向翻页手势（横向位移占优且达滑动阈值，与
-      // _fushiReaderMouseDragResolvePageDirection / _gestureEnd 同款判据）：是→把
-      // 本次手势从「原生选词」转换为「拖动翻页」（清掉已起的选区、接管 pointer、
-      // 后续走 _finishFushiReaderMouseDrag 回传 onSwipe）；否→保持原行为（竖向/短拖
-      // 交还原生选区，仍可正常划词查词）。
       var ntDir = (!fushiContinuousMode)
           ? _fushiReaderMouseDragResolvePageDirection(e.clientX, e.clientY)
           : null;
@@ -1348,14 +1191,6 @@ install: function(C) {
       _fushiReaderMouseDragPointerId = null;
       _fushiReaderMouseDragPageDirection = null;
       _fushiReaderPointerNoSelect(false);
-      // 只有「本次手势里指针真的移动过」(nativeMoved) 才当作用户在拖动划原生选区，
-      // 保留选区供复制 / 桌面 Ctrl+C，不再当作查词 tap。
-      // 旧代码还把「残留原生选区未折叠」也塞进这条早退：只要上一轮的选区还在，纯 tap
-      //（未移动）也会在此提前 return，跳过 _gestureEnd -> selectText -> clearSelection
-      // 整条链——于是残留选区会让之后每一次点击都被吞（查词永远打不开）。桌面细指针鼠标
-      // 拖选/右键复制刻意保留原生选区，最容易触发这个死循环。纯 tap 时改为落到下方
-      // _gestureEnd：selectText 会先 clearSelection(removeAllRanges) 再查词，既清掉残留
-      // 选区又能正常弹词典。BUG-927。
       if (nativeMoved) {
         hasStart = false;
         return;
@@ -1393,13 +1228,6 @@ install: function(C) {
   document.addEventListener('selectstart', function(e) {
     if (hasStart && !_fushiReaderMouseNativeTextStart && (Date.now() - startTime) < 400) e.preventDefault();
   });
-  // TODO-1028: 砍掉双击建立的原生框选——它会盖住单击查词、并绊住振假名 dblclick
-  // 切换（历史上 'toggle' 分支的 dblclick 整页切换带 `!sel.isCollapsed` 守卫，
-  // 该分支已随三态改造删除，本 capture 清选区仍是单击查词不被双击框选盖住的前提）。原生双击选词在
-  // mousedown/selectstart 阶段已发生，dblclick 只是结果，preventDefault 拦不住，故改
-  // removeAllRanges 清掉既成选区。用 capture 让它先于振假名 handler（bubble 阶段）跑，
-  // 从而振假名切换反而恢复正常（守卫不再被双击选区绊住）。单击查词走 onTap/_selectTextAt
-  // 自管 CSS Highlight，不产生原生选区，零影响。
   document.addEventListener('dblclick', function() {
     var sel = window.getSelection && window.getSelection();
     if (sel && !sel.isCollapsed) sel.removeAllRanges();
@@ -1410,13 +1238,6 @@ $kPagedWheelGestureHelperJs
   // 只有静默后、起点已经在边界的新手势才表达跨章意图。真正跨 document 的残余惯性
   // 仍由 Dart 的 chapter-turn cooldown 承接。
   var _continuousWheelLastTickAt = 0;
-  // 查词弹窗的 barrier 会吃掉「弹窗开着时的第一拍滚轮」（它在 Flutter 侧，滚轮根本
-  // 到不了本 document）。那一拍如果不记进手势时间线，紧随其后的惯性 tick 就会被上面
-  // 的 startsNewWheelGesture 判成**新手势** —— 章末一次带惯性的滑动会直接跨章，正是
-  // BUG-2015 那段 arm-then-fire 要防的。宿主关窗后调这个口子把时间戳补上。
-  window.__fushiArmWheelGesture = function() {
-    _continuousWheelLastTickAt = Date.now();
-  };
 $kContinuousWheelScrollJs
   document.addEventListener('wheel', function(e) {
     // BUG-239 / TODO-345 同源门控：连续模式靠浏览器原生滚动（滚动轴 = 书写轴）。
@@ -1506,12 +1327,7 @@ $kContinuousWheelScrollJs
         'onBoundarySwipe', wheelDir, pointerKind);
       return;
     }
-    // BUG-2364: VN uses the same paginate(direction) contract as the regular
-    // paged shell, but intentionally has no paginationMetrics (it advances a
-    // screen stream rather than a CSS column viewport). The old capability
-    // gate therefore discarded every VN wheel event before it reached the
-    // shared onWheelPaginate -> _paginate throttle/chapter-turn path.
-    if (!r || (!fushiVnMode && !('paginationMetrics' in r))) return;
+    if (!r || !('paginationMetrics' in r)) return;
     // TODO-737: 分页滚轮方向脱钩 invertSwipeDirection——改回传新 handler onWheelPaginate
     // 产「语义意图」(forward/backward)，方向 deltaY>0=forward 对齐连续滚轮(沿书写轴
     // delta>0=前进)，不再经 onSwipe 被 invertSwipeDirection(默认 true) 连坐反向。
@@ -1520,23 +1336,6 @@ $kContinuousWheelScrollJs
     // 纵向鼠标滚轮仍走 _paginate 固定窗口。invertSwipeDirection 只管触摸/鼠标拖动。
     _handlePagedWheelTick(e);
   }, {passive: false});
-  var _shiftHoverLastX = -1, _shiftHoverLastY = -1;
-  document.addEventListener('mousemove', function(e) {
-    // BUG-2508：宿主腿活着的平台上本腿让路（macOS 上这里本来也收不到事件）。
-    if (window.__fushiHostHoverLookup) return;
-    // TODO-756b：开了 window.__hoverAutoLookup 则纯悬停即查词（不要求 Shift）；
-    // 否则退回 756a 的 Shift 门控。未触发分支仍复位节流锚，使下次进入即触发。
-    if (!e.shiftKey && !window.__hoverAutoLookup) { _shiftHoverLastX = -1; _shiftHoverLastY = -1; return; }
-    var dx = e.clientX - _shiftHoverLastX, dy = e.clientY - _shiftHoverLastY;
-    if (dx * dx + dy * dy < 64) return;
-    _shiftHoverLastX = e.clientX; _shiftHoverLastY = e.clientY;
-    window.flutter_inappwebview.callHandler('onShiftHover', e.clientX, e.clientY);
-  }, {passive: true});
-  // TODO-1078：桌面 Windows 阅读器裸 Space 被 WebView2 吞成 Chromium 默认
-  // scrollByPage（向下翻屏），而不是走 Flutter 的 Space 覆写（有声书激活→
-  // 播放/暂停、否则→翻页）。桥接细节（为何需要、放行哪些情况）见
-  // [webViewKeyBridgeScript]；回传的 onSpaceKey 在 Dart 侧经
-  // resolveReaderSpaceOverride 统一解析，与 Flutter 焦点路径同款语义。
 ${webViewKeyBridgeScript(handlerName: 'onSpaceKey', keys: const <String>[' '])}
   window.fushiProgressDetails = function() {
     var r = window.fushiReader;
@@ -1693,7 +1492,6 @@ updateLive: function(patch) {
   /// 注入前剥掉整行注释与空行（见 [ReaderScriptCompactor]）——传的是同一份语义的
   /// 脚本，只是不再把给人看的中文注释也编组、传输、解析一遍。
   static String readerEngineSource({
-    required bool vnMode,
     required bool continuousMode,
   }) {
     final String key = ((continuousMode ? 'continuous' : 'paged'));
@@ -1701,7 +1499,6 @@ updateLive: function(patch) {
       key,
       () => ReaderScriptCompactor.compact(
         _buildReaderEngineSource(
-          vnMode: vnMode,
           continuousMode: continuousMode,
         ),
       ),
@@ -1854,29 +1651,8 @@ updateLive: function(patch) {
         }
         _loadChapterDirectly(_currentChapter);
 
-        controller.addJavaScriptHandler(
-          handlerName: 'onTextSelected',
-          callback: (args) async {
-            if (args.isEmpty) return;
-            try {
-              final Map<String, dynamic> payload =
-                  jsonDecode(args[0] as String) as Map<String, dynamic>;
-              await _handleTextSelected(ReaderSelectionData.fromJson(payload));
-            } catch (e, stack) {
-              ErrorLogService.instance.log(
-                'ReaderFushi.onTextSelected',
-                e,
-                stack,
-              );
-              debugPrint('[ReaderFushi] onTextSelected error: $e');
-            }
-          },
-        );
-
-        // TODO-1317: a mobile long-press *drag*-select fires this instead of
-        // onTextSelected. Dart shows a selection menu (Copy / Lookup) so a
-        // plain-text range selection (copy) and lookup/mining coexist -- the
-        // drag no longer forces an immediate lookup (BUG-609 regression).
+        // TODO-1317: a mobile long-press *drag*-select fires this; Dart shows
+        // a selection menu (Copy / Highlight) for the range.
         controller.addJavaScriptHandler(
           handlerName: 'onSelectionMenu',
           callback: (args) async {
@@ -1898,15 +1674,14 @@ updateLive: function(patch) {
 
         controller.addJavaScriptHandler(
           handlerName: 'onRestoreComplete',
-          // args[0] = JS 侧 perfSnapshot()；args[1] = 文档安装引擎时捕获的
-          // navigationGeneration。代次缺失/失配一律不能完成当前 restore，更不能
-          // 消费当前代 pending。
+          // args[0] = 文档安装引擎时捕获的 navigationGeneration。代次缺失/失配
+          // 一律不能完成当前 restore，更不能消费当前代 pending。
           callback: (List<dynamic> args) {
-            if (args.length < 2 || args[1] is! num) {
+            if (args.isEmpty || args[0] is! num) {
               debugPrint('[ReaderFushi] onRestoreComplete missing generation');
               return;
             }
-            final num rawGeneration = args[1] as num;
+            final num rawGeneration = args[0] as num;
             if (!rawGeneration.isFinite ||
                 rawGeneration != rawGeneration.toInt()) {
               debugPrint('[ReaderFushi] onRestoreComplete invalid generation');
@@ -1914,7 +1689,6 @@ updateLive: function(patch) {
             }
             _acceptRestoreComplete(
               reportedGeneration: rawGeneration.toInt(),
-              perfSnapshot: args.first,
             );
           },
         );
@@ -1987,13 +1761,6 @@ updateLive: function(patch) {
         );
 
         controller.addJavaScriptHandler(
-          handlerName: 'onShiftHover',
-          callback: (args) {
-            return;
-          },
-        );
-
-        controller.addJavaScriptHandler(
           handlerName: 'onTapEmpty',
           callback: (_) {
             // BUG-2276：抽屉压着正文时，这次点击是「点遮罩关抽屉」，不是正文点击。
@@ -2014,33 +1781,6 @@ updateLive: function(patch) {
             // Tap on empty space handed OS focus to the WebView; reclaim it so
             // ESC still exits the book afterward (BUG-136).
             _focusOwnership.reclaim(FocusReclaimCause.gesture);
-          },
-        );
-
-        // BUG-1195: VN（视觉小说）模式空白点击的专用桥。JS 只判「这一点落在字面外」，
-        // 翻页还是唤出控制栏由 Dart 判（chrome 可见性的真值在 Dart 侧）。
-        controller.addJavaScriptHandler(
-          handlerName: 'onVnBlankTap',
-          callback: (_) {
-            // BUG-2276：抽屉压着正文时，这次点击是「点遮罩关抽屉」，不是正文点击。
-            if (_closeSideSheetForWebViewPointer()) return;
-            _handleVnBlankTap();
-          },
-        );
-
-        // BUG-756: 歌词模式空白点击的专用桥。歌词是独立文档（LyricsModeHtml），没有
-        // 正文 fushiReader 的 onTap/onTapEmpty；歌词里点句子 = 查词，唯一能唤出底栏的
-        // 手势就是点空白。故这里对隐藏的底栏**无条件唤出/收起**——不看
-        // tapEmptyToHideChrome（那开关管的是正文点空白是否收起底栏，歌词没有别的唤出
-        // 途径，绝不能被它关死）。挤压态直接 _toggleChrome（隐藏→出、可见→收，且其内部
-        // 已 requestFocus reclaim）；悬浮态走同一唤出/收起状态机。收尾再 reclaim 一次
-        // 阅读焦点：本次 pointer 手势把 OS 焦点交给了 WebView，不夺回 Flutter _focusNode
-        // 就收不到 ESC，全局「Esc 退出整页」永不触发（正文每个手势都 reclaim，歌词此前
-        // 一处都没有 → esc 退不出）。有可见查词弹窗时按正文语义清栈、不动底栏。
-        controller.addJavaScriptHandler(
-          handlerName: 'onLyricsTapEmpty',
-          callback: (_) {
-            return;
           },
         );
 
@@ -2373,14 +2113,6 @@ updateLive: function(patch) {
         );
 
         controller.addJavaScriptHandler(
-          handlerName: 'onImageLongPress',
-          callback: (args) async {
-            if (args.isEmpty) return;
-            await _shareReaderImage(args[0] as String);
-          },
-        );
-
-        controller.addJavaScriptHandler(
           handlerName: 'spreadReady',
           callback: (_) {
             _isNavigatingToChapter = false;
@@ -2442,13 +2174,6 @@ updateLive: function(patch) {
             _executeShortcutAction(action);
           },
         );
-
-        controller.addJavaScriptHandler(
-          handlerName: 'onLyricsPointerSeek',
-          callback: (List<dynamic> args) {
-            return;
-          },
-        );
       },
       shouldInterceptRequest: (controller, request) async {
         return await _interceptRequest(request.url);
@@ -2474,7 +2199,6 @@ updateLive: function(patch) {
       },
       onLoadStop: (controller, url) async {
         _isNavigatingToChapter = false;
-        ReaderChapterPerfTrace.mark('docLoad');
         final int chapterSnapshot = _currentChapter;
         debugPrint(
           '[ReaderFushi] onLoadStop: url=$url '
@@ -2515,14 +2239,6 @@ updateLive: function(patch) {
           return;
         }
         if (request.isForMainFrame ?? false) {
-          final int? failedLyricsGeneration = _lyricsDocumentGenerationFromUrl(
-            request.url.toString(),
-          );
-          if (failedLyricsGeneration != null &&
-              failedLyricsGeneration == _lyricsDocumentLoadGeneration &&
-              failedLyricsGeneration == _lyricsLoadGeneration) {
-            _lyricsDocumentLoadGeneration = null;
-          }
           debugPrint(
             '[ReaderFushi] onReceivedError: ${error.description} '
             'url=${request.url}',
@@ -2579,17 +2295,6 @@ updateLive: function(patch) {
     return keyed;
   }
 
-  int? _lyricsDocumentGenerationFromUrl(String? raw) {
-    final Uri? uri = raw == null ? null : Uri.tryParse(raw);
-    if (uri == null ||
-        !uri.isScheme('https') ||
-        uri.host != 'fushi.local' ||
-        uri.path != '/lyrics') {
-      return null;
-    }
-    return int.tryParse(uri.queryParameters['generation'] ?? '');
-  }
-
   Future<void> _onChapterLoadComplete(
     InAppWebViewController controller,
   ) async {
@@ -2622,8 +2327,6 @@ updateLive: function(patch) {
     final int gen = _navigateGeneration;
     final int chapterSnapshot = _currentChapter;
     try {
-      String? sentenceAudioCuesJson;
-      ReaderChapterPerfTrace.mark('sentenceAudioCues');
       if (_currentChapter != chapterSnapshot || _navigateGeneration != gen) {
         return;
       }
@@ -2632,28 +2335,19 @@ updateLive: function(patch) {
       // Dart 侧每章重新拼装 + 压缩近万行（实测 buildSetupScript 中位数 9ms）。
       final ReaderEngineConfig engineConfig = _buildReaderEngineConfig(
         navigationGeneration: gen,
-        sentenceAudioCuesJson: sentenceAudioCuesJson,
       );
       final String engineSource = readerEngineSource(
-        vnMode: engineConfig.vnMode,
         continuousMode: engineConfig.continuousMode,
       );
       final String setupScript =
           '$engineSource\n${readerEngineBoot(engineConfig)}';
-      ReaderChapterPerfTrace.mark('buildSetupScript');
-      ReaderChapterPerfTrace.noteSize('setupChars', setupScript.length);
       await controller.evaluateJavascript(source: setupScript);
-      ReaderChapterPerfTrace.mark('evalSetupScript');
       if (!mounted || _navigateGeneration != gen) return;
 
-      ReaderChapterPerfTrace.mark('caretReanchor');
-
       _initialFragment = null;
-      ReaderChapterPerfTrace.mark('audiobookBridge');
       if (!mounted || _navigateGeneration != gen) return;
       await HighlightBridge.inject(controller);
       await _applyChapterHighlights();
-      ReaderChapterPerfTrace.mark('highlights');
       if (!mounted || _navigateGeneration != gen) return;
       // BUG-111: 基线取「JS 实际分页用的尺寸」(_paginatedWidth/Height)，不是当前
       // MediaQuery——这样后续 resize 才与真正生效的版面宽度比对。
@@ -2663,13 +2357,6 @@ updateLive: function(patch) {
       // page-turn hits the LRU cache instead of disk read + decode + sanitize +
       // inject. Background, single chapter, dropped if disposed/style-changed.
       _prefetchAdjacentChapter(chapterSnapshot + 1);
-      // BUG-785: EPUB 正文首次就绪 + 有声书已挂载 → 恢复「上次退出时在歌词模式」。
-      // 此刻正文已加载，切歌词等价用户手动切（已知安全），规避 fresh open 直接整页
-      // 加载歌词 HTML 跳过 EPUB 的 iOS 白屏。一次性（下面立即清零）防每章重触发；
-      // 无有声书（controller==null）则不恢复（歌词模式依赖音频），意图也一并清掉。
-      if (_pendingLyricsRestore) {
-        _pendingLyricsRestore = false;
-      }
     } catch (e, stack) {
       ErrorLogService.instance.log(
         'ReaderFushi._onChapterLoadComplete',

@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:fushi/src/models/app_font_loader.dart';
 import 'package:fushi/src/models/app_ui_font_chain.dart';
 import 'package:fushi/src/models/cjk_font_families.dart' show CjkFontStyle;
 import 'package:fushi/src/models/content_font_chain.dart';
@@ -24,10 +23,7 @@ class FontPreviewCandidate {
 
 /// 用途 → 这个用途**真正会用到**的族名，与各消费端同一语义：
 ///
-/// - 界面 / 正文 / 词典：整条有序链都参与（缺字按序回退）。
-/// - 视频字幕：只用第一个可用条目（`AppFontLoader.resolveAndLoad`）。
-/// - 游戏浮窗：只用第一个 native DirectWrite 吃得下的条目
-///   （`AppFontLoader.resolveForNativeOverlay`，WOFF/WOFF2 跳过）。
+/// 界面 / 正文：整条有序链都参与（缺字按序回退）。
 ///
 /// 预览照这个结果渲染，所以「为什么我排第二的字体没生效」在预览里是看得见的。
 List<String> effectiveFontTargetFamilies(
@@ -38,21 +34,10 @@ List<String> effectiveFontTargetFamilies(
   for (final FontPreviewCandidate candidate in enabledInOrder) {
     final String? family = candidate.family;
     if (family == null || family.isEmpty) continue;
-    if (target == FontTarget.gameLookup &&
-        !AppFontLoader.nativeOverlayCanUse(candidate.path)) {
-      continue;
-    }
     if (!families.contains(family)) families.add(family);
-    if (fontTargetUsesFirstFontOnly(target)) break;
   }
   return families;
 }
-
-/// 这个用途是否只取链上第一款字体（其余条目对它无效）。
-bool fontTargetUsesFirstFontOnly(FontTarget target) => switch (target) {
-  FontTarget.videoSubtitle || FontTarget.gameLookup => true,
-  FontTarget.appUi || FontTarget.body || FontTarget.dictionary => false,
-};
 
 /// 各用途的实时样张：照着真实表面的形态画一块缩样，用该用途**实际生效**的字体链
 /// 渲染日文。用途与真实消费端一一对应（[FontTarget] 穷尽 switch，新增用途编译报错）。
@@ -81,10 +66,6 @@ class FontTargetPreview extends StatelessWidget {
     final ColorScheme scheme = Theme.of(context).colorScheme;
     final String hint = families.isEmpty
         ? t.font_preview_default_font
-        : target == FontTarget.gameLookup
-        ? '${t.font_preview_first_only_hint} ${t.font_preview_game_overlay_hint}'
-        : fontTargetUsesFirstFontOnly(target)
-        ? t.font_preview_first_only_hint
         : t.font_preview_chain_hint;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -100,9 +81,6 @@ class FontTargetPreview extends StatelessWidget {
                 families: families,
                 sampleText: sampleText,
               ),
-              FontTarget.dictionary => const SizedBox.shrink(),
-              FontTarget.videoSubtitle => const SizedBox.shrink(),
-              FontTarget.gameLookup => const SizedBox.shrink(),
             },
           ),
         ),

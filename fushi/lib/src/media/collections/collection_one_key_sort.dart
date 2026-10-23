@@ -66,11 +66,9 @@ List<T> sortNewCollectionMembersNaturally<T>(
   ];
 }
 
-/// 合集「一键整理」在**库页右键菜单 / 书架网格详情页**的实现：成员行只有身份键，
-/// 故标题 / 导入时间从 epub / srt / galgames / videoBooks 四表现查；查不到的成员
-/// （孤儿 / 对端未知种类）按 `(entryKey, 0)` 兜底排序，不 throw。游戏标题取用户
-/// 覆盖名（customDataJson.name）优先；视频改名直接写 `videoBooks.title`，raw 列
-/// 即显示名。
+/// 合集「一键整理」在**书架网格详情页**的实现：成员行只有身份键，故标题 / 导入时间
+/// 从 epub 表现查；查不到的成员（孤儿 / 对端未知种类）按 `(entryKey, 0)` 兜底排序，
+/// 不 throw。
 ///
 /// 排序规则本身走共享的 [compareCollectionMembers]。落盘走
 /// [FushiDatabase.reorderCollectionItems]，库页合集行 / 播放器换集读同一
@@ -81,8 +79,6 @@ Future<List<MediaCollectionItemRow>> sortedCollectionRows({
   required bool byTitle,
 }) async {
   final List<EpubBookMeta> epubs = await db.getEpubBookMetas();
-  final List<SrtBookRow> srts = await db.getAllSrtBooks();
-  final List<VideoBookRow> videos = await db.allVideoBooks();
   final Map<String, ({String title, int importedAt})> meta =
       <String, ({String title, int importedAt})>{
     // v83：成员表 epub entryKey = `epub_books.uid`，meta 直接按行内 uid 建键
@@ -92,17 +88,6 @@ Future<List<MediaCollectionItemRow>> sortedCollectionRows({
       MediaKind.epub.compositeKey(r.uid.isNotEmpty ? r.uid : r.bookKey): (
         title: r.title,
         importedAt: r.importedAt,
-      ),
-    for (final SrtBookRow r in srts)
-      MediaKind.srt.compositeKey(r.uid): (
-        title: r.title,
-        importedAt: r.importedAt,
-      ),
-    for (final VideoBookRow r in videos)
-      MediaKind.video.compositeKey(r.bookUid): (
-        title: r.title,
-        // v57 起 importedAt 才有真值；旧数据 null 按 0（最旧）兜底。
-        importedAt: r.importedAt ?? 0,
       ),
   };
   ({String title, int importedAt}) metaOf(MediaCollectionItemRow r) =>

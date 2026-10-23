@@ -49,7 +49,6 @@ abstract class PdfImporter {
     required String fileName,
     required String title,
     DuplicatePolicy policy = const DuplicatePolicy.suffix(),
-    int? sourceId,
   }) async {
     await PdfEngine.ensureInitialized();
 
@@ -111,7 +110,6 @@ abstract class PdfImporter {
           chaptersJson: '[]',
           importedAt: importedAtMs,
           format: Value(BookFormat.pdf.dbValue),
-          sourceId: sourceId != null ? Value(sourceId) : const Value.absent(),
         ),
       );
 

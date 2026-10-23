@@ -84,7 +84,6 @@ extension _ReaderNavigation on _ReaderFushiPageState {
 
   void _acceptRestoreComplete({
     required int reportedGeneration,
-    Object? perfSnapshot,
   }) {
     if (!mounted ||
         !isCurrentReaderRestoreCompletion(
@@ -99,12 +98,10 @@ extension _ReaderNavigation on _ReaderFushiPageState {
       );
       return;
     }
-    ReaderChapterPerfTrace.noteJs(perfSnapshot);
     _onRestoreComplete();
   }
 
   void _onRestoreComplete() {
-    ReaderChapterPerfTrace.mark('jsInitRestore');
     // BUG-438 / TODO-889：恢复完成=内容真正就绪，清掉兜底 deadline，下次导航拿新窗口。
     _clearContentReadyTimeout();
 
@@ -139,16 +136,8 @@ extension _ReaderNavigation on _ReaderFushiPageState {
       // TODO-700 T3：内容就绪确定性落焦到正文（门控见 helper）。
       _focusOwnership.reclaim(FocusReclaimCause.contentReady);
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        // 跨章计时的真正终点：用户感知的跨章 = 遮罩（!_readerContentReady 时盖住整页的
-        // ColoredBox）从屏上消失、新章可见那一刻。上面的 _rebuild 只是把状态翻真，遮罩
-        // 到这一帧才真正撤掉，所以 overlayGone 才是「跨章结束」，total 也算到这里。
-        ReaderChapterPerfTrace.mark('overlayGone');
-        ReaderChapterPerfTrace.end();
         if (mounted) _syncPageSize();
       });
-    } else {
-      // 已就绪（同章重恢复等）时没有遮罩要撤，恢复完成即终点。
-      ReaderChapterPerfTrace.end();
     }
 
     // BUG-1052：这里**不再**重锚任何会话时钟。本方法（恢复完成）每次重排版/重恢复
@@ -213,15 +202,6 @@ extension _ReaderNavigation on _ReaderFushiPageState {
       // 所以能显示）。在这里（与立即收藏相同的稳定状态）再应用一次即可对齐。
       // 重复应用是幂等的：__fushiApplyHighlights 会先清空再重建 range map。
       _applyChapterHighlights();
-      // TODO-724：跳章 / 位置恢复完成后重置有声书图片暂停的 cue 推进锚点
-      // (__fushiPrevHighlight)。否则恢复到章节中段后，首次 cue 推进时 prev 仍指向很早
-      // 的元素，__fushiImageBetween 会跨越中间所有插图、误把视口 reveal 到一张远处的图
-      // （BUG-007 的 reveal 滚图被恢复 + 大跨度 cue 放大）。本路径同时覆盖初次开书与
-      // 有声书跨章推进（_handleCueCrossChapter→_navigateToChapter 完成后均回到这里）。
-      // 与 718 的 _reanchorContinuousAfterRestore（连续模式重锚）零共享状态，正交独立。
-      if (_controller != null) {
-        AudiobookBridge.resetImagePauseAnchor(_controller!);
-      }
       _refreshProgress();
       _startProgressPoll();
       _diag718ProbeViewportDrift();
@@ -317,7 +297,6 @@ extension _ReaderNavigation on _ReaderFushiPageState {
     final bool allowed = readerScrollProgressRefreshAllowed(
       readerContentReady: _readerContentReady,
       restoreInFlight: _restoreInFlight,
-      lyricsMode: false,
       controllerAvailable: _controller != null,
     );
     // TODO-151/164 / BUG-225 诊断（默认 off，DebugLogService.instance.enabled 门控）：
@@ -328,7 +307,6 @@ extension _ReaderNavigation on _ReaderFushiPageState {
         '[ReaderDiag] _handleReaderScroll'
         ' readerContentReady=$_readerContentReady'
         ' restoreInFlight=$_restoreInFlight'
-        ' lyricsMode=false'
         ' controllerAvailable=${_controller != null}'
         ' allowed=$allowed → refresh=${allowed ? 'yes' : 'no'}',
       );
@@ -374,16 +352,6 @@ extension _ReaderNavigation on _ReaderFushiPageState {
     _scrollProgressThrottleTimer = null;
     _lastScrollProgressAt = now;
     _scrollProgressInFlight = true;
-    // TODO-937：连续模式手动滚动后，在进度刷新落地的同一 50ms 节流相位补一次
-    // _caretRefresh()，让字符级焦点环重锚到首个可见字符（详见
-    // readerScrollCaretFollowAllowed 门控真值表 + _caretRefresh 文档）。
-    if (readerScrollCaretFollowAllowed(
-      continuousMode: _settings?.isContinuousMode == true,
-      caretActive: false,
-      caretOnReader: false,
-    )) {
-      _caretRefresh();
-    }
     _refreshProgress().whenComplete(() {
       _scrollProgressInFlight = false;
       if (_scrollProgressPending && mounted) {
@@ -507,7 +475,6 @@ extension _ReaderNavigation on _ReaderFushiPageState {
   /// 弃置 completer 不 complete、旧装载失败分支不清导航旗，各自分叉）。对已复位的字段
   /// 幂等（装载失败路径 `_isNavigatingToChapter` 已在 rethrow 前清过，再清无副作用）。
   void _failNavigation() {
-    ReaderChapterPerfTrace.abort();
     // 导航中止 / 内容就绪兜底超时：WebView 里现在是什么不可知，当前单元丢弃不结算
     // （宁可不计）。跳走前那页已在 [_beginNavigation] `leave()` 结算（BUG-2226：此前
     // 这里 discard 掉的正是用户真读过的上一页），dispose 也在调本方法之前 `leave()`；
@@ -571,8 +538,6 @@ extension _ReaderNavigation on _ReaderFushiPageState {
       return;
     }
 
-    if (manual) {
-    }
     _progressPollTimer?.cancel();
     _flushReadingStats();
 
@@ -587,10 +552,8 @@ extension _ReaderNavigation on _ReaderFushiPageState {
     );
     _lastProgressCharOffset = _initialCharOffset;
 
-    ReaderChapterPerfTrace.begin('chapter=$index');
     try {
       await _loadChapterDirectly(index);
-      ReaderChapterPerfTrace.mark('loadUrl');
     } catch (e, stack) {
       ErrorLogService.instance.log('ReaderFushi._navigateToChapter', e, stack);
       debugPrint('[ReaderFushi] _navigateToChapter loadUrl failed: $e');
@@ -716,14 +679,13 @@ extension _ReaderNavigation on _ReaderFushiPageState {
       await _jumpToFragmentInPlace(fragment);
       return;
     }
-    await _navigateToChapterWithFragment(index, fragment, manual: true);
+    await _navigateToChapterWithFragment(index, fragment);
   }
 
   Future<void> _navigateToChapterWithFragment(
     int index,
-    String? fragment, {
-    bool manual = false,
-  }) async {
+    String? fragment,
+  ) async {
     if (_book == null || index < 0 || index >= _book!.chapters.length) return;
     if (_controller == null) return;
 
@@ -737,9 +699,6 @@ extension _ReaderNavigation on _ReaderFushiPageState {
     }
 
     _progressPollTimer?.cancel();
-    if (manual) {
-    } else {
-    }
     _flushReadingStats();
 
     // BUG-162: 新章/fragment 跳转走分数/fragment，非 char 锚 → -1。
@@ -1625,25 +1584,18 @@ extension _ReaderNavigation on _ReaderFushiPageState {
     // 快照一次，阅读中改设置要退出重开书才生效。
     clock.idleTimeout = appModel.readingIdleTimeout;
     // 手动暂停 / 切后台 / 面板打开时不自动起表（章导航 / 进度刷新都会经这里）：
-    // 统一判据，见 [studyClockMayRun]（BUG-2209：旧实现只看手动暂停旗，后台听书
-    // 跟随每次翻章都把生命周期已停掉的时钟重新起表）。
+    // 统一判据，见 [studyClockMayRun]（BUG-2209）。
     if (_studyClockMayRun) clock.start();
     return clock;
   }
 
   /// 时钟此刻可跑（[studyClockMayRun]）。
-  ///
-  /// BUG-2558：`audiobookPlaying` 直接读控制器的**当前**播放态，不用任何镜像字段——
-  /// 判据要的是「此刻真在出声」，缓存一份就会在媒体中心暂停后多计到下一次事件。
-  /// [_noteAudiobookPlayingForStudyClock] 那枚镜像只负责边沿检测（何时该 sync），
-  /// 不参与判定。
   bool get _studyClockMayRun =>
       !_sourceReviewActive &&
       studyClockMayRun(
         manualPause: _studyClockManualPause,
         lifecycleStopped: _studyClockLifecycleStopped,
         modalDepth: _studyClockModalDepth,
-        audiobookPlaying: false,
       );
 
   /// 把时钟运行态对齐到判据：可跑 → `start()`（对已在跑的是 no-op），不可跑 →

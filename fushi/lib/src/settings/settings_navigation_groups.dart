@@ -6,7 +6,6 @@ import 'package:fushi/src/settings/settings_destination.dart';
 enum SettingsNavigationGroupId {
   interface,
   content,
-  learning,
   connections,
   data,
   app;
@@ -14,7 +13,6 @@ enum SettingsNavigationGroupId {
   String title(BuildContext context) => switch (this) {
     interface => context.t.settings_group_interface,
     content => context.t.settings_group_content,
-    learning => context.t.settings_group_learning,
     connections => context.t.settings_group_connections,
     data => context.t.settings_group_data,
     app => context.t.settings_group_app,
@@ -32,27 +30,12 @@ class SettingsNavigationGroup {
 SettingsNavigationGroupId settingsNavigationGroupFor(
   SettingsDestinationId id,
 ) => switch (id) {
-  SettingsDestinationId.appearance ||
-  SettingsDestinationId.floatingBall => SettingsNavigationGroupId.interface,
-  SettingsDestinationId.reading ||
-  SettingsDestinationId.manga ||
-  SettingsDestinationId.video ||
-  SettingsDestinationId.game ||
-  SettingsDestinationId.mediaTracking => SettingsNavigationGroupId.content,
-  SettingsDestinationId.lookup ||
-  SettingsDestinationId.cardCreation => SettingsNavigationGroupId.learning,
-  SettingsDestinationId.downloads ||
-  SettingsDestinationId.services ||
-  SettingsDestinationId.ai => SettingsNavigationGroupId.connections,
-  SettingsDestinationId.profiles ||
-  SettingsDestinationId.syncBackup ||
-  SettingsDestinationId.interconnect ||
+  SettingsDestinationId.appearance => SettingsNavigationGroupId.interface,
+  SettingsDestinationId.reading => SettingsNavigationGroupId.content,
+  SettingsDestinationId.services => SettingsNavigationGroupId.connections,
   SettingsDestinationId.storage => SettingsNavigationGroupId.data,
   SettingsDestinationId.system ||
-  SettingsDestinationId.readerQuickSettings ||
-  SettingsDestinationId.videoQuickSettings ||
-  SettingsDestinationId.appIcon ||
-  SettingsDestinationId.shortcuts => SettingsNavigationGroupId.app,
+  SettingsDestinationId.readerQuickSettings => SettingsNavigationGroupId.app,
 };
 
 /// 接收经过平台和模块门控后的列表，保留 schema 组内顺序，不生成空标题。

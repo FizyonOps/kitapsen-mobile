@@ -2,8 +2,8 @@ import 'package:drift/drift.dart' show Value;
 // 引擎只准 import 纯 Dart 子 barrel：全 barrel 会导出 just_audio /
 // shared_preferences / file_picker，把 Flutter 拖进无头服务端的 AOT 编译
 // （守卫 fushi/test/build/fushi_engine_purity_guard_test.dart）。
-// StudyClock 就在子 barrel 里（fushi_audio_core.dart 导出 src/audiobook/study_clock.dart）。
-import 'package:fushi_audio/fushi_audio_core.dart';
+// StudyClock 就在子 barrel 里（fushi_reading.dart 导出 src/reading/study_clock.dart）。
+import 'package:fushi_reading/fushi_reading.dart';
 import 'package:fushi_core/fushi_core.dart';
 
 /// 同一媒体相邻两段间隔不超过这个值就归成同一次会话（与首页活动流的
@@ -13,25 +13,22 @@ const Duration kStudySessionGap = Duration(minutes: 30);
 /// 删一次会话的**唯一**入口：先让段 uid 在所有在跑的 `StudyClock` 上退役，再删库。
 ///
 /// 顺序不能反。时钟按 uid upsert **绝对值**，删库与退役之间落下的任何一个 tick 都会
-/// 把刚写零的行原样写回去——用户删掉「刚刚那次」（有声书在放 / galgame hook 在跑，
-/// 段还开着）时必然撞上，表现为「删了又回来」。
+/// 把刚写零的行原样写回去——用户删掉「刚刚那次」（书还开着、段还开着）时必然撞上，
+/// 表现为「删了又回来」。
 /// 页面**不要**直接调 `FushiDatabase.deleteStudySession`。
 Future<void> deleteStudySession(FushiDatabase db, StudySession s) async {
   retireStudySegmentUids(s.segmentUids);
-  await db.deleteStudySession(
-    segmentUids: s.segmentUids.toSet(),
-    gameSessionId: s.gameSessionId,
-  );
+  await db.deleteStudySession(segmentUids: s.segmentUids.toSet());
 }
 
 /// 清空全部学习会话（统计页会话区块的「清除全部会话」）的**唯一**入口。
 ///
 /// 逐会话走 [deleteStudySession] 的同一条纪律（先在 `StudyClock` 上退役 uid 再写库），
 /// 只是把退役与写库各批成一次：会话流常年几十上百条，逐条一个事务在移动端能卡住
-/// 整个 UI 帧。语义与逐条删逐字节一致——段写零、游戏骨架行硬删、不立墓碑。
+/// 整个 UI 帧。语义与逐条删逐字节一致——段写零、不立墓碑。
 ///
 /// 只清 [sessions] 里这一批（调用页传自己域的切片，总览传跨域全量），不是「清空
-/// 本域全部统计」——legacy 日行、收藏、制卡历史、查词计数一个都不动。
+/// 本域全部统计」——legacy 日行、收藏一个都不动。
 Future<void> deleteStudySessions(
   FushiDatabase db,
   List<StudySession> sessions,
@@ -40,12 +37,8 @@ Future<void> deleteStudySessions(
   final Set<String> uids = <String>{
     for (final StudySession s in sessions) ...s.segmentUids,
   };
-  final List<int> gameIds = <int>[
-    for (final StudySession s in sessions)
-      if (s.gameSessionId != null) s.gameSessionId!,
-  ];
   retireStudySegmentUids(uids.toList());
-  await db.deleteStudySessions(segmentUids: uids, gameSessionIds: gameIds);
+  await db.deleteStudySessions(segmentUids: uids);
 }
 
 /// 用户对一次会话的编辑意图（统计页会话行的铅笔）：`null` = 该项不改。
@@ -70,7 +63,7 @@ class StudySessionEdit {
 ///
 /// [current] 是各段**现有**字数（顺序即段顺序）。按现有字数比例分，除不尽的余数
 /// 全给第一段（保证 `sum(out) == total` 逐字节成立）；各段现有字数全为 0（纯时长
-/// 段 / 游戏骨架）时整数落在第一段——没有任何信息能支持更细的分法，把它摊平反而
+/// 段）时整数落在第一段——没有任何信息能支持更细的分法，把它摊平反而
 /// 让每段都带上一个凭空捏造的数字。
 List<int> distributeSessionChars(List<int> current, int total) {
   if (current.isEmpty) return const <int>[];
@@ -99,10 +92,6 @@ int studySessionDateShiftMs(DateTime from, DateTime to) =>
 /// 先让段 uid 在所有在跑的 `StudyClock` 上退役，再写库——时钟按 uid upsert 绝对值，
 /// 改库与退役之间落下的任何一个 tick 都会把刚改完的段按旧值原样写回去（「改了又弹
 /// 回来」）。页面**不要**直接调 `FushiDatabase.updateStudySession`。
-///
-/// 游戏会话另有两处特例：骨架行 `galgame_sessions` 的起止与 dateKey 跟着平移；
-/// 骨架一条字数段都没有时，改字数会新建一条与骨架区间相交的 chars-only 段
-/// （与 hook 记字数写的行同形，下次派生被同一个骨架吸收回去）。
 Future<void> applyStudySessionEdit(
   FushiDatabase db,
   StudySession s,
@@ -142,54 +131,18 @@ Future<void> applyStudySessionEdit(
       updatedAt: Value(now),
     ));
   }
-  // 游戏纯时长会话改字数：没有任何段可写，新建一条与骨架区间相交的 chars-only 段。
-  final List<StudySegmentsCompanion> inserts = <StudySegmentsCompanion>[];
-  if (rows.isEmpty && s.isGame && (edit.chars ?? 0) > 0) {
-    final int startAt = s.startAt + shiftMs;
-    final DateTime startDay = DateTime.fromMillisecondsSinceEpoch(startAt);
-    inserts.add(StudySegmentsCompanion.insert(
-      uid: FushiDatabase.newStudySegmentUid(),
-      deviceId: await db.getOrCreateStudyDeviceId(),
-      mediaKind: s.mediaKind,
-      mediaKey: s.mediaKey,
-      title: s.title,
-      startAt: startAt,
-      endAt: s.endAt + shiftMs,
-      dateKey: FushiDatabase.statDateKeyOf(startDay),
-      hour: startDay.hour,
-      chars: Value(edit.chars!),
-      updatedAt: now,
-    ));
-  }
   retireStudySegmentUids(s.segmentUids);
-  final int gameStartAt = s.startAt + shiftMs;
-  await db.updateStudySession(
-    segments: updates,
-    insertSegments: inserts,
-    gameSessionId: s.gameSessionId,
-    gameStartMs: gameStartAt,
-    gameEndMs: s.endAt + shiftMs,
-    // 游戏骨架行的 dateKey 用**纯日历日**（`FushiTimeFormat.dayKey`），与它唯一的
-    // 生产写入点（`GalHookSessionController` 落 galgame_sessions 时）逐字节同口径。
-    // 段那边用 `statDateKeyOf`（会减 statDayResetHour）是另一张表的另一套约定；
-    // 两处混用会让「统计日重置时刻 != 0」的用户一编辑就把某条游玩会话挪到隔壁天，
-    // 按日聚合跟着跳。这里不做统一，只做对齐——统一口径是另一件事。
-    gameDateKey: FushiDatabase.statCalendarDayKeyOf(
-      DateTime.fromMillisecondsSinceEpoch(s.endAt + shiftMs),
-    ),
-  );
+  await db.updateStudySession(segments: updates);
 }
 
 /// 一次学习会话（统计页「最近会话」一行）：**派生视图，不落库**。
 ///
-/// 事实只有两处：`study_segments`（一段一行、整点切段、uid 键控）与 `galgame_sessions`
-/// （游玩时长；hook 字数走 chars-only 段，两表之间没有外键）。会话 = 同
-/// (deviceId, mediaKind, mediaKey) 的相邻段按 [kStudySessionGap] 归并；游戏会话以
-/// `galgame_sessions` 行为骨架，吸收时间区间相交的同游戏字数段。
+/// 事实只有 `study_segments`（一段一行、整点切段、uid 键控）。会话 = 同
+/// (deviceId, mediaKind, mediaKey) 的相邻段按 [kStudySessionGap] 归并。
 ///
 /// 删除一次会话 = 它的段按 uid **写零**（`FushiDatabase.deleteStudySession`，与按天删同一
 /// 原语：零值是一次新的绝对值写，经 uid LWW 同步自然传到对端；**不**立按身份的墓碑——
-/// 那会压死这本书的全部历史）+ 游戏骨架行硬删（游戏统计不出本机，BUG-2221）。
+/// 那会压死这本书的全部历史）。
 class StudySession {
   StudySession({
     required this.mediaKind,
@@ -203,13 +156,12 @@ class StudySession {
     required this.chars,
     required this.pages,
     required List<String> segmentUids,
-    this.gameSessionId,
   }) : segmentUids = List<String>.unmodifiable(segmentUids);
 
   final String mediaKind;
   final String mediaKey;
 
-  /// 展示快照（段的 title / 游戏当前显示名）；空串时展示层回退 [mediaKey]。
+  /// 展示快照（段的 title）；空串时展示层回退 [mediaKey]。
   final String title;
   final String format;
   final String deviceId;
@@ -222,12 +174,7 @@ class StudySession {
   /// 组成本会话的段 uid（删除时写零的行集）。
   final List<String> segmentUids;
 
-  /// 游戏会话的骨架行 `galgame_sessions.id`（删除时硬删）；非游戏为 null。
-  final int? gameSessionId;
-
   bool get isBook => mediaKind == kActivityMediaBook;
-  bool get isVideo => mediaKind == kActivityMediaVideo;
-  bool get isGame => mediaKind == kActivityMediaGame;
 
   /// 按一次编辑生成**同一条**会话的展示副本（起止平移、总字数替换）。
   ///
@@ -254,29 +201,15 @@ class StudySession {
       chars: edit.chars ?? chars,
       pages: pages,
       segmentUids: segmentUids,
-      gameSessionId: gameSessionId,
     );
   }
 
   /// 展示 / 删除的稳定键（同一派生结果内唯一）。
-  String get key => gameSessionId != null
-      ? 'game:$gameSessionId'
-      : 'seg:${segmentUids.first}';
+  String get key => 'seg:${segmentUids.first}';
 }
 
 bool _isZero(StudySegmentRow s) =>
     s.durationMs <= 0 && s.chars <= 0 && s.pages <= 0;
-
-/// 这一段属于「骨架窗口之外的游玩会话」吗？
-///
-/// 游戏会话的时长只存在于 `galgame_sessions` 骨架行上；hook 记的字数段 `durationMs`
-/// 恒为 0。调用方按 `kRecentGameSessionsLimit` 截断骨架，所以更早的游玩会话**没有**
-/// 骨架行——它的字数段若掉进通用归并，产出的是「0 分钟、只有字数」的孤儿会话，
-/// 用户往下翻过那条线之后整片都是它们。窗口之外不做游戏会话，比做一个假的好。
-bool _outsideGameSkeleton(StudySegmentRow s, int? windowStartAt) =>
-    windowStartAt != null &&
-    s.mediaKind == kActivityMediaGame &&
-    s.startAt < windowStartAt;
 
 /// 从事实派生会话列表，按结束时刻倒序。
 ///
@@ -284,62 +217,14 @@ bool _outsideGameSkeleton(StudySegmentRow s, int? windowStartAt) =>
 /// 本来就不在这里——会话流只覆盖 v92 之后的数据。
 List<StudySession> deriveStudySessions({
   required List<StudySegmentRow> segments,
-  List<GalgameSessionRow> gameSessions = const <GalgameSessionRow>[],
-  Map<String, String> gameNamesById = const <String, String>{},
   Duration gap = kStudySessionGap,
 }) {
   final List<StudySession> out = <StudySession>[];
-  final Set<String> absorbed = <String>{};
 
-  // 1) 游戏骨架：galgame_sessions 一行一会话，吸收区间相交的同游戏字数段。
-  for (final GalgameSessionRow g in gameSessions) {
-    final List<StudySegmentRow> hits = <StudySegmentRow>[
-      for (final StudySegmentRow s in segments)
-        if (s.mediaKind == kActivityMediaGame &&
-            s.mediaKey == g.gameId &&
-            !_isZero(s) &&
-            s.startAt < g.endMs &&
-            s.endAt > g.startMs)
-          s,
-    ];
-    int chars = 0;
-    for (final StudySegmentRow s in hits) {
-      chars += s.chars;
-      absorbed.add(s.uid);
-    }
-    out.add(
-      StudySession(
-        mediaKind: kActivityMediaGame,
-        mediaKey: g.gameId,
-        title: gameNamesById[g.gameId] ??
-            (hits.isEmpty ? '' : hits.first.title),
-        format: '',
-        deviceId: hits.isEmpty ? '' : hits.first.deviceId,
-        startAt: g.startMs,
-        endAt: g.endMs,
-        durationMs: g.durationSeconds * 1000,
-        chars: chars,
-        pages: 0,
-        segmentUids: <String>[for (final StudySegmentRow s in hits) s.uid],
-        gameSessionId: g.id,
-      ),
-    );
-  }
-
-  // 2) 其余段：同 (device, kind, key) 按起始时刻排序，gap 内相邻归并。
-  // 骨架窗口的左界：比它更早的游戏段没有骨架行，见 [_outsideGameSkeleton]。
-  int? gameWindowStartAt;
-  for (final GalgameSessionRow g in gameSessions) {
-    if (gameWindowStartAt == null || g.startMs < gameWindowStartAt) {
-      gameWindowStartAt = g.startMs;
-    }
-  }
+  // 同 (device, kind, key) 按起始时刻排序，gap 内相邻归并。
   final List<StudySegmentRow> rest = <StudySegmentRow>[
     for (final StudySegmentRow s in segments)
-      if (!_isZero(s) &&
-          !absorbed.contains(s.uid) &&
-          !_outsideGameSkeleton(s, gameWindowStartAt))
-        s,
+      if (!_isZero(s)) s,
   ]..sort((StudySegmentRow a, StudySegmentRow b) {
       final int c = _compareGroup(_groupKey(a), _groupKey(b));
       return c != 0 ? c : a.startAt.compareTo(b.startAt);

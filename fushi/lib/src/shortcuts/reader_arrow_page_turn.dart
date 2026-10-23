@@ -1,0 +1,110 @@
+import 'package:flutter/services.dart'
+    show LogicalKeyboardKey, PhysicalKeyboardKey;
+
+import 'package:fushi/src/shortcuts/input_binding.dart';
+import 'package:fushi/src/shortcuts/shortcut_action.dart';
+
+/// 键盘裸左右键翻页必须跟随阅读方向（BUG-098）：
+/// - 竖排 RTL（`vertical-rl`，日文默认）：从右往左读，「下一页」在左 → 左箭头前进、
+///   右箭头后退。
+/// - 横排 LTR（`horizontal-tb`）：从左往右读，「下一页」在右 → 右箭头前进、
+///   左箭头后退。
+///
+/// 默认键盘绑定把「右箭头=前进」写死，对 RTL 书方向恰好相反。本函数在注册表解析前
+/// 介入，仅处理**键盘**「无修饰的裸左/右箭头」；其它键（上/下箭头、PageUp/PageDown、
+/// Space、字母键，以及 Ctrl+方向键的有声书句子导航）一律返回 null，交回默认解析不受影响。
+/// D-pad / gamepad / joystick 事件必须先走 gamepad registry，不进入这个 helper。
+///
+/// [reverse]（TODO-120 用户开关 `reverse_arrow_page_turn`，默认 false）只对**最终
+/// 方向**整体取反：先按阅读方向（[rtl]）算出前进/后退，再在开关打开时把前进/后退对调。
+/// 这样无论 LTR 还是 RTL，开关都只把键盘左右键当前行为整体反过来（左↔右互换），
+/// 与 RTL 自动判定正交叠加，不影响手柄映射、字母快捷键或滑动手势。
+///
+/// TODO-847：IME 改写 [key] 成 [LogicalKeyboardKey.process] 时裸左右键判定失效，
+/// 导致 RTL 书翻页方向反转（落回注册表的 Right=前进 写死映射）。当
+/// `key == process` 时用 [physicalKey] 还原 arrowLeft/arrowRight 语义；文本框
+/// composing 时调用方传 null 关闭回退。方向键物理位在常见布局一致，回退稳定。
+///
+/// TODO-992：本覆写只为「翻页绑定」做阅读方向校正，**必须尊重用户改键**。调用方传入
+/// 该裸键当前在阅读器 co-active 组（reader + audiobook scope）解析出的 [boundAction]：
+/// - 仍是翻页动作（[ShortcutAction.readerPageForward]/[ShortcutAction.readerPageBackward]）
+///   → 按阅读方向重定向，保持 BUG-098/099/TODO-120 既有行为。
+/// - 被用户改绑成别的动作（如有声书上/下句）或显式解绑（null）→ 返回 null 让出，
+///   交回注册表解析用户的真实绑定（修复「连续滚动模式下左右键仍只翻页不动有声书」，
+///   分页与连续两模式都走这条统一解析，故两模式一并修复）。
+/// 默认绑定下裸 Left/Right 仍解析为翻页，故默认用户行为不变（Never break userspace）。
+ShortcutAction? resolveReaderArrowPageTurn({
+  required LogicalKeyboardKey key,
+  required Set<ModifierKey> modifiers,
+  required bool rtl,
+  required ShortcutAction? boundAction,
+  bool reverse = false,
+  PhysicalKeyboardKey? physicalKey,
+}) {
+  if (modifiers.isNotEmpty) return null;
+  // 用户已把裸左/右键改绑成非翻页动作（或解绑）→ 不覆写，交回注册表解析真实绑定。
+  // 只有当该键仍绑定到翻页时，阅读方向校正才适用。
+  if (boundAction != ShortcutAction.readerPageForward &&
+      boundAction != ShortcutAction.readerPageBackward) {
+    return null;
+  }
+  final bool leftIsForward = rtl ^ reverse;
+  final bool isLeft = key == LogicalKeyboardKey.arrowLeft ||
+      (key == LogicalKeyboardKey.process &&
+          physicalKey == PhysicalKeyboardKey.arrowLeft);
+  final bool isRight = key == LogicalKeyboardKey.arrowRight ||
+      (key == LogicalKeyboardKey.process &&
+          physicalKey == PhysicalKeyboardKey.arrowRight);
+  if (isLeft) {
+    return leftIsForward
+        ? ShortcutAction.readerPageForward
+        : ShortcutAction.readerPageBackward;
+  }
+  if (isRight) {
+    return leftIsForward
+        ? ShortcutAction.readerPageBackward
+        : ShortcutAction.readerPageForward;
+  }
+  return null;
+}
+
+/// 触摸 / 鼠标滑动翻页方向必须跟随书写方向（横排 LTR 与竖排 vertical-rl 相反），
+/// 与键盘方向键 [resolveReaderArrowPageTurn] 的 `leftIsForward = rtl ^ reverse` 同构。
+///
+/// 返回「向左滑（`onSwipe('left')`，手指 dx<0）是否 = 前进」。
+/// - [invert] = 用户 `invertSwipeDirection` 开关（默认 true）。
+/// - [rtl] = 竖排 vertical-rl（日文默认，`_isRtlReading`）。
+///
+/// `invert ^ rtl` 的四象限：
+/// - 竖排默认(rtl=T, invert=T) → false：右滑前进（**与历史行为一致**，不破坏既有手感）。
+/// - 横排默认(rtl=F, invert=T) → true：左滑前进（LTR 下一页在右，推内容向左露出=前进）。
+///
+/// 此前滑动路径只用 [invert] 不看书写方向，横排与竖排共用同一套映射（横排方向反了）；
+/// 键盘路径早已翻转，滑动漏了，本谓词补齐。
+bool swipeLeftIsForward({required bool invert, required bool rtl}) =>
+    invert ^ rtl;
+
+/// TODO-1370：长按方向键连续切句。判断一个已解析出的阅读器/有声书快捷动作是否应随
+/// OS 键盘自动重复（[KeyRepeatEvent]）连续触发。
+///
+/// 根因：阅读器 `_handleKeyEvent` 在解析快捷键前有 `event is! KeyDownEvent` 闸门，
+/// 把长按产生的 KeyRepeat 事件全部丢弃（字符光标除外），所以按住 Ctrl+←/→（或用户
+/// 改绑成裸 ←/→）的「上一句/下一句」只在按下瞬间触发一次，无法连续切句——而视频
+/// 播放器经 `SingleActivator(includeRepeats: true)`、手柄 D-pad 经 `GamepadFrameProcessor`
+/// 自动重复，两者都连续。本谓词让阅读器键盘路径与它们对齐。
+///
+/// 只放行「移动 / 前进后退」类动作：翻页（[ShortcutAction.readerPageForward] /
+/// [ShortcutAction.readerPageBackward]）与有声书上一句/下一句
+/// （[ShortcutAction.audiobookPrevSentence] / [ShortcutAction.audiobookNextSentence]）。
+/// 离散动作（查词 / 书签 / 关词典 / 打开菜单 / 播放暂停）必须一次一按，绝不随长按连发
+/// （否则按住会连续查词 / 反复开关播放），故默认一律返回 false；新增 action 也默认不
+/// 可重复，需显式加入白名单才连发。
+bool isRepeatableReaderKeyboardShortcut(ShortcutAction action) {
+  switch (action) {
+    case ShortcutAction.readerPageForward:
+    case ShortcutAction.readerPageBackward:
+      return true;
+    default:
+      return false;
+  }
+}

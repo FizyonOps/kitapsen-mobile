@@ -66,7 +66,6 @@ class LibrarySectionTabs<T extends Object> extends StatelessWidget {
     required T this.selected,
     required ValueChanged<T> this.onChanged,
     required this.focusIdPrefix,
-    this.secondary = false,
     this.fill = false,
     super.key,
   }) : controller = null;
@@ -83,18 +82,12 @@ class LibrarySectionTabs<T extends Object> extends StatelessWidget {
     required this.tabs,
     required TabController this.controller,
     required this.focusIdPrefix,
-    this.secondary = false,
     this.fill = false,
     super.key,
   }) : selected = null,
        onChanged = null;
 
   final List<LibrarySectionTab<T>> tabs;
-
-  /// MD3 secondary tabs：页面内、primary tabs 之下的二级分区（如「浏览」页签里
-  /// 再分小说 / 漫画 / 视频）。与 primary 同一套焦点、滚动与投影契约，只换
-  /// 呈现（指示条横贯整个 tab、选中文案不着主色），层级一眼可辨。
-  final bool secondary;
 
   /// 摆得下时铺满整行（各段等分可用宽度、不滚动）；摆不下（窄窗 / 界面缩放 /
   /// 长译文）自动退回贴左可滚动的常规形态，不会把段挤到截字。用于页面内的
@@ -139,7 +132,6 @@ class LibrarySectionTabs<T extends Object> extends StatelessWidget {
           tabs: tabs,
           selected: selectedValue,
           onChanged: onSelect,
-          secondary: secondary,
           fill: fill,
         ),
       );
@@ -161,7 +153,6 @@ class LibrarySectionTabs<T extends Object> extends StatelessWidget {
           child: FushiSectionTabBar<T>.controlled(
             tabs: tabs,
             controller: host,
-            secondary: secondary,
             fill: fill,
           ),
         );
@@ -182,7 +173,6 @@ class FushiSectionTabBar<T extends Object> extends StatefulWidget {
     required this.tabs,
     required T this.selected,
     required ValueChanged<T> this.onChanged,
-    this.secondary = false,
     this.fill = false,
     super.key,
   }) : controller = null;
@@ -192,7 +182,6 @@ class FushiSectionTabBar<T extends Object> extends StatefulWidget {
   const FushiSectionTabBar.controlled({
     required this.tabs,
     required TabController this.controller,
-    this.secondary = false,
     this.fill = false,
     super.key,
   }) : selected = null,
@@ -202,9 +191,6 @@ class FushiSectionTabBar<T extends Object> extends StatefulWidget {
   final T? selected;
   final ValueChanged<T>? onChanged;
   final TabController? controller;
-
-  /// 见 [LibrarySectionTabs.secondary]。
-  final bool secondary;
 
   /// 见 [LibrarySectionTabs.fill]。
   final bool fill;
@@ -444,8 +430,6 @@ class _FushiSectionTabBarState<T extends Object>
               onTap: onTap,
               tabs: tabs,
             ));
-    }
-    if (widget.secondary) {
     }
     return TabBar(
       controller: _controller,

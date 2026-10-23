@@ -48,7 +48,6 @@ abstract class EpubImporter {
     required String filePath,
     required String fileName,
     DuplicatePolicy policy = const DuplicatePolicy.suffix(),
-    int? sourceId,
   }) async {
     final int tempId = DateTime.now().millisecondsSinceEpoch;
     final String tempDir = await EpubStorage.bookDirectory('.tmp-$tempId');
@@ -60,7 +59,6 @@ abstract class EpubImporter {
       fileName: fileName,
       tempDir: tempDir,
       policy: policy,
-      sourceId: sourceId,
     );
   }
 
@@ -79,7 +77,6 @@ abstract class EpubImporter {
     required String fileName,
     required String tempDir,
     DuplicatePolicy policy = const DuplicatePolicy.suffix(),
-    int? sourceId,
   }) async {
     String? insertedKey;
     String extractDir = tempDir;
@@ -164,9 +161,6 @@ abstract class EpubImporter {
           chaptersJson: chaptersJson,
           tocJson: tocJson != null ? Value(tocJson) : const Value.absent(),
           importedAt: importedAtMs,
-          // TODO-817 M1b：扫描器入库时回填来源库 id；手动导入 sourceId==null
-          // → Value.absent() 落 NULL（向后兼容）。
-          sourceId: sourceId != null ? Value(sourceId) : const Value.absent(),
           // v87：OPF 的 dc:language 回填。`EpubParser` 一直解析着这个字段，但在此
           // 之前全仓没有任何消费方——正文字体因此只能落到 CSS 的裸 `serif`，在
           // Windows 上就是宋体（中文字形），日文书也一样。落库后由

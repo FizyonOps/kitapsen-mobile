@@ -28,14 +28,6 @@ abstract class EnginePaths {
     return Directory(p.join(root.path, child));
   }
 
-  /// 视频封面目录 `<documents>/video_covers`。
-  Future<Directory> videoCoversDirectory() =>
-      documentsSubdirectory('video_covers');
-
-  /// 视频外挂字幕副本目录 `<documents>/video_subtitles`。
-  Future<Directory> videoSubtitlesDirectory() =>
-      documentsSubdirectory('video_subtitles');
-
   /// 系统文件选择器把用户选中的文件**拷进** app 沙盒时落盘的目录（BUG-2863）。
   ///
   /// 这些目录里的媒体文件不是用户的原件，而是 app 为了能读到它才复制出来的整份

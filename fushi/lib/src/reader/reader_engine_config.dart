@@ -22,22 +22,12 @@ class ReaderEngineConfig {
   const ReaderEngineConfig({
     required this.navigationGeneration,
     required this.continuousMode,
-    required this.vnMode,
-    required this.vnClickAdvance,
     required this.scanNonJapaneseText,
-    required this.hoverAutoLookup,
-    this.hostHoverLookup = false,
-    required this.highlightOnTap,
-    required this.showChrome,
     required this.debugLogging,
     required this.swipeDistThreshold,
     required this.swipeFastDistThreshold,
     required this.swipeFastVelocity,
     required this.wheelGestureQuietMs,
-    required this.furiganaMode,
-    required this.caretColor,
-    required this.caretInsetTop,
-    required this.caretInsetBottom,
     required this.initialProgress,
     required this.initialCharOffset,
     required this.initialCharOffsetEnd,
@@ -52,13 +42,6 @@ class ReaderEngineConfig {
     required this.marginRight,
     required this.blurImages,
     required this.revealedKeys,
-    required this.perfTraceEnabled,
-    required this.vnRevealSpeed,
-    required this.vnScreenMode,
-    required this.vnSentencesPerScreen,
-    required this.vnPreserveDialogue,
-    required this.vnMergeCrossScreenSentenceAudioCues,
-    this.sentenceAudioCuesJson,
   });
 
   /// Immutable token identifying the document/navigation that owns this
@@ -68,17 +51,7 @@ class ReaderEngineConfig {
 
   // ── 视图模式 / 手势 ────────────────────────────────────────────────
   final bool continuousMode;
-  final bool vnMode;
-  final bool vnClickAdvance;
   final bool scanNonJapaneseText;
-  final bool hoverAutoLookup;
-
-  /// BUG-2508：true = 宿主（Flutter）侧接管 Shift-悬停 / 纯悬停查词，文档内的
-  /// mousemove 腿整条关掉（只有 macOS，判据 `hostOwnsWebViewHoverLookup`）；
-  /// false = 维持 JS 腿（Windows / Android / iOS / Linux）。
-  final bool hostHoverLookup;
-  final bool highlightOnTap;
-  final bool showChrome;
   final bool debugLogging;
   final int swipeDistThreshold;
   final int swipeFastDistThreshold;
@@ -87,16 +60,6 @@ class ReaderEngineConfig {
   /// [ReaderSettings.swipePageTurnDistThresholds]，随灵敏度一起缩放。
   final int swipeFastVelocity;
   final int wheelGestureQuietMs;
-
-  /// `off` / `toggle` / `hidden` / `dimmed`（`ReaderSettings.furiganaMode` 的
-  /// 值域）。JS 侧现已不按它分支（隐藏 / 淡显都由 CSS 承担），仍随 config 下发
-  /// 供探针 / 日志读。
-  final String furiganaMode;
-
-  // ── caret ─────────────────────────────────────────────────────────
-  final String caretColor;
-  final double caretInsetTop;
-  final double caretInsetBottom;
 
   // ── 恢复锚（三选一，优先级 fragment > charOffset > progress）────────
   final double initialProgress;
@@ -118,40 +81,15 @@ class ReaderEngineConfig {
   final bool blurImages;
   final List<String> revealedKeys;
 
-  // ── 诊断 ──────────────────────────────────────────────────────────
-  final bool perfTraceEnabled;
-
-  // ── VN shell ──────────────────────────────────────────────────────
-  final int vnRevealSpeed;
-  final String vnScreenMode;
-  final int vnSentencesPerScreen;
-  final bool vnPreserveDialogue;
-  final bool vnMergeCrossScreenSentenceAudioCues;
-
-  /// 有声书 sasayaki cue 列表，**已经是 JSON 文本**（`_prepareSasayakiCuesJson` 的
-  /// 产物）。原样嵌进 config 字面量，避免「解码再编码」多走一遍。`null` = 本章无 cue。
-  final String? sentenceAudioCuesJson;
-
-  /// 除 [sasayakiCuesJson] 外的全部字段（它是已编码的 JSON 片段，见 [toJsLiteral]）。
   Map<String, Object?> toJson() => <String, Object?>{
     'navigationGeneration': navigationGeneration,
     'continuousMode': continuousMode,
-    'vnMode': vnMode,
-    'vnClickAdvance': vnClickAdvance,
     'scanNonJapaneseText': scanNonJapaneseText,
-    'hoverAutoLookup': hoverAutoLookup,
-    'hostHoverLookup': hostHoverLookup,
-    'highlightOnTap': highlightOnTap,
-    'showChrome': showChrome,
     'debugLogging': debugLogging,
     'swipeDistThreshold': swipeDistThreshold,
     'swipeFastDistThreshold': swipeFastDistThreshold,
     'swipeFastVelocity': swipeFastVelocity,
     'wheelGestureQuietMs': wheelGestureQuietMs,
-    'furiganaMode': furiganaMode,
-    'caretColor': caretColor,
-    'caretInsetTop': caretInsetTop,
-    'caretInsetBottom': caretInsetBottom,
     'initialProgress': initialProgress,
     'initialCharOffset': initialCharOffset,
     'initialCharOffsetEnd': initialCharOffsetEnd,
@@ -166,12 +104,6 @@ class ReaderEngineConfig {
     'marginRight': marginRight,
     'blurImages': blurImages,
     'revealedKeys': revealedKeys,
-    'perfTraceEnabled': perfTraceEnabled,
-    'vnRevealSpeed': vnRevealSpeed,
-    'vnScreenMode': vnScreenMode,
-    'vnSentencesPerScreen': vnSentencesPerScreen,
-    'vnPreserveDialogue': vnPreserveDialogue,
-    'vnMergeCrossScreenSentenceAudioCues': vnMergeCrossScreenSentenceAudioCues,
   };
 
   /// 运行时可**热更新**的那一小份（BUG-2471）：`window.__fushiEngine.updateLive(patch)`
@@ -215,14 +147,5 @@ class ReaderEngineConfig {
   }
 
   /// 可直接嵌进 JS 的对象字面量。
-  ///
-  /// [sasayakiCuesJson] 本身已是合法 JSON（数组）文本，直接拼进来；其余字段走
-  /// [jsonEncode]。这样避免 `jsonDecode` 一遍再 `jsonEncode` 一遍（cue 列表按章可达数千条）。
-  String toJsLiteral() {
-    final String head = jsonEncode(toJson());
-    assert(head.startsWith('{') && head.endsWith('}'));
-    final String body = head.substring(1, head.length - 1);
-    final String cues = sentenceAudioCuesJson ?? 'null';
-    return '{$body,"sentenceAudioCues":$cues}';
-  }
+  String toJsLiteral() => jsonEncode(toJson());
 }

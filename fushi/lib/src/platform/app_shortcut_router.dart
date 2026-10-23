@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/widgets.dart';
 
 import 'package:fushi/src/models/home_tab.dart';
-import 'package:fushi/src/models/module_id.dart';
 import 'package:fushi/src/platform/app_shortcuts.dart';
 
 /// 快捷方式 URL 的冷启动排队。
@@ -30,9 +29,6 @@ class AppShortcutQueue {
 
 /// 落地一条长按图标快捷方式。
 ///
-/// - 目标模块已关：什么都不做。Android 上被固定到桌面的旧快捷方式不会随
-///   `setDynamicShortcuts` 消失（原生侧会把它置灰，但老版本固定的、或置灰前点下
-///   的仍可能到这里），此时既不能切 tab，也不能把用户正在看的页面退掉。
 /// - 新手引导未完成：只在引导下面切 tab，不动路由栈（引导是压在首页上的路由，
 ///   以任何方式关掉都记为完成）；用户走完引导落在目标 tab 上。查词与其它 tab
 ///   同口径——不在引导上面再压一个独立查词页。
@@ -42,19 +38,12 @@ class AppShortcutQueue {
 ///   两步都排在 [ExternalMediaNavigation.navigate] 队列里。
 Future<void> runAppShortcut(
   AppShortcut shortcut, {
-  required ModuleVisibility visibility,
   required bool onboardingCompleted,
   required NavigatorState? navigator,
   required void Function(HomeTab tab) selectHomeTab,
-  required VoidCallback openLookup,
 }) async {
-  if (!visibility.isEnabled(shortcut.module)) return;
   if (!onboardingCompleted) {
     selectHomeTab(shortcut.homeTab);
-    return;
-  }
-  if (shortcut == AppShortcut.lookup) {
-    openLookup();
     return;
   }
   // Kitapsen: no Anki card-source navigation queue, and reader pages do not

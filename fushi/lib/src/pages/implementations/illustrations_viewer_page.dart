@@ -3,11 +3,11 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart' show compute;
 import 'package:flutter/material.dart';
-import 'package:fushi_audio/fushi_audio.dart'
+import 'package:fushi_reading/fushi_reading.dart'
     show ReaderPosition, ReaderPositionRepository;
 import 'package:fushi_core/fushi_core.dart' show FushiDatabase;
 import 'package:fushi_engine/epub/epub_book.dart' show EpubBook, EpubImageRef;
-import 'package:fushi/src/media/audiobook/audiobook_bridge.dart'
+import 'package:fushi/src/media/book/book_search.dart'
     show TtuTocEntry;
 import 'package:fushi/src/media/sources/reader_fushi_source.dart'
     show ReaderFushiSource;

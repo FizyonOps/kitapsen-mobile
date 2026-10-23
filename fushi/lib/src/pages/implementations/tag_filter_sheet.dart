@@ -38,12 +38,6 @@ final bookTagMapProvider =
   return _tagMapForKind(ref.watch(appProvider).database, TagHostKind.epub);
 });
 
-/// SRT 书 → 标签列表（v77 起 keyed by SrtBooks.uid，弃本机自增 int id）。
-final srtBookTagMapProvider =
-    FutureProvider<Map<String, List<BookTagRow>>>((ref) async {
-  return _tagMapForKind(ref.watch(appProvider).database, TagHostKind.srt);
-});
-
 /// 合集 → 标签列表（keyed by collectionId）。与 [bookTagMapProvider] 等同形，
 /// 共用同一 [BookTags] 标签池。让书架/视频列表里的合集行也能展示已打的标签 chip
 /// （详情页早有展示，列表行此前没有——用户实报「打了标签但列表上看不见」）。
@@ -55,14 +49,6 @@ final collectionTagMapProvider =
     for (final MapEntry<String, List<BookTagRow>> e in byKey.entries)
       if (collectionIdOfTagEntryKey(e.key) case final int id) id: e.value,
   };
-});
-
-/// v77 起返回 srt uid 集合（弃 int id）。
-final filteredSrtBookUidsProvider = FutureProvider<Set<String>?>((ref) async {
-  final tagIds = ref.watch(selectedTagIdsProvider);
-  if (tagIds.isEmpty) return null;
-  final db = ref.watch(appProvider).database;
-  return db.getSrtUidsForAllTags(tagIds);
 });
 
 /// 含【全部】选中标签的合集 id（无选中标签时 null = 不过滤）。合集卡按此显隐。

@@ -329,7 +329,6 @@ body::after {
     String? customBg,
     String? customFg,
     String? selectionColor,
-    String? sentenceAudioHighlightColor,
     String? linkColor,
     String? themeOverride,
     // 墨水屏模式：强制纯黑白正文 + 线式高亮 + 关过渡（叠加在任意主题之上，见
@@ -353,14 +352,13 @@ body::after {
             textColor: einkDark ? '#fff' : '#000',
             backgroundColor: einkDark ? '#000' : '#fff',
             selectionColor: einkDark ? '#fff' : '#000',
-            sentenceAudioHighlightColor: 'transparent',
             linkColor: einkDark ? '#fff' : '#000',
             colorScheme: einkDark ? 'dark' : 'light',
           )
         : themedColors;
 
     // 查词高亮用「预合成到背景色的不透明色」：在无重叠区与原半透明色像素一致，
-    // 但在与音频(sasayaki)高亮重叠区会覆盖其下的灰层 → 单层、查词优先、无双重高亮
+    // 但在与其它高亮重叠区会覆盖其下的灰层 → 单层、查词优先、无双重高亮
     // (BUG-125)。同时去掉旧的 <rt> 不透明遮罩(原 BUG-123)，那个遮罩会连基字右缘一起
     // 抹掉(竖排 jukugo ruby 的振假名盒压在基字右缘上)。
     final String selectionBase = selectionColor ?? colors.selectionColor;
@@ -506,7 +504,7 @@ svg.block-img.blurred {
 }'''
         : '';
 
-    final String furiganaCss = _furiganaCss(settings.furiganaMode);
+    const String furiganaCss = _rubyCss;
 
     final String textIndentCss = settings.textIndentation > 0
         ? 'text-indent: ${settings.textIndentation}em !important;'
@@ -585,38 +583,7 @@ $resolvedFontFaces
 $pageBreakCss
 @media (prefers-color-scheme: light) { :root { --fushi-system-text-color: #000; } }
 @media (prefers-color-scheme: dark) { :root { --fushi-system-text-color: #fff; } }
-:root {
-  --fushi-sentence-audio-text-color: ${colors.textColor};
-  --fushi-sentence-audio-background-color: ${sentenceAudioHighlightColor ?? colors.sentenceAudioHighlightColor};
-}
 html {
-  /* TODO-1308 (BUG): the legacy WebKit property
-     `-webkit-line-box-contain: block glyphs replaced` (cargo-ported from Hoshi
-     in ec4abf78a) has been REMOVED here. It told the engine to size line boxes
-     to glyphs only, i.e. to NOT reserve the extra leading a <ruby>'s <rt>
-     annotation needs. Current Blink dropped support for the property entirely
-     (CSS.supports('-webkit-line-box-contain', ...) === false on WebView2 /
-     recent Android WebView), so it was already a dead no-op for most users. But
-     on older Android System WebView that still honours it, the stripped reserve
-     means the furigana has nowhere to sit: in vertical-rl the annotation lives
-     on the column's cross axis (to the right of the base column), so with the
-     reserve gone the <rt> collapses INTO the base-character column — "假名跑到
-     文字中间". The overlap re-materialises after a TOC/bookmark/search jump
-     because `_applyChapterHighlights` (navigation.part.dart) forces a style
-     recalc / incremental relayout on the freshly-scrolled content, re-applying
-     the glyph-only line-box constraint. Removing the declaration restores the
-     default line-box behaviour (which reserves ruby space) on every engine —
-     exactly what current Blink already does correctly (zero regression there),
-     and the BUG-108 lesson that Blink WebViews do not add ruby leading unless
-     the line box is allowed to grow.
-     BUG-2472 addendum: on WebKit (macOS / iOS) the SAME reserve is what makes a
-     paragraph whose first line carries furigana taller than its neighbours. The
-     first fix emitted `block replaced` here for Apple only; BUG-2482 showed that
-     in quirks mode it also drops the strut of every line whose text lives only
-     inside inline boxes (TOC entries, `<p><br/></p>` blank lines collapse to
-     zero height). The property is therefore emitted on NO engine any more; the
-     WebKit-only ruby fix lives in _webKitRubyAnnotationCss (a negative
-     margin-block-start on the annotation box). */
   /* Themed scrollbar: the track stays transparent so it shows the page
      background, and the thumb takes the theme text colour (already alpha<1),
      so dark themes get a light thumb and light themes a dark one. The standard
@@ -724,55 +691,6 @@ svg.block-img image {
 }
 $blurImagesCss
 $furiganaCss
-/* TODO-1308 (BUG-611 follow-up): the reader FORCES the writing mode, so it must
-   also own the <ruby> formatting context. Real vertical EPUBs (e.g. light novels)
-   ship legacy furigana CSS such as `rt { display: inline-block }` /
-   `ruby { display: inline-block }` — patterns that rendered under old WebKit's
-   ruby model but, under Blink's modern ruby (WebView2 / recent Android WebView),
-   drop the <rt> out of its annotation box. In vertical-rl the furigana then
-   collapses ~one base glyph DOWN the column: 貫(かん)禄(ろく) renders with かん
-   between 貫/禄 and ろく floating to the base's right at the wrong height
-   (measured dyRatio≈0.95 vs 0 correct). The reader style tag is injected LAST in
-   <head> (webview.part.dart `_buildSanitizedChapterHtmlBytes`), so these
-   !important rules win the cascade over the book stylesheet and re-assert the
-   correct ruby structure (rt display is owned by _furiganaCss so `hide` mode's
-   display:none still wins there). This is engine-agnostic and a no-op for books
-   that don't override the ruby display (these ARE the UA defaults).
-
-   BUG-666 (TODO-1308 follow-up): owning writing-mode + display is not enough —
-   the reader must ALSO own `ruby-position`. Legacy vertical EPUBs ship
-   `ruby { ruby-position: under }` (or the WebKit alias `-webkit-ruby-position:
-   after`), which in vertical-rl throws the furigana to the LEFT of the base
-   column instead of the correct Japanese side (the right). Blink resolves the
-   `-webkit-` alias onto the same `ruby-position` longhand, so this later
-   !important declaration wins the cascade over either spelling. `over` maps to
-   line-over in horizontal-tb (furigana ABOVE the base) and to the right in
-   vertical-rl (furigana RIGHT of the base) — the correct side for Japanese in
-   both writing modes. This also keeps the audiobook/selection highlight on the
-   base characters: the full-fill background (BUG-716) paints the <ruby> element
-   box, and `over` keeps the furigana in its own annotation lane on the correct
-   side (the right in vertical-rl) so it stays outside the highlighted base box;
-   the book's `under` would throw furigana to the left and back under the base.
-   display unchanged, so the 65fd8d03d non-collapse (dyRatio≈0) is preserved.
-
-   TODO-1308 (user re-report): owning ruby/rt display is STILL not enough for
-   <rb>/<rtc> markup (W3C ruby extensions / JIS mono-ruby, e.g.
-   <ruby><rb>貫</rb><rtc><rt>かん</rt></rtc><rb>禄</rb><rtc><rt>ろく</rt></rtc></ruby>).
-   Blink has NO rb/rtc support (CSS.supports('display','ruby-base') and
-   ('display','ruby-text-container') are both false on WebView2; the elements
-   default to inline), so an <rt> forced to display:ruby-text INSIDE an inline
-   <rtc> is wrapped in an ANONYMOUS ruby at its flow position: the annotation
-   becomes its own inline character slot in the BASE column (measured on the
-   real WebView2 by reader_vertical_ruby_forms_itest.dart: かん occupies a full
-   cell between 貫 and 禄, pushing 禄 one cell down; ろく lands below the
-   word) — exactly the user screenshot. Fix: the reader owns the layout role of
-   EVERY ruby descendant — rb → inline (base content), rtc → ruby-text (ONE
-   annotation level; the mode-dependent rtc display is owned by _furiganaCss
-   next to rt), rtc > rt → inline (a plain run INSIDE the rtc annotation, so
-   it pairs with the preceding base instead of spawning an anonymous ruby
-   slot). Interleaved per-base <rtc> regains correct mono pairing; a single
-   trailing <rtc> degrades to standard group-ruby rendering (annotation spans
-   the word). Both keep every annotation in the lane. */
 ruby {
   display: ruby !important;
   ruby-position: over !important;
@@ -787,41 +705,21 @@ ruby rt, ruby rp {
   -webkit-user-select: none;
   user-select: none;
 }
-/* TODO-1279：书籍里长按拖选正文时，WebView 引擎会把长按拖选翻译成**原生文本选区**
-   （蓝色 ::selection），与我们自绘的查词选区高亮（::highlight(fushi-selection) /
-   .fushi-dict-highlight）叠成「双选区并存」。查词命中不依赖原生选区——它走
-   getCharacterAtPoint → caretPositionFromPoint + Range + CSS Highlights API，与
-   user-select 无关（user-select 只管用户能否拖选、不影响程序化 Range/caret 与
-   ::highlight 绘制）。原生选区在触屏上唯一「消费者」并不存在：Ctrl+C 复制
-   （caret.part.dart 的 readerShouldHandleDesktopCopy）与右键「查词/复制/导出」菜单
-   （chrome.part.dart 的 _showReaderTextContextMenu）都 isWindowsPlatform / 桌面门控，
-   触屏没有任何路径读原生选区。故按指针类型消除这条特殊情况：粗指针（触屏，pointer:
-   coarse——手机/平板 WebView 报告的主指针）禁用原生 user-select + iOS 长按 callout，
-   长按拖选只留我们的查词高亮；细指针（鼠标，pointer: fine——桌面 WebView2 / WKWebView /
-   Linux）不受影响，桌面 Ctrl+C 复制与右键导出所依赖的 window.getSelection() 原生选区
-   照旧。这是 CSS 层的根因修复，不再靠 selectstart 的 <400ms 时窗 preventDefault
-   （长按天然 >400ms 会逃逸）去追着压制。
-   BUG-2607：iOS 不走这条 user-select 规则——WebKit 对 user-select:none 的文字
-   **不绘制任何 ::highlight()**，见 _touchNativeSelectionCss。 */
 ${_touchNativeSelectionCss()}/* BUG-765 续：移动端选区起止手柄的强调色跟随主题。reader_selection_scripts.dart 里
    自绘的起/止手柄用 var(--fushi-sel-handle) 引用本变量；主题切换重注入本 CSS 时手柄
    颜色自动更新，无需 JS 感知主题。用主题 linkColor（各主题的饱和强调色）而非查词高亮
    色（0.35 低透明 tint，太淡不适合实心抓手）。 */
 :root { --fushi-sel-handle: ${linkColor ?? colors.linkColor}; }
-/* BUG-125：查词高亮用不透明色（见 selectionOpaque 注释）。JS 侧给该 Highlight 设
-   priority=1，使其叠在音频(sentenceAudioHighlight, 默认 priority=0)之上 → 重叠处只显示这一层。 */
 ::highlight(fushi-selection) {
   background-color: $selectionOpaque;
   color: inherit;
 }
-/* BUG-110：<ruby> 内的字不走 ::highlight（竖排下会双绘成深色带），改给 ruby 元素
-   加 class，背景画在元素上只画一遍。移植自 Hoshi-Reader-Android。 */
 ruby.fushi-selection-ruby-active {
   background-color: $selectionOpaque !important;
   color: inherit;
 }
 /* 收藏句高亮同时服务 CSS Highlight、旧 WebView span fallback、以及 ruby 分流 class；
-   三条路径共用背景 + underline，和 sentenceAudioHighlight/current sentence 重叠时仍保留收藏语义。
+   三条路径共用背景 + underline。
    BUG-716：ruby 高亮回到整句填充（不再走 1em 窄 lane），下同。 */
 ::highlight(fushi-hl-yellow),
 .fushi-hl-yellow,
@@ -872,42 +770,8 @@ ruby.fushi-hl-purple-ruby-active {
   background-color: $selectionOpaque !important;
   color: inherit;
 }
-::highlight(fushi-sentence-audio) {
-  color: var(--fushi-sentence-audio-text-color);
-  background-color: var(--fushi-sentence-audio-background-color);
-}
-/* BUG-110：sentenceAudioHighlight 跟随高亮里 <ruby> 元素用 class（不走 ::highlight，避免竖排双绘）。 */
-ruby.fushi-sentence-audio-ruby-active {
-  color: var(--fushi-sentence-audio-text-color) !important;
-  background-color: var(--fushi-sentence-audio-background-color) !important;
-}
-/* BUG-125：同一 <ruby> 同时带查词+音频两个 class 时（元素只渲染一个背景），用双类
-   高于单类的特异性让查词不透明色胜出 → 重叠的振假名字也只显示查词层（查词优先）。 */
-ruby.fushi-selection-ruby-active.fushi-sentence-audio-ruby-active {
-  background-color: $selectionOpaque !important;
-  color: inherit !important;
-}
 ::highlight(fushi-search) {
   background-color: rgba(255, 200, 0, 0.45);
-}
-.fushi-sentence-audio-cue {
-  background-color: transparent;
-}
-/* BUG-716：sentenceAudioHighlight 逐句跟随高亮回到整句 background-color 填充。narrow-lane
-   (旧 _highlightLaneCss 的 1em 窄条 + background-position:left) 在书籍行距≠字号
-   或 <ruby> 盒含注音轨时把条画偏（竖排下往基字左侧偏移、有无振假名两种宽度不一），
-   用户实机确认有声书与查词的注音高亮都错位。整句填充按元素 class 只刷一遍背景，
-   注音轨天然在 ruby 元素背景盒外（BUG-110/643 不回归），横竖排、有无振假名一致。 */
-.fushi-sentence-audio-cue.fushi-sentence-audio-active {
-  color: var(--fushi-sentence-audio-text-color) !important;
-  background-color: var(--fushi-sentence-audio-background-color) !important;
-}
-/* BUG-2806 起基字 wrapper 在 <ruby> 里面：子元素背景画在 ruby 的查词背景之上，
-   BUG-125 的「查词优先」要由 wrapper 让位（连同内联的补缝 box-shadow）。 */
-ruby.fushi-selection-ruby-active .fushi-sentence-audio-cue.fushi-sentence-audio-active {
-  color: inherit !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
 }
 /* 链接色**恒** !important，不跟随「优先书籍样式」。这是阅读器唯一强制链接色的地方：
    撤掉后书自带的 `a{color:#000}`（EPUB 里极常见）在深色主题（背景 #0A0A0A）下就是
@@ -942,8 +806,6 @@ ${einkMode ? _einkOverrideCss(einkDark: einkDark) : ''}
 :root {
   --fushi-reader-eink-mode: 1;
   --fushi-sel-handle: $fg;
-  --fushi-sentence-audio-text-color: inherit;
-  --fushi-sentence-audio-background-color: transparent;
 }
 * {
   transition: none !important;
@@ -972,43 +834,6 @@ ruby.fushi-selection-ruby-active {
   text-decoration-color: $fg !important;
   text-decoration-thickness: 0.14em !important;
   text-underline-offset: 0.18em !important;
-}
-::highlight(fushi-sentence-audio) {
-  background-color: transparent;
-  color: inherit;
-  text-decoration-line: underline;
-  text-decoration-style: solid;
-  text-decoration-color: $fg;
-  text-decoration-thickness: 0.10em;
-  text-underline-offset: 0.18em;
-}
-ruby.fushi-sentence-audio-ruby-active {
-  background-color: transparent !important;
-  color: inherit !important;
-  text-decoration-line: underline !important;
-  text-decoration-style: solid !important;
-  text-decoration-color: $fg !important;
-  text-decoration-thickness: 0.10em !important;
-  text-underline-offset: 0.18em !important;
-}
-.fushi-sentence-audio-cue.fushi-sentence-audio-active {
-  background-color: transparent !important;
-  color: inherit !important;
-  text-decoration-line: underline !important;
-  text-decoration-style: solid !important;
-  text-decoration-color: $fg !important;
-  text-decoration-thickness: 0.10em !important;
-  text-underline-offset: 0.18em !important;
-}
-/* 查词+有声书重叠：查词的粗实线优先（双类特异性高于单类，语义同 BUG-125）。 */
-ruby.fushi-selection-ruby-active.fushi-sentence-audio-ruby-active {
-  text-decoration-style: solid !important;
-  text-decoration-thickness: 0.14em !important;
-}
-/* 基字 wrapper 在查词 ruby 里（BUG-2806）：只留查词的粗实线。 */
-ruby.fushi-selection-ruby-active .fushi-sentence-audio-cue.fushi-sentence-audio-active {
-  text-decoration-line: none !important;
-  box-shadow: none !important;
 }
 ::highlight(fushi-search) {
   background-color: transparent;
@@ -1090,14 +915,6 @@ body {
   height: var(--reader-viewport-height, 100vh) !important;
   column-width: $columnWidthCss !important;
   column-gap: $columnGapCss !important;
-  /* TODO-1285（每页列数分页·相邻页泄露根因修复其一）：分页多列(pageColumns≥2)是
-     固定高度 + 横/竖溢出的 multicol。CSS 默认 column-fill:balance 让引擎在末
-     fragmentainer把内容均摊成等高短列；Blink 在受限高度下退化成 auto(实测
-     balance==auto)故本机无差，但按规范其它引擎/旧 WebView 可对每个 fragment
-     都做均摊 → 列高不齐、列不落在 pageStep 网格 → 翻页时相邻页的列露进本页。
-     分页 multicol 必须显式 column-fill:auto(与 ttu 上游、本仓 horizontal_pitch
-     harness 一致)：逐列填满再溢出、列周期恒 == pageStep。单列(pageColumns≤1)同样
-     受用(1 列无可均摊，零行为变化)。 */
   column-fill: auto !important;
   padding: $paddingCss !important;
   padding-top: calc($marginTopCss + var(--chrome-top-inset, 0px)) !important;
@@ -1229,69 +1046,14 @@ body::after {
 }''';
   }
 
-  static String _furiganaCss(String mode) {
-    // TODO-1308: when furigana is SHOWN, force `display: ruby-text !important` so
-    // a book stylesheet that sets `rt { display: inline-block/inline/block }`
-    // cannot pull the annotation out of its ruby box and collapse it into the
-    // base column in vertical writing (see the ruby rule in the main CSS). rt
-    // display is owned here (not globally) so the `hide` branch's display:none
-    // still wins for hidden furigana. The shown modes also own <rtc> (see
-    // _rtcAnnotationCss); `hide` hides rtc together with rt so a hidden
-    // annotation container cannot keep reserving lane space.
-    // 四态（值域见 ReaderSettings.furiganaMode）：前三态 off / toggle / hidden
-    // 对齐 Hoshi Reader iOS `FuriganaMode`，`dimmed` 是 2026-09-12 用户追加的
-    // 「显示但淡」。`toggle` 的隐藏纯由 CSS 承担，不再靠装载时 JS 给 ruby 打
-    // class：正文动态换章 / 设置热更新都只重发 CSS，JS 标记会漏掉新内容或在热
-    // 切换后残留。揭示 = 点击那个 ruby 加 `furigana-revealed`
-    // （fushiSelection.selectText 入口，命中隐藏注音的 ruby 只揭示、不查词）；
-    // `body.show-all-rt` 是 readerToggleFurigana 快捷键（手柄 R3）的整页揭示。
-    //
-    // `dimmed` 的淡显只用 `opacity`，**不改 color**：注音色如果写死成某个灰，在
-    // 深浅主题 / 自定义正文色之间总有一边对比失衡（浅底上的浅灰几乎不可读、深底
-    // 上的深灰直接消失）；opacity 是对当前正文色的相对衰减，两边都成立，也不和
-    // 主题色变量、有声书高亮的背景填充打架。同一颗 `readerToggleFurigana` 快捷键
-    // 在 `dimmed` 下的语义是「临时恢复全亮」——`body.show-all-rt` 把 opacity 拉回
-    // 1，与 `toggle` 下「整页揭示」同构（都是一次性看清全页注音）。
-    switch (mode) {
-      case 'hidden':
-        return 'rt, rtc { display: none !important; }';
-      case 'toggle':
-        return '''
-rt { display: ruby-text !important; font-size: 0.45em; }
-$_rtcAnnotationCss
-ruby:not(.furigana-revealed) > rt,
-ruby:not(.furigana-revealed) > rtc,
-ruby:not(.furigana-revealed) > rp {
-  visibility: hidden !important;
-}
-ruby:not(.furigana-revealed):has(rt) {
-  text-decoration-line: underline !important;
-  text-decoration-style: dotted !important;
-  text-decoration-color: rgba(160, 160, 160, 0.8) !important;
-  text-underline-offset: 0.05em !important;
-}
-body.show-all-rt ruby > rt,
-body.show-all-rt ruby > rtc {
-  visibility: visible !important;
-}''';
-      case 'dimmed':
-        return '''
-rt { display: ruby-text !important; font-size: 0.45em; }
-$_rtcAnnotationCss
-ruby > rt,
-ruby > rtc {
-  opacity: 0.45 !important;
-}
-body.show-all-rt ruby > rt,
-body.show-all-rt ruby > rtc {
-  opacity: 1 !important;
-}''';
-      default:
-        return '''
+  // TODO-1308: force `display: ruby-text !important` so a book stylesheet that
+  // sets `rt { display: inline-block/inline/block }` cannot pull the annotation
+  // out of its ruby box and collapse it into the base column in vertical
+  // writing (see the ruby rule in the main CSS); <rtc> is owned by
+  // [_rtcAnnotationCss].
+  static const String _rubyCss = '''
 rt { display: ruby-text !important; font-size: 0.45em; }
 $_rtcAnnotationCss''';
-    }
-  }
 
   /// TODO-1308 (user re-report): Blink has no <rtc> support (`display:
   /// ruby-text-container` unsupported; the element defaults to inline), so a
@@ -1322,7 +1084,6 @@ rtc > rt {
           textColor: 'rgba(0, 0, 0, 0.87)',
           backgroundColor: '#f7f6eb',
           selectionColor: 'rgba(194, 178, 128, 0.35)',
-          sentenceAudioHighlightColor: 'rgba(168, 198, 140, 0.40)',
           linkColor: '#7a6232',
         );
       case 'water-theme':
@@ -1330,7 +1091,6 @@ rtc > rt {
           textColor: 'rgba(0, 0, 0, 0.87)',
           backgroundColor: '#dfecf4',
           selectionColor: 'rgba(200, 170, 110, 0.35)',
-          sentenceAudioHighlightColor: 'rgba(100, 180, 220, 0.40)',
           linkColor: '#3a5fad',
         );
       case 'eyecare-theme':
@@ -1340,7 +1100,6 @@ rtc > rt {
           textColor: 'rgba(0, 0, 0, 0.87)',
           backgroundColor: '#c7edcc',
           selectionColor: 'rgba(136, 181, 131, 0.35)',
-          sentenceAudioHighlightColor: 'rgba(160, 200, 120, 0.40)',
           linkColor: '#4c7a3e',
         );
       case 'gray-theme':
@@ -1348,7 +1107,6 @@ rtc > rt {
           textColor: 'rgba(255, 255, 255, 0.87)',
           backgroundColor: '#23272a',
           selectionColor: 'rgba(190, 155, 100, 0.35)',
-          sentenceAudioHighlightColor: 'rgba(80, 150, 200, 0.35)',
           linkColor: '#6fa8dc',
           colorScheme: 'dark',
         );
@@ -1357,7 +1115,6 @@ rtc > rt {
           textColor: 'rgba(255, 255, 255, 0.6)',
           backgroundColor: '#121212',
           selectionColor: 'rgba(180, 145, 90, 0.35)',
-          sentenceAudioHighlightColor: 'rgba(70, 130, 180, 0.35)',
           linkColor: '#7aacdf',
           colorScheme: 'dark',
         );
@@ -1366,7 +1123,6 @@ rtc > rt {
           textColor: 'rgba(255, 255, 255, 0.87)',
           backgroundColor: '#000',
           selectionColor: 'rgba(170, 135, 80, 0.40)',
-          sentenceAudioHighlightColor: 'rgba(60, 120, 170, 0.40)',
           linkColor: '#5b9bd5',
           colorScheme: 'dark',
         );
@@ -1491,7 +1247,6 @@ class _ThemeColors {
     this.textColor = 'rgba(0, 0, 0, 0.87)',
     this.backgroundColor = '#fff',
     this.selectionColor = 'rgba(160, 160, 160, 0.40)',
-    this.sentenceAudioHighlightColor = 'rgba(135, 206, 235, 0.40)',
     this.linkColor = '#426cf5',
     this.colorScheme = 'light',
   });
@@ -1499,7 +1254,6 @@ class _ThemeColors {
   final String textColor;
   final String backgroundColor;
   final String selectionColor;
-  final String sentenceAudioHighlightColor;
   final String linkColor;
 
   /// UA color-scheme bucket ('light' | 'dark') the native (Fluent overlay)

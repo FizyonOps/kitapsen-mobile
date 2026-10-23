@@ -25,7 +25,7 @@ import 'package:fushi/src/utils/misc/smooth_wheel_scroll.dart';
 import 'package:fushi/utils.dart';
 import 'package:fushi/src/shortcuts/global_navigation.dart';
 import 'package:fushi/src/stats/study_diag_log.dart';
-import 'package:fushi_audio/fushi_audio.dart' show StudyClock;
+import 'package:fushi_reading/fushi_reading.dart' show StudyClock;
 import 'package:fushi/src/startup/loading_watchdog_view.dart';
 import 'package:fushi/src/startup/webview_prewarm.dart';
 import 'package:fushi/src/startup/exit_flush_registry.dart';
@@ -41,17 +41,6 @@ import 'package:fushi/src/utils/misc/fushi_share.dart';
 import 'package:fushi/src/engine_bindings.dart';
 
 Color? _savedSplashColor;
-
-/// 桌面端「从 app 外打开视频文件」时，runner 经 `set_dart_entrypoint_arguments`
-/// 把视频路径传进 `main(List<String> args)`；这里暂存，待 app 初始化完成后由
-/// [_FushiReaderAppState] 打开播放页并加入书架。null 表示本次启动不是外部打开视频。
-String? _pendingExternalVideoPath;
-
-/// BUG-1666：桌面端 `fushi://lookup?word=<词>` 深链（Anki 卡片上的词典交叉引用）
-/// 冷启动时从 `main(args)` 暂存待查词；app 初始化完成后由 [_FushiReaderAppState]
-/// 经 [DesktopLookupService.triggerLookup] 排队查词。null = 本次启动非深链查词。
-String? _pendingLookupDeepLinkWord;
-final List<String> _pendingCardSourceUrls = <String>[];
 
 /// Single source of truth for the status/navigation bar overlay style.
 ///
@@ -199,7 +188,7 @@ void main([List<String> args = const <String>[]]) {
     /// Initialise error log service.
     await ErrorLogService.instance.init();
     // 统计诊断流水（用户 2026-09-12：导出日志排查阅读速度异常）。StudyClock 在
-    // fushi_audio 包里，靠静态 sink 接进来——五个装配点一处不改。
+    // fushi_reading 包里，靠静态 sink 接进来——五个装配点一处不改。
     await StudyDiagLog.instance.init();
     StudyClock.trace = (String line) => StudyDiagLog.instance.add('clock', line);
     await DebugLogService.instance.init();
@@ -228,7 +217,6 @@ void main([List<String> args = const <String>[]]) {
     // 用户还在看主页/书架时就把冷启动成本吃掉：~500-1500ms。
     // 移动端可直接预热；桌面端（WebView2）必须等首帧渲染、Flutter view
     // 已挂载后再构造 HeadlessInAppWebView，否则会崩 WebView2。
-
 
     final bool isMobilePlatform = Platform.isAndroid || Platform.isIOS;
     if (shouldPrewarmWebView(
@@ -277,7 +265,6 @@ void main([List<String> args = const <String>[]]) {
         }
       }));
     }
-
 
     // galgame helper 与 Magpie 都只从 Windows 主包随附归档安装（BUG-1196 / BUG-1292）。
     // 版本与 app 强绑定：要新组件就更新 Hibiki。不要恢复后台静默下载或旧包联网兜底。
@@ -350,10 +337,6 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
     with WidgetsBindingObserver {
   StreamSubscription? _intentsSubscription;
 
-  /// 初始化完成后补发一次待发制卡 / 补一次 Anki 同步（桌面冷启动不一定有
-  /// resumed 生命周期事件）。只触发一次。
-  bool _startupPendingMinesFlushed = false;
-
   /// 长按 app 图标点下的快捷方式（`fushi://shortcut/<id>`）。冷启动时 URL 比
   /// `initialise()` 先到，而 HomePage.initState 会把 [homeShellTabNotifier]
   /// 重置成启动 tab，所以先排队，等 home 挂载后的首帧再落地。
@@ -361,7 +344,6 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
     isActive: () => mounted,
     run: _runAppShortcut,
   );
-  bool _sourceNavigationScheduled = false;
 
   /// 守卫：`detached` 退出清理只跑一次。
   bool _shutdownStarted = false;
@@ -434,10 +416,6 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
 
   /// 回到前台补发待发制卡队列：桌面 / Android 上连续补发；AnkiMobile 只有在用户
   /// 点过「全部发送」的会话里才发下一张（每张卡 `x-success` 跳回都会走到这里）。
-  void _flushPendingMines() {
-    return;
-  }
-
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
@@ -521,30 +499,10 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
     final AppModel appModel = ref.read(appProvider);
     return runAppShortcut(
       shortcut,
-      visibility: appModel.moduleVisibility,
       onboardingCompleted: appModel.onboardingCompleted,
       navigator: appModel.navigatorKey.currentState,
       selectHomeTab: (HomeTab tab) => homeShellTabNotifier.value = tab,
-      // 用户点「查词」就是要打字：送进搜索框。
-      openLookup: () => appModel.requestHomeDictionaryTab(focusSearch: true),
     );
-  }
-
-  void _scheduleCardSourceNavigation() {
-    if ((_sourceNavigationScheduled) || _pendingCardSourceUrls.isEmpty) {
-      return;
-    }
-    _sourceNavigationScheduled = true;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _sourceNavigationScheduled = false;
-      if (mounted) unawaited(_drainCardSourceNavigation());
-    });
-    WidgetsBinding.instance.ensureVisualUpdate();
-  }
-
-  Future<void> _drainCardSourceNavigation() async {
-    // Kitapsen: card source links come from Anki cards, which it never makes.
-    return;
   }
 
   /// TODO-1260：进入裸加载态时启动看门狗（只挂一个；已翻超时标记则不再重启）。
@@ -876,30 +834,13 @@ class _FushiReaderAppState extends ConsumerState<FushiReaderApp>
       );
     }
 
-    _scheduleCardSourceNavigation();
     _appShortcuts.schedule();
-    // 长按图标菜单跟着模块开关与界面语言走：两者一变根 build 就重跑（模块开关
-    // notifyListeners / 语言切换重建整树），发布器按签名去重，平时不过通道。
+    // 长按图标菜单跟着界面语言走（语言切换重建整树），发布器按签名去重，
+    // 平时不过通道。
     AppShortcutsPublisher.instance.sync(
-      AppShortcut.available(appModel.moduleVisibility),
+      AppShortcut.values,
       labelOf: (AppShortcut shortcut) => homeNavItemFor(shortcut.homeTab).label,
-      disabledMessage: t.module_disabled_hint,
     );
-
-    if (!_startupPendingMinesFlushed) {
-      _startupPendingMinesFlushed = true;
-      WidgetsBinding.instance.addPostFrameCallback((_) => _flushPendingMines());
-    }
-
-    // app 已初始化完成（走到这里说明 home 即将渲染）：若本次启动是「从 app 外
-    // 打开视频」，在首帧后建/取 VideoBook 并打开播放页。只触发一次。
-    if (_pendingExternalVideoPath != null) {
-    }
-
-    // BUG-1666：同上，冷启动带 `fushi://lookup?word=<词>` 深链时，初始化完成后
-    // 排队一次显式查词（消费侧按用户的剪贴板落点配置路由到主窗 tab / 面板 / 瞬态卡）。
-    if (_pendingLookupDeepLinkWord != null) {
-    }
 
     // TODO-960: live UI-language switch on desktop. [setAppLocale] no longer
     // restarts the process there (it raced the Windows single-instance mutex

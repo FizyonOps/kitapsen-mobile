@@ -132,7 +132,6 @@ class SpeedSummary {
     required this.weightedAvgCph,
     required this.typicalDayCph,
     required this.recentActiveDays,
-    required this.recentActiveWindow,
     required this.deltaPercent,
     required this.fastestDay,
     required this.slowestDay,
@@ -147,7 +146,6 @@ class SpeedSummary {
 
   /// 近 [recentActiveWindow] 天里有阅读的天数。
   final int recentActiveDays;
-  final int recentActiveWindow;
 
   /// 较前一等长窗口的加权均速变化百分比（+12% 记作 12.0）。
   /// 前窗口均速为 0 或数据不足时为 null。
@@ -230,7 +228,6 @@ SpeedSummary computeSpeedSummary(
     weightedAvgCph: weighted,
     typicalDayCph: typical,
     recentActiveDays: recentActive,
-    recentActiveWindow: recentWindow,
     deltaPercent: delta,
     fastestDay: fastest,
     slowestDay: slowest,

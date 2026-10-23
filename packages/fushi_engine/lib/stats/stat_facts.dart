@@ -2,17 +2,15 @@ import 'package:fushi_engine/stats/study_sessions.dart';
 import 'package:fushi_core/fushi_core.dart';
 // 引擎只准 import 纯 Dart 子 barrel（全 barrel 会导出 just_audio 等插件，
 // 把 Flutter 拖进无头服务端的 AOT 编译）。
-import 'package:fushi_audio/fushi_audio_core.dart';
+import 'package:fushi_reading/fushi_reading.dart';
 
 /// 一条学习统计事实的统一形状（v92 统计域重构）。
 ///
-/// 读取侧只认这一种行：`study_segments`（v92 起唯一写入面）与四张 legacy 投影表
-/// （`reading_statistics` / `video_watch_statistics` / `reading_hourly_logs` /
-/// `video_hourly_logs`，v92 前的历史数据、冻结不再写）都映射到它。页面 / 首页 /
-/// 活动流不再各自读表、各自累加。
+/// 读取侧只认这一种行：`study_segments`（v92 起唯一写入面）与两张 legacy 投影表
+/// （`reading_statistics` / `reading_hourly_logs`，v92 前的历史数据、冻结不再写）
+/// 都映射到它。页面 / 首页 / 活动流不再各自读表、各自累加。
 ///
-/// 身份：[mediaKey] = 书 bookKey / 视频 bookUid / 游戏 galgames.id；legacy 行里
-/// 没有身份的（视频 v39 前 NULL-uid 行、阅读行按 title 反查库表失败）为 ''，
+/// 身份：[mediaKey] = 书 bookKey；legacy 行里没有身份的（按 title 反查库表失败）为 ''，
 /// 读取端按 [title] 回退分组（沿用 v76 的 [groupStatRowsByIdentity] 契约）。
 class StatFact {
   const StatFact({
@@ -25,7 +23,6 @@ class StatFact {
     required this.ms,
     required this.chars,
     required this.pages,
-    required this.lastActiveMs,
   });
 
   /// 'book' | 'video' | 'game'（[ActivityMediaKind.dbValue]）。
@@ -49,108 +46,32 @@ class StatFact {
   final int chars;
   final int pages;
 
-  /// 该事实最后活跃时刻（epoch 毫秒；legacy 日行取 lastModified，段取 endAt），
-  /// 「最近阅读 / 观看」排序用。
-  final int lastActiveMs;
-
   bool get isBook => mediaKind == kActivityMediaBook;
-  bool get isVideo => mediaKind == kActivityMediaVideo;
-  bool get isGame => mediaKind == kActivityMediaGame;
-  bool get isManga => format == BookFormat.manga.dbValue;
 
 }
 
-/// 「查词 / 制卡 / 收藏词 / 收藏句」四类计数事实（学习事实面之外的**计数面**）。
+/// 收藏句计数事实（学习事实面之外的**计数面**）。
 ///
-/// 与 [StatFact] 严格分列：这四类行没有时长 / 字数 / 页数，粒度是
-/// (dateKey, sourceType)（+ per-book 计数自带的 title / bookKey），混进日面就会
-/// 被所有按 ms / chars 求和的消费方当成零行，还会污染排行与热力图。它们只按
-/// dateKey 分桶（`bucketActivityByDateKey`）。
-///
-/// 三个消费方——统计中心总览 tab、阅读 tab、视频 tab——**共用同一次加载**：总览
-/// 是跨域视图，数字必须恰好等于两个域 tab 之和，各页各查一遍就会在口径漂移时
-/// 静默对不上（此前总览干脆没有这四个数字，域 tab 各查各的）。
+/// 与 [StatFact] 严格分列：收藏句没有时长 / 字数 / 页数，混进日面就会被所有按
+/// ms / chars 求和的消费方当成零行，还会污染排行与热力图。只按 dateKey 分桶
+/// （`bucketActivityByDateKey`）。
 class StatCounterFacts {
   const StatCounterFacts({
-    this.mining = const <MiningStatisticRow>[],
-    this.lookupCounters = const <LookupMiningCounterRow>[],
-    this.favoriteWords = const <FavoriteWordRow>[],
     this.favoriteSentences = const <FavoriteSentence>[],
   });
 
   static const StatCounterFacts empty = StatCounterFacts();
 
-  /// 制卡的按日全局计数（`mining_statistics`，已按 (sourceType, dateKey) 聚合）。
-  final List<MiningStatisticRow> mining;
-
-  /// 查词 / 制卡的 per-book 计数（`lookup_mining_counters`）。查词数只有这一个
-  /// 来源（查词不落逐次记录，只有按日计数）。
-  final List<LookupMiningCounterRow> lookupCounters;
-
-  /// 收藏词（`favorite_words`，每行一条 = 计 1）。
-  final List<FavoriteWordRow> favoriteWords;
-
   /// 收藏句（`FavoriteSentenceRepository`，偏好里的 JSON 列表）。
   final List<FavoriteSentence> favoriteSentences;
 
-  /// 按统计来源过滤 per-book 计数行（[source] 为 null = 跨域全取）。
-  List<LookupMiningCounterRow> lookupCountersFor(StatSourceKind? source) =>
-      source == null
-          ? lookupCounters
-          : lookupCounters
-              .where(
-                  (LookupMiningCounterRow c) => c.sourceType == source.dbValue)
-              .toList();
-
-  /// 按统计来源过滤收藏词行（[source] 为 null = 跨域全取）。
-  List<FavoriteWordRow> favoriteWordsFor(StatSourceKind? source) =>
-      source == null
-          ? favoriteWords
-          : favoriteWords
-              .where((FavoriteWordRow f) => f.sourceType == source.dbValue)
-              .toList();
-
-  /// 查词数事件流（喂 `bucketActivityByDateKey`）。[source] 为 null = 跨域求和。
-  Iterable<(String, int)> lookupEvents({StatSourceKind? source}) =>
-      lookupCountersFor(source)
-          .map((LookupMiningCounterRow c) => (c.dateKey, c.lookupCount));
-
-  /// 制卡数事件流。真相源是 `mining_statistics`（域页历史口径），**不是**
-  /// `lookup_mining_counters.mineCount`——后者是 per-book 分摊面，无书制卡进
-  /// title='' 行，两张表在「哪些制卡能归到书上」这一点上不等价。
-  Iterable<(String, int)> minedEvents({StatSourceKind? source}) => mining
-      .where((MiningStatisticRow m) =>
-          source == null || m.sourceType == source.dbValue)
-      .map((MiningStatisticRow m) => (m.dateKey, m.count));
-
-  /// 收藏词事件流（每行计 1）。
-  Iterable<(String, int)> favoriteWordEvents({StatSourceKind? source}) =>
-      favoriteWordsFor(source).map((FavoriteWordRow f) => (f.dateKey, 1));
-
-  /// 收藏句事件流。收藏句的 `source` 是**另一个值域**（书 / 视频 / 有声书 / 歌词 /
-  /// 游戏），与 [StatSourceKind] 不同构：视频域取 `source == video`、游戏域取
-  /// `source == game`，阅读域取**其余全部**（有声书 / 歌词都算阅读，与阅读统计页
-  /// 历史判据一致）。
-  ///
-  /// 阅读域必须**同时**排除 video 与 game（而不是只排 video）：三个域各取一份、
-  /// `source: null` 取全部，「总览 = 三域之和」这条恒等式才成立；漏排一个值域，
-  /// 游戏收藏句会在阅读域与游戏域各计一次，总览就比三域之和小。新增值域时这里
-  /// 与它的域分支必须同时改，否则恒等式静默破掉（`stat_counter_facts_test` 钉死）。
+  /// 收藏句事件流。[source] 为 null = 全取；阅读域取视频 / 游戏以外的全部
+  /// （与阅读统计页历史判据一致）。
   ///
   /// BUG-893：dateKey 缺失（写入端补 dateKey 之前的老条目）回退按 createdAt 归日，
   /// 否则老收藏全被滤掉、统计恒 0。
   Iterable<(String, int)> favoriteSentenceEvents({StatSourceKind? source}) =>
-      favoriteSentences
-          .where((FavoriteSentence s) => switch (source) {
-                null => true,
-                StatSourceKind.video =>
-                  s.source == kFavoriteSentenceSourceVideo,
-                StatSourceKind.game => s.source == kFavoriteSentenceSourceGame,
-                StatSourceKind.book =>
-                  s.source != kFavoriteSentenceSourceVideo &&
-                      s.source != kFavoriteSentenceSourceGame,
-              })
-          .map((FavoriteSentence s) => (
+      favoriteSentences.map((FavoriteSentence s) => (
                 s.dateKey ?? FushiDatabase.statDateKeyOf(s.createdAt),
                 1,
               ));
@@ -175,9 +96,8 @@ Map<String, String> uniqueBookKeyByTitle(Iterable<EpubBookMeta> rows) =>
         if (e.value.length == 1) e.key: e.value.single.bookKey,
     };
 
-/// 库里同名 ≥2 本的 title 集合：喂 `groupStatFactsByIdentity` 的吸收否决（与视频域
-/// `computeVideoStats(ambiguousTitles:)` 同判据——库表判同名时，legacy 无身份行不许
-/// 吸进任何身份组）。
+/// 库里同名 ≥2 本的 title 集合：喂 `groupStatFactsByIdentity` 的吸收否决（库表判
+/// 同名时，legacy 无身份行不许吸进任何身份组）。
 Set<String> ambiguousBookTitles(Iterable<EpubBookMeta> rows) => <String>{
       for (final MapEntry<String, List<EpubBookMeta>> e
           in _booksByTitle(rows).entries)
@@ -209,8 +129,6 @@ class StatFacts {
     required this.segments,
     required this.legacyActivity,
     required this.epubRows,
-    this.recentGameSessions = const <GalgameSessionRow>[],
-    this.gameNamesById = const <String, String>{},
     this.counters = StatCounterFacts.empty,
     this.activityLimit = 200,
   });
@@ -223,26 +141,19 @@ class StatFacts {
     epubRows: <EpubBookMeta>[],
   );
 
-  /// 最近的游玩会话（v92 起游玩只写 galgame_sessions，活动流从这里合成）。
-  final List<GalgameSessionRow> recentGameSessions;
-
-  /// galgames.id → 显示名（合成游玩事件的 title 快照）。
-  final Map<String, String> gameNamesById;
-
-  /// 查词 / 制卡 / 收藏计数面（只在 `loadStatFacts(includeCounters: true)` 时装载，
-  /// 否则是 [StatCounterFacts.empty]——首页时间轴不需要，不白付四个全表读）。
+  /// 收藏计数面（只在 `loadStatFacts(includeCounters: true)` 时装载，否则是
+  /// [StatCounterFacts.empty]——首页时间轴不需要）。
   final StatCounterFacts counters;
 
   /// [activityRows] 的条数上限（与 legacy 行的取数上限同值）。
   final int activityLimit;
 
-  /// **活动流的唯一数据源**：legacy 活动行 ∪ 段合成行 ∪ 游玩会话合成行，按精确
-  /// 时刻倒序、截到 [activityLimit]。首页时间轴与游戏首页时间线都只吃它。
+  /// **活动流的唯一数据源**：legacy 活动行 ∪ 段合成行，按精确时刻倒序、截到
+  /// [activityLimit]。首页时间轴只吃它。
   List<ActivityEventRow> get activityRows {
     final List<ActivityEventRow> all = <ActivityEventRow>[
       ...legacyActivity,
       ...segmentsAsActivityRows(segments),
-      ...galgameSessionsAsActivityRows(recentGameSessions, gameNamesById),
     ]..sort(
         (ActivityEventRow a, ActivityEventRow b) =>
             b.timestampMs.compareTo(a.timestampMs),
@@ -250,13 +161,9 @@ class StatFacts {
     return all.length <= activityLimit ? all : all.sublist(0, activityLimit);
   }
 
-  /// **会话流的唯一数据源**（统计中心总览 + 三个域 tab + 按媒体的会话列表都吃它）：
-  /// 段按 [kStudySessionGap] 归并 + 最近游玩会话骨架，按结束时刻倒序；写零的段不进。
-  List<StudySession> get sessions => deriveStudySessions(
-        segments: segments,
-        gameSessions: recentGameSessions,
-        gameNamesById: gameNamesById,
-      );
+  /// **会话流的唯一数据源**（统计中心 + 按媒体的会话列表都吃它）：段按
+  /// [kStudySessionGap] 归并，按结束时刻倒序；写零的段不进。
+  List<StudySession> get sessions => deriveStudySessions(segments: segments);
 
   final List<StatFact> daily;
   final List<StatFact> hourly;
@@ -264,7 +171,7 @@ class StatFacts {
   /// 原始段（活动流的 session 归并需要 startAt / endAt）。
   final List<StudySegmentRow> segments;
 
-  /// legacy `activity_events` 行（v92 前的 read / watch / game 行 + 至今仍在写的
+  /// legacy `activity_events` 行（v92 前的学习行 + 至今仍在写的
   /// `added` 导入事件）。活动流把它与 [segmentsAsActivityRows] 并集。
   final List<ActivityEventRow> legacyActivity;
 
@@ -273,29 +180,20 @@ class StatFacts {
   final List<EpubBookMeta> epubRows;
 
   Iterable<StatFact> get dailyBooks => daily.where((StatFact f) => f.isBook);
-
-  Iterable<StatFact> get dailyVideos => daily.where((StatFact f) => f.isVideo);
-  Iterable<StatFact> get dailyGames => daily.where((StatFact f) => f.isGame);
 }
 
-/// 从 DB 加载统一事实面（**唯一**读取入口；阅读 / 视频 / 游戏统计页与首页都走它）。
+/// 从 DB 加载统一事实面（**唯一**读取入口；统计页与首页都走它）。
 ///
 /// [activityLimit] 是 legacy 活动行的条数上限（首页时间轴只看最近 200 条）；统计页
 /// 不需要活动行可传 0。
-/// 统计页不要活动行时最近游玩会话仍按这个上限取（会话流骨架）。
-const int kRecentGameSessionsLimit = 200;
-
+///
 /// legacy 活动行里属于「学习统计」的事件类型（v92 前的 read / watch / game 行）：
 /// v105 起只对 legacy 归属 Profile 露出；其余类型（`added` 导入事件）是库事件，
 /// 库不按 Profile 分，对谁都露出。
-const Set<String> kLegacyStudyActivityTypes = <String>{
-  kActivityRead,
-  kActivityWatch,
-  kActivityGame,
-};
+const Set<String> kLegacyStudyActivityTypes = <String>{kActivityRead};
 
 /// v105（统计按 Profile 隔离）：只装载 [profileId]（null = 当前激活 Profile）的
-/// 事实。v92 段与游玩会话按 `profile_id` 列过滤；legacy 四表 + legacy 活动行没有
+/// 事实。v92 段按 `profile_id` 列过滤；legacy 两表 + legacy 活动行没有
 /// Profile 维度，只在 [profileId] 是 legacy 归属 Profile
 /// （[FushiDatabase.getStatLegacyProfileId]，无归属 = 所有人）时装载，否则整批为空。
 Future<StatFacts> loadStatFacts(
@@ -306,61 +204,29 @@ Future<StatFacts> loadStatFacts(
 }) async {
   final int scope = profileId ?? await db.resolveActiveProfileId();
   final bool legacyVisible = await db.legacyStatsVisibleTo(scope);
-  // 十个全表读互不依赖（[includeCounters] 时再挂计数面的四个）：一次全部发出去让
-  // Drift 后台执行器流水线化，而不是每个都等上一个往返回来（首页与三个统计页每次
-  // 打开都走这里）。先 Future.wait 挂上监听，某个失败时其余错误不会成为无人接的
-  // 未处理异常。
+  // 全表读互不依赖（[includeCounters] 时再挂计数面）：一次全部发出去让 Drift 后台
+  // 执行器流水线化，而不是每个都等上一个往返回来。先 Future.wait 挂上监听，某个
+  // 失败时其余错误不会成为无人接的未处理异常。
   final Future<List<EpubBookMeta>> epubRowsF = db.getEpubBookMetas();
   final Future<List<ReadingStatisticRow>> readingF = legacyVisible
       ? db.getAllReadingStatistics()
       : Future<List<ReadingStatisticRow>>.value(<ReadingStatisticRow>[]);
-  final Future<List<VideoWatchStatisticRow>> watchF = legacyVisible
-      ? db.getAllVideoWatchStatistics()
-      : Future<List<VideoWatchStatisticRow>>.value(<VideoWatchStatisticRow>[]);
   final Future<List<ReadingHourlyLogRow>> readingHourlyF = legacyVisible
       ? db.getAllReadingHourlyLogs()
       : Future<List<ReadingHourlyLogRow>>.value(<ReadingHourlyLogRow>[]);
-  final Future<List<VideoHourlyLogRow>> videoHourlyF = legacyVisible
-      ? db.getAllVideoHourlyLogs()
-      : Future<List<VideoHourlyLogRow>>.value(<VideoHourlyLogRow>[]);
-  final Future<List<(String, String, int)>> gameDailyF =
-      db.getGalgameDailySecondsByGame(profileId: scope);
-  // v113：已从库移除的游戏，其会话留着、名字在会话行的快照上。
-  final Future<Map<String, String>> gameSessionTitlesF =
-      db.getGalgameSessionTitles();
   final Future<List<ActivityEventRow>> activityF =
       db.getRecentActivityEvents(limit: activityLimit);
-  final Future<List<ActivityEventRow>> gameActivityF = legacyVisible
-      ? db.getRecentActivityEvents(
-          limit: 1 << 31,
-          eventTypes: const <String>[kActivityGame],
-        )
-      : Future<List<ActivityEventRow>>.value(<ActivityEventRow>[]);
   final Future<List<StudySegmentRow>> segmentsF =
       db.getStudySegments(profileId: scope);
-  // 最近游玩会话不随 [activityLimit] 门控：会话流（[StatFacts.sessions]）在统计页
-  // 也要它——统计页传 0 只是不要 legacy 活动行。
-  final Future<List<GalgameSessionRow>> recentGameSessionsF =
-      db.getRecentGalgameSessions(
-    limit: activityLimit <= 0 ? kRecentGameSessionsLimit : activityLimit,
-    profileId: scope,
-  );
-  // 计数面：四个来源一起挂进同一批并发读（统计页要，首页时间轴不要）。
   final Future<StatCounterFacts> countersF = includeCounters
       ? _loadCounterFacts(db)
       : Future<StatCounterFacts>.value(StatCounterFacts.empty);
   await Future.wait<Object?>(<Future<Object?>>[
     epubRowsF,
     readingF,
-    watchF,
     readingHourlyF,
-    videoHourlyF,
-    gameDailyF,
-    gameSessionTitlesF,
     activityF,
-    gameActivityF,
     segmentsF,
-    recentGameSessionsF,
     countersF,
   ]);
 
@@ -375,8 +241,7 @@ Future<StatFacts> loadStatFacts(
   final List<StatFact> hourly = <StatFact>[];
 
   // legacy 日行：阅读按 title 反查库表补身份与 format（查不到 = 书已删或同名歧义，
-  // 身份 ''、format ''，读取端按 unique-title 吸收 / 无身份分组）；视频 v39 起自带
-  // bookUid。
+  // 身份 ''、format ''，读取端按 unique-title 吸收 / 无身份分组）。
   for (final ReadingStatisticRow r in await readingF) {
     final EpubBookMeta? book = bookByTitle[r.title];
     daily.add(
@@ -390,23 +255,6 @@ Future<StatFacts> loadStatFacts(
         ms: r.readingTimeMs,
         chars: r.charactersRead,
         pages: r.pagesRead,
-        lastActiveMs: r.lastStatisticModified,
-      ),
-    );
-  }
-  for (final VideoWatchStatisticRow w in await watchF) {
-    daily.add(
-      StatFact(
-        mediaKind: kActivityMediaVideo,
-        mediaKey: w.bookUid ?? '',
-        title: w.title,
-        format: '',
-        dateKey: w.dateKey,
-        hour: -1,
-        ms: w.watchTimeMs,
-        chars: w.subtitleChars,
-        pages: 0,
-        lastActiveMs: w.lastModified,
       ),
     );
   }
@@ -423,48 +271,9 @@ Future<StatFacts> loadStatFacts(
         ms: h.readingTimeMs,
         chars: 0,
         pages: 0,
-        lastActiveMs: 0,
       ),
     );
   }
-  for (final VideoHourlyLogRow h in await videoHourlyF) {
-    hourly.add(
-      StatFact(
-        mediaKind: kActivityMediaVideo,
-        mediaKey: '',
-        title: '',
-        format: '',
-        dateKey: h.dateKey,
-        hour: h.hour,
-        ms: h.watchTimeMs,
-        chars: 0,
-        pages: 0,
-        lastActiveMs: 0,
-      ),
-    );
-  }
-  // 游戏时长真相源 galgame_sessions（v55 起就是事实表）：按 (game, day) 进日面。
-  // title 只带已移除游戏的快照名（库内游戏恒空串，展示层按 id 反查库内显示名）。
-  final Map<String, String> gameSessionTitles = await gameSessionTitlesF;
-  for (final (String gameId, String dateKey, int seconds) in await gameDailyF) {
-    daily.add(
-      StatFact(
-        mediaKind: kActivityMediaGame,
-        mediaKey: gameId,
-        title: gameSessionTitles[gameId] ?? '',
-        format: '',
-        dateKey: dateKey,
-        hour: -1,
-        ms: seconds * 1000,
-        chars: 0,
-        pages: 0,
-        lastActiveMs: 0,
-      ),
-    );
-  }
-  // legacy 活动行：v92 前的游戏 hook 字数只存在这里（chars-only game 行）；
-  // read / watch 行的时长 / 字数已在日投影里，**只**取 game 的字数进日面，
-  // 时长一律不取（时长真相源是 galgame_sessions，取了就双计）。
   // v105：legacy 学习行只给归属 Profile；`added` 等库事件不分 Profile。
   final List<ActivityEventRow> activity = legacyVisible
       ? await activityF
@@ -472,24 +281,7 @@ Future<StatFacts> loadStatFacts(
           for (final ActivityEventRow e in await activityF)
             if (!kLegacyStudyActivityTypes.contains(e.eventType)) e,
         ];
-  for (final ActivityEventRow e in await gameActivityF) {
-    final int chars = e.charsDelta ?? 0;
-    if (chars <= 0) continue;
-    daily.add(
-      StatFact(
-        mediaKind: kActivityMediaGame,
-        mediaKey: e.mediaKey ?? '',
-        title: e.title,
-        format: '',
-        dateKey: e.dateKey,
-        hour: -1,
-        ms: 0,
-        chars: chars,
-        pages: 0,
-        lastActiveMs: e.timestampMs,
-      ),
-    );
-  }
+
   // v92 段：两面各一份。
   final List<StudySegmentRow> segments = await segmentsF;
   for (final StudySegmentRow s in segments) {
@@ -515,95 +307,37 @@ Future<StatFacts> loadStatFacts(
       ms: s.durationMs,
       chars: s.chars,
       pages: s.pages,
-      lastActiveMs: s.endAt,
     );
     daily.add(fact);
     hourly.add(fact);
   }
-  // 游玩会话（活动流合成「游玩」事件用；activityLimit 为 0 时不取）。
-  final List<GalgameSessionRow> recentGameSessions = await recentGameSessionsF;
-  // 库内显示名优先；已移除游戏的孤儿会话回落会话行上的快照名（v113）。
-  final Map<String, String> gameNamesById = recentGameSessions.isEmpty
-      ? const <String, String>{}
-      : <String, String>{
-          ...gameSessionTitles,
-          for (final GalgameRow g in await db.getAllGalgames()) g.id: g.name,
-        };
   return StatFacts(
     daily: daily,
     hourly: hourly,
     segments: segments,
     legacyActivity: activity,
     epubRows: epubRows,
-    recentGameSessions: recentGameSessions,
-    gameNamesById: gameNamesById,
     counters: await countersF,
     activityLimit: activityLimit,
   );
 }
 
-/// 计数面的四个全表读（与主事实面同一批并发）。收藏句在偏好里（一条 JSON），
-/// 其余三张是按日聚合的小表。
-Future<StatCounterFacts> _loadCounterFacts(FushiDatabase db) async {
-  final Future<List<MiningStatisticRow>> miningF = db.getAllMiningStatistics();
-  final Future<List<LookupMiningCounterRow>> countersF =
-      db.getAllLookupMiningCounters();
-  final Future<List<FavoriteWordRow>> favoriteWordsF = db.getAllFavoriteWords();
-  final Future<List<FavoriteSentence>> favoriteSentencesF =
-      FavoriteSentenceRepository(db).getAll();
-  await Future.wait<Object?>(<Future<Object?>>[
-    miningF,
-    countersF,
-    favoriteWordsF,
-    favoriteSentencesF,
-  ]);
-  return StatCounterFacts(
-    mining: await miningF,
-    lookupCounters: await countersF,
-    favoriteWords: await favoriteWordsF,
-    favoriteSentences: await favoriteSentencesF,
-  );
-}
-
-/// 把游玩会话映射成活动流行（id=0 哨兵）：v92 前 `GalgamePlayTracker` 会在
-/// galgame_sessions 之外再写一条带 durationMs 的 game 活动行（第二本账），现在
-/// 只在读取时合成。title 取当前库内显示名；游戏已从库移除时是会话行上的快照名
-/// （v113，经 [loadStatFacts] 并进 [gameNamesById]），都没有才空串（展示层回退
-/// mediaKey）。
-List<ActivityEventRow> galgameSessionsAsActivityRows(
-  List<GalgameSessionRow> sessions,
-  Map<String, String> gameNamesById,
-) {
-  return <ActivityEventRow>[
-    for (final GalgameSessionRow s in sessions)
-      ActivityEventRow(
-        id: 0,
-        eventType: kActivityGame,
-        mediaType: kActivityMediaGame,
-        title: gameNamesById[s.gameId] ?? '',
-        mediaKey: s.gameId,
-        dateKey: s.dateKey,
-        timestampMs: s.endMs,
-        durationMs: s.durationSeconds * 1000,
-        charsDelta: null,
-      ),
-  ];
-}
+/// 计数面（与主事实面同一批并发）：收藏句在偏好里（一条 JSON）。
+Future<StatCounterFacts> _loadCounterFacts(FushiDatabase db) async =>
+    StatCounterFacts(
+      favoriteSentences: await FavoriteSentenceRepository(db).getAll(),
+    );
 
 /// 把 v92 段映射成活动流行（id=0 哨兵，display-only 不落库——与互联远端行同一
 /// 手法），喂既有 [aggregateActivityEvents]：同日同媒体多段按 30 分钟 gap 归并成
-/// session 数，时长 / 字数求和。eventType 按 kind：book→read、video→watch、game→game。
+/// session 数，时长 / 字数求和。eventType 恒为 read。
 List<ActivityEventRow> segmentsAsActivityRows(List<StudySegmentRow> segments) {
   return <ActivityEventRow>[
     for (final StudySegmentRow s in segments)
       if (s.durationMs > 0 || s.chars > 0 || s.pages > 0)
         ActivityEventRow(
           id: 0,
-          eventType: switch (s.mediaKind) {
-            kActivityMediaVideo => kActivityWatch,
-            kActivityMediaGame => kActivityGame,
-            _ => kActivityRead,
-          },
+          eventType: kActivityRead,
           mediaType: s.mediaKind,
           title: s.title,
           mediaKey: s.mediaKey,
@@ -616,12 +350,9 @@ List<ActivityEventRow> segmentsAsActivityRows(List<StudySegmentRow> segments) {
 }
 
 /// 首页「今日目标」与阅读统计页目标卡共用的**同一条**口径：给定日面行的当日字数
-/// 合计。目标概念是「每日学习目标」——传整张日面（[StatFacts.daily]）时覆盖阅读 +
-/// 视频字幕 + 游戏 hook 三个来源，与热力图「全部」档同覆盖面；只算某一域时传对应
-/// 切片（如 [StatFacts.dailyBooks]）。v92 曾把分子硬编码成只算阅读域，纯视频 /
-/// 游戏日目标恒 0、与上方热力图对不上（BUG-1993）——现在函数只按 dateKey 求和，
-/// 域由调用方传的行集决定，没有特殊情况。目标偏好键沿用 `readingGoalDailyChars`
-/// （存量持久化名冻结，语义已是学习目标）。
+/// 合计。传整张日面（[StatFacts.daily]）或某一域的切片（如 [StatFacts.dailyBooks]）；
+/// 函数只按 dateKey 求和，域由调用方传的行集决定。目标偏好键沿用
+/// `readingGoalDailyChars`（存量持久化名冻结）。
 int studyGoalCharsForDay(Iterable<StatFact> daily, String dateKey) {
   int total = 0;
   for (final StatFact f in daily) {

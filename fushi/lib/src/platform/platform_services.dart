@@ -3,11 +3,9 @@ import 'dart:io' show Platform;
 import 'package:fushi_platform/fushi_platform.dart';
 import 'package:fushi/src/platform/android/android_directory_service.dart';
 import 'package:fushi/src/platform/android/android_lifecycle_service.dart';
-import 'package:fushi/src/platform/android/android_permission_service.dart';
 import 'package:fushi/src/platform/android/android_device_info_service.dart';
 import 'package:fushi/src/platform/ios/ios_directory_service.dart';
 import 'package:fushi/src/platform/ios/ios_lifecycle_service.dart';
-import 'package:fushi/src/platform/ios/ios_permission_service.dart';
 import 'package:fushi/src/platform/ios/ios_device_info_service.dart';
 
 /// Holds all platform-specific service implementations.
@@ -18,7 +16,6 @@ import 'package:fushi/src/platform/ios/ios_device_info_service.dart';
 class PlatformServices {
   final PlatformDirectoryService directory;
   final PlatformLifecycleService lifecycle;
-  final PlatformPermissionService permission;
   final PlatformDeviceInfoService deviceInfo;
 
   /// 本进程跑在 Windows 上吗。
@@ -51,7 +48,6 @@ class PlatformServices {
   PlatformServices({
     required this.directory,
     required this.lifecycle,
-    required this.permission,
     required this.deviceInfo,
     bool? isWindows,
     bool? isDesktop,
@@ -70,7 +66,6 @@ class PlatformServices {
       return PlatformServices(
         directory: AndroidDirectoryService(),
         lifecycle: AndroidLifecycleService(),
-        permission: AndroidPermissionService(deviceInfo),
         deviceInfo: deviceInfo,
       );
     }
@@ -78,7 +73,6 @@ class PlatformServices {
       return PlatformServices(
         directory: IosDirectoryService(),
         lifecycle: IosLifecycleService(),
-        permission: IosPermissionService(),
         deviceInfo: IosDeviceInfoService(),
       );
     }

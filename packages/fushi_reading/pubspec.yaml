@@ -1,0 +1,16 @@
+name: fushi_reading
+resolution: workspace
+description: Reader positions, bookmarks, favorite sentences, study clock and text/EPUB helpers
+publish_to: none
+
+environment:
+  sdk: ">=3.8.0 <4.0.0"
+
+# 零 Flutter：不得依赖 flutter sdk / 任何 method-channel 插件。字符集插件实现
+# 住在 app 的 fushi/lib/src/media/book/，经 platformCharsetDecoder 装配点注入。
+dependencies:
+  fushi_core:
+    path: ../fushi_core
+  drift: ">=2.33.0 <2.34.0"
+
+dev_dependencies:

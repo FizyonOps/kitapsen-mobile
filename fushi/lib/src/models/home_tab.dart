@@ -13,13 +13,5 @@ enum HomeTab {
   /// Kitapsen edition only: the kitapsen.com catalog (no prices, see
   /// `kitapsen_edition.dart`).
   store,
-  manga,
-  video,
-
-  /// 浏览（Mihon 的 Browse：来源 / 扩展 / 发现 / 下载），2026-09-27 由「下载」改名。
-  browse,
-  dictionaries,
-  games,
-  browserExtension,
   settings,
 }

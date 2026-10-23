@@ -7,7 +7,7 @@ library;
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:fushi_audio/fushi_audio.dart';
+import 'package:fushi_reading/fushi_reading.dart';
 import 'package:fushi_core/fushi_core.dart';
 
 import 'package:fushi/src/sync/kitapsen_annotations.dart';

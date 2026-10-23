@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:fushi_audio/fushi_audio.dart' show StudySessionTotals;
+import 'package:fushi_reading/fushi_reading.dart' show StudySessionTotals;
 
 import 'package:fushi/src/reader/reader_chrome_floating.dart'
     show kTopProgressFontSize;
@@ -25,7 +25,7 @@ import 'package:fushi/utils.dart';
 /// 有声书播放条一唤出（[ReaderStatusInline]），同一串数字又整体飞到右端，两条底部形态
 /// 互换时读数横跨整屏跳位。两段并排贴右后，底部读数只有一处落点。
 ///
-/// 2026-09-14 分层修正（用户）：横屏读数并进底栏那一行（[readerPlaybackStatusInline]
+/// 2026-09-14 分层修正（用户）：横屏读数并进底栏那一行（[readerStatusInline]
 /// → [ReaderStatusInline]），底部只有一层；竖屏读数独立成行时并进**底栏那块遮罩的
 /// 最底部**并居中（[centered]，装配在 `_wrapBottomChromeBar`），底栏的背景因此一路
 /// 盖到屏底，而不是底栏一块、读数一块两块半透明遮罩拼在一起。只有底栏整条不画时
@@ -53,11 +53,10 @@ const double kReaderStatusFooterFontSize = kTopProgressFontSize;
 /// `enabled` 就是它），绘制与预留不会各判各的。
 bool readerStatusFooterEnabled({
   required bool desktop,
-  required bool lyricsMode,
   required bool showTimer,
   required bool showProgress,
 }) =>
-    !lyricsMode && (showTimer || showProgress);
+    showTimer || showProgress;
 
 /// 状态行是否已被底栏**吸收**：挤压态底栏占位（[bottomChromeReserve] > 0）且宽屏把
 /// 同一串读数并进了底栏右端（[inlineStatus]，[ReaderStatusInline]）。
@@ -134,7 +133,7 @@ const double kReaderStatusInlineMinWidth = 480;
 /// 竖屏一律分层：竖屏那点宽度要留给传输键的触控面，把读数挤进同一行只会两边都
 /// 难受——那时读数独立成行，坐在底栏这块遮罩的最底部并**居中**
 /// （[ReaderStatusFooter.centered]）。
-bool readerPlaybackStatusInline({
+bool readerStatusInline({
   required bool enabled,
   required bool landscape,
   required double width,

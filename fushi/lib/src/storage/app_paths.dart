@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:fushi_core/fushi_core.dart'
-    show fushiDatabaseFileName, legacyHibikiDatabaseFileName;
+    show fushiDatabaseFileName;
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -57,7 +57,6 @@ class AppPaths {
   AppPaths._({
     required this.documentsRoot,
     required this.supportRoot,
-    required this.tempRoot,
   });
 
   /// 内容/书库根（`getApplicationDocumentsDirectory` 或测试分支）。
@@ -65,9 +64,6 @@ class AppPaths {
 
   /// 数据库根（`getApplicationSupportDirectory` 或测试分支）。
   final Directory supportRoot;
-
-  /// 可丢弃临时目录（`getTemporaryDirectory` 或测试分支）。
-  final Directory tempRoot;
 
   /// 解析三个根一次，返回不可变快照。在启动期 `_prepareRuntimeDirectories` 调用。
   ///
@@ -84,12 +80,10 @@ class AppPaths {
     await _ensureDocumentsLayoutDecided();
     final Directory documents = await _resolveDocumentsRoot();
     final Directory support = await _resolveSupportRoot();
-    final Directory temp = await _resolveTempRoot();
     await _ensureResolvedRootsExist(documents, support);
     return AppPaths._(
       documentsRoot: documents,
       supportRoot: support,
-      tempRoot: temp,
     );
   }
 
@@ -277,7 +271,7 @@ class AppPaths {
   /// 判定 + 固化默认布局。**唯一做探测 IO 的地方**，只由 [resolve] 在启动期调用一次；
   /// 已判定（本进程判过 / prefs 有锚点）就直接沿用，不再探测。
   ///
-  /// 判据是 support 根下有没有主库文件（`fushi.db`，兼看旧名 `hibiki.db`）——即
+  /// 判据是 support 根下有没有主库文件（`fushi.db`）——即
   /// 「这台机器上是否已经有一个跑过的安装」。
   /// 刻意**不**看 Documents 里有没有 `videos` / `browser` / `thumbnails` 这类目录：那些
   /// 名字在用户自己的文档目录里撞名概率不低，全新安装会被误判成老安装、继续摊开。
@@ -345,19 +339,12 @@ class AppPaths {
   /// support 根下是否已有主库文件 = 本机已存在跑过的安装。与 [_probeDataRootExists] 同一
   /// 纪律：**只准异步 `exists()` + 超时**，绝不 `existsSync()`（这条路径同样在启动最早期
   /// 的主 isolate 上跑）。超时/抛错都按「老安装」处理（保守）。
-  ///
-  /// 兼看旧文件名 [legacyHibikiDatabaseFileName]：老安装在第一次开库前主库还叫
-  /// `hibiki.db`（开库时 fushi_core 才做一次性改名），这里若只认新名会把老安装
-  /// 误判成全新安装。
   static Future<bool> existingInstallHasDatabase() async {
     try {
       final Directory support = await _resolveSupportRoot();
-      Future<bool> dbExists(String fileName) =>
-          File(p.join(support.path, fileName))
-              .exists()
-              .timeout(const Duration(seconds: 2), onTimeout: () => true);
-      return await dbExists(fushiDatabaseFileName) ||
-          await dbExists(legacyHibikiDatabaseFileName);
+      return await File(p.join(support.path, fushiDatabaseFileName))
+          .exists()
+          .timeout(const Duration(seconds: 2), onTimeout: () => true);
     } catch (_) {
       return true;
     }
@@ -395,69 +382,18 @@ class AppPaths {
   /// 老安装可能永远停在扁平布局，故白名单及其守卫**长期有效**，新增
   /// `<documents>/<child>` 派生点仍必须收进来。每一项都必须对应仓库里一个真实的派生点：
   ///
-  ///  - `audiobooks` —— [audiobooksDirectory]；`AppModel` 各处
-  ///    `join(appDirectory, 'audiobooks')`；`AudiobookStorage.ensurePersistDir`。
-  ///  - `fushi_books` —— [epubBooksDirectory]；`EpubStorage`；backup restore。
-  ///  - `hoshi_books` —— 上一条的存量旧名。启动就地改名 `fushi_books`
-  ///    （W2-7，`books_directory.dart`），改名失败留在旧名时数据根搬迁必须
-  ///    继续认它。无派生点是有意的（同 `hibikiExport` 条目）。
-  ///  - `video_covers` —— [videoCoversDirectory]；`VideoStorage.coversDirName`。
-  ///  - `game_covers` —— [gameCoversDirectory]；游戏库封面（手选 + 自动获取）。
-  ///  - `video_subtitles` —— [videoSubtitlesDirectory]；`VideoStorage.subtitlesDirName`。
-  ///  - `mpv_shaders` —— [mpvShadersDirectory]。
-  ///  - `mpv_scripts` —— [mpvLuaScriptsDirectory]。
-  ///  - `remote_videos` —— [remoteVideosDirectory]。
-  ///  - `videos` —— backup restore 的视频落点（`backup.part.dart`
-  ///    `join(appDirectory, 'videos')`）。
+  ///  - `fushi_books` —— [epubBooksDirectory]；`EpubStorage`。
   ///  - `custom_fonts` —— 字体导入/加载（`custom_fonts_page.dart` 等
   ///    `join(appDirectory, 'custom_fonts')`）。
-  ///  - `fushiExport` —— `AppModel.prepareExportDirectory`（`export_directory.dart`）。
-  ///  - `hibikiExport` —— 上一条的存量旧名。启动准备目录时就地改名 `fushiExport`
-  ///    （W2-4），但改名可能因句柄占用等失败而留在旧名——数据根搬迁必须继续认它，
-  ///    否则旧目录会被留在旧位置（数据分家）。无派生点是有意的（守卫单向：派生点
-  ///    必须进白名单，白名单允许含仅存量的旧名）。
-  ///  - `browser` / `thumbnails` / `dictionaryResources` /
-  ///    `dictionaryImportWorkingDirectory` / `webArchive` ——
-  ///    `AppModel` 运行时目录系列派生。
+  ///  - `thumbnails` —— `AppModel` 运行时目录派生（封面缩略图）。
   ///
   /// **刻意不收**：`error_log.txt` / `*_breadcrumb.txt`（`ErrorLogService` 直连
   /// `getApplicationDocumentsDirectory()`，固定落平台 Documents、不随数据根走，搬走
-  /// 反而让服务失去续写目标）；`video_clips` 与桌面导出目录 `Hibiki`（同样直连
-  /// path_provider 的用户可见导出物，属用户文件语义）。
-  ///
-  /// 守卫测试 `test/storage/documents_whitelist_guard_test.dart` 扫描源码派生点，
-  /// 新增 `<documents>/<child>` 派生而漏加这里会红。
+  /// 反而让服务失去续写目标）。
   static const Set<String> fushiOwnedDocumentsEntries = <String>{
-    'audiobooks',
     'fushi_books',
-    'hoshi_books',
-    'video_covers',
-    'game_covers',
-    'video_subtitles',
-    'mpv_shaders',
-    'mpv_scripts',
-    'remote_videos',
-    'videos',
-    'anime_downloads',
     'custom_fonts',
-    'fushiExport',
-    'hibikiExport',
-    'browser',
     'thumbnails',
-    'dictionaryResources',
-    'dictionaryImportWorkingDirectory',
-    'webArchive',
-    // 新手引导推荐包的下载暂存目录（含 .part 半截文件，随根搬走以免续传丢进度；
-    // 导入成功后由向导 initState 整目录删除，常态下为空/不存在）。
-    'recommended_pack',
-    'onboarding_tutorial',
-    // 下载页「手动添加任务」落的 .torrent 元数据，随任务长期持久化，必须随数据根走
-    // （留在旧根 = 换根后任务恢复不出种子）。派生点：AppModel 的
-    // manualTorrentDirectory。
-    'manual_torrents',
-    // 卡片来源回看的待回写草稿（临时音频/图片/字段，`card_source_drafts/<sourceId>`），
-    // 失败后可恢复提交，必须随数据根走。派生点：card_source_router.dart。
-    'card_source_drafts',
   };
 
   // ---- 静态便捷层（给无 AppModel 实例的 static 存储助手） ----
@@ -477,9 +413,5 @@ class AppPaths {
     final Directory root = await _resolveDocumentsRoot();
     return Directory(p.join(root.path, child));
   }
-
-  /// 视频封面目录 `<documents>/video_covers`。
-  static Future<Directory> videoCoversDirectory() =>
-      documentsSubdirectory('video_covers');
 
 }

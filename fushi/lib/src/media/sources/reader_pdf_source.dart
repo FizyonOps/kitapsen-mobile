@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:fushi_audio/fushi_audio.dart';
+import 'package:fushi_reading/fushi_reading.dart';
 import 'package:fushi/media.dart';
 import 'package:fushi/models.dart';
 import 'package:fushi/pages.dart';
@@ -26,11 +26,8 @@ class ReaderPdfSource extends ReaderMediaSource {
   ReaderPdfSource._()
       : super(
           uniqueKey: kUniqueKey,
-          sourceName: t.source_name_bookshelf,
           description: t.kitapsen_source_description_epub,
           icon: Icons.picture_as_pdf_outlined,
-          implementsSearch: false,
-          implementsHistory: false,
         );
 
   /// 媒体源唯一键（持久化标识，永不复用 `reader_fushi`）。[ReaderFushiSource] 的
@@ -39,9 +36,6 @@ class ReaderPdfSource extends ReaderMediaSource {
 
   static ReaderPdfSource get instance => _instance;
   static final ReaderPdfSource _instance = ReaderPdfSource._();
-
-  @override
-  Future<void> prepareResources() async {}
 
   @override
   Future<void> onSourceExit({

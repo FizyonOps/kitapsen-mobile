@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fushi_audio/fushi_audio.dart';
 
 import 'package:fushi/media.dart';
 import 'package:fushi/models.dart';
-import 'package:fushi/src/media/audiobook/book_import_dialog.dart';
+import 'package:fushi/src/media/book/book_import_dialog.dart';
 import 'package:fushi/src/media/import/quick_import_section.dart';
 import 'package:fushi/utils.dart';
 
@@ -53,7 +52,7 @@ class _MediaSourcesPageState extends ConsumerState<MediaSourcesPage> {
                     actions: <QuickImportAction>[
                       QuickImportAction(
                         icon: Icons.upload_file_outlined,
-                        label: t.srt_import,
+                        label: t.book_import,
                         onTap: _importBookFile,
                       ),
                     ],
@@ -68,18 +67,13 @@ class _MediaSourcesPageState extends ConsumerState<MediaSourcesPage> {
     );
   }
 
-  /// 单本书导入：与旧书架页头按钮同一个对话框（EPUB/PDF/文本/字幕/有声书对齐）。
+  /// 单本书导入：与旧书架页头按钮同一个对话框（EPUB / PDF / 文本）。
   Future<void> _importBookFile() async {
     final bool? imported = await showAppDialog<bool>(
       context: context,
-      builder: (_) => BookImportDialog(
-        repo: SrtBookRepository(_appModel.database),
-        audiobookRepo: AudiobookRepository(_appModel.database),
-        db: _appModel.database,
-      ),
+      builder: (_) => BookImportDialog(db: _appModel.database),
     );
     if (imported != true || !mounted) return;
     ref.invalidate(fushiBooksProvider);
-    ref.invalidate(srtBooksProvider);
   }
 }

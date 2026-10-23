@@ -5,10 +5,8 @@ import 'package:flutter/services.dart' hide ModifierKey;
 import 'package:fushi/src/updates/store_update_check.dart';
 import 'package:fushi/src/pages/implementations/kitapsen_store/kitapsen_store_page.dart';
 import 'package:fushi/src/utils/components/nav_rail_brand_button.dart';
-import 'package:fushi/src/sync/sync_auto_trigger.dart';
 import 'package:fushi/src/sync/kitapsen_client.dart'
-    show syncKitapsenLibraryProgress;
-import 'package:fushi/src/models/module_id.dart';
+    show syncKitapsenBookProgress, syncKitapsenLibraryProgress;
 import 'package:fushi/pages.dart';
 import 'package:fushi/utils.dart';
 import 'package:fushi/src/focus/fushi_focus_controller.dart'
@@ -31,40 +29,13 @@ import 'package:fushi/src/shortcuts/shortcut_action.dart';
 
 export 'package:fushi/src/models/home_tab.dart';
 
-/// 纯函数：给定视频开关与游戏库开关，返回可见顶层 tab 的**视觉顺序**——视频固定插在书架
-/// 与词典之间（用户要求「在书架和词典管理中间」），games（galgame 库）仅在开启时出现，
-/// 位置固定紧跟 video 之后（用户要求「底栏里把游戏移动到视频后面」，与书/漫画/视频/游戏
-/// 四类媒体入口连成一段）。提取成顶层函数便于单测条件插入与顺序，不必实例化整个
-/// [HomePage]。底栏/侧栏的位置索引由此列表导出。
-///
-/// 形参是**一个** [ModuleVisibility] 而不是一串 bool：此前这里收七个具名 bool，
-/// 调用方（`_activeTabs()` 与 main.dart 的 macOS 根侧栏）各手抄一份实参表，两份
-/// 已经漂移——macOS 那份漏传 `gamesEnabled`，靠缺省 false 恰好蒙对，注释还把漏写
-/// 说成「macOS 恒 false」。收成一个快照后平台判据只在 [ModuleId.availableOn] 判
-/// 一次，两个调用点各减七行，也不可能再漏配。
-List<HomeTab> homeActiveTabs(ModuleVisibility visibility) => <HomeTab>[
+/// 顶层 tab 的**视觉顺序**。底栏/侧栏的位置索引由此列表导出。
+List<HomeTab> homeActiveTabs() => <HomeTab>[
   HomeTab.home,
-  // 七个库页/工具 tab 都可按「功能模块」偏好隐藏（设置 → 外观 → 功能模块）；
-  // 首页/设置恒在，是全部隐藏后的安全回退面（故 [ModuleId] 里没有它们）。
-  if (visibility.isEnabled(ModuleId.books)) HomeTab.books,
+  HomeTab.books,
   HomeTab.store,
   HomeTab.settings,
 ];
-
-/// 启动落地 tab。「启动默认打开查词」只在查词 tab 真的可见时成立——查词模块被
-/// 关掉时返回它会让 `_currentTab` 从第一帧起就指向一个不在 [homeActiveTabs] 里的
-/// tab（渲染由 `_visibleTab` 兜到首页，但选中身份一直是脏的，底栏高亮与
-/// `_previousTab` 都跟着错），所以门控要在取值处，而不是靠下游兜底。
-HomeTab homeInitialTab({
-  required bool startupDefaultDictionaryTab,
-  required HomeTab fallback,
-  bool dictionariesEnabled = true,
-}) {
-  if (startupDefaultDictionaryTab && dictionariesEnabled) {
-    return HomeTab.dictionaries;
-  }
-  return fallback;
-}
 
 int homeVisualIndexForTab({
   required List<HomeTab> tabs,
@@ -118,43 +89,6 @@ AdaptiveNavItem homeNavItemFor(HomeTab tab) {
         selectedIcon: Icons.storefront,
         label: t.kitapsen_nav_store,
       );
-    case HomeTab.manga:
-      return AdaptiveNavItem(
-        icon: Icons.photo_library_outlined,
-        selectedIcon: Icons.photo_library,
-        label: t.manga_library,
-      );
-    case HomeTab.video:
-      return AdaptiveNavItem(
-        icon: Icons.movie_outlined,
-        selectedIcon: Icons.movie,
-        label: t.nav_video,
-      );
-    case HomeTab.browse:
-      // Mihon 的 Browse：来源 / 扩展 / 发现 / 下载（2026-09-27 由「下载」改名）。
-      return AdaptiveNavItem(
-        icon: Icons.explore_outlined,
-        selectedIcon: Icons.explore,
-        label: t.nav_browse,
-      );
-    case HomeTab.dictionaries:
-      return AdaptiveNavItem(
-        icon: Icons.search_outlined,
-        selectedIcon: Icons.search,
-        label: t.nav_lookup,
-      );
-    case HomeTab.games:
-      return AdaptiveNavItem(
-        icon: Icons.sports_esports_outlined,
-        selectedIcon: Icons.sports_esports,
-        label: t.nav_game,
-      );
-    case HomeTab.browserExtension:
-      return AdaptiveNavItem(
-        icon: Icons.extension_outlined,
-        selectedIcon: Icons.extension,
-        label: t.nav_browser_extension,
-      );
     case HomeTab.settings:
       return AdaptiveNavItem(
         icon: Icons.tune_outlined,
@@ -189,7 +123,6 @@ class _HomePageState extends BasePageState<HomePage>
   HomeTab _previousTab = HomeTab.home;
   final FocusNode _keyboardFocusNode = FocusNode();
 
-  final ValueNotifier<int> _videoLibraryRefreshSignal = ValueNotifier<int>(0);
   final Map<HomeTab, ScrollController> _tabScrollControllers =
       <HomeTab, ScrollController>{};
 
@@ -197,12 +130,6 @@ class _HomePageState extends BasePageState<HomePage>
   void initState() {
     super.initState();
 
-    _currentTab = homeInitialTab(
-      startupDefaultDictionaryTab: appModelNoUpdate.startupDefaultDictionaryTab,
-      dictionariesEnabled:
-          false,
-      fallback: _currentTab,
-    );
     // Seed the shared shell notifier (drives the macOS root sidebar) and listen
     // for external selection from it. No-op on non-macOS (the sidebar that writes
     // it only exists under the macOS shell).
@@ -269,34 +196,17 @@ class _HomePageState extends BasePageState<HomePage>
     setState(() {});
   }
 
-  /// TODO-376：响应显式「打开查词 tab」请求（[AppModel.homeDictionaryTabRequest]）。
-  /// 桌面悬浮字幕条点词（reader 路由 `_lookupFromFloatingLyric`）这类**显式**手势会先
-  /// 把待查词排进 [DesktopLookupService.pendingText]、唤主窗前台，再发本请求；这里只把
-  /// 主窗切到查词 tab，让 [HomeDictionaryPage] 挂载——它在 initState 里无条件消费一次
-  /// 已存在的 pending 并展示。
-  ///
-  /// 这是与被动剪贴板监听正交的显式导航：本回调不读 pendingText、也不被剪贴板/热键的
-  /// 被动命中触发，故不违反「HomePage 根节点不消费查词请求（mainTab 分区只归
-  /// HomeDictionaryPage，spec 2026-07-10 §7）」的守卫。已在查词 tab 时无需切换
-  /// （页面已挂载并消费）。
-  void _onHomeDictionaryTabRequested() {
-    return;
-  }
-
   @override
   void dispose() {
     assert(() {
       return true;
     }());
-    _videoLibraryRefreshSignal.dispose();
     for (final ScrollController controller in _tabScrollControllers.values) {
       controller.dispose();
     }
     _keyboardFocusNode.dispose();
     WidgetsBinding.instance.removeObserver(this);
     appModelNoUpdate.databaseCloseNotifier.removeListener(refresh);
-    appModelNoUpdate.homeDictionaryTabRequest
-        .removeListener(_onHomeDictionaryTabRequested);
     homeShellTabNotifier.removeListener(_onShellTabRequested);
     super.dispose();
   }
@@ -317,9 +227,8 @@ class _HomePageState extends BasePageState<HomePage>
       }
       final item = appModel.currentMediaItem;
       if (item != null) {
-        triggerAutoSyncOnBackground(
-          db: appModel.database,
-          mediaIdentifier: item.mediaIdentifier,
+        unawaited(
+          syncKitapsenBookProgress(appModel.database, item.mediaIdentifier),
         );
       }
     }
@@ -470,13 +379,8 @@ class _HomePageState extends BasePageState<HomePage>
   }
 
   /// 当前可见的顶层 tab：首页 → 书架 → 漫画 → 视频 → 游戏 → 下载 → 词典 → 设置。
-  /// 漫画/视频/游戏三个媒体库 tab 按「功能模块」偏好显隐（默认全开，行为与旧版一致）；
-  /// games（galgame 库）额外叠加 Windows 平台门控（galgame 引擎-hook 注入本就
-  /// Windows-only），紧跟视频之后。底栏/侧栏的位置索引由此列表导出。
-  /// 按「功能模块」偏好显隐（偏好默认全开，行为与旧版一致）。平台门控——games
-  /// 的 Windows-only、扩展的桌面-only——已由 [AppModel.moduleVisibility] 合成，
-  /// 这里不再叠第二遍。
-  List<HomeTab> _activeTabs() => homeActiveTabs(appModel.moduleVisibility);
+  /// 底栏/侧栏的位置索引由此列表导出。
+  List<HomeTab> _activeTabs() => homeActiveTabs();
 
   /// 渲染用的当前 tab：若 `_currentTab` 已不在可见列表（例如刚在「功能模块」里
   /// 关掉当前所在库页），回落到恒在的首页，避免渲染一个不存在的 tab。
@@ -610,8 +514,6 @@ class _HomePageState extends BasePageState<HomePage>
     switch (action) {
       case ShortcutAction.homeTabBooks:
         return _selectTabFromShortcut(HomeTab.books);
-      case ShortcutAction.homeTabDict:
-        return KeyEventResult.ignored;
       case ShortcutAction.homeTabSettings:
         // 设置恒在，不可能不可达；仍走同一条路保持形态一致。
         return _selectTabFromShortcut(HomeTab.settings);
@@ -659,30 +561,7 @@ class _HomePageState extends BasePageState<HomePage>
       return const SizedBox.shrink();
     }
 
-    final Widget home = ValueListenableBuilder<bool>(
-        valueListenable: syncInProgress,
-        builder: (context, syncing, child) => PopScope(
-              canPop: !syncing,
-              onPopInvokedWithResult: (didPop, _) async {
-                if (didPop) return;
-                // 同 route 多 PopScope 的回调全部遍历，故此顶层同步 PopScope 在设置
-                // tab 上也会被触发；设置 tab 的返回由内层 PopScope 切回来源 tab，
-                // 这里据 [shouldWarnOnExit] 收窄到非设置 tab 才弹同步告警（TODO-698）。
-                if (_visibleTab == HomeTab.settings) return;
-                final bool? confirmed = await showAppDialog<bool>(
-                  context: context,
-                  builder: (BuildContext ctx) => _SyncExitWarningDialog(
-                    onCancel: () => Navigator.pop(ctx, false),
-                    onExit: () => Navigator.pop(ctx, true),
-                  ),
-                );
-                if (confirmed == true) {
-                  SystemNavigator.pop();
-                }
-              },
-              child: child!,
-            ),
-        child: Actions(
+    final Widget home = Actions(
             // Desktop gamepad path: the GamepadService dispatches
             // GamepadButtonIntent here (no gameButton* key events on desktop).
             // Resolving it against home/global routes polled controller input
@@ -741,7 +620,7 @@ class _HomePageState extends BasePageState<HomePage>
                       },
                     ),
                   ),
-                ))));
+                )));
     // 桌面剪贴板/热键查词不再叠加独立 overlay 页；监听生命周期收窄到查词 tab。
     return home;
   }
@@ -902,10 +781,6 @@ class _HomePageState extends BasePageState<HomePage>
   /// 若把它也保活会不再 re-mount 而漏消费。
   static const Set<HomeTab> _keepAliveTabs = <HomeTab>{
     HomeTab.books,
-    HomeTab.manga,
-    HomeTab.video,
-    HomeTab.games,
-    HomeTab.browse,
   };
 
   /// 用户已实际打开过至少一次的保活 tab。惰性构建：没进过的视频/书架 tab 不预建，
@@ -959,22 +834,11 @@ class _HomePageState extends BasePageState<HomePage>
       HomeTab.home => HomeDashboardPage(),
       HomeTab.store =>
         const KitapsenStorePage(),
-      // Kitapsen: hidden tabs build nothing, so their pages are tree-shaken out.
-      HomeTab.video => const SizedBox.shrink(),
-      HomeTab.browse => const SizedBox.shrink(),
-      HomeTab.dictionaries => const SizedBox.shrink(),
-      // Android 的 games 模块是串流接收端：远端主机游戏库 + 远程启动串流；
-      // Windows 仍是本机 galgame 库。形态判据只在 [GamesModuleForm.on]。
-      HomeTab.games => const SizedBox.shrink(),
-      HomeTab.browserExtension =>
-        const SizedBox.shrink(),
       HomeTab.settings =>
         // 设置 tab 走侧栏/底栏切回，不显示页头返回箭头；但仍需 PopScope 拦截系统
         // 返回键（否则冒泡到顶层 PopScope = 退出 app，见 BUG-236）。
         _buildSettingsTabContent(showBackButton: false),
       HomeTab.books => const HomeReaderPage(),
-      HomeTab.manga =>
-        const SizedBox.shrink(),
     };
     return PrimaryScrollController(
       controller: _tabScrollControllers.putIfAbsent(
@@ -1037,65 +901,6 @@ class HomeSettingsTabContent extends StatelessWidget {
           FushiSettingsContent(
             onBack: showBackButton ? onReturnToPreviousTab : null,
           ),
-    );
-  }
-}
-
-class _SyncExitWarningDialog extends StatelessWidget {
-  const _SyncExitWarningDialog({
-    required this.onCancel,
-    required this.onExit,
-  });
-
-  final VoidCallback onCancel;
-  final VoidCallback onExit;
-
-  @override
-  Widget build(BuildContext context) {
-    final FushiDesignTokens tokens = FushiDesignTokens.of(context);
-    final ColorScheme colors = Theme.of(context).colorScheme;
-    final TextTheme textTheme = Theme.of(context).textTheme;
-
-    return FushiDialogFrame(
-      maxWidth: 380,
-      padding: EdgeInsets.all(tokens.spacing.card + 4),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            t.sync_exit_warning_title,
-            style: textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          SizedBox(height: tokens.spacing.gap + 4),
-          Text(
-            t.sync_exit_warning,
-            style: textTheme.bodyMedium?.copyWith(
-              color: colors.onSurfaceVariant,
-            ),
-          ),
-          SizedBox(height: tokens.spacing.card + tokens.spacing.gap),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              adaptiveDialogAction(
-                context: context,
-                onPressed: onCancel,
-                child: Text(t.dialog_cancel),
-              ),
-              SizedBox(width: tokens.spacing.gap),
-              adaptiveDialogAction(
-                context: context,
-                isDestructiveAction: true,
-                onPressed: onExit,
-                child: Text(t.dialog_exit),
-              ),
-            ],
-          ),
-        ],
-      ),
     );
   }
 }

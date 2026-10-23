@@ -18,7 +18,7 @@ import 'package:fushi/src/sync/sync_backend.dart'
 import 'package:fushi/src/sync/sync_repository.dart';
 import 'package:fushi/src/utils/misc/error_log_service.dart';
 import 'package:fushi_core/fushi_core.dart';
-import 'package:fushi_engine/sync/fushi_library_host_service.dart';
+import 'package:fushi_engine/sync/remote_book_info.dart';
 import 'package:fushi_engine/sync/ttu_filename.dart';
 import 'package:fushi_engine/utils/net/app_http.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -526,7 +526,6 @@ class KitapsenClient implements RemoteBookClient, RemoteCoverFetcher {
     }
     throw SyncBackendError(
       'Kitapsen HTTP $status: ${_detail(body) ?? ''}',
-      isRetryable: status >= 500,
     );
   }
 

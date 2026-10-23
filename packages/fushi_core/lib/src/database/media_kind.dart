@@ -21,23 +21,11 @@ library;
 
 /// 合集 / 书架成员的媒体种类。
 ///
-/// Drift 列本身保持 `TEXT`（不引入 TypeConverter）：
-/// - `MediaCollectionItems.mediaType` 有 `''` 哨兵
-///   （`FushiDatabase.collectionTombstoneSentinel`）；
-/// - 同步引擎必须原样透传对端未来新增的未知种类。
-/// 因此边界上用 [tryParse] 显式解析、用 [dbValue] 显式落库。
+/// Drift 列本身保持 `TEXT`（不引入 TypeConverter），边界上用 [tryParse] 显式
+/// 解析、用 [dbValue] 显式落库。
 enum MediaKind {
   /// EPUB 书。
-  epub('epub'),
-
-  /// 字幕书（SRT/字幕文本导入的书）。
-  srt('srt'),
-
-  /// 视频。
-  video('video'),
-
-  /// galgame 游戏。
-  game('game');
+  epub('epub');
 
   const MediaKind(this.dbValue);
 

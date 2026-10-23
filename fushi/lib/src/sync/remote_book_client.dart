@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:fushi_engine/sync/fushi_library_host_service.dart';
+import 'package:fushi_engine/sync/remote_book_info.dart';
 import 'package:fushi/src/sync/remote_library_source.dart';
 
 abstract class RemoteBookClient implements RemoteLibrarySource {

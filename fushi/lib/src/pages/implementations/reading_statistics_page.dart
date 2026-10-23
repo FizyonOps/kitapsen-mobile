@@ -83,11 +83,6 @@ class _ReadingStatisticsPageState extends BasePageState<ReadingStatisticsPage> {
   /// 阅读域逐日合计（范围图表 / 趋势 / 速度 / 所选范围卡 / 学习日历共用）。
   Map<String, StatDayData> _byDay = <String, StatDayData>{};
 
-  /// 阅读域计数面原始行：按书的查词 / 制卡 / 收藏数跟随范围重算。
-  List<LookupMiningCounterRow> _counterRows = <LookupMiningCounterRow>[];
-  List<FavoriteWordRow> _favoriteRows = <FavoriteWordRow>[];
-  List<(String, int)> _lookupEvents = const <(String, int)>[];
-
   /// bookKey → 书架条目（按书行的封面走书架同一条缩略图链）。
   Map<String, MediaItem> _bookItemsByKey = <String, MediaItem>{};
 
@@ -147,18 +142,8 @@ class _ReadingStatisticsPageState extends BasePageState<ReadingStatisticsPage> {
   // StatHourlyFormatBand.unattributed，图上单独成带、不归入任何阅读面。
   StatHourlyBreakdown _hourly = StatHourlyBreakdown();
 
-  // 制卡 / 收藏计数（来源 'book'），按今日/本周/本月/全部分桶。
-  StatActivityBuckets _mined = StatActivityBuckets();
-  StatActivityBuckets _favorited = StatActivityBuckets();
+  // 收藏句计数（来源 'book'），按今日/本周/本月/全部分桶。
   StatActivityBuckets _favoritedSentences = StatActivityBuckets();
-
-  // 查词计数（来源 'book'）按今日/本周/本月/全部分桶（TODO-1204）。
-  StatActivityBuckets _lookup = StatActivityBuckets();
-
-  // per-book 查词/制卡计数（按 title 聚合，对齐字数/时长 tile 的聚合键）。
-
-  // per-book 收藏计数（TODO-1252：按 title 聚合当前收藏活行，无书收藏 title='' 跳过，
-  // 只进汇总面板）。收藏取消即删行 → 聚合活行天然回落。
 
   // 按书聚合
   List<_BookData> _bookData = [];
@@ -242,32 +227,9 @@ class _ReadingStatisticsPageState extends BasePageState<ReadingStatisticsPage> {
       final List<EpubBookMeta> epubRows = facts.epubRows;
       _ambiguousBookTitles = ambiguousBookTitles(epubRows);
       _computeAggregates();
-      // 计数面（查词 / 制卡 / 收藏）与事实面同一次加载：总览 tab 是跨域视图，
-      // 它的四个数字必须恰好等于本 tab 与视频 tab 之和；三页各查一遍时，口径一漂
-      // 就静默对不上。按 source 切片的判据只在 [StatCounterFacts] 里写一遍。
+      // 计数面（收藏句）与事实面同一次加载；按 source 切片的判据只在
+      // [StatCounterFacts] 里写一遍。
       final StatCounterFacts counterFacts = facts.counters;
-      final List<FavoriteWordRow> favs = counterFacts.favoriteWordsFor(
-        StatSourceKind.book,
-      );
-      _favorited = bucketActivityByDateKey(
-        counterFacts.favoriteWordEvents(source: StatSourceKind.book),
-        now,
-      );
-      _mined = bucketActivityByDateKey(
-        counterFacts.minedEvents(source: StatSourceKind.book),
-        now,
-      );
-      // 查词/制卡 per-book 计数：汇总用 lookupCount 分桶，per-book tile 按 title
-      // 聚合（无书查词 title='' 跳过，只进汇总）。
-      final List<LookupMiningCounterRow> counters = counterFacts
-          .lookupCountersFor(StatSourceKind.book);
-      _lookupEvents = counterFacts
-          .lookupEvents(source: StatSourceKind.book)
-          .toList();
-      counterFacts.minedEvents(source: StatSourceKind.book).toList();
-      _lookup = bucketActivityByDateKey(_lookupEvents, now);
-      _counterRows = counters;
-      _favoriteRows = favs;
       // 合集归属（书架同源）：title→bookKey→'epub|bookKey'→合集名，喂 per-book tile。
       _collectionNamesById = <int, String>{
         for (final MediaCollectionRow c in await db.getAllMediaCollections())
@@ -347,13 +309,9 @@ class _ReadingStatisticsPageState extends BasePageState<ReadingStatisticsPage> {
 
     final dailyMap = <String, StatDayData>{};
 
-    // 阅读统计只合并阅读域的普通书与漫画。视频 / 游戏有各自统计页，不进入本页
-    // KPI、趋势或活跃天数；唯一例外是目标进度——目标是学习域概念（BUG-1993），
+    // 阅读统计合并阅读域；唯一例外是目标进度——目标是学习域概念（BUG-1993），
     // 分子在下方单独按完整日面求和。
-    for (final StatBreakdownSource source in const <StatBreakdownSource>[
-      StatBreakdownSource.book,
-      StatBreakdownSource.manga,
-    ]) {
+    for (final StatBreakdownSource source in StatBreakdownSource.values) {
       final Map<String, StatSourceTotals> byDay =
           _sourceDaily[source] ?? const <String, StatSourceTotals>{};
       byDay.forEach((String dateKey, StatSourceTotals totals) {
@@ -391,10 +349,7 @@ class _ReadingStatisticsPageState extends BasePageState<ReadingStatisticsPage> {
 
     // 总览活跃天数只取阅读域日期；dateKey 零填充，可直接字典序比较。
     final Set<String> activeDayKeys = <String>{};
-    for (final StatBreakdownSource source in const <StatBreakdownSource>[
-      StatBreakdownSource.book,
-      StatBreakdownSource.manga,
-    ]) {
+    for (final StatBreakdownSource source in StatBreakdownSource.values) {
       for (final MapEntry<String, StatSourceTotals> entry
           in (_sourceDaily[source] ?? const <String, StatSourceTotals>{})
               .entries) {
@@ -405,8 +360,7 @@ class _ReadingStatisticsPageState extends BasePageState<ReadingStatisticsPage> {
   }
 
   /// 范围派生量（纯内存，范围一变就重算，不重查 DB）：范围逐日数据 → 趋势 /
-  /// 速度摘要 / 日均；来源合计；按书列表（字数 / 时长 / 查词 / 制卡 / 收藏全按
-  /// 范围求和）。顶部时段卡与 KPI 的今日 / 本周是固定的当下视图，不在这里。
+  /// 速度摘要 / 日均；来源合计；按书列表（字数 / 时长全按范围求和）。顶部时段卡与 KPI 的今日 / 本周是固定的当下视图，不在这里。
   void _computeRangeAggregates() {
     final StatRange range = _range;
     _dailyData = <StatDayData>[
@@ -435,15 +389,10 @@ class _ReadingStatisticsPageState extends BasePageState<ReadingStatisticsPage> {
     }
     _bookData = bookMap.values.toList();
     _sortBookData();
-    aggregateStatCountersByTitle(_counterRows.where((LookupMiningCounterRow r) => range.contains(r.dateKey)).toList());
-    aggregateStatFavoritesByTitle(_favoriteRows.where((FavoriteWordRow r) => range.contains(r.dateKey)).toList());
 
-    // 阅读域来源合计（普通书 + 漫画）：所选范围内求和。
+    // 阅读域来源合计：所选范围内求和。
     _breakdownTotals = <StatBreakdownSource, StatSourceTotals>{
-      for (final StatBreakdownSource source in const <StatBreakdownSource>[
-        StatBreakdownSource.book,
-        StatBreakdownSource.manga,
-      ])
+      for (final StatBreakdownSource source in StatBreakdownSource.values)
         source: sumStatSourceTotals(
           _sourceDaily[source] ?? const <String, StatSourceTotals>{},
           range.contains,
@@ -756,14 +705,11 @@ class _ReadingStatisticsPageState extends BasePageState<ReadingStatisticsPage> {
     );
   }
 
-  /// 阅读域「各来源」卡：普通书与漫画各自的字数 + 时长，漫画额外显示页数。
+  /// 阅读域「各来源」卡：字数 + 时长（+ 页数）。
   Widget _buildSourceBreakdown() {
     final FushiDesignTokens tokens = FushiDesignTokens.of(context);
     final List<Widget> rows = <Widget>[];
-    for (final StatBreakdownSource source in const <StatBreakdownSource>[
-      StatBreakdownSource.book,
-      StatBreakdownSource.manga,
-    ]) {
+    for (final StatBreakdownSource source in StatBreakdownSource.values) {
       final StatSourceTotals totals =
           _breakdownTotals[source] ?? StatSourceTotals();
       if (totals.isEmpty) continue;
@@ -802,14 +748,11 @@ class _ReadingStatisticsPageState extends BasePageState<ReadingStatisticsPage> {
     final ColorScheme scheme = Theme.of(context).colorScheme;
     final (IconData icon, String label) = switch (source) {
       StatBreakdownSource.book => (Icons.menu_book, t.home_filter_read),
-      StatBreakdownSource.manga => (Icons.photo_library, t.manga_library),
-      StatBreakdownSource.video => (Icons.movie, t.home_filter_watch),
-      StatBreakdownSource.game => (Icons.videogame_asset, t.home_filter_game),
     };
     final List<String> metrics = <String>[
       formatStatChars(totals.chars),
       formatStatTime(totals.timeMs),
-      // 页数只有漫画有；0 页不显示（未翻页的会话只贡献时长）。
+      // 0 页不显示（未翻页的会话只贡献时长）。
       if (totals.pages > 0) t.stat_format_pages(n: totals.pages),
     ];
     return Padding(
@@ -850,9 +793,6 @@ class _ReadingStatisticsPageState extends BasePageState<ReadingStatisticsPage> {
         t.stat_today,
         _todayChars,
         _todayMs,
-        _lookup.today,
-        _mined.today,
-        _favorited.today,
         _favoritedSentences.today,
         contains: w.isToday,
       ),
@@ -860,9 +800,6 @@ class _ReadingStatisticsPageState extends BasePageState<ReadingStatisticsPage> {
         t.stat_this_week,
         _weekChars,
         _weekMs,
-        _lookup.week,
-        _mined.week,
-        _favorited.week,
         _favoritedSentences.week,
         contains: w.inWeek,
       ),
@@ -870,9 +807,6 @@ class _ReadingStatisticsPageState extends BasePageState<ReadingStatisticsPage> {
         t.stat_this_month,
         _monthChars,
         _monthMs,
-        _lookup.month,
-        _mined.month,
-        _favorited.month,
         _favoritedSentences.month,
         contains: w.inMonth,
       ),
@@ -880,9 +814,6 @@ class _ReadingStatisticsPageState extends BasePageState<ReadingStatisticsPage> {
         t.stat_all_time,
         _allChars,
         _allMs,
-        _lookup.all,
-        _mined.all,
-        _favorited.all,
         _favoritedSentences.all,
         contains: (String _) => true,
       ),
@@ -893,9 +824,6 @@ class _ReadingStatisticsPageState extends BasePageState<ReadingStatisticsPage> {
     String label,
     int chars,
     int ms,
-    int lookup,
-    int mined,
-    int favorited,
     int favoritedSentences, {
     required bool Function(String dateKey) contains,
   }) {

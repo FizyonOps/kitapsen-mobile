@@ -15,7 +15,7 @@ import 'package:flutter/services.dart';
 import 'package:fushi_engine/epub/epub_book.dart'
     show EpubImageRef, kEpubCoverChapterIndex;
 import 'package:fushi/src/focus/fushi_focus_controller.dart' show FushiFocusId;
-import 'package:fushi/src/media/audiobook/audiobook_bridge.dart'
+import 'package:fushi/src/media/book/book_search.dart'
     show TtuTocEntry;
 import 'package:fushi/src/reader/illustration_aspect_probe.dart';
 import 'package:fushi/src/reader/illustration_grid_columns.dart';
@@ -1238,7 +1238,7 @@ class _ReaderGalleryPageState extends State<ReaderGalleryPage> {
           onPressed: () => _scrollToCurrentPosition(animate: true),
         ),
       Semantics(
-        identifier: 'hibiki.reader.gallery.close',
+        identifier: 'fushi.reader.gallery.close',
         child: IconButton(
           key: const ValueKey<String>('fushi_gallery_close'),
           tooltip: MaterialLocalizations.of(context).closeButtonTooltip,

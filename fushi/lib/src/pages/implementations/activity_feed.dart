@@ -68,7 +68,6 @@ class ActivityEntry {
     required this.totalDurationMs,
     required this.totalChars,
     required this.sessionCount,
-    this.sourceDevice,
   });
 
   final String title;
@@ -88,10 +87,6 @@ class ActivityEntry {
 
   /// 归并后的 session 次数（见 [kActivitySessionGap]）。
   final int sessionCount;
-
-  /// 事件来源设备显示名（互联对端事件带 host 设备名；null = 本机）。同一
-  /// (日期,类型,标题) 的双端 session **不合并**——provenance 优先，分设备各一条。
-  final String? sourceDevice;
 }
 
 /// 一个日期分组（dateKey + 该日的条目，按最近时刻倒序）。
@@ -188,7 +183,6 @@ List<ActivityDateGroup> aggregateActivityEvents(
       totalDurationMs: totalDuration,
       totalChars: totalChars,
       sessionCount: _countSessions(stamps, sessionGap),
-      sourceDevice: deviceByKey[kv.key],
     ));
   }
 

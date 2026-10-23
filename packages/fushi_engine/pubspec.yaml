@@ -8,8 +8,7 @@ publish_to: none
 
 # 本包 pubspec 不声明 flutter sdk：源码禁止 package:flutter / dart:ui / 任何
 # method-channel 插件 import（守卫 fushi/test/build/fushi_engine_purity_guard_test.dart）。
-# fushi_core / fushi_audio 已零 Flutter（2026-09-30）；fushi_anki / fushi_dictionary /
-# fushi_platform 仍声明 flutter，所以解析依赖时需要
+# fushi_core / fushi_reading 零 Flutter；fushi_platform 仍声明 flutter，所以解析依赖时需要
 # Flutter SDK 作为构建工具链；运行时二进制不含 Flutter（dart compile exe 是最终门）。
 environment:
   sdk: ">=3.8.0 <4.0.0"
@@ -17,8 +16,8 @@ environment:
 dependencies:
   fushi_core:
     path: ../fushi_core
-  fushi_audio:
-    path: ../fushi_audio
+  fushi_reading:
+    path: ../fushi_reading
   archive: ^3.6.1
   dio: ^5.1.1
   drift: ">=2.33.0 <2.34.0"

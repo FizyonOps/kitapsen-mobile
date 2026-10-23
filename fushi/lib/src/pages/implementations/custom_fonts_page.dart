@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:fushi/media.dart';
 import 'package:fushi/models.dart';
 import 'package:fushi/pages.dart';
-import 'package:fushi/src/models/app_font_loader.dart';
 import 'package:fushi/src/pages/implementations/font_preview/font_specimen.dart';
 import 'package:fushi/src/pages/implementations/font_preview/font_target_preview.dart';
 import 'package:fushi/src/pages/implementations/font_preview/system_font_browser_page.dart';
@@ -205,13 +204,11 @@ class RecommendedFont {
     required this.name,
     required this.nameJa,
     required this.urls,
-    required this.license,
     required this.description,
   });
   final String name;
   final String nameJa;
   final List<String> urls;
-  final String license;
   final String description;
 }
 
@@ -234,7 +231,6 @@ List<RecommendedFont> get recommendedFontsCatalog => [
       'https://raw.githubusercontent.com/google/fonts/main/ofl/kleeone/KleeOne-Regular.ttf',
       'https://fonts.google.com/download?family=Klee+One',
     ],
-    license: 'OFL 1.1',
     description: t.font_desc_klee_one,
   ),
   // ── CJK 覆盖（日中韩通用，不会缺字） ──
@@ -246,7 +242,6 @@ List<RecommendedFont> get recommendedFontsCatalog => [
       'https://raw.githubusercontent.com/google/fonts/main/ofl/notosansjp/NotoSansJP%5Bwght%5D.ttf',
       'https://fonts.google.com/download?family=Noto+Sans+JP',
     ],
-    license: 'OFL 1.1',
     description: t.font_desc_noto_sans_jp,
   ),
   RecommendedFont(
@@ -257,7 +252,6 @@ List<RecommendedFont> get recommendedFontsCatalog => [
       'https://raw.githubusercontent.com/google/fonts/main/ofl/notoserifjp/NotoSerifJP%5Bwght%5D.ttf',
       'https://fonts.google.com/download?family=Noto+Serif+JP',
     ],
-    license: 'OFL 1.1',
     description: t.font_desc_noto_serif_jp,
   ),
   RecommendedFont(
@@ -268,7 +262,6 @@ List<RecommendedFont> get recommendedFontsCatalog => [
       'https://raw.githubusercontent.com/google/fonts/main/ofl/notosanssc/NotoSansSC%5Bwght%5D.ttf',
       'https://fonts.google.com/download?family=Noto+Sans+SC',
     ],
-    license: 'OFL 1.1',
     description: t.font_desc_noto_sans_sc,
   ),
   RecommendedFont(
@@ -279,7 +272,6 @@ List<RecommendedFont> get recommendedFontsCatalog => [
       'https://raw.githubusercontent.com/google/fonts/main/ofl/notoserifsc/NotoSerifSC%5Bwght%5D.ttf',
       'https://fonts.google.com/download?family=Noto+Serif+SC',
     ],
-    license: 'OFL 1.1',
     description: t.font_desc_noto_serif_sc,
   ),
   RecommendedFont(
@@ -290,7 +282,6 @@ List<RecommendedFont> get recommendedFontsCatalog => [
       'https://raw.githubusercontent.com/google/fonts/main/ofl/notosanstc/NotoSansTC%5Bwght%5D.ttf',
       'https://fonts.google.com/download?family=Noto+Sans+TC',
     ],
-    license: 'OFL 1.1',
     description: t.font_desc_noto_sans_tc,
   ),
   RecommendedFont(
@@ -301,7 +292,6 @@ List<RecommendedFont> get recommendedFontsCatalog => [
       'https://raw.githubusercontent.com/google/fonts/main/ofl/notoseriftc/NotoSerifTC%5Bwght%5D.ttf',
       'https://fonts.google.com/download?family=Noto+Serif+TC',
     ],
-    license: 'OFL 1.1',
     description: t.font_desc_noto_serif_tc,
   ),
   // ── 日语特色字体（风格独特，建议搭配 Noto Sans JP 做回退） ──
@@ -312,7 +302,6 @@ List<RecommendedFont> get recommendedFontsCatalog => [
       'https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/shipporimincho/ShipporiMincho-Regular.ttf',
       'https://fonts.google.com/download?family=Shippori+Mincho',
     ],
-    license: 'OFL 1.1',
     description: t.font_desc_shippori_mincho,
   ),
   RecommendedFont(
@@ -322,7 +311,6 @@ List<RecommendedFont> get recommendedFontsCatalog => [
       'https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/zenoldmincho/ZenOldMincho-Regular.ttf',
       'https://fonts.google.com/download?family=Zen+Old+Mincho',
     ],
-    license: 'OFL 1.1',
     description: t.font_desc_zen_old_mincho,
   ),
   RecommendedFont(
@@ -332,7 +320,6 @@ List<RecommendedFont> get recommendedFontsCatalog => [
       'https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/zenmarugothic/ZenMaruGothic-Regular.ttf',
       'https://fonts.google.com/download?family=Zen+Maru+Gothic',
     ],
-    license: 'OFL 1.1',
     description: t.font_desc_zen_maru_gothic,
   ),
   RecommendedFont(
@@ -342,7 +329,6 @@ List<RecommendedFont> get recommendedFontsCatalog => [
       'https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/mplusrounded1c/MPLUSRounded1c-Regular.ttf',
       'https://fonts.google.com/download?family=M+PLUS+Rounded+1c',
     ],
-    license: 'OFL 1.1',
     description: t.font_desc_mplus_rounded_1c,
   ),
   RecommendedFont(
@@ -352,7 +338,6 @@ List<RecommendedFont> get recommendedFontsCatalog => [
       'https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/hinamincho/HinaMincho-Regular.ttf',
       'https://fonts.google.com/download?family=Hina+Mincho',
     ],
-    license: 'OFL 1.1',
     description: t.font_desc_hina_mincho,
   ),
   RecommendedFont(
@@ -362,7 +347,6 @@ List<RecommendedFont> get recommendedFontsCatalog => [
       'https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/zenkakugothicnew/ZenKakuGothicNew-Regular.ttf',
       'https://fonts.google.com/download?family=Zen+Kaku+Gothic+New',
     ],
-    license: 'OFL 1.1',
     description: t.font_desc_zen_kaku_gothic_new,
   ),
 ];
@@ -389,9 +373,6 @@ class CustomFontsPage extends BasePage {
 String fontTargetLabel(FontTarget target) => switch (target) {
       FontTarget.appUi => t.font_target_app_ui,
       FontTarget.body => t.font_target_body,
-      FontTarget.dictionary => t.font_target_dictionary,
-      FontTarget.videoSubtitle => t.font_target_video_subtitle,
-      FontTarget.gameLookup => t.font_target_game_lookup,
     };
 
 /// 阅读器设置的 DB 偏好 key：经单一真相编码器 [dbSourcePrefKey]（`reader_fushi`
@@ -517,23 +498,6 @@ class _CustomFontsPageState extends BasePageState<CustomFontsPage> {
   /// 单一名字——四个入口共用同一个名字才守得住「有新入口没接作用域」。
   Map<FontTarget, bool> _newFontTargets() =>
       customFontInitialTargets(widget.target);
-
-  /// 这个字体行**格式上**用不了的用途 → 给用户看的原因。
-  ///
-  /// 只有一条来源：native 分层窗（[FontTarget.gameLookup]）的 DirectWrite 只吃裸
-  /// sfnt，WOFF/WOFF2 会被 `resolveForNativeOverlay` 静默跳过。判据与 loader 共用
-  /// 同一个 [AppFontLoader.nativeOverlayCanUse]，两处不会漂开。
-  Map<FontTarget, String> _unsupportedTargetsFor(CustomFontCatalogRow row) {
-    final String? path = row.path;
-    if (AppFontLoader.nativeOverlayCanUse(path)) {
-      return const <FontTarget, String>{};
-    }
-    return <FontTarget, String>{
-      FontTarget.gameLookup: t.import_unsupported_file_format(
-        ext: p.extension(path!).toLowerCase(),
-      ),
-    };
-  }
 
   Future<void> _save() {
     final FontCatalogState state = customFontCatalogStateFromRows(_fonts);
@@ -950,8 +914,7 @@ class _CustomFontsPageState extends BasePageState<CustomFontsPage> {
                 runSpacing: tokens.spacing.gap,
                 children: [
                   for (final FontTarget target in FontTarget.values)
-                    if (isFontTargetAvailableOnPlatform(target))
-                      FushiSelectableChip(
+                    FushiSelectableChip(
                         key: ValueKey<String>('font-preview-target-${target.name}'),
                         label: fontTargetLabel(target),
                         selected: _previewTarget == target,
@@ -1125,7 +1088,6 @@ class _CustomFontsPageState extends BasePageState<CustomFontsPage> {
                       initiallyExpandRoles: widget.target != FontTarget.body,
                       // native 分层窗只吃裸 sfnt；WOFF/WOFF2 勾了游戏用途下游会
                       // 静默跳过，这里直接把那枚开关置灰，别让用户白设。
-                      unsupportedTargets: _unsupportedTargetsFor(entry),
                     );
                   },
                 ),
@@ -1385,7 +1347,6 @@ class CustomFontCatalogTile extends StatefulWidget {
     required this.onMoveUp,
     required this.onMoveDown,
     this.initiallyExpandRoles = false,
-    this.unsupportedTargets = const <FontTarget, String>{},
     this.previewFamily,
     this.previewState = FontSpecimenState.ready,
     this.chainPosition,
@@ -1413,13 +1374,6 @@ class CustomFontCatalogTile extends StatefulWidget {
   /// 为 true：那条路径上的用户要找的正是「这个字体给游戏用不用」，折叠着等于没有。
   final bool initiallyExpandRoles;
 
-  /// 本字体**格式上**用不了的用途 → 置灰时给用户看的原因，而不是让他勾一个下游会
-  /// 静默忽略的组合。当前唯一来源是 WOFF/WOFF2 遇上 [FontTarget.gameLookup]
-  /// （native DirectWrite 只吃裸 sfnt），判据见 `AppFontLoader.nativeOverlayCanUse`。
-  ///
-  /// 传的是**成文的原因**而不是裸枚举集合：拼文案要知道具体扩展名，而这只有持有
-  /// 字体行的页面侧知道。
-  final Map<FontTarget, String> unsupportedTargets;
   final int index;
   final bool isLast;
   final ValueChanged<FontTarget> onTargetToggled;
@@ -1439,15 +1393,7 @@ class _CustomFontCatalogTileState extends State<CustomFontCatalogTile> {
 
   String _targetLabel(FontTarget target) => fontTargetLabel(target);
 
-  /// 本平台真有消费端的用途。gameLookup 只有 Windows 有 native 分层窗消费，
-  /// 其余平台勾上等于写一个永远没人读的偏好键——显示出来只会让用户以为设好了。
-  ///
-  /// 只影响**显示**：已存的 targetEnabled 由 customFontLegacyListsFromRows 按
-  /// FontTarget.values 全量回写，跨平台同步过来的勾选不会被这里的隐藏抹掉。
-  static List<FontTarget> get _visibleTargets => <FontTarget>[
-        for (final FontTarget target in FontTarget.values)
-          if (isFontTargetAvailableOnPlatform(target)) target,
-      ];
+  static List<FontTarget> get _visibleTargets => FontTarget.values;
 
   /// 折叠态摘要：把已启用的用途拼成一行，用户不展开也能一眼看到该字体用在哪。
   String get _rolesSummary => <String>[
@@ -1592,23 +1538,11 @@ class _CustomFontCatalogTileState extends State<CustomFontCatalogTile> {
                 runSpacing: tokens.spacing.gap,
                 children: [
                   for (final FontTarget target in _visibleTargets)
-                    if (widget.unsupportedTargets.containsKey(target))
-                      // 置灰而非隐藏：用户需要知道「这个用途存在，但这个字体格式
-                      // 用不了」，隐藏只会让人继续找不到、以为是 app 少做了。
-                      Tooltip(
-                        message: widget.unsupportedTargets[target]!,
-                        child: FilterChip(
-                          label: Text(_targetLabel(target)),
-                          selected: false,
-                          onSelected: null,
-                        ),
-                      )
-                    else
-                      FilterChip(
-                        label: Text(_targetLabel(target)),
-                        selected: widget.targets.contains(target),
-                        onSelected: (_) => widget.onTargetToggled(target),
-                      ),
+                    FilterChip(
+                      label: Text(_targetLabel(target)),
+                      selected: widget.targets.contains(target),
+                      onSelected: (_) => widget.onTargetToggled(target),
+                    ),
                 ],
               ),
             ],

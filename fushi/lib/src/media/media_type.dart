@@ -8,7 +8,6 @@ abstract class MediaType with ChangeNotifier {
   MediaType({
     required this.uniqueKey,
     required this.icon,
-    required this.outlinedIcon,
   });
 
   /// A unique name that allows distinguishing this type from others,
@@ -18,9 +17,6 @@ abstract class MediaType with ChangeNotifier {
 
   /// An icon that will represent this media type in its home tab.
   final IconData icon;
-
-  /// An icon that represents this media type when unselected in its home tab.
-  final IconData outlinedIcon;
 
   /// The controller to be used for this media type's home tab when it has
   /// enough media items to display that require the tab to be scrollable.

@@ -15,7 +15,7 @@ import 'package:fushi_engine/epub/epub_book.dart';
 import 'package:fushi_engine/epub/epub_parser.dart';
 import 'package:path/path.dart' as p;
 
-import 'package:fushi/src/media/audiobook/audiobook_bridge.dart'
+import 'package:fushi/src/media/book/book_search.dart'
     show TtuTocEntry;
 import 'package:fushi/src/reader/ttu_toc_flatten.dart';
 

@@ -29,9 +29,7 @@ class MediaItem {
     this.extra,
     this.base64Image,
     this.imageUrl,
-    this.audioUrl,
     this.author,
-    this.authorIdentifier,
     this.sourceMetadata,
   });
 
@@ -73,9 +71,6 @@ class MediaItem {
   /// otherwise [base64Image] will be attempted.
   String? imageUrl;
 
-  /// Used to override the audio to be played for the media.
-  String? audioUrl;
-
   /// This field is a convenience field as it may be common to store this
   /// detail. For a web video, this could be the channel where the video is
   /// from. For a book, it is the author.
@@ -86,10 +81,6 @@ class MediaItem {
 
   /// This field is a convenience field for metadata information.
   String? extra;
-
-  /// This field is for future-proofing, and can be used to store an identifier
-  /// for an author, for example, a YouTube channel.
-  String? authorIdentifier;
 
   /// This field may be used to store additional details that the source may
   /// require to get more details on this item.
@@ -145,7 +136,6 @@ class MediaItem {
     String? mediaTypeIdentifier,
     String? base64Image,
     String? imageUrl,
-    String? audioUrl,
     String? author,
     String? sourceMetadata,
     int? position,
@@ -162,7 +152,6 @@ class MediaItem {
       mediaTypeIdentifier: mediaTypeIdentifier ?? this.mediaTypeIdentifier,
       base64Image: base64Image ?? this.base64Image,
       imageUrl: imageUrl ?? this.imageUrl,
-      audioUrl: audioUrl ?? this.audioUrl,
       author: author ?? this.author,
       sourceMetadata: sourceMetadata ?? this.sourceMetadata,
       position: position ?? this.position,

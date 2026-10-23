@@ -13,15 +13,10 @@ class AdaptiveNavItem {
   final IconData? selectedIcon;
   final String label;
 
-  /// 在图标右上角叠加一个 MD3 小圆点徽标（无文字），标记该目的地为「实验性」。
-  /// 底栏与侧栏共用同一渲染，徽标随之一致。
-  final bool experimentalBadge;
-
   const AdaptiveNavItem({
     required this.icon,
     required this.label,
     this.selectedIcon,
-    this.experimentalBadge = false,
   });
 }
 
@@ -36,7 +31,7 @@ Widget _maybeBadge({required AdaptiveNavItem item, required Widget child}) {
 /// so integration tests can locate the top-level destinations without depending
 /// on the private widget type or the stock NavigationBar/NavigationRail (which
 /// this no longer uses on Material).
-const Key fushiMaterialNavKey = ValueKey<String>('hibiki-material-nav');
+const Key fushiMaterialNavKey = ValueKey<String>('fushi-material-nav');
 
 /// Height of the mobile bottom bar's **content box**, in logical pixels —
 /// the system gesture inset is let through by [SafeArea] on top of this.

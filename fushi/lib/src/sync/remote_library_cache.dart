@@ -200,14 +200,4 @@ abstract class RemoteLibraryCacheKeys {
 
   static const String books = 'books';
 
-  /// 远端视频清单（`List<RemoteVideoInfo>`）。
-  ///
-  /// 互联 host live 库与云盘目录用**同一个域** key，但落在**各自的槽**里（槽 =
-  /// 来源身份 + 域）。TODO-2119 之前云盘返回的是 manifest entry，被迫拆出第二个
-  /// `cloud_videos` 域常量；现在两种源都实现 `RemoteVideoSource`、清单都已在各自
-  /// client 里统一成 `RemoteVideoInfo`，域名可以只留一个，来源隔离交给 `sourceId`。
-  static const String videos = 'videos';
-  static const String audiobooks = 'audiobooks';
-  static const String dictionaries = 'dictionaries';
-
 }

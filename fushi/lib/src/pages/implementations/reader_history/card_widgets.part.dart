@@ -128,46 +128,6 @@ extension _ReaderHistoryCardWidgets on _ReaderFushiHistoryPageState {
     );
   }
 
-  String? _existingCoverFilePath(String? coverPath) {
-    if (coverPath == null || coverPath.isEmpty) return null;
-    try {
-      return File(coverPath).existsSync() ? coverPath : null;
-    } catch (_) {
-      return null;
-    }
-  }
-
-  Widget? _buildCoverFromUri(String? coverUri, IconData placeholderIcon) {
-    if (coverUri == null || coverUri.isEmpty) return null;
-    String? coverPath;
-    if (coverUri.startsWith('file://')) {
-      try {
-        coverPath = Uri.parse(coverUri).toFilePath();
-      } catch (_) {
-        coverPath = null;
-      }
-    } else if (p.isAbsolute(coverUri)) {
-      coverPath = coverUri;
-    }
-    final String? existingPath = _existingCoverFilePath(coverPath);
-    return existingPath == null
-        ? null
-        : _buildFileCover(existingPath, placeholderIcon);
-  }
-
-  Widget _buildFileCover(String coverPath, IconData placeholderIcon) {
-    return FadeInImage(
-      imageErrorBuilder: (_, __, ___) => _coverPlaceholderIcon(
-        placeholderIcon,
-      ),
-      placeholder: MemoryImage(kTransparentImage),
-      // BUG-959: 降采样解码，避免 EPUB 原始封面(常 1600×2400)整帧撑爆 ImageCache。
-      image: resizedFileImage(File(coverPath)),
-      alignment: Alignment.topCenter,
-      fit: _bookCardCoverFit,
-    );
-  }
-
   Widget _coverPlaceholderIcon(IconData icon) {
     final FushiDesignTokens tokens = FushiDesignTokens.of(context);
     // 巡检 B11：深色主题下无封面占位（卡面色 ≈ 页面背景）与背景零对比，占位卡

@@ -21,6 +21,6 @@ String bookMainFilePath(EpubBookRow row) {
   final BookFormat format = BookFormat.parseOrEpub(row.format);
   return switch (format) {
     BookFormat.epub => row.extractDir,
-    BookFormat.pdf || BookFormat.manga => p.join(row.extractDir, row.epubPath),
+    BookFormat.pdf => p.join(row.extractDir, row.epubPath),
   };
 }

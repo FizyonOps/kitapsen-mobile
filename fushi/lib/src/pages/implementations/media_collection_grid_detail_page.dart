@@ -62,13 +62,9 @@ class MediaCollectionGridDetailPage extends StatefulWidget {
   /// (mediaType, entryKey) 删底层书/有声书/视频本体 + 磁盘副本，并释放空间。
   /// null = 详情页不提供该选项（确认框不显示复选框），退回纯解链删除。
   ///
-  /// 第二、三个参数 `deleteLocalFiles` / `deleteStatistics` 与视频侧共用同一回调
-  /// 形状；书架合集不提供「同时删除本地文件」（书的原件删除由
-  /// [ReaderFushiSource.deleteBook] 自己的纪律决定），故 `deleteLocalFiles` 恒传
-  /// false；`deleteStatistics` 来自 [deleteMembersStatisticsSubtitle] 那一行勾选。
+  /// 第二个参数 `deleteStatistics` 来自 [deleteMembersStatisticsSubtitle] 那一行勾选。
   final Future<void> Function(
     List<MediaCollectionItemRow> members,
-    bool deleteLocalFiles,
     bool deleteStatistics,
   )? onDeleteMembersMedia;
 
@@ -164,9 +160,7 @@ class _MediaCollectionGridDetailPageState
       statisticsSubtitle:
           canDeleteMembers ? widget.deleteMembersStatisticsSubtitle : null,
       checkedDisclosure: canDeleteMembers
-          ? buildDeletionDisclosure(
-              target: DeletionDisclosureTarget.shelfBook,
-            )
+          ? buildDeletionDisclosure()
           : null,
     );
     if (result == null || !mounted) return;
@@ -176,7 +170,6 @@ class _MediaCollectionGridDetailPageState
     if (result.checked && widget.onDeleteMembersMedia != null) {
       await widget.onDeleteMembersMedia!(
         List<MediaCollectionItemRow>.of(_rows),
-        false,
         result.deleteStatistics,
       );
     }

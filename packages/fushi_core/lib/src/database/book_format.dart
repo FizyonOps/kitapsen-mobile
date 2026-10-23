@@ -27,10 +27,7 @@ enum BookFormat {
   epub('epub'),
 
   /// pdfrx 渲染的真 PDF。`chapterCount`=页数、`chaptersJson`=`'[]'`。
-  pdf('pdf'),
-
-  /// 漫画 OCR(第三种书)。`chapterCount`=页数、`chaptersJson`=`'[]'`。
-  manga('manga');
+  pdf('pdf');
 
   const BookFormat(this.dbValue);
 
@@ -53,11 +50,9 @@ enum BookFormat {
   static BookFormat parseOrEpub(String? raw) =>
       tryParse(raw) ?? BookFormat.epub;
 
-  /// 是否是「按页翻」的图像书(PDF / 漫画)。
+  /// 是否是「按页翻」的图像书(PDF)。
   ///
   /// 这类书的 `chapterCount` 存的是**页数**、`chaptersJson` 是 `'[]'`,阅读位置的
-  /// `sectionIndex` 是**页码**而不是章序号 —— 任何「按章计数」的下游(尤其向
-  /// Bangumi 上报章进度)都必须先用它把这两种书排除掉,否则会把页码当章数报出去。
-  bool get isPagedImageBook =>
-      this == BookFormat.pdf || this == BookFormat.manga;
+  /// `sectionIndex` 是**页码**而不是章序号。
+  bool get isPagedImageBook => this == BookFormat.pdf;
 }

@@ -24,8 +24,7 @@ library;
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:fushi_audio/fushi_audio.dart' show StudySessionTotals;
-import 'package:fushi_core/fushi_core.dart' show LookupMiningCounterRow;
+import 'package:fushi_reading/fushi_reading.dart' show StudySessionTotals;
 
 import 'package:fushi/src/pages/implementations/stat_shared.dart'
     show formatStatTime;
@@ -40,12 +39,10 @@ import 'package:fushi_engine/stats/stat_facts.dart'
 import 'package:fushi/src/stats/stat_window.dart';
 import 'package:fushi/utils.dart';
 
-/// 本书的今日 / 累计阅读量（字数 + 毫秒）+ 今日查词 / 制卡数。
+/// 本书的今日 / 累计阅读量（字数 + 毫秒）。
 typedef ReaderBookStatTotals = ({
   int todayChars,
   int todayMs,
-  int todayLookups,
-  int todayCards,
   int allChars,
   int allMs,
 });
@@ -53,8 +50,6 @@ typedef ReaderBookStatTotals = ({
 const ReaderBookStatTotals kEmptyReaderBookStatTotals = (
   todayChars: 0,
   todayMs: 0,
-  todayLookups: 0,
-  todayCards: 0,
   allChars: 0,
   allMs: 0,
 );
@@ -69,13 +64,8 @@ typedef ReaderPositionSnapshot = ({
 
 /// 从阅读域日面事实里切出**本书**的今日 / 累计。身份优先 `mediaKey == bookKey`；
 /// legacy 无身份行按 title 回退（与阅读统计页的按书分组同一规则）。
-///
-/// [counters] 是 per-book 查词 / 制卡计数面（`lookup_mining_counters`），只取今日；
-/// 身份优先 `bookKey`，`bookKey` 为空的旧行（该列是后补的 `withDefault('')`）按
-/// title 回退——与 [dailyBooks] 同一口径。
 ReaderBookStatTotals summarizeReaderBookStats(
   Iterable<StatFact> dailyBooks, {
-  Iterable<LookupMiningCounterRow> counters = const <LookupMiningCounterRow>[],
   required String bookKey,
   required String? title,
   required DateTime now,
@@ -94,21 +84,9 @@ ReaderBookStatTotals summarizeReaderBookStats(
       todayMs += f.ms;
     }
   }
-  int todayLookups = 0;
-  int todayCards = 0;
-  for (final LookupMiningCounterRow c in counters) {
-    final bool mine = c.bookKey.isNotEmpty
-        ? c.bookKey == bookKey
-        : (title != null && title.isNotEmpty && c.title == title);
-    if (!mine || !window.isToday(c.dateKey)) continue;
-    todayLookups += c.lookupCount;
-    todayCards += c.mineCount;
-  }
   return (
     todayChars: todayChars,
     todayMs: todayMs,
-    todayLookups: todayLookups,
-    todayCards: todayCards,
     allChars: allChars,
     allMs: allMs,
   );
@@ -286,7 +264,7 @@ class _ReaderStatisticsSheetState extends State<ReaderStatisticsSheet> {
                 ),
               ),
               Semantics(
-                identifier: 'hibiki.reader.side_sheet.close',
+                identifier: 'fushi.reader.side_sheet.close',
                 child: IconButton(
                   key: const ValueKey<String>('fushi_reader_stats_close'),
                   icon: const Icon(Icons.close),
@@ -448,7 +426,7 @@ class _SessionClock extends StatelessWidget {
           ),
         ),
         Semantics(
-          identifier: 'hibiki.reader.stats.toggle_pause',
+          identifier: 'fushi.reader.stats.toggle_pause',
           child: IconButton.outlined(
             key: const ValueKey<String>('fushi_reader_stats_pause'),
             icon: Icon(

@@ -69,11 +69,7 @@ String formatStatSessionMeta(StudySession s) {
 }
 
 /// 域图标（总览里三域混排时区分来源；域 tab 里也保留，形状统一）。
-IconData statSessionIcon(StudySession s) => s.isVideo
-    ? Icons.movie
-    : s.isGame
-        ? Icons.videogame_asset
-        : Icons.menu_book;
+IconData statSessionIcon(StudySession s) => Icons.menu_book;
 
 /// 页面内的「最近会话」区块：标题行（右侧「全部会话」进 sheet）+ 最多 [limit] 行。
 /// [sessions] 已按结束时刻倒序（`StatFacts.sessions` 的契约）。

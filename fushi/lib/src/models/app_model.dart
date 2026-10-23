@@ -15,12 +15,10 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:fushi/media.dart';
 import 'package:fushi/utils.dart';
-import 'package:fushi/src/media/override_thumbnail_migration.dart';
 import 'package:fushi/src/storage/app_paths.dart';
-import 'package:fushi/src/storage/books_directory.dart';
 import 'package:fushi/src/storage/sandbox_relocation.dart';
 import 'package:fushi/src/utils/net/app_network_bindings.dart';
-import 'package:fushi_audio/fushi_audio.dart';
+import 'package:fushi_reading/fushi_reading.dart';
 import 'package:fushi/src/profile/profile_repository.dart';
 import 'package:fushi/src/models/app_font_loader.dart';
 import 'package:fushi/src/models/app_ui_font_chain.dart';
@@ -29,10 +27,6 @@ import 'package:fushi/src/reader/reader_control_layout.dart';
 import 'package:fushi/src/reader/reader_settings.dart';
 import 'package:fushi/src/models/media_history_repository.dart';
 import 'package:fushi/src/models/preferences_repository.dart';
-import 'package:fushi/src/sync/sync_auto_trigger.dart';
-import 'package:fushi/src/sync/sync_backend.dart';
-import 'package:fushi/src/sync/sync_orchestrator.dart';
-import 'package:fushi/src/sync/sync_repository.dart';
 import 'package:fushi/src/models/theme_notifier.dart' as theme_notifier;
 import 'package:fushi/src/models/theme_notifier.dart'
     show ThemeNotifier, CustomThemeEntry, ThemePreset;
@@ -40,20 +34,10 @@ import 'package:fushi/src/models/theme_notifier.dart'
 // consumers (theme swatch row, CustomThemePage) can name it.
 export 'package:fushi/src/models/theme_notifier.dart'
     show CustomThemeEntry, ThemePreset;
-import 'package:fushi/src/migration/migration_readonly.dart';
-import 'package:fushi/src/migration/migration_target_channel.dart';
-import 'package:fushi/src/models/module_id.dart';
-import 'package:fushi/src/settings/settings_schema.dart'
-    show resetSettingsSchemaCache;
 import 'package:fushi/src/shortcuts/gamepad_service.dart';
-import 'package:fushi/src/shortcuts/shortcut_preferences.dart';
 import 'package:fushi/src/shortcuts/shortcut_registry.dart';
 import 'package:fushi/src/platform/platform_services.dart';
 import 'package:fushi/src/platform/platform_providers.dart';
-
-export 'package:fushi/src/models/local_audio_manager.dart' show InvalidLocalAudioDbException;
-export 'package:fushi/src/models/audio_source_config.dart'
-    show AudioSourceConfig, AudioSourceKind;
 
 // LocalAudioDbEntry moved to local_audio_manager.dart, re-exported above.
 
@@ -93,28 +77,6 @@ ColorScheme buildFushiColorScheme({
 /// [done] 已结束（成功或失败），显示确认视图等用户点「立即重启」。
 enum BackupImportPhase { validating, running, done, failed }
 
-/// 一次「请打开首页『查词』tab」请求（[AppModel.homeDictionaryTabRequest] 的值）。
-///
-/// [seq] 每次请求自增，只作 edge 触发（ValueNotifier 按相等性去重，两次同意图的请求
-/// 也必须各触发一次）；[focusSearch] 是调用方对搜索框的意图，见
-/// [AppModel.requestHomeDictionaryTab]。
-@immutable
-class HomeDictionaryTabRequest {
-  const HomeDictionaryTabRequest({required this.seq, required this.focusSearch});
-
-  final int seq;
-  final bool focusSearch;
-
-  @override
-  bool operator ==(Object other) =>
-      other is HomeDictionaryTabRequest &&
-      other.seq == seq &&
-      other.focusSearch == focusSearch;
-
-  @override
-  int get hashCode => Object.hash(seq, focusSearch);
-}
-
 /// A scoped model for parameters that affect the entire application.
 /// RiverPod is used for global state management across multiple layers,
 /// especially for preferences that persist across application restarts.
@@ -123,12 +85,6 @@ class AppModel with ChangeNotifier {
   final PlatformServices platformServices;
 
   AppModel(this.platformServices);
-
-  /// 同步报告产出后的统一 UI 回调（onReport）：并列触发**冲突弹窗**与**删除传播确认
-  /// 弹窗**。两者独立（无冲突时仍可能有删除候选，反之亦然），故不能嵌套在
-  /// [presentAutoConflicts] 的 early-return 之内。签名与 [SyncReportCallback] 一致。
-  void presentSyncPrompts(SyncRunReport report, SyncBackend backend) {
-  }
 
   /// Used for showing dialogs without needing to pass around a [BuildContext].
   GlobalKey<NavigatorState> get navigatorKey => _navigatorKey;
@@ -145,12 +101,6 @@ class AppModel with ChangeNotifier {
   /// (the late fields are reassigned, so the old DB would otherwise leak).
   bool _databaseOpened = false;
 
-  /// Whether [database] is safe to read. False before any init path has opened
-  /// the DB (and while a test seam deliberately leaves [_database] unset), so
-  /// callers outside the init flow must gate [database] access on this instead
-  /// of risking a LateInitializationError.
-  bool get isDatabaseReady => _databaseOpened;
-
   /// Theme management, extracted from AppModel for testability.
   late ThemeNotifier themeNotifier;
   bool _themeListenerAdded = false;
@@ -158,21 +108,10 @@ class AppModel with ChangeNotifier {
   /// Preference management, extracted from AppModel for testability.
   PreferencesRepository? _prefsRepo;
   PreferencesRepository get prefsRepo => _prefsRepo!;
-  bool get isPreferencesReady => _prefsRepo != null;
 
   /// Media history and search history, extracted for testability.
   late MediaHistoryRepository mediaHistoryRepo;
 
-  /// **当前查词来源**的内容语言（BCP-47），决定查词卡里**词头**（`.expression`
-  /// 与振假名）用哪条字体链。null = 未知 → 词头跟随弹窗的兜底链。
-  ///
-  /// 为什么词头不跟词典走：词头是**被查的那个词**，语言由用户正在读的东西决定，
-  /// 不由哪本词典解释它决定——同一个词头在日文书里查和在中文书里查是两种字形。
-  /// 释义区才跟词典语言（见 `dictionary_language_css.dart` 的分层）。
-  ///
-  /// 由各媒体页在进入/切换内容时写入（阅读器开书、视频页解析字幕语言、galgame
-  /// 启动）；app 外查词（剪贴板/扩展）保持 null → 落到全局默认。
-  String? currentLookupLanguage;
 
   /// Keyboard / gamepad shortcut bindings, persisted in preferences.
   final FushiShortcutRegistry shortcutRegistry = FushiShortcutRegistry();
@@ -227,17 +166,6 @@ class AppModel with ChangeNotifier {
   /// Whether [initialise] has completed successfully.
   bool get isInitialised => _isInitialised;
   bool _isInitialised = false;
-
-  /// 已迁移只读态（Fushi 迁移 P1-4，见 [kMigrationReadonlyPrefKey]）。
-  /// 置位后本启动周期内：不自启互联/Yomitan 服务、不跑自动同步与后台写手。
-  ///
-  /// **包名门**：该偏好会随迁移 core 批原样合并进 Fushi 的库，只有真正运行为
-  /// 老包（`app.hibiki.reader`）时才生效——否则 Fushi 导入完成后会误锁自己。
-  /// 顺序有意：先查偏好（测试夹具里 [packageInfo] 是未初始化的 late 字段，
-  /// 偏好为 false 时短路，不触发 LateInitializationError）。
-  bool get isMigrationReadonly =>
-      prefsRepo.getPref(kMigrationReadonlyPrefKey) == true &&
-      packageInfo.packageName == kHibikiPackageName;
 
   /// BUG-815: the currently-running [_initialiseOnce] future, or null when no
   /// init is in flight. [initialise] uses it to serialise concurrent callers so
@@ -324,23 +252,8 @@ class AppModel with ChangeNotifier {
     await retryInitialise();
   }
 
-  /// Used to notify dictionary widgets to dictionary history additions.
-  final ChangeNotifier dictionaryEntriesNotifier = ChangeNotifier();
-
-  /// Used to notify dictionary widgets to dictionary import additions.
-  final ChangeNotifier dictionarySearchAgainNotifier = ChangeNotifier();
-
-  /// Used to notify dictionary widgets to dictionary menu changes.
-  final ChangeNotifier dictionaryMenuNotifier = ChangeNotifier();
-
-  /// Used to notify toggling incognito. Updates the app logo to and from
-  /// grayscale.
-  final ChangeNotifier incognitoNotifier = ChangeNotifier();
-
   /// Notifies app to stop showing any screens.
   final ChangeNotifier databaseCloseNotifier = ChangeNotifier();
-
-  bool get dataRootMigrationActive => false;
 
   /// TODO-1151：本地备份「导入/恢复」期间的全屏遮罩状态。导入同样会
   /// [closeDatabase]（释放数据库句柄以便整体替换 DB + 内容树），流程结束后必须
@@ -351,62 +264,13 @@ class AppModel with ChangeNotifier {
   BackupImportPhase? _backupImportPhase;
   bool get backupImportActive => _backupImportPhase != null;
 
-  /// TODO-376：一次性「请打开首页『查词』tab」信号。值每请求一次自增（内容无关，
-  /// 仅作 edge 触发）。桌面悬浮字幕条点词（reader 路由里 `_lookupFromFloatingLyric`）
-  /// 这种**显式**查词手势，需要把主窗口从阅读器/任意 tab 切到查词 tab，让
-  /// [HomeDictionaryPage] 挂载并消费 [DesktopLookupService.pendingText]。
-  ///
-  /// 这是显式导航原语：HomePage 监听本信号只切 tab，不监听 DesktopLookupService；
-  /// pending 只由 HomeDictionaryPage 消费（tab 未挂载时排队），HomePage 根节点
-  /// 依旧不消费查词请求。
-  ///
-  /// 值是 [HomeDictionaryTabRequest]：[HomeDictionaryTabRequest.seq] 每请求一次自增
-  /// （内容无关，仅作 edge 触发），[HomeDictionaryTabRequest.focusSearch] 带调用方对
-  /// 搜索框的意图（见 [requestHomeDictionaryTab]）。
-  final ValueNotifier<HomeDictionaryTabRequest> homeDictionaryTabRequest =
-      ValueNotifier<HomeDictionaryTabRequest>(
-    const HomeDictionaryTabRequest(seq: 0, focusSearch: false),
-  );
-
-  /// 发一次「打开查词 tab」请求（桌面悬浮字幕点词等显式手势调）。
-  ///
-  /// [focusSearch]：是否顺带把用户送进搜索框。**携带待查词**的调用方（桌面取词 /
-  /// 悬浮字幕点词 / 扩展回流）传 false——它们正要把 pending 的词填进去出词卡，此刻
-  /// 抢焦点只会打断；**不取任何文本**的 app 外热键「置顶并打开查词页」传 true——用户
-  /// 按它就是为了打字，页面弹出来还得先点一下搜索框等于热键只做了一半。
-  void requestHomeDictionaryTab({bool focusSearch = false}) {
-    homeDictionaryTabRequest.value = HomeDictionaryTabRequest(
-      seq: homeDictionaryTabRequest.value.seq + 1,
-      focusSearch: focusSearch,
-    );
-  }
-
   late AppPaths _appPaths;
 
   /// Directory where data may be persisted.
   Directory get appDirectory => _appDirectory;
   late Directory _appDirectory;
 
-  /// Directory where database data is persisted.
-  Directory get databaseDirectory => _databaseDirectory;
   late Directory _databaseDirectory;
-
-  /// Directory where database data is persisted.
-  /// 磁盘上是否真装着名为 [name] 的词典（`dictionaryResourceDirectory/<name>/`）。
-  ///
-  /// BUG-1994：`dictionary_metadata` 行的存在性**不是**「已安装」的判据——旧的
-  /// profile prune 会把已安装词典的行删掉。切 profile 回插时只信这个。
-  ///
-  /// 刻意**不**加「资源目录还没就绪就返回 false」的兜底：唯一调用方是
-  /// [ProfileRepository.applyProfile]，四个入口全是用户操作（切换 / 导入覆盖 /
-  /// 删除激活 profile 后回落），必在初始化之后。真要在初始化前被调到，`late` 抛
-  /// 出来才是对的——静默返回 false =「判定成没装」= 不回插 = 正好重演本 bug 的
-  /// 数据丢失，那是最不该选的失败模式。
-  bool isDictionaryInstalledOnDisk(String name) =>
-      Directory(path.join(_dictionaryResourceDirectory.path, name))
-          .existsSync();
-
-  late Directory _dictionaryResourceDirectory;
 
   /// Directory where media source thumbnails may be persisted.
   Directory get thumbnailsDirectory => _thumbnailsDirectory;
@@ -475,20 +339,6 @@ class AppModel with ChangeNotifier {
   Locale? _cachedFontChainLocale;
   List<String>? _cachedFontChainSource;
 
-  /// The user's custom video-subtitle font family, or null to use the platform
-  /// default (+ CJK fallback chain). Resolved/registered with the Flutter
-  /// engine by [refreshAppFont] from the [FontTarget.videoSubtitle] target
-  /// (TODO-864), independent of the app-wide UI font.
-  String? _subtitleFontFamily;
-
-  /// [FontTarget.gameLookup] 在 **Flutter 侧**解析出的字体链（texthooker 页面等
-  /// 游戏文本面用），由 [refreshAppFont] 注册进引擎。
-  ///
-  /// 与 native hook 浮窗同一个用户设置、两端各取所能：native 分层窗只吃第一条裸
-  /// sfnt（`AppFontLoader.resolveForNativeOverlay`），Flutter 侧能解码 WOFF/WOFF2
-  /// 且能整链缺字回退，所以这里走 `resolveAndLoadAll` 取全链。
-  List<String> _gameLookupFontFamilies = const <String>[];
-
   /// Loads **all** enabled entries of the `appUiFonts` target as the app-wide UI
   /// font chain (registering each file with the Flutter engine via
   /// [AppFontLoader]) and rebuilds the theme. Falls back to the display
@@ -502,27 +352,8 @@ class AppModel with ChangeNotifier {
     // 才真正参与缺字回退。
     final List<String> families =
         await AppFontLoader.resolveAndLoadAll(settings.appUiFonts);
-    // TODO-864: 视频字幕字体走独立的 videoSubtitle 目标；复用同一次
-    // refreshFromDb 一起解析。两个 target 都解析完再判是否 notify，否则
-    // 只改字幕字体（appUi 未变）时 early-return 会吞掉刷新。
-    // 字幕层自带 CJK 回退链（TODO-088）且与 mpv/libass 字号换算耦合（BUG-929），
-    // 故仍取单个家族，不走链。
-    final String? subtitleFamily =
-        await AppFontLoader.resolveAndLoad(settings.videoSubtitleFonts);
-    // 游戏文本目标同样在这里解析：texthooker 页面（Flutter 层）此前只跟主题字体，
-    // 用户在字体库里为「游戏」设的字体只作用于 native hook 浮窗，同一批台词在
-    // app 内页面里不跟随——两个表面各说各话。整链解析，理由见
-    // [_gameLookupFontFamilies]。
-    final List<String> gameFamilies =
-        await AppFontLoader.resolveAndLoadAll(settings.gameLookupFonts);
-    if (listEquals(families, _appFontFamilies) &&
-        subtitleFamily == _subtitleFontFamily &&
-        listEquals(gameFamilies, _gameLookupFontFamilies)) {
-      return;
-    }
+    if (listEquals(families, _appFontFamilies)) return;
     _appFontFamilies = families;
-    _subtitleFontFamily = subtitleFamily;
-    _gameLookupFontFamilies = gameFamilies;
     notifyListeners();
   }
 
@@ -579,23 +410,6 @@ class AppModel with ChangeNotifier {
 
   ColorScheme buildColorScheme(Brightness brightness) =>
       themeNotifier.buildColorScheme(brightness);
-
-  /// This should all be refactored as part of [MediaItem] if possible. No
-  /// reason to expose it here if not for card export functions. This is super
-  /// cursed. Need to extract this to its own Provider at some point.
-
-  /// Override color for the dictionary widget.
-  Color? get overrideDictionaryColor => _overrideDictionaryColor;
-  Color? _overrideDictionaryColor;
-
-  /// Override color for the dictionary widget.
-  void setOverrideDictionaryColor(Color? color) {
-    _overrideDictionaryColor = color;
-  }
-
-  /// Override theme for the dictionary widget.
-  void setOverrideDictionaryTheme(ThemeData? themeData) {
-  }
 
   /// Populate maps for locales at startup to optimise performance.
   void populateLocales() {
@@ -679,11 +493,6 @@ class AppModel with ChangeNotifier {
     );
   }
 
-  /// Populate maps for actions at startup to optimise performance.
-  void populateQuickActions() {
-    return;
-  }
-
   /// Injects licenses to be displayed in the licenses page that aren't
   /// pre-included by Flutter upon compilation but are included as assets.
   Future<void> injectAssetLicenses() async {
@@ -728,10 +537,6 @@ class AppModel with ChangeNotifier {
     // TODO-935 E0：三个数据根经唯一入口 [AppPaths] 解析（内部已honor测试分支
     // [fushiTestDirectory]，故行为与旧的 test/production 双分支逐字节等价）。
     _appPaths = await AppPaths.resolve();
-    // TODO-1236：把上游 `hibiki_audio` 的有声书持久根解析接到 `AppPaths`（它无法 import
-    // AppPaths）。这样桌面自定义数据根生效后，有声书新导入落数据根下的 `audiobooks/`
-    // （与 TODO-1226 迁移白名单一致），而不是落回平台 Documents。
-    AudiobookStorage.documentsRootResolver = AppPaths.documentsRootDirectory;
     _appDirectory = _appPaths.documentsRoot;
     _databaseDirectory = _appPaths.supportRoot;
   }
@@ -772,22 +577,10 @@ class AppModel with ChangeNotifier {
           .markInitStep('resolve-data-roots（AppPaths.resolve / 数据根 stat）');
       await _guardInitIo('resolve-data-roots', _prepareRuntimeDirectories());
 
-      // W2-7：存量书库目录 hoshi_books → fushi_books 就地改名。必须在 DB 打开
-      // **之前**跑：v72 迁移在首次打开时把 extract_dir / image_url 里的目录段
-      // 改写成新名，先改磁盘再开库，同一次启动内两侧一致。改名失败不阻塞
-      // （上报错误日志，下次启动重试自愈；旧目录原地保留，数据零丢失）。
-      migrateLegacyBooksDirectoryAt(
-        _appDirectory.path,
-        onMigrationError: (Object e, StackTrace stack) => ErrorLogService
-            .instance
-            .log('AppModel.migrateLegacyBooksDirectory', e, stack),
-      );
-
       debugPrint('[Fushi] init: Drift database');
       ErrorLogService.instance.markInitStep('open-database（Drift 打开 fushi.db）');
       _database = FushiDatabase(_databaseDirectory.path);
       _databaseOpened = true;
-
 
       // 沙箱重定位自愈：数据根被**平台**挪走后，把库里的绝对路径重基过去。
       //
@@ -807,26 +600,11 @@ class AppModel with ChangeNotifier {
         onError: (Object e, StackTrace stack) => ErrorLogService.instance
             .log('AppModel.sandboxRelocation', e, stack),
       );
-      //    cloud backup backend can now coexist);
-      // 4) BUG-1576: drop the pre-decoupling GLOBAL folder cache. Two channels
-      //    took turns writing that single pair of keys, so its value can no
-      //    longer be attributed to any one remote — and an interconnect/WebDAV
-      //    folderId is an ABSOLUTE URL, which the other channel would then hit
-      //    (Basic credentials attached). It is a pure cache: every backend
-      //    re-resolves its root/book folders by name on the next sweep.
-      await SyncRepository(_database).migrateSmbToWebDav();
-      await SyncRepository(_database).migrateInterconnectBackendToToggle();
-      await SyncRepository(_database).migrateFolderCacheToPerChannel();
 
       /// Prepare all repositories (objects created first, then loaded in
       /// parallel to avoid serial await chains).
       _prefsRepo = PreferencesRepository(_database);
-      final profileRepo = ProfileRepository(
-        _database,
-        // BUG-1994：切 profile 时「这本词典装没装」只认磁盘目录。闭包是惰性的，
-        // 只在 applyProfile（用户操作）里调，那时 late 的资源目录早已就位。
-        isDictionaryInstalled: isDictionaryInstalledOnDisk,
-      );
+      final profileRepo = ProfileRepository(_database);
       mediaHistoryRepo = MediaHistoryRepository(_database);
 
       debugPrint('[Fushi] init: repositories (parallel)');
@@ -851,12 +629,9 @@ class AppModel with ChangeNotifier {
       _thumbnailsDirectory =
           Directory(path.join(appDirectory.path, 'thumbnails'));
 
-      _dictionaryResourceDirectory =
-          Directory(path.join(appDirectory.path, 'dictionaryResources'));
-
       // TODO-1260：这些目录都派生自数据根（documentsRoot）；盘掉线时 create() 会 hang。
       ErrorLogService.instance.markInitStep(
-          'create-runtime-dirs（thumbnails / dictionaryResources 等目录创建）');
+          'create-runtime-dirs（thumbnails 目录创建）');
       await _guardInitIo(
         'create-runtime-dirs',
         Future.wait(<Future<void>>[
@@ -865,36 +640,18 @@ class AppModel with ChangeNotifier {
         ]),
       );
 
-      // W2-3：override 封面文件名的 hoshi://→fushi:// 前缀换代一次性清扫
-      // （文件名是 identifier 的 hashCode，v73 改写库内 identifier 后旧文件
-      // 不再命中）。pref 门控幂等；清扫不干净（rename 失败）不落标记，下次
-      // 启动重试。放在 thumbnails 目录建好、DB 迁移已跑完之后。
-      if (!prefsRepo.containsKey(kOverrideThumbnailPrefixMigratedPrefKey)) {
-        final bool clean = await migrateOverrideThumbnailPrefixes(
-          db: _database,
-          thumbnailsDirectory: thumbnailsDirectory,
-        );
-        if (clean) {
-          await prefsRepo.setPref(
-              kOverrideThumbnailPrefixMigratedPrefKey, true);
-        }
-      }
-
-      debugPrint('[Fushi] init: populate maps + audio DB (parallel)');
+      debugPrint('[Fushi] init: locales, media types, licenses, built-in tags');
       populateLocales();
       LocaleSettings.setLocaleRaw(appLocale.toLanguageTag());
       populateMediaTypes();
       populateMediaSources();
-      populateQuickActions();
-
 
       await Future.wait(<Future<void>>[
         injectAssetLicenses(),
         _seedBuiltInTags(),
       ]);
 
-      debugPrint(
-          '[Fushi] init: reader settings + enhancements + quick actions + media sources (parallel)');
+      debugPrint('[Fushi] init: reader settings, fonts, media sources');
       MediaSource.setDatabase(_database);
       final readerSettings = ReaderSettings(_database);
       await readerSettings.loadFromPrefsSnapshot(prefsSnapshot);
@@ -920,22 +677,8 @@ class AppModel with ChangeNotifier {
       // order — the chain feeds fontFamily + fontFamilyFallback) before first
       // paint so the global theme uses them without a flash. Reuses the
       // settings just loaded above to avoid a second prefs read.
-      // 三个字体目标互不依赖，并发解析（同名家族由 AppFontLoader 的在途表去重，
-      // 只装一次）；串行三条链 = 首帧前三段可见等待。
-      final Future<List<String>> appFontsF =
-          AppFontLoader.resolveAndLoadAll(readerSettings.appUiFonts);
-      // TODO-864: 视频字幕字体同样在首帧前从 videoSubtitle 目标解析。
-      final Future<String?> subtitleFontF =
-          AppFontLoader.resolveAndLoad(readerSettings.videoSubtitleFonts);
-      // 游戏文本字体链也在首帧前解析：否则 texthooker 页面首次打开会先用主题字体
-      // 画一帧再跳变（refreshAppFont 要等到用户改设置才跑）。
-      final Future<List<String>> gameFontsF =
-          AppFontLoader.resolveAndLoadAll(readerSettings.gameLookupFonts);
-      await Future.wait<Object?>(
-          <Future<Object?>>[appFontsF, subtitleFontF, gameFontsF]);
-      _appFontFamilies = await appFontsF;
-      _subtitleFontFamily = await subtitleFontF;
-      _gameLookupFontFamilies = await gameFontsF;
+      _appFontFamilies =
+          await AppFontLoader.resolveAndLoadAll(readerSettings.appUiFonts);
       ReaderFushiSource.readerSettings = readerSettings;
 
       // Start polling physical controllers on platforms that need it (desktop);
@@ -950,43 +693,12 @@ class AppModel with ChangeNotifier {
         ]),
       ]);
 
-      // BUG-207: load the shortcut registry only AFTER ReaderFushiSource has
-      // run initialise() (which populates its in-memory preference cache from
-      // the DB). Reading shortcut_bindings_json before the cache is loaded saw
-      // an empty cache -> null -> resetToDefaults, and getPreference's
-      // cache-miss write-through clobbered the saved JSON with 's:null',
-      // permanently dropping the user's custom keys on every launch. Mirrors the
-      // profile-switch path (refreshPrefCache: refresh source caches first, then
-      // loadShortcutRegistry).
-      await loadShortcutRegistry(
-        shortcutRegistry,
-        ReaderFushiSource.instance,
-        defaultTargetPlatform,
-      );
-
-      debugPrint(
-          '[Fushi] init: search preload (deferred to after first frame)');
+      shortcutRegistry.loadDefaults(defaultTargetPlatform);
 
       debugPrint('[Fushi] init: DONE');
       // TODO-1260：启动正常跑完，清掉启动步进面包屑（否则下次启动会误报上次 hang）。
       ErrorLogService.instance.clearInitStep();
       _isInitialised = true;
-      // TODO-855: prime the prefs-version watermark from the freshly loaded
-      // cache (keeps refreshPrefCacheIfChanged consistent if ever reused here).
-      // 已迁移只读态（Fushi 迁移 P1-4）：不再自启互联服务——两版并存时端口
-      // 固定必冲突（SyncServerPortInUseException 会打到用户脸上）；老版只保
-      // 留「重新导出」通道。
-      if (isMigrationReadonly) {
-        notifyListeners();
-        return;
-      }
-      // 「功能模块」后台自启门（模块被关 = 它专属的后台**下次启动不再拉起**）。
-      //
-      // 快照只取一次：[moduleVisibility] 每次读都重新合成一个 Set，而下面这一串
-      // 是同一帧里的连续判定，取一次既省分配也保证这一批门读的是同一份真值。
-      //
-      // 刻意**只判启动、不 stop**：用户在会话中途关模块时不切断进行中的任务
-      // （正在跑的同步/下载/做种照常跑完），下次启动才不再拉起。
       notifyListeners();
     } on DataRootUnavailableException catch (e, stack) {
       // BUG-815: a custom data root IS configured but is currently unreachable
@@ -1040,14 +752,6 @@ class AppModel with ChangeNotifier {
       }
     }
     await themeNotifier.refreshFromDb();
-    // Shortcut bindings are profile-scoped: reload the live registry from the
-    // (now-refreshed) source preference so a profile switch takes effect
-    // immediately instead of only after an app restart.
-    await loadShortcutRegistry(
-      shortcutRegistry,
-      ReaderFushiSource.instance,
-      defaultTargetPlatform,
-    );
     // TODO-855: after a full reload the in-memory cache holds the latest DB
     // version, so advance the watermark to keep refreshPrefCacheIfChanged from
     // immediately reloading again.
@@ -1141,11 +845,6 @@ class AppModel with ChangeNotifier {
   Color? get activeCustomThemeLinkColor =>
       themeNotifier.activeCustomThemeLinkColor;
 
-  /// TODO-977: 全局音频高亮颜色（与阅读器主题解耦），委托 ThemeNotifier。
-  Color? get audioHighlightColor => themeNotifier.audioHighlightColor;
-  Future<void> setAudioHighlightColor(Color? c) =>
-      themeNotifier.setAudioHighlightColor(c);
-
   /// Get the current app locale from persisted preferences.
   /// Defaults to system locale if supported, otherwise en-US.
   Locale get appLocale {
@@ -1194,44 +893,11 @@ class AppModel with ChangeNotifier {
     LocaleSettings.setLocaleRaw(localeTag);
     if (platformServices.lifecycle.supportsRestart) {
       await platformServices.lifecycle.restartApp();
-    } else {
     }
   }
 
-  bool get startupDefaultDictionaryTab => prefsRepo.startupDefaultDictionaryTab;
-
   /// 阅读器顶栏 / 底栏按钮布局（ReaderControlLayout，2026-09-13）。
   ReaderControlLayout get readerControlLayout => prefsRepo.readerControlLayout;
-
-  /// 视频字幕外观（JSON；见 VideoSubtitleStyle）。
-  String get videoSubtitleStyle => prefsRepo.videoSubtitleStyle;
-
-  // galgame 窗口超分**每游戏一档**（BUG-1191），存 `galgames.upscaling_mode`，
-  // 读写走 [galgameRepo]。这里刻意不再有全局 getter/setter —— 留着一个全局值就会
-  // 有人接回去用，然后两份真值慢慢漂开。
-
-  /// 只暴露当前设备可访问的本地受管视频来源，供发现页新任务/订阅选择。
-  Future<List<MediaSourceRow>> getManagedVideoDownloadSources() async {
-    final List<MediaSourceRow> sources =
-        await database.getMediaSourcesByKind('video');
-    return sources
-        .where(
-          (MediaSourceRow source) =>
-              source.transport == 'local' &&
-              path.isAbsolute(source.rootPath) &&
-              Directory(source.rootPath).existsSync(),
-        )
-        .toList(growable: false);
-  }
-
-  Future<void> _disposeVideoDownloadPipelineRuntime({
-    Duration? pipelineDrainTimeout,
-  }) async {
-  }
-
-  // 注：远端视频播放偏好（调轴/音轨/副字幕源/副字幕调轴）不再走本层门面——统一
-  // 落 `video_remote_*_` prefs 键对（播放偏好同步泛化批，键定义在
-  // fushi_library_host_service.dart，页面直用 prefsRepo.getPref/setPref）。
 
   bool get reverseNavigationBar => prefsRepo.reverseNavigationBar;
   void toggleReverseNavigationBar() => prefsRepo.toggleReverseNavigationBar();
@@ -1239,32 +905,6 @@ class AppModel with ChangeNotifier {
   bool get reverseReaderBottomBar => prefsRepo.reverseReaderBottomBar;
   void toggleReverseReaderBottomBar() =>
       prefsRepo.toggleReverseReaderBottomBar();
-
-  /// Requests for full external storage permissions. Required to handle video
-  /// files and their subtitle files in the same directory.
-  ///
-  /// **只申请存储权限，不碰相机**（BUG-1209）。本函数的全部调用点都是「选扫描根 /
-  /// 选文件 / 改下载目录」（`media/import/real_path_directory_picker.dart`），它们只需要
-  /// 读盘。此前这里顺带 `requestCameraPermission()`：用户理解不了选个文件夹为什么要给
-  /// 相机，合理反应是拒绝，而在同一串权限流程里拒绝很可能把本该给的存储权限一起否掉
-  /// ——于是「加了扫描根却扫不出东西」。
-  ///
-  /// 相机是另一件事，归真正需要相机的入口自己申请：当前唯一的相机消费方
-  /// `creator/enhancements/camera_enhancement.dart` 走 image_picker 的 `ImageSource.camera`
-  /// 系统拍照 intent，而 `AndroidManifest.xml` 并未声明 `android.permission.CAMERA`，
-  /// 该 intent 本就不需要运行时权限，故它从来没有、也不需要调这里。
-  ///
-  /// 早退门同样只看存储：旧版的 `&& hasCameraPermission()` 在安卓上恒为 false
-  /// （CAMERA 未在 manifest 声明 → permission_handler 直接判 denied），使得存储已授权时
-  /// 也永远走不进早退分支。
-  Future<void> requestExternalStoragePermissions() async {
-    // Kitapsen declares no storage permissions: file imports go through the
-    // system picker (SAF / Files), which needs none, so never ask.
-    return;
-  }
-
-  /// Whether or not the media item should be killed upon exit.
-  bool _shouldKillMediaOnPop = false;
 
   /// A helper function for launching a media source.
   Future<void> openMedia({
@@ -1274,27 +914,13 @@ class AppModel with ChangeNotifier {
     bool pushReplacement = false,
     MediaItem? item,
     Bookmark? initialBookmarkJump,
-    bool recordHistory = true,
     bool waitUntilClosed = true,
     Widget Function()? launchPageBuilder,
   }) async {
-    // 已迁移只读态（Fushi 迁移 P1-4b）：单闸门挡掉全部媒体打开路径——进度/
-    // 统计/制卡的所有写点都在媒体页内，媒体不开则写路径整体不可达（好过在
-    // 每个写点各加一个特例分支）。老版此时只保留「重新导出」通道。
-    if (isMigrationReadonly) {
-      FushiToast.show(msg: t.migration_readonly_note);
-      return;
-    }
-    _shouldKillMediaOnPop = true;
-
-    mediaSource.clearExtraData();
-
     _currentMediaSource = mediaSource;
     _currentMediaItem = item;
     // TODO-1375：把「媒体已打开」推给可靠通知源，让 macOS 根 sidebar 隐藏（阅读全宽）。
     mediaOpenNotifier.value = true;
-
-    _overrideDictionaryColor = null;
 
     if (ReaderFushiSource.instance.keepScreenAwake) {
       try {
@@ -1304,9 +930,6 @@ class AppModel with ChangeNotifier {
       }
     }
     await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-
-    if (recordHistory && item != null && mediaSource.implementsHistory) {
-    }
 
     final ctx = _ctx;
     if (ctx == null || !ctx.mounted) return;
@@ -1351,16 +974,11 @@ class AppModel with ChangeNotifier {
     required MediaSource mediaSource,
     MediaItem? item,
   }) async {
-
-    mediaSource.setShouldGenerateImage(value: true);
-    mediaSource.setShouldGenerateAudio(value: true);
-    mediaSource.clearExtraData();
     _currentMediaSource = null;
     _currentMediaItem = null;
     // TODO-1375：把「媒体已关闭」推给可靠通知源，保证退出阅读器后 macOS 根 sidebar
     // 必然重建恢复（不再依赖碰巧有别的 notifyListeners 触发 builder 重跑）。
     mediaOpenNotifier.value = false;
-    _overrideDictionaryColor = null;
     try {
       await WakelockPlus.disable();
     } catch (e) {
@@ -1374,17 +992,12 @@ class AppModel with ChangeNotifier {
       ref: ref,
     );
 
-
     mediaSource.mediaType.refreshTab();
-
-    if (_shouldKillMediaOnPop) {
-    }
   }
 
   Future<void> deleteMediaItem(MediaItem item) async {
     MediaSource mediaSource = item.getMediaSource(appModel: this);
     await mediaSource.clearOverrideValues(appModel: this, item: item);
-    await mediaSource.onMediaItemClear(item);
     await mediaHistoryRepo.deleteMediaItemById(item);
   }
 
@@ -1405,52 +1018,12 @@ class AppModel with ChangeNotifier {
   // TODO-861②：是否扫描非日文文本（选区/查词）。默认 true，向后兼容。
   bool get scanNonJapaneseText => prefsRepo.scanNonJapaneseText;
 
-  void setDictionaryFontSize(double fontSize) =>
-      prefsRepo.setDictionaryFontSize(fontSize);
-
-  bool get popupInstantScroll => prefsRepo.popupInstantScroll;
-
   bool get isFirstTimeSetup => prefsRepo.isFirstTimeSetup;
   void setFirstTimeSetupFlag() => prefsRepo.setFirstTimeSetupFlag();
 
   bool get onboardingCompleted => prefsRepo.onboardingCompleted;
   Future<void> setOnboardingCompleted({required bool value}) =>
       prefsRepo.setOnboardingCompleted(value: value);
-
-  /// 「功能模块」用户意愿的读写。**平台判据不在这里**——见 [moduleVisibility]。
-  ///
-  /// 偏好仓库还没装配好时**一律判开**（fail-open）。模块门控读得比 `initialise()`
-  /// 早：设置 schema 的 `visible` 谓词同时喂渲染与搜索索引，展平索引这条路径在弹窗
-  /// 词典入口与纯 widget 测试里都会撞上一个未初始化的 AppModel。裸 `prefsRepo!` 会
-  /// 在那里抛 null check——而「读不到用户意愿」的安全方向是全都显示，不是把整个设置
-  /// 页藏掉（与 module_registry 里「漏写映射默认恒在」同一个方向）。
-  bool moduleEnabled(ModuleId module) =>
-      isPreferencesReady ? prefsRepo.moduleEnabled(module) : true;
-
-  Future<void> setModuleEnabled(ModuleId module, bool value) async {
-    await prefsRepo.setModuleEnabled(module, value);
-    // 设置 schema 树按 locale 记忆化，两张投影表（阅读器/视频快捷面板）也惰性缓存。
-    // 模块可见性会改变这些树的过滤结果，故翻转开关必须丢弃快照，否则快捷面板会
-    // 继续发已被关掉模块的设置项（settings_schema.dart 的 `_SettingsSchemaCache`）。
-    resetSettingsSchemaCache();
-    notifyListeners();
-  }
-
-  /// 「此刻哪些模块可见」——pref 真值与平台判据的**唯一合成**。
-  ///
-  /// 全 app 的门控一律读它。此前底栏与 macOS 侧栏各手抄一份七参表，`games` 的
-  /// `Platform.isWindows` 判据抄了两遍、漏了一遍（macOS 那份靠缺省值蒙对）。
-  ///
-  /// 平台判据取自 [PlatformServices]（那是本类「不必知道自己跑在哪个平台」的出口），
-  /// 不再直读 `dart:io` —— 直读会让 widget 测试无缝可注，Windows 独有的模块
-  /// （galgame）在 Linux CI 上被静默滤掉而本机全绿。
-  ModuleVisibility get moduleVisibility => ModuleVisibility.resolve(
-        prefOf: moduleEnabled,
-        isWindows: platformServices.isWindows,
-        isDesktop: platformServices.isDesktop,
-        isIOS: platformServices.isIOS,
-        isAndroid: platformServices.isAndroid,
-      );
 
   /// Check if the database is still open.
   bool get isDatabaseOpen => _isInitialised;
@@ -1459,37 +1032,9 @@ class AppModel with ChangeNotifier {
   FushiDatabase get database => _database;
 
   /// Close the database and notify listeners, without exiting the app.
-  /// BUG-1505：关库**之前**把后台写手停掉。
-  ///
-  /// `closeDatabase()` 只关连接，不停任何人。下载流水线这类常驻 drain 循环仍在跑，
-  /// 于是关库后每次唤醒都撞上 drift 的
-  /// 「Tried to send Request ... over isolate channel, but the connection was
-  /// closed!」——用户机器上实测一次迁移导入刷出 8 条。它至少污染诊断日志（真正的
-  /// 失败原因被淹没），更糟的是合并导入正在直接操作同一个库文件，此时放任第二个
-  /// 写手继续往里写是数据安全问题，不是噪声问题。
-  ///
-  /// 只停「后台自己会写库」的那几个（下载/订阅/漫画队列），不碰查词、TTS 这类只读
-  /// 子系统：closeDatabase 之后调用方一律走重启，停多了没收益、只增加爆炸半径。
-  ///
-  /// [pipelineDrainTimeout] 只在**退出路径**给：见
-  /// [VideoDownloadPipelineService.stop] 的注释——迁移导入 / 备份导入 / 数据根迁移
-  /// 也走这条链，它们在关库后要在文件层动整个 DB 目录，放行一个仍在飞的 `_process`
-  /// 会让它继续打已关闭的连接、并被随后的 `_videoDownloadBackend?.close()` 抽掉
-  /// 句柄。那些路径必须等到真收尾。
-  Future<void> quiesceBackgroundDatabaseWriters({
-    Duration? pipelineDrainTimeout,
-  }) async {
-    await _disposeVideoDownloadPipelineRuntime(
-      pipelineDrainTimeout: pipelineDrainTimeout,
-    );
-  }
-
-  Future<void> closeDatabase({Duration? pipelineDrainTimeout}) async {
+  Future<void> closeDatabase() async {
     _isInitialised = false;
     databaseCloseNotifier.notifyListeners();
-    await quiesceBackgroundDatabaseWriters(
-      pipelineDrainTimeout: pipelineDrainTimeout,
-    );
     await _database.close();
   }
 
@@ -1501,12 +1046,7 @@ class AppModel with ChangeNotifier {
       themeNotifier.dispose();
       _themeListenerAdded = false;
     }
-    dictionaryEntriesNotifier.dispose();
-    dictionarySearchAgainNotifier.dispose();
-    dictionaryMenuNotifier.dispose();
-    incognitoNotifier.dispose();
     databaseCloseNotifier.dispose();
-    homeDictionaryTabRequest.dispose();
     mediaOpenNotifier.dispose();
     gamepadService.dispose();
     // Dispose the extracted repository notifiers (all ChangeNotifiers). Only
@@ -1566,14 +1106,6 @@ class AppModel with ChangeNotifier {
   // ── 浏览器扩展「试一试」页 ───────────────────────────────────────────
 
   // ── UI visibility (delegated) ────────────────────────────────────────
-
-  bool get showMediaNotification => prefsRepo.showMediaNotification;
-
-  bool get showFloatingLyric => prefsRepo.showFloatingLyric;
-
-  double get floatingLyricFontSize => prefsRepo.floatingLyricFontSize;
-
-  bool get floatingLyricClickLookup => prefsRepo.floatingLyricClickLookup;
 
   String get updateCustomProxy => prefsRepo.updateCustomProxy;
   Future<void> setUpdateCustomProxy(String value) async {

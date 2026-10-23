@@ -70,9 +70,9 @@ typedef _FushiSchemeKey = (
   bool neutralDerived,
   bool pureBlack,
 );
-final Map<_FushiSchemeKey, ColorScheme> _hibikiSchemeCache =
+final Map<_FushiSchemeKey, ColorScheme> _fushiSchemeCache =
     <_FushiSchemeKey, ColorScheme>{};
-const int _hibikiSchemeCacheLimit = 64;
+const int _fushiSchemeCacheLimit = 64;
 
 /// [surface]：用户钉死的界面底色（页面 / 卡片 / 菜单）。给了就用
 /// [deriveSurfaceRolesFrom] 从它推出整套中性角色（容器梯度、文字、描边、反色），
@@ -105,7 +105,7 @@ ColorScheme buildFushiColorScheme({
     neutralDerived,
     pureBlack,
   );
-  final ColorScheme? cached = _hibikiSchemeCache[key];
+  final ColorScheme? cached = _fushiSchemeCache[key];
   if (cached != null) return cached;
   // 中性派生：标签 / 选中项 / 菜单 / 表面这些「派生色」一律灰阶，只留主题色本身
   // 作强调（Windows 亮色主题那种观感）。两种情况走这条路：用户显式开了
@@ -141,8 +141,8 @@ ColorScheme buildFushiColorScheme({
       secondary != null ? _deriveContainer(secondary, brightness) : null;
   final Color? terContainer =
       tertiary != null ? _deriveContainer(tertiary, brightness) : null;
-  if (_hibikiSchemeCache.length >= _hibikiSchemeCacheLimit) {
-    _hibikiSchemeCache.remove(_hibikiSchemeCache.keys.first);
+  if (_fushiSchemeCache.length >= _fushiSchemeCacheLimit) {
+    _fushiSchemeCache.remove(_fushiSchemeCache.keys.first);
   }
   final SurfaceRoles? surfaceRoles =
       surface != null ? deriveSurfaceRolesFrom(surface) : null;
@@ -176,11 +176,11 @@ ColorScheme buildFushiColorScheme({
         : base.onPrimaryContainer,
   );
   if (surfaceRoles == null) {
-    return _hibikiSchemeCache[key] = pureBlack
+    return _fushiSchemeCache[key] = pureBlack
         ? applyFushiPureBlackSurfaceLadder(withRoles)
         : applyFushiSurfaceLadder(withRoles);
   }
-  return _hibikiSchemeCache[key] = withRoles.copyWith(
+  return _fushiSchemeCache[key] = withRoles.copyWith(
     surface: surfaceRoles.surface,
     surfaceDim: surfaceRoles.surfaceDim,
     surfaceBright: surfaceRoles.surfaceBright,
@@ -519,7 +519,6 @@ class CustomThemeEntry {
     this.secondaryColor,
     this.tertiaryColor,
     this.containerColor,
-    this.sentenceAudioHighlightColor,
     this.linkColor,
     this.surfaceColor,
     this.followSystemAccent = false,
@@ -536,7 +535,6 @@ class CustomThemeEntry {
   final int? secondaryColor;
   final int? tertiaryColor;
   final int? containerColor;
-  final int? sentenceAudioHighlightColor;
   final int? linkColor;
 
   /// 界面底色（页面 / 卡片 / 菜单），null = 由 seed 派生。见 [deriveSurfaceRolesFrom]。
@@ -561,10 +559,6 @@ class CustomThemeEntry {
         if (secondaryColor != null) 'secondaryColor': secondaryColor,
         if (tertiaryColor != null) 'tertiaryColor': tertiaryColor,
         if (containerColor != null) 'containerColor': containerColor,
-        // JSON 键与字段同名；历史键 'sasayakiColor'（custom_themes 旧行）已由
-        // v71 Drift 迁移一次性改写。分享码不含此键（用 'sk' 段），不受影响。
-        if (sentenceAudioHighlightColor != null)
-          'sentenceAudioHighlightColor': sentenceAudioHighlightColor,
         if (linkColor != null) 'linkColor': linkColor,
         if (surfaceColor != null) 'surfaceColor': surfaceColor,
         if (followSystemAccent) 'followSystemAccent': true,
@@ -584,7 +578,6 @@ class CustomThemeEntry {
       secondaryColor: asInt(json['secondaryColor']),
       tertiaryColor: asInt(json['tertiaryColor']),
       containerColor: asInt(json['containerColor']),
-      sentenceAudioHighlightColor: asInt(json['sentenceAudioHighlightColor']),
       linkColor: asInt(json['linkColor']),
       surfaceColor: asInt(json['surfaceColor']),
       followSystemAccent: json['followSystemAccent'] == true,
@@ -632,7 +625,6 @@ LegacyCustomThemeMigration migrateLegacyCustomTheme({
   required int legacySecondaryColor,
   required int legacyTertiaryColor,
   required int legacyContainerColor,
-  required int legacySentenceAudioHighlightColor,
   required int legacyLinkColor,
   required String Function() idGenerator,
 }) {
@@ -664,7 +656,6 @@ LegacyCustomThemeMigration migrateLegacyCustomTheme({
       legacySecondaryColor != 0 ||
       legacyTertiaryColor != 0 ||
       legacyContainerColor != 0 ||
-      legacySentenceAudioHighlightColor != 0 ||
       legacyLinkColor != 0;
 
   if (!configured) {
@@ -687,7 +678,6 @@ LegacyCustomThemeMigration migrateLegacyCustomTheme({
     secondaryColor: nz(legacySecondaryColor),
     tertiaryColor: nz(legacyTertiaryColor),
     containerColor: nz(legacyContainerColor),
-    sentenceAudioHighlightColor: nz(legacySentenceAudioHighlightColor),
     linkColor: nz(legacyLinkColor),
   );
   return LegacyCustomThemeMigration(
@@ -1396,27 +1386,12 @@ class ThemeNotifier extends ChangeNotifier {
 
   Color? get customThemeLinkColor => _colorPref('custom_theme_link_color');
 
-  /// TODO-977: 音频高亮（原 sasayaki 跟随高亮）颜色，**全局、与阅读器主题解耦**。
-  ///
-  /// 旧设计把该色绑死在 custom-theme 主题条目里（`customThemeSasayakiColor`），
-  /// 非自定义主题时阅读器音频高亮恒用主题 primary（reader_fushi_page.dart:300），
-  /// 用户无处改色——「一直用主色」。本偏好是单值全局色，置非空时由
-  /// `resolveReaderThemeColors` 覆盖所有主题分支的 sasayaki 角色色；为 null 时
-  /// 沿用旧的随主题取色行为（向后兼容，老用户不受影响）。
-  static const String audioHighlightColorPrefKey = 'audio_highlight_color';
-  Color? get audioHighlightColor => _colorPref(audioHighlightColorPrefKey);
-  Future<void> setAudioHighlightColor(Color? c) =>
-      _setColorPref(audioHighlightColorPrefKey, c);
-
   Color? _colorPref(String key) {
     final int v = _get(key, defaultValue: 0);
     if (v == 0) return null;
     return Color(v);
   }
 
-  Future<void> _setColorPref(String key, Color? color) async {
-    await _set(key, color?.toARGB32() ?? 0);
-  }
 
   // ── Multi custom theme list (TODO-930) ────────────────────────────
   //
@@ -1547,8 +1522,6 @@ class ThemeNotifier extends ChangeNotifier {
           _get('custom_theme_tertiary_color', defaultValue: 0) as int,
       legacyContainerColor:
           _get('custom_theme_container_color', defaultValue: 0) as int,
-      legacySentenceAudioHighlightColor:
-          _get('custom_theme_sentence_audio_color', defaultValue: 0) as int,
       legacyLinkColor: _get('custom_theme_link_color', defaultValue: 0) as int,
       idGenerator: _customThemeIdGenerator,
     );

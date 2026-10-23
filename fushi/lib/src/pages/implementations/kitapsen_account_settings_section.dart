@@ -18,7 +18,7 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart'
 import 'package:fushi/src/media/sources/reader_fushi_source.dart';
 import 'package:fushi/src/models/app_model.dart';
 import 'package:fushi/src/pages/implementations/tag_filter_sheet.dart'
-    show bookTagMapProvider, srtBookTagMapProvider;
+    show bookTagMapProvider;
 import 'package:fushi/src/pages/implementations/source_toggle_section.dart';
 import 'package:fushi/src/sync/kitapsen_client.dart';
 import 'package:fushi/src/sync/remote_library_cache.dart';
@@ -362,7 +362,6 @@ class _KitapsenAccountSettingsSectionState
     }
     ref.invalidate(fushiBooksProvider);
     ref.invalidate(bookTagMapProvider);
-    ref.invalidate(srtBookTagMapProvider);
   }
 
   @override

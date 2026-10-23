@@ -7,13 +7,8 @@ abstract class ReaderMediaSource extends MediaSource {
   /// Initialise a media source.
   ReaderMediaSource({
     required super.uniqueKey,
-    required super.sourceName,
     required super.description,
     required super.icon,
-    required super.implementsSearch,
-    required super.implementsHistory,
-    super.overridesAutoImage = false,
-    super.overridesAutoAudio = false,
   }) : super(
           mediaType: ReaderMediaType.instance,
         );

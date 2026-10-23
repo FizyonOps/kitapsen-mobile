@@ -17,39 +17,8 @@ library;
 import 'activity_event_types.dart';
 import 'media_kind.dart';
 import 'stat_source_kind.dart';
-import 'tag_host_kind.dart';
 
-/// 合集/书架种类 → 活动事件种类（epub / srt 都折叠进活动域的 `book`）。
+/// 合集/书架种类 → 活动事件种类（epub 折叠进活动域的 `book`）。
 ActivityMediaKind activityMediaKindOf(MediaKind kind) => switch (kind) {
-      MediaKind.epub || MediaKind.srt => ActivityMediaKind.book,
-      MediaKind.video => ActivityMediaKind.video,
-      MediaKind.game => ActivityMediaKind.game,
-    };
-
-/// 活动事件种类 → 其可能对应的合集/书架种类（**有序**：book 活动行的
-/// mediaKey 不带书架种类标记，按「epub 优先、srt 回退」逐一试探——与
-/// home_dashboard 时间轴合集归属推导的既有语义一致）。
-List<MediaKind> shelfKindsOfActivityMedia(ActivityMediaKind kind) =>
-    switch (kind) {
-      ActivityMediaKind.book => const <MediaKind>[
-          MediaKind.epub,
-          MediaKind.srt
-        ],
-      ActivityMediaKind.video => const <MediaKind>[MediaKind.video],
-      ActivityMediaKind.game => const <MediaKind>[MediaKind.game],
-    };
-
-/// 标签宿主种类 → 标签墓碑域（[BookTagMembershipTombstones].mediaType 的落库值）。
-///
-/// 五个宿主种类都进互联标签同步、都有墓碑语义（tag_sync_engine）。epub / srt /
-/// video / game 与 [MediaKind] 同串同义（旧行零迁移）；合集不是媒体、[MediaKind]
-/// 里没有它，墓碑域直接取 [TagHostKind.collection] 的落库值 `'collection'`。
-/// 穷尽 switch：以后加宿主种类编译期就逼着在这里定墓碑域，不会静默写错域（写错
-/// 域的墓碑所有读取端都命不中，跨端标签移除会静默失传，review5-9）。
-String tagTombstoneDomainOf(TagHostKind kind) => switch (kind) {
-      TagHostKind.epub => MediaKind.epub.dbValue,
-      TagHostKind.srt => MediaKind.srt.dbValue,
-      TagHostKind.video => MediaKind.video.dbValue,
-      TagHostKind.game => MediaKind.game.dbValue,
-      TagHostKind.collection => TagHostKind.collection.dbValue,
+      MediaKind.epub => ActivityMediaKind.book,
     };

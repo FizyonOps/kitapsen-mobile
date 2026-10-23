@@ -74,24 +74,6 @@ class ErrorLogService extends ChangeNotifier
   /// 泵到而死锁，故只在**纯 `test()`**（真实事件循环）里经 [pendingFileWrite] 排空。
   Future<void> _pendingFileWrite = Future<void>.value();
 
-  /// 导入面包屑文件：在每本词典调 native FFI 前**同步**写入，返回后清空。
-  /// native 硬崩溃（访问违例 / 栈溢出）会绕过 Dart try/catch 直接带崩进程，
-  /// 异步日志缓冲来不及落盘；这个文件因为同步写入而能存活崩溃，下次启动
-  /// 把残留内容折进错误日志，即可定位是哪本词典把进程带崩的。
-  File? _breadcrumbFile;
-
-  File? _importStepFile;
-
-  /// 查词面包屑文件（TODO-607 P0-2，**独立**于导入面包屑 [_breadcrumbFile]）：
-  /// 在每次「查词弹窗栈层进出」（顶层查词 / 嵌套查词 push / 关栈裁层）时**同步**
-  /// 写入当前栈深度 + 顶层词。嵌套查词触发的 native 进程级闪退（跨线程 teardown
-  /// 竞态，文档推断同 603-B / BUG-344，待 dump 坐实）会绕过所有 Dart 错误捕获
-  /// （`FlutterError.onError` / `runZonedGuarded` / `PlatformDispatcher.onError`），
-  /// 异步日志缓冲来不及落盘；这个文件因为**同步**写入而能存活崩溃，下次启动折成
-  /// [_foldLookupBreadcrumb] 的 `Lookup.crashRecovered`，记下「上次嵌套查词把进程
-  /// 带崩 + 崩时第几层」。与导入面包屑分文件，互不覆盖。
-  File? _lookupBreadcrumbFile;
-
   /// TODO-1260：**启动步进面包屑**文件（`init_step_breadcrumb.txt`，独立于导入 /
   /// 查词面包屑）。app 启动的「无限加载」根因是某早期 IO（对掉线的自定义数据根盘做
   /// stat / 目录创建）永不返回，`initialise()` 无逃生口 → 卡死首帧。这类 hang 不是
@@ -193,10 +175,6 @@ class ErrorLogService extends ChangeNotifier
         fushiTestDirectory('app-documents') ??
         await getApplicationDocumentsDirectory();
     _logFile = File('${dir.path}/error_log.txt');
-    _breadcrumbFile = File('${dir.path}/import_crash_breadcrumb.txt');
-    // 文件名必须与 native `import_breadcrumb::kStepFileName` 完全一致（TODO-892）。
-    _importStepFile = File('${dir.path}/import_step_breadcrumb.txt');
-    _lookupBreadcrumbFile = File('${dir.path}/lookup_crash_breadcrumb.txt');
     _initStepFile = File('${dir.path}/init_step_breadcrumb.txt');
     try {
       if (await _logFile!.exists()) {
@@ -215,40 +193,6 @@ class ErrorLogService extends ChangeNotifier
       }
     } catch (e) {
       debugPrint('[ErrorLogService] init failed: $e');
-    }
-    // 崩溃恢复：上次有面包屑残留 = 那本词典的 native 导入没返回就崩了。
-    try {
-      final String? culprit = readAndClearBreadcrumb(_breadcrumbFile!);
-      // TODO-892：native 步进面包屑（崩前最后处理到的 bank / 阶段）。即便导入面包屑
-      // 不在（正常清掉），步进文件若残留也单独读出，定位到「哪一步」而不仅「哪本词典」。
-      final String? nativeStep = readAndClearBreadcrumb(_importStepFile!);
-      if (culprit != null || nativeStep != null) {
-        final String stepSuffix =
-            nativeStep != null ? '，native 最后步骤=$nativeStep' : '';
-        final String head = culprit ?? '（无导入面包屑残留）';
-        log('DictImport.crashRecovered',
-            '上次词典导入疑似让 app 崩溃（native 进程级，Dart 无法捕获）：$head$stepSuffix');
-      }
-    } catch (e) {
-      debugPrint('[ErrorLogService] breadcrumb recovery failed: $e');
-    }
-    // 查词崩溃恢复（TODO-607 P0-2）：上次有**查词**面包屑残留 = 进程在某查词栈层
-    // 活跃时没有正常退出——native 崩了，或者卡死后被用户强杀（BUG-2588：视频页
-    // Shift 换词卡死就是后者，面包屑层面两者不可区分）。独立文件、独立分支，折成
-    // `Lookup.crashRecovered`（日志 label，非 i18n key），记下当时栈深度。卡死那条
-    // 由 Windows 看门狗另折 `MainThread.hangRecovered`（带 hang dump 路径）。
-    try {
-      final String? lookupCulprit =
-          readAndClearBreadcrumb(_lookupBreadcrumbFile!);
-      if (lookupCulprit != null) {
-        log(
-            'Lookup.crashRecovered',
-            '上次查词期间进程没有正常退出（native 崩溃，或卡死后被强杀——若同时有 '
-                'MainThread.hangRecovered 即为卡死，dump 见诊断区「崩溃转储」）：'
-                '$lookupCulprit');
-      }
-    } catch (e) {
-      debugPrint('[ErrorLogService] lookup breadcrumb recovery failed: $e');
     }
     // TODO-1260：启动 hang 恢复。上次有**启动步进**面包屑残留 = 进程在某启动步骤活跃时
     // 没跑完就被（用户强杀 / OS 杀）终止，最可能是那一步的 IO（掉线数据根盘）永不返回。

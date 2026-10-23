@@ -3,10 +3,6 @@
 // （extension 方案在此翻车过）；私有 mixin 不进公共 API 面。
 part of 'database.dart';
 
-/// 视频「已看过的片内区间并集」偏好键前缀（BUG-2108：观看时长只计首次覆盖）。值是
-/// `WatchCoverage.toJson()`；按视频稳定身份 bookUid 键控，删该视频统计时连带删。
-const String kVideoWatchCoveragePrefPrefix = 'video_watch_coverage_';
-
 /// 「统计日」重置整点的偏好键（int 0..23，默认 0）。见
 /// [FushiDatabase.statDayResetHour]。
 const String kStatDayResetHourPrefKey = 'stats_day_reset_hour';
@@ -42,10 +38,6 @@ mixin _FushiDbStatistics
   Future<List<ReadingHourlyLogRow>> getAllReadingHourlyLogs() =>
       select(readingHourlyLogs).get();
 
-  // ── video watch statistics ──────────────────────────────────────
-  Future<List<VideoWatchStatisticRow>> getAllVideoWatchStatistics() =>
-      select(videoWatchStatistics).get();
-
   // ── activity events (v49) ───────────────────────────────────────
   /// 追加一条活动事件（每次阅读/观看 session 结束或导入完成时写一行）。纯追加，
   /// 不去重、不累加——同书同日多次 session = 多行，读取端按需分组/计数。
@@ -67,7 +59,7 @@ mixin _FushiDbStatistics
 
   /// 统计日分组键（`yyyy-MM-dd`）：时刻 [d] 所属的**统计日**——按本地墙钟把小时
   /// 减去 [statDayResetHour] 后取日历日（墙钟减法而不是 Duration 减法，DST 切换日
-  /// 不会多算 / 少算一小时）。与 app 层 `statDateKey` / fushi_audio 的小时桶 dateKey
+  /// 不会多算 / 少算一小时）。与 app 层 `statDateKey` / fushi_reading 的小时桶 dateKey
   /// 同构——[recordReadingSession] 在 DB 层派生 dateKey 的单一来源，别再让调用方
   /// 自算一份传进来。
   ///
@@ -205,55 +197,6 @@ mixin _FushiDbStatistics
   // _stampStudySegmentProfile 住 _FushiDbTagsSync（Profile CRUD 所在层；
   // _FushiDbContentMisc 的删除原语也要用，mixin 只能向下看）。
 
-  /// v105 迁移专用：存量统计行认领的 Profile。激活的 > 最早建的 > 新建 'Default'
-  /// （迁移里没有 fushi 层，没法连带快照；'Default' 是 `ensureDefaultProfile`
-  /// 同名默认，它随后看到已有 Profile 就只校验激活 id，不会再建第二个）。
-  /// 只用裸 SQL：迁移时的 drift 生成查询未必与磁盘形态一致。
-  Future<int> _statOwnerProfileForV105() async {
-    if (!await _tableExists('profiles')) return 0;
-    Future<int?> existingId(int id) async {
-      final List<QueryRow> rows = await customSelect(
-        'SELECT id FROM profiles WHERE id = ?',
-        variables: <Variable<Object>>[Variable.withInt(id)],
-      ).get();
-      return rows.isEmpty ? null : rows.first.read<int>('id');
-    }
-
-    if (await _tableExists('preferences')) {
-      final List<QueryRow> prefRows = await customSelect(
-        'SELECT "value" FROM preferences WHERE "key" = ?',
-        variables: <Variable<Object>>[
-          Variable.withString(kActiveProfileIdPrefKey),
-        ],
-      ).get();
-      final int fromPref = prefRows.isEmpty
-          ? -1
-          : (int.tryParse(prefRows.first.read<String>('value')) ?? -1);
-      if (fromPref > 0 && await existingId(fromPref) != null) return fromPref;
-    }
-    final List<QueryRow> first = await customSelect(
-      'SELECT id FROM profiles ORDER BY created_at ASC, id ASC LIMIT 1',
-    ).get();
-    if (first.isNotEmpty) return first.first.read<int>('id');
-    final int now = DateTime.now().millisecondsSinceEpoch;
-    await customStatement(
-      'INSERT INTO profiles (name, created_at, updated_at) VALUES (?, ?, ?)',
-      <Object>['Default', now, now],
-    );
-    final List<QueryRow> created = await customSelect(
-      'SELECT id FROM profiles ORDER BY id DESC LIMIT 1',
-    ).get();
-    final int id = created.first.read<int>('id');
-    if (await _tableExists('preferences')) {
-      await customStatement(
-        'INSERT OR REPLACE INTO preferences ("key", "value", updated_at) '
-        'VALUES (?, ?, ?)',
-        <Object>[kActiveProfileIdPrefKey, id.toString(), now],
-      );
-    }
-    return id;
-  }
-
   /// **唯一写入口**：按 [uid] 绝对值 upsert。同 uid 重复写同值 = no-op；
   /// 写入方持有段累计器，绝不在这里做 `+=`。
   ///
@@ -334,110 +277,19 @@ mixin _FushiDbStatistics
   // zeroStudySegmentsOnDays / deleteStatFactsOnDays 住 _FushiDbContentMisc（同
   // deleteStudySegmentsForMedia：legacy 删行在那层连带调用，mixin 只能向下看）。
 
-  /// galgame_sessions 按 (game_id, date_key) 的时长合计（秒）：喂统一事实面
-  /// （日明细按游戏分节、热力图游戏时长）。
-  /// v105：只取 [profileId]（null = 当前激活 Profile）的会话。
-  ///
-  /// v113：游戏已从库移除的孤儿会话照样计入；[getGalgameSessionTitles] 给它们的
-  /// 显示名快照。
-  Future<List<(String gameId, String dateKey, int totalSeconds)>>
-      getGalgameDailySecondsByGame({int? profileId}) async {
-    final int scope = profileId ?? await resolveActiveProfileId();
-    final List<QueryRow> rows = await customSelect(
-      'SELECT game_id, date_key, COALESCE(SUM(duration_seconds), 0) AS s '
-      'FROM galgame_sessions WHERE profile_id = ? GROUP BY game_id, date_key',
-      variables: [Variable.withInt(scope)],
-      readsFrom: {galgameSessions},
-    ).get();
-    return <(String, String, int)>[
-      for (final QueryRow row in rows)
-        (
-          row.read<String>('game_id'),
-          row.read<String>('date_key'),
-          row.read<int>('s'),
-        ),
-    ];
-  }
-
-  /// v113：游玩会话行上的游戏显示名快照（`game_id -> game_title`，只含非空快照，
-  /// 即已从库移除的游戏）。统计读取端在库内反查不到游戏时用它显示名字。
-  Future<Map<String, String>> getGalgameSessionTitles() async {
-    final List<QueryRow> rows = await customSelect(
-      'SELECT game_id, MAX(game_title) AS title FROM galgame_sessions '
-      "WHERE game_title != '' GROUP BY game_id",
-      readsFrom: {galgameSessions},
-    ).get();
-    return <String, String>{
-      for (final QueryRow row in rows)
-        row.read<String>('game_id'): row.read<String>('title'),
-    };
-  }
-
   // upsertStudySegmentTombstone 住 _FushiDbContentMisc（deleteStudySegmentsForMedia /
   // clearStudySegments 在那层调用，mixin 只能向下看；本层的
   // applyStudySegmentTombstone 向下调它）。
 
-  // ── galgames / galgame_sources / galgame_sessions (v55 游戏库) ──────
-  //
-  // 设计见 `docs/design/galgame-library-reina-parity.md`。这里刻意没有统计投影表：
-  // 时长/次数/最后游玩全部现算 GROUP BY（见下面聚合方法），一次消掉「投影与
-  // 事实表不一致」的整类 bug。单机规模是几百游戏 × 几千会话，SQLite 毫秒级。
-
-  /// 全部游戏，按添加时间升序（与旧 JSON 列表的天然顺序一致，Never break userspace）。
-  Future<List<GalgameRow>> getAllGalgames() =>
-      (select(galgames)..orderBy([(t) => OrderingTerm.asc(t.addedAt)])).get();
-
-  /// 全库元数据源快照，按 gameId 分组（库页一次取全量，避免 N+1）。
-  Future<Map<String, List<GalgameSourceRow>>> getAllGalgameSources() async {
-    final List<GalgameSourceRow> rows = await select(galgameSources).get();
-    final Map<String, List<GalgameSourceRow>> out =
-        <String, List<GalgameSourceRow>>{};
-    for (final GalgameSourceRow row in rows) {
-      (out[row.gameId] ??= <GalgameSourceRow>[]).add(row);
-    }
-    return out;
-  }
-
-  /// 最近 [limit] 条游玩会话（按结束时刻倒序）：v92 起游玩不再写 activity 行，
-  /// 首页活动流 / 游戏首页时间线从这里合成「游玩」事件。v105：只看 [profileId]
-  /// （null = 当前激活 Profile）。
-  Future<List<GalgameSessionRow>> getRecentGalgameSessions({
-    int limit = 200,
-    int? profileId,
-  }) async {
-    final int scope = profileId ?? await resolveActiveProfileId();
-    return (select(galgameSessions)
-          ..where((t) => t.profileId.equals(scope))
-          ..orderBy([(t) => OrderingTerm.desc(t.endMs)])
-          ..limit(limit))
-        .get();
-  }
-
-  /// 清空游戏统计，只删除游玩会话事实。
-  ///
-  /// 游戏库（[galgames]）与首页活动时间线（[activityEvents]）是独立用户数据，
-  /// 不能因统计页的「清空」操作被连带删除。
-  ///
-  /// v105：只清当前激活 Profile 的那份（别的 Profile 的游玩史不是本 Profile 的
-  /// 「全部」）。
-  Future<int> clearAllGalgameStatistics() => transaction(() async {
-        final int profileId = await resolveActiveProfileId();
-        // v92：hook 字数段（chars-only）与游玩会话同属「游戏统计」，一起清。
-        await clearStudySegments(kActivityMediaGame, profileId: profileId);
-        return (delete(galgameSessions)
-              ..where((t) => t.profileId.equals(profileId)))
-            .go();
-      });
-
   /// 首页仪表盘的「数据变了」信号：activity_events / reading_statistics /
-  /// video_watch_statistics / video_books 任一表变更即 emit（不带数据，消费方自行
+  /// study_segments / reader_positions 任一表变更即 emit（不带数据，消费方自行
   /// 重查聚合）。首页据此在阅读/观看/导入落库后**自动刷新**热力图 + 时长 + 活动
   /// 时间轴——否则首页在 pushed 阅读器路由下不重建，读完回来仍是旧数据（用户报
   /// 「打开一本书 Activity 还是空的」）。
   ///
   /// 用手动 [StreamController] + [tableUpdates]，**不用** drift keyed `.watch()`：
   /// 后者取消订阅会遗留缓存保留 `Timer.run`，触发 flutter_test `!timersPending`
-  /// 让 flutter_tester 永不退出（BUG-834，见 [watchVideoBookUids] 详注）。
+  /// 让 flutter_tester 永不退出（BUG-834）。
   /// tableUpdates 流取消时不安排该 Timer，widget 测试可正常收敛。
   Stream<void> watchDashboardDataChanges() {
     late final StreamController<void> controller;
@@ -449,12 +301,9 @@ mixin _FushiDbStatistics
               .onAllTables(<ResultSetImplementation<dynamic, dynamic>>[
             activityEvents,
             readingStatistics,
-            videoWatchStatistics,
             // v92：学习统计唯一事实表；本地写入面只写它，首页热力图 / 今日 /
             // 活动流全部从它派生。
             studySegments,
-            galgameSessions,
-            videoBooks,
             // 阅读位置是首页「继续」的数据源（MediaItem.position 与最近阅读时刻
             // 均派生自它）。此前不在表集里：互联/云同步把更远的对端进度写回
             // reader_positions 后，首页「继续」不刷新、要重启 app 才生效——
@@ -471,33 +320,4 @@ mixin _FushiDbStatistics
     );
     return controller.stream;
   }
-
-  /// 逐行读取全部视频小时日志，供云聚合同步 materialize 快照（TODO-1056 phase B）。
-  Future<List<VideoHourlyLogRow>> getAllVideoHourlyLogs() =>
-      select(videoHourlyLogs).get();
-
-  // ── favorite words ──────────────────────────────────────────────
-
-  /// 取全部收藏词，按 createdAt 倒序（最近在前），供收藏夹导出（TODO-829）。
-  /// 纯 select，不动 schema。
-  Future<List<FavoriteWordRow>> getAllFavoriteWords() =>
-      (select(favoriteWords)..orderBy([(t) => OrderingTerm.desc(t.createdAt)]))
-          .get();
-
-  // ── mining statistics ───────────────────────────────────────────
-
-  /// 逐行读取全部制卡计数行（所有来源），供云聚合同步 materialize 快照
-  /// （TODO-1056 phase B）。写回用 [setMiningCount]（MAX 语义、幂等）。
-  Future<List<MiningStatisticRow>> getAllMiningStatistics() =>
-      select(miningStatistics).get();
-
-  // ── lookup / mining per-book counters (TODO-1204) ────────────────
-
-  /// 逐行读取全部查词/制卡计数行（所有来源），供将来云聚合同步 materialize 快照。
-  /// 写回用 [setLookupCount] / [setMineCountPerBook]（MAX 语义、幂等）。
-  Future<List<LookupMiningCounterRow>> getAllLookupMiningCounters() =>
-      select(lookupMiningCounters).get();
-
-  // ── mined sentences ──────────────────────────────────────────────
-
 }

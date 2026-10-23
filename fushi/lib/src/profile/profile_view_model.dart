@@ -50,13 +50,6 @@ class ProfileUiState {
   final Map<String, int> languageBindings;
   final bool isLoading;
 
-  ProfileRow? get activeProfile {
-    for (final p in profiles) {
-      if (p.id == activeProfileId) return p;
-    }
-    return profiles.isNotEmpty ? profiles.first : null;
-  }
-
   ProfileUiState copyWith({
     List<ProfileRow>? profiles,
     int? activeProfileId,
@@ -160,11 +153,7 @@ final fushiDatabaseProvider = Provider<FushiDatabase>((ref) {
 
 final profileRepositoryProvider = Provider<ProfileRepository>((ref) {
   final db = ref.watch(fushiDatabaseProvider);
-  return ProfileRepository(
-    db,
-    // BUG-1994：回插被旧 prune 删掉的词典行时，「装没装」只认磁盘目录。
-    isDictionaryInstalled: ref.read(appProvider).isDictionaryInstalledOnDisk,
-  );
+  return ProfileRepository(db);
 });
 
 /// 临时 UI 草稿所绑定的 Profile 应用代次。

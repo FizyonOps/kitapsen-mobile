@@ -57,7 +57,7 @@ class FushiCard extends StatefulWidget {
 
 class _FushiCardState extends State<FushiCard> {
   late final FushiFocusId _fallbackFocusId = FushiFocusId(
-    'hibiki-card-${identityHashCode(this)}',
+    'fushi-card-${identityHashCode(this)}',
   );
 
   @override
@@ -200,7 +200,7 @@ class FushiListItem extends StatefulWidget {
 
 class _FushiListItemState extends State<FushiListItem> {
   late final FushiFocusId _fallbackFocusId = FushiFocusId(
-    'hibiki-list-item-${identityHashCode(this)}',
+    'fushi-list-item-${identityHashCode(this)}',
   );
 
   @override
@@ -416,7 +416,7 @@ class FushiTextField extends StatefulWidget {
 
 class _FushiTextFieldState extends State<FushiTextField> {
   late final FocusNode _ownedFocusNode = FocusNode(
-    debugLabel: widget.hintText ?? widget.labelText ?? 'hibiki-text-field',
+    debugLabel: widget.hintText ?? widget.labelText ?? 'fushi-text-field',
   );
 
   FocusNode get _effectiveFocusNode => widget.focusNode ?? _ownedFocusNode;
@@ -431,7 +431,7 @@ class _FushiTextFieldState extends State<FushiTextField> {
   Widget build(BuildContext context) {
     final FushiDesignTokens tokens = FushiDesignTokens.of(context);
     final Widget? effectiveSuffix = widget.suffixIcon ??
-        _hibikiTextFieldInputSuffix(
+        _fushiTextFieldInputSuffix(
           context: context,
           controller: widget.readOnly ? null : widget.controller,
           onChanged: widget.onChanged,
@@ -496,7 +496,7 @@ class _FushiTextFieldState extends State<FushiTextField> {
 /// [iconSize] / [padding] 为空时保持 [FushiIconButton] 的默认尺寸（[FushiTextField]
 /// 等常规输入框沿用原样）；[FushiSearchField] 传紧凑值，否则默认按钮会撑破 40 高的
 /// 搜索框内容区。
-Widget? _hibikiTextFieldInputSuffix({
+Widget? _fushiTextFieldInputSuffix({
   required BuildContext context,
   required TextEditingController? controller,
   ValueChanged<String>? onChanged,
@@ -690,7 +690,7 @@ class _FushiTagChipState extends State<FushiTagChip> {
   /// default — Stateful (not Stateless) so identityHashCode is stable across
   /// rebuilds. Mirrors FushiCard / FushiListItem.
   late final FushiFocusId _fallbackFocusId =
-      FushiFocusId('hibiki-tag-chip-${identityHashCode(this)}');
+      FushiFocusId('fushi-tag-chip-${identityHashCode(this)}');
 
   @override
   Widget build(BuildContext context) {
@@ -2459,7 +2459,7 @@ class _FushiOverflowMenuState<T> extends State<FushiOverflowMenu<T>> {
   final GlobalKey<PopupMenuButtonState<T>> _menuKey =
       GlobalKey<PopupMenuButtonState<T>>();
   late final FushiFocusId _fallbackFocusId =
-      FushiFocusId('hibiki-overflow-menu-${identityHashCode(this)}');
+      FushiFocusId('fushi-overflow-menu-${identityHashCode(this)}');
 
   @override
   Widget build(BuildContext context) {
@@ -2984,7 +2984,7 @@ bool logSelectionScrollDecision({
 
 class _LogSelectionScrollController extends ScrollController {
   _LogSelectionScrollController()
-      : super(debugLabel: 'hibiki-log-selection-scroll');
+      : super(debugLabel: 'fushi-log-selection-scroll');
 
   // 拖拽选区是否激活。这是 [logSelectionScrollDecision] 唯一需要的状态——
   // TODO-822 简化判据后不再追踪指针几何 / 手动滚动标志（边缘自动滚动整条拿掉，
@@ -3038,6 +3038,7 @@ class _LogSelectionScrollController extends ScrollController {
     required Curve curve,
   }) {
     if (!_allowProgrammaticScroll(offset, animated: true)) {
+      return Future<void>.value();
     }
     return super.animateTo(offset, duration: duration, curve: curve);
   }
@@ -3066,6 +3067,7 @@ class _LogSelectionScrollPosition extends ScrollPositionWithSingleContext {
     required Curve curve,
   }) {
     if (!controller._allowProgrammaticScroll(to, animated: true)) {
+      return Future<void>.value();
     }
     return super.animateTo(to, duration: duration, curve: curve);
   }
@@ -3116,7 +3118,7 @@ class FushiEditorPanel extends StatelessWidget {
             Positioned(
               top: tokens.spacing.gap,
               right: tokens.spacing.gap,
-              child: _hibikiTextFieldInputSuffix(
+              child: _fushiTextFieldInputSuffix(
                     context: context,
                     controller: controller,
                   ) ??

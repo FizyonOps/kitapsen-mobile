@@ -23,8 +23,8 @@ dependencies:
     path: ../packages/fushi_core
   fushi_engine:
     path: ../packages/fushi_engine
-  fushi_audio:
-    path: ../packages/fushi_audio
+  fushi_reading:
+    path: ../packages/fushi_reading
   fushi_platform:
     path: ../packages/fushi_platform
   flutter_cache_manager: ^3.3.0
@@ -52,7 +52,6 @@ dependencies:
   package_info_plus: ^4.0.2
   path: ^1.8.2
   path_provider: ^2.0.13
-  permission_handler: ^10.2.0
   # PDF 阅读器（Phase 0 spike）：PDFium 底层、字符级文本矩形供点选查词。
   # 五平台 + native-assets/build-hook 下载 PDFium。见 docs/specs/pdf-reader-lookup。
   # 钉 2.4.5：>=2.4.6 经 pdfrx_engine 拉 image ^4.8.0 → 要 archive ^4.0.7 / xml ^7.0.1，

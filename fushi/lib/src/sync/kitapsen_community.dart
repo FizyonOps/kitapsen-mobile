@@ -181,7 +181,6 @@ class StoreReadingGoal {
     required this.progress,
     required this.percent,
     required this.endDate,
-    this.startDate,
     this.completed = false,
   });
 
@@ -191,7 +190,6 @@ class StoreReadingGoal {
   final double progress;
   final double percent;
   final DateTime endDate;
-  final DateTime? startDate;
   final bool completed;
 }
 
@@ -319,7 +317,6 @@ class StoreBookClub {
     required this.ownerId,
     required this.memberIds,
     this.description,
-    this.currentBookId,
   });
 
   final int id;
@@ -330,7 +327,6 @@ class StoreBookClub {
   /// User ids of the members, to tell whether the reader is one.
   final Set<int> memberIds;
   final String? description;
-  final int? currentBookId;
 }
 
 class StoreClubMember {
@@ -725,7 +721,6 @@ extension KitapsenCommunity on KitapsenStore {
           progress: _double(j['current_progress']),
           percent: _double(j['progress_percent']),
           endDate: end,
-          startDate: _date(j['start_date']),
           completed: j['completed_at'] != null,
         ),
   ];
@@ -914,7 +909,6 @@ extension KitapsenCommunity on KitapsenStore {
           _int(m['user_id'])!,
     },
     description: _text(j['description']),
-    currentBookId: _int(j['current_book_id']),
   );
 
   Future<List<StoreBookClub>> bookClubs() async => <StoreBookClub>[

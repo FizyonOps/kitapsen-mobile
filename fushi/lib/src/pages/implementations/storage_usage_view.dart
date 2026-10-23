@@ -10,17 +10,9 @@ import 'package:fushi/utils.dart';
 
 /// 设置 →「存储」目的地正文（经 [SettingsDestination.body] 逃生口渲染）。
 ///
-/// 两块：
-/// 1. 磁盘占用总览——[StorageUsageService.scanCategories] 逐类目渐进出结果，
-///    **每个类目都可展开明细**：书籍/词典是 DB 已知条目（可单条删除），其余
-///    类目是类目根下的直接子项（只读，看清是哪个文件在吃盘）；着色器类目行
-///    额外挂 Anime4K 预设删除（只删清单内文件，恢复走视频设置既有下载入口）；
-/// 2. 随包组件——安装目录内随包携带的大件，**只展示**：更新 = 安装器整体重写
-///    安装目录，删掉的必然回来，做删除按钮是假动作。
-///
-/// 漫画 OCR 模型的逐模型下载/删除**不在本总览里**：入口是「存储 › 模型与组件 ›
-/// 本机 OCR 模型」（`manga_ocr_models_storage_section.dart`，走
-/// `MangaOcrService.deleteModels` 原语），本总览只如实显示它占多少。
+/// 磁盘占用总览——[StorageUsageService.scanCategories] 逐类目渐进出结果，**每个
+/// 类目都可展开明细**：书籍是 DB 已知条目（可单条删除），其余类目是类目根下的
+/// 直接子项（缓存 / 缩略图可删，其余只读）。
 ///
 /// 删除一律复用各域既有路径（见 [StorageUsageService] 头注释），本文件零裸
 /// `Directory.delete`。所有依赖经构造参数注入（服务/取数/删除回调），
@@ -29,11 +21,7 @@ class StorageUsageView extends ConsumerStatefulWidget {
   const StorageUsageView({
     required this.service,
     required this.booksProvider,
-    required this.dictionaryNamesProvider,
-    this.dictionaryDisplayNamesProvider,
     required this.deleteBook,
-    required this.deleteSrtBook,
-    required this.deleteDictionary,
     required this.deleteDatabaseSnapshots,
     required this.deleteFiles,
     super.key,
@@ -44,26 +32,9 @@ class StorageUsageView extends ConsumerStatefulWidget {
   /// 书籍清单取数（真实现读 `epub_books` 表）。
   final Future<List<StorageBookRef>> Function() booksProvider;
 
-  /// 词典名清单取数（真实现读 `AppModel.dictionaries`）。
-  final Future<List<String>> Function() dictionaryNamesProvider;
-
-  /// 词典改名（v95）：真名 -> 显示名。可选——不传（测试 seam / 旧调用点）就按
-  /// 真名显示，与改名前逐字节一致。条目 id 与磁盘路径始终是真名，只有 label 翻译。
-  final Future<Map<String, String>> Function()? dictionaryDisplayNamesProvider;
-
   /// 删除一本书（真实现 `ReaderFushiSource.instance.deleteBook`）。
   /// 返回 null = 成功，非 null = 失败原因。
   final Future<String?> Function(String bookKey) deleteBook;
-
-  /// 删除一本纯字幕书 / standalone 有声书（真实现 `SrtBookRepository.delete`）。
-  /// BUG-1893：这类书没有 EpubBooks 行、`bookKey` 恒空，[deleteBook] 那条路按
-  /// bookKey 找行必然落空——必须单独接原语，否则条目有行却删不掉。
-  final Future<String?> Function(String uid) deleteSrtBook;
-
-  /// 删除一部词典（真实现 `AppModel.deleteDictionary` + 删除后核对词典表）。
-  /// 返回 null = 成功，非 null = 失败原因——`deleteDictionary` 内部 catch-all
-  /// 不上抛，接线方必须以「删除后该名是否仍在」为准回报，不能拿无异常当成功。
-  final Future<String?> Function(String name) deleteDictionary;
 
   /// 删除 support 根下全部主库快照残留（BUG-1870；真实现 fushi_core
   /// `deleteDatabaseSnapshotFiles(supportRoot)`，识别口径与扫描侧同源：
@@ -75,7 +46,7 @@ class StorageUsageView extends ConsumerStatefulWidget {
   /// 删除 [StorageEntryKind.derivedFile] 明细指向的路径（文件或目录）。
   ///
   /// 只有 [kDeletableEntryCategories] 里的类目会产出这种明细 —— 那里装的都是派生
-  /// 数据 / 缓存 / 可重新获取的资源，没有 DB 行引用，所以这条原语就是裸删；本 widget
+  /// 数据 / 缓存，没有 DB 行引用，所以这条原语就是裸删；本 widget
   /// 自身仍不碰磁盘（真实现在 `settings_schema_storage.dart` 接线）。
   /// 返回 null = 成功，非 null = 失败原因。
   final Future<String?> Function(List<String> paths) deleteFiles;
@@ -94,13 +65,12 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
   bool _scanning = false;
 
   /// 扫描代际：删除成功后无条件重扫（哪怕上一轮还在跑），旧代际的事件按此
-  /// 丢弃——否则「GB 级词典类目还在扫时删了一本书」会被 `_scanning` guard
-  /// 静默吞掉，数字不刷新（审查 L1）。
+  /// 丢弃——否则「慢类目还在扫时删了一本书」会被 `_scanning` guard 静默吞掉，
+  /// 数字不刷新（审查 L1）。
   int _scanEpoch = 0;
   StreamSubscription<StorageCategoryUsage>? _scanSub;
 
-  /// 正在删除的条目 id（书 bookKey / 词典名）。非 null 时禁用全部删除入口——
-  /// 词典删除原语在 UI isolate 同步删 GB 级目录，期间再点别的删除只会排队
+  /// 正在删除的条目 id。非 null 时禁用全部删除入口，期间再点别的删除只会排队
   /// 添乱（审查 M2）。
   String? _busyEntryId;
 
@@ -123,14 +93,8 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
       _usage.clear();
     });
     List<StorageBookRef> books = const <StorageBookRef>[];
-    List<String> dictNames = const <String>[];
-    Map<String, String> dictDisplayNames = const <String, String>{};
     try {
       books = await widget.booksProvider();
-      dictNames = await widget.dictionaryNamesProvider();
-      dictDisplayNames =
-          await widget.dictionaryDisplayNamesProvider?.call() ??
-              const <String, String>{};
     } catch (e) {
       debugPrint('[storage] listing failed: $e');
     }
@@ -138,11 +102,7 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
     await _scanSub?.cancel();
     if (!mounted || epoch != _scanEpoch) return;
     _scanSub = widget.service
-        .scanCategories(
-          books: books,
-          dictionaryNames: dictNames,
-          dictionaryDisplayNames: dictDisplayNames,
-        )
+        .scanCategories(books: books)
         .listen(
       (StorageCategoryUsage usage) {
         if (!mounted || epoch != _scanEpoch) return;
@@ -189,22 +149,14 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
   String _entryTitle(StorageEntryUsage entry) =>
       entry.kind == StorageEntryKind.databaseSnapshots
           ? t.storage_entry_database_snapshots_label(n: entry.paths.length)
-          : entry.kind == StorageEntryKind.backupArchives
-              ? t.storage_entry_backups_label(n: entry.paths.length)
           : entry.label;
 
   Future<void> _deleteEntry(StorageEntryUsage entry) async {
     if (_busyEntryId != null) return;
     final String body = switch (entry.kind) {
-      StorageEntryKind.book ||
-      StorageEntryKind.srtBook =>
-        t.storage_entry_delete_book_confirm_body,
-      StorageEntryKind.dictionary =>
-        t.storage_entry_delete_dictionary_confirm_body,
+      StorageEntryKind.book => t.storage_entry_delete_book_confirm_body,
       StorageEntryKind.databaseSnapshots =>
         t.storage_entry_delete_database_snapshots_confirm_body,
-      StorageEntryKind.backupArchives =>
-        t.storage_entry_delete_backups_confirm_body,
       StorageEntryKind.derivedFile =>
         t.storage_entry_delete_files_confirm_body,
       StorageEntryKind.readOnly => throw StateError('read-only entry'),
@@ -220,20 +172,11 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
         case StorageEntryKind.book:
           failure = await widget.deleteBook(entry.id);
           changed = failure == null;
-        case StorageEntryKind.srtBook:
-          failure = await widget.deleteSrtBook(entry.id);
-          changed = failure == null;
-        case StorageEntryKind.dictionary:
-          failure = await widget.deleteDictionary(entry.id);
-          changed = failure == null;
         case StorageEntryKind.databaseSnapshots:
           final DatabaseSnapshotDeletionResult result =
               await widget.deleteDatabaseSnapshots();
           changed = result.deleted.isNotEmpty;
           failure = _snapshotDeleteFailureReason(result);
-        case StorageEntryKind.backupArchives:
-          failure = await widget.deleteFiles(entry.paths);
-          changed = failure == null;
         case StorageEntryKind.derivedFile:
           failure = await widget.deleteFiles(entry.paths);
           changed = failure == null;
@@ -272,66 +215,23 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
   static const Map<StorageCategoryId, IconData> _categoryIcons =
       <StorageCategoryId, IconData>{
     StorageCategoryId.books: Icons.menu_book_outlined,
-    StorageCategoryId.dictionaries: Icons.translate_outlined,
-    StorageCategoryId.videoDownloads: Icons.movie_outlined,
     StorageCategoryId.covers: Icons.image_outlined,
-    StorageCategoryId.subtitles: Icons.subtitles_outlined,
-    StorageCategoryId.shaders: Icons.auto_awesome_outlined,
     StorageCategoryId.customFonts: Icons.font_download_outlined,
-    StorageCategoryId.web: Icons.public_outlined,
-    StorageCategoryId.exports: Icons.output_outlined,
-    StorageCategoryId.backups: Icons.backup_outlined,
     StorageCategoryId.database: Icons.storage_outlined,
-    StorageCategoryId.ocrModels: Icons.document_scanner_outlined,
     StorageCategoryId.cache: Icons.cached_outlined,
     StorageCategoryId.other: Icons.more_horiz_outlined,
   };
-
-  /// Kitapsen: categories that belong to features the edition does not ship
-  /// (dictionaries, video, shaders, OCR models, the in-app browser / web
-  /// archive, card media exports, backup archives) are not listed.
-  static bool _categoryInEdition(StorageCategoryId id) {
-    switch (id) {
-      case StorageCategoryId.dictionaries:
-      case StorageCategoryId.videoDownloads:
-      case StorageCategoryId.subtitles:
-      case StorageCategoryId.shaders:
-      case StorageCategoryId.ocrModels:
-      case StorageCategoryId.web:
-      case StorageCategoryId.exports:
-      case StorageCategoryId.backups:
-        return false;
-      default:
-        return true;
-    }
-  }
 
   String _categoryTitle(StorageCategoryId id) {
     switch (id) {
       case StorageCategoryId.books:
         return t.kitapsen_storage_category_books;
-      case StorageCategoryId.dictionaries:
-        return '';
-      case StorageCategoryId.videoDownloads:
-        return t.storage_category_video_downloads;
       case StorageCategoryId.covers:
         return t.storage_category_covers;
-      case StorageCategoryId.subtitles:
-        return t.storage_category_subtitles;
-      case StorageCategoryId.shaders:
-        return t.storage_category_shaders;
       case StorageCategoryId.customFonts:
         return t.storage_category_custom_fonts;
-      case StorageCategoryId.web:
-        return t.storage_category_web;
-      case StorageCategoryId.exports:
-        return t.storage_category_exports;
-      case StorageCategoryId.backups:
-        return t.storage_category_backups;
       case StorageCategoryId.database:
         return t.storage_category_database;
-      case StorageCategoryId.ocrModels:
-        return '';
       case StorageCategoryId.cache:
         return t.storage_category_cache;
       case StorageCategoryId.other:
@@ -381,7 +281,7 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
           ),
         ),
         for (final StorageCategoryId id in StorageCategoryId.values)
-          if (_categoryInEdition(id)) ..._buildCategoryRows(id),
+          ..._buildCategoryRows(id),
       ],
     );
   }
@@ -392,9 +292,6 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
     // 显示占位。
     final bool expandable = usage != null && usage.entries.isNotEmpty;
     final bool expanded = _expanded.contains(id);
-    // Anime4K 预设是唯一「删了还能一键装回来」的着色器资产，而删除原语只此一处
-    //（视频设置的画质增强只有下载入口）：挂在着色器类目行上，只删清单内文件，
-    // 用户自己导入的同目录 .glsl 不碰。
     return <Widget>[
       FushiListItem(
         title: Text(_categoryTitle(id)),
@@ -420,7 +317,7 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
   }
 
   List<Widget> _buildEntryRows(StorageCategoryUsage usage) {
-    // 可删性由**条目 kind** 决定（书/词典/数据库快照残留各接自己的删除原语）；
+    // 可删性由**条目 kind** 决定（书 / 数据库快照残留各接自己的删除原语）；
     // readOnly 条目是磁盘子项，删它就是裸 `Directory.delete`——会绕过墓碑/引用
     // 护栏，也可能删掉主库文件，故只读展示。
     final List<StorageEntryUsage> visible =
@@ -433,15 +330,7 @@ class _StorageUsageViewState extends ConsumerState<StorageUsageView> {
       for (final StorageEntryUsage entry in visible)
         FushiListItem(
           title: Text(_entryTitle(entry)),
-          // BUG-1893：externalPaths 非空 = 桌面「引用原文件」导入，音频留在 app 目录
-          // 外，既不占应用空间也删不掉。不加这句说明的话，条目只显示 EPUB 正文那几百
-          // KB，用户会以为音频丢了——体积统计的口径必须自己说清楚。
-          subtitle: Text(
-            entry.externalPaths.isEmpty
-                ? formatStorageBytes(entry.bytes)
-                : '${formatStorageBytes(entry.bytes)} · '
-                    '${t.storage_entry_external_audio_hint}',
-          ),
+          subtitle: Text(formatStorageBytes(entry.bytes)),
           padding: const EdgeInsetsDirectional.only(start: 32, end: 8),
           density: FushiListDensity.compact,
           trailing: entry.kind == StorageEntryKind.readOnly

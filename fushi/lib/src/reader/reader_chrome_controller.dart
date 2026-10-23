@@ -1,12 +1,9 @@
 /// 阅读器 chrome（顶部工具栏 / 底栏 / 顶部进度 pill）显隐状态的唯一持有者。
 ///
 /// 页面 `_ReaderFushiPageState` 只保留同名转发 getter/setter（`_showChrome` /
-/// `_chromeTransientVisible` / `_appearanceSheetOpen`），状态与自动收起计时器都在
-/// 这里；控制器变更经 [ChangeNotifier] 通知页面重建。把这台状态机从 4000 行页面里
+/// `_chromeTransientVisible` / `_appearanceSheetOpen`），状态都在这里；控制器变更经 [ChangeNotifier] 通知页面重建。把这台状态机从 4000 行页面里
 /// 拆出来，UI 迭代不再需要在页面 State 上穿针，且可脱离页面单测。
 library;
-
-import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 
@@ -34,8 +31,7 @@ class ReaderChromeController extends ChangeNotifier {
     if (_toolbarsHidden == value) return;
     _toolbarsHidden = value;
     if (value) {
-      // 关掉时把已唤出的悬浮栏一并收掉，并停掉 VN 推进武装的收起计时。
-      cancelAutoHide();
+      // 关掉时把已唤出的悬浮栏一并收掉。
       _transientVisible = false;
     }
     notifyListeners();
@@ -68,31 +64,4 @@ class ReaderChromeController extends ChangeNotifier {
 
   /// 导航抽屉目录里手动展开的父节（按 label；会话内记忆）。
   final Set<String> expandedTocParents = <String>{};
-
-  Timer? _autoHideTimer;
-
-  /// 自动收起计时器（只读；页面 dispose 路径按旧守卫字面量 `cancel()` 它）。
-  Timer? get autoHideTimer => _autoHideTimer;
-
-  /// 武装自动收起：到时把临时可见态收起并通知。重复武装 = 重新计时。
-  void armAutoHide(Duration after) {
-    cancelAutoHide();
-    _autoHideTimer = Timer(after, () {
-      _autoHideTimer = null;
-      if (!_transientVisible) return;
-      _transientVisible = false;
-      notifyListeners();
-    });
-  }
-
-  void cancelAutoHide() {
-    _autoHideTimer?.cancel();
-    _autoHideTimer = null;
-  }
-
-  @override
-  void dispose() {
-    cancelAutoHide();
-    super.dispose();
-  }
 }

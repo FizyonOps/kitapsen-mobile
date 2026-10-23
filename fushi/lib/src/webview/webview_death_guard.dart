@@ -90,18 +90,11 @@ class WebViewDeathGuard {
   final int _maxRebuilds;
   final void Function(String surface, String message) _reporter;
 
-  int _epoch = 0;
   int _deathCount = 0;
   bool _handling = false;
 
   /// 重建预算是否已用尽：此后只抢救数据、不再重建。
   bool get isRebuildBudgetExhausted => _deathCount > _maxRebuilds;
-
-  /// 挂在 WebView **之上**（而不是 WebView 自己）的重建 key。
-  ///
-  /// 挂在上面而非 WebView 自己身上，是为了不动 `ValueKey('fushi_webview')` /
-  /// `ValueKey('manga_webview')` 这类被大量集成测试 finder 依赖的锚点。
-  Key get rebuildKey => ValueKey<String>('${surface}_webview_gen_$_epoch');
 
   /// renderer 死了。接到 `onRenderProcessGone` 就调这个。
   ///
@@ -152,7 +145,6 @@ class WebViewDeathGuard {
       _handling = false;
       return;
     }
-    _epoch += 1;
     try {
       _afterRebuild?.call();
     } catch (e, stack) {

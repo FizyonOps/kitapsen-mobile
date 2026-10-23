@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:pdfrx/pdfrx.dart';
 
-import 'package:fushi_audio/fushi_audio.dart';
+import 'package:fushi_reading/fushi_reading.dart';
 import 'package:fushi_core/fushi_core.dart';
 import 'package:fushi/src/epub/book_file_location.dart';
 import 'package:fushi/src/pages/base_source_page.dart';

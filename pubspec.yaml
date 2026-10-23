@@ -6,7 +6,7 @@ environment:
 
 workspace:
   - fushi
-  - packages/fushi_audio
+  - packages/fushi_reading
   - packages/fushi_core
   - packages/fushi_engine
   - packages/fushi_platform

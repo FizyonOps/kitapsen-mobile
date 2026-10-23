@@ -183,10 +183,6 @@ class MaterialSettingsRenderer implements SettingsRenderer {
       routeBuilder: (BuildContext context, WidgetBuilder builder) {
         return MaterialPageRoute<void>(builder: builder);
       },
-      footerStyle: (BuildContext context) => Theme.of(context)
-          .textTheme
-          .bodySmall
-          ?.copyWith(color: FushiDesignTokens.of(context).surfaces.onVariant),
     );
 
     // 整页正文逃生口（见 SettingsDestination.body）：接在所有 schema section 之后，

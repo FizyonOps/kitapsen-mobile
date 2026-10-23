@@ -8,7 +8,6 @@ class ReaderMediaType extends MediaType {
       : super(
           uniqueKey: 'reader_media_type',
           icon: Icons.library_books,
-          outlinedIcon: Icons.library_books_outlined,
         );
 
   /// Get the singleton instance of this media type.

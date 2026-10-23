@@ -11,10 +11,9 @@ import 'package:fushi/models.dart';
 import 'package:fushi/pages.dart';
 import 'package:fushi_core/fushi_core.dart';
 import 'package:fushi_engine/epub/epub_storage.dart';
-import 'package:fushi_audio/fushi_audio.dart';
+import 'package:fushi_reading/fushi_reading.dart';
 import 'package:fushi/src/reader/reader_chrome_floating.dart';
 import 'package:fushi/src/reader/reader_settings.dart';
-import 'package:fushi_engine/sync/deletion_propagation.dart';
 import 'package:fushi/utils.dart';
 import 'package:fushi_engine/media/media_pref_keys.dart' as pref_keys;
 export 'package:fushi_engine/media/media_pref_keys.dart'
@@ -46,11 +45,6 @@ final fushiBooksProvider =
 
 /// The one key every caller passes to [fushiBooksProvider].
 const Object kShelfBooksKey = 'shelf';
-
-final srtBooksProvider = FutureProvider<List<SrtBook>>((ref) {
-  // Kitapsen imports plain books only: subtitle books never exist.
-  return const <SrtBook>[];
-});
 
 /// 每本书的「最后阅读时间」（`reader_positions.updatedAt` 毫秒，key=书稳定身份：
 /// v82 起 epub 行 = `EpubBooks.uid`，非 epub 遗留行沿用其原键。EPUB/SRT 同源——
@@ -157,16 +151,10 @@ int? lastReadAtForBookKey(
 /// 状。[failureReason] 在失败时携带面向诊断的原因（同一原因已写入
 /// `ErrorLogService`），供调用方在 toast 里一并展示。
 class DeleteBookResult {
-  const DeleteBookResult._(
-    this.deleted,
-    this.failureReason, [
-    this.localFiles = const LocalFileDeleteReport(),
-  ]);
+  const DeleteBookResult._(this.deleted, this.failureReason);
 
   /// 成功删除（DB 行已删）。磁盘副本清理失败不影响成功判定，只记日志。
-  const DeleteBookResult.success({
-    LocalFileDeleteReport localFiles = const LocalFileDeleteReport(),
-  }) : this._(true, null, localFiles);
+  const DeleteBookResult.success() : this._(true, null);
 
   /// 删除失败，[reason] 是面向诊断的原因（已写入 ErrorLogService）。
   const DeleteBookResult.failure(String reason) : this._(false, reason);
@@ -176,10 +164,6 @@ class DeleteBookResult {
 
   /// 失败原因；[deleted] 为 true 时恒为 null。
   final String? failureReason;
-
-  /// 「同时删除本地文件」的逐条结果（没勾选时恒为空）。删除本身成功、原件却一个
-  /// 都没删掉（正在播放、句柄占用）是必须让用户看见的状态，不能混进 [deleted]。
-  final LocalFileDeleteReport localFiles;
 }
 
 /// 阅读器媒体源的**持久化身份键**（DB pref 前缀 `src:reader_fushi:`、
@@ -191,11 +175,8 @@ class ReaderFushiSource extends ReaderMediaSource {
   ReaderFushiSource._()
       : super(
           uniqueKey: kReaderSourcePersistedKey,
-          sourceName: t.source_name_bookshelf,
           description: t.kitapsen_source_description_epub,
           icon: Icons.auto_stories_outlined,
-          implementsSearch: false,
-          implementsHistory: false,
         );
 
   static ReaderFushiSource get instance => _instance;
@@ -231,8 +212,6 @@ class ReaderFushiSource extends ReaderMediaSource {
     switch (format) {
       case BookFormat.pdf:
         return ReaderPdfSource.kUniqueKey;
-      // Kitapsen 版没有漫画阅读器，也没有任何写入 `'manga'` 行的入口。
-      case BookFormat.manga:
       case BookFormat.epub:
         return instance.uniqueKey;
     }
@@ -297,26 +276,6 @@ class ReaderFushiSource extends ReaderMediaSource {
     return bookKey;
   }
 
-  /// BUG-1018 (A3): standalone SRT books (empty bookKey sentinel) need their
-  /// OWN media identity. They previously all shared `mediaIdentifierFor('')`
-  /// == `hoshi://book/`, so every standalone SRT book's override title/cover
-  /// landed on the same preference key and stomped each other, and the author
-  /// save silently no-opped (parseBookKey returned null). Their identity is
-  /// the stable `SrtBook.uid` under a distinct prefix that can never collide
-  /// with a sanitized EPUB bookKey identifier.
-  static const String _srtBookIdentifierPrefix = 'fushi://srtbook/';
-
-  static String mediaIdentifierForSrtUid(String uid) =>
-      '$_srtBookIdentifierPrefix$uid';
-
-  /// Inverse of [mediaIdentifierForSrtUid]; null for non-SRT identifiers.
-  static String? parseSrtBookUid(String identifier) {
-    if (!identifier.startsWith(_srtBookIdentifierPrefix)) return null;
-    final String uid = identifier.substring(_srtBookIdentifierPrefix.length);
-    if (uid.isEmpty) return null;
-    return uid;
-  }
-
   /// BUG-1018 (A1): resolve the user's override display title for a book by
   /// its stable [bookKey], for surfaces that don't hold a full [MediaItem]
   /// (home continue/activity rows, reading statistics, audiobook notification
@@ -326,12 +285,6 @@ class ReaderFushiSource extends ReaderMediaSource {
   String? overrideTitleForBookKey(String bookKey) {
     if (bookKey.isEmpty) return null;
     return _overrideTitleForIdentifier(mediaIdentifierFor(bookKey));
-  }
-
-  /// [overrideTitleForBookKey]'s standalone-SRT sibling (identity = uid).
-  String? overrideTitleForSrtUid(String uid) {
-    if (uid.isEmpty) return null;
-    return _overrideTitleForIdentifier(mediaIdentifierForSrtUid(uid));
   }
 
   /// BUG-1317：这里合成的 `mediaSourceIdentifier` **不再参与 override 身份**。
@@ -377,10 +330,6 @@ class ReaderFushiSource extends ReaderMediaSource {
   /// BUG-220: persist the edited author directly to the `epubBooks.author`
   /// column (NOT the primary key, so no re-key is needed — unlike the title,
   /// which is overridden via a preference). A blank author clears the column.
-  ///
-  /// BUG-1018 (A3): standalone SRT books (identity `hoshi://srtbook/<uid>`)
-  /// write through to the `srt_books.author` column instead of silently
-  /// no-opping like the old empty-bookKey identifier did.
   @override
   Future<void> setAuthorFromMediaItem({
     required MediaItem item,
@@ -393,16 +342,6 @@ class ReaderFushiSource extends ReaderMediaSource {
       await db.updateEpubBookAuthor(bookKey, author);
     }
   }
-
-  @override
-  Future<void> prepareResources() async {}
-
-  // HBK-AUDIT-042 / HBK-AUDIT-124: removed the dead generateAudio override and
-  // its _pendingCue/_pendingAudioFiles + setPendingSentenceAudio/
-  // clearPendingSentenceAudio machinery. They had zero callers, so the override
-  // always returned null; the live sentence-audio mining is done inline in
-  // reader_fushi_page.dart. The misleading overridesAutoAudio:true flag was
-  // dropped from the constructor (now defaults to false) for the same reason.
 
   @override
   Future<void> onSourceExit({
@@ -807,13 +746,12 @@ class ReaderFushiSource extends ReaderMediaSource {
     return null;
   }
 
-  /// 删一本书（EPUB / PDF / 漫画 / 字幕书）攒下的统计：「同时删除统计数据」勾选的
+  /// 删一本书（EPUB / PDF）攒下的统计：「同时删除统计数据」勾选的
   /// 落地，书架单删 / 批删 / 合集连删 / 漫画作品页移出书架共用。
   ///
   /// 逐身份走 [FushiDatabase.deleteReadingStatisticsForTitle]：它在一个事务里删
-  /// `study_segments` 并按身份立碑、删 legacy 阅读时长/字数与查词/制卡计数，并立
-  /// title 墓碑防同步复活。[mediaKeys] 同时给 bookKey 与 srt uid——后台听书时钟对
-  /// 纯字幕书以 uid 为身份（`SessionBookInfo.studyMediaKey`），两个都得清。
+  /// `study_segments` 并按身份立碑、删 legacy 阅读时长/字数，并立 title 墓碑防同步
+  /// 复活。
   ///
   /// best-effort：统计删失败不该拦住书本身的删除（用户可在统计页再删），只记日志。
   static Future<void> deleteBookStatistics({
@@ -832,65 +770,33 @@ class ReaderFushiSource extends ReaderMediaSource {
     }
   }
 
-  /// 删除这本字幕书时能否提供「同时删除统计数据」。
-  ///
-  /// 只有配对了 EPUB 的字幕书（bookKey 非空，走 [deleteBook]）能安全删统计。纯字幕书
-  /// （bookKey 空）不行：它的 legacy `reading_statistics` / book 类查词制卡计数与
-  /// `(title, 'book')` 墓碑只能按 title 定位，同名 EPUB 的统计会被连坐删掉（PR #1697
-  /// 审查阻断 2）。书架单删 / 批删 / 合集连删共用这一条判据：不摆勾选、执行时跳过。
-  static bool srtBookOffersStatisticsDeletion(SrtBook book) =>
-      book.bookKey.isNotEmpty;
-
   /// Delete a book and all of its associated data.
   ///
   /// Pass [appModel] to also clear the override thumbnail file (it is needed to
   /// resolve the thumbnails directory); the override title preference is always
   /// cleared regardless (HBK-AUDIT-040).
-  /// [scope] 控制删除传播：[DeleteScope.syncEverywhere] 记一条 sync 删除墓碑，供同步
-  /// 时发布到远端标记、其他设备逐条确认后也删；[DeleteScope.keepLocalOnly]（默认）只删
-  /// 本机不传播（消费远端删除标记时也走此值——删本地、绝不再回写墓碑造成循环）。备份防
-  /// 复活墓碑（[FushiDatabase.deleteEpubBook] 的 tombstone:true）与 scope 无关，永远记
-  /// （用户在本机删的东西，导入自己的旧备份不该复活）。
-  /// [deleteLocalFiles]（默认 false，对应删除弹窗「同时删除本地文件」）：true 时连
-  /// 这本书附带的有声书 / 配对字幕书**显式登记的原始音频文件**一起删。书本体
-  /// （EPUB / PDF / 漫画）导入即拷贝进 app 目录、原件路径根本没入库，没有可删的
-  /// 原件——这就是 [hasLocalFiles] 只看音频列的原因，也是「同时删除本地文件」这条
-  /// 披露只讲音频的原因。
   /// [deleteStatistics]（默认 false，对应删除弹窗「同时删除统计数据」）：true 时在删
-  /// 行**之前**把这本书攒下的统计一并删掉（[deleteBookStatistics]）——标题与 srt uid
-  /// 都住在即将被删的行上，行一删就无从定位。
+  /// 行**之前**把这本书攒下的统计一并删掉（[deleteBookStatistics]）——标题住在即将
+  /// 被删的行上，行一删就无从定位。
   Future<DeleteBookResult> deleteBook({
     required FushiDatabase db,
     required String bookKey,
     AppModel? appModel,
-    DeleteScope scope = DeleteScope.keepLocalOnly,
-    bool deleteLocalFiles = false,
     bool deleteStatistics = false,
   }) async {
     try {
-      // 原件位置在 audiobooks / srt_books 行上，deleteEpubBook 的事务会把它们
-      // 级联删掉，必须先快照。
-      // Kitapsen has no audiobooks or subtitle books to clean up.
-      LocalFileDeleteReport localFileReport = const LocalFileDeleteReport();
       // HBK-AUDIT-041: db.deleteEpubBook removes every associated DB row
-      // (readerPositions, bookmarks, srtBooks, audioCues, audiobooks for the
-      // same bookKey) inside one transaction. Previously deleteBook ALSO
-      // deleted the audiobook/srt rows via the repos, double-deleting the same
-      // rows and splitting the deletion across non-atomic layers. We now let
-      // the transaction own all row deletes and only run the non-redundant
-      // on-disk cleanups (deletePersistDir, extracted dir) afterwards.
+      // (readerPositions, bookmarks, … for the same bookKey) inside one
+      // transaction; only the on-disk cleanups run afterwards.
       //
-      // The book's on-disk extract dir and the srt uid must be resolved BEFORE
-      // the transaction, because deleteEpubBook deletes the rows they live on.
+      // The book's on-disk extract dir must be resolved BEFORE the
+      // transaction, because deleteEpubBook deletes the row it lives on.
       final EpubBookRow? bookRow = await db.getEpubBook(bookKey);
-      const SrtBook? srt = null;
 
       // BUG-439：bookKey 指向的行不存在（孤儿壳行 bookKey==''、key 不匹配、或重复
-      // 删除）时，以前 deleteEpubBook 删 0 行后仍无条件 return true 谎报成功，调用方
-      // 据此把这本计入「已删除 N 本」。这里在删之前就判定：没有任何对应行（EPUB 行
-      // 与按 bookKey 关联的 SRT 行都不存在）→ 真的没东西可删 → 如实回报失败并带上
-      // 原因（TODO-1359 起写入 ErrorLogService），不跑磁盘清理/VACUUM，也不谎报成功。
-      if (bookRow == null && srt == null) {
+      // 删除）时如实回报失败并带上原因（TODO-1359 起写入 ErrorLogService），不跑磁盘
+      // 清理/VACUUM，也不谎报成功。
+      if (bookRow == null) {
         final String reason = '找不到这本书的数据（bookKey="$bookKey" 无对应行，'
             '可能已删除或书架条目已失效）';
         ErrorLogService.instance
@@ -902,27 +808,14 @@ class ReaderFushiSource extends ReaderMediaSource {
       if (deleteStatistics) {
         await deleteBookStatistics(
           db: db,
-          title: bookRow?.title ?? srt!.title,
-          mediaKeys: <String>[bookKey, ],
+          title: bookRow.title,
+          mediaKeys: <String>[bookKey],
         );
       }
 
       // TODO-1195 part B: a user shelf delete records a tombstone so a later
       // backup MERGE import never resurrects this book from an old backup.
-      final int deletedRows = await db.deleteEpubBook(bookKey, tombstone: true);
-
-      // 删除传播（显式确认式）：仅当用户在删除弹窗选「同步删除」(syncEverywhere) 才记
-      // 一条 sync 删除墓碑，供同步时发布到远端标记、其他设备逐条确认后也删。keepLocalOnly
-      // （含消费远端删除标记的路径）不记，避免「删本地→回写墓碑→再传播」循环。host 服务
-      // 客户端删除走 _cleanupBookOnDisk 不经本方法。best-effort：记账失败不翻转删除结果。
-      if (deletedRows > 0 && scope == DeleteScope.syncEverywhere) {
-        try {
-          await db.writeSyncDeletionTombstone(
-              'book', bookKey, DateTime.now().millisecondsSinceEpoch);
-        } catch (_) {
-          // best-effort：删除墓碑记账失败不影响书已删。
-        }
-      }
+      final int deletedRows = await db.deleteEpubBook(bookKey);
 
       // TODO-1359 根因：DB 行（唯一真相源）此刻已删，这本书对用户已经消失。下面的
       // 磁盘副本/偏好清理属于删完再打扫的尾活——Windows 上解压目录若被 WebView
@@ -934,20 +827,7 @@ class ReaderFushiSource extends ReaderMediaSource {
       try {
         // Locate the extracted dir by the stored extract_dir column (the on-disk
         // folder name may still be the legacy int id; the column is the truth).
-        if (bookRow != null) {
-          await EpubStorage.deleteBookDir(bookRow.extractDir);
-        }
-        // 用户明确勾选后才删原始音频；两条记录可能指向同一批文件，第二次删到的
-        // 已不存在，[deleteLocalFiles] 既不计入 removed 也不计入 failures。
-        if (deleteLocalFiles) {
-          for (final LocalFileDeleteFailure failure
-              in localFileReport.failures) {
-            ErrorLogService.instance.log(
-              'ReaderFushiSource.deleteBook.localFiles',
-              failure,
-            );
-          }
-        }
+        await EpubStorage.deleteBookDir(bookRow.extractDir);
 
         // HBK-AUDIT-040: these books are created with canDelete:false, so the
         // generic AppModel.deleteMediaItem cleanup (clearOverrideValues) never
@@ -976,7 +856,7 @@ class ReaderFushiSource extends ReaderMediaSource {
             '(DB rows already removed; on-disk copy may leak): $e');
       }
 
-      // BUG-276: 上面已删 DB 行 + 解压目录/有声书副本，但 SQLite 删除只把页放回
+      // BUG-276: 上面已删 DB 行 + 解压目录，但 SQLite 删除只把页放回
       // freelist、不归还磁盘；WAL 也会继续增长。删一本书后 VACUUM 回收空间
       // （否则用户「书都删了占用没降」）。VACUUM 必须在事务外，这里已在事务外；
       // 失败不应让删除整体失败（行已删），只记日志。
@@ -988,10 +868,9 @@ class ReaderFushiSource extends ReaderMediaSource {
             .log('ReaderFushiSource.deleteBook.vacuum', e, stack);
         debugPrint('[ReaderFushiSource] VACUUM after delete failed: $e');
       }
-      // 真删了 EPUB 行，或清理了按 bookKey 关联的 SRT 行/磁盘副本，才算删除成功。
-      // 过了上面的早退守卫后两者至少有一个为真，这里如实回报删除结果。
-      if (deletedRows > 0 || srt != null) {
-        return DeleteBookResult.success(localFiles: localFileReport);
+      // 真删了 EPUB 行才算删除成功，这里如实回报删除结果。
+      if (deletedRows > 0) {
+        return const DeleteBookResult.success();
       }
       final String reason = 'DB 删除未移除任何行（bookKey="$bookKey"，deletedRows=0）';
       ErrorLogService.instance
@@ -1005,45 +884,9 @@ class ReaderFushiSource extends ReaderMediaSource {
     }
   }
 
-  /// 这本书（按 [bookKey]）有没有本机可删的原件——删除确认框据此决定摆不摆
-  /// 「同时删除本地文件」勾选框。只看附带有声书 / 配对字幕书**显式登记在 app 持久
-  /// 目录之外**的原始音频（见 [deleteBook] 与 `audiobook_local_files.dart`）。
-  Future<bool> hasLocalFiles({
-    required FushiDatabase db,
-    required String bookKey,
-  }) async {
-    return false;
-  }
-
   // ── Settings (same keys as ReaderTtuSource for seamless migration) ──
 
   static ReaderSettings? readerSettings;
-
-  /// 当前**生效**的 [ReaderSettings]。查词弹窗一侧（静态设置注入 + 字体 URL 拦截器
-  /// 白名单）的唯一取值入口——两边必须解析出同一份设置，否则就是「CSS 里引了某个
-  /// 字体，拦截器却拒绝供给」这类哑失败。
-  ///
-  /// **不要直接读 [readerSettings]。** 它在整个进程里只有一个赋值点
-  /// （`AppModel._initialiseOnce()`），而 `AppModel.initialiseForDictionaryPopup()`
-  /// 从不给它赋值。于是在 Android 独立 `:popup` 进程与悬浮查词窗
-  /// （`popup_main.dart` / `floating_dict_main.dart`）里它**恒为 null**：任何直接
-  /// 读它的判据在 app 外查词时都会静默退化成「用户什么都没配」。
-  ///
-  /// 没有活着的阅读器时退到 DB 背书的实例。注意必须**同时**灌 prefs 快照
-  /// （[ReaderSettings.applyPrefsSnapshot]）：`ReaderSettings(db)` 的内存缓存是空
-  /// 的，且所有读取器都是同步 getter、不会自己回源，只 new 一个出来等于返回一份
-  /// 「所有设置都是默认值」的假设置。快照取自 [AppModel.prefsRepo]（已在初始化里
-  /// 一次性读全表），因此这条路是纯内存的，热路径可调用。
-  ///
-  /// DB / prefs 仓库任一未就绪时返回 null（两者都是 late 字段，早期与测试 seam 会
-  /// 撞进未赋值窗口），调用方按「无设置」降级。
-  static ReaderSettings? resolveEffectiveReaderSettings(AppModel appModel) {
-    final ReaderSettings? live = readerSettings;
-    if (live != null) return live;
-    if (!appModel.isDatabaseReady || !appModel.isPreferencesReady) return null;
-    return ReaderSettings(appModel.database)
-      ..applyPrefsSnapshot(appModel.prefsRepo.prefsSnapshot);
-  }
 
   /// Fired on CSS-only setting changes (font size / line height / margins /
   /// indentation / justify / kerning / vpal / furigana / vert-orient). The
@@ -1128,31 +971,6 @@ class ReaderFushiSource extends ReaderMediaSource {
         ));
   }
 
-  /// TODO-756b：是否“鼠标悬停即自动查词”。开启时无需按住 Shift，鼠标悬停在
-  /// 字幕/正文字符上即触发查词（与 TODO-756a 的 Shift-悬停同链路）；关闭时退回
-  /// 756a 的 Shift+悬停行为。悬停是桌面鼠标行为，移动端无 OS hover、自然不触发
-  /// （配置项在设置 UI 走 DesktopLookupService.isDesktop 桌面门控隐藏）。默认
-  /// false（保持 756a 既有行为）。视频页与阅读器共享 [instance]，天然通用。
-  bool get hoverAutoLookup =>
-      getPreference<bool>(key: 'hover_auto_lookup', defaultValue: false);
-
-  /// 0 = skip by sentence (default), 5/10/15/30 = skip by N seconds.
-  int get skipActionSeconds =>
-      getPreference<int>(key: 'skip_action_seconds', defaultValue: 0);
-
-  double get dismissSwipeSensitivity => getPreference<double>(
-        key: 'dismiss_swipe_sensitivity',
-        defaultValue: 0.6,
-      );
-
-  /// 滑动关闭查词弹窗时，松手后是否播放「补间滑出屏外 / 弹回原位」动画。默认 true
-  /// （保持既有手感）；关掉则松手当帧就关，与墨水屏模式下的行为一致。唯一消费点是
-  /// [popupDismissAnimationDuration]。
-  bool get popupDismissAnimation => getPreference<bool>(
-        key: 'popup_dismiss_animation',
-        defaultValue: true,
-      );
-
   /// 鼠标滚轮翻页节流间隔（毫秒），越大翻页越慢。默认 450ms。
   int get wheelPageTurnInterval =>
       readerSettings?.wheelPageTurnInterval ??
@@ -1203,9 +1021,6 @@ class ReaderFushiSource extends ReaderMediaSource {
         ));
   }
 
-  bool get highlightOnTap =>
-      false;
-
   bool get showTopProgressBar =>
       readerSettings?.showTopProgressBar ??
       getPreference<bool>(key: 'show_top_progress_bar', defaultValue: true);
@@ -1233,13 +1048,6 @@ class ReaderFushiSource extends ReaderMediaSource {
           key: 'keep_screen_awake',
           value: !keepScreenAwake,
         ));
-  }
-
-  bool get lyricsMode =>
-      getPreference<bool>(key: 'lyrics_mode', defaultValue: false);
-
-  Future<void> setLyricsMode(bool value) async {
-    await setPreference<bool>(key: 'lyrics_mode', value: value);
   }
 
   bool get tapEmptyToHideChrome =>
@@ -1332,44 +1140,6 @@ class ReaderFushiSource extends ReaderMediaSource {
 
   static int _clampFontWeight(int v) => v.clamp(100, 900);
 
-  double get lyricsFontSize =>
-      readerSettings?.lyricsFontSize ??
-      getPreference<double>(key: 'lyrics_font_size', defaultValue: 24);
-
-  /// TODO-368: 歌词字幕文字色（独立于主题色）。ARGB int；`0` = 未设置（跟随主题）。
-  int get lyricsTextColor =>
-      readerSettings?.lyricsTextColor ??
-      getPreference<int>(key: 'lyrics_text_color', defaultValue: 0);
-
-  double get lyricsMarginTop =>
-      readerSettings?.lyricsMarginTop ??
-      getPreference<double>(key: 'lyrics_margin_top', defaultValue: 0);
-
-  double get lyricsMarginBottom =>
-      readerSettings?.lyricsMarginBottom ??
-      getPreference<double>(key: 'lyrics_margin_bottom', defaultValue: 0);
-
-  double get lyricsMarginLeft =>
-      readerSettings?.lyricsMarginLeft ??
-      getPreference<double>(key: 'lyrics_margin_left', defaultValue: 0);
-
-  double get lyricsMarginRight =>
-      readerSettings?.lyricsMarginRight ??
-      getPreference<double>(key: 'lyrics_margin_right', defaultValue: 0);
-
-  /// TODO-907: 歌词竖排开关（独立 key，**不复用** `writing_mode` 正文真值）。
-  /// 默认 `false` = 横排。切换走整页重建（`_loadLyricsPage`），不在此触发 live。
-  bool get lyricsVerticalWriting =>
-      readerSettings?.lyricsVerticalWriting ??
-      getPreference<bool>(key: 'lyrics_vertical_writing', defaultValue: false);
-
-  /// TODO-908: 歌词听力沉浸模糊开关（独立 key `lyrics_blur`，默认 `false`）。
-  /// 切换走 live 样式更新（`onSettingsChangedLive` → `_updateLyricsStyleLive` →
-  /// `__lyricsSetBlur`），不重建整页。
-  bool get lyricsBlur =>
-      readerSettings?.lyricsBlur ??
-      getPreference<bool>(key: 'lyrics_blur', defaultValue: false);
-
   double get readerLineHeight =>
       readerSettings?.lineHeight ??
       getPreference<double>(key: 'line_height', defaultValue: 1.65);
@@ -1404,12 +1174,6 @@ class ReaderFushiSource extends ReaderMediaSource {
     await (readerSettings?.setViewMode(v) ??
         setPreference<String>(key: 'view_mode', value: v));
     onSettingsChangedLive?.call();
-  }
-
-  String get readerVisualNovelScreenMode {
-    final String raw = readerSettings?.visualNovelScreenMode ??
-        getPreference<String>(key: 'vn_screen_mode', defaultValue: 'block');
-    return raw.toLowerCase() == 'sentences' ? 'sentences' : 'block';
   }
 
   Future<void> setReaderTheme(String v) async {

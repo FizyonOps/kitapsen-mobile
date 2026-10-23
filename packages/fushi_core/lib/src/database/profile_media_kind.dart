@@ -12,28 +12,7 @@ library;
 /// 用 [dbValue] 显式落库。
 enum ProfileMediaKind {
   /// EPUB 书（无有声书 / 字幕挂载时的默认阅读绑定）。
-  epub('epub'),
-
-  /// 字幕书（SRT 文本导入的书）。
-  srtbook('srtbook'),
-
-  /// 有声书（EPUB + 音频对齐）。
-  audiobook('audiobook'),
-
-  /// 歌词模式。
-  lyrics('lyrics'),
-
-  /// 视频。
-  video('video'),
-
-  /// 漫画（OCR 阅读器，`EpubBooks.format == 'manga'`）。TODO-2936。
-  manga('manga'),
-
-  /// 游戏（galgame hook 会话：launch / attach 查词浮窗）。TODO-2936。
-  game('game'),
-
-  /// 浏览器（浏览器扩展经 yomitan-api server 查词）。TODO-2936。
-  browser('browser');
+  epub('epub');
 
   const ProfileMediaKind(this.dbValue);
 

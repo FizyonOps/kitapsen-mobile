@@ -40,22 +40,13 @@ class _TagPickerPageState extends ConsumerState<TagPickerPage> {
 
   FushiDatabase get _db => ref.read(appProvider).database;
 
-  /// 读当前目标已挂的标签（合集直取；媒体按 [MediaKind] 穷尽分派）。
-  /// v77 起 SRT 标签映射按 uid 落库，[MediaRef.entryKey]（= uid）直传，无需解析 id。
+  /// 读当前目标已挂的标签（合集直取；媒体只有书）。
   Future<List<BookTagRow>> _currentTags() async {
     final int? collectionId = widget.collectionId;
     if (collectionId != null) return _db.getTagsForCollection(collectionId);
     final MediaRef media = widget.media!;
-    switch (media.kind) {
-      case MediaKind.epub:
-        return _db.getTagsForBook(media.entryKey);
-      case MediaKind.srt:
-        return _db.getTagsForSrtBook(media.entryKey);
-      case MediaKind.video:
-        return _db.getTagsForVideoBook(media.entryKey);
-      case MediaKind.game:
-        return _db.getTagsForGame(media.entryKey);
-    }
+    if (media.kind != MediaKind.epub) return const <BookTagRow>[];
+    return _db.getTagsForBook(media.entryKey);
   }
 
   Future<void> _addTag(int tagId) async {
@@ -64,16 +55,8 @@ class _TagPickerPageState extends ConsumerState<TagPickerPage> {
       return _db.addTagToCollection(collectionId, tagId);
     }
     final MediaRef media = widget.media!;
-    switch (media.kind) {
-      case MediaKind.epub:
-        return _db.addTagToBook(media.entryKey, tagId);
-      case MediaKind.srt:
-        return _db.addTagToSrtBook(media.entryKey, tagId);
-      case MediaKind.video:
-        return _db.addTagToVideoBook(media.entryKey, tagId);
-      case MediaKind.game:
-        return _db.addTagToGame(media.entryKey, tagId);
-    }
+    if (media.kind != MediaKind.epub) return;
+    return _db.addTagToBook(media.entryKey, tagId);
   }
 
   Future<void> _removeTag(int tagId) async {
@@ -82,16 +65,8 @@ class _TagPickerPageState extends ConsumerState<TagPickerPage> {
       return _db.removeTagFromCollection(collectionId, tagId);
     }
     final MediaRef media = widget.media!;
-    switch (media.kind) {
-      case MediaKind.epub:
-        return _db.removeTagFromBook(media.entryKey, tagId);
-      case MediaKind.srt:
-        return _db.removeTagFromSrtBook(media.entryKey, tagId);
-      case MediaKind.video:
-        return _db.removeTagFromVideoBook(media.entryKey, tagId);
-      case MediaKind.game:
-        return _db.removeTagFromGame(media.entryKey, tagId);
-    }
+    if (media.kind != MediaKind.epub) return;
+    return _db.removeTagFromBook(media.entryKey, tagId);
   }
 
   Future<void> _load() async {

@@ -20,9 +20,7 @@ MediaItem _$MediaItemFromJson(Map<String, dynamic> json) => MediaItem(
       extra: json['extra'] as String?,
       base64Image: json['base64Image'] as String?,
       imageUrl: json['imageUrl'] as String?,
-      audioUrl: json['audioUrl'] as String?,
       author: json['author'] as String?,
-      authorIdentifier: json['authorIdentifier'] as String?,
       sourceMetadata: json['sourceMetadata'] as String?,
     );
 
@@ -34,11 +32,9 @@ Map<String, dynamic> _$MediaItemToJson(MediaItem instance) => <String, dynamic>{
       'mediaSourceIdentifier': instance.mediaSourceIdentifier,
       'base64Image': instance.base64Image,
       'imageUrl': instance.imageUrl,
-      'audioUrl': instance.audioUrl,
       'author': instance.author,
       'extraUrl': instance.extraUrl,
       'extra': instance.extra,
-      'authorIdentifier': instance.authorIdentifier,
       'sourceMetadata': instance.sourceMetadata,
       'position': instance.position,
       'duration': instance.duration,

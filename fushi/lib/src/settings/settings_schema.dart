@@ -49,15 +49,6 @@ _SettingsSchemaCache _schemaSnapshot() {
   return fresh;
 }
 
-/// 丢弃 schema 缓存。
-///
-/// 生产路径不需要它（locale 是唯一缓存键，已由 [_schemaSnapshot] 自动比对）；存在
-/// 是为两件事：① debug 热重载——改了 `settings_schema_*.dart` 的树结构后，已缓存的
-/// 旧树不会自己更新，故 `_FushiReaderAppState.reassemble()` 调它；② 测试里需要观察
-/// 「重新构造」而非缓存命中时的显式复位。
-void resetSettingsSchemaCache() {
-  _schemaCache = null;
-}
 
 /// 全部一级分类。返回的是**当前 locale 下共享的同一棵不可变树**（见
 /// [_SettingsSchemaCache]）——调用方一律只读遍历，切勿就地改动返回的列表。
@@ -106,11 +97,10 @@ Map<ReaderGroup, List<SettingsItem>> collectReaderItems(
 /// 刻意**不**走 `destination.visibleSections(context)`：section / item 级的
 /// `visible` 大量依赖**运行期**状态（`videoHostVisible` 要求播放页 host 在场，
 /// 阅读侧的 `isVertical` / `isPaginated` 随排版模式实时翻转），而这张投影表是
-/// 惰性缓存、只在 locale 变化 / `resetSettingsSchemaCache()` 时重算——把它们烘进
+/// 惰性缓存、只在 locale 变化时重算——把它们烘进
 /// 缓存等于把「首次投影那一刻的运行期状态」冻死。item 级可见性本来就由渲染器每帧
 /// 求值（`SettingsDestination.visibleSections` → `SettingsSection.visibleCopy`），
-/// 这里重复过滤既无必要又有害。destination 级则安全：模块开关翻转会调
-/// `resetSettingsSchemaCache()`（见 `AppModel.setModuleEnabled`），缓存必然重建。
+/// 这里重复过滤既无必要又有害。
 Map<ReaderGroup, List<SettingsItem>> _collectReaderItems(
   List<SettingsDestination> destinations,
   SettingsContext context,
