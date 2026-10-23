@@ -1,39 +1,30 @@
 import 'dart:async';
-import 'dart:io';
 import 'dart:math' as math;
 import 'dart:ui' as ui;
 
 import 'package:flutter/widgets.dart';
 import 'package:fushi/src/utils/misc/error_log_service.dart';
-import 'package:path/path.dart' as p;
-import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
-/// 系统分享面板**呈现**的上限。
+/// 系统分享面板**在途**的上限。
 ///
-/// 非结果变体的 Future 在面板呈现后即完成（不等关闭），所以这是一次「把面板画
-/// 出来」的往返，正常在几百毫秒内；留 30 s 是给冷启动的分享目标枚举留余量。
-/// 不加这道上限时，平台侧不回包就会把 [FushiShare._sharing] 永久钉在 true——
-/// 那是个 static 字段，一坏就是**全 App** 此后每一次分享都被防重入门静默丢弃
-/// （BUG-2542）。
-const Duration _kSharePresentationTimeout = Duration(seconds: 30);
+/// share_plus 10 起只剩结果变体：Future 要等面板**关闭**（Android 的
+/// `onActivityResult`、iOS 的 completion handler）才完成，所以这是「面板从弹出
+/// 到关闭」的余量，不是一次呈现往返。不加这道上限时，平台侧不回包就会把
+/// [FushiShare._sharing] 永久钉在 true——那是个 static 字段，一坏就是**全 App**
+/// 此后每一次分享都被防重入门静默丢弃（BUG-2542）。
+const Duration _kShareSheetTimeout = Duration(minutes: 5);
 
 /// 统一的系统分享入口（TODO-1318 / BUG-608）。
 ///
-/// **根因**：`Share.shareXFiles` 走 share_plus 的**返回结果变体**
-/// （platform interface 的 `shareFilesWithResult` 方法通道）。Android 侧
-/// `ShareSuccessManager` 用一个原子标志 `isCalledBack` 串联「分享面板关闭」
-/// 回调（`compareAndSet(true, false)`）。若上一次结果型分享的 `onActivityResult`
-/// 没有回调（面板被系统方式关闭、Activity 因内存/旋转被重建、目标 App 未回传
-/// 结果），该标志会**永久卡在 false**，之后**每一次** `shareXFiles` 都会抛
-/// `PlatformException(Share callback error, prior share-sheet did not call
-/// back, did you await it? Maybe use non-result variant, null, null)`；快速
-/// 重复触发（连点分享按钮）同样命中这个分支。
-///
-/// **修复**：本 App 从不读取 `ShareResult`，因此统一改用**非结果变体**
-/// （`Share.shareFiles`，`isWithResult=false`，从根上绕开 `ShareSuccessManager`
-/// 整套回调状态机——它是错误的唯一来源），并叠加进程内**防重入**串行化，
-/// 避免在面板呈现的瞬间被重复触发而堆叠两个分享面板。
+/// share_plus 7.x 的结果变体在 Android 侧有个死锁：`ShareSuccessManager` 的
+/// `isCalledBack` 标志在上一次面板没回调时（面板被系统方式关闭、Activity 被
+/// 重建、目标 App 未回传结果）会**永久卡在 false**，之后每一次分享都抛
+/// `Share callback error, prior share-sheet did not call back`，所以这里曾改走
+/// 非结果变体 `Share.shareFiles`。share_plus 10 删掉了非结果变体，也修掉了这个
+/// 死锁（新的一次分享会先以 `unavailable` 结掉悬着的那次），本类于是改用
+/// `Share.share` / `Share.shareXFiles`，并保留进程内**防重入**串行化，避免连点
+/// 分享按钮时叠出两个分享面板。
 abstract class FushiShare {
 
   // iOS 分享锚点（BUG-2064）：share_plus 的 iOS 端把 text / uri / files 三条
@@ -103,7 +94,7 @@ abstract class FushiShare {
   /// 同样自带 iOS 锚点。空文本直接返回：iOS 侧会以 `Non-empty text expected`
   /// 拒绝，Android 侧则弹出一个空面板，都不是有用行为。
   ///
-  /// 返回**面板是否真的呈现出来了**——语义与 [shareFiles] 一致，见那里的说明。
+  /// 返回**这次分享是否真的送到了平台**——语义与 [shareFiles] 一致，见那里的说明。
   static Future<bool> shareText(String text, {String? subject}) async {
     if (_sharing || text.isEmpty) {
       _logDroppedShare('shareText', reentrant: _sharing);
@@ -115,7 +106,7 @@ abstract class FushiShare {
         text,
         subject: subject,
         sharePositionOrigin: _sharePositionOrigin(),
-      ).timeout(_kSharePresentationTimeout);
+      ).timeout(_kShareSheetTimeout);
       return true;
     } on TimeoutException {
       _logShareTimeout('shareText');
@@ -127,20 +118,19 @@ abstract class FushiShare {
 
   /// 通过系统分享面板分享一个或多个文件。
   ///
-  /// [files] 允许包含内存型 `XFile`（`XFile.fromData`，`path` 为空）——会先落盘
-  /// 到临时目录再分享，因为非结果分享通道只接受真实文件路径。
+  /// [files] 允许包含内存型 `XFile`（`XFile.fromData`，`path` 为空）——share_plus
+  /// 会先把它落盘到临时目录再分享。
   ///
-  /// 返回的 `Future` 在分享面板**呈现后**即完成（非结果变体不等待面板关闭），
-  /// 其值是**面板是否真的呈现出来了**：`false` 表示这次分享根本没送出去——被
-  /// 防重入门丢弃、文件列表为空，或平台侧在 [_kSharePresentationTimeout] 内没
-  /// 回包。`true` 不代表用户完成了分享（非结果变体拿不到这个），只代表面板已
-  /// 呈现。
+  /// 返回的 `Future` 在分享面板**关闭后**才完成，其值是**这次分享是否真的送到了
+  /// 平台**：`false` 表示这次分享根本没送出去——被防重入门丢弃、文件列表为空，
+  /// 或平台侧在 [_kShareSheetTimeout] 内没回包。`true` 不代表用户完成了分享，
+  /// 只代表面板呈现过并已关闭。
   ///
-  /// **为什么必须有返回值（BUG-2542）**：手机端的片段导出、备份导出、日志导出
-  /// 把产物落在 app 私有目录（不进相册、不注册 MediaStore），这次系统分享面板
-  /// 是用户取回文件的**唯一**通道。旧签名是 `Future<void>`，被丢弃时静默返回，
-  /// 调用方无从得知，于是照样弹「已保存」成功提示——面板没出现、相册里没有、
-  /// 私有目录用户进不去，文件等于凭空消失。调用方现在据此决定报成功还是报失败。
+  /// **为什么必须有返回值（BUG-2542）**：手机端的日志导出把产物落在 app 私有
+  /// 目录（不进相册、不注册 MediaStore），这次系统分享面板是用户取回文件的
+  /// **唯一**通道。旧签名是 `Future<void>`，被丢弃时静默返回，调用方无从得知，
+  /// 于是照样弹「已保存」成功提示——面板没出现、相册里没有、私有目录用户进不去，
+  /// 文件等于凭空消失。调用方现在据此决定报成功还是报失败。
   static Future<bool> shareFiles(
     List<XFile> files, {
     String? subject,
@@ -152,36 +142,12 @@ abstract class FushiShare {
     }
     _sharing = true;
     try {
-      final List<String> paths = <String>[];
-      final List<String> mimeTypes = <String>[];
-      Directory? tmpDir;
-      for (final XFile file in files) {
-        String path = file.path;
-        if (path.isEmpty) {
-          // 内存型 XFile：落盘到临时文件，供非结果分享通道读取。
-          tmpDir ??= await getTemporaryDirectory();
-          final String name = file.name.isNotEmpty
-              ? file.name
-              : 'fushi_share_${DateTime.now().microsecondsSinceEpoch}';
-          path = p.join(tmpDir.path, name);
-          await file.saveTo(path);
-        }
-        paths.add(path);
-        // 显式 mime 优先；缺失时用 `*/*`（比 octet-stream 更宽，不会收窄
-        // 可分享目标，属 shareXFiles 结果集的超集，无回归）。
-        mimeTypes.add(file.mimeType ?? '*/*');
-      }
-      // 非结果变体：从根上绕开 `ShareSuccessManager` 的结果回调状态机
-      // （TODO-1318）。本 App 不使用 `ShareResult`，故不再走
-      // `shareXFiles` / `shareFilesWithResult`。
-      // ignore: deprecated_member_use
-      await Share.shareFiles(
-        paths,
-        mimeTypes: mimeTypes,
+      await Share.shareXFiles(
+        files,
         subject: subject,
         text: text,
         sharePositionOrigin: _sharePositionOrigin(),
-      ).timeout(_kSharePresentationTimeout);
+      ).timeout(_kShareSheetTimeout);
       return true;
     } on TimeoutException {
       _logShareTimeout('shareFiles');
@@ -204,16 +170,16 @@ abstract class FushiShare {
     ErrorLogService.instance.log(
       'FushiShare.$entry',
       'share dropped before reaching the platform: '
-          'another share sheet is still being presented',
+          'another share sheet is still open',
       StackTrace.current,
     );
   }
 
-  /// 平台侧在呈现上限内没回包。记下来，并让调用方拿到 `false`。
+  /// 平台侧在在途上限内没回包。记下来，并让调用方拿到 `false`。
   static void _logShareTimeout(String entry) {
     ErrorLogService.instance.log(
       'FushiShare.$entry',
-      'share sheet did not present within $_kSharePresentationTimeout; '
+      'share sheet did not close within $_kShareSheetTimeout; '
           'the reentrancy gate has been released so later shares still work',
       StackTrace.current,
     );
