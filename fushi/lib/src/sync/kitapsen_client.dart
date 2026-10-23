@@ -663,6 +663,15 @@ class KitapsenClient implements RemoteBookClient, RemoteCoverFetcher {
     destination,
   );
 
+  /// Downloads the whole of store book [bookId] for an admin reviewing it,
+  /// whatever its status, price or ownership; anyone else gets the sample
+  /// cut from the same request. Read once like a sample, never shelved.
+  Future<void> getReviewCopy(int bookId, File destination) => _downloadContent(
+    bookId,
+    const <String, String>{'format': 'epub'},
+    destination,
+  );
+
   Future<void> _downloadContent(
     int bookId,
     Map<String, String> query,

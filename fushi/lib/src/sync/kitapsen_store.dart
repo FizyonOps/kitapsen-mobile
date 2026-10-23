@@ -131,6 +131,7 @@ class StoreBookDetail {
     this.isFree = false,
     this.isSerialized = false,
     this.previewPercentage = 0,
+    this.isPublished = true,
     this.isbn,
     this.format,
     this.authorBio,
@@ -162,6 +163,10 @@ class StoreBookDetail {
 
   /// How much of the book its reading sample holds (0 = no sample).
   final int previewPercentage;
+
+  /// False for a book still waiting for approval or taken off sale. Only
+  /// its author and admins see such a book.
+  final bool isPublished;
 }
 
 class StoreReview {
@@ -369,24 +374,37 @@ class KitapsenStore {
     return c;
   }
 
-  Future<int?>? _viewerId;
+  Future<({int? id, bool admin})>? _viewer;
 
-  /// The signed-in account's id (`/users/me`, fetched once per store), so
-  /// "Bildir" stays off the reader's own reviews and comments. Null when
-  /// signed out; a failed lookup is retried on the next call.
-  Future<int?> viewerId() {
+  /// The signed-in account (`/users/me`, fetched once per store). Signed out
+  /// or a failed lookup reads as nobody; a failure is retried on the next
+  /// call.
+  Future<({int? id, bool admin})> _me() {
     final KitapsenClient? c = client;
-    if (c == null) return Future<int?>.value();
-    return _viewerId ??= c
+    if (c == null) {
+      return Future<({int? id, bool admin})>.value((id: null, admin: false));
+    }
+    return _viewer ??= c
         .requestJson('GET', '/users/me')
         .then(
-          (Object? d) => d is Map<String, dynamic> ? _int(d['id']) : null,
+          (Object? d) => d is Map<String, dynamic>
+              ? (id: _int(d['id']), admin: d['is_superuser'] == true)
+              : (id: null, admin: false),
           onError: (Object _) {
-            _viewerId = null;
-            return null;
+            _viewer = null;
+            return (id: null, admin: false);
           },
         );
   }
+
+  /// The signed-in account's id, so "Bildir" stays off the reader's own
+  /// reviews and comments. Null when signed out.
+  Future<int?> viewerId() => _me().then((v) => v.id);
+
+  /// Whether the signed-in account is a kitapsen.com admin. Admins review
+  /// books before they are published, so the server always gives them the
+  /// whole book, and the book page lets them read any book in full.
+  Future<bool> viewerIsAdmin() => _me().then((v) => v.admin);
 
   /// GET for the store's other API files (`kitapsen_community.dart`):
   /// signed in when someone is, anonymous otherwise.
@@ -577,6 +595,9 @@ class KitapsenStore {
       isFree: isFree,
       isSerialized: decoded['is_serialized'] == true,
       previewPercentage: _int(decoded['preview_percentage']) ?? 0,
+      // Only the author/admin view carries a status; the public view serves
+      // published books alone.
+      isPublished: (_text(decoded['status']) ?? 'PUBLISHED') == 'PUBLISHED',
       isbn: _text(decoded['isbn']),
       format: _text(decoded['format']),
       authorBio: _text(decoded['author_bio']),

@@ -1,4 +1,6 @@
-/// Reading samples of paid store books (book page › "Örneği oku").
+/// Reading samples of paid store books (book page › "Örneği oku"), and the
+/// whole-book copy an admin reads to review a book (book page › "Şimdi Oku"
+/// on a book the admin does not own, published or not).
 ///
 /// A sample is imported for one reading session and deleted when the reader
 /// closes. Left on the shelf it would carry the full book's title, so once
@@ -34,13 +36,15 @@ import 'package:fushi/utils.dart';
 /// left behind by a killed app is removed at the next start.
 const String _kSampleBookKeyPref = 'kitapsen_sample_book_key';
 
-/// Downloads the sample of store book [bookId], opens it in the reader and
+/// Downloads the sample of store book [bookId] (or, with [fullBook], an
+/// admin's review copy of the whole book), opens it in the reader and
 /// removes it again once the reader is closed.
 Future<void> readKitapsenSample({
   required WidgetRef ref,
   required KitapsenClient client,
   required int bookId,
   required String title,
+  bool fullBook = false,
 }) async {
   final AppModel appModel = ref.read(appProvider);
   final FushiDatabase db = appModel.database;
@@ -48,7 +52,11 @@ Future<void> readKitapsenSample({
   final Directory temp = await getTemporaryDirectory();
   final File file = File(p.join(temp.path, 'kitapsen_sample_$bookId'));
   try {
-    await client.getSample(bookId, file);
+    if (fullBook) {
+      await client.getReviewCopy(bookId, file);
+    } else {
+      await client.getSample(bookId, file);
+    }
     final String bookKey = await _importSample(db, file, title);
     await db.setPref(_kSampleBookKeyPref, bookKey);
     final MediaItem? item = await ReaderFushiSource.instance

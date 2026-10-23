@@ -41,12 +41,16 @@ class _BookState {
     required this.wishlisted,
     required this.localBookKey,
     required this.chapters,
+    required this.admin,
   });
 
   final KitapsenStore store;
   final StoreBookDetail detail;
   bool owned;
   bool wishlisted;
+
+  /// A kitapsen.com admin, who reads any book in full to review it.
+  final bool admin;
 
   /// Set when the book is already downloaded to this device.
   final String? localBookKey;
@@ -89,11 +93,13 @@ class _KitapsenBookPageState extends ConsumerState<KitapsenBookPage> {
     final StoreBookDetail detail = await store.book(widget.bookId);
     bool owned = false;
     bool wishlisted = false;
+    bool admin = false;
     String? localBookKey;
     if (store.signedIn) {
-      (owned, wishlisted) = await (
+      (owned, wishlisted, admin) = await (
         store.owns(widget.bookId),
         store.inWishlist(widget.bookId),
+        store.viewerIsAdmin(),
       ).wait;
       for (final ({int bookId, EpubBookRow book}) d
           in await store.client!.downloadedBooks()) {
@@ -121,6 +127,7 @@ class _KitapsenBookPageState extends ConsumerState<KitapsenBookPage> {
       wishlisted: wishlisted,
       localBookKey: localBookKey,
       chapters: chapters,
+      admin: admin,
     )..storyFollow = storyFollow;
   }
 
@@ -216,6 +223,18 @@ class _KitapsenBookPageState extends ConsumerState<KitapsenBookPage> {
       _toast(t.kitapsen_sample_unavailable);
     }
   });
+
+  /// An admin's review copy: the whole book, whatever its status or price,
+  /// read once like a sample and never claimed into the admin's library.
+  Future<void> _readReviewCopy(_BookState s) => _run(
+    () => readKitapsenSample(
+      ref: ref,
+      client: s.store.client!,
+      bookId: widget.bookId,
+      title: s.detail.book.title,
+      fullBook: true,
+    ),
+  );
 
   Future<void> _toggleWishlist(_BookState s) => _run(() async {
     await s.store.setWishlisted(widget.bookId, !s.wishlisted);
@@ -577,7 +596,21 @@ class _KitapsenBookPageState extends ConsumerState<KitapsenBookPage> {
           spacing: 8,
           runSpacing: 8,
           children: <Widget>[
-            if (!d.isSerialized && (s.owned || d.isFree))
+            // Admins review books before they are published, so a book they
+            // do not own opens in full, unclaimed and unbought. A published
+            // free book keeps the normal claim-and-read path.
+            if (!d.isSerialized &&
+                !s.owned &&
+                s.admin &&
+                !(d.isFree && d.isPublished))
+              FilledButton.icon(
+                key: const ValueKey<String>('kitapsen-book-review-read'),
+                style: readStyle,
+                onPressed: _busy ? null : () => _readReviewCopy(s),
+                icon: const Icon(Icons.menu_book_outlined, size: 18),
+                label: Text(t.kitapsen_book_read_now),
+              )
+            else if (!d.isSerialized && (s.owned || d.isFree))
               FilledButton.icon(
                 key: const ValueKey<String>('kitapsen-book-read'),
                 style: readStyle,
@@ -590,6 +623,7 @@ class _KitapsenBookPageState extends ConsumerState<KitapsenBookPage> {
               ),
             if (!d.isSerialized &&
                 !s.owned &&
+                !s.admin &&
                 !d.isFree &&
                 d.previewPercentage > 0)
               FilledButton.icon(
@@ -599,7 +633,8 @@ class _KitapsenBookPageState extends ConsumerState<KitapsenBookPage> {
                 icon: const Icon(Icons.chrome_reader_mode_outlined, size: 18),
                 label: Text(t.kitapsen_book_read_sample),
               ),
-            if (!d.isSerialized && !s.owned && d.isFree)
+            // Only a published book can be claimed.
+            if (!d.isSerialized && !s.owned && d.isFree && d.isPublished)
               OutlinedButton.icon(
                 key: const ValueKey<String>('kitapsen-book-get-free'),
                 style: outlineStyle,
